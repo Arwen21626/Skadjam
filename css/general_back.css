@@ -1,18 +1,40 @@
+@font-face {
+    font-family: 'MavenPro';
+    src: url("../font/MavenPro/MavenPro-Regular.ttf");
+}
+
+@font-face {
+    font-family: 'Amiko';
+    src: url("../font/Amiko/Amiko-Regular.ttf");
+}
+
+h1, h2, h3, h4 {
+    font-family: 'MavenPro';
+}
+
 
 /* CSS pour le Header */
 header {
     background-color: #365452;
-    padding: 1em;
+    
 }
 
 header section {
     display: flex;
     flex-direction: row;
+    padding: 1em;
+}
+
+header nav {
+    background-color: #588A87;
+    padding: 1em;
 }
 
 h1{
     width: 100%;
     text-align: center;
+    font-size: 96px;
+    color: #E2F9FF;
 }
 
 header section img {
@@ -33,20 +55,50 @@ header section img {
 /* CSS pour le footer */
 footer {
     background-color: #365452;
+    display: flex;
+    justify-content: space-around;
+}
+
+footer #info-footer {
+    display: flex;
+    justify-content: space-around;
+}
+
+footer #info-footer article {
+    display: flex;
+    flex-direction: column;
+    padding: 0.5em 2em 2em 2em;
+}
+
+footer #section-reseaux {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 5px;
+}
+
+footer .reseau_item {
+    align-self: center;
 }
 
 footer h3 {
     font-size: 40px;
+    margin: 0.5em;
     color: #E2F9FF;
 }
 
 footer a {
     font-size: 30px;
+    font-family: 'MavenPro';
     text-decoration: none;
     color: #E2F9FF;
+    margin: 0.2em;
+}
+
+footer a:hover {
+    color: #E3D7CC;
 }
 
 .logo_reseaux {
-    width: 50px;
-    height: 50px;
+    width: 75px;
+    height: 75px;
 }
