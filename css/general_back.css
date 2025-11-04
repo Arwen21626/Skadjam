@@ -37,8 +37,14 @@ footer {
 
 footer h3 {
     font-size: 40px;
+    color: #E2F9FF;
 }
 
+footer a {
+    font-size: 30px;
+    text-decoration: none;
+    color: #E2F9FF;
+}
 
 .logo_reseaux {
     width: 50px;
