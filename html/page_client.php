@@ -8,7 +8,16 @@
 </head>
 <body>
     <?php
+        include "connexion_client.php";
+        try{
+            $dbh = new PDO("$driver:host=$server;dbname=$dbname",$user,$pass);
+            $dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
         
+            
+        }catch(PDOException $e){
+            print "Erreur : " . $e->getMessage() . "<br>" ;
+            die();
+        }
     ?>
     <h2>Mon compte</h2>
     <article>
@@ -20,7 +29,9 @@
         <h3><?php echo $telephone ?></h3>
         <h3><?php echo $mail ?></h3>
     </article>
-    <form action="modifier_client.php"><input type="submit" value="Modifier"></form>
-    <form action="index.php"><input type="submit" value="Se déconnecter"></form>
+    <article>
+        <form action="modifier_client.php"><input type="submit" value="Modifier"></form>
+        <form action="index.php"><input type="submit" value="Se déconnecter"></form>
+    </article>
 </body>
 </html>
