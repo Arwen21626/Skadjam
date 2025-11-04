@@ -33,6 +33,14 @@
             </a>        
         </section>
 
+        <section id ="ligneBoutons">
+            <a href="" class="bouton">Ajouter un produit</a>
+            <a href="" class="bouton">Statistiques</a>
+            <a href="" class="bouton">Avis récents</a>
+        </section>
+
+        <h2>Vos produits</h2>
+
 
         <!--Début du catalogue-->
 

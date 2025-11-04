@@ -1,3 +1,6 @@
+/*****************************************
+Css commun aux différentes pages d'accueil
+******************************************/
 .carreImages{
     display: grid;
     grid-template-columns: 1fr, 1fr;
@@ -35,4 +38,21 @@ a{
 
 p{
     text-align: right;
+}
+
+
+/*****************************************
+Css page d'accueil vendeur
+******************************************/
+#ligneBoutons{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.bouton{
+    text-decoration: none;
+    border-radius: 1em;
+    /*border-color: ;*/
+
 }
