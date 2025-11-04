@@ -11,7 +11,10 @@
 </header>
 
 <body>
-    <img src="" alt="">
+    <img src="../images/imagesAccueil/promotion.webp" alt="promotion">
+    <img src="../images/imagesAccueil/nouveauxProduits.webp" alt="nouveaux produits">
+    <img src="../images/imagesAccueil/lesPlusVendus.webp" alt="les plus vendus">
+    <img src="../images/imagesAccueil/commandes.webp" alt="commandes">
     
 </body>
 
