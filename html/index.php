@@ -6,20 +6,29 @@
     <title>Accueil</title>
 </head>
 
-<header>
 
-</header>
 
 <body>
-    <img src="../images/imagesAccueil/promotion.webp" alt="promotion">
-    <img src="../images/imagesAccueil/nouveauxProduits.webp" alt="nouveaux produits">
-    <img src="../images/imagesAccueil/lesPlusVendus.webp" alt="les plus vendus">
-    <img src="../images/imagesAccueil/commandes.webp" alt="commandes">
+    <header>
+
+    </header>
+
+    <main>
+        <img src="../images/imagesAccueil/promotion.webp" alt="promotion">
+        <img src="../images/imagesAccueil/nouveauxProduits.webp" alt="nouveaux produits">
+        <img src="../images/imagesAccueil/lesPlusVendus.webp" alt="les plus vendus">
+        <img src="../images/imagesAccueil/commandes.webp" alt="commandes">
+        <img src="../images/logo/logoAlizonBeige.webp" alt="logo">
+
+
+
+        <p>Voir plus ...</p>
+    </main>
     
+    
+    <footer>
+
+    </footer>
 </body>
-
-<footer>
-
-</footer>
 
 </html>
