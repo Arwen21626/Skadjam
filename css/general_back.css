@@ -1,3 +1,5 @@
+
+/* CSS pour le Header */
 header {
     background-color: #365452;
     padding: 1em;
@@ -27,9 +29,16 @@ header section img {
     height: 100px;
 }
 
+
+/* CSS pour le footer */
 footer {
     background-color: #365452;
 }
+
+footer h3 {
+    font-size: 40px;
+}
+
 
 .logo_reseaux {
     width: 50px;
