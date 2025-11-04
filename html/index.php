@@ -19,7 +19,7 @@
         <img src="../images/imagesAccueil/lesPlusVendus.webp" alt="les plus vendus">
         <img src="../images/imagesAccueil/commandes.webp" alt="commandes">
         <img src="../images/logo/logoAlizonBeige.webp" alt="logo">
-
+        
 
 
         <p>Voir plus ...</p>
