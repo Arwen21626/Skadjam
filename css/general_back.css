@@ -1,0 +1,28 @@
+header {
+    background-color: #365452;
+    padding: 1em;
+}
+
+header section {
+    display: flex;
+    flex-direction: row;
+}
+
+h1{
+    width: 100%;
+    text-align: center;
+}
+
+header section img {
+    float: left;
+}
+
+.logo {
+    width: 150px;
+    height: 150px;
+}
+
+.logo_nav {
+    width: 100px;
+    height: 100px;
+}

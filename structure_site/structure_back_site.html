@@ -8,7 +8,8 @@
  Donc je mets une liste des choses à changer selon votre page et où elle se trouve dans l'arborescence du site
  (Souvent il va juste s'agir de changer la partie avant le dossier en question, par exemple pour une image la partie précédant le /images)
 
-    - le href de la balise link pour le css
+    - le href de la balise link pour le css (si vous le prenez aussi lors de votre copier-coller)
+
     - le src de l'img pour le logo dans le header
     - les href pour lier chaque logo à la bonne page
     - les src de chaque logo dans le nav
@@ -21,6 +22,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Structures Back</title>
+
     <link rel="stylesheet" href="../css/general_back.css">
 </head>
 
@@ -29,23 +31,22 @@
     <header>
 
         <section>
-            <img src="../images/logo/logoAlizonBleuClaire.webp" alt="logo Alizon" width="100" height="100">
+            <img src="../images/logo/logoAlizonBleuClaire.webp" alt="logo Alizon" class="logo">
             <h1>Alizon</h1>
         </section>
         
         <nav>
             <a href="A modifier">
-                <img src="../bootstrap_icon/house-door.svg" alt="Accueil" title="Accueil">
+                <img src="../bootstrap_icon/house-door.svg" alt="Accueil" title="Accueil" class="logo_nav">
             </a>
             <a href="A modifier">
-                <img src="../bootstrap_icon/truck.svg" alt="Livraisons" title="Livraisons">
+                <img src="../bootstrap_icon/truck.svg" alt="Livraisons" title="Livraisons" class="logo_nav">
             </a>
             <a href="A modifier">
-                <img src="../bootstrap_icon/plus.svg" alt="Créer un produit" title="Créer un produit">
+                <img src="../bootstrap_icon/plus-square.svg" alt="Créer un produit" title="Créer un produit" class="logo_nav">
             </a>
-            <a href="A modifier">
-
-            </a>
+            
+            <!-- Menu burger avec la dernière icône en attente -->
         </nav>
     </header>
 </body>
