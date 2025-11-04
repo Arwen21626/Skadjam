@@ -34,7 +34,7 @@
         <input type="password" id="verif" name="verif" required>
 
         <label for="cgu">J'ai lu et j'acccepte les conditions générales d'utilisation :</label>
-        <input type="checkbox" required>
+        <input type="checkbox" required><br>
 
         <input type="reset" value="Annuler">
         <input type="submit" value="Valider">
