@@ -10,7 +10,7 @@ function verifNomPrenom($nom){
 }
 
 function verifTelephone($tel){
-    if (!preg_match("/^+33[0-9]{9}$/", $tel)){
+    if (!preg_match("/^\+33[0-9]{9}$/", $tel)){
         return false;
     }
     else{
@@ -19,7 +19,7 @@ function verifTelephone($tel){
 }
 
 function verifMail($mail){
-    if (strlen($mail) > 150 || !preg_match("/^[A-Za-z]@[A-Za-z].[A-Za-z]$/", $mail)){
+    if (strlen($mail) > 150 || !preg_match("/^[A-Za-z0-9.]+@[A-Za-z]+.[A-Za-z]+$/", $mail)){
         return false;
     }
     else{
@@ -28,7 +28,7 @@ function verifMail($mail){
 }
 
 function verifMotDePasse($mdp){
-    if (!preg_match("/^[A-Za-z0-9@-_#$/.!?%*-+:;,&~|^àçéïîëêäâüûöô]{10,}$/", $mdp)){
+    if (!preg_match("/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[-@_#$.£!?%*+:;,&~|^])[^\s<>]{10,}$/", $mdp)){
         return false;
     }
     else{
