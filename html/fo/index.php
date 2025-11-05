@@ -45,7 +45,7 @@
                 $dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
                 //faire des tableaux associatifs au lieu de numérique
                 $dbh->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC);
-
+                //hello
                 //récupère les infos nécessaires des produits et des photos
                 foreach($dbh->query("SELECT *
                                     from sae3_skadjam._produit pr
