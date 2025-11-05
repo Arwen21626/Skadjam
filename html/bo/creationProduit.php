@@ -1,3 +1,23 @@
+<?php
+include('connection_params.php');
+
+
+
+if (isset($_POST['categorie']) && isset($_POST['nom']) && isset($_POST['prix']) && isset($_POST['categorie']) && isset($_POST['description'])) {
+    $categorie = htmlentities($_POST['categorie']);
+    $nom = htmlentities($_POST['nom']);
+    $prix = htmlentities($_POST['prix']);
+    $qteStock = htmlentities($_POST['qteStock']);
+    $enLigne = htmlentities($_POST['mettreEnLigne']);
+    $enPromotion = htmlentities($_POST['mettreEnPromotion']);
+    $description = $enLigne = htmlentities($_POST['description']);
+    //OUBLIE PAS LA PHOTO
+
+
+}
+
+?>
+
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -45,16 +65,4 @@
 </body>
 </html>
 
-<?php
 
-$categorie = htmlentities($_POST['categorie']);
-$nom = htmlentities($_POST['nom']);
-$prix = htmlentities($_POST['prix']);
-$qteStock = htmlentities($_POST['qteStock']);
-$enLigne = htmlentities($_POST['mettreEnLigne']);
-$enPromotion = htmlentities($_POST['mettreEnPromotion']);
-$description = $enLigne = htmlentities($_POST['description']);
-
-
-
-?>
