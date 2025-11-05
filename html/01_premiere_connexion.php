@@ -1,6 +1,6 @@
 <?php
 echo __DIR__;
-include '/docker/data/web/connections_param.php';
+include '/docker/data/web/connections_params.php';
 try {
     $dbh = new PDO("$driver:host=$server;dbname=$dbname", 
             $user, $pass);
