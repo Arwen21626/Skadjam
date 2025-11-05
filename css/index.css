@@ -1,0 +1,58 @@
+/*****************************************
+Css commun aux différentes pages d'accueil
+******************************************/
+.carreImages{
+    display: grid;
+    grid-template-columns: 1fr, 1fr;
+    grid-template-rows: 1fr, 1fr;
+    grid-gap: 1em;   
+}
+
+img{
+    width: 15em;
+    height: auto;
+}
+
+a{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+#image1{
+    grid-row: 1;
+    grid-column: 1;
+}
+#image2{
+    grid-row: 1;
+    grid-column: 2;
+}
+#image3{
+    grid-row: 2;
+    grid-column: 1;
+}
+#image4{
+    grid-row: 2;
+    grid-column: 2;
+}
+
+
+p{
+    text-align: right;
+}
+
+
+/*****************************************
+Css page d'accueil vendeur
+******************************************/
+#ligneBoutons{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.bouton{
+    text-decoration: none;
+    border-radius: 1em;
+    /*border-color: ;*/
+
+}
