@@ -47,7 +47,10 @@
                 //faire des tableaux associatifs au lieu de numérique
                 $dbh->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC);
 
-                foreach($dbh->query("SELECT * from sae3_skadjam._produit", PDO::FETCH_ASSOC) as $row) {
+                foreach($dbh->query("SELECT * from sae3_skadjam._produit pr
+                                        inner join sae3_skadjam._photo ph
+                                        inner join sae_skadjam._montre m on pr.id_produit=m.id_produit on ph.id_photo = m.id_photo ", 
+                                        PDO::FETCH_ASSOC) as $row) {
                     $tabProduit[] = $row;
                     print_r($row);
                 }
