@@ -1,5 +1,5 @@
 <?php
-
+echo __DIR__;
 include __DIR__.'/../connections_param.php';
 try {
     $dbh = new PDO("$driver:host=$server;dbname=$dbname", 
