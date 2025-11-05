@@ -16,6 +16,7 @@
             </select>
             
             <input type="file" name="photo" id="photo" required>
+            <label for="photo">Ajouter des images</label>
 
             <label for="nom">Nom produit *:</label>
             <input type="text" name="nom" id="nom" required>
