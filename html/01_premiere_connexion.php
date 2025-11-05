@@ -1,5 +1,5 @@
 <?php
-echo getcwd();
+echo __DIR__;
 //include('../connections_param.php');
 try {
     $dbh = new PDO("$driver:host=$server;dbname=$dbname", 
