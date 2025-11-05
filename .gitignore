@@ -1,2 +1,4 @@
 .vscode/
-connection_param.php
+html/connexion.php
+html/info.php
+connections_params.php
