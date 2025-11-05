@@ -8,12 +8,34 @@
     src: url("../font/Amiko/Amiko-Regular.ttf");
 }
 
+body {
+    margin: 0;
+    padding: 0;
+}
+
 h1, h2, h3, h4 {
     font-family: 'MavenPro';
 }
 
+h1 {
+    font-size: 96px;
+}
+
+h2 {
+    font-size: 64px;
+}
+
+h3 {
+    font-size: 48px;
+}
+
+h4 {
+    font-size: 40px;
+}
+
 p, a {
     font-family: 'Amiko';
+    font-size: 30px;
 }
 
 
@@ -23,26 +45,27 @@ header {
     
 }
 
-header section {
-    display: flex;
-    flex-direction: row;
-    padding: 1em;
+#header-section {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    padding: 1.5em;
 }
 
-header nav {
+#nav-section {
     background-color: #588A87;
     padding: 1em;
 }
 
-h1{
+#header-section h1{
     width: 100%;
     text-align: center;
-    font-size: 96px;
     color: #E2F9FF;
+    margin: 0;
+    padding-top: 0.25em;
 }
 
-header section img {
-    float: left;
+#header-section img {
+    padding-left: 3em;
 }
 
 .logo {
@@ -76,7 +99,7 @@ footer #info-footer article {
 
 footer #section-reseaux {
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: 1fr 1fr;
     gap: 5px;
 }
 
@@ -85,13 +108,11 @@ footer .reseau_item {
 }
 
 footer h3 {
-    font-size: 40px;
     margin: 0.5em;
     color: #E2F9FF;
 }
 
 footer a {
-    font-size: 30px;
     text-decoration: none;
     color: #E2F9FF;
     margin: 0.2em;
