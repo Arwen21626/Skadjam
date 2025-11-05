@@ -21,16 +21,16 @@
         <section class="carreImages">
 
             <a href="" title="lien vers page promotion" id="image1">
-                <img src="../images/imagesAccueil/promotion.webp" alt="promotion">
+                <img src="../../images/imagesAccueil/promotion.webp" alt="promotion">
             </a>
             <a href="" title="lien vers page derniers ajouts" id="image2">
-                <img src="../images/imagesAccueil/derniersAjouts.webp" alt="derniers ajouts">
+                <img src="../../images/imagesAccueil/derniersAjouts.webp" alt="derniers ajouts">
             </a>           
             <a href="" title="lien vers page stock" id="image3">
-                <img src="../images/imagesAccueil/stock.webp" alt="stock">
+                <img src="../../images/imagesAccueil/stock.webp" alt="stock">
             </a>
             <a href="" title="lien vers page commandes" id="image4">
-                <img src="../images/imagesAccueil/commandes.webp" alt="commandes">
+                <img src="../../images/imagesAccueil/commandes.webp" alt="commandes">
             </a>        
         </section>
 
