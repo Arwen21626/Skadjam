@@ -67,9 +67,11 @@ header {
     height: 150px;
 }
 
-#nav-section {
-    display: grid;
+#nav-section section {
+    display: flex;
     grid-template-columns: repeat(4, 1fr);
+    justify-content: space-a;
+    align-items: center;
     
     background-color: #588A87;
     padding: 1em;
@@ -77,12 +79,19 @@ header {
 
 .logo_nav {
     width: 100px;
-    height: 100px;   
+    height: 100px;
+     
 }
 
 #nav-section a {
     text-decoration: none;
 }
+
+#nav-section ul {
+    display: none;
+}
+
+#nav-section section:nth-child(1) img
 
 /* CSS pour le footer */
 footer {
