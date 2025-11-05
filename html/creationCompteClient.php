@@ -1,6 +1,8 @@
 <?php
 require_once("../php/verificationFormulaire.php"); // fonctions qui vérifient les données des formulaires
-$dbh = new PDO("$driver:host=$server;dbname=$dbname", $user, $pass); // connextion à la base de données
+require_once("A NE SURTOUT PAS COMMIT !!!!!!!!!!.php"); // données de connection à la base de données
+
+$dbh = new PDO("$driver:host=$server;dbname=$dbname", $user, $pass); // connection à la base de données
 $dbh->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC);
 
 ?>
@@ -18,18 +20,20 @@ $dbh->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC);
     // Traitement du formulaire seulement si toutes les données son saisie
     if(isset($_POST['nom']) && isset($_POST['prenom']) && isset($_POST['mail']) && isset($_POST['telephone']) && isset($_POST['mdp']) && isset($_POST['verifMdp'])){
         // Vérification que toutes les données saisie son correcte
+        echo 'Salut 1 !';
+
         if (verifNomPrenom($_POST['nom']) && verifNomPrenom($_POST['prenom']) && verifTelephone($_POST['telephone']) && verifMail($_POST['mail']) && verifMotDePasse($_POST['mdp']) && ($_POST['mdp'] === $_POST['verifMdp'])){
             echo 'Salut !';
             // Traitement des données pour celle qui en on besoin
-            $nom = strlower($_POST['nom']);
-            $prenom = strlower($_POST['prenom']);
+            $nom = strupper($_POST['nom']);
+            $prenom = $_POST['prenom'];
             $mail = strlower($_POST['mail']);
-            // $mdp = ;  // à Hasher
+            $mdp = $_POST['mdp'];  // à Hasher
 
             // Insertion des données dans la base de données
-            $insertNouvDept = $dbh->prepare("INSERT INTO teste_sae3._compte(id_compte, nomdept, lieu) 
-                                                VALUES('50', 'DEPARTEMENT1','Lannion')"); // lancer une requête sql
-            $insertNouvDept->execute();
+            // $insertNouvDept = $dbh->prepare("INSERT INTO teste_sae3._compte(nom_compte, prenom_compte, adresse_mail, motDePasse, numero_telephone, bloque)
+            //                                     VALUES($nom, $prenom, $mail, $mdp, $telephone, 'false')");
+            // $insertNouvDept->execute();
 
             // Redirection vers la page d'accueil
 
