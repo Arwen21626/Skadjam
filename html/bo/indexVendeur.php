@@ -1,11 +1,12 @@
-<?php include('PAS_DE_COMMIT.php');?>
+<?php include('../PAS_DE_COMMIT.php');?>
 
 <!DOCTYPE html>
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" type="text/css" href="../css/index.css" >
+    <link rel="stylesheet" type="text/css" href="../../css/fo/index.css" >
+    <link rel="stylesheet" type="text/css" href="../../css/bo/general_back.css" >
     <title>Accueil</title>
 </head>
 
@@ -22,16 +23,24 @@
             <a href="" title="lien vers page promotion" id="image1">
                 <img src="../images/imagesAccueil/promotion.webp" alt="promotion">
             </a>
-            <a href="" title="lien vers page nouveaux produits" id="image2">
-                <img src="../images/imagesAccueil/nouveauxProduits.webp" alt="nouveaux produits">
+            <a href="" title="lien vers page derniers ajouts" id="image2">
+                <img src="../images/imagesAccueil/derniersAjouts.webp" alt="derniers ajouts">
             </a>           
-            <a href="" title="lien vers page les plus vendus" id="image3">
-                <img src="../images/imagesAccueil/lesPlusVendus.webp" alt="les plus vendus">
+            <a href="" title="lien vers page stock" id="image3">
+                <img src="../images/imagesAccueil/stock.webp" alt="stock">
             </a>
             <a href="" title="lien vers page commandes" id="image4">
                 <img src="../images/imagesAccueil/commandes.webp" alt="commandes">
             </a>        
         </section>
+
+        <section id ="ligneBoutons">
+            <a href="" class="bouton">Ajouter un produit</a>
+            <a href="" class="bouton">Statistiques</a>
+            <a href="" class="bouton">Avis récents</a>
+        </section>
+
+        <h2>Vos produits</h2>
 
 
         <!--Début du catalogue-->
@@ -47,10 +56,7 @@
                 //faire des tableaux associatifs au lieu de numérique
                 $dbh->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC);
 
-                foreach($dbh->query("SELECT * from sae3_skadjam._produit pr
-                                        inner join sae3_skadjam._photo ph
-                                        inner join sae_skadjam._montre m on pr.id_produit=m.id_produit on ph.id_photo = m.id_photo ", 
-                                        PDO::FETCH_ASSOC) as $row) {
+                foreach($dbh->query("SELECT * from sae3_skadjam._produit", PDO::FETCH_ASSOC) as $row) {
                     $tabProduit[] = $row;
                     print_r($row);
                 }

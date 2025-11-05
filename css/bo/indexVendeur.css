@@ -39,3 +39,13 @@ a{
 p{
     text-align: right;
 }
+
+
+/*****************************************
+Css page d'accueil vendeur
+******************************************/
+#ligneBoutons{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
