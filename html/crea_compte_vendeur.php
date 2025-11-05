@@ -16,6 +16,7 @@ include("verification_formulaire.php");
     $tel = '';
     $denomination = '';
     $adresse = '';
+    $iban = '';
     $siren = '';
     $mdp = '';
     $verif = '';
@@ -112,6 +113,10 @@ if (isset($_POST["nom"])){
                 <div class="case-form">
                     <label for="siren">Numéro de SIREN * :</label>
                     <input type="text" id="siren" name="siren" value="<?= $_POST["siren"] ?? ''?>" size="25" required>
+                </div>
+                <div class="case-form">
+                    <label for="iban">Numéro de IBAN * :</label>
+                    <input type="text" id="iban" name="iban" value="<?= $_POST["iban"] ?? ''?>" size="25" required>
                 </div>
             </div>
 
