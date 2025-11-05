@@ -1,0 +1,152 @@
+@font-face { /* Pour les titres */
+    font-family: 'MavenPro';
+    src: url("../font/MavenPro/MavenPro-Regular.ttf");
+}
+
+@font-face { /* Pour les paragraphes */
+    font-family: 'Amiko';
+    src: url("../font/Amiko/Amiko-Regular.ttf");
+}
+
+body {
+    margin: 0;
+    padding: 0;
+}
+
+h1, h2, h3, h4 {
+    font-family: 'MavenPro';
+}
+
+h1 {
+    font-size: 96px;
+}
+
+h2 {
+    font-size: 64px;
+}
+
+h3 {
+    font-size: 48px;
+}
+
+h4 {
+    font-size: 40px;
+}
+
+p, a, input, label{
+    font-family: 'Amiko';
+    font-size: 30px;
+}
+
+
+/* CSS pour le Header */
+header {
+    background-color: #365452;
+}
+
+#header-section {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    padding: 1.5em;
+}
+
+#header-section h1{
+    width: 100%;
+    text-align: center;
+    color: #E2F9FF;
+    margin: 0;
+    padding-top: 0.25em;
+}
+
+#header-section img {
+    padding-left: 3em;
+}
+
+.logo {
+    width: 150px;
+    height: 150px;
+}
+
+#nav-section section {
+    display: flex;
+    grid-template-columns: repeat(4, 1fr);
+    justify-content: space-a;
+    align-items: center;
+    
+    background-color: #588A87;
+    padding: 1em;
+}
+
+.logo_nav {
+    width: 100px;
+    height: 100px;
+     
+}
+
+#nav-section a {
+    text-decoration: none;
+}
+
+#nav-section ul {
+    display: none;
+}
+
+#nav-section section:nth-child(1) img
+
+/* CSS pour le footer */
+footer {
+    background-color: #365452;
+    display: flex;
+    justify-content: space-around;
+}
+
+footer #info-footer {
+    display: flex;
+    justify-content: space-around;
+}
+
+footer #info-footer article {
+    display: flex;
+    flex-direction: column;
+    padding: 0.5em 2em 2em 2em;
+}
+
+footer #section-reseaux {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 5px;
+}
+
+footer .reseau_item {
+    align-self: center;
+}
+
+footer h3 {
+    margin: 0.5em;
+    color: #E2F9FF;
+}
+
+footer a {
+    text-decoration: none;
+    color: #E2F9FF;
+    margin: 0.2em;
+}
+
+footer a:hover {
+    color: #E3D7CC;
+}
+
+.logo_reseaux {
+    width: 75px;
+    height: 75px;
+}
+
+/* position titre du main */
+main {
+    display: flex;
+    flex-direction: column;
+}
+
+main>h2{
+    align-self: center;
+}
