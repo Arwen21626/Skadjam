@@ -42,18 +42,12 @@ p, a {
 /* CSS pour le Header */
 header {
     background-color: #365452;
-    
 }
 
 #header-section {
     display: grid;
     grid-template-columns: 1fr auto 1fr;
     padding: 1.5em;
-}
-
-#nav-section {
-    background-color: #588A87;
-    padding: 1em;
 }
 
 #header-section h1{
@@ -73,11 +67,22 @@ header {
     height: 150px;
 }
 
-.logo_nav {
-    width: 100px;
-    height: 100px;
+#nav-section {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    
+    background-color: #588A87;
+    padding: 1em;
 }
 
+.logo_nav {
+    width: 100px;
+    height: 100px;   
+}
+
+#nav-section a {
+    text-decoration: none;
+}
 
 /* CSS pour le footer */
 footer {
