@@ -1,6 +1,6 @@
 <?php
 echo __DIR__;
-include '../connections_params.php';
+include './connections_params.php';
 try {
     $dbh = new PDO("$driver:host=$server;dbname=$dbname", 
             $user, $pass);
