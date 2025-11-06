@@ -1,5 +1,6 @@
 <?php
-include('connection_params.php');
+include('../../connections_params.php');
+require_once('../../php/verification_formulaire.php');
 
 
 
@@ -12,6 +13,13 @@ if (isset($_POST['categorie']) && isset($_POST['nom']) && isset($_POST['prix']) 
     $enPromotion = htmlentities($_POST['mettreEnPromotion']);
     $description = $enLigne = htmlentities($_POST['description']);
     //OUBLIE PAS LA PHOTO
+    //Il faut récupérer l'id du vendeur pour l'insertion
+    if (verifiePrix($prix) && verifieQteStock($qteStock)) {
+        $dbh = new PDO("$driver:host=$server;dbname=$dbname");
+        $insertion_produit = $dbh -> prepare("INSERT INTO sae3_skadjam._produit VALUES ");
+        $insertion_produit -> execute();
+        $dbh = null;
+    }
 
 
 }

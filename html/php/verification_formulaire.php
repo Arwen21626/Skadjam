@@ -91,3 +91,24 @@ function verifieIban($iban){
         return false;
     }
 }
+
+
+//Fonction création produit
+
+function verifiePrix($prix){
+    if ($prix >= 0) {
+        return true;
+    }
+    else{
+        return false;
+    }
+}
+
+function verifieQteStock($qteStock){
+    if ($qteStock >= 0) {
+        return true;
+    }
+    else{
+        return false;
+    }
+}
