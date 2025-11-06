@@ -1,0 +1,41 @@
+<footer>
+    <section id="info-footer">
+        <article>
+            <h3>Infos Pratiques</h3>
+            <a href="Insérer lien CGV">
+                Conditions générales de vente
+            </a>
+
+            <a href="Insérer lien CGU">
+                Conditions générales d'utilisation
+            </a>
+        </article>
+
+        <article>
+            <h3>À propos</h3>
+            <a href="Insérer lien page info sur la COBREC">Qui sommes-nous ?</a>
+            <a href="Insérer lien vers le Site de la COBREC">Site de la COBREC</a>
+        </article>
+
+        <article>
+            <h3>Nous contacter</h3>
+            <a href="mailto:questions@cobrec.bzh">questions@cobrec.bzh</a>
+            <a href="tel:0295264512">02 95 26 45 12</a>
+        </article>
+    </section>
+
+    <section id="section-reseaux">
+        <a href="A modifier" class="reseau_item">
+            <img src="../images/logo/reseaux/facebook-back.webp" alt="Facebook" title="Facebook" class="logo_reseaux">
+        </a>
+        <a href="A modifier" class="reseau_item">
+            <img src="../images/logo/reseaux/instagram-back.webp" alt="Instagram" title="Instagram" class="logo_reseaux">
+        </a>
+        <a href="A modifier" class="reseau_item">
+            <img src="../images/logo/reseaux/linkeding-back.webp" alt="Linkedin" title="Linkedin" class="logo_reseaux">
+        </a>
+        <a href="A modifier" class="reseau_item">
+            <img src="../images/logo/reseaux/twitter-x-back.webp" alt="Twitter - X" title="Twitter - X" class="logo_reseaux">
+        </a>
+    </section>  
+</footer>
