@@ -1,6 +1,6 @@
 <?php
 include("connexion.php");
-include("verification_formulaire.php");
+include("../../php/verification_formulaire.php");
 
 /* initialiser toutes les variables avant l'affichage de la page */
     $errConfirmation = '';
