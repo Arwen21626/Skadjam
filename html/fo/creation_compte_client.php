@@ -1,5 +1,5 @@
 <?php
-require_once("../php/verificationFormulaire.php"); // fonctions qui vérifient les données des formulaires
+require_once("../php/verification_formulaire.php"); // fonctions qui vérifient les données des formulaires
 require_once("A NE SURTOUT PAS COMMIT !!!!!!!!!!.php"); // données de connection à la base de données
 
 $dbh = new PDO("$driver:host=$server;dbname=$dbname", $user, $pass); // connection à la base de données
@@ -25,18 +25,25 @@ $dbh->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC);
         if (verifNomPrenom($_POST['nom']) && verifNomPrenom($_POST['prenom']) && verifTelephone($_POST['telephone']) && verifMail($_POST['mail']) && verifMotDePasse($_POST['mdp']) && ($_POST['mdp'] === $_POST['verifMdp'])){
             echo 'Salut !';
             // Traitement des données pour celle qui en on besoin
-            $nom = strupper($_POST['nom']);
-            $prenom = $_POST['prenom'];
-            $mail = strlower($_POST['mail']);
-            $mdp = $_POST['mdp'];  // à Hasher
+            $nom = htmlentities($_POST['nom']);
+            echo 'le pb est ici2';
+            $prenom = htmlentities($_POST['prenom']);
+            echo 'le pb est ici2';
+            $mail = htmlentities($_POST['mail']);
+            echo 'le pb est ici4';
+            $mdp = password_hash($_POST['mdp'], PASSWORD_DEFAULT);  // à Hasher
+            echo 'le pb est ici5';
+            $telephone = htmlentities($_POST['telephone']);
 
             // Insertion des données dans la base de données
-            // $insertNouvDept = $dbh->prepare("INSERT INTO teste_sae3._compte(nom_compte, prenom_compte, adresse_mail, motDePasse, numero_telephone, bloque)
-            //                                     VALUES($nom, $prenom, $mail, $mdp, $telephone, 'false')");
-            // $insertNouvDept->execute();
+            $insertNouvDept = $dbh->prepare("INSERT INTO sae3_skadjam._compte(nom_compte, prenom_compte, adresse_mail, motDePasse, numero_telephone, bloque)
+                                                VALUES('$nom', '$prenom', '$mail', '$mdp', '$telephone', 'false')");
+            $insertNouvDept->execute();
 
             // Redirection vers la page d'accueil
+            
 
+            //se déconnecter de la bdd
         }
         // Messages d'erreurs si l'un des champs ne correspond pas à ce qu'on attend
         else{ 
@@ -51,7 +58,7 @@ $dbh->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC);
 
     <h2>Création du compte client</h2>
 
-    <form action="creationCompteClient.php" method="post"> 
+    <form action="./creation_compte_client.php" method="post"> 
         <label for="nom">Nom* :</label>
         <input type="text" name="nom" id="nom" required>
 
