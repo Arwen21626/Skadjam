@@ -12,16 +12,17 @@ if (isset($_POST['categorie']) && isset($_POST['nom']) && isset($_POST['prix']) 
     $enLigne = htmlentities($_POST['mettreEnLigne']);
     $enPromotion = htmlentities($_POST['mettreEnPromotion']);
     $description = $enLigne = htmlentities($_POST['description']);
+    echo "Dans le 1er if";
     //OUBLIE PAS LA PHOTO
     //Il faut récupérer l'id du vendeur pour l'insertion
     if (verifiePrix($prix) && verifieQteStock($qteStock)) {
+        echo "Avant l'insertion";
         $dbh = new PDO("$driver:host=$server;dbname=$dbname");
-        $insertion_produit = $dbh -> prepare("INSERT INTO sae3_skadjam._produit VALUES ");
+        $insertion_produit = $dbh -> prepare("INSERT INTO sae3_skadjam._produit (libelle_produit, description_produit, prix_ht, quantite_stock) VALUES ($nom, $description, $prix,$qteStock)");
         $insertion_produit -> execute();
         $dbh = null;
+        echo "Après l'insertion";
     }
-
-
 }
 
 ?>
@@ -37,14 +38,14 @@ if (isset($_POST['categorie']) && isset($_POST['nom']) && isset($_POST['prix']) 
     <header></header>
     <main>
         <h2>Création d'un produit</h2>
-        <form action="" method="post">
+        <form action="creation_produit.php" method="post">
             <select name="categorie" id="categorie" required>
                 <option value="0">Categorie</option>
                 <option value="id dans la bdd">Boucle php sur la bdd</option>
             </select>
             
-            <input type="file" name="photo" id="photo" required>
-            <label for="photo">Ajouter des images</label>
+            <!-- <input type="file" name="photo" id="photo" required>
+            <label for="photo">Ajouter des images</label> -->
 
             <label for="nom">Nom produit *:</label>
             <input type="text" name="nom" id="nom" required>

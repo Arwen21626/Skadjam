@@ -1,3 +1,16 @@
+<?php 
+include('../../connections_params.php');
+//Récupération des données sur le produit
+
+// $dbh = new PDO("$driver:host=$server;dbname=$dbname");
+// echo "Avant select";
+// $recuperation = $dbh->query("SELECT * FROM sae3_skadjam._produit", PDO::FETCH_ASSOC);
+// $recuperation -> execute();
+// echo "Apres select";
+
+
+?>
+
 <!DOCTYPE html>
 <html lang="fr">
 <head>
