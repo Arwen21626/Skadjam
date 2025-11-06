@@ -1,12 +1,12 @@
-<?php include('PAS_DE_COMMIT.php');?>
+<?php include('../../PAS_DE_COMMIT.php');?>
 
 <!DOCTYPE html>
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" type="text/css" href="../../css/bo/index.css" >
-    <link rel="stylesheet" type="text/css" href="../../css/fo/general_front.css">
+    <link rel="stylesheet" type="text/css" href="../css/index.css" >
+    <link rel="stylesheet" type="text/css" href="../css/fo/general_front.css">
     <title>Accueil</title>
 </head>
 
@@ -61,16 +61,22 @@
                 }
 
                 foreach($tabProduit as $id => $valeurs){?>
-                <?php
-                    $lienProduit = $valeurs['libelle_produit'];
-                ?>
-                    <a href="<?php echo htmlentities($lienProduit);?>">
+                    <a href="produit_detaille.php">
                         <img src="<?php echo htmlentities($valeurs['url_photo']);?>" 
                                 alt="<?php echo htmlentities($valeurs['alt']);?>"
                                 title="<?php echo htmlentities($valeurs['titre']);?>">
                     </a>
                     <h4><?php echo htmlentities($valeurs['libelle_produit']);?></h4>    
                     <p><?php echo htmlentities($valeurs['prix_ttc']);?></p>
+                    <?php $note = $valeurs['note'];?>
+                    <div class="etoilesProduit">
+                        <?php if (($note != "non noté") && ($note !=0)){
+                            for($i=0; $i<$note; $i++){ ?>
+                                <img src="" alt="">
+                            <?php }
+                        };?>
+                        
+                    </div>
                     <!--<p>nb étoiles</p>-->
                     
             <?php }
