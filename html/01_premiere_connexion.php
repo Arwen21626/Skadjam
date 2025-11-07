@@ -7,9 +7,7 @@ try {
     foreach($dbh->query('SELECT * from sae3_skadjam._compte', 
                         PDO::FETCH_ASSOC) 
                 as $row) {
-        echo "<pre>";
-        print_r($row);
-        echo "</pre>";
+        echo $row;
     }
     $dbh = null;
 } catch (PDOException $e) {
