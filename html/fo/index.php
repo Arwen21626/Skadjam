@@ -1,4 +1,4 @@
-<?php include('PAS_DE_COMMIT.php');?>
+<?php include('../connections_params.php');?>
 
 <!DOCTYPE html>
 <html lang="fr">
