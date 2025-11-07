@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Test Front</title>
-    <link rel="stylesheet" href="../css/fo/general_front.css">
+    <link rel="stylesheet" href="/html/css/fo/general_front.css">
     
 </head>
 <body>

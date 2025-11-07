@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Test Back</title>
-    <link rel="stylesheet" href="../css/bo/general_back.css">
+    <link rel="stylesheet" href="/html/css/bo/general_back.css">
 </head>
 <body>
     

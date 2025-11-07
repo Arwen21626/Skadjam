@@ -26,16 +26,16 @@
 
     <section id="section-reseaux">
         <a href="A modifier" class="reseau_item">
-            <img src="../images/logo/reseaux/facebook_back.webp" alt="Facebook" title="Facebook" class="logo_reseaux">
+            <img src="/html/images/logo/reseaux/facebook_back.webp" alt="Facebook" title="Facebook" class="logo_reseaux">
         </a>
         <a href="A modifier" class="reseau_item">
-            <img src="../images/logo/reseaux/instagram_back.webp" alt="Instagram" title="Instagram" class="logo_reseaux">
+            <img src="/html/images/logo/reseaux/instagram_back.webp" alt="Instagram" title="Instagram" class="logo_reseaux">
         </a>
         <a href="A modifier" class="reseau_item">
-            <img src="../images/logo/reseaux/linkeding_back.webp" alt="Linkedin" title="Linkedin" class="logo_reseaux">
+            <img src="/html/images/logo/reseaux/linkeding_back.webp" alt="Linkedin" title="Linkedin" class="logo_reseaux">
         </a>
         <a href="A modifier" class="reseau_item">
-            <img src="../images/logo/reseaux/twitter_x_back.webp" alt="Twitter - X" title="Twitter - X" class="logo_reseaux">
+            <img src="/html/images/logo/reseaux/twitter_x_back.webp" alt="Twitter - X" title="Twitter - X" class="logo_reseaux">
         </a>
     </section>  
 </footer>
