@@ -3,6 +3,11 @@ include('../../connections_params.php');
 include('../../01_premiere_connexion.php');
 require_once('../../php/verification_formulaire.php');
 
+$tab_categories = [];
+
+foreach($dbh->query('SELECT * from sae3_skadjam._categorie', PDO::FETCH_ASSOC) as $row) {
+        $tab_categories[] = $row;
+    }
 
 
 if (isset($_POST['categorie']) && isset($_POST['nom']) && isset($_POST['prix']) && isset($_POST['qteStock']) && isset($_POST['description'])) {
@@ -46,7 +51,10 @@ if (isset($_POST['categorie']) && isset($_POST['nom']) && isset($_POST['prix']) 
         <form action="creation_produit.php" method="post">
             <select name="categorie" id="categorie" required>
                 <option value="0">Categorie</option>
-                <option value="id dans la bdd">Boucle php sur la bdd</option>
+                <?php foreach ($tab_categories as $categorie) {?>
+                    <option value="<?php echo $categorie['id_categorie']?>"><?php echo $categorie['libelle_categorie']?></option>
+                <?php } ?>
+                
             </select>
             
             <!-- <input type="file" name="photo" id="photo" required>
