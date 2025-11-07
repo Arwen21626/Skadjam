@@ -1,13 +1,18 @@
 <?php 
 include('../../connections_params.php');
+include('../../01_premiere_connexion.php');
 //Récupération des données sur le produit
+$tab_produit = [];
 
-// $dbh = new PDO("$driver:host=$server;dbname=$dbname");
-// echo "Avant select";
-// $recuperation = $dbh->query("SELECT * FROM sae3_skadjam._produit", PDO::FETCH_ASSOC);
-// $recuperation -> execute();
-// $dbh = null;
-// echo "Apres select";
+foreach($dbh->query('SELECT * from sae3_skadjam._produit', 
+                        PDO::FETCH_ASSOC) 
+                as $row) {
+        echo "<pre>";
+        print_r($row);
+        echo "</pre>";
+        $tab_produit[] = $row;
+    }
+print_r($tab_produit);
 
 
 ?>
