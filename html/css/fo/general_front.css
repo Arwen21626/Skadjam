@@ -16,7 +16,6 @@ body {
 
 h1, h2, h3, h4 {
     font-family: 'MavenPro';
-    color: #365452;
 }
 
 h1 {
@@ -38,7 +37,6 @@ h4 {
 p, a, input, label{
     font-family: 'Amiko';
     font-size: 30px;
-    color: #365452;
     text-decoration: none;
 }
 
@@ -63,6 +61,7 @@ header {
     text-align: center;
     margin: 0;
     padding-top: 0.25em;
+    color: #365452;
 }
 
 #header-section div {
@@ -94,6 +93,14 @@ header {
     flex-direction: column;
     justify-content: center;
     align-items: center;
+}
+
+.logo_nav_div a {
+    color: #365452;
+}
+
+.logo_nav_div a:hover {
+    color: #A70101;
 }
 
 /* Pour l'icône de l'accueil */
@@ -153,6 +160,7 @@ footer {
     background-color: #86D0CC;
     display: flex;
     justify-content: space-around;
+    color: #365452;
 }
 
 footer #info-footer {
@@ -182,6 +190,7 @@ footer h3 {
 
 footer a {
     margin: 0.2em;
+    color: #365452;
 }
 
 .logo_reseaux {
