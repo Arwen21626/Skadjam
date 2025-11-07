@@ -35,7 +35,7 @@
     ?>
     <h2>Mon compte</h2>
     <article>
-        <section>
+        <section class="nomComplet">
             <img src="<?php echo $photo ?>" alt="Photo de profil" width="50" height="50">
             <h3><?php echo $client['nomCompte'] ?></h3>
             <h3><?php echo $client['prenomCompte'] ?></h3>
