@@ -1,20 +1,17 @@
-<?php session_start(); ?>
+<?php
+    session_start();
+    require_once "../connections_params.php";
+?>
 <!DOCTYPE html>
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../css/general_front.css">
+    <link rel="stylesheet" type="text/css" href="../css/fo/general_front.css">
     <title>Mon compte</title>
 </head>
 <body>
     <?php
-        if (empty($_SESSION['idCompte'])) {
-            // client non connecté -> redirection vers connexion
-            header('Location: connexion_client.php');
-            exit;
-        }
-
         $id = (int) $_SESSION['idCompte'];
 
         try{
@@ -29,13 +26,12 @@
 
             $dbh = null;
         }catch(PDOException $e){
-            print "Erreur : " . $e->getMessage() . "<br>" ;
-            die();
+            print "Erreur : " . $e->getMessage() . "<br/>";
         }
     ?>
     <h2>Mon compte</h2>
     <article>
-        <section>
+        <section class="nomComplet">
             <img src="<?php echo $photo ?>" alt="Photo de profil" width="50" height="50">
             <h3><?php echo $client['nomCompte'] ?></h3>
             <h3><?php echo $client['prenomCompte'] ?></h3>

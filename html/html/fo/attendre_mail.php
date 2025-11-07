@@ -1,9 +1,10 @@
-<?php session_start(); ?>
+<?php require_once "../connections_params.php"; ?>
 <!DOCTYPE html>
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="../css/fo/general_front.css">
     <title>Réinitialiser mon mot de passe</title>
 </head>
 <body>
@@ -40,8 +41,7 @@
         }
         $dbh = null;
     }catch(PDOException $e){
-        print "Erreur : " . $e->getMessage() . "<br>" ;
-        die();
+        print "Erreur : " . $e->getMessage() . "<br/>";
     }
     ?>
     </p>
