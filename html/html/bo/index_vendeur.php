@@ -5,7 +5,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" type="text/css" href="../../css/fo/index.css" >
+    <link rel="stylesheet" type="text/css" href="../../css//bo/index_vendeur.css" >
     <link rel="stylesheet" type="text/css" href="../../css/bo/general_back.css" >
     <title>Accueil</title>
 </head>
@@ -21,16 +21,16 @@
         <section class="carreImages">
 
             <a href="" title="lien vers page promotion" id="image1">
-                <img src="../../images/imagesAccueil/promotion.webp" alt="promotion">
+                <img src="../../images/images_accueil/promotion.webp" alt="promotion">
             </a>
             <a href="" title="lien vers page derniers ajouts" id="image2">
-                <img src="../../images/imagesAccueil/derniersAjouts.webp" alt="derniers ajouts">
+                <img src="../../images/images_accueil/derniers_ajouts.webp" alt="derniers ajouts">
             </a>           
             <a href="" title="lien vers page stock" id="image3">
-                <img src="../../images/imagesAccueil/stock.webp" alt="stock">
+                <img src="../../images/images_accueil/stock.webp" alt="stock">
             </a>
             <a href="" title="lien vers page commandes" id="image4">
-                <img src="../../images/imagesAccueil/commandes.webp" alt="commandes">
+                <img src="../../images/images_accueil/commandes.webp" alt="commandes">
             </a>        
         </section>
 
@@ -41,8 +41,6 @@
         </section>
 
         <h2>Vos produits</h2>
-
-
         <!--Début du catalogue-->
 
         <?php
@@ -55,12 +53,71 @@
                 $dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
                 //faire des tableaux associatifs au lieu de numérique
                 $dbh->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC);
-
-                foreach($dbh->query("SELECT * from sae3_skadjam._produit", PDO::FETCH_ASSOC) as $row) {
+                
+                //récupère toutes les infos des tables produits et photos
+                foreach($dbh->query("SELECT *
+                                    from sae3_skadjam._produit pr
+                                    inner join sae3_skadjam._montre m
+                                        on pr.id_produit=m.id_produit
+                                    inner join sae3_skadjam._photo ph  
+                                        on ph.id_photo = m.id_photo ", PDO::FETCH_ASSOC) as $row){
                     $tabProduit[] = $row;
-                    print_r($row);
                 }
 
+                //affiche la photo du produit, son nom, son prix et sa note
+                foreach($tabProduit as $id => $valeurs){?>
+                    <!--affichage de la photo-->
+                    <a href="">
+                        <img src="<?php echo htmlentities($valeurs['url_photo']);?>" 
+                                alt="<?php echo htmlentities($valeurs['alt']);?>"
+                                title="<?php echo htmlentities($valeurs['titre']);?>">
+                    </a>
+
+                    <!--affichage du nom du produit-->
+                    <h4><?php echo htmlentities($valeurs['libelle_produit']);?></h4> 
+
+                    <!--affichage du prix du produit-->   
+                    <p><?php echo htmlentities($valeurs['prix_ttc']);?></p>
+
+                    <!--affichage de la note-->
+                    <?php $note = $valeurs['note'];
+
+                        //note nulle
+                        if ($note == null){ ?>
+                            <p><?php echo htmlentities('non noté'); ?></p>
+                        <?php } 
+                        else {
+
+                            //note entière 
+                            if(($note == 0) || ($note == 1) || ($note == 2) || ($note == 3) || ($note == 4) || ($note == 5)){
+                                $cinqMoinsNote = 5-$note;
+                                //boucle pour étoiles pleines
+                                for($i=0; $i<$note; $i++){?>
+                                    <img src="../../images/logo/bootstrap_icon/star-fill.svg" alt="étoile pleine">
+                                <?php }
+                                //boucle pour étoiles vides
+                                for($i=0; $i<$cinqMoinsNote; $i++){?>
+                                    <img src="../../images/logo/bootstrap_icon/star.svg" alt="étoile vide">
+                                <?php }
+                            }
+
+                            //note à virgule
+                            if(($note == 0.5) || ($note == 1.5) || ($note == 2.5) || ($note == 3.5) || ($note == 4.5) || ($note == 5.5)){
+                                $partieEntiere = $note-0.5;
+                                $cinqMoinsNote = 5-$partieEntiere-1;
+                                //boucle pour étoiles pleines
+                                for($i=0; $i<$partieEntiere; $i++){?>
+                                    <img src="../../images/logo/bootstrap_icon/star-fill.svg" alt="étoile pleine">
+                                <?php } ?>
+                                <!--demie étoile-->
+                                <img src="../../images/logo/bootstrap_icon/star-half.svg" alt="demie étoile">
+                                <!--boucle pour étoiles vides-->
+                                <?php for($i=0; $i<$cinqMoinsNote; $i++){?>
+                                    <img src="../../images/logo/bootstrap_icon/star.svg" alt="étoile vide">
+                                <?php }
+                            }
+                        }?>                
+            <?php }
 
                 $dbh = null;
             } 
@@ -70,12 +127,10 @@
                 die();
             }
         ?>
-        <img src="images/imagesProduits/" alt="">
-        <h4></h4>
-        <p></p>
-        <!--nb étoiles-->
+        <!--fin du catalogue-->
 
-        <p>Voir plus ...</p>
+        <p id="droite">Voir plus ...</p>
+
     </main>
     
     
