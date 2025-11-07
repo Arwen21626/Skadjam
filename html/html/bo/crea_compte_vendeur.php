@@ -122,7 +122,7 @@ if (isset($_POST["nom"])){
                     <!-- s'il y a une erreur elle sera affiché sous la cellule -->
                     <?php echo (isset($erreurs["prenom"])) ? "<p class=\"erreur\">" . $erreurs["prenom"] . " </p>" : '' ?>
                 </div>
-                <div class="case-form">
+                <div class="case-form ">
                     <label for="mail">Mail * :</label>
                     <input type="email" id="mail" name="mail" value="<?= (!(isset($erreurs["mail"]) || isset($erreurs["unique"]))) ? $mail : ''  ?>" size="40" required>
                     <!-- s'il y a une erreur elle sera affiché sous la cellule -->
