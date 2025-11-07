@@ -7,7 +7,7 @@ require_once "../php/verification_formulaire.php";
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" type="text/css" href="../css/bo/general_front.css">
+    <link rel="stylesheet" type="text/css" href="../css/fo/general_front.css">
     <title>Nouveau mot de passe</title>
 </head>
 <body>
@@ -22,7 +22,7 @@ require_once "../php/verification_formulaire.php";
                 echo "Congrats";
                 $mdp = $_POST['mdp'];  // à Hasher
                 // Redirection vers la page de connexion
-                //header('Location: connexion_client.php');
+                
             }else{ 
                 echo "Erreur";
             }
