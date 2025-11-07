@@ -83,10 +83,28 @@ function verifSiren($siren){
     }
 }
 
-function verifieIban($iban){
+function verifIban($iban){
     if (preg_match("/^FR[0-9]{25}$/", $iban)){
         return true;
     }else{
+        return false;
+    }
+}
+
+function verifPrix($prix){
+    if ($prix >= 0){
+        return true;
+    }
+    else{
+        return false;
+    }
+}
+
+function verifQteStock($qteStock){
+    if ($qteStock >= 0){
+        return true;
+    }
+    else{
         return false;
     }
 }

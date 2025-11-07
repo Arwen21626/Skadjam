@@ -8,7 +8,6 @@
     src: url("../../font/Amiko/Amiko-Regular.ttf");
 }
 
-
 body {
     margin: 0;
     padding: 0;
@@ -16,29 +15,10 @@ body {
 
 h1, h2, h3, h4 {
     font-family: 'MavenPro';
-    color: #365452;
 }
 
-h1 {
-    font-size: 96px;
-}
-
-h2 {
-    font-size: 64px;
-}
-
-h3 {
-    font-size: 48px;
-}
-
-h4 {
-    font-size: 40px;
-}
-
-p, a, input, label{
+p, a {
     font-family: 'Amiko';
-    font-size: 30px;
-    color: #365452;
     text-decoration: none;
 }
 
@@ -46,113 +26,165 @@ a:hover {
     color: #A70101;
 }
 
-
 /* CSS pour le Header */
 header {
     background-color: #86D0CC;
 }
 
-#header-section {
-    display: grid;
-    grid-template-columns: 1fr auto 1fr;
-    padding: 1.5em;
+header h1 {
+    color: #365452;
 }
 
-#header-section h1{
-    width: 100%;
-    text-align: center;
-    margin: 0;
-    padding-top: 0.25em;
-}
-
-#header-section div {
-    padding-left: 3em;
-}
-
-.logo {
-    width: 150px;
-    height: 150px;
-}
-
-#nav-section section {
-    display: flex;
-    grid-template-columns: repeat(4, 1fr);
-    justify-content: space-around;
-    align-items: center;
-    
+#nav-section {
     background-color: #E3D7CC;
-    padding: 1em;
 }
 
-#nav-section ul {
-    display: none;
+.logo_nav_div a {
+    color: #365452;
 }
 
-/* Mise en page de chaque div contenant le logo + titre de l'élément de la navbar */
-.logo_nav_div {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+.logo_nav_div a:hover {
+    color: #A70101;
 }
 
-/* Pour l'icône de l'accueil */
-.logo_accueil .logo_nav_img {
-    height: 75px;
-    width: 75px;
-    background-image: url("../../images/logo/bootstrap_icon/house.svg") ;
-    background-repeat: no-repeat;
-    background-size: 75px;
+@media (min-width:1440px) {
+    
+    /* CSS pour le Header */
+    h1 {
+        font-size: 96px;
+    }
+
+    h2 {
+        font-size: 64px;
+    }
+
+    h3 {
+        font-size: 48px;
+    }
+
+    h4 {
+        font-size: 40px;
+    }
+
+    p, a, input, label{
+        font-size: 30px;
+    }
+
+    #header-section {
+        display: grid;
+        grid-template-columns: 1fr auto 1fr;
+        padding: 1.5em;
+    }
+
+    #header-section h1{
+        width: 100%;
+        text-align: center;
+        margin: 0;
+        padding-top: 0.25em;
+    }
+
+    #header-section div {
+        padding-left: 3em;
+    }
+
+    .logo {
+        width: 150px;
+        height: 150px;
+    }
+
+    #nav-section section {
+        display: flex;
+        grid-template-columns: repeat(5, 1fr);
+        justify-content: space-around;
+        align-items: center;
+        padding: 1em;
+    }
+
+    #nav-section ul {
+        display: none;
+    }
+
+    /* Mise en page de chaque div contenant le logo + titre de l'élément de la navbar */
+    .logo_nav_div {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+
+    /* Pour l'icône de l'accueil */
+    .logo_accueil .logo_nav_img {
+        height: 75px;
+        width: 75px;
+        background-image: url("../../images/logo/bootstrap_icon/house.svg") ;
+        background-repeat: no-repeat;
+        background-size: 75px;
+    }
+
+    .logo_accueil .logo_nav_img:hover {
+        background-image: url("../../images/logo/bootstrap_icon/house-fill.svg") ;
+    }
+
+    /* Pour l'icône des commandes */
+    .logo_commandes .logo_nav_img {
+        height: 75px;
+        width: 75px;
+        background-image: url("../../images/logo/bootstrap_icon/truck.svg") ;
+        background-repeat: no-repeat;
+        background-size: 75px;
+    }
+
+    .logo_commandes .logo_nav_img:hover {
+        background-image: url("../../images/logo/bootstrap_icon/truck-fill.svg") ;
+    }
+
+    /* Pour l'icône de recherche */
+    .logo_recherche .logo_nav_img {
+        height: 75px;
+        width: 75px;
+        background-image: url("../../images/logo/bootstrap_icon/search.svg");
+        background-repeat: no-repeat;
+        background-size: 75px;
+    }
+
+    .logo_recherche .logo_nav_img:hover {
+        background-image: url("../../images/logo/bootstrap_icon/search-selected.svg");
+    }
+
+    /* Pour l'icône de création de produit */
+    .logo_creer_produit .logo_nav_img {
+        height: 75px;
+        width: 75px;
+        background-image: url("../../images/logo/bootstrap_icon/plus-square.svg") ;
+        background-repeat: no-repeat;
+        background-size: 75px;
+    }
+
+    .logo_creer_produit .logo_nav_img:hover {
+        background-image: url("../../images/logo/bootstrap_icon/plus-square-fill.svg");
+    }
+
+    /* Pour l'icône du profil */
+    .logo_profil .logo_nav_img {
+        height: 75px;
+        width: 75px;
+        background-image: url("../../images/logo/bootstrap_icon/person.svg") ;
+        background-repeat: no-repeat;
+        background-size: 75px;
+    }
+
+    .logo_profil .logo_nav_img:hover {
+        background-image: url("../../images/logo/bootstrap_icon/person-fill.svg");
+    }
 }
 
-.logo_accueil .logo_nav_img:hover {
-    background-image: url("../../images/logo/bootstrap_icon/house-fill.svg") ;
-}
-
-/* Pour l'icône des livraisons/commandes */
-.logo_commandes .logo_nav_img {
-    height: 75px;
-    width: 75px;
-    background-image: url("../../images/logo/bootstrap_icon/truck.svg") ;
-    background-repeat: no-repeat;
-    background-size: 75px;
-}
-
-.logo_commandes .logo_nav_img:hover {
-    background-image: url("../../images/logo/bootstrap_icon/truck-fill.svg") ;
-}
-
-/* Pour l'icône de création de produit */
-.logo_creer_produit .logo_nav_img {
-    height: 75px;
-    width: 75px;
-    background-image: url("../../images/logo/bootstrap_icon/plus-square.svg") ;
-    background-repeat: no-repeat;
-    background-size: 75px;
-}
-
-.logo_creer_produit .logo_nav_img:hover {
-    background-image: url("../../images/logo/bootstrap_icon/plus-square-fill.svg");
-}
-
-/* Pour l'icône du profil */
-.logo_profil .logo_nav_img {
-    height: 75px;
-    width: 75px;
-    background-image: url("../../images/logo/bootstrap_icon/person.svg") ;
-    background-repeat: no-repeat;
-    background-size: 75px;
-}
-
-.logo_profil .logo_nav_img:hover {
-    background-image: url("../../images/logo/bootstrap_icon/person-fill.svg");
-}
 
 /* CSS pour le footer */
 footer {
     background-color: #86D0CC;
     display: flex;
     justify-content: space-around;
+    color: #365452;
 }
 
 footer #info-footer {
@@ -182,6 +214,7 @@ footer h3 {
 
 footer a {
     margin: 0.2em;
+    color: #365452;
 }
 
 .logo_reseaux {
