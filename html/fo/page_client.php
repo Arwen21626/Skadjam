@@ -29,8 +29,7 @@
 
             $dbh = null;
         }catch(PDOException $e){
-            print "Erreur : " . $e->getMessage() . "<br/>" ;
-            die();
+            print "Erreur : " . $e->getMessage() . "<br/>";
         }
     ?>
     <h2>Mon compte</h2>

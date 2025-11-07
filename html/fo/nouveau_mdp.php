@@ -47,8 +47,7 @@ require_once "../php/verification_formulaire.php";
         </form>
         <?php }
     }catch(PDOException $e){
-        print "Erreur : " . $e->getMessage() . "<br>" ;
-        die();
+        print "Erreur : " . $e->getMessage() . "<br/>";
     } ?>
 </body>
 </html>
