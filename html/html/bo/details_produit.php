@@ -27,7 +27,7 @@ print_r($tab_produit);
 <body>
     <header></header>
     <main>
-        <h2>Nom produit à récupérer</h2>
+        <h2><?php echo($tab_produit['libelle_produit']); ?>Nom produit à récupérer</h2>
         <p>NB étoiles à récupérer</p>
         <p>Catégorie : à récupérer</p>
         <p>carroussel d'image</p>
