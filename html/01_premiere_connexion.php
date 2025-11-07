@@ -8,7 +8,7 @@ try {
         echo "<pre>";
         print_r($row);
         echo "</pre>";
-        echo $row[5];
+        echo $row['bloque'];
     }
     $dbh = null;
 } catch (PDOException $e) {
