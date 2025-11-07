@@ -8,6 +8,7 @@
     src: url("../../font/Amiko/Amiko-Regular.ttf");
 }
 
+/* CSS général */
 body {
     margin: 0;
     padding: 0;
@@ -26,7 +27,7 @@ a:hover {
     color: #A70101;
 }
 
-/* CSS pour le Header */
+/* CSS général pour le Header */
 header {
     background-color: #86D0CC;
 }
@@ -45,6 +46,16 @@ header h1 {
 
 .logo_nav_div a:hover {
     color: #A70101;
+}
+
+/* CSS général pour le footer */
+footer {
+    background-color: #86D0CC;
+    color: #365452;
+}
+
+footer a {
+    color: #365452;
 }
 
 @media (min-width:1440px) {
@@ -176,58 +187,63 @@ header h1 {
     .logo_profil .logo_nav_img:hover {
         background-image: url("../../images/logo/bootstrap_icon/person-fill.svg");
     }
+
+    /* CSS pour le footer */
+    footer {
+        display: flex;
+        justify-content: space-around;
+    }
+
+    footer #info-footer {
+        display: flex;
+        justify-content: space-around;
+    }
+
+    footer #info-footer article {
+        display: flex;
+        flex-direction: column;
+        padding: 0.5em 2em 2em 2em;
+    }
+
+    footer #section-reseaux {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 5px;
+    }
+
+    footer .reseau_item {
+        align-self: center;
+    }
+
+    footer h3 {
+        margin: 0.5em;
+    }
+
+    footer a {
+        margin: 0.2em;
+    }
+
+    .logo_reseaux {
+        width: 75px;
+        height: 75px;
+    }
+
+    /* position titre du main */
+    main {
+        display: flex;
+        flex-direction: column;
+    }
+
+    main>h2{
+        align-self: center;
+    }
 }
 
 
-/* CSS pour le footer */
-footer {
-    background-color: #86D0CC;
-    display: flex;
-    justify-content: space-around;
-    color: #365452;
-}
 
-footer #info-footer {
-    display: flex;
-    justify-content: space-around;
-}
 
-footer #info-footer article {
-    display: flex;
-    flex-direction: column;
-    padding: 0.5em 2em 2em 2em;
-}
 
-footer #section-reseaux {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 5px;
-}
 
-footer .reseau_item {
-    align-self: center;
-}
 
-footer h3 {
-    margin: 0.5em;
-}
 
-footer a {
-    margin: 0.2em;
-    color: #365452;
-}
 
-.logo_reseaux {
-    width: 75px;
-    height: 75px;
-}
-
-/* position titre du main */
-main {
-    display: flex;
-    flex-direction: column;
-}
-
-main>h2{
-    align-self: center;
-}
