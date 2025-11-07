@@ -91,4 +91,22 @@ function verifieIban($iban){
     }
 }
 
+function verifePrix($prix){
+    if ($prix >= 0){
+        return true;
+    }
+    else{
+        return false;
+    }
+}
+
+function verifeQteStock($qteStock){
+    if ($qteStock >= 0){
+        return true;
+    }
+    else{
+        return false;
+    }
+}
+
 
