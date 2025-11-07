@@ -1,12 +1,12 @@
-<?php include('PAS_DE_COMMIT.php');?>
+<?php include('../../PAS_DE_COMMIT.php');?>
 
 <!DOCTYPE html>
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" type="text/css" href="../../css/bo/index.css" >
-    <link rel="stylesheet" type="text/css" href="../../css/fo/general_front.css">
+    <link rel="stylesheet" type="text/css" href="../css/index.css" >
+    <link rel="stylesheet" type="text/css" href="../css/fo/general_front.css">
     <title>Accueil</title>
 </head>
 
@@ -19,16 +19,16 @@
         <section class="carreImages">
 
             <a href="" title="lien vers page promotion" id="image1">
-                <img src="../../images/imagesAccueil/promotion.webp" alt="promotion">
+                <img src="../images/images_accueil/promotion.webp" alt="promotion">
             </a>
             <a href="" title="lien vers page nouveaux produits" id="image2">
-                <img src="../../images/imagesAccueil/nouveauxProduits.webp" alt="nouveaux produits">
+                <img src="../images/images_accueil/nouveaux_produits.webp" alt="nouveaux produits">
             </a>           
             <a href="" title="lien vers page les plus vendus" id="image3">
-                <img src="../../images/imagesAccueil/lesPlusVendus.webp" alt="les plus vendus">
+                <img src="../images/images_accueil/les_plus_vendus.webp" alt="les plus vendus">
             </a>
             <a href="" title="lien vers page commandes" id="image4">
-                <img src="../../images/imagesAccueil/commandes.webp" alt="commandes">
+                <img src="../images/images_accueil/commandes.webp" alt="commandes">
             </a>        
         </section>
 
@@ -60,23 +60,30 @@
                 produit sur la page d'accueil visiteur et vendeur */
                 }
 
-                foreach($tabProduit as $id => $valeurs){?>
-                <?php
-                    $lienProduit = $valeurs['libelle_produit'];
-                ?>
-                    <a href="<?php echo htmlentities($lienProduit);?>">
+                /*foreach($tabProduit as $id => $valeurs){?>
+                    <a href="produit_detaille.php">
                         <img src="<?php echo htmlentities($valeurs['url_photo']);?>" 
                                 alt="<?php echo htmlentities($valeurs['alt']);?>"
                                 title="<?php echo htmlentities($valeurs['titre']);?>">
                     </a>
                     <h4><?php echo htmlentities($valeurs['libelle_produit']);?></h4>    
                     <p><?php echo htmlentities($valeurs['prix_ttc']);?></p>
+                    <?php $note = $valeurs['note'];?>
+                    <div class="etoilesProduit">
+                        <?php if (($note != "non noté") && ($note !=0)){
+                            for($i=0; $i<$note; $i++){ ?>
+        
+                                <img src="" alt="">
+                            <?php }
+                        };?>
+                        
+                    </div>
                     <!--<p>nb étoiles</p>-->
                     
-            <?php }
-
+            <?php }*/
 
                 $dbh = null;
+                print_r($tabProduit);
             } 
 
             catch (PDOException $e) {
