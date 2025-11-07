@@ -1,6 +1,7 @@
 <?php
 session_start();
 require_once "../php/verification_formulaire.php";
+require_once "../connections_params.php";
 ?>
 <!DOCTYPE html>
 <html lang="fr">

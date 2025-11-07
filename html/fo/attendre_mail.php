@@ -1,3 +1,4 @@
+<?php require_once "../connections_params.php"; ?>
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -12,7 +13,8 @@
     <p>
     <?php
     try{
-        $dbh = new PDO("$driver:host=$server;dbname=$dbname",$user,$pass);
+        $dbh = new PDO("$d
+        river:host=$server;dbname=$dbname",$user,$pass);
         $dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
         $dbh->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC);
 
