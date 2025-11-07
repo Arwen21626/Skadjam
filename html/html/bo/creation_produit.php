@@ -1,7 +1,7 @@
 <?php
-include('html/connections_params.php');
-include('html/01_premiere_connexion.php');
-require_once('html/php/verification_formulaire.php');
+include('../../connections_params.php');
+include('../../01_premiere_connexion.php');
+require_once('../../php/verification_formulaire.php');
 
 $tab_categories = [];
 
@@ -21,9 +21,9 @@ if (isset($_POST['categorie']) && isset($_POST['nom']) && isset($_POST['prix']) 
 
     //OUBLIE PAS LA PHOTO
     //Il faut récupérer l'id du vendeur pour l'insertion
-    if (verifiePrix($prix) && verifieQteStock($qteStock)) {
+    if (verifPrix($prix) && verifQteStock($qteStock)){
         try{
-            $prix_ttc = $prix*1.2;
+            $prix_ttc = $prix*1.2; //A adapter
             $insertion_produit = $dbh -> prepare("INSERT INTO sae3_skadjam._produit (libelle_produit, description_produit, prix_ht, prix_ttc, est_masque, quantite_stock, seuil_alerte, quantite_unite, unite, id_categorie, id_vendeur, id_tva)
             VALUES ('$nom','$description', $prix, $prix_ttc, false, $qteStock, 0, 1,'kg',1, 1, 1)");
             $insertion_produit -> execute();
@@ -43,9 +43,10 @@ if (isset($_POST['categorie']) && isset($_POST['nom']) && isset($_POST['prix']) 
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Création d'un produit</title>
+    <link rel="stylesheet" href="../../css/bo/general_back.css">
 </head>
 <body>
-    <header></header>
+    <?php include('../../php/header_back.php');?>
     <main>
         <h2>Création d'un produit</h2>
         <form action="creation_produit.php" method="post">
