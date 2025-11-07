@@ -58,43 +58,57 @@
 
                 //affiche la photo du produit, son nom, son prix et sa note
                 foreach($tabProduit as $id => $valeurs){?>
+                    <!--affichage de la photo-->
                     <a href="">
                         <img src="<?php echo htmlentities($valeurs['url_photo']);?>" 
                                 alt="<?php echo htmlentities($valeurs['alt']);?>"
                                 title="<?php echo htmlentities($valeurs['titre']);?>">
                     </a>
-                    <h4><?php echo htmlentities($valeurs['libelle_produit']);?></h4>    
+
+                    <!--affichage du nom du produit-->
+                    <h4><?php echo htmlentities($valeurs['libelle_produit']);?></h4> 
+
+                    <!--affichage du prix du produit-->   
                     <p><?php echo htmlentities($valeurs['prix_ttc']);?></p>
+
+                    <!--affichage de la note-->
                     <?php $note = $valeurs['note'];
+
+                        //note nulle
                         if ($note == null){ ?>
                             <p><?php echo htmlentities('non noté'); ?></p>
                         <?php } 
                         else {
+
+                            //note entière 
                             if(($note == 0) || ($note == 1) || ($note == 2) || ($note == 3) || ($note == 4) || ($note == 5)){
                                 $cinqMoinsNote = 5-$note;
+                                //boucle pour étoiles pleines
                                 for($i=0; $i<$note; $i++){?>
                                     <img src="../../images/logo/bootstrap_icon/star-fill.svg" alt="étoile pleine">
                                 <?php }
+                                //boucle pour étoiles vides
                                 for($i=0; $i<$cinqMoinsNote; $i++){?>
                                     <img src="../../images/logo/bootstrap_icon/star.svg" alt="étoile vide">
                                 <?php }
                             }
+
+                            //note à virgule
                             if(($note == 0.5) || ($note == 1.5) || ($note == 2.5) || ($note == 3.5) || ($note == 4.5) || ($note == 5.5)){
                                 $partieEntiere = $note-0.5;
                                 $cinqMoinsNote = 5-$partieEntiere-1;
+                                //boucle pour étoiles pleines
                                 for($i=0; $i<$partieEntiere; $i++){?>
                                     <img src="../../images/logo/bootstrap_icon/star-fill.svg" alt="étoile pleine">
                                 <?php } ?>
+                                <!--demie étoile-->
                                 <img src="../../images/logo/bootstrap_icon/star-half.svg" alt="demie étoile">
+                                <!--boucle pour étoiles vides-->
                                 <?php for($i=0; $i<$cinqMoinsNote; $i++){?>
                                     <img src="../../images/logo/bootstrap_icon/star.svg" alt="étoile vide">
                                 <?php }
                             }
-                        }?>
-
-                    
-                    <!--<p>nb étoiles</p>-->
-                    
+                        }?>                
             <?php }
 
                 $dbh = null;
@@ -105,8 +119,10 @@
                 die();
             }
         ?>
+        <!--fin du catalogue-->
 
         <p id="droite">Voir plus ...</p>
+
     </main>
     
     
