@@ -14,7 +14,7 @@
         <br>
         <p>Les présentes CGU sont accessibles sur le site à la rubrique « <bold>CGU</bold> ».</p>
         <br>
-        <p>Toute inscription ou utilisation du site implique l'acceptation sans aucune réserve ni restriction des présentes CGU par l’utilisateur. Lors de l'inscription sur le site via le Formulaire d’inscription, chaque utilisateur accepte expressément les présentes CGU en cochant la case précédant le texte suivant : « Je reconnais avoir lu et compris les CGU et je les accepte ». En cas de non-acceptation des CGU stipulées dans le présent contrat, l'Utilisateur se doit de renoncer à l'accès des services proposés par le site. Alizon.bzh se réserve le droit de modifier unilatéralement et à tout moment le contenu des présentes CGU.</p>
+        <p>Toute inscription ou utilisation du site implique l'acceptation sans aucune réserve ni restriction des présentes CGU par l’Utilisateur. Lors de l'inscription sur le site via le Formulaire d’inscription, chaque utilisateur accepte expressément les présentes CGU en cochant la case précédant le texte suivant : « Je reconnais avoir lu et compris les CGU et je les accepte ». En cas de non-acceptation des CGU stipulées dans le présent contrat, l'Utilisateur se doit de renoncer à l'accès des services proposés par le site. Alizon.bzh se réserve le droit de modifier unilatéralement et à tout moment le contenu des présentes CGU.</p>
     </article>
     <article>
         <h3>Article 1 : Les mentions légales</h3>
