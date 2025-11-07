@@ -9,7 +9,6 @@ foreach($dbh->query('SELECT * from sae3_skadjam._categorie', PDO::FETCH_ASSOC) a
         $tab_categories[] = $row;
     }
 
-
 if (isset($_POST['categorie']) && isset($_POST['nom']) && isset($_POST['prix']) && isset($_POST['qteStock']) && isset($_POST['description'])) {
     $categorie = htmlentities($_POST['categorie']);
     $nom = htmlentities($_POST['nom']);
@@ -19,11 +18,20 @@ if (isset($_POST['categorie']) && isset($_POST['nom']) && isset($_POST['prix']) 
     $enPromotion = htmlentities($_POST['mettreEnPromotion']);
     $description = htmlentities($_POST['description']);
 
+    if (isset($_POST['mettreEnLigne']) && isset($_POST['mettreEnPromotion'])) {
+        $enPromotion = htmlentities($_POST['mettreEnPromotion']);
+        $enLigne = htmlentities($_POST['mettreEnLigne']);
+    }
+    else{
+        $enPromotion = false;
+        $enLigne = false;
+    }
+
     //OUBLIE PAS LA PHOTO
     //Il faut récupérer l'id du vendeur pour l'insertion
     if (verifPrix($prix) && verifQteStock($qteStock)){
         try{
-            $prix_ttc = $prix*1.2; //A adapter
+            $prix_ttc = $prix*1.2; //A adapter en fonction de la categorie
             $insertion_produit = $dbh -> prepare("INSERT INTO sae3_skadjam._produit (libelle_produit, description_produit, prix_ht, prix_ttc, est_masque, quantite_stock, seuil_alerte, quantite_unite, unite, id_categorie, id_vendeur, id_tva)
             VALUES ('$nom','$description', $prix, $prix_ttc, false, $qteStock, 0, 1,'kg',1, 1, 1)");
             $insertion_produit -> execute();
