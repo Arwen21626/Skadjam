@@ -1,14 +1,19 @@
+<?php 
+
+?>
 <!DOCTYPE html>
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Modifier un produit</title>
+    <link rel="stylesheet" href="../../css/bo/general_back.css">
 </head>
 <body>
-    <header></header>
+    <?php include('../../php/header_back.php');?>
     <main>
         <h2>Modifier le produit</h2>
+        <p>ID : à recupérer</p>
         <form action="" method="post">
             <select name="categorie" id="categorie" required>
                 <option value="0">Categorie</option>
@@ -41,6 +46,6 @@
             <input type="submit" value="Valider">
         </form>
     </main>
-    <footer></footer>
+    <?php include('../../php/footer_back.php');?>
 </body>
 </html>

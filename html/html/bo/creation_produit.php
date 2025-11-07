@@ -84,7 +84,7 @@ if (isset($_POST['categorie']) && isset($_POST['nom']) && isset($_POST['prix']) 
             <input type="submit" value="Valider">
         </form>
     </main>
-    <footer></footer>
+    <?php include('../../php/footer_back.php');?>
 </body>
 </html>
 

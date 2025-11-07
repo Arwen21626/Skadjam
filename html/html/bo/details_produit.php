@@ -10,6 +10,7 @@ foreach($dbh->query('SELECT * from sae3_skadjam._produit',
         echo "<pre>";
         print_r($row);
         echo "</pre>";
+        
         $tab_produit[] = $row;
     }
 print_r($tab_produit);
@@ -22,17 +23,18 @@ print_r($tab_produit);
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../../css/bo/general_back.css">
     <title>Détails</title>
 </head>
 <body>
-    <header></header>
+    <?php include('../../php/header_back.php');?>
     <main>
-        <h2><?php echo($tab_produit['libelle_produit']); ?>Nom produit à récupérer</h2>
+        <h2><?php echo($tab_produit['libelle_produit']); ?></h2>
         <p>NB étoiles à récupérer</p>
-        <p><?php echo($tab_produit['id_categorie']); ?>Catégorie : à récupérer</p>
+        <p><?php echo($tab_produit['id_categorie']); ?></p>
         <p>carroussel d'image</p>
-        <p>Prix à récupérer</p>
-        <p>En stock : à récupérer</p>
+        <p> <?php echo($tab_produit['prix_ttc']); ?></p>
+        <p><?php echo($tab_produit['quantite_stock']); ?></p>
         <button type="button">Modifier</button>
         <button type="button">Masquer</button>
         <button type="button">Extraire</button>
@@ -44,6 +46,6 @@ print_r($tab_produit);
         <p>Partie sur les avis à voir plus tard</p>
 
     </main>
-    <footer></footer>
+    <?php include('../../php/footer_back.php');?>
 </body>
 </html>
