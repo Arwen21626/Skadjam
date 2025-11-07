@@ -37,16 +37,15 @@ function verifMotDePasse($mdp){
 }
 
 //modification
-include("connexion.php");
+include("../../connexion.php");
 
 function confirmationMotDePasse($mdp, $confMdp){
     return $mdp === $confMdp;
 }
 
 function mailUnique($mail){
-    global $pdo;
-
-    $stmt = $pdo->prepare("SELECT adresse_mail FROM _compte WHERE adresse_mail = ?");
+    global $dbh;
+    $stmt = $dbh->prepare("SELECT adresse_mail FROM sae3_skadjam._compte WHERE adresse_mail = ?");
     $stmt->execute([$mail]);
     $row = $stmt->fetch(PDO::FETCH_ASSOC);
 
@@ -91,3 +90,5 @@ function verifieIban($iban){
         return false;
     }
 }
+
+
