@@ -97,11 +97,12 @@ if (isset($_POST["nom"])){
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../css/style_form_creation_vendeur.css">
-    <link rel="stylesheet" href="../css/general_back.css">
+    <link rel="stylesheet" href="../../css/bo//general_back.css">
+    <link rel="stylesheet" href="../../css/style_form_creation_vendeur.css">
     <title>Créer un compte vendeur</title>
 </head>
 <body>
+    <?php require_once("../../php/header_back.php") ?>
     <main>
         <h2>Inscription Vendeur</h2>
         <form method="POST">
@@ -195,5 +196,6 @@ if (isset($_POST["nom"])){
             <a href="connexion_vendeur" class="underline" >Connectez vous</a>
         </div>
     </main>
+    <?php require_once("../../php/footer_back.php") ?>
 </body>
 </html>
