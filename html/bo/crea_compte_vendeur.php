@@ -1,6 +1,7 @@
 <?php
 include("../01_premiere_connexion.php");
 include("../php/verification_formulaire.php");
+include("../php/modification_variable.php");
 
 /* initialiser toutes les variables avant l'affichage de la page */
     
@@ -22,7 +23,7 @@ if (isset($_POST["nom"])){
   
     //récuperer les attributs du post
     $nom = $_POST["nom"]; //verif
-    $prenom = $_POST["prenom"];//verif
+    $prenom = format_prenom($_POST["prenom"]);//verif
     $mail = $_POST["mail"]; //verif
     $tel = $_POST["tel"]; //verif
     $denomination = $_POST["denomination"];//verif
@@ -67,16 +68,31 @@ if (isset($_POST["nom"])){
 
     /* s'il n'y a pas d'erreur faire la requete */
     if (empty($erreurs)){
-        //preparer la requete sql pour inserer dans le compte
-        $stmt = $dbh->prepare("INSERT INTO sae3_skadjam._compte (nom_compte, prenom_compte, adresse_mail, motDePasse, numero_telephone, bloque) VALUES (?,?,?,?,?, false)");
-        //excuter la requete sql avec les attributs
-        $stmt->execute([$nom, $prenom,$mail, password_hash($mdp, PASSWORD_DEFAULT),"+33". substr($tel, 1) ]);
-        //preparer la requete sql pour inserer dans vendeur
-        $req = $dbh->prepare("SELECT id_compte FROM sae3_skadjam._compte WHERE adresse_mail = ?");
-        $id = $req->execute([$mail]);
+        try{
+            $id = null;
+            //preparer la requete sql pour inserer dans le compte
+            $stmt = $dbh->prepare("INSERT INTO sae3_skadjam._compte (nom_compte, prenom_compte, adresse_mail, motDePasse, numero_telephone, bloque) VALUES (?,?,?,?,?, false) RETURNING id_compte");
+            //excuter la requete sql avec les attributs
+            $stmt->execute([$nom, $prenom,$mail, password_hash($mdp, PASSWORD_DEFAULT),"+33". substr($tel, 1) ]);
+            
+            //recuperer l'id du compte associé au vendeur
+            $id = $stmt->fetchColumn();
 
-        //$stmt = $dbh->prepare("INSERT INTO sae3_skadjam._vendeur (id_compte, raison_sociale, siren, iban, denomination) VALUES (?,?,?,?,?)");
-        //$stmt->execute([$id, $raisonSociale, $siren, $iban, $denomination]);
+            //preparer la requete sql pour inserer dans vendeur
+            $stmt = $dbh->prepare("INSERT INTO sae3_skadjam._vendeur (id_compte, raison_sociale, siren, iban, denomination) VALUES (?,?,?,?,?)");
+            $stmt->execute([$id,$raisonSociale, (int)$siren, $iban, $denomination]);
+            
+        } catch (PDOException $e) {
+            print "Erreur !: " . $e->getMessage() . "<br/>";
+            die();
+        }
+        foreach($dbh->query('SELECT * from sae3_skadjam._compte', 
+                            PDO::FETCH_ASSOC) 
+                    as $row) {
+            echo "<pre>";
+            print_r($row);
+            echo "</pre>";
+        }
     }
     
     
@@ -150,7 +166,7 @@ if (isset($_POST["nom"])){
                 </div>
                 <div class="case-form">
                     <label for="iban">Numéro de IBAN * :</label>
-                    <input type="text" id="iban" name="iban" value="<?= (!isset($erreurs["iban"]))?$iban: 'FR'?>" placeholder="FR" size="25" required>
+                    <input type="text" id="iban" name="iban" value="<?= (!isset($erreurs["iban"]))?$iban: 'FR'?>" placeholder="FR" size="30" required>
                     <?php echo (isset($erreurs["iban"])) ? "<p class=\"erreur\">" . $erreurs["iban"] . " </p>" : '' ?>
                 </div>
             </div>
