@@ -1,7 +1,7 @@
 <?php
 include("../../connexion.php");
-include("../php/verification_formulaire.php");
-include("../php/modification_variable.php");
+include("../../php/verification_formulaire.php");
+include("../../php/modification_variable.php");
 
 /* initialiser toutes les variables avant l'affichage de la page */
     
