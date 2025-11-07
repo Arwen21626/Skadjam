@@ -28,6 +28,14 @@
                 <a href="#A modifier">Mes commandes</a>
             </div>
             
+            <div class="logo_recherche logo_nav_div">
+                <a href="#A modifier">
+                    <div class="logo_nav_img"></div>
+                </a>
+
+                <a href="#A modifier">Recherche</a>
+            </div>
+
             <div class="logo_creer_produit logo_nav_div">
                 <a href="#A modifier">
                     <div class="logo_nav_img"></div>
