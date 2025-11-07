@@ -37,7 +37,7 @@ function verifMotDePasse($mdp){
 }
 
 //modification
-include("../../connexion.php");
+include("../01_premiere_connexion.php");
 
 function confirmationMotDePasse($mdp, $confMdp){
     return $mdp === $confMdp;
