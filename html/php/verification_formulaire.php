@@ -91,7 +91,7 @@ function verifieIban($iban){
     }
 }
 
-function verifePrix($prix){
+function verifiePrix($prix){
     if ($prix >= 0){
         return true;
     }
@@ -100,7 +100,7 @@ function verifePrix($prix){
     }
 }
 
-function verifeQteStock($qteStock){
+function verifieQteStock($qteStock){
     if ($qteStock >= 0){
         return true;
     }

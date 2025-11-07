@@ -1,7 +1,7 @@
 <?php
-include('../../connections_params.php');
-include('../../01_premiere_connexion.php');
-require_once('../../php/verification_formulaire.php');
+include('html/connections_params.php');
+include('html/01_premiere_connexion.php');
+require_once('html/php/verification_formulaire.php');
 
 $tab_categories = [];
 
