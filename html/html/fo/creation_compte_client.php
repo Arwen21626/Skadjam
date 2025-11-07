@@ -1,6 +1,9 @@
 <?php
-require_once("../php/verification_formulaire.php"); // fonctions qui vérifient les données des formulaires
+require_once("../php/verificationFormulaire.php"); // fonctions qui vérifient les données des formulaires
 require_once("A NE SURTOUT PAS COMMIT !!!!!!!!!!.php"); // données de connection à la base de données
+
+$dbh = new PDO("$driver:host=$server;dbname=$dbname", $user, $pass); // connection à la base de données
+$dbh->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC);
 
 ?>
 <!DOCTYPE html>
@@ -13,69 +16,33 @@ require_once("A NE SURTOUT PAS COMMIT !!!!!!!!!!.php"); // données de connectio
 <body>
 
     <?php
-    // il ne reste plus qu'a créer le cookie de connection
-                
-    // Traitement du formulaire seulement si toutes les données sont saisie
+
+    // Traitement du formulaire seulement si toutes les données son saisie
     if(isset($_POST['nom']) && isset($_POST['prenom']) && isset($_POST['mail']) && isset($_POST['telephone']) && isset($_POST['mdp']) && isset($_POST['verifMdp'])){
-        
-        try{
-            $dbh = new PDO("$driver:host=$server;dbname=$dbname", $user, $pass); // connection à la base de données
-            $dbh->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC);
-            // Vérification que toutes les données saisie son correcte
-            if (verifNomPrenom($_POST['nom']) && verifNomPrenom($_POST['prenom']) && verifTelephone($_POST['telephone']) && verifMail($_POST['mail']) && verifMotDePasse($_POST['mdp']) && ($_POST['mdp'] === $_POST['verifMdp'])){
-                // Traitement des données pour celle qui en ont besoin
-                $nom = htmlentities($_POST['nom']);
-                $prenom = htmlentities($_POST['prenom']);
-                $mail = htmlentities($_POST['mail']);
-                $mdp = password_hash($_POST['mdp'], PASSWORD_DEFAULT);
-                $telephone = htmlentities($_POST['telephone']);
+        // Vérification que toutes les données saisie son correcte
+        echo 'Salut 1 !';
 
-                // Insertion des données dans la base de données
-                $insertNouvDept = $dbh->prepare("INSERT INTO sae3_skadjam._compte(nom_compte, prenom_compte, adresse_mail, motDePasse, numero_telephone, bloque)
-                                                    VALUES('$nom', '$prenom', '$mail', '$mdp', '$telephone', 'false')");
-                $insertNouvDept->execute();
+        if (verifNomPrenom($_POST['nom']) && verifNomPrenom($_POST['prenom']) && verifTelephone($_POST['telephone']) && verifMail($_POST['mail']) && verifMotDePasse($_POST['mdp']) && ($_POST['mdp'] === $_POST['verifMdp'])){
+            echo 'Salut !';
+            // Traitement des données pour celle qui en on besoin
+            $nom = strupper($_POST['nom']);
+            $prenom = $_POST['prenom'];
+            $mail = strlower($_POST['mail']);
+            $mdp = $_POST['mdp'];  // à Hasher
 
-                // Fermer la connection à la base de données
-                $dbh = null;
+            // Insertion des données dans la base de données
+            // $insertNouvDept = $dbh->prepare("INSERT INTO teste_sae3._compte(nom_compte, prenom_compte, adresse_mail, motDePasse, numero_telephone, bloque)
+            //                                     VALUES($nom, $prenom, $mail, $mdp, $telephone, 'false')");
+            // $insertNouvDept->execute();
 
-                // Redirection vers la page d'accueil
-                header("location: index.php");
-            }
-            // Messages d'erreurs si l'un des champs n'est pas rempli'
-            else{ 
-                echo "Erreur : ";
-                if (!verifNomPrenom($_POST['nom'])){
-                    echo "le format de votre nom n'est pas correct.";
-                }
-                elseif (!verifNomPrenom($_POST['prenom'])){
-                    echo "le format de votre prénom n'est pas correct.";
-                }
-                elseif (!verifMail($_POST['mail'])){
-                    echo "le format de votre mail n'est pas correct.";
-                }
-                elseif (!verifTelephone($_POST['telephone'])){
-                    echo "le format de votre numéro de téléphone n'est pas correct.";
-                }
-                elseif (!verifMotDePasse($_POST['mdp'])){
-                    echo "le format de votre mot de passe n'est pas correct.";
-                }
-                elseif (!($_POST['verifMdp'] === $_POST['mdp'])){
-                    echo "le mot de passe de vérification ne correspond pas à votre mot de passe.";
-                }
-                else{
-                    echo "inconu.";
-                }?>
+            // Redirection vers la page d'accueil
 
-                <a href="./creation_compte_client.php">Retour</a>
-            <?php }
         }
-        catch(PDOException $e){
-            print "La connection à la base de données à échouer.";
-            die();
+        // Messages d'erreurs si l'un des champs ne correspond pas à ce qu'on attend
+        else{ 
+            echo "erreur";
         }
-        
     }
-
 
     // Formulaire
     else{
@@ -84,7 +51,7 @@ require_once("A NE SURTOUT PAS COMMIT !!!!!!!!!!.php"); // données de connectio
 
     <h2>Création du compte client</h2>
 
-    <form action="./creation_compte_client.php" method="post"> 
+    <form action="creationCompteClient.php" method="post"> 
         <label for="nom">Nom* :</label>
         <input type="text" name="nom" id="nom" required>
 
@@ -99,13 +66,19 @@ require_once("A NE SURTOUT PAS COMMIT !!!!!!!!!!.php"); // données de connectio
 
         <label for="mdp">Mot de passe* :</label>
         <input type="password" name="mdp" id="mdp" required>
-        <p> 1 majuscule, 1 minuscule, 1 chiffre, 1 caractère spécial, 10 caractère minimum</p>
+        <ul>
+            <li>1 majuscule,</li>
+            <li>1 minuscule,</li>
+            <li>1 chiffre,</li>
+            <li>1 caractère spécial,</li>
+            <li>10 caractère minimum</li>
+        </ul>
 
         <label for="verifMdp">Vérification du mot de passe* :</label>
-        <input type="password" name="verifMdp" id="verifMdp" >
+        <input type="password" name="verifMdp" id="verifMdp" required>
 
         <p>Vous avez déjà un compte ?</p>
-        <a href='se_connecter_compte_client.php'>Connectez vous</a>   <!-- lien à revoir en fonction du nom du fichier qui permet de se connecter -->
+        <a href='seConnecterCompteClient.php'>Connectez vous</a>   <!-- lien à revoir en fonction du nom du fichier qui permet de se connecter -->
 
 <!--bouton annuler-->
         <input type="Submit" name="submit" id="submit" value="S'inscrire">
