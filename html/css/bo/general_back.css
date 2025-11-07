@@ -37,6 +37,12 @@ h4 {
 p, a, input, label{
     font-family: 'Amiko';
     font-size: 30px;
+    color: #E2F9FF;
+    text-decoration: none;
+}
+
+a:hover {
+    color: #E3D7CC;
 }
 
 
@@ -78,22 +84,68 @@ header {
     padding: 1em;
 }
 
-.logo_nav {
-    width: 100px;
-    height: 100px;
-     
-}
-
-#nav-section a {
-    text-decoration: none;
-}
-
 #nav-section ul {
     display: none;
 }
 
-#nav-section section:nth-child(1) img:hover {
-    background-image: url("../../images/logo/bootstrap_icon/house-fill.svg");
+/* Mise en page de chaque div contenant le logo + titre de l'élément de la navbar */
+.logo_nav_div {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Pour l'icône de l'accueil */
+.logo_accueil .logo_nav_img {
+    height: 75px;
+    width: 75px;
+    background-image: url("../../images/logo/bootstrap_icon/house.svg") ;
+    background-repeat: no-repeat;
+    background-size: 75px;
+}
+
+.logo_accueil .logo_nav_img:hover {
+    background-image: url("../../images/logo/bootstrap_icon/house-fill.svg") ;
+}
+
+/* Pour l'icône des livraisons/commandes */
+.logo_commandes .logo_nav_img {
+    height: 75px;
+    width: 75px;
+    background-image: url("../../images/logo/bootstrap_icon/truck.svg") ;
+    background-repeat: no-repeat;
+    background-size: 75px;
+}
+
+.logo_commandes .logo_nav_img:hover {
+    background-image: url("../../images/logo/bootstrap_icon/truck-fill.svg") ;
+}
+
+/* Pour l'icône de création de produit */
+.logo_creer_produit .logo_nav_img {
+    height: 75px;
+    width: 75px;
+    background-image: url("../../images/logo/bootstrap_icon/plus-square.svg") ;
+    background-repeat: no-repeat;
+    background-size: 75px;
+}
+
+.logo_creer_produit .logo_nav_img:hover {
+    background-image: url("../../images/logo/bootstrap_icon/plus-square-fill.svg");
+}
+
+/* Pour l'icône du profil */
+.logo_profil .logo_nav_img {
+    height: 75px;
+    width: 75px;
+    background-image: url("../../images/logo/bootstrap_icon/person.svg") ;
+    background-repeat: no-repeat;
+    background-size: 75px;
+}
+
+.logo_profil .logo_nav_img:hover {
+    background-image: url("../../images/logo/bootstrap_icon/person-fill.svg");
 }
 
 /* CSS pour le footer */
@@ -130,8 +182,6 @@ footer h3 {
 }
 
 footer a {
-    text-decoration: none;
-    color: #E2F9FF;
     margin: 0.2em;
 }
 
