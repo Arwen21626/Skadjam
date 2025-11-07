@@ -193,6 +193,7 @@ footer a {
 main {
     display: flex;
     flex-direction: column;
+    color: black;
 }
 
 main>h2{
