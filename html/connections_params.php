@@ -1,7 +1,7 @@
 <?php
-$server = '10.253.5.109';
+$server = 'localhost';
 $driver = 'pgsql';
-$dbname = 'saedb';
-$user   = 'sae';
-$pass	= 'Skadjam-sae3';
+$dbname = 'pg_arwen';
+$user = 'arwen';
+$pass = 'Jedoqujesemo626!';
 ?>

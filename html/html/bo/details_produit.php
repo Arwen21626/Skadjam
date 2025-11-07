@@ -6,6 +6,7 @@ include('../../connections_params.php');
 // echo "Avant select";
 // $recuperation = $dbh->query("SELECT * FROM sae3_skadjam._produit", PDO::FETCH_ASSOC);
 // $recuperation -> execute();
+// $dbh = null;
 // echo "Apres select";
 
 

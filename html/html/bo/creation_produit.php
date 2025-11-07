@@ -1,27 +1,36 @@
 <?php
 include('../../connections_params.php');
+include('../../01_premiere_connexion.php');
 require_once('../../php/verification_formulaire.php');
 
 
 
-if (isset($_POST['categorie']) && isset($_POST['nom']) && isset($_POST['prix']) && isset($_POST['categorie']) && isset($_POST['description'])) {
+if (isset($_POST['categorie']) && isset($_POST['nom']) && isset($_POST['prix']) && isset($_POST['qteStock']) && isset($_POST['description'])) {
     $categorie = htmlentities($_POST['categorie']);
     $nom = htmlentities($_POST['nom']);
     $prix = htmlentities($_POST['prix']);
     $qteStock = htmlentities($_POST['qteStock']);
     $enLigne = htmlentities($_POST['mettreEnLigne']);
     $enPromotion = htmlentities($_POST['mettreEnPromotion']);
-    $description = $enLigne = htmlentities($_POST['description']);
-    echo "Dans le 1er if";
+    $description = htmlentities($_POST['description']);
+
     //OUBLIE PAS LA PHOTO
     //Il faut récupérer l'id du vendeur pour l'insertion
     if (verifiePrix($prix) && verifieQteStock($qteStock)) {
-        echo "Avant l'insertion";
-        $dbh = new PDO("$driver:host=$server;dbname=$dbname");
-        $insertion_produit = $dbh -> prepare("INSERT INTO sae3_skadjam._produit (libelle_produit, description_produit, prix_ht, quantite_stock) VALUES ($nom, $description, $prix,$qteStock)");
-        $insertion_produit -> execute();
-        $dbh = null;
-        echo "Après l'insertion";
+        try{
+            $prix_ttc = $prix*1.2;
+            echo "Avant l'insertion";
+            $insertion_produit = $dbh -> prepare("INSERT INTO sae3_skadjam._produit (libelle_produit, description_produit, prix_ht, prix_ttc, est_masque, quantite_stock, seuil_alerte, quantite_unite, unite, id_categorie, id_vendeur, id_tva)
+            VALUES ('$nom','$description', $prix, $prix_ttc, false, $qteStock, 0, 1,'kg',1, 1, 1)");
+            echo "Après l'insertion 1";
+            $insertion_produit -> execute();
+            $dbh = null;
+            echo "Après l'insertion 2";
+        }
+        catch (PDOException $e) {
+            print "Erreur !: " . $e->getMessage() . "<br/>";
+            die();
+        }
     }
 }
 
