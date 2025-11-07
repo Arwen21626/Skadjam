@@ -1,6 +1,11 @@
 <header>
     <section id="header-section">
-        <img src="../images/logo/alizon/logo_alizon_bleu_claire.webp" alt="logo Alizon" class="logo">
+        <div>
+            <a href="#A modifier">
+                <img src="../images/logo/alizon/logo_alizon_bleu_claire.webp" alt="logo Alizon" class="logo">
+            </a>
+        </div>
+        
         <h1>Alizon</h1>
     </section>
         
