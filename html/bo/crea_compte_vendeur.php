@@ -81,17 +81,10 @@ if (isset($_POST["nom"])){
             //preparer la requete sql pour inserer dans vendeur
             $stmt = $dbh->prepare("INSERT INTO sae3_skadjam._vendeur (id_compte, raison_sociale, siren, iban, denomination) VALUES (?,?,?,?,?)");
             $stmt->execute([$id,$raisonSociale, (int)$siren, $iban, $denomination]);
-            
+
         } catch (PDOException $e) {
             print "Erreur !: " . $e->getMessage() . "<br/>";
             die();
-        }
-        foreach($dbh->query('SELECT * from sae3_skadjam._compte', 
-                            PDO::FETCH_ASSOC) 
-                    as $row) {
-            echo "<pre>";
-            print_r($row);
-            echo "</pre>";
         }
     }
     
