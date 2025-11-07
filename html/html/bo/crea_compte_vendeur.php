@@ -1,5 +1,5 @@
 <?php
-include("../01_premiere_connexion.php");
+include("../../connexion.php");
 include("../php/verification_formulaire.php");
 include("../php/modification_variable.php");
 
@@ -47,7 +47,7 @@ if (isset($_POST["nom"])){
     if (!mailUnique($mail)) $erreurs["unique"] = "un utilisateur avec cette e-mail existe deja : $mail";
 
     /* TEL */
-    if (!verifTelephone("+33". substr($tel, 1))) $erreurs["tel"] = "numéro à 10 chiffres";
+    if (!verifTelephone(format_tel($tel))) $erreurs["tel"] = "numéro à 10 chiffres";
 
     /* DENOMINATION */
     if (!verifDenomination($denomination)) $erreurs["denomination"] = "autorisé majuscules, minuscules et chiffres";
@@ -73,7 +73,7 @@ if (isset($_POST["nom"])){
             //preparer la requete sql pour inserer dans le compte
             $stmt = $dbh->prepare("INSERT INTO sae3_skadjam._compte (nom_compte, prenom_compte, adresse_mail, motDePasse, numero_telephone, bloque) VALUES (?,?,?,?,?, false) RETURNING id_compte");
             //excuter la requete sql avec les attributs
-            $stmt->execute([$nom, $prenom,$mail, password_hash($mdp, PASSWORD_DEFAULT),"+33". substr($tel, 1) ]);
+            $stmt->execute([$nom, $prenom,$mail, password_hash($mdp, PASSWORD_DEFAULT),format_tel($tel) ]);
             
             //recuperer l'id du compte associé au vendeur
             $id = $stmt->fetchColumn();
