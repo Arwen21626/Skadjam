@@ -16,6 +16,7 @@ body {
 
 h1, h2, h3, h4 {
     font-family: 'MavenPro';
+    color: #E2F9FF;
 }
 
 h1 {
@@ -60,7 +61,6 @@ header {
 #header-section h1{
     width: 100%;
     text-align: center;
-    color: #E2F9FF;
     margin: 0;
     padding-top: 0.25em;
 }
@@ -178,15 +178,10 @@ footer .reseau_item {
 
 footer h3 {
     margin: 0.5em;
-    color: #E2F9FF;
 }
 
 footer a {
     margin: 0.2em;
-}
-
-footer a:hover {
-    color: #E3D7CC;
 }
 
 .logo_reseaux {
