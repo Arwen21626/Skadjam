@@ -58,7 +58,168 @@ footer a {
     color: #365452;
 }
 
-@media (min-width:1440px) {
+@media (max-width: 1440px) {
+
+    /* CSS pour le header */
+    h1 {
+        font-size: 64px;
+    }
+
+    h2 {
+        font-size: 30px;
+    }
+
+    h3 {
+        font-size: 25px;
+    }
+
+    h4 {
+        font-size: 20px;
+    }
+
+    p, a, input, label{
+        font-size: 16px;
+    }
+
+    #header-section {
+        display: flex;
+        justify-content: space-between;
+        padding: 0.5em 0.5em 0.25em;
+    }
+
+    #header-section h1 {
+        margin: 0;
+        text-align: right;
+        padding-top: 0.125em;
+    }
+
+    .logo {
+        width: 75px;
+        height: 75px;
+    }
+
+    #header-section div {
+        padding-left: 0.5em;
+    }
+
+    #nav-section section {
+        display: flex;
+        grid-template-columns: repeat(5, 1fr);
+        justify-content: space-around;
+        align-items: center;
+        padding: 0.25em;
+    }
+
+    /* Mise en page de la barre nav */
+
+    .logo_nav_div a:last-child { /* Cache le texte en dessous des images en version téléphone */
+        display: none;
+    }
+
+    /* Pour l'icône de l'accueil */
+    .logo_accueil .logo_nav_img {
+        height: 50px;
+        width: 50px;
+        background-image: url("../../images/logo/bootstrap_icon/house.svg");
+        background-repeat: no-repeat;
+        background-size: 50px;
+    }
+
+    .logo_accueil .logo_nav_img:hover {
+        background-image: url("../../images/logo/bootstrap_icon/house-fill.svg");
+    }
+
+    /* Pour l'icône des commandes */
+    .logo_commandes .logo_nav_img {
+        height: 50px;
+        width: 50px;
+        background-image: url("../../images/logo/bootstrap_icon/truck.svg");
+        background-repeat: no-repeat;
+        background-size: 50px;
+    }
+
+    .logo_commandes .logo_nav_img:hover {
+        background-image: url("../../images/logo/bootstrap_icon/truck-fill.svg");
+    }
+
+    /* Pour l'icône de recherche */
+    .logo_recherche .logo_nav_img {
+        height: 50px;
+        width: 50px;
+        background-image: url("../../images/logo/bootstrap_icon/search.svg");
+        background-repeat: no-repeat;
+        background-size: 50px;
+    }
+
+    .logo_recherche .logo_nav_img:hover {
+        background-image: url("../../images/logo/bootstrap_icon/search-selected.svg");
+    }
+
+    /* Pour l'icône de l'ajout au panier */
+    .logo_panier .logo_nav_img {
+        height: 50px;
+        width: 50px;
+        background-image: url("../../images/logo/bootstrap_icon/cart.svg");
+        background-repeat: no-repeat;
+        background-size: 50px;
+    }
+
+    .logo_panier .logo_nav_img:hover {
+        background-image: url("../../images/logo/bootstrap_icon/cart-fill.svg");
+    }
+
+    /* Pour l'icône du profil */
+    .logo_profil .logo_nav_img {
+        height: 50px;
+        width: 50px;
+        background-image: url("../../images/logo/bootstrap_icon/person.svg");
+        background-repeat: no-repeat;
+        background-size: 50px;
+    }
+
+    .logo_profil .logo_nav_img:hover {
+        background-image: url("../../images/logo/bootstrap_icon/person-fill.svg");
+    }
+
+    /* CSS pour le footer */
+    footer {
+        display: flex;
+        flex-wrap: wrap;
+        padding: 0.1em;
+    }
+
+    footer article {
+        display: flex;
+        flex-direction: column;
+        max-width: 50%;
+        padding: 0.25em 0.5em 0.5em 0.5em;
+    }
+
+    footer #section-reseaux {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 2.5px;
+    }
+
+    footer .reseau_item {
+        align-self: center;
+    }
+
+    footer h3 {
+        margin: 0.5em;
+    }
+
+    footer a {
+        margin: 0.2em;
+    }
+
+    .logo_reseaux {
+        width: 50px;
+        height: 50px;
+    }
+}
+
+@media (min-width: 1440px) { /* CSS Pour une taille PC supérieur à 1440px */
     
     /* CSS pour le Header */
     h1 {
@@ -88,19 +249,18 @@ footer a {
     }
 
     #header-section h1{
-        width: 100%;
         text-align: center;
         margin: 0;
         padding-top: 0.25em;
     }
 
-    #header-section div {
-        padding-left: 3em;
-    }
-
     .logo {
         width: 150px;
         height: 150px;
+    }
+
+    #header-section div {
+        padding-left: 3em;
     }
 
     #nav-section section {
@@ -109,10 +269,6 @@ footer a {
         justify-content: space-around;
         align-items: center;
         padding: 1em;
-    }
-
-    #nav-section ul {
-        display: none;
     }
 
     /* Mise en page de chaque div contenant le logo + titre de l'élément de la navbar */
@@ -162,17 +318,17 @@ footer a {
         background-image: url("../../images/logo/bootstrap_icon/search-selected.svg");
     }
 
-    /* Pour l'icône de création de produit */
-    .logo_creer_produit .logo_nav_img {
+    /* Pour l'icône du panier */
+    .logo_panier .logo_nav_img {
         height: 75px;
         width: 75px;
-        background-image: url("../../images/logo/bootstrap_icon/plus-square.svg") ;
+        background-image: url("../../images/logo/bootstrap_icon/cart.svg") ;
         background-repeat: no-repeat;
         background-size: 75px;
     }
 
-    .logo_creer_produit .logo_nav_img:hover {
-        background-image: url("../../images/logo/bootstrap_icon/plus-square-fill.svg");
+    .logo_panier .logo_nav_img:hover {
+        background-image: url("../../images/logo/bootstrap_icon/cart-fill.svg");
     }
 
     /* Pour l'icône du profil */
@@ -194,21 +350,17 @@ footer a {
         justify-content: space-around;
     }
 
-    footer #info-footer {
-        display: flex;
-        justify-content: space-around;
-    }
-
-    footer #info-footer article {
+    footer article {
         display: flex;
         flex-direction: column;
-        padding: 0.5em 2em 2em 2em;
+        padding: 0.5em 1em 1em 1em;
     }
 
     footer #section-reseaux {
         display: grid;
         grid-template-columns: 1fr 1fr;
         gap: 5px;
+        margin-left: 4em;
     }
 
     footer .reseau_item {
