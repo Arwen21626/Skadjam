@@ -38,6 +38,8 @@ header h1 {
 
 #nav-section {
     background-color: #E3D7CC;
+    position: sticky;
+    top: 0;
 }
 
 .logo_nav_div a {
@@ -58,7 +60,7 @@ footer a {
     color: #365452;
 }
 
-@media (max-width: 1440px) {
+@media (max-width: 1440px) { /* CSS Pour une taille d'écran de téléphone (idéal 428-430px, et jusqu'à 1440px au délà passe en écran PC) */
 
     /* CSS pour le header */
     h1 {

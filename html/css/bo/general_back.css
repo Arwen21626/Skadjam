@@ -73,6 +73,11 @@ header {
     height: 150px;
 }
 
+#nav-section {
+    position: sticky;
+    top: 0;
+}
+
 #nav-section section {
     display: flex;
     grid-template-columns: repeat(4, 1fr);
@@ -82,10 +87,6 @@ header {
     background-color: #588A87;
     padding: 1em;
     color: #E2F9FF;
-}
-
-#nav-section ul {
-    display: none;
 }
 
 /* Mise en page de chaque div contenant le logo + titre de l'élément de la navbar */
