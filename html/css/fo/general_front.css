@@ -60,7 +60,7 @@ footer a {
     color: #365452;
 }
 
-@media (max-width: 1440px) { /* CSS Pour une taille d'écran de téléphone (idéal 428-430px, et jusqu'à 1440px au délà passe en écran PC) */
+@media (max-width: 1324px) { /* CSS Pour une taille d'écran de téléphone (idéal 428-430px, et jusqu'à 1440px au délà passe en écran PC) */
 
     /* CSS pour le header */
     h1 {
@@ -221,7 +221,7 @@ footer a {
     }
 }
 
-@media (min-width: 1440px) { /* CSS Pour une taille PC supérieur à 1440px */
+@media (min-width: 1324px) { /* CSS Pour une taille PC supérieur à 1440px */
     
     /* CSS pour le Header */
     h1 {
