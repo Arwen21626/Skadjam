@@ -23,15 +23,19 @@ function format_date($date){
 }
 
 function numRue($adresse){
-if (preg_match('/^(\d+\s*[A-Za-z]*)[, ]*(.+)$/u', $adresse, $matches)) {
-    $numero = trim($matches[1]); 
+    //recois une adresse complete
+    //renvoi le numéro et le complement
+    if (preg_match('/^(\d+\s*[A-Za-z]*)[, ]*(.+)$/u', $adresse, $matches)) {
+        $numero = trim($matches[1]); 
 
-    return $numero;
-}
+        return $numero;
+    }
 
 }
 
 function formatAdresse($adresse){
+    //recois une adresse complete
+    //renvoi la rue
     if (preg_match('/^(\d+\s*[A-Za-z]*)[, ]*(.+)$/u', $adresse, $matches)) {
     $rue = trim($matches[2]);
 
@@ -40,13 +44,17 @@ function formatAdresse($adresse){
 }
 
 function formatNum($num){
+    //recois le numéro et le complement
+    //renvoi le numero
     $ret = trim($num);
     $ret = explode(" ", $ret);
     return $ret[0];
 }
 
 function formatCompNum($num){
-        $ret = trim($num);
+    //recois le numéro et le complement
+    //renvoi le complément
+    $ret = trim($num);
     $ret = explode(" ", $ret);
     return $ret[1];
 }
