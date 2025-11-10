@@ -135,7 +135,7 @@
 
     </main>
     
-    <?php include "../../php/structure/footer_back.php"; ?>
+    <?php include "../../php/structure/footer_front.php"; ?>
 
 </body>
 
