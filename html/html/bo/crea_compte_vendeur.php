@@ -1,7 +1,7 @@
 <?php
-include("../01_premiere_connexion.php");
-include("../../php/verification_formulaire.php");
-include("../../php/modification_variable.php");
+include("../SAE3/html/01_premiere_connexion.php");
+include(__DIR__ . "../../php/verification_formulaire.php");
+include(__DIR__ . "../../php/modification_variable.php");
 
 /* initialiser toutes les variables avant l'affichage de la page */
     
@@ -13,6 +13,8 @@ include("../../php/modification_variable.php");
     $raisonSociale = '';
     $iban = 'FR';
     $adresse = '';
+    $ville = '';
+    $cp = '';
     $siren = '';
     $mdp = '';
     $verif = '';
@@ -30,6 +32,8 @@ if (isset($_POST["nom"])){
     $raisonSociale = $_POST["raisonSociale"];//verif
     $iban = $_POST["iban"];//verif
     $adresse = $_POST["adresse"];
+    $ville = $_POST["ville"];
+    $cp = $_POST["cp"];
     $siren = $_POST["siren"];//verif
     $mdp = $_POST["mdp"];//verif
     $verif = $_POST["verif"];//verif
@@ -56,7 +60,7 @@ if (isset($_POST["nom"])){
     if (!verifDenomination($raisonSociale)) $erreurs["raisonSociale"] = "autorisé majuscules, minuscules et chiffres";
 
     /* IBAN */
-    if (!verifieIban($iban)) $erreurs["iban"] = "numéro IBAN invalide";
+    if (!verifIban($iban)) $erreurs["iban"] = "numéro IBAN invalide";
 
     /* MDP */
     if (!verifMotDePasse($mdp)) $erreurs["mdp"] = "doit inclure tous les éléments si dessous";
@@ -64,6 +68,10 @@ if (isset($_POST["nom"])){
 
     /* SIREN */
     if (!verifSiren($siren)) $erreurs["siren"] = "numéro SIREN invalide";
+
+    /* ##### ADRESSE ##### */
+
+
 
 
     /* s'il n'y a pas d'erreur faire la requete */
@@ -102,7 +110,7 @@ if (isset($_POST["nom"])){
     <title>Créer un compte vendeur</title>
 </head>
 <body>
-    <?php require_once("../../php/header_back.php") ?>
+    <?php //require_once("../../php/header_back.php") ?>
     <main>
         <h2>Inscription Vendeur</h2>
         <form method="POST">
@@ -150,10 +158,6 @@ if (isset($_POST["nom"])){
                     <?php echo (isset($erreurs["denomination"])) ? "<p class=\"erreur\">" . $erreurs["denomination"] . " </p>" : '' ?>
                 </div>
                 <div class="case-form">
-                    <label for="adresse">Adresse du siège social * :</label>
-                    <input type="text" id="adresse" name="adresse" value="<?= $_POST["adresse"] ?? ''?>" size="40" required>
-                </div>
-                <div class="case-form">
                     <label for="siren">Numéro de SIREN * :</label>
                     <input type="text" id="siren" name="siren" value="<?= (!isset($erreurs["siren"]))?$siren: ''?>" size="25" required>
                     <?php echo (isset($erreurs["siren"])) ? "<p class=\"erreur\">" . $erreurs["siren"] . " </p>" : '' ?>
@@ -163,6 +167,27 @@ if (isset($_POST["nom"])){
                     <input type="text" id="iban" name="iban" value="<?= (!isset($erreurs["iban"]))?$iban: 'FR'?>" placeholder="FR" size="30" required>
                     <?php echo (isset($erreurs["iban"])) ? "<p class=\"erreur\">" . $erreurs["iban"] . " </p>" : '' ?>
                 </div>
+            </div>
+
+            <!-- ########## ADRESSE ########## -->
+            <h3 class="underline">Siège social :</h3>
+            <div class="zone-form">
+                <div class="case-form">
+                    <label for="adresse">Adresse * :</label>
+                    <input type="text" id="adresse" name="adresse" value="<?= $_POST["adresse"] ?? ''?>" size="40" placeholder="ex : 3 rue des camélia" required>
+                    <?php echo (isset($erreurs["adresse"])) ? "<p class=\"erreur\">" . $erreurs["adresse"] . " </p>" : '' ?>
+                </div>
+                <div class="case-form">
+                    <label for="ville">Ville * :</label>
+                    <input type="text" id="ville" name="ville" value="<?= $_POST["ville"] ?? ''?>" size="40" required>
+                    <?php echo (isset($erreurs["ville"])) ? "<p class=\"erreur\">" . $erreurs["ville"] . " </p>" : '' ?>
+                </div>
+                <div class="case-form">
+                    <label for="cp">Code Postal * :</label>
+                    <input type="text" id="cp" name="cp" value="<?= $_POST["cp"] ?? ''?>" size="40" required>
+                    <?php echo (isset($erreurs["cp"])) ? "<p class=\"erreur\">" . $erreurs["cp"] . " </p>" : '' ?>
+                </div>
+                
             </div>
 
             <h3 class="underline">Mot de passe :</h3>
