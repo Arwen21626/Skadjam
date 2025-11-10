@@ -7,7 +7,7 @@
     <title>Conditions Générales d'Utilisateurs</title>
 </head>
 <body>
-    <?php require "../../php/header_front.php"; ?>
+    <?php require "../../php/structure/header_front.php"; ?>
     <main>
     <h2>Conditions générales d'utilisation</h2>
     <h3>En vigueur au 07/11/2025</h3>
@@ -98,6 +98,6 @@
         <p>Pour toute question relative à l’application des présentes CGU, vous pouvez joindre l’éditeur aux coordonnées inscrites à l’<a href="#mentionsLegalesFO">Article 1</a>.</p>
     </article>
     </main>
-    <?php require "../../php/footer_front.php"; ?>
+    <?php require "../../php/structure/footer_front.php"; ?>
 </body>
 </html>

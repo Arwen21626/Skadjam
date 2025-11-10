@@ -7,7 +7,7 @@
     <title>Conditions Générales de Vente</title>
 </head>
 <body>
-    <?php require "../../php/header_front.php"; ?>
+    <?php require "../../php/structure/header_front.php"; ?>
     <main>
     <h2>Conditions générales de vente</h2>
     <h3>En vigueur au 07/11/2025</h3>
@@ -65,6 +65,6 @@
         <p>Les présentes conditions de vente à distance sont soumises à la loi française. Pour tous litiges ou contentieux, le Tribunal compétent sera celui de Lannion.</p>
     </article>
     </main>
-    <?php require "../../php/footer_front.php"; ?>
+    <?php require "../../php/structure/footer_front.php"; ?>
 </body>
 </html>
