@@ -25,18 +25,18 @@ if (isset($_POST["nom"])){
   
     //récuperer les attributs du post
     $nom = $_POST["nom"]; //verif
-    $prenom = format_prenom($_POST["prenom"]);//verif
-    $mail = $_POST["mail"]; //verif
-    $tel = $_POST["tel"]; //verif
-    $denomination = $_POST["denomination"];//verif
-    $raisonSociale = $_POST["raisonSociale"];//verif
-    $iban = $_POST["iban"];//verif
+    $prenom = formatPrenom($_POST["prenom"]);   //verif
+    $mail = $_POST["mail"];                     //verif
+    $tel = $_POST["tel"];                       //verif
+    $denomination = $_POST["denomination"];     //verif
+    $raisonSociale = $_POST["raisonSociale"];   //verif
+    $iban = $_POST["iban"];                     //verif
     $adresse = $_POST["adresse"];
     $ville = $_POST["ville"];
     $cp = $_POST["cp"];
-    $siren = $_POST["siren"];//verif
-    $mdp = $_POST["mdp"];//verif
-    $verif = $_POST["verif"];//verif
+    $siren = $_POST["siren"];                   //verif
+    $mdp = $_POST["mdp"];                       //verif
+    $verif = $_POST["verif"];                   //verif
 
     /* enregistrer toutes les erreurs */
 
@@ -51,7 +51,7 @@ if (isset($_POST["nom"])){
     if (!mailUnique($mail)) $erreurs["unique"] = "un utilisateur avec cette e-mail existe deja : $mail";
 
     /* TEL */
-    if (!verifTelephone(format_tel($tel))) $erreurs["tel"] = "numéro à 10 chiffres";
+    if (!verifTelephone(formatTel($tel))) $erreurs["tel"] = "numéro à 10 chiffres";
 
     /* DENOMINATION */
     if (!verifDenomination($denomination)) $erreurs["denomination"] = "autorisé majuscules, minuscules et chiffres";
@@ -70,7 +70,11 @@ if (isset($_POST["nom"])){
     if (!verifSiren($siren)) $erreurs["siren"] = "numéro SIREN invalide";
 
     /* ##### ADRESSE ##### */
+    if (!verifCp($cp)) $erreurs["cp"] = "code postale invalide";
 
+    if (!verifVille($ville)) $erreurs["ville"] = "format ville incorrect";
+
+    
 
 
 
@@ -81,7 +85,7 @@ if (isset($_POST["nom"])){
             //preparer la requete sql pour inserer dans le compte
             $stmt = $dbh->prepare("INSERT INTO sae3_skadjam._compte (nom_compte, prenom_compte, adresse_mail, motDePasse, numero_telephone, bloque) VALUES (?,?,?,?,?, false) RETURNING id_compte");
             //excuter la requete sql avec les attributs
-            $stmt->execute([$nom, $prenom,$mail, password_hash($mdp, PASSWORD_DEFAULT),format_tel($tel) ]);
+            $stmt->execute([$nom, $prenom,$mail, password_hash($mdp, PASSWORD_DEFAULT),formatTel($tel) ]);
             
             //recuperer l'id du compte associé au vendeur
             $id = $stmt->fetchColumn();
