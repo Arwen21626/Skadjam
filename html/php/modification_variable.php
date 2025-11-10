@@ -46,16 +46,24 @@ function formatAdresse($adresse){
 function formatNum($num){
     //recois le numéro et le complement
     //renvoi le numero
-    $ret = trim($num);
-    $ret = explode(" ", $ret);
-    return $ret[0];
+    $ret = "";
+    foreach ($num as $char){
+        if ($char>=0){
+            $ret = $ret . $char;
+        }
+    }
+    return $ret;
 }
 
 function formatCompNum($num){
     //recois le numéro et le complement
     //renvoi le complément
-    $ret = trim($num);
-    $ret = explode(" ", $ret);
-    return $ret[1];
+    $ret = "";
+    foreach ($num as $char){
+        if (preg_match("/^[a-zA-Z]$/", $char)){
+            $ret = $ret . $char;
+        }
+    }
+    return $ret;
 }
 ?>
