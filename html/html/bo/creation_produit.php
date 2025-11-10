@@ -4,6 +4,8 @@ include('../../01_premiere_connexion.php');
 require_once('../../php/verification_formulaire.php');
 
 $tab_categories = [];
+$typePhoto = $_FILES['photo']['type'];
+$nom_serv_photo = $_FILES['photo']['tmp_name'];
 
 foreach($dbh->query('SELECT * from sae3_skadjam._categorie', PDO::FETCH_ASSOC) as $row) {
         $tab_categories[] = $row;
@@ -35,6 +37,7 @@ if (isset($_POST['categorie']) && isset($_POST['nom']) && isset($_POST['prix']) 
             $insertion_produit = $dbh -> prepare("INSERT INTO sae3_skadjam._produit (libelle_produit, description_produit, prix_ht, prix_ttc, est_masque, quantite_stock, seuil_alerte, quantite_unite, unite, id_categorie, id_vendeur, id_tva)
             VALUES ('$nom','$description', $prix, $prix_ttc, false, $qteStock, 0, 1,'kg',1, 1, 1)");
             $insertion_produit -> execute();
+            $insertion_produit = $dbh -> prepare("INSERT INTO sae3_skadjam._photo ('url_photo, alt, titre') VALUES ");
         }
         catch (PDOException $e) {
             print "Erreur !: " . $e->getMessage() . "<br/>";
@@ -51,7 +54,7 @@ if (isset($_POST['categorie']) && isset($_POST['nom']) && isset($_POST['prix']) 
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Création d'un produit</title>
-    <link rel="stylesheet" href="../../css/bo/general_back.css">
+    <link rel="stylesheet" href="../../css/output.css">
 </head>
 <body>
     <?php include('../../php/structure/header_back.php');?>
@@ -66,8 +69,8 @@ if (isset($_POST['categorie']) && isset($_POST['nom']) && isset($_POST['prix']) 
                 
             </select>
             
-            <!-- <input type="file" name="photo" id="photo" required>
-            <label for="photo">Ajouter des images</label> -->
+            <input type="file" name="photo" id="photo" required>
+            <label for="photo">Ajouter des images</label>
 
             <label for="nom">Nom produit *:</label>
             <input type="text" name="nom" id="nom" required>
