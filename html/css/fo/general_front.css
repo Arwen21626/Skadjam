@@ -60,7 +60,7 @@ footer a {
     color: #365452;
 }
 
-@media (max-width: 1440px) { /* CSS Pour une taille d'écran de téléphone (idéal 428-430px, et jusqu'à 1440px au délà passe en écran PC) */
+@media (max-width: 1324px) { /* CSS Pour une taille d'écran de téléphone (idéal 428-430px, et jusqu'à 1440px au délà passe en écran PC) */
 
     /* CSS pour le header */
     h1 {
@@ -219,9 +219,39 @@ footer a {
         width: 50px;
         height: 50px;
     }
+    
+    /* position titre du main */
+    main {
+        display: flex;
+        flex-direction: column;
+    }
+
+    main>h2{
+        align-self: center;
+        margin: 0.5em;
+    }
+
+    main{
+        margin: 2em 3em;
+    }
+
+    h2+h3{
+        align-self: center;
+        margin-top: 0;
+        margin-bottom: 1em;
+    }
+
+    article p {
+        margin: 0;
+        padding: 0;
+    }
+
+    article h3{
+        margin-left: 1em;
+    }
 }
 
-@media (min-width: 1440px) { /* CSS Pour une taille PC supérieur à 1440px */
+@media (min-width: 1324px) { /* CSS Pour une taille PC supérieur à 1440px */
     
     /* CSS pour le Header */
     h1 {
@@ -390,6 +420,26 @@ footer a {
 
     main>h2{
         align-self: center;
+        margin: 0.5em;
+    }
+
+    main{
+        margin: 2em 5em;
+    }
+
+    h2+h3{
+        align-self: center;
+        margin-top: 0;
+        margin-bottom: 2em;
+    }
+
+    article p {
+        margin: 0;
+        padding: 0;
+    }
+
+    article h3{
+        margin-left: 2em;
     }
 }
 

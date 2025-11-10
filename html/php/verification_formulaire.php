@@ -172,3 +172,7 @@ function verifNum($num){
     // verifie le format du numéro de rue
     return (preg_match("/^\d+$/",$num));
 }
+
+function verifCompNum($comp){
+    return (preg_match("/^[A-Za-z]$/",$comp));
+}
