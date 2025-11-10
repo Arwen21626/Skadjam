@@ -12,6 +12,7 @@
 </head>
 <body>
     <?php require "../../php/structure/header_front.php" ?>
+    <?php require "../../php/structure/navbar_front.php"; ?>
     <main>
         <?php
             $id = (int) $_SESSION['id_compte'];

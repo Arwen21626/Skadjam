@@ -8,6 +8,7 @@
 </head>
 <body>
     <?php require "../../php/structure/header_front.php"; ?>
+    <?php require "../../php/structure/navbar_front.php"; ?>
     <main>
         <h2>Conditions générales de vente</h2>
         <h3>En vigueur au 07/11/2025</h3>
