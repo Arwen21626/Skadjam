@@ -158,5 +158,18 @@ function verifAge($naissance){
     return false;
 }
 
+function verifCp($cp){
+    if (01000<$cp && $cp<99999){
+        return true;
+    }else{
+        return false;
+    }
+}
 
-
+function verifVille($ville){
+    if (preg_match("/[a-zA-Z -]{1,}/", $ville)){
+        return true;
+    }else{
+        return false;
+    }
+}
