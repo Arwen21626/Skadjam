@@ -7,8 +7,9 @@
 </head>
 <body>
     <?php require("html/php/structure/header_front.php"); ?>
+    <?php require("html/php/structure/navbar_front.php"); ?>
 
-    <main>
+    <main class="bg-amber-700">
         <!-- Section Description -->
         <section>
             <article> <!-- Titrage -->
@@ -16,6 +17,13 @@
                 <p>Catégorie : "Catégorie du produit"</p>
             </article>
             
+            <article>
+                <img src="#jsp" alt="jsp">
+                <div>
+                    <h4>"Prix"€</h4>
+                    <p>"Disponibilité"</p>
+                </div>
+            </article>
         </section>
 
         <!-- Section Description détaillée -->
