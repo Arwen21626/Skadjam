@@ -1,0 +1,14 @@
+/*! tailwindcss v4.1.17 | MIT License | https://tailwindcss.com */
+.relative {
+  position: relative;
+}
+.inline {
+  display: inline;
+}
+
+.underline {
+  text-decoration-line: underline;
+}
+.btn-special {
+  padding-block: calc(var(--spacing, 0.25rem) * 2);
+}
