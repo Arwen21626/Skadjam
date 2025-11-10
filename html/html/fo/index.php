@@ -1,5 +1,5 @@
 <?php include('../../PAS_DE_COMMIT.php');
-const PAGE_SIZE = 15;?>
+const PAGE_SIZE = 3;?>
 
 <!DOCTYPE html>
 <html lang="fr">
