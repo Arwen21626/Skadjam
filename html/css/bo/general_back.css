@@ -50,6 +50,10 @@ header {
     background-color: #365452;
 }
 
+header a:hover {
+    color: #E3D7CC;
+}
+
 #header-section {
     display: grid;
     grid-template-columns: 1fr auto 1fr;
@@ -102,7 +106,7 @@ header {
 }
 
 .logo_nav_div a:hover {
-    color: #A70101;
+    color: #E3D7CC;
 }
 
 /* Pour l'icône de l'accueil */
@@ -195,6 +199,10 @@ footer a {
     color: #E2F9FF;
 }
 
+footer a:hover {
+    color: #E3D7CC;
+}
+
 .logo_reseaux {
     width: 75px;
     height: 75px;
@@ -213,4 +221,24 @@ main h3 {
 
 main>h2{
     align-self: center;
+    margin: 0.5em;
+}
+
+main{
+    margin: 2em 5em;
+}
+
+h2+h3{
+    align-self: center;
+    margin-top: 0;
+    margin-bottom: 2em;
+}
+
+article p {
+    margin: 0;
+    padding: 0;
+}
+
+article h3{
+    margin-left: 2em;
 }
