@@ -34,7 +34,7 @@ input[type="checkbox"]{
 /* css des input*/
 input{
     border-radius: 15px;
-    border:  10px solid #e3d7cc;
+    border:  5px solid #e3d7cc;
     box-shadow: 4px;
     height: 80px;
 }

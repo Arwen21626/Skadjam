@@ -1,4 +1,5 @@
 <?php
+session_start();
 include __DIR__ . '/../../01_premiere_connexion.php';
 include(__DIR__ . '/../../php/modification_variable.php');
 include(__DIR__ . '/../../php/verification_formulaire.php');
@@ -57,7 +58,7 @@ if (isset($_POST["nom"])){
     if (!mailUnique($mail)) $erreurs["unique"] = "un utilisateur avec cette e-mail existe deja : $mail";
 
     /* TEL */
-    if (!verifTelephone(formatTel($tel))) $erreurs["tel"] = "numéro à 10 chiffres";
+    if (!verifTelephone($tel)) $erreurs["tel"] = "numéro à 10 chiffres";
 
     /* DENOMINATION */
     if (!verifDenomination($denomination)) $erreurs["denomination"] = "autorisé majuscules, minuscules et chiffres";
@@ -94,7 +95,7 @@ if (isset($_POST["nom"])){
     /* s'il n'y a pas d'erreur faire la requete */
     if (empty($erreurs)){
         try{
-            $id = null;
+            $idCompte = null;
             //preparer la requete sql pour inserer dans le compte
             $stmt = $dbh->prepare("INSERT INTO sae3_skadjam._compte (nom_compte, prenom_compte, adresse_mail, motDePasse, numero_telephone, bloque) VALUES (?,?,?,?,?, false) RETURNING id_compte");
             //excuter la requete sql avec les attributs
@@ -115,7 +116,9 @@ if (isset($_POST["nom"])){
             //inserer dans habite pour lier le compte a l'adresse
             $stmt = $dbh->prepare("INSERT INTO sae3_skadjam._habite (id_adresse,id_compte) VALUES (?,?)");
             $stmt->execute([$idAdresse, $idCompte]);
-
+            $_SESSION["idCompte"] = $idCompte;
+                                            
+            header("Location: index_vendeur.php");
             
         } catch (PDOException $e) {
             print "Erreur !: " . $e->getMessage() . "<br/>";
@@ -132,12 +135,12 @@ if (isset($_POST["nom"])){
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../../css/bo//general_back.css">
-    <link rel="stylesheet" href="../../css/style_form_creation_vendeur.css">
+    <link rel="stylesheet" href="/html/css/bo/general_back.css">
+    <link rel="stylesheet" href="/html/css/style_form_creation_vendeur.css">
     <title>Créer un compte vendeur</title>
 </head>
 <body>
-    <?php // require_once("html/php/structure/header_back.php") ?>
+    <?php require_once __DIR__ . "/../../php/structure/header_back.php" ?>
     <main>
         <h2>Inscription Vendeur</h2>
         <form method="POST">
@@ -206,12 +209,12 @@ if (isset($_POST["nom"])){
                 </div>
                 <div class="case-form">
                     <label for="ville">Ville * :</label>
-                    <input type="text" id="ville" name="ville" value="<?= $_POST["ville"] ?? ''?>" size="40" required>
+                    <input type="text" id="ville" name="ville" value="<?= $_POST["ville"] ?? ''?>" size="30" required>
                     <?php echo (isset($erreurs["ville"])) ? "<p class=\"erreur\">" . $erreurs["ville"] . " </p>" : '' ?>
                 </div>
                 <div class="case-form">
                     <label for="cp">Code Postal * :</label>
-                    <input type="text" id="cp" name="cp" value="<?= $_POST["cp"] ?? ''?>" size="40" required>
+                    <input type="text" id="cp" name="cp" value="<?= $_POST["cp"] ?? ''?>" size="15" required>
                     <?php echo (isset($erreurs["cp"])) ? "<p class=\"erreur\">" . $erreurs["cp"] . " </p>" : '' ?>
                 </div>
                 
@@ -248,6 +251,6 @@ if (isset($_POST["nom"])){
             <a href="connexion_vendeur" class="underline" >Connectez vous</a>
         </div>
     </main>
-    <?php require_once("html/php/structure/footer_back.php") ?>
+    <?php require_once __DIR__ . "/../../php/structure/footer_back.php" ?>
 </body>
 </html>
