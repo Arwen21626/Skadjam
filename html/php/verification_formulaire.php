@@ -1,5 +1,5 @@
 <?php
-include("../01_premiere_connexion.php");
+include __DIR__ . "/../01_premiere_connexion.php";
 
 function verifNomPrenom($nom){
     // Vérification que soit un prénom soit un nom soyent au bon format
@@ -168,11 +168,7 @@ function verifVille($ville){
     return (preg_match("/^[a-zA-Z -]{1,}$/", $ville));
 }
 
-function verifNum($num){
-    // verifie le format du numéro de rue
-    return (preg_match("/^\d+$/",$num));
-}
-
-function verifCompNum($comp){
-    return (preg_match("/^[A-Za-z]$/",$comp));
+function verifAdresse($adresse){
+    //verifie le format de l'adresse
+    return (preg_match('/^(\d+\s*[A-Za-z]*)[, ]*(.+)$/u', $adresse));
 }

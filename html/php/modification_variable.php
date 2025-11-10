@@ -25,7 +25,7 @@ function format_date($date){
 function numRue($adresse){
     //recois une adresse complete
     //renvoi le numéro et le complement
-    if (preg_match('/^(\d+\s*[A-Za-z]*)[, ]*(.+)$/u', $adresse, $matches)) {
+    if (preg_match('/^(\d+\s*(?:bis|ter|quater)?)[, ]+(.+)$/ui', $adresse, $matches)) {
         $numero = trim($matches[1]); 
 
         return $numero;
@@ -36,9 +36,8 @@ function numRue($adresse){
 function formatAdresse($adresse){
     //recois une adresse complete
     //renvoi la rue
-    if (preg_match('/^(\d+\s*[A-Za-z]*)[, ]*(.+)$/u', $adresse, $matches)) {
+    if (preg_match('/^(\d+\s*(?:bis|ter|quater)?)[, ]+(.+)$/ui', $adresse, $matches)) {
     $rue = trim($matches[2]);
-
     return $rue;
     }
 }
@@ -46,11 +45,11 @@ function formatAdresse($adresse){
 function formatNum($num){
     //recois le numéro et le complement
     //renvoi le numero
-    $ret = "";
-    foreach ($num as $char){
-        if ($char>=0){
-            $ret = $ret . $char;
-        }
+    $num = trim($num);
+    $ret = '';
+    if (preg_match('/^(\d+)\s*([A-Za-z]*)$/i', trim($num), $matches)) {
+        $ret = $matches[1];
+        return $ret;
     }
     return $ret;
 }
@@ -58,11 +57,11 @@ function formatNum($num){
 function formatCompNum($num){
     //recois le numéro et le complement
     //renvoi le complément
-    $ret = "";
-    foreach ($num as $char){
-        if (preg_match("/^[a-zA-Z]$/", $char)){
-            $ret = $ret . $char;
-        }
+    $comp = trim($num);
+    $ret = '';
+    if (preg_match('/^(\d+)\s*([A-Za-z]*)$/i', trim($num), $matches)) {
+        $ret = $matches[2] ?: ''; // vide si pas de suffixe
+        return $ret;
     }
     return $ret;
 }

@@ -1,7 +1,11 @@
 <?php
-include("../SAE3/html/01_premiere_connexion.php");
-include(__DIR__ . "../../php/verification_formulaire.php");
-include(__DIR__ . "../../php/modification_variable.php");
+include __DIR__ . '/../../01_premiere_connexion.php';
+include(__DIR__ . '/../../php/modification_variable.php');
+include(__DIR__ . '/../../php/verification_formulaire.php');
+
+//include("html/01_premiere_connexion.php");
+//include("html/php/modification_variable.php");
+//include("html/php/verification_formulaire.php");
 
 /* initialiser toutes les variables avant l'affichage de la page */
     
@@ -15,6 +19,8 @@ include(__DIR__ . "../../php/modification_variable.php");
     $adresse = '';
     $ville = '';
     $cp = '';
+    $numero = '';
+    $compNum = '';
     $siren = '';
     $mdp = '';
     $verif = '';
@@ -74,7 +80,14 @@ if (isset($_POST["nom"])){
 
     if (!verifVille($ville)) $erreurs["ville"] = "format ville incorrect";
 
-    
+    if (!verifAdresse($adresse)) $erreurs["adresse"] = "format de l'adresse invalide";
+    $numComplet = numRue($adresse);
+    $numero = formatNum($numComplet);
+    $compNum = formatCompNum($numComplet);
+    $adresse = formatAdresse($adresse);
+
+
+
 
 
 
@@ -88,12 +101,22 @@ if (isset($_POST["nom"])){
             $stmt->execute([$nom, $prenom,$mail, password_hash($mdp, PASSWORD_DEFAULT),formatTel($tel) ]);
             
             //recuperer l'id du compte associé au vendeur
-            $id = $stmt->fetchColumn();
+            $idCompte = $stmt->fetchColumn();
 
             //preparer la requete sql pour inserer dans vendeur
             $stmt = $dbh->prepare("INSERT INTO sae3_skadjam._vendeur (id_compte, raison_sociale, siren, iban, denomination) VALUES (?,?,?,?,?)");
-            $stmt->execute([$id,$raisonSociale, (int)$siren, $iban, $denomination]);
+            $stmt->execute([$idCompte,$raisonSociale, (int)$siren, $iban, $denomination]);
 
+            //preparer la requete pour inserer dans adresse et recuperer l'id
+            $stmt = $dbh->prepare("INSERT INTO sae3_skadjam._adresse (adresse_postale, complement_adresse, numero_rue, code_postal, ville) VALUES (?,?,?,?,?) RETURNING id_adresse");
+            $stmt->execute([$adresse, $compNum, $numero, $cp, $ville]);
+            $idAdresse = $stmt->fetchColumn();
+
+            //inserer dans habite pour lier le compte a l'adresse
+            $stmt = $dbh->prepare("INSERT INTO sae3_skadjam._habite (id_adresse,id_compte) VALUES (?,?)");
+            $stmt->execute([$idAdresse, $idCompte]);
+
+            
         } catch (PDOException $e) {
             print "Erreur !: " . $e->getMessage() . "<br/>";
             die();
@@ -114,7 +137,7 @@ if (isset($_POST["nom"])){
     <title>Créer un compte vendeur</title>
 </head>
 <body>
-    <?php //require_once("../../php/header_back.php") ?>
+    <?php // require_once("html/php/structure/header_back.php") ?>
     <main>
         <h2>Inscription Vendeur</h2>
         <form method="POST">
@@ -225,6 +248,6 @@ if (isset($_POST["nom"])){
             <a href="connexion_vendeur" class="underline" >Connectez vous</a>
         </div>
     </main>
-    <?php require_once("../../php/footer_back.php") ?>
+    <?php require_once("html/php/structure/footer_back.php") ?>
 </body>
 </html>
