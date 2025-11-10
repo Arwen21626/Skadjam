@@ -11,8 +11,11 @@
     <main>
         <!-- Section Description -->
         <section>
-            <h2>"Nom du produit"</h2>
-            <p>Catégorie : "Catégorie du produit"</p>
+            <article> <!-- Titrage -->
+                <h3>"Nom du produit"</h3>
+                <p>Catégorie : "Catégorie du produit"</p>
+            </article>
+            
         </section>
 
         <!-- Section Description détaillée -->
