@@ -1,6 +1,10 @@
-<?php include('../../connections_params.php');
-include('../../01_premiere_connexion.php');
-const PAGE_SIZE = 15;?>
+<?php 
+    session_start();
+    include('../../01_premiere_connexion.php');
+    const PAGE_SIZE = 15;
+    $idCompte = $_SESSION['idCompte'];
+    echo($idCompte);
+?>
 
 <!DOCTYPE html>
 <html lang="fr">
@@ -36,9 +40,9 @@ const PAGE_SIZE = 15;?>
         </section>
 
         <section id ="ligneBoutons">
-            <a href="" class="bouton">Ajouter un produit</a>
-            <a href="" class="bouton">Statistiques</a>
-            <a href="" class="bouton">Avis récents</a>
+            <button type="button" class="bouton">Ajouter un produit</button>
+            <button type="button" class="bouton">Statistiques</button>
+            <button type="button" class="bouton">Avis récents</button>
         </section>
 
         <!--Début du catalogue-->

@@ -1,5 +1,4 @@
 <?php 
-    include('../../connections_params.php');
     include('../../01_premiere_connexion.php');
 
     //Récupération des données sur le produit ainsi que la photo
@@ -10,7 +9,9 @@
                         inner join sae3_skadjam._montre m
                             on pr.id_produit=m.id_produit
                         inner join sae3_skadjam._photo ph  
-                            on ph.id_photo = m.id_photo 
+                            on ph.id_photo = m.id_photo
+                        inner join sae3_skadjam._categorie c
+                            on c.id_categorie = pr.id_categorie 
                         where pr.id_produit = $idProd", PDO::FETCH_ASSOC) as $row){
         $produit = $row;
     }
@@ -87,24 +88,30 @@
                     <?php }
                 }
             } ?>  
-        <p><?php echo($produit['id_categorie']); ?></p>
+        <p>Catégorie : <?php echo htmlentities($produit['libelle_categorie']); ?></p>
         <!--affichage de la photo-->
         <!--carrousel à faire-->
         <img src="<?php echo htmlentities($produit['url_photo']);?>" 
             alt="<?php echo htmlentities($produit['alt']);?>"
             title="<?php echo htmlentities($produit['titre']);?>">
         <!--affichage du prix-->
-        <p> <?php echo($produit['prix_ttc']); ?></p>
+        <p> <?php echo htmlentities($produit['prix_ttc']); ?></p>
         <!--affichage de la quantite-->
-        <p><?php echo($produit['quantite_stock']); ?></p>
+        <?php 
+            $stock = $produit['quantite_stock'];
+            if($stock != 0){?>
+                <p>En stock : <?php echo htmlentities($stock); ?></p>
+            <?php } 
+            else{?>
+                <p>Produit indsponible</p>
+            <?php }?>
 
         <button type="button">Modifier</button>
         <button type="button">Masquer</button>
         <button type="button">Extraire</button>
 
         <h2>Description détaillée</h2>
-
-        <p>Description à récupérer</p>
+        <?php echo htmlentities($produit['description_produit']);?>
 
         <p>Partie sur les avis à voir plus tard</p>
 
