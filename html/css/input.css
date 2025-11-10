@@ -3,7 +3,9 @@
 @tailwind utilities;
 @reference "tailwindcss";
 
+
 /* CSS personnalisé */
 .btn-special {
   @apply py-2;
 }
+

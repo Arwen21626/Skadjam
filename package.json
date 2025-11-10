@@ -4,6 +4,9 @@
     "tailwindcss": "^4.1.17"
   },
   "scripts": {
-    "dev" :"tailwindcss -i ./html/css/input.css -o ./html/css/output.css"
+    "dev": "tailwindcss -i ./html/css/input.css -o ./html/css/output.css"
+  },
+  "devDependencies": {
+    "postcss": "^8.5.6"
   }
 }

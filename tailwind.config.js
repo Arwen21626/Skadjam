@@ -6,7 +6,16 @@ module.exports = {
     "./html/**/*.js",   // tous les fichiers JS si tu utilises des classes dynamiques
   ],
   theme: {
-    extend: {}, // tu peux ajouter tes couleurs, polices, etc. ici
+    extend: {
+      colors: {
+        'vertFonce': '#365452',
+        'vertClair': '#588A87',
+        'beige': '#E3D7CC',
+        'rouge': '#A70101',
+        'bleuClair': '#E2F9FF',
+        'turquoise': '#86D0CC'
+      },
+    }, // Ajout couleurs, polices
   },
   plugins: [], // ajoute tes plugins Tailwind ici si besoin
 }

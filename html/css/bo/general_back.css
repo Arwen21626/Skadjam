@@ -242,3 +242,13 @@ article p {
 article h3{
     margin-left: 2em;
 }
+
+
+/* Inputs*/
+
+input{
+    border-radius: 15px;
+    border:  5px solid #e3d7cc;
+    box-shadow: 4px;
+    height: 80px;
+}
