@@ -11,7 +11,7 @@
 </head>
 
 <body>
-    <?php include "../../php/header_front.php"; ?>
+    <?php include "../../php/structure/header_front.php"; ?>
 
     <main>
         <section class="carreImages">
@@ -135,7 +135,7 @@
 
     </main>
     
-    <?php include "../../php/header_back.php"; ?>
+    <?php include "../../php/structure/header_back.php"; ?>
 
 </body>
 
