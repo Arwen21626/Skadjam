@@ -1,21 +1,18 @@
 <?php 
-include('../../../connections_params.php');
-include('../../01_premiere_connexion.php');
-//Récupération des données sur le produit
-$tab_produit = [];
+    include('../../connections_params.php');
+    include('../../01_premiere_connexion.php');
 
-foreach($dbh->query('SELECT * from sae3_skadjam._produit', 
-                        PDO::FETCH_ASSOC) 
-                as $row) {
-        echo "<pre>";
-        print_r($row);
-        echo "</pre>";
-        
-        $tab_produit[] = $row;
+    //Récupération des données sur le produit ainsi que les photos
+    $tabProduit = [];
+
+    foreach($dbh->query("SELECT *
+                        from sae3_skadjam._produit pr
+                        inner join sae3_skadjam._montre m
+                            on pr.id_produit=m.id_produit
+                        inner join sae3_skadjam._photo ph  
+                            on ph.id_photo = m.id_photo ", PDO::FETCH_ASSOC) as $row){
+        $tabProduit[] = $row;
     }
-print_r($tab_produit);
-
-
 ?>
 
 <!DOCTYPE html>
@@ -27,14 +24,80 @@ print_r($tab_produit);
     <title>Détails</title>
 </head>
 <body>
-    <?php include('../../php/structure/header_back.php');?>
+    <!--header-->
+    <?php include "../../php/structure/header_front.php"; ?>
+
     <main>
-        <h2><?php echo($tab_produit['libelle_produit']); ?></h2>
-        <p>NB étoiles à récupérer</p>
-        <p><?php echo($tab_produit['id_categorie']); ?></p>
-        <p>carroussel d'image</p>
-        <p> <?php echo($tab_produit['prix_ttc']); ?></p>
-        <p><?php echo($tab_produit['quantite_stock']); ?></p>
+        <?php foreach($tabProduit as $id => $valeurs){ ?>
+            <!--affichage du libelle-->
+            <h2><?php echo($valeurs['libelle_produit']); ?></h2>
+            <!--récupération de la note-->
+            <?php $note = $valeurs['note_moyenne'];
+                //affichage d'une note nulle
+                if ($note == null){ ?>
+                    <p><?php echo htmlentities('non noté'); ?></p>
+                <?php } 
+
+                else {
+                    $entierPrec = intval($note);
+                    $entierSuiv = $entierPrec+1;
+                    $moitie = $entierPrec+0.5;
+                    $noteFinale;
+                    $nbEtoilesVides;
+
+                    //note arrondie à l'entier précédent
+                    if($note < $entierPrec+0.3){
+                        $noteFinale = $entierPrec;
+                    }
+
+                    //note arrondie à 0.5
+                    else if(($note < $moitie) || ($note < $entierPrec+0.8)){
+                        $noteFinale = $moitie;
+                        $nbEtoilesVides = 5-$entierPrec-1;
+                        //affichage d'une note et demie
+                        //boucle pour étoiles pleines
+                        for($i=0; $i<$entierPrec; $i++){?>
+                            <img src="../../images/logo/bootstrap_icon/star-fill.svg" alt="étoile pleine">
+                        <?php } ?>
+                        <!--demie étoile-->
+                        <img src="../../images/logo/bootstrap_icon/star-half.svg" alt="demie étoile">
+                        <!--boucle pour étoiles vides-->
+                        <?php for($i=0; $i<$nbEtoilesVides; $i++){?>
+                            <img src="../../images/logo/bootstrap_icon/star.svg" alt="étoile vide">
+                        <?php }
+                    }
+                    
+                    //note arrondie à l'entier suivant
+                    else{
+                        $noteFinale = $entierSuiv;
+                    }
+
+                    //affichage d'une note entière :
+                    if($noteFinale != $moitie){
+                        $nbEtoilesVides = 5-$noteFinale;
+                        //boucle pour étoiles pleines
+                        for($i=0; $i<$noteFinale; $i++){?>
+                            <img src="../../images/logo/bootstrap_icon/star-fill.svg" alt="étoile pleine">
+                        <?php }
+                        //boucle pour étoiles vides
+                        for($i=0; $i<$nbEtoilesVides; $i++){?>
+                            <img src="../../images/logo/bootstrap_icon/star.svg" alt="étoile vide">
+                        <?php }
+                    }
+                } ?>  
+            <p><?php echo($valeurs['id_categorie']); ?></p>
+            <!--affichage de la photo-->
+            <!--carrousel à faire-->
+            <img src="<?php echo htmlentities($valeurs['url_photo']);?>" 
+                alt="<?php echo htmlentities($valeurs['alt']);?>"
+                title="<?php echo htmlentities($valeurs['titre']);?>">
+            <!--affichage du prix-->
+            <p> <?php echo($valeurs['prix_ttc']); ?></p>
+            <!--affichage de la quantite-->
+            <p><?php echo($valeurs['quantite_stock']); ?></p>
+
+        <?php } ?>
+
         <button type="button">Modifier</button>
         <button type="button">Masquer</button>
         <button type="button">Extraire</button>
