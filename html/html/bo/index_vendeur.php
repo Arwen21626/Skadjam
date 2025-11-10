@@ -1,4 +1,4 @@
-<?php include('../../PAS_DE_COMMIT.php');
+<?php include('../../connection_params.php');
 const PAGE_SIZE = 15;?>
 
 <!DOCTYPE html>
@@ -79,7 +79,7 @@ const PAGE_SIZE = 15;?>
                 //affiche la photo du produit, son nom, son prix et sa note
                 foreach($tabProduit as $id => $valeurs){?>
                     <!--affichage de la photo-->
-                    <a href="">
+                    <a href="details_produit.php">
                         <img src="<?php echo htmlentities($valeurs['url_photo']);?>" 
                                 alt="<?php echo htmlentities($valeurs['alt']);?>"
                                 title="<?php echo htmlentities($valeurs['titre']);?>">
