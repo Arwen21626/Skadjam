@@ -1,4 +1,5 @@
-<?php include('../../PAS_DE_COMMIT.php');?>
+<?php include('../../PAS_DE_COMMIT.php');
+const PAGE_SIZE = 15;?>
 
 <!DOCTYPE html>
 <html lang="fr">
@@ -32,8 +33,17 @@
 
 
         <!--Début du catalogue-->
+        <h2 id="nosProduits">Nos produits</h2>
 
         <?php
+            //initialisation du numéro de page
+            if(isset($_GET['page'])&& $_GET['page']!==""){
+                $pageNumber = $_GET['page'];
+            }
+            else{
+                $pageNumber = 1;
+            }
+
             $tabProduit = [];
 
             try {
@@ -54,8 +64,11 @@
                     $tabProduit[] = $row;
                 }
 
+                $maxPage = sizeof($tabProduit)/PAGE_SIZE;
+                $lignes = array_slice($tabProduit, $pageNumber*PAGE_SIZE-PAGE_SIZE, PAGE_SIZE);
+
                 //affiche la photo du produit, son nom, son prix et sa note
-                foreach($tabProduit as $id => $valeurs){?>
+                foreach($lignes as $id => $valeurs){?>
                     <!--affichage de la photo-->
                     <a href="">
                         <img src="<?php echo htmlentities($valeurs['url_photo']);?>" 
@@ -135,7 +148,13 @@
         ?>
         <!--fin du catalogue-->
 
-        <p id="droite">Voir plus ...</p>
+        <?php if ($pageNumber>1){?>
+        <a class= "lienPage" href="<?php echo "./index.php?page=".($pageNumber-1)."#nosProduits";?>">page précédente</a>
+        <?php }?>
+    
+        <?php if ($pageNumber<$maxPage){?>
+        <a class= "lienPage" href="<?php echo "./index.php?page=".($pageNumber+1)."#nosProduits";?>">page suivante</a>
+        <?php }?>
 
     </main>
     
