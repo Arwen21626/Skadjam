@@ -9,17 +9,30 @@ function formatPrenom($nom){
 
 function formatTel($tel){
     // renvoi un numéro de téléphone avec le format : +33 suivie de 9 chiffres
-
+    // ou un numéro de téléphone avec le format : 0 suivie de 9 chiffres
     $tel = str_replace(" ", "", trim($tel));
-    return "+33". substr($tel, 1);
+    if (substr($tel, 0, 1) === '+'){
+        return "0".substr($tel, 3);
+    }
+    else{
+        return "+33". substr($tel, 1);
+    }
 }
 
 function formatDate($date){
     // reçois une date au format : aaaa-mm-jj
     // et renvoi une date au format : jj/mm/aaaa 
-
-    $dateBonFormat = explode('-', $date);
-    return "$dateBonFormat[2]/$dateBonFormat[1]/$dateBonFormat[0]";
+    // ou l'inverse
+    
+    if (substr($date, 4, 1) === '-'){
+        $dateBonFormat = explode('-', $date);
+        return $dateBonFormat[2].'/'.$dateBonFormat[1].'/'.$dateBonFormat[0];
+    }
+    else{
+        $dateBonFormat = explode('/', $date);
+        return $dateBonFormat[2].'-'.$dateBonFormat[1].'-'.$dateBonFormat[0];
+    }
+    
 }
 
 function numRue($adresse){
