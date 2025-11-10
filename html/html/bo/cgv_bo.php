@@ -3,10 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" type="text/css" href="../css/fo/general_back.css">
+    <link rel="stylesheet" type="text/css" href="../../css/bo/general_back.css">
     <title>Conditions Générales de Vente</title>
 </head>
 <body>
+    <?php require "../../php/header_back.php"; ?>
+    <main>
     <h2>Conditions générales de vente</h2>
     <h3>En vigueur au 07/11/2025</h3>
     <p>Les présentes conditions de vente sont conclues d’une part par la société SARL COBREC au capital social de 0 dont le siège social est situé à Lannion, immatriculée au RCS de Lannion sous le numéro 508 977 303. ci-après dénommée COBREC et gérant le site Alizon.bzh et, d’autre part, par toute personne physique ou morale souhaitant procéder à un achat via le site internet Alizon.bzh dénommée ci-après " l’Acheteur ".</p>
@@ -26,7 +28,7 @@
     <article>
         <h3>Article 4 : Commande et modalités de paiement</h3>
         <p>Avant toute commande, l’Acheteur doit créer un compte sur le site Alizon.bzh . La rubrique de création de compte est accessible directement depuis la barre de menu latérale. A chaque visite, l’Acheteur, s’il souhaite commander ou consulter son compte (état des commandes, profil…), devra s’identifier à l’aide de ces informations. La société COBREC propose à l’Acheteur de commander et régler ses produits en plusieurs étapes :</p>
-        <p><bold>Paiement par virement bancaire : </bold>l’Acheteur sélectionne les produits qu’il souhaite commander dans le « panier », modifie si besoin (quantités, références…), vérifie l’adresse de livraison ou en renseigne une nouvelle. Puis, les frais de port sont calculés et soumis à l’Acheteur, ainsi que le nom du transporteur. Ensuite, l’Acheteur choisit le mode de paiement de son choix : « Paiement par virement ». Enfin, la dernière étape lui propose de vérifier l’ensemble des informations, prendre connaissance et accepter les présentes conditions générales de vente en cochant la case correspondante, puis l’invite à valider sa commande en cliquant sur le bouton « Confirmer ma commande ». Ce dernier clic forme la conclusion définitive du contrat. Dès validation, l’Acheteur reçoit un bon de commande confirmant l’enregistrement de sa commande. Afin de finaliser son paiement et déclencher le traitement de sa commande, l’Acheteur doit contacter sa banque afin d'effectuer le virement correspondant au montant de sa commande vers le compte bancaire de COBREC, dont les coordonnées sont communiquées à l'Acheteur. Dès réception du virement, la commande sera traitée et l’Acheteur en sera informé par e-mail. La société COBREC expédiera les produits au plus tôt 2 jours ouvrés après réception du virement correspondant à la commande, sous réserve de provisions.</p>
+        <p><strong>Paiement par virement bancaire : </strong>l’Acheteur sélectionne les produits qu’il souhaite commander dans le « panier », modifie si besoin (quantités, références…), vérifie l’adresse de livraison ou en renseigne une nouvelle. Puis, les frais de port sont calculés et soumis à l’Acheteur, ainsi que le nom du transporteur. Ensuite, l’Acheteur choisit le mode de paiement de son choix : « Paiement par virement ». Enfin, la dernière étape lui propose de vérifier l’ensemble des informations, prendre connaissance et accepter les présentes conditions générales de vente en cochant la case correspondante, puis l’invite à valider sa commande en cliquant sur le bouton « Confirmer ma commande ». Ce dernier clic forme la conclusion définitive du contrat. Dès validation, l’Acheteur reçoit un bon de commande confirmant l’enregistrement de sa commande. Afin de finaliser son paiement et déclencher le traitement de sa commande, l’Acheteur doit contacter sa banque afin d'effectuer le virement correspondant au montant de sa commande vers le compte bancaire de COBREC, dont les coordonnées sont communiquées à l'Acheteur. Dès réception du virement, la commande sera traitée et l’Acheteur en sera informé par e-mail. La société COBREC expédiera les produits au plus tôt 2 jours ouvrés après réception du virement correspondant à la commande, sous réserve de provisions.</p>
         <p>La confirmation d’une commande entraîne acceptation des présentes conditions de vente, la reconnaissance d’en avoir parfaite connaissance et la renonciation à se prévaloir de ses propres conditions d’achat. L’ensemble des données fournies et la confirmation enregistrée vaudront preuve de la transaction. Si l’Acheteur possède une adresse électronique et s’il l’a renseignée sur son bon de commande, la société COBREC lui communiquera par courrier électronique la confirmation de l’enregistrement de sa commande.</p>
         <p>Si l’Acheteur souhaite contacter la société COBREC, il peut le faire soit par courrier à l’adresse suivante : 7 Rue Édouard Branly, 22300 Lannion ; soit par email à l’adresse suivante : armel.kermanach@etudiant.univ-rennes.fr, soit par téléphone au 02 96 46 93 00.</p>
     </article>
@@ -62,5 +64,7 @@
         <h3>Article 12 : Règlement des litiges</h3>
         <p>Les présentes conditions de vente à distance sont soumises à la loi française. Pour tous litiges ou contentieux, le Tribunal compétent sera celui de Lannion.</p>
     </article>
+    </main>
+    <?php require "../../php/footer_back.php"; ?>
 </body>
 </html>
