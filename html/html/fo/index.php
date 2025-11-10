@@ -12,6 +12,7 @@ const PAGE_SIZE = 15;?>
 </head>
 
 <body>
+    <!--header-->
     <?php include "../../php/structure/header_front.php"; ?>
 
     <main>
@@ -65,6 +66,7 @@ const PAGE_SIZE = 15;?>
                 }
 
                 $maxPage = sizeof($tabProduit)/PAGE_SIZE;
+                //découpe le catalogue en page de 15 produits
                 $lignes = array_slice($tabProduit, $pageNumber*PAGE_SIZE-PAGE_SIZE, PAGE_SIZE);
 
                 //affiche la photo du produit, son nom, son prix et sa note
@@ -138,7 +140,7 @@ const PAGE_SIZE = 15;?>
                             }
                         }  
                 }             
-            $dbh = null;
+                $dbh = null;
             } 
 
             catch (PDOException $e) {
@@ -158,6 +160,7 @@ const PAGE_SIZE = 15;?>
 
     </main>
     
+    <!--footer-->
     <?php include "../../php/structure/footer_front.php"; ?>
 
 </body>
