@@ -1,4 +1,5 @@
-<?php include('../../connection_params.php');
+<?php include('../../connections_params.php');
+include('../../01_premiere_connexion.php');
 const PAGE_SIZE = 15;?>
 
 <!DOCTYPE html>
@@ -54,14 +55,7 @@ const PAGE_SIZE = 15;?>
 
             $tabProduit = [];
 
-            try {
-                $dbh = new PDO("$driver:host=$server;dbname=$dbname", $user, $pass);
-
-                //gère les erreurs
-                $dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-                //faire des tableaux associatifs au lieu de numérique
-                $dbh->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC);
-                
+            try {                
                 //récupère toutes les infos des tables produits et photos
                 foreach($dbh->query("SELECT *
                                     from sae3_skadjam._produit pr
@@ -77,9 +71,10 @@ const PAGE_SIZE = 15;?>
                 $lignes = array_slice($tabProduit, $pageNumber*PAGE_SIZE-PAGE_SIZE, PAGE_SIZE);
 
                 //affiche la photo du produit, son nom, son prix et sa note
-                foreach($tabProduit as $id => $valeurs){?>
+                foreach($tabProduit as $id => $valeurs){
+                    $idProduit = $valeurs['id_produit'];?>
                     <!--affichage de la photo-->
-                    <a href="details_produit.php">
+                    <a href= "<?php echo "details_produit.php?idProduit=".$idProduit;?>">
                         <img src="<?php echo htmlentities($valeurs['url_photo']);?>" 
                                 alt="<?php echo htmlentities($valeurs['alt']);?>"
                                 title="<?php echo htmlentities($valeurs['titre']);?>">
