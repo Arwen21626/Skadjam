@@ -50,6 +50,10 @@ header {
     background-color: #365452;
 }
 
+header a:hover {
+    color: #E3D7CC;
+}
+
 #header-section {
     display: grid;
     grid-template-columns: 1fr auto 1fr;
@@ -102,7 +106,7 @@ header {
 }
 
 .logo_nav_div a:hover {
-    color: #A70101;
+    color: #E3D7CC;
 }
 
 /* Pour l'icône de l'accueil */
@@ -193,6 +197,10 @@ footer h3 {
 footer a {
     margin: 0.2em;
     color: #E2F9FF;
+}
+
+footer a:hover {
+    color: #E3D7CC;
 }
 
 .logo_reseaux {
