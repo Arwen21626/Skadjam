@@ -1,6 +1,6 @@
 <?php
     session_start();
-    //require_once "../connections_params.php";
+    require_once "../../connections_params.php";
 ?>
 <!DOCTYPE html>
 <html lang="fr">
@@ -14,7 +14,7 @@
     <?php require "../../php/structure/header_front.php" ?>
     <main>
         <?php
-            $id = (int) $_SESSION['idCompte'];
+            $id = (int) $_SESSION['id_compte'];
 
             try{
                 $dbh = new PDO("$driver:host=$server;dbname=$dbname",$user,$pass);
@@ -22,8 +22,8 @@
                 $dbh->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC);
 
                 // Récupérer toutes les infos du client
-                $infosClient = $dbh->prepare('SELECT idCompte, nomCompte, prenomCompte, adresseMail, numeroTelephone FROM compte WHERE idCompte = :idCompte LIMIT 1');
-                $infosClient->execute([':idCompte' => $id]);
+                $infosClient = $dbh->prepare('SELECT id_compte, nom_compte, prenom_compte, adresse_mail, numero_telephone FROM sae3_skadjam._compte WHERE id_compte = :id_compte LIMIT 1');
+                $infosClient->execute([':id_compte' => $id]);
                 $client = $infosClient->fetch(PDO::FETCH_ASSOC);
 
                 $dbh = null;
