@@ -3,7 +3,7 @@ session_start();
 
 require_once("../../php/verification_formulaire.php"); // fonctions qui vérifient les données des formulaires
 require_once("../../php/modification_variable.php"); // fonctions qui vérifient les données des formulaires
-require_once("A NE SURTOUT PAS COMMIT !!!!!!!!!!.php"); // données de connexion à la base de données
+require_once("../../connections_params.php");; // données de connexion à la base de données
 
 //Connection à la base de données
 $dbh = new PDO("$driver:host=$server;dbname=$dbname", $user, $pass); 
