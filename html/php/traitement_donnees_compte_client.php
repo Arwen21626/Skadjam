@@ -1,7 +1,7 @@
 <?php
 require_once("./verification_formulaire.php"); // fonctions qui vérifient les données des formulaires
 require_once("./modification_variable.php"); // fonctions qui vérifient les données des formulaires
-require_once("./A NE SURTOUT PAS COMMIT !!!!!!!!!!.php"); // données de connexion à la base de données
+require_once("../../connections_params.php"); // données de connexion à la base de données
 
 // Traitement du formulaire seulement si toutes les données sont saisie
 if(isset($_POST['pseudo']) && isset($_POST['naissance']) && isset($_POST['nom']) && isset($_POST['prenom']) && isset($_POST['mail']) && isset($_POST['telephone']) && isset($_POST['mdp']) && isset($_POST['verifMdp'])){
