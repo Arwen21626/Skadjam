@@ -11,9 +11,7 @@
 </head>
 
 <body>
-    <header>
-
-    </header>
+    <?php include "../../php/header_front.php"; ?>
 
     <main>
         <section class="carreImages">
@@ -94,8 +92,20 @@
                             }
 
                             //note à virgule
-                            if(($note == 0.5) || ($note == 1.5) || ($note == 2.5) || ($note == 3.5) || ($note == 4.5) || ($note == 5.5)){
-                                $partieEntiere = $note-0.5;
+                            else{
+                                $entierPrec = intval($note);
+                                $entierSuiv = $entierPrec+1;
+                                $moitie = $entierPrec+0.5;
+                                $noteFinale;
+                                if($note < $entierPrec+0.3){
+                                    $noteFinale = $entierPrec;
+                                }
+                                else if(($note < $moitie) || ($note < $entierPrec+0.8)){
+                                    $noteFinale = $moitie;
+                                }
+                                else{
+                                    $noteFinale = $entierSuiv;
+                                }
                                 $cinqMoinsNote = 5-$partieEntiere-1;
                                 //boucle pour étoiles pleines
                                 for($i=0; $i<$partieEntiere; $i++){?>
@@ -125,10 +135,8 @@
 
     </main>
     
-    
-    <footer>
+    <?php include "../../php/header_back.php"; ?>
 
-    </footer>
 </body>
 
 </html>
