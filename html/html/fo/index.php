@@ -1,4 +1,5 @@
-<?php include('../../PAS_DE_COMMIT.php');
+<?php include('../../connections_params.php');
+include('../../01_premiere_connexion.php');
 const PAGE_SIZE = 3;?>
 
 <!DOCTYPE html>
@@ -47,14 +48,7 @@ const PAGE_SIZE = 3;?>
 
             $tabProduit = [];
 
-            try {
-                $dbh = new PDO("$driver:host=$server;dbname=$dbname", $user, $pass);
-
-                //gère les erreurs
-                $dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-                //faire des tableaux associatifs au lieu de numérique
-                $dbh->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC);
-                
+            try {                
                 //récupère toutes les infos des tables produits et photos
                 foreach($dbh->query("SELECT *
                                     from sae3_skadjam._produit pr
