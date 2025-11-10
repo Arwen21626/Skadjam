@@ -13,7 +13,7 @@ function verifNomPrenom($nom){
 
 function verifTelephone($tel){
     // Vérification que le numéro de téléphone soit au bon format
-    if (!preg_match("/^\+33[0-9]{9}$/", $tel)){
+    if (!preg_match("/^0[0-9]{9}$/", $tel)){
         return false;
     }
     else{
