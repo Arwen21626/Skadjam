@@ -14,7 +14,7 @@ function formatTel($tel){
     return "+33". substr($tel, 1);
 }
 
-function format_date($date){
+function formatDate($date){
     // reçois une date au format : aaaa-mm-jj
     // et renvoi une date au format : jj/mm/aaaa 
 
