@@ -2,11 +2,11 @@
     <section id="info-footer">
         <article>
             <h3>Infos Pratiques</h3>
-            <a href="Insérer lien CGV">
+            <a href="./cgv_bo.php">
                 Conditions générales de vente
             </a>
 
-            <a href="Insérer lien CGU">
+            <a href="./cgu_bo.php">
                 Conditions générales d'utilisation
             </a>
         </article>
