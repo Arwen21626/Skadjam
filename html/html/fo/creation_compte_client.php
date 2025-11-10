@@ -20,7 +20,7 @@
         <label for="prenom">Prenom* :</label>
         <input type="text" name="prenom" id="prenom" required>
 
-        <label for="pseudo">Pseudo :</label>
+        <label for="pseudo">Pseudo* :</label>
         <input type="text" name="pseudo" id="pseudo" required>
 
         <label for="naissance">Date de naissance* :</label>
