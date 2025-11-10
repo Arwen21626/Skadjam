@@ -159,17 +159,16 @@ function verifAge($naissance){
 }
 
 function verifCp($cp){
-    if (01000<$cp && $cp<99999){
-        return true;
-    }else{
-        return false;
-    }
+    // verifie le format du code postale
+    return (01000<$cp && $cp<99999);
 }
 
 function verifVille($ville){
-    if (preg_match("/[a-zA-Z -]{1,}/", $ville)){
-        return true;
-    }else{
-        return false;
-    }
+    //verifie le format de la ville
+    return (preg_match("/^[a-zA-Z -]{1,}$/", $ville));
+}
+
+function verifNum($num){
+    // verifie le format du numéro de rue
+    return (preg_match("/^\d+$/",$num));
 }
