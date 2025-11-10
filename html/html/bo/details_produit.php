@@ -1,5 +1,5 @@
 <?php 
-include('../../connections_params.php');
+include('../../../connections_params.php');
 include('../../01_premiere_connexion.php');
 //Récupération des données sur le produit
 $tab_produit = [];
@@ -27,7 +27,7 @@ print_r($tab_produit);
     <title>Détails</title>
 </head>
 <body>
-    <?php include('../../php/header_back.php');?>
+    <?php include('../../php/structure/header_back.php');?>
     <main>
         <h2><?php echo($tab_produit['libelle_produit']); ?></h2>
         <p>NB étoiles à récupérer</p>
@@ -46,6 +46,6 @@ print_r($tab_produit);
         <p>Partie sur les avis à voir plus tard</p>
 
     </main>
-    <?php include('../../php/footer_back.php');?>
+    <?php include('../../php/structure/footer_back.php');?>
 </body>
 </html>

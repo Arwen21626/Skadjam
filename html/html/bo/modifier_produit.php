@@ -1,5 +1,7 @@
 <?php 
-
+include('../../../connections_params.php');
+include('../../01_premiere_connexion.php');
+require_once('../../php/verification_formulaire.php');
 ?>
 <!DOCTYPE html>
 <html lang="fr">
@@ -10,7 +12,7 @@
     <link rel="stylesheet" href="../../css/bo/general_back.css">
 </head>
 <body>
-    <?php include('../../php/header_back.php');?>
+    <?php include('../../php/structre/header_back.php');?>
     <main>
         <h2>Modifier le produit</h2>
         <p>ID : à recupérer</p>
@@ -46,6 +48,6 @@
             <input type="submit" value="Valider">
         </form>
     </main>
-    <?php include('../../php/footer_back.php');?>
+    <?php include('../../php/structure/footer_back.php');?>
 </body>
 </html>
