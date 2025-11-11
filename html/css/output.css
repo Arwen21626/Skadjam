@@ -10,11 +10,11 @@
   border-style: var(--tw-border-style);
   border-width: 1px;
 }
+.bg-\[var\(--color-vertFonce\)\] {
+  background-color: var(--color-vertFonce);
+}
 .underline {
   text-decoration-line: underline;
-}
-.btn-special {
-  padding-block: calc(var(--spacing, 0.25rem) * 2);
 }
 @property --tw-border-style {
   syntax: "*";

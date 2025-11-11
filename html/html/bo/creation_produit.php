@@ -55,6 +55,8 @@ if (isset($_POST['categorie']) && isset($_POST['nom']) && isset($_POST['prix']) 
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Création d'un produit</title>
     <link rel="stylesheet" href="../../css/output.css">
+    <link rel="stylesheet" href="../../css/bo/creation_produit.css">
+    <link rel="stylesheet" href="../../css/bo/general_back.css">
 </head>
 <body>
     <?php include('../../php/structure/header_back.php');?>
@@ -92,7 +94,7 @@ if (isset($_POST['categorie']) && isset($_POST['nom']) && isset($_POST['prix']) 
             <input type="text" name="description" id="description" required>
             
             <input type="button" value="Retour" href="">
-            <input type="submit" value="Valider">
+            <input class="border-2 bg-vertFonce" type="submit" value="Valider">
         </form>
     </main>
     <?php include('../../php/structure/footer_back.php');?>
