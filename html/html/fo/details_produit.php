@@ -9,7 +9,7 @@
     <?php require("html/php/structure/header_front.php"); ?>
     <?php require("html/php/structure/navbar_front.php"); ?>
 
-    <main class="bg-amber-700">
+    <main >
         <!-- Section Description -->
         <section>
             <article> <!-- Titrage -->
