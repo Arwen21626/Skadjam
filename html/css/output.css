@@ -10,6 +10,9 @@
   border-style: var(--tw-border-style);
   border-width: 1px;
 }
+.bg-amber-700 {
+  background-color: var(--color-amber-700, oklch(55.5% 0.163 48.998));
+}
 .underline {
   text-decoration-line: underline;
 }
