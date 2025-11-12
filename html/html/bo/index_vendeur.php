@@ -1,9 +1,11 @@
 <?php 
     session_start();
+    //à retirer
+    $_SESSION['idCompte'] = 1;
+
     include('../../01_premiere_connexion.php');
     const PAGE_SIZE = 15;
     $idCompte = $_SESSION['idCompte'];
-    echo($idCompte);
 ?>
 
 <!DOCTYPE html>
@@ -62,11 +64,15 @@
             try {                
                 //récupère toutes les infos des tables produits et photos
                 foreach($dbh->query("SELECT *
-                                    from sae3_skadjam._produit pr
-                                    inner join sae3_skadjam._montre m
-                                        on pr.id_produit=m.id_produit
-                                    inner join sae3_skadjam._photo ph  
-                                        on ph.id_photo = m.id_photo ", PDO::FETCH_ASSOC) as $row){
+                                    FROM sae3_skadjam._produit pr
+                                    INNER join sae3_skadjam._montre m
+                                        ON pr.id_produit=m.id_produit
+                                    INNER JOIN sae3_skadjam._photo ph  
+                                        ON ph.id_photo = m.id_photo 
+                                    INNER JOIN sae3_skadjam._vendeur v
+                                        ON pr.id_vendeur = v.id_compte
+                                    WHERE v.id_compte = $idCompte"
+                                    , PDO::FETCH_ASSOC) as $row){
                     $tabProduit[] = $row;
                 }
 
