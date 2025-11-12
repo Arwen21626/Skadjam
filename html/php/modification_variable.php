@@ -30,48 +30,22 @@ function formatDatePourInput($date){
     return "$dateBonFormat[2]/$dateBonFormat[1]/$dateBonFormat[0]";
 }
 
-function numRue($adresse){
-    //recois une adresse complete
-    //renvoi le numéro et le complement
-    if (preg_match('/^(\d+\s*[A-Za-z]*)[, ]*(.+)$/u', $adresse, $matches)) {
-        $numero = trim($matches[1]); 
+function tabAdresse($adresse){
+    //recois une adresse format : x [bis,...] nomRue
+    //renvoi un tableau avec le numéro le complement de numéro et le reste de l'adresse
+    $num = "";
+    $complementNum = "";
 
-        return $numero;
-    }
+    //separe le numero complet du reste de l'adresse
+    if (preg_match('/^(\d+\s*(?:bis|ter|quater)?)[, ]+(.+)$/ui', $adresse, $matches)) {
+        $numeroComplet = trim($matches[1]);
+        $adresse = trim($matches[2]); 
 
-}
-
-function formatAdresse($adresse){
-    //recois une adresse complete
-    //renvoi la rue
-    if (preg_match('/^(\d+\s*[A-Za-z]*)[, ]*(.+)$/u', $adresse, $matches)) {
-    $rue = trim($matches[2]);
-
-    return $rue;
-    }
-}
-
-function formatNum($num){
-    //recois le numéro et le complement
-    //renvoi le numero
-    $ret = "";
-    foreach ($num as $char){
-        if ($char>=0){
-            $ret = $ret . $char;
+        //si le numéro est suivit d'un copletment ex bis ils sont séparé
+        if (preg_match('/^(\d+)\s*([A-Za-z]*)$/i', $numeroComplet, $matches)){
+            $num = $matches[1];
+            $complementNum = $matches[2] ?: "";
         }
     }
-    return $ret;
+    return [$num, $complementNum, $adresse];
 }
-
-function formatCompNum($num){
-    //recois le numéro et le complement
-    //renvoi le complément
-    $ret = "";
-    foreach ($num as $char){
-        if (preg_match("/^[a-zA-Z]$/", $char)){
-            $ret = $ret . $char;
-        }
-    }
-    return $ret;
-}
-?>

@@ -31,19 +31,19 @@ include(__DIR__ . '/../../php/verification_formulaire.php');
 if (isset($_POST["nom"])){
   
     //récuperer les attributs du post
-    $nom = $_POST["nom"]; //verif
-    $prenom = formatPrenom($_POST["prenom"]);   //verif
-    $mail = $_POST["mail"];                     //verif
-    $tel = $_POST["tel"];                       //verif
-    $denomination = $_POST["denomination"];     //verif
-    $raisonSociale = $_POST["raisonSociale"];   //verif
-    $iban = $_POST["iban"];                     //verif
+    $nom = $_POST["nom"]; 
+    $prenom = formatPrenom($_POST["prenom"]);   
+    $mail = $_POST["mail"];                     
+    $tel = $_POST["tel"];                       
+    $denomination = $_POST["denomination"];     
+    $raisonSociale = $_POST["raisonSociale"];   
+    $iban = $_POST["iban"];                     
     $adresse = $_POST["adresse"];
     $ville = $_POST["ville"];
     $cp = $_POST["cp"];
-    $siren = $_POST["siren"];                   //verif
-    $mdp = $_POST["mdp"];                       //verif
-    $verif = $_POST["verif"];                   //verif
+    $siren = $_POST["siren"];                   
+    $mdp = $_POST["mdp"];                       
+    $verif = $_POST["verif"];                   
 
     /* enregistrer toutes les erreurs */
 
@@ -82,15 +82,11 @@ if (isset($_POST["nom"])){
     if (!verifVille($ville)) $erreurs["ville"] = "format ville incorrect";
 
     if (!verifAdresse($adresse)) $erreurs["adresse"] = "format de l'adresse invalide";
-    $numComplet = numRue($adresse);
-    $numero = formatNum($numComplet);
-    $compNum = formatCompNum($numComplet);
-    $adresse = formatAdresse($adresse);
-
-
-
-
-
+    
+    $temp = tabAdresse($adresse);
+    $numero = $temp[0];
+    $compNum = $temp[1];
+    $adresse = $temp[2];
 
     /* s'il n'y a pas d'erreur faire la requete */
     if (empty($erreurs)){
