@@ -40,19 +40,20 @@
                 print "Erreur : " . $e->getMessage() . "<br/>";
             }
         ?>
-        <h2>Mon compte</h2>
-        <article>
-            <section class="nomComplet">
+        <h2>Profil</h2>
+        <section>
+            <div>
                 <h3><?php echo $pseudo ?></h3>
-                <p><?php echo $prenom ?></p>
-                <p><?php echo $nom ?></p>
-            </section>
-            <p><?php echo $naissance ?></p>
-            <p><?php echo $telephone ?></p>
-            <p><?php echo $mail ?></p>
-        </article>
+                <h4><?php echo $prenom ?> <?php echo $nom ?></h4>
+            </div>
+            <div>
+                <p><?php echo $naissance ?></p>
+                <p><?php echo $telephone ?></p>
+                <p><?php echo $mail ?></p>
+            </div>
+        </section>
         <article>
-            <form action="modifier_client.php"><input type="submit" value="Modifier"></form>
+            <form action="modifier_compte_client.php"><input type="submit" value="Modifier"></form>
             <form action="index.php"><input type="submit" value="Se déconnecter"></form>
         </article>
     </main>

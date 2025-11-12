@@ -4,7 +4,6 @@
 @layer theme {
   :root, :host {
     --color-vertFonce: #365452;
-    --color-vertClair: #588A87;
   }
 }
 @layer base {
@@ -161,8 +160,14 @@
   .relative {
     position: relative;
   }
+  .flex {
+    display: flex;
+  }
   .inline {
     display: inline;
+  }
+  .flex-row {
+    flex-direction: row;
   }
   .border {
     border-style: var(--tw-border-style);
@@ -171,9 +176,6 @@
   .border-2 {
     border-style: var(--tw-border-style);
     border-width: 2px;
-  }
-  .bg-vertClair {
-    background-color: var(--color-vertClair);
   }
   .bg-vertFonce {
     background-color: var(--color-vertFonce);
