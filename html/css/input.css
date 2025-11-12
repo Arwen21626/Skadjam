@@ -5,11 +5,12 @@
 
 @theme{
   --color-vertFonce: #365452;
-  --color-vertClair: #588A87;
+  --color-vertMoyen: #588A87;
+  --color-vertClair: #86D0CC;
   --color-beige: #E3D7CC;
   --color-rouge: #A70101;
-  --color-bleuClair: #E2F9FF;
-  --color-turquoise: #86D0CC;
+  --color-bleu: #E2F9FF;
+  
 
 }
 
