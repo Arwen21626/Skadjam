@@ -1,11 +1,16 @@
-@tailwind base;
-@tailwind components;
+@import "tailwindcss";
 @tailwind utilities;
 @reference "tailwindcss";
 
 
-/* CSS personnalisé */
-.btn-special {
-  @apply py-2;
+@theme{
+  --color-vertFonce: #365452;
+  --color-vertMoyen: #588A87;
+  --color-vertClair: #86D0CC;
+  --color-beige: #E3D7CC;
+  --color-rouge: #A70101;
+  --color-bleu: #E2F9FF;
+  
+
 }
 

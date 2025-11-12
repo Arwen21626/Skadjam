@@ -1,4 +1,4 @@
-<?php include('../../connections_params.php');
+<?php
 include('../../01_premiere_connexion.php');
 const PAGE_SIZE = 3;?>
 
