@@ -15,6 +15,7 @@
     <?php require "../../php/structure/navbar_front.php"; ?>
     <main>
         <?php
+            // Connexion à la session
             $id = (int) $_SESSION['id_compte'];
 
             try{
