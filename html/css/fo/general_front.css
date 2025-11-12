@@ -438,7 +438,7 @@ footer a {
         padding: 0;
     }
 
-    article h3{
+    article>h3{
         margin-left: 2em;
     }
 }
