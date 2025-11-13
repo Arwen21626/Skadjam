@@ -438,27 +438,26 @@ footer a {
         padding: 0;
     }
 
+    main>section>div:first-child{
+        display: flex;
+    }
+
     article>h3{
         margin-left: 2em;
     }
 
-    main>section{
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-    }
-
-    main>section>div{
-        display: flex;
-        flex-direction: column;
-    }
-
-    main>section>div>h4{
+    main>section>div>h3{
         color: #365452;
+        position: relative;
+        top: 5px;
     }
 
-    main>section>div>h3, main>section>div>h4, main>section>div>p{
-        margin: 0.1em 0;
+    main>section>div>h2, main>section>div>h3{
+        margin: 0.1em 1em 0.1em 0;
+    }
+
+    main>section>div>p{
+        margin: 1em;
     }
 }
 
