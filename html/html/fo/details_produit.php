@@ -52,9 +52,9 @@
     <main>
         <!-- Section Description -->
         <section>
-            <article> <!-- Titrage -->
+            <article class="flex-col"> <!-- Titrage -->
                 <h3> <?php echo $libelleProd; ?></h3>
-                <p>Catégorie : <?php echo $libelleCat; ?></p>
+                <p class="ml-4">Catégorie : <?php echo $libelleCat; ?></p>
             </article>
             
             <article>
