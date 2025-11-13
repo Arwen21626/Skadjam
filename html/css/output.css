@@ -4,7 +4,8 @@
 @layer theme {
   :root, :host {
     --color-vertFonce: #365452;
-    --color-vertClair: #588A87;
+    --color-vertClair: #86D0CC;
+    --color-rouge: #A70101;
   }
 }
 @layer base {
@@ -161,8 +162,77 @@
   .relative {
     position: relative;
   }
-  .inline {
-    display: inline;
+  .m-2 {
+    margin: calc(var(--spacing, 0.25rem) * 2);
+  }
+  .mt-2 {
+    margin-top: calc(var(--spacing, 0.25rem) * 2);
+  }
+  .mt-4 {
+    margin-top: calc(var(--spacing, 0.25rem) * 4);
+  }
+  .mt-6 {
+    margin-top: calc(var(--spacing, 0.25rem) * 6);
+  }
+  .mr-10 {
+    margin-right: calc(var(--spacing, 0.25rem) * 10);
+  }
+  .mb-2 {
+    margin-bottom: calc(var(--spacing, 0.25rem) * 2);
+  }
+  .mb-4 {
+    margin-bottom: calc(var(--spacing, 0.25rem) * 4);
+  }
+  .mb-7 {
+    margin-bottom: calc(var(--spacing, 0.25rem) * 7);
+  }
+  .ml-5 {
+    margin-left: calc(var(--spacing, 0.25rem) * 5);
+  }
+  .ml-10 {
+    margin-left: calc(var(--spacing, 0.25rem) * 10);
+  }
+  .ml-px {
+    margin-left: 1px;
+  }
+  .flex {
+    display: flex;
+  }
+  .h-5 {
+    height: calc(var(--spacing, 0.25rem) * 5);
+  }
+  .w-5 {
+    width: calc(var(--spacing, 0.25rem) * 5);
+  }
+  .w-64 {
+    width: calc(var(--spacing, 0.25rem) * 64);
+  }
+  .cursor-pointer {
+    cursor: pointer;
+  }
+  .flex-col {
+    flex-direction: column;
+  }
+  .flex-row {
+    flex-direction: row;
+  }
+  .flex-wrap {
+    flex-wrap: wrap;
+  }
+  .items-center {
+    align-items: center;
+  }
+  .items-start {
+    align-items: flex-start;
+  }
+  .justify-around {
+    justify-content: space-around;
+  }
+  .justify-between {
+    justify-content: space-between;
+  }
+  .justify-center {
+    justify-content: center;
   }
   .border {
     border-style: var(--tw-border-style);
@@ -178,8 +248,14 @@
   .bg-vertFonce {
     background-color: var(--color-vertFonce);
   }
+  .text-rouge {
+    color: var(--color-rouge);
+  }
   .underline {
     text-decoration-line: underline;
+  }
+  .underline\! {
+    text-decoration-line: underline !important;
   }
 }
 @property --tw-border-style {
