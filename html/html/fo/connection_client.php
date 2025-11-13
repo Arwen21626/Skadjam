@@ -4,10 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Connection client</title>
-
-    <link rel="stylesheet" type="text/css" href="../../css/fo/general_front.css">
     
-    <?php //phpinfo();?>
+    <?php require_once(__DIR__ . '/../../php/structure/head_front.php');?>
     <style>
 
     main section{
@@ -69,7 +67,7 @@
 </head>
 <body>
     <?php 
-    include ("../../php/header_front.php"); 
+    include(__DIR__ . '../../php/structure/header_front.php');
     require_once("../../php/verification_formulaire.php");
     ?>
 
@@ -77,17 +75,18 @@
     
     if(isset($_POST['mail']) && isset($_POST['mdp'])){
         try{
-            echo "<pre>";
-            echo 'mot de passe : '.$_POST['mdp']."\n";
-            echo "<pre>";
-
             if(verifMotDePasse($_POST['mdp'])){
                 echo "<pre>";
-                echo "mot de passe bon";
+                echo "format bon";
+                foreach($dbh->query('SELECT * from sae3_skadjam._compte', PDO::FETCH_ASSOC) as $row) {
+                    echo "<pre>";
+                    echo $row['mot_de_passe'];
+                    if($row['mot_de_pass'])
+                    echo "</pre>";
+                    
+                }
+                $dbh = null;
                 echo "<pre>";
-            }
-            else{
-                echo 'mot de passe pas bon';
             }
         }
         catch(PDOException $e){
@@ -103,6 +102,8 @@
 
         <section>
             <h3>Connexion</h3>
+
+            
 
             <form action="./connection_client.php" method="post">
 

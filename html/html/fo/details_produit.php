@@ -1,6 +1,41 @@
 <?php 
     include("html/01_premiere_connexion.php");
     
+    $idProd = $_GET["idProduit"]; // Récupère l'id du produit qu'on affiche
+
+    // Requête pour récupérer les infos du produit
+    foreach($dbh->query("SELECT *, est_masque::char AS est_masque_char
+                         FROM sae3_skadjam._produit pr
+                         WHERE pr.id_produit = $idProd"
+                        , PDO::FETCH_ASSOC) as $row){
+        $produit = $row;
+    }
+
+    // Requête pour récupérer les infos de la catégorie du produit
+    foreach ($dbh->query("SELECT libelle_categorie
+                                      FROM sae3_skadjam._categorie ca
+                                      WHERE ca.id_categorie =" . $produit["id_categorie"], 
+                                      PDO::FETCH_ASSOC) as $row) {
+        $categorie = $row;
+    };
+
+    // Requête pour récupérer les infos du vendeur du produit
+    foreach ($dbh->query("  SELECT *
+                            FROM sae3_skadjam._vendeur ven
+                            WHERE ven.id_compte =" . $produit["id_vendeur"], 
+                                      PDO::FETCH_ASSOC) as $row) {
+        $vendeur = $row;
+    };
+    
+    // Définition des variables PHP pour récupérer chaque donnée nécessaire
+    $libelleProd = $produit["libelle_produit"];
+    $libelleCat = $categorie["libelle_categorie"];
+    $prixTTC = $produit["prix_ttc"];
+    $produitMasque = $produit["est_masque_char"];
+    $nomVendeur = $vendeur["raison_sociale"];
+
+    // Affichage test
+    print_r($nomVendeur);
 ?>
 
 
@@ -8,7 +43,7 @@
 <html lang="fr">
 <head>
     <?php require("html/php/structure/head_front.php") ?>
-    <title>"Nom du produit"</title>
+    <title> <?php echo $produit["libelle_produit"] ?></title>
 </head>
 <body>
     <?php require("html/php/structure/header_front.php"); ?>
@@ -18,16 +53,26 @@
         <!-- Section Description -->
         <section>
             <article> <!-- Titrage -->
-                <h3>"Nom du produit"</h3>
-                <p>Catégorie : "Catégorie du produit"</p>
+                <h3> <?php echo $libelleProd; ?></h3>
+                <p>Catégorie : <?php echo $libelleCat; ?></p>
             </article>
             
             <article>
                 <img src="#jsp" alt="jsp">
                 <div>
-                    <h4>"Prix"€</h4>
-                    <p>"Disponibilité"</p>
-                    <p>Vendu par "Nom du vendeur"</p>
+                    <h4> <?php echo $prixTTC ?>€</h4>
+                    <p>
+                        <?php 
+                            if ($produitMasque === "f") { // Pour false, le produit n'est pas masqué donc il est disponible
+                                echo "Disponible";
+                            }
+                            else if ($produitMasque === "t") {
+                                echo "Indisponible";
+                            }
+
+                        ?>
+                    </p>
+                    <p>Vendu par <?php echo $nomVendeur ?></p>
                     <button>Ajouter au panier</button>
                 </div>
             </article>

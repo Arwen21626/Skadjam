@@ -23,7 +23,7 @@
             <h3>Article 1 : Les mentions légales</h3>
             <p>L'édition du site Alizon.bzh est assurée par la Société SARL COBREC au capital de 0 euros, immatriculée au RCS de Lannion sous le numéro 508 977 303, dont le siège social est situé au 7 Rue Édouard Branly, 22300 Lannion.</p>
             <p>Numéro de téléphone : 02 96 46 93 00</p>
-            <p>Adresse e-mail : armel.kermanach@etudiant.univ-rennes.fr</p>
+            <p>Adresse e-mail : cobrec@mail.bzh</p>
             <p>Le Directeur de la publication est : Armel KERMANAC'H</p>
             <br>
             <p>L'hébergeur du site Alizon.bzh est la société COBREC, dont le siège social est situé au 7 Rue Édouard Branly, 22300 Lannion, avec le numéro de téléphone : 02 96 46 93 00.</p>

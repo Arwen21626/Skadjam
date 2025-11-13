@@ -4,7 +4,7 @@ INSERT INTO _categorie (libelle_categorie) VALUES ('Alimentaire');
 
 INSERT INTO _tva (nom_tva, pourcentage_tva) VALUES ('Plus petite', 0.05);
 
-INSERT INTO _compte (nom_compte, prenom_compte, adresse_mail, motDePasse, numero_telephone, bloque)
+INSERT INTO _compte (nom_compte, prenom_compte, adresse_mail, mot_de_passe, numero_telephone, bloque)
 VALUES
     ('blbl', 'Blbl', 'adresse_mail@compte.1', 'mot_de_passe_1', '+33123456789', false),
     ('blbl', 'Senior', 'adresse_mail@compte.2', 'mot_de_passe_2', '+33123456789', false),

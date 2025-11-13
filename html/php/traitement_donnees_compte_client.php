@@ -12,7 +12,7 @@ if(isset($_POST['pseudo']) && isset($_POST['naissance']) && isset($_POST['nom'])
         $dbh = new PDO("$driver:host=$server;dbname=$dbname", $user, $pass); 
         $dbh->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC);
 
-        // Vérification que toutes les données saisie sont correcte
+        // Vérification que toutes les données commune à la création et à la modification d'un compte client sont correcte
         if (verifPseudo($_POST['pseudo']) && verifAge($_POST['naissance']) && verifNomPrenom($_POST['nom']) && verifNomPrenom($_POST['prenom']) && verifTelephone($_POST['telephone']) && (verifMail($_POST['mail']))){
             // Traitement des données saisie
             $nom = htmlentities(formatPrenom($_POST['nom']));
@@ -22,10 +22,13 @@ if(isset($_POST['pseudo']) && isset($_POST['naissance']) && isset($_POST['nom'])
             $pseudo = htmlentities($_POST['pseudo']);
             $naissance = htmlentities(formatDate($_POST['naissance']));
             
+            // S'il y a eu une erreur lors de l'execution
+            $erreur = false;
+
             // Si le visiteur est entrain de créer son compte
             if (isset($_POST['mdp']) && isset($_POST['verifMdp'])){
                 if(verifMotDePasse($_POST['mdp']) && confirmationMotDePasse($_POST['mdp'], $_POST['verifMdp']) && mailUnique($_POST['mail'])){
-                    $mdp = password_hash($_POST['mdp'], PASSWORD_DEFAULT);
+                    $mdp = password_hash(htmlentities($_POST['mdp']), PASSWORD_DEFAULT);
 
                     $aujourdhui = date('d/m/Y');
                     
@@ -58,14 +61,20 @@ if(isset($_POST['pseudo']) && isset($_POST['naissance']) && isset($_POST['nom'])
                 }
                 // Gestion des erreur spécifique à la création d'un compte
                 elseif (!verifMotDePasse($_POST['mdp'])){
+                    $erreur = true;
+                    echo 'Erreur : ';
                     echo "le format de votre mot de passe n'est pas correct. ";
                     echo "il doit contenir au minimum une majuscule, une minuscule, un chiffre et un caractère spéciale (parmi : - @ _ # $ . £ ! ? % * + : ; , & ~ | ^) et 10 caractères";
                 }
                 elseif (!confirmationMotDePasse($_POST['mdp'], $_POST['verifMdp'])){
+                    $erreur = true;
+                    echo 'Erreur : ';
                     echo "le mot de passe de vérification ne correspond pas à votre mot de passe.";
                     echo "il doit être identique à votre mot de passe.";
                 }
                 elseif(!mailUnique($_POST['mail'])){
+                    $erreur = true;
+                    echo 'Erreur : ';
                     echo "le mail saisie existe déjà. ";
                 }
                     
@@ -73,31 +82,96 @@ if(isset($_POST['pseudo']) && isset($_POST['naissance']) && isset($_POST['nom'])
             // Si le client est entrain de modifier son compte
             else{
                 $idCompte = $_SESSION['idCompte'];
+                $idCompte = 3; // à retirer
+
+                // Récupération de l'ancien email
                 foreach($dbh->query("SELECT c.adresse_mail 
                                         FROM sae3_skadjam._compte c 
                                         WHERE id_compte = $idCompte", PDO::FETCH_ASSOC) as $ligne){
                     $ancienMail = $ligne['adresse_mail'];
                 }
+                
+                // Vérification de l'email et de l'adresse
+                if ((mailUnique($mail) || $ancienMail === $mail)){
 
-                if (mailUnique($mail) || $ancienMail === $mail){
+                    // Modification du compte
                     $modifCompte = $dbh->prepare("UPDATE sae3_skadjam._compte
-                                                    SET nom_compte = '$nom', prenom_compte = '$prenom', adresse_mail = '$mail', numero_telephone = '$telephone'");
-                    $modifClient = $dbh->prepare("UPDATE sae3_skadjam._client
-                                                    SET pseudo = '$pseudo', date_naissance = '$naissance'");
+                                                    SET nom_compte = '$nom', prenom_compte = '$prenom', adresse_mail = '$mail', numero_telephone = '$telephone'
+                                                    WHERE id_compte = $idCompte");
 
+                    $modifClient = $dbh->prepare("UPDATE sae3_skadjam._client
+                                                    SET pseudo = '$pseudo', date_naissance = '$naissance'
+                                                    WHERE id_compte = $idCompte");
                     $modifCompte->execute();
                     $modifClient->execute();
+
+                    // Modification des adresses
+                    $compteur = 1;
+                    foreach($dbh->query("SELECT h.id_adresse
+                                            FROM sae3_skadjam._habite h
+                                            WHERE id_compte = $idCompte
+                                            ORDER BY id_adresse ASC", PDO::FETCH_ASSOC) as $ligne){
+                        if(isset($_POST['adresse'][$compteur]['adressePostal']) && isset($_POST['adresse'][$compteur]['ville']) && isset($_POST['adresse'][$compteur]['codePostal'])){
+
+                            $numRue = htmlentities(tabAdresse($_POST['adresse'][$compteur]['adressePostal'])[0]);
+                            $nomRue = htmlentities(tabAdresse($_POST['adresse'][$compteur]['adressePostal'])[2]);
+                            $complement = htmlentities(tabAdresse($_POST['adresse'][$compteur]['adressePostal'])[1]);
+                            $numBat = htmlentities($_POST['adresse'][$compteur]['batiment']);
+                            $numApart = htmlentities($_POST['adresse'][$compteur]['apart']);
+                            $interphone = htmlentities($_POST['adresse'][$compteur]['interphone']);
+                            $codePostal = htmlentities($_POST['adresse'][$compteur]['codePostal']);
+                            $ville = htmlentities($_POST['adresse'][$compteur]['ville']);
+
+
+                            if (verifAdresse($numRue.' '.$complement.' '.$nomRue) && verifVille($ville) && verifCp($codePostal)){
+                            
+                                $idAdresse = $ligne['id_adresse'];
+                                $modifAdresse = $dbh->prepare("UPDATE sae3_skadjam._adresse
+                                                                SET numero_rue = $numRue, numero_bat = '$numBat', numero_appart = '$numApart', code_interphone = '$interphone', code_postal = $codePostal, complement_adresse = '$complement', ville = '$ville', adresse_postale = '$nomRue'
+                                                                WHERE id_adresse = $idAdresse");
+
+                                $modifAdresse->execute();
+                            }
+                            // Erreurs consernant le format de l'adresse
+                            elseif(!verifAdresse($numRue.' '.$complement.' '.$nomRue)){
+                                $erreur = true;
+                                echo "Erreur : sur l'adresse numéro $compteur, le format de l'adresse postale n'est pas correcte. ";
+                                echo "Exemple : 3 bis rue des camélia";
+                            }
+                            elseif(!verifVille($ville)){
+                                $erreur = true;
+                                echo "Erreur : sur l'adresse numéro $compteur, le format de la ville n'est pas correcte. ";
+                                echo "Elle ne peut contenir que des lettres, des espaces et des -";
+                            }
+                            elseif(!verifCp($codePostal)){
+                                $erreur = true;
+                                echo "Erreur : sur l'adresse numéro $compteur, le format du code postale n'est pas correcte. ";
+                                echo "Il doit contnire exactement 5 chiffres.";
+                            }
+                        }
+                        // erreur si l'un des champs obligatoire des adresses n'est pas rempli
+                        else{
+                            $erreur = true;
+                            echo "vous n'avez pas rempli tous les champs obligatoires de l'adresse numéro $compteur, elle n'a donc pas été modifier.";
+                        }
+                        $compteur++;
+                    }
                 }
-                else{
-                    echo "le mail saisie existe déjà. ";
+                // Erreur consernant l'unicité du mail
+                elseif(!mailUnique($mail) || !($ancienMail === $mail)){
+                    $erreur = true;
+                    echo "Erreur : le mail saisie existe déjà. ";
                 }
+                
             
             }
             // Fermer la connexion à la base de données
             $dbh = null;
 
             // Redirection vers la page d'accueil
-            // header("location: ../html/fo/index.php");
+            if (!$erreur){
+                header("location: ../html/fo/index.php");
+            }
         }
         // Messages d'erreurs si l'un des champs est mal rempli
         else{ 

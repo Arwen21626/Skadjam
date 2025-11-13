@@ -9,7 +9,7 @@ CREATE TABLE sae3_skadjam._compte (
     nom_compte CHARACTER VARYING(100) NOT NULL,
     prenom_compte CHARACTER VARYING(100) NOT NULL,
     adresse_mail CHARACTER VARYING(150) NOT NULL UNIQUE,
-    motDePasse CHARACTER VARYING(100) NOT NULL,
+    mot_de_passe CHARACTER VARYING(100) NOT NULL,
     numero_telephone CHARACTER(12) NOT NULL,
     bloque BOOLEAN NOT NULL
     
