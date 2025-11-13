@@ -4,7 +4,7 @@
 @layer theme {
   :root, :host {
     --color-vertFonce: #365452;
-    --color-vertClair: #86D0CC;
+    --color-beige: #E3D7CC;
     --color-rouge: #A70101;
   }
 }
@@ -234,8 +234,8 @@
   .justify-center {
     justify-content: center;
   }
-  .flex-row {
-    flex-direction: row;
+  .rounded-2xl {
+    border-radius: var(--radius-2xl, 1rem);
   }
   .border {
     border-style: var(--tw-border-style);
@@ -245,8 +245,22 @@
     border-style: var(--tw-border-style);
     border-width: 2px;
   }
+  .border-5 {
+    border-style: var(--tw-border-style);
+    border-width: 5px;
+  }
+  .border-solid {
+    --tw-border-style: solid;
+    border-style: solid;
+  }
+  .border-beige {
+    border-color: var(--color-beige);
+  }
   .bg-vertFonce {
     background-color: var(--color-vertFonce);
+  }
+  .pl-3 {
+    padding-left: calc(var(--spacing, 0.25rem) * 3);
   }
   .text-rouge {
     color: var(--color-rouge);
