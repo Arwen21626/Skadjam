@@ -4,10 +4,6 @@ include __DIR__ . '/../../01_premiere_connexion.php';
 include(__DIR__ . '/../../php/modification_variable.php');
 include(__DIR__ . '/../../php/verification_formulaire.php');
 
-//include("html/01_premiere_connexion.php");
-//include("html/php/modification_variable.php");
-//include("html/php/verification_formulaire.php");
-
 /* initialiser toutes les variables avant l'affichage de la page */
     
     $nom = '';

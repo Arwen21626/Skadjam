@@ -4,17 +4,13 @@ include __DIR__ . '/../../01_premiere_connexion.php';
 if (isset($_POST["mail"])){
     $mail = $_POST["mail"];
     $mdp = $_POST["mdp"];
-    echo "avant prepare";
     $stmt = $dbh->prepare("SELECT c.motdepasse, c.id_compte FROM sae3_skadjam._compte c inner join sae3_skadjam._vendeur v on c.id_compte = v.id_compte where adresse_mail = ?");
-    echo "avant exec";
     $stmt->execute([$mail]);
-    echo "  >$mail = $mdp ";
-    $passHash = $stmt->fetchColumn();
-    echo "  >>$mail = $mdp ||  $passHash";
+    $passHash = $stmt->fetchColumn(0);
+    $idCompte = $stmt->fetchColumn(1);
     $passCorrect = password_verify($mdp, $passHash);
-    echo "  >>>$mail = $mdp | correct = $passCorrect ||  $passHash";
-    if ($stmt->execute([$mail, $mdp]) === 1){
-        $id_compte = $stmt->fetchColumn();
+
+    if ($passCorrect){
         header("location:index_vendeur.php");
     }
 }
