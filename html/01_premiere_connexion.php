@@ -5,8 +5,7 @@
 //echo __DIR__;
 include __DIR__ . '../../connections_params.php';
 try {
-    $dbh = new PDO("$driver:host=$server;port=$port;dbname=$dbname", 
-            $user, $pass);
+    $dbh = new PDO("$driver:host=$server;port=$port;dbname=$dbname", $user, $pass);
     
     // foreach($dbh->query('SELECT * from sae3_skadjam._vendeur', PDO::FETCH_ASSOC) as $row) {
     //     echo "<pre>";

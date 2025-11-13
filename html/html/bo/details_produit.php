@@ -1,4 +1,5 @@
-<?php 
+<?php
+
     include('../../01_premiere_connexion.php');
 
     //Récupération des données sur le produit ainsi que la photo

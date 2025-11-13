@@ -1,7 +1,7 @@
 <?php
-include(__DIR__ . '/../../../connections_params.php');
-include(__DIR__ . '/../../01_premiere_connexion.php');
-require_once(__DIR__ . '/../../php/verification_formulaire.php');
+
+include('../../01_premiere_connexion.php');
+require_once('../../php/verification_formulaire.php');
 
 $tab_categories = [];
 $typePhoto = $_FILES['photo']['type'];
@@ -62,8 +62,8 @@ if (isset($_POST['categorie']) && isset($_POST['nom']) && isset($_POST['prix']) 
     <?php include('../../php/structure/navbar_back.php');?>
     <main>
         <h2>Création d'un produit</h2>
-        <form class="grid grid-cols-1 grid-rows-5" action="creation_produit.php" method="post">
-            <select class="col-end-1 row-end-1 bg-beige rounded m-2 p-2" name="categorie" id="categorie" required>
+        <form class="grid grid-cols-[30/100-70/100] grid-rows-[10/100-15/100-15/100-15/100-auto]  w-11/12 self-center" action="creation_produit.php" method="post">
+            <select class="col-end-1 row-end-1 bg-beige rounded m-2 p-2 w-40" name="categorie" id="categorie" required>
                 <option value="0">Categorie</option>
                 <?php foreach ($tab_categories as $categorie) {?>
                     <option value="<?php echo $categorie['id_categorie']?>"><?php echo $categorie['libelle_categorie']?></option>
@@ -71,10 +71,14 @@ if (isset($_POST['categorie']) && isset($_POST['nom']) && isset($_POST['prix']) 
                 
             </select>
 
-            <div class="row-start-1 row-span-3 flex flex-col m-2 p-2">
-                <input type="file" name="photo" id="photo" required>
-                <label for="photo">Ajouter des images</label>
+            <div class="row-start-1 row-span-3 m-2 p-2 grid grid-rows-[2/3-1/3] items-center">
+                <input type="file" id="photo" name="photo" class="hidden" required>
+                <!-- label qui agit comme bouton -->
+                <label for="photo" class="bg-beige w-60 h-60 rounded-xl " style="background-image: url('../../images/logo/bootstrap_icon/image.svg'); background-repeat: no-repeat; background-position: center; background-size: 60%;"></label>
+                <p>Ajouter une image</p>
+
             </div>
+            
 
             <div class="col-start-1 row-start-1 flex flex-col w-200 m-2 p-2">
                 <label for="nom">Nom produit *:</label>
@@ -104,18 +108,18 @@ if (isset($_POST['categorie']) && isset($_POST['nom']) && isset($_POST['prix']) 
                 </div>
             </div>
             
-            <div class="row-start-4 col-span-2 flex flex-col m-2 p-2 justify-center">
+            <div class="row-start-4 col-span-2 flex flex-col m-2 p-2 ">
                 <label for="nom">Description *:</label>
-                <input class="border-4 border-beige rounded-2xl w-200" type="textarea" name="description" id="description" required>
+                <textarea class="border-4 border-beige rounded-2xl w-3/4 self-center" name="description" id="description" cols="100" rows="10" required></textarea>
             </div>
             
             <div class="row-start-5 col-span-2 flex flex-row justify-around m-4">
-                <input class="border-2 border-vertFonce rounded-2xl w-96" type="button" value="Retour" href="">
-                <input class="border-2 border-vertFonce rounded-2xl w-96 " type="submit" value="Valider" href="">
+                <button class="border-2 border-vertFonce rounded-2xl w-40 h-14"><a href="../bo/index_vendeur.php">Retour</a></button>
+                <input class="border-2 border-vertFonce rounded-2xl w-40 h-14" type="submit" value="Valider" href="../bo/details_produit.php">
             </div>
         </form>
     </main>
-    <?php include(__DIR__ . '/../../php/structure/footer_back.php');?>
+    <?php include('../../php/structure/footer_back.php');?>
 </body>
 </html>
 
