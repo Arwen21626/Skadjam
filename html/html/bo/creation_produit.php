@@ -1,7 +1,7 @@
 <?php
-include('../../../connections_params.php');
-include('../../01_premiere_connexion.php');
-require_once('../../php/verification_formulaire.php');
+include(__DIR__ . '/../../../connections_params.php');
+include(__DIR__ . '/../../01_premiere_connexion.php');
+require_once(__DIR__ . '/../../php/verification_formulaire.php');
 
 $tab_categories = [];
 $typePhoto = $_FILES['photo']['type'];
@@ -59,7 +59,8 @@ if (isset($_POST['categorie']) && isset($_POST['nom']) && isset($_POST['prix']) 
     <link rel="stylesheet" href="../../css/bo/general_back.css">
 </head>
 <body>
-    <?php include('../../php/structure/header_back.php');?>
+    <?php include(__DIR__ . '/../../php/structure/header_back.php');?>
+    <?php include(__DIR__ . '/../../php/structure/navbar_back.php');?>
     <main>
         <h2>Création d'un produit</h2>
         <form action="creation_produit.php" method="post">
@@ -97,7 +98,7 @@ if (isset($_POST['categorie']) && isset($_POST['nom']) && isset($_POST['prix']) 
             <input class="border-2 bg-vertFonce" type="submit" value="Valider">
         </form>
     </main>
-    <?php include('../../php/structure/footer_back.php');?>
+    <?php include(__DIR__ . '/../../php/structure/footer_back.php');?>
 </body>
 </html>
 

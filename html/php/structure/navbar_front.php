@@ -13,7 +13,7 @@
                 <div class="logo_nav_img"></div>
             </a>
 
-            <a href="#A modifier">Mes commandes</a>
+            <a href="#A modifier">Commandes</a>
         </div>
             
         <div class="logo_recherche logo_nav_div">
@@ -29,7 +29,7 @@
                 <div class="logo_nav_img"></div>
             </a>
 
-            <a href="#A modifier">Votre panier</a>
+            <a href="#A modifier">Panier</a>
         </div>
             
         <!-- A changer plus tard en menu burger avec la dernière icône -->
@@ -38,7 +38,7 @@
                 <div class="logo_nav_img"></div>
             </a>
 
-            <a href="#A modifier">Mon Profil</a>
+            <a href="#A modifier">Profil</a>
         </div>
             
     </section>

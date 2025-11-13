@@ -13,7 +13,7 @@
                 <div class="logo_nav_img"></div>
             </a>
 
-            <a href="#A modifier">Mes commandes</a>
+            <a href="#A modifier">Commandes</a>
         </div>
 
         <div class="logo_creer_produit logo_nav_div">
@@ -30,7 +30,7 @@
                 <div class="logo_nav_img"></div>
             </a>
 
-            <a href="#A modifier">Mon Profil</a>
+            <a href="#A modifier">Profil</a>
         </div>
 
     </section>

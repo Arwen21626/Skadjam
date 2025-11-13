@@ -1,5 +1,7 @@
 <?php
     session_start();
+    // à retirer
+    $_SESSION["idCompte"] = 1;
     require_once "../../connections_params.php";
 ?>
 <!DOCTYPE html>
@@ -11,11 +13,12 @@
     <title>Mon compte</title>
 </head>
 <body>
-    <?php require "../../php/structure/header_front.php" ?>
+    <?php require "../../php/structure/header_front.php"; ?>
     <?php require "../../php/structure/navbar_front.php"; ?>
     <main>
         <?php
-            $id = (int) $_SESSION['id_compte'];
+            // Connexion à la session
+            $id = (int) $_SESSION["idCompte"];
 
             try{
                 $dbh = new PDO("$driver:host=$server;dbname=$dbname",$user,$pass);
@@ -23,30 +26,37 @@
                 $dbh->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC);
 
                 // Récupérer toutes les infos du client
-                $infosClient = $dbh->prepare('SELECT id_compte, nom_compte, prenom_compte, adresse_mail, numero_telephone FROM sae3_skadjam._compte WHERE id_compte = :id_compte LIMIT 1');
-                $infosClient->execute([':id_compte' => $id]);
-                $client = $infosClient->fetch(PDO::FETCH_ASSOC);
+                foreach($dbh->query("SELECT * FROM sae3_skadjam._compte c INNER JOIN sae3_skadjam._client cli ON c.id_compte = cli.id_compte WHERE c.id_compte = $id", PDO::FETCH_ASSOC) as $client){
+                    $nom = $client['nom_compte'];
+                    $prenom = $client['prenom_compte'];
+                    $pseudo = $client['pseudo'];
+                    $mail = $client['adresse_mail'];
+                    $naissance = $client['date_naissance'];
+                    $telephone = $client['numero_telephone'];
+                }
 
                 $dbh = null;
             }catch(PDOException $e){
                 print "Erreur : " . $e->getMessage() . "<br/>";
             }
         ?>
-        <h2>Mon compte</h2>
+        <h2>Profil</h2>
+        <section>
+            <div>
+                <h3><?php echo $pseudo ?></h3>
+                <h4><?php echo $prenom ?> <?php echo $nom ?></h4>
+            </div>
+            <div>
+                <p><?php echo $naissance ?></p>
+                <p><?php echo $telephone ?></p>
+                <p><?php echo $mail ?></p>
+            </div>
+        </section>
         <article>
-            <section class="nomComplet">
-                <img src="<?php echo $photo ?>" alt="Photo de profil" width="50" height="50">
-                <h3><?php echo $client['nomCompte'] ?></h3>
-                <h3><?php echo $client['prenomCompte'] ?></h3>
-            </section>
-            <h3><?php echo $client['numeroTelephone'] ?></h3>
-            <h3><?php echo $client['adresseMail'] ?></h3>
-        </article>
-        <article>
-            <form action="modifier_client.php"><input type="submit" value="Modifier"></form>
+            <form action="modifier_compte_client.php"><input type="submit" value="Modifier"></form>
             <form action="index.php"><input type="submit" value="Se déconnecter"></form>
         </article>
     </main>
-    <?php require "../../php/structure/footer_front.php" ?>
+    <?php require "../../php/structure/footer_front.php"; ?>
 </body>
 </html>

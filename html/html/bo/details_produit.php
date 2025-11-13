@@ -12,11 +12,10 @@
                             on ph.id_photo = m.id_photo
                         inner join sae3_skadjam._categorie c
                             on c.id_categorie = pr.id_categorie 
-                        where pr.id_produit = $idProd", PDO::FETCH_ASSOC) as $row){
+                        where pr.id_produit = $idProd"
+                        , PDO::FETCH_ASSOC) as $row){
         $produit = $row;
     }
-
-    print_r($produit);
 ?>
 
 <!DOCTYPE html>

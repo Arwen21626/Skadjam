@@ -241,12 +241,12 @@ footer a {
         margin-bottom: 1em;
     }
 
-    article p {
+    article>p {
         margin: 0;
         padding: 0;
     }
 
-    article h3{
+    article>h3{
         margin-left: 1em;
     }
 }
@@ -433,13 +433,32 @@ footer a {
         margin-bottom: 2em;
     }
 
-    article p {
+    article>p {
         margin: 0;
         padding: 0;
     }
 
-    article h3{
+    article>h3{
         margin-left: 2em;
+    }
+
+    main>section{
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    main>section>div{
+        display: flex;
+        flex-direction: column;
+    }
+
+    main>section>div>h4{
+        color: #365452;
+    }
+
+    main>section>div>h3, main>section>div>h4, main>section>div>p{
+        margin: 0.1em 0;
     }
 }
 
