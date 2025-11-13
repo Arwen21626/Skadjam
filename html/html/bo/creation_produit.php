@@ -55,47 +55,64 @@ if (isset($_POST['categorie']) && isset($_POST['nom']) && isset($_POST['prix']) 
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Création d'un produit</title>
     <link rel="stylesheet" href="../../css/output.css">
-    <link rel="stylesheet" href="../../css/bo/creation_produit.css">
     <link rel="stylesheet" href="../../css/bo/general_back.css">
 </head>
 <body>
-    <?php include(__DIR__ . '/../../php/structure/header_back.php');?>
-    <?php include(__DIR__ . '/../../php/structure/navbar_back.php');?>
+    <?php include('../../php/structure/header_back.php');?>
+    <?php include('../../php/structure/navbar_back.php');?>
     <main>
         <h2>Création d'un produit</h2>
-        <form action="creation_produit.php" method="post">
-            <select name="categorie" id="categorie" required>
+        <form class="grid grid-cols-1 grid-rows-5" action="creation_produit.php" method="post">
+            <select class="col-end-1 row-end-1 bg-beige rounded m-2 p-2" name="categorie" id="categorie" required>
                 <option value="0">Categorie</option>
                 <?php foreach ($tab_categories as $categorie) {?>
                     <option value="<?php echo $categorie['id_categorie']?>"><?php echo $categorie['libelle_categorie']?></option>
                 <?php } ?>
                 
             </select>
+
+            <div class="row-start-1 row-span-3 flex flex-col m-2 p-2">
+                <input type="file" name="photo" id="photo" required>
+                <label for="photo">Ajouter des images</label>
+            </div>
+
+            <div class="col-start-1 row-start-1 flex flex-col w-200 m-2 p-2">
+                <label for="nom">Nom produit *:</label>
+                <input class=" border-4 border-beige rounded-2xl" type="text" name="nom" id="nom" required>
+            </div>
+
+            <div class="col-start-1 row-start-2 flex flex-row justify-between w-200 m-2 p-2">
+                <div class="flex flex-col">
+                    <label for="prix">Prix *:</label>
+                    <input class="border-4 border-beige rounded-2xl w-75" type="number" name="prix" id="prix" min="0.0" step="0.5" required>
+                </div>
+                <div class="flex flex-col">
+                    <label for="qteStock">Quantité en stock :</label>
+                    <input class="border-4 border-beige rounded-2xl w-75" type="number" name="qteStock" id="qteStock" min="0" required>
+                </div>
+            </div>
+
+            <div class="row-start-3 col-span-2 flex flex-row justify-around m-2 p-2">
+                <div>
+                    <label for="mettreEnLigne">Mettre en ligne</label>
+                    <input type="checkbox" name="mettreEnLigne" id="mettreEnLigne">
+                </div>
             
-            <input type="file" name="photo" id="photo" required>
-            <label for="photo">Ajouter des images</label>
-
-            <label for="nom">Nom produit *:</label>
-            <input type="text" name="nom" id="nom" required>
-
-            <label for="prix">Prix *:</label>
-            <input type="number" name="prix" id="prix" min="0.0" step="0.5" required>
-
-            <label for="qteStock">Quantité en stock :</label>
-            <input type="number" name="qteStock" id="qteStock" min="0" required>
-
-            <label for="mettreEnLigne">Mettre en ligne</label>
-            <input type="checkbox" name="mettreEnLigne" id="mettreEnLigne">
-
-            <label for="mettreEnPromotion">Mettre en promotion</label>
-            <input type="checkbox" name="mettreEnPromotion" id="mettreEnPromotion">
-
-
-            <label for="nom">Description *:</label>
-            <input type="text" name="description" id="description" required>
+                <div>
+                    <label for="mettreEnPromotion">Mettre en promotion</label>
+                    <input type="checkbox" name="mettreEnPromotion" id="mettreEnPromotion">
+                </div>
+            </div>
             
-            <input type="button" value="Retour" href="">
-            <input class="border-2 bg-vertFonce" type="submit" value="Valider">
+            <div class="row-start-4 col-span-2 flex flex-col m-2 p-2 justify-center">
+                <label for="nom">Description *:</label>
+                <input class="border-4 border-beige rounded-2xl w-200" type="textarea" name="description" id="description" required>
+            </div>
+            
+            <div class="row-start-5 col-span-2 flex flex-row justify-around m-4">
+                <input class="border-2 border-vertFonce rounded-2xl w-96" type="button" value="Retour" href="">
+                <input class="border-2 border-vertFonce rounded-2xl w-96 " type="submit" value="Valider" href="">
+            </div>
         </form>
     </main>
     <?php include(__DIR__ . '/../../php/structure/footer_back.php');?>

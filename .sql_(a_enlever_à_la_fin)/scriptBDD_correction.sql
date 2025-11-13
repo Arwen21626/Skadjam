@@ -9,7 +9,7 @@ CREATE TABLE sae3_skadjam._compte (
     nom_compte CHARACTER VARYING(100) NOT NULL,
     prenom_compte CHARACTER VARYING(100) NOT NULL,
     adresse_mail CHARACTER VARYING(150) NOT NULL UNIQUE,
-    motDePasse CHARACTER VARYING(100) NOT NULL,
+    mot_de_passe CHARACTER VARYING(100) NOT NULL,
     numero_telephone CHARACTER(12) NOT NULL,
     bloque BOOLEAN NOT NULL
     
@@ -556,7 +556,7 @@ ALTER TABLE sae3_skadjam._produit
 
 ALTER TABLE sae3_skadjam._vendeur
     ADD CONSTRAINT ch_vendeur_raison_social
-        CHECK (raison_sociale ~ '[a-zA-Z- 0-9]{1,}');
+        CHECK (raison_sociale ~ '[a-zA-Z0-9 -]{1,}');
 
 
 ALTER TABLE sae3_skadjam._vendeur
@@ -570,7 +570,7 @@ ALTER TABLE sae3_skadjam._vendeur
 
 ALTER TABLE sae3_skadjam._vendeur
     ADD CONSTRAINT ch_vendeur_denomination
-        CHECK (denomination ~ '[a-zA-Z- 0-9]{1,}');
+        CHECK (denomination ~ '[a-zA-Z0-9 -]{1,}');
 
 ALTER TABLE sae3_skadjam._remise
     ADD CONSTRAINT ch_remise_date_debut

@@ -1,6 +1,16 @@
 <?php 
     include("html/01_premiere_connexion.php");
     
+    $idProd = 1; 
+
+    foreach($dbh->query("SELECT *
+                         FROM sae3_skadjam._produit pr
+                         WHERE pr.id_produit = $idProd"
+                        , PDO::FETCH_ASSOC) as $row){
+        $produit = $row;
+    }
+
+    print_r($produit);
 ?>
 
 
@@ -18,7 +28,7 @@
         <!-- Section Description -->
         <section>
             <article> <!-- Titrage -->
-                <h3>"Nom du produit"</h3>
+                <h3> <?php echo $produit["libelle_produit"] ?></h3>
                 <p>Catégorie : "Catégorie du produit"</p>
             </article>
             
