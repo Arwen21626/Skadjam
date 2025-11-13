@@ -63,7 +63,7 @@ if (isset($_POST['categorie']) && isset($_POST['nom']) && isset($_POST['prix']) 
     <main>
         <h2>Création d'un produit</h2>
         <form class="grid grid-cols-1 grid-rows-5" action="creation_produit.php" method="post">
-            <select class="col-end-1 row-end-1 p-1 bg-beige rounded m-2 p-2" name="categorie" id="categorie" required>
+            <select class="col-end-1 row-end-1 bg-beige rounded m-2 p-2" name="categorie" id="categorie" required>
                 <option value="0">Categorie</option>
                 <?php foreach ($tab_categories as $categorie) {?>
                     <option value="<?php echo $categorie['id_categorie']?>"><?php echo $categorie['libelle_categorie']?></option>
