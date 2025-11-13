@@ -556,7 +556,7 @@ ALTER TABLE sae3_skadjam._produit
 
 ALTER TABLE sae3_skadjam._vendeur
     ADD CONSTRAINT ch_vendeur_raison_social
-        CHECK (raison_sociale ~ '[a-zA-Z- 0-9]{1,}');
+        CHECK (raison_sociale ~ '[a-zA-Z0-9 -]{1,}');
 
 
 ALTER TABLE sae3_skadjam._vendeur
@@ -570,7 +570,7 @@ ALTER TABLE sae3_skadjam._vendeur
 
 ALTER TABLE sae3_skadjam._vendeur
     ADD CONSTRAINT ch_vendeur_denomination
-        CHECK (denomination ~ '[a-zA-Z- 0-9]{1,}');
+        CHECK (denomination ~ '[a-zA-Z0-9 -]{1,}');
 
 ALTER TABLE sae3_skadjam._remise
     ADD CONSTRAINT ch_remise_date_debut

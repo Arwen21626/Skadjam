@@ -244,7 +244,7 @@ if (isset($_POST["nom"])){
         </form>
         <div class="flex flex-row flex-wrap justify-center m-2">
             <p class=" ml-px">Vous avez déjà un compte ? </p>
-            <a href="connexion_vendeur" class="underline!" >Connectez vous</a>
+            <a href="./connexion_compte_vendeur.php" class="underline!" >Connectez vous</a>
         </div>
     </main>
     <?php require_once __DIR__ . "/../../php/structure/footer_back.php" ?>
