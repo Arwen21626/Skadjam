@@ -30,12 +30,6 @@
                                                 INNER JOIN
                                             sae3_skadjam._client cli 
                                                 ON c.id_compte = cli.id_compte
-                                                INNER JOIN
-                                            sae3_skadjam._habite h
-                                                ON c.id_compte = h.id_compte
-                                                INNER JOIN
-                                            sae3_skadjam._adresse a
-                                                ON h.id_adresse = a.id_adresse
                                             WHERE c.id_compte = $id", PDO::FETCH_ASSOC) as $client){
                     $nom = $client['nom_compte'];
                     $prenom = $client['prenom_compte'];
@@ -43,11 +37,22 @@
                     $mail = $client['adresse_mail'];
                     $naissance = $client['date_naissance'];
                     $telephone = $client['numero_telephone'];
-                    $adresse = $client['adresse_postale'];
-                    $code = $client['code_postal'];
-                    $ville = $client['ville'];
                 }
-
+                // Récupérer les adresses du client
+                $nbAdresse = 0;
+                foreach($dbh->query("SELECT * FROM sae3_skadjam._compte c
+                                                INNER JOIN
+                                            sae3_skadjam._habite h
+                                                ON c.id_compte = h.id_compte
+                                                INNER JOIN
+                                            sae3_skadjam._adresse a
+                                                ON h.id_adresse = a.id_adresse
+                                            WHERE c.id_compte = $id", PDO::FETCH_ASSOC) as $adresse){
+                    $adressePostale[$nbAdresse] = $adresse['adresse_postale'];
+                    $codePostal[$nbAdresse] = $adresse['code_postal'];
+                    $ville[$nbAdresse] = $adresse['ville'];
+                    $nbAdresse++;
+                }
                 $dbh = null;
             }catch(PDOException $e){
                 print "Erreur : " . $e->getMessage() . "<br/>";
@@ -61,7 +66,9 @@
             </div>
             <div>
                 <p><?php echo $naissance ?></p>
-                <p><?php echo "$adresse, $code $ville" ?></p>
+                <?php for ($i=0; $i < $nbAdresse; $i++) { // Affiche toutes les adresses du client ?>
+                <p><?php echo "$adressePostale[$i], $codePostal[$i] $ville[$i]" ?></p>
+                <?php } ?>
                 <p><?php echo $telephone ?></p>
                 <p><?php echo $mail ?></p>
             </div>
