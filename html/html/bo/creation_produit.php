@@ -1,7 +1,7 @@
 <?php
-include('../../../connections_params.php');
-include('../../01_premiere_connexion.php');
-require_once('../../php/verification_formulaire.php');
+include(__DIR__ . '/../../../connections_params.php');
+include(__DIR__ . '/../../01_premiere_connexion.php');
+require_once(__DIR__ . '/../../php/verification_formulaire.php');
 
 $tab_categories = [];
 $typePhoto = $_FILES['photo']['type'];
@@ -115,7 +115,7 @@ if (isset($_POST['categorie']) && isset($_POST['nom']) && isset($_POST['prix']) 
             </div>
         </form>
     </main>
-    <?php include('../../php/structure/footer_back.php');?>
+    <?php include(__DIR__ . '/../../php/structure/footer_back.php');?>
 </body>
 </html>
 

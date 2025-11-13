@@ -128,123 +128,123 @@ if (isset($_POST["nom"])){
 
 <!DOCTYPE html>
 <html lang="en">
+<?php require_once __DIR__ . "/../../php/structure/head_back.php"?>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/html/css/bo/general_back.css">
-    <link rel="stylesheet" href="/html/css/style_form_creation_vendeur.css">
     <title>Créer un compte vendeur</title>
 </head>
 <body>
-    <?php require_once __DIR__ . "/../../php/structure/header_back.php" ?>
+    <?php 
+    require_once __DIR__ . "/../../php/structure/header_back.php";
+    require_once __DIR__ . "/../../php/structure/navbar_back.php";
+    ?>
     <main>
         <h2>Inscription Vendeur</h2>
         <form method="POST">
 
             <h3 class="underline">Informations vendeur :</h3>
-            <div class="zone-form ">
+            <div class="flex flex-row flex-wrap justify-between ml-10 mb-7 mr-10">
                 <!-- à la validation du formulaire, s'il y a des erreurs, les informations valides resteront saisies -->
-                <div class="case-form">
+                <div class="flex flex-col mt-6 items-start">
                     <label for="nom">Nom * :</label>
-                    <input type="text" id="nom" name="nom" value="<?= (!isset($erreurs["nom"])) ? $nom : '' ?>" size="25" required>
+                    <input class="ml-5 border-5 border-solid rounded-2xl border-beige pl-3" type="text" id="nom" name="nom" value="<?= (!isset($erreurs["nom"])) ? $nom : '' ?>" size="25" required >
                     <!-- s'il y a une erreur elle sera affiché sous la cellule -->
-                    <?php echo (isset($erreurs["nom"])) ? "<p class=\"erreur\">" . $erreurs["nom"] . " </p>" : '' ?>
+                    <?php echo (isset($erreurs["nom"])) ? "<p class=\"text-rouge\">" . $erreurs["nom"] . " </p>" : '' ?>
                 </div>
-                <div class="case-form">
+                <div class="flex flex-col mt-6 items-start">
                     <label for="prenom">Prénom * :</label>
-                    <input type="text" id="prenom" name="prenom" value="<?= (!isset($erreurs["prenom"])) ? $prenom : '' ?>" size="25" required>
+                    <input class="ml-5 border-5 border-solid rounded-2xl border-beige pl-3 " type="text" id="prenom" name="prenom" value="<?= (!isset($erreurs["prenom"])) ? $prenom : '' ?>" size="25" required>
                     <!-- s'il y a une erreur elle sera affiché sous la cellule -->
-                    <?php echo (isset($erreurs["prenom"])) ? "<p class=\"erreur\">" . $erreurs["prenom"] . " </p>" : '' ?>
+                    <?php echo (isset($erreurs["prenom"])) ? "<p class=\"text-rouge\">" . $erreurs["prenom"] . " </p>" : '' ?>
                 </div>
-                <div class="case-form ">
+                <div class="flex flex-col mt-6 items-start ">
                     <label for="mail">Mail * :</label>
-                    <input type="email" id="mail" name="mail" value="<?= (!(isset($erreurs["mail"]) || isset($erreurs["unique"]))) ? $mail : ''  ?>" size="40" required>
+                    <input class="ml-5 border-5 border-solid rounded-2xl border-beige pl-3 " type="email" id="mail" name="mail" <?= (!(isset($erreurs["mail"]) || isset($erreurs["unique"]))) ? "value=\"$mail\"" : ''  ?> size="40" required>
                     <!-- s'il y a une erreur elle sera affiché sous la cellule -->
-                    <?php echo (isset($erreurs["mail"])) ? "<p class=\"erreur\">" . $erreurs["mail"] . " </p>" : '' ?>
-                    <?php echo (isset($erreurs["unique"])) ? "<p class=\"erreur\">" . $erreurs["unique"] . " </p>" : '' ?>
+                    <?php echo (isset($erreurs["mail"])) ? "<p class=\"text-rouge\">" . $erreurs["mail"] . " </p>" : '' ?>
+                    <?php echo (isset($erreurs["unique"])) ? "<p class=\"text-rouge\">" . $erreurs["unique"] . " </p>" : '' ?>
                 </div>
-                <div class="case-form">
+                <div class="flex flex-col mt-6 items-start">
                     <label for="tel">Numéro de téléphone * :</label>
-                    <input type="tel" id="tel" name="tel" value="<?= (!isset($erreurs["tel"]))?$tel:''?>" size="25" required>
+                    <input class="ml-5 border-5 border-solid rounded-2xl border-beige pl-3 " type="tel" id="tel" name="tel" value="<?= (!isset($erreurs["tel"]))?$tel:''?>" size="16" required>
                     <!-- s'il y a une erreur elle sera affiché sous la cellule -->
-                    <?php echo (isset($erreurs["tel"])) ? "<p class=\"erreur\">" . $erreurs["tel"] . " </p>" : '' ?>
+                    <?php echo (isset($erreurs["tel"])) ? "<p class=\"text-rouge\">" . $erreurs["tel"] . " </p>" : '' ?>
                 </div>
             </div>
 
             <h3 class="underline">Informations entreprise :</h3>
-            <div class="zone-form">
-                <div class="case-form">
+            <div class="flex flex-row flex-wrap justify-between ml-10 mb-7 mr-10">
+                <div class="flex flex-col mt-6 items-start">
                     <label for="raisonSociale">Raison sociale de l'entreprise * :</label>
-                    <input type="text" id="raisonSociale" name="raisonSociale" value="<?= (!isset($erreurs["raisonSociale"]))? $raisonSociale: ''?>" size="40" required>
-                    <?php echo (isset($erreurs["raisonSociale"])) ? "<p class=\"erreur\">" . $erreurs["raisonSociale"] . " </p>" : '' ?>
+                    <input class="ml-5 border-5 border-solid rounded-2xl border-beige pl-3 " type="text" id="raisonSociale" name="raisonSociale" value="<?= (!isset($erreurs["raisonSociale"]))? $raisonSociale: ''?>" size="40" required>
+                    <?php echo (isset($erreurs["raisonSociale"])) ? "<p class=\"text-rouge\">" . $erreurs["raisonSociale"] . " </p>" : '' ?>
                 </div>
-                <div class="case-form">
+                <div class="flex flex-col mt-6 items-start">
                     <label for="denomination">Nom de l'entreprise * :</label>
-                    <input type="text" id="denomination" name="denomination" value="<?= (!isset($erreurs["denomination"]))? $denomination: ''?>" size="40" required>
-                    <?php echo (isset($erreurs["denomination"])) ? "<p class=\"erreur\">" . $erreurs["denomination"] . " </p>" : '' ?>
+                    <input class="ml-5 border-5 border-solid rounded-2xl border-beige pl-3 " type="text" id="denomination" name="denomination" value="<?= (!isset($erreurs["denomination"]))? $denomination: ''?>" size="40" required>
+                    <?php echo (isset($erreurs["denomination"])) ? "<p class=\"text-rouge\">" . $erreurs["denomination"] . " </p>" : '' ?>
                 </div>
-                <div class="case-form">
+                <div class="flex flex-col mt-6 items-start">
                     <label for="siren">Numéro de SIREN * :</label>
-                    <input type="text" id="siren" name="siren" value="<?= (!isset($erreurs["siren"]))?$siren: ''?>" size="25" required>
-                    <?php echo (isset($erreurs["siren"])) ? "<p class=\"erreur\">" . $erreurs["siren"] . " </p>" : '' ?>
+                    <input class="ml-5 border-5 border-solid rounded-2xl border-beige pl-3 " type="text" id="siren" name="siren" value="<?= (!isset($erreurs["siren"]))?$siren: ''?>" size="11" required>
+                    <?php echo (isset($erreurs["siren"])) ? "<p class=\"text-rouge\">" . $erreurs["siren"] . " </p>" : '' ?>
                 </div>
-                <div class="case-form">
+                <div class="flex flex-col mt-6 items-start">
                     <label for="iban">Numéro de IBAN * :</label>
-                    <input type="text" id="iban" name="iban" value="<?= (!isset($erreurs["iban"]))?$iban: 'FR'?>" placeholder="FR" size="30" required>
-                    <?php echo (isset($erreurs["iban"])) ? "<p class=\"erreur\">" . $erreurs["iban"] . " </p>" : '' ?>
+                    <input class="ml-5 border-5 border-solid rounded-2xl border-beige pl-3 " type="text" id="iban" name="iban" value="<?= (!isset($erreurs["iban"]))?$iban: 'FR'?>" placeholder="FR" size="30" required>
+                    <?php echo (isset($erreurs["iban"])) ? "<p class=\"text-rouge\">" . $erreurs["iban"] . " </p>" : '' ?>
                 </div>
             </div>
 
             <!-- ########## ADRESSE ########## -->
             <h3 class="underline">Siège social :</h3>
-            <div class="zone-form">
-                <div class="case-form">
+            <div class="flex flex-row flex-wrap justify-between ml-10 mb-7 mr-10">
+                <div class="flex flex-col mt-6 items-start">
                     <label for="adresse">Adresse * :</label>
-                    <input type="text" id="adresse" name="adresse" value="<?= $_POST["adresse"] ?? ''?>" size="40" placeholder="ex : 3 rue des camélia" required>
-                    <?php echo (isset($erreurs["adresse"])) ? "<p class=\"erreur\">" . $erreurs["adresse"] . " </p>" : '' ?>
+                    <input class="ml-5 border-5 border-solid rounded-2xl border-beige pl-3 " type="text" id="adresse" name="adresse" value="<?= $_POST["adresse"] ?? ''?>" size="40" placeholder="ex : 3 rue des camélia" required>
+                    <?php echo (isset($erreurs["adresse"])) ? "<p class=\"text-rouge\">" . $erreurs["adresse"] . " </p>" : '' ?>
                 </div>
-                <div class="case-form">
+                <div class="flex flex-col mt-6 items-start">
                     <label for="ville">Ville * :</label>
-                    <input type="text" id="ville" name="ville" value="<?= $_POST["ville"] ?? ''?>" size="30" required>
-                    <?php echo (isset($erreurs["ville"])) ? "<p class=\"erreur\">" . $erreurs["ville"] . " </p>" : '' ?>
+                    <input class="ml-5 border-5 border-solid rounded-2xl border-beige pl-3 " type="text" id="ville" name="ville" value="<?= $_POST["ville"] ?? ''?>" size="30" required>
+                    <?php echo (isset($erreurs["ville"])) ? "<p class=\"text-rouge\">" . $erreurs["ville"] . " </p>" : '' ?>
                 </div>
-                <div class="case-form">
+                <div class="flex flex-col mt-6 items-start">
                     <label for="cp">Code Postal * :</label>
-                    <input type="text" id="cp" name="cp" value="<?= $_POST["cp"] ?? ''?>" size="15" required>
-                    <?php echo (isset($erreurs["cp"])) ? "<p class=\"erreur\">" . $erreurs["cp"] . " </p>" : '' ?>
+                    <input class="ml-5 border-5 border-solid rounded-2xl border-beige pl-3 " type="text" id="cp" name="cp" value="<?= $_POST["cp"] ?? ''?>" size="10" required>
+                    <?php echo (isset($erreurs["cp"])) ? "<p class=\"text-rouge\">" . $erreurs["cp"] . " </p>" : '' ?>
                 </div>
                 
             </div>
 
             <h3 class="underline">Mot de passe :</h3>
-            <div class="zone-form">
-                <div class="case-form">
+            <div class="flex flex-row flex-wrap justify-between ml-10 mb-7 mr-10">
+                <div class="flex flex-col mt-6 items-start">
                     <label for="mdp">Mot de passe * :</label>
-                    <input type="password" id="mdp" name="mdp" value="<?= (!isset($erreurs["mdp"]) && isset($_POST["mdp"])) ? $_POST["mdp"] : ''?>" size="30" required>
-                    <?php echo (isset($erreurs["mdp"])) ? "<p class=\"erreur\">" . $erreurs["mdp"] . " </p>" : '' ?>
+                    <input class="ml-5 border-5 border-solid rounded-2xl border-beige pl-3 " type="password" id="mdp" name="mdp" value="<?= (!isset($erreurs["mdp"]) && isset($_POST["mdp"])) ? $_POST["mdp"] : ''?>" size="30" required>
+                    <?php echo (isset($erreurs["mdp"])) ? "<p class=\"text-rouge\">" . $erreurs["mdp"] . " </p>" : '' ?>
                     <!-- s'il y a une erreur elle sera affiché sous la cellule -->
                     <p>1 majuscule, 1 minuscule, 1 chiffre, 1 caractère spécial, 10 caractères minimum</p>
                 </div>
-                <div class="case-form">
+                <div class="flex flex-col mt-6 items-start">
                     <label for="verif">Vérification du mot de passe * :</label>
-                    <input type="password" id="verif" name="verif" value="<?= (!(isset($erreurs["conf"]) || isset($erreurs["mdp"])) && isset($_POST["verif"])) ? $_POST["verif"] : ''?>" size="30" required>
+                    <input class="ml-5 border-5 border-solid rounded-2xl border-beige pl-3 " type="password" id="verif" name="verif" value="<?= (!(isset($erreurs["conf"]) || isset($erreurs["mdp"])) && isset($_POST["verif"])) ? $_POST["verif"] : ''?>" size="30" required>
                     <!-- s'il y a une erreur elle sera affiché sous la cellule -->
-                    <?php echo (isset($erreurs["conf"])) ? "<p class=\"erreur\">" . $erreurs["conf"] . " </p>" : '' ?>
+                    <?php echo (isset($erreurs["conf"])) ? "<p class=\"text-rouge\">" . $erreurs["conf"] . " </p>" : '' ?>
                 </div>
             </div>
 
-            <div class="inline milieu left">
-                <label for="cgu" class="underline">J'ai lu et j'acccepte les conditions générales d'utilisation :</label>
-                <input type="checkbox" required>
+            <div class="flex flex-row flex-wrap items-center mt-2 mb-2">
+                <label for="cgu" class="underline! cursor-pointer">J'ai lu et j'acccepte les conditions générales d'utilisation :</label>
+                <input type="checkbox" id="cgu" name="cgu" required class="ml-10 w-5 h-5">
             </div>
-            <div class="buttons-form">
-                <input type="reset" value="Annuler">
-                <input type="submit" value="Valider">
+            <div class="flex flex-row justify-around mt-4 mb-4">
+                <input type="reset" value="Annuler" class="cursor-pointer w-64 border-5 border-solid rounded-2xl border-beige pl-3">
+                <input type="submit" value="Valider" class="cursor-pointer w-64 border-5 border-solid rounded-2xl border-beige pl-3">
             </div>
         </form>
-        <div class="inline center milieu">
-            <p>Vous avez déjà un compte ?</p>
-            <a href="connexion_vendeur" class="underline" >Connectez vous</a>
+        <div class="flex flex-row flex-wrap justify-center m-2">
+            <p class=" ml-px">Vous avez déjà un compte ? </p>
+            <a href="./connexion_compte_vendeur.php" class="underline!" >Connectez vous</a>
         </div>
     </main>
     <?php require_once __DIR__ . "/../../php/structure/footer_back.php" ?>
