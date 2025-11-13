@@ -29,7 +29,7 @@
 </head>
 <body>
     <!--header-->
-    <?php include "../../php/structure/header_front.php"; ?>
+    <?php include __DIR__ . "/../../php/structure/header_front.php"; ?>
 
     <main>
         <!--affichage du libelle-->
@@ -116,6 +116,6 @@
         <p>Partie sur les avis à voir plus tard</p>
 
     </main>
-    <?php include('../../php/structure/footer_back.php');?>
+    <?php include(__DIR__ . '/../../php/structure/footer_back.php');?>
 </body>
 </html>
