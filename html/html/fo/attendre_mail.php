@@ -1,4 +1,4 @@
-<?php require_once "../connections_params.php"; ?>
+<?php require_once "../../connections_params.php"; ?>
 <!DOCTYPE html>
 <html lang="fr">
 <head>
