@@ -2,7 +2,6 @@
 @tailwind utilities;
 @reference "tailwindcss";
 
-
 @theme{
   --color-vertFonce: #365452;
   --color-vertMoyen: #588A87;
@@ -12,3 +11,5 @@
   --color-bleu: #E2F9FF;
 }
 
+/* Imports des autres fichiers CSS */
+@import "./fo/general_front.css";

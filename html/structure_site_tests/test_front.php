@@ -6,6 +6,7 @@
 </head>
 <body>
     <?php require_once("html/php/structure/header_front.php"); ?>
+    <?php require_once("html/php/structure/navbar_front.php"); ?>
     
     <main>
         <section>
@@ -67,6 +68,7 @@
         </section>
     </main>
 
+    
     <?php require_once("html/php/structure/footer_front.php");?>
 </body>
 </html>

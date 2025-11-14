@@ -11,8 +11,10 @@
     <title>Mon profil</title>
 </head>
 <body>
-    <?php require "../../php/structure/header_front.php"; ?>
-    <?php require "../../php/structure/navbar_front.php"; ?>
+    <?php
+        require "../../php/structure/header_front.php";
+        require "../../php/structure/navbar_front.php";
+    ?>
     <main>
         <?php
             // Connexion à la session
@@ -65,16 +67,23 @@
             <div>
                 <p class="m-4"><?php echo $naissance; ?></p>
                 <?php for ($i=0; $i < $nbAdresse; $i++) { // Affiche toutes les adresses du client ?>
-                <p class="mt-2 mb-2 mr-4 ml-4"><?php echo "$adressePostale[$i], $codePostal[$i] $ville[$i]"; ?></p>
+                <p class="mt-2 mb-2 mr-4 ml-4"><?php echo $adressePostale[$i]; ?>, <?php echo $codePostal[$i]; ?> <?php echo $ville[$i]; ?></p>
                 <?php } ?>
                 <p class="m-4"><?php echo $telephone; ?></p>
                 <p class="m-4"><?php echo $mail; ?></p>
             </div>
         </section>
         <article class="flex flex-row justify-around">
-            <form action="modifier_compte_client.php"><input class="border-2 border-vertClair rounded-xl p-2" type="submit" value="Modifier mes informations"></form>
-            <form action="attendre_mail.php"><input class="border-2 border-vertClair rounded-xl p-2" type="submit" value="Modifier mon mot de passe"></form>
-            <form action="index.php"><input class="border-2 border-vertClair rounded-xl p-2" type="submit" value="Se déconnecter"></form>
+            <form action="modifier_compte_client.php">
+                <input class="border-2 border-vertClair rounded-xl p-2" type="submit" value="Modifier mes informations">
+            </form>
+            <form action="reinitialiser_mdp.php">
+                <input class="border-2 border-vertClair rounded-xl p-2" type="submit" value="Modifier mon mot de passe">    
+                <input type="hidden" name="mail" id="mail" value="<?php echo $mail; ?>">
+            </form>
+            <form action="index.php">
+                <input class="border-2 border-vertClair rounded-xl p-2" type="submit" value="Se déconnecter">
+            </form>
         </article>
     </main>
     <?php require "../../php/structure/footer_front.php"; ?>
