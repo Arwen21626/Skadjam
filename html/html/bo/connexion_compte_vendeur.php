@@ -32,18 +32,18 @@ if (isset($_POST["mail"])){
 
                 <div class="flex w-fit flex-col items-start">
                     <label for="mail">Adresse mail :</label>
-                    <input class="ml-5 border-5 border-solid rounded-2xl border-beige pl-3 mb-5" type="text" name="mail" id="mail" required>
+                    <input class="ml-5 border-5 border-solid rounded-2xl border-bleu pl-3 mb-5" type="text" name="mail" id="mail" required>
                 </div>
 
                 <div class="flex w-fit flex-col mt-6 items-start">
                     <label for="mdp">Mot de passe :</label>
-                    <input class="ml-5 border-5 border-solid rounded-2xl border-beige pl-3" type="password" name="mdp" id="mdp" required>
+                    <input class="ml-5 border-5 border-solid rounded-2xl border-bleu pl-3" type="password" name="mdp" id="mdp" required>
                     <a href=""></a>
                     <p class="underline! self-end cursor-pointer">mot de passe oublié ?</p>
                 </div class="flex w-fit flex-col mt-6 items-start">
 
                 <div class=" justify-self-center mt-8 mb-8">
-                    <input type="submit" value="Se connecter" class="cursor-pointer w-64 border-5 border-solid rounded-2xl border-beige pl-3">
+                    <input type="submit" value="Se connecter" class="cursor-pointer w-64 border-5 border-solid rounded-2xl border-bleu pl-3">
                 </div>
             </div>
         </form>
