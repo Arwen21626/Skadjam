@@ -427,7 +427,7 @@ footer a {
         margin: 2em 5em;
     }
 
-    h2+h3{
+    main>h2+h3{
         align-self: center;
         margin-top: 0;
         margin-bottom: 2em;
@@ -444,8 +444,6 @@ footer a {
 
     main>section>div>h3{
         color: #365452;
-        position: relative;
-        top: 5px;
     }
 }
 
