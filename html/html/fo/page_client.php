@@ -72,9 +72,9 @@
             </div>
         </section>
         <article class="flex flex-row justify-around">
-            <form action="modifier_compte_client.php"><input type="submit" value="Modifier mes informations"></form>
-            <form action="attendre_mail.php"><input type="submit" value="Modifier mon mot de passe"></form>
-            <form action="index.php"><input type="submit" value="Se déconnecter"></form>
+            <form action="modifier_compte_client.php"><input class="border-2 border-vertClair rounded-xl p-2" type="submit" value="Modifier mes informations"></form>
+            <form action="attendre_mail.php"><input class="border-2 border-vertClair rounded-xl p-2" type="submit" value="Modifier mon mot de passe"></form>
+            <form action="index.php"><input class="border-2 border-vertClair rounded-xl p-2" type="submit" value="Se déconnecter"></form>
         </article>
     </main>
     <?php require "../../php/structure/footer_front.php"; ?>
