@@ -1,14 +1,14 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" type="text/css" href="../../css/fo/general_front.css">
+    <?php require "../../php/structure/head_front.php"; ?>
     <title>Conditions Générales d'Utilisateurs</title>
 </head>
 <body>
-    <?php require "../../php/structure/header_front.php"; ?>
-    <?php require "../../php/structure/navbar_front.php"; ?>
+    <?php
+        require "../../php/structure/header_front.php";
+        require "../../php/structure/navbar_front.php";
+    ?>
     <main>
         <h2>Conditions générales d'utilisation</h2>
         <h3>En vigueur au 07/11/2025</h3>

@@ -62,7 +62,7 @@
         <section>
             <div class="flex flex-row">
                 <h2 class="mt-1 mb-1 mr-4 ml-0"><?php echo $pseudo; ?></h2>
-                <h3 class="mt-1 mb-1 mr-4 ml-0 relative top-4 text-vertFonce"><?php echo $prenom; ?> <?php echo $nom; ?></h3>
+                <h3 class="mt-1 mb-1 mr-4 ml-0 relative top-4 text-vertFonce -z-1"><?php echo $prenom; ?> <?php echo $nom; ?></h3>
             </div>
             <div>
                 <p class="m-4"><?php echo $naissance; ?></p>
@@ -74,14 +74,16 @@
             </div>
         </section>
         <article class="flex flex-row justify-around">
-            <form action="modifier_compte_client.php">
+            <form action="modifier_compte_client.php" method="post">
                 <input class="border-2 border-vertClair rounded-xl p-2" type="submit" value="Modifier mes informations">
             </form>
-            <form action="reinitialiser_mdp.php">
-                <input class="border-2 border-vertClair rounded-xl p-2" type="submit" value="Modifier mon mot de passe">    
+            <form action="reinitialiser_mdp.php" method="post">
+                <input type="hidden" name="titre" id="titre" value="Changer mon mot de passe">
                 <input type="hidden" name="mail" id="mail" value="<?php echo $mail; ?>">
+                <input class="border-2 border-vertClair rounded-xl p-2" type="submit" value="Modifier mon mot de passe">    
             </form>
-            <form action="index.php">
+            <form action="index.php" method="post">
+                <?php session_destroy(); ?>
                 <input class="border-2 border-vertClair rounded-xl p-2" type="submit" value="Se déconnecter">
             </form>
         </article>
