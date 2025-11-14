@@ -28,14 +28,15 @@
     };
     
     // Définition des variables PHP pour récupérer chaque donnée nécessaire
-    $libelleProd = $produit["libelle_produit"];
-    $libelleCat = $categorie["libelle_categorie"];
-    $prixTTC = $produit["prix_ttc"];
-    $produitMasque = $produit["est_masque_char"];
+    $libelleProd = $produit["libelle_produit"]; // Nom du produit
+    $libelleCat = $categorie["libelle_categorie"]; //Libellé de la catégorie
+    $prixTTC = $produit["prix_ttc"]; // Prix du produit
+    $produitStock = $produit["quantite_stock"]; // Récupère le stock du produit pour savoir si il est disponible ou non
     $nomVendeur = $vendeur["raison_sociale"];
+    $produitDesc = $produit["description_produit"];
 
     // Affichage test
-    print_r($nomVendeur);
+    print_r($produit);
 ?>
 
 
@@ -63,13 +64,12 @@
                     <h4> <?php echo $prixTTC ?>€</h4>
                     <p>
                         <?php 
-                            if ($produitMasque === "f") { // Pour false, le produit n'est pas masqué donc il est disponible
-                                echo "Disponible";
+                            if ($produitStock > 0) { // Le stock est supérieur à 0, le produit est disponible
+                                echo "Disponible"; 
                             }
-                            else if ($produitMasque === "t") {
+                            else { // Pour 
                                 echo "Indisponible";
                             }
-
                         ?>
                     </p>
                     <p>Vendu par <?php echo $nomVendeur ?></p>
@@ -82,13 +82,7 @@
         <section>
             <h3>Description détaillée</h3>
             <p>
-                Lorem ipsum dolor, sit amet consectetur adipisicing elit.
-                Omnis hic quidem earum ad animi quo, illo, quas pariatur maiores nam natus. 
-                Odit vitae blanditiis unde labore nemo. Provident, numquam harum!
-            </p>
-            <p>
-                Lorem ipsum dolor, sit amet consectetur adipisicing elit. 
-                Incidunt ad ratione reprehenderit, excepturi hic labore autem magnam doloremque harum at quia repellat earum ab voluptatem sed cupiditate iusto officiis nesciunt.
+                <?php echo $produitDesc; ?>
             </p>
         </section>
 
