@@ -41,14 +41,15 @@
             </a>        
         </div>
 
+
         <div class="flex flex-row justify-around m-4">
             <button class="border-2 border-vertFonce rounded-2xl w-40 h-14"><a href="../bo/creation_produit.php">Ajouter un produit</a></button>
-            <button class="border-2 border-vertFonce rounded-2xl w-40 h-14">Statistiques</button>
-            <button class="border-2 border-vertFonce rounded-2xl w-40 h-14">Avis récents</button>
+            <button class="border-2 border-vertFonce rounded-2xl w-40 h-14"><a href="">Statistiques</a></button>
+            <button class="border-2 border-vertFonce rounded-2xl w-40 h-14"><a href="">Avis récents</a></button>
         </div>
 
         <!--Début du catalogue-->
-        <h2 id="nosProduits">Nos produits</h2>
+        <h2 id="vosProduits">Vos produits</h2>
 
         <?php
             //initialisation du numéro de page
@@ -83,80 +84,80 @@
                 //affiche la photo du produit, son nom, son prix et sa note, son stock
                 foreach($tabProduit as $id => $valeurs){
                     $idProduit = $valeurs['id_produit'];?>
-                    <div class="grid grid-cols-3 gap-2">
+                    <section class="bg-bleu grid grid-col-[30%_70%]">
                         <!--affichage de la photo-->
-                        <a href= "<?php echo "details_produit.php?idProduit=".$idProduit;?>">
+                        <a href= "<?php echo "details_produit.php?idProduit=".$idProduit;?>" class="col-span-2">
                             <img src="<?php echo htmlentities($valeurs['url_photo']);?>" 
                                     alt="<?php echo htmlentities($valeurs['alt']);?>"
                                     title="<?php echo htmlentities($valeurs['titre']);?>">
                         </a>
 
                         <!--affichage du nom du produit-->
-                        <h4><?php echo htmlentities($valeurs['libelle_produit']);?></h4> 
+                        <h4 class="col-span-2"><?php echo htmlentities($valeurs['libelle_produit']);?></h4> 
 
                         <!--affichage du prix du produit-->   
-                        <p><?php echo htmlentities($valeurs['prix_ttc']);?></p>
+                        <p class="col-1"><?php echo htmlentities($valeurs['prix_ttc']);?> €</p>
 
                         <!--récupération de la note-->
-                        <?php $note = $valeurs['note_moyenne']; ?>
+                        <div class=" flex justify-start col-2"></div>
+                            <?php $note = $valeurs['note_moyenne']; ?>
 
                             <!--affichage d'une note nulle-->
-                            <div class="flex flex-row">
-                                <?php 
-                                if ($note == null){ ?>
-                                    <p><?php echo htmlentities('non noté'); ?></p>
-                                <?php } 
-                                else {
-                                    $entierPrec = intval($note);
-                                    $entierSuiv = $entierPrec+1;
-                                    $moitie = $entierPrec+0.5;
-                                    $noteFinale;
-                                    $nbEtoilesVides;
+                            <?php 
+                            if ($note == null){ ?>
+                                <p><?php echo htmlentities('non noté'); ?></p>
+                            <?php } 
+                            else {
+                                $entierPrec = intval($note);
+                                $entierSuiv = $entierPrec+1;
+                                $moitie = $entierPrec+0.5;
+                                $noteFinale;
+                                $nbEtoilesVides;
 
-                                    //note arrondie à l'entier précédent
-                                    if($note < $entierPrec+0.3){
-                                        $noteFinale = $entierPrec;
-                                    }
+                                //note arrondie à l'entier précédent
+                                if($note < $entierPrec+0.3){
+                                    $noteFinale = $entierPrec;
+                                }
 
-                                    //note arrondie à 0.5
-                                    else if(($note < $moitie) || ($note < $entierPrec+0.8)){
-                                        $noteFinale = $moitie;
-                                        $nbEtoilesVides = 5-$entierPrec-1;
-                                        //affichage d'une note et demie
-                                        //boucle pour étoiles pleines
-                                        for($i=0; $i<$entierPrec; $i++){?>
-                                            <img src="../../images/logo/bootstrap_icon/star-fill.svg" alt="étoile pleine">
-                                        <?php } ?>
-                                        <!--demie étoile-->
-                                        <img src="../../images/logo/bootstrap_icon/star-half.svg" alt="demie étoile">
-                                        <!--boucle pour étoiles vides-->
-                                        <?php for($i=0; $i<$nbEtoilesVides; $i++){?>
-                                            <img src="../../images/logo/bootstrap_icon/star.svg" alt="étoile vide">
-                                        <?php }
-                                    }
-                                    
-                                    //note arrondie à l'entier suivant
-                                    else{
-                                        $noteFinale = $entierSuiv;
-                                    }
+                                //note arrondie à 0.5
+                                else if(($note < $moitie) || ($note < $entierPrec+0.8)){
+                                    $noteFinale = $moitie;
+                                    $nbEtoilesVides = 5-$entierPrec-1;
+                                    //affichage d'une note et demie
+                                    //boucle pour étoiles pleines
+                                    for($i=0; $i<$entierPrec; $i++){?>
+                                        <img src="../../images/logo/bootstrap_icon/star-fill.svg" alt="étoile pleine" class="w-3 h-3"  >
+                                    <?php } ?>
+                                    <!--demie étoile-->
+                                    <img src="../../images/logo/bootstrap_icon/star-half.svg" alt="demie étoile" class="w-3 h-3"  >
+                                    <!--boucle pour étoiles vides-->
+                                    <?php for($i=0; $i<$nbEtoilesVides; $i++){?>
+                                        <img src="../../images/logo/bootstrap_icon/star.svg" alt="étoile vide" class="w-3 h-3"  >
+                                    <?php }
+                                }
+                                
+                                //note arrondie à l'entier suivant
+                                else{
+                                    $noteFinale = $entierSuiv;
+                                }
 
-                                    //affichage d'une note entière :
-                                    if($noteFinale != $moitie){
-                                        $nbEtoilesVides = 5-$noteFinale;
-                                        //boucle pour étoiles pleines
-                                        for($i=0; $i<$noteFinale; $i++){?>
-                                            <img src="../../images/logo/bootstrap_icon/star-fill.svg" alt="étoile pleine">
-                                        <?php }
-                                        //boucle pour étoiles vides
-                                        for($i=0; $i<$nbEtoilesVides; $i++){?>
-                                            <img src="../../images/logo/bootstrap_icon/star.svg" alt="étoile vide">
-                                        <?php }
-                                    } ?>       
-                            <!--affichage du stock-->
-                            <p>En stock : <?php echo htmlentities($valeurs['quantite_stock']);?></p>
-                        </div>
-                       <?php }   ?>
-                    </div>
+                                //affichage d'une note entière :
+                                if($noteFinale != $moitie){
+                                    $nbEtoilesVides = 5-$noteFinale;
+                                    //boucle pour étoiles pleines
+                                    for($i=0; $i<$noteFinale; $i++){?>
+                                        <img src="../../images/logo/bootstrap_icon/star-fill.svg" alt="étoile pleine" class="w-3 h-3"  >
+                                    <?php }
+                                    //boucle pour étoiles vides
+                                    for($i=0; $i<$nbEtoilesVides; $i++){?>
+                                        <img src="../../images/logo/bootstrap_icon/star.svg" alt="étoile vide" class="w-3 h-3"  >
+                                    <?php }
+                                } ?>  
+                        </div>     
+                        <!--affichage du stock-->
+                        <p class="col-span-2">En stock : <?php echo htmlentities($valeurs['quantite_stock']);?></p>
+                        <?php }   ?>
+                    </section>
                 <?php }          
                 $dbh = null;
             } 
@@ -169,11 +170,11 @@
         <!--fin du catalogue-->
 
         <?php if ($pageNumber>1){?>
-        <a class= "lienPage" href="<?php echo "./index_vendeur.php?page=".($pageNumber-1)."#nosProduits";?>">page précédente</a>
+        <a class= "lienPage" href="<?php echo "./index_vendeur.php?page=".($pageNumber-1)."#vosProduits";?>">page précédente</a>
         <?php }?>
     
         <?php if ($pageNumber<$maxPage){?>
-        <a class= "lienPage" href="<?php echo "./index_vendeur.php?page=".($pageNumber+1)."#nosProduits";?>">page suivante</a>
+        <a class= "lienPage" href="<?php echo "./index_vendeur.php?page=".($pageNumber+1)."#vosProduits";?>">page suivante</a>
         <?php }?>
 
     </main>
