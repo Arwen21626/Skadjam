@@ -16,6 +16,11 @@
     <link rel="stylesheet" type="text/css" href="../../css/output.css" >
     <link rel="stylesheet" type="text/css" href="../../css/bo/general_back.css" >
     <title>Accueil</title>
+    <style>
+        button a:hover{
+            color: black;
+        }
+    </style>
 </head>
 
 
@@ -108,7 +113,8 @@
                                 <?php 
                                 if ($note == null){ ?>
                                     <p><?php echo htmlentities('non noté'); ?></p>
-                                <?php } 
+                                <?php }
+
                                 else {
                                     $entierPrec = intval($note);
                                     $entierSuiv = $entierPrec+1;
@@ -154,13 +160,13 @@
                                         for($i=0; $i<$nbEtoilesVides; $i++){?>
                                             <img src="../../images/logo/bootstrap_icon/star.svg" alt="étoile vide" class="w-7 h-7"  >
                                         <?php }
-                                    } ?>  
+                                    } ?> 
+                                <?php }   ?> 
                             </div>     
                             <!--affichage du stock-->
-                            <p class="col-span-2">En stock : <?php echo htmlentities($valeurs['quantite_stock']);?></p>
-                            <?php }   ?>
+                            <p class="col-span-2">En stock : <?php echo htmlentities($valeurs['quantite_stock']);?></p>       
                         </section>
-                <?php } ?>
+                    <?php } ?>
                 </div>         
                 <?php $dbh = null;
             } 
