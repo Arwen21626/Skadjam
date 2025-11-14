@@ -3,6 +3,17 @@
     // à retirer
     $_SESSION["idCompte"] = 1;
     require_once __DIR__ . "/../../01_premiere_connexion.php";
+
+    // Vérifie que le formulaire a été envoyé
+    if (isset($_POST['logout'])) {
+        // Supprime toutes les variables de session
+        session_unset();
+        // Détruit la session
+        session_destroy();
+        // Redirection vers la page principale
+        header("Location: index.php");
+        exit();
+    }
 ?>
 <!DOCTYPE html>
 <html lang="fr">
@@ -80,7 +91,7 @@
             <form action="nouveau_mdp.php" method="post">
                 <input class="border-2 border-vertClair rounded-xl p-2" type="submit" value="Modifier mon mot de passe">    
             </form>
-            <form action="index.php" method="post">
+            <form action="page_client.php" method="post">
                 <input type="hidden" id="logout" name="logout" value="true">
                 <input class="border-2 border-vertClair rounded-xl p-2" type="submit" value="Se déconnecter">
             </form>
