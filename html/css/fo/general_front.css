@@ -1,11 +1,11 @@
 @font-face { /* Pour les titres */
     font-family: 'MavenPro';
-    src: url("../../font/MavenPro/MavenPro-Regular.ttf");
+    src: url("/html/font/MavenPro/MavenPro-Regular.ttf");
 }
 
 @font-face { /* Pour les paragraphes */
     font-family: 'Amiko';
-    src: url("../../font/Amiko/Amiko-Regular.ttf");
+    src: url("/html/font/Amiko/Amiko-Regular.ttf");
 }
 
 /* CSS général */
@@ -122,65 +122,65 @@ footer a {
     .logo_accueil .logo_nav_img {
         height: 50px;
         width: 50px;
-        background-image: url("../../images/logo/bootstrap_icon/house.svg");
+        background-image: url("/html/images/logo/bootstrap_icon/house.svg");
         background-repeat: no-repeat;
         background-size: 50px;
     }
 
     .logo_accueil .logo_nav_img:hover {
-        background-image: url("../../images/logo/bootstrap_icon/house-fill.svg");
+        background-image: url("/html/images/logo/bootstrap_icon/house-fill.svg");
     }
 
     /* Pour l'icône des commandes */
     .logo_commandes .logo_nav_img {
         height: 50px;
         width: 50px;
-        background-image: url("../../images/logo/bootstrap_icon/truck.svg");
+        background-image: url("/html/images/logo/bootstrap_icon/truck.svg");
         background-repeat: no-repeat;
         background-size: 50px;
     }
 
     .logo_commandes .logo_nav_img:hover {
-        background-image: url("../../images/logo/bootstrap_icon/truck-fill.svg");
+        background-image: url("/html/images/logo/bootstrap_icon/truck-fill.svg");
     }
 
     /* Pour l'icône de recherche */
     .logo_recherche .logo_nav_img {
         height: 50px;
         width: 50px;
-        background-image: url("../../images/logo/bootstrap_icon/search.svg");
+        background-image: url("/html/images/logo/bootstrap_icon/search.svg");
         background-repeat: no-repeat;
         background-size: 50px;
     }
 
     .logo_recherche .logo_nav_img:hover {
-        background-image: url("../../images/logo/bootstrap_icon/search-selected.svg");
+        background-image: url("/html/images/logo/bootstrap_icon/search-selected.svg");
     }
 
     /* Pour l'icône de l'ajout au panier */
     .logo_panier .logo_nav_img {
         height: 50px;
         width: 50px;
-        background-image: url("../../images/logo/bootstrap_icon/cart.svg");
+        background-image: url("/html/images/logo/bootstrap_icon/cart.svg");
         background-repeat: no-repeat;
         background-size: 50px;
     }
 
     .logo_panier .logo_nav_img:hover {
-        background-image: url("../../images/logo/bootstrap_icon/cart-fill.svg");
+        background-image: url("/html/images/logo/bootstrap_icon/cart-fill.svg");
     }
 
     /* Pour l'icône du profil */
     .logo_profil .logo_nav_img {
         height: 50px;
         width: 50px;
-        background-image: url("../../images/logo/bootstrap_icon/person.svg");
+        background-image: url("/html/images/logo/bootstrap_icon/person.svg");
         background-repeat: no-repeat;
         background-size: 50px;
     }
 
     .logo_profil .logo_nav_img:hover {
-        background-image: url("../../images/logo/bootstrap_icon/person-fill.svg");
+        background-image: url("/html/images/logo/bootstrap_icon/person-fill.svg");
     }
 
     /* CSS pour le footer */
@@ -315,65 +315,65 @@ footer a {
     .logo_accueil .logo_nav_img {
         height: 75px;
         width: 75px;
-        background-image: url("../../images/logo/bootstrap_icon/house.svg") ;
+        background-image: url("/html/images/logo/bootstrap_icon/house.svg") ;
         background-repeat: no-repeat;
         background-size: 75px;
     }
 
     .logo_accueil .logo_nav_img:hover {
-        background-image: url("../../images/logo/bootstrap_icon/house-fill.svg") ;
+        background-image: url("/html/images/logo/bootstrap_icon/house-fill.svg") ;
     }
 
     /* Pour l'icône des commandes */
     .logo_commandes .logo_nav_img {
         height: 75px;
         width: 75px;
-        background-image: url("../../images/logo/bootstrap_icon/truck.svg") ;
+        background-image: url("/html/images/logo/bootstrap_icon/truck.svg") ;
         background-repeat: no-repeat;
         background-size: 75px;
     }
 
     .logo_commandes .logo_nav_img:hover {
-        background-image: url("../../images/logo/bootstrap_icon/truck-fill.svg") ;
+        background-image: url("/html/images/logo/bootstrap_icon/truck-fill.svg") ;
     }
 
     /* Pour l'icône de recherche */
     .logo_recherche .logo_nav_img {
         height: 75px;
         width: 75px;
-        background-image: url("../../images/logo/bootstrap_icon/search.svg");
+        background-image: url("/html/images/logo/bootstrap_icon/search.svg");
         background-repeat: no-repeat;
         background-size: 75px;
     }
 
     .logo_recherche .logo_nav_img:hover {
-        background-image: url("../../images/logo/bootstrap_icon/search-selected.svg");
+        background-image: url("/html/images/logo/bootstrap_icon/search-selected.svg");
     }
 
     /* Pour l'icône du panier */
     .logo_panier .logo_nav_img {
         height: 75px;
         width: 75px;
-        background-image: url("../../images/logo/bootstrap_icon/cart.svg") ;
+        background-image: url("/html/images/logo/bootstrap_icon/cart.svg") ;
         background-repeat: no-repeat;
         background-size: 75px;
     }
 
     .logo_panier .logo_nav_img:hover {
-        background-image: url("../../images/logo/bootstrap_icon/cart-fill.svg");
+        background-image: url("/html/images/logo/bootstrap_icon/cart-fill.svg");
     }
 
     /* Pour l'icône du profil */
     .logo_profil .logo_nav_img {
         height: 75px;
         width: 75px;
-        background-image: url("../../images/logo/bootstrap_icon/person.svg") ;
+        background-image: url("/html/images/logo/bootstrap_icon/person.svg") ;
         background-repeat: no-repeat;
         background-size: 75px;
     }
 
     .logo_profil .logo_nav_img:hover {
-        background-image: url("../../images/logo/bootstrap_icon/person-fill.svg");
+        background-image: url("/html/images/logo/bootstrap_icon/person-fill.svg");
     }
 
     /* CSS pour le footer */
