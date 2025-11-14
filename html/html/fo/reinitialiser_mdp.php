@@ -1,3 +1,4 @@
+<?php require_once "../../connections_params.php"; ?>
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -7,9 +8,16 @@
 <body>
     <?php
         require "../../php/structure/header_front.php";
-        require "../../php/structure/navbar_front.php";
     ?>
-    <h2>Mot de passe oublié</h2>
+    <h2>
+        <?php
+        if($_POST["titre"] === null){
+            echo "Mot de passe oublié";
+        }else{
+            echo $_POST["titre"];
+        }
+        ?>
+    </h2>
     <?php if($_POST["mail"] === null){ ?>
     <form action="reinitialiser_mdp.php" method="post">
         <label>Adresse mail :</label>
@@ -31,7 +39,7 @@
         $dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
         $dbh->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC);
 
-        $mails = $dbh->prepare('SELECT adresseMail FROM compte');
+        $mails = $dbh->prepare('SELECT adresse_mail FROM _compte');
         $mailPresent = false;
 
         foreach ($mails as $mail) {
@@ -59,6 +67,8 @@
     }
     ?>
     </p>
-    <?php } ?>
+    <?php }
+        require "../../php/structure/footer_front.php";
+    ?>
 </body>
 </html>

@@ -74,14 +74,15 @@
             </div>
         </section>
         <article class="flex flex-row justify-around">
-            <form action="modifier_compte_client.php">
+            <form action="modifier_compte_client.php" method="post">
                 <input class="border-2 border-vertClair rounded-xl p-2" type="submit" value="Modifier mes informations">
             </form>
-            <form action="reinitialiser_mdp.php">
-                <input class="border-2 border-vertClair rounded-xl p-2" type="submit" value="Modifier mon mot de passe">    
+            <form action="reinitialiser_mdp.php" method="post">
+                <input type="hidden" name="titre" id="titre" value="Changer mon mot de passe">
                 <input type="hidden" name="mail" id="mail" value="<?php echo $mail; ?>">
+                <input class="border-2 border-vertClair rounded-xl p-2" type="submit" value="Modifier mon mot de passe">    
             </form>
-            <form action="index.php">
+            <form action="index.php" method="post">
                 <input class="border-2 border-vertClair rounded-xl p-2" type="submit" value="Se déconnecter">
             </form>
         </article>
