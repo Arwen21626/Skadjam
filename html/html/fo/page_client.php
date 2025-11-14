@@ -56,16 +56,16 @@
                 print "Erreur : " . $e->getMessage() . "<br/>";
             }
         ?>
-        <h2>Profil</h2>
+        <h2>Mon profil</h2>
         <section>
             <div class="flex flex-row">
-                <h2 class="my-[0.1em] mr-4 ml-0"><?php echo $pseudo; ?></h2>
-                <h3 class="my-[0.1em] mr-4 ml-0 relative top-[5px]"><?php echo "$prenom $nom"; ?></h3>
+                <h2 class="mt-1 mb-1 mr-4 ml-0"><?php echo $pseudo; ?></h2>
+                <h3 class="mt-1 mb-1 mr-4 ml-0 relative top-4 text-vertFonce"><?php echo $prenom; ?> <?php echo $nom; ?></h3>
             </div>
             <div>
                 <p class="m-4"><?php echo $naissance; ?></p>
                 <?php for ($i=0; $i < $nbAdresse; $i++) { // Affiche toutes les adresses du client ?>
-                <p class="mx-4 my-2"><?php echo "$adressePostale[$i], $codePostal[$i] $ville[$i]"; ?></p>
+                <p class="mt-2 mb-2 mr-4 ml-4"><?php echo "$adressePostale[$i], $codePostal[$i] $ville[$i]"; ?></p>
                 <?php } ?>
                 <p class="m-4"><?php echo $telephone; ?></p>
                 <p class="m-4"><?php echo $mail; ?></p>
