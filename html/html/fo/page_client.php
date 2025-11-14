@@ -60,20 +60,20 @@
         ?>
         <h2>Profil</h2>
         <section>
-            <div>
-                <h2><?php echo $pseudo ?></h2>
-                <h3><?php echo "$prenom $nom" ?></h3>
+            <div class="flex flex-row">
+                <h2 class="my-0.1 mr-1 ml-0"><?php echo $pseudo ?></h2>
+                <h3 class="my-0.1 mr-1 ml-0 relative top-5"><?php echo "$prenom $nom" ?></h3>
             </div>
             <div>
-                <p><?php echo $naissance ?></p>
+                <p class="m-1"><?php echo $naissance ?></p>
                 <?php for ($i=0; $i < $nbAdresse; $i++) { // Affiche toutes les adresses du client ?>
-                <p><?php echo "$adressePostale[$i], $codePostal[$i] $ville[$i]" ?></p>
+                <p class="mx-1 my-0.5"><?php echo "$adressePostale[$i], $codePostal[$i] $ville[$i]" ?></p>
                 <?php } ?>
-                <p><?php echo $telephone ?></p>
-                <p><?php echo $mail ?></p>
+                <p class="m-1"><?php echo $telephone ?></p>
+                <p class="m-1"><?php echo $mail ?></p>
             </div>
         </section>
-        <article>
+        <article class="flex flex-row justify-around">
             <form action="modifier_compte_client.php"><input type="submit" value="Modifier mes informations"></form>
             <form action="attendre_mail.php"><input type="submit" value="Modifier mon mot de passe"></form>
             <form action="index.php"><input type="submit" value="Se déconnecter"></form>

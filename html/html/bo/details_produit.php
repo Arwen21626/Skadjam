@@ -4,6 +4,7 @@
 
     //Récupération des données sur le produit ainsi que la photo
     $idProd = $_GET['idProduit'];
+    $idPord = 1;
 
     foreach($dbh->query("SELECT *
                         from sae3_skadjam._produit pr

@@ -12,6 +12,7 @@ foreach($dbh->query('SELECT * from sae3_skadjam._categorie', PDO::FETCH_ASSOC) a
     }
 
 if (isset($_POST['categorie']) && isset($_POST['nom']) && isset($_POST['prix']) && isset($_POST['qteStock']) && isset($_POST['description'])) {
+    //Récupération des champspour l'insertion
     $categorie = htmlentities($_POST['categorie']);
     $nom = htmlentities($_POST['nom']);
     $prix = htmlentities($_POST['prix']);
@@ -75,7 +76,7 @@ if (isset($_POST['categorie']) && isset($_POST['nom']) && isset($_POST['prix']) 
                 <input type="file" id="photo" name="photo" class="hidden" required>
                 <!-- label qui agit comme bouton -->
                 <label for="photo" class="bg-beige w-60 h-60 rounded-xl " style="background-image: url('../../images/logo/bootstrap_icon/image.svg'); background-repeat: no-repeat; background-position: center; background-size: 60%;"></label>
-                <p>Ajouter une image</p>
+                <label for="photo">Ajouter une image</label>
 
             </div>
             
