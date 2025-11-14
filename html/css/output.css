@@ -198,17 +198,32 @@
   .flex {
     display: flex;
   }
+  .grid {
+    display: grid;
+  }
   .h-5 {
     height: calc(var(--spacing, 0.25rem) * 5);
   }
+  .h-auto {
+    height: auto;
+  }
   .w-5 {
     width: calc(var(--spacing, 0.25rem) * 5);
+  }
+  .w-60 {
+    width: calc(var(--spacing, 0.25rem) * 60);
   }
   .w-64 {
     width: calc(var(--spacing, 0.25rem) * 64);
   }
   .cursor-pointer {
     cursor: pointer;
+  }
+  .grid-cols-2 {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .grid-cols-3 {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
   }
   .flex-col {
     flex-direction: column;
@@ -236,6 +251,9 @@
   }
   .justify-items-center {
     justify-items: center;
+  }
+  .gap-2 {
+    gap: calc(var(--spacing, 0.25rem) * 2);
   }
   .rounded-2xl {
     border-radius: var(--radius-2xl, 1rem);
