@@ -1,8 +1,10 @@
-<?php 
+<?php
+
     include('../../01_premiere_connexion.php');
 
     //Récupération des données sur le produit ainsi que la photo
     $idProd = $_GET['idProduit'];
+    $idPord = 1;
 
     foreach($dbh->query("SELECT *
                         from sae3_skadjam._produit pr
@@ -28,7 +30,7 @@
 </head>
 <body>
     <!--header-->
-    <?php include "../../php/structure/header_front.php"; ?>
+    <?php include __DIR__ . "/../../php/structure/header_front.php"; ?>
 
     <main>
         <!--affichage du libelle-->
@@ -115,6 +117,6 @@
         <p>Partie sur les avis à voir plus tard</p>
 
     </main>
-    <?php include('../../php/structure/footer_back.php');?>
+    <?php include(__DIR__ . '/../../php/structure/footer_back.php');?>
 </body>
 </html>

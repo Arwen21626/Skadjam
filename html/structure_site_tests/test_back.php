@@ -6,6 +6,7 @@
 </head>
 <body>
     <?php require_once("html/php/structure/header_back.php"); ?>
+    <?php require_once("html/php/structure/navbar_back.php"); ?>
    
     <main>
         <section>

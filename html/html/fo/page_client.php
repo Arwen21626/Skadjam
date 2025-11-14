@@ -10,7 +10,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" type="text/css" href="../../css/fo/general_front.css">
-    <title>Mon compte</title>
+    <title>Mon profil</title>
 </head>
 <body>
     <?php require "../../php/structure/header_front.php"; ?>
@@ -26,7 +26,11 @@
                 $dbh->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC);
 
                 // Récupérer toutes les infos du client
-                foreach($dbh->query("SELECT * FROM sae3_skadjam._compte c INNER JOIN sae3_skadjam._client cli ON c.id_compte = cli.id_compte WHERE c.id_compte = $id", PDO::FETCH_ASSOC) as $client){
+                foreach($dbh->query("SELECT * FROM sae3_skadjam._compte c
+                                                INNER JOIN
+                                            sae3_skadjam._client cli 
+                                                ON c.id_compte = cli.id_compte
+                                            WHERE c.id_compte = $id", PDO::FETCH_ASSOC) as $client){
                     $nom = $client['nom_compte'];
                     $prenom = $client['prenom_compte'];
                     $pseudo = $client['pseudo'];
@@ -34,7 +38,21 @@
                     $naissance = $client['date_naissance'];
                     $telephone = $client['numero_telephone'];
                 }
-
+                // Récupérer les adresses du client
+                $nbAdresse = 0;
+                foreach($dbh->query("SELECT * FROM sae3_skadjam._compte c
+                                                INNER JOIN
+                                            sae3_skadjam._habite h
+                                                ON c.id_compte = h.id_compte
+                                                INNER JOIN
+                                            sae3_skadjam._adresse a
+                                                ON h.id_adresse = a.id_adresse
+                                            WHERE c.id_compte = $id", PDO::FETCH_ASSOC) as $adresse){
+                    $adressePostale[$nbAdresse] = $adresse['adresse_postale'];
+                    $codePostal[$nbAdresse] = $adresse['code_postal'];
+                    $ville[$nbAdresse] = $adresse['ville'];
+                    $nbAdresse++;
+                }
                 $dbh = null;
             }catch(PDOException $e){
                 print "Erreur : " . $e->getMessage() . "<br/>";
@@ -42,18 +60,22 @@
         ?>
         <h2>Profil</h2>
         <section>
-            <div>
-                <h3><?php echo $pseudo ?></h3>
-                <h4><?php echo $prenom ?> <?php echo $nom ?></h4>
+            <div class="flex flex-row">
+                <h2 class="my-0.1 mr-1 ml-0"><?php echo $pseudo ?></h2>
+                <h3 class="my-0.1 mr-1 ml-0 relative top-5"><?php echo "$prenom $nom" ?></h3>
             </div>
             <div>
-                <p><?php echo $naissance ?></p>
-                <p><?php echo $telephone ?></p>
-                <p><?php echo $mail ?></p>
+                <p class="m-1"><?php echo $naissance ?></p>
+                <?php for ($i=0; $i < $nbAdresse; $i++) { // Affiche toutes les adresses du client ?>
+                <p class="mx-1 my-0.5"><?php echo "$adressePostale[$i], $codePostal[$i] $ville[$i]" ?></p>
+                <?php } ?>
+                <p class="m-1"><?php echo $telephone ?></p>
+                <p class="m-1"><?php echo $mail ?></p>
             </div>
         </section>
-        <article>
-            <form action="modifier_compte_client.php"><input type="submit" value="Modifier"></form>
+        <article class="flex flex-row justify-around">
+            <form action="modifier_compte_client.php"><input type="submit" value="Modifier mes informations"></form>
+            <form action="attendre_mail.php"><input type="submit" value="Modifier mon mot de passe"></form>
             <form action="index.php"><input type="submit" value="Se déconnecter"></form>
         </article>
     </main>
