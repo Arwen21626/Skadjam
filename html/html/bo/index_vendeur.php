@@ -3,7 +3,7 @@
     //à retirer
     $_SESSION['idCompte'] = 1;
 
-    include('../../01_premiere_connexion.php');
+    include __DIR__ .'/../../01_premiere_connexion.php';
     const PAGE_SIZE = 15;
     $idCompte = $_SESSION['idCompte'];
 ?>
@@ -22,29 +22,30 @@
 
 <body>
     <!--header-->
-    <?php include "../../php/structure/header_front.php"; ?>
+    <?php include("../../php/structure/header_back.php"); ?>
+    <?php include("../../php/structure/navbar_back.php"); ?>
 
     <main>
-        <section class="grid grid-cols-2 gap-2">
+        <div class="grid grid-cols-2 gap-2">
             <a href="" title="lien vers page promotion">
-                <img src="../../images/images_accueil/promotion.webp" alt="promotion" class="w-60 h-auto">
+                <img src="../../images/images_accueil/promotion.webp" alt="promotion" class="w-80 h-auto">
             </a>
             <a href="" title="lien vers page derniers ajouts">
-                <img src="../../images/images_accueil/derniers_ajouts.webp" alt="derniers ajouts" class="w-60 h-auto">
+                <img src="../../images/images_accueil/derniers_ajouts.webp" alt="derniers ajouts" class="w-80 h-auto">
             </a>           
             <a href="" title="lien vers page stock">
-                <img src="../../images/images_accueil/stock.webp" alt="stock" class="w-60 h-auto">
+                <img src="../../images/images_accueil/stock.webp" alt="stock" class="w-80 h-auto">
             </a>
             <a href="" title="lien vers page commandes">
-                <img src="../../images/images_accueil/commandes.webp" alt="commandes" class="w-60 h-auto">
+                <img src="../../images/images_accueil/commandes.webp" alt="commandes" class="w-80 h-auto">
             </a>        
-        </section>
+        </div>
 
-        <section class ="flex flex-row justify-center justify-items-center">
-            <button type="button" class="border-2 bg-vertFonce">Ajouter un produit</button>
-            <button type="button" class="border-2 bg-vertFonce">Statistiques</button>
-            <button type="button" class="border-2 bg-vertFonce">Avis récents</button>
-        </section>
+        <div class="flex flex-row justify-around m-4">
+            <button class="border-2 border-vertFonce rounded-2xl w-40 h-14"><a href="../bo/creation_produit.php">Ajouter un produit</a></button>
+            <button class="border-2 border-vertFonce rounded-2xl w-40 h-14">Statistiques</button>
+            <button class="border-2 border-vertFonce rounded-2xl w-40 h-14">Avis récents</button>
+        </div>
 
         <!--Début du catalogue-->
         <h2 id="nosProduits">Nos produits</h2>
@@ -99,7 +100,7 @@
                         <!--récupération de la note-->
                         <?php $note = $valeurs['note_moyenne']; ?>
 
-                            //affichage d'une note nulle
+                            <!--affichage d'une note nulle-->
                             <div class="flex flex-row">
                                 <?php 
                                 if ($note == null){ ?>
@@ -178,7 +179,7 @@
     </main>
     
     <!--footer-->
-    <?php include "../../php/structure/footer_front.php"; ?>
+    <?php include("../../php/structure/footer_back.php"); ?>
 
 </body>
 
