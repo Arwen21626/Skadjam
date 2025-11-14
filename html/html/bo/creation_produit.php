@@ -12,7 +12,7 @@ foreach($dbh->query('SELECT * from sae3_skadjam._categorie', PDO::FETCH_ASSOC) a
     }
 
 if (isset($_POST['categorie']) && isset($_POST['nom']) && isset($_POST['prix']) && isset($_POST['qteStock']) && isset($_POST['description'])) {
-    //Récupération des champspour l'insertion
+    //Récupération des champs pour l'insertion
     $categorie = htmlentities($_POST['categorie']);
     $nom = htmlentities($_POST['nom']);
     $prix = htmlentities($_POST['prix']);

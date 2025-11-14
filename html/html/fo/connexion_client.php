@@ -67,7 +67,7 @@
 </head>
 <body>
     <?php 
-    include(__DIR__ . '../../php/structure/header_front.php');
+    include(__DIR__ . '/../../php/structure/header_front.php');
     require_once("../../php/verification_formulaire.php");
     ?>
 
