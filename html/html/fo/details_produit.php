@@ -3,6 +3,12 @@
     
     $idProd = $_GET["idProduit"]; // Récupère l'id du produit qu'on affiche
 
+    /* A NE GARDER QUE POUR LE DEV, A RETIRER POUR LA PRODUCTION */
+    if ($idProd === null) {
+        $idProd = 1;
+    }
+    /* A NE GARDER QUE POUR LE DEV, A RETIRER POUR LA PRODUCTION */
+
     // Requête pour récupérer les infos du produit
     foreach($dbh->query("SELECT *, est_masque::char AS est_masque_char
                          FROM sae3_skadjam._produit pr
