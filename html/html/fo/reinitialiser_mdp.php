@@ -1,28 +1,18 @@
-<?php require_once "../../connections_params.php"; ?>
+<?php require_once __DIR__ . "/../../01_premiere_connexion.php"; ?>
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-    <?php require "../../php/structure/head_front.php"; ?>
+    <?php require __DIR__ . "/../../php/structure/head_front.php"; ?>
     <title>Réinitialiser mon mot de passe</title>
 </head>
 <body>
-    <?php
-        require "../../php/structure/header_front.php";
-    ?>
-    <h2>
-        <?php
-        if($_POST["titre"] === null){
-            echo "Mot de passe oublié";
-        }else{
-            echo $_POST["titre"];
-        }
-        ?>
-    </h2>
-    <?php if($_POST["mail"] === null){ ?>
+    <?php require __DIR__ . "/../../php/structure/header_front.php"; ?>
+    <h2>Mot de passe oublié</h2>
+    <?php if($_POST['mail'] === null){ ?>
     <form action="reinitialiser_mdp.php" method="post">
         <label>Adresse mail :</label>
         <br>
-        <input type="email" name="mail" id="mail" required>
+        <input type="email" name='mail' id='mail' required>
         <br>
         <br>
         <p>Si un compte à cette adresse existe, vous recevrez un mail contenant un lien pour la réinitialisation.</p>
@@ -31,7 +21,7 @@
         <input type="submit" value="Recevoir un mail">
     </form>
     <?php }else{ ?>
-        <p>Mail entré : <?php echo $_POST["mail"]; ?></p>
+        <p>Mail entré : <?php echo $_POST['mail']; ?></p>
     <p>
     <?php
     try{
@@ -39,14 +29,14 @@
         $dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
         $dbh->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC);
 
-        $mails = $dbh->prepare('SELECT adresse_mail FROM _compte');
+        // Le mail est-il présent dans la BDD ?
         $mailPresent = false;
-
-        foreach ($mails as $mail) {
-            if($mail === $_POST['mail']){
+        foreach($dbh->query("SELECT adresse_mail FROM sae3_skadjam._compte", PDO::FETCH_ASSOC) as $mail){
+            if($mail['adresse_mail'] === $_POST['mail']){
                 $mailPresent = true;
             }
         }
+
         if($mailPresent){
             if(isset($_POST['mail'])){
                 $retour = mail($_POST['mail'],"Alizon : réinitialiser votre mot de passe","test");
@@ -68,7 +58,7 @@
     ?>
     </p>
     <?php }
-        require "../../php/structure/footer_front.php";
+        require __DIR__ . "/../../php/structure/footer_front.php";
     ?>
 </body>
 </html>

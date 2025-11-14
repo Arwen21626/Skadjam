@@ -2,18 +2,29 @@
     session_start();
     // à retirer
     $_SESSION["idCompte"] = 1;
-    require_once "../../connections_params.php";
+    require_once __DIR__ . "/../../01_premiere_connexion.php";
+
+    // Vérifie que le formulaire a été envoyé
+    if (isset($_POST['logout'])) {
+        // Supprime toutes les variables de session
+        session_unset();
+        // Détruit la session
+        session_destroy();
+        // Redirection vers la page principale
+        header("Location: index.php");
+        exit();
+    }
 ?>
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-    <?php require "../../php/structure/head_front.php"; ?>
+    <?php require __DIR__ . "/../../php/structure/head_front.php"; ?>
     <title>Mon profil</title>
 </head>
 <body>
     <?php
-        require "../../php/structure/header_front.php";
-        require "../../php/structure/navbar_front.php";
+    require __DIR__ . "/../../php/structure/header_front.php";
+    require __DIR__ . "/../../php/structure/navbar_front.php";
     ?>
     <main>
         <?php
@@ -77,17 +88,15 @@
             <form action="modifier_compte_client.php" method="post">
                 <input class="border-2 border-vertClair rounded-xl p-2" type="submit" value="Modifier mes informations">
             </form>
-            <form action="reinitialiser_mdp.php" method="post">
-                <input type="hidden" name="titre" id="titre" value="Changer mon mot de passe">
-                <input type="hidden" name="mail" id="mail" value="<?php echo $mail; ?>">
+            <form action="nouveau_mdp.php" method="post">
                 <input class="border-2 border-vertClair rounded-xl p-2" type="submit" value="Modifier mon mot de passe">    
             </form>
-            <form action="index.php" method="post">
-                <?php session_destroy(); ?>
+            <form action="page_client.php" method="post">
+                <input type="hidden" id="logout" name="logout" value="true">
                 <input class="border-2 border-vertClair rounded-xl p-2" type="submit" value="Se déconnecter">
             </form>
         </article>
     </main>
-    <?php require "../../php/structure/footer_front.php"; ?>
+    <?php require __DIR__ . "/../../php/structure/footer_front.php"; ?>
 </body>
 </html>
