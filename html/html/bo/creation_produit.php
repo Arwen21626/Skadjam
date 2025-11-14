@@ -32,57 +32,44 @@ if (isset($_POST['categorie']) && isset($_POST['nom']) && isset($_POST['prix']) 
     $enPromotion = htmlentities($_POST['mettreEnPromotion']);
     $description = htmlentities($_POST['description']);
     $unite = htmlentities($_POST['unite']);
-    echo ($unite);
     $qteUnite = htmlentities($_POST['qteUnite']);
     
 
     if (isset($_POST['mettreEnLigne']) && isset($_POST['mettreEnPromotion'])) {
-        $enPromotion = htmlentities($_POST['mettreEnPromotion']);
-        $enLigne = htmlentities($_POST['mettreEnLigne']);
+        $enPromotion = 'true';
+        $enLigne = 'true';
+        // $enPromotion = htmlentities($_POST['mettreEnPromotion']);
+        // $enLigne = htmlentities($_POST['mettreEnLigne']);
     }
     else{
-        $enPromotion = false;
-        $enLigne = false;
+        $enPromotion = 'false';
+        $enLigne = 'false';
     }
 
     //OUBLIE PAS LA PHOTO
+
+    //test tva
     //Il faut récupérer l'id du vendeur pour l'insertion
     if (verifPrix($prix) && verifQteStock($qteStock)){
         try{
             //Calcul prixTTC
-            $prix_ttc = $prix*1.2; //A adapter en fonction de la categorie
+            $prix_ttc = $prixht*1.2; //A adapter en fonction de la categorie
 
             //Insertion du produit
-            // $insertion_produit = $dbh -> prepare("INSERT INTO sae3_skadjam._produit (libelle_produit, description_produit, prix_ht, prix_ttc, est_masque, quantite_stock, quantite_unite, unite, id_categorie, id_vendeur, id_tva)
-            // VALUES ('$nom','$description', $prix, $prix_ttc, $enLigne, $qteStock, 1,'$unite',$qteUnite, $idVendeur, 1)");
-
-            echo('salut1');
-            // $test = $dbh -> query("WITH id AS (
-            //     INSERT INTO sae3_skadjam._produit 
-            //     (libelle_produit, description_produit, prix_ht, prix_ttc, est_masque, quantite_stock, quantite_unite, unite, id_categorie, id_vendeur, id_tva)
-            //     VALUES 
-            //     ('$nom','$description', $prix, $prix_ttc, false, $qteStock, $qteUnite,'$unite',1, $idVendeur, 1)
-            //     RETURNING id_produit)
-            //     SELECT * FROM id;
-            //     ");
-
-            $test = $dbh -> query("WITH id AS (
+            $insertionProduit = $dbh -> query("WITH id AS (
                 INSERT INTO sae3_skadjam._produit 
                 (libelle_produit, description_produit, prix_ht, prix_ttc, est_masque, quantite_stock, quantite_unite, unite, id_categorie, id_vendeur, id_tva)
                 VALUES 
-                ('$nom','$description', 20, 12, true, $qteStock, $qteUnite,'$unite',1, 1, 1)
+                ('$nom','$description', $prixht, $prix_ttc, $enLigne, $qteStock, $qteUnite,'$unite', $categorie, 1, 1)
                 RETURNING id_produit)
                 SELECT * FROM id;
                 ");
 
-            echo('salut2');
+            
             foreach ($test as $t) {
-                echo('salut3');
-                echo $t['id_produit'];
-                $id_prod = $t['id_produit'];
+                $idProd = $t['id_produit'];
             }
-            echo('salut4');
-            $test -> execute();
+            $insertionProduit -> execute();
             
             //$insertion_produit -> execute();
 
@@ -192,7 +179,7 @@ if (isset($_POST['categorie']) && isset($_POST['nom']) && isset($_POST['prix']) 
             
             <div class="col-start-1 col-span-2 row-start-6 flex flex-row justify-around m-4">
                 <button class="border-2 border-vertFonce rounded-2xl w-40 h-14"><a href="../bo/index_vendeur.php">Retour</a></button>
-                <input class="border-2 border-vertFonce rounded-2xl w-40 h-14" type="submit" value="Valider" href="../bo/details_produit.php">
+                <input class="border-2 border-vertFonce rounded-2xl w-40 h-14" type="submit" value="Valider" href="../bo/details_produit.php?idProduit=<?php echo $idProd ;?>">
             </div>
         </form>
     </main>
