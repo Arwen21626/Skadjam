@@ -235,18 +235,18 @@ footer a {
         margin: 2em 3em;
     }
 
-    h2+h3{
+    main>h2+h3{
         align-self: center;
         margin-top: 0;
         margin-bottom: 1em;
     }
 
-    article>p {
+    main>article>p {
         margin: 0;
         padding: 0;
     }
 
-    article>h3{
+    main>article>h3{
         margin-left: 1em;
     }
 }
@@ -433,12 +433,12 @@ footer a {
         margin-bottom: 2em;
     }
 
-    article>p {
+    main>article>p {
         margin: 0;
         padding: 0;
     }
 
-    article>h3{
+    main>article>h3{
         margin-left: 2em;
     }
 }

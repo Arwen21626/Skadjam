@@ -305,6 +305,15 @@
   .w-fit {
     width: fit-content;
   }
+  .-z-1 {
+    z-index: -1;
+  }
+  .z-0 {
+    z-index: 0;
+  }
+  .z-1 {
+    z-index: 1;
+  }
   .cursor-pointer {
     cursor: pointer;
   }
@@ -398,6 +407,9 @@
   }
   .bg-beige {
     background-color: var(--color-beige);
+  }
+  .p-0 {
+    padding: calc(var(--spacing, 0.25rem) * 0);
   }
   .p-2 {
     padding: calc(var(--spacing, 0.25rem) * 2);

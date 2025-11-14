@@ -62,7 +62,7 @@
         <section>
             <div class="flex flex-row">
                 <h2 class="mt-1 mb-1 mr-4 ml-0"><?php echo $pseudo; ?></h2>
-                <h3 class="mt-1 mb-1 mr-4 ml-0 relative top-4 text-vertFonce"><?php echo $prenom; ?> <?php echo $nom; ?></h3>
+                <h3 class="mt-1 mb-1 mr-4 ml-0 relative top-4 text-vertFonce -z-1"><?php echo $prenom; ?> <?php echo $nom; ?></h3>
             </div>
             <div>
                 <p class="m-4"><?php echo $naissance; ?></p>
@@ -83,6 +83,7 @@
                 <input class="border-2 border-vertClair rounded-xl p-2" type="submit" value="Modifier mon mot de passe">    
             </form>
             <form action="index.php" method="post">
+                <?php session_destroy(); ?>
                 <input class="border-2 border-vertClair rounded-xl p-2" type="submit" value="Se déconnecter">
             </form>
         </article>
