@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Connection client</title>
+    <title>Connexion client</title>
     
     <?php require_once(__DIR__ . '/../../php/structure/head_front.php');?>
     <style>
