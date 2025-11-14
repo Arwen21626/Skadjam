@@ -10,6 +10,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" type="text/css" href="../../css/fo/general_front.css">
+    <link rel="stylesheet" type="text/css" href="../../css/output.css">
     <title>Mon profil</title>
 </head>
 <body>
@@ -61,16 +62,16 @@
         <h2>Profil</h2>
         <section>
             <div class="flex flex-row">
-                <h2 class="my-0.1 mr-1 ml-0"><?php echo $pseudo ?></h2>
-                <h3 class="my-0.1 mr-1 ml-0 relative top-5"><?php echo "$prenom $nom" ?></h3>
+                <h2 class="my-[0.1em] mr-4 ml-0"><?php echo $pseudo ?></h2>
+                <h3 class="my-[0.1em] mr-4 ml-0 relative top-[5px]"><?php echo "$prenom $nom" ?></h3>
             </div>
             <div>
-                <p class="m-1"><?php echo $naissance ?></p>
+                <p class="m-4"><?php echo $naissance ?></p>
                 <?php for ($i=0; $i < $nbAdresse; $i++) { // Affiche toutes les adresses du client ?>
-                <p class="mx-1 my-0.5"><?php echo "$adressePostale[$i], $codePostal[$i] $ville[$i]" ?></p>
+                <p class="mx-4 my-2"><?php echo "$adressePostale[$i], $codePostal[$i] $ville[$i]" ?></p>
                 <?php } ?>
-                <p class="m-1"><?php echo $telephone ?></p>
-                <p class="m-1"><?php echo $mail ?></p>
+                <p class="m-4"><?php echo $telephone ?></p>
+                <p class="m-4"><?php echo $mail ?></p>
             </div>
         </section>
         <article class="flex flex-row justify-around">

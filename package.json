@@ -1,13 +1,29 @@
 {
   "dependencies": {
     "@tailwindcss/cli": "^4.1.17",
-    "@tailwindcss/postcss": "^4.1.17",
-    "tailwindcss": "^4.1.17"
+    "@tailwindcss/postcss": "^4.1.17"
   },
   "scripts": {
     "dev": "tailwindcss -i ./html/css/input.css -o ./html/css/output.css"
   },
   "devDependencies": {
-    "postcss": "^8.5.6"
-  }
+    "autoprefixer": "^10.4.22",
+    "postcss": "^8.5.6",
+    "tailwindcss": "^4.1.17"
+  },
+  "name": "skadjam",
+  "version": "1.0.0",
+  "main": "tailwind.config.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Arwen21626/Skadjam.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Arwen21626/Skadjam/issues"
+  },
+  "homepage": "https://github.com/Arwen21626/Skadjam#readme",
+  "description": ""
 }
