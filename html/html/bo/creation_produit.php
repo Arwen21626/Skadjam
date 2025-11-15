@@ -11,10 +11,12 @@ $idVendeur = $_SESSION['idCompte'];
 $tab_categories = [];
 
 //Tableau pour les unites
-$tab_unite = ["Pièce", "Litre","cl","g","kg","S","M","L","XL","XXL","m","cm"];
+$tab_unite = ["Piece", "Litre","cl","g","kg","S","M","L","XL","XXL","m","cm"];
 
 //Gestion de la photo
+print_r($_FILES);
 $typePhoto = $_FILES['photo']['type'];
+echo ($typePhoto);
 $nom_serv_photo = $_FILES['photo']['tmp_name'];
 
 //Requete récupération categories
@@ -26,41 +28,46 @@ if (isset($_POST['categorie']) && isset($_POST['nom']) && isset($_POST['prix']) 
     //Récupération des champs pour l'insertion
     $categorie = htmlentities($_POST['categorie']);
     $nom = htmlentities($_POST['nom']);
-    $prixht = htmlentities($_POST['prix']);
+    $prixHT = htmlentities($_POST['prix']);
     $qteStock = htmlentities($_POST['qteStock']);
     $enLigne = htmlentities($_POST['mettreEnLigne']);
     $enPromotion = htmlentities($_POST['mettreEnPromotion']);
     $description = htmlentities($_POST['description']);
     $unite = htmlentities($_POST['unite']);
     $qteUnite = htmlentities($_POST['qteUnite']);
-    
 
-    if (isset($_POST['mettreEnLigne']) && isset($_POST['mettreEnPromotion'])) {
-        $enPromotion = 'true';
+    $enPromotion = htmlentities($_POST['mettreEnPromotion']);
+    $enLigne = htmlentities($_POST['mettreEnLigne']);
+    
+    if ($_POST['mettreEnLigne'] == false) {
+        //S'il n'est pas coché il faut mettre est_masque dans la BDD à true en chaine pour eviter les problèmes
         $enLigne = 'true';
-        // $enPromotion = htmlentities($_POST['mettreEnPromotion']);
-        // $enLigne = htmlentities($_POST['mettreEnLigne']);
     }
     else{
-        $enPromotion = 'false';
         $enLigne = 'false';
     }
 
     //OUBLIE PAS LA PHOTO
+    //Déplacement et renommage du fichier photo
+
+    $currentTime = time();
+    $destination = '../../images/photo_importees';
+    move_uploaded_file($nom_serv_photo,$destination.'/'.$currentTime.'.'.$ext);
 
     //test tva
+
     //Il faut récupérer l'id du vendeur pour l'insertion
     if (verifPrix($prix) && verifQteStock($qteStock)){
         try{
             //Calcul prixTTC
-            $prix_ttc = $prixht*1.2; //A adapter en fonction de la categorie
+            $prixTTC = $prixHT*1.2; //A adapter en fonction de la categorie
 
             //Insertion du produit
             $insertionProduit = $dbh -> query("WITH id AS (
                 INSERT INTO sae3_skadjam._produit 
                 (libelle_produit, description_produit, prix_ht, prix_ttc, est_masque, quantite_stock, quantite_unite, unite, id_categorie, id_vendeur, id_tva)
                 VALUES 
-                ('$nom','$description', $prixht, $prix_ttc, $enLigne, $qteStock, $qteUnite,'$unite', $categorie, 1, 1)
+                ('$nom','$description', $prixHT, $prixTTC, $enLigne, $qteStock, $qteUnite, '$unite', $categorie, 1, 1)
                 RETURNING id_produit)
                 SELECT * FROM id;
                 ");
@@ -75,10 +82,6 @@ if (isset($_POST['categorie']) && isset($_POST['nom']) && isset($_POST['prix']) 
 
             //Insertion de la photo
             //$insertion_photo = $dbh -> prepare("INSERT INTO sae3_skadjam._photo ('url_photo, alt, titre') VALUES ");
-
-            //Récupération de l'id du produit pour accéder au details
-            // $recup_id_produit = $dbh -> prepare("SELECT id_produit FROM sae3_skadjam._produit WHERE ");
-            // $recup_id_produit -> execute();
         }
         catch (PDOException $e) {
             print "Erreur !: " . $e->getMessage() . "<br/>";
@@ -111,7 +114,7 @@ if (isset($_POST['categorie']) && isset($_POST['nom']) && isset($_POST['prix']) 
         <form class="grid grid-cols-[40%_60%] w-11/12 self-center" action="creation_produit.php" method="post">
 
             <div class="row-start-1 row-span-3 m-2 p-4 grid grid-rows-[2/3-1/3] justify-items-center">
-                <input type="file" id="photo" name="photo" class="hidden" required>
+                <input type="file" id="photo" name="photo" class="" required>
                 <!-- label qui agit comme bouton -->
                 <label for="photo" class="bg-beige w-60 h-60 rounded-xl" style="background-image: url('../../images/logo/bootstrap_icon/image.svg'); background-repeat: no-repeat; background-position: center; background-size: 60%;"></label>
                 <label for="photo">Ajouter une image</label>
