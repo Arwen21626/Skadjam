@@ -27,8 +27,8 @@
 
 <body>
     <!--header-->
-    <?php include("../../php/structure/header_back.php"); ?>
-    <?php include("../../php/structure/navbar_back.php"); ?>
+    <?php include(__DIR__ . "/../../php/structure/header_back.php"); ?>
+    <?php include(__DIR__ . "/../../php/structure/navbar_back.php"); ?>
 
     <main>
         <div class="grid grid-cols-2 gap-2 justify-items-center">
@@ -189,7 +189,7 @@
     </main>
     
     <!--footer-->
-    <?php include("../../php/structure/footer_back.php"); ?>
+    <?php include(__DIR__ . "/../../php/structure/footer_back.php"); ?>
 
 </body>
 

@@ -2,7 +2,8 @@
     <section class="bg-vertMoyen flex justify-around items-center p-2 text-bleu">
 
         <div class="flex flex-col justify-center items-center">
-            <a class="text-bleu hover:text-beige" href="#A modifier">
+
+            <a class="text-bleu hover:text-beige" href="/html/html/bo/index_vendeur.php">
                 <div class="size-12 bg-no-repeat bg-size-[auto_48px]
                             bg-[url(/html/images/logo/bootstrap_icon/house.svg)]
                             hover:bg-[url(/html/images/logo/bootstrap_icon/house-fill.svg)]">
@@ -13,6 +14,7 @@
         </div>
 
         <div class="flex flex-col justify-center items-center">
+
             <a class="text-bleu hover:text-beige" href="#A modifier">
                 <div class="size-12 bg-no-repeat bg-size-[auto_48px]
                             bg-[url(/html/images/logo/bootstrap_icon/truck.svg)]
@@ -24,6 +26,7 @@
         </div>
 
         <div class="flex flex-col justify-center items-center">
+            
             <a class="text-bleu hover:text-beige" href="/html/html/bo/creation_produit.php">
                 <div class="size-12 bg-no-repeat bg-size-[auto_48px]
                             bg-[url(/html/images/logo/bootstrap_icon/plus-square.svg)]
@@ -36,6 +39,7 @@
 
         <!-- A changer plus tard en menu burger avec la dernière icône -->
         <div class="flex flex-col justify-center items-center">
+
             <a class="text-bleu hover:text-beige" href="#A modifier">
                 <div class="size-12 bg-no-repeat bg-size-[auto_48px]
                             bg-[url(/html/images/logo/bootstrap_icon/person.svg)]
