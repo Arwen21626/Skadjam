@@ -40,6 +40,29 @@ p, a {
     }
 }
 
+@media (min-width: 768px) {
+
+    h1 {
+        font-size: 64px;
+    }
+
+    h2 {
+        font-size: 48px;
+    }
+
+    h3 {
+        font-size: 30px;
+    }
+
+    h4 {
+        font-size: 25px;
+    }
+
+    p, a, input, label{
+        font-size: 20px;
+    }
+}
+
 @import "tailwindcss";
 @tailwind utilities;
 @reference "tailwindcss";
