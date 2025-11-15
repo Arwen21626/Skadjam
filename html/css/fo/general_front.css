@@ -8,62 +8,6 @@
 
 @media (max-width: 1324px) { /* CSS Pour une taille d'écran de téléphone (idéal 428-430px, et jusqu'à 1440px au délà passe en écran PC) */
 
-    /* CSS pour le header */
-    h1 {
-        font-size: 64px;
-    }
-
-    h2 {
-        font-size: 30px;
-    }
-
-    h3 {
-        font-size: 25px;
-    }
-
-    h4 {
-        font-size: 20px;
-    }
-
-    p, a, input, label{
-        font-size: 16px;
-    }
-
-    #header-section {
-        display: flex;
-        justify-content: space-between;
-        padding: 0.5em 0.5em 0.25em;
-    }
-
-    #header-section h1 {
-        margin: 0;
-        text-align: right;
-        padding-top: 0.125em;
-    }
-
-    .logo {
-        width: 75px;
-        height: 75px;
-    }
-
-    #header-section div {
-        padding-left: 0.5em;
-    }
-
-    #nav-section section {
-        display: flex;
-        grid-template-columns: repeat(5, 1fr);
-        justify-content: space-around;
-        align-items: center;
-        padding: 0.25em;
-    }
-
-    /* Mise en page de la barre nav */
-
-    .logo_nav_div a:last-child { /* Cache le texte en dessous des images en version téléphone */
-        display: none;
-    }
-
     /* Pour l'icône de l'accueil */
     .logo_accueil .logo_nav_img {
         height: 50px;
