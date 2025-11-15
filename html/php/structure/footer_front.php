@@ -5,11 +5,11 @@
     <article class="flex flex-col max-w-1/2 pt-1 pr-2 pb-2 pl-2 md:max-w-fit md:pt-0.5 md:pr-1 md:pb-1 md:pl-1">
         <h3 class="m-2">Infos Pratiques</h3>
 
-        <a class="hover:text-rouge m-1" href="./cgv_fo.php">
+        <a class="hover:text-rouge m-1" href="/html/html/fo/cgv_fo.php">
             Conditions générales de vente
         </a>
 
-        <a class="hover:text-rouge m-1" href="./cgu_fo.php">
+        <a class="hover:text-rouge m-1" href="/html/html/fo/cgu_fo.php">
             Conditions générales d'utilisation
         </a>
     </article>

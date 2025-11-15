@@ -2,11 +2,11 @@
     <section class="flex justify-around">
         <article class="flex flex-col p-1">
             <h3 class="m-2">Infos Pratiques</h3>
-            <a class="m-1 text-bleu hover:text-beige" href="./cgv_bo.php">
+            <a class="m-1 text-bleu hover:text-beige" href="/html/html/bo/cgv_bo.php">
                 Conditions générales de vente
             </a>
 
-            <a class="m-1 text-bleu hover:text-beige" href="./cgu_bo.php">
+            <a class="m-1 text-bleu hover:text-beige" href="/html/html/bo/cgu_bo.php">
                 Conditions générales d'utilisation
             </a>
         </article>
