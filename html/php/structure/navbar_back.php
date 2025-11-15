@@ -1,36 +1,49 @@
-<nav id="nav-section">
-    <section>
-        <div class="logo_accueil logo_nav_div">
-            <a href="#A modifier">
-                <div class="logo_nav_img"></div>
+<nav class="sticky top-0 z-10">
+    <section class="bg-vertMoyen flex justify-around items-center p-2 text-bleu">
+
+        <div class="flex flex-col justify-center items-center">
+            <a class="text-bleu hover:text-beige" href="#A modifier">
+                <div class="size-12 bg-no-repeat bg-size-[auto_48px]
+                            bg-[url(/html/images/logo/bootstrap_icon/house.svg)]
+                            hover:bg-[url(/html/images/logo/bootstrap_icon/house-fill.svg)]">
+                </div>
             </a>
 
-            <a href="/html/html/bo/index_vendeur.php">Accueil</a>
+            <a class="text-bleu hover:text-beige" href="/html/html/bo/index_vendeur.php">Accueil</a>
         </div>
 
-        <div class="logo_commandes logo_nav_div">
-            <a href="#A modifier">
-                <div class="logo_nav_img"></div>
+        <div class="flex flex-col justify-center items-center">
+            <a class="text-bleu hover:text-beige" href="#A modifier">
+                <div class="size-12 bg-no-repeat bg-size-[auto_48px]
+                            bg-[url(/html/images/logo/bootstrap_icon/truck.svg)]
+                            hover:bg-[url(/html/images/logo/bootstrap_icon/truck-fill.svg)]">
+                </div>
             </a>
 
-            <a href="#A modifier">Commandes</a>
+            <a class="text-bleu hover:text-beige" href="#A modifier">Commandes</a>
         </div>
 
-        <div class="logo_creer_produit logo_nav_div">
-            <a href="/html/html/bo/creation_produit.php">
-                <div class="logo_nav_img"></div>
+        <div class="flex flex-col justify-center items-center">
+            <a class="text-bleu hover:text-beige" href="/html/html/bo/creation_produit.php">
+                <div class="size-12 bg-no-repeat bg-size-[auto_48px]
+                            bg-[url(/html/images/logo/bootstrap_icon/plus-square.svg)]
+                            hover:bg-[url(/html/images/logo/bootstrap_icon/plus-square-fill.svg)]">
+                </div>
             </a>
 
-            <a href="/html/html/bo/creation_produit.php">Créer un produit</a>
+            <a class="text-bleu hover:text-beige" href="/html/html/bo/creation_produit.php">Créer un produit</a>
         </div>
 
         <!-- A changer plus tard en menu burger avec la dernière icône -->
-        <div class="logo_profil logo_nav_div">
-            <a href="#A modifier">
-                <div class="logo_nav_img"></div>
+        <div class="flex flex-col justify-center items-center">
+            <a class="text-bleu hover:text-beige" href="#A modifier">
+                <div class="size-12 bg-no-repeat bg-size-[auto_48px]
+                            bg-[url(/html/images/logo/bootstrap_icon/person.svg)]
+                            hover:bg-[url(/html/images/logo/bootstrap_icon/person-fill.svg)]">
+                </div>
             </a>
 
-            <a href="#A modifier">Profil</a>
+            <a class="text-bleu hover:text-beige" href="#A modifier">Profil</a>
         </div>
 
     </section>

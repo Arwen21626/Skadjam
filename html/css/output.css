@@ -52,6 +52,7 @@ p, a {
 @layer theme {
   :root, :host {
     --color-vertFonce: #365452;
+    --color-vertMoyen: #588A87;
     --color-vertClair: #86D0CC;
     --color-beige: #E3D7CC;
     --color-rouge: #A70101;
@@ -209,6 +210,9 @@ p, a {
   }
 }
 @layer utilities {
+  .fixed {
+    position: fixed;
+  }
   .relative {
     position: relative;
   }
@@ -221,8 +225,14 @@ p, a {
   .top-4 {
     top: calc(var(--spacing, 0.25rem) * 4);
   }
+  .bottom-0 {
+    bottom: calc(var(--spacing, 0.25rem) * 0);
+  }
   .-z-1 {
     z-index: calc(1 * -1);
+  }
+  .z-10 {
+    z-index: 10;
   }
   .col-span-1 {
     grid-column: span 1 / span 1;
@@ -323,6 +333,9 @@ p, a {
   .mb-8 {
     margin-bottom: calc(var(--spacing, 0.25rem) * 8);
   }
+  .mb-12 {
+    margin-bottom: calc(var(--spacing, 0.25rem) * 12);
+  }
   .ml-0 {
     margin-left: calc(var(--spacing, 0.25rem) * 0);
   }
@@ -354,6 +367,10 @@ p, a {
   .size-20 {
     width: calc(var(--spacing, 0.25rem) * 20);
     height: calc(var(--spacing, 0.25rem) * 20);
+  }
+  .size-28 {
+    width: calc(var(--spacing, 0.25rem) * 28);
+    height: calc(var(--spacing, 0.25rem) * 28);
   }
   .h-5 {
     height: calc(var(--spacing, 0.25rem) * 5);
@@ -418,6 +435,9 @@ p, a {
   .w-fit {
     width: fit-content;
   }
+  .w-full {
+    width: 100%;
+  }
   .max-w-1\/2 {
     max-width: calc(1/2 * 100%);
   }
@@ -477,6 +497,9 @@ p, a {
   }
   .gap-0\.5 {
     gap: calc(var(--spacing, 0.25rem) * 0.5);
+  }
+  .gap-1 {
+    gap: calc(var(--spacing, 0.25rem) * 1);
   }
   .gap-2 {
     gap: calc(var(--spacing, 0.25rem) * 2);
@@ -542,6 +565,12 @@ p, a {
   .bg-vertClair {
     background-color: var(--color-vertClair);
   }
+  .bg-vertFonce {
+    background-color: var(--color-vertFonce);
+  }
+  .bg-vertMoyen {
+    background-color: var(--color-vertMoyen);
+  }
   .bg-\[url\(\/html\/images\/logo\/bootstrap_icon\/cart\.svg\)\] {
     background-image: url(/html/images/logo/bootstrap_icon/cart.svg);
   }
@@ -550,6 +579,9 @@ p, a {
   }
   .bg-\[url\(\/html\/images\/logo\/bootstrap_icon\/person\.svg\)\] {
     background-image: url(/html/images/logo/bootstrap_icon/person.svg);
+  }
+  .bg-\[url\(\/html\/images\/logo\/bootstrap_icon\/plus-square\.svg\)\] {
+    background-image: url(/html/images/logo/bootstrap_icon/plus-square.svg);
   }
   .bg-\[url\(\/html\/images\/logo\/bootstrap_icon\/search\.svg\)\] {
     background-image: url(/html/images/logo/bootstrap_icon/search.svg);
@@ -581,6 +613,9 @@ p, a {
   .p-4 {
     padding: calc(var(--spacing, 0.25rem) * 4);
   }
+  .p-6 {
+    padding: calc(var(--spacing, 0.25rem) * 6);
+  }
   .p-15 {
     padding: calc(var(--spacing, 0.25rem) * 15);
   }
@@ -608,11 +643,17 @@ p, a {
   .pl-3 {
     padding-left: calc(var(--spacing, 0.25rem) * 3);
   }
+  .pl-12 {
+    padding-left: calc(var(--spacing, 0.25rem) * 12);
+  }
   .text-center {
     text-align: center;
   }
   .text-right {
     text-align: right;
+  }
+  .text-bleu {
+    color: var(--color-bleu);
   }
   .text-rouge {
     color: var(--color-rouge);
@@ -652,6 +693,13 @@ p, a {
       }
     }
   }
+  .hover\:bg-\[url\(\/html\/images\/logo\/bootstrap_icon\/plus-square-fill\.svg\)\] {
+    &:hover {
+      @media (hover: hover) {
+        background-image: url(/html/images/logo/bootstrap_icon/plus-square-fill.svg);
+      }
+    }
+  }
   .hover\:bg-\[url\(\/html\/images\/logo\/bootstrap_icon\/search-selected\.svg\)\] {
     &:hover {
       @media (hover: hover) {
@@ -666,6 +714,13 @@ p, a {
       }
     }
   }
+  .hover\:text-beige {
+    &:hover {
+      @media (hover: hover) {
+        color: var(--color-beige);
+      }
+    }
+  }
   .hover\:text-rouge {
     &:hover {
       @media (hover: hover) {
@@ -673,9 +728,24 @@ p, a {
       }
     }
   }
+  .md\:sticky {
+    @media (width >= 48rem) {
+      position: sticky;
+    }
+  }
+  .md\:top-0 {
+    @media (width >= 48rem) {
+      top: calc(var(--spacing, 0.25rem) * 0);
+    }
+  }
   .md\:mr-10 {
     @media (width >= 48rem) {
       margin-right: calc(var(--spacing, 0.25rem) * 10);
+    }
+  }
+  .md\:mb-0 {
+    @media (width >= 48rem) {
+      margin-bottom: calc(var(--spacing, 0.25rem) * 0);
     }
   }
   .md\:flex {
@@ -693,10 +763,10 @@ p, a {
       display: inline-block;
     }
   }
-  .md\:size-16 {
+  .md\:size-14 {
     @media (width >= 48rem) {
-      width: calc(var(--spacing, 0.25rem) * 16);
-      height: calc(var(--spacing, 0.25rem) * 16);
+      width: calc(var(--spacing, 0.25rem) * 14);
+      height: calc(var(--spacing, 0.25rem) * 14);
     }
   }
   .md\:size-28 {
