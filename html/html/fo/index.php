@@ -1,5 +1,5 @@
 <?php
-include('../../01_premiere_connexion.php');
+include(__DIR__ . '/../../01_premiere_connexion.php');
 const PAGE_SIZE = 3;?>
 
 <!DOCTYPE html>
@@ -14,7 +14,7 @@ const PAGE_SIZE = 3;?>
 
 <body>
     <!--header-->
-    <?php include "../../php/structure/header_front.php"; ?>
+    <?php include __DIR__ . "/../../php/structure/header_front.php"; ?>
 
     <main>
         <section class="carreImages">
@@ -155,7 +155,7 @@ const PAGE_SIZE = 3;?>
     </main>
     
     <!--footer-->
-    <?php include "../../php/structure/footer_front.php"; ?>
+    <?php include __DIR__ . "/../../php/structure/footer_front.php"; ?>
 
 </body>
 

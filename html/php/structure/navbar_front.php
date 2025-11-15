@@ -3,17 +3,19 @@
     <section class="flex justify-around items-center p-1">
 
         <div class="md:flex md:flex-col md:justify-center md:items-center">
-            <a class="items-center" href="#A modifier">
+
+            <a class="items-center" href="/html/html/fo/index.php">
                 <div class="size-12 bg-no-repeat bg-size-[auto_48px] 
                 bg-[url(/html/images/logo/bootstrap_icon/house.svg)] 
                 hover:bg-[url(/html/images/logo/bootstrap_icon/house-fill.svg)]">
                 </div>
             </a>
 
-            <a class="text-vertFonce hover:text-rouge hidden md:inline-block" href="#A modifier">Accueil</a>
+            <a class="text-vertFonce hover:text-rouge hidden md:inline-block" href="/html/html/fo/index.php">Accueil</a>
         </div>
             
         <div class="md:flex md:flex-col md:justify-center md:items-center">
+
             <a  href="#A modifier">
                 <div class="size-12 bg-no-repeat bg-size-[auto_48px] 
                 bg-[url(/html/images/logo/bootstrap_icon/truck.svg)] 
@@ -25,6 +27,7 @@
         </div>
             
         <div class="md:flex md:flex-col md:justify-center md:items-center">
+
             <a href="#A modifier">
                 <div class="size-12 bg-no-repeat bg-size-[auto_48px] 
                 bg-[url(/html/images/logo/bootstrap_icon/search.svg)] 
@@ -36,6 +39,7 @@
         </div>
 
         <div class="md:flex md:flex-col md:justify-center md:items-center">
+
             <a href="#A modifier">
                 <div class="size-12 bg-no-repeat bg-size-[auto_48px] 
                 bg-[url(/html/images/logo/bootstrap_icon/cart.svg)] 
@@ -46,8 +50,8 @@
             <a class="text-vertFonce hover:text-rouge hidden md:inline-block" href="#A modifier">Panier</a>
         </div>
             
-        <!-- A changer plus tard en menu burger avec la dernière icône -->
         <div class="md:flex md:flex-col md:justify-center md:items-center">
+
             <a href="#A modifier">
                 <div class="size-12 bg-no-repeat bg-size-[auto_48px] 
                 bg-[url(/html/images/logo/bootstrap_icon/person.svg)] 
