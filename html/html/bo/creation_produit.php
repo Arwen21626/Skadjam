@@ -114,7 +114,7 @@ if (isset($_POST['categorie']) && isset($_POST['nom']) && isset($_POST['prix']) 
         <form class="grid grid-cols-[40%_60%] w-11/12 self-center" action="creation_produit.php" method="post">
 
             <div class="row-start-1 row-span-3 m-2 p-4 grid grid-rows-[2/3-1/3] justify-items-center">
-                <input type="file" id="photo" name="photo" class="" required>
+                <input type="file" id="photo" name="photo" class="hidden" required>
                 <!-- label qui agit comme bouton -->
                 <label for="photo" class="bg-beige w-60 h-60 rounded-xl" style="background-image: url('../../images/logo/bootstrap_icon/image.svg'); background-repeat: no-repeat; background-position: center; background-size: 60%;"></label>
                 <label for="photo">Ajouter une image</label>
