@@ -243,6 +243,9 @@ p, a {
   .m-0 {
     margin: calc(var(--spacing, 0.25rem) * 0);
   }
+  .m-1 {
+    margin: calc(var(--spacing, 0.25rem) * 1);
+  }
   .m-2 {
     margin: calc(var(--spacing, 0.25rem) * 2);
   }
@@ -395,6 +398,9 @@ p, a {
   .w-fit {
     width: fit-content;
   }
+  .max-w-1\/2 {
+    max-width: calc(1/2 * 100%);
+  }
   .min-w-3xs {
     min-width: var(--container-3xs, 16rem);
   }
@@ -448,6 +454,9 @@ p, a {
   }
   .justify-items-center {
     justify-items: center;
+  }
+  .gap-0\.5 {
+    gap: calc(var(--spacing, 0.25rem) * 0.5);
   }
   .gap-2 {
     gap: calc(var(--spacing, 0.25rem) * 2);
@@ -513,8 +522,20 @@ p, a {
   .bg-vertClair {
     background-color: var(--color-vertClair);
   }
+  .bg-\[url\(\/html\/images\/logo\/bootstrap_icon\/cart\.svg\)\] {
+    background-image: url(/html/images/logo/bootstrap_icon/cart.svg);
+  }
   .bg-\[url\(\/html\/images\/logo\/bootstrap_icon\/house\.svg\)\] {
     background-image: url(/html/images/logo/bootstrap_icon/house.svg);
+  }
+  .bg-\[url\(\/html\/images\/logo\/bootstrap_icon\/person\.svg\)\] {
+    background-image: url(/html/images/logo/bootstrap_icon/person.svg);
+  }
+  .bg-\[url\(\/html\/images\/logo\/bootstrap_icon\/search\.svg\)\] {
+    background-image: url(/html/images/logo/bootstrap_icon/search.svg);
+  }
+  .bg-\[url\(\/html\/images\/logo\/bootstrap_icon\/truck\.svg\)\] {
+    background-image: url(/html/images/logo/bootstrap_icon/truck.svg);
   }
   .bg-size-\[auto_48px\] {
     background-size: auto 48px;
@@ -524,6 +545,9 @@ p, a {
   }
   .p-0 {
     padding: calc(var(--spacing, 0.25rem) * 0);
+  }
+  .p-0\.5 {
+    padding: calc(var(--spacing, 0.25rem) * 0.5);
   }
   .p-1 {
     padding: calc(var(--spacing, 0.25rem) * 1);
@@ -587,10 +611,38 @@ p, a {
       background-color: var(--color-beige);
     }
   }
+  .hover\:bg-\[url\(\/html\/images\/logo\/bootstrap_icon\/cart-fill\.svg\)\] {
+    &:hover {
+      @media (hover: hover) {
+        background-image: url(/html/images/logo/bootstrap_icon/cart-fill.svg);
+      }
+    }
+  }
   .hover\:bg-\[url\(\/html\/images\/logo\/bootstrap_icon\/house-fill\.svg\)\] {
     &:hover {
       @media (hover: hover) {
         background-image: url(/html/images/logo/bootstrap_icon/house-fill.svg);
+      }
+    }
+  }
+  .hover\:bg-\[url\(\/html\/images\/logo\/bootstrap_icon\/person-fill\.svg\)\] {
+    &:hover {
+      @media (hover: hover) {
+        background-image: url(/html/images/logo/bootstrap_icon/person-fill.svg);
+      }
+    }
+  }
+  .hover\:bg-\[url\(\/html\/images\/logo\/bootstrap_icon\/search-selected\.svg\)\] {
+    &:hover {
+      @media (hover: hover) {
+        background-image: url(/html/images/logo/bootstrap_icon/search-selected.svg);
+      }
+    }
+  }
+  .hover\:bg-\[url\(\/html\/images\/logo\/bootstrap_icon\/truck-fill\.svg\)\] {
+    &:hover {
+      @media (hover: hover) {
+        background-image: url(/html/images/logo/bootstrap_icon/truck-fill.svg);
       }
     }
   }
@@ -606,9 +658,9 @@ p, a {
       margin-right: calc(var(--spacing, 0.25rem) * 10);
     }
   }
-  .md\:contents {
+  .md\:inline {
     @media (width >= 48rem) {
-      display: contents;
+      display: inline;
     }
   }
   .md\:justify-end {
