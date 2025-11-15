@@ -1,7 +1,7 @@
 <?php
 
-include( __DIR__ . '/../../01_premiere_connexion.php');
-require_once(__DIR__ . '/../../php/verification_formulaire.php');
+    include( __DIR__ . '/../../01_premiere_connexion.php');
+    require_once(__DIR__ . '/../../php/verification_formulaire.php');
 
 session_start();
 //Récupération id vendeur
@@ -117,7 +117,7 @@ if (isset($_POST['categorie']) && isset($_POST['nom']) && isset($_POST['prix']) 
                 <input type="file" id="photo" name="photo" class="hidden" required>
                 <!-- label qui agit comme bouton -->
                 <label for="photo" class="bg-beige w-60 h-60 rounded-xl" style="background-image: url('../../images/logo/bootstrap_icon/image.svg'); background-repeat: no-repeat; background-position: center; background-size: 60%;"></label>
-                <label for="photo">Ajouter une image</label>
+                <label for="photo">Ajouter une image*</label>
             </div>
             
 
