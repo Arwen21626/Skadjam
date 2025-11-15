@@ -1,27 +1,27 @@
-<nav id="nav-section">
+<nav class="bg-beige sticky top-0">
     <section>
         <div class="logo_accueil logo_nav_div">
             <a href="#A modifier">
                 <div class="logo_nav_img"></div>
             </a>
 
-            <a href="#A modifier">Accueil</a>
+            <a class="text-vertFonce hover:text-rouge" href="#A modifier">Accueil</a>
         </div>
             
         <div class="logo_commandes logo_nav_div">
-            <a href="#A modifier">
+            <a  href="#A modifier">
                 <div class="logo_nav_img"></div>
             </a>
 
-            <a href="#A modifier">Commandes</a>
+            <a class="text-vertFonce hover:text-rouge" href="#A modifier">Commandes</a>
         </div>
             
         <div class="logo_recherche logo_nav_div">
             <a href="#A modifier">
-                <div class="logo_nav_img"></div>
+                <div class="bg-[url(/html/images/logo/bootstrap_icon/person.svg)]"></div>
             </a>
 
-            <a href="#A modifier">Recherche</a>
+            <a class="text-vertFonce hover:text-rouge" href="#A modifier">Recherche</a>
         </div>
 
         <div class="logo_panier logo_nav_div">
@@ -29,7 +29,7 @@
                 <div class="logo_nav_img"></div>
             </a>
 
-            <a href="#A modifier">Panier</a>
+            <a class="text-vertFonce hover:text-rouge" href="#A modifier">Panier</a>
         </div>
             
         <!-- A changer plus tard en menu burger avec la dernière icône -->
@@ -38,7 +38,7 @@
                 <div class="logo_nav_img"></div>
             </a>
 
-            <a href="#A modifier">Profil</a>
+            <a class="text-vertFonce hover:text-rouge" href="#A modifier">Profil</a>
         </div>
             
     </section>

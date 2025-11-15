@@ -1,4 +1,4 @@
-<header>
+<header class="bg-vertClair">
     <section id="header-section">
         <div>
             <a href="#A modifier">
@@ -6,7 +6,6 @@
             </a>
         </div>
         
-
-        <h1>Alizon</h1>
+        <h1 class="text-vertFonce">Alizon</h1>
     </section>
 </header>

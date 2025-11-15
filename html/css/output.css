@@ -1,5 +1,36 @@
 /*! tailwindcss v4.1.17 | MIT License | https://tailwindcss.com */
 @layer properties;
+@font-face {
+  font-family: 'MavenPro';
+  src: url("/html/font/MavenPro/MavenPro-Regular.ttf");
+}
+@font-face {
+  font-family: 'Amiko';
+  src: url("/html/font/Amiko/Amiko-Regular.ttf");
+}
+h1, h2, h3, h4 {
+  font-family: 'MavenPro';
+}
+p, a {
+  font-family: 'Amiko';
+}
+@media (max-width: 768px) {
+  h1 {
+    font-size: 64px;
+  }
+  h2 {
+    font-size: 30px;
+  }
+  h3 {
+    font-size: 25px;
+  }
+  h4 {
+    font-size: 20px;
+  }
+  p, a, input, label {
+    font-size: 16px;
+  }
+}
 @layer theme, base, components, utilities;
 @layer theme {
   :root, :host {
@@ -163,6 +194,12 @@
 @layer utilities {
   .relative {
     position: relative;
+  }
+  .sticky {
+    position: sticky;
+  }
+  .top-0 {
+    top: calc(var(--spacing, 0.25rem) * 0);
   }
   .top-4 {
     top: calc(var(--spacing, 0.25rem) * 4);
@@ -480,6 +517,12 @@
   .bg-bleu {
     background-color: var(--color-bleu);
   }
+  .bg-vertClair {
+    background-color: var(--color-vertClair);
+  }
+  .bg-\[url\(\/html\/images\/logo\/bootstrap_icon\/person\.svg\)\] {
+    background-image: url(/html/images/logo/bootstrap_icon/person.svg);
+  }
   .p-0 {
     padding: calc(var(--spacing, 0.25rem) * 0);
   }
@@ -527,6 +570,13 @@
       background-color: var(--color-beige);
     }
   }
+  .hover\:text-rouge {
+    &:hover {
+      @media (hover: hover) {
+        color: var(--color-rouge);
+      }
+    }
+  }
   .md\:mr-10 {
     @media (width >= 48rem) {
       margin-right: calc(var(--spacing, 0.25rem) * 10);
@@ -536,346 +586,6 @@
     @media (width >= 48rem) {
       justify-content: flex-end;
     }
-  }
-}
-@font-face {
-  font-family: 'MavenPro';
-  src: url("/html/font/MavenPro/MavenPro-Regular.ttf");
-}
-@font-face {
-  font-family: 'Amiko';
-  src: url("/html/font/Amiko/Amiko-Regular.ttf");
-}
-body {
-  margin: 0;
-  padding: 0;
-}
-h1, h2, h3, h4 {
-  font-family: 'MavenPro';
-}
-p, a {
-  font-family: 'Amiko';
-  text-decoration: none;
-}
-a:hover {
-  color: #A70101;
-}
-header {
-  background-color: #86D0CC;
-}
-header h1 {
-  color: #365452;
-}
-#nav-section {
-  background-color: #E3D7CC;
-  position: sticky;
-  top: 0;
-}
-.logo_nav_div a {
-  color: #365452;
-}
-.logo_nav_div a:hover {
-  color: #A70101;
-}
-footer {
-  background-color: #86D0CC;
-  color: #365452;
-}
-footer a {
-  color: #365452;
-}
-@media (max-width: 1324px) {
-  h1 {
-    font-size: 64px;
-  }
-  h2 {
-    font-size: 30px;
-  }
-  h3 {
-    font-size: 25px;
-  }
-  h4 {
-    font-size: 20px;
-  }
-  p, a, input, label {
-    font-size: 16px;
-  }
-  #header-section {
-    display: flex;
-    justify-content: space-between;
-    padding: 0.5em 0.5em 0.25em;
-  }
-  #header-section h1 {
-    margin: 0;
-    text-align: right;
-    padding-top: 0.125em;
-  }
-  .logo {
-    width: 75px;
-    height: 75px;
-  }
-  #header-section div {
-    padding-left: 0.5em;
-  }
-  #nav-section section {
-    display: flex;
-    grid-template-columns: repeat(5, 1fr);
-    justify-content: space-around;
-    align-items: center;
-    padding: 0.25em;
-  }
-  .logo_nav_div a:last-child {
-    display: none;
-  }
-  .logo_accueil .logo_nav_img {
-    height: 50px;
-    width: 50px;
-    background-image: url("/html/images/logo/bootstrap_icon/house.svg");
-    background-repeat: no-repeat;
-    background-size: 50px;
-  }
-  .logo_accueil .logo_nav_img:hover {
-    background-image: url("/html/images/logo/bootstrap_icon/house-fill.svg");
-  }
-  .logo_commandes .logo_nav_img {
-    height: 50px;
-    width: 50px;
-    background-image: url("/html/images/logo/bootstrap_icon/truck.svg");
-    background-repeat: no-repeat;
-    background-size: 50px;
-  }
-  .logo_commandes .logo_nav_img:hover {
-    background-image: url("/html/images/logo/bootstrap_icon/truck-fill.svg");
-  }
-  .logo_recherche .logo_nav_img {
-    height: 50px;
-    width: 50px;
-    background-image: url("/html/images/logo/bootstrap_icon/search.svg");
-    background-repeat: no-repeat;
-    background-size: 50px;
-  }
-  .logo_recherche .logo_nav_img:hover {
-    background-image: url("/html/images/logo/bootstrap_icon/search-selected.svg");
-  }
-  .logo_panier .logo_nav_img {
-    height: 50px;
-    width: 50px;
-    background-image: url("/html/images/logo/bootstrap_icon/cart.svg");
-    background-repeat: no-repeat;
-    background-size: 50px;
-  }
-  .logo_panier .logo_nav_img:hover {
-    background-image: url("/html/images/logo/bootstrap_icon/cart-fill.svg");
-  }
-  .logo_profil .logo_nav_img {
-    height: 50px;
-    width: 50px;
-    background-image: url("/html/images/logo/bootstrap_icon/person.svg");
-    background-repeat: no-repeat;
-    background-size: 50px;
-  }
-  .logo_profil .logo_nav_img:hover {
-    background-image: url("/html/images/logo/bootstrap_icon/person-fill.svg");
-  }
-  footer {
-    display: flex;
-    flex-wrap: wrap;
-    padding: 0.1em;
-  }
-  footer article {
-    display: flex;
-    flex-direction: column;
-    max-width: 50%;
-    padding: 0.25em 0.5em 0.5em 0.5em;
-  }
-  footer #section-reseaux {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 2.5px;
-  }
-  footer .reseau_item {
-    align-self: center;
-  }
-  footer h3 {
-    margin: 0.5em;
-  }
-  footer a {
-    margin: 0.2em;
-  }
-  .logo_reseaux {
-    width: 50px;
-    height: 50px;
-  }
-  main {
-    display: flex;
-    flex-direction: column;
-  }
-  main>h2 {
-    align-self: center;
-    margin: 0.5em;
-  }
-  main {
-    margin: 2em 3em;
-  }
-  main>h2+h3 {
-    align-self: center;
-    margin-top: 0;
-    margin-bottom: 1em;
-  }
-  main>article>p {
-    margin: 0;
-    padding: 0;
-  }
-  main>article>h3 {
-    margin-left: 1em;
-  }
-}
-@media (min-width: 1324px) {
-  h1 {
-    font-size: 96px;
-  }
-  h2 {
-    font-size: 64px;
-  }
-  h3 {
-    font-size: 48px;
-  }
-  h4 {
-    font-size: 40px;
-  }
-  p, a, input, label {
-    font-size: 30px;
-  }
-  #header-section {
-    display: grid;
-    grid-template-columns: 1fr auto 1fr;
-    padding: 1.5em;
-  }
-  #header-section h1 {
-    text-align: center;
-    margin: 0;
-    padding-top: 0.25em;
-  }
-  .logo {
-    width: 150px;
-    height: 150px;
-  }
-  #header-section div {
-    padding-left: 3em;
-  }
-  #nav-section section {
-    display: flex;
-    grid-template-columns: repeat(5, 1fr);
-    justify-content: space-around;
-    align-items: center;
-    padding: 1em;
-  }
-  .logo_nav_div {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-  }
-  .logo_accueil .logo_nav_img {
-    height: 75px;
-    width: 75px;
-    background-image: url("/html/images/logo/bootstrap_icon/house.svg");
-    background-repeat: no-repeat;
-    background-size: 75px;
-  }
-  .logo_accueil .logo_nav_img:hover {
-    background-image: url("/html/images/logo/bootstrap_icon/house-fill.svg");
-  }
-  .logo_commandes .logo_nav_img {
-    height: 75px;
-    width: 75px;
-    background-image: url("/html/images/logo/bootstrap_icon/truck.svg");
-    background-repeat: no-repeat;
-    background-size: 75px;
-  }
-  .logo_commandes .logo_nav_img:hover {
-    background-image: url("/html/images/logo/bootstrap_icon/truck-fill.svg");
-  }
-  .logo_recherche .logo_nav_img {
-    height: 75px;
-    width: 75px;
-    background-image: url("/html/images/logo/bootstrap_icon/search.svg");
-    background-repeat: no-repeat;
-    background-size: 75px;
-  }
-  .logo_recherche .logo_nav_img:hover {
-    background-image: url("/html/images/logo/bootstrap_icon/search-selected.svg");
-  }
-  .logo_panier .logo_nav_img {
-    height: 75px;
-    width: 75px;
-    background-image: url("/html/images/logo/bootstrap_icon/cart.svg");
-    background-repeat: no-repeat;
-    background-size: 75px;
-  }
-  .logo_panier .logo_nav_img:hover {
-    background-image: url("/html/images/logo/bootstrap_icon/cart-fill.svg");
-  }
-  .logo_profil .logo_nav_img {
-    height: 75px;
-    width: 75px;
-    background-image: url("/html/images/logo/bootstrap_icon/person.svg");
-    background-repeat: no-repeat;
-    background-size: 75px;
-  }
-  .logo_profil .logo_nav_img:hover {
-    background-image: url("/html/images/logo/bootstrap_icon/person-fill.svg");
-  }
-  footer {
-    display: flex;
-    justify-content: space-around;
-  }
-  footer article {
-    display: flex;
-    flex-direction: column;
-    padding: 0.5em 1em 1em 1em;
-  }
-  footer #section-reseaux {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 5px;
-    margin-left: 4em;
-  }
-  footer .reseau_item {
-    align-self: center;
-  }
-  footer h3 {
-    margin: 0.5em;
-  }
-  footer a {
-    margin: 0.2em;
-  }
-  .logo_reseaux {
-    width: 75px;
-    height: 75px;
-  }
-  main {
-    display: flex;
-    flex-direction: column;
-  }
-  main>h2 {
-    align-self: center;
-    margin: 0.5em;
-  }
-  main {
-    margin: 2em 5em;
-  }
-  main>h2+h3 {
-    align-self: center;
-    margin-top: 0;
-    margin-bottom: 2em;
-  }
-  main>article>p {
-    margin: 0;
-    padding: 0;
-  }
-  main>article>h3 {
-    margin-left: 2em;
   }
 }
 @property --tw-border-style {
