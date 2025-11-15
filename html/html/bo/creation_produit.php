@@ -1,7 +1,7 @@
 <?php
 
-include(__DIR__.'/../../01_premiere_connexion.php');
-require_once('../../php/verification_formulaire.php');
+include( __DIR__ . '/../../01_premiere_connexion.php');
+require_once(__DIR__ . '/../../php/verification_formulaire.php');
 
 session_start();
 //Récupération id vendeur
@@ -107,8 +107,8 @@ if (isset($_POST['categorie']) && isset($_POST['nom']) && isset($_POST['prix']) 
     </style>
 </head>
 <body>
-    <?php include('../../php/structure/header_back.php');?>
-    <?php include('../../php/structure/navbar_back.php');?>
+    <?php include(__DIR__ . '/../../php/structure/header_back.php');?>
+    <?php include(__DIR__ . '/../../php/structure/navbar_back.php');?>
     <main>
         <h2>Création d'un produit</h2>
         <form class="grid grid-cols-[40%_60%] w-11/12 self-center" action="creation_produit.php" method="post">
@@ -186,7 +186,7 @@ if (isset($_POST['categorie']) && isset($_POST['nom']) && isset($_POST['prix']) 
             </div>
         </form>
     </main>
-    <?php include('../../php/structure/footer_back.php');?>
+    <?php include(__DIR__ . '/../../php/structure/footer_back.php');?>
 </body>
 </html>
 
