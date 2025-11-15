@@ -47,11 +47,11 @@
         </div>
 
 
-        <div class="mt-15 flex flex-row justify-around">
+        <div class="mt-15 flex flex-row">
             <button class="border-2 border-vertFonce rounded-2xl w-auto h-14 px-7"><a href="../bo/creation_produit.php">Ajouter un produit</a></button>
             <button class="border-2 border-vertFonce rounded-2xl w-auto h-14 px-7"><a href="">Statistiques</a></button>
             <button class="border-2 border-vertFonce rounded-2xl w-auto h-14 px-7"><a href="">Avis récents</a></button>
-            <button class="border-2 border-vertFonce rounded-2xl w-auto h-14 px-7"><a href="">Vider le catalogue</a></button>
+            <button class="border-2 border-vertFonce rounded-2xl w-auto h-14 px-7"><a href="../bo/vider_catalogue.php">Vider le catalogue</a></button>
         </div>
 
         <!--Début du catalogue-->
