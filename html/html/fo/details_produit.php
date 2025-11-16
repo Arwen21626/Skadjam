@@ -1,13 +1,17 @@
 <?php 
     include("html/01_premiere_connexion.php");
     
-    $idProd = $_GET["idProduit"]; // Récupère l'id du produit qu'on affiche
-
-    /* A NE GARDER QUE POUR LE DEV, A RETIRER POUR LA PRODUCTION */
-    if ($idProd === null) {
+    /* Temporaire pour le dev, à changer au moment de la finalisation */
+    if (isset($_GET["idProduit"])) {
+        $idProd = $_GET["idProduit"]; // Récupère l'id du produit qu'on affiche
+    }
+    else { 
         $idProd = 1;
     }
-    /* A NE GARDER QUE POUR LE DEV, A RETIRER POUR LA PRODUCTION */
+    /* Temporaire pour le dev, à changer au moment de la finalisation */
+
+    
+    
 
     // Requête pour récupérer les infos du produit
     foreach($dbh->query("SELECT *, est_masque::char AS est_masque_char
@@ -56,29 +60,34 @@
     <?php require("html/php/structure/header_front.php"); ?>
     <?php require("html/php/structure/navbar_front.php"); ?>
 
-    <main>
+    <main class="p-4">
         <!-- Section Description -->
-        <section>
-            <article class="flex-col"> <!-- Titrage -->
+        <section class="flex flex-col">
+            <article class="p-2"> <!-- Titrage -->
                 <h3> <?php echo $libelleProd; ?></h3>
                 <p class="ml-4">Catégorie : <?php echo $libelleCat; ?></p>
             </article>
             
             <article>
-                <img src="#jsp" alt="jsp">
-                <div>
-                    <h4> <?php echo $prixTTC ?>€</h4>
-                    <p>
-                        <?php 
-                            if ($produitStock > 0) { // Le stock est supérieur à 0, le produit est disponible
-                                echo "Disponible"; 
-                            }
-                            else { // Pour 
-                                echo "Indisponible";
-                            }
-                        ?>
-                    </p>
-                    <p>Vendu par <?php echo $nomVendeur ?></p>
+                <img src="/html/images/photos_vrac_converties/cidre_breton_brut.webp" alt="PLACE-HOLDER" title="PLACE-HOLDER"
+                class="size-1/2 border
+                       md:size-1/3">
+                <div class="p-2 flex flex-col items-start">
+                    <div class="flex ">
+                        <h3 class="text-center pr-2 self-center"> <?php echo $prixTTC ?>€</h3>
+                        <p class="text-center pl-2 mt-1 self-center">
+                            <?php 
+                                if ($produitStock > 0) { // Le stock est supérieur à 0, le produit est disponible
+                                    echo "Disponible"; 
+                                }
+                                else { // Pour 
+                                    echo "Indisponible";
+                                }
+                            ?>
+                        </p>
+                    </div>
+                    
+                    <p class="text-center">Vendu par <?php echo $nomVendeur ?></p>
                     <button>Ajouter au panier</button>
                 </div>
             </article>
