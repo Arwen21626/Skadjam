@@ -1,13 +1,13 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-    <?php require "../../php/structure/head_front.php"; ?>
+    <?php require __DIR__ . "/../../php/structure/head_front.php"; ?>
     <title>Conditions Générales d'Utilisateurs</title>
 </head>
 <body>
     <?php
-        require "../../php/structure/header_front.php";
-        require "../../php/structure/navbar_front.php";
+        require __DIR__ . "/../../php/structure/header_front.php";
+        require __DIR__ . "/../../php/structure/navbar_front.php";
     ?>
     <main>
         <h2>Conditions générales d'utilisation</h2>
@@ -99,6 +99,6 @@
             <p>Pour toute question relative à l’application des présentes CGU, vous pouvez joindre l’éditeur aux coordonnées inscrites à l’<a href="#mentionsLegalesFO">Article 1</a>.</p>
         </article>
     </main>
-    <?php require "../../php/structure/footer_front.php"; ?>
+    <?php require __DIR__ . "/../../php/structure/footer_front.php"; ?>
 </body>
 </html>

@@ -68,7 +68,6 @@
         </section>
     </main>
 
-    
     <?php require_once("html/php/structure/footer_front.php");?>
 </body>
 </html>

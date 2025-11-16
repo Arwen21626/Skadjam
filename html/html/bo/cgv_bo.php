@@ -1,13 +1,13 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-    <?php require "../../php/structure/head_back.php"; ?>
+    <?php require __DIR__ . "/../../php/structure/head_back.php"; ?>
     <title>Conditions Générales de Vente</title>
 </head>
 <body>
     <?php
-        require "../../php/structure/header_back.php";
-        require "../../php/structure/navbar_back.php";
+        require __DIR__ . "/../../php/structure/header_back.php";
+        require __DIR__ . "/../../php/structure/navbar_back.php";
     ?>
     <main>
         <h2>Conditions générales de vente</h2>
@@ -66,6 +66,6 @@
             <p>Les présentes conditions de vente à distance sont soumises à la loi française. Pour tous litiges ou contentieux, le Tribunal compétent sera celui de Lannion.</p>
         </article>
     </main>
-    <?php require "../../php/structure/footer_back.php"; ?>
+    <?php require __DIR__ . "/../../php/structure/footer_back.php"; ?>
 </body>
 </html>
