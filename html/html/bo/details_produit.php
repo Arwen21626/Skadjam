@@ -18,6 +18,11 @@
                         , PDO::FETCH_ASSOC) as $row){
         $produit = $row;
     }
+
+    function supprimer($id){
+        $supp = $dbh->query("DELETE FROM sae3_skadjam._produit WHERE id_produit = $id");
+        $supp -> execute();
+    }
 ?>
 
 <!DOCTYPE html>
