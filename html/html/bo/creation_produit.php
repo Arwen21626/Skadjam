@@ -14,7 +14,7 @@ $tab_categories = [];
 $tab_unite = ["Piece", "Litre","cl","g","kg","S","M","L","XL","XXL","m","cm"];
 
 //Gestion de la photo
-print_r($_FILES);
+//print_r($_FILES);
 $typePhoto = $_FILES['photo']['type'];
 echo ($typePhoto);
 $nom_serv_photo = $_FILES['photo']['tmp_name'];
@@ -182,7 +182,7 @@ if (isset($_POST['categorie']) && isset($_POST['nom']) && isset($_POST['prix']) 
             
             <div class="col-start-1 col-span-2 row-start-6 flex flex-row justify-around m-4">
                 <button class="border-2 border-vertFonce rounded-2xl w-40 h-14"><a href="../bo/index_vendeur.php">Retour</a></button>
-                <input class="border-2 border-vertFonce rounded-2xl w-40 h-14" type="submit" value="Valider" href="../bo/details_produit.php?idProduit=<?php echo $idProd ;?>">
+                <a href="details_produit.php?idProduit=<?php echo $idProd ;?>"><input class="border-2 border-vertFonce rounded-2xl w-40 h-14" type="submit" value="Valider"></a>
             </div>
         </form>
     </main>

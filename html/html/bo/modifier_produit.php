@@ -3,7 +3,7 @@ include( __DIR__ . '/../../01_premiere_connexion.php');
 require_once(__DIR__ . '/../../php/verification_formulaire.php');
 
 
-$idProduit = $_POST['idProduit'];
+$idProduit = $_GET['idProduit'];
 $idProduit = 1;
 
 foreach($dbh->query("SELECT * FROM sae3_skadjam._produit p
