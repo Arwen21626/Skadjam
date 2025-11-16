@@ -172,3 +172,13 @@ function verifAdresse($adresse){
     //verifie le format de l'adresse
     return (preg_match('/^(\d+\s*[A-Za-z]*)[, ]*(.+)$/u', $adresse));
 }
+
+
+function verifNumCarte($num){
+    //Vérfie que le numéro à bien 16 chiffres
+    return (preg_match('[0-9]{16}',$num));
+}
+
+function verifExpiration($date){
+    //Vérifie que la date d'expiration n'est pas dépassé
+}
