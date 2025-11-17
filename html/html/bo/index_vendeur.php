@@ -4,6 +4,7 @@
     $_SESSION['idCompte'] = 1;
 
     include __DIR__ .'/../../01_premiere_connexion.php';
+    require_once("./../../php/fonctions.php");
     const PAGE_SIZE = 15;
     $idCompte = $_SESSION['idCompte'];
 ?>
@@ -114,62 +115,10 @@
 
                             <!--récupération de la note-->
                             <div class=" flex col-span-1 col-start-2">
-                                <?php $note = $valeurs['note_moyenne']; ?>
-
-                                <!--affichage d'une note nulle-->
-                                <?php 
-                                if ($note == null){ ?>
-                                    <p><?php echo htmlentities('non noté'); ?></p>
-                                <?php }
-
-                                else {
-                                    $entierPrec = intval($note);
-                                    $entierSuiv = $entierPrec+1;
-                                    $moitie = $entierPrec+0.5;
-                                    $noteFinale;
-                                    $nbEtoilesVides;
-
-                                    //note arrondie à l'entier précédent
-                                    if($note < $entierPrec+0.3){
-                                        $noteFinale = $entierPrec;
-                                    }
-
-                                    //note arrondie à 0.5
-                                    else if(($note < $moitie) || ($note < $entierPrec+0.8)){
-                                        $noteFinale = $moitie;
-                                        $nbEtoilesVides = 5-$entierPrec-1;
-                                        //affichage d'une note et demie
-                                        //boucle pour étoiles pleines
-                                        for($i=0; $i<$entierPrec; $i++){?>
-                                            <img src="../../images/logo/bootstrap_icon/star-fill.svg" alt="étoile pleine" class="w-7 h-7"  >
-                                        <?php } ?>
-                                        <!--demie étoile-->
-                                        <img src="../../images/logo/bootstrap_icon/star-half.svg" alt="demie étoile" class="w-7 h-7"  >
-                                        <!--boucle pour étoiles vides-->
-                                        <?php for($i=0; $i<$nbEtoilesVides; $i++){?>
-                                            <img src="../../images/logo/bootstrap_icon/star.svg" alt="étoile vide" class="w-7 h-7"  >
-                                        <?php }
-                                    }
-                                    
-                                    //note arrondie à l'entier suivant
-                                    else{
-                                        $noteFinale = $entierSuiv;
-                                    }
-
-                                    //affichage d'une note entière :
-                                    if($noteFinale != $moitie){
-                                        $nbEtoilesVides = 5-$noteFinale;
-                                        //boucle pour étoiles pleines
-                                        for($i=0; $i<$noteFinale; $i++){?>
-                                            <img src="../../images/logo/bootstrap_icon/star-fill.svg" alt="étoile pleine" class="w-7 h-7"  >
-                                        <?php }
-                                        //boucle pour étoiles vides
-                                        for($i=0; $i<$nbEtoilesVides; $i++){?>
-                                            <img src="../../images/logo/bootstrap_icon/star.svg" alt="étoile vide" class="w-7 h-7"  >
-                                        <?php }
-                                    }
-                                } ?> 
-                            </div>     
+                                <?php $note = $valeurs['note_moyenne'];
+                                    affichageNote($note); ?>
+                            </div>    
+                             
                             <!--affichage du stock-->
                             <p class="col-span-2">En stock : <?php echo htmlentities($valeurs['quantite_stock']);?></p>       
                         </section>
