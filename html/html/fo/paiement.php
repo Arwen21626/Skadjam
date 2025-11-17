@@ -14,7 +14,7 @@
     <?php include(__DIR__ . '/../../php/structure/head_front.php');?>
     <?php include(__DIR__ . '/../../php/structure/navbar_front.php');?>
     <main>
-        <form class="w-4/5" action="">
+        <form class="w-4/5 self-center" action="">
 
                 <div class="flex flex-col">
                     <label for="numero">Numéro de carte* :</label>

@@ -20,8 +20,8 @@ $nom_serv_photo = $_FILES['photo']['tmp_name'];
 
 //Requete récupération categories
 foreach($dbh->query('SELECT * from sae3_skadjam._categorie', PDO::FETCH_ASSOC) as $row) {
-        $tab_categories[] = $row;
-    }
+    $tab_categories[] = $row;
+}
 
 if (isset($_POST['categorie']) && isset($_POST['nom']) && isset($_POST['prix']) && isset($_POST['qteStock']) && isset($_POST['description']) && isset($_POST['unite'])) {
     //Récupération des champs pour l'insertion
@@ -46,7 +46,6 @@ if (isset($_POST['categorie']) && isset($_POST['nom']) && isset($_POST['prix']) 
         $enLigne = 'false';
     }
 
-    //OUBLIE PAS LA PHOTO
     //Déplacement et renommage du fichier photo
     $nom_explode = explode(' ',$nom)[0];
     $currentTime = time();
@@ -71,15 +70,12 @@ if (isset($_POST['categorie']) && isset($_POST['nom']) && isset($_POST['prix']) 
                 RETURNING id_produit)
                 SELECT * FROM id;
                 ");
-
             
             foreach ($insertionProduit as $t) {
                 $idProd = $t['id_produit'];
             }
-            
 
             //Insertion de la photo dans la table photo
-            
             $insertionPhoto = $dbh -> query("WITH id AS (
                 INSERT INTO sae3_skadjam._photo 
                 (url_photo, alt, titre)
@@ -95,16 +91,15 @@ if (isset($_POST['categorie']) && isset($_POST['nom']) && isset($_POST['prix']) 
 
             $insertionMontre = $dbh -> query("INSERT INTO sae3_skadjam._montre VALUES ($idPhoto,$idProd);");
 
-            //$insertionPhoto -> execute();
         }
         catch (PDOException $e) {
             print "Erreur !: " . $e->getMessage() . "<br/>";
             die();
         }
     }
+    header(("location:./details_produit.php?idProduit=$idProd"));
 }
-
-?>
+else { ?>
 
 <!DOCTYPE html>
 <html lang="fr">
@@ -196,7 +191,7 @@ if (isset($_POST['categorie']) && isset($_POST['nom']) && isset($_POST['prix']) 
             
             <div class="col-start-1 col-span-2 row-start-6 flex flex-row justify-around m-4">
                 <button class="border-2 border-vertFonce rounded-2xl w-40 h-14"><a href="../bo/index_vendeur.php">Retour</a></button>
-                <a href="details_produit.php?idProduit=<?php echo $idProd ;?>"><input class="border-2 border-vertFonce rounded-2xl w-40 h-14" type="submit" value="Valider"></a>
+                <input class="border-2 border-vertFonce rounded-2xl w-40 h-14" type="submit" value="Valider">
             </div>
         </form>
     </main>
@@ -204,4 +199,4 @@ if (isset($_POST['categorie']) && isset($_POST['nom']) && isset($_POST['prix']) 
 </body>
 </html>
 
-
+<?php } ?>

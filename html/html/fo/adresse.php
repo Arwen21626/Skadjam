@@ -15,7 +15,7 @@
     <?php include(__DIR__ . '/../../php/structure/navbar_front.php');?>
     <main >
         <h2>Adresse</h2>
-        <form class="w-4/5 m-4 p-4" action="">
+        <form class="w-4/5 self-center" action="">
             
             <div class="flex flex-row">
                 <div class="flex flex-col">
@@ -44,7 +44,7 @@
             
             
             <div class="flex flex-row">
-                <div class="flex flex-col">
+                <div class="flexself-center flex-col">
                     <label for="numBat">Numéro de batiment :</label>
                     <input class="border-4 border-vertClair rounded-2xl" type="text" name="numBat" id="numBat">
                 </div>
