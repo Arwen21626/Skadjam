@@ -4,7 +4,7 @@ $erreur = false;
 include __DIR__ . '/../../01_premiere_connexion.php';
 if(isset($_POST['mdp']) && isset($_POST['mail'])){
     // Initialisation des données
-    
+    $erreur = false;
     $mail = htmlentities($_POST["mail"]);
     $mdp = htmlentities($_POST["mdp"]);
 
