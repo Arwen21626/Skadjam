@@ -57,7 +57,8 @@
 
     // Affichage test
      print_r($infoPhoto);
-     echo __DIR__ . "/../../.." . $infoPhoto["url_photo"];
+     echo "../../.." . $infoPhoto["url_photo"];
+    //  <?php echo "../../.." . $infoPhoto["url_photo"]; ?>
 ?>
 
 
@@ -80,7 +81,7 @@
             </article>
             
             <article class="md:flex md:flex-row md:justify-around">
-                <img src= <?php echo __DIR__ . "/../../.." . $infoPhoto["url_photo"]; ?>  alt=<?php echo $infoPhoto["alt"] ?> title=<?php echo $infoPhoto["titre"] ?>
+                <img src="../../images/photo_importees/Confiture1763389188.webp"  alt=<?php echo $infoPhoto["alt"] ?> title=<?php echo $infoPhoto["titre"] ?>
                 class="size-1/2 border
                        md:size-1/4">
 
@@ -107,7 +108,7 @@
                     
                     <button class="-indent-96 overflow-hidden whitespace-nowrap
                     size-12 bg-no-repeat bg-size-[auto_48px]
-                    bg-[url(/html/images/logo/bootstrap_icon/plus.svg)]
+                    bg-[url(/images/logo/bootstrap_icon/plus.svg)]
                     md:size-auto md:bg-none md:indent-0 md:overflow-visible md:whitespace-normal
                     md:bg-beige md:shadow md:rounded-2xl md:w-40 md:h-14 md:mt-4">
                         Ajouter au panier

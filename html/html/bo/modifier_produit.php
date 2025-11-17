@@ -4,8 +4,8 @@ require_once(__DIR__ . '/../../php/verification_formulaire.php');
 
 
 $idProduit = $_GET['idProduit'];
-$idProduit = 1;
-foreach($dbh->query("SELECT * FROM sae3_skadjam._produit pr
+$idProduit = 5;
+foreach($dbh->query("SELECT *,est_masque::CHAR as est_masque_php FROM sae3_skadjam._produit pr
                         INNER JOIN sae3_skadjam._categorie c
                             ON pr.id_categorie = c.id_categorie
                         INNER JOIN sae3_skadjam._montre m
@@ -18,14 +18,14 @@ foreach($dbh->query("SELECT * FROM sae3_skadjam._produit pr
     $nom = $produit['libelle_produit'];
     $description = $produit['description_produit'];
     $prixHT = $produit['prix_ht'];
-    $enLigne = $produit['est_masque']; //A revoir
+    $enLigne = $produit['est_masque_php']; 
     $qteStock = $produit['quantite_stock'];
     $qteUnite = $produit['quantite_unite'];
     $unite = $produit['unite'];
     $nomCategorie = $produit['libelle_categorie'];
     $idCategorie = $produit['id_categorie'];
 
-    if($enLigne == 'false'){
+    if($enLigne == 'f'){
         //Si dans la BDD est_masque est a false, il faut mettre enLigne à true ou l'inverse
         $enLigne = 'true';
     }
@@ -33,9 +33,12 @@ foreach($dbh->query("SELECT * FROM sae3_skadjam._produit pr
         $enLigne = 'false';
     }
 
+    //echo $enLigne;
+
     //Récupération attribut de photo
     $idPhoto = $produit['id_photo'];
     $urlPhoto = $produit['url_photo'];
+    echo $urlPhoto;
     $altPhoto = $produit['alt'];
     $titrePhoto = $produit['titre'];
 
@@ -62,12 +65,12 @@ foreach($dbh->query("SELECT * FROM sae3_skadjam._produit pr
     <?php include(__DIR__ . '/../../php/structure/navbar_back.php');?>
     <main>
         <h2>Modifier un produit</h2>
-        <form class="grid grid-cols-[40%_60%] w-11/12 self-center" action="creation_produit.php" method="post">
+        <form class="grid grid-cols-[40%_60%] w-11/12 self-center" action="" method="post">
 
             <div class="row-start-1 row-span-3 m-2 p-4 grid grid-rows-[2/3-1/3] justify-items-center">
                 <input type="file" id="photo" name="photo" class="hidden" required>
                 <!-- label qui agit comme bouton -->
-                <label id="labelImage" for="photo" class="bg-beige w-60 h-60 rounded-xl" style="background-image: url('../../images/logo/bootstrap_icon/image.svg'); background-repeat: no-repeat; background-position: center; background-size: 60%;"></label>
+                <label id="labelImage" for="photo" class=" w-60 h-60 rounded-xl" style="background-image: url(<?php echo $urlPhoto ?>); background-repeat: no-repeat; background-position: center; background-size: 100%;"></label>
                 <label for="photo">Ajouter une image*</label>
             </div>
             
@@ -117,7 +120,7 @@ foreach($dbh->query("SELECT * FROM sae3_skadjam._produit pr
             <div class="col-start-1 row-start-4 col-span-2 flex flex-row justify-around m-2 p-2">
                 <div class="flex flex-row mr-4 ml-4">
                     <label class="mr-4" for="mettreEnLigne">Mettre en ligne</label>
-                    <input class="appearance-none w-10 h-10 border-4 border-beige rounded-md checked:bg-beige" type="checkbox" name="mettreEnLigne" id="mettreEnLigne" checked>
+                    <input class="appearance-none w-10 h-10 border-4 border-beige rounded-md checked:bg-beige" type="checkbox" name="mettreEnLigne" id="mettreEnLigne" <?php echo ($enLigne == 'true')?'checked':'' ?>>
                 </div>
             
                 <div class="flex flex-row mr-4 ml-4">
@@ -137,10 +140,6 @@ foreach($dbh->query("SELECT * FROM sae3_skadjam._produit pr
             </div>
         </form>
     </main>
-    <?php include(__DIR__ . '/../../php/structure/footer_back.php');?>
-    <script>
-        let image = document.getElementById('labelImage');
-        image.style.backgroundImage('<?php echo $urlPhoto ;?>');
-    </script>
+    <?php include(__DIR__ . '/../../php/structure/footer_back.php');?> 
 </body>
 </html>
