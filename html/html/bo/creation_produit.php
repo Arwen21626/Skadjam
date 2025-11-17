@@ -31,11 +31,10 @@ foreach($dbh->query('SELECT * from sae3_skadjam._categorie', PDO::FETCH_ASSOC) a
 foreach($dbh->query('SELECT * from sae3_skadjam._tva', PDO::FETCH_ASSOC) as $row) {
     $tab_tva[] = $row;
 }
-print_r($tab_tva);
-if (isset($_POST['idCategorie']) && isset($_POST['nom']) && isset($_POST['prix']) && isset($_POST['qteStock']) && isset($_POST['description']) && isset($_POST['unite'])) {
+
+if (isset($_POST['categorie']) && isset($_POST['nom']) && isset($_POST['prix']) && isset($_POST['qteStock']) && isset($_POST['description']) && isset($_POST['unite'])) {
     //Récupération des champs pour l'insertion
     $idCategorie = htmlentities($_POST['categorie']);
-    echo ($idCategorie);
     $nom = htmlentities($_POST['nom']);
     $prixHT = htmlentities($_POST['prix']);
     $qteStock = htmlentities($_POST['qteStock']);
@@ -50,7 +49,7 @@ if (isset($_POST['idCategorie']) && isset($_POST['nom']) && isset($_POST['prix']
 
     //Récupération du nom de la catégorie pour la gestion de la tva
     foreach ($tab_categories as $c) {
-        if ($c['id_categorie'] === $categorie) {
+        if ($c['id_categorie'] == $idCategorie) {
             $nomCategorie = $c['libelle_categorie'];
         }
     }
@@ -69,13 +68,10 @@ if (isset($_POST['idCategorie']) && isset($_POST['nom']) && isset($_POST['prix']
     $destination = '../../images/photo_importees';
     $nom_photo_finale = $nom_explode.$currentTime.'.'.$ext;
     move_uploaded_file($nom_serv_photo,$destination.'/'.$nom_photo_finale);
-
-    //test tva
-
-    //Il faut récupérer l'id du vendeur pour l'insertion
+    
     if (verifPrix($prix) && verifQteStock($qteStock)){
         try{
-            if ($nomCategorie === 'Alimentaire') {
+            if ($nomCategorie == 'Alimentaire') {
                 foreach ($tab_tva as $t) {
                     if ($t['nom_tva'] === 'reduit') {
                         $tva = $t['id_tva'];
@@ -91,16 +87,17 @@ if (isset($_POST['idCategorie']) && isset($_POST['nom']) && isset($_POST['prix']
                     }
                 }
             }
+
             
             //Calcul prixTTC
-            $prixTTC = $prixHT*(1+$pourcentageTVA*100);
+            $prixTTC = $prixHT*(1+$pourcentageTVA);
 
             //Insertion du produit
             $insertionProduit = $dbh -> query("WITH id AS (
                 INSERT INTO sae3_skadjam._produit 
                 (libelle_produit, description_produit, prix_ht, prix_ttc, est_masque, quantite_stock, quantite_unite, unite, id_categorie, id_vendeur, id_tva)
                 VALUES 
-                ('$nom','$description', $prixHT, $prixTTC, $enLigne, $qteStock, $qteUnite, '$unite', $idCategorie, 1, $tva)
+                ('$nom','$description', $prixHT, $prixTTC, $enLigne, $qteStock, $qteUnite, '$unite', $idCategorie, $idVendeur, $tva)
                 RETURNING id_produit)
                 SELECT * FROM id;
                 ");
