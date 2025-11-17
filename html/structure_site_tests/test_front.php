@@ -2,11 +2,11 @@
 <html lang="fr">
 <head>
     <title>Test Front</title>
-    <?php require_once("html/php/structure/head_front.php") ?>
+    <?php require_once(__DIR__ . "/../php/structure/head_front.php") ?>
 </head>
 <body>
-    <?php require_once("html/php/structure/header_front.php"); ?>
-    <?php require_once("html/php/structure/navbar_front.php"); ?>
+    <?php require_once(__DIR__ . "/../php/structure/header_front.php"); ?>
+    <?php require_once(__DIR__ . "/../php/structure/navbar_front.php"); ?>
     
     <main>
         <section>
@@ -68,6 +68,6 @@
         </section>
     </main>
 
-    <?php require_once("html/php/structure/footer_front.php");?>
+    <?php require_once(__DIR__ . "/../php/structure/footer_front.php");?>
 </body>
 </html>

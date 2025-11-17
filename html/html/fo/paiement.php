@@ -18,25 +18,25 @@
 
                 <div class="flex flex-col">
                     <label for="numero">Numéro de carte* :</label>
-                    <input class="border-4 border-vertClair rounded-2xl" type="text" name="numero" id="numero" required>
+                    <input placeholder="0000 1111 2222 3333" class="border-4 border-vertClair rounded-2xl placeholder-gray-500" type="text" name="numero" id="numero" required>
                 </div>
                 
                 <div class="flex flex-row">
                     <div class="flex flex-col">
                         <label for="expiration">Date d'expiration* :</label>
-                        <input class="border-4 border-vertClair rounded-2xl" type="date" name="expiration" id="expiration" required>
+                        <input placeholder="AAAA/mm mais à voir pour changer" class="border-4 border-vertClair rounded-2xl placeholder-gray-500" type="month" name="expiration" id="expiration" required>
                     </div>
                     
 
                     <div class="flex flex-col">
                         <label for="cryptogramme">Cryptogramme* :</label>
-                        <input class="border-4 border-vertClair rounded-2xl" type="text" name="cryptogramme" id="cryptogramme" required>
+                        <input placeholder="000" class="border-4 border-vertClair rounded-2xl placeholder-gray-500" type="text" name="cryptogramme" id="cryptogramme" required>
                     </div>
                 </div>
 
                 <div class="flex flex-col">
                     <label for="nom">Nom du titulaire* :</label>
-                    <input class="border-4 border-vertClair rounded-2xl" type="text" name="nom" id="nom" required>
+                    <input placeholder="M Alizon" class="border-4 border-vertClair rounded-2xl placeholder-gray-500" type="text" name="nom" id="nom" required>
                 </div>
 
             <label for="enregistrerCarte">Enregistrer cette carte pour les prochains paiements?</label>
