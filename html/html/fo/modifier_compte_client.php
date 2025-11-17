@@ -1,11 +1,11 @@
 <?php
 session_start();
-require_once("../../php/verification_formulaire.php"); // fonctions qui vérifient les données des formulaires
-require_once("../../php/modification_variable.php"); // fonctions qui vérifient les données des formulaires
-require_once("../../../connections_params.php"); // données de connexion à la base de données
+require_once(__DIR__ . "/../../php/verification_formulaire.php"); // fonctions qui vérifient les données des formulaires
+require_once(__DIR__ . "/../../php/modification_variable.php"); // fonctions qui vérifient les données des formulaires
+require_once(__DIR__ . "/../../../connections_params.php"); // données de connexion à la base de données
 
 //Connection à la base de données
-$dbh = new PDO("$driver:host=$server;dbname=$dbname", $user, $pass); 
+$dbh = new PDO("$driver:host=$server;port=$port;dbname=$dbname", $user, $pass); 
 $dbh->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC);
 
 $idCompte = $_SESSION["idCompte"];
@@ -29,7 +29,7 @@ foreach($dbh->query("SELECT * FROM sae3_skadjam._compte c
 
 <!DOCTYPE html>
 <html lang="fr">
-<?php include (__DIR__."/../../php/structure/head_front.php");?>
+<?php include (__DIR__ . "/../../php/structure/head_front.php");?>
 <head>
     <title>Modification d'un compte client</title>
     <style>
@@ -138,7 +138,7 @@ foreach($dbh->query("SELECT * FROM sae3_skadjam._compte c
 
     <?php 
     // Import du footer
-    include (__DIR__."/../../php/structure/footer_front.php");
+    include (__DIR__ . "/../../php/structure/footer_front.php");
 
     // Fermer la connexion à la base de données
     $dbh = null;

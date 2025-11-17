@@ -17,14 +17,21 @@ require_once __DIR__ . "/../../01_premiere_connexion.php";
         $dbh = new PDO("$driver:host=$server;dbname=$dbname",$user,$pass);
         $dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
         $dbh->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC);
+
+        $id = $_POST['id'];
+
         // Traitement du formulaire seulement si toutes les données son saisie
         if(isset($_POST['mdp']) && isset($_POST['verifMdp'])){
             // Vérification que toutes les données saisie son correcte
             if(verifMotDePasse($_POST['mdp']) && ($_POST['mdp'] === $_POST['verifMdp'])){
-                echo "Congrats";
-                $mdp = $_POST['mdp'];  // à Hasher
+                $mdp = password_hash(htmlentities($_POST['mdp']), PASSWORD_DEFAULT);
+                // Enregistrer le nouveau mdp dans la BDD
+                $nouvMdp = $dbh->prepare("UPDATE sae3_skadjam._compte 
+                                                    SET motDePasse = $mdp
+                                                    WHERE id_compte = $id");
+                $nouvMdp->execute();
                 // Redirection vers la page de connexion
-                
+                header("Location: connexion.php");
             }else{ 
                 echo "Erreur";
             }

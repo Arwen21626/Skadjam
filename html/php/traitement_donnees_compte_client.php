@@ -9,7 +9,7 @@ require_once(__DIR__."/../../connections_params.php"); // données de connexion 
 if(isset($_POST['pseudo']) && isset($_POST['naissance']) && isset($_POST['nom']) && isset($_POST['prenom']) && isset($_POST['telephone']) && isset($_POST['mail'])){
     try{
         // Connexion à la base de données
-        $dbh = new PDO("$driver:host=$server;dbname=$dbname", $user, $pass); 
+        $dbh = new PDO("$driver:host=$server;port=$port;dbname=$dbname", $user, $pass); 
         $dbh->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC);
 
         // Vérification que toutes les données commune à la création et à la modification d'un compte client sont correcte
@@ -206,7 +206,7 @@ if(isset($_POST['pseudo']) && isset($_POST['naissance']) && isset($_POST['nom'])
                 echo "vous avez moins de 18 ans.";
             }
             else{
-                echo "inconu.";
+                echo "inconnu.";
             }
             ?>
 
@@ -214,7 +214,9 @@ if(isset($_POST['pseudo']) && isset($_POST['naissance']) && isset($_POST['nom'])
         <?php }
     }
     catch(PDOException $e){
-        print "Erreur dans l'envoie des données dans la base de données.";
+        echo "Erreur dans l'envoie des données dans la base de données.";
+        echo $e; // Potentiellement temporaire
+
         die();
     }
     

@@ -4,7 +4,7 @@
     $_SESSION["idCompte"] = 1;
     require_once __DIR__ . "/../../01_premiere_connexion.php";
 
-    // Vérifie que le formulaire a été envoyé
+    // Vérifie si le bouton 'Se déconnecter à été appuyé'
     if (isset($_POST['logout'])) {
         // Supprime toutes les variables de session
         session_unset();
@@ -32,7 +32,7 @@
             $id = (int) $_SESSION["idCompte"];
 
             try{
-                $dbh = new PDO("$driver:host=$server;dbname=$dbname",$user,$pass);
+                $dbh = new PDO("$driver:host=$server;port=$port;dbname=$dbname",$user,$pass);
                 $dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
                 $dbh->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC);
 
@@ -89,6 +89,7 @@
                 <input class="border-2 border-vertClair rounded-xl p-2" type="submit" value="Modifier mes informations">
             </form>
             <form action="nouveau_mdp.php" method="post">
+                <input type="hidden" id="id" name="id" value="<?php echo $id; ?>">
                 <input class="border-2 border-vertClair rounded-xl p-2" type="submit" value="Modifier mon mot de passe">    
             </form>
             <form action="page_client.php" method="post">
