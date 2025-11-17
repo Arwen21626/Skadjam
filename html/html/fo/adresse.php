@@ -20,39 +20,39 @@
             <div class="flex flex-row">
                 <div class="flex flex-col">
                     <label for="nom">Nom* :</label>
-                    <input class="border-4 border-vertClair rounded-2xl" type="text" name="nom" id="nom" required>
+                    <input placeholder="Cobrec" class="border-4 border-vertClair rounded-2xl placeholder-gray-500" type="text" name="nom" id="nom" required>
                 </div>
                 
 
                 <div class="flex flex-col">
                     <label for="prenom">Prénom* :</label>
-                    <input class="border-4 border-vertClair rounded-2xl" type="text" name="prenom" id="prenom" required>
+                    <input placeholder="Alizon" class="border-4 border-vertClair rounded-2xl placeholder-gray-500" type="text" name="prenom" id="prenom" required>
                 </div>
                 
             </div>
             
             <div class="flex flex-col">
                 <label for="adresse">Adresse postale* :</label>
-                <input class="border-4 border-vertClair rounded-2xl" type="text" name="adresse" id="adresse" required>
+                <input placeholder="1 rue des fleurs" class="border-4 border-vertClair rounded-2xl placeholder-gray-500" type="text" name="adresse" id="adresse" required>
             </div>
             
 
             <div class="flex flex-col">
                 <label for="complement">Complément :</label>
-                <input class="border-4 border-vertClair rounded-2xl" type="text" name="complement" id="complement">
+                <input placeholder="" class="border-4 border-vertClair rounded-2xl placeholder-gray-500" type="text" name="complement" id="complement">
             </div>
             
             
             <div class="flex flex-row">
                 <div class="flexself-center flex-col">
                     <label for="numBat">Numéro de batiment :</label>
-                    <input class="border-4 border-vertClair rounded-2xl" type="text" name="numBat" id="numBat">
+                    <input placeholder="3C" class="border-4 border-vertClair rounded-2xl placeholder-gray-500" type="text" name="numBat" id="numBat">
                 </div>
                 
 
                 <div class="flex flex-col">
-                    <label for="numAppart">Numéro d'appartement</label>
-                    <input class="border-4 border-vertClair rounded-2xl" type="text" name="numAppart" id="numAppart">
+                    <label for="numAppart">Numéro d'appartement :</label>
+                    <input placeholder="22C" class="border-4 border-vertClair rounded-2xl placeholder-gray-500" type="text" name="numAppart" id="numAppart">
                 </div>
                 
             </div>
@@ -60,12 +60,12 @@
             <div class="flex flex-row">
                 <div class="flex flex-col">
                     <label for="ville">Ville* :</label>
-                    <input class="border-4 border-vertClair rounded-2xl" type="text" name="ville" id="ville" required>
+                    <input placeholder="Lannion" class="border-4 border-vertClair rounded-2xl placeholder-gray-500" type="text" name="ville" id="ville" required>
                 </div>
                 
                 <div class="flex flex-col">
                     <label for="codePostal">Code postal* :</label>
-                    <input class="border-4 border-vertClair rounded-2xl" type="text" name="codePostal" id="codePostal" required>
+                    <input placeholder="22300" class="border-4 border-vertClair rounded-2xl placeholder-gray-500" type="text" name="codePostal" id="codePostal" required>
                 </div>
             </div>
 

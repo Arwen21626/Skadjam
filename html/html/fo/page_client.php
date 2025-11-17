@@ -4,7 +4,7 @@
     $_SESSION["idCompte"] = 1;
     require_once __DIR__ . "/../../01_premiere_connexion.php";
 
-    // Vérifie que le formulaire a été envoyé
+    // Vérifie si le bouton 'Se déconnecter à été appuyé'
     if (isset($_POST['logout'])) {
         // Supprime toutes les variables de session
         session_unset();
@@ -32,7 +32,7 @@
             $id = (int) $_SESSION["idCompte"];
 
             try{
-                $dbh = new PDO("$driver:host=$server;dbname=$dbname",$user,$pass);
+                $dbh = new PDO("$driver:host=$server;port=$port;dbname=$dbname",$user,$pass);
                 $dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
                 $dbh->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC);
 
@@ -59,6 +59,7 @@
                                             sae3_skadjam._adresse a
                                                 ON h.id_adresse = a.id_adresse
                                             WHERE c.id_compte = $id", PDO::FETCH_ASSOC) as $adresse){
+                    $numRue[$nbAdresse] = $adresse['numero_rue'];
                     $adressePostale[$nbAdresse] = $adresse['adresse_postale'];
                     $codePostal[$nbAdresse] = $adresse['code_postal'];
                     $ville[$nbAdresse] = $adresse['ville'];
@@ -69,7 +70,7 @@
                 print "Erreur : " . $e->getMessage() . "<br/>";
             }
         ?>
-        <h2>Mon profil</h2>
+        <h2 class="flex justify-center text-center">Mon profil</h2>
         <section>
             <div class="flex flex-row">
                 <h2 class="mt-1 mb-1 mr-4 ml-0"><?php echo $pseudo; ?></h2>
@@ -78,17 +79,18 @@
             <div>
                 <p class="m-4"><?php echo $naissance; ?></p>
                 <?php for ($i=0; $i < $nbAdresse; $i++) { // Affiche toutes les adresses du client ?>
-                <p class="mt-2 mb-2 mr-4 ml-4"><?php echo $adressePostale[$i]; ?>, <?php echo $codePostal[$i]; ?> <?php echo $ville[$i]; ?></p>
+                <p class="mt-2 mb-2 mr-4 ml-4"><?php echo "$numRue[$i] $adressePostale[$i], $codePostal[$i] $ville[$i]"; ?></p>
                 <?php } ?>
                 <p class="m-4"><?php echo $telephone; ?></p>
                 <p class="m-4"><?php echo $mail; ?></p>
             </div>
         </section>
-        <article class="flex flex-row justify-around">
+        <article class="flex flex-row justify-around mb-5">
             <form action="modifier_compte_client.php" method="post">
                 <input class="border-2 border-vertClair rounded-xl p-2" type="submit" value="Modifier mes informations">
             </form>
             <form action="nouveau_mdp.php" method="post">
+                <input type="hidden" id="id" name="id" value="<?php echo $id; ?>">
                 <input class="border-2 border-vertClair rounded-xl p-2" type="submit" value="Modifier mon mot de passe">    
             </form>
             <form action="page_client.php" method="post">

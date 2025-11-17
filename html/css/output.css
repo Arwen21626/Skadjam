@@ -2,11 +2,11 @@
 @layer properties;
 @font-face {
   font-family: 'MavenPro';
-  src: url("/html/font/MavenPro/MavenPro-Regular.ttf");
+  src: url("/font/MavenPro/MavenPro-Regular.ttf");
 }
 @font-face {
   font-family: 'Amiko';
-  src: url("/html/font/Amiko/Amiko-Regular.ttf");
+  src: url("/font/Amiko/Amiko-Regular.ttf");
 }
 h1, h2, h3, h4 {
   font-family: 'MavenPro';
@@ -213,6 +213,9 @@ p, a {
   }
 }
 @layer utilities {
+  .\@container {
+    container-type: inline-size;
+  }
   .fixed {
     position: fixed;
   }
@@ -291,6 +294,9 @@ p, a {
   .mt-2 {
     margin-top: calc(var(--spacing, 0.25rem) * 2);
   }
+  .mt-3 {
+    margin-top: calc(var(--spacing, 0.25rem) * 3);
+  }
   .mt-6 {
     margin-top: calc(var(--spacing, 0.25rem) * 6);
   }
@@ -366,6 +372,9 @@ p, a {
   .inline-block {
     display: inline-block;
   }
+  .table {
+    display: table;
+  }
   .size-1\/2 {
     width: calc(1/2 * 100%);
     height: calc(1/2 * 100%);
@@ -406,6 +415,9 @@ p, a {
   .w-1\/1 {
     width: calc(1/1 * 100%);
   }
+  .w-2\/3 {
+    width: calc(2/3 * 100%);
+  }
   .w-3\/4 {
     width: calc(3/4 * 100%);
   }
@@ -439,6 +451,9 @@ p, a {
   .w-80 {
     width: calc(var(--spacing, 0.25rem) * 80);
   }
+  .w-85 {
+    width: calc(var(--spacing, 0.25rem) * 85);
+  }
   .w-150 {
     width: calc(var(--spacing, 0.25rem) * 150);
   }
@@ -456,6 +471,9 @@ p, a {
   }
   .max-w-1\/2 {
     max-width: calc(1/2 * 100%);
+  }
+  .max-w-3\/4 {
+    max-width: calc(3/4 * 100%);
   }
   .min-w-3xs {
     min-width: var(--container-3xs, 16rem);
@@ -594,29 +612,29 @@ p, a {
   .bg-vertMoyen {
     background-color: var(--color-vertMoyen);
   }
-  .bg-\[url\(\/html\/images\/logo\/bootstrap_icon\/cart\.svg\)\] {
-    background-image: url(/html/images/logo/bootstrap_icon/cart.svg);
-  }
-  .bg-\[url\(\/html\/images\/logo\/bootstrap_icon\/chat-left-dots\.svg\)\] {
-    background-image: url(/html/images/logo/bootstrap_icon/chat-left-dots.svg);
-  }
-  .bg-\[url\(\/html\/images\/logo\/bootstrap_icon\/house\.svg\)\] {
-    background-image: url(/html/images/logo/bootstrap_icon/house.svg);
-  }
-  .bg-\[url\(\/html\/images\/logo\/bootstrap_icon\/person\.svg\)\] {
-    background-image: url(/html/images/logo/bootstrap_icon/person.svg);
-  }
-  .bg-\[url\(\/html\/images\/logo\/bootstrap_icon\/plus-square\.svg\)\] {
-    background-image: url(/html/images/logo/bootstrap_icon/plus-square.svg);
-  }
   .bg-\[url\(\/html\/images\/logo\/bootstrap_icon\/plus\.svg\)\] {
     background-image: url(/html/images/logo/bootstrap_icon/plus.svg);
   }
-  .bg-\[url\(\/html\/images\/logo\/bootstrap_icon\/search\.svg\)\] {
-    background-image: url(/html/images/logo/bootstrap_icon/search.svg);
+  .bg-\[url\(\/images\/logo\/bootstrap_icon\/cart\.svg\)\] {
+    background-image: url(/images/logo/bootstrap_icon/cart.svg);
   }
-  .bg-\[url\(\/html\/images\/logo\/bootstrap_icon\/truck\.svg\)\] {
-    background-image: url(/html/images/logo/bootstrap_icon/truck.svg);
+  .bg-\[url\(\/images\/logo\/bootstrap_icon\/chat-left-dots\.svg\)\] {
+    background-image: url(/images/logo/bootstrap_icon/chat-left-dots.svg);
+  }
+  .bg-\[url\(\/images\/logo\/bootstrap_icon\/house\.svg\)\] {
+    background-image: url(/images/logo/bootstrap_icon/house.svg);
+  }
+  .bg-\[url\(\/images\/logo\/bootstrap_icon\/person\.svg\)\] {
+    background-image: url(/images/logo/bootstrap_icon/person.svg);
+  }
+  .bg-\[url\(\/images\/logo\/bootstrap_icon\/plus-square\.svg\)\] {
+    background-image: url(/images/logo/bootstrap_icon/plus-square.svg);
+  }
+  .bg-\[url\(\/images\/logo\/bootstrap_icon\/search\.svg\)\] {
+    background-image: url(/images/logo/bootstrap_icon/search.svg);
+  }
+  .bg-\[url\(\/images\/logo\/bootstrap_icon\/truck\.svg\)\] {
+    background-image: url(/images/logo/bootstrap_icon/truck.svg);
   }
   .bg-size-\[auto_48px\] {
     background-size: auto 48px;
@@ -718,6 +736,11 @@ p, a {
   .underline\! {
     text-decoration-line: underline !important;
   }
+  .placeholder-gray-500 {
+    &::placeholder {
+      color: var(--color-gray-500, oklch(55.1% 0.027 264.364));
+    }
+  }
   .shadow {
     --tw-shadow: 0 1px 3px 0 var(--tw-shadow-color, rgb(0 0 0 / 0.1)), 0 1px 2px -1px var(--tw-shadow-color, rgb(0 0 0 / 0.1));
     box-shadow: var(--tw-inset-shadow), var(--tw-inset-ring-shadow), var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow);
@@ -727,45 +750,45 @@ p, a {
       background-color: var(--color-beige);
     }
   }
-  .hover\:bg-\[url\(\/html\/images\/logo\/bootstrap_icon\/cart-fill\.svg\)\] {
+  .hover\:bg-\[url\(\/images\/logo\/bootstrap_icon\/cart-fill\.svg\)\] {
     &:hover {
       @media (hover: hover) {
-        background-image: url(/html/images/logo/bootstrap_icon/cart-fill.svg);
+        background-image: url(/images/logo/bootstrap_icon/cart-fill.svg);
       }
     }
   }
-  .hover\:bg-\[url\(\/html\/images\/logo\/bootstrap_icon\/house-fill\.svg\)\] {
+  .hover\:bg-\[url\(\/images\/logo\/bootstrap_icon\/house-fill\.svg\)\] {
     &:hover {
       @media (hover: hover) {
-        background-image: url(/html/images/logo/bootstrap_icon/house-fill.svg);
+        background-image: url(/images/logo/bootstrap_icon/house-fill.svg);
       }
     }
   }
-  .hover\:bg-\[url\(\/html\/images\/logo\/bootstrap_icon\/person-fill\.svg\)\] {
+  .hover\:bg-\[url\(\/images\/logo\/bootstrap_icon\/person-fill\.svg\)\] {
     &:hover {
       @media (hover: hover) {
-        background-image: url(/html/images/logo/bootstrap_icon/person-fill.svg);
+        background-image: url(/images/logo/bootstrap_icon/person-fill.svg);
       }
     }
   }
-  .hover\:bg-\[url\(\/html\/images\/logo\/bootstrap_icon\/plus-square-fill\.svg\)\] {
+  .hover\:bg-\[url\(\/images\/logo\/bootstrap_icon\/plus-square-fill\.svg\)\] {
     &:hover {
       @media (hover: hover) {
-        background-image: url(/html/images/logo/bootstrap_icon/plus-square-fill.svg);
+        background-image: url(/images/logo/bootstrap_icon/plus-square-fill.svg);
       }
     }
   }
-  .hover\:bg-\[url\(\/html\/images\/logo\/bootstrap_icon\/search-selected\.svg\)\] {
+  .hover\:bg-\[url\(\/images\/logo\/bootstrap_icon\/search-selected\.svg\)\] {
     &:hover {
       @media (hover: hover) {
-        background-image: url(/html/images/logo/bootstrap_icon/search-selected.svg);
+        background-image: url(/images/logo/bootstrap_icon/search-selected.svg);
       }
     }
   }
-  .hover\:bg-\[url\(\/html\/images\/logo\/bootstrap_icon\/truck-fill\.svg\)\] {
+  .hover\:bg-\[url\(\/images\/logo\/bootstrap_icon\/truck-fill\.svg\)\] {
     &:hover {
       @media (hover: hover) {
-        background-image: url(/html/images/logo/bootstrap_icon/truck-fill.svg);
+        background-image: url(/images/logo/bootstrap_icon/truck-fill.svg);
       }
     }
   }
@@ -1006,6 +1029,46 @@ p, a {
     @media (width >= 48rem) {
       --tw-shadow: 0 1px 3px 0 var(--tw-shadow-color, rgb(0 0 0 / 0.1)), 0 1px 2px -1px var(--tw-shadow-color, rgb(0 0 0 / 0.1));
       box-shadow: var(--tw-inset-shadow), var(--tw-inset-ring-shadow), var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow);
+    }
+  }
+  .\@max-\[768px\]\:mt-2 {
+    @container (width < 768px) {
+      margin-top: calc(var(--spacing, 0.25rem) * 2);
+    }
+  }
+  .\@max-\[768px\]\:mr-5 {
+    @container (width < 768px) {
+      margin-right: calc(var(--spacing, 0.25rem) * 5);
+    }
+  }
+  .\@max-\[768px\]\:ml-2 {
+    @container (width < 768px) {
+      margin-left: calc(var(--spacing, 0.25rem) * 2);
+    }
+  }
+  .\@max-\[768px\]\:ml-5 {
+    @container (width < 768px) {
+      margin-left: calc(var(--spacing, 0.25rem) * 5);
+    }
+  }
+  .\@max-\[768px\]\:w-7\/8 {
+    @container (width < 768px) {
+      width: calc(7/8 * 100%);
+    }
+  }
+  .\@max-\[768px\]\:flex-col {
+    @container (width < 768px) {
+      flex-direction: column;
+    }
+  }
+  .\@max-\[768px\]\:items-center {
+    @container (width < 768px) {
+      align-items: center;
+    }
+  }
+  .\@max-\[768px\]\:pl-2 {
+    @container (width < 768px) {
+      padding-left: calc(var(--spacing, 0.25rem) * 2);
     }
   }
 }
