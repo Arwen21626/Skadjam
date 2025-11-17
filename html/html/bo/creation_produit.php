@@ -97,7 +97,7 @@ if (isset($_POST['categorie']) && isset($_POST['nom']) && isset($_POST['prix']) 
                 INSERT INTO sae3_skadjam._produit 
                 (libelle_produit, description_produit, prix_ht, prix_ttc, est_masque, quantite_stock, quantite_unite, unite, id_categorie, id_vendeur, id_tva)
                 VALUES 
-                ('$nom','$description', $prixHT, $prixTTC, $enLigne, $qteStock, $qteUnite, '$unite', $idCategorie, $idVendeur, $tva)
+                ('$nom','$description', $prixHT, $prixTTC, $enLigne, $qteStock, $qteUnite, '$unite', $idCategorie, 1, $tva)
                 RETURNING id_produit)
                 SELECT * FROM id;
                 ");
@@ -111,7 +111,7 @@ if (isset($_POST['categorie']) && isset($_POST['nom']) && isset($_POST['prix']) 
                 INSERT INTO sae3_skadjam._photo 
                 (url_photo, alt, titre)
                 VALUES 
-                ('/html/images/photo_importees/$nom_photo_finale','$nom','$nom')
+                ('/images/photo_importees/$nom_photo_finale','$nom','$nom')
                 RETURNING id_photo)
                 SELECT * FROM id;
                 ");
@@ -131,7 +131,7 @@ if (isset($_POST['categorie']) && isset($_POST['nom']) && isset($_POST['prix']) 
     else{
         echo ("Le prix ou la quantité saisi est incorrect.");
     }
-    //header(("location:./details_produit.php?idProduit=$idProd"));
+    header(("location:./details_produit.php?idProduit=$idProd"));
 }
 else { ?>
 
@@ -159,7 +159,7 @@ else { ?>
             <div class="row-start-1 row-span-3 m-2 p-4 grid grid-rows-[2/3-1/3] justify-items-center">
                 <input type="file" id="photo" name="photo" class="hidden" required>
                 <!-- label qui agit comme bouton -->
-                <label for="photo" class="bg-beige w-60 h-60 rounded-xl" style="background-image: url('../../images/logo/bootstrap_icon/image.svg'); background-repeat: no-repeat; background-position: center; background-size: 60%;"></label>
+                <label for="photo" class="bg-beige w-60 h-60 rounded-2xl" style="background-image: url('../../images/logo/bootstrap_icon/image.svg'); background-repeat: no-repeat; background-position: center; background-size: 60%;"></label>
                 <label for="photo">Ajouter une image*</label>
             </div>
             

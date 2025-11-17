@@ -606,9 +606,6 @@ p, a {
   .border-beige {
     border-color: var(--color-beige);
   }
-  .border-bleu {
-    border-color: var(--color-bleu);
-  }
   .border-vertClair {
     border-color: var(--color-vertClair);
   }
