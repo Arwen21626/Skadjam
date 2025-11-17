@@ -4,7 +4,7 @@
 
     //Récupération des données sur le produit ainsi que la photo
     $idProd = $_GET['idProduit'];
-    $idProd = 3;
+    $idProd = 1;
 
     foreach($dbh->query("SELECT *
                         from sae3_skadjam._produit pr
@@ -19,10 +19,10 @@
         $produit = $row;
     }
 
-    function supprimer($id){
-        $supp = $dbh->query("DELETE FROM sae3_skadjam._produit WHERE id_produit = $id");
-        $supp -> execute();
-    }
+    // function supprimer($id){
+    //     $supp = $dbh->query("DELETE FROM sae3_skadjam._produit WHERE id_produit = $id");
+    //     $supp -> execute();
+    // }
 ?>
 
 <!DOCTYPE html>

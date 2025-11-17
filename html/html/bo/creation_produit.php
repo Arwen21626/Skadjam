@@ -4,6 +4,7 @@ include( __DIR__ . '/../../01_premiere_connexion.php');
 require_once(__DIR__ . '/../../php/verification_formulaire.php');
 
 session_start();
+
 //Récupération id vendeur
 $idVendeur = $_SESSION['idCompte'];
 
@@ -97,6 +98,9 @@ if (isset($_POST['categorie']) && isset($_POST['nom']) && isset($_POST['prix']) 
             die();
         }
     }
+    else{
+        echo ("Le prix ou la quantité saisi est incorrect.");
+    }
     header(("location:./details_produit.php?idProduit=$idProd"));
 }
 else { ?>
@@ -132,17 +136,17 @@ else { ?>
 
             <div class="col-start-2 row-start-1 flex flex-col w-200 m-2 p-2">
                 <label for="nom">Nom produit *:</label>
-                <input class=" border-4 border-beige rounded-2xl" type="text" name="nom" id="nom" required>
+                <input placeholder="Confiture fraises des bois 200g" class=" border-4 border-beige rounded-2xl placeholder-gray-500" type="text" name="nom" id="nom" required>
             </div>
 
             <div class="col-start-2 row-start-2 flex flex-row justify-between w-200 m-2 p-2">
                 <div class="flex flex-col">
                     <label for="prix">Prix *(hors taxe):</label>
-                    <input class="border-4 border-beige rounded-2xl w-75" type="number" name="prix" id="prix" min="0.0" step="0.5" required>
+                    <input placeholder="3.99" class="border-4 border-beige rounded-2xl w-75 placeholder-gray-500" type="number" name="prix" id="prix" min="0.0" step="0.5" required>
                 </div>
                 <div class="flex flex-col">
                     <label for="qteStock">Quantité en stock* :</label>
-                    <input class="border-4 border-beige rounded-2xl w-75" type="number" name="qteStock" id="qteStock" min="0" required>
+                    <input placeholder="50" class="border-4 border-beige rounded-2xl w-75 placeholder-gray-500" type="number" name="qteStock" id="qteStock" min="0" required>
                 </div>
             </div>
                 
@@ -167,7 +171,7 @@ else { ?>
                 </div>
                 <div class="flex flex-col">
                     <label for="qteUnite">Quantité unité :</label>
-                    <input class="border-4 border-beige rounded-2xl w-75" type="number" name="qteUnite" id="qteUnite" min="0" required>
+                    <input placeholder="200" class="border-4 border-beige rounded-2xl w-75 placeholder-gray-500" type="number" name="qteUnite" id="qteUnite" min="0" required>
                 </div>
             </div>
 
@@ -186,7 +190,7 @@ else { ?>
             
             <div class="col-start-1 col-span-2 row-start-5 flex flex-col m-2 p-2 ">
                 <label for="description">Description *:</label>
-                <textarea class="border-4 border-beige rounded-2xl w-3/4 self-center" name="description" id="description" cols="100" rows="10" required></textarea>
+                <textarea placeholder="Pot de confiture de fraises des bois" class="border-4 border-beige rounded-2xl w-3/4 self-center placeholder-gray-500" name="description" id="description" cols="100" rows="10" required></textarea>
             </div>
             
             <div class="col-start-1 col-span-2 row-start-6 flex flex-row justify-around m-4">

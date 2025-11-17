@@ -366,6 +366,9 @@ p, a {
   .inline-block {
     display: inline-block;
   }
+  .table {
+    display: table;
+  }
   .size-1\/2 {
     width: calc(1/2 * 100%);
     height: calc(1/2 * 100%);
@@ -717,6 +720,11 @@ p, a {
   }
   .underline\! {
     text-decoration-line: underline !important;
+  }
+  .placeholder-gray-500 {
+    &::placeholder {
+      color: var(--color-gray-500, oklch(55.1% 0.027 264.364));
+    }
   }
   .shadow {
     --tw-shadow: 0 1px 3px 0 var(--tw-shadow-color, rgb(0 0 0 / 0.1)), 0 1px 2px -1px var(--tw-shadow-color, rgb(0 0 0 / 0.1));
