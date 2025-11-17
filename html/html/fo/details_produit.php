@@ -1,5 +1,5 @@
 <?php 
-    include("html/01_premiere_connexion.php");
+    include(__DIR__ . "/../../01_premiere_connexion.php");
     
     /* Temporaire pour le dev, à changer au moment de la finalisation */
     if (isset($_GET["idProduit"])) {
@@ -53,12 +53,12 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-    <?php require("html/php/structure/head_front.php") ?>
+    <?php require(__DIR__ . "/../../php/structure/head_front.php") ?>
     <title> <?php echo $produit["libelle_produit"] ?></title>
 </head>
 <body>
-    <?php require("html/php/structure/header_front.php"); ?>
-    <?php require("html/php/structure/navbar_front.php"); ?>
+    <?php require(__DIR__ . "/../../php/structure/header_front.php"); ?>
+    <?php require(__DIR__ . "/../../php/structure/navbar_front.php"); ?>
 
     <main class="p-4 md:pl-8 pr-8">
         <!-- Section Description -->
@@ -69,7 +69,7 @@
             </article>
             
             <article class="md:flex md:flex-row md:justify-around">
-                <img src="/html/images/photos_vrac_converties/cidre_breton_brut.webp" alt="PLACE-HOLDER" title="PLACE-HOLDER"
+                <img src="../../images/photos_vrac_converties/cidre_breton_brut.webp" alt="PLACE-HOLDER" title="PLACE-HOLDER"
                 class="size-1/2 border
                        md:size-1/4">
 
@@ -154,7 +154,7 @@
                     </div>
                     <button class="-indent-96 overflow-hidden whitespace-nowrap
                     size-12 bg-no-repeat bg-size-[auto_48px]
-                    bg-[url(/html/images/logo/bootstrap_icon/chat-left-dots.svg)]
+                    bg-[url(/images/logo/bootstrap_icon/chat-left-dots.svg)]
                     md:size-auto md:bg-none md:indent-0 md:overflow-visible md:whitespace-normal
                     md:bg-beige md:shadow md:rounded-2xl md:w-40 md:h-14 md:mt-4 md:p-0.5">
                         Écrire un commentaire
@@ -164,6 +164,6 @@
         </section>
     </main>
 
-    <?php require("html/php/structure/footer_front.php") ?>
+    <?php require(__DIR__ . "/../../php/structure/footer_front.php") ?>
 </body>
 </html>

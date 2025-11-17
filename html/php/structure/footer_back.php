@@ -2,11 +2,11 @@
     <section class="flex justify-around">
         <article class="flex flex-col p-1">
             <h3 class="m-2">Infos Pratiques</h3>
-            <a class="m-1 text-bleu hover:text-beige" href="/html/html/bo/cgv_bo.php">
+            <a class="m-1 text-bleu hover:text-beige" href="/html/bo/cgv_bo.php">
                 Conditions générales de vente
             </a>
 
-            <a class="m-1 text-bleu hover:text-beige" href="/html/html/bo/cgu_bo.php">
+            <a class="m-1 text-bleu hover:text-beige" href="/html/bo/cgu_bo.php">
                 Conditions générales d'utilisation
             </a>
         </article>
@@ -26,16 +26,16 @@
 
     <section class="grid grid-cols-2 gap-1">
         <a class="m-1 text-bleu hover:text-beige" href="A modifier" class="self-center">
-            <img src="/html/images/logo/reseaux/facebook_back.webp" alt="Facebook" title="Facebook" class="size-12">
+            <img src="/images/logo/reseaux/facebook_back.webp" alt="Facebook" title="Facebook" class="size-12">
         </a>
         <a class="m-1 text-bleu hover:text-beige" href="A modifier" class="reseau_item">
-            <img src="/html/images/logo/reseaux/instagram_back.webp" alt="Instagram" title="Instagram" class="size-12">
+            <img src="/images/logo/reseaux/instagram_back.webp" alt="Instagram" title="Instagram" class="size-12">
         </a>
         <a class="m-1 text-bleu hover:text-beige" href="A modifier" class="reseau_item">
-            <img src="/html/images/logo/reseaux/linkedin_back.webp" alt="Linkedin" title="Linkedin" class="size-12">
+            <img src="/images/logo/reseaux/linkedin_back.webp" alt="Linkedin" title="Linkedin" class="size-12">
         </a>
         <a class="m-1 text-bleu hover:text-beige" href="A modifier" class="reseau_item">
-            <img src="/html/images/logo/reseaux/twitter_x_back.webp" alt="Twitter - X" title="Twitter - X" class="size-12">
+            <img src="/images/logo/reseaux/twitter_x_back.webp" alt="Twitter - X" title="Twitter - X" class="size-12">
         </a>
     </section>  
 </footer>

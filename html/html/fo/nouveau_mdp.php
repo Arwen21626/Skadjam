@@ -26,39 +26,41 @@ require_once __DIR__ . "/../../01_premiere_connexion.php";
             if(verifMotDePasse($_POST['mdp']) && ($_POST['mdp'] === $_POST['verifMdp'])){
                 $mdp = password_hash(htmlentities($_POST['mdp']), PASSWORD_DEFAULT);
                 // Enregistrer le nouveau mdp dans la BDD
-                $nouvMdp = $dbh->prepare("UPDATE sae3_skadjam._compte 
-                                                    SET motDePasse = $mdp
-                                                    WHERE id_compte = $id");
-                $nouvMdp->execute();
+                $nouvMdp = $dbh->prepare("UPDATE sae3_skadjam._compte
+                                                    SET motDePasse = :mdp
+                                                    WHERE id_compte = :id");
+                $nouvMdp->execute([
+                    ':mdp' => $mdp,
+                    ':id'  => $id
+                ]);
                 // Redirection vers la page de connexion
                 header("Location: connexion.php");
             }else{ 
                 echo "Erreur";
             }
         }else{ ?>
-            <h2>Nouveau mot de passe</h2>
+            <h2 class="flex justify-center text-center">Nouveau mot de passe</h2>
 
-            <form action="nouveau_mdp.php" method="post"> 
-                <label for="mdp">Mot de passe* :</label>
-                <input type="password" name="mdp" id="mdp" required>
-                <ul>
-                    <li>1 majuscule,</li>
-                    <li>1 minuscule,</li>
-                    <li>1 chiffre,</li>
-                    <li>1 caractère spécial,</li>
-                    <li>10 caractère minimum</li>
-                </ul>
+            <form class="flex flex-wrap p-15 pt-0 justify-around" action="nouveau_mdp.php" method="post"> 
+                <div class="flex flex-col basis-1/3 m-5 min-w-3xs">
+                    <label for="mdp">Mot de passe* :</label>
+                    <input class="border-4 border-vertClair rounded-2xl w-1/1 p-1 pl-3" type="password" name="mdp" id="mdp" required>
+                    <p style="font-size: 0.90em"> 1 majuscule, 1 minuscule, 1 chiffre, 1 caractère spécial, 10 caractères minimum</p>
+                </div>
 
-                <label for="verifMdp">Vérification du mot de passe* :</label>
-                <input type="password" name="verifMdp" id="verifMdp" required>
+                <div class="flex flex-col basis-1/3 m-5 min-w-3xs">
+                    <label for="verifMdp">Vérification du mot de passe* :</label>
+                    <input class="border-4 border-vertClair rounded-2xl w-1/1 p-1 pl-3" type="password" name="verifMdp" id="verifMdp" required>
+                </div>
 
-                <input type="submit" value="Confirmer">
+                <div class="flex mt-10 justify-center md:justify-end w-1/1 ">
+                    <input class="border-2 border-vertClair rounded-2xl w-40 h-14 p-0 m-0 md:mr-10" type="submit" value="Confirmer">
+                </div>
             </form><?php
         }
     }catch(PDOException $e){
         print "Erreur : " . $e->getMessage() . "<br/>";
     }
-    require __DIR__ . "/../../php/structure/footer_front.php";
-    ?>
+    require __DIR__ . "/../../php/structure/footer_front.php"; ?>
 </body>
 </html>

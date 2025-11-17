@@ -47,12 +47,15 @@
         </div>
 
 
-        <div class="mt-15 flex flex-row">
+        <div class="mt-15 flex flex-row justify-around">
             <button class="border-2 border-vertFonce rounded-2xl w-auto h-14 px-7"><a href="../bo/creation_produit.php">Ajouter un produit</a></button>
             <button class="border-2 border-vertFonce rounded-2xl w-auto h-14 px-7"><a href="">Statistiques</a></button>
             <button class="border-2 border-vertFonce rounded-2xl w-auto h-14 px-7"><a href="">Avis récents</a></button>
             <button class="border-2 border-vertFonce rounded-2xl w-auto h-14 px-7"><a href="../bo/vider_catalogue.php">Vider le catalogue</a></button>
         </div>
+
+        
+
 
         <!--Début du catalogue-->
         <h2 id="vosProduits">Vos produits</h2>
@@ -82,6 +85,10 @@
                                     , PDO::FETCH_ASSOC) as $row){
                     $tabProduit[] = $row;
                 }
+
+                if($tabProduit == null){ ?>
+                    <p>Votre catalogue est vide.</p>
+                <?php }
 
                 $maxPage = sizeof($tabProduit)/PAGE_SIZE;
                 //découpe le catalogue en page de 15 produits
@@ -160,8 +167,8 @@
                                         for($i=0; $i<$nbEtoilesVides; $i++){?>
                                             <img src="../../images/logo/bootstrap_icon/star.svg" alt="étoile vide" class="w-7 h-7"  >
                                         <?php }
-                                    } ?> 
-                                <?php }   ?> 
+                                    }
+                                } ?> 
                             </div>     
                             <!--affichage du stock-->
                             <p class="col-span-2">En stock : <?php echo htmlentities($valeurs['quantite_stock']);?></p>       
