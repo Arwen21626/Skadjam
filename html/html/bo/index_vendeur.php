@@ -167,8 +167,8 @@
                                         for($i=0; $i<$nbEtoilesVides; $i++){?>
                                             <img src="../../images/logo/bootstrap_icon/star.svg" alt="étoile vide" class="w-7 h-7"  >
                                         <?php }
-                                    } ?> 
-                                <?php }   ?> 
+                                    }
+                                } ?> 
                             </div>     
                             <!--affichage du stock-->
                             <p class="col-span-2">En stock : <?php echo htmlentities($valeurs['quantite_stock']);?></p>       
