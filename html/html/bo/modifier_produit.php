@@ -38,6 +38,8 @@ foreach($dbh->query("SELECT * FROM sae3_skadjam._produit pr
     $urlPhoto = $produit['url_photo'];
     $altPhoto = $produit['alt'];
     $titrePhoto = $produit['titre'];
+
+    
 }
 
 ?>

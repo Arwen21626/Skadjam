@@ -24,7 +24,7 @@
                 <div class="flex flex-row">
                     <div class="flex flex-col">
                         <label for="expiration">Date d'expiration* :</label>
-                        <input placeholder="mm/AA" class="border-4 border-vertClair rounded-2xl placeholder-gray-500" type="month" name="expiration" id="expiration" required>
+                        <input placeholder="AAAA/mm mais à voir pour changer" class="border-4 border-vertClair rounded-2xl placeholder-gray-500" type="month" name="expiration" id="expiration" required>
                     </div>
                     
 
