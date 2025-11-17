@@ -69,7 +69,7 @@ try {
     <main class=" flex flex-col items-center">
         <h2 class="m-8">Profil</h2>
         <form method="POST" enctype="multipart/form-data" class=" w-2/3 @max-[768px]:w-7/8">
-            <div class="flex flex-row justify-between">
+            <div class="flex flex-row items-center justify-between">
                 <div class=" flex flex-col w-fit">
                     <?php 
                     $stmt = $dbh->prepare("SELECT url_photo, alt, titre FROM sae3_skadjam._presente pr inner join sae3_skadjam._photo ph on pr.id_photo = ph.id_photo where id_vendeur = ?");
@@ -78,11 +78,12 @@ try {
                     if ($tabPhoto){ 
                         $photo = $tabPhoto[1];
                         ?>
-                        <img class=" w-80 border-2 border-solid rounded-2xl border-beige mb-3 @max-[768px]:" src="<?= "../../" .  $photo["url_photo"] ?>" alt="<?= $photo["alt"] ?>" title="<?= $photo["titre"] ?>" width="390px" height="390px">
+                        <img class=" w-80 border-2 border-solid rounded-2xl border-beige mb-3" src="<?= "../../" .  $photo["url_photo"] ?>" alt="<?= $photo["alt"] ?>" title="<?= $photo["titre"] ?>">
                     <?php  
-                    }else{ ?>
-                    
-                    <img class="mb-3" src="../../images/logo/bootstrap_icon/image.svg" alt="aucune image" title="aucune image" width="390px" height="390px">
+                    }else{?>
+                    <div class="w-80 h-80">
+                        <img class="mb-3 w-80 bg-beige rounded-2xl" src="../../images/logo/bootstrap_icon/image.svg" alt="aucune image" title="aucune image">
+                    </div>
                     
                     <?php }
                     ?>
@@ -90,50 +91,126 @@ try {
                     <label class="cursor-pointer w-80 rounded-2xl bg-beige p-2 text-center"  for="image">Ajouter une image</label>
                 </div>
                 <div class=" mt-5">
-                    <div class=" mb-3">
-                        <p class="underline">Entreprise :</p>
-                        <p class=" ml-7 mt-2"><?= $denom ?></p>
+                    <div class=" mb-3 modif-attribut">
+                        <div class=" flex flex-row items-center">
+                            <p class="underline">Entreprise :</p>
+                            <button type="button" class="bouton-modifier group/pen cursor-pointer">
+                                <img src="../../images/logo/bootstrap_icon/pencil.svg" alt="modifier" title="modifier" class=" w-6! h-6! ml-4 block group-hover/pen:hidden">
+                                <img src="../../images/logo/bootstrap_icon/pencil-fill.svg" alt="modifier" title="modifier" class=" w-6! h-6! ml-4 hidden group-hover/pen:block">
+                            </button>
+                        </div>
+                        <p class="attribut-text ml-7 mt-2"><?= $denom ?></p>
+                        <input type="text" name="denom" class="champ-text ml-7 hidden border-2 border-solid rounded-md border-beige pl-3" value="<?= $denom ?>">
                     </div>
-                    <div class=" mb-3">
-                        <p class="underline">Adresse du siège social :</p>
-                        <p class=" ml-7 mt-2"><?= "$num $numBis $adresse, $ville, $cp" ?></p>
+
+                    <div class=" mb-3 modif-attribut">
+                        <div class=" flex flex-row items-center">
+                            <p class="underline">Adresse du siège social :</p>
+                            <button type="button" class="bouton-modifier group/pen cursor-pointer">
+                                <img src="../../images/logo/bootstrap_icon/pencil.svg" alt="modifier" title="modifier" class=" w-6! h-6! ml-4 block group-hover/pen:hidden">
+                                <img src="../../images/logo/bootstrap_icon/pencil-fill.svg" alt="modifier" title="modifier" class=" w-6! h-6! ml-4 hidden group-hover/pen:block">
+                            </button>
+                        </div>
+                        <p class="attribut-text ml-7 mt-2"><?= "$num $numBis $adresse, $ville, $cp" ?></p>
+                        <input type="text" name="adresse" class="champ-text ml-7 hidden border-2 border-solid rounded-md border-beige pl-3" value="<?= "$num $numBis $adresse, $ville, $cp" ?>">
                     </div>
-                    <div class=" mb-3">
-                        <p class="underline">Numéro SIREN :</p>
-                        <p class=" ml-7 mt-2"><?= $siren ?></p>
+
+                    <div class=" mb-3 modif-attribut">
+                        <div class=" flex flex-row items-center">
+                            <p class="underline">Numéro SIREN :</p>
+                            <button type="button" class="bouton-modifier group/pen cursor-pointer">
+                                <img src="../../images/logo/bootstrap_icon/pencil.svg" alt="modifier" title="modifier" class=" w-6! h-6! ml-4 block group-hover/pen:hidden">
+                                <img src="../../images/logo/bootstrap_icon/pencil-fill.svg" alt="modifier" title="modifier" class=" w-6! h-6! ml-4 hidden group-hover/pen:block">
+                            </button>
+                        </div>
+                        <p class="attribut-text ml-7 mt-2"><?= $siren ?></p>
+                        <input type="text" name="siren" class="champ-text ml-7 hidden border-2 border-solid rounded-md border-beige pl-3" value="<?= $siren ?>">
                     </div>
+
                 </div>
             </div>
-            <div class="flex flex-row justify-between mt-8">
+            <div class="flex flex-row items-center justify-between mt-8">
                 <div>
-                    <h3>Propriétaire</h3>
-                    <div class="mb-3">
-                        <p class="underline">Nom :</p>
-                        <p class=" ml-7 mt-2"><?= $nom ?></p>
-                    </div class="mb-3">
-                    <div>
-                        <p class="underline">Prénom :</p>
-                        <p class=" ml-7 mt-2"><?= $prenom ?></p>
+                    <h3 class=" mb-2">Propriétaire</h3>
+                    <div class="mb-3 modif-attribut">
+                        <div class=" flex flex-row items-center">
+                            <p class="underline">Nom :</p>
+                            <button type="button" class="bouton-modifier group/pen cursor-pointer">
+                                <img src="../../images/logo/bootstrap_icon/pencil.svg" alt="modifier" title="modifier" class=" w-6! h-6! ml-4 block group-hover/pen:hidden">
+                                <img src="../../images/logo/bootstrap_icon/pencil-fill.svg" alt="modifier" title="modifier" class=" w-6! h-6! ml-4 hidden group-hover/pen:block">
+                            </button>
+                        </div>
+                        <p class="attribut-text ml-7 mt-2"><?= $nom ?></p>
+                        <input type="text" name="nom" class="champ-text ml-7 hidden border-2 border-solid rounded-md border-beige pl-3" value="<?= $nom ?>">
                     </div>
+
+                    <div class="mb-3 modif-attribut">
+                        <div class=" flex flex-row items-center">
+                            <p class="underline">Prénom :</p>
+                            <button type="button" class="bouton-modifier group/pen cursor-pointer">
+                                <img src="../../images/logo/bootstrap_icon/pencil.svg" alt="modifier" title="modifier" class=" w-6! h-6! ml-4 block group-hover/pen:hidden">
+                                <img src="../../images/logo/bootstrap_icon/pencil-fill.svg" alt="modifier" title="modifier" class=" w-6! h-6! ml-4 hidden group-hover/pen:block">
+                            </button>
+                        </div>
+                        <p class="attribut-text ml-7 mt-2"><?= $prenom ?></p>
+                        <input type="text" name="prenom" class="champ-text ml-7 hidden border-2 border-solid rounded-md border-beige pl-3" value="<?= $prenom ?>">
+                    </div>
+
                 </div>
                 <div>
-                    <h3>Contact</h3>
-                    <div class="mb-3">
-                        <p class="underline">Numéro de téléphone :</p>
-                        <p class=" ml-7 mt-2"><?= $tel ?></p>
+                    <h3 class=" mb-2">Contact</h3>
+                    <div class="mb-3 modif-attribut">
+                        <div class=" flex flex-row items-center">
+                            <p class="underline">Numéro de téléphone :</p>
+                            <button type="button" class="bouton-modifier group/pen cursor-pointer">
+                                <img src="../../images/logo/bootstrap_icon/pencil.svg" alt="modifier" title="modifier" class=" w-6! h-6! ml-4 block group-hover/pen:hidden">
+                                <img src="../../images/logo/bootstrap_icon/pencil-fill.svg" alt="modifier" title="modifier" class=" w-6! h-6! ml-4 hidden group-hover/pen:block">
+                            </button>
+                        </div>
+                        <p class="attribut-text ml-7 mt-2"><?= $tel ?></p>
+                        <input type="text" name="tel" class="champ-text ml-7 hidden border-2 border-solid rounded-md border-beige pl-3" value="<?= $tel ?>">
                     </div>
-                    <div class="mb-3">
-                        <p class="underline">E-Mail :</p>
-                        <p class=" ml-7 mt-2"><?= $mail ?></p>
+
+                    <div class="mb-3 modif-attribut">
+                        <div class=" flex flex-row items-center">
+                            <p class="underline">E-Mail :</p>
+                            <button type="button" class="bouton-modifier group/pen cursor-pointer">
+                                <img src="../../images/logo/bootstrap_icon/pencil.svg" alt="modifier" title="modifier" class=" w-6! h-6! ml-4 block group-hover/pen:hidden">
+                                <img src="../../images/logo/bootstrap_icon/pencil-fill.svg" alt="modifier" title="modifier" class=" w-6! h-6! ml-4 hidden group-hover/pen:block">
+                            </button>
+                        </div>
+                        <p class="attribut-text ml-7 mt-2"><?= $mail ?></p>
+                        <input type="text" name="mail" class="champ-text ml-7 hidden border-2 border-solid rounded-md border-beige pl-3" value="<?= $mail ?>">
                     </div>
+
                 </div>
             </div>
-            <div class=" mt-8 mb-20">
-                <h3>Description :</h3>
-                <p class=" ml-7 mt-2"><?= $description ?></p>
+            <div class=" mt-8 mb-20 modif-attribut">
+                <div class=" flex flex-row items-center">
+                    <h3 class=" mb-2">Description :</h3>
+                    <button type="button" class="bouton-modifier group/pen cursor-pointer">
+                        <img src="../../images/logo/bootstrap_icon/pencil.svg" alt="modifier" title="modifier" class=" w-6! h-6! ml-4 block group-hover/pen:hidden">
+                        <img src="../../images/logo/bootstrap_icon/pencil-fill.svg" alt="modifier" title="modifier" class=" w-6! h-6! ml-4 hidden group-hover/pen:block">
+                    </button>
+                </div>
+                <p class="attribut-text ml-7"><?= $description ?></p>
+                <textarea name="description" class="champ-text ml-7 hidden border-2 border-solid rounded-md border-beige pl-3 w-full h-40"><?= $description ?></textarea>
             </div>
         </form>
     </main>
     <?php require_once __DIR__ . "/../../php/structure/footer_back.php" ?>
 </body>
+<script>
+document.querySelectorAll(".modif-attribut .bouton-modifier").forEach(button => {
+    button.addEventListener("click", () => {
+        const container = button.closest(".modif-attribut"); // parent
+        const paragraph = container.querySelector("p.attribut-text");
+        const champ = container.querySelector(".champ-text")// le <p> à cacher
+        paragraph.classList.toggle("hidden");
+        champ.classList.toggle("hidden");
+        champ.classList.toggle("block");
+    });
+});
+</script>
+
 </html>
