@@ -38,7 +38,7 @@ if(isset($_POST['mdp']) && isset($_POST['mail'])){
 <body>
     <?php require_once __DIR__ . "/../../php/structure/header_front.php"; ?>
     <main>
-        <h2>Connexion</h2>
+        <h2 class="flex flex-col items-center">Connexion</h2>
         <form method="post">
             <div class="flex flex-col items-center ml-10 mb-7 mr-10">
 
