@@ -648,9 +648,6 @@ p, a {
   .bg-vertMoyen {
     background-color: var(--color-vertMoyen);
   }
-  .bg-\[url\(\/html\/images\/logo\/bootstrap_icon\/plus\.svg\)\] {
-    background-image: url(/html/images/logo/bootstrap_icon/plus.svg);
-  }
   .bg-\[url\(\/images\/logo\/bootstrap_icon\/cart\.svg\)\] {
     background-image: url(/images/logo/bootstrap_icon/cart.svg);
   }
@@ -665,6 +662,9 @@ p, a {
   }
   .bg-\[url\(\/images\/logo\/bootstrap_icon\/plus-square\.svg\)\] {
     background-image: url(/images/logo/bootstrap_icon/plus-square.svg);
+  }
+  .bg-\[url\(\/images\/logo\/bootstrap_icon\/plus\.svg\)\] {
+    background-image: url(/images/logo/bootstrap_icon/plus.svg);
   }
   .bg-\[url\(\/images\/logo\/bootstrap_icon\/search\.svg\)\] {
     background-image: url(/images/logo/bootstrap_icon/search.svg);
