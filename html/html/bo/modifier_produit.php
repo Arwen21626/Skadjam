@@ -4,7 +4,7 @@ require_once(__DIR__ . '/../../php/verification_formulaire.php');
 
 
 $idProduit = $_GET['idProduit'];
-$idProduit = 4;
+$idProduit = 5;
 foreach($dbh->query("SELECT *,est_masque::CHAR as est_masque_php FROM sae3_skadjam._produit pr
                         INNER JOIN sae3_skadjam._categorie c
                             ON pr.id_categorie = c.id_categorie
@@ -70,7 +70,7 @@ foreach($dbh->query("SELECT *,est_masque::CHAR as est_masque_php FROM sae3_skadj
             <div class="row-start-1 row-span-3 m-2 p-4 grid grid-rows-[2/3-1/3] justify-items-center">
                 <input type="file" id="photo" name="photo" class="hidden" required>
                 <!-- label qui agit comme bouton -->
-                <label id="labelImage" for="photo" class="bg-beige w-60 h-60 rounded-xl" style="background-image: url(<?php echo $urlPhoto ?>); background-repeat: no-repeat; background-position: center; background-size: 60%;"></label>
+                <label id="labelImage" for="photo" class=" w-60 h-60 rounded-xl" style="background-image: url(<?php echo $urlPhoto ?>); background-repeat: no-repeat; background-position: center; background-size: 100%;"></label>
                 <label for="photo">Ajouter une image*</label>
             </div>
             
@@ -140,10 +140,6 @@ foreach($dbh->query("SELECT *,est_masque::CHAR as est_masque_php FROM sae3_skadj
             </div>
         </form>
     </main>
-    <?php include(__DIR__ . '/../../php/structure/footer_back.php');?>
-    <script>
-        let image = document.getElementById('labelImage');
-        image.style.backgroundImage('<?php echo $urlPhoto ;?>');
-    </script>
+    <?php include(__DIR__ . '/../../php/structure/footer_back.php');?> 
 </body>
 </html>
