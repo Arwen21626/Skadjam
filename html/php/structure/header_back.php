@@ -2,7 +2,7 @@
     <section class="grid grid-cols-3 p-6">
         <div class="pl-12">
             <a class="inline-block" href="/html/html/bo/index_vendeur.php">
-                <img src="/html/images/logo/alizon/logo_alizon_bleu_claire.webp" alt="logo Alizon" 
+                <img src="/images/logo/alizon/logo_alizon_bleu_claire.webp" alt="logo Alizon" 
                 class="size-28">
             </a>
         </div>
