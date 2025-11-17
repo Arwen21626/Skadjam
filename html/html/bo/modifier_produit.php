@@ -117,7 +117,7 @@ foreach($dbh->query("SELECT * FROM sae3_skadjam._produit pr
             <div class="col-start-1 row-start-4 col-span-2 flex flex-row justify-around m-2 p-2">
                 <div class="flex flex-row mr-4 ml-4">
                     <label class="mr-4" for="mettreEnLigne">Mettre en ligne</label>
-                    <input value="<?php echo($enLigne) ;?>" class="appearance-none w-10 h-10 border-4 border-beige rounded-md checked:bg-beige" type="checkbox" name="mettreEnLigne" id="mettreEnLigne">
+                    <input class="appearance-none w-10 h-10 border-4 border-beige rounded-md checked:bg-beige" type="checkbox" name="mettreEnLigne" id="mettreEnLigne" checked>
                 </div>
             
                 <div class="flex flex-row mr-4 ml-4">
@@ -140,7 +140,7 @@ foreach($dbh->query("SELECT * FROM sae3_skadjam._produit pr
     <?php include(__DIR__ . '/../../php/structure/footer_back.php');?>
     <script>
         let image = document.getElementById('labelImage');
-        image.style.backgroundImage(<?php echo $urlPhoto ;?>);
+        image.style.backgroundImage('<?php echo $urlPhoto ;?>');
     </script>
 </body>
 </html>

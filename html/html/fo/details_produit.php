@@ -36,6 +36,16 @@
                                       PDO::FETCH_ASSOC) as $row) {
         $vendeur = $row;
     };
+
+    // Requête pour récupérer l'url de la photo
+    foreach ($dbh->query("  SELECT url_photo, alt, titre
+                            FROM sae3_skadjam._montre
+                            INNER JOIN sae3_skadjam._photo
+                            ON _photo.id_photo = _montre.id_photo
+                            WHERE _montre.id_produit =" . $idProd, 
+                                      PDO::FETCH_ASSOC) as $row) {
+        $infoPhoto = $row;
+    };
     
     // Définition des variables PHP pour récupérer chaque donnée nécessaire
     $libelleProd = $produit["libelle_produit"]; // Nom du produit
@@ -46,7 +56,8 @@
     $produitDesc = $produit["description_produit"];
 
     // Affichage test
-    // print_r($produit);
+     print_r($infoPhoto);
+     echo __DIR__ . "/../../.." . $infoPhoto["url_photo"];
 ?>
 
 
@@ -69,7 +80,7 @@
             </article>
             
             <article class="md:flex md:flex-row md:justify-around">
-                <img src="../../images/photos_vrac_converties/cidre_breton_brut.webp" alt="PLACE-HOLDER" title="PLACE-HOLDER"
+                <img src= <?php echo __DIR__ . "/../../.." . $infoPhoto["url_photo"]; ?>  alt=<?php echo $infoPhoto["alt"] ?> title=<?php echo $infoPhoto["titre"] ?>
                 class="size-1/2 border
                        md:size-1/4">
 
