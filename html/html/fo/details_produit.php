@@ -56,9 +56,9 @@
     $produitDesc = $produit["description_produit"];
 
     // Affichage test
-     print_r($infoPhoto);
-     echo "../../.." . $infoPhoto["url_photo"];
-    //  <?php echo "../../.." . $infoPhoto["url_photo"]; ?>
+    //  print_r($infoPhoto);
+     echo $infoPhoto["url_photo"];
+    //  <?php echo "../../.." . $infoPhoto["url_photo"]; 
 ?>
 
 
@@ -81,7 +81,7 @@
             </article>
             
             <article class="md:flex md:flex-row md:justify-around">
-                <img src="../../images/photo_importees/Confiture1763389188.webp"  alt=<?php echo $infoPhoto["alt"] ?> title=<?php echo $infoPhoto["titre"] ?>
+                <img src="<?php echo $infoPhoto["url_photo"]; ?>"  alt=<?php echo $infoPhoto["alt"] ?> title=<?php echo $infoPhoto["titre"] ?>
                 class="size-1/2 border
                        md:size-1/4">
 

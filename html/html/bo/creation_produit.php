@@ -65,7 +65,8 @@ if (isset($_POST['categorie']) && isset($_POST['nom']) && isset($_POST['prix']) 
     //Déplacement et renommage du fichier photo
     $nom_explode = explode(' ',$nom)[0];
     $currentTime = time();
-    $destination = __DIR__ . '../../images/photo_importees';
+    $destination = __DIR__ . '/../../images/photo_importees';
+    echo $destination;
     $nom_photo_finale = $nom_explode.$currentTime.'.'.$ext;
     move_uploaded_file($nom_serv_photo,$destination.'/'.$nom_photo_finale);
     
