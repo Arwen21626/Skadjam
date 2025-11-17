@@ -6,8 +6,9 @@ require __DIR__ . '/../../php/PHPMailer/src/Exception.php';
 
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
+use PHPMailer\PHPMailer\SMTP;
 
-$mail = new PHPMailer(true);
+$mailer = new PHPMailer(true);
 ?>
 <!DOCTYPE html>
 <html lang="fr">
@@ -51,27 +52,27 @@ $mail = new PHPMailer(true);
             if(isset($_POST['mail'])){
                 try {
                     // Configuration SMTP
-                    $mail->isSMTP();
-                    $mail->Host       = 'smtp.gmail.com'; // À adapter selon ton serveur
-                    $mail->SMTPAuth   = true;
-                    $mail->Username   = 'alizon.reinitialisation@gmail.com';
-                    $mail->Password   = 'jjab jifb lmms dfuz';
-                    $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
-                    $mail->Port       = 587;
+                    $mailer->isSMTP();
+                    $mailer->Host       = 'smtp.gmail.com';
+                    $mailer->SMTPAuth   = true;
+                    $mailer->Username   = 'alizon.reinitialisation@gmail.com';
+                    $mailer->Password   = 'jjab jifb lmms dfuz';
+                    $mailer->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
+                    $mailer->Port       = 587;
 
                     // Expéditeur
-                    $mail->setFrom('alizon.reinitialisation@gmail.com', 'Alizon');
+                    $mailer->setFrom('alizon.reinitialisation@gmail.com', 'Alizon');
 
                     // Destinataire
-                    $mail->addAddress($_POST['mail']);
+                    $mailer->addAddress($_POST['mail']);
 
                     // Contenu
-                    $mail->isHTML(false);
-                    $mail->Subject = 'Alizon : réinitialiser votre mot de passe';
-                    $mail->Body    = 'Voici votre email de test';
+                    $mailer->isHTML(false);
+                    $mailer->Subject = 'Alizon : réinitialiser votre mot de passe';
+                    $mailer->Body    = 'Voici votre email de test';
 
                     // Envoi
-                    $mail->send();
+                    $mailer->send();
                     echo "Vérifiez votre adresse mail.";
                 } catch (Exception $e) {
                     echo "Erreur : {$mail->ErrorInfo}";
