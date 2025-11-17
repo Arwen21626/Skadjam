@@ -11,6 +11,9 @@ $idVendeur = $_SESSION['idCompte'];
 //Tableau pour les catégories de la base
 $tab_categories = [];
 
+//Tableau pour les tva
+$tab_tva = [];
+
 //Tableau pour les unites
 $tab_unite = ["Piece", "Litre","cl","g","kg","S","M","L","XL","XXL","m","cm"];
 
@@ -24,9 +27,14 @@ foreach($dbh->query('SELECT * from sae3_skadjam._categorie', PDO::FETCH_ASSOC) a
     $tab_categories[] = $row;
 }
 
+//Requete récupération TVA
+foreach($dbh->query('SELECT * from sae3_skadjam._tva', PDO::FETCH_ASSOC) as $row) {
+    $tab_tva[] = $row;
+}
+
 if (isset($_POST['categorie']) && isset($_POST['nom']) && isset($_POST['prix']) && isset($_POST['qteStock']) && isset($_POST['description']) && isset($_POST['unite'])) {
     //Récupération des champs pour l'insertion
-    $categorie = htmlentities($_POST['categorie']);
+    $idCategorie = htmlentities($_POST['categorie']);
     $nom = htmlentities($_POST['nom']);
     $prixHT = htmlentities($_POST['prix']);
     $qteStock = htmlentities($_POST['qteStock']);
@@ -38,6 +46,13 @@ if (isset($_POST['categorie']) && isset($_POST['nom']) && isset($_POST['prix']) 
 
     $enPromotion = htmlentities($_POST['mettreEnPromotion']);
     $enLigne = htmlentities($_POST['mettreEnLigne']);
+
+    //Récupération du nom de la catégorie pour la gestion de la tva
+    foreach ($tab_categories as $c) {
+        if ($c['id_categorie'] == $idCategorie) {
+            $nomCategorie = $c['libelle_categorie'];
+        }
+    }
     
     if ($_POST['mettreEnLigne'] == false) {
         //S'il n'est pas coché il faut mettre est_masque dans la BDD à true en chaine pour eviter les problèmes
@@ -50,24 +65,39 @@ if (isset($_POST['categorie']) && isset($_POST['nom']) && isset($_POST['prix']) 
     //Déplacement et renommage du fichier photo
     $nom_explode = explode(' ',$nom)[0];
     $currentTime = time();
-    $destination = '../../images/photo_importees';
+    $destination = __DIR__ . '../../images/photo_importees';
     $nom_photo_finale = $nom_explode.$currentTime.'.'.$ext;
     move_uploaded_file($nom_serv_photo,$destination.'/'.$nom_photo_finale);
-
-    //test tva
-
-    //Il faut récupérer l'id du vendeur pour l'insertion
+    
     if (verifPrix($prix) && verifQteStock($qteStock)){
         try{
+            if ($nomCategorie == 'Alimentaire') {
+                foreach ($tab_tva as $t) {
+                    if ($t['nom_tva'] === 'reduit') {
+                        $tva = $t['id_tva'];
+                        $pourcentageTVA = $t['pourcentage_tva'];
+                    }
+                }
+            }
+            else{
+                foreach ($tab_tva as $t) {
+                    if ($t['nom_tva'] === 'normal') {
+                        $tva = $t['id_tva'];
+                        $pourcentageTVA = $t['pourcentage_tva'];
+                    }
+                }
+            }
+
+            
             //Calcul prixTTC
-            $prixTTC = $prixHT*1.2; //A adapter en fonction de la categorie
+            $prixTTC = $prixHT*(1+$pourcentageTVA);
 
             //Insertion du produit
             $insertionProduit = $dbh -> query("WITH id AS (
                 INSERT INTO sae3_skadjam._produit 
                 (libelle_produit, description_produit, prix_ht, prix_ttc, est_masque, quantite_stock, quantite_unite, unite, id_categorie, id_vendeur, id_tva)
                 VALUES 
-                ('$nom','$description', $prixHT, $prixTTC, $enLigne, $qteStock, $qteUnite, '$unite', $categorie, 1, 1)
+                ('$nom','$description', $prixHT, $prixTTC, $enLigne, $qteStock, $qteUnite, '$unite', $idCategorie, 1, $tva)
                 RETURNING id_produit)
                 SELECT * FROM id;
                 ");
@@ -81,7 +111,7 @@ if (isset($_POST['categorie']) && isset($_POST['nom']) && isset($_POST['prix']) 
                 INSERT INTO sae3_skadjam._photo 
                 (url_photo, alt, titre)
                 VALUES 
-                ('/html/images/photo_importees/$nom_photo_finale','$nom','$nom')
+                ('/images/photo_importees/$nom_photo_finale','$nom','$nom')
                 RETURNING id_photo)
                 SELECT * FROM id;
                 ");
@@ -129,7 +159,7 @@ else { ?>
             <div class="row-start-1 row-span-3 m-2 p-4 grid grid-rows-[2/3-1/3] justify-items-center">
                 <input type="file" id="photo" name="photo" class="hidden" required>
                 <!-- label qui agit comme bouton -->
-                <label for="photo" class="bg-beige w-60 h-60 rounded-xl" style="background-image: url('../../images/logo/bootstrap_icon/image.svg'); background-repeat: no-repeat; background-position: center; background-size: 60%;"></label>
+                <label for="photo" class="bg-beige w-60 h-60 rounded-2xl" style="background-image: url('../../images/logo/bootstrap_icon/image.svg'); background-repeat: no-repeat; background-position: center; background-size: 60%;"></label>
                 <label for="photo">Ajouter une image*</label>
             </div>
             
@@ -142,7 +172,7 @@ else { ?>
             <div class="col-start-2 row-start-2 flex flex-row justify-between w-200 m-2 p-2">
                 <div class="flex flex-col">
                     <label for="prix">Prix *(hors taxe):</label>
-                    <input placeholder="3.99" class="border-4 border-beige rounded-2xl w-75 placeholder-gray-500" type="number" name="prix" id="prix" min="0.0" step="0.5" required>
+                    <input placeholder="3.99" class="border-4 border-beige rounded-2xl w-75 placeholder-gray-500" type="number" name="prix" id="prix" min="0.0" step="0.01" required>
                 </div>
                 <div class="flex flex-col">
                     <label for="qteStock">Quantité en stock* :</label>

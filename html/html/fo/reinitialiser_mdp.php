@@ -6,8 +6,9 @@ require __DIR__ . '/../../php/PHPMailer/src/Exception.php';
 
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
+use PHPMailer\PHPMailer\SMTP;
 
-$mail = new PHPMailer(true);
+$mailer = new PHPMailer(true);
 ?>
 <!DOCTYPE html>
 <html lang="fr">
@@ -31,68 +32,61 @@ $mail = new PHPMailer(true);
     </form>
     <?php }else{ ?>
         <p>Mail entré : <?php echo $_POST['mail']; ?></p>
-    <p>
-    <?php
-    try{
-        $dbh = new PDO("$driver:host=$server;dbname=$dbname",$user,$pass);
-        $dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-        $dbh->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC);
+        <p>
+        <?php
+        try{
+            $dbh = new PDO("$driver:host=$server;dbname=$dbname",$user,$pass);
+            $dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+            $dbh->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC);
 
-        // L'e-mail est-il présent dans la BDD ?
-        $mailPresent = false;
-        foreach($dbh->query("SELECT adresse_mail FROM sae3_skadjam._compte", PDO::FETCH_ASSOC) as $mail){
-            if($mail['adresse_mail'] === $_POST['mail']){
-                $mailPresent = true;
-            }
-        }
-
-        // Si l'e-mail est présent, essaie d'envoyer un message à cette adresse
-        if($mailPresent){
-            if(isset($_POST['mail'])){
-                try {
-                    // Configuration SMTP
-                    $mail->isSMTP();
-                    $mail->Host       = 'smtp.gmail.com'; // À adapter selon ton serveur
-                    $mail->SMTPAuth   = true;
-                    $mail->Username   = 'alizon.reinitialisation@gmail.com';
-                    $mail->Password   = 'jjab jifb lmms dfuz';
-                    $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
-                    $mail->Port       = 587;
-
-                    // Expéditeur
-                    $mail->setFrom('alizon.reinitialisation@gmail.com', 'Alizon');
-
-                    // Destinataire
-                    $mail->addAddress($_POST['mail']);
-
-                    // Contenu
-                    $mail->isHTML(false);
-                    $mail->Subject = 'Alizon : réinitialiser votre mot de passe';
-                    $mail->Body    = 'Voici votre email de test';
-
-                    // Envoi
-                    $mail->send();
-                    echo "Vérifiez votre adresse mail.";
-                } catch (Exception $e) {
-                    echo "Erreur : {$mail->ErrorInfo}";
+            // L'e-mail est-il présent dans la BDD ?
+            $mailPresent = false;
+            foreach($dbh->query("SELECT adresse_mail FROM sae3_skadjam._compte", PDO::FETCH_ASSOC) as $mail){
+                if($mail['adresse_mail'] === $_POST['mail']){
+                    $mailPresent = true;
                 }
-                $retour = mail($_POST['mail'],"Alizon : réinitialiser votre mot de passe","test");
-                if($retour){
-                    echo "Vérifiez votre adresse mail.";
+            }
+
+            // Si l'e-mail est présent, essaie d'envoyer un message à cette adresse
+            if($mailPresent){
+                if(isset($_POST['mail'])){
+                    try {
+                        // Configuration SMTP
+                        $mailer->isSMTP();
+                        $mailer->Host       = 'smtp.gmail.com';
+                        $mailer->SMTPAuth   = true;
+                        $mailer->Username   = 'alizon.reinitialisation@gmail.com';
+                        $mailer->Password   = 'jjab jifb lmms dfuz';
+                        $mailer->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
+                        $mailer->Port       = 587;
+
+                        // Expéditeur
+                        $mailer->setFrom('alizon.reinitialisation@gmail.com', 'Alizon');
+                    
+                        // Destinataire
+                        $mailer->addAddress($_POST['mail']);
+
+                        // Contenu
+                        $mailer->isHTML(false);
+                        $mailer->Subject = 'Alizon : reinitialiser votre mot de passe';
+                        $mailer->Body    = "Pour changer votre mot de passe, cliquez sur ce lien : http://localhost:8888/html/html/fo/nouveau_mdp.php";
+
+                        // Envoi
+                        $mailer->send();
+                        echo "Vérifiez votre boîte de réception ainsi que vos spams.";
+                    } catch (Exception $e) {
+                        echo "Erreur : le mail n'a pas été envoyé.";
+                    }
                 }else{
-                    echo "Erreur : le mail n'a pas été envoyé.";
+                    echo "Erreur : Aucun mail n'a été entré ou une erreur est survenue.";
                 }
             }else{
-                echo "Erreur : Aucun mail n'a été entré ou une erreur est survenue.";
+                echo "Ce mail ne correspond à aucun compte.";
             }
-        }else{
-            echo "Ce mail ne correspond à aucun compte.";
-        }
-        $dbh = null;
-    }catch(PDOException $e){
-        print "Erreur : " . $e->getMessage() . "<br/>";
-    }
-    ?>
+            $dbh = null;
+        }catch(PDOException $e){
+            print "Erreur : " . $e->getMessage() . "<br/>";
+        } ?>
     </p>
     <?php }
         require __DIR__ . "/../../php/structure/footer_front.php";

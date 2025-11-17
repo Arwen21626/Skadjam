@@ -28,6 +28,8 @@
     ?>
     <main>
         <?php
+        // Vérifier si le client est connecter
+        if(isset($_SESSION["idCompte"])) {
             // Connexion à la session
             $id = (int) $_SESSION["idCompte"];
 
@@ -61,13 +63,15 @@
                                             WHERE c.id_compte = $id", PDO::FETCH_ASSOC) as $adresse){
                     $numRue[$nbAdresse] = $adresse['numero_rue'];
                     $adressePostale[$nbAdresse] = $adresse['adresse_postale'];
+                    $batiment[$nbAdresse] = " " . $adresse['numero_bat'];
+                    $appartement[$nbAdresse] = " " . $adresse['numero_appart'];
                     $codePostal[$nbAdresse] = $adresse['code_postal'];
                     $ville[$nbAdresse] = $adresse['ville'];
                     $nbAdresse++;
                 }
                 $dbh = null;
             }catch(PDOException $e){
-                print "Erreur : " . $e->getMessage() . "<br/>";
+                echo "Erreur : " . $e->getMessage();
             }
         ?>
         <h2 class="flex justify-center text-center">Mon profil</h2>
@@ -79,7 +83,7 @@
             <div>
                 <p class="m-4"><?php echo $naissance; ?></p>
                 <?php for ($i=0; $i < $nbAdresse; $i++) { // Affiche toutes les adresses du client ?>
-                <p class="mt-2 mb-2 mr-4 ml-4"><?php echo "$numRue[$i] $adressePostale[$i], $codePostal[$i] $ville[$i]"; ?></p>
+                <p class="mt-2 mb-2 mr-4 ml-4"><?php echo "$numRue[$i] $adressePostale[$i]$batiment[$i]$appartement[$i], $codePostal[$i] $ville[$i]"; ?></p>
                 <?php } ?>
                 <p class="m-4"><?php echo $telephone; ?></p>
                 <p class="m-4"><?php echo $mail; ?></p>
@@ -98,6 +102,9 @@
                 <input class="border-2 border-vertClair rounded-xl p-2" type="submit" value="Se déconnecter">
             </form>
         </article>
+        <?php }else{
+            header("Location: connexion.php"); // Si non connecté, l'emmener à la page de connexion à la place
+        } ?>
     </main>
     <?php require __DIR__ . "/../../php/structure/footer_front.php"; ?>
 </body>
