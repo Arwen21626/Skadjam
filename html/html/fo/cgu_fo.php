@@ -2,6 +2,7 @@
 <html lang="fr">
 <head>
     <?php require __DIR__ . "/../../php/structure/head_front.php"; ?>
+    <link rel="stylesheet" href="../../css/fo/general_front.css">
     <title>Conditions Générales d'Utilisateurs</title>
 </head>
 <body>
