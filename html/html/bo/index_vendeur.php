@@ -3,7 +3,7 @@
     //à retirer
     $_SESSION['idCompte'] = 1;
 
-    include('../../01_premiere_connexion.php');
+    include __DIR__ .'/../../01_premiere_connexion.php';
     const PAGE_SIZE = 15;
     $idCompte = $_SESSION['idCompte'];
 ?>
@@ -16,38 +16,46 @@
     <link rel="stylesheet" type="text/css" href="../../css/output.css" >
     <link rel="stylesheet" type="text/css" href="../../css/bo/general_back.css" >
     <title>Accueil</title>
+    <style>
+        button a:hover{
+            color: black;
+        }
+    </style>
 </head>
 
 
 
 <body>
     <!--header-->
-    <?php include "../../php/structure/header_front.php"; ?>
+    <?php include(__DIR__ . "/../../php/structure/header_back.php"); ?>
+    <?php include(__DIR__ . "/../../php/structure/navbar_back.php"); ?>
 
     <main>
-        <section class="grid grid-cols-2 gap-2">
+        <div class="grid grid-cols-2 gap-2 justify-items-center">
             <a href="" title="lien vers page promotion">
-                <img src="../../images/images_accueil/promotion.webp" alt="promotion" class="w-60 h-auto">
+                <img src="../../images/images_accueil/promotion.webp" alt="promotion" class="w-150 h-auto justify-self-end">
             </a>
             <a href="" title="lien vers page derniers ajouts">
-                <img src="../../images/images_accueil/derniers_ajouts.webp" alt="derniers ajouts" class="w-60 h-auto">
+                <img src="../../images/images_accueil/derniers_ajouts.webp" alt="derniers ajouts" class="w-150 h-auto justify-self-start">
             </a>           
             <a href="" title="lien vers page stock">
-                <img src="../../images/images_accueil/stock.webp" alt="stock" class="w-60 h-auto">
+                <img src="../../images/images_accueil/stock.webp" alt="stock" class="w-150 h-auto justify-self-end">
             </a>
             <a href="" title="lien vers page commandes">
-                <img src="../../images/images_accueil/commandes.webp" alt="commandes" class="w-60 h-auto">
+                <img src="../../images/images_accueil/commandes.webp" alt="commandes" class="w-150 h-auto justify-self-start">
             </a>        
-        </section>
+        </div>
 
-        <section class ="flex flex-row justify-center justify-items-center">
-            <button type="button" class="border-2 bg-vertFonce">Ajouter un produit</button>
-            <button type="button" class="border-2 bg-vertFonce">Statistiques</button>
-            <button type="button" class="border-2 bg-vertFonce">Avis récents</button>
-        </section>
+
+        <div class="mt-15 flex flex-row">
+            <button class="border-2 border-vertFonce rounded-2xl w-auto h-14 px-7"><a href="../bo/creation_produit.php">Ajouter un produit</a></button>
+            <button class="border-2 border-vertFonce rounded-2xl w-auto h-14 px-7"><a href="">Statistiques</a></button>
+            <button class="border-2 border-vertFonce rounded-2xl w-auto h-14 px-7"><a href="">Avis récents</a></button>
+            <button class="border-2 border-vertFonce rounded-2xl w-auto h-14 px-7"><a href="../bo/vider_catalogue.php">Vider le catalogue</a></button>
+        </div>
 
         <!--Début du catalogue-->
-        <h2 id="nosProduits">Nos produits</h2>
+        <h2 id="vosProduits">Vos produits</h2>
 
         <?php
             //initialisation du numéro de page
@@ -77,34 +85,36 @@
 
                 $maxPage = sizeof($tabProduit)/PAGE_SIZE;
                 //découpe le catalogue en page de 15 produits
-                $lignes = array_slice($tabProduit, $pageNumber*PAGE_SIZE-PAGE_SIZE, PAGE_SIZE);
+                $lignes = array_slice($tabProduit, $pageNumber*PAGE_SIZE-PAGE_SIZE, PAGE_SIZE); 
 
-                //affiche la photo du produit, son nom, son prix et sa note, son stock
-                foreach($tabProduit as $id => $valeurs){
-                    $idProduit = $valeurs['id_produit'];?>
-                    <div class="grid grid-cols-3 gap-2">
-                        <!--affichage de la photo-->
-                        <a href= "<?php echo "details_produit.php?idProduit=".$idProduit;?>">
-                            <img src="<?php echo htmlentities($valeurs['url_photo']);?>" 
-                                    alt="<?php echo htmlentities($valeurs['alt']);?>"
-                                    title="<?php echo htmlentities($valeurs['titre']);?>">
-                        </a>
+                //affiche la photo du produit, son nom, son prix et sa note, son stock ?>
+                <div class="grid grid-cols-3">
+                    <?php foreach($tabProduit as $id => $valeurs){
+                        $idProduit = $valeurs['id_produit'];?>
+                        <section class="bg-bleu grid grid-cols-[40%_60%] w-80 p-3 m-2">
+                            <!--affichage de la photo-->
+                            <a href= "<?php echo "details_produit.php?idProduit=".$idProduit;?>" class="col-span-2 justify-self-center mb-3">
+                                <img src="<?php echo htmlentities($valeurs['url_photo']);?>" 
+                                        alt="<?php echo htmlentities($valeurs['alt']);?>"
+                                        title="<?php echo htmlentities($valeurs['titre']);?>">
+                            </a>
 
-                        <!--affichage du nom du produit-->
-                        <h4><?php echo htmlentities($valeurs['libelle_produit']);?></h4> 
+                            <!--affichage du nom du produit-->
+                            <p class="col-span-2"><?php echo htmlentities($valeurs['libelle_produit']);?></p> 
 
-                        <!--affichage du prix du produit-->   
-                        <p><?php echo htmlentities($valeurs['prix_ttc']);?></p>
+                            <!--affichage du prix du produit-->   
+                            <p class="col-span-1 col-start-1"><?php echo htmlentities($valeurs['prix_ttc']);?> €</p>
 
-                        <!--récupération de la note-->
-                        <?php $note = $valeurs['note_moyenne']; ?>
+                            <!--récupération de la note-->
+                            <div class=" flex col-span-1 col-start-2">
+                                <?php $note = $valeurs['note_moyenne']; ?>
 
-                            //affichage d'une note nulle
-                            <div class="flex flex-row">
+                                <!--affichage d'une note nulle-->
                                 <?php 
                                 if ($note == null){ ?>
                                     <p><?php echo htmlentities('non noté'); ?></p>
-                                <?php } 
+                                <?php }
+
                                 else {
                                     $entierPrec = intval($note);
                                     $entierSuiv = $entierPrec+1;
@@ -124,13 +134,13 @@
                                         //affichage d'une note et demie
                                         //boucle pour étoiles pleines
                                         for($i=0; $i<$entierPrec; $i++){?>
-                                            <img src="../../images/logo/bootstrap_icon/star-fill.svg" alt="étoile pleine">
+                                            <img src="../../images/logo/bootstrap_icon/star-fill.svg" alt="étoile pleine" class="w-7 h-7"  >
                                         <?php } ?>
                                         <!--demie étoile-->
-                                        <img src="../../images/logo/bootstrap_icon/star-half.svg" alt="demie étoile">
+                                        <img src="../../images/logo/bootstrap_icon/star-half.svg" alt="demie étoile" class="w-7 h-7"  >
                                         <!--boucle pour étoiles vides-->
                                         <?php for($i=0; $i<$nbEtoilesVides; $i++){?>
-                                            <img src="../../images/logo/bootstrap_icon/star.svg" alt="étoile vide">
+                                            <img src="../../images/logo/bootstrap_icon/star.svg" alt="étoile vide" class="w-7 h-7"  >
                                         <?php }
                                     }
                                     
@@ -144,20 +154,21 @@
                                         $nbEtoilesVides = 5-$noteFinale;
                                         //boucle pour étoiles pleines
                                         for($i=0; $i<$noteFinale; $i++){?>
-                                            <img src="../../images/logo/bootstrap_icon/star-fill.svg" alt="étoile pleine">
+                                            <img src="../../images/logo/bootstrap_icon/star-fill.svg" alt="étoile pleine" class="w-7 h-7"  >
                                         <?php }
                                         //boucle pour étoiles vides
                                         for($i=0; $i<$nbEtoilesVides; $i++){?>
-                                            <img src="../../images/logo/bootstrap_icon/star.svg" alt="étoile vide">
+                                            <img src="../../images/logo/bootstrap_icon/star.svg" alt="étoile vide" class="w-7 h-7"  >
                                         <?php }
-                                    } ?>       
+                                    } ?> 
+                                <?php }   ?> 
+                            </div>     
                             <!--affichage du stock-->
-                            <p>En stock : <?php echo htmlentities($valeurs['quantite_stock']);?></p>
-                        </div>
-                       <?php }   ?>
-                    </div>
-                <?php }          
-                $dbh = null;
+                            <p class="col-span-2">En stock : <?php echo htmlentities($valeurs['quantite_stock']);?></p>       
+                        </section>
+                    <?php } ?>
+                </div>         
+                <?php $dbh = null;
             } 
 
             catch (PDOException $e) {
@@ -168,17 +179,17 @@
         <!--fin du catalogue-->
 
         <?php if ($pageNumber>1){?>
-        <a class= "lienPage" href="<?php echo "./index_vendeur.php?page=".($pageNumber-1)."#nosProduits";?>">page précédente</a>
+        <a class= "lienPage" href="<?php echo "./index_vendeur.php?page=".($pageNumber-1)."#vosProduits";?>">Page précédente</a>
         <?php }?>
     
         <?php if ($pageNumber<$maxPage){?>
-        <a class= "lienPage" href="<?php echo "./index_vendeur.php?page=".($pageNumber+1)."#nosProduits";?>">page suivante</a>
+        <a class= "lienPage" href="<?php echo "./index_vendeur.php?page=".($pageNumber+1)."#vosProduits";?>">Page suivante</a>
         <?php }?>
 
     </main>
     
     <!--footer-->
-    <?php include "../../php/structure/footer_front.php"; ?>
+    <?php include(__DIR__ . "/../../php/structure/footer_back.php"); ?>
 
 </body>
 

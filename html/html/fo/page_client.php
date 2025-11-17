@@ -2,26 +2,37 @@
     session_start();
     // à retirer
     $_SESSION["idCompte"] = 1;
-    require_once "../../connections_params.php";
+    require_once __DIR__ . "/../../01_premiere_connexion.php";
+
+    // Vérifie si le bouton 'Se déconnecter à été appuyé'
+    if (isset($_POST['logout'])) {
+        // Supprime toutes les variables de session
+        session_unset();
+        // Détruit la session
+        session_destroy();
+        // Redirection vers la page principale
+        header("Location: index.php");
+        exit();
+    }
 ?>
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" type="text/css" href="../../css/fo/general_front.css">
+    <?php require __DIR__ . "/../../php/structure/head_front.php"; ?>
     <title>Mon profil</title>
 </head>
 <body>
-    <?php require "../../php/structure/header_front.php"; ?>
-    <?php require "../../php/structure/navbar_front.php"; ?>
+    <?php
+    require __DIR__ . "/../../php/structure/header_front.php";
+    require __DIR__ . "/../../php/structure/navbar_front.php";
+    ?>
     <main>
         <?php
             // Connexion à la session
             $id = (int) $_SESSION["idCompte"];
 
             try{
-                $dbh = new PDO("$driver:host=$server;dbname=$dbname",$user,$pass);
+                $dbh = new PDO("$driver:host=$server;port=$port;dbname=$dbname",$user,$pass);
                 $dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
                 $dbh->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC);
 
@@ -58,27 +69,35 @@
                 print "Erreur : " . $e->getMessage() . "<br/>";
             }
         ?>
-        <h2>Profil</h2>
+        <h2>Mon profil</h2>
         <section>
             <div class="flex flex-row">
-                <h2 class="my-0.1 mr-1 ml-0"><?php echo $pseudo ?></h2>
-                <h3 class="my-0.1 mr-1 ml-0 relative top-5"><?php echo "$prenom $nom" ?></h3>
+                <h2 class="mt-1 mb-1 mr-4 ml-0"><?php echo $pseudo; ?></h2>
+                <h3 class="mt-1 mb-1 mr-4 ml-0 relative top-4 text-vertFonce -z-1"><?php echo $prenom; ?> <?php echo $nom; ?></h3>
             </div>
             <div>
-                <p class="m-1"><?php echo $naissance ?></p>
+                <p class="m-4"><?php echo $naissance; ?></p>
                 <?php for ($i=0; $i < $nbAdresse; $i++) { // Affiche toutes les adresses du client ?>
-                <p class="mx-1 my-0.5"><?php echo "$adressePostale[$i], $codePostal[$i] $ville[$i]" ?></p>
+                <p class="mt-2 mb-2 mr-4 ml-4"><?php echo $adressePostale[$i]; ?>, <?php echo $codePostal[$i]; ?> <?php echo $ville[$i]; ?></p>
                 <?php } ?>
-                <p class="m-1"><?php echo $telephone ?></p>
-                <p class="m-1"><?php echo $mail ?></p>
+                <p class="m-4"><?php echo $telephone; ?></p>
+                <p class="m-4"><?php echo $mail; ?></p>
             </div>
         </section>
         <article class="flex flex-row justify-around">
-            <form action="modifier_compte_client.php"><input type="submit" value="Modifier mes informations"></form>
-            <form action="attendre_mail.php"><input type="submit" value="Modifier mon mot de passe"></form>
-            <form action="index.php"><input type="submit" value="Se déconnecter"></form>
+            <form action="modifier_compte_client.php" method="post">
+                <input class="border-2 border-vertClair rounded-xl p-2" type="submit" value="Modifier mes informations">
+            </form>
+            <form action="nouveau_mdp.php" method="post">
+                <input type="hidden" id="id" name="id" value="<?php echo $id; ?>">
+                <input class="border-2 border-vertClair rounded-xl p-2" type="submit" value="Modifier mon mot de passe">    
+            </form>
+            <form action="page_client.php" method="post">
+                <input type="hidden" id="logout" name="logout" value="true">
+                <input class="border-2 border-vertClair rounded-xl p-2" type="submit" value="Se déconnecter">
+            </form>
         </article>
     </main>
-    <?php require "../../php/structure/footer_front.php"; ?>
+    <?php require __DIR__ . "/../../php/structure/footer_front.php"; ?>
 </body>
 </html>

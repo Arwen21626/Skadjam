@@ -1,15 +1,15 @@
 <?php
 session_start(); // Création de la session
 
-require_once("./verification_formulaire.php"); // fonctions qui vérifient les données des formulaires
-require_once("./modification_variable.php"); // fonctions qui vérifient les données des formulaires
-require_once("../../connections_params.php"); // données de connexion à la base de données
+require_once(__DIR__."/verification_formulaire.php"); // fonctions qui vérifient les données des formulaires
+require_once(__DIR__."/modification_variable.php"); // fonctions qui vérifient les données des formulaires
+require_once(__DIR__."/../../connections_params.php"); // données de connexion à la base de données
 
 // Traitement du formulaire seulement si toutes les données sont saisie
 if(isset($_POST['pseudo']) && isset($_POST['naissance']) && isset($_POST['nom']) && isset($_POST['prenom']) && isset($_POST['telephone']) && isset($_POST['mail'])){
     try{
         // Connexion à la base de données
-        $dbh = new PDO("$driver:host=$server;dbname=$dbname", $user, $pass); 
+        $dbh = new PDO("$driver:host=$server;port=$port;dbname=$dbname", $user, $pass); 
         $dbh->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC);
 
         // Vérification que toutes les données commune à la création et à la modification d'un compte client sont correcte
@@ -77,12 +77,10 @@ if(isset($_POST['pseudo']) && isset($_POST['naissance']) && isset($_POST['nom'])
                     echo 'Erreur : ';
                     echo "le mail saisie existe déjà. ";
                 }
-                    
             }
             // Si le client est entrain de modifier son compte
             else{
                 $idCompte = $_SESSION['idCompte'];
-                $idCompte = 3; // à retirer
 
                 // Récupération de l'ancien email
                 foreach($dbh->query("SELECT c.adresse_mail 
@@ -163,15 +161,19 @@ if(isset($_POST['pseudo']) && isset($_POST['naissance']) && isset($_POST['nom'])
                     echo "Erreur : le mail saisie existe déjà. ";
                 }
                 
-            
+                
             }
             // Fermer la connexion à la base de données
             $dbh = null;
 
             // Redirection vers la page d'accueil
-            if (!$erreur){
+            if (!$erreur && isset($_POST['mdp']) && isset($_POST['verifMdp'])){ // Si c'est la création d'un compte
                 header("location: ../html/fo/index.php");
+            } 
+            elseif(!$erreur && !isset($_POST['mdp']) && !isset($_POST['verifMdp'])){ // Si c'est la modification d'un compte
+                header("location: ../html/fo/page_client.php");
             }
+
         }
         // Messages d'erreurs si l'un des champs est mal rempli
         else{ 
@@ -204,7 +206,7 @@ if(isset($_POST['pseudo']) && isset($_POST['naissance']) && isset($_POST['nom'])
                 echo "vous avez moins de 18 ans.";
             }
             else{
-                echo "inconu.";
+                echo "inconnu.";
             }
             ?>
 
@@ -212,7 +214,9 @@ if(isset($_POST['pseudo']) && isset($_POST['naissance']) && isset($_POST['nom'])
         <?php }
     }
     catch(PDOException $e){
-        print "Erreur dans l'envoie des données dans la base de données.";
+        echo "Erreur dans l'envoie des données dans la base de données.";
+        echo $e; // Potentiellement temporaire
+
         die();
     }
     

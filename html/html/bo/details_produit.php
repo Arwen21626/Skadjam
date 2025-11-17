@@ -1,10 +1,10 @@
 <?php
 
-    include('../../01_premiere_connexion.php');
+    include(__DIR__.'/../../01_premiere_connexion.php');
 
     //Récupération des données sur le produit ainsi que la photo
     $idProd = $_GET['idProduit'];
-    $idPord = 1;
+    $idProd = 3;
 
     foreach($dbh->query("SELECT *
                         from sae3_skadjam._produit pr
@@ -18,6 +18,11 @@
                         , PDO::FETCH_ASSOC) as $row){
         $produit = $row;
     }
+
+    function supprimer($id){
+        $supp = $dbh->query("DELETE FROM sae3_skadjam._produit WHERE id_produit = $id");
+        $supp -> execute();
+    }
 ?>
 
 <!DOCTYPE html>
@@ -25,12 +30,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../../css/bo/general_back.css">
+    <link rel="stylesheet" href="../../css/output.css">
     <title>Détails</title>
 </head>
 <body>
     <!--header-->
-    <?php include __DIR__ . "/../../php/structure/header_front.php"; ?>
+    <?php //include(__DIR__ . '/../../php/structure/header_back.php');?>
+    <?php //include(__DIR__ . '/../../php/structure/navbar_back.php');?>
 
     <main>
         <!--affichage du libelle-->
@@ -107,9 +113,13 @@
                 <p>Produit indsponible</p>
             <?php }?>
 
-        <button type="button">Modifier</button>
-        <button type="button">Masquer</button>
-        <button type="button">Extraire</button>
+            <div class="flex flex-col">
+                <button class=" bg-beige rounded-2xl w-40 h-14" type="button">Modifier</button>
+                <button class=" bg-beige rounded-2xl w-40 h-14" type="button">Masquer</button>
+                <!-- <button type="button">Extraire</button> -->
+                <button class=" bg-beige rounded-2xl w-40 h-14" type="button">Supprimer</button>
+            </div>
+        
 
         <h2>Description détaillée</h2>
         <?php echo htmlentities($produit['description_produit']);?>
@@ -117,6 +127,6 @@
         <p>Partie sur les avis à voir plus tard</p>
 
     </main>
-    <?php include(__DIR__ . '/../../php/structure/footer_back.php');?>
+    <?php //include(__DIR__ . '/../../php/structure/footer_back.php');?>
 </body>
 </html>
