@@ -90,7 +90,7 @@ try {
                     <input type="file" id="image" name="image" accept="image/png, image/jpeg image/webp" hidden>
                     <label class="cursor-pointer w-80 rounded-2xl bg-beige p-2 text-center"  for="image">Ajouter une image</label>
                 </div>
-                <div class=" mt-5">
+                <div class=" mt-5 min-w-1/3 max-w-5/12">
                     <div class=" mb-3 modif-attribut">
                         <div class=" flex flex-row items-center">
                             <p class="underline">Entreprise :</p>
@@ -100,7 +100,7 @@ try {
                             </button>
                         </div>
                         <p class="attribut-text ml-7 mt-2"><?= $denom ?></p>
-                        <input type="text" name="denom" class="champ-text ml-7 hidden border-2 border-solid rounded-md border-beige pl-3" value="<?= $denom ?>">
+                        <input type="text" name="denom" class="champ-text ml-5 hidden border-2 border-solid rounded-md border-beige pl-3" value="<?= $denom ?>" size="20">
                     </div>
 
                     <div class=" mb-3 modif-attribut">
@@ -112,7 +112,7 @@ try {
                             </button>
                         </div>
                         <p class="attribut-text ml-7 mt-2"><?= "$num $numBis $adresse, $ville, $cp" ?></p>
-                        <input type="text" name="adresse" class="champ-text ml-7 hidden border-2 border-solid rounded-md border-beige pl-3" value="<?= "$num $numBis $adresse, $ville, $cp" ?>">
+                        <input type="text" name="adresse" class="champ-text ml-5 hidden border-2 border-solid rounded-md border-beige pl-3" value="<?= "$num $numBis $adresse, $ville, $cp" ?>">
                     </div>
 
                     <div class=" mb-3 modif-attribut">
@@ -124,13 +124,13 @@ try {
                             </button>
                         </div>
                         <p class="attribut-text ml-7 mt-2"><?= $siren ?></p>
-                        <input type="text" name="siren" class="champ-text ml-7 hidden border-2 border-solid rounded-md border-beige pl-3" value="<?= $siren ?>">
+                        <input type="text" name="siren" class="champ-text ml-5 hidden border-2 border-solid rounded-md border-beige pl-3" value="<?= $siren ?>" size="9">
                     </div>
 
                 </div>
             </div>
             <div class="flex flex-row items-center justify-between mt-8">
-                <div>
+                <div class=" min-w-1/3">
                     <h3 class=" mb-2">Propriétaire</h3>
                     <div class="mb-3 modif-attribut">
                         <div class=" flex flex-row items-center">
@@ -141,7 +141,7 @@ try {
                             </button>
                         </div>
                         <p class="attribut-text ml-7 mt-2"><?= $nom ?></p>
-                        <input type="text" name="nom" class="champ-text ml-7 hidden border-2 border-solid rounded-md border-beige pl-3" value="<?= $nom ?>">
+                        <input type="text" name="nom" class="champ-text ml-5 hidden border-2 border-solid rounded-md border-beige pl-3" value="<?= $nom ?>" size="15">
                     </div>
 
                     <div class="mb-3 modif-attribut">
@@ -153,11 +153,11 @@ try {
                             </button>
                         </div>
                         <p class="attribut-text ml-7 mt-2"><?= $prenom ?></p>
-                        <input type="text" name="prenom" class="champ-text ml-7 hidden border-2 border-solid rounded-md border-beige pl-3" value="<?= $prenom ?>">
+                        <input type="text" name="prenom" class="champ-text ml-5 hidden border-2 border-solid rounded-md border-beige pl-3" value="<?= $prenom ?>" size="15">
                     </div>
 
                 </div>
-                <div>
+                <div class=" min-w-1/3">
                     <h3 class=" mb-2">Contact</h3>
                     <div class="mb-3 modif-attribut">
                         <div class=" flex flex-row items-center">
@@ -168,7 +168,7 @@ try {
                             </button>
                         </div>
                         <p class="attribut-text ml-7 mt-2"><?= $tel ?></p>
-                        <input type="text" name="tel" class="champ-text ml-7 hidden border-2 border-solid rounded-md border-beige pl-3" value="<?= $tel ?>">
+                        <input type="text" name="tel" class="champ-text ml-5 hidden border-2 border-solid rounded-md border-beige pl-3" value="<?= $tel ?>" size="15">
                     </div>
 
                     <div class="mb-3 modif-attribut">
@@ -180,7 +180,7 @@ try {
                             </button>
                         </div>
                         <p class="attribut-text ml-7 mt-2"><?= $mail ?></p>
-                        <input type="text" name="mail" class="champ-text ml-7 hidden border-2 border-solid rounded-md border-beige pl-3" value="<?= $mail ?>">
+                        <input type="text" name="mail" class="champ-text ml-5 hidden border-2 border-solid rounded-md border-beige pl-3 w-auto" value="<?= $mail ?>">
                     </div>
 
                 </div>
@@ -194,7 +194,7 @@ try {
                     </button>
                 </div>
                 <p class="attribut-text ml-7"><?= $description ?></p>
-                <textarea name="description" class="champ-text ml-7 hidden border-2 border-solid rounded-md border-beige pl-3 w-full h-40"><?= $description ?></textarea>
+                <textarea name="description" class="champ-text ml-5 hidden border-2 border-solid rounded-md border-beige pl-3 w-full h-40"><?= $description ?></textarea>
             </div>
         </form>
     </main>
