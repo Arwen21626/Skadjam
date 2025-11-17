@@ -134,7 +134,7 @@ if (isset($_POST["nom"])){
     require_once __DIR__ . "/../../php/structure/navbar_back.php";
     ?>
     <main class=" flex flex-col items-center">
-        <h2 class="m-5">Inscription Vendeur</h2>
+        <h2 class="m-8">Inscription Vendeur</h2>
         <form method="POST" class=" w-2/3 @max-[768px]:w-7/8">
 
             <h3 class="underline">Informations vendeur :</h3>
