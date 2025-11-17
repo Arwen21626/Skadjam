@@ -232,6 +232,9 @@
   .mb-2 {
     margin-bottom: calc(var(--spacing, 0.25rem) * 2);
   }
+  .mb-3 {
+    margin-bottom: calc(var(--spacing, 0.25rem) * 3);
+  }
   .mb-4 {
     margin-bottom: calc(var(--spacing, 0.25rem) * 4);
   }
@@ -268,11 +271,26 @@
   .h-5 {
     height: calc(var(--spacing, 0.25rem) * 5);
   }
+  .h-14 {
+    height: calc(var(--spacing, 0.25rem) * 14);
+  }
+  .h-60 {
+    height: calc(var(--spacing, 0.25rem) * 60);
+  }
   .h-auto {
     height: auto;
   }
+  .w-3\/4 {
+    width: calc(3/4 * 100%);
+  }
   .w-5 {
     width: calc(var(--spacing, 0.25rem) * 5);
+  }
+  .w-11\/12 {
+    width: calc(11/12 * 100%);
+  }
+  .w-40 {
+    width: calc(var(--spacing, 0.25rem) * 40);
   }
   .w-60 {
     width: calc(var(--spacing, 0.25rem) * 60);
@@ -292,6 +310,12 @@
   .cursor-pointer {
     cursor: pointer;
   }
+  .grid-cols-2 {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .grid-cols-3 {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
   .grid-cols-\[30\/100-70\/100\] {
     grid-template-columns: 30/100-70/100;
   }
@@ -300,11 +324,6 @@
   }
   .grid-rows-\[10\/100-15\/100-15\/100-15\/100-auto\] {
     grid-template-rows: 10/100-15/100-15/100-15/100-auto;
-  .grid-cols-2 {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
-  .grid-cols-3 {
-    grid-template-columns: repeat(3, minmax(0, 1fr));
   }
   .flex-col {
     flex-direction: column;
@@ -330,6 +349,12 @@
   .justify-center {
     justify-content: center;
   }
+  .justify-items-center {
+    justify-items: center;
+  }
+  .gap-2 {
+    gap: calc(var(--spacing, 0.25rem) * 2);
+  }
   .self-center {
     align-self: center;
   }
@@ -341,9 +366,6 @@
   }
   .rounded {
     border-radius: 0.25rem;
-  }
-  .gap-2 {
-    gap: calc(var(--spacing, 0.25rem) * 2);
   }
   .rounded-2xl {
     border-radius: var(--radius-2xl, 1rem);
@@ -382,6 +404,9 @@
   }
   .bg-beige {
     background-color: var(--color-beige);
+  }
+  .bg-vertFonce {
+    background-color: var(--color-vertFonce);
   }
   .p-2 {
     padding: calc(var(--spacing, 0.25rem) * 2);
