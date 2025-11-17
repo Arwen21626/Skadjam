@@ -12,7 +12,7 @@ require_once __DIR__ . "/../../01_premiere_connexion.php";
 <body>
     <?php
     require __DIR__ . "/../../php/structure/header_front.php";
-
+    $erreur = false;
     try{
         $dbh = new PDO("$driver:host=$server;dbname=$dbname",$user,$pass);
         $dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
@@ -36,9 +36,9 @@ require_once __DIR__ . "/../../01_premiere_connexion.php";
                 // Redirection vers la page de connexion
                 header("Location: connexion.php");
             }else{ 
-                echo "Erreur";
+                $erreur = true;
             }
-        }else{ ?>
+        } ?>
             <h2 class="flex justify-center text-center">Nouveau mot de passe</h2>
 
             <form class="flex flex-wrap p-15 pt-0 justify-around" action="nouveau_mdp.php" method="post"> 
@@ -52,12 +52,15 @@ require_once __DIR__ . "/../../01_premiere_connexion.php";
                     <label for="verifMdp">Vérification du mot de passe* :</label>
                     <input class="border-4 border-vertClair rounded-2xl w-1/1 p-1 pl-3" type="password" name="verifMdp" id="verifMdp" required>
                 </div>
-
+                <div class=" flex w-fit flex-col mt-6 items-start ">
+                    <?php if($erreur){ ?>
+                        <p class="text-rouge"><?php echo "Votre mot de passe ne respecte pas la structure ordinaire ou ne correspond pas à sa vérification.";?></p>
+                    <?php } ?>
+                </div>
                 <div class="flex mt-10 justify-center md:justify-end w-1/1 ">
                     <input class="border-2 border-vertClair rounded-2xl w-40 h-14 p-0 m-0 md:mr-10" type="submit" value="Confirmer">
                 </div>
             </form><?php
-        }
     }catch(PDOException $e){
         print "Erreur : " . $e->getMessage() . "<br/>";
     }
