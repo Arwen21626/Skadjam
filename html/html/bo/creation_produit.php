@@ -14,9 +14,8 @@ $tab_categories = [];
 $tab_unite = ["Piece", "Litre","cl","g","kg","S","M","L","XL","XXL","m","cm"];
 
 //Gestion de la photo
-//print_r($_FILES);
 $typePhoto = $_FILES['photo']['type'];
-echo ($typePhoto);
+$ext = explode('/',$typePhoto)[1];
 $nom_serv_photo = $_FILES['photo']['tmp_name'];
 
 //Requete récupération categories
@@ -49,10 +48,11 @@ if (isset($_POST['categorie']) && isset($_POST['nom']) && isset($_POST['prix']) 
 
     //OUBLIE PAS LA PHOTO
     //Déplacement et renommage du fichier photo
-
+    $nom_explode = explode(' ',$nom)[0];
     $currentTime = time();
     $destination = '../../images/photo_importees';
-    move_uploaded_file($nom_serv_photo,$destination.'/'.$currentTime.'.'.$ext);
+    $nom_photo_finale = $nom_explode.$currentTime.'.'.$ext;
+    move_uploaded_file($nom_serv_photo,$destination.'/'.$nom_photo_finale);
 
     //test tva
 
@@ -73,15 +73,29 @@ if (isset($_POST['categorie']) && isset($_POST['nom']) && isset($_POST['prix']) 
                 ");
 
             
-            foreach ($test as $t) {
+            foreach ($insertionProduit as $t) {
                 $idProd = $t['id_produit'];
             }
-            $insertionProduit -> execute();
             
-            //$insertion_produit -> execute();
 
-            //Insertion de la photo
-            //$insertion_photo = $dbh -> prepare("INSERT INTO sae3_skadjam._photo ('url_photo, alt, titre') VALUES ");
+            //Insertion de la photo dans la table photo
+            
+            $insertionPhoto = $dbh -> query("WITH id AS (
+                INSERT INTO sae3_skadjam._photo 
+                (url_photo, alt, titre)
+                VALUES 
+                ('/html/images/photo_importees/$nom_photo_finale','$nom','$nom')
+                RETURNING id_photo)
+                SELECT * FROM id;
+                ");
+
+            foreach ($insertionPhoto as $t) {
+                $idPhoto = $t['id_photo'];
+            }
+
+            $insertionMontre = $dbh -> query("INSERT INTO sae3_skadjam._montre VALUES ($idPhoto,$idProd);");
+
+            //$insertionPhoto -> execute();
         }
         catch (PDOException $e) {
             print "Erreur !: " . $e->getMessage() . "<br/>";
@@ -111,7 +125,7 @@ if (isset($_POST['categorie']) && isset($_POST['nom']) && isset($_POST['prix']) 
     <?php include(__DIR__ . '/../../php/structure/navbar_back.php');?>
     <main>
         <h2>Création d'un produit</h2>
-        <form class="grid grid-cols-[40%_60%] w-11/12 self-center" action="creation_produit.php" method="post">
+        <form class="grid grid-cols-[40%_60%] w-4/5 self-center" action="creation_produit.php" method="post" enctype="multipart/form-data">
 
             <div class="row-start-1 row-span-3 m-2 p-4 grid grid-rows-[2/3-1/3] justify-items-center">
                 <input type="file" id="photo" name="photo" class="hidden" required>
