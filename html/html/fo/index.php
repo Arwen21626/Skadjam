@@ -23,18 +23,18 @@ const PAGE_SIZE = 15;?>
     <?php include(__DIR__ . "/../../php/structure/navbar_front.php"); ?>
 
     <main>
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-2 justify-items-center">
+        <div class="grid grid-cols-2 gap-4 justify-items-center">
             <a href="" title="lien vers page promotion">
-                <img src="../../images/images_accueil/promotion.webp" alt="promotion" class="h-35 w-150 md:h-auto md:justify-self-end">
+                <img src="../../images/images_accueil/promotion.webp" alt="promotion" class="w-90 md:w-150 h-auto justify-self-end">
             </a>
             <a href="" title="lien vers page nouveaux produits">
-                <img src="../../images/images_accueil/nouveaux_produits.webp" alt="nouveaux produits" class="h-35 w-150 md:h-auto md:justify-self-start">
+                <img src="../../images/images_accueil/nouveaux_produits.webp" alt="nouveaux produits" class="w-90 md:w-150 h-auto justify-self-start">
             </a>           
             <a href="" title="lien vers page les plus vendus">
-                <img src="../../images/images_accueil/les_plus_vendus.webp" alt="les plus vendus" class="h-35 w-150 md:h-auto md:justify-self-end">
+                <img src="../../images/images_accueil/les_plus_vendus.webp" alt="les plus vendus" class="w-90 md:w-150 h-auto justify-self-end">
             </a>
             <a href="" title="lien vers page commandes">
-                <img src="../../images/images_accueil/commandes.webp" alt="commandes" class="h-35 w-150 md:h-auto md:justify-self-start">
+                <img src="../../images/images_accueil/commandes.webp" alt="commandes" class="w-90 md:w-150 h-auto justify-self-start">
             </a>        
         </div>
 
@@ -75,7 +75,7 @@ const PAGE_SIZE = 15;?>
                 <div class="grid grid-cols-2 justify-items-center md:grid-cols-3">
                     <?php foreach($lignes as $id => $valeurs){
                         $idProduit = $valeurs['id_produit'];?>
-                        <section class="bg-bleu grid grid-cols-[40%_60%] w-40 md:w-80 h-auto p-3 m-2">
+                        <section class="bg-bleu grid grid-cols-[40%_60%] w-38 md:w-80 h-auto p-3 m-2">
                         <!--affichage de la photo-->
                         <a href= "<?php echo "details_produit.php?idProduit=".$idProduit;?>" class="col-span-2 justify-self-center mb-3">
                             <img src="<?php echo htmlentities($valeurs['url_photo']);?>" 
