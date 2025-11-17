@@ -1,6 +1,6 @@
 <?php
 include(__DIR__ . '/../../01_premiere_connexion.php');
-const PAGE_SIZE = 3;?>
+const PAGE_SIZE = 15;?>
 
 <!DOCTYPE html>
 <html lang="fr">
@@ -23,18 +23,18 @@ const PAGE_SIZE = 3;?>
     <?php include(__DIR__ . "/../../php/structure/navbar_front.php"); ?>
 
     <main>
-        <div class="grid grid-cols-2 gap-2 justify-items-center">
+        <div class="grid grid-cols-2 gap-4 justify-items-center">
             <a href="" title="lien vers page promotion">
-                <img src="../../images/images_accueil/promotion.webp" alt="promotion" class="w-150 h-auto justify-self-end">
+                <img src="../../images/images_accueil/promotion.webp" alt="promotion" class="w-90 md:w-150 h-auto justify-self-end">
             </a>
             <a href="" title="lien vers page nouveaux produits">
-                <img src="../../images/images_accueil/nouveaux_produits.webp" alt="nouveaux produits" class="w-150 h-auto justify-self-start">
+                <img src="../../images/images_accueil/nouveaux_produits.webp" alt="nouveaux produits" class="w-90 md:w-150 h-auto justify-self-start">
             </a>           
             <a href="" title="lien vers page les plus vendus">
-                <img src="../../images/images_accueil/les_plus_vendus.webp" alt="les plus vendus" class="w-150 h-auto justify-self-end">
+                <img src="../../images/images_accueil/les_plus_vendus.webp" alt="les plus vendus" class="w-90 md:w-150 h-auto justify-self-end">
             </a>
             <a href="" title="lien vers page commandes">
-                <img src="../../images/images_accueil/commandes.webp" alt="commandes" class="w-150 h-auto justify-self-start">
+                <img src="../../images/images_accueil/commandes.webp" alt="commandes" class="w-90 md:w-150 h-auto justify-self-start">
             </a>        
         </div>
 
@@ -72,10 +72,10 @@ const PAGE_SIZE = 3;?>
                 $lignes = array_slice($tabProduit, $pageNumber*PAGE_SIZE-PAGE_SIZE, PAGE_SIZE);
 
                 //affiche la photo du produit, son nom, son prix et sa note ?>
-                <div class="grid grid-cols-3">
+                <div class="grid grid-cols-2 justify-items-center md:grid-cols-3">
                     <?php foreach($lignes as $id => $valeurs){
                         $idProduit = $valeurs['id_produit'];?>
-                        <section class="bg-bleu grid grid-cols-[40%_60%] w-80 p-3 m-2">
+                        <section class="bg-bleu grid grid-cols-[40%_60%] w-38 md:w-80 h-auto p-3 m-2">
                         <!--affichage de la photo-->
                         <a href= "<?php echo "details_produit.php?idProduit=".$idProduit;?>" class="col-span-2 justify-self-center mb-3">
                             <img src="<?php echo htmlentities($valeurs['url_photo']);?>" 
@@ -117,13 +117,13 @@ const PAGE_SIZE = 3;?>
                                         //affichage d'une note et demie
                                         //boucle pour étoiles pleines
                                         for($i=0; $i<$entierPrec; $i++){?>
-                                            <img src="../../images/logo/bootstrap_icon/star-fill.svg" alt="étoile pleine" class="w-7 h-7">
+                                            <img src="../../images/logo/bootstrap_icon/star-fill.svg" alt="étoile pleine" class="w-4 h-4 md:w-7 md:h-7">
                                         <?php } ?>
                                         <!--demie étoile-->
-                                        <img src="../../images/logo/bootstrap_icon/star-half.svg" alt="demie étoile" class="w-7 h-7">
+                                        <img src="../../images/logo/bootstrap_icon/star-half.svg" alt="demie étoile" class="w-4 h-4 md:w-7 md:h-7">
                                         <!--boucle pour étoiles vides-->
                                         <?php for($i=0; $i<$nbEtoilesVides; $i++){?>
-                                            <img src="../../images/logo/bootstrap_icon/star.svg" alt="étoile vide" class="w-7 h-7">
+                                            <img src="../../images/logo/bootstrap_icon/star.svg" alt="étoile vide" class="w-4 h-4 md:w-7 md:h-7">
                                         <?php }
                                     }
                                     
@@ -137,11 +137,11 @@ const PAGE_SIZE = 3;?>
                                         $nbEtoilesVides = 5-$noteFinale;
                                         //boucle pour étoiles pleines
                                         for($i=0; $i<$noteFinale; $i++){?>
-                                            <img src="../../images/logo/bootstrap_icon/star-fill.svg" alt="étoile pleine" class="w-7 h-7">
+                                            <img src="../../images/logo/bootstrap_icon/star-fill.svg" alt="étoile pleine" class="w-4 h-4 md:w-7 md:h-7">
                                         <?php }
                                         //boucle pour étoiles vides
                                         for($i=0; $i<$nbEtoilesVides; $i++){?>
-                                            <img src="../../images/logo/bootstrap_icon/star.svg" alt="étoile vide" class="w-7 h-7">
+                                            <img src="../../images/logo/bootstrap_icon/star.svg" alt="étoile vide" class="w-4 h-4 md:w-7 md:h-7">
                                         <?php }
                                     }
                                 } ?>

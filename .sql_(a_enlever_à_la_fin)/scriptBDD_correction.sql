@@ -9,7 +9,7 @@ CREATE TABLE sae3_skadjam._compte (
     nom_compte CHARACTER VARYING(100) NOT NULL,
     prenom_compte CHARACTER VARYING(100) NOT NULL,
     adresse_mail CHARACTER VARYING(150) NOT NULL UNIQUE,
-    motDePasse CHARACTER VARYING(100) NOT NULL,
+    mot_de_passe CHARACTER VARYING(100) NOT NULL,
     numero_telephone CHARACTER(12) NOT NULL,
     bloque BOOLEAN NOT NULL
     
@@ -109,7 +109,7 @@ CREATE TABLE sae3_skadjam._produit (
 CREATE TABLE sae3_skadjam._tva(
     id_tva SERIAL NOT NULL,
     nom_tva CHARACTER VARYING(50) NOT NULL,
-    pourcentage_tva NUMERIC(5,3) NOT NULL
+    pourcentage_tva NUMERIC(4,3) NOT NULL
 );
 
 
@@ -558,7 +558,7 @@ ALTER TABLE sae3_skadjam._produit
 
 ALTER TABLE sae3_skadjam._produit
     ADD CONSTRAINT ch_produit_unite
-        CHECK (unite IN ('piece', 'L', 'cl', 'g', 'kg', 'S', 'M', 'L', 'XL', 'XXL', 'm', 'cm'));
+        CHECK (unite IN ('Piece', 'Litre', 'cl', 'g', 'kg', 'S', 'M', 'L', 'XL', 'XXL', 'm', 'cm'));
 
 ALTER TABLE sae3_skadjam._vendeur
     ADD CONSTRAINT ch_vendeur_raison_social
@@ -778,4 +778,3 @@ CREATE TRIGGER trig_produit_montant_ttc
   AFTER INSERT ON sae3_skadjam._produit
   FOR EACH ROW
   EXECUTE FUNCTION calcul_produit_prix_remise();
- 
