@@ -31,9 +31,20 @@
     <main>
         <h2>Voulez-vous vraiment vider le catalogue ?</h2>
         <div class="mt-15 flex flex-row justify-around">
-            <button class="border-2 border-vertFonce rounded-2xl w-auto h-14 px-7">Oui</button>
+            <button id="executerViderCatalogue" class="border-2 border-vertFonce rounded-2xl w-auto h-14 px-7">Oui</button>
             <button class="border-2 border-vertFonce rounded-2xl w-auto h-14 px-7"><a href="../bo/index_vendeur.php">Non</a></button>
         </div>
+
+        <script>
+            document.getElementById('executerViderCatalogue').addEventListener('click', () => {
+                fetch('../../php/executer_vider_catalogue.php')
+                .then(res => res.text())
+                .then(data => {
+                    window.location.href = "index_vendeur.php";
+                });
+        });
+        </script>
+
     </main>
 
     <?php include("../../php/structure/footer_back.php"); ?>
