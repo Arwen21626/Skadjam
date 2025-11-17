@@ -297,6 +297,9 @@ p, a {
   .mt-3 {
     margin-top: calc(var(--spacing, 0.25rem) * 3);
   }
+  .mt-4 {
+    margin-top: calc(var(--spacing, 0.25rem) * 4);
+  }
   .mt-6 {
     margin-top: calc(var(--spacing, 0.25rem) * 6);
   }

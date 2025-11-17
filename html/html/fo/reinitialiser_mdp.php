@@ -7,18 +7,16 @@
 </head>
 <body>
     <?php require __DIR__ . "/../../php/structure/header_front.php"; ?>
-    <h2>Mot de passe oublié</h2>
+    <h2 class="flex justify-center text-center">Mot de passe oublié</h2>
     <?php if($_POST['mail'] === null){ ?>
-    <form action="reinitialiser_mdp.php" method="post">
+    <form class="flex flex-col p-15 pt-0 justify-around justify-items-center" action="reinitialiser_mdp.php" method="post">
         <label>Adresse mail :</label>
         <br>
-        <input type="email" name='mail' id='mail' required>
-        <br>
-        <br>
+        <input class="border-4 border-vertClair rounded-2xl w-3/4 p-1 pl-3"  type="email" name='mail' id='mail' required>
         <p>Si un compte à cette adresse existe, vous recevrez un mail contenant un lien pour la réinitialisation.</p>
-        <br>
-        <br>
-        <input type="submit" value="Recevoir un mail">
+        <div class="flex mt-10 justify-center md:justify-end w-1/1 ">
+            <input class="border-2 border-vertClair rounded-2xl w-40 h-14 p-0 m-0 md:mr-10" type="submit" value="Recevoir un mail">
+        </div>
     </form>
     <?php }else{ ?>
         <p>Mail entré : <?php echo $_POST['mail']; ?></p>
