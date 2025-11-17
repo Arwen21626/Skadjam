@@ -2,11 +2,11 @@
 <html lang="fr">
 <head>
     <title>Test Back</title>
-    <?php require_once("html/php/structure/head_back.php") ?>
+    <?php require_once(__DIR__ . "/../php/structure/head_back.php") ?>
 </head>
 <body>
-    <?php require_once("html/php/structure/header_back.php"); ?>
-    <?php require_once("html/php/structure/navbar_back.php"); ?>
+    <?php require_once(__DIR__ . "/../php/structure/header_back.php"); ?>
+    <?php require_once(__DIR__ . "/../php/structure/navbar_back.php"); ?>
    
     <main>
         <section>
@@ -68,6 +68,6 @@
         </section>
     </main>
 
-    <?php require_once("html/php/structure/footer_back.php");?>
+    <?php require_once(__DIR__ . "/../php/structure/footer_back.php");?>
 </body>
 </html>
