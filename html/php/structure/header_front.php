@@ -3,7 +3,7 @@
                                         md:grid md:grid-cols-3 md:p-4">
         <div class="pl-2 md:pl-12">
             <a class="inline-block" href="/html/html/fo/index.php">
-                <img src="/html/images/logo/alizon/logo_alizon_vert_fonce.webp" alt="logo Alizon" 
+                <img src="../../images/logo/alizon/logo_alizon_vert_fonce.webp" alt="logo Alizon" 
                 class="size-20 md:size-28">
             </a>
         </div>

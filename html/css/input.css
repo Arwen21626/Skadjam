@@ -1,12 +1,12 @@
 /* Définition des styles génériques */
 @font-face { /* Pour les titres */
     font-family: 'MavenPro';
-    src: url("/html/font/MavenPro/MavenPro-Regular.ttf");
+    src: url("/font/MavenPro/MavenPro-Regular.ttf");
 }
 
 @font-face { /* Pour les paragraphes */
     font-family: 'Amiko';
-    src: url("/html/font/Amiko/Amiko-Regular.ttf");
+    src: url("/font/Amiko/Amiko-Regular.ttf");
 }
 
 h1, h2, h3, h4 {

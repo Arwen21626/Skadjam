@@ -2,11 +2,11 @@
 @layer properties;
 @font-face {
   font-family: 'MavenPro';
-  src: url("/html/font/MavenPro/MavenPro-Regular.ttf");
+  src: url("/font/MavenPro/MavenPro-Regular.ttf");
 }
 @font-face {
   font-family: 'Amiko';
-  src: url("/html/font/Amiko/Amiko-Regular.ttf");
+  src: url("/font/Amiko/Amiko-Regular.ttf");
 }
 h1, h2, h3, h4 {
   font-family: 'MavenPro';
@@ -296,9 +296,6 @@ p, a {
   }
   .mt-3 {
     margin-top: calc(var(--spacing, 0.25rem) * 3);
-  }
-  .mt-4 {
-    margin-top: calc(var(--spacing, 0.25rem) * 4);
   }
   .mt-6 {
     margin-top: calc(var(--spacing, 0.25rem) * 6);
@@ -615,29 +612,29 @@ p, a {
   .bg-vertMoyen {
     background-color: var(--color-vertMoyen);
   }
-  .bg-\[url\(\/html\/images\/logo\/bootstrap_icon\/cart\.svg\)\] {
-    background-image: url(/html/images/logo/bootstrap_icon/cart.svg);
-  }
-  .bg-\[url\(\/html\/images\/logo\/bootstrap_icon\/chat-left-dots\.svg\)\] {
-    background-image: url(/html/images/logo/bootstrap_icon/chat-left-dots.svg);
-  }
-  .bg-\[url\(\/html\/images\/logo\/bootstrap_icon\/house\.svg\)\] {
-    background-image: url(/html/images/logo/bootstrap_icon/house.svg);
-  }
-  .bg-\[url\(\/html\/images\/logo\/bootstrap_icon\/person\.svg\)\] {
-    background-image: url(/html/images/logo/bootstrap_icon/person.svg);
-  }
-  .bg-\[url\(\/html\/images\/logo\/bootstrap_icon\/plus-square\.svg\)\] {
-    background-image: url(/html/images/logo/bootstrap_icon/plus-square.svg);
-  }
   .bg-\[url\(\/html\/images\/logo\/bootstrap_icon\/plus\.svg\)\] {
     background-image: url(/html/images/logo/bootstrap_icon/plus.svg);
   }
-  .bg-\[url\(\/html\/images\/logo\/bootstrap_icon\/search\.svg\)\] {
-    background-image: url(/html/images/logo/bootstrap_icon/search.svg);
+  .bg-\[url\(\/images\/logo\/bootstrap_icon\/cart\.svg\)\] {
+    background-image: url(/images/logo/bootstrap_icon/cart.svg);
   }
-  .bg-\[url\(\/html\/images\/logo\/bootstrap_icon\/truck\.svg\)\] {
-    background-image: url(/html/images/logo/bootstrap_icon/truck.svg);
+  .bg-\[url\(\/images\/logo\/bootstrap_icon\/chat-left-dots\.svg\)\] {
+    background-image: url(/images/logo/bootstrap_icon/chat-left-dots.svg);
+  }
+  .bg-\[url\(\/images\/logo\/bootstrap_icon\/house\.svg\)\] {
+    background-image: url(/images/logo/bootstrap_icon/house.svg);
+  }
+  .bg-\[url\(\/images\/logo\/bootstrap_icon\/person\.svg\)\] {
+    background-image: url(/images/logo/bootstrap_icon/person.svg);
+  }
+  .bg-\[url\(\/images\/logo\/bootstrap_icon\/plus-square\.svg\)\] {
+    background-image: url(/images/logo/bootstrap_icon/plus-square.svg);
+  }
+  .bg-\[url\(\/images\/logo\/bootstrap_icon\/search\.svg\)\] {
+    background-image: url(/images/logo/bootstrap_icon/search.svg);
+  }
+  .bg-\[url\(\/images\/logo\/bootstrap_icon\/truck\.svg\)\] {
+    background-image: url(/images/logo/bootstrap_icon/truck.svg);
   }
   .bg-size-\[auto_48px\] {
     background-size: auto 48px;
@@ -753,45 +750,45 @@ p, a {
       background-color: var(--color-beige);
     }
   }
-  .hover\:bg-\[url\(\/html\/images\/logo\/bootstrap_icon\/cart-fill\.svg\)\] {
+  .hover\:bg-\[url\(\/images\/logo\/bootstrap_icon\/cart-fill\.svg\)\] {
     &:hover {
       @media (hover: hover) {
-        background-image: url(/html/images/logo/bootstrap_icon/cart-fill.svg);
+        background-image: url(/images/logo/bootstrap_icon/cart-fill.svg);
       }
     }
   }
-  .hover\:bg-\[url\(\/html\/images\/logo\/bootstrap_icon\/house-fill\.svg\)\] {
+  .hover\:bg-\[url\(\/images\/logo\/bootstrap_icon\/house-fill\.svg\)\] {
     &:hover {
       @media (hover: hover) {
-        background-image: url(/html/images/logo/bootstrap_icon/house-fill.svg);
+        background-image: url(/images/logo/bootstrap_icon/house-fill.svg);
       }
     }
   }
-  .hover\:bg-\[url\(\/html\/images\/logo\/bootstrap_icon\/person-fill\.svg\)\] {
+  .hover\:bg-\[url\(\/images\/logo\/bootstrap_icon\/person-fill\.svg\)\] {
     &:hover {
       @media (hover: hover) {
-        background-image: url(/html/images/logo/bootstrap_icon/person-fill.svg);
+        background-image: url(/images/logo/bootstrap_icon/person-fill.svg);
       }
     }
   }
-  .hover\:bg-\[url\(\/html\/images\/logo\/bootstrap_icon\/plus-square-fill\.svg\)\] {
+  .hover\:bg-\[url\(\/images\/logo\/bootstrap_icon\/plus-square-fill\.svg\)\] {
     &:hover {
       @media (hover: hover) {
-        background-image: url(/html/images/logo/bootstrap_icon/plus-square-fill.svg);
+        background-image: url(/images/logo/bootstrap_icon/plus-square-fill.svg);
       }
     }
   }
-  .hover\:bg-\[url\(\/html\/images\/logo\/bootstrap_icon\/search-selected\.svg\)\] {
+  .hover\:bg-\[url\(\/images\/logo\/bootstrap_icon\/search-selected\.svg\)\] {
     &:hover {
       @media (hover: hover) {
-        background-image: url(/html/images/logo/bootstrap_icon/search-selected.svg);
+        background-image: url(/images/logo/bootstrap_icon/search-selected.svg);
       }
     }
   }
-  .hover\:bg-\[url\(\/html\/images\/logo\/bootstrap_icon\/truck-fill\.svg\)\] {
+  .hover\:bg-\[url\(\/images\/logo\/bootstrap_icon\/truck-fill\.svg\)\] {
     &:hover {
       @media (hover: hover) {
-        background-image: url(/html/images/logo/bootstrap_icon/truck-fill.svg);
+        background-image: url(/images/logo/bootstrap_icon/truck-fill.svg);
       }
     }
   }
