@@ -57,8 +57,6 @@
 
     // Affichage test
     //  print_r($infoPhoto);
-     echo $infoPhoto["url_photo"];
-    //  <?php echo "../../.." . $infoPhoto["url_photo"]; 
 ?>
 
 
