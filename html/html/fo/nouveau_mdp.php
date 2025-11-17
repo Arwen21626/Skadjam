@@ -7,6 +7,7 @@ require_once __DIR__ . "/../../01_premiere_connexion.php";
 <html lang="fr">
 <head>
     <?php require __DIR__ . "/../../php/structure/head_front.php"; ?>
+    <link rel="stylesheet" href="<?php echo "__DIR__ . /../../css/fo/general_front.css"; ?>">
     <title>Nouveau mot de passe</title>
 </head>
 <body>
