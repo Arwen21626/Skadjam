@@ -400,6 +400,9 @@ p, a {
   .h-auto {
     height: auto;
   }
+  .min-h-\[480px\] {
+    min-height: 480px;
+  }
   .w-1\/1 {
     width: calc(1/1 * 100%);
   }
