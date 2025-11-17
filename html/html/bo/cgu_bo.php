@@ -2,6 +2,7 @@
 <html lang="fr">
 <head>
     <?php require __DIR__ . "/../../php/structure/head_back.php"; ?>
+    <link rel="stylesheet" href="../../css/bo/general_back.css">
     <title>Conditions Générales d'Utilisateurs</title>
 </head>
 <body>
