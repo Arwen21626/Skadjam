@@ -89,7 +89,7 @@ if (isset($_POST["nom"])){
         try{
             $idCompte = null;
             //preparer la requete sql pour inserer dans le compte
-            $stmt = $dbh->prepare("INSERT INTO sae3_skadjam._compte (nom_compte, prenom_compte, adresse_mail, motDePasse, numero_telephone, bloque) VALUES (?,?,?,?,?, false) RETURNING id_compte");
+            $stmt = $dbh->prepare("INSERT INTO sae3_skadjam._compte (nom_compte, prenom_compte, adresse_mail, mot_de_passe, numero_telephone, bloque) VALUES (?,?,?,?,?, false) RETURNING id_compte");
             //excuter la requete sql avec les attributs
             $stmt->execute([$nom, $prenom,$mail, password_hash($mdp, PASSWORD_DEFAULT),formatTel($tel) ]);
             

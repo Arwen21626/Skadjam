@@ -76,6 +76,7 @@
                 <input class="border-2 border-vertFonce rounded-2xl w-40 h-14 p-0 m-0 md:mr-10" type="Submit" name="submit" id="submit" value="S'inscrire">
             </div>
         </form>
+        <button class="border-2 border-vertFonce rounded-2xl w-40 h-14 p-0 m-0 md:mr-10"><a href="../bo/crea_compte_vendeur.php">Créer un compte vendeur</a></button>
     </main>
 
     <?php 

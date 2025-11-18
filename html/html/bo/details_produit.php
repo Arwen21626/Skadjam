@@ -4,7 +4,6 @@
 
     //Récupération des données sur le produit ainsi que la photo
     $idProd = $_GET['idProduit'];
-    $idProd = 3;
 
     foreach($dbh->query("SELECT *
                         from sae3_skadjam._produit pr
@@ -64,7 +63,7 @@
         <div class="flex flex-col">
             <button class=" bg-beige rounded-2xl w-40 h-14" type="button">Modifier</button>
             <button class=" bg-beige rounded-2xl w-40 h-14" type="button">Masquer</button>
-            <button class=" bg-beige rounded-2xl w-40 h-14" type="button">Supprimer</button>
+            <button class=" bg-beige rounded-2xl w-40 h-14" type="button"><a href="../bo/supprimer_produit.php">Supprimer</a></button>
         </div>
         
 
