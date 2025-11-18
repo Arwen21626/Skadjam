@@ -4,7 +4,7 @@ require_once(__DIR__ . '/../../php/verification_formulaire.php');
 
 
 $idProduit = $_GET['idProduit'];
-$idProduit = 1;
+$idProduit = 2;
 
 //Tableau pour les catégories de la base
 $tab_categories = [];
@@ -64,6 +64,8 @@ foreach($dbh->query("SELECT *,est_masque::CHAR as est_masque_php FROM sae3_skadj
 
     
 }
+
+//Traitement du formulaire
 if (isset($_POST['categorie']) && isset($_POST['nom']) && isset($_POST['prix']) && isset($_POST['qteStock']) && isset($_POST['description']) && isset($_POST['unite'])) {
     
     //Gestion de la photo
@@ -74,7 +76,7 @@ if (isset($_POST['categorie']) && isset($_POST['nom']) && isset($_POST['prix']) 
     //Déplacement et renommage du fichier photo
     $nom_explode = explode(' ',$nom)[0];
     $currentTime = time();
-    $destination = __DIR__ . '../../images/photo_importees';
+    $destination = __DIR__ . '/../../images/photo_importees';
     $nom_photo_finale = $nom_explode.$currentTime.'.'.$ext;
     move_uploaded_file($nom_serv_photo,$destination.'/'.$nom_photo_finale);
 
@@ -108,8 +110,7 @@ if (isset($_POST['categorie']) && isset($_POST['nom']) && isset($_POST['prix']) 
         $enLigne = 'false';
     }
 
-    
-    
+    //Vérification du prix et du stock
     if (verifPrix($prix) && verifQteStock($qteStock)){
         try{
             if ($nomCategorie == 'Alimentaire') {
@@ -156,9 +157,9 @@ if (isset($_POST['categorie']) && isset($_POST['nom']) && isset($_POST['prix']) 
                 url_photo = '/images/photo_importees/$nom_photo_finale', 
                 alt = '$nom', 
                 titre = '$nom'
+                WHERE id_photo = $idPhoto
                 ;");
 
-            $insertionMontre = $dbh -> query("UPDATE sae3_skadjam._montre SET id_photo=$idPhoto, id_produit=$idProduit;");
         }
         catch (PDOException $e) {
             print "Erreur !: " . $e->getMessage() . "<br/>";
@@ -196,7 +197,7 @@ else { ?>
             <div class="row-start-1 row-span-3 m-2 p-4 grid grid-rows-[2/3-1/3] justify-items-center">
                 <input type="file" id="photo" name="photo" class="hidden" required>
                 <!-- label qui agit comme bouton -->
-                <label id="labelImage" for="photo" class=" w-60 h-60 rounded-xl" style="background-image: url(<?php echo $urlPhoto ?>); background-repeat: no-repeat; background-position: center; background-size: 100%;"></label>
+                <label id="labelImage" for="photo" class=" w-60 h-60 rounded-xl" style="background-image: url('/images/photo_importees/Fraise1763470571.png ' <?php //echo $urlPhoto ?>); background-repeat: no-repeat; background-position: center; background-size: 100%;"></label>
                 <label for="photo">Ajouter une image*</label>
             </div>
             
