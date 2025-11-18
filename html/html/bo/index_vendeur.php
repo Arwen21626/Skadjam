@@ -110,7 +110,7 @@
                             <p class="col-span-1 col-start-1"><?php echo htmlentities($valeurs['prix_ttc']);?> €</p>
 
                             <!--récupération de la note-->
-                            <div class=" flex col-span-1 col-start-2">
+                            <div class=" flex col-span-1 col-start-2 justify-self-start">
                                 <?php $note = $valeurs['note_moyenne'];
                                     affichageNote($note); ?>
                             </div>    

@@ -26,13 +26,13 @@ require_once(__DIR__ . "/../../php/fonctions.php");
 
     <main>
         <div class="grid grid-cols-2 gap-4 justify-items-center">
-            <a href="" title="lien vers page promotion">
+            <a href="#nosProduits" title="lien vers page promotion">
                 <img src="../../images/images_accueil/promotion.webp" alt="promotion" class="w-90 md:w-150 h-auto justify-self-end">
             </a>
-            <a href="" title="lien vers page nouveaux produits">
+            <a href="#nosProduits" title="lien vers page nouveaux produits">
                 <img src="../../images/images_accueil/nouveaux_produits.webp" alt="nouveaux produits" class="w-90 md:w-150 h-auto justify-self-start">
             </a>           
-            <a href="" title="lien vers page les plus vendus">
+            <a href="#nosProduits" title="lien vers page les plus vendus">
                 <img src="../../images/images_accueil/les_plus_vendus.webp" alt="les plus vendus" class="w-90 md:w-150 h-auto justify-self-end">
             </a>
             <a href="" title="lien vers page commandes">
