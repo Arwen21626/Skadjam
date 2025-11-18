@@ -68,7 +68,11 @@
 
             <div class="flex mt-10 flex-col w-1/1 items-start">
                 <p>Vous avez déjà un compte ?</p>
-                <a style="text-decoration-line: underline" href='connexion_client.php'>Connectez vous</a> 
+                <a style="text-decoration-line: underline" href="connexion_client.php">Connectez vous</a> 
+            </div>
+            <div class="flex mt-10 flex-col w-1/1 items-start">
+                <p>Vous êtes un vendeur ?</p>
+                <a style="text-decoration-line: underline" href="../bo/crea_compte_vendeur.php">Créer un compte vendeur</a> 
             </div>
             
             <div class="flex mt-10 justify-center md:justify-end w-1/1 ">

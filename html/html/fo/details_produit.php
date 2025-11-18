@@ -1,12 +1,13 @@
 <?php 
     include(__DIR__ . "/../../01_premiere_connexion.php");
-    
+    include(__DIR__ . "/../../php/fonctions.php");
+
     /* Temporaire pour le dev, à changer au moment de la finalisation */
     if (isset($_GET["idProduit"])) {
         $idProd = $_GET["idProduit"]; // Récupère l'id du produit qu'on affiche
     }
     else { 
-        $idProd = 1;
+        $idProd = 3;
     }
     /* Temporaire pour le dev, à changer au moment de la finalisation */
 
@@ -125,52 +126,42 @@
 
         <!-- Section avis -->
         <section>
-            <h3>Avis "NB"</h3>
-            <div id="avis_container" class="mt-2 mb-2">   <!-- Div dynamique qui contiendra tout les avis du produit -->
-                <!-- Div représentant un avis et sa potentielle réponse -->
-                <div class="avis-reponse shadow">
-                    <!-- Div représentant l'avis -->
-                    <div class="bg-bleu p-2">
-                        <h4 class="mb-0.5">"Pseudonyme"</h4>
-                        <p>
-                            Lorem ipsum dolor sit amet, consectetur adipisicing elit. 
-                            Dolore, eum aut blanditiis iusto officiis est voluptates omnis laudantium possimus officia quia delectus voluptas deleniti similique debitis,
-                            cum accusamus voluptate necessitatibus?
-                        </p>
-                    </div>
+            <div class="flex justify-between items-center">
+                <h3>Avis</h3>
+                <button class="size-auto bg-none indent-0 overflow-visible whitespace-normal
+                                bg-beige shadow rounded-2xl w-40 h-14 mt-4">
+                    <a href="ajouter_avis.php?idProduit=<?php echo $idProd;?>">Ajouter un avis</a>
+                </button>
+            </div>
+            <section class=" m-2 md:ml-32">
+                <?php 
+                    $avis = [];
+                    foreach($dbh->query("SELECT * FROM sae3_skadjam._avis a 
+                                        INNER JOIN sae3_skadjam._client c 
+                                            ON a.id_compte = c.id_compte 
+                                        WHERE id_produit = $idProd", PDO::FETCH_ASSOC) as $row){
+                        $avis[] = $row;
+                    }
                     
-                    <!-- Div représentant la réponse -->
-                     <div class="bg-beige p-2">
-                        <h4 class="mb-0.5"> <?php echo $nomVendeur ?> </h4>
-                        <p>
-                            Lorem ipsum dolor sit amet, consectetur adipisicing elit. 
-                            Dolore, eum aut blanditiis iusto officiis est voluptates omnis laudantium possimus officia quia delectus voluptas deleniti similique debitis,
-                            cum accusamus voluptate necessitatibus?
-                        </p>
-                     </div>
-                </div>
-            </div>
-
-            <div id="notes_container">
-                <h3>Notes</h3>
-                <div class="flex justify-between">
-                    <div class="flex flex-col">
-                        <h4>"NB" notes</h4>
-                        <p>5* - "NB" notes</p>
-                        <p>4* - "NB" notes</p>
-                        <p>3* - "NB" notes</p>
-                        <p>2* - "NB" notes</p>
-                        <p>1* - "NB" notes</p>
-                    </div>
-                    <button class="-indent-96 overflow-hidden whitespace-nowrap
-                    size-12 bg-no-repeat bg-size-[auto_48px]
-                    bg-[url(/images/logo/bootstrap_icon/chat-left-dots.svg)]
-                    md:size-auto md:bg-none md:indent-0 md:overflow-visible md:whitespace-normal
-                    md:bg-beige md:shadow md:rounded-2xl md:w-40 md:h-14 md:mt-4 md:p-0.5">
-                        Écrire un commentaire
-                    </button>
-                </div>
-            </div>
+                    if($avis == null){?>
+                        <p>Aucun commentaire associé à ce produit.</p>
+                    <?php }
+                    else{
+                        foreach($avis as $row){?>
+                        
+                        <section class=" bg-bleu rounded-2xl m-4 p-4 md:w-2/3">
+                            <div class="flex flex-nowrap justify-start items-center w-auto">
+                                <h4 class="mr-4">
+                                    <?php echo $row['pseudo'];?>
+                                </h4>
+                                <?php echo affichageNote($row['nb_etoile']);?>
+                            </div>
+                            <p><?php echo $row['contenu_commentaire'];?></p>     
+                        </section>
+                    <?php }
+                    }?>
+                
+            </section>
         </section>
     </main>
 

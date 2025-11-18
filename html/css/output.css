@@ -246,9 +246,6 @@ p, a {
   .z-10 {
     z-index: 10;
   }
-  .col-span-1 {
-    grid-column: span 1 / span 1;
-  }
   .col-span-2 {
     grid-column: span 2 / span 2;
   }
@@ -387,6 +384,9 @@ p, a {
   .ml-0 {
     margin-left: calc(var(--spacing, 0.25rem) * 0);
   }
+  .ml-2 {
+    margin-left: calc(var(--spacing, 0.25rem) * 2);
+  }
   .ml-4 {
     margin-left: calc(var(--spacing, 0.25rem) * 4);
   }
@@ -475,6 +475,12 @@ p, a {
   .w-1\/1 {
     width: calc(1/1 * 100%);
   }
+  .w-1\/3 {
+    width: calc(1/3 * 100%);
+  }
+  .w-1\/5 {
+    width: calc(1/5 * 100%);
+  }
   .w-2\/3 {
     width: calc(2/3 * 100%);
   }
@@ -517,6 +523,9 @@ p, a {
   .w-90 {
     width: calc(var(--spacing, 0.25rem) * 90);
   }
+  .w-100 {
+    width: calc(var(--spacing, 0.25rem) * 100);
+  }
   .w-150 {
     width: calc(var(--spacing, 0.25rem) * 150);
   }
@@ -537,9 +546,6 @@ p, a {
   }
   .max-w-3\/4 {
     max-width: calc(3/4 * 100%);
-  }
-  .min-w-1\/3 {
-    min-width: calc(1/3 * 100%);
   }
   .min-w-3xs {
     min-width: var(--container-3xs, 16rem);
@@ -828,6 +834,20 @@ p, a {
   .\[hostname\:port\] {
     hostname: port;
   }
+  .group-hover\/annuler\:block {
+    &:is(:where(.group\/annuler):hover *) {
+      @media (hover: hover) {
+        display: block;
+      }
+    }
+  }
+  .group-hover\/annuler\:hidden {
+    &:is(:where(.group\/annuler):hover *) {
+      @media (hover: hover) {
+        display: none;
+      }
+    }
+  }
   .group-hover\/pen\:block {
     &:is(:where(.group\/pen):hover *) {
       @media (hover: hover) {
@@ -837,6 +857,20 @@ p, a {
   }
   .group-hover\/pen\:hidden {
     &:is(:where(.group\/pen):hover *) {
+      @media (hover: hover) {
+        display: none;
+      }
+    }
+  }
+  .group-hover\/valider\:block {
+    &:is(:where(.group\/valider):hover *) {
+      @media (hover: hover) {
+        display: block;
+      }
+    }
+  }
+  .group-hover\/valider\:hidden {
+    &:is(:where(.group\/valider):hover *) {
       @media (hover: hover) {
         display: none;
       }
@@ -933,6 +967,11 @@ p, a {
       margin-bottom: calc(var(--spacing, 0.25rem) * 4);
     }
   }
+  .md\:ml-10 {
+    @media (width >= 48rem) {
+      margin-left: calc(var(--spacing, 0.25rem) * 10);
+    }
+  }
   .md\:flex {
     @media (width >= 48rem) {
       display: flex;
@@ -975,6 +1014,11 @@ p, a {
   .md\:h-14 {
     @media (width >= 48rem) {
       height: calc(var(--spacing, 0.25rem) * 14);
+    }
+  }
+  .md\:w-2\/3 {
+    @media (width >= 48rem) {
+      width: calc(2/3 * 100%);
     }
   }
   .md\:w-40 {
