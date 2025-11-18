@@ -3,22 +3,24 @@ session_start();
 include __DIR__ . "/../../01_premiere_connexion.php";
 //$idCompte = $_SESSION["idCompte"];
 $idCompte = 1;
+if (!isset($denom)) {
+    $denom = "";
+    $siren = "";
+    $description = "";
+    
+    $adresse = "";
+    $num = "";
+    $numBis = "";
+    $ville = "";
+    $cp = "";
+    
+    
+    $nom = "";
+    $prenom = "";
+    $tel = "";
+    $mail = "";
+}
 
-$denom = "";
-$siren = "";
-$description = "";
-
-$adresse = "";
-$num = "";
-$numBis = "";
-$ville = "";
-$cp = "";
-
-
-$nom = "";
-$prenom = "";
-$tel = "";
-$mail = "";
 
 try {
     //information compte
@@ -51,6 +53,42 @@ try {
 } catch (PDOException $e) {
     echo "Erreur requete : " . $e->getMessage();
     exit;
+}
+
+if ($_SERVER["REQUEST_METHOD"] === "POST") {
+    // Traitement du formulaire de modification du profil vendeur
+    // Récupération des données du formulaire
+    $newDenom = $_POST['denom'];
+    $newSiren = $_POST['siren'];
+    $newDescription = $_POST['description'];
+    $newNom = $_POST['nom'];
+    $newPrenom = $_POST['prenom'];
+    $newTel = $_POST['tel'];
+    $newMail = $_POST['mail'];
+    $newAdresse = $_POST['adresse'];
+    print_r($_POST);
+
+    // Mettre à jour la base de données avec les nouvelles valeurs
+    try {
+        // Mettre à jour les informations du compte
+        $stmt = $dbh->prepare("UPDATE sae3_skadjam._compte SET nom_compte = ?, prenom_compte = ?, adresse_mail = ?, numero_telephone = ? WHERE id_compte = ?");
+        $stmt->execute([$newNom, $newPrenom, $newMail, $newTel, $idCompte]);
+
+        // Mettre à jour les informations du vendeur
+        $stmt = $dbh->prepare("UPDATE sae3_skadjam._vendeur SET raison_sociale = ?, siren = ?, description_vendeur = ? WHERE id_compte = ?");
+        $stmt->execute([$newDenom, $newSiren, $newDescription, $idCompte]);
+
+        // Mettre à jour l'adresse (simplifié pour cet exemple)
+        // Vous devrez peut-être diviser l'adresse en ses composants
+        // et mettre à jour la table des adresses en conséquence
+
+        // Rediriger ou afficher un message de succès
+        header("Location: profil_vendeur.php");
+        exit;
+    } catch (PDOException $e) {
+        echo "Erreur lors de la mise à jour : " . $e->getMessage();
+        exit;
+    }
 }
 
 
@@ -97,8 +135,8 @@ try {
                             <p class="underline">Entreprise :</p>
                             <?php include __DIR__ . "/../../php/structure/bouton_modifier_vendeur.php"; ?>
                         </div>
-                        <p class="attribut-text ml-7 mt-2"><?= (isset($newDenom)&& $newDenom !=="")? $newDenom : $denom ?></p>
-                        <input type="text" name="denom" class="champ-text w-full ml-5 hidden border-2 border-solid rounded-md border-beige pl-3" value="">
+                        <p class="attribut-text ml-7 mt-2"><?= $denom ?></p>
+                        <input type="text" name="denom" class="champ-text w-full ml-5 hidden border-2 border-solid rounded-md border-beige pl-3" value="<?= $denom ?>">
                     </div>
 
                     <div class=" mb-3 modif-attribut">
@@ -107,7 +145,7 @@ try {
                             <?php include __DIR__ . "/../../php/structure/bouton_modifier_vendeur.php"; ?>
                         </div>
                         <p class="attribut-text ml-7 mt-2"><?= "$num $numBis $adresse, $ville, $cp" ?></p>
-                        <input type="text" name="adresse" class="champ-text w-full ml-5 hidden border-2 border-solid rounded-md border-beige pl-3" value="">
+                        <input type="text" name="adresse" class="champ-text w-full ml-5 hidden border-2 border-solid rounded-md border-beige pl-3" value="<?= "$num $numBis $adresse, $ville, $cp" ?>">
                     </div>
 
                     <div class=" mb-3 modif-attribut">
@@ -115,8 +153,8 @@ try {
                             <p class="underline">Numéro SIREN :</p>
                             <?php include __DIR__ . "/../../php/structure/bouton_modifier_vendeur.php"; ?>
                         </div>
-                        <p class="attribut-text ml-7 mt-2"><?= (isset($newSiren)&& $newSiren !=="")? $newSiren : $siren ?></p>
-                        <input type="text" name="siren" class="champ-text w-full ml-5 hidden border-2 border-solid rounded-md border-beige pl-3" value="">
+                        <p class="attribut-text ml-7 mt-2"><?= $siren ?></p>
+                        <input type="text" name="siren" class="champ-text w-full ml-5 hidden border-2 border-solid rounded-md border-beige pl-3" value="<?= $siren ?>">
                     </div>
 
                 </div>
@@ -129,8 +167,8 @@ try {
                             <p class="underline">Nom :</p>
                             <?php include __DIR__ . "/../../php/structure/bouton_modifier_vendeur.php"; ?>
                         </div>
-                        <p class="attribut-text ml-7 mt-2"><?= (isset($newNom)&& $newNom !=="")? $newNom : $nom ?></p>
-                        <input type="text" name="nom" class="champ-text w-full ml-5 hidden border-2 border-solid rounded-md border-beige pl-3" value="">
+                        <p class="attribut-text ml-7 mt-2"><?= $nom ?></p>
+                        <input type="text" name="nom" class="champ-text w-full ml-5 hidden border-2 border-solid rounded-md border-beige pl-3" value="<?= $nom ?>">
                     </div>
 
                     <div class="mb-3 modif-attribut">
@@ -138,8 +176,8 @@ try {
                             <p class="underline">Prénom :</p>
                             <?php include __DIR__ . "/../../php/structure/bouton_modifier_vendeur.php"; ?>
                         </div>
-                        <p class="attribut-text ml-7 mt-2"><?= (isset($newPrenom)&& $newPrenom !=="")? $newPrenom : $prenom ?></p>
-                        <input type="text" name="prenom" class="champ-text w-full ml-5 hidden border-2 border-solid rounded-md border-beige pl-3" value="">
+                        <p class="attribut-text ml-7 mt-2"><?= $prenom ?></p>
+                        <input type="text" name="prenom" class="champ-text w-full ml-5 hidden border-2 border-solid rounded-md border-beige pl-3" value="<?= $prenom ?>">
                     </div>
 
                 </div>
@@ -150,8 +188,8 @@ try {
                             <p class="underline">Numéro de téléphone :</p>
                             <?php include __DIR__ . "/../../php/structure/bouton_modifier_vendeur.php"; ?>
                         </div>
-                        <p class="attribut-text ml-7 mt-2"><?= (isset($newTel)&& $newTel !=="")? $newTel : $tel ?></p>
-                        <input type="text" name="tel" class="champ-text w-full ml-5 hidden border-2 border-solid rounded-md border-beige pl-3" value="">
+                        <p class="attribut-text ml-7 mt-2"><?= $tel ?></p>
+                        <input type="text" name="tel" class="champ-text w-full ml-5 hidden border-2 border-solid rounded-md border-beige pl-3" value="<?= $tel ?>">
                     </div>
 
                     <div class="mb-3 modif-attribut">
@@ -159,8 +197,8 @@ try {
                             <p class="underline">E-Mail :</p>
                             <?php include __DIR__ . "/../../php/structure/bouton_modifier_vendeur.php"; ?>
                         </div>
-                        <p class="attribut-text ml-7 mt-2"><?= (isset($newMail)&& $newMail !=="")? $newMail : $mail ?></p>
-                        <input type="text" name="mail" class="champ-text w-full ml-5 hidden border-2 border-solid rounded-md border-beige pl-3" value="">
+                        <p class="attribut-text ml-7 mt-2"><?= $mail ?></p>
+                        <input type="text" name="mail" class="champ-text w-full ml-5 hidden border-2 border-solid rounded-md border-beige pl-3" value="<?= $mail ?>">
                     </div>
 
                 </div>
@@ -172,6 +210,10 @@ try {
                 </div>
                 <p class="attribut-text ml-7"><?= $description ?></p>
                 <textarea name="description" class="champ-text ml-5 hidden border-2 border-solid rounded-md border-beige pl-3 w-full h-40"><?= $description ?></textarea>
+            </div>
+            <div class="flex flex-row justify-around mt-8 mb-8 @max-[768px]:flex-col @max-[768px]:items-center">
+                <input type="reset" value="Annuler" class="cursor-pointer w-64 border-2 border-solid rounded-md border-beige pl-3">
+                <input type="submit" value="Valider" class="cursor-pointer w-64 border-2 border-solid rounded-md border-beige pl-3 @max-[768px]:mt-2">
             </div>
         </form>
     </main>
@@ -186,8 +228,8 @@ document.querySelectorAll(".modif-attribut .bouton-modifier, .modif-attribut .gr
         const boutonModifier = container.querySelector(".bouton-modifier"); // bouton modidier
         const groupeBouton = container.querySelector(".groupe-bouton"); // groupe de bouton valider/annuler
 
-        texte = paragraph.textContent;
-        champ.value = texte;
+        ancienTexte = paragraph.textContent;
+        champ.value = ancienTexte;
         
         paragraph.classList.toggle("hidden");
 
@@ -210,16 +252,16 @@ document.querySelectorAll(".modif-attribut .bouton-valider").forEach(button => {
         texte = champ.value;
         paragraph.textContent = texte;
 
-        paragraph.classList.toggle("hidden");
+    });
+});
+document.querySelectorAll(".modif-attribut .bouton-annuler").forEach(button => {
+    button.addEventListener("click", () => {
+        const container = button.closest(".modif-attribut"); // parent
+        const paragraph = container.querySelector("p.attribut-text"); // texte en p
+        const champ = container.querySelector(".champ-text") // texte en input ou textarea
 
-        champ.classList.toggle("hidden");
-        champ.classList.toggle("block");
+        champ.value = ancienTexte;
 
-        groupeBouton.classList.toggle("hidden");
-        groupeBouton.classList.toggle("flex");  
-        
-        boutonModifier.classList.toggle("hidden");
-        boutonModifier.classList.toggle("block");
     });
 });
 </script>
