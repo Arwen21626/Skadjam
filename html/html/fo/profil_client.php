@@ -98,6 +98,7 @@ if (isset($_POST['logout'])) {
 
                 <!-- Modifier le mot de passe du client -->
                 <form action="nouveau_mdp.php">
+                    <?php $_SESSION['adresse_mail'] = $mail; ?>
                     <input class="border-2 border-vertClair rounded-xl p-2" type="submit" value="Modifier mon mot de passe">    
                 </form>
 
