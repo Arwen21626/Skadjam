@@ -1,7 +1,7 @@
 <header class="bg-vertFonce">
     <section class="grid grid-cols-3 p-6">
         <div class="pl-12">
-            <a class="inline-block" href="/html/html/bo/index_vendeur.php">
+            <a class="inline-block" href="/html/bo/index_vendeur.php">
                 <img src="/images/logo/alizon/logo_alizon_bleu_claire.webp" alt="logo Alizon" 
                 class="size-28">
             </a>
