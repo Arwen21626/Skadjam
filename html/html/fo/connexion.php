@@ -27,10 +27,12 @@ if(isset($_POST['mdp']) && isset($_POST['mail'])){
         $estVendeur = $stmt->fetch(PDO::FETCH_ASSOC);
 
         if($estVendeur['id_compte']){ 
-            // Vendeur
+            // Index vendeur + role vendeur
+            $_SESSION['role'] = 'vendeur';
             header('Location: ../bo/index_vendeur.php');
         }else{ 
-            // Client
+            // Index client + role client
+            $_SESSION['role'] = 'client';
             header('Location: ../fo/index.php');
         }
         
