@@ -4,7 +4,6 @@ require_once(__DIR__ . '/../../php/verification_formulaire.php');
 
 
 $idProduit = $_GET['idProduit'];
-$idProduit = 2;
 
 //Tableau pour les catégories de la base
 $tab_categories = [];
