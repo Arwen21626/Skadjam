@@ -1,41 +1,39 @@
 <?php 
-    session_start();
+session_start();
 
-    include __DIR__ .'/../../01_premiere_connexion.php';
-    const PAGE_SIZE = 15;
-    $idCompte = $_SESSION['idCompte'];
+include __DIR__ .'/../../01_premiere_connexion.php';
+
+$idPorduit = 1; //a changer
+$idCompte = $_SESSION['idCompte'];
 ?>
-
 <!DOCTYPE html>
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" type="text/css" href="../../css/output.css" >
-    <link rel="stylesheet" type="text/css" href="../../css/bo/general_back.css" >
-    <title>Vider le catalogue</title>
+    <title>Supprimer</title>
     <style>
         button a:hover{
             color: black;
         }
     </style>
 </head>
-
 <body>
-    <!--header-->
+    <!--Header-->
     <?php include("../../php/structure/header_back.php"); ?>
     <?php include("../../php/structure/navbar_back.php"); ?>
 
     <main>
-        <h2 class="mt-15">Voulez-vous vraiment vider le catalogue ?</h2>
+        <h2>Voulez-vous vraiment supprimer le produit ?</h2>
         <div class="mt-15 flex flex-row justify-around mb-15">
-            <button id="executerViderCatalogue" class="border-2 border-vertFonce rounded-2xl w-auto h-14 px-7">Oui</button>
+            <button id="suppProduit" class="border-2 border-vertFonce rounded-2xl w-auto h-14 px-7">Oui</button>
             <button class="border-2 border-vertFonce rounded-2xl w-auto h-14 px-7"><a href="../bo/index_vendeur.php">Non</a></button>
         </div>
 
         <script>
-            document.getElementById('executerViderCatalogue').addEventListener('click', () => {
-                fetch('../../php/executer_vider_catalogue.php')
+            document.getElementById('suppProduit').addEventListener('click', () => {
+                fetch('../../php/executer_supprimer_produit.php')
                 .then(res => res.text())
                 .then(data => {
                     window.location.href = "index_vendeur.php";
@@ -45,9 +43,7 @@
 
     </main>
 
+    <!-- Footer -->
     <?php include("../../php/structure/footer_back.php"); ?>
-
 </body>
-
 </html>
-    

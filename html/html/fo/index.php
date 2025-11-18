@@ -1,7 +1,8 @@
 <?php
 include(__DIR__ . '/../../01_premiere_connexion.php');
 const PAGE_SIZE = 15;
-require_once("./../../php/fonctions.php");?>
+require_once(__DIR__ . "/../../php/fonctions.php");
+?>
 
 <!DOCTYPE html>
 <html lang="fr">
@@ -25,13 +26,13 @@ require_once("./../../php/fonctions.php");?>
 
     <main>
         <div class="grid grid-cols-2 gap-4 justify-items-center">
-            <a href="" title="lien vers page promotion">
+            <a href="#nosProduits" title="lien vers page promotion">
                 <img src="../../images/images_accueil/promotion.webp" alt="promotion" class="w-90 md:w-150 h-auto justify-self-end">
             </a>
-            <a href="" title="lien vers page nouveaux produits">
+            <a href="#nosProduits" title="lien vers page nouveaux produits">
                 <img src="../../images/images_accueil/nouveaux_produits.webp" alt="nouveaux produits" class="w-90 md:w-150 h-auto justify-self-start">
             </a>           
-            <a href="" title="lien vers page les plus vendus">
+            <a href="#nosProduits" title="lien vers page les plus vendus">
                 <img src="../../images/images_accueil/les_plus_vendus.webp" alt="les plus vendus" class="w-90 md:w-150 h-auto justify-self-end">
             </a>
             <a href="" title="lien vers page commandes">
@@ -88,13 +89,15 @@ require_once("./../../php/fonctions.php");?>
                             <p class="col-span-2"><?php echo htmlentities($valeurs['libelle_produit']);?></p> 
 
                             <!--affichage du prix du produit-->   
-                            <p class="col-span-1 col-start-1"><?php echo htmlentities($valeurs['prix_ttc']);?> €</p>
+                            <div class="flex justify-start items-center col-span-2">
+                                <p><?php echo htmlentities($valeurs['prix_ttc']);?> €</p>
 
-                            <!--récupération de la note-->
-                            <div class=" flex col-span-1 col-start-2">
-                                <?php $note = $valeurs['note_moyenne'];
-                                    affichageNote($note); ?>
-                            </div> 
+                                <!--récupération de la note-->
+                                <div class="ml-2 md:ml-10 flex">
+                                    <?php $note = $valeurs['note_moyenne'];
+                                        affichageNote($note); ?>
+                                </div> 
+                            </div>
                         </section>
                     <?php } ?>
                 </div>

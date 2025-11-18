@@ -18,7 +18,7 @@ require_once __DIR__ . "/../../01_premiere_connexion.php";
         $dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
         $dbh->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC);
 
-        $id = $_POST['id'];
+        $mail = $_SESSION['adresse_mail'];
 
         // Traitement du formulaire seulement si toutes les données son saisie
         if(isset($_POST['mdp']) && isset($_POST['verifMdp'])){
@@ -27,11 +27,11 @@ require_once __DIR__ . "/../../01_premiere_connexion.php";
                 $mdp = password_hash(htmlentities($_POST['mdp']), PASSWORD_DEFAULT);
                 // Enregistrer le nouveau mdp dans la BDD
                 $nouvMdp = $dbh->prepare("UPDATE sae3_skadjam._compte
-                                                    SET motDePasse = :mdp
-                                                    WHERE id_compte = :id");
+                                                    SET mot_de_passe = :mdp
+                                                    WHERE adresse_mail = :mail");
                 $nouvMdp->execute([
-                    ':mdp' => $mdp,
-                    ':id'  => $id
+                    ':mdp'  => $mdp,
+                    ':mail' => $mail
                 ]);
                 // Redirection vers la page de connexion
                 header("Location: connexion.php");

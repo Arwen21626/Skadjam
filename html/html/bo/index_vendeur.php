@@ -1,10 +1,8 @@
 <?php 
     session_start();
-    //à retirer
-    $_SESSION['idCompte'] = 1;
 
     include __DIR__ .'/../../01_premiere_connexion.php';
-    require_once("./../../php/fonctions.php");
+    require_once(__DIR__ . "/../../php/fonctions.php");
     const PAGE_SIZE = 15;
     $idCompte = $_SESSION['idCompte'];
 ?>
@@ -33,13 +31,13 @@
 
     <main>
         <div class="grid grid-cols-2 gap-4 justify-items-center">
-            <a href="" title="lien vers page promotion">
+            <a href="#vosProduits" title="lien vers page promotion">
                 <img src="../../images/images_accueil/promotion.webp" alt="promotion" class="w-150 h-auto justify-self-end">
             </a>
-            <a href="" title="lien vers page derniers ajouts">
+            <a href="#vosProduits" title="lien vers page derniers ajouts">
                 <img src="../../images/images_accueil/derniers_ajouts.webp" alt="derniers ajouts" class="w-150 h-auto justify-self-start">
             </a>           
-            <a href="" title="lien vers page stock">
+            <a href="#vosProduits" title="lien vers page stock">
                 <img src="../../images/images_accueil/stock.webp" alt="stock" class="w-150 h-auto justify-self-end">
             </a>
             <a href="" title="lien vers page commandes">
@@ -50,8 +48,6 @@
 
         <div class="mt-15 flex flex-row justify-around">
             <button class="border-2 border-vertFonce rounded-2xl w-auto h-14 px-7"><a href="../bo/creation_produit.php">Ajouter un produit</a></button>
-            <button class="border-2 border-vertFonce rounded-2xl w-auto h-14 px-7"><a href="">Statistiques</a></button>
-            <button class="border-2 border-vertFonce rounded-2xl w-auto h-14 px-7"><a href="">Avis récents</a></button>
             <button class="border-2 border-vertFonce rounded-2xl w-auto h-14 px-7"><a href="../bo/vider_catalogue.php">Vider le catalogue</a></button>
         </div>
 
@@ -111,13 +107,15 @@
                             <p class="col-span-2"><?php echo htmlentities($valeurs['libelle_produit']);?></p> 
 
                             <!--affichage du prix du produit-->   
-                            <p class="col-span-1 col-start-1"><?php echo htmlentities($valeurs['prix_ttc']);?> €</p>
+                            <div class="flex justify-start items-center col-span-2">
+                                <p><?php echo htmlentities($valeurs['prix_ttc']);?> €</p>
 
-                            <!--récupération de la note-->
-                            <div class=" flex col-span-1 col-start-2">
-                                <?php $note = $valeurs['note_moyenne'];
-                                    affichageNote($note); ?>
-                            </div>    
+                                <!--récupération de la note-->
+                                <div class="ml-2 md:ml-10 flex">
+                                    <?php $note = $valeurs['note_moyenne'];
+                                        affichageNote($note); ?>
+                                </div> 
+                            </div>   
                              
                             <!--affichage du stock-->
                             <p class="col-span-2">En stock : <?php echo htmlentities($valeurs['quantite_stock']);?></p>       

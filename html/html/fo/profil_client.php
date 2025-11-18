@@ -1,19 +1,19 @@
 <?php
-    session_start();
-    // à retirer
-    $_SESSION["idCompte"] = 1;
-    require_once __DIR__ . "/../../01_premiere_connexion.php";
+session_start();
+require_once __DIR__ . "/../../01_premiere_connexion.php";
 
-    // Vérifie si le bouton 'Se déconnecter à été appuyé'
-    if (isset($_POST['logout'])) {
-        // Supprime toutes les variables de session
-        session_unset();
-        // Détruit la session
-        session_destroy();
-        // Redirection vers la page principale
-        header("Location: index.php");
-        exit();
-    }
+// Vérifie si le bouton 'Se déconnecter à été appuyé'
+if (isset($_POST['logout'])) {
+    // Supprime toutes les variables de session
+    session_unset();
+
+    // Détruit la session
+    session_destroy();
+
+    // Redirection vers la page principale
+    header("Location: index.php");
+    exit();
+}
 ?>
 <!DOCTYPE html>
 <html lang="fr">
@@ -73,38 +73,46 @@
             }catch(PDOException $e){
                 echo "Erreur : " . $e->getMessage();
             }
+            ?>
+            <h2 class="flex justify-center text-center">Mon profil</h2>
+            <section>
+                <!-- Affichage des informations du client (sauf son mot de passe) -->
+                <div class="flex flex-row">
+                    <h2 class="mt-1 mb-1 mr-4 ml-0"><?php echo $pseudo; ?></h2>
+                    <h3 class="mt-1 mb-1 mr-4 ml-0 relative top-4 text-vertFonce -z-1"><?php echo $prenom; ?> <?php echo $nom; ?></h3>
+                </div>
+                <div>
+                    <p class="m-4"><?php echo $naissance; ?></p>
+                    <?php for ($i=0; $i < $nbAdresse; $i++) { // Affiche toutes les adresses du client ?>
+                        <p class="mt-2 mb-2 mr-4 ml-4"><?php echo "$numRue[$i] $adressePostale[$i]$batiment[$i]$appartement[$i], $codePostal[$i] $ville[$i]"; ?></p>
+                    <?php } ?>
+                    <p class="m-4"><?php echo $telephone; ?></p>
+                    <p class="m-4"><?php echo $mail; ?></p>
+                </div>
+            </section>
+            <article class="flex flex-row justify-around mb-5">
+                <!-- Modifier les informations du client (sauf le mot de passe) -->
+                <form action="modifier_compte_client.php" method="post">
+                    <input class="border-2 border-vertClair rounded-xl p-2" type="submit" value="Modifier mes informations">
+                </form>
+
+                <!-- Modifier le mot de passe du client -->
+                <form action="nouveau_mdp.php">
+                    <input class="border-2 border-vertClair rounded-xl p-2" type="submit" value="Modifier mon mot de passe">    
+                </form>
+
+                <!-- Déconnexion -->
+                <form action="profil_client.php" method="post">
+                    <input type="hidden" id="logout" name="logout" value="true">
+                    <input class="border-2 border-vertClair rounded-xl p-2" type="submit" value="Se déconnecter">
+                </form>
+            </article>
+        <?php
+        }else{
+            // Si non connecté, l'emmener à la page de connexion à la place
+            header("Location: connexion.php");
+        }
         ?>
-        <h2 class="flex justify-center text-center">Mon profil</h2>
-        <section>
-            <div class="flex flex-row">
-                <h2 class="mt-1 mb-1 mr-4 ml-0"><?php echo $pseudo; ?></h2>
-                <h3 class="mt-1 mb-1 mr-4 ml-0 relative top-4 text-vertFonce -z-1"><?php echo $prenom; ?> <?php echo $nom; ?></h3>
-            </div>
-            <div>
-                <p class="m-4"><?php echo $naissance; ?></p>
-                <?php for ($i=0; $i < $nbAdresse; $i++) { // Affiche toutes les adresses du client ?>
-                <p class="mt-2 mb-2 mr-4 ml-4"><?php echo "$numRue[$i] $adressePostale[$i]$batiment[$i]$appartement[$i], $codePostal[$i] $ville[$i]"; ?></p>
-                <?php } ?>
-                <p class="m-4"><?php echo $telephone; ?></p>
-                <p class="m-4"><?php echo $mail; ?></p>
-            </div>
-        </section>
-        <article class="flex flex-row justify-around mb-5">
-            <form action="modifier_compte_client.php" method="post">
-                <input class="border-2 border-vertClair rounded-xl p-2" type="submit" value="Modifier mes informations">
-            </form>
-            <form action="nouveau_mdp.php" method="post">
-                <input type="hidden" id="id" name="id" value="<?php echo $id; ?>">
-                <input class="border-2 border-vertClair rounded-xl p-2" type="submit" value="Modifier mon mot de passe">    
-            </form>
-            <form action="page_client.php" method="post">
-                <input type="hidden" id="logout" name="logout" value="true">
-                <input class="border-2 border-vertClair rounded-xl p-2" type="submit" value="Se déconnecter">
-            </form>
-        </article>
-        <?php }else{
-            header("Location: connexion.php"); // Si non connecté, l'emmener à la page de connexion à la place
-        } ?>
     </main>
     <?php require __DIR__ . "/../../php/structure/footer_front.php"; ?>
 </body>

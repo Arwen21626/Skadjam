@@ -19,7 +19,7 @@ if(isset($_POST['mdp']) && isset($_POST['mail'])){
 
     if ($passCorrect){
         // Initialisation de la session après confirmation du mot de passe
-        $_SESSION['id_compte'] = $tab['id_compte'];
+        $_SESSION['idCompte'] = $tab['id_compte'];
 
         // Récupération des données de la bdd pour voir si c'est un vendeur ou un client
         $stmt = $dbh->prepare("SELECT id_compte FROM sae3_skadjam._vendeur WHERE id_compte = ?");
@@ -27,10 +27,12 @@ if(isset($_POST['mdp']) && isset($_POST['mail'])){
         $estVendeur = $stmt->fetch(PDO::FETCH_ASSOC);
 
         if($estVendeur['id_compte']){ 
-            // Vendeur
+            // Index vendeur + role vendeur
+            $_SESSION['role'] = 'vendeur';
             header('Location: ../bo/index_vendeur.php');
         }else{ 
-            // Client
+            // Index client + role client
+            $_SESSION['role'] = 'client';
             header('Location: ../fo/index.php');
         }
         
@@ -59,12 +61,12 @@ if(isset($_POST['mdp']) && isset($_POST['mail'])){
 
                 <div class="flex w-fit flex-col items-start">
                     <label for="mail">Adresse mail :</label>
-                    <input class="ml-5 border-5 border-solid rounded-2xl border-vertClair pl-3 mb-5 w-150 h-15" type="text" name="mail" id="mail" required>
+                    <input class="ml-5 border-5 border-solid rounded-2xl border-vertClair pl-3 mb-5 w-150 h-15" type="text" name="mail" id="mail" value="<?= isset($_POST['mail'])? $_POST['mail'] : "" ?>" required>
                 </div>
 
                 <div class="flex w-fit flex-col mt-6 items-start">
                     <label for="mdp">Mot de passe :</label>
-                    <input class="ml-5 border-5 border-solid rounded-2xl border-vertClair pl-3 w-150 h-15" type="password" name="mdp" id="mdp" required>
+                    <input class="ml-5 border-5 border-solid rounded-2xl border-vertClair pl-3 w-150 h-15" type="text" name="mdp" id="mdp"  value="<?= isset($_POST['mdp'])? $_POST['mdp'] : "" ?>" required>
                     <a href=""></a>
                     <br>
                     <!-- Renvoie sur la page de réinitialisation de mot de passe -->
@@ -82,7 +84,7 @@ if(isset($_POST['mdp']) && isset($_POST['mail'])){
                         <p class="text-rouge items-center"><?php echo 'adresse mail ou mot de passe invalide';?></p>
                     <?php }?>
                 </div>
-                
+                <button></button>
             </div>
         </form>
         <!-- Renvoie sur la page de création d'un compte client -->
@@ -95,6 +97,28 @@ if(isset($_POST['mdp']) && isset($_POST['mail'])){
             <p class=" mr-2">Pas encore vendeur ? </p>
             <a href="../bo/crea_compte_vendeur.php" class="underline! hover:text-rouge">Créer un compte vendeur</a>
         </div>
+
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                // Fonction pour ajouter l'icône et gérer le clic
+                function ajouterIconeOeil(inputId) {
+                    var passwordInput = document.getElementById(inputId);
+                    eyeIcon.addEventListener('click', function() {
+                        if (passwordInput.type === 'password') {
+                        passwordInput.type = 'text';
+                        eyeIcon.setAttribute('src', '<?php echo __DIR__ . '/../../../images/logo/bootstrap_icon/oeil-cacher.png'?>'); // Change to the "eye-slash" icon
+                        } else {
+                        passwordInput.type = 'password';
+                        eyeIcon.setAttribute('src', '<?php echo __DIR__ . '/../../../images/logo/bootstrap_icon/oeil.png'?>'); // Revert back to the original "eye" icon
+                        }
+                    });
+                }
+                // Appliquer la fonction aux champs de mot de passe et de confirmation
+                ajouterIconeOeil('password');
+                ajouterIconeOeil('password_copy');
+            });
+        </script>
+
     </main>
     <?php require_once __DIR__ . "/../../php/structure/footer_front.php"; ?>
 </body>
