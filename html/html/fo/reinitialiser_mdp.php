@@ -80,7 +80,10 @@ $mailer = new PHPMailer(true);
 
                                     // Envoi
                                     $mailer->send();
+
+                                    // Permet de savoir quel compte doit changer de mot de passe
                                     $_SESSION["adresse_mail"] = $_POST["mail"];
+                                    
                                     echo "Vérifiez votre boîte de réception ainsi que vos spams.";
                                 }catch(Exception $e){
                                     echo "Erreur : le mail n'a pas été envoyé.";

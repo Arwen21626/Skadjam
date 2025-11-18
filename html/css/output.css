@@ -475,6 +475,9 @@ p, a {
   .w-1\/1 {
     width: calc(1/1 * 100%);
   }
+  .w-1\/3 {
+    width: calc(1/3 * 100%);
+  }
   .w-2\/3 {
     width: calc(2/3 * 100%);
   }
@@ -537,9 +540,6 @@ p, a {
   }
   .max-w-3\/4 {
     max-width: calc(3/4 * 100%);
-  }
-  .min-w-1\/3 {
-    min-width: calc(1/3 * 100%);
   }
   .min-w-3xs {
     min-width: var(--container-3xs, 16rem);
@@ -828,6 +828,20 @@ p, a {
   .\[hostname\:port\] {
     hostname: port;
   }
+  .group-hover\/annuler\:block {
+    &:is(:where(.group\/annuler):hover *) {
+      @media (hover: hover) {
+        display: block;
+      }
+    }
+  }
+  .group-hover\/annuler\:hidden {
+    &:is(:where(.group\/annuler):hover *) {
+      @media (hover: hover) {
+        display: none;
+      }
+    }
+  }
   .group-hover\/pen\:block {
     &:is(:where(.group\/pen):hover *) {
       @media (hover: hover) {
@@ -837,6 +851,20 @@ p, a {
   }
   .group-hover\/pen\:hidden {
     &:is(:where(.group\/pen):hover *) {
+      @media (hover: hover) {
+        display: none;
+      }
+    }
+  }
+  .group-hover\/valider\:block {
+    &:is(:where(.group\/valider):hover *) {
+      @media (hover: hover) {
+        display: block;
+      }
+    }
+  }
+  .group-hover\/valider\:hidden {
+    &:is(:where(.group\/valider):hover *) {
       @media (hover: hover) {
         display: none;
       }
