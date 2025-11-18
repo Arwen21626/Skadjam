@@ -33,13 +33,13 @@
 
     <main>
         <div class="grid grid-cols-2 gap-4 justify-items-center">
-            <a href="" title="lien vers page promotion">
+            <a href="#vosProduits" title="lien vers page promotion">
                 <img src="../../images/images_accueil/promotion.webp" alt="promotion" class="w-150 h-auto justify-self-end">
             </a>
-            <a href="" title="lien vers page derniers ajouts">
+            <a href="#vosProduits" title="lien vers page derniers ajouts">
                 <img src="../../images/images_accueil/derniers_ajouts.webp" alt="derniers ajouts" class="w-150 h-auto justify-self-start">
             </a>           
-            <a href="" title="lien vers page stock">
+            <a href="#vosProduits" title="lien vers page stock">
                 <img src="../../images/images_accueil/stock.webp" alt="stock" class="w-150 h-auto justify-self-end">
             </a>
             <a href="" title="lien vers page commandes">
@@ -50,8 +50,6 @@
 
         <div class="mt-15 flex flex-row justify-around">
             <button class="border-2 border-vertFonce rounded-2xl w-auto h-14 px-7"><a href="../bo/creation_produit.php">Ajouter un produit</a></button>
-            <button class="border-2 border-vertFonce rounded-2xl w-auto h-14 px-7"><a href="">Statistiques</a></button>
-            <button class="border-2 border-vertFonce rounded-2xl w-auto h-14 px-7"><a href="">Avis récents</a></button>
             <button class="border-2 border-vertFonce rounded-2xl w-auto h-14 px-7"><a href="../bo/vider_catalogue.php">Vider le catalogue</a></button>
         </div>
 
