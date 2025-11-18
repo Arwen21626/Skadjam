@@ -22,14 +22,20 @@ if($_SESSION['role'] != 'client'){
 <body>
 
     <?php
-    if(isset($_POST['numero'])){
-        
-        echo '<pre>';
-        print_r($_SESSION);
-        print_r($_POST);
-        echo '<pre>';
+    // if(isset($_POST['numero'])){
+    //     // Initialisation des variables
+        $erreurNumero = true;
+        $erreurExpiration = true;
+        $erreurCryptogramme = true;
+        $erreurNom = true;
+
+
+    //     echo '<pre>';
+    //     print_r($_SESSION);
+    //     print_r($_POST);
+    //     echo '<pre>';
     
-    }  
+    // }
     ?>
 
 
@@ -37,29 +43,45 @@ if($_SESSION['role'] != 'client'){
     <?php include(__DIR__ . '/../../php/structure/head_front.php');?>
     <?php include(__DIR__ . '/../../php/structure/navbar_front.php');?>
     <main>
-        <form class="w-4/5 self-center" action="paiement.php" method="post">
+        <form class="w-1/5 justify-self-center" action="paiement.php" method="post">
 
                 <div class="flex flex-col">
                     <label for="numero">Numéro de carte* :</label>
-                    <input placeholder="0000 1111 2222 3333" class="border-4 border-vertClair rounded-2xl placeholder-gray-500" type="text" name="numero" id="numero" required>
+                    <input placeholder="0000 1111 2222 3333" class="border-4 border-vertClair rounded-2xl placeholder-gray-500 w-100" type="text" name="numero" id="numero" required>
+                    <?php
+                        if($erreurNumero){ ?>
+                            <p class="text-rouge"><?php echo "Le numéro n'est pas bon";?></p>
+                    <?php } ?>
                 </div>
                 
                 <div class="flex flex-row">
                     <div class="flex flex-col">
                         <label for="expiration">Date d'expiration* :</label>
                         <input placeholder="MM/AA" class="border-4 border-vertClair rounded-2xl placeholder-gray-500" type="month" name="expiration" id="expiration" required>
+                        
+                        <?php if($erreurExpiration){ ?>
+                            <p class="text-rouge"><?php echo "La date n'est pas bonne";?></p>
+                        <?php } ?>
                     </div>
                     
 
-                    <div class="flex flex-col">
+                    <div class="flex flex-col ml-7">
                         <label for="cryptogramme">Cryptogramme* :</label>
                         <input placeholder="000" class="border-4 border-vertClair rounded-2xl placeholder-gray-500" type="text" name="cryptogramme" id="cryptogramme" required>
+                        
+                        <?php if($erreurCryptogramme){ ?>
+                            <p class="text-rouge"><?php echo "Le cryptogramme n'est pas bon";?></p>
+                        <?php } ?>
                     </div>
                 </div>
 
                 <div class="flex flex-col">
                     <label for="nom">Nom du titulaire* :</label>
-                    <input placeholder="M Alizon" class="border-4 border-vertClair rounded-2xl placeholder-gray-500" type="text" name="nom" id="nom" required>
+                    <input placeholder="M Alizon" class="border-4 border-vertClair rounded-2xl placeholder-gray-500 w-100" type="text" name="nom" id="nom" required>
+                    
+                    <?php if($erreurNom){ ?>
+                            <p class="text-rouge"><?php echo "Le nom n'est pas bon";?></p>
+                    <?php } ?>
                 </div>
 
             <label for="enregistrerCarte">Enregistrer cette carte pour les prochains paiements?</label>

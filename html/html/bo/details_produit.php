@@ -17,6 +17,11 @@
                         , PDO::FETCH_ASSOC) as $row){
         $produit = $row;
     }
+
+    function supprimer($id){
+        $supp = $dbh->query("DELETE FROM sae3_skadjam._produit WHERE id_produit = $id");
+        $supp -> execute();
+    }
 ?>
 
 <!DOCTYPE html>
@@ -36,7 +41,7 @@
 
     <main class="p-10">
         <!--affichage du libelle-->
-        <h2><?php echo($produit['libelle_produit']); ?></h2>
+        <h2><?php echo($produit['id_produit'].' - '.$produit['libelle_produit']); ?></h2>
         <!--récupération de la note-->
         <?php 
             $note = $produit['note_moyenne'];
@@ -74,20 +79,31 @@
         <h3>Avis</h3>
         <section class=" ml-32">
             <?php 
-            foreach($dbh->query("SELECT * FROM sae3_skadjam._avis a 
+                $avis = [];
+                foreach($dbh->query("SELECT * FROM sae3_skadjam._avis a 
                                     INNER JOIN sae3_skadjam._client c 
                                         ON a.id_compte = c.id_compte 
-                                    WHERE id_produit = $idProd") as $row){?>
-            <section class=" bg-bleu m-4 p-4 w-2/3">
-                <div class="flex flex-nowrap justify-start items-center w-auto">
-                    <h4 class="mr-4">
-                        <?php echo $row['pseudo'];?>
-                    </h4>
-                    <?php echo affichageNote($row['nb_etoile']);?>
-                </div>
-                <p><?php echo $row['contenu_commentaire'];?></p>     
-            </section>          
-            <?php }?>
+                                    WHERE id_produit = $idProd", PDO::FETCH_ASSOC) as $row){
+                    $avis[] = $row;
+                }
+                
+                if($avis == null){?>
+                    <p>Aucun commentaire associé à ce produit.</p>
+                <?php }
+                else{
+                    foreach($avis as $row){?>
+                    
+                    <section class=" bg-bleu rounded-2xl m-4 p-4 md:w-2/3">
+                        <div class="flex flex-nowrap justify-start items-center w-auto">
+                            <h4 class="mr-4">
+                                <?php echo $row['pseudo'];?>
+                            </h4>
+                            <?php echo affichageNote($row['nb_etoile']);?>
+                        </div>
+                        <p><?php echo $row['contenu_commentaire'];?></p>     
+                    </section>
+                <?php }
+                }?>
         </section>
     </main>
     <?php include(__DIR__ . '/../../php/structure/footer_back.php');?>
