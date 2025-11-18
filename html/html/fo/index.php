@@ -1,7 +1,7 @@
 <?php
-include(__DIR__ . '/../../01_premiere_connexion.php');
-const PAGE_SIZE = 15;
-require_once(__DIR__ . "/../../php/fonctions.php");
+    include(__DIR__ . '/../../01_premiere_connexion.php');
+    const PAGE_SIZE = 15;
+    require_once(__DIR__ . "/../../php/fonctions.php");
 ?>
 
 <!DOCTYPE html>
@@ -35,7 +35,7 @@ require_once(__DIR__ . "/../../php/fonctions.php");
             <a href="#nosProduits" title="lien vers page les plus vendus">
                 <img src="../../images/images_accueil/les_plus_vendus.webp" alt="les plus vendus" class="w-90 md:w-150 h-auto justify-self-end">
             </a>
-            <a href="" title="lien vers page commandes">
+            <a href="../fo/commandes.php" title="lien vers page commandes">
                 <img src="../../images/images_accueil/commandes.webp" alt="commandes" class="w-90 md:w-150 h-auto justify-self-start">
             </a>        
         </div>

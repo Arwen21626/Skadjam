@@ -98,7 +98,7 @@ if (isset($_POST['categorie']) && isset($_POST['nom']) && isset($_POST['prix']) 
                 INSERT INTO sae3_skadjam._produit 
                 (libelle_produit, description_produit, prix_ht, prix_ttc, est_masque, quantite_stock, quantite_unite, unite, id_categorie, id_vendeur, id_tva)
                 VALUES 
-                ('$nom','$description', $prixHT, $prixTTC, $enLigne, $qteStock, $qteUnite, '$unite', $idCategorie, 1, $tva)
+                ('$nom','$description', $prixHT, $prixTTC, $enLigne, $qteStock, $qteUnite, '$unite', $idCategorie, $idVendeur, $tva)
                 RETURNING id_produit)
                 SELECT * FROM id;
                 ");

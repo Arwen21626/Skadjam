@@ -1,6 +1,6 @@
 <?php
 include __DIR__ .'/../01_premiere_connexion.php';
-$idProduit = 1;
+$idProduit = $_GET['idProduit'];
 
 try{
     //Garder l'id de la photo

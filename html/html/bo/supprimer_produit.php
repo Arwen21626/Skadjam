@@ -3,7 +3,7 @@ session_start();
 
 include __DIR__ .'/../../01_premiere_connexion.php';
 
-$idPorduit = 1; //a changer
+$idProduit = $_GET['idProduit'];
 $idCompte = $_SESSION['idCompte'];
 ?>
 <!DOCTYPE html>
@@ -33,7 +33,7 @@ $idCompte = $_SESSION['idCompte'];
 
         <script>
             document.getElementById('suppProduit').addEventListener('click', () => {
-                fetch('../../php/executer_supprimer_produit.php')
+                fetch('../../php/executer_supprimer_produit.php?idProduit=<?php echo $idProduit?>')
                 .then(res => res.text())
                 .then(data => {
                     window.location.href = "index_vendeur.php";

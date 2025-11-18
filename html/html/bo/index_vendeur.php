@@ -40,7 +40,7 @@
             <a href="#vosProduits" title="lien vers page stock">
                 <img src="../../images/images_accueil/stock.webp" alt="stock" class="w-150 h-auto justify-self-end">
             </a>
-            <a href="" title="lien vers page commandes">
+            <a href="../bo/commandes.php" title="lien vers page commandes">
                 <img src="../../images/images_accueil/commandes.webp" alt="commandes" class="w-150 h-auto justify-self-start">
             </a>        
         </div>
