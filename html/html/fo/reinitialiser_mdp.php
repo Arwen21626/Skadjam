@@ -1,4 +1,5 @@
 <?php
+session_start();
 require_once __DIR__ . "/../../01_premiere_connexion.php";
 require __DIR__ . '/../../php/PHPMailer/src/PHPMailer.php';
 require __DIR__ . '/../../php/PHPMailer/src/SMTP.php';
@@ -27,7 +28,7 @@ $mailer = new PHPMailer(true);
             <p class="mt-10">Si un compte à cette adresse existe, vous recevrez un mail contenant un lien pour la réinitialisation.</p>
         </div>
         <div class="flex mt-10 justify-center md:justify-end w-1/1">
-            <input class="border-2 border-vertClair rounded-2xl w-40 h-14 p-0 m-0 md:mr-10" type="submit" value="Recevoir un mail">
+            <input class="border-2 border-vertClair rounded-2xl w-60 h-14 p-0 m-0 md:mr-10" type="submit" value="Recevoir un mail">
         </div>
             <?php }else{ ?>
             <p class="mt-10">
@@ -70,6 +71,7 @@ $mailer = new PHPMailer(true);
 
                                 // Envoi
                                 $mailer->send();
+                                $_SESSION["adresse_mail"] = $_POST["mail"];
                                 echo "Vérifiez votre boîte de réception ainsi que vos spams.";
                             } catch (Exception $e) {
                                 echo "Erreur : le mail n'a pas été envoyé.";

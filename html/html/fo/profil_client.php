@@ -1,17 +1,19 @@
 <?php
-    session_start();
-    require_once __DIR__ . "/../../01_premiere_connexion.php";
+session_start();
+require_once __DIR__ . "/../../01_premiere_connexion.php";
 
-    // Vérifie si le bouton 'Se déconnecter à été appuyé'
-    if (isset($_POST['logout'])) {
-        // Supprime toutes les variables de session
-        session_unset();
-        // Détruit la session
-        session_destroy();
-        // Redirection vers la page principale
-        header("Location: index.php");
-        exit();
-    }
+// Vérifie si le bouton 'Se déconnecter à été appuyé'
+if (isset($_POST['logout'])) {
+    // Supprime toutes les variables de session
+    session_unset();
+
+    // Détruit la session
+    session_destroy();
+
+    // Redirection vers la page principale
+    header("Location: index.php");
+    exit();
+}
 ?>
 <!DOCTYPE html>
 <html lang="fr">
@@ -74,6 +76,7 @@
         ?>
         <h2 class="flex justify-center text-center">Mon profil</h2>
         <section>
+            <!-- Affichage des informations du client (sauf son mot de passe) -->
             <div class="flex flex-row">
                 <h2 class="mt-1 mb-1 mr-4 ml-0"><?php echo $pseudo; ?></h2>
                 <h3 class="mt-1 mb-1 mr-4 ml-0 relative top-4 text-vertFonce -z-1"><?php echo $prenom; ?> <?php echo $nom; ?></h3>
@@ -88,20 +91,25 @@
             </div>
         </section>
         <article class="flex flex-row justify-around mb-5">
+            <!-- Modifier les informations du client (sauf le mot de passe) -->
             <form action="modifier_compte_client.php" method="post">
                 <input class="border-2 border-vertClair rounded-xl p-2" type="submit" value="Modifier mes informations">
             </form>
-            <form action="nouveau_mdp.php" method="post">
-                <input type="hidden" id="id" name="id" value="<?php echo $id; ?>">
+
+            <!-- Modifier le mot de passe du client -->
+            <form action="nouveau_mdp.php">
                 <input class="border-2 border-vertClair rounded-xl p-2" type="submit" value="Modifier mon mot de passe">    
             </form>
-            <form action="page_client.php" method="post">
+
+            <!-- Déconnexion -->
+            <form action="profil_client.php" method="post">
                 <input type="hidden" id="logout" name="logout" value="true">
                 <input class="border-2 border-vertClair rounded-xl p-2" type="submit" value="Se déconnecter">
             </form>
         </article>
         <?php }else{
-            header("Location: connexion.php"); // Si non connecté, l'emmener à la page de connexion à la place
+            // Si non connecté, l'emmener à la page de connexion à la place
+            header("Location: connexion.php");
         } ?>
     </main>
     <?php require __DIR__ . "/../../php/structure/footer_front.php"; ?>
