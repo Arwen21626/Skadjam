@@ -89,13 +89,15 @@ require_once(__DIR__ . "/../../php/fonctions.php");
                             <p class="col-span-2"><?php echo htmlentities($valeurs['libelle_produit']);?></p> 
 
                             <!--affichage du prix du produit-->   
-                            <p class="col-span-1 col-start-1"><?php echo htmlentities($valeurs['prix_ttc']);?> €</p>
+                            <div class="flex justify-start items-center col-span-2">
+                                <p><?php echo htmlentities($valeurs['prix_ttc']);?> €</p>
 
-                            <!--récupération de la note-->
-                            <div class=" flex col-span-1 col-start-2">
-                                <?php $note = $valeurs['note_moyenne'];
-                                    affichageNote($note); ?>
-                            </div> 
+                                <!--récupération de la note-->
+                                <div class="ml-2 md:ml-10 flex">
+                                    <?php $note = $valeurs['note_moyenne'];
+                                        affichageNote($note); ?>
+                                </div> 
+                            </div>
                         </section>
                     <?php } ?>
                 </div>
