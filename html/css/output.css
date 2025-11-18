@@ -842,27 +842,6 @@ p, a {
       }
     }
   }
-  .group-hover\/check\:block {
-    &:is(:where(.group\/check):hover *) {
-      @media (hover: hover) {
-        display: block;
-      }
-    }
-  }
-  .group-hover\/check\:hidden {
-    &:is(:where(.group\/check):hover *) {
-      @media (hover: hover) {
-        display: none;
-      }
-    }
-  }
-  .group-hover\/cross\:hidden {
-    &:is(:where(.group\/cross):hover *) {
-      @media (hover: hover) {
-        display: none;
-      }
-    }
-  }
   .group-hover\/pen\:block {
     &:is(:where(.group\/pen):hover *) {
       @media (hover: hover) {

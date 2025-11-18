@@ -29,6 +29,7 @@ try {
     $prenom = $compte["prenom_compte"];
     $mail = $compte["adresse_mail"];
     $tel = $compte["numero_telephone"];
+    $tel = "0" . substr($tel, 3);
     
     //information vendeur
     $stmt = $dbh->prepare("SELECT raison_sociale, siren, description_vendeur FROM sae3_skadjam._vendeur where id_compte = ?");
@@ -94,65 +95,28 @@ try {
                     <div class=" mb-3 modif-attribut">
                         <div class=" flex flex-row items-center">
                             <p class="underline">Entreprise :</p>
-                            <button type="button" class="bouton-modifier group/pen cursor-pointer">
-                                <img src="../../images/logo/bootstrap_icon/pencil.svg" alt="modifier" title="modifier" class=" w-6! h-6! ml-4 block group-hover/pen:hidden">
-                                <img src="../../images/logo/bootstrap_icon/pencil-fill.svg" alt="modifier" title="modifier" class=" w-6! h-6! ml-4 hidden group-hover/pen:block">
-                            </button>
-                            <div class=" flex flex-row ">
-                                <button type="button" class="bouton-valider group/valider cursor-pointer hidden">
-                                    <img src="../../images/logo/bootstrap_icon/check-square.svg" alt="valider" title="valider" class=" w-6! h-6! ml-4 block group-hover/valider:hidden">
-                                    <img src="../../images/logo/bootstrap_icon/check-square-fill.svg" alt="valider" title="valider" class=" w-6! h-6! ml-4 hidden group-hover/valider:block">
-                                </button>
-                                <button type="button" class="bouton-annuler group/annuler cursor-pointer hidden">
-                                    <img src="../../images/logo/bootstrap_icon/x-square.svg" alt="annuler" title="annuler" class=" w-6! h-6! ml-4 block group-hover/annuler:hidden">
-                                    <img src="../../images/logo/bootstrap_icon/x-square-fill.svg" alt="annuler" title="annuler" class=" w-6! h-6! ml-4 hidden group-hover/annuler:block">
-                                </button>
-                            </div>
+                            <?php include __DIR__ . "/../../php/structure/bouton_modifier_vendeur.php"; ?>
                         </div>
-                        <p class="attribut-text ml-7 mt-2"><?= $denom ?></p>
-                        <input type="text" name="denom" class="champ-text w-full ml-5 hidden border-2 border-solid rounded-md border-beige pl-3" value="<?= $denom ?>">
+                        <p class="attribut-text ml-7 mt-2"><?= (isset($newDenom)&& $newDenom !=="")? $newDenom : $denom ?></p>
+                        <input type="text" name="denom" class="champ-text w-full ml-5 hidden border-2 border-solid rounded-md border-beige pl-3" value="">
                     </div>
 
                     <div class=" mb-3 modif-attribut">
                         <div class=" flex flex-row items-center">
                             <p class="underline">Adresse du siège social :</p>
-                            <button type="button" class="bouton-modifier group/pen cursor-pointer">
-                                <img src="../../images/logo/bootstrap_icon/pencil.svg" alt="modifier" title="modifier" class=" w-6! h-6! ml-4 block group-hover/pen:hidden">
-                                <img src="../../images/logo/bootstrap_icon/pencil-fill.svg" alt="modifier" title="modifier" class=" w-6! h-6! ml-4 hidden group-hover/pen:block">
-                            </button>
-                            <div class=" flex flex-row ">
-                                <button type="button" class="bouton-valider group/check cursor-pointer hidden">
-                                    <img src="../../images/logo/bootstrap_icon/check-square.svg" alt="valider" title="valider" class=" w-6! h-6! ml-4 block group-hover/check:hidden">
-                                    <img src="../../images/logo/bootstrap_icon/check-square-fill.svg" alt="valider" title="valider" class=" w-6! h-6! ml-4 hidden group-hover/check:block">
-                                </button>
-                                <button type="button" class="bouton-annuler group/cross cursor-pointer hidden">
-                                    <img src="../../images/logo/bootstrap_icon/x-square.svg" alt="annuler" title="annuler" class=" w-6! h-6! ml-4 group-hover/cross:hidden">
-                                </button>
-                            </div>
+                            <?php include __DIR__ . "/../../php/structure/bouton_modifier_vendeur.php"; ?>
                         </div>
                         <p class="attribut-text ml-7 mt-2"><?= "$num $numBis $adresse, $ville, $cp" ?></p>
-                        <input type="text" name="adresse" class="champ-text w-full ml-5 hidden border-2 border-solid rounded-md border-beige pl-3" value="<?= "$num $numBis $adresse, $ville, $cp" ?>">
+                        <input type="text" name="adresse" class="champ-text w-full ml-5 hidden border-2 border-solid rounded-md border-beige pl-3" value="">
                     </div>
 
                     <div class=" mb-3 modif-attribut">
                         <div class=" flex flex-row items-center">
                             <p class="underline">Numéro SIREN :</p>
-                            <button type="button" class="bouton-modifier group/pen cursor-pointer">
-                                <img src="../../images/logo/bootstrap_icon/pencil.svg" alt="modifier" title="modifier" class=" w-6! h-6! ml-4 block group-hover/pen:hidden">
-                                <img src="../../images/logo/bootstrap_icon/pencil-fill.svg" alt="modifier" title="modifier" class=" w-6! h-6! ml-4 hidden group-hover/pen:block">
-                            </button>
-                            <div class=" flex flex-row ">
-                                <button type="button" class="bouton-valider group/check cursor-pointer hidden">
-                                    <img src="../../images/logo/bootstrap_icon/check-square.svg" alt="valider" title="valider" class=" w-6! h-6! ml-4 block group-hover/check:hidden">
-                                    <img src="../../images/logo/bootstrap_icon/check-square-fill.svg" alt="valider" title="valider" class=" w-6! h-6! ml-4 hidden group-hover/check:block">
-                                </button>
-                                <button type="button" class="bouton-annuler group/cross cursor-pointer hidden">
-                                    <img src="../../images/logo/bootstrap_icon/x-square.svg" alt="annuler" title="annuler" class=" w-6! h-6! ml-4 group-hover/cross:hidden">
-                                </button>
-                            </div>
+                            <?php include __DIR__ . "/../../php/structure/bouton_modifier_vendeur.php"; ?>
                         </div>
-                        <p class="attribut-text ml-7 mt-2"><?= $siren ?></p>
-                        <input type="text" name="siren" class="champ-text w-full ml-5 hidden border-2 border-solid rounded-md border-beige pl-3" value="<?= $siren ?>">
+                        <p class="attribut-text ml-7 mt-2"><?= (isset($newSiren)&& $newSiren !=="")? $newSiren : $siren ?></p>
+                        <input type="text" name="siren" class="champ-text w-full ml-5 hidden border-2 border-solid rounded-md border-beige pl-3" value="">
                     </div>
 
                 </div>
@@ -163,43 +127,19 @@ try {
                     <div class="mb-3 modif-attribut">
                         <div class=" flex flex-row items-center">
                             <p class="underline">Nom :</p>
-                            <button type="button" class="bouton-modifier group/pen cursor-pointer">
-                                <img src="../../images/logo/bootstrap_icon/pencil.svg" alt="modifier" title="modifier" class=" w-6! h-6! ml-4 block group-hover/pen:hidden">
-                                <img src="../../images/logo/bootstrap_icon/pencil-fill.svg" alt="modifier" title="modifier" class=" w-6! h-6! ml-4 hidden group-hover/pen:block">
-                            </button>
-                            <div class=" flex flex-row ">
-                                <button type="button" class="bouton-valider group/check cursor-pointer hidden">
-                                    <img src="../../images/logo/bootstrap_icon/check-square.svg" alt="valider" title="valider" class=" w-6! h-6! ml-4 block group-hover/check:hidden">
-                                    <img src="../../images/logo/bootstrap_icon/check-square-fill.svg" alt="valider" title="valider" class=" w-6! h-6! ml-4 hidden group-hover/check:block">
-                                </button>
-                                <button type="button" class="bouton-annuler group/cross cursor-pointer hidden">
-                                    <img src="../../images/logo/bootstrap_icon/x-square.svg" alt="annuler" title="annuler" class=" w-6! h-6! ml-4 group-hover/cross:hidden">
-                                </button>
-                            </div>
+                            <?php include __DIR__ . "/../../php/structure/bouton_modifier_vendeur.php"; ?>
                         </div>
-                        <p class="attribut-text ml-7 mt-2"><?= $nom ?></p>
-                        <input type="text" name="nom" class="champ-text w-full ml-5 hidden border-2 border-solid rounded-md border-beige pl-3" value="<?= $nom ?>">
+                        <p class="attribut-text ml-7 mt-2"><?= (isset($newNom)&& $newNom !=="")? $newNom : $nom ?></p>
+                        <input type="text" name="nom" class="champ-text w-full ml-5 hidden border-2 border-solid rounded-md border-beige pl-3" value="">
                     </div>
 
                     <div class="mb-3 modif-attribut">
                         <div class=" flex flex-row items-center">
                             <p class="underline">Prénom :</p>
-                            <button type="button" class="bouton-modifier group/pen cursor-pointer">
-                                <img src="../../images/logo/bootstrap_icon/pencil.svg" alt="modifier" title="modifier" class=" w-6! h-6! ml-4 block group-hover/pen:hidden">
-                                <img src="../../images/logo/bootstrap_icon/pencil-fill.svg" alt="modifier" title="modifier" class=" w-6! h-6! ml-4 hidden group-hover/pen:block">
-                            </button>
-                            <div class=" flex flex-row ">
-                                <button type="button" class="bouton-valider group/check cursor-pointer hidden">
-                                    <img src="../../images/logo/bootstrap_icon/check-square.svg" alt="valider" title="valider" class=" w-6! h-6! ml-4 block group-hover/check:hidden">
-                                    <img src="../../images/logo/bootstrap_icon/check-square-fill.svg" alt="valider" title="valider" class=" w-6! h-6! ml-4 hidden group-hover/check:block">
-                                </button>
-                                <button type="button" class="bouton-annuler group/cross cursor-pointer hidden">
-                                    <img src="../../images/logo/bootstrap_icon/x-square.svg" alt="annuler" title="annuler" class=" w-6! h-6! ml-4 group-hover/cross:hidden">
-                                </button>
-                            </div>
+                            <?php include __DIR__ . "/../../php/structure/bouton_modifier_vendeur.php"; ?>
                         </div>
-                        <p class="attribut-text ml-7 mt-2"><?= $prenom ?></p>
-                        <input type="text" name="prenom" class="champ-text w-full ml-5 hidden border-2 border-solid rounded-md border-beige pl-3" value="<?= $prenom ?>">
+                        <p class="attribut-text ml-7 mt-2"><?= (isset($newPrenom)&& $newPrenom !=="")? $newPrenom : $prenom ?></p>
+                        <input type="text" name="prenom" class="champ-text w-full ml-5 hidden border-2 border-solid rounded-md border-beige pl-3" value="">
                     </div>
 
                 </div>
@@ -208,43 +148,19 @@ try {
                     <div class="mb-3 modif-attribut">
                         <div class=" flex flex-row items-center">
                             <p class="underline">Numéro de téléphone :</p>
-                            <button type="button" class="bouton-modifier group/pen cursor-pointer">
-                                <img src="../../images/logo/bootstrap_icon/pencil.svg" alt="modifier" title="modifier" class=" w-6! h-6! ml-4 block group-hover/pen:hidden">
-                                <img src="../../images/logo/bootstrap_icon/pencil-fill.svg" alt="modifier" title="modifier" class=" w-6! h-6! ml-4 hidden group-hover/pen:block">
-                            </button>
-                            <div class=" flex flex-row ">
-                                <button type="button" class="bouton-valider group/check cursor-pointer hidden">
-                                    <img src="../../images/logo/bootstrap_icon/check-square.svg" alt="valider" title="valider" class=" w-6! h-6! ml-4 block group-hover/check:hidden">
-                                    <img src="../../images/logo/bootstrap_icon/check-square-fill.svg" alt="valider" title="valider" class=" w-6! h-6! ml-4 hidden group-hover/check:block">
-                                </button>
-                                <button type="button" class="bouton-annuler group/cross cursor-pointer hidden">
-                                    <img src="../../images/logo/bootstrap_icon/x-square.svg" alt="annuler" title="annuler" class=" w-6! h-6! ml-4 group-hover/cross:hidden">
-                                </button>
-                            </div>
+                            <?php include __DIR__ . "/../../php/structure/bouton_modifier_vendeur.php"; ?>
                         </div>
-                        <p class="attribut-text ml-7 mt-2"><?= $tel ?></p>
-                        <input type="text" name="tel" class="champ-text w-full ml-5 hidden border-2 border-solid rounded-md border-beige pl-3" value="<?= $tel ?>">
+                        <p class="attribut-text ml-7 mt-2"><?= (isset($newTel)&& $newTel !=="")? $newTel : $tel ?></p>
+                        <input type="text" name="tel" class="champ-text w-full ml-5 hidden border-2 border-solid rounded-md border-beige pl-3" value="">
                     </div>
 
                     <div class="mb-3 modif-attribut">
                         <div class=" flex flex-row items-center">
                             <p class="underline">E-Mail :</p>
-                            <button type="button" class="bouton-modifier group/pen cursor-pointer">
-                                <img src="../../images/logo/bootstrap_icon/pencil.svg" alt="modifier" title="modifier" class=" w-6! h-6! ml-4 block group-hover/pen:hidden">
-                                <img src="../../images/logo/bootstrap_icon/pencil-fill.svg" alt="modifier" title="modifier" class=" w-6! h-6! ml-4 hidden group-hover/pen:block">
-                            </button>
-                            <div class=" flex flex-row ">
-                                <button type="button" class="bouton-valider group/check cursor-pointer hidden">
-                                    <img src="../../images/logo/bootstrap_icon/check-square.svg" alt="valider" title="valider" class=" w-6! h-6! ml-4 block group-hover/check:hidden">
-                                    <img src="../../images/logo/bootstrap_icon/check-square-fill.svg" alt="valider" title="valider" class=" w-6! h-6! ml-4 hidden group-hover/check:block">
-                                </button>
-                                <button type="button" class="bouton-annuler group/cross cursor-pointer hidden">
-                                    <img src="../../images/logo/bootstrap_icon/x-square.svg" alt="annuler" title="annuler" class=" w-6! h-6! ml-4 group-hover/cross:hidden">
-                                </button>
-                            </div>
+                            <?php include __DIR__ . "/../../php/structure/bouton_modifier_vendeur.php"; ?>
                         </div>
-                        <p class="attribut-text ml-7 mt-2"><?= $mail ?></p>
-                        <input type="text" name="mail" class="champ-text w-full ml-5 hidden border-2 border-solid rounded-md border-beige pl-3" value="<?= $mail ?>">
+                        <p class="attribut-text ml-7 mt-2"><?= (isset($newMail)&& $newMail !=="")? $newMail : $mail ?></p>
+                        <input type="text" name="mail" class="champ-text w-full ml-5 hidden border-2 border-solid rounded-md border-beige pl-3" value="">
                     </div>
 
                 </div>
@@ -252,19 +168,7 @@ try {
             <div class=" mt-8 mb-20 modif-attribut">
                 <div class=" flex flex-row items-center">
                     <h3 class=" mb-2">Description :</h3>
-                    <button type="button" class="bouton-modifier group/pen cursor-pointer">
-                        <img src="../../images/logo/bootstrap_icon/pencil.svg" alt="modifier" title="modifier" class=" w-6! h-6! ml-4 block group-hover/pen:hidden">
-                        <img src="../../images/logo/bootstrap_icon/pencil-fill.svg" alt="modifier" title="modifier" class=" w-6! h-6! ml-4 hidden group-hover/pen:block">
-                    </button>
-                    <div class=" flex flex-row ">
-                        <button type="button" class="bouton-valider group/check cursor-pointer hidden">
-                                    <img src="../../images/logo/bootstrap_icon/check-square.svg" alt="valider" title="valider" class=" w-6! h-6! ml-4 block group-hover/check:hidden">
-                                    <img src="../../images/logo/bootstrap_icon/check-square-fill.svg" alt="valider" title="valider" class=" w-6! h-6! ml-4 hidden group-hover/check:block">
-                        </button>
-                        <button type="button" class="bouton-annuler group/cross cursor-pointer hidden">
-                                    <img src="../../images/logo/bootstrap_icon/x-square.svg" alt="annuler" title="annuler" class=" w-6! h-6! ml-4 group-hover/cross:hidden">
-                        </button>
-                    </div>
+                    <?php include __DIR__ . "/../../php/structure/bouton_modifier_vendeur.php"; ?>
                 </div>
                 <p class="attribut-text ml-7"><?= $description ?></p>
                 <textarea name="description" class="champ-text ml-5 hidden border-2 border-solid rounded-md border-beige pl-3 w-full h-40"><?= $description ?></textarea>
@@ -274,16 +178,48 @@ try {
     <?php require_once __DIR__ . "/../../php/structure/footer_back.php" ?>
 </body>
 <script>
-document.querySelectorAll(".modif-attribut .bouton-modifier").forEach(button => {
+document.querySelectorAll(".modif-attribut .bouton-modifier, .modif-attribut .groupe-bouton").forEach(button => {
     button.addEventListener("click", () => {
         const container = button.closest(".modif-attribut"); // parent
         const paragraph = container.querySelector("p.attribut-text"); // texte en p
         const champ = container.querySelector(".champ-text") // texte en input ou textarea
-        const boutonValider = container.querySelector(".bouton-valider"); // bouton valider
-        const boutonAnnuler = container.querySelector(".bouton-annuler"); // bouton annuler
+        const boutonModifier = container.querySelector(".bouton-modifier"); // bouton modidier
+        const groupeBouton = container.querySelector(".groupe-bouton"); // groupe de bouton valider/annuler
+
+        texte = paragraph.textContent;
+        champ.value = texte;
+        
         paragraph.classList.toggle("hidden");
+
         champ.classList.toggle("hidden");
         champ.classList.toggle("block");
+
+        groupeBouton.classList.toggle("hidden");
+        groupeBouton.classList.toggle("flex");  
+        
+        boutonModifier.classList.toggle("hidden");
+        boutonModifier.classList.toggle("block");
+    });
+});
+document.querySelectorAll(".modif-attribut .bouton-valider").forEach(button => {
+    button.addEventListener("click", () => {
+        const container = button.closest(".modif-attribut"); // parent
+        const paragraph = container.querySelector("p.attribut-text"); // texte en p
+        const champ = container.querySelector(".champ-text") // texte en input ou textarea
+        
+        texte = champ.value;
+        paragraph.textContent = texte;
+
+        paragraph.classList.toggle("hidden");
+
+        champ.classList.toggle("hidden");
+        champ.classList.toggle("block");
+
+        groupeBouton.classList.toggle("hidden");
+        groupeBouton.classList.toggle("flex");  
+        
+        boutonModifier.classList.toggle("hidden");
+        boutonModifier.classList.toggle("block");
     });
 });
 </script>
