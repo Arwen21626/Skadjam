@@ -34,7 +34,7 @@ if(isset($_POST['pseudo']) && isset($_POST['naissance']) && isset($_POST['nom'])
                     
                     // Insertion des données dans la base de données et création du panier
                     $nouvCompte = $dbh->prepare("WITH creation_compte AS (
-                                                        INSERT INTO sae3_skadjam._compte(nom_compte, prenom_compte, adresse_mail, motDePasse, numero_telephone, bloque) 
+                                                        INSERT INTO sae3_skadjam._compte(nom_compte, prenom_compte, adresse_mail, mot_de_passe, numero_telephone, bloque) 
                                                         VALUES ('$nom', '$prenom', '$mail', '$mdp', '$telephone', 'false') RETURNING id_compte
                                                     )
                                                     INSERT INTO sae3_skadjam._client(id_compte, pseudo, date_naissance) 

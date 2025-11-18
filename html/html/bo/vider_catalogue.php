@@ -1,7 +1,5 @@
 <?php 
     session_start();
-    //à retirer
-    $_SESSION['idCompte'] = 1;
 
     include __DIR__ .'/../../01_premiere_connexion.php';
     const PAGE_SIZE = 15;

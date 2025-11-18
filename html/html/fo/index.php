@@ -1,6 +1,7 @@
 <?php
 include(__DIR__ . '/../../01_premiere_connexion.php');
-const PAGE_SIZE = 15;?>
+const PAGE_SIZE = 15;
+require_once("./../../php/fonctions.php");?>
 
 <!DOCTYPE html>
 <html lang="fr">
@@ -76,76 +77,24 @@ const PAGE_SIZE = 15;?>
                     <?php foreach($lignes as $id => $valeurs){
                         $idProduit = $valeurs['id_produit'];?>
                         <section class="bg-bleu grid grid-cols-[40%_60%] w-38 md:w-80 h-auto p-3 m-2">
-                        <!--affichage de la photo-->
-                        <a href= "<?php echo "details_produit.php?idProduit=".$idProduit;?>" class="col-span-2 justify-self-center mb-3">
-                            <img src="<?php echo htmlentities($valeurs['url_photo']);?>" 
-                                    alt="<?php echo htmlentities($valeurs['alt']);?>"
-                                    title="<?php echo htmlentities($valeurs['titre']);?>">
-                        </a>
+                            <!--affichage de la photo-->
+                            <a href= "<?php echo "details_produit.php?idProduit=".$idProduit;?>" class="col-span-2 justify-self-center mb-3">
+                                <img src="<?php echo htmlentities($valeurs['url_photo']);?>" 
+                                        alt="<?php echo htmlentities($valeurs['alt']);?>"
+                                        title="<?php echo htmlentities($valeurs['titre']);?>">
+                            </a>
 
-                        <!--affichage du nom du produit-->
-                        <p class="col-span-2"><?php echo htmlentities($valeurs['libelle_produit']);?></p> 
+                            <!--affichage du nom du produit-->
+                            <p class="col-span-2"><?php echo htmlentities($valeurs['libelle_produit']);?></p> 
 
-                        <!--affichage du prix du produit-->   
-                        <p class="col-span-1 col-start-1"><?php echo htmlentities($valeurs['prix_ttc']);?> €</p>
+                            <!--affichage du prix du produit-->   
+                            <p class="col-span-1 col-start-1"><?php echo htmlentities($valeurs['prix_ttc']);?> €</p>
 
-                        <!--récupération de la note-->
-                        <div class=" flex col-span-1 col-start-2">
-                            <?php $note = $valeurs['note_moyenne'];
-
-                                //affichage d'une note nulle
-                                if ($note == null){ ?>
-                                    <p><?php echo htmlentities('non noté'); ?></p>
-                                <?php } 
-
-                                else {
-                                    $entierPrec = intval($note);
-                                    $entierSuiv = $entierPrec+1;
-                                    $moitie = $entierPrec+0.5;
-                                    $noteFinale;
-                                    $nbEtoilesVides;
-
-                                    //note arrondie à l'entier précédent
-                                    if($note < $entierPrec+0.3){
-                                        $noteFinale = $entierPrec;
-                                    }
-
-                                    //note arrondie à 0.5
-                                    else if(($note < $moitie) || ($note < $entierPrec+0.8)){
-                                        $noteFinale = $moitie;
-                                        $nbEtoilesVides = 5-$entierPrec-1;
-                                        //affichage d'une note et demie
-                                        //boucle pour étoiles pleines
-                                        for($i=0; $i<$entierPrec; $i++){?>
-                                            <img src="../../images/logo/bootstrap_icon/star-fill.svg" alt="étoile pleine" class="w-4 h-4 md:w-7 md:h-7">
-                                        <?php } ?>
-                                        <!--demie étoile-->
-                                        <img src="../../images/logo/bootstrap_icon/star-half.svg" alt="demie étoile" class="w-4 h-4 md:w-7 md:h-7">
-                                        <!--boucle pour étoiles vides-->
-                                        <?php for($i=0; $i<$nbEtoilesVides; $i++){?>
-                                            <img src="../../images/logo/bootstrap_icon/star.svg" alt="étoile vide" class="w-4 h-4 md:w-7 md:h-7">
-                                        <?php }
-                                    }
-                                    
-                                    //note arrondie à l'entier suivant
-                                    else{
-                                        $noteFinale = $entierSuiv;
-                                    }
-
-                                    //affichage d'une note entière :
-                                    if($noteFinale != $moitie){
-                                        $nbEtoilesVides = 5-$noteFinale;
-                                        //boucle pour étoiles pleines
-                                        for($i=0; $i<$noteFinale; $i++){?>
-                                            <img src="../../images/logo/bootstrap_icon/star-fill.svg" alt="étoile pleine" class="w-4 h-4 md:w-7 md:h-7">
-                                        <?php }
-                                        //boucle pour étoiles vides
-                                        for($i=0; $i<$nbEtoilesVides; $i++){?>
-                                            <img src="../../images/logo/bootstrap_icon/star.svg" alt="étoile vide" class="w-4 h-4 md:w-7 md:h-7">
-                                        <?php }
-                                    }
-                                } ?>
-                            </div>
+                            <!--récupération de la note-->
+                            <div class=" flex col-span-1 col-start-2">
+                                <?php $note = $valeurs['note_moyenne'];
+                                    affichageNote($note); ?>
+                            </div> 
                         </section>
                     <?php } ?>
                 </div>
