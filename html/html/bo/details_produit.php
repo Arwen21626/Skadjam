@@ -63,7 +63,7 @@
         <div class="flex flex-col">
             <button class=" bg-beige rounded-2xl w-40 h-14" type="button">Modifier</button>
             <button class=" bg-beige rounded-2xl w-40 h-14" type="button">Masquer</button>
-            <button class=" bg-beige rounded-2xl w-40 h-14" type="button"><a href="../bo/supprimer_produit.php">Supprimer</a></button>
+            <button class=" bg-beige rounded-2xl w-40 h-14" type="button"><a href="../bo/supprimer_produit.php?idProduit=$idProduit">Supprimer</a></button>
         </div>
         
 
