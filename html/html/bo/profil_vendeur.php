@@ -90,7 +90,7 @@ try {
                     <input type="file" id="image" name="image" accept="image/png, image/jpeg image/webp" hidden>
                     <label class="cursor-pointer w-80 rounded-2xl bg-beige p-2 text-center"  for="image">Ajouter une image</label>
                 </div>
-                <div class=" mt-5 min-w-1/3 max-w-5/12">
+                <div class=" mt-5 w-1/3">
                     <div class=" mb-3 modif-attribut">
                         <div class=" flex flex-row items-center">
                             <p class="underline">Entreprise :</p>
@@ -98,9 +98,19 @@ try {
                                 <img src="../../images/logo/bootstrap_icon/pencil.svg" alt="modifier" title="modifier" class=" w-6! h-6! ml-4 block group-hover/pen:hidden">
                                 <img src="../../images/logo/bootstrap_icon/pencil-fill.svg" alt="modifier" title="modifier" class=" w-6! h-6! ml-4 hidden group-hover/pen:block">
                             </button>
+                            <div class=" flex flex-row ">
+                                <button type="button" class="bouton-valider group/valider cursor-pointer hidden">
+                                    <img src="../../images/logo/bootstrap_icon/check-square.svg" alt="valider" title="valider" class=" w-6! h-6! ml-4 block group-hover/valider:hidden">
+                                    <img src="../../images/logo/bootstrap_icon/check-square-fill.svg" alt="valider" title="valider" class=" w-6! h-6! ml-4 hidden group-hover/valider:block">
+                                </button>
+                                <button type="button" class="bouton-annuler group/annuler cursor-pointer hidden">
+                                    <img src="../../images/logo/bootstrap_icon/x-square.svg" alt="annuler" title="annuler" class=" w-6! h-6! ml-4 block group-hover/annuler:hidden">
+                                    <img src="../../images/logo/bootstrap_icon/x-square-fill.svg" alt="annuler" title="annuler" class=" w-6! h-6! ml-4 hidden group-hover/annuler:block">
+                                </button>
+                            </div>
                         </div>
                         <p class="attribut-text ml-7 mt-2"><?= $denom ?></p>
-                        <input type="text" name="denom" class="champ-text ml-5 hidden border-2 border-solid rounded-md border-beige pl-3" value="<?= $denom ?>" size="20">
+                        <input type="text" name="denom" class="champ-text w-full ml-5 hidden border-2 border-solid rounded-md border-beige pl-3" value="<?= $denom ?>">
                     </div>
 
                     <div class=" mb-3 modif-attribut">
@@ -110,9 +120,18 @@ try {
                                 <img src="../../images/logo/bootstrap_icon/pencil.svg" alt="modifier" title="modifier" class=" w-6! h-6! ml-4 block group-hover/pen:hidden">
                                 <img src="../../images/logo/bootstrap_icon/pencil-fill.svg" alt="modifier" title="modifier" class=" w-6! h-6! ml-4 hidden group-hover/pen:block">
                             </button>
+                            <div class=" flex flex-row ">
+                                <button type="button" class="bouton-valider group/check cursor-pointer hidden">
+                                    <img src="../../images/logo/bootstrap_icon/check-square.svg" alt="valider" title="valider" class=" w-6! h-6! ml-4 block group-hover/check:hidden">
+                                    <img src="../../images/logo/bootstrap_icon/check-square-fill.svg" alt="valider" title="valider" class=" w-6! h-6! ml-4 hidden group-hover/check:block">
+                                </button>
+                                <button type="button" class="bouton-annuler group/cross cursor-pointer hidden">
+                                    <img src="../../images/logo/bootstrap_icon/x-square.svg" alt="annuler" title="annuler" class=" w-6! h-6! ml-4 group-hover/cross:hidden">
+                                </button>
+                            </div>
                         </div>
                         <p class="attribut-text ml-7 mt-2"><?= "$num $numBis $adresse, $ville, $cp" ?></p>
-                        <input type="text" name="adresse" class="champ-text ml-5 hidden border-2 border-solid rounded-md border-beige pl-3" value="<?= "$num $numBis $adresse, $ville, $cp" ?>">
+                        <input type="text" name="adresse" class="champ-text w-full ml-5 hidden border-2 border-solid rounded-md border-beige pl-3" value="<?= "$num $numBis $adresse, $ville, $cp" ?>">
                     </div>
 
                     <div class=" mb-3 modif-attribut">
@@ -122,15 +141,24 @@ try {
                                 <img src="../../images/logo/bootstrap_icon/pencil.svg" alt="modifier" title="modifier" class=" w-6! h-6! ml-4 block group-hover/pen:hidden">
                                 <img src="../../images/logo/bootstrap_icon/pencil-fill.svg" alt="modifier" title="modifier" class=" w-6! h-6! ml-4 hidden group-hover/pen:block">
                             </button>
+                            <div class=" flex flex-row ">
+                                <button type="button" class="bouton-valider group/check cursor-pointer hidden">
+                                    <img src="../../images/logo/bootstrap_icon/check-square.svg" alt="valider" title="valider" class=" w-6! h-6! ml-4 block group-hover/check:hidden">
+                                    <img src="../../images/logo/bootstrap_icon/check-square-fill.svg" alt="valider" title="valider" class=" w-6! h-6! ml-4 hidden group-hover/check:block">
+                                </button>
+                                <button type="button" class="bouton-annuler group/cross cursor-pointer hidden">
+                                    <img src="../../images/logo/bootstrap_icon/x-square.svg" alt="annuler" title="annuler" class=" w-6! h-6! ml-4 group-hover/cross:hidden">
+                                </button>
+                            </div>
                         </div>
                         <p class="attribut-text ml-7 mt-2"><?= $siren ?></p>
-                        <input type="text" name="siren" class="champ-text ml-5 hidden border-2 border-solid rounded-md border-beige pl-3" value="<?= $siren ?>" size="9">
+                        <input type="text" name="siren" class="champ-text w-full ml-5 hidden border-2 border-solid rounded-md border-beige pl-3" value="<?= $siren ?>">
                     </div>
 
                 </div>
             </div>
             <div class="flex flex-row items-center justify-between mt-8">
-                <div class=" min-w-1/3">
+                <div class=" w-1/3">
                     <h3 class=" mb-2">Propriétaire</h3>
                     <div class="mb-3 modif-attribut">
                         <div class=" flex flex-row items-center">
@@ -139,9 +167,18 @@ try {
                                 <img src="../../images/logo/bootstrap_icon/pencil.svg" alt="modifier" title="modifier" class=" w-6! h-6! ml-4 block group-hover/pen:hidden">
                                 <img src="../../images/logo/bootstrap_icon/pencil-fill.svg" alt="modifier" title="modifier" class=" w-6! h-6! ml-4 hidden group-hover/pen:block">
                             </button>
+                            <div class=" flex flex-row ">
+                                <button type="button" class="bouton-valider group/check cursor-pointer hidden">
+                                    <img src="../../images/logo/bootstrap_icon/check-square.svg" alt="valider" title="valider" class=" w-6! h-6! ml-4 block group-hover/check:hidden">
+                                    <img src="../../images/logo/bootstrap_icon/check-square-fill.svg" alt="valider" title="valider" class=" w-6! h-6! ml-4 hidden group-hover/check:block">
+                                </button>
+                                <button type="button" class="bouton-annuler group/cross cursor-pointer hidden">
+                                    <img src="../../images/logo/bootstrap_icon/x-square.svg" alt="annuler" title="annuler" class=" w-6! h-6! ml-4 group-hover/cross:hidden">
+                                </button>
+                            </div>
                         </div>
                         <p class="attribut-text ml-7 mt-2"><?= $nom ?></p>
-                        <input type="text" name="nom" class="champ-text ml-5 hidden border-2 border-solid rounded-md border-beige pl-3" value="<?= $nom ?>" size="15">
+                        <input type="text" name="nom" class="champ-text w-full ml-5 hidden border-2 border-solid rounded-md border-beige pl-3" value="<?= $nom ?>">
                     </div>
 
                     <div class="mb-3 modif-attribut">
@@ -151,13 +188,22 @@ try {
                                 <img src="../../images/logo/bootstrap_icon/pencil.svg" alt="modifier" title="modifier" class=" w-6! h-6! ml-4 block group-hover/pen:hidden">
                                 <img src="../../images/logo/bootstrap_icon/pencil-fill.svg" alt="modifier" title="modifier" class=" w-6! h-6! ml-4 hidden group-hover/pen:block">
                             </button>
+                            <div class=" flex flex-row ">
+                                <button type="button" class="bouton-valider group/check cursor-pointer hidden">
+                                    <img src="../../images/logo/bootstrap_icon/check-square.svg" alt="valider" title="valider" class=" w-6! h-6! ml-4 block group-hover/check:hidden">
+                                    <img src="../../images/logo/bootstrap_icon/check-square-fill.svg" alt="valider" title="valider" class=" w-6! h-6! ml-4 hidden group-hover/check:block">
+                                </button>
+                                <button type="button" class="bouton-annuler group/cross cursor-pointer hidden">
+                                    <img src="../../images/logo/bootstrap_icon/x-square.svg" alt="annuler" title="annuler" class=" w-6! h-6! ml-4 group-hover/cross:hidden">
+                                </button>
+                            </div>
                         </div>
                         <p class="attribut-text ml-7 mt-2"><?= $prenom ?></p>
-                        <input type="text" name="prenom" class="champ-text ml-5 hidden border-2 border-solid rounded-md border-beige pl-3" value="<?= $prenom ?>" size="15">
+                        <input type="text" name="prenom" class="champ-text w-full ml-5 hidden border-2 border-solid rounded-md border-beige pl-3" value="<?= $prenom ?>">
                     </div>
 
                 </div>
-                <div class=" min-w-1/3">
+                <div class=" w-1/3">
                     <h3 class=" mb-2">Contact</h3>
                     <div class="mb-3 modif-attribut">
                         <div class=" flex flex-row items-center">
@@ -166,9 +212,18 @@ try {
                                 <img src="../../images/logo/bootstrap_icon/pencil.svg" alt="modifier" title="modifier" class=" w-6! h-6! ml-4 block group-hover/pen:hidden">
                                 <img src="../../images/logo/bootstrap_icon/pencil-fill.svg" alt="modifier" title="modifier" class=" w-6! h-6! ml-4 hidden group-hover/pen:block">
                             </button>
+                            <div class=" flex flex-row ">
+                                <button type="button" class="bouton-valider group/check cursor-pointer hidden">
+                                    <img src="../../images/logo/bootstrap_icon/check-square.svg" alt="valider" title="valider" class=" w-6! h-6! ml-4 block group-hover/check:hidden">
+                                    <img src="../../images/logo/bootstrap_icon/check-square-fill.svg" alt="valider" title="valider" class=" w-6! h-6! ml-4 hidden group-hover/check:block">
+                                </button>
+                                <button type="button" class="bouton-annuler group/cross cursor-pointer hidden">
+                                    <img src="../../images/logo/bootstrap_icon/x-square.svg" alt="annuler" title="annuler" class=" w-6! h-6! ml-4 group-hover/cross:hidden">
+                                </button>
+                            </div>
                         </div>
                         <p class="attribut-text ml-7 mt-2"><?= $tel ?></p>
-                        <input type="text" name="tel" class="champ-text ml-5 hidden border-2 border-solid rounded-md border-beige pl-3" value="<?= $tel ?>" size="15">
+                        <input type="text" name="tel" class="champ-text w-full ml-5 hidden border-2 border-solid rounded-md border-beige pl-3" value="<?= $tel ?>">
                     </div>
 
                     <div class="mb-3 modif-attribut">
@@ -178,9 +233,18 @@ try {
                                 <img src="../../images/logo/bootstrap_icon/pencil.svg" alt="modifier" title="modifier" class=" w-6! h-6! ml-4 block group-hover/pen:hidden">
                                 <img src="../../images/logo/bootstrap_icon/pencil-fill.svg" alt="modifier" title="modifier" class=" w-6! h-6! ml-4 hidden group-hover/pen:block">
                             </button>
+                            <div class=" flex flex-row ">
+                                <button type="button" class="bouton-valider group/check cursor-pointer hidden">
+                                    <img src="../../images/logo/bootstrap_icon/check-square.svg" alt="valider" title="valider" class=" w-6! h-6! ml-4 block group-hover/check:hidden">
+                                    <img src="../../images/logo/bootstrap_icon/check-square-fill.svg" alt="valider" title="valider" class=" w-6! h-6! ml-4 hidden group-hover/check:block">
+                                </button>
+                                <button type="button" class="bouton-annuler group/cross cursor-pointer hidden">
+                                    <img src="../../images/logo/bootstrap_icon/x-square.svg" alt="annuler" title="annuler" class=" w-6! h-6! ml-4 group-hover/cross:hidden">
+                                </button>
+                            </div>
                         </div>
                         <p class="attribut-text ml-7 mt-2"><?= $mail ?></p>
-                        <input type="text" name="mail" class="champ-text ml-5 hidden border-2 border-solid rounded-md border-beige pl-3 w-auto" value="<?= $mail ?>">
+                        <input type="text" name="mail" class="champ-text w-full ml-5 hidden border-2 border-solid rounded-md border-beige pl-3" value="<?= $mail ?>">
                     </div>
 
                 </div>
@@ -192,6 +256,15 @@ try {
                         <img src="../../images/logo/bootstrap_icon/pencil.svg" alt="modifier" title="modifier" class=" w-6! h-6! ml-4 block group-hover/pen:hidden">
                         <img src="../../images/logo/bootstrap_icon/pencil-fill.svg" alt="modifier" title="modifier" class=" w-6! h-6! ml-4 hidden group-hover/pen:block">
                     </button>
+                    <div class=" flex flex-row ">
+                        <button type="button" class="bouton-valider group/check cursor-pointer hidden">
+                                    <img src="../../images/logo/bootstrap_icon/check-square.svg" alt="valider" title="valider" class=" w-6! h-6! ml-4 block group-hover/check:hidden">
+                                    <img src="../../images/logo/bootstrap_icon/check-square-fill.svg" alt="valider" title="valider" class=" w-6! h-6! ml-4 hidden group-hover/check:block">
+                        </button>
+                        <button type="button" class="bouton-annuler group/cross cursor-pointer hidden">
+                                    <img src="../../images/logo/bootstrap_icon/x-square.svg" alt="annuler" title="annuler" class=" w-6! h-6! ml-4 group-hover/cross:hidden">
+                        </button>
+                    </div>
                 </div>
                 <p class="attribut-text ml-7"><?= $description ?></p>
                 <textarea name="description" class="champ-text ml-5 hidden border-2 border-solid rounded-md border-beige pl-3 w-full h-40"><?= $description ?></textarea>
@@ -204,8 +277,10 @@ try {
 document.querySelectorAll(".modif-attribut .bouton-modifier").forEach(button => {
     button.addEventListener("click", () => {
         const container = button.closest(".modif-attribut"); // parent
-        const paragraph = container.querySelector("p.attribut-text");
-        const champ = container.querySelector(".champ-text")// le <p> à cacher
+        const paragraph = container.querySelector("p.attribut-text"); // texte en p
+        const champ = container.querySelector(".champ-text") // texte en input ou textarea
+        const boutonValider = container.querySelector(".bouton-valider"); // bouton valider
+        const boutonAnnuler = container.querySelector(".bouton-annuler"); // bouton annuler
         paragraph.classList.toggle("hidden");
         champ.classList.toggle("hidden");
         champ.classList.toggle("block");
