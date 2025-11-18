@@ -33,7 +33,7 @@ $idCompte = $_SESSION['idCompte'];
 
         <script>
             document.getElementById('suppProduit').addEventListener('click', () => {
-                fetch('../../php/executer_supprimer_produit.php?idProduit=$idProduit')
+                fetch('../../php/executer_supprimer_produit.php?idProduit=<?php echo $idProduit?>')
                 .then(res => res.text())
                 .then(data => {
                     window.location.href = "index_vendeur.php";
