@@ -1,7 +1,5 @@
 <?php 
     session_start();
-    //à retirer
-    $_SESSION['idCompte'] = 1;
 
     include __DIR__ .'/../../01_premiere_connexion.php';
     require_once(__DIR__ . "/../../php/fonctions.php");
