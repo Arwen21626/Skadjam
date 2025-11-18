@@ -1,3 +1,12 @@
+<?php
+session_start();
+//echo $_SESSION['role'];
+if($_SESSION['role'] != 'client'){
+    echo 'Vous n\'avez pas accès, vous n\'êtes pas client';
+    //header('Location: ./404.php');
+}
+?>
+
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -11,10 +20,24 @@
     </style>
 </head>
 <body>
+
+    <?php
+    if(isset($_POST['numero'])){
+        
+        echo '<pre>';
+        print_r($_SESSION);
+        print_r($_POST);
+        echo '<pre>';
+    
+    }  
+    ?>
+
+
+
     <?php include(__DIR__ . '/../../php/structure/head_front.php');?>
     <?php include(__DIR__ . '/../../php/structure/navbar_front.php');?>
     <main>
-        <form class="w-4/5 self-center" action="">
+        <form class="w-4/5 self-center" action="paiement.php" method="post">
 
                 <div class="flex flex-col">
                     <label for="numero">Numéro de carte* :</label>
@@ -24,7 +47,7 @@
                 <div class="flex flex-row">
                     <div class="flex flex-col">
                         <label for="expiration">Date d'expiration* :</label>
-                        <input placeholder="AAAA/mm mais à voir pour changer" class="border-4 border-vertClair rounded-2xl placeholder-gray-500" type="month" name="expiration" id="expiration" required>
+                        <input placeholder="MM/AA" class="border-4 border-vertClair rounded-2xl placeholder-gray-500" type="month" name="expiration" id="expiration" required>
                     </div>
                     
 

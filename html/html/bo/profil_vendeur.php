@@ -1,8 +1,7 @@
 <?php
 session_start();
 include __DIR__ . "/../../01_premiere_connexion.php";
-//$idCompte = $_SESSION["idCompte"];
-$idCompte = 1;
+$idCompte = $_SESSION["idCompte"];
 
 $denom = "";
 $siren = "";
