@@ -80,7 +80,7 @@ if (isset($_POST['logout'])) {
                 <!-- Affichage des informations du client (sauf son mot de passe) -->
                 <div class="flex flex-row">
                     <h2 class="mt-1 mb-1 mr-4 ml-0"><?php echo $pseudo; ?></h2>
-                    <h3 class="mt-1 mb-1 mr-4 ml-0 relative top-4 text-vertFonce -z-1"><?php echo $prenom; ?> <?php echo $nom; ?></h3>
+                    <h3 class="mt-1 mb-1 mr-4 ml-0 relative top-1.5 md:top-4 text-vertFonce -z-1"><?php echo $prenom; ?> <?php echo $nom; ?></h3>
                 </div>
                 <div>
                     <p class="m-4"><?php echo $naissance; ?></p>
