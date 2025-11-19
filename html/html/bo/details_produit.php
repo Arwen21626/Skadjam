@@ -1,22 +1,23 @@
 <?php
-    include(__DIR__.'/../../01_premiere_connexion.php');
-    require_once("./../../php/fonctions.php");
 
-    //Récupération des données sur le produit ainsi que la photo
-    $idProd = $_GET['idProduit'];
-    $idProd = 5;
-    foreach($dbh->query("SELECT *
-                        from sae3_skadjam._produit pr
-                        inner join sae3_skadjam._montre m
-                            on pr.id_produit=m.id_produit
-                        inner join sae3_skadjam._photo ph  
-                            on ph.id_photo = m.id_photo
-                        inner join sae3_skadjam._categorie c
-                            on c.id_categorie = pr.id_categorie 
-                        where pr.id_produit = $idProd"
-                        , PDO::FETCH_ASSOC) as $row){
-        $produit = $row;
-    }
+include(__DIR__.'/../../01_premiere_connexion.php');
+require_once("./../../php/fonctions.php");
+session_start();
+
+//Récupération des données sur le produit ainsi que la photo
+$idProd = $_GET['idProduit'];
+foreach($dbh->query("SELECT *
+                    from sae3_skadjam._produit pr
+                    inner join sae3_skadjam._montre m
+                        on pr.id_produit=m.id_produit
+                    inner join sae3_skadjam._photo ph  
+                        on ph.id_photo = m.id_photo
+                    inner join sae3_skadjam._categorie c
+                        on c.id_categorie = pr.id_categorie 
+                    where pr.id_produit = $idProd"
+                    , PDO::FETCH_ASSOC) as $row){
+    $produit = $row;
+}
 ?>
 
 <!DOCTYPE html>

@@ -1,7 +1,8 @@
-<?php 
+<?php
+
 include( __DIR__ . '/../../01_premiere_connexion.php');
 require_once(__DIR__ . '/../../php/verification_formulaire.php');
-
+session_start();
 
 $idProduit = $_GET['idProduit'];
 
