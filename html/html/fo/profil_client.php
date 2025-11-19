@@ -40,10 +40,9 @@ if (isset($_POST['logout'])) {
 
                 // Récupérer toutes les infos du client
                 foreach($dbh->query("SELECT * FROM sae3_skadjam._compte c
-                                                INNER JOIN
-                                            sae3_skadjam._client cli 
-                                                ON c.id_compte = cli.id_compte
-                                            WHERE c.id_compte = $id", PDO::FETCH_ASSOC) as $client){
+                                        INNER JOIN sae3_skadjam._client cli 
+                                            ON c.id_compte = cli.id_compte
+                                        WHERE c.id_compte = $id", PDO::FETCH_ASSOC) as $client){
                     $nom = $client['nom_compte'];
                     $prenom = $client['prenom_compte'];
                     $pseudo = $client['pseudo'];
@@ -54,13 +53,11 @@ if (isset($_POST['logout'])) {
                 // Récupérer les adresses du client
                 $nbAdresse = 0;
                 foreach($dbh->query("SELECT * FROM sae3_skadjam._compte c
-                                                INNER JOIN
-                                            sae3_skadjam._habite h
-                                                ON c.id_compte = h.id_compte
-                                                INNER JOIN
-                                            sae3_skadjam._adresse a
-                                                ON h.id_adresse = a.id_adresse
-                                            WHERE c.id_compte = $id", PDO::FETCH_ASSOC) as $adresse){
+                                        INNER JOIN sae3_skadjam._habite h
+                                            ON c.id_compte = h.id_compte
+                                        INNER JOIN sae3_skadjam._adresse a
+                                            ON h.id_adresse = a.id_adresse
+                                        WHERE c.id_compte = $id", PDO::FETCH_ASSOC) as $adresse){
                     $numRue[$nbAdresse] = $adresse['numero_rue'];
                     $adressePostale[$nbAdresse] = $adresse['adresse_postale'];
                     $batiment[$nbAdresse] = " " . $adresse['numero_bat'];
