@@ -171,7 +171,7 @@ if(isset($_POST['pseudo']) && isset($_POST['naissance']) && isset($_POST['nom'])
                 header("location: ../html/fo/index.php");
             } 
             elseif(!$erreur && !isset($_POST['mdp']) && !isset($_POST['verifMdp'])){ // Si c'est la modification d'un compte
-                header("location: ../html/fo/page_client.php");
+                header("location: ../html/fo/profil_client.php");
             }
 
         }
