@@ -197,7 +197,7 @@ else { ?>
             <div class="row-start-1 row-span-3 m-2 p-4 grid grid-rows-[2/3-1/3] justify-items-center">
                 <input type="file" id="photo" name="photo" class="hidden" required>
                 <!-- label qui agit comme bouton -->
-                <label id="labelImage" for="photo" class=" w-60 h-60 rounded-xl" style="background-image: url('/images/photo_importees/Fraise1763470571.png ' <?php //echo $urlPhoto ?>); background-repeat: no-repeat; background-position: center; background-size: 100%;"></label>
+                <label id="labelImage" for="photo" class=" w-60 h-60 rounded-xl" style="background-image: url(' <?php echo $urlPhoto ?>'); background-repeat: no-repeat; background-position: center; background-size: 100%;"></label>
                 <label for="photo">Ajouter une image*</label>
             </div>
             
