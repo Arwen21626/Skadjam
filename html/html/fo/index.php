@@ -77,7 +77,7 @@
                 <div class="grid grid-cols-2 justify-items-center md:grid-cols-3">
                     <?php foreach($lignes as $id => $valeurs){
                         $idProduit = $valeurs['id_produit'];?>
-                        <section class="bg-bleu grid grid-cols-[40%_60%] w-38 md:w-80 h-auto p-3 m-2">
+                        <section class="bg-bleu grid grid-cols-[40%_60%] w-40 md:w-80 h-auto p-2 md:p-3 m-2">
                             <!--affichage de la photo-->
                             <a href= "<?php echo "details_produit.php?idProduit=".$idProduit;?>" class="col-span-2 justify-self-center mb-3">
                                 <img src="<?php echo htmlentities($valeurs['url_photo']);?>" 
@@ -93,7 +93,7 @@
                                 <p><?php echo htmlentities($valeurs['prix_ttc']);?> €</p>
 
                                 <!--récupération de la note-->
-                                <div class="ml-2 md:ml-10 flex">
+                                <div class="w-2/4 ml-2 md:ml-10 flex">
                                     <?php $note = $valeurs['note_moyenne'];
                                         affichageNote($note); ?>
                                 </div> 

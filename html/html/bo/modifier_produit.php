@@ -1,7 +1,8 @@
-<?php 
+<?php
+
 include( __DIR__ . '/../../01_premiere_connexion.php');
 require_once(__DIR__ . '/../../php/verification_formulaire.php');
-
+session_start();
 
 $idProduit = $_GET['idProduit'];
 
@@ -25,7 +26,8 @@ foreach($dbh->query('SELECT * from sae3_skadjam._tva', PDO::FETCH_ASSOC) as $row
 }
 
 //Recuperation de toutes les informations du produit
-foreach($dbh->query("SELECT *,est_masque::CHAR as est_masque_php FROM sae3_skadjam._produit pr
+foreach($dbh->query("SELECT *,est_masque::CHAR as est_masque_php 
+                        FROM sae3_skadjam._produit pr
                         INNER JOIN sae3_skadjam._categorie c
                             ON pr.id_categorie = c.id_categorie
                         INNER JOIN sae3_skadjam._montre m
@@ -168,7 +170,7 @@ if (isset($_POST['categorie']) && isset($_POST['nom']) && isset($_POST['prix']) 
     else{
         echo ("Le prix ou la quantité saisi est incorrect.");
     }
-    header(("location:./details_produit.php?idProduit=$idProd"));
+    header("Location: ./details_produit.php?idProduit=$idProd");
 }
 else { ?>
 
@@ -196,7 +198,7 @@ else { ?>
             <div class="row-start-1 row-span-3 m-2 p-4 grid grid-rows-[2/3-1/3] justify-items-center">
                 <input type="file" id="photo" name="photo" class="hidden" required>
                 <!-- label qui agit comme bouton -->
-                <label id="labelImage" for="photo" class=" w-60 h-60 rounded-xl" style="background-image: url('/images/photo_importees/Fraise1763470571.png ' <?php //echo $urlPhoto ?>); background-repeat: no-repeat; background-position: center; background-size: 100%;"></label>
+                <label id="labelImage" for="photo" class=" w-60 h-60 rounded-xl" style="background-image: url(' <?php echo $urlPhoto ?>'); background-repeat: no-repeat; background-position: center; background-size: 100%;"></label>
                 <label for="photo">Ajouter une image*</label>
             </div>
             

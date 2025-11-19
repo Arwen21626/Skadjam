@@ -1,5 +1,9 @@
 <?php 
     session_start();
+
+    if ($_SESSION["role"] === "visiteur") {
+        header("location:/html/fo/connexion.php");
+    }
 ?>
 
 <!DOCTYPE html>
