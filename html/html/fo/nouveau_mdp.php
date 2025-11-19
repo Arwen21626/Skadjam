@@ -43,7 +43,7 @@ require_once __DIR__ . "/../../01_premiere_connexion.php";
         ?>
         <h2 class="flex justify-center text-center">Nouveau mot de passe</h2>
 
-        <form class="flex flex-wrap p-15 pt-0 justify-around" action="nouveau_mdp.php" method="post"> 
+        <form class="flex md:flex-row flex-col flex-wrap p-15 pt-0 justify-around" action="nouveau_mdp.php" method="post"> 
             <div class="flex flex-col basis-1/3 m-5 min-w-3xs">
                 <label for="mdp">Mot de passe* :</label>
                 <input class="border-4 border-vertClair rounded-2xl w-1/1 p-1 pl-3" type="password" name="mdp" id="mdp" required>
@@ -54,10 +54,11 @@ require_once __DIR__ . "/../../01_premiere_connexion.php";
                 <label for="verifMdp">Vérification du mot de passe* :</label>
                 <input class="border-4 border-vertClair rounded-2xl w-1/1 p-1 pl-3" type="password" name="verifMdp" id="verifMdp" required>
             </div>
+
             <!-- Ne s'affiche que si le mot de passe entré ne respecte pas la structure ordonnée ou qu'il est différent de la vérification du mot de passe -->
-            <div class=" flex w-fit flex-col mt-6 items-start ">
+            <div class="flex w-fit flex-col mt-6 items-start ">
                 <?php if($erreur){ ?>
-                    <p class="text-rouge"><?php echo "Votre mot de passe ne respecte pas la structure ordinaire ou ne correspond pas à sa vérification.";?></p>
+                    <p class="text-rouge">Votre mot de passe ne respecte pas la structure ordinaire ou ne correspond pas à sa vérification.</p>
                 <?php } ?>
             </div>
             <div class="flex mt-10 justify-center md:justify-end w-1/1">
