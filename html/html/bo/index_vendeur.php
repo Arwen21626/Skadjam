@@ -37,7 +37,7 @@
             <a href="#vosProduits" title="lien vers page derniers ajouts">
                 <img src="../../images/images_accueil/derniers_ajouts.webp" alt="derniers ajouts" class="w-150 h-auto justify-self-start">
             </a>           
-            <a href="#vosProduits" title="lien vers page stock">
+            <a href="../bo/stock.php" title="lien vers page stock">
                 <img src="../../images/images_accueil/stock.webp" alt="stock" class="w-150 h-auto justify-self-end">
             </a>
             <a href="../bo/commandes.php" title="lien vers page commandes">

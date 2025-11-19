@@ -11,6 +11,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="../../css/output.css" >
+    <link rel="stylesheet" type="text/css" href="../../css/bo/general_back.css" >
     <title>Stock</title>
 </head>
 <body>
@@ -32,15 +34,38 @@
                                     WHERE v.id_compte = $idCompte"
                                     , PDO::FETCH_ASSOC) as $row){
                     $tabProduit[] = $row;
-                } 
+                } ?>
+
+                <h2>Stock</h2>
                 
-                if($tabProduit == null){ ?>
+                <?php if($tabProduit == null){ ?>
                     <p>Votre catalogue de produit est vide, vous n'avez donc pas de stock.</p>
                 <?php } 
                 
                 else{?>
-                    <table>
-                        
+                    <table class="table-auto w-200">
+                        <thead>
+                            <tr>
+                                <th scope="col" class="text-left">Nom du produit</th>
+                                <th scope="col">Prix</th>
+                                <th scope="col">Note</th>
+                                <th scope="col">Stock</th>
+                                <th scope="col"></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php foreach($tabProduit as $id => $valeurs){
+                                $idProduit = $valeurs['id_produit']; ?>
+                                <tr>
+                                    <th scope="row" class="text-left"><?php echo htmlentities($valeurs['libelle_produit']); ?></th>
+                                    <td class="text-left"><?php echo htmlentities($valeurs['prix_ttc']);?> €</td>
+                                    <td class="text-left"><?php $note = $valeurs['note_moyenne'];
+                                        affichageNote($note); ?></td>
+                                    <td class="text-left"><?php echo htmlentities($valeurs['quantite_stock']);?></td>
+                                    <td class="text-left"><a href="<?php echo "modifier_produit.php?idProduit=".$idProduit;?>"><img src="../../images/logo/bootstrap_icon/plus-square.svg" alt="bouton modifier produit"></a></td>
+                                </tr>
+                            <?php }?>
+                        </tbody>
                     </table>
 
 
