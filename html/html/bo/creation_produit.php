@@ -17,11 +17,6 @@ $tab_tva = [];
 //Tableau pour les unites
 $tab_unite = ["Piece", "Litre","cl","g","kg","S","M","L","XL","XXL","m","cm"];
 
-//Gestion de la photo
-$typePhoto = $_FILES['photo']['type'];
-$ext = explode('/',$typePhoto)[1];
-$nom_serv_photo = $_FILES['photo']['tmp_name'];
-
 //Requete récupération categories
 foreach($dbh->query('SELECT * from sae3_skadjam._categorie', PDO::FETCH_ASSOC) as $row) {
     $tab_categories[] = $row;
@@ -61,6 +56,11 @@ if (isset($_POST['categorie']) && isset($_POST['nom']) && isset($_POST['prix']) 
     else{
         $enLigne = 'false';
     }
+
+    //Gestion de la photo
+    $typePhoto = $_FILES['photo']['type'];
+    $ext = explode('/',$typePhoto)[1];
+    $nom_serv_photo = $_FILES['photo']['tmp_name'];
 
     //Déplacement et renommage du fichier photo
     $nom_explode = explode(' ',$nom)[0];
