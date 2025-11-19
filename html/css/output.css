@@ -237,8 +237,14 @@ p, a {
   .top-4 {
     top: calc(var(--spacing, 0.25rem) * 4);
   }
+  .right-4 {
+    right: calc(var(--spacing, 0.25rem) * 4);
+  }
   .bottom-0 {
     bottom: calc(var(--spacing, 0.25rem) * 0);
+  }
+  .bottom-41 {
+    bottom: calc(var(--spacing, 0.25rem) * 41);
   }
   .-z-1 {
     z-index: calc(1 * -1);
@@ -989,6 +995,11 @@ p, a {
   .md\:top-0 {
     @media (width >= 48rem) {
       top: calc(var(--spacing, 0.25rem) * 0);
+    }
+  }
+  .md\:bottom-14 {
+    @media (width >= 48rem) {
+      bottom: calc(var(--spacing, 0.25rem) * 14);
     }
   }
   .md\:mt-4 {

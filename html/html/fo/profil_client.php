@@ -1,5 +1,6 @@
 <?php
 session_start();
+$_SESSION["idCompte"] = 5;
 require_once __DIR__ . "/../../01_premiere_connexion.php";
 
 // Vérifie si le bouton 'Se déconnecter à été appuyé'
@@ -90,24 +91,27 @@ if (isset($_POST['logout'])) {
                     <p class="m-4"><?php echo $mail; ?></p>
                 </div>
             </section>
-            <article class="flex flex-row justify-around mb-5">
+            <article class="flex flex-col md:flex-row justify-around items-center mb-7">
                 <!-- Modifier les informations du client (sauf le mot de passe) -->
                 <form action="modifier_compte_client.php" method="post">
-                    <input class="border-2 border-vertClair rounded-xl p-2" type="submit" value="Modifier mes informations">
+                    <input class="border-2 border-vertClair rounded-xl p-2 m-1" type="submit" value="Modifier mes informations">
                 </form>
 
                 <!-- Modifier le mot de passe du client -->
                 <form action="nouveau_mdp.php">
                     <?php $_SESSION['adresse_mail'] = $mail; ?>
-                    <input class="border-2 border-vertClair rounded-xl p-2" type="submit" value="Modifier mon mot de passe">    
+                    <input class="border-2 border-vertClair rounded-xl p-2 m-1" type="submit" value="Modifier mon mot de passe">    
                 </form>
 
                 <!-- Déconnexion -->
                 <form action="profil_client.php" method="post">
                     <input type="hidden" id="logout" name="logout" value="true">
-                    <input class="border-2 border-vertClair rounded-xl p-2" type="submit" value="Se déconnecter">
+                    <input class="border-2 border-vertClair rounded-xl p-2 m-1" type="submit" value="Se déconnecter">
                 </form>
             </article>
+            <!--    Récupérer mes données
+            <a href="reinitialiser_mdp.php" class="underline! absolute right-4 bottom-41 md:bottom-14 cursor-pointer hover:text-rouge">Demander mes données</a>
+            -->
         <?php
         }else{
             // Si non connecté, l'emmener à la page de connexion à la place
