@@ -3,7 +3,7 @@ function affichageNote($note){
     // fonction qui affiche une note avec des étoiles
     //affichage d'une note nulle
     ?><section class="flex flex-nowrap items-center"><?php
-    if ($note == null){ ?>
+    if ($note === null){ ?>
         <p><?php echo htmlentities('non noté'); ?></p>
     <?php } 
 
