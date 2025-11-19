@@ -321,6 +321,9 @@ p, a {
   .mt-3 {
     margin-top: calc(var(--spacing, 0.25rem) * 3);
   }
+  .mt-4 {
+    margin-top: calc(var(--spacing, 0.25rem) * 4);
+  }
   .mt-5 {
     margin-top: calc(var(--spacing, 0.25rem) * 5);
   }
@@ -347,9 +350,6 @@ p, a {
   }
   .mr-10 {
     margin-right: calc(var(--spacing, 0.25rem) * 10);
-  }
-  .mb-0\.5 {
-    margin-bottom: calc(var(--spacing, 0.25rem) * 0.5);
   }
   .mb-1 {
     margin-bottom: calc(var(--spacing, 0.25rem) * 1);
@@ -442,6 +442,10 @@ p, a {
     width: calc(var(--spacing, 0.25rem) * 28);
     height: calc(var(--spacing, 0.25rem) * 28);
   }
+  .size-auto {
+    width: auto;
+    height: auto;
+  }
   .h-5 {
     height: calc(var(--spacing, 0.25rem) * 5);
   }
@@ -477,6 +481,9 @@ p, a {
   }
   .w-1\/3 {
     width: calc(1/3 * 100%);
+  }
+  .w-1\/4 {
+    width: calc(1/4 * 100%);
   }
   .w-1\/5 {
     width: calc(1/5 * 100%);
@@ -586,6 +593,9 @@ p, a {
   .flex-wrap {
     flex-wrap: wrap;
   }
+  .content-between {
+    align-content: space-between;
+  }
   .items-center {
     align-items: center;
   }
@@ -616,6 +626,13 @@ p, a {
   .gap-4 {
     gap: calc(var(--spacing, 0.25rem) * 4);
   }
+  .space-y-4 {
+    :where(& > :not(:last-child)) {
+      --tw-space-y-reverse: 0;
+      margin-block-start: calc(calc(var(--spacing, 0.25rem) * 4) * var(--tw-space-y-reverse));
+      margin-block-end: calc(calc(var(--spacing, 0.25rem) * 4) * calc(1 - var(--tw-space-y-reverse)));
+    }
+  }
   .self-center {
     align-self: center;
   }
@@ -633,6 +650,9 @@ p, a {
   }
   .overflow-hidden {
     overflow: hidden;
+  }
+  .overflow-visible {
+    overflow: visible;
   }
   .rounded-2xl {
     border-radius: var(--radius-2xl, 1rem);
@@ -690,9 +710,6 @@ p, a {
   .bg-\[url\(\/images\/logo\/bootstrap_icon\/cart\.svg\)\] {
     background-image: url(/images/logo/bootstrap_icon/cart.svg);
   }
-  .bg-\[url\(\/images\/logo\/bootstrap_icon\/chat-left-dots\.svg\)\] {
-    background-image: url(/images/logo/bootstrap_icon/chat-left-dots.svg);
-  }
   .bg-\[url\(\/images\/logo\/bootstrap_icon\/house\.svg\)\] {
     background-image: url(/images/logo/bootstrap_icon/house.svg);
   }
@@ -710,6 +727,9 @@ p, a {
   }
   .bg-\[url\(\/images\/logo\/bootstrap_icon\/truck\.svg\)\] {
     background-image: url(/images/logo/bootstrap_icon/truck.svg);
+  }
+  .bg-none {
+    background-image: none;
   }
   .bg-size-\[auto_48px\] {
     background-size: auto 48px;
@@ -792,9 +812,15 @@ p, a {
   .-indent-96 {
     text-indent: calc(var(--spacing, 0.25rem) * -96);
   }
+  .indent-0 {
+    text-indent: calc(var(--spacing, 0.25rem) * 0);
+  }
   .font-medium {
     --tw-font-weight: var(--font-weight-medium, 500);
     font-weight: var(--font-weight-medium, 500);
+  }
+  .whitespace-normal {
+    white-space: normal;
   }
   .whitespace-nowrap {
     white-space: nowrap;
@@ -972,6 +998,11 @@ p, a {
       margin-left: calc(var(--spacing, 0.25rem) * 10);
     }
   }
+  .md\:ml-32 {
+    @media (width >= 48rem) {
+      margin-left: calc(var(--spacing, 0.25rem) * 32);
+    }
+  }
   .md\:flex {
     @media (width >= 48rem) {
       display: flex;
@@ -1111,11 +1142,6 @@ p, a {
       padding: calc(var(--spacing, 0.25rem) * 0);
     }
   }
-  .md\:p-0\.5 {
-    @media (width >= 48rem) {
-      padding: calc(var(--spacing, 0.25rem) * 0.5);
-    }
-  }
   .md\:p-4 {
     @media (width >= 48rem) {
       padding: calc(var(--spacing, 0.25rem) * 4);
@@ -1222,6 +1248,11 @@ p, a {
       padding-left: calc(var(--spacing, 0.25rem) * 2);
     }
   }
+}
+@property --tw-space-y-reverse {
+  syntax: "*";
+  inherits: false;
+  initial-value: 0;
 }
 @property --tw-border-style {
   syntax: "*";
@@ -1353,6 +1384,7 @@ p, a {
 @layer properties {
   @supports ((-webkit-hyphens: none) and (not (margin-trim: inline))) or ((-moz-orient: inline) and (not (color:rgb(from red r g b)))) {
     *, ::before, ::after, ::backdrop {
+      --tw-space-y-reverse: 0;
       --tw-border-style: solid;
       --tw-font-weight: initial;
       --tw-shadow: 0 0 #0000;
