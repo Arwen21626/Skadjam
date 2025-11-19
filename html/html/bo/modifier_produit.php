@@ -169,7 +169,7 @@ if (isset($_POST['categorie']) && isset($_POST['nom']) && isset($_POST['prix']) 
     else{
         echo ("Le prix ou la quantité saisi est incorrect.");
     }
-    header(("location:./details_produit.php?idProduit=$idProd"));
+    header("Location: ./details_produit.php?idProduit=$idProd");
 }
 else { ?>
 
