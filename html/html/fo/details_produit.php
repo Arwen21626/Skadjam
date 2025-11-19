@@ -57,8 +57,23 @@
     $nomVendeur = $vendeur["raison_sociale"];
     $produitDesc = $produit["description_produit"];
 
+    // Définition du lien vers lequel est renvoyé le client en cliquant sur le bouton ajouter au panier
+    // Si il est connecté : le produit est ajouté à son panier
+    //Si il n'est pas connecté : le visiteur est renvoyé sur la page de connexion
+
+    if ($_SESSION["role"] === "visiteur") 
+    {
+        $lienBtnAjouterPanier = "/html/fo/connexion.php";
+    }
+    else if ($_SESSION["role"] === "client")
+    {
+        $lienBtnAjouterPanier = "/php/ajouter_panier.php";
+    }
+
     // Affichage test
     //  print_r($infoPhoto);
+    echo $idProd;
+    echo $_SESSION["role"];
 ?>
 
 
@@ -105,14 +120,14 @@
                         <p class="text-center font-medium pl-1 md:p-0"><?php echo $nomVendeur ?></p>
                     </div>
                     
-                    
-                    <button class="-indent-96 overflow-hidden whitespace-nowrap
-                    size-12 bg-no-repeat bg-size-[auto_48px]
-                    bg-[url(/images/logo/bootstrap_icon/plus.svg)]
-                    md:size-auto md:bg-none md:indent-0 md:overflow-visible md:whitespace-normal
-                    md:bg-beige md:shadow md:rounded-2xl md:w-40 md:h-14 md:mt-4">
-                        Ajouter au panier
-                    </button>
+                    <form method="post" action="<?php echo $lienBtnAjouterPanier ?>" >
+                        <input type="hidden" name="idProduit" value="<?php echo $idProd ?>">
+                        <button class="
+                        bg-beige shadow rounded-2xl w-40 h-14 mt-4 cursor-pointer"
+                        type="submit">
+                            Ajouter au panier
+                        </button>
+                    </form>
                 </div>
             </article>
         </section>

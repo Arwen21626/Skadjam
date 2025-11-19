@@ -17,11 +17,6 @@ $tab_tva = [];
 //Tableau pour les unites
 $tab_unite = ["Piece", "Litre","cl","g","kg","S","M","L","XL","XXL","m","cm"];
 
-//Gestion de la photo
-$typePhoto = $_FILES['photo']['type'];
-$ext = explode('/',$typePhoto)[1];
-$nom_serv_photo = $_FILES['photo']['tmp_name'];
-
 //Requete récupération categories
 foreach($dbh->query('SELECT * from sae3_skadjam._categorie', PDO::FETCH_ASSOC) as $row) {
     $tab_categories[] = $row;
@@ -38,13 +33,11 @@ if (isset($_POST['categorie']) && isset($_POST['nom']) && isset($_POST['prix']) 
     $nom = htmlentities($_POST['nom']);
     $prixHT = htmlentities($_POST['prix']);
     $qteStock = htmlentities($_POST['qteStock']);
-    $enLigne = htmlentities($_POST['mettreEnLigne']);
-    $enPromotion = htmlentities($_POST['mettreEnPromotion']);
     $description = htmlentities($_POST['description']);
     $unite = htmlentities($_POST['unite']);
     $qteUnite = htmlentities($_POST['qteUnite']);
 
-    $enPromotion = htmlentities($_POST['mettreEnPromotion']);
+    // $enPromotion = htmlentities($_POST['mettreEnPromotion']);
     $enLigne = htmlentities($_POST['mettreEnLigne']);
 
     //Récupération du nom de la catégorie pour la gestion de la tva
@@ -62,6 +55,11 @@ if (isset($_POST['categorie']) && isset($_POST['nom']) && isset($_POST['prix']) 
         $enLigne = 'false';
     }
 
+    //Gestion de la photo
+    $typePhoto = $_FILES['photo']['type'];
+    $ext = explode('/',$typePhoto)[1];
+    $nom_serv_photo = $_FILES['photo']['tmp_name'];
+
     //Déplacement et renommage du fichier photo
     $nom_explode = explode(' ',$nom)[0];
     $currentTime = time();
@@ -70,7 +68,7 @@ if (isset($_POST['categorie']) && isset($_POST['nom']) && isset($_POST['prix']) 
     $nom_photo_finale = $nom_explode.$currentTime.'.'.$ext;
     move_uploaded_file($nom_serv_photo,$destination.'/'.$nom_photo_finale);
     
-    if (verifPrix($prix) && verifQteStock($qteStock)){
+    if (verifPrix($prixHT) && verifQteStock($qteStock)){
         try{
             if ($nomCategorie == 'Alimentaire') {
                 foreach ($tab_tva as $t) {
@@ -132,7 +130,7 @@ if (isset($_POST['categorie']) && isset($_POST['nom']) && isset($_POST['prix']) 
     else{
         echo ("Le prix ou la quantité saisi est incorrect.");
     }
-    header(("location:./details_produit.php?idProduit=$idProd"));
+    header("Location: ./details_produit.php?idProduit=".$idProd);
 }
 else { ?>
 
