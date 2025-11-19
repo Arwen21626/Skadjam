@@ -1,6 +1,5 @@
 <?php
 session_start();
-$_SESSION["idCompte"] = 5;
 require_once __DIR__ . "/../../01_premiere_connexion.php";
 
 // Vérifie si le bouton 'Se déconnecter à été appuyé'
