@@ -1,3 +1,22 @@
+<?php 
+
+    if (!isset($_SESSION['role'])) {
+        $_SESSION['role'] = "visiteur";
+    }
+
+    $urlProfil;
+
+    if ($_SESSION["role"] === "visiteur") {
+        $urlProfil = "/" . "html/fo/connexion.php";
+    }
+    else if ($_SESSION["role"] === 'client') {
+        $urlProfil = "/" . "html/fo/profil_client.php";
+    }
+
+    // echo $urlProfil;
+    // print_r($_SESSION['role']) ;
+?>
+
 <nav class="bg-beige fixed bottom-0 w-full z-10 md:sticky md:top-0">
 
     <section class="flex justify-around items-center p-1">
@@ -40,26 +59,26 @@
 
         <div class="md:flex md:flex-col md:justify-center md:items-center">
 
-            <a href="#A modifier">
+            <a href="/html/fo/panier.php">
                 <div class="size-12 bg-no-repeat bg-size-[auto_48px] 
                 bg-[url(/images/logo/bootstrap_icon/cart.svg)] 
                 hover:bg-[url(/images/logo/bootstrap_icon/cart-fill.svg)]">
                 </div>
             </a>
 
-            <a class="text-vertFonce hover:text-rouge hidden md:inline-block" href="#A modifier">Panier</a>
+            <a class="text-vertFonce hover:text-rouge hidden md:inline-block" href="/html/fo/panier.php">Panier</a>
         </div>
             
         <div class="md:flex md:flex-col md:justify-center md:items-center">
 
-            <a href="#A modifier">
+            <a href=<?php echo $urlProfil ?>>
                 <div class="size-12 bg-no-repeat bg-size-[auto_48px] 
                 bg-[url(/images/logo/bootstrap_icon/person.svg)] 
                 hover:bg-[url(/images/logo/bootstrap_icon/person-fill.svg)]">
                 </div>
             </a>
 
-            <a class="text-vertFonce hover:text-rouge hidden md:inline-block" href="#A modifier">Profil</a>
+            <a class="text-vertFonce hover:text-rouge hidden md:inline-block" href=<?php echo $urlProfil ?>>Profil</a>
         </div>
             
     </section>

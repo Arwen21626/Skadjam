@@ -1,4 +1,5 @@
-<?php 
+<?php
+    session_start();
     include(__DIR__ . "/../../01_premiere_connexion.php");
     include(__DIR__ . "/../../php/fonctions.php");
 

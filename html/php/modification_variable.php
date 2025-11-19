@@ -54,3 +54,14 @@ function tabAdresse($adresse){
     }
     return [$num, $complementNum, $adresse];
 }
+ 
+function modifierSiegeSocial($adresse){
+    // modifie l'adresse pour ne garder que la ville et le code postale
+    // adresse au format : x [bis,...] nomRue, ville, cp
+
+    $parts = explode(',', $adresse);
+    $ville = trim($parts[count($parts) - 2]);
+    $cp = trim($parts[count($parts) - 1]);
+    $adresseRue = trim(implode(',', array_slice($parts, 0, -2)));
+    return ["adresse"=>$adresseRue, "ville"=>$ville, "cp"=>$cp];
+}

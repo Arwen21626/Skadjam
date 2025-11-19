@@ -1,7 +1,7 @@
 <?php
-include(__DIR__ . '/../../01_premiere_connexion.php');
-const PAGE_SIZE = 15;
-require_once(__DIR__ . "/../../php/fonctions.php");
+    include(__DIR__ . '/../../01_premiere_connexion.php');
+    const PAGE_SIZE = 15;
+    require_once(__DIR__ . "/../../php/fonctions.php");
 ?>
 
 <!DOCTYPE html>
@@ -35,7 +35,7 @@ require_once(__DIR__ . "/../../php/fonctions.php");
             <a href="#nosProduits" title="lien vers page les plus vendus">
                 <img src="../../images/images_accueil/les_plus_vendus.webp" alt="les plus vendus" class="w-90 md:w-150 h-auto justify-self-end">
             </a>
-            <a href="" title="lien vers page commandes">
+            <a href="../fo/commandes.php" title="lien vers page commandes">
                 <img src="../../images/images_accueil/commandes.webp" alt="commandes" class="w-90 md:w-150 h-auto justify-self-start">
             </a>        
         </div>
@@ -77,7 +77,7 @@ require_once(__DIR__ . "/../../php/fonctions.php");
                 <div class="grid grid-cols-2 justify-items-center md:grid-cols-3">
                     <?php foreach($lignes as $id => $valeurs){
                         $idProduit = $valeurs['id_produit'];?>
-                        <section class="bg-bleu grid grid-cols-[40%_60%] w-38 md:w-80 h-auto p-3 m-2">
+                        <section class="bg-bleu grid grid-cols-[40%_60%] w-40 md:w-80 h-auto p-2 md:p-3 m-2">
                             <!--affichage de la photo-->
                             <a href= "<?php echo "details_produit.php?idProduit=".$idProduit;?>" class="col-span-2 justify-self-center mb-3">
                                 <img src="<?php echo htmlentities($valeurs['url_photo']);?>" 
@@ -93,7 +93,7 @@ require_once(__DIR__ . "/../../php/fonctions.php");
                                 <p><?php echo htmlentities($valeurs['prix_ttc']);?> €</p>
 
                                 <!--récupération de la note-->
-                                <div class="ml-2 md:ml-10 flex">
+                                <div class="w-2/4 ml-2 md:ml-10 flex">
                                     <?php $note = $valeurs['note_moyenne'];
                                         affichageNote($note); ?>
                                 </div> 

@@ -698,6 +698,9 @@ p, a {
   .bg-bleu {
     background-color: var(--color-bleu);
   }
+  .bg-gray-400 {
+    background-color: var(--color-gray-400, oklch(70.7% 0.022 261.325));
+  }
   .bg-vertClair {
     background-color: var(--color-vertClair);
   }

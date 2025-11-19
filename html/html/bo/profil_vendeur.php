@@ -1,6 +1,8 @@
 <?php
 session_start();
 include __DIR__ . "/../../01_premiere_connexion.php";
+include(__DIR__ . '/../../php/modification_variable.php');
+include(__DIR__ . '/../../php/verification_formulaire.php');
 //$idCompte = $_SESSION["idCompte"];
 $idCompte = 1;
 if (!isset($denom)) {
@@ -65,29 +67,67 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $newPrenom = $_POST['prenom'];
     $newTel = $_POST['tel'];
     $newMail = $_POST['mail'];
-    $newAdresse = $_POST['adresse'];
-    print_r($_POST);
+    $newAdresse = modifierSiegeSocial($_POST['adresse']);
+    $newVille = $newAdresse["ville"];
+    $newCp = $newAdresse["cp"];
+    $newAdresse = $newAdresse["adresse"];
+    
+    $erreurs = [];
+    // Validation des données
+    /* NOM */
+    if (!verifNomPrenom($newNom)) $erreurs["nom"] = "lettre majuscule ou minuscule seulement";
+
+    /* PRENOM */
+    if (!verifNomPrenom($newPrenom)) $erreurs["prenom"] = "lettre majuscule ou minuscule seulement";
+
+    /* MAIL */
+    if (!verifMail($newMail)) $erreurs["mail"] = "format incorrecte";
+
+    /* TEL */
+    if (!verifTelephone($newTel)) $erreurs["tel"] = "numéro à 10 chiffres";
+
+    /* RS */
+    if (!verifDenomination($newDenom)) $erreurs["denomination"] = "autorisé majuscules, minuscules et chiffres";
+
+    /* SIREN */
+    if (!verifSiren($newSiren)) $erreurs["siren"] = "numéro SIREN invalide";
+
+    /* ##### ADRESSE ##### */
+    if (!verifCp($newCp)) $erreurs["cp"] = "code postale invalide";
+
+    if (!verifVille($newVille)) $erreurs["ville"] = "format ville incorrect";
+
+    if (!verifAdresse($newAdresse)) $erreurs["adresse"] = "format de l'adresse invalide";
+    
+    $temp = tabAdresse($adresse);
+    $newNumero = $temp[0];
+    $newCompNum = $temp[1];
+    $newAdresse = $temp[2];
+
+    print_r($erreurs);
 
     // Mettre à jour la base de données avec les nouvelles valeurs
-    try {
-        // Mettre à jour les informations du compte
-        $stmt = $dbh->prepare("UPDATE sae3_skadjam._compte SET nom_compte = ?, prenom_compte = ?, adresse_mail = ?, numero_telephone = ? WHERE id_compte = ?");
-        $stmt->execute([$newNom, $newPrenom, $newMail, $newTel, $idCompte]);
-
-        // Mettre à jour les informations du vendeur
-        $stmt = $dbh->prepare("UPDATE sae3_skadjam._vendeur SET raison_sociale = ?, siren = ?, description_vendeur = ? WHERE id_compte = ?");
-        $stmt->execute([$newDenom, $newSiren, $newDescription, $idCompte]);
-
-        // Mettre à jour l'adresse (simplifié pour cet exemple)
-        // Vous devrez peut-être diviser l'adresse en ses composants
-        // et mettre à jour la table des adresses en conséquence
-
-        // Rediriger ou afficher un message de succès
-        header("Location: profil_vendeur.php");
-        exit;
-    } catch (PDOException $e) {
-        echo "Erreur lors de la mise à jour : " . $e->getMessage();
-        exit;
+    if (empty($erreurs)) {
+        try {
+            // Mettre à jour les informations du compte
+            $stmt = $dbh->prepare("UPDATE sae3_skadjam._compte SET nom_compte = ?, prenom_compte = ?, adresse_mail = ?, numero_telephone = ? WHERE id_compte = ?");
+            $stmt->execute([$newNom, $newPrenom, $newMail, $newTel, $idCompte]);
+    
+            // Mettre à jour les informations du vendeur
+            $stmt = $dbh->prepare("UPDATE sae3_skadjam._vendeur SET raison_sociale = ?, siren = ?, description_vendeur = ? WHERE id_compte = ?");
+            $stmt->execute([$newDenom, $newSiren, $newDescription, $idCompte]);
+    
+            // Mettre à jour l'adresse (simplifié pour cet exemple)
+            // Vous devrez peut-être diviser l'adresse en ses composants
+            // et mettre à jour la table des adresses en conséquence
+    
+            // Rediriger ou afficher un message de succès
+            header("Location: profil_vendeur.php");
+            exit;
+        } catch (PDOException $e) {
+            echo "Erreur lors de la mise à jour : " . $e->getMessage();
+            exit;
+        }
     }
 }
 
@@ -213,13 +253,21 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             </div>
             <div class="flex flex-row justify-around mt-8 mb-8 @max-[768px]:flex-col @max-[768px]:items-center">
                 <input type="reset" value="Annuler" class="cursor-pointer w-64 border-2 border-solid rounded-md border-beige pl-3">
-                <input type="submit" value="Valider" class="cursor-pointer w-64 border-2 border-solid rounded-md border-beige pl-3 @max-[768px]:mt-2">
+                <input type="submit" value="Valider" class="cursor-pointer w-64 border-2 border-solid rounded-md border-beige pl-3 @max-[768px]:mt-2" id="valider">
             </div>
         </form>
     </main>
     <?php require_once __DIR__ . "/../../php/structure/footer_back.php" ?>
 </body>
 <script>
+const valider = false;
+const boutonValider = document.getElementById("valider");
+boutonValider.disabled = !valider;
+if (!valider){
+    boutonValider.classList.add("bg-gray-400");
+    boutonValider.classList.remove("bg-beige", "hover:bg-darkbeige");
+}
+
 document.querySelectorAll(".modif-attribut .bouton-modifier, .modif-attribut .groupe-bouton").forEach(button => {
     button.addEventListener("click", () => {
         const container = button.closest(".modif-attribut"); // parent
@@ -264,6 +312,7 @@ document.querySelectorAll(".modif-attribut .bouton-annuler").forEach(button => {
 
     });
 });
+
 </script>
 
 </html>
