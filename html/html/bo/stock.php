@@ -88,35 +88,7 @@
                             <?php }?>
                         </tbody>
                     </table>
-
-                    <script>
-                        document.getElementById('executerAjouterStock').addEventListener('click', () => {
-                            fetch('../../php/executer_ajouter_stock.php')
-                            .then(res => res.text())
-                            .then(data => {
-                                window.location.href = "stock.php";
-                            });
-                        });
-
-                        document.getElementById('executerEnleverStock').addEventListener('click', () => {
-                            fetch('../../php/executer_enlever_stock.php')
-                            .then(res => res.text())
-                            .then(data => {
-                                window.location.href = "stock.php";
-                            });
-                        });
-
-                        document.getElementById('executerViderStock').addEventListener('click', () => {
-                            fetch('../../php/executer_vider_stock.php')
-                            .then(res => res.text())
-                            .then(data => {
-                                window.location.href = "stock.php";
-                            });
-                        });
-                    </script>
-
-
-                        
+      
                 <?php }
                 $dbh = null;
             } 
