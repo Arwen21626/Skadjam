@@ -29,7 +29,7 @@ if(isset($_POST['mdp']) && isset($_POST['mail'])){
         echo '<pre>';
         print_r($estVendeur);
         echo '<pre>';
-        
+
         if($estVendeur['id_compte']){ 
             // Index vendeur + role vendeur
             $_SESSION['role'] = 'vendeur';
@@ -47,7 +47,7 @@ if(isset($_POST['mdp']) && isset($_POST['mail'])){
             if($estClient['id_compte']){ 
                 // Index client + role client
                 $_SESSION['role'] = 'client';
-                header('Location: ./index.php');
+                header('Location: ../fo//index.php');
             }
         }
         
