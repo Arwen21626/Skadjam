@@ -51,6 +51,7 @@
                                 <th scope="col">Note</th>
                                 <th scope="col">Stock</th>
                                 <th scope="col"></th>
+                                <th scope="col"></th>
                             </tr>
                         </thead>
                         <tbody>
@@ -62,7 +63,8 @@
                                     <td class="text-left"><?php $note = $valeurs['note_moyenne'];
                                         affichageNote($note); ?></td>
                                     <td class="text-left"><?php echo htmlentities($valeurs['quantite_stock']);?></td>
-                                    <td class="text-left"><a href="<?php echo "modifier_produit.php?idProduit=".$idProduit;?>"><img src="../../images/logo/bootstrap_icon/plus-square.svg" alt="bouton modifier produit"></a></td>
+                                    <td class=""><img src="../../images/logo/bootstrap_icon/plus-square.svg" alt="bouton ajouter 1 au stock"></td>
+                                    <td class=""><img src="../../images/logo/bootstrap_icon/dash-square.svg" alt="bouton enlever 1 au stock"></td>
                                 </tr>
                             <?php }?>
                         </tbody>
