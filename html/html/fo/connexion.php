@@ -23,7 +23,7 @@ if(isset($_POST['mdp']) && isset($_POST['mail'])){
 
         // Récupération des données de la bdd pour voir si c'est un vendeur ou un client
         $stmt = $dbh->prepare("SELECT id_compte FROM sae3_skadjam._vendeur WHERE id_compte = ?");
-        $stmt->execute([$_SESSION['id_compte']]);
+        $stmt->execute([$_SESSION['idCompte']]);
         $estVendeur = $stmt->fetch(PDO::FETCH_ASSOC);
 
         echo '<pre>';
@@ -31,7 +31,7 @@ if(isset($_POST['mdp']) && isset($_POST['mail'])){
         echo '<pre>';
 
         $stmt = $dbh->prepare("SELECT id_compte FROM sae3_skadjam._client WHERE id_compte = ?");
-        $stmt->execute([$tab['id_compte']]);
+        $stmt->execute([$_SESSION['idCompte']]);
         $estClient = $stmt->fetch(PDO::FETCH_ASSOC);
 
         echo '<pre>';
