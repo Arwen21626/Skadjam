@@ -36,9 +36,9 @@ $stmt->execute([
     ':id_produit' => $idProd
 ]);
 
-$isInTable = $stmt->fetch(PDO::FETCH_ASSOC); // soit array, soit false
+$estDansPanier = $stmt->fetch(PDO::FETCH_ASSOC); // soit array, soit false
 
-if (!$isInTable) 
+if (!$estDansPanier) 
 {
     $dbh->query("INSERT INTO sae3_skadjam._contient
              (id_produit, id_panier, quantite_par_produit)
@@ -47,19 +47,28 @@ if (!$isInTable)
 }
 else
 {
-    echo $isInTable["quantite_par_produit"];
+    $quantiteProd = $estDansPanier["quantite_par_produit"];
+    $quantiteProd++;
+
+    $maj = $dbh->prepare("
+        UPDATE sae3_skadjam._contient SET
+        quantite_par_produit = :quantite_par_produit
+        WHERE id_panier = :id_panier AND id_produit = :id_produit
+    ");
+
+    $maj->execute([
+        ':quantite_par_produit' => $quantiteProd,
+        ':id_panier' => $idPanier,
+        ':id_produit' => $idProd
+    ]);
 }
 
-// print_r($isInTable);
 
 
 
-// echo $idProd . "<br>" . $idClient;
 
 
-// header("location:/html/fo/details_produit.php?idProduit=" . $idProd);
+
+
+header("location:/html/fo/details_produit.php?idProduit=" . $idProd);
 ?>
-
-<!-- <pre>
-    <?php //print_r($infoPanier) ?>
-</pre> -->

@@ -71,9 +71,7 @@
     }
 
     // Affichage test
-    //  print_r($infoPhoto);
-    echo $idProd;
-    echo $_SESSION["role"];
+    
 ?>
 
 
