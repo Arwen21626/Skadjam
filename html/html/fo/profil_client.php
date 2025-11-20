@@ -106,7 +106,7 @@ if (isset($_POST['logout'])) {
                 </form>
             </article>
             <!--    Récupérer mes données
-            <a href="reinitialiser_mdp.php" class="underline! absolute right-4 bottom-41 md:bottom-14 cursor-pointer hover:text-rouge">Demander mes données</a>
+            <a href="donnees_client.php" class="underline! absolute right-4 bottom-41 md:bottom-14 cursor-pointer hover:text-rouge">Demander mes données</a>
             -->
         <?php
         }else{
