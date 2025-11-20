@@ -29,7 +29,7 @@ if(isset($_POST['mdp']) && isset($_POST['mail'])){
         $estVendeur = $stmt->fetch(PDO::FETCH_ASSOC);
 
         echo '<pre>';
-        print_r($estVendeur['id_compte']);
+        print_r($estVendeur);
         echo '<pre>';
 
         if($estVendeur['id_compte'] == null) $estVendeur = 0;
