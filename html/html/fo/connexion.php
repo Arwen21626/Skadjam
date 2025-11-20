@@ -21,6 +21,9 @@ if(isset($_POST['mdp']) && isset($_POST['mail'])){
         // Initialisation de la session après confirmation du mot de passe
         $_SESSION['idCompte'] = $tab['id_compte'];
 
+        $estVendeur['id_compte'] = 0;
+        $estClient['id_compte'] = 0;
+
         // Récupération des données de la bdd pour voir si c'est un vendeur ou un client
         $stmt = $dbh->prepare("SELECT id_compte FROM sae3_skadjam._vendeur WHERE id_compte = ?");
         $stmt->execute([$_SESSION['idCompte']]);
