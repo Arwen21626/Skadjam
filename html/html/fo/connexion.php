@@ -28,7 +28,9 @@ if(isset($_POST['mdp']) && isset($_POST['mail'])){
         $stmt->execute([$tab['id_compte']]);
         $estVendeur = $stmt->fetch(PDO::FETCH_ASSOC);
 
-        echo $estVendeur['id_compte'];
+        echo '<pre>';
+        print_r($estVendeur['id_compte']);
+        echo '<pre>';
 
         if($estVendeur['id_compte'] == null) $estVendeur = 0;
 
