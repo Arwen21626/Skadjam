@@ -28,6 +28,8 @@ if(isset($_POST['mdp']) && isset($_POST['mail'])){
         $stmt->execute([$tab['id_compte']]);
         $estVendeur = $stmt->fetch(PDO::FETCH_ASSOC);
 
+        echo $estVendeur['id_compte'];
+
         if($estVendeur['id_compte'] == null) $estVendeur = 0;
 
         $stmt = $dbh->prepare("SELECT id_compte FROM sae3_skadjam._client WHERE id_compte = ?");
