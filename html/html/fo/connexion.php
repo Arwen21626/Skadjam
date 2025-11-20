@@ -53,7 +53,7 @@ if(isset($_POST['mdp']) && isset($_POST['mail'])){
             if($estClient['id_compte']){ 
                 // Index client + role client
                 $_SESSION['role'] = 'client';
-                header('Location: ../fo//index.php');
+                header('Location: ../fo/index.php');
             }
         }
         
