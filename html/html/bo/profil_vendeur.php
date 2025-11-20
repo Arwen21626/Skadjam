@@ -60,6 +60,7 @@ try {
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
     // Traitement du formulaire de modification du profil vendeur
     // Récupération des données du formulaire
+
     $newDenom = $_POST['denom'];
     $newSiren = $_POST['siren'];
     $newDescription = $_POST['description'];
@@ -71,7 +72,11 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $newVille = $newAdresse["ville"];
     $newCp = $newAdresse["cp"];
     $newAdresse = $newAdresse["adresse"];
-    
+    $image = $_FILES['image'];
+    $urlPhoto = "images/images_vendeur/" . $image['name'];
+    $imageAlt = explode(".",$image['name'])[0];
+    $imageTitre = explode(".",$image['name'])[0];
+
     $erreurs = [];
     // Validation des données
     /* NOM */
@@ -104,8 +109,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $newCompNum = $temp[1];
     $newAdresse = $temp[2];
 
-    print_r("$newVille $newCp");
-    print_r($temp);
+    
 
     // Mettre à jour la base de données avec les nouvelles valeurs
     if (empty($erreurs)) {
@@ -125,17 +129,18 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             $stmt->execute([$newAdresse, $newCompNum, $newNumero, $newCp, $newVille, $idCompte]);
             // et mettre à jour la table des adresses en conséquence
             
+
             $dbh->commit();
 
             // Rediriger ou afficher un message de succès
-            header("Location: profil_vendeur.php");
+            // header("Location: profil_vendeur.php");
             exit;
         } catch (PDOException $e) {
             echo "Erreur lors de la mise à jour : " . $e->getMessage();
             exit;
         }
     }
-}
+}else {
 
 
 
@@ -148,10 +153,11 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 </head>
 <body>
     <?php 
-    require_once __DIR__ . "/../../php/structure/header_back.php";
-    require_once __DIR__ . "/../../php/structure/navbar_back.php";
+    /*require_once __DIR__ . "/../../php/structure/header_back.php";
+    require_once __DIR__ . "/../../php/structure/navbar_back.php";*/
     ?>
     <main class=" flex flex-col items-center">
+
         <h2 class="m-8">Profil</h2>
         <form method="POST" enctype="multipart/form-data" class=" w-2/3 @max-[768px]:w-7/8">
             <div class="flex flex-row items-center justify-between">
@@ -163,18 +169,32 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                     if ($tabPhoto){ 
                         $photo = $tabPhoto[1];
                         ?>
-                        <img class=" w-80 border-2 border-solid rounded-2xl border-beige mb-3" src="<?= "../../" .  $photo["url_photo"] ?>" alt="<?= $photo["alt"] ?>" title="<?= $photo["titre"] ?>">
+                        <img class="image-vendeur w-80 border-2 border-solid rounded-2xl border-beige mb-3" src="<?= "../../" .  $photo["url_photo"] ?>" alt="<?= $photo["alt"] ?>" title="<?= $photo["titre"] ?>">
+
                     <?php  
                     }else{?>
-                    <div class="w-80 h-80">
-                        <img class="mb-3 w-80 bg-beige rounded-2xl" src="../../images/logo/bootstrap_icon/image.svg" alt="aucune image" title="aucune image">
-                    </div>
+                        <div class="w-80 h-80">
+                            <img class="image-none mb-3 w-80 bg-beige rounded-2xl" src="../../images/logo/bootstrap_icon/image.svg" alt="aucune image" title="aucune image">
+                        </div>
+
+                        
+                    <?php } ?>
+
+                    <input class="image-vendeur" type="file" id="image" name="image" accept="image/*" hidden>
                     
-                    <?php }
+                    <?php
+                    if ($tabPhoto){ ?>
+                        <label class="cursor-pointer w-80 rounded-2xl  bg-beige p-2 text-center"  for="image">Modifier l'image</label>
+                    <?php
+                    } else { ?>
+                        <label class="cursor-pointer w-80 rounded-2xl bg-beige p-2 text-center"  for="image">Ajouter une image</label>
+                    <?php
+                    }
+                    
                     ?>
-                    <input type="file" id="image" name="image" accept="image/png, image/jpeg image/webp" hidden>
-                    <label class="cursor-pointer w-80 rounded-2xl bg-beige p-2 text-center"  for="image">Ajouter une image</label>
+                    
                 </div>
+
                 <div class=" mt-5 w-1/3">
                     <div class=" mb-3 modif-attribut">
                         <div class=" flex flex-row items-center">
@@ -277,8 +297,21 @@ const boutonValider = document.getElementById("valider");
 boutonValider.disabled = !valider;
 if (!valider){
     boutonValider.classList.add("bg-gray-400");
-    boutonValider.classList.remove("bg-beige", "cursor-pointer", "hover:bg-darkbeige");
+    boutonValider.classList.remove("bg-beige", "cursor-pointer");
 }
+
+document.getElementById("image").addEventListener("change", function() {
+    newEtatChamp = true;
+    if(boutonValider.disabled){
+        ancienEtatChamp = newEtatChamp;
+        if(nbModifActive === 0){
+            activerValider();
+            // boutonValider.disabled = false;
+            // boutonValider.classList.remove("bg-gray-400");
+            // boutonValider.classList.add("bg-beige", "cursor-pointer");
+        }
+    }
+});
 
 document.querySelectorAll(".modif-attribut .bouton-modifier").forEach(button => {
     button.addEventListener("click", () => {
@@ -292,7 +325,7 @@ document.querySelectorAll(".modif-attribut .bouton-modifier").forEach(button => 
             ancienEtatValider = true;
             boutonValider.disabled = true;
             boutonValider.classList.add("bg-gray-400");
-            boutonValider.classList.remove("bg-beige", "cursor-pointer", "hover:bg-darkbeige");
+            boutonValider.classList.remove("bg-beige", "cursor-pointer");
         }
 
         ancienTexte = paragraph.textContent;
@@ -342,9 +375,10 @@ document.querySelectorAll(".modif-attribut .bouton-valider").forEach(button => {
         if(boutonValider.disabled && newEtatChamp){
             ancienEtatChamp = newEtatChamp;
             if(nbModifActive === 0){
-                boutonValider.disabled = false;
-                boutonValider.classList.remove("bg-gray-400");
-                boutonValider.classList.add("bg-beige", "cursor-pointer", "hover:bg-darkbeige");
+                activerValider();
+                // boutonValider.disabled = false;
+                // boutonValider.classList.remove("bg-gray-400");
+                // boutonValider.classList.add("bg-beige", "cursor-pointer");
             }
         }
         
@@ -360,9 +394,11 @@ document.querySelectorAll(".modif-attribut .bouton-annuler").forEach(button => {
         const champ = container.querySelector(".champ-text") // texte en input ou textarea
         newEtatChamp = ancienEtatChamp
         if(ancienEtatValider && nbModifActive === 0){
+            activerValider();
+            /*
             boutonValider.disabled = false;
             boutonValider.classList.remove("bg-gray-400");
-            boutonValider.classList.add("bg-beige", "cursor-pointer", "hover:bg-darkbeige");
+            boutonValider.classList.add("bg-beige", "cursor-pointer");*/
         }
 
         champ.value = ancienTexte;
@@ -376,6 +412,16 @@ document.querySelectorAll('.modif-attribut .champ-text').forEach(input => {
     });
 });
 
+function activerValider(){
+    boutonValider.disabled = false;
+    boutonValider.classList.remove("bg-gray-400");
+    boutonValider.classList.add("bg-beige", "cursor-pointer");
+}
+
+
 </script>
 
 </html>
+<?php
+}
+?>
