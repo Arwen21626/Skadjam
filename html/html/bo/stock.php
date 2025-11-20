@@ -46,10 +46,11 @@
                     <table class="table-auto w-200">
                         <thead>
                             <tr>
-                                <th scope="col" class="text-left">Nom du produit</th>
-                                <th scope="col">Prix</th>
-                                <th scope="col">Note</th>
-                                <th scope="col">Stock</th>
+                                <th scope="col" class="text-left"><h3>Nom du produit</h3></th>
+                                <th scope="col"><h3>Prix</h3></th>
+                                <th scope="col"><h3>Note</h3></th>
+                                <th scope="col"><h3>Stock</h3></th>
+                                <th scope="col"></th>
                                 <th scope="col"></th>
                                 <th scope="col"></th>
                             </tr>
@@ -58,17 +59,61 @@
                             <?php foreach($tabProduit as $id => $valeurs){
                                 $idProduit = $valeurs['id_produit']; ?>
                                 <tr>
-                                    <th scope="row" class="text-left"><?php echo htmlentities($valeurs['libelle_produit']); ?></th>
-                                    <td class="text-left"><?php echo htmlentities($valeurs['prix_ttc']);?> €</td>
-                                    <td class="text-left"><?php $note = $valeurs['note_moyenne'];
+                                    <th scope="row" class="text-left"><a href="<?php echo htmlentities("details_produit.php?idProduit=".$idProduit);?>"><?php echo htmlentities($valeurs['libelle_produit']); ?></a></th>
+                                    <td class="text-center"><p><?php echo htmlentities($valeurs['prix_ttc']);?> €</p></td>
+                                    <td><?php $note = $valeurs['note_moyenne'];
                                         affichageNote($note); ?></td>
-                                    <td class="text-left"><?php echo htmlentities($valeurs['quantite_stock']);?></td>
-                                    <td class=""><img src="../../images/logo/bootstrap_icon/plus-square.svg" alt="bouton ajouter 1 au stock"></td>
-                                    <td class=""><img src="../../images/logo/bootstrap_icon/dash-square.svg" alt="bouton enlever 1 au stock"></td>
+                                    <td class="text-center"><p><?php echo htmlentities($valeurs['quantite_stock']);?></p></td>
+                                    <td>
+                                        <form action="../../php/executer_ajouter_stock.php" method="POST">
+                                            <input type="hidden" name="id" value="<?php echo htmlentities($idProduit);?>">
+                                            <button type="submit"><img src="../../images/logo/bootstrap_icon/plus-square.svg" alt="bouton ajouter 1 au stock"></button>
+                                        </form>
+                                    </td>
+                                    <td>
+                                        <form action="../../php/executer_enlever_stock.php" method="POST">
+                                            <input type="hidden" name="id" value="<?php echo htmlentities($idProduit);?>">
+                                            <input type="hidden" name="quantite" value="1">
+                                            <input type="hidden" name="stockActuel" value="<?php echo htmlentities($valeurs['quantite_stock']);?>">
+                                            <button type="submit"><img src="../../images/logo/bootstrap_icon/dash-square.svg" alt="bouton enlever 1 au stock"></button>
+                                        </form>
+                                    </td>
+                                    <td>
+                                        <form action="../../php/executer_vider_stock.php" method="POST">
+                                            <input type="hidden" name="id" value="<?php echo htmlentities($idProduit);?>">
+                                            <button type="submit"><img src="../../images/logo/bootstrap_icon/trash.svg" alt="bouton vider stock"></button>
+                                        </form>
+                                    </td>
                                 </tr>
                             <?php }?>
                         </tbody>
                     </table>
+
+                    <script>
+                        document.getElementById('executerAjouterStock').addEventListener('click', () => {
+                            fetch('../../php/executer_ajouter_stock.php')
+                            .then(res => res.text())
+                            .then(data => {
+                                window.location.href = "stock.php";
+                            });
+                        });
+
+                        document.getElementById('executerEnleverStock').addEventListener('click', () => {
+                            fetch('../../php/executer_enlever_stock.php')
+                            .then(res => res.text())
+                            .then(data => {
+                                window.location.href = "stock.php";
+                            });
+                        });
+
+                        document.getElementById('executerViderStock').addEventListener('click', () => {
+                            fetch('../../php/executer_vider_stock.php')
+                            .then(res => res.text())
+                            .then(data => {
+                                window.location.href = "stock.php";
+                            });
+                        });
+                    </script>
 
 
                         
