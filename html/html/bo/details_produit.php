@@ -6,6 +6,7 @@ session_start();
 
 //Récupération des données sur le produit ainsi que la photo
 $idProd = $_GET['idProduit'];
+
 foreach($dbh->query("SELECT *
                     from sae3_skadjam._produit pr
                     inner join sae3_skadjam._montre m

@@ -40,10 +40,9 @@ if (isset($_POST['logout'])) {
 
                 // Récupérer toutes les infos du client
                 foreach($dbh->query("SELECT * FROM sae3_skadjam._compte c
-                                                INNER JOIN
-                                            sae3_skadjam._client cli 
-                                                ON c.id_compte = cli.id_compte
-                                            WHERE c.id_compte = $id", PDO::FETCH_ASSOC) as $client){
+                                        INNER JOIN sae3_skadjam._client cli 
+                                            ON c.id_compte = cli.id_compte
+                                        WHERE c.id_compte = $id", PDO::FETCH_ASSOC) as $client){
                     $nom = $client['nom_compte'];
                     $prenom = $client['prenom_compte'];
                     $pseudo = $client['pseudo'];
@@ -54,13 +53,11 @@ if (isset($_POST['logout'])) {
                 // Récupérer les adresses du client
                 $nbAdresse = 0;
                 foreach($dbh->query("SELECT * FROM sae3_skadjam._compte c
-                                                INNER JOIN
-                                            sae3_skadjam._habite h
-                                                ON c.id_compte = h.id_compte
-                                                INNER JOIN
-                                            sae3_skadjam._adresse a
-                                                ON h.id_adresse = a.id_adresse
-                                            WHERE c.id_compte = $id", PDO::FETCH_ASSOC) as $adresse){
+                                        INNER JOIN sae3_skadjam._habite h
+                                            ON c.id_compte = h.id_compte
+                                        INNER JOIN sae3_skadjam._adresse a
+                                            ON h.id_adresse = a.id_adresse
+                                        WHERE c.id_compte = $id", PDO::FETCH_ASSOC) as $adresse){
                     $numRue[$nbAdresse] = $adresse['numero_rue'];
                     $adressePostale[$nbAdresse] = $adresse['adresse_postale'];
                     $batiment[$nbAdresse] = " " . $adresse['numero_bat'];
@@ -79,7 +76,7 @@ if (isset($_POST['logout'])) {
                 <!-- Affichage des informations du client (sauf son mot de passe) -->
                 <div class="flex flex-row">
                     <h2 class="mt-1 mb-1 mr-4 ml-0"><?php echo $pseudo; ?></h2>
-                    <h3 class="mt-1 mb-1 mr-4 ml-0 relative top-4 text-vertFonce -z-1"><?php echo $prenom; ?> <?php echo $nom; ?></h3>
+                    <h3 class="mt-1 mb-1 mr-4 ml-0 relative top-1.5 md:top-4 text-vertFonce -z-1"><?php echo $prenom; ?> <?php echo $nom; ?></h3>
                 </div>
                 <div>
                     <p class="m-4"><?php echo $naissance; ?></p>
@@ -90,24 +87,27 @@ if (isset($_POST['logout'])) {
                     <p class="m-4"><?php echo $mail; ?></p>
                 </div>
             </section>
-            <article class="flex flex-row justify-around mb-5">
+            <article class="flex flex-col md:flex-row justify-around items-center mb-7">
                 <!-- Modifier les informations du client (sauf le mot de passe) -->
                 <form action="modifier_compte_client.php" method="post">
-                    <input class="border-2 border-vertClair rounded-xl p-2" type="submit" value="Modifier mes informations">
+                    <input class="border-2 border-vertClair rounded-xl p-2 m-1" type="submit" value="Modifier mes informations">
                 </form>
 
                 <!-- Modifier le mot de passe du client -->
                 <form action="nouveau_mdp.php">
                     <?php $_SESSION['adresse_mail'] = $mail; ?>
-                    <input class="border-2 border-vertClair rounded-xl p-2" type="submit" value="Modifier mon mot de passe">    
+                    <input class="border-2 border-vertClair rounded-xl p-2 m-1" type="submit" value="Modifier mon mot de passe">    
                 </form>
 
                 <!-- Déconnexion -->
                 <form action="profil_client.php" method="post">
                     <input type="hidden" id="logout" name="logout" value="true">
-                    <input class="border-2 border-vertClair rounded-xl p-2" type="submit" value="Se déconnecter">
+                    <input class="border-2 border-vertClair rounded-xl p-2 m-1" type="submit" value="Se déconnecter">
                 </form>
             </article>
+            <!--    Récupérer mes données
+            <a href="reinitialiser_mdp.php" class="underline! absolute right-4 bottom-41 md:bottom-14 cursor-pointer hover:text-rouge">Demander mes données</a>
+            -->
         <?php
         }else{
             // Si non connecté, l'emmener à la page de connexion à la place

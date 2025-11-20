@@ -234,11 +234,20 @@ p, a {
   .top-0 {
     top: calc(var(--spacing, 0.25rem) * 0);
   }
-  .top-4 {
-    top: calc(var(--spacing, 0.25rem) * 4);
+  .top-1 {
+    top: calc(var(--spacing, 0.25rem) * 1);
+  }
+  .top-1\.5 {
+    top: calc(var(--spacing, 0.25rem) * 1.5);
+  }
+  .right-4 {
+    right: calc(var(--spacing, 0.25rem) * 4);
   }
   .bottom-0 {
     bottom: calc(var(--spacing, 0.25rem) * 0);
+  }
+  .bottom-41 {
+    bottom: calc(var(--spacing, 0.25rem) * 41);
   }
   .-z-1 {
     z-index: calc(1 * -1);
@@ -452,6 +461,9 @@ p, a {
   .h-6\! {
     height: calc(var(--spacing, 0.25rem) * 6) !important;
   }
+  .h-7 {
+    height: calc(var(--spacing, 0.25rem) * 7);
+  }
   .h-10 {
     height: calc(var(--spacing, 0.25rem) * 10);
   }
@@ -509,11 +521,20 @@ p, a {
   .w-11\/12 {
     width: calc(11/12 * 100%);
   }
+  .w-20 {
+    width: calc(var(--spacing, 0.25rem) * 20);
+  }
+  .w-35 {
+    width: calc(var(--spacing, 0.25rem) * 35);
+  }
   .w-38 {
     width: calc(var(--spacing, 0.25rem) * 38);
   }
   .w-40 {
     width: calc(var(--spacing, 0.25rem) * 40);
+  }
+  .w-50 {
+    width: calc(var(--spacing, 0.25rem) * 50);
   }
   .w-60 {
     width: calc(var(--spacing, 0.25rem) * 60);
@@ -659,6 +680,9 @@ p, a {
   }
   .rounded-md {
     border-radius: var(--radius-md, 0.375rem);
+  }
+  .rounded-sm {
+    border-radius: var(--radius-sm, 0.25rem);
   }
   .rounded-xl {
     border-radius: var(--radius-xl, 0.75rem);
@@ -976,6 +1000,16 @@ p, a {
       top: calc(var(--spacing, 0.25rem) * 0);
     }
   }
+  .md\:top-4 {
+    @media (width >= 48rem) {
+      top: calc(var(--spacing, 0.25rem) * 4);
+    }
+  }
+  .md\:bottom-14 {
+    @media (width >= 48rem) {
+      bottom: calc(var(--spacing, 0.25rem) * 14);
+    }
+  }
   .md\:mt-4 {
     @media (width >= 48rem) {
       margin-top: calc(var(--spacing, 0.25rem) * 4);
@@ -1058,6 +1092,11 @@ p, a {
   .md\:w-40 {
     @media (width >= 48rem) {
       width: calc(var(--spacing, 0.25rem) * 40);
+    }
+  }
+  .md\:w-50 {
+    @media (width >= 48rem) {
+      width: calc(var(--spacing, 0.25rem) * 50);
     }
   }
   .md\:w-80 {

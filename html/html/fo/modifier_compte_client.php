@@ -130,7 +130,7 @@ foreach($dbh->query("SELECT * FROM sae3_skadjam._compte c
             ?>
 
             <div class="flex mt-10 justify-center md:justify-end w-1/1">
-                <button class="border-2 border-vertFonce rounded-2xl w-40 h-14 p-0 m-0 mr-10" type="button"><a href="./index.php">Annuler</a></button>
+                <button class="border-2 border-vertFonce rounded-2xl w-40 h-14 p-0 m-0 mr-10" type="button"><a href="./profil_client.php">Annuler</a></button>
                 <input class="border-2 border-vertFonce rounded-2xl w-40  h-14 p-0 m-0 md:mr-10" type="Submit" name="submit" id="submit" value="Valider">
             </div>
         </form>

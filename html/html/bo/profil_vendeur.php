@@ -99,28 +99,34 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
     if (!verifAdresse($newAdresse)) $erreurs["adresse"] = "format de l'adresse invalide";
     
-    $temp = tabAdresse($adresse);
+    $temp = tabAdresse($newAdresse);
     $newNumero = $temp[0];
     $newCompNum = $temp[1];
     $newAdresse = $temp[2];
 
-    print_r($erreurs);
+    print_r("$newVille $newCp");
+    print_r($temp);
 
     // Mettre à jour la base de données avec les nouvelles valeurs
     if (empty($erreurs)) {
         try {
+            $dbh->beginTransaction();
+
             // Mettre à jour les informations du compte
             $stmt = $dbh->prepare("UPDATE sae3_skadjam._compte SET nom_compte = ?, prenom_compte = ?, adresse_mail = ?, numero_telephone = ? WHERE id_compte = ?");
-            $stmt->execute([$newNom, $newPrenom, $newMail, $newTel, $idCompte]);
+            $stmt->execute([$newNom, $newPrenom, $newMail, formatTel($newTel), $idCompte]);
     
             // Mettre à jour les informations du vendeur
             $stmt = $dbh->prepare("UPDATE sae3_skadjam._vendeur SET raison_sociale = ?, siren = ?, description_vendeur = ? WHERE id_compte = ?");
             $stmt->execute([$newDenom, $newSiren, $newDescription, $idCompte]);
     
             // Mettre à jour l'adresse (simplifié pour cet exemple)
-            // Vous devrez peut-être diviser l'adresse en ses composants
+            $stmt = $dbh->prepare("UPDATE sae3_skadjam._adresse AS a SET adresse_postale = ?, complement_adresse = ?, numero_rue = ?, code_postal = ?, ville = ? FROM sae3_skadjam._habite AS h WHERE a.id_adresse = h.id_adresse AND h.id_compte = ?");
+            $stmt->execute([$newAdresse, $newCompNum, $newNumero, $newCp, $newVille, $idCompte]);
             // et mettre à jour la table des adresses en conséquence
-    
+            
+            $dbh->commit();
+
             // Rediriger ou afficher un message de succès
             header("Location: profil_vendeur.php");
             exit;
@@ -185,7 +191,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                             <?php include __DIR__ . "/../../php/structure/bouton_modifier_vendeur.php"; ?>
                         </div>
                         <p class="attribut-text ml-7 mt-2"><?= "$num $numBis $adresse, $ville, $cp" ?></p>
-                        <input type="text" name="adresse" class="champ-text w-full ml-5 hidden border-2 border-solid rounded-md border-beige pl-3" value="<?= "$num $numBis $adresse, $ville, $cp" ?>">
+                        <input type="text" name="adresse" class="champ-text w-full ml-5 hidden border-2 border-solid rounded-md border-beige pl-3" value="<?= "$num $numBis $adresse, $ville, $cp" ?>" placeholder="X [bis] rue camélia, Paris, 75011">
                     </div>
 
                     <div class=" mb-3 modif-attribut">
@@ -260,24 +266,36 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     <?php require_once __DIR__ . "/../../php/structure/footer_back.php" ?>
 </body>
 <script>
-const valider = false;
+let valider = false;
+let ancienEtatValider = false;
+let nbModifActive = 0;
+let ancienEtatChamp = false;
+let newEtatChamp = false;
+let ancienTexte = "";
+let texte = "";
 const boutonValider = document.getElementById("valider");
 boutonValider.disabled = !valider;
 if (!valider){
     boutonValider.classList.add("bg-gray-400");
-    boutonValider.classList.remove("bg-beige", "hover:bg-darkbeige");
+    boutonValider.classList.remove("bg-beige", "cursor-pointer", "hover:bg-darkbeige");
 }
 
-document.querySelectorAll(".modif-attribut .bouton-modifier, .modif-attribut .groupe-bouton").forEach(button => {
+document.querySelectorAll(".modif-attribut .bouton-modifier").forEach(button => {
     button.addEventListener("click", () => {
         const container = button.closest(".modif-attribut"); // parent
         const paragraph = container.querySelector("p.attribut-text"); // texte en p
         const champ = container.querySelector(".champ-text") // texte en input ou textarea
         const boutonModifier = container.querySelector(".bouton-modifier"); // bouton modidier
         const groupeBouton = container.querySelector(".groupe-bouton"); // groupe de bouton valider/annuler
+        nbModifActive += 1;
+        if(!boutonValider.disabled){
+            ancienEtatValider = true;
+            boutonValider.disabled = true;
+            boutonValider.classList.add("bg-gray-400");
+            boutonValider.classList.remove("bg-beige", "cursor-pointer", "hover:bg-darkbeige");
+        }
 
         ancienTexte = paragraph.textContent;
-        champ.value = ancienTexte;
         
         paragraph.classList.toggle("hidden");
 
@@ -291,11 +309,44 @@ document.querySelectorAll(".modif-attribut .bouton-modifier, .modif-attribut .gr
         boutonModifier.classList.toggle("block");
     });
 });
+
+document.querySelectorAll(".modif-attribut .bouton-valider, .modif-attribut .bouton-annuler").forEach(button => {
+    button.addEventListener("click", () => {
+        const container = button.closest(".modif-attribut"); // parent
+        const paragraph = container.querySelector("p.attribut-text"); // texte en p
+        const champ = container.querySelector(".champ-text") // texte en input ou textarea
+        const boutonModifier = container.querySelector(".bouton-modifier"); // bouton modidier
+        const groupeBouton = container.querySelector(".groupe-bouton"); // groupe de bouton valider/annuler
+        
+        nbModifActive -= 1;
+
+        paragraph.classList.toggle("hidden");
+
+        champ.classList.toggle("hidden");
+        champ.classList.toggle("block");
+
+        groupeBouton.classList.toggle("hidden");
+        groupeBouton.classList.toggle("flex");  
+        
+        boutonModifier.classList.toggle("hidden");
+        boutonModifier.classList.toggle("block");
+    });
+});
+
 document.querySelectorAll(".modif-attribut .bouton-valider").forEach(button => {
     button.addEventListener("click", () => {
         const container = button.closest(".modif-attribut"); // parent
         const paragraph = container.querySelector("p.attribut-text"); // texte en p
         const champ = container.querySelector(".champ-text") // texte en input ou textarea
+
+        if(boutonValider.disabled && newEtatChamp){
+            ancienEtatChamp = newEtatChamp;
+            if(nbModifActive === 0){
+                boutonValider.disabled = false;
+                boutonValider.classList.remove("bg-gray-400");
+                boutonValider.classList.add("bg-beige", "cursor-pointer", "hover:bg-darkbeige");
+            }
+        }
         
         texte = champ.value;
         paragraph.textContent = texte;
@@ -307,9 +358,21 @@ document.querySelectorAll(".modif-attribut .bouton-annuler").forEach(button => {
         const container = button.closest(".modif-attribut"); // parent
         const paragraph = container.querySelector("p.attribut-text"); // texte en p
         const champ = container.querySelector(".champ-text") // texte en input ou textarea
+        newEtatChamp = ancienEtatChamp
+        if(ancienEtatValider && nbModifActive === 0){
+            boutonValider.disabled = false;
+            boutonValider.classList.remove("bg-gray-400");
+            boutonValider.classList.add("bg-beige", "cursor-pointer", "hover:bg-darkbeige");
+        }
 
         champ.value = ancienTexte;
 
+    });
+});
+
+document.querySelectorAll('.modif-attribut .champ-text').forEach(input => {
+    input.addEventListener('input', () => {
+        newEtatChamp = true
     });
 });
 
