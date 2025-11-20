@@ -21,22 +21,22 @@ if(isset($_POST['mdp']) && isset($_POST['mail'])){
         // Initialisation de la session après confirmation du mot de passe
         $_SESSION['idCompte'] = $tab['id_compte'];
 
-
-
         // Récupération des données de la bdd pour voir si c'est un vendeur ou un client
         $stmt = $dbh->prepare("SELECT id_compte FROM sae3_skadjam._vendeur WHERE id_compte = ?");
-        $stmt->execute([$tab['id_compte']]);
+        $stmt->execute([$_SESSION['id_compte']]);
         $estVendeur = $stmt->fetch(PDO::FETCH_ASSOC);
 
         echo '<pre>';
         print_r($estVendeur);
         echo '<pre>';
 
-        if($estVendeur['id_compte'] == null) $estVendeur = 0;
-
         $stmt = $dbh->prepare("SELECT id_compte FROM sae3_skadjam._client WHERE id_compte = ?");
         $stmt->execute([$tab['id_compte']]);
         $estClient = $stmt->fetch(PDO::FETCH_ASSOC);
+
+        echo '<pre>';
+        print_r($estClient);
+        echo '<pre>';
 
         if($estVendeur['id_compte']){ 
             // Index vendeur + role vendeur
