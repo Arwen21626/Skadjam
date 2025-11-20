@@ -29,25 +29,28 @@ if(isset($_POST['mdp']) && isset($_POST['mail'])){
         echo '<pre>';
         print_r($estVendeur);
         echo '<pre>';
-
-        $stmt = $dbh->prepare("SELECT id_compte FROM sae3_skadjam._client WHERE id_compte = ?");
-        $stmt->execute([$_SESSION['idCompte']]);
-        $estClient = $stmt->fetch(PDO::FETCH_ASSOC);
-
-        echo '<pre>';
-        print_r($estClient);
-        echo '<pre>';
-
+        
         if($estVendeur['id_compte']){ 
             // Index vendeur + role vendeur
             $_SESSION['role'] = 'vendeur';
             header('Location: ../bo/index_vendeur.php');
         }
-        else if($estClient['id_compte']){ 
-            // Index client + role client
-            $_SESSION['role'] = 'client';
-            header('Location: ./index.php');
+        else{
+            $stmt = $dbh->prepare("SELECT id_compte FROM sae3_skadjam._client WHERE id_compte = ?");
+            $stmt->execute([$_SESSION['idCompte']]);
+            $estClient = $stmt->fetch(PDO::FETCH_ASSOC);
+
+            echo '<pre>';
+            print_r($estClient);
+            echo '<pre>';
+            
+            if($estClient['id_compte']){ 
+                // Index client + role client
+                $_SESSION['role'] = 'client';
+                header('Location: ./index.php');
+            }
         }
+        
         
     }
     else{
