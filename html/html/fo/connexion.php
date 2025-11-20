@@ -30,6 +30,7 @@ if(isset($_POST['mdp']) && isset($_POST['mail'])){
         $estVendeur = $stmt->fetch(PDO::FETCH_ASSOC);
 
         echo '<pre>';
+        echo 'estVendeur';
         print_r($estVendeur);
         echo '<pre>';
 
@@ -44,6 +45,8 @@ if(isset($_POST['mdp']) && isset($_POST['mail'])){
             $estClient = $stmt->fetch(PDO::FETCH_ASSOC);
 
             echo '<pre>';
+
+            echo 'estClient';
             print_r($estClient);
             echo '<pre>';
             
