@@ -29,11 +29,6 @@ if(isset($_POST['mdp']) && isset($_POST['mail'])){
         $stmt->execute([$_SESSION['idCompte']]);
         $estVendeur = $stmt->fetch(PDO::FETCH_ASSOC);
 
-        echo '<pre>';
-        echo 'estVendeur';
-        print_r($estVendeur);
-        echo '<pre>';
-
         if($estVendeur['id_compte']){ 
             // Index vendeur + role vendeur
             $_SESSION['role'] = 'vendeur';
