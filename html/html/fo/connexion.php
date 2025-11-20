@@ -40,21 +40,8 @@ if(isset($_POST['mdp']) && isset($_POST['mail'])){
             header('Location: ../bo/index_vendeur.php');
         }
         else{
-            $stmt = $dbh->prepare("SELECT id_compte FROM sae3_skadjam._client WHERE id_compte = ?");
-            $stmt->execute([$_SESSION['idCompte']]);
-            $estClient = $stmt->fetch(PDO::FETCH_ASSOC);
-
-            echo '<pre>';
-
-            echo 'estClient';
-            print_r($estClient);
-            echo '<pre>';
-            
-            if($estClient['id_compte']){ 
-                // Index client + role client
-                $_SESSION['role'] = 'client';
-                header('Location: ../fo/index.php');
-            }
+            $_SESSION['role'] = 'client';
+            header('Location: ../fo/index.php');
         }
         
         
