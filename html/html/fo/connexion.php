@@ -35,13 +35,13 @@ if(isset($_POST['mdp']) && isset($_POST['mail'])){
 
         // print_r($_SESSION);
         // print_r($_POST);
-        $idProduit = null;
+        $idProduit = 0;
         $idProduit = $_POST['idProduit'];
 
         if($_SESSION['role'] == 'vendeur'){
             header('Location: ./../bo/index_vendeur.php');
         }else{
-            if($_SESSION['role'] == 'client' && $_POST['idProduit'] != null){
+            if($_SESSION['role'] == 'client' && $idProduit != null){
                 header('Location: ./../fo/details_produit.php?idProduit='.$idProduit);
             }else{
                 header('Location: ./../fo/index.php');
