@@ -1,6 +1,5 @@
 <?php 
-    include __DIR__ .'/../01_premiere_connexion.php';
-    $_SESSION['idCompte'] = 1;
+    include(__DIR__ .'/../01_premiere_connexion.php');
     $idCompte = $_SESSION['idCompte'];
 
 
