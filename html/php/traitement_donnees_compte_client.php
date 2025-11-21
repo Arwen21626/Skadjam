@@ -58,6 +58,7 @@ if(isset($_POST['pseudo']) && isset($_POST['naissance']) && isset($_POST['nom'])
 
                     // Sauvegarde de l'id du compte client dans le cookie de session
                     $_SESSION["idCompte"] = $idCompte;
+                    $_SESSION["role"] = 'client';
                 }
                 // Gestion des erreur spécifique à la création d'un compte
                 elseif (!verifMotDePasse($_POST['mdp'])){
@@ -215,7 +216,6 @@ if(isset($_POST['pseudo']) && isset($_POST['naissance']) && isset($_POST['nom'])
     }
     catch(PDOException $e){
         echo "Erreur dans l'envoie des données dans la base de données.";
-        echo $e; // Potentiellement temporaire
 
         die();
     }
