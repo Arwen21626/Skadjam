@@ -16,13 +16,11 @@ if(isset($_POST['mdp']) && isset($_POST['mail'])){
     // Vérification mot de passe
     $passCorrect = password_verify($mdp, $tab['mot_de_passe']);
     
+    /* !! renvoie détails produit !! TODO */
 
     if ($passCorrect){
         // Initialisation de la session après confirmation du mot de passe
         $_SESSION['idCompte'] = $tab['id_compte'];
-
-        $estVendeur['id_compte'] = 0;
-        $estClient['id_compte'] = 0;
 
         // Récupération des données de la bdd pour voir si c'est un vendeur ou un client
         $stmt = $dbh->prepare("SELECT id_compte FROM sae3_skadjam._vendeur WHERE id_compte = ?");
@@ -58,43 +56,53 @@ if(isset($_POST['mdp']) && isset($_POST['mail'])){
 </head>
 <body>
     <?php require_once __DIR__ . "/../../php/structure/header_front.php"; ?>
-    <main>
-        <h2 class="md:flex md:flex-col md:items-center">Connexion</h2>
+    <main class="min-h-[150px]">
+        <h2 class="flex flex-col items-center">Connexion</h2>
         <form method="post">
-            <div class="md:flex md:flex-col md:items-center md:ml-10 md:mb-7 md:mr-10">
+            <div class="flex flex-col items-center md:ml-10 md:mb-7 md:mr-10">
 
                 <div class="flex w-fit flex-col items-start">
                     <label for="mail">Adresse mail :</label>
-                    <input class="ml-5 border-5 border-solid rounded-2xl border-vertClair pl-3 mb-5 md:w-150 h-15 w-70" type="text" name="mail" id="mail" value="<?= isset($_POST['mail'])? $_POST['mail'] : "" ?>" required>
+                    
+                    <div class="flex modif-attribut float-rigth">
+                        <input class="ml-5 border-5 border-solid rounded-2xl border-vertClair pl-3 mb-5 md:w-150 h-15 w-70" type="text" name="mail" id="mail" value="<?= isset($_POST['mail'])? $_POST['mail'] : "" ?>" required>
+                        <div>
+                            <div class="w-15! h-15! cursor:default"></div>
+                        </div>
+                    </div>
                 </div>
 
                 <div class="flex w-fit flex-col mt-6 items-start">
+
                     <label for="mdp">Mot de passe :</label>
-                    <input id="mdp" class="ml-5 border-5 border-solid rounded-2xl border-vertClair pl-3 w-150 h-15" name="mdp" id="mdp"  value="<?= isset($_POST['mdp'])? $_POST['mdp'] : "" ?>" required>
+
+                    <div class="flex w-fit flex-wrap relative items-center"> <!-- div pour rassembler l'input et le bouton -->
+                        <input id="mdp" class="ml-5 border-5 border-solid rounded-2xl border-vertClair pl-3 md:w-150 h-15 w-70" name="mdp" id="mdp"  value="<?= isset($_POST['mdp'])? $_POST['mdp'] : "" ?>" required>
                     
-                    <!-- oeil pour afficher/cacher le mdp -->
-                     <div class="modif-attribut">
-                         <button type="button" class="bouton-modifier group/eye cursor-pointer">
-                             <img src="/../../../images/logo/bootstrap_icon/eye.svg" alt="modifier" title="modifier" class=" w-6! h-6! ml-4 block group-hover/eye:hidden">
-                             <img src="/../../../images/logo/bootstrap_icon/eye-fill.svg" alt="modifier" title="modifier" class=" w-6! h-6! ml-4 hidden group-hover/eye:block">
-                         </button>
-                         <button type="button" class="group/valider cursor-pointer bouton-valider hidden">
-                             <img src="/../../../images/logo/bootstrap_icon/eye-slash.svg" alt="valider" title="valider" class=" w-6! h-6! ml-4 block group-hover/valider:hidden">
-                             <img src="/../../../images/logo/bootstrap_icon/eye-slash-fill.svg" alt="valider" title="valider" class=" w-6! h-6! ml-4 hidden group-hover/valider:block">
-                         </button>
-                     </div>
+                        <!-- oeil pour afficher/cacher le mdp -->
+                         <div class="flex modif-attribut float-rigth">  <!-- div pour changer les boutons  -->
+                            <button type="button" class="bouton-modifier group/eye cursor-pointer ">
+                                <img src="/../../../images/logo/bootstrap_icon/eye.svg" alt="modifier" title="modifier" class="w-9! h-9! ml-4 block group-hover/eye:hidden relative md:w-12! md:h-12!">
+                                <img src="/../../../images/logo/bootstrap_icon/eye-fill.svg" alt="modifier" title="modifier" class=" w-9! h-9! ml-4 hidden group-hover/eye:block relative md:w-12! md:h-12!">
+                            </button>
+                            <button type="button" class="group/valider cursor-pointer bouton-valider hidden">
+                                <img src="/../../../images/logo/bootstrap_icon/eye-slash.svg" alt="valider" title="valider" class=" w-9! h-9! ml-4 block group-hover/valider:hidden relative md:w-12! md:h-12!">
+                                <img src="/../../../images/logo/bootstrap_icon/eye-slash-fill.svg" alt="valider" title="valider" class=" w-9! h-9! ml-4 hidden group-hover/valider:block relative md:w-12! md:h-12!">
+                            </button>
+                        </div>
+                    </div>
 
                     <br>
                     <!-- Renvoie sur la page de réinitialisation de mot de passe -->
                     <a href="reinitialiser_mdp.php" class="underline! self-end cursor-pointer hover:text-rouge">mot de passe oublié ?</a>
-                </div class="flex w-fit flex-col mt-6 items-start">
+                </div>
 
                 <div class=" justify-self-center mt-8 mb-8">
                     <!-- Envoie des données en méthode POST pour se connecter -->
                     <input type="submit" value="Se connecter" class="cursor-pointer w-64 border-5 border-solid rounded-2xl border-vertClair pl-3">
                 </div>
                 
-                <div class=" flex w-fit flex-col mt-6 items-start ">
+                <div class=" flex w-fit flex-col mt-6 items-center ">
                     <!-- Si erreur détecté -->
                     <?php if($erreur){ ?>
                         <p class="text-rouge items-center"><?php echo 'adresse mail ou mot de passe invalide';?></p>
