@@ -5,7 +5,7 @@ require_once __DIR__ . "/../../01_premiere_connexion.php";
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-    <?php require __DIR__ . "/../../php/structure/head_front.php"; ?>
+    <?php require __DIR__ . "/../../php/structure/head_back.php"; ?>
     <title>Données</title>
 </head>
 <body>
@@ -17,20 +17,23 @@ require_once __DIR__ . "/../../01_premiere_connexion.php";
         $dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
         $dbh->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC);
 
-        // Récupérer toutes les infos du client
+        // Récupérer toutes les infos du vendeur
         foreach($dbh->query("SELECT * FROM sae3_skadjam._compte c
-                                INNER JOIN sae3_skadjam._client cli 
-                                    ON c.id_compte = cli.id_compte
-                                WHERE c.id_compte = $id", PDO::FETCH_ASSOC) as $client){
-            $nom = $client['nom_compte'];
-            $prenom = $client['prenom_compte'];
-            $pseudo = $client['pseudo'];
-            $mail = $client['adresse_mail'];
-            $naissance = $client['date_naissance'];
-            $telephone = $client['numero_telephone'];
-            $bloque = $client['bloque'];
+                                INNER JOIN sae3_skadjam._vendeur v 
+                                    ON c.id_compte = v.id_compte
+                                WHERE c.id_compte = $id", PDO::FETCH_ASSOC) as $vendeur){
+            $nom = $vendeur['nom_compte'];
+            $prenom = $vendeur['prenom_compte'];
+            $mail = $vendeur['adresse_mail'];
+            $telephone = $vendeur['numero_telephone'];
+            $raisonSociale = $vendeur['raison_sociale'];
+            $siren = $vendeur['siren'];
+            $description = $vendeur['description_vendeur'];
+            $iban = $vendeur['iban'];
+            $denomination = $vendeur['denomination'];
+            $bloque = $vendeur['bloque'];
         }
-        // Récupérer les adresses du client
+        // Récupérer les adresses du vendeur
         $nbAdresse = 0;
         foreach($dbh->query("SELECT * FROM sae3_skadjam._compte c
                         INNER JOIN sae3_skadjam._habite h
@@ -49,27 +52,6 @@ require_once __DIR__ . "/../../01_premiere_connexion.php";
             $ville[$nbAdresse] = $adresse['ville'];
             $nbAdresse++;
         }
-        // Récupérer les informations du panier du client
-        foreach($dbh->query("SELECT * FROM sae3_skadjam._client cli
-                                INNER JOIN sae3_skadjam._panier p
-                                    ON cli.id_panier = p.id_panier
-                                WHERE cli.id_compte = $id", PDO::FETCH_ASSOC) as $panier){
-            $idPanier = $panier['id_panier'];
-            $nbProduit = $panier['nb_produit_total'];
-            $montantTTC = $panier['montant_total_ttc'];
-            $dateDerniereModif = $panier['date_derniere_modif'];
-        }
-        // Récupérer les informations bancaires du client
-        foreach($dbh->query("SELECT * FROM sae3_skadjam._compte c
-                                INNER JOIN sae3_skadjam._carte_bancaire cb
-                                    ON c.id_compte = cb.id_client
-                                WHERE c.id_compte = $id", PDO::FETCH_ASSOC) as $carteB){
-            $idCarte = $carteB['id_carte_bancaire'];
-            $numeroCarte = $carteB['numero_carte'];
-            $cryptogramme = $carteB['cryptogramme'];
-            $nomCarte = $carteB['nom'];
-            $expiration = $carteB['expiration'];
-        }
 
         $dbh = null;
     }catch(PDOException $e){
@@ -81,12 +63,15 @@ require_once __DIR__ . "/../../01_premiere_connexion.php";
             <h2>Compte</h2>
             <?php
             echo "id : $id<br>";
-            echo "pseudo : $pseudo<br>";
             echo "prénom : $prenom<br>";
             echo "nom : $nom<br>";
-            echo "date de naissance : $naissance<br>";
             echo "numéro de téléphone : $telephone<br>";
             echo "adresse mail : $mail<br>";
+            echo "raison sociale : $raisonSociale<br>";
+            echo "siren : $siren<br>";
+            echo "description : $description<br>";
+            echo "iban : $iban<br>";
+            echo "dénomination : $denomination<br>";
             echo "vous avez été bloqué : ";
             if($bloque){
                 echo "oui<br>";
@@ -98,7 +83,7 @@ require_once __DIR__ . "/../../01_premiere_connexion.php";
         <div>
             <h2>Adresse.s</h2>
             <?php
-            for ($i=0; $i < $nbAdresse; $i++) { // Affiche toutes les adresses du client
+            for ($i=0; $i < $nbAdresse; $i++) { // Affiche toutes les adresses du vendeur
                 echo "<h3>adresse n°$i</h3>";
                 echo "id : $idCli[$i]<br>";
                 echo "numéro de rue : $numRue[$i]<br>";
@@ -110,25 +95,6 @@ require_once __DIR__ . "/../../01_premiere_connexion.php";
                 echo "code postal : $codePostal[$i]<br>";
                 echo "ville : $ville[$i]<br>";
             }
-            ?>
-        </div>
-        <div>
-            <h2>Informations bancaires</h2>
-            <?php
-            echo "id : $idCarte<br>";
-            echo "numéro de carte : $numeroCarte<br>";
-            echo "cryptogramme : $cryptogramme<br>";
-            echo "nom sur la carte : $nomCarte<br>";
-            echo "date d'expiration : $expiration<br>";
-            ?>
-        </div>
-        <div>
-            <h2>Panier</h2>
-            <?php
-            echo "id : $idPanier<br>";
-            echo "nombre de produit dans votre panier : $nb_produit_total<br>";
-            echo "montant total TTC : $montantTTC<br>";
-            echo "date de la dernière modification : $dateDerniereModif<br>";
             ?>
         </div>
     </main>
