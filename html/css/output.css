@@ -592,11 +592,17 @@ p, a, input, label {
   .w-100 {
     width: calc(var(--spacing, 0.25rem) * 100);
   }
+  .w-125 {
+    width: calc(var(--spacing, 0.25rem) * 125);
+  }
   .w-150 {
     width: calc(var(--spacing, 0.25rem) * 150);
   }
   .w-200 {
     width: calc(var(--spacing, 0.25rem) * 200);
+  }
+  .w-250 {
+    width: calc(var(--spacing, 0.25rem) * 250);
   }
   .w-auto {
     width: auto;
@@ -829,6 +835,12 @@ p, a, input, label {
   .px-7 {
     padding-inline: calc(var(--spacing, 0.25rem) * 7);
   }
+  .py-3 {
+    padding-block: calc(var(--spacing, 0.25rem) * 3);
+  }
+  .py-4 {
+    padding-block: calc(var(--spacing, 0.25rem) * 4);
+  }
   .pt-0 {
     padding-top: calc(var(--spacing, 0.25rem) * 0);
   }
@@ -879,6 +891,10 @@ p, a, input, label {
   }
   .-indent-96 {
     text-indent: calc(var(--spacing, 0.25rem) * -96);
+  }
+  .font-bold {
+    --tw-font-weight: var(--font-weight-bold, 700);
+    font-weight: var(--font-weight-bold, 700);
   }
   .font-medium {
     --tw-font-weight: var(--font-weight-medium, 500);
@@ -1069,11 +1085,6 @@ p, a, input, label {
       margin-right: calc(var(--spacing, 0.25rem) * 10);
     }
   }
-  .md\:mb-0 {
-    @media (width >= 48rem) {
-      margin-bottom: calc(var(--spacing, 0.25rem) * 0);
-    }
-  }
   .md\:mb-4 {
     @media (width >= 48rem) {
       margin-bottom: calc(var(--spacing, 0.25rem) * 4);
@@ -1261,6 +1272,11 @@ p, a, input, label {
   .md\:pr-1 {
     @media (width >= 48rem) {
       padding-right: calc(var(--spacing, 0.25rem) * 1);
+    }
+  }
+  .md\:pb-0 {
+    @media (width >= 48rem) {
+      padding-bottom: calc(var(--spacing, 0.25rem) * 0);
     }
   }
   .md\:pb-1 {
