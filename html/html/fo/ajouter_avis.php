@@ -46,7 +46,7 @@
 <html lang="fr">
 <head>
     <?php require(__DIR__ . "/../../php/structure/head_front.php") ?>
-    <title> <?php echo $produit["libelle_produit"] ?></title>
+    <title>Ajouter un avis au produit : <?php echo $idProd;?></title>
 </head>
 <body>
     <?php require(__DIR__ . "/../../php/structure/header_front.php"); ?>
