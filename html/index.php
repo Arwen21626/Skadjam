@@ -2,6 +2,7 @@
     include(__DIR__ . '/01_premiere_connexion.php');
     const PAGE_SIZE = 15;
     require_once(__DIR__ . "/../connections_params.php");
+    require_once(__DIR__ . "/php/fonctions.php");
     session_start();
 ?>
 
@@ -10,8 +11,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" type="text/css" href="/html/css/output.css" >
     <link rel="stylesheet" type="text/css" href="../../css/fo/general_front.css">
+    <?php (include __DIR__ . "/php/structure/head_front.php"); ?>
+
     <title>Accueil</title>
     <style>
         button a:hover{
@@ -22,7 +24,8 @@
 
 <body>
     <!--header-->
-    <?php (include __DIR__ . "/php/structure/head_front.php"); ?>
+    
+    <?php (include __DIR__ . "/php/structure/header_front.php"); ?>
     <?php include(__DIR__ . "/php/structure/navbar_front.php"); ?>
 
     <main>
@@ -124,7 +127,7 @@
     </main>
     
     <!--footer-->
-    <?php include (__DIR__ . "/php/structure/footer_front.php"); ?>
+    <?php require (__DIR__ . "/php/structure/footer_front.php"); ?>
 
 </body>
 
