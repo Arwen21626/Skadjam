@@ -120,6 +120,8 @@ if (isset($_POST["nom"])){
             print "Erreur !: " . $e->getMessage() . "<br/>";
             die();
         }
+    }else{
+        header("Location: crea_compte_vendeur.php");
     }
     
     

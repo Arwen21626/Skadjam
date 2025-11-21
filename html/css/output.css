@@ -237,6 +237,9 @@ p, a, input, label {
   .top-1\.5 {
     top: calc(var(--spacing, 0.25rem) * 1.5);
   }
+  .top-48 {
+    top: calc(var(--spacing, 0.25rem) * 48);
+  }
   .right-4 {
     right: calc(var(--spacing, 0.25rem) * 4);
   }
@@ -351,6 +354,9 @@ p, a, input, label {
   .mt-20 {
     margin-top: calc(var(--spacing, 0.25rem) * 20);
   }
+  .mr-1 {
+    margin-right: calc(var(--spacing, 0.25rem) * 1);
+  }
   .mr-2 {
     margin-right: calc(var(--spacing, 0.25rem) * 2);
   }
@@ -359,6 +365,9 @@ p, a, input, label {
   }
   .mr-10 {
     margin-right: calc(var(--spacing, 0.25rem) * 10);
+  }
+  .mr-16 {
+    margin-right: calc(var(--spacing, 0.25rem) * 16);
   }
   .mb-1 {
     margin-bottom: calc(var(--spacing, 0.25rem) * 1);
@@ -396,6 +405,9 @@ p, a, input, label {
   .ml-0 {
     margin-left: calc(var(--spacing, 0.25rem) * 0);
   }
+  .ml-1 {
+    margin-left: calc(var(--spacing, 0.25rem) * 1);
+  }
   .ml-2 {
     margin-left: calc(var(--spacing, 0.25rem) * 2);
   }
@@ -410,6 +422,9 @@ p, a, input, label {
   }
   .ml-10 {
     margin-left: calc(var(--spacing, 0.25rem) * 10);
+  }
+  .ml-24 {
+    margin-left: calc(var(--spacing, 0.25rem) * 24);
   }
   .ml-32 {
     margin-left: calc(var(--spacing, 0.25rem) * 32);
@@ -511,6 +526,9 @@ p, a, input, label {
   .w-4\/5 {
     width: calc(4/5 * 100%);
   }
+  .w-4xl {
+    width: var(--container-4xl, 56rem);
+  }
   .w-5 {
     width: calc(var(--spacing, 0.25rem) * 5);
   }
@@ -534,6 +552,9 @@ p, a, input, label {
   }
   .w-40 {
     width: calc(var(--spacing, 0.25rem) * 40);
+  }
+  .w-45 {
+    width: calc(var(--spacing, 0.25rem) * 45);
   }
   .w-50 {
     width: calc(var(--spacing, 0.25rem) * 50);
@@ -780,6 +801,9 @@ p, a, input, label {
   }
   .p-4 {
     padding: calc(var(--spacing, 0.25rem) * 4);
+  }
+  .p-5 {
+    padding: calc(var(--spacing, 0.25rem) * 5);
   }
   .p-6 {
     padding: calc(var(--spacing, 0.25rem) * 6);

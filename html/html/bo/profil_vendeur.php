@@ -184,7 +184,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             $dbh->commit();
 
             // Rediriger ou afficher un message de succès
-            // header("Location: profil_vendeur.php");
+            header("Location: profil_vendeur.php");
             exit;
         } catch (PDOException $e) {
             echo "Erreur lors de la mise à jour : " . $e->getMessage();
@@ -224,20 +224,20 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                     <?php  
                     }else{?>
                         <div class="w-80 h-80 mb-3 bg-beige rounded-2xl">
-                            <img class="image-none w-80 " src="../../images/logo/bootstrap_icon/image.svg" alt="aucune image" title="aucune image">
+                            <img class="image-vendeur w-80 " src="../../images/logo/bootstrap_icon/image.svg" alt="aucune image" title="aucune image">
                         </div>
 
                         
                     <?php } ?>
 
-                    <input class="image-vendeur" type="file" id="image" name="image" accept="image/png, image/jpeg, image/webp" hidden>
+                    <input type="file" id="image" name="image" accept="image/png, image/jpeg, image/webp" hidden>
                     
                     <?php
                     if ($tabPhoto){ ?>
-                        <label class="cursor-pointer w-80 rounded-2xl  bg-beige p-2 text-center"  for="image">Modifier l'image</label>
+                        <label class="label-image cursor-pointer w-80 rounded-2xl  bg-beige p-2 text-center"  for="image">Modifier l'image</label>
                     <?php
                     } else { ?>
-                        <label class="cursor-pointer w-80 rounded-2xl bg-beige p-2 text-center"  for="image">Ajouter une image</label>
+                        <label class="label-image cursor-pointer w-80 rounded-2xl bg-beige p-2 text-center"  for="image">Ajouter une image</label>
                     <?php
                     }
                     
@@ -335,137 +335,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     </main>
     <?php require_once __DIR__ . "/../../php/structure/footer_back.php" ?>
 </body>
-<script>
-let valider = false;
-let ancienEtatValider = false;
-let nbModifActive = 0;
-let ancienEtatChamp = false;
-let newEtatChamp = false;
-let ancienTexte = "";
-let texte = "";
-const boutonValider = document.getElementById("valider");
-boutonValider.disabled = !valider;
-if (!valider){
-    boutonValider.classList.add("bg-gray-400");
-    boutonValider.classList.remove("bg-beige", "cursor-pointer");
-}
 
-document.getElementById("image").addEventListener("change", function() {
-    newEtatChamp = true;
-    if(nbModifActive === 0){
-        activerValider();
-        // boutonValider.disabled = false;
-        // boutonValider.classList.remove("bg-gray-400");
-        // boutonValider.classList.add("bg-beige", "cursor-pointer");
-    }
-});
-
-document.querySelectorAll(".modif-attribut .bouton-modifier").forEach(button => {
-    button.addEventListener("click", () => {
-        const container = button.closest(".modif-attribut"); // parent
-        const paragraph = container.querySelector("p.attribut-text"); // texte en p
-        const champ = container.querySelector(".champ-text") // texte en input ou textarea
-        const boutonModifier = container.querySelector(".bouton-modifier"); // bouton modidier
-        const groupeBouton = container.querySelector(".groupe-bouton"); // groupe de bouton valider/annuler
-        nbModifActive += 1;
-        if(!boutonValider.disabled){
-            ancienEtatValider = true;
-            boutonValider.disabled = true;
-            boutonValider.classList.add("bg-gray-400");
-            boutonValider.classList.remove("bg-beige", "cursor-pointer");
-        }
-
-        ancienTexte = paragraph.textContent;
-        
-        paragraph.classList.toggle("hidden");
-
-        champ.classList.toggle("hidden");
-        champ.classList.toggle("block");
-
-        groupeBouton.classList.toggle("hidden");
-        groupeBouton.classList.toggle("flex");  
-        
-        boutonModifier.classList.toggle("hidden");
-        boutonModifier.classList.toggle("block");
-    });
-});
-
-document.querySelectorAll(".modif-attribut .bouton-valider, .modif-attribut .bouton-annuler").forEach(button => {
-    button.addEventListener("click", () => {
-        const container = button.closest(".modif-attribut"); // parent
-        const paragraph = container.querySelector("p.attribut-text"); // texte en p
-        const champ = container.querySelector(".champ-text") // texte en input ou textarea
-        const boutonModifier = container.querySelector(".bouton-modifier"); // bouton modidier
-        const groupeBouton = container.querySelector(".groupe-bouton"); // groupe de bouton valider/annuler
-        
-        nbModifActive -= 1;
-
-        paragraph.classList.toggle("hidden");
-
-        champ.classList.toggle("hidden");
-        champ.classList.toggle("block");
-
-        groupeBouton.classList.toggle("hidden");
-        groupeBouton.classList.toggle("flex");  
-        
-        boutonModifier.classList.toggle("hidden");
-        boutonModifier.classList.toggle("block");
-    });
-});
-
-document.querySelectorAll(".modif-attribut .bouton-valider").forEach(button => {
-    button.addEventListener("click", () => {
-        const container = button.closest(".modif-attribut"); // parent
-        const paragraph = container.querySelector("p.attribut-text"); // texte en p
-        const champ = container.querySelector(".champ-text") // texte en input ou textarea
-
-        if(boutonValider.disabled && newEtatChamp){
-            ancienEtatChamp = newEtatChamp;
-            if(nbModifActive === 0){
-                activerValider();
-                // boutonValider.disabled = false;
-                // boutonValider.classList.remove("bg-gray-400");
-                // boutonValider.classList.add("bg-beige", "cursor-pointer");
-            }
-        }
-        
-        texte = champ.value;
-        paragraph.textContent = texte;
-
-    });
-});
-document.querySelectorAll(".modif-attribut .bouton-annuler").forEach(button => {
-    button.addEventListener("click", () => {
-        const container = button.closest(".modif-attribut"); // parent
-        const paragraph = container.querySelector("p.attribut-text"); // texte en p
-        const champ = container.querySelector(".champ-text") // texte en input ou textarea
-        newEtatChamp = ancienEtatChamp
-        if(ancienEtatValider && nbModifActive === 0){
-            activerValider();
-            /*
-            boutonValider.disabled = false;
-            boutonValider.classList.remove("bg-gray-400");
-            boutonValider.classList.add("bg-beige", "cursor-pointer");*/
-        }
-
-        champ.value = ancienTexte;
-
-    });
-});
-
-document.querySelectorAll('.modif-attribut .champ-text').forEach(input => {
-    input.addEventListener('input', () => {
-        newEtatChamp = true
-    });
-});
-
-function activerValider(){
-    boutonValider.disabled = false;
-    boutonValider.classList.remove("bg-gray-400");
-    boutonValider.classList.add("bg-beige", "cursor-pointer");
-}
-
-
-</script>
+<script src="../../js/bo/profil_vendeur.js"></script>
 
 </html>
