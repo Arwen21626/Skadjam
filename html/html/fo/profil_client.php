@@ -26,7 +26,7 @@ if (isset($_POST['logout'])) {
     require __DIR__ . "/../../php/structure/header_front.php";
     require __DIR__ . "/../../php/structure/navbar_front.php";
     ?>
-    <main>
+    <main class="ml-10 mr-10">
         <?php
         // Vérifier si le client est connecter
         if(isset($_SESSION["idCompte"])) {
@@ -72,19 +72,22 @@ if (isset($_POST['logout'])) {
             }
             ?>
             <h2 class="flex justify-center text-center">Mon profil</h2>
-            <section>
+            <section class="ml-10">
                 <!-- Affichage des informations du client (sauf son mot de passe) -->
                 <div class="flex flex-row">
                     <h2 class="mt-1 mb-1 mr-4 ml-0"><?php echo $pseudo; ?></h2>
                     <h3 class="mt-1 mb-1 mr-4 ml-0 relative top-1.5 md:top-4 text-vertFonce -z-1"><?php echo $prenom; ?> <?php echo $nom; ?></h3>
                 </div>
-                <div>
-                    <p class="m-4"><?php echo $naissance; ?></p>
-                    <?php for ($i=0; $i < $nbAdresse; $i++) { // Affiche toutes les adresses du client ?>
-                        <p class="mt-2 mb-2 mr-4 ml-4"><?php echo "$numRue[$i] $adressePostale[$i]$batiment[$i]$appartement[$i], $codePostal[$i] $ville[$i]"; ?></p>
+                <div class="ml-5">
+                    <p class="m-4">Date de naissance : <?php echo $naissance; ?></p>
+                    <?php
+                    for ($i=0; $i < $nbAdresse; $i++) { // Affiche toutes les adresses du client 
+                        $j=$i+1;
+                        ?>
+                        <p class="mt-2 mb-2 mr-4 ml-4">Adresse n°<?php echo "$j : $numRue[$i] $adressePostale[$i]$batiment[$i]$appartement[$i], $codePostal[$i] $ville[$i]"; ?></p>
                     <?php } ?>
-                    <p class="m-4"><?php echo $telephone; ?></p>
-                    <p class="m-4"><?php echo $mail; ?></p>
+                    <p class="m-4">N° de téléphone : <?php echo $telephone; ?></p>
+                    <p class="m-4">Adresse mail : <?php echo $mail; ?></p>
                 </div>
             </section>
             <article class="flex flex-col md:flex-row justify-around items-center mb-7">
