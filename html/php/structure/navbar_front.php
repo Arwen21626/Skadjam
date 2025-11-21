@@ -20,14 +20,14 @@
 
         <div class="md:flex md:flex-col md:justify-center md:items-center">
 
-            <a class="items-center" href="/html/fo/index.php">
+            <a class="items-center" href="/index.php">
                 <div class="size-12 bg-no-repeat bg-size-[auto_48px] 
                 bg-[url(/images/logo/bootstrap_icon/house.svg)] 
                 hover:bg-[url(/images/logo/bootstrap_icon/house-fill.svg)]">
                 </div>
             </a>
 
-            <a class="text-vertFonce hover:text-rouge hidden md:inline-block" href="/html/fo/index.php">Accueil</a>
+            <a class="text-vertFonce hover:text-rouge hidden md:inline-block" href="/index.php">Accueil</a>
         </div>
             
         <div class="md:flex md:flex-col md:justify-center md:items-center">
