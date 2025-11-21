@@ -1,11 +1,4 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <?php require_once __DIR__ . "/../../php/structure/head_front.php"?>
-    <title>connexion</title>
-</head>
-<body>
-    <?php
+<?php
     session_start();
 
     $erreur = false;
@@ -72,7 +65,15 @@
         }
     }
 
-    ?>
+?>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <?php require_once __DIR__ . "/../../php/structure/head_front.php"?>
+    <title>connexion</title>
+</head>
+<body>
     <?php require_once __DIR__ . "/../../php/structure/header_front.php"; ?>
     <main class="min-h-[150px]">
         <h2 class="flex flex-col items-center">Connexion</h2>
