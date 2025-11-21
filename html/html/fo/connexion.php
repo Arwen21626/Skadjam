@@ -62,7 +62,7 @@ if(isset($_POST['mdp']) && isset($_POST['mail'])){
         <form method="post">
 
         <?php $_GET['idProduit'] = 0?>
-        <input name="idProduit" id="idProduit" value="<?php echo $_GET['idProduit'];?>" class="hidden">
+        <input name="idProduit" id="idProduit" value="<?php echo $_GET['idProduit'];?>" class="hidden w-1">
 
             <div class="flex flex-col items-center md:ml-10 md:mb-7 md:mr-10">
 

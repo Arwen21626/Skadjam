@@ -508,6 +508,9 @@ p, a, input, label {
   .min-h-\[480px\] {
     min-height: 480px;
   }
+  .w-1 {
+    width: calc(var(--spacing, 0.25rem) * 1);
+  }
   .w-1\/1 {
     width: calc(1/1 * 100%);
   }
