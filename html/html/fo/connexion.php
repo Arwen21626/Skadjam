@@ -1,73 +1,72 @@
-<?php 
-session_start();
-$erreur = false;
-include __DIR__ . '/../../01_premiere_connexion.php';
-if(isset($_POST['mdp']) && isset($_POST['mail'])){
-    // Initialisation des données
-    $erreur = false;
-    $mail = htmlentities($_POST["mail"]);
-    $mdp = htmlentities($_POST["mdp"]);
-
-    // Récupération des données de la bdd pour tester la connexion
-    $stmt = $dbh->prepare("SELECT id_compte, mot_de_passe FROM sae3_skadjam._compte WHERE adresse_mail = ?");
-    $stmt->execute([$mail]);
-    $tab = $stmt->fetch(PDO::FETCH_ASSOC);
-
-    // Vérification mot de passe    
-    $passCorrect = password_verify($mdp, $tab['mot_de_passe']);
-
-    if ($passCorrect){
-        // Initialisation de la session après confirmation du mot de passe
-        $_SESSION['idCompte'] = $tab['id_compte'];
-
-        // Récupération des données de la bdd pour voir si c'est un vendeur ou un client
-        $stmt = $dbh->prepare("SELECT id_compte FROM sae3_skadjam._vendeur WHERE id_compte = ?");
-        $stmt->execute([$_SESSION['idCompte']]);
-        $role = $stmt->fetch(PDO::FETCH_ASSOC);
-        $_SESSION['role'] = 'vendeur';
-        
-        if($role == null){
-            $stmt = $dbh->prepare("SELECT id_compte FROM sae3_skadjam._client WHERE id_compte = ?");
-            $stmt->execute([$_SESSION['idCompte']]);
-            $role = $stmt->fetch(PDO::FETCH_ASSOC);
-            $_SESSION['role'] = 'client';
-        }
-
-        // print_r($_SESSION);
-        // print_r($_POST);
-        $idProduit = 0;
-        if(isset($_POST['idProduit'])){
-            $idProduit = $_POST['idProduit'];
-        }
-        
-
-        if($_SESSION['role'] == 'vendeur'){
-            header('Location: ./../bo/index_vendeur.php');
-        }else{
-            if($_SESSION['role'] == 'client' && $idProduit != 0){
-                header('Location: ./../fo/details_produit.php?idProduit='.$idProduit);
-            }else{
-                header('Location: ./../fo/index.php');
-            }
-        }
-        
-    }
-    else{
-        // Erreur détecté dans l'adresse mail ou le mot de passe
-        $erreur = true;
-    }
-}
-
-?>
+<?php session_start();?>
 
 <!DOCTYPE html>
 <html lang="en">
-<?php require_once __DIR__ . "/../../php/structure/head_front.php"?>
 <head>
-    
+    <?php require_once __DIR__ . "/../../php/structure/head_front.php"?>
     <title>connexion</title>
 </head>
 <body>
+    <?php
+    $erreur = false;
+    include __DIR__ . '/../../01_premiere_connexion.php';
+    if(isset($_POST['mdp']) && isset($_POST['mail'])){
+        // Initialisation des données
+        $erreur = false;
+        $mail = htmlentities($_POST["mail"]);
+        $mdp = htmlentities($_POST["mdp"]);
+
+        // Récupération des données de la bdd pour tester la connexion
+        $stmt = $dbh->prepare("SELECT id_compte, mot_de_passe FROM sae3_skadjam._compte WHERE adresse_mail = ?");
+        $stmt->execute([$mail]);
+        $tab = $stmt->fetch(PDO::FETCH_ASSOC);
+
+        // Vérification mot de passe    
+        $passCorrect = password_verify($mdp, $tab['mot_de_passe']);
+
+        if ($passCorrect){
+            // Initialisation de la session après confirmation du mot de passe
+            $_SESSION['idCompte'] = $tab['id_compte'];
+
+            // Récupération des données de la bdd pour voir si c'est un vendeur ou un client
+            $stmt = $dbh->prepare("SELECT id_compte FROM sae3_skadjam._vendeur WHERE id_compte = ?");
+            $stmt->execute([$_SESSION['idCompte']]);
+            $role = $stmt->fetch(PDO::FETCH_ASSOC);
+            $_SESSION['role'] = 'vendeur';
+            
+            if($role == null){
+                $stmt = $dbh->prepare("SELECT id_compte FROM sae3_skadjam._client WHERE id_compte = ?");
+                $stmt->execute([$_SESSION['idCompte']]);
+                $role = $stmt->fetch(PDO::FETCH_ASSOC);
+                $_SESSION['role'] = 'client';
+            }
+
+            // print_r($_SESSION);
+            // print_r($_POST);
+            $idProduit = 0;
+            if(isset($_POST['idProduit'])){
+                $idProduit = $_POST['idProduit'];
+            }
+            
+
+            if($_SESSION['role'] == 'vendeur'){
+                header('Location: ./../bo/index_vendeur.php');
+            }else{
+                if($_SESSION['role'] == 'client' && $idProduit != 0){
+                    header('Location: ./../fo/details_produit.php?idProduit='.$idProduit);
+                }else{
+                    header('Location: ./../fo/index.php');
+                }
+            }
+            
+        }
+        else{
+            // Erreur détecté dans l'adresse mail ou le mot de passe
+            $erreur = true;
+        }
+    }
+
+    ?>
     <?php require_once __DIR__ . "/../../php/structure/header_front.php"; ?>
     <main class="min-h-[150px]">
         <h2 class="flex flex-col items-center">Connexion</h2>
