@@ -36,6 +36,7 @@ if(isset($_POST['mdp']) && isset($_POST['mail'])){
         }
 
         print_r($_SESSION);
+        print_r($_POST);
         
         
     }
