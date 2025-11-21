@@ -12,9 +12,6 @@
     else if ($_SESSION["role"] === 'client') {
         $urlProfil = "/" . "html/fo/profil_client.php";
     }
-
-    // echo $urlProfil;
-    // print_r($_SESSION['role']) ;
 ?>
 
 <nav class="bg-beige fixed bottom-0 w-full z-10 md:sticky md:top-0">
