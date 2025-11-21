@@ -73,14 +73,16 @@ if(isset($_POST['mdp']) && isset($_POST['mail'])){
                     <input id="mdp" class="ml-5 border-5 border-solid rounded-2xl border-vertClair pl-3 w-150 h-15" name="mdp" id="mdp"  value="<?= isset($_POST['mdp'])? $_POST['mdp'] : "" ?>" required>
                     
                     <!-- oeil pour afficher/cacher le mdp -->
-                    <button type="button" class="bouton-modifier group/eye cursor-pointer">
-                        <img src="/../../../images/logo/bootstrap_icon/eye.svg" alt="modifier" title="modifier" class=" w-6! h-6! ml-4 block group-hover/pen:hidden">
-                        <img src="/../../../images/logo/bootstrap_icon/eye-fill.svg" alt="modifier" title="modifier" class=" w-6! h-6! ml-4 hidden group-hover/pen:block">
-                    </button>
-                    <button type="button" class="group/valider cursor-pointer bouton-valider">
-                        <img src="/../../../images/logo/bootstrap_icon/eye-slash.svg" alt="valider" title="valider" class=" w-6! h-6! ml-4 block group-hover/valider:hidden">
-                        <img src="/../../../images/logo/bootstrap_icon/eye-slash-fill.svg" alt="valider" title="valider" class=" w-6! h-6! ml-4 hidden group-hover/valider:block">
-                    </button>
+                     <div class="modif-attribut">
+                         <button type="button" class="bouton-modifier group/eye cursor-pointer">
+                             <img src="/../../../images/logo/bootstrap_icon/eye.svg" alt="modifier" title="modifier" class=" w-6! h-6! ml-4 block group-hover/eye:hidden">
+                             <img src="/../../../images/logo/bootstrap_icon/eye-fill.svg" alt="modifier" title="modifier" class=" w-6! h-6! ml-4 hidden group-hover/eye:block">
+                         </button>
+                         <button type="button" class="group/valider cursor-pointer bouton-valider hidden">
+                             <img src="/../../../images/logo/bootstrap_icon/eye-slash.svg" alt="valider" title="valider" class=" w-6! h-6! ml-4 block group-hover/valider:hidden">
+                             <img src="/../../../images/logo/bootstrap_icon/eye-slash-fill.svg" alt="valider" title="valider" class=" w-6! h-6! ml-4 hidden group-hover/valider:block">
+                         </button>
+                     </div>
 
                     <br>
                     <!-- Renvoie sur la page de réinitialisation de mot de passe -->
@@ -113,31 +115,32 @@ if(isset($_POST['mdp']) && isset($_POST['mail'])){
         </div>
 
         <script>
-            document.querySelectorAll(".modif-attribut .bouton-modifier, .modif-attribut .groupe-bouton").forEach(button => {
+            var passwordInput = document.getElementById("mdp");
+            passwordInput.type = 'password';
+
+            document.querySelectorAll(".modif-attribut .bouton-modifier, .modif-attribut .bouton-valider").forEach(button => {
                 button.addEventListener("click", () => {
                     const container = button.closest(".modif-attribut"); // parent
                     const boutonEye = container.querySelector(".bouton-modifier"); // oeil
-                    const groupeEyeSlash = container.querySelector(".groupe-bouton"); // oeil slash
+                    const boutonSlash = container.querySelector(".bouton-valider"); // oeil slash
 
-                    groupeBouton.classList.toggle("hidden");
-                    groupeBouton.classList.toggle("flex");  
+                    boutonSlash.classList.toggle("hidden");
+                    boutonSlash.classList.toggle("block");  
                     
-                    boutonModifier.classList.toggle("hidden");
-                    boutonModifier.classList.toggle("block");
+                    boutonEye.classList.toggle("hidden");
+                    boutonEye.classList.toggle("block");
                 });
             });
             document.querySelectorAll(".modif-attribut .bouton-valider").forEach(button => {
                 button.addEventListener("click", () => {
                     const container = button.closest(".modif-attribut"); // parent
-                    var passwordInput = document.getElementById("mdp");
                     passwordInput.type = 'password';
 
                 });
             });
-            document.querySelectorAll(".modif-attribut .bouton-annuler").forEach(button => {
+            document.querySelectorAll(".modif-attribut .bouton-modifier").forEach(button => {
                 button.addEventListener("click", () => {
                     const container = button.closest(".modif-attribut"); // parent
-                    var passwordInput = document.getElementById("mdp");
 
                     passwordInput.type = 'text';
                     

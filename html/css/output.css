@@ -234,9 +234,6 @@ p, a, input, label {
   .top-0 {
     top: calc(var(--spacing, 0.25rem) * 0);
   }
-  .top-1 {
-    top: calc(var(--spacing, 0.25rem) * 1);
-  }
   .top-1\.5 {
     top: calc(var(--spacing, 0.25rem) * 1.5);
   }
@@ -550,6 +547,9 @@ p, a, input, label {
   }
   .w-64 {
     width: calc(var(--spacing, 0.25rem) * 64);
+  }
+  .w-70 {
+    width: calc(var(--spacing, 0.25rem) * 70);
   }
   .w-75 {
     width: calc(var(--spacing, 0.25rem) * 75);
@@ -910,6 +910,20 @@ p, a, input, label {
       }
     }
   }
+  .group-hover\/eye\:block {
+    &:is(:where(.group\/eye):hover *) {
+      @media (hover: hover) {
+        display: block;
+      }
+    }
+  }
+  .group-hover\/eye\:hidden {
+    &:is(:where(.group\/eye):hover *) {
+      @media (hover: hover) {
+        display: none;
+      }
+    }
+  }
   .group-hover\/pen\:block {
     &:is(:where(.group\/pen):hover *) {
       @media (hover: hover) {
@@ -1037,6 +1051,11 @@ p, a, input, label {
   .md\:mb-4 {
     @media (width >= 48rem) {
       margin-bottom: calc(var(--spacing, 0.25rem) * 4);
+    }
+  }
+  .md\:mb-7 {
+    @media (width >= 48rem) {
+      margin-bottom: calc(var(--spacing, 0.25rem) * 7);
     }
   }
   .md\:ml-10 {
