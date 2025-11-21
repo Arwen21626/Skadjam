@@ -1,5 +1,3 @@
-<?php session_start();?>
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -8,6 +6,8 @@
 </head>
 <body>
     <?php
+    session_start();
+
     $erreur = false;
     include __DIR__ . '/../../01_premiere_connexion.php';
     if(isset($_POST['mdp']) && isset($_POST['mail'])){
@@ -48,18 +48,20 @@
                 $idProduit = $_POST['idProduit'];
             }
             
-            ob_end_flush();
             // Redirection suivant le role
             if($_SESSION['role'] == 'vendeur'){
                 header('Location: ../bo/index_vendeur.php');
+                exit;
             }
             else{
                 // Si on était sur un produit alors redirection dessus
                 if($_SESSION['role'] == 'client' && $idProduit != 0){
                     header('Location: ../fo/details_produit.php?idProduit='.$idProduit);
+                    exit;
                 }
                 else{
                     header('Location: ../../../index.php');
+                    exit;
                 }
             }
             
