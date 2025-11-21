@@ -11,8 +11,7 @@ require_once __DIR__ . "/../../01_premiere_connexion.php";
 <body>
     <?php 
     // Connexion à la session
-    //$id = (int) $_SESSION["idCompte"];
-    $id = 4;
+    $id = (int) $_SESSION["idCompte"];
     try{
         $dbh = new PDO("$driver:host=$server;port=$port;dbname=$dbname",$user,$pass);
         $dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
@@ -22,12 +21,7 @@ require_once __DIR__ . "/../../01_premiere_connexion.php";
         foreach($dbh->query("SELECT * FROM sae3_skadjam._compte c
                                 INNER JOIN sae3_skadjam._client cli 
                                     ON c.id_compte = cli.id_compte
-                                INNER JOIN sae3_skadjam._panier p
-                                    ON cli.id_panier = p.id_panier
-                                INNER JOIN sae3_skadjam._carte_bancaire cb
-                                    ON c.id_compte = cb.id_client
                                 WHERE c.id_compte = $id", PDO::FETCH_ASSOC) as $client){
-            // Compte
             $nom = $client['nom_compte'];
             $prenom = $client['prenom_compte'];
             $pseudo = $client['pseudo'];
@@ -35,17 +29,6 @@ require_once __DIR__ . "/../../01_premiere_connexion.php";
             $naissance = $client['date_naissance'];
             $telephone = $client['numero_telephone'];
             $bloque = $client['bloque'];
-            // Panier
-            $idPanier = $client['id_panier'];
-            $nbProduit = $client['nb_produit_total'];
-            $montantTTC = $client['montant_total_ttc'];
-            $dateDerniereModif = $client['date_derniere_modif'];
-            // Carte Bancaire
-            $idCarte = $client['id_carte_bancaire'];
-            $numeroCarte = $client['numero_carte'];
-            $cryptogramme = $client['cryptogramme'];
-            $nomCarte = $client['nom'];
-            $expiration = $client['expiration'];
         }
         // Récupérer les adresses du client
         $nbAdresse = 0;
@@ -65,6 +48,27 @@ require_once __DIR__ . "/../../01_premiere_connexion.php";
             $codePostal[$nbAdresse] = $adresse['code_postal'];
             $ville[$nbAdresse] = $adresse['ville'];        
             $nbAdresse++;
+        }
+        // Récupérer les informations du panier du client
+        foreach($dbh->query("SELECT * FROM sae3_skadjam._client cli
+                                INNER JOIN sae3_skadjam._panier p
+                                    ON cli.id_panier = p.id_panier
+                                WHERE cli.id_compte = $id", PDO::FETCH_ASSOC) as $panier){
+            $idPanier = $panier['id_panier'];
+            $nbProduit = $panier['nb_produit_total'];
+            $montantTTC = $panier['montant_total_ttc'];
+            $dateDerniereModif = $panier['date_derniere_modif'];
+        }
+        // Récupérer les informations bancaires du client
+        foreach($dbh->query("SELECT * FROM sae3_skadjam._compte c
+                                INNER JOIN sae3_skadjam._carte_bancaire cb
+                                    ON c.id_compte = cb.id_client
+                                WHERE c.id_compte = $id", PDO::FETCH_ASSOC) as $carteB){
+            $idCarte = $carteB['id_carte_bancaire'];
+            $numeroCarte = $carteB['numero_carte'];
+            $cryptogramme = $carteB['cryptogramme'];
+            $nomCarte = $carteB['nom'];
+            $expiration = $carteB['expiration'];
         }
 
         $dbh = null;
@@ -92,7 +96,7 @@ require_once __DIR__ . "/../../01_premiere_connexion.php";
             ?>
         </div>
         <div>
-        <h2>Adresse.s</h2>
+            <h2>Adresse.s</h2>
             <?php
             for ($i=0; $i < $nbAdresse; $i++) { // Affiche toutes les adresses du client
                 echo "<h3>adresse n°$i</h3>";
@@ -102,7 +106,7 @@ require_once __DIR__ . "/../../01_premiere_connexion.php";
                 echo "complément d'adresse : $complement[$i]<br>";
                 echo "batiment : $batiment[$i]<br>";
                 echo "appartement : $appartement[$i]<br>";
-                echo "code interphone : $codeInterphone";
+                echo "code interphone : $codeInterphone<br>";
                 echo "code postal : $codePostal[$i]<br>";
                 echo "ville : $ville[$i]<br>";
             }
