@@ -15,7 +15,7 @@ if(isset($_POST['mdp']) && isset($_POST['mail'])){
 
     // Vérification mot de passe
     $passCorrect = password_verify($mdp, $tab['mot_de_passe']);
-    
+
     /* !! renvoie détails produit !! TODO */
 
     if ($passCorrect){
@@ -25,17 +25,17 @@ if(isset($_POST['mdp']) && isset($_POST['mail'])){
         // Récupération des données de la bdd pour voir si c'est un vendeur ou un client
         $stmt = $dbh->prepare("SELECT id_compte FROM sae3_skadjam._vendeur WHERE id_compte = ?");
         $stmt->execute([$_SESSION['idCompte']]);
-        $estVendeur = $stmt->fetch(PDO::FETCH_ASSOC);
-
-        if($estVendeur['id_compte']){ 
-            // Index vendeur + role vendeur
-            $_SESSION['role'] = 'vendeur';
-            header('Location: ../bo/index_vendeur.php');
-        }
-        else{
+        $role = $stmt->fetch(PDO::FETCH_ASSOC);
+        $_SESSION['role'] = 'vendeur';
+        
+        if($role == null){
+            $stmt = $dbh->prepare("SELECT id_compte FROM sae3_skadjam._client WHERE id_compte = ?");
+            $stmt->execute([$_SESSION['idCompte']]);
+            $role = $stmt->fetch(PDO::FETCH_ASSOC);
             $_SESSION['role'] = 'client';
-            header('Location: ../fo/index.php');
         }
+
+        print_r($_SESSION);
         
         
     }
@@ -59,6 +59,9 @@ if(isset($_POST['mdp']) && isset($_POST['mail'])){
     <main class="min-h-[150px]">
         <h2 class="flex flex-col items-center">Connexion</h2>
         <form method="post">
+
+        <input name="idProduit" id="idProduit" value="<?php echo $_GET['idProduit'];?>" class="hidden">
+
             <div class="flex flex-col items-center md:ml-10 md:mb-7 md:mr-10">
 
                 <div class="flex w-fit flex-col items-start">
