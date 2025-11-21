@@ -1,5 +1,5 @@
 <footer class="bg-vertClair text-vertFonce 
-                flex flex-wrap p-0.5 mb-12
+                flex flex-wrap p-0.5 pb-12
                 md:justify-around md:flex-nowrap md:mb-0">
 
     <article class="flex flex-col max-w-1/2 pt-1 pr-2 pb-2 pl-2 md:max-w-fit md:pt-0.5 md:pr-1 md:pb-1 md:pl-1">
