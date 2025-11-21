@@ -58,7 +58,7 @@
                     header('Location: ./../fo/details_produit.php?idProduit='.$idProduit);
                 }
                 else{
-                    header('Location: ./../../../index.php');
+                    header('Location: ../../../index.php');
                 }
             }
             
