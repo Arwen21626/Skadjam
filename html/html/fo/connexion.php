@@ -34,6 +34,7 @@
             $role = $stmt->fetch(PDO::FETCH_ASSOC);
             $_SESSION['role'] = 'vendeur';
             
+            // si l'id du compte n'est pas dans vendeur
             if($role == null){
                 $stmt = $dbh->prepare("SELECT id_compte FROM sae3_skadjam._client WHERE id_compte = ?");
                 $stmt->execute([$_SESSION['idCompte']]);
@@ -41,20 +42,22 @@
                 $_SESSION['role'] = 'client';
             }
 
-            // print_r($_SESSION);
-            // print_r($_POST);
+            // Initialisation pour une redirection sur le produit si on écrivais un avis par exemple et qu'on devait se connecter
             $idProduit = 0;
             if(isset($_POST['idProduit'])){
                 $idProduit = $_POST['idProduit'];
             }
             
-
+            // Redirection suivant le role
             if($_SESSION['role'] == 'vendeur'){
                 header('Location: ./../bo/index_vendeur.php');
-            }else{
+            }
+            else{
+                // Si on était sur un produit alors redirection dessus
                 if($_SESSION['role'] == 'client' && $idProduit != 0){
                     header('Location: ./../fo/details_produit.php?idProduit='.$idProduit);
-                }else{
+                }
+                else{
                     header('Location: ./../fo/index.php');
                 }
             }
