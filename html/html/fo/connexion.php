@@ -35,7 +35,7 @@ if(isset($_POST['mdp']) && isset($_POST['mail'])){
 
         // print_r($_SESSION);
         // print_r($_POST);
-
+        $idProduit = null;
         $idProduit = $_POST['idProduit'];
 
         if($_SESSION['role'] == 'vendeur'){
