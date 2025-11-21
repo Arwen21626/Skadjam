@@ -60,6 +60,7 @@ if(isset($_POST['mdp']) && isset($_POST['mail'])){
         <h2 class="flex flex-col items-center">Connexion</h2>
         <form method="post">
 
+        <?php $_GET['idProduit'] = 0?>
         <input name="idProduit" id="idProduit" value="<?php echo $_GET['idProduit'];?>" class="hidden">
 
             <div class="flex flex-col items-center md:ml-10 md:mb-7 md:mr-10">
