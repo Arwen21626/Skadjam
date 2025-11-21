@@ -50,12 +50,12 @@
             
             // Redirection suivant le role
             if($_SESSION['role'] == 'vendeur'){
-                header('Location: ./../bo/index_vendeur.php');
+                header('Location: ../bo/index_vendeur.php');
             }
             else{
                 // Si on était sur un produit alors redirection dessus
                 if($_SESSION['role'] == 'client' && $idProduit != 0){
-                    header('Location: ./../fo/details_produit.php?idProduit='.$idProduit);
+                    header('Location: ../fo/details_produit.php?idProduit='.$idProduit);
                 }
                 else{
                     header('Location: ../../../index.php');
