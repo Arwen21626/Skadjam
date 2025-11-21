@@ -1,4 +1,3 @@
-
 <?php
     session_start();
     include(__DIR__ . "/../../01_premiere_connexion.php");
@@ -138,7 +137,7 @@
         <!-- Section avis -->
         <section>
             <h3>Avis</h3>
-            <div class="flex flex-row justify-between mt-10">
+            <div class="flex flex-col-reverse items-center mt-0 md:items-start md:justify-between md:mt-10 md:flex-row">
                 <?php 
                 // tableau contenant tous les avis
                 $avis = [];
@@ -150,15 +149,15 @@
                 }
                 
                 if($avis == null){?>
-                    <p class=" ml-24">Aucun commentaire associé à ce produit.</p>
+                    <p class=" md:ml-24">Aucun commentaire associé à ce produit.</p>
                 <?php }
                 else{?>
 
                 <!-- Commentaire -->
-                <section class=" ml-32">
+                <section class=" md:ml-32">
                     <?php foreach($avis as $row){
                         if ($row['contenu_commentaire'] != ''){?>
-                            <section class=" bg-bleu rounded-2xl m-4 p-4 w-4xl">
+                            <section class=" bg-bleu rounded-2xl m-4 p-4 md:w-4xl">
                                 <div class="flex flex-nowrap justify-start items-center w-auto">
                                     <h4 class="mr-4">
                                         <?php echo $row['pseudo'];?>
@@ -171,10 +170,9 @@
                     }?>
                 </section>
 
-                <div class="sticky top-48 h-full" >
+                <div class="md:sticky md:top-48 h-full flex flex-nowrap flex-col items-center md:items-start" >
                     <!-- Ajouter un avis -->
-                     
-                    <button class="bg-beige rounded-2xl w-48 h-14 mt-4 mb-4 mr-16 hover:text-rouge">
+                    <button class="bg-beige rounded-2xl w-48 h-14 mt-4 mb-4 md:mr-16 hover:text-rouge">
                         
                         <?php if (($_SESSION['role'] === 'client')){
                             // si le client est connecter
@@ -201,7 +199,7 @@
                     </button>
 
                     <!-- Notes -->
-                    <section class="mr-16 p-5 bg-beige rounded-2xl h-80 w-48 flex flex-col justify-center">
+                    <section class="md:mr-16 p-5 bg-beige rounded-2xl h-80 w-48 flex flex-col justify-center">
                         <h4>Notes - <?php echo count($avis);?></h4>
                         <table>
                             <tbody>
