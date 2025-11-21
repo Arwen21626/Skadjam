@@ -23,7 +23,7 @@
 
     if ($produit === "vide") 
     {
-        header("location:/html/fo/404.php");
+        header("location:/404.php");
     }
     else
     {
