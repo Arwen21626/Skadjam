@@ -149,7 +149,7 @@
                 }
                 
                 if($avis == null){?>
-                    <p class=" md:ml-24">Aucun commentaire associé à ce produit.</p>
+                    <p class=" md:ml-24">Aucun avis associé à ce produit.</p>
                 <?php }
                 else{?>
 
@@ -169,6 +169,7 @@
                         <?php }
                     }?>
                 </section>
+                <?php }?>
 
                 <div class="md:sticky md:top-48 h-full flex flex-nowrap flex-col items-center md:items-start" >
                     <!-- Ajouter un avis -->
@@ -197,7 +198,7 @@
                             <a href="connexion.php?idProduit=<?php echo $idProd;?>">Ajouter un avis</a>
                         <?php }?>
                     </button>
-
+                    <?php if($avis != null){?>
                     <!-- Notes -->
                     <section class="md:mr-16 p-5 bg-beige rounded-2xl h-80 w-48 flex flex-col justify-center">
                         <h4>Notes - <?php echo count($avis);?></h4>
@@ -222,7 +223,7 @@
                             </tbody>
                         </table>
                     </section>
-                <?php }?>
+                    <?php }?>
                 </div>
             </div>
         </sectiob>
