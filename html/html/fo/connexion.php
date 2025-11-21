@@ -48,6 +48,7 @@
                 $idProduit = $_POST['idProduit'];
             }
             
+            ob_end_flush();
             // Redirection suivant le role
             if($_SESSION['role'] == 'vendeur'){
                 header('Location: ../bo/index_vendeur.php');
@@ -174,7 +175,6 @@
                 });
             });
         </script>
-
     </main>
     <?php require_once __DIR__ . "/../../php/structure/footer_front.php"; ?>
 </body>
