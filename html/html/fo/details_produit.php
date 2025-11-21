@@ -71,9 +71,7 @@
     }
 
     // Affichage test
-    //  print_r($infoPhoto);
-    echo $idProd;
-    echo $_SESSION["role"];
+    
 ?>
 
 
@@ -123,7 +121,7 @@
                     <form method="post" action="<?php echo $lienBtnAjouterPanier ?>" >
                         <input type="hidden" name="idProduit" value="<?php echo $idProd ?>">
                         <button class="
-                        bg-beige shadow rounded-2xl w-40 h-14 mt-4 cursor-pointer"
+                        bg-beige shadow rounded-2xl w-40 h-14 mt-4 cursor-pointer hover:text-rouge"
                         type="submit">
                             Ajouter au panier
                         </button>
@@ -144,8 +142,8 @@
         <section>
             <div class="flex justify-between items-center">
                 <h3>Avis</h3>
-                <button class="size-auto bg-none indent-0 overflow-visible whitespace-normal
-                                bg-beige shadow rounded-2xl w-40 h-14 mt-4">
+                <button class="
+                                bg-beige shadow rounded-2xl w-40 h-14 mt-4 hover:text-rouge">
                     <a href="ajouter_avis.php?idProduit=<?php echo $idProd;?>">Ajouter un avis</a>
                 </button>
             </div>

@@ -454,10 +454,6 @@ p, a, input, label {
     width: calc(var(--spacing, 0.25rem) * 28);
     height: calc(var(--spacing, 0.25rem) * 28);
   }
-  .size-auto {
-    width: auto;
-    height: auto;
-  }
   .h-5 {
     height: calc(var(--spacing, 0.25rem) * 5);
   }
@@ -761,9 +757,6 @@ p, a, input, label {
   .bg-\[url\(\/images\/logo\/bootstrap_icon\/truck\.svg\)\] {
     background-image: url(/images/logo/bootstrap_icon/truck.svg);
   }
-  .bg-none {
-    background-image: none;
-  }
   .bg-size-\[auto_48px\] {
     background-size: auto 48px;
   }
@@ -848,15 +841,9 @@ p, a, input, label {
   .-indent-96 {
     text-indent: calc(var(--spacing, 0.25rem) * -96);
   }
-  .indent-0 {
-    text-indent: calc(var(--spacing, 0.25rem) * 0);
-  }
   .font-medium {
     --tw-font-weight: var(--font-weight-medium, 500);
     font-weight: var(--font-weight-medium, 500);
-  }
-  .whitespace-normal {
-    white-space: normal;
   }
   .whitespace-nowrap {
     white-space: nowrap;

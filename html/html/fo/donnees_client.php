@@ -27,6 +27,7 @@ require_once __DIR__ . "/../../01_premiere_connexion.php";
                                 INNER JOIN sae3_skadjam._carte_bancaire cb
                                     ON c.id_compte = cb.id_client
                                 WHERE c.id_compte = $id", PDO::FETCH_ASSOC) as $client){
+            // Compte
             $nom = $client['nom_compte'];
             $prenom = $client['prenom_compte'];
             $pseudo = $client['pseudo'];
@@ -34,10 +35,12 @@ require_once __DIR__ . "/../../01_premiere_connexion.php";
             $naissance = $client['date_naissance'];
             $telephone = $client['numero_telephone'];
             $bloque = $client['bloque'];
+            // Panier
             $idPanier = $client['id_panier'];
             $nbProduit = $client['nb_produit_total'];
             $montantTTC = $client['montant_total_ttc'];
             $dateDerniereModif = $client['date_derniere_modif'];
+            // Carte Bancaire
             $idCarte = $client['id_carte_bancaire'];
             $numeroCarte = $client['numero_carte'];
             $cryptogramme = $client['cryptogramme'];
