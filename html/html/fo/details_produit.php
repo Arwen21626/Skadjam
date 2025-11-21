@@ -1,3 +1,4 @@
+
 <?php
     session_start();
     include(__DIR__ . "/../../01_premiere_connexion.php");
@@ -11,9 +12,6 @@
         $idProd = 3;
     }
     /* Temporaire pour le dev, à changer au moment de la finalisation */
-
-    
-    
 
     // Requête pour récupérer les infos du produit
     foreach($dbh->query("SELECT *, est_masque::char AS est_masque_char
@@ -120,8 +118,7 @@
                     
                     <form method="post" action="<?php echo $lienBtnAjouterPanier ?>" >
                         <input type="hidden" name="idProduit" value="<?php echo $idProd ?>">
-                        <button class="
-                        bg-beige shadow rounded-2xl w-40 h-14 mt-4 cursor-pointer hover:text-rouge"
+                        <button class="bg-beige rounded-2xl w-40 h-14 mt-4 cursor-pointer hover:text-rouge"
                         type="submit">
                             Ajouter au panier
                         </button>
@@ -140,43 +137,97 @@
 
         <!-- Section avis -->
         <section>
-            <div class="flex justify-between items-center">
-                <h3>Avis</h3>
-                <button class="
-                                bg-beige shadow rounded-2xl w-40 h-14 mt-4 hover:text-rouge">
-                    <a href="ajouter_avis.php?idProduit=<?php echo $idProd;?>">Ajouter un avis</a>
-                </button>
-            </div>
-            <section class=" m-2 md:ml-32">
+            <h3>Avis</h3>
+            <div class="flex flex-row justify-between mt-10">
                 <?php 
-                    $avis = [];
-                    foreach($dbh->query("SELECT * FROM sae3_skadjam._avis a 
-                                        INNER JOIN sae3_skadjam._client c 
-                                            ON a.id_compte = c.id_compte 
-                                        WHERE id_produit = $idProd", PDO::FETCH_ASSOC) as $row){
-                        $avis[] = $row;
-                    }
-                    
-                    if($avis == null){?>
-                        <p>Aucun commentaire associé à ce produit.</p>
-                    <?php }
-                    else{
-                        foreach($avis as $row){?>
-                        
-                        <section class=" bg-bleu rounded-2xl m-4 p-4 md:w-2/3">
-                            <div class="flex flex-nowrap justify-start items-center w-auto">
-                                <h4 class="mr-4">
-                                    <?php echo $row['pseudo'];?>
-                                </h4>
-                                <?php echo affichageNote($row['nb_etoile']);?>
-                            </div>
-                            <p><?php echo $row['contenu_commentaire'];?></p>     
-                        </section>
-                    <?php }
-                    }?>
+                // tableau contenant tous les avis
+                $avis = [];
+                foreach($dbh->query("SELECT * FROM sae3_skadjam._avis a 
+                                    INNER JOIN sae3_skadjam._client c 
+                                        ON a.id_compte = c.id_compte 
+                                    WHERE id_produit = $idProd", PDO::FETCH_ASSOC) as $row){
+                    $avis[] = $row;
+                }
                 
-            </section>
-        </section>
+                if($avis == null){?>
+                    <p class=" ml-24">Aucun commentaire associé à ce produit.</p>
+                <?php }
+                else{?>
+
+                <!-- Commentaire -->
+                <section class=" ml-32">
+                    <?php foreach($avis as $row){
+                        if ($row['contenu_commentaire'] != ''){?>
+                            <section class=" bg-bleu rounded-2xl m-4 p-4 w-4xl">
+                                <div class="flex flex-nowrap justify-start items-center w-auto">
+                                    <h4 class="mr-4">
+                                        <?php echo $row['pseudo'];?>
+                                    </h4>
+                                    <?php echo affichageNote($row['nb_etoile']);?>
+                                </div>
+                                <p><?php echo $row['contenu_commentaire'];?></p>     
+                            </section>
+                        <?php }
+                    }?>
+                </section>
+
+                <div class="sticky top-48 h-full" >
+                    <!-- Ajouter un avis -->
+                     
+                    <button class="bg-beige rounded-2xl w-48 h-14 mt-4 mb-4 mr-16 hover:text-rouge">
+                        
+                        <?php if (($_SESSION['role'] === 'client')){
+                            // si le client est connecter
+                            
+                            // savoir si le client a déjà donner son avis sur le produit
+                            $dejaAvis = false;
+                            foreach($avis as $row){
+                                if ($_SESSION['idCompte'] == $row['id_compte']){
+                                    $dejaAvis = true;
+                                }
+                            }
+                            // redirections
+                            if(!$dejaAvis){?>
+                                <a href="ajouter_avis.php?idProduit=<?php echo $idProd;?>">Ajouter un avis</a>
+                            <?php }
+                            else{?>
+                                <a href="details_produit.php?idProduit=<?php echo $idProd;?>">Modifier mon avis</a>
+                                <p>A venir</p>
+                            <?php }
+                        } else{
+                            // si le client n'est pas connecter?>
+                            <a href="connexion.php?idProduit=<?php echo $idProd;?>">Ajouter un avis</a>
+                        <?php }?>
+                    </button>
+
+                    <!-- Notes -->
+                    <section class="mr-16 p-5 bg-beige rounded-2xl h-80 w-48 flex flex-col justify-center">
+                        <h4>Notes - <?php echo count($avis);?></h4>
+                        <table>
+                            <tbody>
+                                <?php for ($i = 0; $i <= 5; $i++){
+                                    $compteur = 5- $i;?>
+                                    <tr class="flex justify-around items-center">
+                                        <td class=" mr-1 mt-2 mb-2" ><?php echo $compteur;?></td>
+                                        <td class=" mr-4 ml-1 mt-2 mb-2"><img src="../../images/logo/bootstrap_icon/star-fill.svg"></td>
+                                        <?php 
+                                            foreach($dbh->query("SELECT COUNT(nb_etoile) AS nbre_notes 
+                                                                    FROM sae3_skadjam._avis 
+                                                                    WHERE id_produit = $idProd 
+                                                                        AND nb_etoile = $compteur"
+                                                                , PDO::FETCH_ASSOC) as $row){;?>
+                                            <td class=" mr-1 mt-2 mb-2"><?php echo $row["nbre_notes"];?></td>
+                                            <td class=" mr-4 ml-1 mt-2 mb-2"><?php echo ($row["nbre_notes"]<=1)?'note':'notes'?></td>
+                                        <?php }?>
+                                    </tr>
+                                <?php }?>
+                            </tbody>
+                        </table>
+                    </section>
+                <?php }?>
+                </div>
+            </div>
+        </sectiob>
     </main>
 
     <?php require(__DIR__ . "/../../php/structure/footer_front.php") ?>

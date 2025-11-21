@@ -13,7 +13,6 @@
             $note = htmlentities($_POST['note']);
             $commentaire = htmlentities($_POST['commentaire']);
             $idCompte = $_SESSION['idCompte'];
-            $idCompte = 2;
             if ($note>=0 && $note<=5){
                 $insertionAvis = $dbh->prepare("INSERT INTO sae3_skadjam._avis(nb_etoile, nb_pouce_haut, nb_pouce_bas, contenu_commentaire, id_produit, id_compte) 
                                                     VALUES ($note, 0, 0, '$commentaire', $idProd, $idCompte)");
