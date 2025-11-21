@@ -13,10 +13,8 @@ if(isset($_POST['mdp']) && isset($_POST['mail'])){
     $stmt->execute([$mail]);
     $tab = $stmt->fetch(PDO::FETCH_ASSOC);
 
-    // Vérification mot de passe
+    // Vérification mot de passe    
     $passCorrect = password_verify($mdp, $tab['mot_de_passe']);
-
-    /* !! renvoie détails produit !! TODO */
 
     if ($passCorrect){
         // Initialisation de la session après confirmation du mot de passe
@@ -37,7 +35,18 @@ if(isset($_POST['mdp']) && isset($_POST['mail'])){
 
         print_r($_SESSION);
         print_r($_POST);
-        
+
+        $idProduit = $_POST['idProduit'];
+
+        if($_SESSION['role'] == 'vendeur'){
+            header('Location: ./../bo/index_vendeur.php');
+        }else{
+            if($_SESSION['role'] == 'client' && $_POST['idProduit'] != null){
+                echo 'Location: ./../fo/details_produit.php?idProduit='.$idProduit;
+            }//else{
+            //     header('Location: ./../fo/index.php');
+            // }
+        }
         
     }
     else{
@@ -60,9 +69,9 @@ if(isset($_POST['mdp']) && isset($_POST['mail'])){
     <main class="min-h-[150px]">
         <h2 class="flex flex-col items-center">Connexion</h2>
         <form method="post">
-
-        <?php $_GET['idProduit'] = 0?>
-        <input name="idProduit" id="idProduit" value="<?php echo $_GET['idProduit'];?>" class="hidden w-1">
+        <?php if(isset($_GET['idProduit'])){ ?>
+            <input name="idProduit" id="idProduit" value="<?php echo $_GET['idProduit'];?>" class="hidden w-1">
+        <?php }?>
 
             <div class="flex flex-col items-center md:ml-10 md:mb-7 md:mr-10">
 
