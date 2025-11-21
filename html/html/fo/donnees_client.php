@@ -86,10 +86,19 @@ require_once __DIR__ . "/../../01_premiere_connexion.php";
             $quantite[$nbCommande] = $commande['quantite'];
             $sousTotal[$nbCommande] = $commande['sous_total'];
             $idProdCo[$nbCommande] = $commande['id_produit'];
-            $libelleProdCo[$nbCommande] = $commande['libelle_produit'];
-            $descriptionProdCo[$nbCommande] = $commande['description_produit'];
-            $idVendeurCo[$nbCommande] = $commande['id_vendeur'];
             $nbCommande++;
+        }
+        // Récupérer les informattions des avis du client
+        $nbAvis = 0;
+        foreach($dbh->query("SELECT * FROM sae3_skadjam._compte c
+                                INNER JOIN sae3_skadjam._avis av
+                                    ON c.id_compte = av.id_compte
+                                WHERE c.id_compte = $id", PDO::FETCH_ASSOC) as $avis){
+            $idAvis[$nbAvis] = $avis['id_avis'];
+            $nbEtoile[$nbAvis] = $avis['nb_etoile'];
+            $contenu[$nbAvis] = $avis['contenu_commentaire'];
+            $idProdAv[$nbAvis] = $avis['id_produit'];
+            $nbAvis++;
         }
         $dbh = null;
     }catch(PDOException $e){
@@ -164,6 +173,18 @@ require_once __DIR__ . "/../../01_premiere_connexion.php";
                 echo "id du produit : $idProd[$i]<br>";
                 echo "libelle du produit : $libelleProd[$i]<br>";
                 echo "id du vendeur : $idVendeur[$i]<br>";
+            }
+            ?>
+        </div>
+        <div>
+            <h2>Avis</h2>
+            <?php
+            for ($i=0; $i < $nbAvis; $i++) { // Affiche tous les avis du client
+                echo "<h3>avis n°$i</h3>";
+                echo "id : $idAvis[$i]<br>";
+                echo "nombre d'étoiles : $nbEtoile[$i]<br>";
+                echo "contenu de l'avis : <p>$contenu[$i]</p><br>";
+                echo "id du produit : $idProdAv[$i]<br>";
             }
             ?>
         </div>
