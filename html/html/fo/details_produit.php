@@ -13,6 +13,7 @@
     /* Temporaire pour le dev, à changer au moment de la finalisation */
 
     // Requête pour récupérer les infos du produit
+    $produit = "vide";
     foreach($dbh->query("SELECT *, est_masque::char AS est_masque_char
                          FROM sae3_skadjam._produit pr
                          WHERE pr.id_produit = $idProd"
@@ -20,52 +21,62 @@
         $produit = $row;
     }
 
-    // Requête pour récupérer les infos de la catégorie du produit
-    foreach ($dbh->query("SELECT libelle_categorie
-                                      FROM sae3_skadjam._categorie ca
-                                      WHERE ca.id_categorie =" . $produit["id_categorie"], 
-                                      PDO::FETCH_ASSOC) as $row) {
-        $categorie = $row;
-    };
+    if ($produit === "vide") 
+    {
+        header("location:/html/fo/404.php");
+    }
+    else
+    {
+        // Requête pour récupérer les infos de la catégorie du produit
+        foreach ($dbh->query("SELECT libelle_categorie
+                                        FROM sae3_skadjam._categorie ca
+                                        WHERE ca.id_categorie =" . $produit["id_categorie"], 
+                                        PDO::FETCH_ASSOC) as $row) {
+            $categorie = $row;
+        };
 
-    // Requête pour récupérer les infos du vendeur du produit
-    foreach ($dbh->query("  SELECT *
-                            FROM sae3_skadjam._vendeur ven
-                            WHERE ven.id_compte =" . $produit["id_vendeur"], 
-                                      PDO::FETCH_ASSOC) as $row) {
-        $vendeur = $row;
-    };
+        // Requête pour récupérer les infos du vendeur du produit
+        foreach ($dbh->query("  SELECT *
+                                FROM sae3_skadjam._vendeur ven
+                                WHERE ven.id_compte =" . $produit["id_vendeur"], 
+                                        PDO::FETCH_ASSOC) as $row) {
+            $vendeur = $row;
+        };
 
-    // Requête pour récupérer l'url de la photo
-    foreach ($dbh->query("  SELECT url_photo, alt, titre
-                            FROM sae3_skadjam._montre
-                            INNER JOIN sae3_skadjam._photo
-                            ON _photo.id_photo = _montre.id_photo
-                            WHERE _montre.id_produit =" . $idProd, 
-                                      PDO::FETCH_ASSOC) as $row) {
-        $infoPhoto = $row;
-    };
+        // Requête pour récupérer l'url de la photo
+        foreach ($dbh->query("  SELECT url_photo, alt, titre
+                                FROM sae3_skadjam._montre
+                                INNER JOIN sae3_skadjam._photo
+                                ON _photo.id_photo = _montre.id_photo
+                                WHERE _montre.id_produit =" . $idProd, 
+                                        PDO::FETCH_ASSOC) as $row) {
+            $infoPhoto = $row;
+        };
+        
+        // Définition des variables PHP pour récupérer chaque donnée nécessaire
+        $libelleProd = $produit["libelle_produit"]; // Nom du produit
+        $libelleCat = $categorie["libelle_categorie"]; //Libellé de la catégorie
+        $prixTTC = $produit["prix_ttc"]; // Prix du produit
+        $produitStock = $produit["quantite_stock"]; // Récupère le stock du produit pour savoir si il est disponible ou non
+        $nomVendeur = $vendeur["raison_sociale"];
+        $produitDesc = $produit["description_produit"];
+
+        // Définition du lien vers lequel est renvoyé le client en cliquant sur le bouton ajouter au panier
+        // Si il est connecté : le produit est ajouté à son panier
+        //Si il n'est pas connecté : le visiteur est renvoyé sur la page de connexion
+
+        if ($_SESSION["role"] === "visiteur") 
+        {
+            $lienBtnAjouterPanier = "/html/fo/connexion.php?idProduit=" . $idProd;
+        }
+        else if ($_SESSION["role"] === "client")
+        {
+            $lienBtnAjouterPanier = "/php/ajouter_panier.php";
+        }
+    }
     
-    // Définition des variables PHP pour récupérer chaque donnée nécessaire
-    $libelleProd = $produit["libelle_produit"]; // Nom du produit
-    $libelleCat = $categorie["libelle_categorie"]; //Libellé de la catégorie
-    $prixTTC = $produit["prix_ttc"]; // Prix du produit
-    $produitStock = $produit["quantite_stock"]; // Récupère le stock du produit pour savoir si il est disponible ou non
-    $nomVendeur = $vendeur["raison_sociale"];
-    $produitDesc = $produit["description_produit"];
 
-    // Définition du lien vers lequel est renvoyé le client en cliquant sur le bouton ajouter au panier
-    // Si il est connecté : le produit est ajouté à son panier
-    //Si il n'est pas connecté : le visiteur est renvoyé sur la page de connexion
-
-    if ($_SESSION["role"] === "visiteur") 
-    {
-        $lienBtnAjouterPanier = "/html/fo/connexion.php";
-    }
-    else if ($_SESSION["role"] === "client")
-    {
-        $lienBtnAjouterPanier = "/php/ajouter_panier.php";
-    }
+    
 
     // Affichage test
     
