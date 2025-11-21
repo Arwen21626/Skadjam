@@ -324,6 +324,9 @@ p, a, input, label {
   .m-10 {
     margin: calc(var(--spacing, 0.25rem) * 10);
   }
+  .mt-0 {
+    margin-top: calc(var(--spacing, 0.25rem) * 0);
+  }
   .mt-1 {
     margin-top: calc(var(--spacing, 0.25rem) * 1);
   }
@@ -502,6 +505,9 @@ p, a, input, label {
   .h-auto {
     height: auto;
   }
+  .h-full {
+    height: 100%;
+  }
   .min-h-\[150px\] {
     min-height: 150px;
   }
@@ -570,6 +576,9 @@ p, a, input, label {
   }
   .w-45 {
     width: calc(var(--spacing, 0.25rem) * 45);
+  }
+  .w-48 {
+    width: calc(var(--spacing, 0.25rem) * 48);
   }
   .w-50 {
     width: calc(var(--spacing, 0.25rem) * 50);
@@ -654,6 +663,9 @@ p, a, input, label {
   }
   .flex-col {
     flex-direction: column;
+  }
+  .flex-col-reverse {
+    flex-direction: column-reverse;
   }
   .flex-row {
     flex-direction: row;
@@ -1073,6 +1085,11 @@ p, a, input, label {
       top: calc(var(--spacing, 0.25rem) * 4);
     }
   }
+  .md\:top-48 {
+    @media (width >= 48rem) {
+      top: calc(var(--spacing, 0.25rem) * 48);
+    }
+  }
   .md\:bottom-14 {
     @media (width >= 48rem) {
       bottom: calc(var(--spacing, 0.25rem) * 14);
@@ -1083,9 +1100,19 @@ p, a, input, label {
       margin-top: calc(var(--spacing, 0.25rem) * 4);
     }
   }
+  .md\:mt-10 {
+    @media (width >= 48rem) {
+      margin-top: calc(var(--spacing, 0.25rem) * 10);
+    }
+  }
   .md\:mr-10 {
     @media (width >= 48rem) {
       margin-right: calc(var(--spacing, 0.25rem) * 10);
+    }
+  }
+  .md\:mr-16 {
+    @media (width >= 48rem) {
+      margin-right: calc(var(--spacing, 0.25rem) * 16);
     }
   }
   .md\:mb-4 {
@@ -1101,6 +1128,11 @@ p, a, input, label {
   .md\:ml-10 {
     @media (width >= 48rem) {
       margin-left: calc(var(--spacing, 0.25rem) * 10);
+    }
+  }
+  .md\:ml-24 {
+    @media (width >= 48rem) {
+      margin-left: calc(var(--spacing, 0.25rem) * 24);
     }
   }
   .md\:ml-32 {
@@ -1157,9 +1189,9 @@ p, a, input, label {
       height: calc(var(--spacing, 0.25rem) * 14);
     }
   }
-  .md\:w-2\/3 {
+  .md\:w-4xl {
     @media (width >= 48rem) {
-      width: calc(2/3 * 100%);
+      width: var(--container-4xl, 56rem);
     }
   }
   .md\:w-12\! {
@@ -1217,9 +1249,19 @@ p, a, input, label {
       align-items: center;
     }
   }
+  .md\:items-start {
+    @media (width >= 48rem) {
+      align-items: flex-start;
+    }
+  }
   .md\:justify-around {
     @media (width >= 48rem) {
       justify-content: space-around;
+    }
+  }
+  .md\:justify-between {
+    @media (width >= 48rem) {
+      justify-content: space-between;
     }
   }
   .md\:justify-center {
