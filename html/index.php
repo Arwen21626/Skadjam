@@ -1,7 +1,7 @@
 <?php
-    include(__DIR__ . '/../../01_premiere_connexion.php');
+    include(__DIR__ . '/01_premiere_connexion.php');
     const PAGE_SIZE = 15;
-    require_once(__DIR__ . "/../../php/fonctions.php");
+    require_once(__DIR__ . "/../connections_params.php");
     session_start();
 ?>
 
@@ -10,8 +10,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" type="text/css" href="../../css/output.css" >
-    <link rel="stylesheet" type="text/css" href="../../css/fo/general_front.css">
+    <link rel="stylesheet" type="text/css" href="/html/css/output.css" >
+    <!-- <link rel="stylesheet" type="text/css" href="../../css/fo/general_front.css"> -->
     <title>Accueil</title>
     <style>
         button a:hover{
@@ -22,22 +22,22 @@
 
 <body>
     <!--header-->
-    <?php (include __DIR__ . "/../../php/structure/header_front.php"); ?>
-    <?php include(__DIR__ . "/../../php/structure/navbar_front.php"); ?>
+    <?php (include __DIR__ . "/php/structure/head_front.php"); ?>
+    <?php include(__DIR__ . "/php/structure/navbar_front.php"); ?>
 
     <main>
         <div class="grid grid-cols-2 gap-4 justify-items-center">
             <a href="#nosProduits" title="lien vers page promotion">
-                <img src="../../images/images_accueil/promotion.webp" alt="promotion" class="w-90 md:w-150 h-auto justify-self-end">
+                <img src="images/images_accueil/promotion.webp" alt="promotion" class="w-90 md:w-150 h-auto justify-self-end">
             </a>
             <a href="#nosProduits" title="lien vers page nouveaux produits">
-                <img src="../../images/images_accueil/nouveaux_produits.webp" alt="nouveaux produits" class="w-90 md:w-150 h-auto justify-self-start">
+                <img src="images/images_accueil/nouveaux_produits.webp" alt="nouveaux produits" class="w-90 md:w-150 h-auto justify-self-start">
             </a>           
             <a href="#nosProduits" title="lien vers page les plus vendus">
-                <img src="../../images/images_accueil/les_plus_vendus.webp" alt="les plus vendus" class="w-90 md:w-150 h-auto justify-self-end">
+                <img src="images/images_accueil/les_plus_vendus.webp" alt="les plus vendus" class="w-90 md:w-150 h-auto justify-self-end">
             </a>
             <a href="../fo/commandes.php" title="lien vers page commandes">
-                <img src="../../images/images_accueil/commandes.webp" alt="commandes" class="w-90 md:w-150 h-auto justify-self-start">
+                <img src="images/images_accueil/commandes.webp" alt="commandes" class="w-90 md:w-150 h-auto justify-self-start">
             </a>        
         </div>
 
@@ -111,19 +111,20 @@
             }
         ?>
         <!--fin du catalogue-->
-
-        <?php if ($pageNumber>1){?>
-        <a class= "lienPage" href="<?php echo "./index.php?page=".($pageNumber-1)."#nosProduits";?>">page précédente</a>
-        <?php }?>
-    
-        <?php if ($pageNumber<$maxPage){?>
-        <a class= "lienPage" href="<?php echo "./index.php?page=".($pageNumber+1)."#nosProduits";?>">page suivante</a>
-        <?php }?>
+        <div class="flex flex-row space-x-4 justify-center">
+            <?php if ($pageNumber>1){?>
+            <a class= "lienPage" href="<?php echo "./index.php?page=".($pageNumber-1)."#nosProduits";?>">Page précédente</a>
+            <?php }?>
+        
+            <?php if ($pageNumber<$maxPage){?>
+            <a class= "lienPage" href="<?php echo "./index.php?page=".($pageNumber+1)."#nosProduits";?>">Page suivante</a>
+            <?php }?>
+        </div>
 
     </main>
     
     <!--footer-->
-    <?php include (__DIR__ . "/../../php/structure/footer_front.php"); ?>
+    <?php include (__DIR__ . "/php/structure/footer_front.php"); ?>
 
 </body>
 
