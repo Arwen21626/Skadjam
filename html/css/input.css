@@ -67,6 +67,12 @@ p, a, input, label {
     }
 }
 
+main>h2{
+    text-align: center;
+    align-self: center;
+    margin: 0.5em;
+}
+
 @import "tailwindcss";
 @tailwind utilities;
 @reference "tailwindcss";

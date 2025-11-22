@@ -148,7 +148,7 @@ else { ?>
     <body>
         <?php include(__DIR__ . '/../../php/structure/header_back.php');?>
         <?php include(__DIR__ . '/../../php/structure/navbar_back.php');?>
-        <main>
+        <main class="flex flex-col items-center">
             <h2>Création d'un produit</h2>
             <form class="grid grid-cols-[40%_60%] w-4/5 self-center" action="creation_produit.php" method="post" enctype="multipart/form-data">
 

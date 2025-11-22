@@ -51,6 +51,11 @@ p, a, input, label {
     font-size: 20px;
   }
 }
+main>h2 {
+  text-align: center;
+  align-self: center;
+  margin: 0.5em;
+}
 @layer theme, base, components, utilities;
 @layer theme {
   :root, :host {
