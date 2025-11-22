@@ -21,7 +21,7 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-    <?php require(__DIR__ . "/../../php/structure/head_front.php") ?>
+    <?php require(__DIR__ . "/../../php/structure/head_backt.php") ?>
     <title>Détails</title>
 </head>
 <body>
