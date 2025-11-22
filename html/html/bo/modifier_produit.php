@@ -5,6 +5,7 @@ require_once(__DIR__ . '/../../php/verification_formulaire.php');
 session_start();
 
 $idProduit = $_GET['idProduit'];
+echo $idProduit;
 
 //Tableau pour les catégories de la base
 $tab_categories = [];
@@ -260,7 +261,7 @@ else { ?>
                 </div>
                 
                 <div class="col-start-1 col-span-2 row-start-6 flex flex-row justify-around m-4">
-                    <button class="border-2 border-vertFonce rounded-2xl w-40 h-14"><a href="../bo/details_produit.php">Retour</a></button>
+                    <button class="border-2 border-vertFonce rounded-2xl w-40 h-14"><a href="../bo/details_produit.php?idProduit=<?php echo $idProduit ;?>">Retour</a></button>
                     <input class="border-2 border-vertFonce rounded-2xl w-40 h-14" type="submit" value="Valider">
                 </div>
             </form>
