@@ -216,7 +216,7 @@ if(isset($_POST['pseudo']) && isset($_POST['naissance']) && isset($_POST['nom'])
     }
     catch(PDOException $e){
         echo "Erreur dans l'envoie des données dans la base de données.";
-        echo $e;
+        
         die();
     }
     
