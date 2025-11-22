@@ -525,6 +525,9 @@ main>h2 {
   .min-h-\[150px\] {
     min-height: 150px;
   }
+  .min-h-\[545px\] {
+    min-height: 545px;
+  }
   .w-1 {
     width: calc(var(--spacing, 0.25rem) * 1);
   }
