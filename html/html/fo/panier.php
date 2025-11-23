@@ -103,7 +103,13 @@
                                                 
                                                 <div id="prix">
                                                     <p> <?php echo "Prix unitaire : " . $infoProduitsPanier[$i]["infoProduit"]["prix_ttc"] . "€"; ?> </p>
-                                                    <p> <?php echo "Prix total : " . ($infoProduitsPanier[$i]["infoProduit"]["prix_ttc"] * $infoProduitsPanier[$i]["quantiteProduit"]) . "€"; ?> </p>
+                                                    <p> 
+                                                        <?php
+                                                            $prixTot = ($infoProduitsPanier[$i]["infoProduit"]["prix_ttc"] * $infoProduitsPanier[$i]["quantiteProduit"]);
+                                                            $prixTot = number_format($prixTot, 2, '.', '');
+                                                            echo "Prix total : " . $prixTot . "€"; 
+                                                        ?> 
+                                                    </p>
                                                 </div>
                                                 <div class="flex justify-center items-center">
                                                     <form method="post" action="#" >
@@ -149,10 +155,11 @@
         if (!empty($produitsPanier))
         {
             ?>
-                <div class="grid grid-cols-3 fixed bottom-64 w-full pointer-events-none">
+                <div class="grid grid-cols-5 fixed bottom-64 w-full pointer-events-none">
                     <div></div>
                     <div></div>
-                    <div id="conteneur-info_panier" class="grid grid-rows-4 items-center pointer-events-auto">
+                    <div></div>
+                    <div id="conteneur-info_panier" class="grid grid-rows-4 justify-center items-center pointer-events-auto bg-beige rounded-2xl pb-4">
                         <div class="inline-flex mt-4">
                             <p class="mr-2">Nombre d'article : </p>
                             <p class="ml-2"> <?php echo $nbProduitsTotal; ?> </p>
@@ -161,13 +168,20 @@
                             <p class="mr-2">Sous total :</p>
                             <p class="ml-2"> <?php echo $montantTotalTTC . "€"; ?> </p>
                         </div>
-                        <button class="bg-beige rounded-2xl w-40 h-14 mt-4 cursor-pointer hover:text-rouge" type="submit">
-                            Vider le panier
-                        </button>
-                        <button class="bg-beige rounded-2xl w-40 h-14 mt-4 cursor-pointer hover:text-rouge" type="submit">
-                            Acheter
-                        </button>
+                        <form class="flex justify-center" action="/php/vider_panier.php">
+                            <button class="bg-beige rounded-2xl w-40 h-14 mt-4 cursor-pointer hover:bg-rouge hover:text-white border-black border shadow" type="submit">
+                                Vider le panier
+                            </button>
+                        </form>
+                        
+                        <form class="flex justify-center" action="">
+                            <button class="bg-beige rounded-2xl w-40 h-14 mt-4 cursor-pointer hover:text-rouge border-black border shadow" type="submit">
+                                Acheter
+                            </button>
+                        </form>
+                        
                     </div>
+                    <div></div>
                 </div>
             <?php
         }

@@ -678,6 +678,9 @@ main>h2 {
   .grid-cols-3 {
     grid-template-columns: repeat(3, minmax(0, 1fr));
   }
+  .grid-cols-5 {
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+  }
   .grid-cols-\[40\%_60\%\] {
     grid-template-columns: 40% 60%;
   }
@@ -801,6 +804,9 @@ main>h2 {
   }
   .border-beige {
     border-color: var(--color-beige);
+  }
+  .border-black {
+    border-color: var(--color-black, #000);
   }
   .border-vertClair {
     border-color: var(--color-vertClair);
@@ -1051,6 +1057,13 @@ main>h2 {
       background-color: var(--color-beige);
     }
   }
+  .hover\:bg-rouge {
+    &:hover {
+      @media (hover: hover) {
+        background-color: var(--color-rouge);
+      }
+    }
+  }
   .hover\:bg-\[url\(\/images\/logo\/bootstrap_icon\/cart-fill\.svg\)\] {
     &:hover {
       @media (hover: hover) {
@@ -1111,6 +1124,13 @@ main>h2 {
     &:hover {
       @media (hover: hover) {
         color: var(--color-vertClair);
+      }
+    }
+  }
+  .hover\:text-white {
+    &:hover {
+      @media (hover: hover) {
+        color: var(--color-white, #fff);
       }
     }
   }

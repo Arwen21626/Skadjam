@@ -1,5 +1,5 @@
 <?php
-include_once(__DIR__ . "/../01_premiere_connexion.php");
+require_once(__DIR__ . "/../01_premiere_connexion.php");
 
 session_start();
 
