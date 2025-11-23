@@ -221,6 +221,12 @@ main>h2 {
   .\@container {
     container-type: inline-size;
   }
+  .pointer-events-auto {
+    pointer-events: auto;
+  }
+  .pointer-events-none {
+    pointer-events: none;
+  }
   .absolute {
     position: absolute;
   }
@@ -934,6 +940,10 @@ main>h2 {
   .-indent-96 {
     text-indent: calc(var(--spacing, 0.25rem) * -96);
   }
+  .text-4xl {
+    font-size: var(--text-4xl, 2.25rem);
+    line-height: var(--tw-leading, var(--text-4xl--line-height, calc(2.5 / 2.25)));
+  }
   .font-bold {
     --tw-font-weight: var(--font-weight-bold, 700);
     font-weight: var(--font-weight-bold, 700);
@@ -1094,6 +1104,13 @@ main>h2 {
     &:hover {
       @media (hover: hover) {
         color: var(--color-rouge);
+      }
+    }
+  }
+  .hover\:text-vertClair {
+    &:hover {
+      @media (hover: hover) {
+        color: var(--color-vertClair);
       }
     }
   }
@@ -1354,6 +1371,11 @@ main>h2 {
   .md\:pt-0\.5 {
     @media (width >= 48rem) {
       padding-top: calc(var(--spacing, 0.25rem) * 0.5);
+    }
+  }
+  .md\:pt-4 {
+    @media (width >= 48rem) {
+      padding-top: calc(var(--spacing, 0.25rem) * 4);
     }
   }
   .md\:pt-5 {

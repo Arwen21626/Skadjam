@@ -128,6 +128,7 @@
                     
                     <form method="post" action="<?php echo $lienBtnAjouterPanier ?>" >
                         <input type="hidden" name="idProduit" value="<?php echo $idProd ?>">
+                        <input type="hidden" name="pageDeRetour" value="details">
                         <button class="bg-beige rounded-2xl w-40 h-14 mt-4 cursor-pointer hover:text-rouge"
                         type="submit">
                             Ajouter au panier
