@@ -60,8 +60,8 @@
     <title>Panier</title>
 </head>
 <body>
-    <?php include("php/structure/header_front.php") ?>
-    <?php include("php/structure/navbar_front.php") ?>
+    <?php include(__DIR__ . "/../../php/structure/header_front.php") ?>
+    <?php include(__DIR__ . "/../../php/structure/navbar_front.php") ?>
 
     
 
@@ -210,6 +210,6 @@
     ?>
     
     
-    <?php include("php/structure/footer_front.php") ?>
+    <?php include(__DIR__ . "/../../php/structure/footer_front.php") ?>
 </body>
 </html>
