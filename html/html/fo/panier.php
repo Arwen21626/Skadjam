@@ -56,7 +56,7 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-    <?php include("php/structure/head_front.php");?>
+    <?php include(__DIR__ . "/../../php/structure/head_front.php");?>
     <title>Panier</title>
 </head>
 <body>
