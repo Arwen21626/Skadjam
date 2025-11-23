@@ -98,7 +98,7 @@ else
     }
     else if ($_POST["pageDeRetour"] === "panier")
     {
-        header("location:/html/fo/panier.php");
+        header("location:/html/fo/panier.php#" . $idProd);
     }
     
 }

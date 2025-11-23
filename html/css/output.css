@@ -504,6 +504,9 @@ main>h2 {
   .h-10 {
     height: calc(var(--spacing, 0.25rem) * 10);
   }
+  .h-12 {
+    height: calc(var(--spacing, 0.25rem) * 12);
+  }
   .h-14 {
     height: calc(var(--spacing, 0.25rem) * 14);
   }

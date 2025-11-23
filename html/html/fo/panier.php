@@ -82,7 +82,7 @@
                                 foreach ($infoProduitsPanier as $i => $value) 
                                 {
                                     ?>
-                                        <div class="bg-bleu p-4 m-4 shadow md:grid md:grid-cols-2">
+                                        <div id="<?php echo $infoProduitsPanier[$i]["infoProduit"]["id_produit"]; ?>" class="bg-bleu p-4 m-4 shadow md:grid md:grid-cols-2">
 
                                             <!-- l'Image -->
                                             <div class="flex justify-center">
@@ -112,8 +112,14 @@
                                                     </p>
                                                 </div>
                                                 <div class="flex justify-center items-center">
-                                                    <form method="post" action="#" >
+                                                    <form method="post" action="/php/retrait_panier.php" >
                                                         <input type="hidden" name="idProduit" value="<?php echo $infoProduitsPanier[$i]["infoProduit"]["id_produit"]; ?>">
+                                                        <input type="hidden" name="quantiteProd" value="<?php echo $infoProduitsPanier[$i]["quantiteProduit"]; ?>">
+                                                        <input type="hidden" name="prixTTC" value="<?php echo $infoProduitsPanier[$i]["infoProduit"]["prix_ttc"]; ?>">
+                                                        <input type="hidden" name="quantiteTot" value="<?php echo $nbProduitsTotal; ?>">
+                                                        <input type="hidden" name="prixTot" value="<?php echo $montantTotalTTC; ?>">
+                                                        <input type="hidden" name="typeRetrait" value="decrement">
+
                                                         <button class="text-4xl text-center mr-4 cursor-pointer hover:text-rouge"
                                                         type="submit">
                                                             -
@@ -132,7 +138,20 @@
                                                     </form>
                                                 </div>
                                                 
-                                                <button>Supprimer du panier</button>
+                                                <form method="post" action="/php/retrait_panier.php">
+                                                    <input type="hidden" name="idProduit" value="<?php echo $infoProduitsPanier[$i]["infoProduit"]["id_produit"]; ?>">
+                                                    <input type="hidden" name="quantiteProd" value="<?php echo $infoProduitsPanier[$i]["quantiteProduit"]; ?>">
+                                                    <input type="hidden" name="prixTTC" value="<?php echo $infoProduitsPanier[$i]["infoProduit"]["prix_ttc"]; ?>">
+                                                    <input type="hidden" name="quantiteTot" value="<?php echo $nbProduitsTotal; ?>">
+                                                    <input type="hidden" name="prixTot" value="<?php echo $montantTotalTTC; ?>">
+                                                    <input type="hidden" name="typeRetrait" value="suppression">
+
+                                                    <button class="rounded-2xl border border-black w-48 h-12 self-center cursor-pointer hover:bg-rouge hover:text-white"
+                                                    type="submit">
+                                                        Supprimer du panier
+                                                    </button>
+                                                </form>
+                                                
                                             </div>
 
                                         </div>
