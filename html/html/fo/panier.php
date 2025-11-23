@@ -68,8 +68,8 @@
         <?php
             if (empty($produitsPanier)) {
                 ?>
-                    <main class="md:min-h-[545px] md:p-4 md:flex md:justify-center">
-                        <h2 class="md:text-center md:self-center">Votre panier est vide</h2>
+                    <main class="min-h-[360px] md:min-h-[545px] md:p-4 flex justify-center">
+                        <h2 class="md:text-center self-center">Votre panier est vide</h2>
                 <?php
             }
             else
@@ -82,28 +82,29 @@
                                 foreach ($infoProduitsPanier as $i => $value) 
                                 {
                                     ?>
-                                        <div id="<?php echo $infoProduitsPanier[$i]["infoProduit"]["id_produit"]; ?>" class="bg-bleu p-4 m-4 shadow md:grid md:grid-cols-2">
+                                        <div id="<?php echo $infoProduitsPanier[$i]["infoProduit"]["id_produit"]; ?>" class="bg-bleu p-2 md:p-4 m-4 shadow md:grid md:grid-cols-2">
 
                                             <!-- l'Image -->
-                                            <div class="flex justify-center">
-                                                <a href="/html/fo/details_produit.php?idProduit=<?php echo $infoProduitsPanier[$i]["infoProduit"]["id_produit"]; ?>">
+                                            <div class="flex justify-center mb-3 md:mb-0">
+                                                <a class="flex justify-center" href="/html/fo/details_produit.php?idProduit=<?php echo $infoProduitsPanier[$i]["infoProduit"]["id_produit"]; ?>">
                                                     <img src="<?php echo $infoProduitsPanier[$i]["infoPhoto"]["url_photo"]; ?>" 
                                                     alt="<?php echo $infoProduitsPanier[$i]["infoPhoto"]["alt"]; ?>" 
                                                     title="<?php echo $infoProduitsPanier[$i]["infoPhoto"]["titre"]; ?>"
-                                                    class="border">
+                                                    class="border self-center w-3/4 h-auto md:w-full md:h-auto">
                                                 </a> 
                                             </div>
                                             
                                             <!-- Le conteneur des éléments liés au produit -->
                                             <div class="text-center md:flex md:flex-col md:justify-evenly">
-                                                <div class="flex flex-col justify-center items-center">
+
+                                                <div class="flex flex-col justify-center items-center mb-3 md:mb-0">
                                                     <h4> <?php echo $infoProduitsPanier[$i]["infoProduit"]["libelle_produit"]; ?></h4>
                                                     <p class="mt-2"> <?php echo affichageNote($infoProduitsPanier[$i]["infoProduit"]["note_moyenne"]); ?> </p>
                                                 </div>
                                                 
                                                 <div id="prix">
-                                                    <p> <?php echo "Prix unitaire : " . $infoProduitsPanier[$i]["infoProduit"]["prix_ttc"] . "€"; ?> </p>
-                                                    <p> 
+                                                    <p class="mb-0.5 md:mb-0"> <?php echo "Prix unitaire : " . $infoProduitsPanier[$i]["infoProduit"]["prix_ttc"] . "€"; ?> </p>
+                                                    <p class="mt-0.5 md:mt-0"> 
                                                         <?php
                                                             $prixTot = ($infoProduitsPanier[$i]["infoProduit"]["prix_ttc"] * $infoProduitsPanier[$i]["quantiteProduit"]);
                                                             $prixTot = number_format($prixTot, 2, '.', '');
@@ -111,7 +112,7 @@
                                                         ?> 
                                                     </p>
                                                 </div>
-                                                <div class="flex justify-center items-center">
+                                                <div class="flex justify-center items-center mb-2 md:mb-0">
                                                     <form method="post" action="/php/retrait_panier.php" >
                                                         <input type="hidden" name="idProduit" value="<?php echo $infoProduitsPanier[$i]["infoProduit"]["id_produit"]; ?>">
                                                         <input type="hidden" name="quantiteProd" value="<?php echo $infoProduitsPanier[$i]["quantiteProduit"]; ?>">
@@ -138,7 +139,7 @@
                                                     </form>
                                                 </div>
                                                 
-                                                <form method="post" action="/php/retrait_panier.php">
+                                                <form class="mt-2 md:mt-0" method="post" action="/php/retrait_panier.php">
                                                     <input type="hidden" name="idProduit" value="<?php echo $infoProduitsPanier[$i]["infoProduit"]["id_produit"]; ?>">
                                                     <input type="hidden" name="quantiteProd" value="<?php echo $infoProduitsPanier[$i]["quantiteProduit"]; ?>">
                                                     <input type="hidden" name="prixTTC" value="<?php echo $infoProduitsPanier[$i]["infoProduit"]["prix_ttc"]; ?>">
@@ -174,27 +175,29 @@
         if (!empty($produitsPanier))
         {
             ?>
-                <div class="grid grid-cols-5 fixed bottom-64 w-full pointer-events-none">
+                <div class="flex bottom-14 border-b md:border-none md:w-full md:grid md:grid-cols-5 fixed md:bottom-64 pointer-events-none">
                     <div></div>
                     <div></div>
                     <div></div>
-                    <div id="conteneur-info_panier" class="grid grid-rows-4 justify-center items-center pointer-events-auto bg-beige rounded-2xl pb-4">
-                        <div class="inline-flex mt-4">
+                    <div id="conteneur-info_panier" class="flex w-full flex-wrap justify-evenly md:flex-nowrap bg-beige pb-4 pointer-events-auto md:grid md:grid-rows-4 md:justify-center md:items-center md:rounded-2xl" >
+                        <div class="inline-flex mt-2 mb-2 md:mb-0 md:mt-4">
                             <p class="mr-2">Nombre d'article : </p>
                             <p class="ml-2"> <?php echo $nbProduitsTotal; ?> </p>
                         </div>
-                        <div class="inline-flex mt-4">
+
+                        <div class="inline-flex mt-2 mb-2 md:mb-0 md:mt-4">
                             <p class="mr-2">Sous total :</p>
                             <p class="ml-2"> <?php echo $montantTotalTTC . "€"; ?> </p>
                         </div>
+
                         <form class="flex justify-center" action="/php/vider_panier.php">
-                            <button class="bg-beige rounded-2xl w-40 h-14 mt-4 cursor-pointer hover:bg-rouge hover:text-white border-black border shadow" type="submit">
+                            <button class="bg-beige rounded-2xl w-32 h-10 mt-2 md:w-40 md:h-14 md:mt-4 cursor-pointer hover:bg-rouge hover:text-white border-black border shadow" type="submit">
                                 Vider le panier
                             </button>
                         </form>
                         
                         <form class="flex justify-center" action="">
-                            <button class="bg-beige rounded-2xl w-40 h-14 mt-4 cursor-pointer hover:text-rouge border-black border shadow" type="submit">
+                            <button class="bg-beige rounded-2xl w-20 h-10 mt-2 md:w-40 md:h-14 md:mt-4 cursor-pointer hover:text-rouge border-black border shadow" type="submit">
                                 Acheter
                             </button>
                         </form>
