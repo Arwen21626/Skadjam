@@ -57,6 +57,7 @@
         $produitStock = $produit["quantite_stock"]; // Récupère le stock du produit pour savoir si il est disponible ou non
         $nomVendeur = $vendeur["raison_sociale"];
         $produitDesc = $produit["description_produit"];
+        $noteMoy = $produit["note_moyenne"];
 
         // Définition du lien vers lequel est renvoyé le client en cliquant sur le bouton ajouter au panier
         // Si il est connecté : le produit est ajouté à son panier
@@ -71,12 +72,6 @@
             $lienBtnAjouterPanier = "/php/ajouter_panier.php";
         }
     }
-    
-
-    
-
-    // Affichage test
-    
 ?>
 
 
@@ -96,6 +91,7 @@
             <article class="p-2 md:pb-8"> <!-- Titrage -->
                 <h3> <?php echo $libelleProd; ?></h3>
                 <p class="ml-4">Catégorie : <?php echo $libelleCat; ?></p>
+                <div class="ml-10"> <?php echo affichageNote($noteMoy); ?> </div>
             </article>
             
             <article class="md:flex md:flex-row md:justify-around">
