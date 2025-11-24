@@ -39,7 +39,7 @@
             <img src="/images/logo/reseaux/instagram_front.webp" alt="Instagram" title="Instagram" 
             class="size-12 md:size-14">
         </a>
-        <a class="hover:text-rouge m-1" href="#A modifier" class="self-center">
+        <a class="hover:text-rouge m-1" href="https://www.linkedin.com" class="self-center">
 
             <img src="/images/logo/reseaux/linkedin_front.webp" alt="Linkedin" title="Linkedin" 
             class="size-12 md:size-14">
