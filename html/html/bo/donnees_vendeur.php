@@ -78,9 +78,9 @@ require_once __DIR__ . "/../../01_premiere_connexion.php";
             $dateDebut[$nbPromotion] = $promotion['date_debut_promotion'];
             $dateFin[$nbPromotion] = $promotion['date_fin_promotion'];
             $periodicite[$nbPromotion] = $promotion['periodicite'];
-    heure_debut CHARACTER VARYING(5) NOT NULL,
-    heure_fin CHARACTER VARYING(5),
-    id_produit INT NOT NULL
+    //heure_debut CHARACTER VARYING(5) NOT NULL,
+    //heure_fin CHARACTER VARYING(5),
+    //id_produit INT NOT NULL
             $nbPromotion++;
         }
 
