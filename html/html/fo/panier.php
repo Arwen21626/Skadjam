@@ -197,7 +197,7 @@
                         </form>
                         
                         <form class="flex justify-center" action="">
-                            <button class="bg-beige rounded-2xl w-20 h-10 mt-2 md:w-40 md:h-14 md:mt-4 cursor-pointer hover:text-rouge border-black border shadow" type="submit">
+                            <button class="bg-beige rounded-2xl w-20 h-10 mt-2 md:w-40 md:h-14 md:mt-4 cursor-pointer hover:bg-bleu hover:text-vertFonce border-black border shadow" type="submit">
                                 Acheter
                             </button>
                         </form>
