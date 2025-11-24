@@ -76,7 +76,7 @@ $mailer = new PHPMailer(true);
                                     // Contenu
                                     $mailer->isHTML(false);
                                     $mailer->Subject = 'Alizon : reinitialiser votre mot de passe';
-                                    $mailer->Body    = "Pour changer votre mot de passe, cliquez sur ce lien : http://localhost:8888/html/fo/nouveau_mdp.php";
+                                    $mailer->Body    = "Pour changer votre mot de passe, cliquez sur ce lien : http://10.253.5.109/html/fo/nouveau_mdp.php";
 
                                     // Envoi
                                     $mailer->send();
