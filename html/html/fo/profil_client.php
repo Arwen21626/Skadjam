@@ -17,8 +17,8 @@ if (isset($_POST['logout'])) {
 ?>
 <!DOCTYPE html>
 <html lang="fr">
+<?php require __DIR__ . "/../../php/structure/head_front.php"; ?>
 <head>
-    <?php require __DIR__ . "/../../php/structure/head_front.php"; ?>
     <title>Mon profil</title>
 </head>
 <body>
