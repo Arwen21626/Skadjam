@@ -169,7 +169,7 @@ if(isset($_POST['pseudo']) && isset($_POST['naissance']) && isset($_POST['nom'])
 
             // Redirection vers la page d'accueil
             if (!$erreur && isset($_POST['mdp']) && isset($_POST['verifMdp'])){ // Si c'est la création d'un compte
-                header("location: ../html/fo/index.php");
+                header("location: /index.php");
             } 
             elseif(!$erreur && !isset($_POST['mdp']) && !isset($_POST['verifMdp'])){ // Si c'est la modification d'un compte
                 header("location: ../html/fo/profil_client.php");
@@ -216,7 +216,6 @@ if(isset($_POST['pseudo']) && isset($_POST['naissance']) && isset($_POST['nom'])
     }
     catch(PDOException $e){
         echo "Erreur dans l'envoie des données dans la base de données.";
-
         die();
     }
     

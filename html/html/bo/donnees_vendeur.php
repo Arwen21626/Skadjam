@@ -74,7 +74,13 @@ require_once __DIR__ . "/../../01_premiere_connexion.php";
                         INNER JOIN sae3_skadjam._promu promu
                             ON promo.id_promotion = promu.id_promotion
                         WHERE c.id_compte = $id", PDO::FETCH_ASSOC) as $promotion){
-            
+            $idPromotion[$nbPromotion] = $promotion['id_promotion'];
+            $dateDebut[$nbPromotion] = $promotion['date_debut_promotion'];
+            $dateFin[$nbPromotion] = $promotion['date_fin_promotion'];
+            $periodicite[$nbPromotion] = $promotion['periodicite'];
+    //heure_debut CHARACTER VARYING(5) NOT NULL,
+    //heure_fin CHARACTER VARYING(5),
+    //id_produit INT NOT NULL
             $nbPromotion++;
         }
 

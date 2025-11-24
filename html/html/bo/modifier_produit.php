@@ -5,6 +5,7 @@ require_once(__DIR__ . '/../../php/verification_formulaire.php');
 session_start();
 
 $idProduit = $_GET['idProduit'];
+echo $idProduit;
 
 //Tableau pour les catégories de la base
 $tab_categories = [];
@@ -176,100 +177,97 @@ else { ?>
 
 <!DOCTYPE html>
 <html lang="fr">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Modifier un produit</title>
-    <link rel="stylesheet" href="../../css/output.css">
-    <link rel="stylesheet" href="../../css/bo/general_back.css">
-    <style>
-        button a:hover{
-            color : black;
-        }
-    </style>
-</head>
-<body>
-    <?php include(__DIR__ . '/../../php/structure/header_back.php');?>
-    <?php include(__DIR__ . '/../../php/structure/navbar_back.php');?>
-    <main>
-        <h2>Modifier un produit</h2>
-        <form class="grid grid-cols-[40%_60%] w-11/12 self-center" action="modifier_produit.php" method="post" enctype="multipart/form-data">
+    <?php include(__DIR__."/../../php/structure/head_back.php");?>
+    <head>
+        <title>Modifier un produit</title>
+        <style>
+            button a:hover{
+                color : black;
+            }
+        </style>
+    </head>
+    <body>
+        <?php include(__DIR__ . '/../../php/structure/header_back.php');?>
+        <?php include(__DIR__ . '/../../php/structure/navbar_back.php');?>
+        <main>
+            <h2>Modifier un produit</h2>
+            <form class="grid grid-cols-[40%_60%] w-11/12 self-center" action="modifier_produit.php" method="post" enctype="multipart/form-data">
 
-            <div class="row-start-1 row-span-3 m-2 p-4 grid grid-rows-[2/3-1/3] justify-items-center">
-                <input type="file" id="photo" name="photo" class="hidden" required>
-                <!-- label qui agit comme bouton -->
-                <label id="labelImage" for="photo" class=" w-60 h-60 rounded-xl" style="background-image: url(' <?php echo $urlPhoto ?>'); background-repeat: no-repeat; background-position: center; background-size: 100%;"></label>
-                <label for="photo">Ajouter une image*</label>
-            </div>
-            
-
-            <div class="col-start-2 row-start-1 flex flex-col w-200 m-2 p-2">
-                <label for="nom">Nom produit *:</label>
-                <input value="<?php echo($nom) ;?>" class=" border-4 border-beige rounded-2xl" type="text" name="nom" id="nom" required>
-            </div>
-
-            <div class="col-start-2 row-start-2 flex flex-row justify-between w-200 m-2 p-2">
-                <div class="flex flex-col">
-                    <label for="prix">Prix *(hors taxe):</label>
-                    <input value="<?php echo($prixHT) ;?>" class="border-4 border-beige rounded-2xl w-75" type="number" name="prix" id="prix" min="0.0" step="0.5" required>
+                <div class="row-start-1 row-span-3 m-2 p-4 grid grid-rows-[2/3-1/3] justify-items-center">
+                    <input type="file" id="photo" name="photo" class="hidden" required>
+                    <!-- label qui agit comme bouton -->
+                    <label id="labelImage" for="photo" class=" w-60 h-60 rounded-xl" style="background-image: url(' <?php echo $urlPhoto ?>'); background-repeat: no-repeat; background-position: center; background-size: 100%;"></label>
+                    <label for="photo">Ajouter une image*</label>
                 </div>
-                <div class="flex flex-col">
-                    <label for="qteStock">Quantité en stock* :</label>
-                    <input value="<?php echo($qteStock) ;?>" class="border-4 border-beige rounded-2xl w-75" type="number" name="qteStock" id="qteStock" min="0" required>
-                </div>
-            </div>
                 
-            <div class="col-start-2 row-start-3 col-span-2 flex flex-row justify-between w-200 m-2 p-2">
-                <div class="flex flex-col">
-                    <label for="categorie">Catégorie* :</label>
-                    <select class=" border-4 border-beige rounded-2xl m-2 p-2 w-40 h-14" name="categorie" id="categorie" required>
-                        <option value="<?php echo($idCategorie) ;?>"><?php echo($nomCategorie) ;?></option>
-                        <?php foreach ($tab_categories as $categorie) {?>
-                            <option value="<?php echo $categorie['id_categorie']?>"><?php echo $categorie['libelle_categorie']?></option>
+
+                <div class="col-start-2 row-start-1 flex flex-col w-200 m-2 p-2">
+                    <label for="nom">Nom produit *:</label>
+                    <input value="<?php echo($nom) ;?>" class=" border-4 border-beige rounded-2xl" type="text" name="nom" id="nom" required>
+                </div>
+
+                <div class="col-start-2 row-start-2 flex flex-row justify-between w-200 m-2 p-2">
+                    <div class="flex flex-col">
+                        <label for="prix">Prix *(hors taxe):</label>
+                        <input value="<?php echo($prixHT) ;?>" class="border-4 border-beige rounded-2xl w-75" type="number" name="prix" id="prix" min="0.0" step="0.5" required>
+                    </div>
+                    <div class="flex flex-col">
+                        <label for="qteStock">Quantité en stock* :</label>
+                        <input value="<?php echo($qteStock) ;?>" class="border-4 border-beige rounded-2xl w-75" type="number" name="qteStock" id="qteStock" min="0" required>
+                    </div>
+                </div>
+                    
+                <div class="col-start-2 row-start-3 col-span-2 flex flex-row justify-between w-200 m-2 p-2">
+                    <div class="flex flex-col">
+                        <label for="categorie">Catégorie* :</label>
+                        <select class=" border-4 border-beige rounded-2xl m-2 p-2 w-40 h-14" name="categorie" id="categorie" required>
+                            <option value="<?php echo($idCategorie) ;?>"><?php echo($nomCategorie) ;?></option>
+                            <?php foreach ($tab_categories as $categorie) {?>
+                                <option value="<?php echo $categorie['id_categorie']?>"><?php echo $categorie['libelle_categorie']?></option>
+                            <?php } ?>
+                        </select>
+                    </div>
+                    <div class="flex flex-col">
+                        <label for="unite">Unité* :</label>
+                        <select class="border-4 border-beige rounded-2xl m-2 p-2 w-40 h-14" name="unite" id="unite" required>
+                        <option value="<?php echo($unite) ;?>"><?php echo($unite) ;?></option>
+                        <?php foreach ($tab_unite as $unite) {?>
+                            <option value="<?php echo $unite?>"><?php echo $unite?></option>
                         <?php } ?>
                     </select>
+                    </div>
+                    <div class="flex flex-col">
+                        <label for="qteUnite">Quantité unité :</label>
+                        <input value="<?php echo($qteUnite) ;?>" class="border-4 border-beige rounded-2xl w-75" type="number" name="qteUnite" id="qteUnite" min="0" required>
+                    </div>
                 </div>
-                <div class="flex flex-col">
-                    <label for="unite">Unité* :</label>
-                    <select class="border-4 border-beige rounded-2xl m-2 p-2 w-40 h-14" name="unite" id="unite" required>
-                    <option value="<?php echo($unite) ;?>"><?php echo($unite) ;?></option>
-                    <?php foreach ($tab_unite as $unite) {?>
-                        <option value="<?php echo $unite?>"><?php echo $unite?></option>
-                    <?php } ?>
-                </select>
-                </div>
-                <div class="flex flex-col">
-                    <label for="qteUnite">Quantité unité :</label>
-                    <input value="<?php echo($qteUnite) ;?>" class="border-4 border-beige rounded-2xl w-75" type="number" name="qteUnite" id="qteUnite" min="0" required>
-                </div>
-            </div>
 
-            
-            <div class="col-start-1 row-start-4 col-span-2 flex flex-row justify-around m-2 p-2">
-                <div class="flex flex-row mr-4 ml-4">
-                    <label class="mr-4" for="mettreEnLigne">Mettre en ligne</label>
-                    <input class="appearance-none w-10 h-10 border-4 border-beige rounded-md checked:bg-beige" type="checkbox" name="mettreEnLigne" id="mettreEnLigne" <?php echo ($enLigne == 'true')?'checked':'' ?>>
+                
+                <div class="col-start-1 row-start-4 col-span-2 flex flex-row justify-around m-2 p-2">
+                    <div class="flex flex-row mr-4 ml-4">
+                        <label class="mr-4" for="mettreEnLigne">Mettre en ligne</label>
+                        <input class="appearance-none w-10 h-10 border-4 border-beige rounded-md checked:bg-beige" type="checkbox" name="mettreEnLigne" id="mettreEnLigne" <?php echo ($enLigne == 'true')?'checked':'' ?>>
+                    </div>
+                
+                    <div class="flex flex-row mr-4 ml-4">
+                        <label class="mr-4" for="mettreEnPromotion">Mettre en promotion</label>
+                        <input class="appearance-none w-10 h-10 border-4 border-beige rounded-md checked:bg-beige" type="checkbox" name="mettreEnPromotion" id="mettreEnPromotion">
+                    </div>
                 </div>
-            
-                <div class="flex flex-row mr-4 ml-4">
-                    <label class="mr-4" for="mettreEnPromotion">Mettre en promotion</label>
-                    <input class="appearance-none w-10 h-10 border-4 border-beige rounded-md checked:bg-beige" type="checkbox" name="mettreEnPromotion" id="mettreEnPromotion">
+                
+                <div class="col-start-1 col-span-2 row-start-5 flex flex-col m-2 p-2 ">
+                    <label for="description">Description *:</label>
+                    <textarea class="border-4 border-beige rounded-2xl w-3/4 self-center" name="description" id="description" cols="100" rows="10" required><?php echo($description) ;?></textarea>
                 </div>
-            </div>
-            
-            <div class="col-start-1 col-span-2 row-start-5 flex flex-col m-2 p-2 ">
-                <label for="description">Description *:</label>
-                <textarea class="border-4 border-beige rounded-2xl w-3/4 self-center" name="description" id="description" cols="100" rows="10" required><?php echo($description) ;?></textarea>
-            </div>
-            
-            <div class="col-start-1 col-span-2 row-start-6 flex flex-row justify-around m-4">
-                <button class="border-2 border-vertFonce rounded-2xl w-40 h-14"><a href="../bo/details_produit.php">Retour</a></button>
-                <input class="border-2 border-vertFonce rounded-2xl w-40 h-14" type="submit" value="Valider">
-            </div>
-        </form>
-    </main>
-    <?php include(__DIR__ . '/../../php/structure/footer_back.php');?> 
-</body>
+                
+                <div class="col-start-1 col-span-2 row-start-6 flex flex-row justify-around m-4">
+                    <button class="border-2 border-vertFonce rounded-2xl w-40 h-14"><a href="../bo/details_produit.php?idProduit=<?php echo $idProduit ;?>">Retour</a></button>
+                    <input class="border-2 border-vertFonce rounded-2xl w-40 h-14" type="submit" value="Valider">
+                </div>
+            </form>
+        </main>
+        <?php include(__DIR__ . '/../../php/structure/footer_back.php');?> 
+    </body>
 </html>
 <?php } ?>
 

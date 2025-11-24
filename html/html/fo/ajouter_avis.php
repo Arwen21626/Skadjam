@@ -57,8 +57,11 @@
         <form class="flex flex-col justify-start items-start m-10" action="./ajouter_avis.php?idProduit=<?php echo $produit['id_produit']?>" method="post">
             <!-- La note -->
             <label for="note">Note* :</label>
-            <input class="border-4 border-beige rounded-2xl p-1 pl-3 w-16" name="note" id="note" type="number" min="0" max="5" required>
-
+            <div class="flex flex-nowarp items-center justify-center">
+                <input class="border-4 border-beige rounded-2xl p-1 pl-3 w-16" name="note" id="note" type="number" min="0" max="5" required>
+                <img class=" w-7 ml-3" src="../../images/logo/bootstrap_icon/star-fill.svg">
+            </div>
+            
             <!-- Le commantaire -->
             <label class="mt-10" for="commentaire">Commentaire : </label>
             <textarea class="border-4 border-beige rounded-2xl w-1/1 p-1 pl-3" name="commentaire" rows="10" cols="100"></textarea>

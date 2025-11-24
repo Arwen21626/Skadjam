@@ -1,6 +1,7 @@
 <?php
-    include(__DIR__.'/../../01_premiere_connexion.php');
-    require_once("./../../php/fonctions.php");
+    session_start();
+    include(__DIR__."/../../01_premiere_connexion.php");
+    require_once(__DIR__."/../../php/fonctions.php");
 
     //Récupération des données sur le produit ainsi que la photo
     $idProd = $_GET['idProduit'];
@@ -21,7 +22,7 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-    <?php require(__DIR__ . "/../../php/structure/head_front.php") ?>
+    <?php require(__DIR__ . "/../../php/structure/head_back.php") ?>
     <title>Détails</title>
 </head>
 <body>

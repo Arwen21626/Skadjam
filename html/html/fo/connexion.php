@@ -1,13 +1,6 @@
-<?php session_start();?>
+<?php
+    session_start();
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <?php require_once __DIR__ . "/../../php/structure/head_front.php"?>
-    <title>connexion</title>
-</head>
-<body>
-    <?php
     $erreur = false;
     include __DIR__ . '/../../01_premiere_connexion.php';
     if(isset($_POST['mdp']) && isset($_POST['mail'])){
@@ -34,6 +27,7 @@
             $role = $stmt->fetch(PDO::FETCH_ASSOC);
             $_SESSION['role'] = 'vendeur';
             
+            // si l'id du compte n'est pas dans vendeur
             if($role == null){
                 $stmt = $dbh->prepare("SELECT id_compte FROM sae3_skadjam._client WHERE id_compte = ?");
                 $stmt->execute([$_SESSION['idCompte']]);
@@ -41,21 +35,26 @@
                 $_SESSION['role'] = 'client';
             }
 
-            // print_r($_SESSION);
-            // print_r($_POST);
+            // Initialisation pour une redirection sur le produit si on écrivais un avis par exemple et qu'on devait se connecter
             $idProduit = 0;
             if(isset($_POST['idProduit'])){
                 $idProduit = $_POST['idProduit'];
             }
             
-
+            // Redirection suivant le role
             if($_SESSION['role'] == 'vendeur'){
-                header('Location: ./../bo/index_vendeur.php');
-            }else{
+                header('Location: ../bo/index_vendeur.php');
+                exit;
+            }
+            else{
+                // Si on était sur un produit alors redirection dessus
                 if($_SESSION['role'] == 'client' && $idProduit != 0){
-                    header('Location: ./../fo/details_produit.php?idProduit='.$idProduit);
-                }else{
-                    header('Location: ./../fo/index.php');
+                    header('Location: ../fo/details_produit.php?idProduit='.$idProduit);
+                    exit;
+                }
+                else{
+                    header('Location: ../../../index.php');
+                    exit;
                 }
             }
             
@@ -66,7 +65,15 @@
         }
     }
 
-    ?>
+?>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <?php require_once __DIR__ . "/../../php/structure/head_front.php"?>
+    <title>connexion</title>
+</head>
+<body>
     <?php require_once __DIR__ . "/../../php/structure/header_front.php"; ?>
     <main class="min-h-[150px]">
         <h2 class="flex flex-col items-center">Connexion</h2>
@@ -171,7 +178,6 @@
                 });
             });
         </script>
-
     </main>
     <?php require_once __DIR__ . "/../../php/structure/footer_front.php"; ?>
 </body>
