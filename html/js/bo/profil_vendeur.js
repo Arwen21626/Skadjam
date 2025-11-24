@@ -21,6 +21,10 @@ const imageVendeur = document.querySelector(".image-vendeur");
 const srcImageVide = "../../images/logo/bootstrap_icon/image.svg";
 const form = document.getElementById('form-profil-vendeur');
 const estConteneurVide = containerImage.classList.contains("vide");
+const containerDescription = document.querySelector(".description");
+const paragrapheDescription = containerDescription.querySelector(".attribut-text");
+const textarea = containerDescription.querySelector(".champ-text");
+paragrapheDescription.innerHTML = textarea.value.replaceAll(/\n/g, "<br>").replaceAll(/ /g, "&nbsp;");
 
 imagesSrc.push(imageVendeur.src);
 imageFile.push("");
@@ -69,6 +73,9 @@ document.querySelectorAll(".modif-attribut .bouton-modifier").forEach(button => 
 
         //garder en mémoire l'ancien texte
         ancienTexte = paragraph.textContent;
+        if (champ.classList.contains("textarea")){
+            champ.value = paragraph.innerHTML.replaceAll(/<br>/g, "\n").replaceAll(/&nbsp;/g, " ");
+        }
 
         champInput(paragraph, champ, boutonModifier, groupeBouton);
         
@@ -87,6 +94,8 @@ document.querySelectorAll(".modif-attribut .bouton-valider, .modif-attribut .bou
         //on décrémente le nombre de modification en cours
         nbModifActive -= 1;
 
+        
+
         //modification du style des boutons concernés
         champParagraphe(paragraph, champ, groupeBouton, boutonModifier);
     });
@@ -99,6 +108,10 @@ document.querySelectorAll(".modif-attribut .bouton-valider").forEach(button => {
         const paragraph = container.querySelector("p.attribut-text"); // texte en p
         const champ = container.querySelector(".champ-text") // texte en input ou textarea
 
+        //mise a jour du texte affiché
+        texte = champ.value;
+        paragraph.textContent = texte;
+
         //activation du bouton valider
         //si le bouton est désactivé et que le champ a été modifié
         //globaleEtatChamp passe a true et le bouton valider est activé si aucune autre modification n'est en cours
@@ -109,10 +122,10 @@ document.querySelectorAll(".modif-attribut .bouton-valider").forEach(button => {
             }
             if (!ancienEtatValider && nbModifActive !=0) ancienEtatValider=true;
         }
-        
-        //mise a jour du texte affiché
-        texte = champ.value;
-        paragraph.textContent = texte;
+
+        if (champ.classList.contains("textarea")){
+            paragraph.innerHTML = champ.value.replaceAll(/\n/g, "<br>").replaceAll(/ /g, "&nbsp;");
+        }
 
     });
 });
@@ -135,8 +148,14 @@ document.querySelectorAll(".modif-attribut .bouton-annuler").forEach(button => {
         //restauration de l'ancien texte
         champ.value = ancienTexte;
 
+        if (champ.classList.contains("textarea")){
+            paragraph.innerHTML = champ.value.replaceAll(/\n/g, "<br>").replaceAll(/ /g, "&nbsp;");
+        }
+
     });
 });
+
+
 
 //gestion des evenements de modification des champs
 document.querySelectorAll('.modif-attribut .champ-text').forEach(input => {
