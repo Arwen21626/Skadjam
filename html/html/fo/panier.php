@@ -175,7 +175,7 @@
         if (!empty($produitsPanier))
         {
             ?>
-                <div class="flex bottom-14 border-b md:border-none md:w-full md:grid md:grid-cols-5 fixed md:bottom-64 pointer-events-none">
+                <div class="flex bottom-14 border-b md:border-none md:w-full md:grid md:grid-cols-5 fixed md:bottom-64 pointer-events-none -z-1">
                     <div></div>
                     <div></div>
                     <div></div>
