@@ -135,6 +135,7 @@ if (isset($_POST['logout'])) {
         }else{
             // Si non connecté, l'emmener à la page de connexion à la place
             header("Location: connexion.php");
+            exit();
         }
         ?>
     </main>

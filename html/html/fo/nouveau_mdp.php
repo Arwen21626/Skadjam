@@ -36,6 +36,7 @@ require_once __DIR__ . "/../../01_premiere_connexion.php";
                 ]);
                 // Redirection vers la page de connexion
                 header("Location: connexion.php");
+                exit();
             }else{ 
                 $erreur = true;
             }
