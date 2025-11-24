@@ -20,18 +20,23 @@
                                , PDO::FETCH_ASSOC) as $row){
             $tabProduitsASupprimer[] = $row;
         }
+        
+        $idPhoto;
+        $idProduit;
 
-        print_r($tabProduitsASupprimer);
+        foreach($tabProduitsASupprimer as $id => $produit){
+            $idPhoto = $produit['id_photo'];
+            $idProduit = $produit['id_produit'];
 
-        foreach($tabProduitsASupprimer as $id => $valeurs){
-            $idPhoto = $valeurs['id_photo'];
-            $idProduit = $valeurs['id_produit'];
             $dbh -> query("DELETE FROM sae3_skadjam._avis 
                             WHERE id_produit = $idProduit");
             $dbh -> query("DELETE FROM sae3_skadjam._montre 
                             WHERE id_produit = $idProduit");
             $dbh -> query("DELETE FROM sae3_skadjam._photo 
                             WHERE id_photo = $idPhoto");
+        }
+
+        foreach($tabProduitsASupprimer as $id => $produit){
             $dbh -> query("DELETE FROM sae3_skadjam._produit 
                             WHERE id_produit = $idProduit");
         }
