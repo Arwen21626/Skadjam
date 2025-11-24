@@ -19,8 +19,9 @@
     <?php include(__DIR__ . "/../../php/structure/header_back.php"); ?>
     <?php include(__DIR__ . "/../../php/structure/navbar_back.php"); ?>
 
-    <main>
-        <?php try {                
+    <main class="min-h-[545px]">
+        <?php try {     
+                $tabProduit = null;           
                 //récupère toutes les infos des tables produits et photos
                 foreach($dbh->query("SELECT *
                                     FROM sae3_skadjam._produit pr
@@ -31,7 +32,7 @@
                                     INNER JOIN sae3_skadjam._vendeur v
                                         ON pr.id_vendeur = v.id_compte
                                     WHERE v.id_compte = $idCompte
-                                    ORDER BY quantite_stock ASC"
+                                    ORDER BY libelle_produit ASC"
                                     , PDO::FETCH_ASSOC) as $row){
                     $tabProduit[] = $row;
                 } ?>
