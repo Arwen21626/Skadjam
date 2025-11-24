@@ -19,7 +19,7 @@
         <p class="text-center self-center">La page n'a pas été trouvé.</p>
 
         <a href="/html/bo/index_vendeur.php"> 
-            <h3 class="text-center self-center hover:text-rouge mt-16">Retour à l'accueil</h3>
+            <h3 class="inline-block text-center self-center hover:text-rouge mt-16">Retour à l'accueil</h3>
         </a>
     </main>
     
