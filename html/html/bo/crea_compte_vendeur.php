@@ -45,40 +45,40 @@ if (isset($_POST["nom"])){
     /* enregistrer toutes les erreurs */
 
     /* NOM */
-    if (!verifNomPrenom($nom)) $erreurs["nom"] = "lettre majuscule ou minuscule seulement";
+    if (!verifNomPrenom($nom)) $erreurs["nom"] = "Lettre majuscule ou minuscule seulement";
 
     /* PRENOM */
-    if (!verifNomPrenom($prenom)) $erreurs["prenom"] = "lettre majuscule ou minuscule seulement";
+    if (!verifNomPrenom($prenom)) $erreurs["prenom"] = "Lettre majuscule ou minuscule seulement";
 
     /* MAIL */
-    if (!verifMail($mail)) $erreurs["mail"] = "format incorrecte";
-    if (!mailUnique($mail)) $erreurs["unique"] = "un utilisateur avec cette e-mail existe deja : $mail";
+    if (!verifMail($mail)) $erreurs["mail"] = "Format incorrecte";
+    if (!mailUnique($mail)) $erreurs["unique"] = "Un utilisateur avec cette e-mail existe deja : $mail";
 
     /* TEL */
-    if (!verifTelephone($tel)) $erreurs["tel"] = "numéro à 10 chiffres";
+    if (!verifTelephone($tel)) $erreurs["tel"] = "Numéro à 10 chiffres";
 
     /* DENOMINATION */
-    if (!verifDenomination($denomination)) $erreurs["denomination"] = "autorisé majuscules, minuscules et chiffres";
+    if (!verifDenomination($denomination)) $erreurs["denomination"] = "Autorisé majuscules, minuscules et chiffres";
 
     /* RS */
-    if (!verifDenomination($raisonSociale)) $erreurs["raisonSociale"] = "autorisé majuscules, minuscules et chiffres";
+    if (!verifDenomination($raisonSociale)) $erreurs["raisonSociale"] = "Autorisé majuscules, minuscules et chiffres";
 
     /* IBAN */
-    if (!verifIban($iban)) $erreurs["iban"] = "numéro IBAN invalide";
+    if (!verifIban($iban)) $erreurs["iban"] = "Numéro IBAN invalide";
 
     /* MDP */
-    if (!verifMotDePasse($mdp)) $erreurs["mdp"] = "doit inclure tous les éléments si dessous";
-    if (!confirmationMotDePasse($verif, $mdp)) $erreurs["conf"] = "le mot de passe est différent";
+    if (!verifMotDePasse($mdp)) $erreurs["mdp"] = "Doit inclure tous les éléments si dessous";
+    if (!confirmationMotDePasse($verif, $mdp)) $erreurs["conf"] = "Le mot de passe est différent";
 
     /* SIREN */
-    if (!verifSiren($siren)) $erreurs["siren"] = "numéro SIREN invalide";
+    if (!verifSiren($siren)) $erreurs["siren"] = "Numéro SIREN invalide";
 
     /* ##### ADRESSE ##### */
-    if (!verifCp($cp)) $erreurs["cp"] = "code postale invalide";
+    if (!verifCp($cp)) $erreurs["cp"] = "Code postale invalide";
 
-    if (!verifVille($ville)) $erreurs["ville"] = "format ville incorrect";
+    if (!verifVille($ville)) $erreurs["ville"] = "Format ville incorrect";
 
-    if (!verifAdresse($adresse)) $erreurs["adresse"] = "format de l'adresse invalide";
+    if (!verifAdresse($adresse)) $erreurs["adresse"] = "Format de l'adresse invalide";
     
     $temp = tabAdresse($adresse);
     $numero = $temp[0];
@@ -224,14 +224,20 @@ if (isset($_POST["nom"])){
             <div class="flex flex-row flex-wrap justify-between ml-10 mb-7 mr-10">
                 <div class="flex flex-col items-start mt-6 w-fit @max-[768px]:mt-2">
                     <label for="mdp">Mot de passe * :</label>
-                    <input class="ml-5 border-4 border-solid rounded-2xl border-beige p-1 pl-3 mb-4 @max-[768px]:ml-2 max-w-3/4 @max-[768px]:pl-2 " type="password" id="mdp" name="mdp" value="<?= (!isset($erreurs["mdp"]) && isset($_POST["mdp"])) ? $_POST["mdp"] : ''?>" size="30" required>
+                    <div class="zone-mdp flex flex-row items-center">
+                        <input class="champ-mdp ml-5 border-4 border-solid rounded-2xl border-beige p-1 pl-3 mb-4 @max-[768px]:ml-2 max-w-3/4 @max-[768px]:pl-2 " type="password" id="mdp" name="mdp" value="<?= (!isset($erreurs["mdp"]) && isset($_POST["mdp"])) ? $_POST["mdp"] : ''?>" size="30" required>
+                        <?php include __DIR__ . "/../../php/structure/bouton_mdp.php" ?>
+                    </div>
                     <?php echo (isset($erreurs["mdp"])) ? "<p class=\"text-rouge\">" . $erreurs["mdp"] . " </p>" : '' ?>
                     <!-- s'il y a une erreur elle sera affiché sous la cellule -->
                     <p>1 majuscule, 1 minuscule, 1 chiffre, 1 caractère spécial, 10 caractères minimum</p>
                 </div>
                 <div class="flex flex-col items-start mt-6 w-fit @max-[768px]:mt-2">
                     <label for="verif">Vérification du mot de passe * :</label>
-                    <input class="ml-5 border-4 border-solid rounded-2xl border-beige p-1 pl-3 mb-4 @max-[768px]:ml-2 max-w-3/4 @max-[768px]:pl-2 " type="password" id="verif" name="verif" value="<?= (!(isset($erreurs["conf"]) || isset($erreurs["mdp"])) && isset($_POST["verif"])) ? $_POST["verif"] : ''?>" size="30" required>
+                    <div class="zone-mdp flex flex-row items-center">
+                        <input class="champ-mdp ml-5 border-4 border-solid rounded-2xl border-beige p-1 pl-3 mb-4 @max-[768px]:ml-2 max-w-3/4 @max-[768px]:pl-2 " type="password" id="verif" name="verif" value="<?= (!(isset($erreurs["conf"]) || isset($erreurs["mdp"])) && isset($_POST["verif"])) ? $_POST["verif"] : ''?>" size="30" required>
+                        <?php include __DIR__ . "/../../php/structure/bouton_mdp.php" ?>
+                    </div>
                     <!-- s'il y a une erreur elle sera affiché sous la cellule -->
                     <?php echo (isset($erreurs["conf"])) ? "<p class=\"text-rouge\">" . $erreurs["conf"] . " </p>" : '' ?>
                 </div>
@@ -253,6 +259,7 @@ if (isset($_POST["nom"])){
     </main>
     <?php require_once __DIR__ . "/../../php/structure/footer_front.php" ?>
 </body>
+<script src="../../js/bo/visibilite_mdp.js"></script>
 </html>
 <?php
 } else {

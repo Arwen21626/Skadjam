@@ -434,6 +434,9 @@ main>h2 {
   .mb-8 {
     margin-bottom: calc(var(--spacing, 0.25rem) * 8);
   }
+  .mb-10 {
+    margin-bottom: calc(var(--spacing, 0.25rem) * 10);
+  }
   .mb-15 {
     margin-bottom: calc(var(--spacing, 0.25rem) * 15);
   }
@@ -518,6 +521,9 @@ main>h2 {
   .size-28 {
     width: calc(var(--spacing, 0.25rem) * 28);
     height: calc(var(--spacing, 0.25rem) * 28);
+  }
+  .h-1\/1 {
+    height: calc(1/1 * 100%);
   }
   .h-5 {
     height: calc(var(--spacing, 0.25rem) * 5);
@@ -716,6 +722,9 @@ main>h2 {
   }
   .min-w-3xs {
     min-width: var(--container-3xs, 16rem);
+  }
+  .flex-1 {
+    flex: 1;
   }
   .basis-1\/1 {
     flex-basis: calc(1/1 * 100%);
@@ -1089,6 +1098,20 @@ main>h2 {
   }
   .group-hover\/eye\:hidden {
     &:is(:where(.group\/eye):hover *) {
+      @media (hover: hover) {
+        display: none;
+      }
+    }
+  }
+  .group-hover\/eyes\:block {
+    &:is(:where(.group\/eyes):hover *) {
+      @media (hover: hover) {
+        display: block;
+      }
+    }
+  }
+  .group-hover\/eyes\:hidden {
+    &:is(:where(.group\/eyes):hover *) {
       @media (hover: hover) {
         display: none;
       }

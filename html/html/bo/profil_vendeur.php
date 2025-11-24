@@ -104,29 +104,29 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         $erreurs = [];
         // Validation des données
         /* NOM */
-        if (!verifNomPrenom($newNom)) $erreurs["nom"] = "lettre majuscule ou minuscule seulement";
+        if (!verifNomPrenom($newNom)) $erreurs["nom"] = "Lettre majuscule ou minuscule seulement";
     
         /* PRENOM */
-        if (!verifNomPrenom($newPrenom)) $erreurs["prenom"] = "lettre majuscule ou minuscule seulement";
+        if (!verifNomPrenom($newPrenom)) $erreurs["prenom"] = "Lettre majuscule ou minuscule seulement";
     
         /* MAIL */
-        if (!verifMail($newMail)) $erreurs["mail"] = "format incorrecte";
+        if (!verifMail($newMail)) $erreurs["mail"] = "Format incorrecte";
     
         /* TEL */
-        if (!verifTelephone($newTel)) $erreurs["tel"] = "numéro à 10 chiffres";
+        if (!verifTelephone($newTel)) $erreurs["tel"] = "Numéro à 10 chiffres";
     
         /* RS */
-        if (!verifDenomination($newDenom)) $erreurs["denomination"] = "autorisé majuscules, minuscules et chiffres";
+        if (!verifDenomination($newDenom)) $erreurs["denomination"] = "Autorisé majuscules, minuscules et chiffres";
     
         /* SIREN */
-        if (!verifSiren($newSiren)) $erreurs["siren"] = "numéro SIREN invalide";
+        if (!verifSiren($newSiren)) $erreurs["siren"] = "Numéro SIREN invalide";
     
         /* ##### ADRESSE ##### */
-        if (!verifCp($newCp)) $erreurs["cp"] = "code postale invalide";
+        if (!verifCp($newCp)) $erreurs["cp"] = "Code postale invalide";
     
-        if (!verifVille($newVille)) $erreurs["ville"] = "format ville incorrect";
+        if (!verifVille($newVille)) $erreurs["ville"] = "Format ville incorrect";
     
-        if (!verifAdresse($newAdresse)) $erreurs["adresse"] = "format de l'adresse invalide";
+        if (!verifAdresse($newAdresse)) $erreurs["adresse"] = "Format de l'adresse invalide";
         
         // Vérifier la taille
         if ($image) {
@@ -365,7 +365,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                 <textarea name="description" class="textarea champ-text ml-5 hidden border-4 border-solid rounded-2xl p-1 border-beige pl-3 w-full h-40"><?= $description ?></textarea>
             </div>
             <div class="flex flex-row justify-around mt-8 mb-8 @max-[768px]:flex-col @max-[768px]:items-center">
-                <input type="reset" value="Annuler" class="cursor-pointer w-64 border-4 border-solid rounded-2xl p-1 border-beige pl-3">
+                <a href="profil_vendeur.php" class="cursor-pointer text-center block w-64 border-4 border-solid rounded-2xl border-beige p-1 pl-3">Annuler</a>
                 <input type="submit" value="Valider" class="cursor-pointer w-64 border-4 border-solid rounded-2xl p-1 border-beige pl-3 @max-[768px]:mt-2" id="valider">
             </div>
         </form>
