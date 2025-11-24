@@ -5,7 +5,6 @@ require_once(__DIR__ . '/../../php/verification_formulaire.php');
 session_start();
 
 $idProduit = $_GET['idProduit'];
-echo $idProduit;
 
 //Tableau pour les catégories de la base
 $tab_categories = [];
@@ -89,13 +88,10 @@ if (isset($_POST['categorie']) && isset($_POST['nom']) && isset($_POST['prix']) 
     $prixHT = htmlentities($_POST['prix']);
     $qteStock = htmlentities($_POST['qteStock']);
     $enLigne = htmlentities($_POST['mettreEnLigne']);
-    $enPromotion = htmlentities($_POST['mettreEnPromotion']);
+    // $enPromotion = htmlentities($_POST['mettreEnPromotion']);
     $description = htmlentities($_POST['description']);
     $unite = htmlentities($_POST['unite']);
     $qteUnite = htmlentities($_POST['qteUnite']);
-
-    $enPromotion = htmlentities($_POST['mettreEnPromotion']);
-    $enLigne = htmlentities($_POST['mettreEnLigne']);
 
     //Récupération du nom de la catégorie pour la gestion de la tva
     foreach ($tab_categories as $c) {
@@ -113,7 +109,7 @@ if (isset($_POST['categorie']) && isset($_POST['nom']) && isset($_POST['prix']) 
     }
 
     //Vérification du prix et du stock
-    if (verifPrix($prix) && verifQteStock($qteStock)){
+    if (verifPrix($prixHT) && verifQteStock($qteStock)){
         try{
             if ($nomCategorie == 'Alimentaire') {
                 foreach ($tab_tva as $t) {
@@ -171,7 +167,7 @@ if (isset($_POST['categorie']) && isset($_POST['nom']) && isset($_POST['prix']) 
     else{
         echo ("Le prix ou la quantité saisi est incorrect.");
     }
-    header("Location: ./details_produit.php?idProduit=$idProd");
+    header("Location: ./details_produit.php?idProduit=$idProduit");
 }
 else { ?>
 
@@ -191,7 +187,7 @@ else { ?>
         <?php include(__DIR__ . '/../../php/structure/navbar_back.php');?>
         <main>
             <h2>Modifier un produit</h2>
-            <form class="grid grid-cols-[40%_60%] w-11/12 self-center" action="modifier_produit.php" method="post" enctype="multipart/form-data">
+            <form class="grid grid-cols-[40%_60%] w-11/12 self-center" action="modifier_produit.php?idProduit=<?php echo $idProduit;?>" method="post" enctype="multipart/form-data">
 
                 <div class="row-start-1 row-span-3 m-2 p-4 grid grid-rows-[2/3-1/3] justify-items-center">
                     <input type="file" id="photo" name="photo" class="hidden" required>
