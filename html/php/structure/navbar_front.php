@@ -38,26 +38,26 @@
             
         <div class="md:flex md:flex-col md:justify-center md:items-center">
 
-            <a  href="#A modifier">
+            <a  href="/html/fo/commandes.php">
                 <div class="size-12 bg-no-repeat bg-size-[auto_48px] 
                 bg-[url(/images/logo/bootstrap_icon/truck.svg)] 
                 hover:bg-[url(/images/logo/bootstrap_icon/truck-fill.svg)]">
                 </div>
             </a>
 
-            <a class="text-vertFonce hover:text-rouge hidden md:inline-block" href="#A modifier">Commandes</a>
+            <a class="text-vertFonce hover:text-rouge hidden md:inline-block" href="/html/fo/commandes.php">Commandes</a>
         </div>
             
         <div class="md:flex md:flex-col md:justify-center md:items-center">
 
-            <a href="#A modifier">
+            <a href="/html/fo/recherche.php">
                 <div class="size-12 bg-no-repeat bg-size-[auto_48px] 
                 bg-[url(/images/logo/bootstrap_icon/search.svg)] 
                 hover:bg-[url(/images/logo/bootstrap_icon/search-selected.svg)]">
                 </div>
             </a>
 
-            <a class="text-vertFonce hover:text-rouge hidden md:inline-block" href="#A modifier">Recherche</a>
+            <a class="text-vertFonce hover:text-rouge hidden md:inline-block" href="/html/fo/recherche.php">Recherche</a>
         </div>
 
         <div class="md:flex md:flex-col md:justify-center md:items-center">
