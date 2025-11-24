@@ -70,16 +70,24 @@ foreach($dbh->query("SELECT *,est_masque::CHAR as est_masque_php
 if (isset($_POST['categorie']) && isset($_POST['nom']) && isset($_POST['prix']) && isset($_POST['qteStock']) && isset($_POST['description']) && isset($_POST['unite'])) {
     
     //Gestion de la photo
-    $typePhoto = $_FILES['photo']['type'];
-    $ext = explode('/',$typePhoto)[1];
-    $nom_serv_photo = $_FILES['photo']['tmp_name'];
+    if (isset($_FILES['photo']) && $_FILES['photo']['error'] === UPLOAD_ERR_OK){
+        $typePhoto = $_FILES['photo']['type'];
+        $ext = explode('/',$typePhoto)[1];
+        $nom_serv_photo = $_FILES['photo']['tmp_name'];
 
-    //Déplacement et renommage du fichier photo
-    $nom_explode = explode(' ',$nom)[0];
-    $currentTime = time();
-    $destination = __DIR__ . '/../../images/photo_importees';
-    $nom_photo_finale = $nom_explode.$currentTime.'.'.$ext;
-    move_uploaded_file($nom_serv_photo,$destination.'/'.$nom_photo_finale);
+        //Déplacement et renommage du fichier photo
+        $nom_explode = explode(' ',$nom)[0];
+        $currentTime = time();
+        $destination = __DIR__ . '/../../images/photo_importees';
+        $nom_photo_finale = $nom_explode.$currentTime.'.'.$ext;
+        move_uploaded_file($nom_serv_photo,$destination.'/'.$nom_photo_finale);
+    }
+    else{
+        //Récupération attribut de photo
+        $nom_photo_finale = explode('/',$urlPhoto)[3];
+    }
+    echo $nom_photo_finale;
+    
 
 
     //Récupération des champs pour l'insertion
@@ -167,7 +175,7 @@ if (isset($_POST['categorie']) && isset($_POST['nom']) && isset($_POST['prix']) 
     else{
         echo ("Le prix ou la quantité saisi est incorrect.");
     }
-    header("Location: ./details_produit.php?idProduit=$idProduit");
+    // header("Location: ./details_produit.php?idProduit=$idProduit");
 }
 else { ?>
 
@@ -190,7 +198,7 @@ else { ?>
             <form class="grid grid-cols-[40%_60%] w-11/12 self-center" action="modifier_produit.php?idProduit=<?php echo $idProduit;?>" method="post" enctype="multipart/form-data">
                 <!-- Image -->
                 <div class="row-start-1 row-span-3 m-2 p-4 grid grid-rows-[2/3-1/3] justify-items-center">
-                    <input type="file" id="photo" name="photo" class="hidden" required>
+                    <input type="file" id="photo" name="photo" class="hidden">
                     <!-- label qui agit comme bouton -->
                     <label id="labelImage" for="photo" class=" w-60 h-60 rounded-xl image-produit" style="background-image: url(' <?php echo $urlPhoto ?>'); background-repeat: no-repeat; background-position: center; background-size: 100%;"></label>
                     <label for="photo">Ajouter une image*</label>
@@ -206,7 +214,7 @@ else { ?>
                 <div class="col-start-2 row-start-2 flex flex-row justify-between w-200 m-2 p-2">
                     <div class="flex flex-col">
                         <label for="prix">Prix *(hors taxe):</label>
-                        <input value="<?php echo($prixHT) ;?>" class="border-4 border-beige rounded-2xl w-75" type="number" name="prix" id="prix" min="0.0" step="0.5" required>
+                        <input value="<?php echo($prixHT) ;?>" class="border-4 border-beige rounded-2xl w-75" type="number" name="prix" id="prix" min="0.0" required>
                     </div>
 
                     <!-- Quantite en stock -->
