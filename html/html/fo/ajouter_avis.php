@@ -44,8 +44,8 @@
 
 <!DOCTYPE html>
 <html lang="fr">
+<?php require(__DIR__ . "/../../php/structure/head_front.php") ?>
 <head>
-    <?php require(__DIR__ . "/../../php/structure/head_front.php") ?>
     <title>Ajouter un avis au produit : <?php echo $idProd;?></title>
 </head>
 <body>
