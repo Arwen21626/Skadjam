@@ -19,8 +19,8 @@ $idCompte = $_SESSION['idCompte'];
     </head>
     <body>
         <!--Header-->
-        <?php include("../../php/structure/header_back.php"); ?>
-        <?php include("../../php/structure/navbar_back.php"); ?>
+        <?php include(__DIR__ . "/../../php/structure/header_back.php"); ?>
+        <?php include(__DIR__ . "/../../php/structure/navbar_back.php"); ?>
 
         <main class=" min-h-[600px]">
             <h2>Voulez-vous vraiment supprimer le produit ?</h2>
@@ -42,6 +42,6 @@ $idCompte = $_SESSION['idCompte'];
         </main>
 
         <!-- Footer -->
-        <?php include("../../php/structure/footer_back.php"); ?>
+        <?php include(__DIR__ . "/../../php/structure/footer_back.php"); ?>
     </body>
 </html>
