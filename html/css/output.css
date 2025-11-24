@@ -374,6 +374,9 @@ main>h2 {
   .mt-20 {
     margin-top: calc(var(--spacing, 0.25rem) * 20);
   }
+  .mt-30 {
+    margin-top: calc(var(--spacing, 0.25rem) * 30);
+  }
   .mr-1 {
     margin-right: calc(var(--spacing, 0.25rem) * 1);
   }

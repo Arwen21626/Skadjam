@@ -188,25 +188,28 @@ else { ?>
         <main>
             <h2>Modifier un produit</h2>
             <form class="grid grid-cols-[40%_60%] w-11/12 self-center" action="modifier_produit.php?idProduit=<?php echo $idProduit;?>" method="post" enctype="multipart/form-data">
-
+                <!-- Image -->
                 <div class="row-start-1 row-span-3 m-2 p-4 grid grid-rows-[2/3-1/3] justify-items-center">
                     <input type="file" id="photo" name="photo" class="hidden" required>
                     <!-- label qui agit comme bouton -->
-                    <label id="labelImage" for="photo" class=" w-60 h-60 rounded-xl" style="background-image: url(' <?php echo $urlPhoto ?>'); background-repeat: no-repeat; background-position: center; background-size: 100%;"></label>
+                    <label id="labelImage" for="photo" class=" w-60 h-60 rounded-xl image-produit" style="background-image: url(' <?php echo $urlPhoto ?>'); background-repeat: no-repeat; background-position: center; background-size: 100%;"></label>
                     <label for="photo">Ajouter une image*</label>
                 </div>
                 
-
+                <!-- Nom produit -->
                 <div class="col-start-2 row-start-1 flex flex-col w-200 m-2 p-2">
                     <label for="nom">Nom produit *:</label>
                     <input value="<?php echo($nom) ;?>" class=" border-4 border-beige rounded-2xl" type="text" name="nom" id="nom" required>
                 </div>
 
+                <!-- Prix hors taxe -->
                 <div class="col-start-2 row-start-2 flex flex-row justify-between w-200 m-2 p-2">
                     <div class="flex flex-col">
                         <label for="prix">Prix *(hors taxe):</label>
                         <input value="<?php echo($prixHT) ;?>" class="border-4 border-beige rounded-2xl w-75" type="number" name="prix" id="prix" min="0.0" step="0.5" required>
                     </div>
+
+                    <!-- Quantite en stock -->
                     <div class="flex flex-col">
                         <label for="qteStock">Quantité en stock* :</label>
                         <input value="<?php echo($qteStock) ;?>" class="border-4 border-beige rounded-2xl w-75" type="number" name="qteStock" id="qteStock" min="0" required>
@@ -214,6 +217,7 @@ else { ?>
                 </div>
                     
                 <div class="col-start-2 row-start-3 col-span-2 flex flex-row justify-between w-200 m-2 p-2">
+                    <!-- Catégorie -->
                     <div class="flex flex-col">
                         <label for="categorie">Catégorie* :</label>
                         <select class=" border-4 border-beige rounded-2xl m-2 p-2 w-40 h-14" name="categorie" id="categorie" required>
@@ -223,6 +227,7 @@ else { ?>
                             <?php } ?>
                         </select>
                     </div>
+                    <!-- Unité -->
                     <div class="flex flex-col">
                         <label for="unite">Unité* :</label>
                         <select class="border-4 border-beige rounded-2xl m-2 p-2 w-40 h-14" name="unite" id="unite" required>
@@ -231,6 +236,7 @@ else { ?>
                             <option value="<?php echo $unite?>"><?php echo $unite?></option>
                         <?php } ?>
                     </select>
+                    <!-- Quantite unité -->
                     </div>
                     <div class="flex flex-col">
                         <label for="qteUnite">Quantité unité :</label>
@@ -240,22 +246,25 @@ else { ?>
 
                 
                 <div class="col-start-1 row-start-4 col-span-2 flex flex-row justify-around m-2 p-2">
+                    <!-- Mettre en ligne -->
                     <div class="flex flex-row mr-4 ml-4">
                         <label class="mr-4" for="mettreEnLigne">Mettre en ligne</label>
                         <input class="appearance-none w-10 h-10 border-4 border-beige rounded-md checked:bg-beige" type="checkbox" name="mettreEnLigne" id="mettreEnLigne" <?php echo ($enLigne == 'true')?'checked':'' ?>>
                     </div>
                 
-                    <div class="flex flex-row mr-4 ml-4">
+                    <!-- Mettre en promotion -->
+                    <!-- <div class="flex flex-row mr-4 ml-4">
                         <label class="mr-4" for="mettreEnPromotion">Mettre en promotion</label>
                         <input class="appearance-none w-10 h-10 border-4 border-beige rounded-md checked:bg-beige" type="checkbox" name="mettreEnPromotion" id="mettreEnPromotion">
-                    </div>
+                    </div> -->
                 </div>
-                
+                <!-- Description -->
                 <div class="col-start-1 col-span-2 row-start-5 flex flex-col m-2 p-2 ">
                     <label for="description">Description *:</label>
                     <textarea class="border-4 border-beige rounded-2xl w-3/4 self-center" name="description" id="description" cols="100" rows="10" required><?php echo($description) ;?></textarea>
                 </div>
                 
+                <!-- Validation -->
                 <div class="col-start-1 col-span-2 row-start-6 flex flex-row justify-around m-4">
                     <button class="border-2 border-vertFonce rounded-2xl w-40 h-14"><a href="../bo/details_produit.php?idProduit=<?php echo $idProduit ;?>">Retour</a></button>
                     <input class="border-2 border-vertFonce rounded-2xl w-40 h-14" type="submit" value="Valider">
@@ -263,6 +272,7 @@ else { ?>
             </form>
         </main>
         <?php include(__DIR__ . '/../../php/structure/footer_back.php');?> 
+        <script src="../../js/bo/changement_image_produits.js"></script>
     </body>
 </html>
 <?php } ?>

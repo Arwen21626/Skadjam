@@ -21,7 +21,7 @@
 
     <main class="min-h-[545px]">
         <?php try {     
-                $tabProduit;           
+                $tabProduit = null;           
                 //récupère toutes les infos des tables produits et photos
                 foreach($dbh->query("SELECT *
                                     FROM sae3_skadjam._produit pr
