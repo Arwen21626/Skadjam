@@ -26,24 +26,6 @@ if ($typeRetrait === "suppression" || $quantiteProd === "1")
         ':idProd' => $idProd
     ]);
 
-    // Mise à jour des informations générales du panier
-
-    $quantiteTot -= $quantiteProd;
-    $prixTot -= $prixTTC * $quantiteProd;
-
-    $rqt = $dbh->prepare("
-        UPDATE sae3_skadjam._panier SET
-        nb_produit_total = :quantiteTot,
-        montant_total_ttc = :montantTot
-        WHERE id_client = :idClient
-    ");
-
-    $rqt->execute([
-        ':quantiteTot' => $quantiteTot,
-        ':montantTot' => $prixTot,
-        ':idClient' => $idClient
-    ]);
-
     header("location:/html/fo/panier.php");
 }
 else if ($typeRetrait === "decrement")
@@ -59,24 +41,6 @@ else if ($typeRetrait === "decrement")
     $rqt->execute([
         ':quantite' => $quantiteProd,
         ':idProd' => $idProd
-    ]);
-
-    // Mise à jour des informations générales du panier
-
-    $quantiteTot--;
-    $prixTot -= $prixTTC;
-
-    $rqt = $dbh->prepare("
-        UPDATE sae3_skadjam._panier SET
-        nb_produit_total = :quantiteTot,
-        montant_total_ttc = :montantTot
-        WHERE id_client = :idClient
-    ");
-
-    $rqt->execute([
-        ':quantiteTot' => $quantiteTot,
-        ':montantTot' => $prixTot,
-        ':idClient' => $idClient
     ]);
 
     header("location:/html/fo/panier.php#" . $idProd);
