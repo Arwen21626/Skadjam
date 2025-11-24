@@ -18,7 +18,7 @@
         <h2 class="text-center self-center">ERREUR 404</h2>
         <p class="text-center self-center">La page n'a pas été trouvé.</p>
 
-        <a href="/html/bo/"> 
+        <a class="hover:text-rouge mt-16" href="/html/bo/"> 
             <h3 class="text-center self-center">Retour à l'accueil</h3>
         </a>
     </main>
