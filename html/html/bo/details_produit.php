@@ -5,6 +5,8 @@
 
     //Récupération des données sur le produit ainsi que la photo
     $idProd = $_GET['idProduit'];
+
+    $produit = "vide";
     foreach($dbh->query("SELECT *
                         from sae3_skadjam._produit pr
                         inner join sae3_skadjam._montre m
@@ -16,6 +18,11 @@
                         where pr.id_produit = $idProd"
                         , PDO::FETCH_ASSOC) as $row){
         $produit = $row;
+    }
+
+    if ($produit === "vide")
+    {
+        header("location:/html/bo/404_vendeur.php");
     }
 ?>
 

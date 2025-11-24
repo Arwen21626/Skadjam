@@ -3,14 +3,11 @@
     include(__DIR__ . "/../../01_premiere_connexion.php");
     include(__DIR__ . "/../../php/fonctions.php");
 
-    /* Temporaire pour le dev, à changer au moment de la finalisation */
-    if (isset($_GET["idProduit"])) {
-        $idProd = $_GET["idProduit"]; // Récupère l'id du produit qu'on affiche
+    $idProd = $_GET["idProduit"];
+
+    if (!isset($_GET["idProduit"])) {
+        header("location:/404.php");
     }
-    else { 
-        $idProd = 3;
-    }
-    /* Temporaire pour le dev, à changer au moment de la finalisation */
 
     // Requête pour récupérer les infos du produit
     $produit = "vide";

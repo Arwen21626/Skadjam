@@ -75,7 +75,7 @@
 </head>
 <body>
     <?php require_once __DIR__ . "/../../php/structure/header_front.php"; ?>
-    <main class="min-h-[150px]">
+    <main class="min-h-[650px]">
         <h2 class="flex flex-col items-center">Connexion</h2>
         <form method="post">
         <?php if(isset($_GET['idProduit'])){ ?>

@@ -51,6 +51,11 @@ p, a, input, label {
     font-size: 20px;
   }
 }
+main>h2 {
+  text-align: center;
+  align-self: center;
+  margin: 0.5em;
+}
 @layer theme, base, components, utilities;
 @layer theme {
   :root, :host {
@@ -216,6 +221,12 @@ p, a, input, label {
   .\@container {
     container-type: inline-size;
   }
+  .pointer-events-auto {
+    pointer-events: auto;
+  }
+  .pointer-events-none {
+    pointer-events: none;
+  }
   .absolute {
     position: absolute;
   }
@@ -245,6 +256,9 @@ p, a, input, label {
   }
   .bottom-0 {
     bottom: calc(var(--spacing, 0.25rem) * 0);
+  }
+  .bottom-14 {
+    bottom: calc(var(--spacing, 0.25rem) * 14);
   }
   .bottom-41 {
     bottom: calc(var(--spacing, 0.25rem) * 41);
@@ -324,6 +338,12 @@ p, a, input, label {
   .m-10 {
     margin: calc(var(--spacing, 0.25rem) * 10);
   }
+  .mt-0 {
+    margin-top: calc(var(--spacing, 0.25rem) * 0);
+  }
+  .mt-0\.5 {
+    margin-top: calc(var(--spacing, 0.25rem) * 0.5);
+  }
   .mt-1 {
     margin-top: calc(var(--spacing, 0.25rem) * 1);
   }
@@ -341,6 +361,9 @@ p, a, input, label {
   }
   .mt-6 {
     margin-top: calc(var(--spacing, 0.25rem) * 6);
+  }
+  .mt-7 {
+    margin-top: calc(var(--spacing, 0.25rem) * 7);
   }
   .mt-8 {
     margin-top: calc(var(--spacing, 0.25rem) * 8);
@@ -369,8 +392,8 @@ p, a, input, label {
   .mr-16 {
     margin-right: calc(var(--spacing, 0.25rem) * 16);
   }
-  .mb-1 {
-    margin-bottom: calc(var(--spacing, 0.25rem) * 1);
+  .mb-0\.5 {
+    margin-bottom: calc(var(--spacing, 0.25rem) * 0.5);
   }
   .mb-2 {
     margin-bottom: calc(var(--spacing, 0.25rem) * 2);
@@ -407,6 +430,9 @@ p, a, input, label {
   }
   .ml-2 {
     margin-left: calc(var(--spacing, 0.25rem) * 2);
+  }
+  .ml-3 {
+    margin-left: calc(var(--spacing, 0.25rem) * 3);
   }
   .ml-4 {
     margin-left: calc(var(--spacing, 0.25rem) * 4);
@@ -447,6 +473,9 @@ p, a, input, label {
   .inline-block {
     display: inline-block;
   }
+  .inline-flex {
+    display: inline-flex;
+  }
   .table {
     display: table;
   }
@@ -481,6 +510,9 @@ p, a, input, label {
   .h-10 {
     height: calc(var(--spacing, 0.25rem) * 10);
   }
+  .h-12 {
+    height: calc(var(--spacing, 0.25rem) * 12);
+  }
   .h-14 {
     height: calc(var(--spacing, 0.25rem) * 14);
   }
@@ -502,11 +534,20 @@ p, a, input, label {
   .h-auto {
     height: auto;
   }
-  .min-h-\[150px\] {
-    min-height: 150px;
+  .h-full {
+    height: 100%;
   }
-  .min-h-\[480px\] {
-    min-height: 480px;
+  .min-h-\[360px\] {
+    min-height: 360px;
+  }
+  .min-h-\[545px\] {
+    min-height: 545px;
+  }
+  .min-h-\[650px\] {
+    min-height: 650px;
+  }
+  .w-1 {
+    width: calc(var(--spacing, 0.25rem) * 1);
   }
   .w-1\/1 {
     width: calc(1/1 * 100%);
@@ -541,6 +582,9 @@ p, a, input, label {
   .w-6\! {
     width: calc(var(--spacing, 0.25rem) * 6) !important;
   }
+  .w-7 {
+    width: calc(var(--spacing, 0.25rem) * 7);
+  }
   .w-9\! {
     width: calc(var(--spacing, 0.25rem) * 9) !important;
   }
@@ -559,6 +603,9 @@ p, a, input, label {
   .w-20 {
     width: calc(var(--spacing, 0.25rem) * 20);
   }
+  .w-32 {
+    width: calc(var(--spacing, 0.25rem) * 32);
+  }
   .w-35 {
     width: calc(var(--spacing, 0.25rem) * 35);
   }
@@ -567,6 +614,9 @@ p, a, input, label {
   }
   .w-45 {
     width: calc(var(--spacing, 0.25rem) * 45);
+  }
+  .w-48 {
+    width: calc(var(--spacing, 0.25rem) * 48);
   }
   .w-50 {
     width: calc(var(--spacing, 0.25rem) * 50);
@@ -592,11 +642,17 @@ p, a, input, label {
   .w-100 {
     width: calc(var(--spacing, 0.25rem) * 100);
   }
+  .w-125 {
+    width: calc(var(--spacing, 0.25rem) * 125);
+  }
   .w-150 {
     width: calc(var(--spacing, 0.25rem) * 150);
   }
   .w-200 {
     width: calc(var(--spacing, 0.25rem) * 200);
+  }
+  .w-250 {
+    width: calc(var(--spacing, 0.25rem) * 250);
   }
   .w-auto {
     width: auto;
@@ -646,6 +702,9 @@ p, a, input, label {
   .flex-col {
     flex-direction: column;
   }
+  .flex-col-reverse {
+    flex-direction: column-reverse;
+  }
   .flex-row {
     flex-direction: row;
   }
@@ -673,6 +732,9 @@ p, a, input, label {
   .justify-center {
     justify-content: center;
   }
+  .justify-evenly {
+    justify-content: space-evenly;
+  }
   .justify-start {
     justify-content: flex-start;
   }
@@ -693,6 +755,13 @@ p, a, input, label {
       --tw-space-y-reverse: 0;
       margin-block-start: calc(calc(var(--spacing, 0.25rem) * 4) * var(--tw-space-y-reverse));
       margin-block-end: calc(calc(var(--spacing, 0.25rem) * 4) * calc(1 - var(--tw-space-y-reverse)));
+    }
+  }
+  .space-x-4 {
+    :where(& > :not(:last-child)) {
+      --tw-space-x-reverse: 0;
+      margin-inline-start: calc(calc(var(--spacing, 0.25rem) * 4) * var(--tw-space-x-reverse));
+      margin-inline-end: calc(calc(var(--spacing, 0.25rem) * 4) * calc(1 - var(--tw-space-x-reverse)));
     }
   }
   .self-center {
@@ -741,12 +810,19 @@ p, a, input, label {
     border-style: var(--tw-border-style);
     border-width: 5px;
   }
+  .border-b {
+    border-bottom-style: var(--tw-border-style);
+    border-bottom-width: 1px;
+  }
   .border-solid {
     --tw-border-style: solid;
     border-style: solid;
   }
   .border-beige {
     border-color: var(--color-beige);
+  }
+  .border-black {
+    border-color: var(--color-black, #000);
   }
   .border-vertClair {
     border-color: var(--color-vertClair);
@@ -829,6 +905,12 @@ p, a, input, label {
   .px-7 {
     padding-inline: calc(var(--spacing, 0.25rem) * 7);
   }
+  .py-3 {
+    padding-block: calc(var(--spacing, 0.25rem) * 3);
+  }
+  .py-4 {
+    padding-block: calc(var(--spacing, 0.25rem) * 4);
+  }
   .pt-0 {
     padding-top: calc(var(--spacing, 0.25rem) * 0);
   }
@@ -879,6 +961,14 @@ p, a, input, label {
   }
   .-indent-96 {
     text-indent: calc(var(--spacing, 0.25rem) * -96);
+  }
+  .text-4xl {
+    font-size: var(--text-4xl, 2.25rem);
+    line-height: var(--tw-leading, var(--text-4xl--line-height, calc(2.5 / 2.25)));
+  }
+  .font-bold {
+    --tw-font-weight: var(--font-weight-bold, 700);
+    font-weight: var(--font-weight-bold, 700);
   }
   .font-medium {
     --tw-font-weight: var(--font-weight-medium, 500);
@@ -983,6 +1073,13 @@ p, a, input, label {
       background-color: var(--color-beige);
     }
   }
+  .hover\:bg-rouge {
+    &:hover {
+      @media (hover: hover) {
+        background-color: var(--color-rouge);
+      }
+    }
+  }
   .hover\:bg-\[url\(\/images\/logo\/bootstrap_icon\/cart-fill\.svg\)\] {
     &:hover {
       @media (hover: hover) {
@@ -1039,6 +1136,20 @@ p, a, input, label {
       }
     }
   }
+  .hover\:text-vertClair {
+    &:hover {
+      @media (hover: hover) {
+        color: var(--color-vertClair);
+      }
+    }
+  }
+  .hover\:text-white {
+    &:hover {
+      @media (hover: hover) {
+        color: var(--color-white, #fff);
+      }
+    }
+  }
   .md\:sticky {
     @media (width >= 48rem) {
       position: sticky;
@@ -1049,9 +1160,9 @@ p, a, input, label {
       top: calc(var(--spacing, 0.25rem) * 0);
     }
   }
-  .md\:top-4 {
+  .md\:top-48 {
     @media (width >= 48rem) {
-      top: calc(var(--spacing, 0.25rem) * 4);
+      top: calc(var(--spacing, 0.25rem) * 48);
     }
   }
   .md\:bottom-14 {
@@ -1059,14 +1170,34 @@ p, a, input, label {
       bottom: calc(var(--spacing, 0.25rem) * 14);
     }
   }
+  .md\:bottom-64 {
+    @media (width >= 48rem) {
+      bottom: calc(var(--spacing, 0.25rem) * 64);
+    }
+  }
+  .md\:mt-0 {
+    @media (width >= 48rem) {
+      margin-top: calc(var(--spacing, 0.25rem) * 0);
+    }
+  }
   .md\:mt-4 {
     @media (width >= 48rem) {
       margin-top: calc(var(--spacing, 0.25rem) * 4);
     }
   }
+  .md\:mt-10 {
+    @media (width >= 48rem) {
+      margin-top: calc(var(--spacing, 0.25rem) * 10);
+    }
+  }
   .md\:mr-10 {
     @media (width >= 48rem) {
       margin-right: calc(var(--spacing, 0.25rem) * 10);
+    }
+  }
+  .md\:mr-16 {
+    @media (width >= 48rem) {
+      margin-right: calc(var(--spacing, 0.25rem) * 16);
     }
   }
   .md\:mb-0 {
@@ -1087,6 +1218,11 @@ p, a, input, label {
   .md\:ml-10 {
     @media (width >= 48rem) {
       margin-left: calc(var(--spacing, 0.25rem) * 10);
+    }
+  }
+  .md\:ml-24 {
+    @media (width >= 48rem) {
+      margin-left: calc(var(--spacing, 0.25rem) * 24);
     }
   }
   .md\:ml-32 {
@@ -1143,9 +1279,19 @@ p, a, input, label {
       height: calc(var(--spacing, 0.25rem) * 14);
     }
   }
-  .md\:w-2\/3 {
+  .md\:h-auto {
     @media (width >= 48rem) {
-      width: calc(2/3 * 100%);
+      height: auto;
+    }
+  }
+  .md\:min-h-\[545px\] {
+    @media (width >= 48rem) {
+      min-height: 545px;
+    }
+  }
+  .md\:w-4xl {
+    @media (width >= 48rem) {
+      width: var(--container-4xl, 56rem);
     }
   }
   .md\:w-12\! {
@@ -1173,14 +1319,34 @@ p, a, input, label {
       width: calc(var(--spacing, 0.25rem) * 150);
     }
   }
+  .md\:w-full {
+    @media (width >= 48rem) {
+      width: 100%;
+    }
+  }
   .md\:max-w-fit {
     @media (width >= 48rem) {
       max-width: fit-content;
     }
   }
+  .md\:grid-cols-2 {
+    @media (width >= 48rem) {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
   .md\:grid-cols-3 {
     @media (width >= 48rem) {
       grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+  }
+  .md\:grid-cols-5 {
+    @media (width >= 48rem) {
+      grid-template-columns: repeat(5, minmax(0, 1fr));
+    }
+  }
+  .md\:grid-rows-4 {
+    @media (width >= 48rem) {
+      grid-template-rows: repeat(4, minmax(0, 1fr));
     }
   }
   .md\:flex-col {
@@ -1203,9 +1369,19 @@ p, a, input, label {
       align-items: center;
     }
   }
+  .md\:items-start {
+    @media (width >= 48rem) {
+      align-items: flex-start;
+    }
+  }
   .md\:justify-around {
     @media (width >= 48rem) {
       justify-content: space-around;
+    }
+  }
+  .md\:justify-between {
+    @media (width >= 48rem) {
+      justify-content: space-between;
     }
   }
   .md\:justify-center {
@@ -1218,6 +1394,11 @@ p, a, input, label {
       justify-content: flex-end;
     }
   }
+  .md\:justify-evenly {
+    @media (width >= 48rem) {
+      justify-content: space-evenly;
+    }
+  }
   .md\:gap-1 {
     @media (width >= 48rem) {
       gap: calc(var(--spacing, 0.25rem) * 1);
@@ -1226,6 +1407,12 @@ p, a, input, label {
   .md\:rounded-2xl {
     @media (width >= 48rem) {
       border-radius: var(--radius-2xl, 1rem);
+    }
+  }
+  .md\:border-none {
+    @media (width >= 48rem) {
+      --tw-border-style: none;
+      border-style: none;
     }
   }
   .md\:bg-none {
@@ -1253,6 +1440,11 @@ p, a, input, label {
       padding-top: calc(var(--spacing, 0.25rem) * 0.5);
     }
   }
+  .md\:pt-4 {
+    @media (width >= 48rem) {
+      padding-top: calc(var(--spacing, 0.25rem) * 4);
+    }
+  }
   .md\:pt-5 {
     @media (width >= 48rem) {
       padding-top: calc(var(--spacing, 0.25rem) * 5);
@@ -1261,6 +1453,11 @@ p, a, input, label {
   .md\:pr-1 {
     @media (width >= 48rem) {
       padding-right: calc(var(--spacing, 0.25rem) * 1);
+    }
+  }
+  .md\:pb-0 {
+    @media (width >= 48rem) {
+      padding-bottom: calc(var(--spacing, 0.25rem) * 0);
     }
   }
   .md\:pb-1 {
@@ -1345,6 +1542,11 @@ p, a, input, label {
   }
 }
 @property --tw-space-y-reverse {
+  syntax: "*";
+  inherits: false;
+  initial-value: 0;
+}
+@property --tw-space-x-reverse {
   syntax: "*";
   inherits: false;
   initial-value: 0;
@@ -1480,6 +1682,7 @@ p, a, input, label {
   @supports ((-webkit-hyphens: none) and (not (margin-trim: inline))) or ((-moz-orient: inline) and (not (color:rgb(from red r g b)))) {
     *, ::before, ::after, ::backdrop {
       --tw-space-y-reverse: 0;
+      --tw-space-x-reverse: 0;
       --tw-border-style: solid;
       --tw-font-weight: initial;
       --tw-shadow: 0 0 #0000;
