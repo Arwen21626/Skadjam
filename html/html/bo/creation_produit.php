@@ -151,24 +151,27 @@ else { ?>
             <h2>Création d'un produit</h2>
             <form class="grid grid-cols-[40%_60%] w-4/5 self-center" action="creation_produit.php" method="post" enctype="multipart/form-data">
 
+                <!-- Image -->
                 <div class="row-start-1 row-span-3 m-2 p-4 grid grid-rows-[2/3-1/3] justify-items-center">
                     <input type="file" id="photo" name="photo" class="hidden" required>
                     <!-- label qui agit comme bouton -->
-                    <label for="photo" class="bg-beige w-60 h-60 rounded-2xl" style="background-image: url('../../images/logo/bootstrap_icon/image.svg'); background-repeat: no-repeat; background-position: center; background-size: 60%;"></label>
+                    <label for="photo" class="bg-beige w-60 h-60 rounded-2xl image-produit" style="background-image: url('../../images/logo/bootstrap_icon/image.svg'); background-repeat: no-repeat; background-position: center; background-size: 60%;"></label>
                     <label for="photo">Ajouter une image*</label>
                 </div>
-                
 
+                <!-- Nom produit -->
                 <div class="col-start-2 row-start-1 flex flex-col w-200 m-2 p-2">
                     <label for="nom">Nom produit *:</label>
                     <input placeholder="Confiture fraises des bois 200g" class=" border-4 border-beige rounded-2xl placeholder-gray-500" type="text" name="nom" id="nom" required>
                 </div>
 
                 <div class="col-start-2 row-start-2 flex flex-row justify-between w-200 m-2 p-2">
+                    <!-- Prix ht -->
                     <div class="flex flex-col">
                         <label for="prix">Prix *(hors taxe):</label>
                         <input placeholder="3.99" class="border-4 border-beige rounded-2xl w-75 placeholder-gray-500" type="number" name="prix" id="prix" min="0.0" step="0.01" required>
                     </div>
+                    <!-- Quantite en stock -->
                     <div class="flex flex-col">
                         <label for="qteStock">Quantité en stock* :</label>
                         <input placeholder="50" class="border-4 border-beige rounded-2xl w-75 placeholder-gray-500" type="number" name="qteStock" id="qteStock" min="0" required>
@@ -176,6 +179,7 @@ else { ?>
                 </div>
                     
                 <div class="col-start-2 row-start-3 col-span-2 flex flex-row justify-between w-200 m-2 p-2">
+                    <!-- Catégorie -->
                     <div class="flex flex-col">
                         <label for="categorie">Catégorie* :</label>
                         <select class=" border-4 border-beige rounded-2xl m-2 p-2 w-40 h-14" name="categorie" id="categorie" required>
@@ -185,6 +189,7 @@ else { ?>
                             <?php } ?>
                         </select>
                     </div>
+                    <!-- Unité -->
                     <div class="flex flex-col">
                         <label for="unite">Unité* :</label>
                         <select class="border-4 border-beige rounded-2xl m-2 p-2 w-40 h-14" name="unite" id="unite" required>
@@ -194,6 +199,7 @@ else { ?>
                         <?php } ?>
                     </select>
                     </div>
+                    <!-- Quantité unité -->
                     <div class="flex flex-col">
                         <label for="qteUnite">Quantité unité :</label>
                         <input placeholder="200" class="border-4 border-beige rounded-2xl w-75 placeholder-gray-500" type="number" name="qteUnite" id="qteUnite" min="0" required>
@@ -202,22 +208,26 @@ else { ?>
 
                 
                 <div class="col-start-1 row-start-4 col-span-2 flex flex-row justify-around m-2 p-2">
+                    <!-- Mettre en ligne -->
                     <div class="flex flex-row mr-4 ml-4">
                         <label class="mr-4" for="mettreEnLigne">Mettre en ligne</label>
                         <input class="appearance-none w-10 h-10 border-4 border-beige rounded-md checked:bg-beige" type="checkbox" name="mettreEnLigne" id="mettreEnLigne">
                     </div>
                 
-                    <div class="flex flex-row mr-4 ml-4">
+                    <!-- Mettre en promotion -->
+                    <!-- <div class="flex flex-row mr-4 ml-4">
                         <label class="mr-4" for="mettreEnPromotion">Mettre en promotion</label>
                         <input class="appearance-none w-10 h-10 border-4 border-beige rounded-md checked:bg-beige" type="checkbox" name="mettreEnPromotion" id="mettreEnPromotion">
-                    </div>
+                    </div> -->
                 </div>
                 
+                <!-- Description -->
                 <div class="col-start-1 col-span-2 row-start-5 flex flex-col m-2 p-2 ">
                     <label for="description">Description *:</label>
                     <textarea placeholder="Pot de confiture de fraises des bois" class="border-4 border-beige rounded-2xl w-3/4 self-center placeholder-gray-500" name="description" id="description" cols="100" rows="10" required></textarea>
                 </div>
                 
+                <!-- Validation -->
                 <div class="col-start-1 col-span-2 row-start-6 flex flex-row justify-around m-4">
                     <button class="border-2 border-vertFonce rounded-2xl w-40 h-14"><a href="../bo/index_vendeur.php">Retour</a></button>
                     <input class="border-2 border-vertFonce rounded-2xl w-40 h-14" type="submit" value="Valider">
@@ -225,6 +235,7 @@ else { ?>
             </form>
         </main>
         <?php include(__DIR__ . '/../../php/structure/footer_back.php');?>
+        <script src="../../js/bo/changement_image_produits.js"></script>
     </body>
 </html>
 
