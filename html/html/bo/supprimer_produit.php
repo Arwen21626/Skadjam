@@ -22,7 +22,7 @@ $idCompte = $_SESSION['idCompte'];
         <?php include("../../php/structure/header_back.php"); ?>
         <?php include("../../php/structure/navbar_back.php"); ?>
 
-        <main>
+        <main class=" min-h-[600px]">
             <h2>Voulez-vous vraiment supprimer le produit ?</h2>
             <div class="mt-15 flex flex-row justify-around mb-15">
                 <button id="suppProduit" class="border-2 border-vertFonce rounded-2xl w-auto h-14 px-7">Oui</button>
