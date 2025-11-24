@@ -1,5 +1,10 @@
 <?php
 session_start();
+
+if ($_SESSION['role'] !== 'client'){
+    header("location: /404.php");
+}
+
 require_once(__DIR__ . "/../../php/verification_formulaire.php"); // fonctions qui vérifient les données des formulaires
 require_once(__DIR__ . "/../../php/modification_variable.php"); // fonctions qui vérifient les données des formulaires
 require_once(__DIR__ . "/../../../connections_params.php"); // données de connexion à la base de données

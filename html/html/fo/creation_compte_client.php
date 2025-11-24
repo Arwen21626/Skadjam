@@ -1,3 +1,10 @@
+<?php
+session_start();
+if ($_SESSION['role'] !== 'visiteur'){
+    header("location: /404.php");
+}
+?>
+
 <!DOCTYPE html>
 <html lang="fr">
 <?php include (__DIR__."/../../php/structure/head_front.php");?>
