@@ -85,7 +85,7 @@ if ($_SESSION['role'] !== 'visiteur'){
             <!-- Lien vers la page de connexion -->
             <div class="flex mt-10 flex-col w-1/1 items-start">
                 <p>Vous avez déjà un compte ?</p>
-                <a style="text-decoration-line: underline" href="connexion_client.php">Connectez vous</a> 
+                <a style="text-decoration-line: underline" href="connexion.php">Connectez vous</a> 
             </div>
 
             <!-- Lien vers la création d'un compte vendeur -->
