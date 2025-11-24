@@ -3,6 +3,12 @@
     include(__DIR__ . "/../../01_premiere_connexion.php");
     include(__DIR__ . "/../../php/fonctions.php");
 
+    $idProd = $_GET["idProduit"];
+
+    if (!isset($_GET["idProduit"])) {
+        header("location:/404.php");
+    }
+
     // Requête pour récupérer les infos du produit
     $produit = "vide";
     foreach($dbh->query("SELECT *, est_masque::char AS est_masque_char
