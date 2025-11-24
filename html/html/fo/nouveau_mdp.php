@@ -25,6 +25,12 @@ try{
                 ':mdp'  => $mdp,
                 ':mail' => $mail
             ]);
+            // Supprime toutes les variables de session
+            session_unset();
+
+            // Détruit la session
+            session_destroy();
+
             // Redirection vers la page de connexion
             header("Location: http://10.253.5.109/html/fo/connexion.php");
             exit();
