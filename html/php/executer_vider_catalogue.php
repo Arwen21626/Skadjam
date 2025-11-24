@@ -1,6 +1,6 @@
 <?php 
+    session_start();
     include __DIR__ .'/../01_premiere_connexion.php';
-    $_SESSION['idCompte'] = 1;
     $idCompte = $_SESSION['idCompte'];
 
     $tabProduitsASupprimer = [];
@@ -14,14 +14,20 @@
                                 ON ph.id_photo = m.id_photo 
                             INNER JOIN sae3_skadjam._vendeur v
                                 ON pr.id_vendeur = v.id_compte
+                            INNER JOIN sae3_skadjam._avis a
+                                ON a.id_produit = pr.id_produit
                             WHERE v.id_compte = $idCompte"
                                , PDO::FETCH_ASSOC) as $row){
             $tabProduitsASupprimer[] = $row;
         }
 
+        print_r($tabProduitsASupprimer);
+
         foreach($tabProduitsASupprimer as $id => $valeurs){
             $idPhoto = $valeurs['id_photo'];
             $idProduit = $valeurs['id_produit'];
+            $dbh -> query("DELETE FROM sae3_skadjam._avis 
+                            WHERE id_produit = $idProduit");
             $dbh -> query("DELETE FROM sae3_skadjam._montre 
                             WHERE id_produit = $idProduit");
             $dbh -> query("DELETE FROM sae3_skadjam._photo 
