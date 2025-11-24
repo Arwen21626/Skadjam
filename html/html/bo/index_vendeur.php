@@ -26,7 +26,7 @@
     <?php include(__DIR__ . "/../../php/structure/header_back.php"); ?>
     <?php include(__DIR__ . "/../../php/structure/navbar_back.php"); ?>
 
-    <main>
+    <main class=" p-8">
         <div class="grid grid-cols-2 gap-4 justify-items-center">
             <a href="#vosProduits" title="lien vers page promotion">
                 <img src="../../images/images_accueil/promotion.webp" alt="promotion" class="w-150 h-auto justify-self-end">
