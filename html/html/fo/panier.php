@@ -13,8 +13,8 @@
     $infoPanier = $rqt->fetch();
 
     $idPanier = $infoPanier["id_panier"];
-    $nbProduitsTotal = $infoPanier["nb_produit_total"];
-    $montantTotalTTC = $infoPanier["montant_total_ttc"];
+    $nbProduitsTotal = 0;
+    $montantTotalTTC = 0;
 
     $produitsPanier = array();
 
@@ -24,12 +24,15 @@
         $produitsPanier[] = $row;
     }
     
+    
+
     if (!empty($produitsPanier)) 
     {
         $infoProduitsPanier = array();
 
         foreach ($produitsPanier as $i => $value) 
         { 
+            
             $rqt = $dbh->query("SELECT id_produit, libelle_produit, prix_ttc, note_moyenne
                                 FROM sae3_skadjam._produit WHERE id_produit = " . $produitsPanier[$i]["id_produit"], PDO::FETCH_ASSOC);
             $infoProduit = $rqt->fetch();
@@ -43,15 +46,16 @@
             $infoProduitsPanier[$i]["infoProduit"] = $infoProduit;
             $infoProduitsPanier[$i]["quantiteProduit"] = $produitsPanier[$i]["quantite_par_produit"];
             $infoProduitsPanier[$i]["infoPhoto"] = $infoPhoto;
-        }
-    }
-    
-   
-?>
 
-<!-- <pre>
-    <?php // print_r($infoProduitsPanier); ?>
-</pre> -->
+            $montantTotalTTC += $infoProduitsPanier[$i]["infoProduit"]["prix_ttc"] * $infoProduitsPanier[$i]["quantiteProduit"];
+            $montantTotalTTC = number_format($montantTotalTTC, 2, ".", "");
+            $nbProduitsTotal += $infoProduitsPanier[$i]["quantiteProduit"];
+        }
+
+        //Mise à jour des attributs nb_produit_total
+        $dbh->query("UPDATE sae3_skadjam._panier SET nb_produit_total = $nbProduitsTotal, montant_total_ttc = $montantTotalTTC WHERE id_panier = $idPanier");
+    } 
+?>
 
 <!DOCTYPE html>
 <html lang="fr">
@@ -147,7 +151,7 @@
                                                     <input type="hidden" name="prixTot" value="<?php echo $montantTotalTTC; ?>">
                                                     <input type="hidden" name="typeRetrait" value="suppression">
 
-                                                    <button class="rounded-2xl border border-black w-48 h-12 self-center cursor-pointer hover:bg-rouge hover:text-white"
+                                                    <button class="rounded-2xl border border-black w-48 h-16 self-center cursor-pointer hover:bg-rouge hover:text-white"
                                                     type="submit">
                                                         Supprimer du panier
                                                     </button>
@@ -190,13 +194,14 @@
                             <p class="ml-2"> <?php echo $montantTotalTTC . "€"; ?> </p>
                         </div>
 
-                        <form class="flex justify-center" action="/php/vider_panier.php">
+                        <form class="flex justify-center" method="post" action="/php/vider_panier.php">
+                            <input type="hidden" name="typeVider" value="normal">
                             <button class="bg-beige rounded-2xl w-32 h-10 mt-2 md:w-40 md:h-14 md:mt-4 cursor-pointer hover:bg-rouge hover:text-white border-black border shadow" type="submit">
                                 Vider le panier
                             </button>
                         </form>
                         
-                        <form class="flex justify-center" action="">
+                        <form class="flex justify-center" action="/html/fo/paiement.php">
                             <button class="bg-beige rounded-2xl w-20 h-10 mt-2 md:w-40 md:h-14 md:mt-4 cursor-pointer hover:bg-bleu hover:text-vertFonce border-black border shadow" type="submit">
                                 Acheter
                             </button>

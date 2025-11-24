@@ -7,6 +7,7 @@ session_start();
 $idClient = $_SESSION["idCompte"];
 $idProd = $_POST["idProduit"];
 
+
 // Récupère les infos du panier du client
 foreach($dbh->query("   SELECT *        
                         FROM sae3_skadjam._panier pan
@@ -16,12 +17,11 @@ foreach($dbh->query("   SELECT *
 }
 
 $idPanier = $infoPanier["id_panier"]; //Récupère l'id du panier
-$nbProduitsTotal = $infoPanier["nb_produit_total"]; // Récupère le nombre de produits dans le panier
-$montantTotalTTC = $infoPanier["montant_total_ttc"]; // Récupère le montant total du panier
+
 
 // Requête pour récupérer les infos du produit à ajouter au panier et vérifie sa présence dans la BDD
-$rqt = $dbh->query("SELECT * FROM sae3_skadjam._produit WHERE id_produit = $idProd", PDO::FETCH_ASSOC);
 
+$rqt = $dbh->query("SELECT * FROM sae3_skadjam._produit WHERE id_produit = $idProd", PDO::FETCH_ASSOC);
 $infoProduit = $rqt->fetch();
 
 if (!$infoProduit) // Si le produit n'existe pas dans la BDD 
@@ -30,26 +30,6 @@ if (!$infoProduit) // Si le produit n'existe pas dans la BDD
 }
 else
 {
-    //Récupération du prix_ttc du produit
-    $prixTTC = $infoProduit["prix_ttc"];
-    
-    // Traitement et mise à jour des infos générales du panier
-    $nbProduitsTotal++;
-    $montantTotalTTC += $prixTTC;
-    
-    $maj = $dbh->prepare("
-        UPDATE sae3_skadjam._panier SET
-        nb_produit_total = :nbProduits,
-        montant_total_ttc = :montantTot
-        WHERE id_panier = :idPanier;
-    ");
-
-    $maj->execute([
-        ':nbProduits' => $nbProduitsTotal,
-        ':montantTot' => $montantTotalTTC,
-        ':idPanier' => $idPanier
-    ]);
-
     // Requête pour récupèrer le produit dans la table _contient qui lie le produit au panier du client
     $rqt = $dbh->prepare("
         SELECT id_produit, id_panier, quantite_par_produit
@@ -89,8 +69,6 @@ else
             ':id_produit' => $idProd
         ]);
     }
-
-
 
     if ($_POST["pageDeRetour"] === "details") 
     {
