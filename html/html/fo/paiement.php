@@ -6,13 +6,15 @@ if($_SESSION['role'] != 'client'){
     include(__DIR__ . '/../../php/verification_formulaire.php');
     include __DIR__ . '/../../01_premiere_connexion.php';
     
+    // Initialisation des variables
     $achatValide = false;
+    $erreurNumero = false;
+    $erreurExpiration = false;
+    $erreurCryptogramme = false;
+    $erreurNom = false;
     if(isset($_POST['numero'])){
     // Initialisation des variables
-        $erreurNumero = false;
-        $erreurExpiration = false;
-        $erreurCryptogramme = false;
-        $erreurNom = false;
+        
 
         $numero = htmlentities($_POST['numero']);
         $mois = htmlentities($_POST['mois']);
