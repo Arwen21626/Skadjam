@@ -18,7 +18,7 @@
         <h2 class="text-center self-center">ERREUR 404</h2>
         <p class="text-center self-center">La page n'a pas été trouvé.</p>
 
-        <a class="flex justify-center" href="/html/bo/index_vendeur.php"> 
+        <a class="inline-block justify-center" href="/html/bo/index_vendeur.php"> 
             <h3 class="inline-block text-center self-center hover:text-rouge mt-16">Retour à l'accueil</h3>
         </a>
     </main>
