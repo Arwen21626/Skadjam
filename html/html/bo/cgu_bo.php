@@ -2,7 +2,6 @@
 <html lang="fr">
 <head>
     <?php require __DIR__ . "/../../php/structure/head_back.php"; ?>
-    <link rel="stylesheet" href="../../css/bo/general_back.css">
     <title>Conditions Générales d'Utilisateurs</title>
 </head>
 <body>
@@ -10,9 +9,9 @@
         require __DIR__ . "/../../php/structure/header_back.php";
         require __DIR__ . "/../../php/structure/navbar_back.php";
     ?>
-    <main>
+    <main class="m-10 mt-2 flex flex-col">
         <h2>Conditions générales d'utilisation</h2>
-        <h3>En vigueur au 07/11/2025</h3>
+        <h3 class="self-center mt-0 mb-2">En vigueur au 07/11/2025</h3>
         <article>
             <p>Les présentes conditions générales d'utilisation (dites « <strong>CGU</strong> ») ont pour objet l'encadrement juridique des modalités de mise à disposition du site et des services par COBREC et de définir les conditions d’accès et d’utilisation des services par « l'<strong>Utilisateur</strong> ».</p>
             <br>
@@ -20,8 +19,8 @@
             <br>
             <p>Toute inscription ou utilisation du site implique l'acceptation sans aucune réserve ni restriction des présentes CGU par l’utilisateur. Lors de l'inscription sur le site via le Formulaire d’inscription, chaque utilisateur accepte expressément les présentes CGU en cochant la case précédant le texte suivant : « Je reconnais avoir lu et compris les CGU et je les accepte ». En cas de non-acceptation des CGU stipulées dans le présent contrat, l'Utilisateur se doit de renoncer à l'accès des services proposés par le site. Alizon.bzh se réserve le droit de modifier unilatéralement et à tout moment le contenu des présentes CGU.</p>
         </article>
-        <article id="mentionsLegalesBO">
-            <h3>Article 1 : Les mentions légales</h3>
+        <article>
+            <h3 class="ml-5">Article 1 : Les mentions légales</h3>
             <p>L'édition du site Alizon.bzh est assurée par la Société SARL COBREC au capital de 0 euros, immatriculée au RCS de Lannion sous le numéro 508 977 303, dont le siège social est situé au 7 Rue Édouard Branly, 22300 Lannion.</p>
             <p>Numéro de téléphone : 02 96 46 93 00</p>
             <p>Adresse e-mail : cobrec@mail.bzh</p>
@@ -30,7 +29,7 @@
             <p>L'hébergeur du site Alizon.bzh est la société COBREC, dont le siège social est situé au 7 Rue Édouard Branly, 22300 Lannion, avec le numéro de téléphone : 02 96 46 93 00.</p>
         </article>
         <article>
-            <h3>Article 2 : Accès au site</h3>
+            <h3 class="ml-5">Article 2 : Accès au site</h3>
             <p>Le site Alizon.bzh permet à l'Utilisateur un accès gratuit aux services suivants : E-Commerce</p>
             <p>Le site est accessible gratuitement en tout lieu à tout Utilisateur ayant un accès à Internet. Tous les frais supportés par l'Utilisateur pour accéder au service (matériel informatique, logiciels, connexion Internet, etc.) sont à sa charge.</p>
             <br>
@@ -40,11 +39,11 @@
             <p>L'Utilisateur a la possibilité de contacter le site par messagerie électronique à l’adresse email de l’éditeur communiqué à l’<a href="#mentionsLegalesBO">Article 1</a>.</p>
         </article>
         <article>
-            <h3>Article 3 : Collecte des données</h3>
+            <h3 class="ml-5">Article 3 : Collecte des données</h3>
             <p>Le site assure à l'Utilisateur une collecte et un traitement d'informations personnelles dans le respect de la vie privée conformément à la loi n°78-17 du 6 janvier 1978 relative à l'informatique, aux fichiers et aux libertés.</p>
         </article>
         <article>
-            <h3>Article 4 : Propriété intellectuelle</h3>
+            <h3 class="ml-5">Article 4 : Propriété intellectuelle</h3>
             <p>Les marques, logos, signes ainsi que tous les contenus du site (textes, images, son…) font l'objet d'une protection par le Code de la propriété intellectuelle et plus particulièrement par le droit d'auteur.</p>
             <br>
             <p>L'Utilisateur doit solliciter l'autorisation préalable du site pour toute reproduction, publication, copie des différents contenus. Il s'engage à une utilisation des contenus du site dans un cadre strictement privé, toute utilisation à des fins commerciales et publicitaires est strictement interdite.</p>
@@ -54,7 +53,7 @@
             <p>Il est rappelé conformément à l’article L122-5 du Code de propriété intellectuelle que l’Utilisateur qui reproduit, copie ou publie le contenu protégé doit citer l’auteur et sa source.</p>
         </article>
         <article>
-            <h3>Article 5 : Responsabilité</h3>
+            <h3 class="ml-5">Article 5 : Responsabilité</h3>
             <p>Les sources des informations diffusées sur le site Alizon.bzh sont réputées fiables mais le site ne garantit pas qu’il soit exempt de défauts, d’erreurs ou d’omissions.</p>
             <br>
             <p>Les informations communiquées sont présentées à titre indicatif et général sans valeur contractuelle. Malgré des mises à jour régulières, le site Alizon.bzh ne peut être tenu responsable de la modification des dispositions administratives et juridiques survenant après la publication. De même, le site ne peut être tenue responsable de l’utilisation et de l’interprétation de l’information contenue dans ce site. L'Utilisateur s'assure de garder son mot de passe secret. Toute divulgation du mot de passe, quelle que soit sa forme, est interdite. Il assume les risques liés à l'utilisation de son identifiant et mot de passe. Le site décline toute responsabilité.</p>
@@ -63,11 +62,11 @@
             <p>La responsabilité du site ne peut être engagée en cas de force majeure ou du fait imprévisible et insurmontable d'un tiers.</p>
         </article>
         <article>
-            <h3>Article 6 : Liens hypertextes</h3>
+            <h3 class="ml-5">Article 6 : Liens hypertextes</h3>
             <p>Des liens hypertextes peuvent être présents sur le site. L’Utilisateur est informé qu’en cliquant sur ces liens, il sortira du site Alizon.bzh. Ce dernier n’a pas de contrôle sur les pages web sur lesquelles aboutissent ces liens et ne saurait, en aucun cas, être responsable de leur contenu.</p>
         </article>
         <article>
-            <h3>Article 7 : Cookies</h3>
+            <h3 class="ml-5">Article 7 : Cookies</h3>
             <p>L’Utilisateur est informé que lors de ses visites sur le site, un cookie peut s’installer automatiquement sur son logiciel de navigation.</p>
             <br>
             <p>Les cookies sont de petits fichiers stockés temporairement sur le disque dur de l’ordinateur de l’Utilisateur par votre navigateur et qui sont nécessaires à l’utilisation du site Alizon.bzh. Les cookies ne contiennent pas d’information personnelle et ne peuvent pas être utilisés pour identifier quelqu’un. Un cookie contient un identifiant unique, généré aléatoirement et donc anonyme. Certains cookies expirent à la fin de la visite de l’Utilisateur, d’autres restent.</p>
@@ -78,7 +77,7 @@
             <p>L’Utilisateur pourra désactiver ces cookies par l’intermédiaire des paramètres figurant au sein de son logiciel de navigation.</p>
         </article>
         <article>
-            <h3>Article 8 : Publication par l’Utilisateur</h3>
+            <h3 class="ml-5">Article 8 : Publication par l’Utilisateur</h3>
             <p>Le site permet aux membres de publier les contenus suivants :</p>
             <p>Produits, Promotions, Commentaires (réponse à un avis).</p>
             <br>
@@ -95,7 +94,7 @@
             <p>Le contenu de l'Utilisateur peut être à tout moment et pour n'importe quelle raison supprimé ou modifié par le site, sans préavis.</p>
         </article>
         <article>
-            <h3>Article 9 : Droit applicable et juridiction compétente</h3>
+            <h3 class="ml-5">Article 9 : Droit applicable et juridiction compétente</h3>
             <p>La législation française s'applique au présent contrat. En cas d'absence de résolution amiable d'un litige né entre les parties, les tribunaux français seront seuls compétents pour en connaître.</p>
             <p>Pour toute question relative à l’application des présentes CGU, vous pouvez joindre l’éditeur aux coordonnées inscrites à l’<a href="#mentionsLegalesBO">Article 1</a>.</p>
         </article>
