@@ -25,9 +25,18 @@ if($_SESSION['role'] != 'client'){
         $expiration = $mois . '/' . $annee;
         $cryptogramme = htmlentities($_POST['cryptogramme']);
         $nom = htmlentities($_POST['nom']);
-        $enregistrerCarte = htmlentities($_POST['enregistrerCarte']);
-        $codePromo = htmlentities($_POST['codePromo']);
-        $carteCadeau = htmlentities($_POST['carteCadeau']);
+
+        if(isset($_POST['enregistrerCarte'])){
+            $enregistrerCarte = htmlentities($_POST['enregistrerCarte']);
+        }
+
+        if(isset($_POST['codePromo'])){
+            $codePromo = htmlentities($_POST['codePromo']);
+        }
+        
+        if(isset($_POST['carteCadeau'])){
+            $carteCadeau = htmlentities($_POST['carteCadeau']);
+        }
 
         //echo $_POST['expiration']; // 22/25
         if(!verifExpiration($expiration)){
