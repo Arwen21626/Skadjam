@@ -88,13 +88,10 @@ if (isset($_POST['categorie']) && isset($_POST['nom']) && isset($_POST['prix']) 
     $prixHT = htmlentities($_POST['prix']);
     $qteStock = htmlentities($_POST['qteStock']);
     $enLigne = htmlentities($_POST['mettreEnLigne']);
-    $enPromotion = htmlentities($_POST['mettreEnPromotion']);
+    // $enPromotion = htmlentities($_POST['mettreEnPromotion']);
     $description = htmlentities($_POST['description']);
     $unite = htmlentities($_POST['unite']);
     $qteUnite = htmlentities($_POST['qteUnite']);
-
-    $enPromotion = htmlentities($_POST['mettreEnPromotion']);
-    $enLigne = htmlentities($_POST['mettreEnLigne']);
 
     //Récupération du nom de la catégorie pour la gestion de la tva
     foreach ($tab_categories as $c) {
@@ -112,7 +109,7 @@ if (isset($_POST['categorie']) && isset($_POST['nom']) && isset($_POST['prix']) 
     }
 
     //Vérification du prix et du stock
-    if (verifPrix($prix) && verifQteStock($qteStock)){
+    if (verifPrix($prixHT) && verifQteStock($qteStock)){
         try{
             if ($nomCategorie == 'Alimentaire') {
                 foreach ($tab_tva as $t) {
