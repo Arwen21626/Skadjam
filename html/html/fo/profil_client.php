@@ -73,10 +73,10 @@ if (isset($_POST['logout'])) {
             ?>
             <h2 class="text-center mt-4 mb-4">Mon profil</h2>
             <div class="flex justify-center">
-                <table class="table-auto w-150">
+                <table class="table-auto w-170">
                     <tbody>
                         <tr class="py-4">
-                            <th class="py-3"><p class="text-left">Pseudo :</p></th>
+                            <th class="py-3 w-37 md:w-auto"><p class="text-left">Pseudo :</p></th>
                             <td class="py-3"><h3><?php echo htmlentities($pseudo); ?></h2></td>
                         </tr>
                         <tr class="py-4">
@@ -87,16 +87,19 @@ if (isset($_POST['logout'])) {
                             <th class="py-3"><p class="text-left">Date de naissance :</p></th>
                             <td class="py-3"><p><?php echo htmlentities($naissance); ?></p></td>
                         </tr>
+                        <?php if($nbAdresse != 0){ ?>
+                            <tr class="py-4">
+                                <th class="py-3"><p class="text-left">Adresse(s) :</p></th>
+                                <td class="py-3">
+                                    <?php for ($i=0; $i < $nbAdresse; $i++) { // Affiche toutes les adresses du client 
+                                        $j=$i+1;?>
+                                    <p> n°<?php echo "$j : $numRue[$i] $adressePostale[$i]$batiment[$i]$appartement[$i], $codePostal[$i] $ville[$i]"; ?></p>
+                                    <?php } ?>
+                                </td>
+                            </tr>
+                        <?php } ?>
                         <tr class="py-4">
-                            <th class="py-3"><p class="text-left">Adresse :</p></th>
-                            <td class="py-3">
-                                <?php for ($i=0; $i < $nbAdresse; $i++) { // Affiche toutes les adresses du client ?>
-                                    <p><?php echo htmlentities("$numRue[$i] $adressePostale[$i]$batiment[$i]$appartement[$i], $codePostal[$i] $ville[$i]"); ?></p>
-                                <?php } ?>
-                            </td>
-                        </tr>
-                        <tr class="py-4">
-                            <th class="py-3"><p class="text-left">Numéro de téléphone :</p></th>
+                            <th class="py-3"><p class="text-left">N° de téléphone :</p></th>
                             <td class="py-3"><p><?php echo htmlentities($telephone); ?></p></td>
                         </tr>
                         <tr class="py-4">
@@ -110,19 +113,19 @@ if (isset($_POST['logout'])) {
             <div class="flex flex-col md:flex-row justify-around items-center mt-7 mb-7">
                 <!-- Modifier les informations du client (sauf le mot de passe) -->
                 <form action="modifier_compte_client.php" method="post">
-                    <input class="border-2 border-vertClair rounded-xl p-2 m-1" type="submit" value="Modifier mes informations">
+                    <input class="border-2 border-vertClair rounded-xl p-2 m-1 md:w-auto w-60" type="submit" value="Modifier mes informations">
                 </form>
 
                 <!-- Modifier le mot de passe du client -->
                 <form action="nouveau_mdp.php">
                     <?php $_SESSION['adresse_mail'] = $mail; ?>
-                    <input class="border-2 border-vertClair rounded-xl p-2 m-1" type="submit" value="Modifier mon mot de passe">    
+                    <input class="border-2 border-vertClair rounded-xl p-2 m-1 md:w-auto w-60" type="submit" value="Modifier mon mot de passe">    
                 </form>
 
                 <!-- Déconnexion -->
                 <form action="profil_client.php" method="post">
                     <input type="hidden" id="logout" name="logout" value="true">
-                    <input class="border-2 border-vertClair rounded-xl p-2 m-1" type="submit" value="Se déconnecter">
+                    <input class="border-2 border-vertClair rounded-xl p-2 m-1 md:w-auto w-60" type="submit" value="Se déconnecter">
                 </form>
             </div>
             <!--    Récupérer mes données
