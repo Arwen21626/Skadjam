@@ -15,8 +15,12 @@
     <?php require(__DIR__ . "/../../php/structure/navbar_back.php"); ?>
 
     <main class="flex flex-col justify-center p-4 min-h-[545px]">
-        <h1 class="text-center self-center">ERREUR 404</h1>
+        <h2 class="text-center self-center">ERREUR 404</h2>
         <p class="text-center self-center">La page n'a pas été trouvé.</p>
+
+        <a href="/html/bo/"> 
+            <h3 class="text-center self-center">Retour à l'accueil</h3>
+        </a>
     </main>
     
 
