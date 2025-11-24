@@ -13,7 +13,6 @@
             $note = htmlentities($_POST['note']);
             $commentaire = htmlentities($_POST['commentaire']);
             $idCompte = $_SESSION['idCompte'];
-            $idCompte = 2;
             if ($note>=0 && $note<=5){
                 $insertionAvis = $dbh->prepare("INSERT INTO sae3_skadjam._avis(nb_etoile, nb_pouce_haut, nb_pouce_bas, contenu_commentaire, id_produit, id_compte) 
                                                     VALUES ($note, 0, 0, '$commentaire', $idProd, $idCompte)");
@@ -47,7 +46,7 @@
 <html lang="fr">
 <head>
     <?php require(__DIR__ . "/../../php/structure/head_front.php") ?>
-    <title> <?php echo $produit["libelle_produit"] ?></title>
+    <title>Ajouter un avis au produit : <?php echo $idProd;?></title>
 </head>
 <body>
     <?php require(__DIR__ . "/../../php/structure/header_front.php"); ?>

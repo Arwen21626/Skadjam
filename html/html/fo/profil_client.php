@@ -26,7 +26,7 @@ if (isset($_POST['logout'])) {
     require __DIR__ . "/../../php/structure/header_front.php";
     require __DIR__ . "/../../php/structure/navbar_front.php";
     ?>
-    <main>
+    <main class="ml-10 mr-10 mt-3">
         <?php
         // Vérifier si le client est connecter
         if(isset($_SESSION["idCompte"])) {

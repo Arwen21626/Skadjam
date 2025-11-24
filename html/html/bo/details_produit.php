@@ -21,9 +21,7 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../../css/output.css">
+    <?php require(__DIR__ . "/../../php/structure/head_front.php") ?>
     <title>Détails</title>
 </head>
 <body>
@@ -78,6 +76,7 @@
         <h3>Avis</h3>
         <div class="flex flex-row justify-between mt-10">
             <?php 
+            // Recupération des avis
             $avis = [];
             foreach($dbh->query("SELECT * FROM sae3_skadjam._avis a 
                                 INNER JOIN sae3_skadjam._client c 

@@ -55,8 +55,6 @@ require_once __DIR__ . "/../../01_premiere_connexion.php";
                                     ON cli.id_panier = p.id_panier
                                 WHERE cli.id_compte = $id", PDO::FETCH_ASSOC) as $panier){
             $idPanier = $panier['id_panier'];
-            $nbProduit = $panier['nb_produit_total'];
-            $montantTTC = $panier['montant_total_ttc'];
             $dateDerniereModif = $panier['date_derniere_modif'];
         }
         // Récupérer les informations bancaires du client
@@ -70,7 +68,38 @@ require_once __DIR__ . "/../../01_premiere_connexion.php";
             $nomCarte = $carteB['nom'];
             $expiration = $carteB['expiration'];
         }
-
+        // Récupérer les informattions des commandes du client
+        $nbCommande = 0;
+        foreach($dbh->query("SELECT * FROM sae3_skadjam._client cli
+                                INNER JOIN sae3_skadjam._commande co
+                                    ON cli.id_compte = co.id_client
+                                INNER JOIN sae3_skadjam._details d
+                                    ON co.id_commande = d.id_commande
+                                INNER JOIN sae3_skadjam._produit prod
+                                    ON d.id_produit = prod.id_produit
+                                WHERE cli.id_compte = $id", PDO::FETCH_ASSOC) as $commande){
+            $idCo[$nbCommande] = $commande['id_commande'];
+            $etat[$nbCommande] = $commande['etat'];
+            $dateCo[$nbCommande] = $commande['date_commande'];
+            $montantCoTTC[$nbCommande] = $commande['montant_total_ttc'];
+            $idFacture[$nbCommande] = $commande['id_facture'];
+            $quantite[$nbCommande] = $commande['quantite'];
+            $sousTotal[$nbCommande] = $commande['sous_total'];
+            $idProdCo[$nbCommande] = $commande['id_produit'];
+            $nbCommande++;
+        }
+        // Récupérer les informattions des avis du client
+        $nbAvis = 0;
+        foreach($dbh->query("SELECT * FROM sae3_skadjam._compte c
+                                INNER JOIN sae3_skadjam._avis av
+                                    ON c.id_compte = av.id_compte
+                                WHERE c.id_compte = $id", PDO::FETCH_ASSOC) as $avis){
+            $idAvis[$nbAvis] = $avis['id_avis'];
+            $nbEtoile[$nbAvis] = $avis['nb_etoile'];
+            $contenu[$nbAvis] = $avis['contenu_commentaire'];
+            $idProdAv[$nbAvis] = $avis['id_produit'];
+            $nbAvis++;
+        }
         $dbh = null;
     }catch(PDOException $e){
         echo "Erreur : " . $e->getMessage();
@@ -126,9 +155,37 @@ require_once __DIR__ . "/../../01_premiere_connexion.php";
             <h2>Panier</h2>
             <?php
             echo "id : $idPanier<br>";
-            echo "nombre de produit dans votre panier : $nb_produit_total<br>";
-            echo "montant total TTC : $montantTTC<br>";
             echo "date de la dernière modification : $dateDerniereModif<br>";
+            ?>
+        </div>
+        <div>
+            <h2>Commande.s</h2>
+            <?php
+            for ($i=0; $i < $nbCommande; $i++) { // Affiche toutes les commande du client
+                echo "<h3>commande n°$i</h3>";
+                echo "id : $idCo[$i]<br>";
+                echo "etat : $etat[$i]<br>";
+                echo "date de la commande : $dateCo[$i]<br>";
+                echo "montant total TTC : $montantCoTTC[$i]<br>";
+                echo "id de la facture : $idFacture[$i]<br>";
+                echo "quantité : $quantite[$i]<br>";
+                echo "sous total : $sousTotal<br>";
+                echo "id du produit : $idProd[$i]<br>";
+                echo "libelle du produit : $libelleProd[$i]<br>";
+                echo "id du vendeur : $idVendeur[$i]<br>";
+            }
+            ?>
+        </div>
+        <div>
+            <h2>Avis</h2>
+            <?php
+            for ($i=0; $i < $nbAvis; $i++) { // Affiche tous les avis du client
+                echo "<h3>avis n°$i</h3>";
+                echo "id : $idAvis[$i]<br>";
+                echo "nombre d'étoiles : $nbEtoile[$i]<br>";
+                echo "contenu de l'avis : <p>$contenu[$i]</p><br>";
+                echo "id du produit : $idProdAv[$i]<br>";
+            }
             ?>
         </div>
     </main>
