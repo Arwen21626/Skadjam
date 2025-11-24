@@ -37,6 +37,8 @@
         }
 
         foreach($tabProduitsASupprimer as $id => $produit){
+            $idProduit = $produit['id_produit'];
+
             $dbh -> query("DELETE FROM sae3_skadjam._produit 
                             WHERE id_produit = $idProduit");
         }
