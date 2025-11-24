@@ -120,11 +120,16 @@
                     <a href="reinitialiser_mdp.php" class="underline! self-end cursor-pointer hover:text-rouge">mot de passe oublié ?</a>
                 </div>
 
-                <div class=" justify-self-center mt-8 mb-8">
+                <div class=" justify-self-center mt-8 mb-1">
                     <!-- Envoie des données en méthode POST pour se connecter -->
                     <input type="submit" value="Se connecter" class="cursor-pointer w-64 border-5 border-solid rounded-2xl border-vertClair pl-3">
                 </div>
-                
+
+                <div class=" justify-self-center mt-8 mb-8">
+                    <!-- Boutton de retour à l'index.php -->
+                    <button class="cursor-pointer w-64 border-5 border-solid rounded-2xl border-vertClair pl-3" type="button"><a href="/index.php">Annuler</a></button>
+                </div>
+
                 <div class=" flex w-fit flex-col mt-6 items-center ">
                     <!-- Si erreur détecté -->
                     <?php if($erreur){ ?>
