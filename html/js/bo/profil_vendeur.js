@@ -25,11 +25,8 @@ const estConteneurVide = containerImage.classList.contains("vide");
 imagesSrc.push(imageVendeur.src);
 imageFile.push("");
 
-//initilisation de l'état du bouton valider
-
 //désactivation du bouton valider
-boutonValider.classList.add("bg-gray-400");
-boutonValider.classList.remove("bg-beige", "cursor-pointer");
+desactiverValider();
 
 
 // creer un input avec l'etat de la photo
@@ -67,9 +64,7 @@ document.querySelectorAll(".modif-attribut .bouton-modifier").forEach(button => 
             //garder en mémoire l'état du bouton valider avant modification
             ancienEtatValider = true;
             //désactivation du bouton valider
-            boutonValider.disabled = true;
-            boutonValider.classList.add("bg-gray-400");
-            boutonValider.classList.remove("bg-beige", "cursor-pointer");
+            desactiverValider();
         }
 
         //garder en mémoire l'ancien texte
@@ -231,6 +226,7 @@ function supprimerImage(){
     if (!annulerEstActive()) activerAnnuler();
     if (estConteneurVide) desactiverAnnuler();
     if (!validerEstActive()) activerValider();
+    if (estConteneurVide) desactiverValider();
 }
 
 function annulerImage(){

@@ -216,7 +216,6 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     require_once __DIR__ . "/../../php/structure/navbar_back.php";
     ?>
     <main class=" flex flex-col items-center">
-
         <h2 class="m-8">Profil</h2>
         <form method="POST" id="form-profil-vendeur" enctype="multipart/form-data" class=" w-2/3 @max-[768px]:w-7/8">
             <div class="flex flex-row items-center justify-between">
