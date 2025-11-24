@@ -6,11 +6,17 @@
 
     $urlProfil;
 
-    if ($_SESSION["role"] === "visiteur") {
+    if ($_SESSION["role"] === "visiteur") 
+    {
         $urlProfil = "/" . "html/fo/connexion.php";
     }
-    else if ($_SESSION["role"] === 'client') {
+    else if ($_SESSION["role"] === "client") 
+    {
         $urlProfil = "/" . "html/fo/profil_client.php";
+    }
+    else if ($_SESSION["role"] === "vendeur")
+    {
+        $urlProfil = "/" . "html/bo/index_vendeur.php";
     }
 ?>
 
