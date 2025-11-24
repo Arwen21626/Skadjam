@@ -14,7 +14,7 @@ h1, h2, h3, h4 {
 h1, h2, h3 {
   font-weight: bold;
 }
-p, a, input, label {
+p, a, input, label,button {
   font-family: 'Amiko';
 }
 @media (max-width: 768px) {
@@ -30,7 +30,7 @@ p, a, input, label {
   h4 {
     font-size: 20px;
   }
-  p, a, input, label {
+  p, a, input, label, button {
     font-size: 16px;
   }
 }
@@ -47,7 +47,7 @@ p, a, input, label {
   h4 {
     font-size: 25px;
   }
-  p, a, input, label {
+  p, a, input, label, button {
     font-size: 20px;
   }
 }
@@ -237,8 +237,14 @@ p, a, input, label {
   .top-1\.5 {
     top: calc(var(--spacing, 0.25rem) * 1.5);
   }
+  .top-2 {
+    top: calc(var(--spacing, 0.25rem) * 2);
+  }
   .top-48 {
     top: calc(var(--spacing, 0.25rem) * 48);
+  }
+  .right-2 {
+    right: calc(var(--spacing, 0.25rem) * 2);
   }
   .right-4 {
     right: calc(var(--spacing, 0.25rem) * 4);
@@ -284,6 +290,9 @@ p, a, input, label {
   }
   .row-start-6 {
     grid-row-start: 6;
+  }
+  .float-right {
+    float: right;
   }
   .container {
     width: 100%;
@@ -478,6 +487,9 @@ p, a, input, label {
   .h-7 {
     height: calc(var(--spacing, 0.25rem) * 7);
   }
+  .h-8\! {
+    height: calc(var(--spacing, 0.25rem) * 8) !important;
+  }
   .h-10 {
     height: calc(var(--spacing, 0.25rem) * 10);
   }
@@ -535,6 +547,9 @@ p, a, input, label {
   .w-6\! {
     width: calc(var(--spacing, 0.25rem) * 6) !important;
   }
+  .w-8\! {
+    width: calc(var(--spacing, 0.25rem) * 8) !important;
+  }
   .w-10 {
     width: calc(var(--spacing, 0.25rem) * 10);
   }
@@ -580,11 +595,17 @@ p, a, input, label {
   .w-100 {
     width: calc(var(--spacing, 0.25rem) * 100);
   }
+  .w-125 {
+    width: calc(var(--spacing, 0.25rem) * 125);
+  }
   .w-150 {
     width: calc(var(--spacing, 0.25rem) * 150);
   }
   .w-200 {
     width: calc(var(--spacing, 0.25rem) * 200);
+  }
+  .w-250 {
+    width: calc(var(--spacing, 0.25rem) * 250);
   }
   .w-auto {
     width: auto;
@@ -817,6 +838,12 @@ p, a, input, label {
   .px-7 {
     padding-inline: calc(var(--spacing, 0.25rem) * 7);
   }
+  .py-3 {
+    padding-block: calc(var(--spacing, 0.25rem) * 3);
+  }
+  .py-4 {
+    padding-block: calc(var(--spacing, 0.25rem) * 4);
+  }
   .pt-0 {
     padding-top: calc(var(--spacing, 0.25rem) * 0);
   }
@@ -864,6 +891,10 @@ p, a, input, label {
   }
   .-indent-96 {
     text-indent: calc(var(--spacing, 0.25rem) * -96);
+  }
+  .font-bold {
+    --tw-font-weight: var(--font-weight-bold, 700);
+    font-weight: var(--font-weight-bold, 700);
   }
   .font-medium {
     --tw-font-weight: var(--font-weight-medium, 500);
@@ -944,6 +975,20 @@ p, a, input, label {
   }
   .group-hover\/pen\:hidden {
     &:is(:where(.group\/pen):hover *) {
+      @media (hover: hover) {
+        display: none;
+      }
+    }
+  }
+  .group-hover\/poubelle\:block {
+    &:is(:where(.group\/poubelle):hover *) {
+      @media (hover: hover) {
+        display: block;
+      }
+    }
+  }
+  .group-hover\/poubelle\:hidden {
+    &:is(:where(.group\/poubelle):hover *) {
       @media (hover: hover) {
         display: none;
       }

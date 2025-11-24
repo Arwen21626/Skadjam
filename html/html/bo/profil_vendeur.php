@@ -4,7 +4,7 @@ include __DIR__ . "/../../01_premiere_connexion.php";
 include(__DIR__ . '/../../php/modification_variable.php');
 include(__DIR__ . '/../../php/verification_formulaire.php');
 //$idCompte = $_SESSION["idCompte"];
-$idCompte = 1;
+$idCompte = 1; // A supprimer après les tests
 if (!isset($denom)) {
     $denom = "";
     $siren = "";
@@ -69,10 +69,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     // Traitement du formulaire de modification du profil vendeur
     // Récupération des données du formulaire
     $temps  = time();
-    echo "   >> FILES : </br>";
-    print_r($_FILES);
-    echo "</br></br>   >> tabPhoto avant : </br>";
-    print_r($tabPhoto);
+
 
     $newDenom = $_POST['denom'];
     $newSiren = $_POST['siren'];
@@ -82,10 +79,12 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $newTel = $_POST['tel'];
     $newMail = $_POST['mail'];
     $newAdresse = modifierSiegeSocial($_POST['adresse']);
-    $newVille = $newAdresse["ville"];
-    $newCp = $newAdresse["cp"];
-    $newAdresse = $newAdresse["adresse"];
+    $newVille = $newAdresse['ville'];
+    $newCp = $newAdresse['cp'];
+    $newAdresse = $newAdresse['adresse'];
     $image = $_FILES['image'];
+    $imageSupprimee = ($_POST['imageSupprimee']==="true")? true : false ; // 'true' ou 'false'
+ 
     if ($image['size'] === 0){
         $image = null;
     }else{
@@ -93,8 +92,6 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         $imageAlt = explode(".",$image['name'])[0];
         $imageTitre = explode(".",$image['name'])[0];
     }
-    echo "</br></br>   >> tabPhoto après : </br>";
-    print_r("Array(url_photo=>" . $urlPhoto . ", alt=>" . $imageAlt . ", titre=>" . $imageTitre . ")</br>");
 
     $erreurs = [];
     // Validation des données
@@ -139,8 +136,6 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $newCompNum = $temp[1];
     $newAdresse = $temp[2];
 
-    
-
     // Mettre à jour la base de données avec les nouvelles valeurs
     if (empty($erreurs)) {
 
@@ -161,24 +156,37 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             // Mettre à jour l'adresse 
             $stmt = $dbh->prepare("UPDATE sae3_skadjam._adresse AS a SET adresse_postale = ?, complement_adresse = ?, numero_rue = ?, code_postal = ?, ville = ? FROM sae3_skadjam._habite AS h WHERE a.id_adresse = h.id_adresse AND h.id_compte = ?");
             $stmt->execute([$newAdresse, $newCompNum, $newNumero, $newCp, $newVille, $idCompte]);
-            if ($image){
-                if ($tabPhoto) {
-                    // Mettre à jour la photo existante
-                    $stmt = $dbh->prepare("UPDATE sae3_skadjam._photo SET url_photo = ?, alt = ?, titre = ? WHERE id_photo = ?");
-                    $stmt->execute([$urlPhoto, $imageAlt, $imageTitre, $tabPhoto['id_photo']]);
-                    echo "   >> id : ";
-                    print_r($tabPhoto['id_photo']);
-                }else {
-                    // Insérer une nouvelle photo
-                    $stmt = $dbh->prepare("INSERT INTO sae3_skadjam._photo (url_photo, alt, titre) VALUES (?, ?, ?) RETURNING id_photo");
-                    $stmt->execute([$urlPhoto, $imageAlt, $imageTitre]);
-                    $newPhotoId = $stmt->fetchColumn();
-    
-                    // Lier la nouvelle photo au vendeur
-                    $stmt = $dbh->prepare("INSERT INTO sae3_skadjam._presente (id_vendeur, id_photo) VALUES (?, ?)");
-                    $stmt->execute([$idCompte, $newPhotoId]);
+
+            //si l'image est supprimee
+            if ($imageSupprimee){
+
+                //supprimer le lien entre l'image et le compte
+                $stmt = $dbh->prepare("DELETE FROM sae3_skadjam._presente WHERE id_photo = ?");
+                $stmt->execute([$tabPhoto['id_photo']]);
+
+                //supprimer l'image
+                $stmt = $dbh->prepare("DELETE FROM sae3_skadjam._photo where id_photo = ?");
+                $stmt->execute([$tabPhoto['id_photo']]);
+            }else{
+                if ($image){
+                    if ($tabPhoto) {
+                        // Mettre à jour la photo existante
+                        $stmt = $dbh->prepare("UPDATE sae3_skadjam._photo SET url_photo = ?, alt = ?, titre = ? WHERE id_photo = ?");
+                        $stmt->execute([$urlPhoto, $imageAlt, $imageTitre, $tabPhoto['id_photo']]);
+
+                    }else {
+                        // Insérer une nouvelle photo
+                        $stmt = $dbh->prepare("INSERT INTO sae3_skadjam._photo (url_photo, alt, titre) VALUES (?, ?, ?) RETURNING id_photo");
+                        $stmt->execute([$urlPhoto, $imageAlt, $imageTitre]);
+                        $newPhotoId = $stmt->fetchColumn();
+        
+                        // Lier la nouvelle photo au vendeur
+                        $stmt = $dbh->prepare("INSERT INTO sae3_skadjam._presente (id_vendeur, id_photo) VALUES (?, ?)");
+                        $stmt->execute([$idCompte, $newPhotoId]);
+                    }
                 }
             }
+
             
 
             $dbh->commit();
@@ -204,27 +212,38 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 </head>
 <body>
     <?php 
-    /*require_once __DIR__ . "/../../php/structure/header_back.php";
-    require_once __DIR__ . "/../../php/structure/navbar_back.php";*/
+    require_once __DIR__ . "/../../php/structure/header_back.php";
+    require_once __DIR__ . "/../../php/structure/navbar_back.php";
     ?>
     <main class=" flex flex-col items-center">
 
         <h2 class="m-8">Profil</h2>
-        <form method="POST" enctype="multipart/form-data" class=" w-2/3 @max-[768px]:w-7/8">
+        <form method="POST" id="form-profil-vendeur" enctype="multipart/form-data" class=" w-2/3 @max-[768px]:w-7/8">
             <div class="flex flex-row items-center justify-between">
                 <div class=" flex flex-col w-fit">
                     <?php 
                     if ($tabPhoto){ 
                         $photo = $tabPhoto;
                         ?>
-                        <div class=" flex items-center justify-center w-80 h-80 border-2 border-solid rounded-2xl border-beige mb-3">
-                            <img class="image-vendeur w-80 " src="<?= "../../" .  $photo["url_photo"] ?>" alt="<?= $photo["alt"] ?>" title="<?= $photo["titre"] ?>">
+                        <div class="container-image relative flex items-center justify-center w-80 border-2 border-solid rounded-2xl border-beige mb-3">
+                            <img class="image-vendeur w-80 rounded-2xl" src="<?= "../../" .  $photo["url_photo"] ?>" alt="<?= $photo["alt"] ?>" title="<?= $photo["titre"] ?>">
+
+                            <button type="button" class="bouton-poubelle group/poubelle cursor-pointer ml-4 float-right absolute top-2 right-2 bg-beige rounded-sm p-1">
+                                <img src="../../images/logo/bootstrap_icon/trash.svg" alt="supprimer-image" title="supprimer-image" class=" w-8! h-8! block group-hover/poubelle:hidden">
+                                <img src="../../images/logo/bootstrap_icon/trash-fill.svg" alt="supprimer-image" title="supprimer-image" class=" w-8! h-8! hidden group-hover/poubelle:block">
+                            </button>
+                                    
                         </div>
 
                     <?php  
                     }else{?>
-                        <div class="w-80 h-80 mb-3 bg-beige rounded-2xl">
-                            <img class="image-vendeur w-80 " src="../../images/logo/bootstrap_icon/image.svg" alt="aucune image" title="aucune image">
+                        <div class="container-image vide relative flex items-center justify-center w-80 h-80 mb-3 bg-beige rounded-2xl">
+                            <img class="image-vendeur w-80 rounded-2xl" src="../../images/logo/bootstrap_icon/image.svg" alt="aucune image" title="aucune image">
+                            <button type="button" class="bouton-poubelle group/poubelle cursor-pointer ml-4 float-right absolute top-2 right-2 bg-beige rounded-sm p-1 hidden">
+                                <img src="../../images/logo/bootstrap_icon/trash.svg" alt="supprimer-image" title="supprimer-image" class=" w-8! h-8! block group-hover/poubelle:hidden">
+                                <img src="../../images/logo/bootstrap_icon/trash-fill.svg" alt="supprimer-image" title="supprimer-image" class=" w-8! h-8! hidden group-hover/poubelle:block">
+                            </button>
+                        
                         </div>
 
                         
@@ -242,7 +261,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                     }
                     
                     ?>
-                    
+                    <button type="button" class="bouton-annuler-image <?= ($tabPhoto) ? "image-modifie" : "image-ajoute" ?> hidden cursor-pointer w-80 rounded-2xl bg-beige p-2 text-center mt-2">Annuler la modification</button>
                 </div>
 
                 <div class=" mt-5 w-1/3">
@@ -251,8 +270,9 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                             <p class="underline">Entreprise :</p>
                             <?php include __DIR__ . "/../../php/structure/bouton_modifier_vendeur.php"; ?>
                         </div>
-                        <p class="attribut-text ml-7 mt-2"><?= $denom ?></p>
+                        <p class="attribut-text ml-7 mt-2 "><?= $denom ?></p>
                         <input type="text" name="denom" class="champ-text w-full ml-5 hidden border-2 border-solid rounded-md border-beige pl-3" value="<?= $denom ?>">
+                        <?= (isset($erreurs["denomination"])) ? "<p class=\"text-rouge\">" . $erreurs["denomination"] . " </p>" : '' ?>
                     </div>
 
                     <div class=" mb-3 modif-attribut">
@@ -262,6 +282,9 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                         </div>
                         <p class="attribut-text ml-7 mt-2"><?= "$num $numBis $adresse, $ville, $cp" ?></p>
                         <input type="text" name="adresse" class="champ-text w-full ml-5 hidden border-2 border-solid rounded-md border-beige pl-3" value="<?= "$num $numBis $adresse, $ville, $cp" ?>" placeholder="X [bis] rue camélia, Paris, 75011">
+                        <?= (isset($erreurs["adresse"])) ? "<p class=\"text-rouge\">" . $erreurs["adresse"] . " </p>" : '' ?>
+                        <?= (isset($erreurs["ville"])) ? "<p class=\"text-rouge\">" . $erreurs["ville"] . " </p>" : '' ?>
+                        <?= (isset($erreurs["cp"])) ? "<p class=\"text-rouge\">" . $erreurs["cp"] . " </p>" : '' ?>
                     </div>
 
                     <div class=" mb-3 modif-attribut">
@@ -271,6 +294,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                         </div>
                         <p class="attribut-text ml-7 mt-2"><?= $siren ?></p>
                         <input type="text" name="siren" class="champ-text w-full ml-5 hidden border-2 border-solid rounded-md border-beige pl-3" value="<?= $siren ?>">
+                        <?= (isset($erreurs["siren"])) ? "<p class=\"text-rouge\">" . $erreurs["siren"] . " </p>" : '' ?>
                     </div>
 
                 </div>
@@ -285,6 +309,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                         </div>
                         <p class="attribut-text ml-7 mt-2"><?= $nom ?></p>
                         <input type="text" name="nom" class="champ-text w-full ml-5 hidden border-2 border-solid rounded-md border-beige pl-3" value="<?= $nom ?>">
+                        <?= (isset($erreurs["nom"])) ? "<p class=\"text-rouge\">" . $erreurs["nom"] . " </p>" : '' ?>
                     </div>
 
                     <div class="mb-3 modif-attribut">
@@ -294,6 +319,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                         </div>
                         <p class="attribut-text ml-7 mt-2"><?= $prenom ?></p>
                         <input type="text" name="prenom" class="champ-text w-full ml-5 hidden border-2 border-solid rounded-md border-beige pl-3" value="<?= $prenom ?>">
+                        <?= (isset($erreurs["prenom"])) ? "<p class=\"text-rouge\">" . $erreurs["prenom"] . " </p>" : '' ?>
                     </div>
 
                 </div>
@@ -306,6 +332,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                         </div>
                         <p class="attribut-text ml-7 mt-2"><?= $tel ?></p>
                         <input type="text" name="tel" class="champ-text w-full ml-5 hidden border-2 border-solid rounded-md border-beige pl-3" value="<?= $tel ?>">
+                        <?= (isset($erreurs["tel"])) ? "<p class=\"text-rouge\">" . $erreurs["tel"] . " </p>" : '' ?>
                     </div>
 
                     <div class="mb-3 modif-attribut">
@@ -315,6 +342,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                         </div>
                         <p class="attribut-text ml-7 mt-2"><?= $mail ?></p>
                         <input type="text" name="mail" class="champ-text w-full ml-5 hidden border-2 border-solid rounded-md border-beige pl-3" value="<?= $mail ?>">
+                        <?= (isset($erreurs["mail"])) ? "<p class=\"text-rouge\">" . $erreurs["mail"] . " </p>" : '' ?>
                     </div>
 
                 </div>
@@ -336,6 +364,6 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     <?php require_once __DIR__ . "/../../php/structure/footer_back.php" ?>
 </body>
 
-<script src="../../js/bo/profil_vendeur.js"></script>
+<script src="../../js/bo/profil_vendeur.js" defer></script>
 
 </html>
