@@ -176,9 +176,33 @@ function verifAdresse($adresse){
 
 function verifNumCarte($num){
     //Vérfie que le numéro à bien 16 chiffres
-    return (preg_match('[0-9]{16}',$num));
+    return (preg_match('/[0-9]{16}/',$num));
 }
 
 function verifExpiration($date){
     //Vérifie que la date d'expiration n'est pas dépassé
-} 
+    $dateCut = explode('/', $date, 2);
+    $mois = $dateCut[0];
+    $annee = $dateCut[1];
+    $anneeEnCours = date('Y');
+    $moisEnCours = date('m');
+    $annee += 2000;
+    $valide = false;
+
+    if($annee > $anneeEnCours && $mois > 0 && $mois <= 12){
+        $valide = true;
+    }
+    else{
+        if($mois >= $moisEnCours && $mois > 0 && $mois <= 12){
+            $valide = true;
+        }else{
+            $valide = false;
+        }
+    }
+    return $valide;
+}
+
+function verifCryptogramme($cryptogramme){
+    // Vérifie que le cryptogramme à bien 3 chiffres
+    return (preg_match('[0-9]{3}',$cryptogramme));
+}
