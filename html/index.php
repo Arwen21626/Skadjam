@@ -83,7 +83,7 @@
                         $idProduit = $valeurs['id_produit'];?>
                         <section class="bg-bleu grid grid-cols-[40%_60%] w-40 md:w-80 h-auto p-2 md:p-3 m-2">
                             <!--affichage de la photo-->
-                            <a href= "<?php echo "details_produit.php?idProduit=".$idProduit;?>" class="col-span-2 justify-self-center mb-3">
+                            <a href= "<?php echo "html/fo/details_produit.php?idProduit=".$idProduit;?>" class="col-span-2 justify-self-center mb-3">
                                 <img src="<?php echo htmlentities($valeurs['url_photo']);?>" 
                                         alt="<?php echo htmlentities($valeurs['alt']);?>"
                                         title="<?php echo htmlentities($valeurs['titre']);?>">
