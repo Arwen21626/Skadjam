@@ -79,15 +79,13 @@ $mailer = new PHPMailer(true);
         <div class="flex mt-10 justify-center md:justify-end w-1/1">
             <input class="border-2 border-vertClair rounded-2xl w-60 h-14 p-0 m-0 md:mr-10" type="submit" value="Recevoir un mail">
         </div>
-        <p class="mt-10">
-            <?php
-                }
-                $dbh = null;
-            }catch(PDOException $e){
-                print "Erreur : " . $e->getMessage();
+        <?php
             }
-            ?>
-        </p>
+            $dbh = null;
+        }catch(PDOException $e){
+            print "Erreur : " . $e->getMessage();
+        }
+        ?>
     </form>
     <?php require __DIR__ . "/../../php/structure/footer_front.php"; ?>
 </body>
