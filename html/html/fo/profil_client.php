@@ -11,7 +11,7 @@ if (isset($_POST['logout'])) {
     session_destroy();
 
     // Redirection vers la page principale
-    header("Location: index.php");
+    header("Location: ../../index.php");
     exit();
 }
 ?>
