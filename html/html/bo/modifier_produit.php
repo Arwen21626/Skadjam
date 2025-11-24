@@ -5,7 +5,6 @@ require_once(__DIR__ . '/../../php/verification_formulaire.php');
 session_start();
 
 $idProduit = $_GET['idProduit'];
-echo $idProduit;
 
 //Tableau pour les catégories de la base
 $tab_categories = [];
@@ -191,7 +190,7 @@ else { ?>
         <?php include(__DIR__ . '/../../php/structure/navbar_back.php');?>
         <main>
             <h2>Modifier un produit</h2>
-            <form class="grid grid-cols-[40%_60%] w-11/12 self-center" action="modifier_produit.php" method="post" enctype="multipart/form-data">
+            <form class="grid grid-cols-[40%_60%] w-11/12 self-center" action="modifier_produit.php?idProduit=<?php echo $idProduit;?>" method="post" enctype="multipart/form-data">
 
                 <div class="row-start-1 row-span-3 m-2 p-4 grid grid-rows-[2/3-1/3] justify-items-center">
                     <input type="file" id="photo" name="photo" class="hidden" required>
