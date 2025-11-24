@@ -26,7 +26,7 @@ if (isset($_POST['logout'])) {
     require __DIR__ . "/../../php/structure/header_front.php";
     require __DIR__ . "/../../php/structure/navbar_front.php";
     ?>
-    <main class="ml-10 mr-10 mt-3">
+    <main class="min-h-[650x]">
         <?php
         // Vérifier si le client est connecter
         if(isset($_SESSION["idCompte"])) {
@@ -110,7 +110,7 @@ if (isset($_POST['logout'])) {
                 </table>
             </div>
 
-            <div class="flex flex-col md:flex-row justify-around items-center mt-7 mb-7">
+            <div class="flex flex-col md:flex-row justify-around items-center mt-7 mb-15">
                 <!-- Modifier les informations du client (sauf le mot de passe) -->
                 <form action="modifier_compte_client.php" method="post">
                     <input class="border-2 border-vertClair rounded-xl p-2 m-1 md:w-auto w-75" type="submit" value="Modifier mes informations">
@@ -125,7 +125,7 @@ if (isset($_POST['logout'])) {
                 <!-- Déconnexion -->
                 <form action="profil_client.php" method="post">
                     <input type="hidden" id="logout" name="logout" value="true">
-                    <input class="border-2 border-vertClair rounded-xl p-2 m-1 md:w-auto w-60" type="submit" value="Se déconnecter">
+                    <input class="border-2 border-vertClair rounded-xl p-2 m-1 md:w-auto w-75" type="submit" value="Se déconnecter">
                 </form>
             </div>
             <!--    Récupérer mes données
@@ -134,7 +134,8 @@ if (isset($_POST['logout'])) {
         <?php
         }else{
             // Si non connecté, l'emmener à la page de connexion à la place
-            header("Location: connexion.php");
+            header("Location: http://10.253.5.109/html/fo/connexion.php");
+            exit();
         }
         ?>
     </main>
