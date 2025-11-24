@@ -15,14 +15,14 @@
 
         <div class="flex flex-col justify-center items-center">
 
-            <a class="text-bleu hover:text-beige" href="#A modifier">
+            <a class="text-bleu hover:text-beige" href="/html/bo/commandes.php">
                 <div class="size-12 bg-no-repeat bg-size-[auto_48px]
                             bg-[url(/images/logo/bootstrap_icon/truck.svg)]
                             hover:bg-[url(/images/logo/bootstrap_icon/truck-fill.svg)]">
                 </div>
             </a>
 
-            <a class="text-bleu hover:text-beige" href="#A modifier">Commandes</a>
+            <a class="text-bleu hover:text-beige" href="/html/bo/commandes.php">Commandes</a>
         </div>
 
         <div class="flex flex-col justify-center items-center">
@@ -40,14 +40,14 @@
         <!-- A changer plus tard en menu burger avec la dernière icône -->
         <div class="flex flex-col justify-center items-center">
 
-            <a class="text-bleu hover:text-beige" href="#A modifier">
+            <a class="text-bleu hover:text-beige" href="/html/bo/profil_vendeur.php">
                 <div class="size-12 bg-no-repeat bg-size-[auto_48px]
                             bg-[url(/images/logo/bootstrap_icon/person.svg)]
                             hover:bg-[url(/images/logo/bootstrap_icon/person-fill.svg)]">
                 </div>
             </a>
 
-            <a class="text-bleu hover:text-beige" href="#A modifier">Profil</a>
+            <a class="text-bleu hover:text-beige" href="/html/bo/profil_vendeur.php">Profil</a>
         </div>
 
     </section>

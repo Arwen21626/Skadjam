@@ -130,14 +130,14 @@ if (isset($_POST["nom"])){
 
 <!DOCTYPE html>
 <html lang="en">
-<?php require_once __DIR__ . "/../../php/structure/head_back.php"?>
+<?php require_once __DIR__ . "/../../php/structure/head_front.php"?>
 <head>
     <title>Créer un compte vendeur</title>
 </head>
 <body class=" @container">
     <?php 
-    require_once __DIR__ . "/../../php/structure/header_back.php";
-    require_once __DIR__ . "/../../php/structure/navbar_back.php";
+    require_once __DIR__ . "/../../php/structure/header_front.php";
+    require_once __DIR__ . "/../../php/structure/navbar_front.php";
     ?>
     <main class=" flex flex-col items-center">
         <h2 class="m-8">Inscription Vendeur</h2>
@@ -246,9 +246,9 @@ if (isset($_POST["nom"])){
         </form>
         <div class="flex flex-row flex-wrap justify-center m-2">
             <p class=" mr-2">Vous avez déjà un compte ? </p>
-            <a href="./connexion_compte_vendeur.php" class="underline!" >Connectez vous</a>
+            <a href="/html/fo/connexion.php" class="underline!" >Connectez vous</a>
         </div>
     </main>
-    <?php require_once __DIR__ . "/../../php/structure/footer_back.php" ?>
+    <?php require_once __DIR__ . "/../../php/structure/footer_front.php" ?>
 </body>
 </html>

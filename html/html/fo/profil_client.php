@@ -11,14 +11,14 @@ if (isset($_POST['logout'])) {
     session_destroy();
 
     // Redirection vers la page principale
-    header("Location: index.php");
+    header("Location: ../../index.php");
     exit();
 }
 ?>
 <!DOCTYPE html>
 <html lang="fr">
+<?php require __DIR__ . "/../../php/structure/head_front.php"; ?>
 <head>
-    <?php require __DIR__ . "/../../php/structure/head_front.php"; ?>
     <title>Mon profil</title>
 </head>
 <body>
@@ -26,7 +26,7 @@ if (isset($_POST['logout'])) {
     require __DIR__ . "/../../php/structure/header_front.php";
     require __DIR__ . "/../../php/structure/navbar_front.php";
     ?>
-    <main>
+    <main class="min-h-[650x]">
         <?php
         // Vérifier si le client est connecter
         if(isset($_SESSION["idCompte"])) {
@@ -71,47 +71,71 @@ if (isset($_POST['logout'])) {
                 echo "Erreur : " . $e->getMessage();
             }
             ?>
-            <h2 class="flex justify-center text-center">Mon profil</h2>
-            <section>
-                <!-- Affichage des informations du client (sauf son mot de passe) -->
-                <div class="flex flex-row">
-                    <h2 class="mt-1 mb-1 mr-4 ml-0"><?php echo $pseudo; ?></h2>
-                    <h3 class="mt-1 mb-1 mr-4 ml-0 relative top-1.5 md:top-4 text-vertFonce -z-1"><?php echo $prenom; ?> <?php echo $nom; ?></h3>
-                </div>
-                <div>
-                    <p class="m-4"><?php echo $naissance; ?></p>
-                    <?php for ($i=0; $i < $nbAdresse; $i++) { // Affiche toutes les adresses du client ?>
-                        <p class="mt-2 mb-2 mr-4 ml-4"><?php echo "$numRue[$i] $adressePostale[$i]$batiment[$i]$appartement[$i], $codePostal[$i] $ville[$i]"; ?></p>
-                    <?php } ?>
-                    <p class="m-4"><?php echo $telephone; ?></p>
-                    <p class="m-4"><?php echo $mail; ?></p>
-                </div>
-            </section>
-            <article class="flex flex-col md:flex-row justify-around items-center mb-7">
+            <h2 class="text-center mt-4 mb-4">Mon profil</h2>
+            <div class="flex justify-center">
+                <table class="table-auto w-170">
+                    <tbody>
+                        <tr class="py-4">
+                            <th class="py-3 w-37 md:w-auto"><p class="text-left">Pseudo :</p></th>
+                            <td class="py-3"><h3><?php echo htmlentities($pseudo); ?></h2></td>
+                        </tr>
+                        <tr class="py-4">
+                            <th class="py-3"><p class="text-left">Prénom et nom :</p></th>
+                            <td class="py-3"><h4><?php echo htmlentities($prenom); ?> <?php echo $nom; ?></h4></td>
+                        </tr>
+                        <tr class="py-4">
+                            <th class="py-3"><p class="text-left">Date de naissance :</p></th>
+                            <td class="py-3"><p><?php echo htmlentities($naissance); ?></p></td>
+                        </tr>
+                        <?php if($nbAdresse != 0){ ?>
+                            <tr class="py-4">
+                                <th class="py-3"><p class="text-left">Adresse(s) :</p></th>
+                                <td class="py-3">
+                                    <?php for ($i=0; $i < $nbAdresse; $i++) { // Affiche toutes les adresses du client 
+                                        $j=$i+1;?>
+                                    <p> n°<?php echo "$j : $numRue[$i] $adressePostale[$i]$batiment[$i]$appartement[$i], $codePostal[$i] $ville[$i]"; ?></p>
+                                    <?php } ?>
+                                </td>
+                            </tr>
+                        <?php } ?>
+                        <tr class="py-4">
+                            <th class="py-3"><p class="text-left">N° de téléphone :</p></th>
+                            <td class="py-3"><p><?php echo htmlentities($telephone); ?></p></td>
+                        </tr>
+                        <tr class="py-4">
+                            <th class="py-3"><p class="text-left">Adresse mail :</p></th>
+                            <td class="py-3"><p><?php echo htmlentities($mail); ?></p></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="flex flex-col md:flex-row justify-around items-center mt-7 mb-15">
                 <!-- Modifier les informations du client (sauf le mot de passe) -->
                 <form action="modifier_compte_client.php" method="post">
-                    <input class="border-2 border-vertClair rounded-xl p-2 m-1" type="submit" value="Modifier mes informations">
+                    <input class="border-2 border-vertClair rounded-xl p-2 m-1 md:w-auto w-75" type="submit" value="Modifier mes informations">
                 </form>
 
                 <!-- Modifier le mot de passe du client -->
                 <form action="nouveau_mdp.php">
                     <?php $_SESSION['adresse_mail'] = $mail; ?>
-                    <input class="border-2 border-vertClair rounded-xl p-2 m-1" type="submit" value="Modifier mon mot de passe">    
+                    <input class="border-2 border-vertClair rounded-xl p-2 m-1 md:w-auto w-75" type="submit" value="Modifier mon mot de passe">    
                 </form>
 
                 <!-- Déconnexion -->
                 <form action="profil_client.php" method="post">
                     <input type="hidden" id="logout" name="logout" value="true">
-                    <input class="border-2 border-vertClair rounded-xl p-2 m-1" type="submit" value="Se déconnecter">
+                    <input class="border-2 border-vertClair rounded-xl p-2 m-1 md:w-auto w-75" type="submit" value="Se déconnecter">
                 </form>
-            </article>
+            </div>
             <!--    Récupérer mes données
             <a href="donnees_client.php" class="underline! absolute right-4 bottom-41 md:bottom-14 cursor-pointer hover:text-rouge">Demander mes données</a>
             -->
         <?php
         }else{
             // Si non connecté, l'emmener à la page de connexion à la place
-            header("Location: connexion.php");
+            header("Location: http://10.253.5.109/html/fo/connexion.php");
+            exit();
         }
         ?>
     </main>

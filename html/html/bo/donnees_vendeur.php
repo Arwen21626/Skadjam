@@ -52,6 +52,37 @@ require_once __DIR__ . "/../../01_premiere_connexion.php";
             $ville[$nbAdresse] = $adresse['ville'];
             $nbAdresse++;
         }
+        // Récupérer les produits du vendeur
+        $nbProduit = 0;
+        foreach($dbh->query("SELECT * FROM sae3_skadjam._compte c
+                        INNER JOIN sae3_skadjam._produit p
+                            ON c.id_compte = p.id_vendeur
+                        WHERE c.id_compte = $id", PDO::FETCH_ASSOC) as $produit){
+            $idProduit[$nbProduit] = $produit['id_produit'];
+            $libelleProduit[$nbProduit] = $produit['libelle_produit'];
+            $descriptionProduit[$nbProduit] = $produit['description_produit'];
+            $prixHT[$nbProduit] = $produit['prix_ht'];
+            $prixTTC[$nbProduit] = $produit['prix_ttc'];
+            $estMasque[$nbProduit] = $produit['est_masque'];
+            $nbProduit++;
+        }
+        // Récupérer les promotions du vendeur
+        $nbPromotion = 0;
+        foreach($dbh->query("SELECT * FROM sae3_skadjam._compte c
+                        INNER JOIN sae3_skadjam._promotion promo
+                            ON c.id_compte = promo.id_vendeur
+                        INNER JOIN sae3_skadjam._promu promu
+                            ON promo.id_promotion = promu.id_promotion
+                        WHERE c.id_compte = $id", PDO::FETCH_ASSOC) as $promotion){
+            $idPromotion[$nbPromotion] = $promotion['id_promotion'];
+            $dateDebut[$nbPromotion] = $promotion['date_debut_promotion'];
+            $dateFin[$nbPromotion] = $promotion['date_fin_promotion'];
+            $periodicite[$nbPromotion] = $promotion['periodicite'];
+    //heure_debut CHARACTER VARYING(5) NOT NULL,
+    //heure_fin CHARACTER VARYING(5),
+    //id_produit INT NOT NULL
+            $nbPromotion++;
+        }
 
         $dbh = null;
     }catch(PDOException $e){
@@ -94,6 +125,25 @@ require_once __DIR__ . "/../../01_premiere_connexion.php";
                 echo "code interphone : $codeInterphone<br>";
                 echo "code postal : $codePostal[$i]<br>";
                 echo "ville : $ville[$i]<br>";
+            }
+            ?>
+        </div>
+        <div>
+            <h2>Produit.s</h2>
+            <?php
+            for ($i=0; $i < $nbProduit; $i++) { // Affiche tous les produits du vendeur
+                echo "<h3>produit n°$i</h3>";
+                echo "id : $idProduit[$i]<br>";
+                echo "libelle : $libelleProduit[$i]<br>";
+                echo "description : $descriptionProduit[$i]<br>";
+                echo "prix HT : $prixHT[$i]<br>";
+                echo "prix TTC : $prixTTC[$i]<br>";
+                echo "ce produit est masqué : ";
+                if($estMasque){
+                    echo "oui<br>";
+                }else{
+                    echo "non<br>";
+                }
             }
             ?>
         </div>

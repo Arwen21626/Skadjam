@@ -9,7 +9,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" type="text/css" href="../../css/output.css" >
     <link rel="stylesheet" type="text/css" href="../../css/fo/general_front.css" >
-    <title>Commandes</title>
+    <title>Recherche</title>
 </head>
 <body>
     <!--header-->

@@ -1,9 +1,12 @@
 <?php
-    include(__DIR__.'/../../01_premiere_connexion.php');
-    require_once("./../../php/fonctions.php");
+    session_start();
+    include(__DIR__."/../../01_premiere_connexion.php");
+    require_once(__DIR__."/../../php/fonctions.php");
 
     //Récupération des données sur le produit ainsi que la photo
     $idProd = $_GET['idProduit'];
+
+    $produit = "vide";
     foreach($dbh->query("SELECT *
                         from sae3_skadjam._produit pr
                         inner join sae3_skadjam._montre m
@@ -16,14 +19,17 @@
                         , PDO::FETCH_ASSOC) as $row){
         $produit = $row;
     }
+
+    if ($produit === "vide")
+    {
+        header("location:/html/bo/404_vendeur.php");
+    }
 ?>
 
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../../css/output.css">
+    <?php require(__DIR__ . "/../../php/structure/head_back.php") ?>
     <title>Détails</title>
 </head>
 <body>
@@ -78,6 +84,7 @@
         <h3>Avis</h3>
         <div class="flex flex-row justify-between mt-10">
             <?php 
+            // Recupération des avis
             $avis = [];
             foreach($dbh->query("SELECT * FROM sae3_skadjam._avis a 
                                 INNER JOIN sae3_skadjam._client c 
