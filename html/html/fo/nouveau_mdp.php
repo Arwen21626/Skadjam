@@ -35,7 +35,8 @@ require_once __DIR__ . "/../../01_premiere_connexion.php";
                     ':mail' => $mail
                 ]);
                 // Redirection vers la page de connexion
-                header("Location: connexion.php");
+                header("Location: http://10.253.5.109/html/fo/connexion.php");
+                exit();
             }else{ 
                 $erreur = true;
             }
