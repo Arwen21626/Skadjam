@@ -12,6 +12,9 @@ if($_SESSION['role'] != 'client'){
     $erreurExpiration = false;
     $erreurCryptogramme = false;
     $erreurNom = false;
+    $erreurCarteCadeau = false;
+    $erreurCodePromo = false;
+    $enregistrerCarte = false;
     if(isset($_POST['numero'])){
     // Initialisation des variables
         
