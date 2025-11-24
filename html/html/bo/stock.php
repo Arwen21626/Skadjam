@@ -20,7 +20,8 @@
     <?php include(__DIR__ . "/../../php/structure/navbar_back.php"); ?>
 
     <main class="min-h-[545px]">
-        <?php try {                
+        <?php try {     
+                $tabProduit;           
                 //récupère toutes les infos des tables produits et photos
                 foreach($dbh->query("SELECT *
                                     FROM sae3_skadjam._produit pr

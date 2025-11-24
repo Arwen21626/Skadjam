@@ -25,8 +25,10 @@
     <?php include("../../php/structure/navbar_back.php"); ?>
 
     <main class="min-h-[545px]">
-        <h2 class="mt-15">Voulez-vous vraiment vider le catalogue ?</h2>
-        <div class="mt-15 flex flex-row justify-around mb-15">
+        <div class="mt-30">
+            <h2 class="text-center">Voulez-vous vraiment vider le catalogue ?</h2>
+        </div>
+        <div class="mt-30 flex flex-row justify-around mb-15">
             <button id="executerViderCatalogue" class="border-2 border-vertFonce rounded-2xl w-auto h-14 px-7">Oui</button>
             <button class="border-2 border-vertFonce rounded-2xl w-auto h-14 px-7"><a href="../bo/index_vendeur.php">Non</a></button>
         </div>
