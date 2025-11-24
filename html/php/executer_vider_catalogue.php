@@ -21,9 +21,6 @@
             $tabProduitsASupprimer[] = $row;
         }
         
-        $idPhoto;
-        $idProduit;
-
         foreach($tabProduitsASupprimer as $id => $produit){
             $idPhoto = $produit['id_photo'];
             $idProduit = $produit['id_produit'];
