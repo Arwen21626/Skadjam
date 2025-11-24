@@ -362,6 +362,9 @@ main>h2 {
   .mt-6 {
     margin-top: calc(var(--spacing, 0.25rem) * 6);
   }
+  .mt-7 {
+    margin-top: calc(var(--spacing, 0.25rem) * 7);
+  }
   .mt-8 {
     margin-top: calc(var(--spacing, 0.25rem) * 8);
   }
@@ -391,9 +394,6 @@ main>h2 {
   }
   .mb-0\.5 {
     margin-bottom: calc(var(--spacing, 0.25rem) * 0.5);
-  }
-  .mb-1 {
-    margin-bottom: calc(var(--spacing, 0.25rem) * 1);
   }
   .mb-2 {
     margin-bottom: calc(var(--spacing, 0.25rem) * 2);
@@ -537,14 +537,14 @@ main>h2 {
   .h-full {
     height: 100%;
   }
-  .min-h-\[150px\] {
-    min-height: 150px;
-  }
   .min-h-\[360px\] {
     min-height: 360px;
   }
   .min-h-\[545px\] {
     min-height: 545px;
+  }
+  .min-h-\[650px\] {
+    min-height: 650px;
   }
   .w-1 {
     width: calc(var(--spacing, 0.25rem) * 1);
@@ -1158,11 +1158,6 @@ main>h2 {
   .md\:top-0 {
     @media (width >= 48rem) {
       top: calc(var(--spacing, 0.25rem) * 0);
-    }
-  }
-  .md\:top-4 {
-    @media (width >= 48rem) {
-      top: calc(var(--spacing, 0.25rem) * 4);
     }
   }
   .md\:top-48 {
