@@ -35,7 +35,7 @@ if (isset($_SESSION["idCompte"]) && $_SESSION["role"] === "vendeur"){
     <html lang="en" class="h-1/1">
     <head>
         
-        <title>Document</title>
+        <title>nouveau mot de passe</title>
     </head>
     <body class="relative h-1/1 flex flex-col">
         <?php require_once __DIR__ . "/../../php/structure/header_back.php" ?>
