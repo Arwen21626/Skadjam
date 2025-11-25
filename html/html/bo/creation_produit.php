@@ -73,7 +73,7 @@ if (isset($_POST['categorie']) && isset($_POST['nom']) && isset($_POST['prix']) 
     $nom_photo_finale = $nom_explode.$currentTime.'.'.$ext;
     move_uploaded_file($nom_serv_photo,$destination.'/'.$nom_photo_finale);
     
-    if (verifPrix($prixHT) && verifQteStock($qteStock)){
+    if (verifPrix($prixHT) && verifQteStock($qteStock) && $idCategorie != 0 && $unite != 0){
         try{
             if ($nomCategorie == 'Alimentaire') {
                 foreach ($tab_tva as $t) {
@@ -126,18 +126,19 @@ if (isset($_POST['categorie']) && isset($_POST['nom']) && isset($_POST['prix']) 
 
             $insertionMontre = $dbh -> query("INSERT INTO sae3_skadjam._montre VALUES ($idPhoto,$idProd);");
 
+            header("Location: ./details_produit.php?idProduit=".$idProd);
+
         }
         catch (PDOException $e) {
             print "Erreur !: " . $e->getMessage() . "<br/>";
             die();
         }
     }
-    else{
-        echo ("Le prix ou la quantité saisi est incorrect.");
-    }
-    header("Location: ./details_produit.php?idProduit=".$idProd);
+    // else{
+    //     echo ("Le prix ou la quantité saisi est incorrect ou la catégorie n'a pas été entré.");
+    // }
 }
-else { ?>
+?>
 
 <!DOCTYPE html>
 <html lang="fr">
@@ -247,5 +248,3 @@ else { ?>
         <script src="../../js/bo/changement_image_produits.js"></script>
     </body>
 </html>
-
-<?php } ?>
