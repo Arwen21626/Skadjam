@@ -126,6 +126,8 @@ if (isset($_POST['categorie']) && isset($_POST['nom']) && isset($_POST['prix']) 
 
             $insertionMontre = $dbh -> query("INSERT INTO sae3_skadjam._montre VALUES ($idPhoto,$idProd);");
 
+            header("Location: ./details_produit.php?idProduit=".$idProd);
+
         }
         catch (PDOException $e) {
             print "Erreur !: " . $e->getMessage() . "<br/>";
@@ -135,7 +137,6 @@ if (isset($_POST['categorie']) && isset($_POST['nom']) && isset($_POST['prix']) 
     else{
         echo ("Le prix ou la quantité saisi est incorrect ou la catégorie n'a pas été entré.");
     }
-    header("Location: ./details_produit.php?idProduit=".$idProd);
 }
 else { ?>
 
