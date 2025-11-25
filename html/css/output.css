@@ -356,6 +356,9 @@ main>h2 {
   .m-10 {
     margin: calc(var(--spacing, 0.25rem) * 10);
   }
+  .mx-3 {
+    margin-inline: calc(var(--spacing, 0.25rem) * 3);
+  }
   .mt-0 {
     margin-top: calc(var(--spacing, 0.25rem) * 0);
   }
@@ -702,8 +705,8 @@ main>h2 {
   .w-150 {
     width: calc(var(--spacing, 0.25rem) * 150);
   }
-  .w-170 {
-    width: calc(var(--spacing, 0.25rem) * 170);
+  .w-175 {
+    width: calc(var(--spacing, 0.25rem) * 175);
   }
   .w-200 {
     width: calc(var(--spacing, 0.25rem) * 200);
