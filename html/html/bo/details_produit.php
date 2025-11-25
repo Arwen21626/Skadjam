@@ -47,14 +47,14 @@
             $note = $produit['note_moyenne'];
             affichageNote($note);
         ?>  
-        <p>Catégorie : <?php echo htmlentities($produit['libelle_categorie']); ?></p>
+        <p>Catégorie : <?php echo $produit['libelle_categorie']; ?></p>
         <!--affichage de la photo-->
 
         <!--carrousel à faire-->
         <div class="flex flex-row justify-around  m-4 p-4">
-            <img class=" w-1/4" src="<?php echo htmlentities($produit['url_photo']);?>" 
-            alt="<?php echo htmlentities($produit['alt']);?>"
-            title="<?php echo htmlentities($produit['titre']);?>">
+            <img class=" w-1/4" src="<?php echo $produit['url_photo'];?>" 
+            alt="<?php echo $produit['alt'];?>"
+            title="<?php echo $produit['titre'];?>">
 
             <div class="m-4 p-4 space-y-4 content-between">
                 <!--affichage du prix-->
@@ -63,7 +63,7 @@
                 <?php 
                 $stock = $produit['quantite_stock'];
                 if($stock != 0){?>
-                    <p>En stock : <?php echo htmlentities($stock); ?></p>
+                    <p>En stock : <?php echo $stock; ?></p>
                 <?php } 
                 else{?>
                     <p>Produit indsponible</p>
@@ -78,7 +78,7 @@
         </div>
 
         <h3>Description détaillée</h3>
-        <p><?php echo htmlentities($produit['description_produit']);?></p>
+        <p><?php echo $produit['description_produit'];?></p>
 
         <!-- Avis -->
         <h3>Avis</h3>
