@@ -12,8 +12,7 @@ $idClient = $_SESSION["idCompte"];
 print_r($_GET);
 
 $achatValide;
-
-// $typeVider = $_GET["typeVider"];
+$typeVider = $_GET["typeVider"];
 
 if (isset($_GET["achatValide"])) {
     $achatValide = $_GET["achatValide"];
