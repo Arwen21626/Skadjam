@@ -1,9 +1,10 @@
 <?php
     session_start();
+    include(__DIR__ . '/../../php/verif_role_bo.php');
 ?>
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 
 <?php require(__DIR__ . "/../../php/structure/head_back.php"); ?>
 <head>

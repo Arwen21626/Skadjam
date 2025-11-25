@@ -1,5 +1,6 @@
 <?php 
     session_start();
+    require_once __DIR__ . '/../../php/verif_role_bo.php';
 
     include __DIR__ .'/../../01_premiere_connexion.php';
     const PAGE_SIZE = 15;
@@ -21,8 +22,8 @@
 
 <body>
     <!--header-->
-    <?php include("../../php/structure/header_back.php"); ?>
-    <?php include("../../php/structure/navbar_back.php"); ?>
+    <?php include(__DIR__ . "/../../php/structure/header_back.php"); ?>
+    <?php include(__DIR__ . "/../../php/structure/navbar_back.php"); ?>
 
     <main class="min-h-[545px]">
         <div class="mt-30">
@@ -45,7 +46,7 @@
 
     </main>
 
-    <?php include("../../php/structure/footer_back.php"); ?>
+    <?php include(__DIR__ . "/../../php/structure/footer_back.php"); ?>
 
 </body>
 

@@ -1,12 +1,13 @@
 <?php 
     session_start();
+    require_once(__DIR__ . "/../../php/verif_role_bo.php");
     include(__DIR__ .'/../../01_premiere_connexion.php');
     require_once(__DIR__ . "/../../php/fonctions.php");
     $idCompte = $_SESSION['idCompte'];
 ?>
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">

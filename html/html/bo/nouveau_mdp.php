@@ -1,5 +1,6 @@
 <?php
 session_start();
+include __DIR__ . "/../../php/verif_role_bo.php";
 include __DIR__ . "/../../01_premiere_connexion.php";
 include __DIR__ . "/../../php/verification_formulaire.php";
 if (isset($_SESSION["idCompte"]) && $_SESSION["role"] === "vendeur"){
@@ -32,7 +33,7 @@ if (isset($_SESSION["idCompte"]) && $_SESSION["role"] === "vendeur"){
     ?>
 
     <!DOCTYPE html>
-    <html lang="en" class="h-1/1">
+    <html lang="fr" class="h-1/1">
     <head>
         
         <title>nouveau mot de passe</title>

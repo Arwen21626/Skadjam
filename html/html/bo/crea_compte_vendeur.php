@@ -1,5 +1,6 @@
 <?php
 session_start();
+include(__DIR__ . '/../../php/verif_role_bo.php');
 include __DIR__ . '/../../01_premiere_connexion.php';
 include(__DIR__ . '/../../php/modification_variable.php');
 include(__DIR__ . '/../../php/verification_formulaire.php');
@@ -131,7 +132,7 @@ if (isset($_POST["nom"])){
 ?>
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 <?php require_once __DIR__ . "/../../php/structure/head_front.php"?>
 <head>
     <title>Créer un compte vendeur</title>
