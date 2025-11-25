@@ -15,7 +15,13 @@ if($_SESSION['role'] != 'client'){
     $erreurCarteCadeau = false;
     $erreurCodePromo = false;
     $enregistrerCarte = false;
-    if(isset($_POST['numero'])){
+
+    // Chope l'attribut Get du script vider panier
+    if (isset($_GET["achatValide"])) {
+        $achatValide = $_GET["achatValide"];
+    }
+
+    if(isset($_POST['numero']) && $achatValide === false){
     // Initialisation des variables
         
 
@@ -25,6 +31,8 @@ if($_SESSION['role'] != 'client'){
         $expiration = $mois . '/' . $annee;
         $cryptogramme = htmlentities($_POST['cryptogramme']);
         $nom = htmlentities($_POST['nom']);
+
+        
 
         if(isset($_POST['enregistrerCarte'])){
             $enregistrerCarte = htmlentities($_POST['enregistrerCarte']);
@@ -57,6 +65,8 @@ if($_SESSION['role'] != 'client'){
             }
         }
         $achatValide = true;
+
+        header("location:/php/vider_panier?typeVider=achat&achatValide=" . $achatValide);
     }
 }
 ?>
