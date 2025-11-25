@@ -12,11 +12,6 @@
 <head>
     <link rel="stylesheet" type="text/css" href="../../css/fo/general_front.css">
     <title>Accueil</title>
-    <style>
-        button a:hover{
-            color: black;
-        }
-    </style>
 </head>
 
 <body>
@@ -84,21 +79,22 @@
                                 <img src="<?php echo htmlentities($valeurs['url_photo']);?>" 
                                         alt="<?php echo htmlentities($valeurs['alt']);?>"
                                         title="<?php echo htmlentities($valeurs['titre']);?>">
+                            
+
+                                <!--affichage du nom du produit-->
+                                <p class="col-span-2"><?php echo htmlentities($valeurs['libelle_produit']);?></p> 
+
+                                <!--affichage du prix du produit-->   
+                                <div class="flex justify-start items-center col-span-2">
+                                    <p><?php echo htmlentities($valeurs['prix_ttc']);?> €</p>
+
+                                    <!--récupération de la note-->
+                                    <div class="w-2/4 ml-2 md:ml-10 flex">
+                                        <?php $note = $valeurs['note_moyenne'];
+                                            affichageNote($note); ?>
+                                    </div> 
+                                </div>
                             </a>
-
-                            <!--affichage du nom du produit-->
-                            <p class="col-span-2"><?php echo htmlentities($valeurs['libelle_produit']);?></p> 
-
-                            <!--affichage du prix du produit-->   
-                            <div class="flex justify-start items-center col-span-2">
-                                <p><?php echo htmlentities($valeurs['prix_ttc']);?> €</p>
-
-                                <!--récupération de la note-->
-                                <div class="w-2/4 ml-2 md:ml-10 flex">
-                                    <?php $note = $valeurs['note_moyenne'];
-                                        affichageNote($note); ?>
-                                </div> 
-                            </div>
                         </section>
                     <?php } ?>
                 </div>
@@ -113,11 +109,11 @@
         <!--fin du catalogue-->
         <div class="flex flex-row space-x-4 justify-center">
             <?php if ($pageNumber>1){?>
-            <a class= "lienPage" href="<?php echo "./index.php?page=".($pageNumber-1)."#nosProduits";?>">Page précédente</a>
+            <a class= "lienPage hover:text-rouge" href="<?php echo "./index.php?page=".($pageNumber-1)."#nosProduits";?>">Page précédente</a>
             <?php }?>
         
             <?php if ($pageNumber<$maxPage){?>
-            <a class= "lienPage" href="<?php echo "./index.php?page=".($pageNumber+1)."#nosProduits";?>">Page suivante</a>
+            <a class= "lienPage hover:text-rouge" href="<?php echo "./index.php?page=".($pageNumber+1)."#nosProduits";?>">Page suivante</a>
             <?php }?>
         </div>
 
