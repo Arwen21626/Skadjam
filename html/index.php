@@ -8,18 +8,17 @@
 
 <!DOCTYPE html>
 <html lang="fr">
-<?php (include __DIR__ . "/php/structure/head_front.php"); ?>
-<head>
-    <title>Accueil</title>
-</head>
-
+    <head>
+        <title>Accueil</title>
+    </head>    
+<?php include __DIR__ . "/php/structure/head_front.php"; ?>
 <body>
     <!--header-->
     
     <?php (include __DIR__ . "/php/structure/header_front.php"); ?>
     <?php include(__DIR__ . "/php/structure/navbar_front.php"); ?>
 
-    <main>
+    <main class="mt-10">
         <div class="grid grid-cols-2 gap-4 justify-items-center">
             <a href="#nosProduits" title="lien vers page promotion">
                 <img src="images/images_accueil/promotion.webp" alt="promotion" class="w-90 md:w-150 h-auto justify-self-end">
