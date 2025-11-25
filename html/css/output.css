@@ -413,9 +413,6 @@ main>h2 {
   .mb-0\.5 {
     margin-bottom: calc(var(--spacing, 0.25rem) * 0.5);
   }
-  .mb-1 {
-    margin-bottom: calc(var(--spacing, 0.25rem) * 1);
-  }
   .mb-2 {
     margin-bottom: calc(var(--spacing, 0.25rem) * 2);
   }

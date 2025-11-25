@@ -14,54 +14,56 @@
         $stmt->execute([$mail]);
         $tab = $stmt->fetch(PDO::FETCH_ASSOC);
 
-        // Vérification mot de passe    
-        $passCorrect = password_verify($mdp, $tab['mot_de_passe']);
-
-        if ($passCorrect){
-            // Initialisation de la session après confirmation du mot de passe
-            $_SESSION['idCompte'] = $tab['id_compte'];
-
-            // Récupération des données de la bdd pour voir si c'est un vendeur ou un client
-            $stmt = $dbh->prepare("SELECT id_compte FROM sae3_skadjam._vendeur WHERE id_compte = ?");
-            $stmt->execute([$_SESSION['idCompte']]);
-            $role = $stmt->fetch(PDO::FETCH_ASSOC);
-            $_SESSION['role'] = 'vendeur';
-            
-            // si l'id du compte n'est pas dans vendeur
-            if($role == null){
-                $stmt = $dbh->prepare("SELECT id_compte FROM sae3_skadjam._client WHERE id_compte = ?");
+        if($tab){
+            // Vérification mot de passe    
+            $passCorrect = password_verify($mdp, $tab['mot_de_passe']);
+    
+            if ($passCorrect){
+                // Initialisation de la session après confirmation du mot de passe
+                $_SESSION['idCompte'] = $tab['id_compte'];
+    
+                // Récupération des données de la bdd pour voir si c'est un vendeur ou un client
+                $stmt = $dbh->prepare("SELECT id_compte FROM sae3_skadjam._vendeur WHERE id_compte = ?");
                 $stmt->execute([$_SESSION['idCompte']]);
                 $role = $stmt->fetch(PDO::FETCH_ASSOC);
-                $_SESSION['role'] = 'client';
-            }
-
-            // Initialisation pour une redirection sur le produit si on écrivais un avis par exemple et qu'on devait se connecter
-            $idProduit = 0;
-            if(isset($_POST['idProduit'])){
-                $idProduit = $_POST['idProduit'];
-            }
-            
-            // Redirection suivant le role
-            if($_SESSION['role'] == 'vendeur'){
-                header('Location: ../bo/index_vendeur.php');
-                exit;
-            }
-            else{
-                // Si on était sur un produit alors redirection dessus
-                if($_SESSION['role'] == 'client' && $idProduit != 0){
-                    header('Location: ../fo/details_produit.php?idProduit='.$idProduit);
+                $_SESSION['role'] = 'vendeur';
+                
+                // si l'id du compte n'est pas dans vendeur
+                if($role == null){
+                    $stmt = $dbh->prepare("SELECT id_compte FROM sae3_skadjam._client WHERE id_compte = ?");
+                    $stmt->execute([$_SESSION['idCompte']]);
+                    $role = $stmt->fetch(PDO::FETCH_ASSOC);
+                    $_SESSION['role'] = 'client';
+                }
+    
+                // Initialisation pour une redirection sur le produit si on écrivais un avis par exemple et qu'on devait se connecter
+                $idProduit = 0;
+                if(isset($_POST['idProduit'])){
+                    $idProduit = $_POST['idProduit'];
+                }
+                
+                // Redirection suivant le role
+                if($_SESSION['role'] == 'vendeur'){
+                    header('Location: ../bo/index_vendeur.php');
                     exit;
                 }
                 else{
-                    header('Location: ../../../index.php');
-                    exit;
+                    // Si on était sur un produit alors redirection dessus
+                    if($_SESSION['role'] == 'client' && $idProduit != 0){
+                        header('Location: ../fo/details_produit.php?idProduit='.$idProduit);
+                        exit;
+                    }
+                    else{
+                        header('Location: ../../../index.php');
+                        exit;
+                    }
                 }
+                
             }
-            
-        }
-        else{
-            // Erreur détecté dans l'adresse mail ou le mot de passe
-            $erreur = true;
+            else{
+                // Erreur détecté dans l'adresse mail ou le mot de passe
+                $erreur = true;
+            }
         }
     }
 
@@ -120,22 +122,26 @@
                     <a href="reinitialiser_mdp.php" class="underline! self-end cursor-pointer hover:text-rouge">mot de passe oublié ?</a>
                 </div>
 
-                <div class=" justify-self-center mt-8 mb-1">
-                    <!-- Envoie des données en méthode POST pour se connecter -->
-                    <input type="submit" value="Se connecter" class="cursor-pointer w-64 border-5 border-solid rounded-2xl border-vertClair pl-3">
-                </div>
-
-                <div class=" justify-self-center mt-8 mb-8">
-                    <!-- Boutton de retour à l'index.php -->
-                    <button class="cursor-pointer w-64 border-5 border-solid rounded-2xl border-vertClair pl-3" type="button"><a href="/index.php">Annuler</a></button>
-                </div>
-
                 <div class=" flex w-fit flex-col mt-6 items-center ">
                     <!-- Si erreur détecté -->
                     <?php if($erreur){ ?>
                         <p class="text-rouge items-center"><?php echo 'adresse mail ou mot de passe invalide';?></p>
                     <?php }?>
                 </div>
+
+                <div class="flex flex-col md:flex-row">
+                    <div class=" justify-self-center mt-8 mb-8 ml-6">
+                        <!-- Boutton de retour à l'index.php -->
+                        <button class="cursor-pointer w-64 border-5 border-solid rounded-2xl border-vertClair pl-3" type="button"><a href="/index.php">Annuler</a></button>
+                    </div>
+
+                    <div class=" justify-self-center mt-8 mb-8 mr-6">
+                        <!-- Envoie des données en méthode POST pour se connecter -->
+                        <input type="submit" value="Se connecter" class="cursor-pointer w-64 border-5 border-solid rounded-2xl border-vertClair pl-3">
+                    </div>
+                </div>
+
+                
                 
             </div>
         </form>
