@@ -9,9 +9,11 @@ $idClient = $_SESSION["idCompte"];
 // Récupère pour quelle raison on vide le panier | 
 // --- normal -> l'utilisateur a cliqué sur le bouton "Vider le panier" de son panier -> redirection sur la page panier
 // --- achat -> l'utilisateur a réalisé le processus d'achat des produits contenus dans son panier et le processus a abouti -> on vide le panier et on redirige vers la suite
+print_r($_GET);
 
 $achatValide;
-$typeVider = $_GET["typeVider"];
+
+// $typeVider = $_GET["typeVider"];
 
 if (isset($_GET["achatValide"])) {
     $achatValide = $_GET["achatValide"];
