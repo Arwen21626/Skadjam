@@ -4,6 +4,7 @@
     $idCompte = $_SESSION['idCompte'];
 
     try{
+        // attribut est_supprime passé à true dans _produit
         $requete = $dbh->prepare("UPDATE sae3_skadjam._produit pr 
                                     SET est_supprime = true 
                                     WHERE pr.id_vendeur = $idCompte;");
