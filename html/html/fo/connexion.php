@@ -14,7 +14,7 @@
         $stmt->execute([$mail]);
         $tab = $stmt->fetch(PDO::FETCH_ASSOC);
 
-        if(isset($tab)){
+        if($tab){
             // Vérification mot de passe    
             $passCorrect = password_verify($mdp, $tab['mot_de_passe']);
     
@@ -130,14 +130,14 @@
                 </div>
 
                 <div class="flex flex-col md:flex-row">
-                    <div class=" justify-self-center mt-8 mb-8 mr-6">
-                        <!-- Envoie des données en méthode POST pour se connecter -->
-                        <input type="submit" value="Se connecter" class="cursor-pointer w-64 border-5 border-solid rounded-2xl border-vertClair pl-3">
-                    </div>
-    
                     <div class=" justify-self-center mt-8 mb-8 ml-6">
                         <!-- Boutton de retour à l'index.php -->
                         <button class="cursor-pointer w-64 border-5 border-solid rounded-2xl border-vertClair pl-3" type="button"><a href="/index.php">Annuler</a></button>
+                    </div>
+
+                    <div class=" justify-self-center mt-8 mb-8 mr-6">
+                        <!-- Envoie des données en méthode POST pour se connecter -->
+                        <input type="submit" value="Se connecter" class="cursor-pointer w-64 border-5 border-solid rounded-2xl border-vertClair pl-3">
                     </div>
                 </div>
 
