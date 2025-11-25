@@ -73,7 +73,7 @@ if (isset($_POST['logout'])) {
             ?>
             <h2 class="text-center mt-4 mb-4">Mon profil</h2>
             <div class="flex justify-center">
-                <table class="table-auto w-170">
+                <table class="mx-3 table-auto w-175">
                     <tbody>
                         <tr class="py-4">
                             <th class="py-3 w-37 md:w-auto"><p class="text-left">Pseudo :</p></th>
