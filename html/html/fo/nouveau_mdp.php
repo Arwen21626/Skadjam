@@ -67,7 +67,7 @@ try{
                 <?php } ?>
             </div>
             <div class="flex mt-10 justify-between md:justify-end w-1/1">
-                <a href="../../index.php" class="text-center block border-4 border-solid p-1 pl-3 border-vertClair rounded-2xl w-40 h-14 cursor-pointer">Annuler</a>
+                <a href="../../index.php" class="text-center block border-4 border-solid p-1 pl-3 border-vertClair rounded-2xl w-40 cursor-pointer">Annuler</a>
                 <input class="border-4 border-vertClair rounded-2xl w-40 h-14 p-0 m-0 md:mr-10 cursor-pointer" type="submit" value="Confirmer">
             </div>
         </form>
