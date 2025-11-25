@@ -11,9 +11,9 @@
 
     // Requête pour récupérer les infos du produit
     $produit = "vide";
-    foreach($dbh->query("SELECT *, est_masque::char AS est_masque_char
+    foreach($dbh->query("SELECT *
                          FROM sae3_skadjam._produit pr
-                         WHERE pr.id_produit = $idProd"
+                         WHERE pr.id_produit = $idProd AND pr.est_supprime = false AND pr.est_masque = false"
                         , PDO::FETCH_ASSOC) as $row){
         $produit = $row;
     }
