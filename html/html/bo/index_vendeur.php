@@ -43,7 +43,7 @@
 
 
         <div class="mt-15 flex flex-row justify-around">
-            <button class="border-2 border-vertFonce rounded-2xl w-auto h-14 px-7 cursor-pointer"><a href="../bo/creation_produit.php">Ajouter un produit</a></button>
+            <button class="border-2 border-vertFonce rounded-2xl w-auto h-14 px-7 cursor-pointer"><a href="../bo/creation_produit.php">Créer un produit</a></button>
             <button class="border-2 border-vertFonce rounded-2xl w-auto h-14 px-7 cursor-pointer"><a href="../bo/vider_catalogue.php">Vider le catalogue</a></button>
         </div>
 
