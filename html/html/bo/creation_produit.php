@@ -38,7 +38,10 @@ if (isset($_POST['categorie']) && isset($_POST['nom']) && isset($_POST['prix']) 
     $qteUnite = htmlentities($_POST['qteUnite']);
 
     // $enPromotion = htmlentities($_POST['mettreEnPromotion']);
-    $enLigne = htmlentities($_POST['mettreEnLigne']);
+    if(isset($_POST['mettreEnLigne'])){
+        $enLigne = htmlentities($_POST['mettreEnLigne']);
+    }
+    
 
     //Récupération du nom de la catégorie pour la gestion de la tva
     foreach ($tab_categories as $c) {
@@ -47,13 +50,16 @@ if (isset($_POST['categorie']) && isset($_POST['nom']) && isset($_POST['prix']) 
         }
     }
     
-    if ($_POST['mettreEnLigne'] == false) {
-        //S'il n'est pas coché il faut mettre est_masque dans la BDD à true en chaine pour eviter les problèmes
-        $enLigne = 'true';
+    if(isset($_POST['mettreEnLigne'])){
+        if($_POST['mettreEnLigne'] == false) {
+            //S'il n'est pas coché il faut mettre est_masque dans la BDD à true en chaine pour eviter les problèmes
+            $enLigne = 'true';
+        }
+        else{
+            $enLigne = 'false';
+        }
     }
-    else{
-        $enLigne = 'false';
-    }
+    
 
     //Gestion de la photo
     $typePhoto = $_FILES['photo']['type'];
