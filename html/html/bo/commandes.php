@@ -7,11 +7,8 @@
 
 <!DOCTYPE html>
 <html lang="fr">
+<?php require __DIR__ . "/../../php/structure/head_back.php"; ?>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" type="text/css" href="../../css/output.css" >
-    <link rel="stylesheet" type="text/css" href="../../css/bo/general_back.css" >
     <title>Commandes</title>
 </head>
 <body>
@@ -22,7 +19,7 @@
     <main class="min-h-[600px]">
         <h2>Bientôt disponible ...</h2>
         <div class="flex justify-center mt-15 mb-15">
-            <button class="border-2 border-vertFonce rounded-2xl w-50 h-14 px-7"><a href="../bo/index_vendeur.php">Retour</a></button>
+            <button class="cursor-pointer border-2 border-vertFonce rounded-2xl w-50 h-14 px-7"><a href="../bo/index_vendeur.php">Retour</a></button>
         </div>
     </main>
 
