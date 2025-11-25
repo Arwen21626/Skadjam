@@ -72,14 +72,14 @@
         <?php
             if (empty($produitsPanier)) {
                 ?>
-                    <main class="min-h-[360px] md:min-h-[545px] md:p-4 flex justify-center">
+                    <main class="min-h-[360px] md:min-h-[620px] md:p-4 flex justify-center">
                         <h2 class="md:text-center self-center">Votre panier est vide</h2>
                 <?php
             }
             else
             {
                 ?>
-                    <main class="md:min-h-[545px] md:p-4 md:grid md:grid-cols-2 md:relative">
+                    <main class="md:min-h-[620px] md:p-4 md:grid md:grid-cols-2 md:relative">
 
                         <div id="conteneur-produit" class="flex flex-col">
                             <?php
@@ -192,8 +192,7 @@
                             <p class="ml-2"> <?php echo $montantTotalTTC . "€"; ?> </p>
                         </div>
 
-                        <form class="flex justify-center" method="get" action="/php/vider_panier.php">
-                            <input type="hidden" name="typeVider" value="normal">
+                        <form class="flex justify-center" method="get" action="/php/vider_panier.php?typeVider=normal">
                             <button class="bg-beige rounded-2xl w-32 h-10 mt-2 md:w-40 md:h-14 md:mt-4 cursor-pointer hover:bg-rouge hover:text-white border-black border shadow" type="submit">
                                 Vider le panier
                             </button>
