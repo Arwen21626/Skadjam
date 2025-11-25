@@ -20,7 +20,7 @@
 
         <div class="flex justify-center mt-16">
             <a class="inline-block justify-center" href="/index.php"> 
-                <h3 class="inline-block text-center self-center hover:text-rouge ">Retour à l'accueil</h3>
+                <h3 class="underline! inline-block text-center self-center hover:text-rouge ">Retour à l'accueil</h3>
             </a>
         </div>
     </main>
