@@ -3,51 +3,24 @@
     include __DIR__ .'/../01_premiere_connexion.php';
     $idCompte = $_SESSION['idCompte'];
 
-    $tabProduitsASupprimer = [];
-
     try{
-        foreach($dbh -> query("SELECT pr.id_produit, m.id_photo, ap.id_avis
-                            FROM sae3_skadjam._produit pr
-                            INNER join sae3_skadjam._montre m
-                                ON pr.id_produit=m.id_produit
-                            INNER JOIN sae3_skadjam._photo ph  
-                                ON ph.id_photo = m.id_photo 
-                            INNER JOIN sae3_skadjam._vendeur v
-                                ON pr.id_vendeur = v.id_compte
-                            INNER JOIN sae3_skadjam._avis a
-                                ON a.id_produit = pr.id_produit
-                            INNER JOIN sae3_skadjam._appuie ap
-                                ON ap.id_avis = a.id_avis
-                            WHERE v.id_compte = $idCompte"
-                               , PDO::FETCH_ASSOC) as $row){
-            $tabProduitsASupprimer[] = $row;
-        }
-
-        print_r($tabProduitsASupprimer);
+        $requete = $dbh->prepare("UPDATE sae3_skadjam._produit pr 
+                                    SET est_supprime = true 
+                                    WHERE pr.id_vendeur = $idCompte;");
+        $requete->execute();
         
-        foreach($tabProduitsASupprimer as $id => $produit){
-            $idPhoto = $produit['id_photo'];
-            $idProduit = $produit['id_produit'];
-            $idAvis = $produit['id_avis'];
 
-            $dbh -> query("DELETE FROM sae3_skadjam._appuie 
-                            WHERE id_avis = $idAvis");
-            $dbh -> query("DELETE FROM sae3_skadjam._avis 
-                            WHERE id_produit = $idProduit");
-            $dbh -> query("DELETE FROM sae3_skadjam._montre 
-                            WHERE id_produit = $idProduit");
-            $dbh -> query("DELETE FROM sae3_skadjam._photo 
-                            WHERE id_photo = $idPhoto");
-            $dbh -> query("DELETE FROM sae3_skadjam._contient 
-                            WHERE id_produit = $idProduit");
-                    
-        }
-
-        foreach($tabProduitsASupprimer as $id => $produit){
-            $idProduit = $produit['id_produit'];
-
-            $dbh -> query("DELETE FROM sae3_skadjam._produit 
-                            WHERE id_produit = $idProduit");
+        
+        
+        foreach($dbh->query("SELECT pr.id_produit
+                            FROM sae3_skadjam._produit pr
+                            WHERE pr.id_vendeur = $idCompte;"
+                            , PDO::FETCH_ASSOC) as $row){
+            $idProduit = $row['id_produit'];
+            //Suppression dans _contient
+            $dbh->query("DELETE FROM sae3_skadjam._contient WHERE id_produit = $idProduit"); 
+            //Suppression dans _avis
+            $dbh->query("DELETE FROM sae3_skadjam._avis WHERE id_produit = $idProduit");                 
         }
 
     }

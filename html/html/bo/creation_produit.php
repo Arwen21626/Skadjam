@@ -156,7 +156,7 @@ else { ?>
                     <input type="file" id="photo" name="photo" class="hidden" required>
                     <!-- label qui agit comme bouton -->
                     <label for="photo" class="bg-beige w-60 h-60 rounded-2xl image-produit" style="background-image: url('../../images/logo/bootstrap_icon/image.svg'); background-repeat: no-repeat; background-position: center; background-size: 60%;"></label>
-                    <label for="photo">Ajouter une image*</label>
+                    <label class="cursor-pointer" for="photo">Ajouter une image*</label>
                 </div>
 
                 <!-- Nom produit -->
@@ -182,7 +182,7 @@ else { ?>
                     <!-- Catégorie -->
                     <div class="flex flex-col">
                         <label for="categorie">Catégorie* :</label>
-                        <select class=" border-4 border-beige rounded-2xl m-2 p-2 w-40 h-14" name="categorie" id="categorie" required>
+                        <select class=" border-4 border-beige rounded-2xl m-2 p-2 w-40 h-14 cursor-pointer" name="categorie" id="categorie" required>
                             <option value="0">Choisir</option>
                             <?php foreach ($tab_categories as $categorie) {?>
                                 <option value="<?php echo $categorie['id_categorie']?>"><?php echo $categorie['libelle_categorie']?></option>
@@ -192,7 +192,7 @@ else { ?>
                     <!-- Unité -->
                     <div class="flex flex-col">
                         <label for="unite">Unité* :</label>
-                        <select class="border-4 border-beige rounded-2xl m-2 p-2 w-40 h-14" name="unite" id="unite" required>
+                        <select class="border-4 border-beige rounded-2xl m-2 p-2 w-40 h-14 cursor-pointer" name="unite" id="unite" required>
                         <option value="0">Choisir</option>
                         <?php foreach ($tab_unite as $unite) {?>
                             <option value="<?php echo $unite?>"><?php echo $unite?></option>
@@ -211,7 +211,7 @@ else { ?>
                     <!-- Mettre en ligne -->
                     <div class="flex flex-row mr-4 ml-4">
                         <label class="mr-4" for="mettreEnLigne">Mettre en ligne</label>
-                        <input class="appearance-none w-10 h-10 border-4 border-beige rounded-md checked:bg-beige" type="checkbox" name="mettreEnLigne" id="mettreEnLigne">
+                        <input class="appearance-none w-10 h-10 border-4 border-beige rounded-md checked:bg-beige cursor-pointer" type="checkbox" name="mettreEnLigne" id="mettreEnLigne">
                     </div>
                 
                     <!-- Mettre en promotion -->
@@ -229,8 +229,11 @@ else { ?>
                 
                 <!-- Validation -->
                 <div class="col-start-1 col-span-2 row-start-6 flex flex-row justify-around m-4">
-                    <button class="border-2 border-vertFonce rounded-2xl w-40 h-14"><a href="../bo/index_vendeur.php">Retour</a></button>
-                    <input class="border-2 border-vertFonce rounded-2xl w-40 h-14" type="submit" value="Valider">
+                    <a href="../bo/index_vendeur.php">
+                        <button class="border-2 border-vertFonce rounded-2xl w-40 h-14 cursor-pointer">Retour</button>
+                    </a>
+                    
+                    <input class="border-2 border-vertFonce rounded-2xl w-40 h-14 cursor-pointer" type="submit" value="Valider">
                 </div>
             </form>
         </main>
