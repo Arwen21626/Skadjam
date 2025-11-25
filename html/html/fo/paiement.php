@@ -1,7 +1,9 @@
 <?php
 session_start();
+require_once __DIR__ . "/../../php/verif_role_fo.php";
+
 if($_SESSION['role'] != 'client'){
-    header('Location: ./404.php');
+    header('Location:/404.php');
 }else{
     include(__DIR__ . '/../../php/verification_formulaire.php');
     include __DIR__ . '/../../01_premiere_connexion.php';
