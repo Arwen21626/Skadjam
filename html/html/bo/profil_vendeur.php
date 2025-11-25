@@ -290,7 +290,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                             <?php include __DIR__ . "/../../php/structure/bouton_modifier_vendeur.php"; ?>
                         </div>
                         <p class="attribut-text ml-7 mt-2"><?= "$num $numBis $adresse, $ville, $cp" ?></p>
-                        <input type="text" name="adresse" class="champ-text w-full ml-5 hidden border-4 border-solid rounded-2xl p-1 border-beige pl-3" value="<?= "$num $numBis $adresse, $ville, $cp" ?>" placeholder="X [bis] rue camélia, Paris, 75011">
+                        <input type="text" name="adresse" class="champ-text w-full ml-5 hidden border-4 border-solid rounded-2xl p-1 border-beige pl-3" value="<?= "$num $numBis $adresse, $ville, $cp" ?>" placeholder="XX [bis] rue camélia, Paris, 75011">
                         <?= (isset($erreurs["adresse"])) ? "<p class=\"text-rouge\">" . $erreurs["adresse"] . " </p>" : '' ?>
                         <?= (isset($erreurs["ville"])) ? "<p class=\"text-rouge\">" . $erreurs["ville"] . " </p>" : '' ?>
                         <?= (isset($erreurs["cp"])) ? "<p class=\"text-rouge\">" . $erreurs["cp"] . " </p>" : '' ?>
