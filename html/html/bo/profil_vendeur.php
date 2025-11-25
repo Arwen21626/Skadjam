@@ -146,8 +146,6 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     
         // Mettre à jour la base de données avec les nouvelles valeurs
         if (empty($erreurs)) {
-    
-            move_uploaded_file($image['tmp_name'], __DIR__ . "/../../" . $urlPhoto);
         
     
             try {
@@ -177,6 +175,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                     $stmt->execute([$tabPhoto['id_photo']]);
                 }else{
                     if ($image){
+                        move_uploaded_file($image['tmp_name'], __DIR__ . "/../../" . $urlPhoto);
                         if ($tabPhoto) {
                             // Mettre à jour la photo existante
                             $stmt = $dbh->prepare("UPDATE sae3_skadjam._photo SET url_photo = ?, alt = ?, titre = ? WHERE id_photo = ?");
