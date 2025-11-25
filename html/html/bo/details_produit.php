@@ -70,9 +70,9 @@
                 <?php }?>
 
                 <div class="flex flex-col space-y-4">
-                    <button class=" bg-beige rounded-2xl w-40 h-14 cursor-pointer" type="button"><a href="../bo/modifier_produit.php?idProduit=<?php echo $idProd?>">Modifier</a></button>
+                    <a href="../bo/modifier_produit.php?idProduit=<?php echo $idProd?>"><button class=" bg-beige rounded-2xl w-40 h-14 cursor-pointer" type="button">Modifier</button></a>
                     <!-- <button class=" bg-beige rounded-2xl w-40 h-14" type="button">Masquer</button> -->
-                    <button class=" bg-beige rounded-2xl w-40 h-14 cursor-pointer" type="button"><a href="../bo/supprimer_produit.php?idProduit=<?php echo $idProd?>">Supprimer</a></button>
+                    <a href="../bo/supprimer_produit.php?idProduit=<?php echo $idProd?>"><button class=" bg-beige rounded-2xl w-40 h-14 cursor-pointer" type="button">Supprimer</button></a>
                 </div>
             </div>
         </div>
