@@ -4,15 +4,15 @@ function affichageNote($note){
     //affichage d'une note nulle
     ?><section class="flex flex-nowrap items-center"><?php
     if ($note === null){ ?>
-        <p><?php echo htmlentities('non noté'); ?></p>
+        <p><?php echo 'non noté'; ?></p>
     <?php } 
 
     else {
         $entierPrec = intval($note);
         $entierSuiv = $entierPrec+1;
         $moitie = $entierPrec+0.5;
-        $noteFinale;
-        $nbEtoilesVides;
+        $noteFinale = 0;
+        $nbEtoilesVides = 0;
 
         //note arrondie à l'entier précédent
         if($note < $entierPrec+0.3){
