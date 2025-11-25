@@ -147,9 +147,8 @@ if($_SESSION['role'] != 'client'){
                         </div>
                     </div> -->
                 </div>
-
                 <div class="flex flex-row justify-center">
-                    <a href="../../index.php"><button class="border-vertClair border-2 rounded-2xl w-40 h-14 cursor-pointer m-5">Retour</button></a>
+                    <button class="border-vertClair border-2 rounded-2xl w-40 h-14 cursor-pointer m-5"><a href="../../index.php">Retour</a></button>
                     <input class="border-vertClair border-2 rounded-2xl w-40 h-14 cursor-pointer m-5" type="submit" value="Suivant">
                 </div>
             </form>

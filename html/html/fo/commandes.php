@@ -19,7 +19,7 @@
     <main class="min-h-[600px]">
         <h2>Bientôt disponible ...</h2>
         <div class="flex justify-center mt-15 mb-18">
-            <button class="bg-beige shadow rounded-sm md:rounded-2xl w-35 h-10 md:w-50 md:h-14 px-7"><a href="../../index.php">Retour</a></button>
+            <a href="../../index.php"><button class="bg-beige shadow rounded-sm md:rounded-2xl w-35 h-10 md:w-50 md:h-14 px-7 cursor-pointer">Retour</button></a>
         </div>
         <!--
         <button class="-indent-96 whitespace-nowrap

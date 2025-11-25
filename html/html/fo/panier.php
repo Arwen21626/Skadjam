@@ -179,9 +179,7 @@
         if (!empty($produitsPanier))
         {
             ?>
-                <div class="flex bottom-14 border-b md:border-none md:w-full md:grid md:grid-cols-5 fixed md:bottom-64 pointer-events-none">
-                    <div></div>
-                    <div></div>
+                <div class="flex bottom-14 border-b md:border-none md:w-full md:grid md:grid-cols-1 lg:grid-cols-3 fixed md:sticky md:bottom-64 pointer-events-none md:h-16 md:top-1/3">
                     <div></div>
                     <div id="conteneur-info_panier" class="flex w-full flex-wrap justify-evenly md:flex-nowrap bg-beige pb-4 pointer-events-auto md:grid md:grid-rows-4 md:justify-center md:items-center md:rounded-2xl" >
                         <div class="inline-flex mt-2 mb-2 md:mb-0 md:mt-4">

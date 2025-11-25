@@ -201,7 +201,7 @@ else { ?>
                     <input type="file" id="photo" name="photo" class="hidden">
                     <!-- label qui agit comme bouton -->
                     <label id="labelImage" for="photo" class=" w-60 h-60 rounded-xl image-produit" style="background-image: url(' <?php echo $urlPhoto ?>'); background-repeat: no-repeat; background-position: center; background-size: 100%;"></label>
-                    <label for="photo">Ajouter une image*</label>
+                    <label class="cursor-pointer" for="photo">Ajouter une image*</label>
                 </div>
                 
                 <!-- Nom produit -->
@@ -214,7 +214,7 @@ else { ?>
                 <div class="col-start-2 row-start-2 flex flex-row justify-between w-200 m-2 p-2">
                     <div class="flex flex-col">
                         <label for="prix">Prix *(hors taxe):</label>
-                        <input value="<?php echo($prixHT) ;?>" class="border-4 border-beige rounded-2xl w-75" type="number" name="prix" id="prix" min="0.0" required>
+                        <input value="<?php echo($prixHT) ;?>" class="border-4 border-beige rounded-2xl w-75" type="number" name="prix" id="prix" min="0.0" step="0.01" required>
                     </div>
 
                     <!-- Quantite en stock -->
@@ -228,7 +228,7 @@ else { ?>
                     <!-- Catégorie -->
                     <div class="flex flex-col">
                         <label for="categorie">Catégorie* :</label>
-                        <select class=" border-4 border-beige rounded-2xl m-2 p-2 w-40 h-14" name="categorie" id="categorie" required>
+                        <select class=" border-4 border-beige rounded-2xl m-2 p-2 w-40 h-14 cursor-pointer" name="categorie" id="categorie" required>
                             <option value="<?php echo($idCategorie) ;?>"><?php echo($nomCategorie) ;?></option>
                             <?php foreach ($tab_categories as $categorie) {?>
                                 <option value="<?php echo $categorie['id_categorie']?>"><?php echo $categorie['libelle_categorie']?></option>
@@ -238,7 +238,7 @@ else { ?>
                     <!-- Unité -->
                     <div class="flex flex-col">
                         <label for="unite">Unité* :</label>
-                        <select class="border-4 border-beige rounded-2xl m-2 p-2 w-40 h-14" name="unite" id="unite" required>
+                        <select class="border-4 border-beige rounded-2xl m-2 p-2 w-40 h-14 cursor-pointer" name="unite" id="unite" required>
                         <option value="<?php echo($unite) ;?>"><?php echo($unite) ;?></option>
                         <?php foreach ($tab_unite as $unite) {?>
                             <option value="<?php echo $unite?>"><?php echo $unite?></option>
@@ -257,7 +257,7 @@ else { ?>
                     <!-- Mettre en ligne -->
                     <div class="flex flex-row mr-4 ml-4">
                         <label class="mr-4" for="mettreEnLigne">Mettre en ligne</label>
-                        <input class="appearance-none w-10 h-10 border-4 border-beige rounded-md checked:bg-beige" type="checkbox" name="mettreEnLigne" id="mettreEnLigne" <?php echo ($enLigne == 'true')?'checked':'' ?>>
+                        <input class="cursor-pointer appearance-none w-10 h-10 border-4 border-beige rounded-md checked:bg-beige" type="checkbox" name="mettreEnLigne" id="mettreEnLigne" <?php echo ($enLigne == 'true')?'checked':'' ?>>
                     </div>
                 
                     <!-- Mettre en promotion -->
@@ -274,8 +274,8 @@ else { ?>
                 
                 <!-- Validation -->
                 <div class="col-start-1 col-span-2 row-start-6 flex flex-row justify-around m-4">
-                    <button class="border-2 border-vertFonce rounded-2xl w-40 h-14"><a href="../bo/details_produit.php?idProduit=<?php echo $idProduit ;?>">Retour</a></button>
-                    <input class="border-2 border-vertFonce rounded-2xl w-40 h-14" type="submit" value="Valider">
+                    <a href="../bo/details_produit.php?idProduit=<?php echo $idProduit ;?>"><button class="border-2 border-vertFonce rounded-2xl w-40 h-14 cursor-pointer">Retour</button></a>
+                    <input class="border-2 border-vertFonce rounded-2xl w-40 h-14 cursor-pointer" type="submit" value="Valider">
                 </div>
             </form>
         </main>
