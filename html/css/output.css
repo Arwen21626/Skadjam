@@ -411,7 +411,7 @@ main>h2 {
     margin-right: calc(var(--spacing, 0.25rem) * 4);
   }
   .mr-6 {
-    margin-right: calc(var(--spacing, 0.25rem) * 4);
+    margin-right: calc(var(--spacing, 0.25rem) * 6);
   }
   .mr-10 {
     margin-right: calc(var(--spacing, 0.25rem) * 10);
@@ -971,6 +971,9 @@ main>h2 {
   .px-7 {
     padding-inline: calc(var(--spacing, 0.25rem) * 7);
   }
+  .py-2\.5 {
+    padding-block: calc(var(--spacing, 0.25rem) * 2.5);
+  }
   .py-3 {
     padding-block: calc(var(--spacing, 0.25rem) * 3);
   }
@@ -1018,10 +1021,6 @@ main>h2 {
   }
   .pl-12 {
     padding-left: calc(var(--spacing, 0.25rem) * 12);
-  }
-  .py-2\.5 {
-    padding-top: calc(var(--spacing, 0.25rem) * 2.5);
-    padding-bottom: calc(var(--spacing, 0.25rem) * 2.5);
   }
   .text-center {
     text-align: center;
@@ -1444,9 +1443,9 @@ main>h2 {
       height: auto;
     }
   }
-  .md\:min-h-\[545px\] {
+  .md\:min-h-\[620px\] {
     @media (width >= 48rem) {
-      min-height: 545px;
+      min-height: 620px;
     }
   }
   .md\:min-h-\[800px\] {
