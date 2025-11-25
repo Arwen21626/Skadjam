@@ -543,9 +543,6 @@ main>h2 {
   .h-10 {
     height: calc(var(--spacing, 0.25rem) * 10);
   }
-  .h-12 {
-    height: calc(var(--spacing, 0.25rem) * 12);
-  }
   .h-14 {
     height: calc(var(--spacing, 0.25rem) * 14);
   }
@@ -554,6 +551,9 @@ main>h2 {
   }
   .h-15\! {
     height: calc(var(--spacing, 0.25rem) * 15) !important;
+  }
+  .h-16 {
+    height: calc(var(--spacing, 0.25rem) * 16);
   }
   .h-40 {
     height: calc(var(--spacing, 0.25rem) * 40);
@@ -1253,6 +1253,11 @@ main>h2 {
       @media (hover: hover) {
         color: var(--color-white, #fff);
       }
+    }
+  }
+  .md\:relative {
+    @media (width >= 48rem) {
+      position: relative;
     }
   }
   .md\:sticky {

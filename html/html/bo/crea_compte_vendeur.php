@@ -194,7 +194,7 @@ if (isset($_POST["nom"])){
                 </div>
                 <div class="flex flex-col items-start mt-6 w-fit @max-[768px]:mt-2">
                     <label for="iban">Numéro de IBAN * :</label>
-                    <input class="ml-5 border-4 border-solid rounded-2xl border-beige p-1 pl-3 mb-4 @max-[768px]:ml-2 max-w-3/4 @max-[768px]:pl-2 " type="text" id="iban" name="iban" value="<?= (!isset($erreurs["iban"]))?$iban: 'FR'?>" placeholder="FR" size="30" required>
+                    <input class="ml-5 border-4 border-solid rounded-2xl border-beige p-1 pl-3 mb-4 @max-[768px]:ml-2 max-w-3/4 @max-[768px]:pl-2 " type="text" id="iban" name="iban" value="<?= (!isset($erreurs["iban"]))?$iban: 'FR'?>" placeholder="FR" size="40" required>
                     <?php echo (isset($erreurs["iban"])) ? "<p class=\"text-rouge\">" . $erreurs["iban"] . " </p>" : '' ?>
                 </div>
             </div>
@@ -204,7 +204,7 @@ if (isset($_POST["nom"])){
             <div class="flex flex-row flex-wrap justify-between ml-10 mb-7 mr-10">
                 <div class="flex flex-col items-start mt-6 w-fit @max-[768px]:mt-2">
                     <label for="adresse">Adresse * :</label>
-                    <input class="ml-5 border-4 border-solid rounded-2xl border-beige p-1 pl-3 mb-4 @max-[768px]:ml-2 max-w-3/4 @max-[768px]:pl-2 " type="text" id="adresse" name="adresse" value="<?= $_POST["adresse"] ?? ''?>" size="40" placeholder="ex : 3 rue des camélias" required>
+                    <input class="ml-5 border-4 border-solid rounded-2xl border-beige p-1 pl-3 mb-4 @max-[768px]:ml-2 max-w-3/4 @max-[768px]:pl-2 " type="text" id="adresse" name="adresse" value="<?= $_POST["adresse"] ?? ''?>" size="60" placeholder="ex : 3 rue des camélias" required>
                     <?php echo (isset($erreurs["adresse"])) ? "<p class=\"text-rouge\">" . $erreurs["adresse"] . " </p>" : '' ?>
                 </div>
                 <div class="flex flex-col items-start mt-6 w-fit @max-[768px]:mt-2">
@@ -224,8 +224,8 @@ if (isset($_POST["nom"])){
             <div class="flex flex-row flex-wrap justify-between ml-10 mb-7 mr-10">
                 <div class="flex flex-col items-start mt-6 w-fit @max-[768px]:mt-2">
                     <label for="mdp">Mot de passe * :</label>
-                    <div class="zone-mdp flex flex-row items-center">
-                        <input class="champ-mdp ml-5 border-4 border-solid rounded-2xl border-beige p-1 pl-3 mb-4 @max-[768px]:ml-2 max-w-3/4 @max-[768px]:pl-2 " type="password" id="mdp" name="mdp" value="<?= (!isset($erreurs["mdp"]) && isset($_POST["mdp"])) ? $_POST["mdp"] : ''?>" size="30" required>
+                    <div class="zone-mdp flex flex-row items-center mb-4">
+                        <input class="champ-mdp ml-5 border-4 border-solid rounded-2xl border-beige p-1 pl-3 @max-[768px]:ml-2 max-w-3/4 @max-[768px]:pl-2 " type="password" id="mdp" name="mdp" value="<?= (!isset($erreurs["mdp"]) && isset($_POST["mdp"])) ? $_POST["mdp"] : ''?>" size="50" required>
                         <?php include __DIR__ . "/../../php/structure/bouton_mdp.php" ?>
                     </div>
                     <?php echo (isset($erreurs["mdp"])) ? "<p class=\"text-rouge\">" . $erreurs["mdp"] . " </p>" : '' ?>
@@ -234,8 +234,8 @@ if (isset($_POST["nom"])){
                 </div>
                 <div class="flex flex-col items-start mt-6 w-fit @max-[768px]:mt-2">
                     <label for="verif">Vérification du mot de passe * :</label>
-                    <div class="zone-mdp flex flex-row items-center">
-                        <input class="champ-mdp ml-5 border-4 border-solid rounded-2xl border-beige p-1 pl-3 mb-4 @max-[768px]:ml-2 max-w-3/4 @max-[768px]:pl-2 " type="password" id="verif" name="verif" value="<?= (!(isset($erreurs["conf"]) || isset($erreurs["mdp"])) && isset($_POST["verif"])) ? $_POST["verif"] : ''?>" size="30" required>
+                    <div class="zone-mdp flex flex-row items-center mb-4">
+                        <input class="champ-mdp ml-5 border-4 border-solid rounded-2xl border-beige p-1 pl-3 @max-[768px]:ml-2 max-w-3/4 @max-[768px]:pl-2 " type="password" id="verif" name="verif" value="<?= (!(isset($erreurs["conf"]) || isset($erreurs["mdp"])) && isset($_POST["verif"])) ? $_POST["verif"] : ''?>" size="50" required>
                         <?php include __DIR__ . "/../../php/structure/bouton_mdp.php" ?>
                     </div>
                     <!-- s'il y a une erreur elle sera affiché sous la cellule -->

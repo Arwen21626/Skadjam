@@ -79,7 +79,7 @@
             else
             {
                 ?>
-                    <main class="md:min-h-[545px] md:p-4 md:grid md:grid-cols-2">
+                    <main class="md:min-h-[545px] md:p-4 md:grid md:grid-cols-2 md:relative">
 
                         <div id="conteneur-produit" class="flex flex-col">
                             <?php
@@ -173,7 +173,7 @@
             }
         ?>
         
-    </main>
+    
     
     <?php 
         if (!empty($produitsPanier))
@@ -214,6 +214,7 @@
         }
     ?>
     
+    </main>
     
     <?php include(__DIR__ . "/../../php/structure/footer_front.php") ?>
 </body>

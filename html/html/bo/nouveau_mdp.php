@@ -2,6 +2,8 @@
 session_start();
 include __DIR__ . "/../../01_premiere_connexion.php";
 include __DIR__ . "/../../php/verification_formulaire.php";
+$_SESSION["idCompte"] = 1;
+$_SESSION["role"] = "vendeur";
 if (isset($_SESSION["idCompte"]) && $_SESSION["role"] === "vendeur"){
     $idCompte = $_SESSION["idCompte"];
     $role = $_SESSION["role"];
@@ -44,8 +46,8 @@ if (isset($_SESSION["idCompte"]) && $_SESSION["role"] === "vendeur"){
             <form method="POST" class="flex flex-col justify-center items-center flex-1 w-fit">
                 <div class="flex flex-col items-start mt-6 w-fit ">
                     <label for="mdp">Entrer le nouveau mot de passe :</label>
-                    <div class="zone-mdp flex flex-row items-center">
-                        <input type="password" name="mdp" id="mdp" required <?= isset($nouveau_mdp) ? "value=\"$nouveau_mdp\" " : "" ?> class="champ-mdp ml-5 border-4 border-solid rounded-2xl border-beige p-1 pl-3 mb-4 w-150">
+                    <div class="zone-mdp flex flex-row items-center mb-4">
+                        <input type="password" name="mdp" id="mdp" required <?= isset($nouveau_mdp) ? "value=\"$nouveau_mdp\" " : "" ?> class="champ-mdp ml-5 border-4 border-solid rounded-2xl border-beige p-1 pl-3 w-150">
                         <?php include __DIR__ . "/../../php/structure/bouton_mdp.php" ?>
                     </div>
                     <?php echo (isset($erreur["mdp"])) ? "<p class=\"text-rouge\">" . $erreur["mdp"] . " </p>" : '' ?>
@@ -53,8 +55,8 @@ if (isset($_SESSION["idCompte"]) && $_SESSION["role"] === "vendeur"){
                 </div>
                 <div class="flex flex-col items-start mt-6 w-fit ">
                     <label for="confirmation">Confirmer le mot de passe :</label>
-                    <div class="zone-mdp flex flex-row items-center">
-                        <input type="password" name="confirmation" id="confirmation" required <?= isset($confirmation) ? "value=\"$confirmation\" " : "" ?> class="champ-mdp ml-5 border-4 border-solid rounded-2xl border-beige p-1 pl-3 mb-4 w-150">
+                    <div class="zone-mdp flex flex-row items-center mb-4">
+                        <input type="password" name="confirmation" id="confirmation" required <?= isset($confirmation) ? "value=\"$confirmation\" " : "" ?> class="champ-mdp ml-5 border-4 border-solid rounded-2xl border-beige p-1 pl-3 w-150">
                         <?php include __DIR__ . "/../../php/structure/bouton_mdp.php" ?>
                     </div>
                     <?php echo (isset($erreur["conf"])) ? "<p class=\"text-rouge\">" . $erreur["conf"] . " </p>" : '' ?>
