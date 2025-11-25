@@ -23,7 +23,7 @@ function verifTelephone($tel){
 
 function verifMail($mail){
     // Vérification que la format de l'email soit correcte
-    if (strlen($mail) > 150 || !preg_match("/^[A-Za-z0-9.]+@[A-Za-z]+.[A-Za-z]+$/", $mail)){
+    if (strlen($mail) > 150 || !preg_match("/^[A-Za-z0-9.]+@[A-Za-z-]+.[A-Za-z]+$/", $mail)){
         return false;
     }
     else{
