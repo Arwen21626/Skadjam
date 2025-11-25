@@ -59,7 +59,7 @@
                                         ON ph.id_photo = m.id_photo 
                                     INNER JOIN sae3_skadjam._vendeur v
                                         ON pr.id_vendeur = v.id_compte
-                                    WHERE pr.est_supprime = false"
+                                    WHERE pr.est_supprime = false AND pr.est_masque = false "
                                     , PDO::FETCH_ASSOC) as $row){
                     $tabProduit[] = $row;
                 }
