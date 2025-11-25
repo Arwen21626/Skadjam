@@ -134,9 +134,9 @@ if (isset($_POST['categorie']) && isset($_POST['nom']) && isset($_POST['prix']) 
             die();
         }
     }
-    else{
-        echo ("Le prix ou la quantité saisi est incorrect ou la catégorie n'a pas été entré.");
-    }
+    // else{
+    //     echo ("Le prix ou la quantité saisi est incorrect ou la catégorie n'a pas été entré.");
+    // }
 }
 else { ?>
 
