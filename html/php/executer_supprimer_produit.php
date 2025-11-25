@@ -10,12 +10,12 @@ try{
     $requete = $dbh->prepare("UPDATE sae3_skadjam._produit pr 
                                     SET est_supprime = true 
                                     WHERE pr.id_produit = $idProduit;");
-        $requete->execute();
-    
-        //Suppression dans _contient
-        $dbh->query("DELETE FROM sae3_skadjam._contient WHERE id_produit = $idProduit"); 
-        //Suppression dans _avis
-        $dbh->query("DELETE FROM sae3_skadjam._avis WHERE id_produit = $idProduit");                  
+    $requete->execute();
+
+    //Suppression dans _contient
+    $dbh->query("DELETE FROM sae3_skadjam._contient WHERE id_produit = $idProduit"); 
+    //Suppression dans _avis
+    $dbh->query("DELETE FROM sae3_skadjam._avis WHERE id_produit = $idProduit");                  
         
 }
 catch (PDOException $e){
