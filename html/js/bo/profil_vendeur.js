@@ -263,6 +263,7 @@ function annulerImage(){
         imageVendeur.src = imagesSrc[0];
         imageVendeurInput.value = imageFile[0]
         console.log(imageVendeur.src);
+        activerSupprimer();
     }
     desactiverAnnuler();
     desactiverValider();

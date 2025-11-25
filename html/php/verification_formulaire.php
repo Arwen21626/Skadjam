@@ -3,7 +3,7 @@ include __DIR__ . "/../01_premiere_connexion.php";
 
 function verifNomPrenom($nom){
     // Vérification que soit un prénom soit un nom soyent au bon format
-    if (strlen($nom) > 100 || !preg_match("/^[A-Za-z -]+$/", $nom)){
+    if (strlen($nom) > 100 || !preg_match("/^[A-Za-zéçèëêàïîäâùüûöô -]+$/", $nom)){
         return false;
     }
     else{
