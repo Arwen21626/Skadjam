@@ -1471,6 +1471,11 @@ main>h2 {
       max-width: fit-content;
     }
   }
+  .md\:grid-cols-1 {
+    @media (width >= 48rem) {
+      grid-template-columns: repeat(1, minmax(0, 1fr));
+    }
+  }
   .md\:grid-cols-2 {
     @media (width >= 48rem) {
       grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -1635,6 +1640,11 @@ main>h2 {
   .md\:whitespace-normal {
     @media (width >= 48rem) {
       white-space: normal;
+    }
+  }
+  .lg\:grid-cols-3 {
+    @media (width >= 64rem) {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
     }
   }
   .\@max-\[768px\]\:mt-2 {
