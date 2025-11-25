@@ -244,7 +244,7 @@ if (isset($_POST["nom"])){
             </div>
 
             <div class="flex flex-row flex-wrap items-center mt-2 mb-2">
-                <label for="cgu" class="underline! cursor-pointer">J'ai lu et j'acccepte les conditions générales d'utilisation :</label>
+                <label for="cgu" class="underline! cursor-pointer hover:text-rouge">J'ai lu et j'acccepte les conditions générales d'utilisation :</label>
                 <input type="checkbox" id="cgu" name="cgu" required class="ml-10 w-5 h-5 @max-[768px]:ml-2 mt-3">
             </div>
             <div class="flex flex-row justify-around mt-8 mb-8 @max-[768px]:flex-col @max-[768px]:items-center">
