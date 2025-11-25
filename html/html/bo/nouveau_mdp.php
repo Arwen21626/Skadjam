@@ -2,8 +2,6 @@
 session_start();
 include __DIR__ . "/../../01_premiere_connexion.php";
 include __DIR__ . "/../../php/verification_formulaire.php";
-$_SESSION["idCompte"] = 1;
-$_SESSION["role"] = "vendeur";
 if (isset($_SESSION["idCompte"]) && $_SESSION["role"] === "vendeur"){
     $idCompte = $_SESSION["idCompte"];
     $role = $_SESSION["role"];
