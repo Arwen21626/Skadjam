@@ -4,6 +4,12 @@
     require_once(__DIR__ . "/../connections_params.php");
     require_once(__DIR__ . "/php/fonctions.php");
     session_start();
+
+    if (!isset($_SESSION['role'])) {
+        $_SESSION['role'] = "visiteur";
+    }
+
+    include_once(__DIR__ . "/php/verif_role_fo.php");
 ?>
 
 <!DOCTYPE html>
