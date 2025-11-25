@@ -85,7 +85,7 @@
 
             <div class="flex mt-10 justify-center md:justify-end w-1/1 ">
                 <button class="cursor-pointer  border-2 border-vertFonce rounded-2xl w-40 h-14 p-0 m-0 mr-10 " type="button"><a href="./details_produit.php?idProduit=<?php echo $idProd; ?>">Annuler</a></button>
-                <input class="cursor-pointer border-2 border-vertFonce rounded-2xl w-40 h-14 p-0 m-0 md:mr-10" type="<?php if($dejaAvis == false){echo "Submit";}else{echo "Disable";} ?>" name="submit" id="submit" value="Valider">
+                <input class="cursor-pointer border-2 border-vertFonce rounded-2xl w-40 h-14 p-0 m-0 md:mr-10" type="<?php echo 'Submit' /*if($dejaAvis == false){echo "Submit";}else{echo "Disable";}*/ ?>" name="submit" id="submit" value="Valider">
             </div>
         </form>
     </main>
