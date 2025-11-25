@@ -78,7 +78,7 @@
 ?>
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 <head>
     <?php require_once __DIR__ . "/../../php/structure/head_front.php"?>
     <title>connexion</title>
