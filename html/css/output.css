@@ -1016,6 +1016,10 @@ main>h2 {
   .pl-12 {
     padding-left: calc(var(--spacing, 0.25rem) * 12);
   }
+  .py-2\.5 {
+    padding-top: calc(var(--spacing, 0.25rem) * 2.5);
+    padding-bottom: calc(var(--spacing, 0.25rem) * 2.5);
+  }
   .text-center {
     text-align: center;
   }

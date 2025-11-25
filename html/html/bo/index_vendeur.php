@@ -9,8 +9,7 @@
 <!DOCTYPE html>
 <html lang="fr">
 <?php include(__DIR__."/../../php/structure/head_back.php");?>
-<head>
-    
+<head> 
     <title>Accueil</title>
     <style>
         button a:hover{
