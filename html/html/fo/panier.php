@@ -173,7 +173,7 @@
             }
         ?>
         
-    </main>
+    
     
     <?php 
         if (!empty($produitsPanier))
@@ -214,6 +214,7 @@
         }
     ?>
     
+    </main>
     
     <?php include(__DIR__ . "/../../php/structure/footer_front.php") ?>
 </body>
