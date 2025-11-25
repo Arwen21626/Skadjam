@@ -66,7 +66,7 @@ if($_SESSION['role'] != 'client'){
         }
         $achatValide = true;
 
-        header("location:/php/vider_panier?typeVider=achat&achatValide=" . $achatValide);
+        header("location:/php/vider_panier.php?typeVider=achat&achatValide=" . $achatValide);
     }
 }
 ?>

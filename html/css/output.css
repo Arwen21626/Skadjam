@@ -1443,9 +1443,9 @@ main>h2 {
       height: auto;
     }
   }
-  .md\:min-h-\[545px\] {
+  .md\:min-h-\[620px\] {
     @media (width >= 48rem) {
-      min-height: 545px;
+      min-height: 620px;
     }
   }
   .md\:min-h-\[800px\] {

@@ -72,14 +72,14 @@
         <?php
             if (empty($produitsPanier)) {
                 ?>
-                    <main class="min-h-[360px] md:min-h-[545px] md:p-4 flex justify-center">
+                    <main class="min-h-[360px] md:min-h-[620px] md:p-4 flex justify-center">
                         <h2 class="md:text-center self-center">Votre panier est vide</h2>
                 <?php
             }
             else
             {
                 ?>
-                    <main class="md:min-h-[545px] md:p-4 md:grid md:grid-cols-2 md:relative">
+                    <main class="md:min-h-[620px] md:p-4 md:grid md:grid-cols-2 md:relative">
 
                         <div id="conteneur-produit" class="flex flex-col">
                             <?php
