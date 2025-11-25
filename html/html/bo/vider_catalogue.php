@@ -38,7 +38,7 @@
                 fetch('../../php/executer_vider_catalogue.php')
                 .then(res => res.text())
                 .then(data => {
-                    window.location.href = "../../php/executer_vider_catalogue.php";
+                    window.location.href = "index_vendeur.php";
                 });
         });
         </script>
