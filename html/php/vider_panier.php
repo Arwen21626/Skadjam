@@ -10,8 +10,13 @@ $idClient = $_SESSION["idCompte"];
 // --- normal -> l'utilisateur a cliqué sur le bouton "Vider le panier" de son panier -> redirection sur la page panier
 // --- achat -> l'utilisateur a réalisé le processus d'achat des produits contenus dans son panier et le processus a abouti -> on vide le panier et on redirige vers la suite
 
+$achatValide;
 $typeVider = $_GET["typeVider"];
-$achatValide = $_GET["achatValide"];
+
+if (isset($_GET["achatValide"])) {
+    $achatValide = $_GET["achatValide"];
+}
+
 
 // Récupère l'id du panier du client
 
