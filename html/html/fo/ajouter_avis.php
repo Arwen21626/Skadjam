@@ -87,12 +87,12 @@
                     }
 
                     if($dejaAvis == false){
-                        $a = 'Submit';
+                        $a = '';
                     }else{
-                        $a = 'Disable';
-                    } 
+                        $a = 'disabled';
+                    }
                 ?>
-                <input class="cursor-pointer border-2 border-vertFonce rounded-2xl w-40 h-14 p-0 m-0 md:mr-10" type="<?php echo $a?>" name="submit" id="submit" value="Valider">
+                <input class="cursor-pointer border-2 border-vertFonce rounded-2xl w-40 h-14 p-0 m-0 md:mr-10" type="submit" name="submit" id="submit" value="Valider" <?php echo $a; ?> >
             </div>
         </form>
     </main>
