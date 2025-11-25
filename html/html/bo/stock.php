@@ -8,10 +8,10 @@
 
 <!DOCTYPE html>
 <html lang="fr">
+<?php include(__DIR__ . "/../../php/structure/head_back.php");?>
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" type="text/css" href="../../css/output.css" >
     <link rel="stylesheet" type="text/css" href="../../css/bo/general_back.css" >
     <title>Stock</title>
 </head>
@@ -74,7 +74,7 @@
                                             $classe = $classe2;
                                         }?>
                                         <tr class="<?php echo $classe; ?>">
-                                            <th scope="row" class="text-left py-3 pl-3" ><a href="<?php echo htmlentities("details_produit.php?idProduit=".$idProduit);?>"><?php echo htmlentities($valeurs['libelle_produit']); ?></a></th>
+                                            <th scope="row" class="text-left py-3 pl-3" ><a href="<?php echo htmlentities("details_produit.php?idProduit=".$idProduit);?>"><?php echo $valeurs['libelle_produit']; ?></a></th>
                                             <td class="text-center py-3"><p><?php echo htmlentities($valeurs['prix_ttc']);?> €</p></td>
                                             <td class="text-center py-3">
                                                 <div class="flex justify-center items-center">
