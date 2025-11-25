@@ -275,6 +275,12 @@ main>h2 {
   .z-10 {
     z-index: 10;
   }
+  .order-1 {
+    order: 1;
+  }
+  .order-2 {
+    order: 2;
+  }
   .col-span-2 {
     grid-column: span 2 / span 2;
   }
@@ -1287,6 +1293,16 @@ main>h2 {
       bottom: calc(var(--spacing, 0.25rem) * 64);
     }
   }
+  .md\:order-1 {
+    @media (width >= 48rem) {
+      order: 1;
+    }
+  }
+  .md\:order-2 {
+    @media (width >= 48rem) {
+      order: 2;
+    }
+  }
   .md\:mt-0 {
     @media (width >= 48rem) {
       margin-top: calc(var(--spacing, 0.25rem) * 0);
@@ -1305,6 +1321,11 @@ main>h2 {
   .md\:mt-16 {
     @media (width >= 48rem) {
       margin-top: calc(var(--spacing, 0.25rem) * 16);
+    }
+  }
+  .md\:mr-4 {
+    @media (width >= 48rem) {
+      margin-right: calc(var(--spacing, 0.25rem) * 4);
     }
   }
   .md\:mr-10 {
@@ -1335,6 +1356,11 @@ main>h2 {
   .md\:ml-0 {
     @media (width >= 48rem) {
       margin-left: calc(var(--spacing, 0.25rem) * 0);
+    }
+  }
+  .md\:ml-4 {
+    @media (width >= 48rem) {
+      margin-left: calc(var(--spacing, 0.25rem) * 4);
     }
   }
   .md\:ml-5 {
