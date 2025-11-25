@@ -47,28 +47,31 @@ try{
 </head>
 <body>
     <?php require __DIR__ . "/../../php/structure/header_front.php"; ?>
-    <h2 class="flex justify-center text-center">Nouveau mot de passe</h2>
-    <form class="flex md:flex-row flex-col flex-wrap p-15 pt-0 justify-around" action="nouveau_mdp.php" method="post"> 
-        <div class="flex flex-col basis-1/3 m-5 min-w-3xs">
-            <label for="mdp">Mot de passe* :</label>
-            <input class="border-4 border-vertClair rounded-2xl w-1/1 p-1 pl-3" type="password" name="mdp" id="mdp" required>
-            <p style="font-size: 0.90em"> 1 majuscule, 1 minuscule, 1 chiffre, 1 caractère spécial, 10 caractères minimum</p>
-        </div>
-        <div class="flex flex-col basis-1/3 m-5 min-w-3xs">
-            <label for="verifMdp">Vérification du mot de passe* :</label>
-            <input class="border-4 border-vertClair rounded-2xl w-1/1 p-1 pl-3" type="password" name="verifMdp" id="verifMdp" required>
-        </div>
+    <main class="md:min-h-[800px] min-h-[600px]">
+        <h2 class="flex justify-center text-center">Nouveau mot de passe</h2>
+        <form class="flex md:flex-row flex-col flex-wrap p-15 pt-0 justify-around" action="nouveau_mdp.php" method="post"> 
+            <div class="flex flex-col basis-1/3 m-5 min-w-3xs">
+                <label for="mdp">Mot de passe* :</label>
+                <input class="border-4 border-vertClair rounded-2xl w-1/1 p-1 pl-3" type="password" name="mdp" id="mdp" required>
+                <p style="font-size: 0.90em"> 1 majuscule, 1 minuscule, 1 chiffre, 1 caractère spécial, 10 caractères minimum</p>
+            </div>
+            <div class="flex flex-col basis-1/3 m-5 min-w-3xs">
+                <label for="verifMdp">Vérification du mot de passe* :</label>
+                <input class="border-4 border-vertClair rounded-2xl w-1/1 p-1 pl-3" type="password" name="verifMdp" id="verifMdp" required>
+            </div>
 
-        <!-- Ne s'affiche que si le mot de passe entré ne respecte pas la structure ordonnée ou qu'il est différent de la vérification du mot de passe -->
-        <div class="flex w-fit flex-col mt-6 items-start ">
-            <?php if($erreur){ ?>
-                <p class="text-rouge">Votre mot de passe ne respecte pas la structure ordinaire ou ne correspond pas à sa vérification.</p>
-            <?php } ?>
-        </div>
-        <div class="flex mt-10 justify-center md:justify-end w-1/1">
-            <input class="border-2 border-vertClair rounded-2xl w-40 h-14 p-0 m-0 md:mr-10 cursor-pointer" type="submit" value="Confirmer">
-        </div>
-    </form>
+            <!-- Ne s'affiche que si le mot de passe entré ne respecte pas la structure ordonnée ou qu'il est différent de la vérification du mot de passe -->
+            <div class="flex w-fit flex-col mt-6 items-start ">
+                <?php if($erreur){ ?>
+                    <p class="text-rouge">Votre mot de passe ne respecte pas la structure ordinaire ou ne correspond pas à sa vérification.</p>
+                <?php } ?>
+            </div>
+            <div class="flex mt-10 justify-between md:justify-end w-1/1">
+                <a href="../../index.php" class="text-center block border-4 border-solid p-1 pl-3 border-vertClair rounded-2xl w-40 h-14 cursor-pointer">Annuler</a>
+                <input class="border-4 border-vertClair rounded-2xl w-40 h-14 p-0 m-0 md:mr-10 cursor-pointer" type="submit" value="Confirmer">
+            </div>
+        </form>
+    </main>
     <?php
     }catch(PDOException $e){
         print "Erreur : " . $e->getMessage() . "<br/>";
