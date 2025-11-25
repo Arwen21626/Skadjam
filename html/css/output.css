@@ -956,9 +956,6 @@ main>h2 {
   .p-6 {
     padding: calc(var(--spacing, 0.25rem) * 6);
   }
-  .p-6\.5 {
-    padding: calc(var(--spacing, 0.25rem) * 6.5);
-  }
   .p-8 {
     padding: calc(var(--spacing, 0.25rem) * 8);
   }
@@ -1024,6 +1021,10 @@ main>h2 {
   }
   .pl-12 {
     padding-left: calc(var(--spacing, 0.25rem) * 12);
+  }
+  .py-2\.5 {
+    padding-top: calc(var(--spacing, 0.25rem) * 2.5);
+    padding-bottom: calc(var(--spacing, 0.25rem) * 2.5);
   }
   .text-center {
     text-align: center;
