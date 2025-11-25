@@ -62,13 +62,13 @@ if (isset($_POST['categorie']) && isset($_POST['nom']) && isset($_POST['prix']) 
     if(isset($_POST['mettreEnLigne'])){
         if($_POST['mettreEnLigne'] == false) {
             //S'il n'est pas coché il faut mettre est_masque dans la BDD à true en chaine pour eviter les problèmes
-            $enLigne = 'true';
-        }else{
             $enLigne = 'false';
+        }else{
+            $enLigne = 'true';
         }
     }
     else{
-        $enLigne = 'false';
+        $enLigne = 'true';
     }
     
 
