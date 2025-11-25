@@ -32,7 +32,7 @@
                                         ON ph.id_photo = m.id_photo 
                                     INNER JOIN sae3_skadjam._vendeur v
                                         ON pr.id_vendeur = v.id_compte
-                                    WHERE v.id_compte = $idCompte AND pr.est_supprime = false
+                                    WHERE v.id_compte = $idCompte
                                     ORDER BY libelle_produit ASC"
                                     , PDO::FETCH_ASSOC) as $row){
                     $tabProduit[] = $row;
