@@ -20,7 +20,8 @@
 
     foreach ($dbh->query("SELECT id_produit, quantite_par_produit
                           FROM sae3_skadjam._contient
-                          WHERE id_panier = $idPanier") as $row) {
+                          WHERE id_panier = $idPanier
+                          ORDER BY id_produit ASC") as $row) {
         $produitsPanier[] = $row;
     }
     
