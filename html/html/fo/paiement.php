@@ -78,7 +78,7 @@ if($_SESSION['role'] != 'client'){
     <?php include(__DIR__ . '/../../php/structure/header_front.php');?>
     <?php include(__DIR__ . '/../../php/structure/navbar_front.php');?>
     <?php if(!$achatValide){?>
-        <main class="md:min-h-[800px] min-h-[600px] flex justify-center items-start md:mt-16">
+        <main class="md:min-h-[800px] min-h-[600px]">
             <form action="paiement.php" method="post">
 
                 <div class="flex flex-col md:items-center items-start ml-5 md:ml-0">
@@ -147,9 +147,8 @@ if($_SESSION['role'] != 'client'){
                         </div>
                     </div> -->
                 </div>
-
                 <div class="flex flex-row justify-center">
-                    <a href="../../index.php"><button class="border-vertClair border-2 rounded-2xl w-40 h-14 cursor-pointer m-5">Retour</button></a>
+                    <button class="border-vertClair border-2 rounded-2xl w-40 h-14 cursor-pointer m-5"><a href="../../index.php">Retour</a></button>
                     <input class="border-vertClair border-2 rounded-2xl w-40 h-14 cursor-pointer m-5" type="submit" value="Suivant">
                 </div>
             </form>

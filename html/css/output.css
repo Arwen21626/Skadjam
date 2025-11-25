@@ -956,7 +956,7 @@ main>h2 {
   .p-6 {
     padding: calc(var(--spacing, 0.25rem) * 6);
   }
-  .p-6\.5{
+  .p-6\.5 {
     padding: calc(var(--spacing, 0.25rem) * 6.5);
   }
   .p-8 {
@@ -1325,11 +1325,6 @@ main>h2 {
   .md\:mt-10 {
     @media (width >= 48rem) {
       margin-top: calc(var(--spacing, 0.25rem) * 10);
-    }
-  }
-  .md\:mt-16 {
-    @media (width >= 48rem) {
-      margin-top: calc(var(--spacing, 0.25rem) * 16);
     }
   }
   .md\:mr-4 {
