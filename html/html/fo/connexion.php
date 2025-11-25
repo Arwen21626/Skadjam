@@ -61,9 +61,13 @@
                 
             }
             else{
-                // Erreur détecté dans l'adresse mail ou le mot de passe
-                $erreur = true;
+            // Erreur détecté dans l'adresse mail ou le mot de passe
+            $erreur = true;
             }
+        }
+        else{
+            // Erreur détecté dans l'adresse mail ou le mot de passe
+            $erreur = true;
         }
     }
 
