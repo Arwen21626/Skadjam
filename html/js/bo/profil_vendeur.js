@@ -74,6 +74,7 @@ document.querySelectorAll(".modif-attribut .bouton-modifier").forEach(button => 
         //garder en mémoire l'ancien texte
         ancienTexte = paragraph.textContent;
         if (champ.classList.contains("textarea")){
+            ancienTexte = paragraph.innerHTML.replaceAll(/<br>/g, "\n").replaceAll(/&nbsp;/g, " ");
             champ.value = paragraph.innerHTML.replaceAll(/<br>/g, "\n").replaceAll(/&nbsp;/g, " ");
         }
 
@@ -140,13 +141,15 @@ document.querySelectorAll(".modif-attribut .bouton-annuler").forEach(button => {
         //restauration de l'état du bouton valider
         newEtatChamp = globaleEtatChamp
 
+        //restauration de l'ancien texte
+        champ.value = ancienTexte;
+
         //si le bouton valider était activé avant modification et qu'aucune autre modification n'est en cours
         if((ancienEtatValider && nbModifActive === 0) || imageEstModifier()){
             activerValider();
         }
 
-        //restauration de l'ancien texte
-        champ.value = ancienTexte;
+        
 
         if (champ.classList.contains("textarea")){
             paragraph.innerHTML = champ.value.replaceAll(/\n/g, "<br>").replaceAll(/ /g, "&nbsp;");
