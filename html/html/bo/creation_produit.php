@@ -38,7 +38,10 @@ if (isset($_POST['categorie']) && isset($_POST['nom']) && isset($_POST['prix']) 
     $qteUnite = htmlentities($_POST['qteUnite']);
 
     // $enPromotion = htmlentities($_POST['mettreEnPromotion']);
-    $enLigne = htmlentities($_POST['mettreEnLigne']);
+    if(isset($_POST['mettreEnLigne'])){
+        $enLigne = htmlentities($_POST['mettreEnLigne']);
+    }
+    
 
     //Récupération du nom de la catégorie pour la gestion de la tva
     foreach ($tab_categories as $c) {
@@ -47,13 +50,16 @@ if (isset($_POST['categorie']) && isset($_POST['nom']) && isset($_POST['prix']) 
         }
     }
     
-    if ($_POST['mettreEnLigne'] == false) {
-        //S'il n'est pas coché il faut mettre est_masque dans la BDD à true en chaine pour eviter les problèmes
-        $enLigne = 'true';
+    if(isset($_POST['mettreEnLigne'])){
+        if($_POST['mettreEnLigne'] == false) {
+            //S'il n'est pas coché il faut mettre est_masque dans la BDD à true en chaine pour eviter les problèmes
+            $enLigne = 'true';
+        }
+        else{
+            $enLigne = 'false';
+        }
     }
-    else{
-        $enLigne = 'false';
-    }
+    
 
     //Gestion de la photo
     $typePhoto = $_FILES['photo']['type'];
@@ -67,7 +73,7 @@ if (isset($_POST['categorie']) && isset($_POST['nom']) && isset($_POST['prix']) 
     $nom_photo_finale = $nom_explode.$currentTime.'.'.$ext;
     move_uploaded_file($nom_serv_photo,$destination.'/'.$nom_photo_finale);
     
-    if (verifPrix($prixHT) && verifQteStock($qteStock)){
+    if (verifPrix($prixHT) && verifQteStock($qteStock) && $idCategorie != 0 && $unite != 0){
         try{
             if ($nomCategorie == 'Alimentaire') {
                 foreach ($tab_tva as $t) {
@@ -120,18 +126,19 @@ if (isset($_POST['categorie']) && isset($_POST['nom']) && isset($_POST['prix']) 
 
             $insertionMontre = $dbh -> query("INSERT INTO sae3_skadjam._montre VALUES ($idPhoto,$idProd);");
 
+            header("Location: ./details_produit.php?idProduit=".$idProd);
+
         }
         catch (PDOException $e) {
             print "Erreur !: " . $e->getMessage() . "<br/>";
             die();
         }
     }
-    else{
-        echo ("Le prix ou la quantité saisi est incorrect.");
-    }
-    header("Location: ./details_produit.php?idProduit=".$idProd);
+    // else{
+    //     echo ("Le prix ou la quantité saisi est incorrect ou la catégorie n'a pas été entré.");
+    // }
 }
-else { ?>
+?>
 
 <!DOCTYPE html>
 <html lang="fr">
@@ -229,10 +236,7 @@ else { ?>
                 
                 <!-- Validation -->
                 <div class="col-start-1 col-span-2 row-start-6 flex flex-row justify-around m-4">
-                    <a href="../bo/index_vendeur.php">
-                        <button class="border-2 border-vertFonce rounded-2xl w-40 h-14 cursor-pointer">Retour</button>
-                    </a>
-                    
+                    <button class="border-2 border-vertFonce rounded-2xl w-40 h-14 cursor-pointer"><a href="../bo/index_vendeur.php">Retour</a></button>                    
                     <input class="border-2 border-vertFonce rounded-2xl w-40 h-14 cursor-pointer" type="submit" value="Valider">
                 </div>
             </form>
@@ -241,5 +245,3 @@ else { ?>
         <script src="../../js/bo/changement_image_produits.js"></script>
     </body>
 </html>
-
-<?php } ?>

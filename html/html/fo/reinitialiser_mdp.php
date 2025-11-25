@@ -78,7 +78,7 @@ $mailer = new PHPMailer(true);
                 <p class="mt-10">Si un compte à cette adresse existe, vous recevrez un mail contenant un lien pour la réinitialisation.</p>
             </div>
             <div class="flex mt-10 justify-between md:justify-end w-1/1">
-                <a href="connexion.php" class="text-center block border-4 border-solid border-vertClair rounded-2xl w-40 py-2.5 pr-1 pl-3 cursor-pointer">Annuler</a>
+                <a href="connexion.php" class="text-center block border-4 border-solid border-vertClair rounded-2xl w-40 py-2.5 mr-6 cursor-pointer">Annuler</a>
                 <input class="border-4 border-vertClair rounded-2xl w-60 h-14 p-0 m-0 md:mr-10 cursor-pointer" type="submit" value="Recevoir un mail">
             </div>
             <?php
