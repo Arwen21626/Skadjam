@@ -10,7 +10,6 @@
 <html lang="fr">
 <?php (include __DIR__ . "/php/structure/head_front.php"); ?>
 <head>
-    <link rel="stylesheet" type="text/css" href="../../css/fo/general_front.css">
     <title>Accueil</title>
 </head>
 
