@@ -95,17 +95,17 @@
                         <section class="bg-bleu grid grid-cols-[40%_60%] w-80 p-3 m-2">
                             <!--affichage de la photo-->
                             <a href= "<?php echo "details_produit.php?idProduit=".$idProduit;?>" class="col-span-2 justify-self-center mb-3">
-                                <img src="<?php echo htmlentities($valeurs['url_photo']);?>" 
-                                        alt="<?php echo htmlentities($valeurs['alt']);?>"
-                                        title="<?php echo htmlentities($valeurs['titre']);?>">
+                                <img src="<?php echo $valeurs['url_photo'];?>" 
+                                        alt="<?php echo $valeurs['alt'];?>"
+                                        title="<?php echo $valeurs['titre'];?>">
                             </a>
 
                             <!--affichage du nom du produit-->
-                            <p class="col-span-2"><?php echo htmlentities($valeurs['libelle_produit']);?></p> 
+                            <p class="col-span-2"><?php echo $valeurs['libelle_produit'];?></p> 
 
                             <!--affichage du prix du produit-->   
                             <div class="flex justify-start items-center col-span-2">
-                                <p><?php echo htmlentities($valeurs['prix_ttc']);?> €</p>
+                                <p><?php echo $valeurs['prix_ttc'];?> €</p>
 
                                 <!--récupération de la note-->
                                 <div class="ml-2 md:ml-10 flex">
@@ -115,7 +115,7 @@
                             </div>   
                              
                             <!--affichage du stock-->
-                            <p class="col-span-2">En stock : <?php echo htmlentities($valeurs['quantite_stock']);?></p>       
+                            <p class="col-span-2">En stock : <?php echo $valeurs['quantite_stock'];?></p>       
                         </section>
                     <?php } ?>
                 </div>         
