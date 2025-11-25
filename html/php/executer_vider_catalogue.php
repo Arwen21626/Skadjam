@@ -6,7 +6,7 @@
     $tabProduitsASupprimer = [];
 
     try{
-        foreach($dbh -> query("SELECT pr.id_produit, ph.id_photo, a.id_avis
+        foreach($dbh -> query("SELECT pr.id_produit, m.id_photo, ap.id_avis
                             FROM sae3_skadjam._produit pr
                             INNER join sae3_skadjam._montre m
                                 ON pr.id_produit=m.id_produit
@@ -18,12 +18,12 @@
                                 ON a.id_produit = pr.id_produit
                             INNER JOIN sae3_skadjam._appuie ap
                                 ON ap.id_avis = a.id_avis
-                            INNER JOIN sae3_skadjam._contient c
-                                ON c.id_produit = pr.id_produit
                             WHERE v.id_compte = $idCompte"
                                , PDO::FETCH_ASSOC) as $row){
             $tabProduitsASupprimer[] = $row;
         }
+
+        print_r($tabProduitsASupprimer);
         
         foreach($tabProduitsASupprimer as $id => $produit){
             $idPhoto = $produit['id_photo'];
