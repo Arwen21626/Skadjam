@@ -75,7 +75,9 @@ document.querySelectorAll(".modif-attribut .bouton-modifier").forEach(button => 
         ancienTexte = paragraph.textContent;
         if (champ.classList.contains("textarea")){
             ancienTexte = paragraph.innerHTML.replaceAll(/<br>/g, "\n").replaceAll(/&nbsp;/g, " ");
+            
             champ.value = paragraph.innerHTML.replaceAll(/<br>/g, "\n").replaceAll(/&nbsp;/g, " ");
+
         }
 
         champInput(paragraph, champ, boutonModifier, groupeBouton);
