@@ -1305,6 +1305,11 @@ main>h2 {
       margin-top: calc(var(--spacing, 0.25rem) * 10);
     }
   }
+  .md\:mt-16 {
+    @media (width >= 48rem) {
+      margin-top: calc(var(--spacing, 0.25rem) * 16);
+    }
+  }
   .md\:mr-10 {
     @media (width >= 48rem) {
       margin-right: calc(var(--spacing, 0.25rem) * 10);
