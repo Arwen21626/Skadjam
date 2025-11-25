@@ -1,9 +1,10 @@
 <?php
-
+session_start();
+include(__DIR__ . '/../../php/verif_role_bo.php');
 include( __DIR__ . '/../../01_premiere_connexion.php');
 require_once(__DIR__ . '/../../php/verification_formulaire.php');
 
-session_start();
+
 
 //Récupération id vendeur
 $idVendeur = $_SESSION['idCompte'];
@@ -178,10 +179,10 @@ if (isset($_POST['categorie']) && isset($_POST['nom']) && isset($_POST['prix']) 
             <form class="grid grid-cols-[40%_60%] w-4/5 self-center" action="creation_produit.php" method="post" enctype="multipart/form-data">
 
                 <!-- Image -->
-                <div class="row-start-1 row-span-3 m-2 p-4 grid grid-rows-[2/3-1/3] justify-items-center cursor-pointer">
+                <div class="row-start-1 row-span-3 m-2 p-4 grid grid-rows-[2/3-1/3] justify-items-center">
                     <input type="file" id="photo" name="photo" class="hidden" required>
                     <!-- label qui agit comme bouton -->
-                    <label for="photo" class="bg-beige w-60 h-60 rounded-2xl image-produit" style="background-image: url('../../images/logo/bootstrap_icon/image.svg'); background-repeat: no-repeat; background-position: center; background-size: 60%;"></label>
+                    <label for="photo" class="bg-beige w-60 h-60 rounded-2xl image-produit cursor-pointer" style="background-image: url('../../images/logo/bootstrap_icon/image.svg'); background-repeat: no-repeat; background-position: center; background-size: 60%;"></label>
                     <label class="cursor-pointer" for="photo">Ajouter une image*</label>
                 </div>
 
