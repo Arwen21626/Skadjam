@@ -17,6 +17,15 @@ $tab_tva = [];
 //Tableau pour les unites
 $tab_unite = ["Piece", "Litre","cl","g","kg","S","M","L","XL","XXL","m","cm"];
 
+//Initialisation des variables d'erreurs
+$erreurIdCategorie = false;
+$erreurNom = false;
+$erreurPrixHT = false;
+$erreurQteStock = false;
+$erreurDescription = false;
+$erreurUnite = false;
+$erreurQteUnite = false;
+
 //Requete récupération categories
 foreach($dbh->query('SELECT * from sae3_skadjam._categorie', PDO::FETCH_ASSOC) as $row) {
     $tab_categories[] = $row;
@@ -72,6 +81,14 @@ if (isset($_POST['categorie']) && isset($_POST['nom']) && isset($_POST['prix']) 
     $destination = __DIR__ . '/../../images/photo_importees';
     $nom_photo_finale = $nom_explode.$currentTime.'.'.$ext;
     move_uploaded_file($nom_serv_photo,$destination.'/'.$nom_photo_finale);
+
+    if($idCategorie == 0){
+        $erreurIdCategorie = true;
+    }
+
+    if($unite == 0){
+        $erreurUnite = true;
+    }
     
     if (verifPrix($prixHT) && verifQteStock($qteStock) && $idCategorie != 0 && $unite != 0){
         try{
