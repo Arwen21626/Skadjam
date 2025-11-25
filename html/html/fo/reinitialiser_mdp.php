@@ -1,5 +1,6 @@
 <?php
 session_start();
+include_once __DIR__ . "/../../php/verif_role_fo.php";
 require_once __DIR__ . "/../../01_premiere_connexion.php";
 require __DIR__ . '/../../php/PHPMailer/src/PHPMailer.php';
 require __DIR__ . '/../../php/PHPMailer/src/SMTP.php';
@@ -14,8 +15,8 @@ $mailer = new PHPMailer(true);
 ?>
 <!DOCTYPE html>
 <html lang="fr">
+<?php require __DIR__ . "/../../php/structure/head_front.php"; ?>
 <head>
-    <?php require __DIR__ . "/../../php/structure/head_front.php"; ?>
     <title>Réinitialiser mon mot de passe</title>
 </head>
 <body>
@@ -24,7 +25,7 @@ $mailer = new PHPMailer(true);
     <!-- Affichage d'un champ input pour insérer une adresse mail -->
     <?php
     try{
-        $dbh = new PDO("$driver:host=$server;dbname=$dbname",$user,$pass);
+        $dbh = new PDO("$driver:host=$server;port=$port;dbname=$dbname",$user,$pass);
         $dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
         $dbh->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC);
 
