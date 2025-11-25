@@ -66,7 +66,10 @@
             <label class="mt-10" for="commentaire">Commentaire : </label>
             <textarea class="border-4 border-beige rounded-2xl w-1/1 p-1 pl-3" name="commentaire" rows="10" cols="100"></textarea>
 
-            <input class="border-2 border-vertFonce rounded-2xl w-40 h-14 mt-15" type="submit" value="Valider">
+            <div class="flex mt-10 justify-center md:justify-end w-1/1 ">
+                <button class="cursor-pointer  border-2 border-vertFonce rounded-2xl w-40 h-14 p-0 m-0 mr-10 " type="button"><a href="./details_produit.php?idProduit=<?php echo $idProd; ?>">Annuler</a></button>
+                <input class="cursor-pointer border-2 border-vertFonce rounded-2xl w-40 h-14 p-0 m-0 md:mr-10" type="Submit" name="submit" id="submit" value="Valider">
+            </div>
         </form>
     </main>
 
