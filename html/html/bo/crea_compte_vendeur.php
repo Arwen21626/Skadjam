@@ -254,7 +254,7 @@ if (isset($_POST["nom"])){
         </form>
         <div class="flex flex-row flex-wrap justify-center m-2">
             <p class=" mr-2">Vous avez déjà un compte ? </p>
-            <a href="/html/fo/connexion.php" class="underline!" >Connectez vous</a>
+            <a href="/html/fo/connexion.php" class="underline! hover:text-rouge" >Connectez vous</a>
         </div>
     </main>
     <?php require_once __DIR__ . "/../../php/structure/footer_front.php" ?>
