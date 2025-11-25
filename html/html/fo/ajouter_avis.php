@@ -27,6 +27,23 @@
             print "Erreur lors de l'envoie des données vers la base de données";
             die();
         }
+
+        // tableau contenant tous les avis
+        $avis = [];
+        foreach($dbh->query("SELECT * FROM sae3_skadjam._avis a 
+                            INNER JOIN sae3_skadjam._client c 
+                                ON a.id_compte = c.id_compte 
+                            WHERE id_produit = $idProd", PDO::FETCH_ASSOC) as $row){
+            $avis[] = $row;
+        }
+
+        // savoir si le client a déjà donner son avis sur le produit
+        $dejaAvis = false;
+        foreach($avis as $row){
+            if ($_SESSION['idCompte'] == $row['id_compte']){
+                $dejaAvis = true;
+            }
+        }
     }
     else{
 
@@ -68,7 +85,7 @@
 
             <div class="flex mt-10 justify-center md:justify-end w-1/1 ">
                 <button class="cursor-pointer  border-2 border-vertFonce rounded-2xl w-40 h-14 p-0 m-0 mr-10 " type="button"><a href="./details_produit.php?idProduit=<?php echo $idProd; ?>">Annuler</a></button>
-                <input class="cursor-pointer border-2 border-vertFonce rounded-2xl w-40 h-14 p-0 m-0 md:mr-10" type="Submit" name="submit" id="submit" value="Valider">
+                <input class="cursor-pointer border-2 border-vertFonce rounded-2xl w-40 h-14 p-0 m-0 md:mr-10" type="<?php if($dejaAvis == true){echo 'disable';}else{echo 'submit';} ?>" name="submit" id="submit" value="Valider">
             </div>
         </form>
     </main>
