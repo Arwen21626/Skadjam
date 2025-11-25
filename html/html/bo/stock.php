@@ -98,7 +98,7 @@
                                             <td class="text-center py-3">
                                                 <form action="../../php/executer_ajouter_stock.php" method="POST">
                                                     <input type="hidden" name="id" value="<?php echo htmlentities($idProduit);?>">
-                                                    <button type="submit"><img src="../../images/logo/bootstrap_icon/plus-square.svg" alt="bouton ajouter 1 au stock" class="w-10 h-auto"></button>
+                                                    <button class="cursor-pointer" type="submit"><img src="../../images/logo/bootstrap_icon/plus-square.svg" alt="bouton ajouter 1 au stock" class="w-10 h-auto"></button>
                                                 </form>
                                             </td>
                                             <td>
@@ -106,13 +106,13 @@
                                                     <input type="hidden" name="id" value="<?php echo htmlentities($idProduit);?>">
                                                     <input type="hidden" name="quantite" value="1">
                                                     <input type="hidden" name="stockActuel" value="<?php echo htmlentities($valeurs['quantite_stock']);?>">
-                                                    <button type="submit"><img src="../../images/logo/bootstrap_icon/dash-square.svg" alt="bouton enlever 1 au stock" class="w-10 h-auto"></button>
+                                                    <button class="cursor-pointer" type="submit"><img src="../../images/logo/bootstrap_icon/dash-square.svg" alt="bouton enlever 1 au stock" class="w-10 h-auto"></button>
                                                 </form>
                                             </td>
                                             <td>
                                                 <form action="../../php/executer_vider_stock.php" method="POST">
                                                     <input type="hidden" name="id" value="<?php echo htmlentities($idProduit);?>">
-                                                    <button type="submit"><img src="../../images/logo/bootstrap_icon/trash.svg" alt="bouton vider stock" class="w-10 h-auto"></button>
+                                                    <button class="cursor-pointer" type="submit"><img src="../../images/logo/bootstrap_icon/trash.svg" alt="bouton vider stock" class="w-10 h-auto"></button>
                                                 </form>
                                             </td>
                                         </tr>
