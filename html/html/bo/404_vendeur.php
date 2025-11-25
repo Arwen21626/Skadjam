@@ -4,6 +4,7 @@
 
 <!DOCTYPE html>
 <html lang="en">
+
 <?php require(__DIR__ . "/../../php/structure/head_back.php"); ?>
 <head>
     <meta charset="UTF-8">
