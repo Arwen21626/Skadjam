@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="fr">
+<?php require __DIR__ . "/../../php/structure/head_back.php"; ?>
 <head>
-    <?php require __DIR__ . "/../../php/structure/head_back.php"; ?>
     <title>Conditions Générales de Vente</title>
 </head>
 <body>

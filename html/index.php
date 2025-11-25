@@ -10,7 +10,6 @@
 <html lang="fr">
 <?php (include __DIR__ . "/php/structure/head_front.php"); ?>
 <head>
-    <link rel="stylesheet" type="text/css" href="../../css/fo/general_front.css">
     <title>Accueil</title>
 </head>
 
@@ -77,17 +76,17 @@
                         <section class="bg-bleu grid grid-cols-[40%_60%] w-40 md:w-80 h-auto p-2 md:p-3 m-2">
                             <!--affichage de la photo-->
                             <a href= "<?php echo "html/fo/details_produit.php?idProduit=".$idProduit;?>" class="col-span-2 justify-self-center mb-3">
-                                <img src="<?php echo htmlentities($valeurs['url_photo']);?>" 
-                                        alt="<?php echo htmlentities($valeurs['alt']);?>"
-                                        title="<?php echo htmlentities($valeurs['titre']);?>">
+                                <img src="<?php echo $valeurs['url_photo'];?>" 
+                                        alt="<?php echo $valeurs['alt'];?>"
+                                        title="<?php echo $valeurs['titre'];?>">
                             
 
                                 <!--affichage du nom du produit-->
-                                <p class="col-span-2"><?php echo htmlentities($valeurs['libelle_produit']);?></p> 
+                                <p class="col-span-2"><?php echo $valeurs['libelle_produit'];?></p> 
 
                                 <!--affichage du prix du produit-->   
                                 <div class="flex justify-start items-center col-span-2">
-                                    <p><?php echo htmlentities($valeurs['prix_ttc']);?> €</p>
+                                    <p><?php echo $valeurs['prix_ttc'];?> €</p>
 
                                     <!--récupération de la note-->
                                     <div class="w-2/4 ml-2 md:ml-10 flex">
