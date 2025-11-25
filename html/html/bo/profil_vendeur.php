@@ -3,8 +3,9 @@ session_start();
 include __DIR__ . "/../../01_premiere_connexion.php";
 include(__DIR__ . '/../../php/modification_variable.php');
 include(__DIR__ . '/../../php/verification_formulaire.php');
-$idCompte = $_SESSION["idCompte"];
-if ($_SESSION["role"] == "vendeur"){
+
+if (isset($_SESSION["role"]) && $_SESSION["role"] == "vendeur"){
+$idCompte = $_SESSION["idCompte"];  
 if (!isset($denom)) {
     $denom = "";
     $siren = "";
