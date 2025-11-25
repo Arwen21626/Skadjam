@@ -31,7 +31,7 @@
         </div>
         <div class="mt-30 flex flex-row justify-around mb-15">
             <button id="executerViderCatalogue" class="border-2 border-vertFonce rounded-2xl w-auto h-14 px-7 cursor-pointer">Oui</button>
-            <button class="border-2 border-vertFonce rounded-2xl w-auto h-14 px-7 cursor-pointer"><a href="../bo/index_vendeur.php">Non</a></button>
+            <a href="../bo/index_vendeur.php"><button class="border-2 border-vertFonce rounded-2xl w-auto h-14 px-7 cursor-pointer">Non</button></a>
         </div>
 
         <script>
