@@ -64,29 +64,31 @@ $mailer = new PHPMailer(true);
             }
         }else{
     ?>
-    <form class="flex flex-col p-15 pt-0 justify-around align-center" action="reinitialiser_mdp.php" method="post">
-        <div class="flex flex-col p-0 m-0 align-center self-center w-3/4">
-            <label>Adresse mail :</label>
-            <input class="border-4 border-vertClair rounded-2xl w-1/1 p-1 pl-3"  type="email" name='mail' id='mail'  required>
-            <!--
-            Si $_POST['mail'] est null, cela signifie qu'aucun n'à été envoyé.
-            Alors on affiche un texte expliquant qu'un e-mail sera envoyé à l'adresse qu'ils entrent et un bouton "Recevoir un mail"
-            Sinon
-            On affiche un texte expliquant qu'il y a eu un problème et le label du bouton est changé en "Rééssayer"
-            -->
-            <p class="mt-10">Si un compte à cette adresse existe, vous recevrez un mail contenant un lien pour la réinitialisation.</p>
-        </div>
-        <div class="flex mt-10 justify-center md:justify-end w-1/1">
-            <input class="border-2 border-vertClair rounded-2xl w-60 h-14 p-0 m-0 md:mr-10 cursor-pointer" type="submit" value="Recevoir un mail">
-        </div>
-        <?php
+    <main class="md:min-h-[800px] min-h-[600px]">
+        <form class="flex flex-col p-15 pt-0 justify-around align-center" action="reinitialiser_mdp.php" method="post">
+            <div class="flex flex-col p-0 m-0 align-center self-center w-3/4">
+                <label>Adresse mail :</label>
+                <input class="border-4 border-vertClair rounded-2xl w-1/1 p-1 pl-3"  type="email" name='mail' id='mail'  required>
+                <!--
+                Si $_POST['mail'] est null, cela signifie qu'aucun n'à été envoyé.
+                Alors on affiche un texte expliquant qu'un e-mail sera envoyé à l'adresse qu'ils entrent et un bouton "Recevoir un mail"
+                Sinon
+                On affiche un texte expliquant qu'il y a eu un problème et le label du bouton est changé en "Rééssayer"
+                -->
+                <p class="mt-10">Si un compte à cette adresse existe, vous recevrez un mail contenant un lien pour la réinitialisation.</p>
+            </div>
+            <div class="flex mt-10 justify-center md:justify-end w-1/1">
+                <input class="border-2 border-vertClair rounded-2xl w-60 h-14 p-0 m-0 md:mr-10 cursor-pointer" type="submit" value="Recevoir un mail">
+            </div>
+            <?php
+                }
+                $dbh = null;
+            }catch(PDOException $e){
+                print "Erreur : " . $e->getMessage();
             }
-            $dbh = null;
-        }catch(PDOException $e){
-            print "Erreur : " . $e->getMessage();
-        }
-        ?>
-    </form>
+            ?>
+        </form>
+    </main>
     <?php require __DIR__ . "/../../php/structure/footer_front.php"; ?>
 </body>
 </html>
