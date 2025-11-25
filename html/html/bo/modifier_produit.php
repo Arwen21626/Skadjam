@@ -86,7 +86,7 @@ if (isset($_POST['categorie']) && isset($_POST['nom']) && isset($_POST['prix']) 
         //Récupération attribut de photo
         $nom_photo_finale = explode('/',$urlPhoto)[3];
     }
-    echo $nom_photo_finale;
+    
     
 
 
