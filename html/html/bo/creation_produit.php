@@ -236,10 +236,7 @@ if (isset($_POST['categorie']) && isset($_POST['nom']) && isset($_POST['prix']) 
                 
                 <!-- Validation -->
                 <div class="col-start-1 col-span-2 row-start-6 flex flex-row justify-around m-4">
-                    <a href="../bo/index_vendeur.php">
-                        <button class="border-2 border-vertFonce rounded-2xl w-40 h-14 cursor-pointer">Retour</button>
-                    </a>
-                    
+                    <button class="border-2 border-vertFonce rounded-2xl w-40 h-14 cursor-pointer"><a href="../bo/index_vendeur.php">Retour</a></button>                    
                     <input class="border-2 border-vertFonce rounded-2xl w-40 h-14 cursor-pointer" type="submit" value="Valider">
                 </div>
             </form>
