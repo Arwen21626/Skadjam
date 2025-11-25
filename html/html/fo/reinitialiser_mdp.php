@@ -1,6 +1,6 @@
 <?php
 session_start();
-include_once __DIR__ . "/../../php/verif_role_fo.php";
+require_once __DIR__ . "/../../php/verif_role_fo.php";
 require_once __DIR__ . "/../../01_premiere_connexion.php";
 require __DIR__ . '/../../php/PHPMailer/src/PHPMailer.php';
 require __DIR__ . '/../../php/PHPMailer/src/SMTP.php';
