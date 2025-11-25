@@ -138,7 +138,7 @@ if (isset($_POST['categorie']) && isset($_POST['nom']) && isset($_POST['prix']) 
     //     echo ("Le prix ou la quantité saisi est incorrect ou la catégorie n'a pas été entré.");
     // }
 }
-else { ?>
+?>
 
 <!DOCTYPE html>
 <html lang="fr">
@@ -248,5 +248,3 @@ else { ?>
         <script src="../../js/bo/changement_image_produits.js"></script>
     </body>
 </html>
-
-<?php } ?>
