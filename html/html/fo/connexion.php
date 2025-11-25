@@ -1,6 +1,10 @@
 <?php
     session_start();
 
+    if ($_SESSION['role'] !== 'visiteur'){
+        header("location: /404.php");
+    }
+
     $erreur = false;
     include __DIR__ . '/../../01_premiere_connexion.php';
     if(isset($_POST['mdp']) && isset($_POST['mail'])){

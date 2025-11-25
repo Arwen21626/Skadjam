@@ -1,3 +1,8 @@
+<?php 
+    session_start();
+    require_once __DIR__ . "/../../php/verif_role_fo.php";
+?>
+
 <!DOCTYPE html>
 <html lang="fr">
 <head>
