@@ -113,19 +113,19 @@ if (isset($_POST['logout'])) {
             <div class="flex flex-col md:flex-row justify-around items-center mt-7 mb-15">
                 <!-- Modifier les informations du client (sauf le mot de passe) -->
                 <form action="modifier_compte_client.php" method="post">
-                    <input class="border-2 border-vertClair rounded-xl p-2 m-1 md:w-auto w-75" type="submit" value="Modifier mes informations">
+                    <input class="border-2 border-vertClair rounded-xl p-2 m-1 md:w-auto w-75 cursor-pointer" type="submit" value="Modifier mes informations">
                 </form>
 
                 <!-- Modifier le mot de passe du client -->
                 <form action="nouveau_mdp.php">
                     <?php $_SESSION['adresse_mail'] = $mail; ?>
-                    <input class="border-2 border-vertClair rounded-xl p-2 m-1 md:w-auto w-75" type="submit" value="Modifier mon mot de passe">    
+                    <input class="border-2 border-vertClair rounded-xl p-2 m-1 md:w-auto w-75 cursor-pointer" type="submit" value="Modifier mon mot de passe">    
                 </form>
 
                 <!-- Déconnexion -->
                 <form action="profil_client.php" method="post">
                     <input type="hidden" id="logout" name="logout" value="true">
-                    <input class="border-2 border-vertClair rounded-xl p-2 m-1 md:w-auto w-75" type="submit" value="Se déconnecter">
+                    <input class="border-2 border-vertClair rounded-xl p-2 m-1 md:w-auto w-75 cursor-pointer" type="submit" value="Se déconnecter">
                 </form>
             </div>
             <!--    Récupérer mes données

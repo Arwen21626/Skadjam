@@ -19,6 +19,12 @@ try{
     //Suppression dans _photo
     $dbh->query("DELETE FROM sae3_skadjam._photo WHERE id_photo = $idPhoto");
 
+    //Suppression dans _contient
+    $dbh->query("DELETE FROM sae3_skadjam._contient WHERE id_produit = $idProduit");
+
+    //Suppression dans _avis
+    $dbh->query("DELETE FROM sae3_skadjam._avis WHERE id_produit = $idProduit");
+
     //Suppression dans _produit
     $dbh->query("DELETE FROM sae3_skadjam._produit WHERE id_produit = $idProduit");
 }

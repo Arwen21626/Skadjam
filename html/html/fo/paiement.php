@@ -1,9 +1,63 @@
 <?php
 session_start();
-//echo $_SESSION['role'];
 if($_SESSION['role'] != 'client'){
-    echo 'Vous n\'avez pas accès, vous n\'êtes pas client';
-    //header('Location: ./404.php');
+    header('Location: ./404.php');
+}else{
+    include(__DIR__ . '/../../php/verification_formulaire.php');
+    include __DIR__ . '/../../01_premiere_connexion.php';
+    
+    // Initialisation des variables
+    $achatValide = false;
+    $erreurNumero = false;
+    $erreurExpiration = false;
+    $erreurCryptogramme = false;
+    $erreurNom = false;
+    $erreurCarteCadeau = false;
+    $erreurCodePromo = false;
+    $enregistrerCarte = false;
+    if(isset($_POST['numero'])){
+    // Initialisation des variables
+        
+
+        $numero = htmlentities($_POST['numero']);
+        $mois = htmlentities($_POST['mois']);
+        $annee = htmlentities($_POST['annee']);
+        $expiration = $mois . '/' . $annee;
+        $cryptogramme = htmlentities($_POST['cryptogramme']);
+        $nom = htmlentities($_POST['nom']);
+
+        if(isset($_POST['enregistrerCarte'])){
+            $enregistrerCarte = htmlentities($_POST['enregistrerCarte']);
+        }
+
+        if(isset($_POST['codePromo'])){
+            $codePromo = htmlentities($_POST['codePromo']);
+        }
+        
+        if(isset($_POST['carteCadeau'])){
+            $carteCadeau = htmlentities($_POST['carteCadeau']);
+        }
+
+        //echo $_POST['expiration']; // 22/25
+        if(!verifExpiration($expiration)){
+            $erreurExpiration = true;
+        }
+        if(!verifNomPrenom($nom)){
+            $erreurNom = true;
+        }
+        if(!verifNumCarte($numero)){
+            $erreurNumero = true;
+        }
+
+        if(isset($enregistrerCarte)){
+            if($enregistrerCarte == 'on'){
+                $idCompte = $_SESSION['idCompte'];
+                $nouvCarte = $dbh->prepare("INSERT INTO sae3_skadjam._carte_bancaire(numero_carte, cryptogramme, nom, expiration, id_client) VALUES($numero, $cryptogramme, '$nom', $expiration, $idCompte)");
+                $nouvCarte->execute();
+            }
+        }
+        $achatValide = true;
+    }
 }
 ?>
 
@@ -12,6 +66,7 @@ if($_SESSION['role'] != 'client'){
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <?php include(__DIR__ . '/../../php/structure/head_front.php');?>
     <title>Paiement</title>
     <style>
         button a:hover{
@@ -20,79 +75,93 @@ if($_SESSION['role'] != 'client'){
     </style>
 </head>
 <body>
-
-    <?php
-    // if(isset($_POST['numero'])){
-    //     // Initialisation des variables
-        $erreurNumero = true;
-        $erreurExpiration = true;
-        $erreurCryptogramme = true;
-        $erreurNom = true;
-
-
-    //     echo '<pre>';
-    //     print_r($_SESSION);
-    //     print_r($_POST);
-    //     echo '<pre>';
-    
-    // }
-    ?>
-
-
-
-    <?php include(__DIR__ . '/../../php/structure/head_front.php');?>
+    <?php include(__DIR__ . '/../../php/structure/header_front.php');?>
     <?php include(__DIR__ . '/../../php/structure/navbar_front.php');?>
-    <main>
-        <form class="w-1/5 justify-self-center" action="paiement.php" method="post">
+    <?php if(!$achatValide){?>
+        <main class="md:min-h-[800px] min-h-[600px]">
+            <form action="paiement.php" method="post">
 
-                <div class="flex flex-col">
-                    <label for="numero">Numéro de carte* :</label>
-                    <input placeholder="0000 1111 2222 3333" class="border-4 border-vertClair rounded-2xl placeholder-gray-500 w-100" type="text" name="numero" id="numero" required>
-                    <?php
-                        if($erreurNumero){ ?>
-                            <p class="text-rouge"><?php echo "Le numéro n'est pas bon";?></p>
-                    <?php } ?>
-                </div>
-                
-                <div class="flex flex-row">
-                    <div class="flex flex-col">
-                        <label for="expiration">Date d'expiration* :</label>
-                        <input placeholder="MM/AA" class="border-4 border-vertClair rounded-2xl placeholder-gray-500" type="month" name="expiration" id="expiration" required>
-                        
-                        <?php if($erreurExpiration){ ?>
-                            <p class="text-rouge"><?php echo "La date n'est pas bonne";?></p>
+                <div class="flex flex-col md:items-center items-start ml-5 md:ml-0">
+                    <div class="flex flex-col mb-5 mt-5">
+                        <label for="numero">Numéro de carte* :</label>
+                        <input placeholder="0000 1111 2222 3333" pattern="[0-9]{16}" value="<?= isset($_POST['numero'])? $numero : "" ?>" class="border-4 border-vertClair rounded-2xl placeholder-gray-500 md:w-100 w-75" type="text" name="numero" id="numero" required>
+                        <?php
+                            if($erreurNumero){ ?>
+                                <p class="text-rouge"><?php echo "Le numéro n'est pas bon";?></p>
                         <?php } ?>
                     </div>
                     
-
-                    <div class="flex flex-col ml-7">
-                        <label for="cryptogramme">Cryptogramme* :</label>
-                        <input placeholder="000" class="border-4 border-vertClair rounded-2xl placeholder-gray-500" type="text" name="cryptogramme" id="cryptogramme" required>
+                    <div class="flex flex-col mb-5">
+                        <div class="flex flex-col w-100">
+                            <label for="expiration">Date d'expiration* :</label>
+                            <p class="flex flex-row">
+                                <input placeholder="MM" value="<?= isset($_POST['mois'])? $mois : "" ?>" maxlength="2" pattern="0[1-9]|1[0-2]" class="border-4 border-vertClair rounded-2xl placeholder-gray-500 w-15" type="text" name="mois" id="mois" required>
+                                /
+                                <input placeholder="AA" value="<?= isset($_POST['annee'])? $annee : "" ?>" maxlength="2" class="border-4 border-vertClair rounded-2xl placeholder-gray-500 w-15" type="text" name="annee" id="annee" required>
+                            </p>
+                            <?php if($erreurExpiration){ ?>
+                                <p class="text-rouge"><?php echo "La date n'est pas bonne";?></p>
+                            <?php } ?>
+                        </div>
                         
-                        <?php if($erreurCryptogramme){ ?>
-                            <p class="text-rouge"><?php echo "Le cryptogramme n'est pas bon";?></p>
+        
+                        <div class="flex flex-col mt-5">
+                            <label for="cryptogramme">Cryptogramme* :</label>
+                            <input placeholder="000" pattern="[0-9]{3}" value="<?= isset($_POST['cryptogramme'])? $cryptogramme : "" ?>" class="border-4 border-vertClair rounded-2xl placeholder-gray-500 w-50" type="text" name="cryptogramme" id="cryptogramme" required>
+                            
+                            <?php if($erreurCryptogramme){ ?>
+                                <p class="text-rouge"><?php echo "Le cryptogramme n'est pas bon";?></p>
+                            <?php } ?>
+                        </div>
+                    </div>
+                    <div class="flex flex-col mb-5">
+                        <label for="nom">Nom du titulaire* :</label>
+                        <input placeholder="M Alizon" value="<?= isset($_POST['nom'])? $nom : "" ?>" class="border-4 border-vertClair rounded-2xl placeholder-gray-500 md:w-100 w-75 ml-0" type="text" name="nom" id="nom" required>
+                        
+                        <?php if($erreurNom){ ?>
+                                <p class="text-rouge"><?php echo "Le nom n'est pas bon";?></p>
                         <?php } ?>
                     </div>
+                    <div class="md:w-100 md:ml-5 ml-0">
+                        <label for="enregistrerCarte">Enregistrer cette carte pour les prochains paiements?</label>
+                        <input type="checkbox" name="enregistrerCarte" id="enregistrerCarte">
+                    </div>
+        
+                    <!-- <div class="flex flex-row mb-5">
+                        <div class="flex flex-col">
+                            <label for="codePromo">Code promotionnel :</label>
+                            <input placeholder="" value="<?= isset($_POST['codePromo'])? $codePromo : "" ?>" class="border-4 border-vertClair rounded-2xl placeholder-gray-500 w-50" type="text" name="codePromo" id="codePromo">
+                            
+                            <?php if($erreurCodePromo){ ?>
+                                <p class="text-rouge"><?php echo "Le code promo n'est pas bon";?></p>
+                            <?php } ?>
+                        </div>
+            
+                        <div class="flex flex-col ml-6">
+                            <label for="carteCadeau">Code carte cadeau :</label>
+                            <input placeholder="" value="<?= isset($_POST['carteCadeau'])? $carteCadeau : "" ?>" class="border-4 border-vertClair rounded-2xl placeholder-gray-500 w-50" type="text" name="carteCadeau" id="carteCadeau">
+                            
+                            <?php if($erreurCarteCadeau){ ?>
+                                <p class="text-rouge"><?php echo "La carte cadeau n'est pas valide";?></p>
+                            <?php } ?>
+                        </div>
+                    </div> -->
                 </div>
 
-                <div class="flex flex-col">
-                    <label for="nom">Nom du titulaire* :</label>
-                    <input placeholder="M Alizon" class="border-4 border-vertClair rounded-2xl placeholder-gray-500 w-100" type="text" name="nom" id="nom" required>
-                    
-                    <?php if($erreurNom){ ?>
-                            <p class="text-rouge"><?php echo "Le nom n'est pas bon";?></p>
-                    <?php } ?>
+                <div class="flex flex-row justify-center">
+                    <a href="../../index.php"><button class="border-vertClair border-2 rounded-2xl w-40 h-14 cursor-pointer m-5">Retour</button></a>
+                    <input class="border-vertClair border-2 rounded-2xl w-40 h-14 cursor-pointer m-5" type="submit" value="Suivant">
                 </div>
-
-            <label for="enregistrerCarte">Enregistrer cette carte pour les prochains paiements?</label>
-            <input type="checkbox" name="enregistrerCarte" id="enregistrerCarte">
-
-            <div class="flex flex-row">
-                <button class="border-vertClair border-2 rounded-2xl w-40 h-14"><a href="">Retour</a></button>
-                <input class="border-vertClair border-2 rounded-2xl w-40 h-14" type="submit" value="Suivant">
+            </form>
+        </main>
+    <?php }else{ ?>
+        <main class="text-center min-h-[500px]">
+            <div class="mt-30">
+                <H1 class="">Votre achat à bien été validé</h1>
+                <a href="../../index.php"><button class="border-vertClair border-2 rounded-2xl w-40 h-14 cursor-pointer m-7">Retour à l'acceuil</button></a>
             </div>
-        </form>
-    </main>
+        </main>
+    <?php }?>
     <?php include(__DIR__ . '/../../php/structure/footer_front.php');?>
 </body>
 </html>
