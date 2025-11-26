@@ -72,7 +72,7 @@
     <?php include(__DIR__ . '/../../php/structure/navbar_front.php');?>
     <main class="flex flex-col justify-center">
         <h2>Adresse de livraison</h2>
-        <form class="flex flex-col self-center" action="adresse.php" method="post">
+        <form class="flex flex-col self-center" method="post">
             
             <div class="flex flex-row justify-between">
                 <div class="flex flex-col max-w-70">
