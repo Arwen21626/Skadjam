@@ -156,8 +156,6 @@
                 <button class="border-vertClair border-2 rounded-2xl w-40 h-14"><a href="/html/fo/panier.php">Retour</a></button>
                 <input class="border-vertClair border-2 rounded-2xl w-40 h-14" type="submit" value="Suivant">
             </div>
-            
-
         </form>
     </main>
     <?php include(__DIR__ . '/../../php/structure/footer_front.php');?>

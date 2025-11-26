@@ -166,7 +166,7 @@ if($_SESSION['role'] != 'client'){
                     </div> -->
                 </div>
                 <div class="flex flex-row justify-center">
-                    <button class="border-vertClair border-2 rounded-2xl w-40 h-14 cursor-pointer m-5"><a href="../../index.php">Retour</a></button>
+                    <button class="border-vertClair border-2 rounded-2xl w-40 h-14 cursor-pointer m-5"><a href="../fo/adresse.php">Retour</a></button>
                     <input class="border-vertClair border-2 rounded-2xl w-40 h-14 cursor-pointer m-5" type="submit" value="Suivant">
                 </div>
             </form>
@@ -174,7 +174,7 @@ if($_SESSION['role'] != 'client'){
     <?php }else{ ?>
         <main class="text-center min-h-[500px]">
             <div class="mt-30">
-                <H1 class="">Votre achat a bien été validé</h1>
+                <h1 class="">Votre achat a bien été validé</h1>
                 <a href="../../index.php"><button class="border-vertClair border-2 rounded-2xl w-40 h-14 cursor-pointer m-7">Retour à l'accueil</button></a>
             </div>
         </main>
