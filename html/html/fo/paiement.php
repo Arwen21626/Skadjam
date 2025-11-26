@@ -172,7 +172,7 @@ if($_SESSION['role'] != 'client'){
         <main class="text-center min-h-[500px]">
             <div class="mt-30">
                 <H1 class="">Votre achat à bien été validé</h1>
-                <a href="../../index.php"><button class="border-vertClair border-2 rounded-2xl w-40 h-14 cursor-pointer m-7">Retour à l'acceuil</button></a>
+                <a href="../../index.php"><button class="border-vertClair border-2 rounded-2xl w-40 h-14 cursor-pointer m-7">Retour à l'accueil</button></a>
             </div>
         </main>
     <?php }?>
