@@ -1,6 +1,6 @@
 <?php
     session_start();
-    include_once(__DIR__ . "/php/verif_role_fo.php");
+    //include_once(__DIR__ . "/php/verif_role_fo.php");
 ?>
 
 <!DOCTYPE html>
