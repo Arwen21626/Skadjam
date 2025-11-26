@@ -89,9 +89,12 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         $newTel = $_POST['tel'];
         $newMail = $_POST['mail'];
         $newAdresse = modifierSiegeSocial($_POST['adresse']);
-        $newVille = $newAdresse['ville'];
-        $newCp = $newAdresse['cp'];
-        $newAdresse = $newAdresse['adresse'];
+        if ($newAdresse != -1){
+            $newVille = $newAdresse['ville'];
+            $newCp = $newAdresse['cp'];
+            $newAdresse = $newAdresse['adresse'];
+        }
+
         $image = $_FILES['image'];
         $imageSupprimee = ($_POST['imageSupprimee']==="true")? true : false ; // 'true' ou 'false'
      
