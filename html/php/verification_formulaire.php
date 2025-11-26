@@ -161,7 +161,7 @@ function verifAge($naissance){
 
 function verifCp($cp){
     // verifie le format du code postale
-    return (01000<$cp && $cp<99999);
+    return (01000<$cp && $cp<99999 && preg_match("/^[0-9]{5}$/", $cp));
 }
 
 function verifVille($ville){
