@@ -1,8 +1,10 @@
 <?php
-include("../01_premiere_connexion.php");
-include("../../php/verification_formulaire.php");
-include("../../php/modification_variable.php");
+session_start();
+include __DIR__ . '/../../01_premiere_connexion.php';
+include(__DIR__ . '/../../php/modification_variable.php');
+include(__DIR__ . '/../../php/verification_formulaire.php');
 
+if (!isset($_SESSION["role"]) || $_SESSION["role"]!=="vendeur"){
 /* initialiser toutes les variables avant l'affichage de la page */
     
     $nom = '';
@@ -13,6 +15,10 @@ include("../../php/modification_variable.php");
     $raisonSociale = '';
     $iban = 'FR';
     $adresse = '';
+    $ville = '';
+    $cp = '';
+    $numero = '';
+    $compNum = '';
     $siren = '';
     $mdp = '';
     $verif = '';
@@ -22,70 +28,102 @@ include("../../php/modification_variable.php");
 if (isset($_POST["nom"])){
   
     //récuperer les attributs du post
-    $nom = $_POST["nom"]; //verif
-    $prenom = format_prenom($_POST["prenom"]);//verif
-    $mail = $_POST["mail"]; //verif
-    $tel = $_POST["tel"]; //verif
-    $denomination = $_POST["denomination"];//verif
-    $raisonSociale = $_POST["raisonSociale"];//verif
-    $iban = $_POST["iban"];//verif
+    $nom = $_POST["nom"]; 
+    $prenom = formatPrenom($_POST["prenom"]);   
+    $mail = $_POST["mail"];                     
+    $tel = $_POST["tel"];                       
+    $denomination = $_POST["denomination"];     
+    $raisonSociale = $_POST["raisonSociale"];   
+    $iban = $_POST["iban"];                     
     $adresse = $_POST["adresse"];
-    $siren = $_POST["siren"];//verif
-    $mdp = $_POST["mdp"];//verif
-    $verif = $_POST["verif"];//verif
+    $ville = $_POST["ville"];
+    $cp = $_POST["cp"];
+    $siren = $_POST["siren"];                   
+    $mdp = $_POST["mdp"];                       
+    $verif = $_POST["verif"];                   
 
     /* enregistrer toutes les erreurs */
 
     /* NOM */
-    if (!verifNomPrenom($nom)) $erreurs["nom"] = "lettre majuscule ou minuscule seulement";
+    if (!verifNomPrenom($nom)) $erreurs["nom"] = "Lettre majuscule ou minuscule seulement";
 
     /* PRENOM */
-    if (!verifNomPrenom($prenom)) $erreurs["prenom"] = "lettre majuscule ou minuscule seulement";
+    if (!verifNomPrenom($prenom)) $erreurs["prenom"] = "Lettre majuscule ou minuscule seulement";
 
     /* MAIL */
-    if (!verifMail($mail)) $erreurs["mail"] = "format incorrecte";
-    if (!mailUnique($mail)) $erreurs["unique"] = "un utilisateur avec cette e-mail existe deja : $mail";
+    if (!verifMail($mail)) $erreurs["mail"] = "Format incorrecte";
+    if (!mailUnique($mail)) $erreurs["unique"] = "Un utilisateur avec cette e-mail existe deja : $mail";
 
     /* TEL */
-    if (!verifTelephone(format_tel($tel))) $erreurs["tel"] = "numéro à 10 chiffres";
+    if (!verifTelephone($tel)) $erreurs["tel"] = "Numéro à 10 chiffres";
 
     /* DENOMINATION */
-    if (!verifDenomination($denomination)) $erreurs["denomination"] = "autorisé majuscules, minuscules et chiffres";
+    if (!verifDenomination($denomination)) $erreurs["denomination"] = "Autorisé majuscules, minuscules et chiffres";
 
     /* RS */
-    if (!verifDenomination($raisonSociale)) $erreurs["raisonSociale"] = "autorisé majuscules, minuscules et chiffres";
+    if (!verifDenomination($raisonSociale)) $erreurs["raisonSociale"] = "Autorisé majuscules, minuscules et chiffres";
 
     /* IBAN */
-    if (!verifieIban($iban)) $erreurs["iban"] = "numéro IBAN invalide";
+    if (!verifIban($iban)) $erreurs["iban"] = "Numéro IBAN invalide";
 
     /* MDP */
-    if (!verifMotDePasse($mdp)) $erreurs["mdp"] = "doit inclure tous les éléments si dessous";
-    if (!confirmationMotDePasse($verif, $mdp)) $erreurs["conf"] = "le mot de passe est différent";
+    if (!verifMotDePasse($mdp)) $erreurs["mdp"] = "Doit inclure tous les éléments si dessous";
+    if (!confirmationMotDePasse($verif, $mdp)) $erreurs["conf"] = "Le mot de passe est différent";
 
     /* SIREN */
-    if (!verifSiren($siren)) $erreurs["siren"] = "numéro SIREN invalide";
+    if (!verifSiren($siren)) $erreurs["siren"] = "Numéro SIREN invalide";
 
+    /* ##### ADRESSE ##### */
+    if (!verifCp($cp)) $erreurs["cp"] = "Code postale invalide";
+
+    if (!verifVille($ville)) $erreurs["ville"] = "Format ville incorrect";
+
+    if (!verifAdresse($adresse)) $erreurs["adresse"] = "Format de l'adresse invalide";
+    
+    $temp = tabAdresse($adresse);
+    $numero = $temp[0];
+    $compNum = $temp[1];
+    $adresse = $temp[2];
 
     /* s'il n'y a pas d'erreur faire la requete */
     if (empty($erreurs)){
         try{
-            $id = null;
+            $dbh->beginTransaction();
+
+            $idCompte = null;
             //preparer la requete sql pour inserer dans le compte
-            $stmt = $dbh->prepare("INSERT INTO sae3_skadjam._compte (nom_compte, prenom_compte, adresse_mail, motDePasse, numero_telephone, bloque) VALUES (?,?,?,?,?, false) RETURNING id_compte");
+            $stmt = $dbh->prepare("INSERT INTO sae3_skadjam._compte (nom_compte, prenom_compte, adresse_mail, mot_de_passe, numero_telephone, bloque) VALUES (?,?,?,?,?, false) RETURNING id_compte");
             //excuter la requete sql avec les attributs
-            $stmt->execute([$nom, $prenom,$mail, password_hash($mdp, PASSWORD_DEFAULT),format_tel($tel) ]);
+            $stmt->execute([$nom, $prenom,$mail, password_hash($mdp, PASSWORD_DEFAULT),formatTel($tel) ]);
             
             //recuperer l'id du compte associé au vendeur
-            $id = $stmt->fetchColumn();
+            $idCompte = $stmt->fetchColumn();
 
             //preparer la requete sql pour inserer dans vendeur
             $stmt = $dbh->prepare("INSERT INTO sae3_skadjam._vendeur (id_compte, raison_sociale, siren, iban, denomination) VALUES (?,?,?,?,?)");
-            $stmt->execute([$id,$raisonSociale, (int)$siren, $iban, $denomination]);
+            $stmt->execute([$idCompte,$raisonSociale, (int)$siren, $iban, $denomination]);
 
+            //preparer la requete pour inserer dans adresse et recuperer l'id
+            $stmt = $dbh->prepare("INSERT INTO sae3_skadjam._adresse (adresse_postale, complement_adresse, numero_rue, code_postal, ville) VALUES (?,?,?,?,?) RETURNING id_adresse");
+            $stmt->execute([$adresse, $compNum, $numero, $cp, $ville]);
+            $idAdresse = $stmt->fetchColumn();
+
+            //inserer dans habite pour lier le compte a l'adresse
+            $stmt = $dbh->prepare("INSERT INTO sae3_skadjam._habite (id_adresse,id_compte) VALUES (?,?)");
+            $stmt->execute([$idAdresse, $idCompte]);
+            $_SESSION["idCompte"] = $idCompte;
+            $_SESSION["role"] = "vendeur";
+
+            $dbh->commit();
+                                            
+            header("Location: index_vendeur.php");
+            
         } catch (PDOException $e) {
             print "Erreur !: " . $e->getMessage() . "<br/>";
             die();
         }
+    }else{
+        header("Location: crea_compte_vendeur.php");
     }
     
     
@@ -93,107 +131,139 @@ if (isset($_POST["nom"])){
 ?>
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
+<?php require_once __DIR__ . "/../../php/structure/head_front.php"?>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../css/style_form_creation_vendeur.css">
-    <link rel="stylesheet" href="../css/general_back.css">
     <title>Créer un compte vendeur</title>
 </head>
-<body>
-    <main>
-        <h2>Inscription Vendeur</h2>
-        <form method="POST">
+<body class=" @container">
+    <?php 
+    require_once __DIR__ . "/../../php/structure/header_front.php";
+    require_once __DIR__ . "/../../php/structure/navbar_front.php";
+    ?>
+    <main class=" flex flex-col items-center">
+        <h2 class="m-8">Inscription Vendeur</h2>
+        <form method="POST" class=" w-2/3 @max-[768px]:w-7/8">
 
             <h3 class="underline">Informations vendeur :</h3>
-            <div class="zone-form ">
+            <div class="flex flex-row flex-wrap justify-between ml-10 mb-7 mr-10 @max-[768px]:ml-5 @max-[768px]:mr-5">
                 <!-- à la validation du formulaire, s'il y a des erreurs, les informations valides resteront saisies -->
-                <div class="case-form">
+                <div class="flex flex-col items-start mt-6 w-fit @max-[768px]:mt-2">
                     <label for="nom">Nom * :</label>
-                    <input type="text" id="nom" name="nom" value="<?= (!isset($erreurs["nom"])) ? $nom : '' ?>" size="25" required>
+                    <input class="ml-5 border-4 border-solid rounded-2xl border-beige p-1 pl-3 mb-4 @max-[768px]:ml-2 max-w-3/4 @max-[768px]:pl-2" type="text" id="nom" name="nom" value="<?= (!isset($erreurs["nom"])) ? $nom : '' ?>" size="25" required >
                     <!-- s'il y a une erreur elle sera affiché sous la cellule -->
-                    <?php echo (isset($erreurs["nom"])) ? "<p class=\"erreur\">" . $erreurs["nom"] . " </p>" : '' ?>
+                    <?php echo (isset($erreurs["nom"])) ? "<p class=\"text-rouge\">" . $erreurs["nom"] . " </p>" : '' ?>
                 </div>
-                <div class="case-form">
+                <div class="flex flex-col items-start mt-6 w-fit @max-[768px]:mt-2">
                     <label for="prenom">Prénom * :</label>
-                    <input type="text" id="prenom" name="prenom" value="<?= (!isset($erreurs["prenom"])) ? $prenom : '' ?>" size="25" required>
+                    <input class="ml-5 border-4 border-solid rounded-2xl border-beige p-1 pl-3 mb-4 @max-[768px]:ml-2 max-w-3/4 @max-[768px]:pl-2 " type="text" id="prenom" name="prenom" value="<?= (!isset($erreurs["prenom"])) ? $prenom : '' ?>" size="25" required>
                     <!-- s'il y a une erreur elle sera affiché sous la cellule -->
-                    <?php echo (isset($erreurs["prenom"])) ? "<p class=\"erreur\">" . $erreurs["prenom"] . " </p>" : '' ?>
+                    <?php echo (isset($erreurs["prenom"])) ? "<p class=\"text-rouge\">" . $erreurs["prenom"] . " </p>" : '' ?>
                 </div>
-                <div class="case-form">
+                <div class="flex flex-col items-start mt-6 w-fit @max-[768px]:mt-2">
                     <label for="mail">Mail * :</label>
-                    <input type="email" id="mail" name="mail" value="<?= (!(isset($erreurs["mail"]) || isset($erreurs["unique"]))) ? $mail : ''  ?>" size="40" required>
+                    <input class="ml-5 border-4 border-solid rounded-2xl border-beige p-1 pl-3 mb-4 @max-[768px]:ml-2 max-w-3/4 @max-[768px]:pl-2 " type="email" id="mail" name="mail" <?= (!(isset($erreurs["mail"]) || isset($erreurs["unique"]))) ? "value=\"$mail\"" : ''  ?> size="40" required>
                     <!-- s'il y a une erreur elle sera affiché sous la cellule -->
-                    <?php echo (isset($erreurs["mail"])) ? "<p class=\"erreur\">" . $erreurs["mail"] . " </p>" : '' ?>
-                    <?php echo (isset($erreurs["unique"])) ? "<p class=\"erreur\">" . $erreurs["unique"] . " </p>" : '' ?>
+                    <?php echo (isset($erreurs["mail"])) ? "<p class=\"text-rouge\">" . $erreurs["mail"] . " </p>" : '' ?>
+                    <?php echo (isset($erreurs["unique"])) ? "<p class=\"text-rouge\">" . $erreurs["unique"] . " </p>" : '' ?>
                 </div>
-                <div class="case-form">
+                <div class="flex flex-col items-start mt-6 w-fit @max-[768px]:mt-2">
                     <label for="tel">Numéro de téléphone * :</label>
-                    <input type="tel" id="tel" name="tel" value="<?= (!isset($erreurs["tel"]))?$tel:''?>" size="25" required>
+                    <input class="ml-5 border-4 border-solid rounded-2xl border-beige p-1 pl-3 mb-4 @max-[768px]:ml-2 max-w-3/4 @max-[768px]:pl-2 " type="tel" id="tel" name="tel" value="<?= (!isset($erreurs["tel"]))?$tel:''?>" size="16" required>
                     <!-- s'il y a une erreur elle sera affiché sous la cellule -->
-                    <?php echo (isset($erreurs["tel"])) ? "<p class=\"erreur\">" . $erreurs["tel"] . " </p>" : '' ?>
+                    <?php echo (isset($erreurs["tel"])) ? "<p class=\"text-rouge\">" . $erreurs["tel"] . " </p>" : '' ?>
                 </div>
             </div>
 
             <h3 class="underline">Informations entreprise :</h3>
-            <div class="zone-form">
-                <div class="case-form">
+            <div class="flex flex-row flex-wrap justify-between ml-10 mb-7 mr-10">
+                <div class="flex flex-col items-start mt-6 w-fit @max-[768px]:mt-2">
                     <label for="raisonSociale">Raison sociale de l'entreprise * :</label>
-                    <input type="text" id="raisonSociale" name="raisonSociale" value="<?= (!isset($erreurs["raisonSociale"]))? $raisonSociale: ''?>" size="40" required>
-                    <?php echo (isset($erreurs["raisonSociale"])) ? "<p class=\"erreur\">" . $erreurs["raisonSociale"] . " </p>" : '' ?>
+                    <input class="ml-5 border-4 border-solid rounded-2xl border-beige p-1 pl-3 mb-4 @max-[768px]:ml-2 max-w-3/4 @max-[768px]:pl-2 " type="text" id="raisonSociale" name="raisonSociale" value="<?= (!isset($erreurs["raisonSociale"]))? $raisonSociale: ''?>" size="40" required>
+                    <?php echo (isset($erreurs["raisonSociale"])) ? "<p class=\"text-rouge\">" . $erreurs["raisonSociale"] . " </p>" : '' ?>
                 </div>
-                <div class="case-form">
+                <div class="flex flex-col items-start mt-6 w-fit @max-[768px]:mt-2">
                     <label for="denomination">Nom de l'entreprise * :</label>
-                    <input type="text" id="denomination" name="denomination" value="<?= (!isset($erreurs["denomination"]))? $denomination: ''?>" size="40" required>
-                    <?php echo (isset($erreurs["denomination"])) ? "<p class=\"erreur\">" . $erreurs["denomination"] . " </p>" : '' ?>
-                </div>
-                <div class="case-form">
-                    <label for="adresse">Adresse du siège social * :</label>
-                    <input type="text" id="adresse" name="adresse" value="<?= $_POST["adresse"] ?? ''?>" size="40" required>
-                </div>
-                <div class="case-form">
+                    <input class="ml-5 border-4 border-solid rounded-2xl border-beige p-1 pl-3 mb-4 @max-[768px]:ml-2 max-w-3/4 @max-[768px]:pl-2 " type="text" id="denomination" name="denomination" value="<?= (!isset($erreurs["denomination"]))? $denomination: ''?>" size="40" required>
+                    <?php echo (isset($erreurs["denomination"])) ? "<p class=\"text-rouge\">" . $erreurs["denomination"] . " </p>" : '' ?>
+                </div> 
+                <div class="flex flex-col items-start mt-6 w-fit @max-[768px]:mt-2">
                     <label for="siren">Numéro de SIREN * :</label>
-                    <input type="text" id="siren" name="siren" value="<?= (!isset($erreurs["siren"]))?$siren: ''?>" size="25" required>
-                    <?php echo (isset($erreurs["siren"])) ? "<p class=\"erreur\">" . $erreurs["siren"] . " </p>" : '' ?>
+                    <input class="ml-5 border-4 border-solid rounded-2xl border-beige p-1 pl-3 mb-4 @max-[768px]:ml-2 max-w-3/4 @max-[768px]:pl-2 " type="text" id="siren" name="siren" value="<?= (!isset($erreurs["siren"]))?$siren: ''?>" size="11" required>
+                    <?php echo (isset($erreurs["siren"])) ? "<p class=\"text-rouge\">" . $erreurs["siren"] . " </p>" : '' ?>
                 </div>
-                <div class="case-form">
+                <div class="flex flex-col items-start mt-6 w-fit @max-[768px]:mt-2">
                     <label for="iban">Numéro de IBAN * :</label>
-                    <input type="text" id="iban" name="iban" value="<?= (!isset($erreurs["iban"]))?$iban: 'FR'?>" placeholder="FR" size="30" required>
-                    <?php echo (isset($erreurs["iban"])) ? "<p class=\"erreur\">" . $erreurs["iban"] . " </p>" : '' ?>
+                    <input class="ml-5 border-4 border-solid rounded-2xl border-beige p-1 pl-3 mb-4 @max-[768px]:ml-2 max-w-3/4 @max-[768px]:pl-2 " type="text" id="iban" name="iban" value="<?= (!isset($erreurs["iban"]))?$iban: 'FR'?>" placeholder="FR" size="40" required>
+                    <?php echo (isset($erreurs["iban"])) ? "<p class=\"text-rouge\">" . $erreurs["iban"] . " </p>" : '' ?>
                 </div>
+            </div>
+
+            <!-- ########## ADRESSE ########## -->
+            <h3 class="underline">Siège social :</h3>
+            <div class="flex flex-row flex-wrap justify-between ml-10 mb-7 mr-10">
+                <div class="flex flex-col items-start mt-6 w-fit @max-[768px]:mt-2">
+                    <label for="adresse">Adresse * :</label>
+                    <input class="ml-5 border-4 border-solid rounded-2xl border-beige p-1 pl-3 mb-4 @max-[768px]:ml-2 max-w-3/4 @max-[768px]:pl-2 " type="text" id="adresse" name="adresse" value="<?= $_POST["adresse"] ?? ''?>" size="60" placeholder="ex : 3 rue des camélias" required>
+                    <?php echo (isset($erreurs["adresse"])) ? "<p class=\"text-rouge\">" . $erreurs["adresse"] . " </p>" : '' ?>
+                </div>
+                <div class="flex flex-col items-start mt-6 w-fit @max-[768px]:mt-2">
+                    <label for="ville">Ville * :</label>
+                    <input class="ml-5 border-4 border-solid rounded-2xl border-beige p-1 pl-3 mb-4 @max-[768px]:ml-2 max-w-3/4 @max-[768px]:pl-2 " type="text" id="ville" name="ville" value="<?= $_POST["ville"] ?? ''?>" size="30" required>
+                    <?php echo (isset($erreurs["ville"])) ? "<p class=\"text-rouge\">" . $erreurs["ville"] . " </p>" : '' ?>
+                </div>
+                <div class="flex flex-col items-start mt-6 w-fit @max-[768px]:mt-2">
+                    <label for="cp">Code Postal * :</label>
+                    <input class="ml-5 border-4 border-solid rounded-2xl border-beige p-1 pl-3 mb-4 @max-[768px]:ml-2 max-w-3/4 @max-[768px]:pl-2 " type="text" id="cp" name="cp" value="<?= $_POST["cp"] ?? ''?>" size="10" required>
+                    <?php echo (isset($erreurs["cp"])) ? "<p class=\"text-rouge\">" . $erreurs["cp"] . " </p>" : '' ?>
+                </div>
+                
             </div>
 
             <h3 class="underline">Mot de passe :</h3>
-            <div class="zone-form">
-                <div class="case-form">
+            <div class="flex flex-row flex-wrap justify-between ml-10 mb-7 mr-10">
+                <div class="flex flex-col items-start mt-6 w-fit @max-[768px]:mt-2">
                     <label for="mdp">Mot de passe * :</label>
-                    <input type="password" id="mdp" name="mdp" value="<?= (!isset($erreurs["mdp"]) && isset($_POST["mdp"])) ? $_POST["mdp"] : ''?>" size="30" required>
-                    <?php echo (isset($erreurs["mdp"])) ? "<p class=\"erreur\">" . $erreurs["mdp"] . " </p>" : '' ?>
+                    <div class="zone-mdp flex flex-row items-center mb-4">
+                        <input class="champ-mdp ml-5 border-4 border-solid rounded-2xl border-beige p-1 pl-3 @max-[768px]:ml-2 max-w-3/4 @max-[768px]:pl-2 " type="password" id="mdp" name="mdp" value="<?= (!isset($erreurs["mdp"]) && isset($_POST["mdp"])) ? $_POST["mdp"] : ''?>" size="50" required>
+                        <?php include __DIR__ . "/../../php/structure/bouton_mdp.php" ?>
+                    </div>
+                    <?php echo (isset($erreurs["mdp"])) ? "<p class=\"text-rouge\">" . $erreurs["mdp"] . " </p>" : '' ?>
                     <!-- s'il y a une erreur elle sera affiché sous la cellule -->
                     <p>1 majuscule, 1 minuscule, 1 chiffre, 1 caractère spécial, 10 caractères minimum</p>
                 </div>
-                <div class="case-form">
+                <div class="flex flex-col items-start mt-6 w-fit @max-[768px]:mt-2">
                     <label for="verif">Vérification du mot de passe * :</label>
-                    <input type="password" id="verif" name="verif" value="<?= (!(isset($erreurs["conf"]) || isset($erreurs["mdp"])) && isset($_POST["verif"])) ? $_POST["verif"] : ''?>" size="30" required>
+                    <div class="zone-mdp flex flex-row items-center mb-4">
+                        <input class="champ-mdp ml-5 border-4 border-solid rounded-2xl border-beige p-1 pl-3 @max-[768px]:ml-2 max-w-3/4 @max-[768px]:pl-2 " type="password" id="verif" name="verif" value="<?= (!(isset($erreurs["conf"]) || isset($erreurs["mdp"])) && isset($_POST["verif"])) ? $_POST["verif"] : ''?>" size="50" required>
+                        <?php include __DIR__ . "/../../php/structure/bouton_mdp.php" ?>
+                    </div>
                     <!-- s'il y a une erreur elle sera affiché sous la cellule -->
-                    <?php echo (isset($erreurs["conf"])) ? "<p class=\"erreur\">" . $erreurs["conf"] . " </p>" : '' ?>
+                    <?php echo (isset($erreurs["conf"])) ? "<p class=\"text-rouge\">" . $erreurs["conf"] . " </p>" : '' ?>
                 </div>
             </div>
 
-            <div class="inline milieu left">
-                <label for="cgu" class="underline">J'ai lu et j'acccepte les conditions générales d'utilisation :</label>
-                <input type="checkbox" required>
+            <div class="flex flex-row flex-wrap items-center mt-2 mb-2">
+                <label for="cgu" class="underline! cursor-pointer hover:text-rouge">J'ai lu et j'acccepte les conditions générales d'utilisation :</label>
+                <input type="checkbox" id="cgu" name="cgu" required class="ml-10 w-5 h-5 @max-[768px]:ml-2 mt-3">
             </div>
-            <div class="buttons-form">
-                <input type="reset" value="Annuler">
-                <input type="submit" value="Valider">
+            <div class="flex flex-row justify-around mt-8 mb-8 @max-[768px]:flex-col @max-[768px]:items-center">
+                <input type="reset" value="Annuler" class="cursor-pointer w-64 border-4 border-solid rounded-2xl border-beige p-1 pl-3">
+                <input type="submit" value="Valider" class="cursor-pointer w-64 border-4 border-solid rounded-2xl border-beige p-1 pl-3 @max-[768px]:mt-2">
             </div>
         </form>
-        <div class="inline center milieu">
-            <p>Vous avez déjà un compte ?</p>
-            <a href="connexion_vendeur" class="underline" >Connectez vous</a>
+        <div class="flex flex-row flex-wrap justify-center m-2">
+            <p class=" mr-2">Vous avez déjà un compte ? </p>
+            <a href="/html/fo/connexion.php" class="underline! hover:text-rouge" >Connectez vous</a>
         </div>
     </main>
+    <?php require_once __DIR__ . "/../../php/structure/footer_front.php" ?>
 </body>
+<script src="../../js/bo/visibilite_mdp.js"></script>
 </html>
+<?php
+} else {
+    header("Location: index_vendeur.php");
+}
+
+?>

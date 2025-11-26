@@ -1,9 +1,9 @@
 <?php
-include("../01_premiere_connexion.php");
+include __DIR__ . "/../01_premiere_connexion.php";
 
 function verifNomPrenom($nom){
     // Vérification que soit un prénom soit un nom soyent au bon format
-    if (strlen($nom) > 100 || !preg_match("/^[A-Za-z -]+$/", $nom)){
+    if (strlen($nom) > 100 || !preg_match("/^[A-Za-zéçèëêàïîäâùüûöô -]+$/", $nom)){
         return false;
     }
     else{
@@ -23,7 +23,7 @@ function verifTelephone($tel){
 
 function verifMail($mail){
     // Vérification que la format de l'email soit correcte
-    if (strlen($mail) > 150 || !preg_match("/^[A-Za-z0-9.]+@[A-Za-z]+.[A-Za-z]+$/", $mail)){
+    if (strlen($mail) > 150 || !preg_match("/^[A-Za-z0-9.]+@[A-Za-z-]+.[A-Za-z]+$/", $mail)){
         return false;
     }
     else{
@@ -158,5 +158,51 @@ function verifAge($naissance){
     return false;
 }
 
+function verifCp($cp){
+    // verifie le format du code postale
+    return (01000<$cp && $cp<99999);
+}
+
+function verifVille($ville){
+    //verifie le format de la ville
+    return (preg_match("/^[a-zA-Z -]{1,}$/", $ville));
+}
+
+function verifAdresse($adresse){
+    //verifie le format de l'adresse
+    return (preg_match('/^(\d+\s*[A-Za-z]*)[, ]*(.+)$/u', $adresse));
+}
 
 
+function verifNumCarte($num){
+    //Vérfie que le numéro à bien 16 chiffres
+    return (preg_match('/[0-9]{16}/',$num));
+}
+
+function verifExpiration($date){
+    //Vérifie que la date d'expiration n'est pas dépassé
+    $dateCut = explode('/', $date, 2);
+    $mois = $dateCut[0];
+    $annee = $dateCut[1];
+    $anneeEnCours = date('Y');
+    $moisEnCours = date('m');
+    $annee += 2000;
+    $valide = false;
+
+    if($annee > $anneeEnCours && $mois > 0 && $mois <= 12){
+        $valide = true;
+    }
+    else{
+        if($mois >= $moisEnCours && $mois > 0 && $mois <= 12){
+            $valide = true;
+        }else{
+            $valide = false;
+        }
+    }
+    return $valide;
+}
+
+function verifCryptogramme($cryptogramme){
+    // Vérifie que le cryptogramme à bien 3 chiffres
+    return (preg_match('[0-9]{3}',$cryptogramme));
+}
