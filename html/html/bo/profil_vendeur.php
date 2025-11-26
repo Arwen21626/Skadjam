@@ -124,7 +124,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         if (!verifDenomination($newDenom)) $erreurs["denomination"] = "Autorisé majuscules, minuscules et chiffres";
     
         /* SIREN */
-        if (!verifSiren($newSiren)) $erreurs["siren"] = "Numéro SIREN invalide";
+        if (!verifSiren($newSiren)) $erreurs["siren"] = "Numéro SIREN invalide, taille 9";
     
         /* ##### ADRESSE ##### */
         if ($newAdresse == -1){

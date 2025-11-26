@@ -67,7 +67,8 @@ function verifDenomination($denomination){
 
 function verifSiren($siren){
     // Vérification d'un numéro de SIREN
-    if (000000000<=$siren && $siren<=999999999){
+
+    if (000000000<=$siren && $siren<=999999999 && preg_match("/^[0-9]{9}$/", $siren)){
         $explodeSiren = str_split($siren);
         $explodeSiren[1] *= 2;
         $explodeSiren[3] *= 2;

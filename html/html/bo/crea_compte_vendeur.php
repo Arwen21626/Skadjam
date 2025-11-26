@@ -71,7 +71,7 @@ if (isset($_POST["nom"])){
     if (!confirmationMotDePasse($verif, $mdp)) $erreurs["conf"] = "Le mot de passe est différent";
 
     /* SIREN */
-    if (!verifSiren($siren)) $erreurs["siren"] = "Numéro SIREN invalide";
+    if (!verifSiren($siren)) $erreurs["siren"] = "Numéro SIREN invalide, taille 9";
 
     /* ##### ADRESSE ##### */
     if (!verifCp($cp)) $erreurs["cp"] = "Code postale invalide";
@@ -189,7 +189,7 @@ if (isset($_POST["nom"])){
                 </div> 
                 <div class="flex flex-col items-start mt-6 w-fit @max-[768px]:mt-2">
                     <label for="siren">Numéro de SIREN * :</label>
-                    <input class="ml-5 border-4 border-solid rounded-2xl border-beige p-1 pl-3 mb-4 @max-[768px]:ml-2 max-w-3/4 @max-[768px]:pl-2 " type="text" id="siren" name="siren" value="<?= (!isset($erreurs["siren"]))?$siren: ''?>" size="11" pattern="[0-9]{9}" required>
+                    <input class="ml-5 border-4 border-solid rounded-2xl border-beige p-1 pl-3 mb-4 @max-[768px]:ml-2 max-w-3/4 @max-[768px]:pl-2 " type="text" id="siren" name="siren" value="<?= (!isset($erreurs["siren"]))?$siren: ''?>" size="11" required>
                     <?php echo (isset($erreurs["siren"])) ? "<p class=\"text-rouge\">" . $erreurs["siren"] . " </p>" : '' ?>
                 </div>
                 <div class="flex flex-col items-start mt-6 w-fit @max-[768px]:mt-2">
