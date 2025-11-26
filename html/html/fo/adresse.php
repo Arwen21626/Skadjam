@@ -12,7 +12,7 @@
 
     if(isset($_POST['nom'])){
         include __DIR__ . '/../../php/verification_formulaire.php';
-        
+
         $nom = htmlentities($_POST['nom']);
         $prenom = htmlentities($_POST['prenom']);
         $adresse = htmlentities($_POST['adresse']);
@@ -55,7 +55,7 @@
 
         // Si tout est bon alors redirection vers la page paiement
         if($erreurNom == false && $erreurPrenom == false && $erreurAdresse == false && $erreurVille == false && $erreurCodePostal == false){
-            header('Location : /html/fo/paiement.php');
+            header('Location: /html/fo/paiement.php');
         }
 
     }
@@ -153,7 +153,7 @@
             </div>
 
             <div class="flex flex-row mt-5 mb-10 justify-between">
-                <button class="border-vertClair border-2 rounded-2xl w-40 h-14"><a href="">Retour</a></button>
+                <button class="border-vertClair border-2 rounded-2xl w-40 h-14"><a href="/html/fo/panier.php">Retour</a></button>
                 <input class="border-vertClair border-2 rounded-2xl w-40 h-14" type="submit" value="Suivant">
             </div>
             
