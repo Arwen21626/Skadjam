@@ -192,12 +192,15 @@ function verifExpiration($date){
     if($annee > $anneeEnCours && $mois > 0 && $mois <= 12){
         $valide = true;
     }
-    else{
+    else if($annee = $anneeEnCours){
         if($mois >= $moisEnCours && $mois > 0 && $mois <= 12){
             $valide = true;
         }else{
             $valide = false;
         }
+    }
+    else{
+        $valide = false;
     }
     return $valide;
 }
