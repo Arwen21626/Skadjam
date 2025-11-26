@@ -124,11 +124,16 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         if (!verifSiren($newSiren)) $erreurs["siren"] = "Numéro SIREN invalide";
     
         /* ##### ADRESSE ##### */
-        if (!verifCp($newCp)) $erreurs["cp"] = "Code postale invalide";
-    
-        if (!verifVille($newVille)) $erreurs["ville"] = "Format ville incorrect";
-    
-        if (!verifAdresse($newAdresse)) $erreurs["adresse"] = "Format de l'adresse invalide";
+        if ($newAdresse == -1){
+            $erreurs["adresse"] = "format de l'adresse doit etre : <br> 4 [bis] rue camélia, Paris, 75011";
+        }else{
+            if (!verifCp($newCp)) $erreurs["cp"] = "Code postale invalide";
+        
+            if (!verifVille($newVille)) $erreurs["ville"] = "Format ville incorrect";
+        
+            if (!verifAdresse($newAdresse)) $erreurs["adresse"] = "Format de l'adresse invalide";
+
+        }
         
         // Vérifier la taille
         if ($image) {
