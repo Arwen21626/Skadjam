@@ -123,7 +123,7 @@ if (isset($_POST["nom"])){
             die();
         }
     }else{
-        header("Location: crea_compte_vendeur.php");
+        //header("Location: crea_compte_vendeur.php");
     }
     
     
