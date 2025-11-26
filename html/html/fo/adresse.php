@@ -21,7 +21,7 @@
     <?php include(__DIR__ . '/../../php/structure/navbar_front.php');?>
     <main class="flex flex-col justify-center">
         <h2>Adresse</h2>
-        <form class="flex flex-col self-center" action="">
+        <form class="flex flex-col self-center" action="/html/fo/paiement.php">
             
             <div class="flex flex-row justify-between">
                 <div class="flex flex-col mr-4">
