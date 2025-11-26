@@ -1,7 +1,7 @@
 <?php 
     session_start();
     require_once __DIR__ . "/../../php/verif_role_fo.php";
-    include __DIR__ . '/../../php/verification_formulaire.php';
+    
 
     $erreurNom = false;
     $erreurPrenom = false;
@@ -11,6 +11,8 @@
 
 
     if(isset($_POST['nom'])){
+        include __DIR__ . '/../../php/verification_formulaire.php';
+        
         $nom = htmlentities($_POST['nom']);
         $prenom = htmlentities($_POST['prenom']);
         $adresse = htmlentities($_POST['adresse']);
