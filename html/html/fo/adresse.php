@@ -53,7 +53,7 @@
 
         // Si tout est bon alors redirection vers la page paiement
         if($erreurNom == false && $erreurPrenom == false && $erreurAdresse == false && $erreurVille == false && $erreurCodePostal == false){
-            header('Location : /../fo/paiement.php');
+            header('Location : ./paiement.php');
         }
 
     }
