@@ -97,7 +97,7 @@ if($_SESSION['role'] != 'client'){
     <?php include(__DIR__ . '/../../php/structure/navbar_front.php');?>
     <?php if(!$achatValide){?>
         <main class="md:min-h-[800px] min-h-[600px]">
-            <form action="paiement.php" method="post">
+            <form method="post">
 
                 <div class="flex flex-col md:items-center items-start ml-5 md:ml-0">
                     <div class="flex flex-col mb-5 mt-5">
@@ -142,7 +142,7 @@ if($_SESSION['role'] != 'client'){
                     </div>
                     <div class="md:w-100 md:ml-5 ml-0">
                         <label for="enregistrerCarte">Enregistrer cette carte pour les prochains paiements?</label>
-                        <input type="checkbox" name="enregistrerCarte" id="enregistrerCarte">
+                        <input type="checkbox" name="enregistrerCarte" id="enregistrerCarte" class="w-5 h-5 mt-1">
                     </div>
         
                     <!-- <div class="flex flex-row mb-5">
@@ -174,7 +174,7 @@ if($_SESSION['role'] != 'client'){
     <?php }else{ ?>
         <main class="text-center min-h-[500px]">
             <div class="mt-30">
-                <H1 class="">Votre achat à bien été validé</h1>
+                <H1 class="">Votre achat a bien été validé</h1>
                 <a href="../../index.php"><button class="border-vertClair border-2 rounded-2xl w-40 h-14 cursor-pointer m-7">Retour à l'accueil</button></a>
             </div>
         </main>
