@@ -96,7 +96,7 @@ if($_SESSION['role'] != 'client'){
                 <div class="flex flex-col md:items-center items-start ml-5 md:ml-0">
                     <div class="flex flex-col mb-5 mt-5">
                         <label for="numero">Numéro de carte* :</label>
-                        <input placeholder="0000 1111 2222 3333" pattern="[0-9]{16}" value="<?= isset($_POST['numero'])? $numero : "" ?>" class="border-4 border-vertClair rounded-2xl placeholder-gray-500 md:w-100 w-75" type="text" name="numero" id="numero" required>
+                        <input placeholder="0000 1111 2222 3333" maxlength="16" pattern="[0-9]{16}" value="<?= isset($_POST['numero'])? $numero : "" ?>" class="border-4 border-vertClair rounded-2xl placeholder-gray-500 md:w-100 w-75" type="text" name="numero" id="numero" required>
                         <?php
                             if($erreurNumero){ ?>
                                 <p class="text-rouge"><?php echo "Le numéro n'est pas bon";?></p>
