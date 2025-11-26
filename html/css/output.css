@@ -413,6 +413,9 @@ main>h2 {
   .mr-4 {
     margin-right: calc(var(--spacing, 0.25rem) * 4);
   }
+  .mr-5 {
+    margin-right: calc(var(--spacing, 0.25rem) * 5);
+  }
   .mr-6 {
     margin-right: calc(var(--spacing, 0.25rem) * 6);
   }

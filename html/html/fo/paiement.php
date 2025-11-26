@@ -3,14 +3,13 @@ session_start();
 require_once __DIR__ . "/../../php/verif_role_fo.php";
 
 if($_SESSION['role'] != 'client'){
-    header('Location:/404.php');
+    header('Location: /index.php');
 }else{
     include(__DIR__ . '/../../php/verification_formulaire.php');
     include __DIR__ . '/../../01_premiere_connexion.php';
     
     // Initialisation des variables
     $achatValide = false;
-    $achatValide2 = false;
     $erreurNumero = false;
     $erreurExpiration = false;
     $erreurCryptogramme = false;
@@ -67,9 +66,12 @@ if($_SESSION['role'] != 'client'){
                 $nouvCarte->execute();
             }
         }
-        $achatValide = true;
-        header("location:/php/vider_panier.php?typeVider=achat&achatValide=" . $achatValide);
-        $achatValide2 = true;
+
+        if(($erreurCryptogramme == false && $erreurExpiration == false && $erreurNom == false && $erreurNumero == false) || $achatValide == true){
+            $achatValide = true;
+            header("location:/php/vider_panier.php?typeVider=achat&achatValide=" . $achatValide);
+        }
+        
     }
 }
 ?>
@@ -90,7 +92,7 @@ if($_SESSION['role'] != 'client'){
 <body>
     <?php include(__DIR__ . '/../../php/structure/header_front.php');?>
     <?php include(__DIR__ . '/../../php/structure/navbar_front.php');?>
-    <?php if(!$achatValide2){?>
+    <?php if(!$achatValide){?>
         <main class="md:min-h-[800px] min-h-[600px]">
             <form action="paiement.php" method="post">
 
