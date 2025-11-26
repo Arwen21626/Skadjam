@@ -1,8 +1,8 @@
 <?php
     session_start();
 
-    if ($_SESSION['role'] !== 'visiteur'){
-        header("location: /404.php");
+    if (!isset($_SESSION['role'])){
+        $_SESSION['role'] = 'visiteur';
     }
 
     $erreur = false;
