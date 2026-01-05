@@ -206,7 +206,7 @@
                         
                         <form class="flex justify-center" action="/html/fo/adresse.php">
                             <button class="bg-beige rounded-2xl w-20 h-10 mt-2 md:w-40 md:h-14 md:mt-4 cursor-pointer hover:bg-bleu hover:text-vertFonce border-black border shadow" type="submit">
-                                Acheter
+                                Acheter le panier
                             </button>
                         </form>
                         
