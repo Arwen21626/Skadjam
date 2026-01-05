@@ -177,55 +177,180 @@
                                             </div>
                                         <?php
                                     }
-                                ?>
-                                
+                                ?>     
+                        </div>  
+                    <?php
+                }
+        
+                if (!empty($produitsPanier))
+                {
+                    ?>
+                        <div class="flex bottom-14 border-b md:border-none md:w-full md:grid md:grid-cols-1 lg:grid-cols-3 fixed md:sticky md:bottom-64 pointer-events-none md:h-16 md:top-1/3">
+                            <div></div>
+                            <div id="conteneur-info_panier" class="flex w-full flex-wrap justify-evenly md:flex-nowrap bg-beige pb-4 pointer-events-auto md:grid md:grid-rows-4 md:justify-center md:items-center md:rounded-2xl" >
+                                <div class="inline-flex mt-2 mb-2 md:mb-0 md:mt-4">
+                                    <p class="mr-2">Nombre d'article : </p>
+                                    <p class="ml-2"> <?php echo $nbProduitsTotal; ?> </p>
+                                </div>
 
+                                <div class="inline-flex mt-2 mb-2 md:mb-0 md:mt-4">
+                                    <p class="mr-2">Sous total :</p>
+                                    <p class="ml-2"> <?php echo $montantTotalTTC . "€"; ?> </p>
+                                </div>
+
+                                <form class="flex justify-center" method="get" action="/php/vider_panier.php">
+                                    <input type="hidden" name="typeVider" value="normal">
+                                    <button class="bg-beige rounded-2xl w-32 h-10 mt-2 md:w-40 md:h-14 md:mt-4 cursor-pointer border-black border shadow" type="submit">
+                                        Vider le panier
+                                    </button>
+                                </form>
+                                
+                                <form class="flex justify-center" action="/html/fo/adresse.php">
+                                    <button class="bg-beige rounded-2xl w-20 h-10 mt-2 md:w-40 md:h-14 md:mt-4 cursor-pointer border-black border shadow" type="submit">
+                                        Acheter le panier
+                                    </button>
+                                </form>
                                 
                             </div>
-                        
-                            
+                            <div></div>
+                        </div>
                     <?php
                 }
             }
-        ?>
+            else if ($_SESSION['role'] === 'visiteur') {
+
+                if ($_SESSION['panier']['nb_produit_total'] === 0) {
+                    ?>
+                        <main class="min-h-[360px] md:min-h-[620px] md:p-4 flex justify-center">
+                            <h2 class="md:text-center self-center">Votre panier est vide</h2>
+                    <?php
+                }
+                else
+                {
+                    ?>
+                        <main class="md:min-h-[620px] md:p-4 md:grid md:grid-cols-2 md:relative">
+
+                            <div id="conteneur-produit" class="flex flex-col">
+                                <?php
+                                    foreach ($infoProduitsPanier as $i => $value) 
+                                    {
+                                        ?>
+                                            <div id="<?php echo $infoProduitsPanier[$i]["infoProduit"]["id_produit"]; ?>" class="bg-bleu p-2 md:p-4 m-4 shadow md:grid md:grid-cols-2">
+
+                                                <!-- l'Image -->
+                                                <div class="flex justify-center mb-3 md:mb-0">
+                                                    <a class="flex justify-center" href="/html/fo/details_produit.php?idProduit=<?php echo $infoProduitsPanier[$i]["infoProduit"]["id_produit"]; ?>">
+                                                        <img src="<?php echo $infoProduitsPanier[$i]["infoPhoto"]["url_photo"]; ?>" 
+                                                        alt="<?php echo $infoProduitsPanier[$i]["infoPhoto"]["alt"]; ?>" 
+                                                        title="<?php echo $infoProduitsPanier[$i]["infoPhoto"]["titre"]; ?>"
+                                                        class="border self-center w-3/4 h-auto md:w-full md:h-auto">
+                                                    </a> 
+                                                </div>
+                                                
+                                                <!-- Le conteneur des éléments liés au produit -->
+                                                <div class="text-center md:flex md:flex-col md:justify-evenly">
+
+                                                    <div class="flex flex-col justify-center items-center mb-3 md:mb-0">
+                                                        <h4> <?php echo $infoProduitsPanier[$i]["infoProduit"]["libelle_produit"]; ?></h4>
+                                                        <p class="mt-2"> <?php echo affichageNote($infoProduitsPanier[$i]["infoProduit"]["note_moyenne"]); ?> </p>
+                                                    </div>
+                                                    
+                                                    <div id="prix">
+                                                        <p class="mb-0.5 md:mb-0"> <?php echo "Prix unitaire : " . $infoProduitsPanier[$i]["infoProduit"]["prix_ttc"] . "€"; ?> </p>
+                                                        <p class="mt-0.5 md:mt-0"> 
+                                                            <?php
+                                                                $prixTot = ($infoProduitsPanier[$i]["infoProduit"]["prix_ttc"] * $infoProduitsPanier[$i]["quantiteProduit"]);
+                                                                $prixTot = number_format($prixTot, 2, '.', '');
+                                                                echo "Prix total : " . $prixTot . "€"; 
+                                                            ?> 
+                                                        </p>
+                                                    </div>
+                                                    <div class="flex justify-center items-center mb-2 md:mb-0">
+                                                        <form method="post" action="/php/retrait_panier.php" >
+                                                            <input type="hidden" name="idProduit" value="<?php echo $infoProduitsPanier[$i]["infoProduit"]["id_produit"]; ?>">
+                                                            <input type="hidden" name="quantiteProd" value="<?php echo $infoProduitsPanier[$i]["quantiteProduit"]; ?>">
+                                                            <input type="hidden" name="prixTTC" value="<?php echo $infoProduitsPanier[$i]["infoProduit"]["prix_ttc"]; ?>">
+                                                            <input type="hidden" name="quantiteTot" value="<?php echo $nbProduitsTotal; ?>">
+                                                            <input type="hidden" name="prixTot" value="<?php echo $montantTotalTTC; ?>">
+                                                            <input type="hidden" name="typeRetrait" value="decrement">
+
+                                                            <button class="text-4xl text-center mr-4 cursor-pointer hover:text-rouge"
+                                                            type="submit">
+                                                                -
+                                                            </button>
+                                                        </form>
+
+                                                        <p class="ml-4 mr-4 text-center"> <?php echo $infoProduitsPanier[$i]["quantiteProduit"]; ?> </p>
+
+                                                        <form method="post" action="/php/ajouter_panier.php" >
+                                                            <input type="hidden" name="idProduit" value="<?php echo $infoProduitsPanier[$i]["infoProduit"]["id_produit"]; ?>">
+                                                            <input type="hidden" name="pageDeRetour" value="panier">
+                                                            <button class="text-4xl text-center ml-4 cursor-pointer hover:text-vertClair"
+                                                            type="submit">
+                                                                +
+                                                            </button>
+                                                        </form>
+                                                    </div>
+                                                    
+                                                    <form class="mt-2 md:mt-0" method="post" action="/php/retrait_panier.php">
+                                                        <input type="hidden" name="idProduit" value="<?php echo $infoProduitsPanier[$i]["infoProduit"]["id_produit"]; ?>">
+                                                        <input type="hidden" name="quantiteProd" value="<?php echo $infoProduitsPanier[$i]["quantiteProduit"]; ?>">
+                                                        <input type="hidden" name="prixTTC" value="<?php echo $infoProduitsPanier[$i]["infoProduit"]["prix_ttc"]; ?>">
+                                                        <input type="hidden" name="quantiteTot" value="<?php echo $nbProduitsTotal; ?>">
+                                                        <input type="hidden" name="prixTot" value="<?php echo $montantTotalTTC; ?>">
+                                                        <input type="hidden" name="typeRetrait" value="suppression">
+
+                                                        <button class="rounded-2xl border border-black w-48 h-16 self-center cursor-pointer "
+                                                        type="submit">
+                                                            Supprimer du panier
+                                                        </button>
+                                                    </form>
+                                                    
+                                                </div>
+
+                                            </div>
+                                        <?php
+                                    }
+                                ?>     
+                        </div>  
+                    <?php
+                }
         
-    
-    
-    <?php 
-        if (!empty($produitsPanier))
-        {
-            ?>
-                <div class="flex bottom-14 border-b md:border-none md:w-full md:grid md:grid-cols-1 lg:grid-cols-3 fixed md:sticky md:bottom-64 pointer-events-none md:h-16 md:top-1/3">
-                    <div></div>
-                    <div id="conteneur-info_panier" class="flex w-full flex-wrap justify-evenly md:flex-nowrap bg-beige pb-4 pointer-events-auto md:grid md:grid-rows-4 md:justify-center md:items-center md:rounded-2xl" >
-                        <div class="inline-flex mt-2 mb-2 md:mb-0 md:mt-4">
-                            <p class="mr-2">Nombre d'article : </p>
-                            <p class="ml-2"> <?php echo $nbProduitsTotal; ?> </p>
-                        </div>
+                if (!empty($produitsPanier))
+                {
+                    ?>
+                        <div class="flex bottom-14 border-b md:border-none md:w-full md:grid md:grid-cols-1 lg:grid-cols-3 fixed md:sticky md:bottom-64 pointer-events-none md:h-16 md:top-1/3">
+                            <div></div>
+                            <div id="conteneur-info_panier" class="flex w-full flex-wrap justify-evenly md:flex-nowrap bg-beige pb-4 pointer-events-auto md:grid md:grid-rows-4 md:justify-center md:items-center md:rounded-2xl" >
+                                <div class="inline-flex mt-2 mb-2 md:mb-0 md:mt-4">
+                                    <p class="mr-2">Nombre d'article : </p>
+                                    <p class="ml-2"> <?php echo $nbProduitsTotal; ?> </p>
+                                </div>
 
-                        <div class="inline-flex mt-2 mb-2 md:mb-0 md:mt-4">
-                            <p class="mr-2">Sous total :</p>
-                            <p class="ml-2"> <?php echo $montantTotalTTC . "€"; ?> </p>
-                        </div>
+                                <div class="inline-flex mt-2 mb-2 md:mb-0 md:mt-4">
+                                    <p class="mr-2">Sous total :</p>
+                                    <p class="ml-2"> <?php echo $montantTotalTTC . "€"; ?> </p>
+                                </div>
 
-                        <form class="flex justify-center" method="get" action="/php/vider_panier.php">
-                            <input type="hidden" name="typeVider" value="normal">
-                            <button class="bg-beige rounded-2xl w-32 h-10 mt-2 md:w-40 md:h-14 md:mt-4 cursor-pointer border-black border shadow" type="submit">
-                                Vider le panier
-                            </button>
-                        </form>
-                        
-                        <form class="flex justify-center" action="/html/fo/adresse.php">
-                            <button class="bg-beige rounded-2xl w-20 h-10 mt-2 md:w-40 md:h-14 md:mt-4 cursor-pointer border-black border shadow" type="submit">
-                                Acheter le panier
-                            </button>
-                        </form>
-                        
-                    </div>
-                    <div></div>
-                </div>
-            <?php
-        }
+                                <form class="flex justify-center" method="get" action="/php/vider_panier.php">
+                                    <input type="hidden" name="typeVider" value="normal">
+                                    <button class="bg-beige rounded-2xl w-32 h-10 mt-2 md:w-40 md:h-14 md:mt-4 cursor-pointer border-black border shadow" type="submit">
+                                        Vider le panier
+                                    </button>
+                                </form>
+                                
+                                <form class="flex justify-center" action="/html/fo/adresse.php">
+                                    <button class="bg-beige rounded-2xl w-20 h-10 mt-2 md:w-40 md:h-14 md:mt-4 cursor-pointer border-black border shadow" type="submit">
+                                        Acheter le panier
+                                    </button>
+                                </form>
+                                
+                            </div>
+                            <div></div>
+                        </div>
+                    <?php
+                }
+            }
     ?>
     
     </main>
