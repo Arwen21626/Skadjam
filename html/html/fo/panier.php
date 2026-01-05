@@ -156,7 +156,7 @@
                                                     <input type="hidden" name="prixTot" value="<?php echo $montantTotalTTC; ?>">
                                                     <input type="hidden" name="typeRetrait" value="suppression">
 
-                                                    <button class="rounded-2xl border border-black w-48 h-16 self-center cursor-pointer hover:bg-rouge hover:text-white"
+                                                    <button class="rounded-2xl border border-black w-48 h-16 self-center cursor-pointer "
                                                     type="submit">
                                                         Supprimer du panier
                                                     </button>
@@ -199,14 +199,14 @@
 
                         <form class="flex justify-center" method="get" action="/php/vider_panier.php">
                             <input type="hidden" name="typeVider" value="normal">
-                            <button class="bg-beige rounded-2xl w-32 h-10 mt-2 md:w-40 md:h-14 md:mt-4 cursor-pointer hover:bg-rouge hover:text-white border-black border shadow" type="submit">
+                            <button class="bg-beige rounded-2xl w-32 h-10 mt-2 md:w-40 md:h-14 md:mt-4 cursor-pointer border-black border shadow" type="submit">
                                 Vider le panier
                             </button>
                         </form>
                         
                         <form class="flex justify-center" action="/html/fo/adresse.php">
-                            <button class="bg-beige rounded-2xl w-20 h-10 mt-2 md:w-40 md:h-14 md:mt-4 cursor-pointer hover:bg-bleu hover:text-vertFonce border-black border shadow" type="submit">
-                                Acheter
+                            <button class="bg-beige rounded-2xl w-20 h-10 mt-2 md:w-40 md:h-14 md:mt-4 cursor-pointer border-black border shadow" type="submit">
+                                Acheter le panier
                             </button>
                         </form>
                         
