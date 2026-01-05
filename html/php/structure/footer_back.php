@@ -9,6 +9,10 @@
             <a class="m-1 text-bleu hover:text-beige" href="/html/bo/cgu_bo.php">
                 Conditions générales d'utilisation
             </a>
+            
+            <a class="m-1 text-bleu hover:text-beige" href="/html/bo/ml_bo.php">
+                Mentions Légales
+            </a>
         </article>
 
         <article class="flex flex-col p-1">
