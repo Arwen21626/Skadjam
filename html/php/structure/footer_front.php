@@ -14,7 +14,7 @@
         </a>
 
         <a class="hover:text-rouge m-1" href="/html/fo/ml_fo.php">
-            Mentions Légales
+            Mentions légales
         </a>
     </article>
 

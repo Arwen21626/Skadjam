@@ -11,7 +11,7 @@
             </a>
 
             <a class="m-1 text-bleu hover:text-beige" href="/html/bo/ml_bo.php">
-                Mentions Légales
+                Mentions légales
             </a>
         </article>
 
