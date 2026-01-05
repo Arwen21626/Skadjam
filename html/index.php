@@ -7,6 +7,9 @@
 
     if (!isset($_SESSION['role'])) {
         $_SESSION['role'] = "visiteur";
+        $_SESSION['panier'] = ["nb_produit_total" => 0, // Utilisation des noms de colonne utilisées dans la BDD
+                               "montant_total_ttc" => 0,
+                               "contient" => []]; 
     }
 
     require_once(__DIR__ . "/php/verif_role_fo.php");
