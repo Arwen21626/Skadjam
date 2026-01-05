@@ -91,7 +91,7 @@
                     <input placeholder="Alizon" value="<?= isset($_POST['prenom'])? $prenom : "" ?>" class="pl-2 border-4 border-vertClair rounded-2xl placeholder-gray-500 max-w-70" type="text" name="prenom" id="prenom" required>
                     <?php 
                     if($erreurPrenom){ ?>
-                        <p class="text-rouge">Une erreur est survenue au niveau de votre prenom</p>
+                        <p class="text-rouge">Une erreur est survenue au niveau de votre prénom</p>
                     <?php } ?>
                 </div>
             </div>
@@ -114,7 +114,7 @@
             <div class="flex flex-col mt-5 ">
                 <div class="flex flex-row justify-between">
                     <div class="flex self-center flex-col">
-                        <label for="numBat">Numéro de batiment :</label>
+                        <label for="numBat">Numéro de bâtiment :</label>
                         <input placeholder="3C" value="<?= isset($_POST['numBat'])? $numBat : "" ?>" class="pl-2 border-4 border-vertClair rounded-2xl placeholder-gray-500" type="text" name="numBat" id="numBat">
                     </div>
                     
