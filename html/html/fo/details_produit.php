@@ -196,8 +196,7 @@
                                 <a href="ajouter_avis.php?idProduit=<?php echo $idProd;?>">Ajouter un avis</a>
                             <?php }
                             else{?>
-                                <a href="details_produit.php?idProduit=<?php echo $idProd;?>">Modifier mon avis</a>
-                                <p>A venir</p>
+                                <a href="ajouter_avis.php?idProduit=<?php echo $idProd;?>">Modifier mon avis</a>
                             <?php }
                         } else{
                             // si le client n'est pas connecter?>
