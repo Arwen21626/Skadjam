@@ -33,7 +33,7 @@ try{
             session_destroy();
 
             // Redirection vers la page de connexion
-            header("Location: http://10.253.5.109/html/fo/connexion.php");
+            header("Location: http://localhost:8888/html/fo/connexion.php");
             exit();
         }else{ 
             $erreur = true;

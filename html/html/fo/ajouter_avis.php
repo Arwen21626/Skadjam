@@ -5,20 +5,36 @@
     include(__DIR__ . "/../../php/fonctions.php");
 
     $idProd = $_GET["idProduit"];
-
+    $idCompte = $_SESSION['idCompte'];
     
+    // récupération des donnée de l'avis précédament donnée
+    foreach($dbh->query("SELECT nb_etoile, contenu_commentaire 
+                        FROM sae3_skadjam._avis 
+                        WHERE id_produit = $idProd 
+                            AND id_compte = $idCompte"
+                        , PDO::FETCH_ASSOC) as $row){
+        $note = $row['nb_etoile'];
+        $commentaire = $row['contenu_commentaire'];
+    }
 
     if(isset($_POST['note'])){
-        // Traitement données
+        //traitement des données et envoie vers la base de donnée
         try{
-            $note = htmlentities($_POST['note']);
-            $commentaire = htmlentities($_POST['commentaire']);
-            $idCompte = $_SESSION['idCompte'];
-            if ($note>=0 && $note<=5){
-                $insertionAvis = $dbh->prepare("INSERT INTO sae3_skadjam._avis(nb_etoile, nb_pouce_haut, nb_pouce_bas, contenu_commentaire, id_produit, id_compte) 
-                                                    VALUES ($note, 0, 0, '$commentaire', $idProd, $idCompte)");
-                $insertionAvis->execute();
+            $nouvNote = htmlentities($_POST['note']);
+            $nouvCommentaire = htmlentities($_POST['commentaire']);
 
+            if ($nouvNote>=0 && $nouvNote<=5){
+                // si c'est l'ajout d'un nouvel avis
+                if ($note == null){
+                    $insertionAvis = $dbh->prepare("INSERT INTO sae3_skadjam._avis(nb_etoile, nb_pouce_haut, nb_pouce_bas, contenu_commentaire, id_produit, id_compte) 
+                                                    VALUES ($nouvNote, 0, 0, '$nouvCommentaire', $idProd, $idCompte)");
+                }
+                // si c'est la modification d'un avis
+                else{
+                    $insertionAvis = $dbh->prepare("UPDATE sae3_skadjam._avis SET nb_etoile = $nouvNote, contenu_commentaire = '$nouvCommentaire'
+                                                    WHERE id_produit = $idProd AND id_compte = $idCompte");
+                }
+                $insertionAvis->execute();
                 header("location: details_produit.php?idProduit=$idProd");
             }
             else{
@@ -26,11 +42,17 @@
             }
         } catch (PDOException $e) {
             print "Erreur lors de l'envoie des données vers la base de données";
+            echo $e;
             die();
         }
     }
-    else{
+    else if(isset($_GET['supr']) && $_GET['supr'] === 'true'){
+        $suprAvis = $dbh->prepare("DELETE FROM sae3_skadjam._avis WHERE id_produit = $idProd AND id_compte = $idCompte");
+        $suprAvis->execute();
 
+        //header("location: details_produit.php?idProduit=$idProd");
+    }
+    else{
         // Récupération des données du produit
         foreach($dbh->query("SELECT *, est_masque::char AS est_masque_char
                             FROM sae3_skadjam._produit pr
@@ -38,6 +60,9 @@
                             , PDO::FETCH_ASSOC) as $row){
             $produit = $row;
         }
+        
+        
+
 ?> 
 
 
@@ -47,7 +72,7 @@
 <html lang="fr">
 <?php require(__DIR__ . "/../../php/structure/head_front.php") ?>
 <head>
-    <title>Ajouter un avis au produit : <?php echo $idProd;?></title>
+    <title>Modifier un avis au produit : <?php echo $idProd;?></title>
 </head>
 <body>
     <?php require(__DIR__ . "/../../php/structure/header_front.php"); ?>
@@ -59,44 +84,20 @@
             <!-- La note -->
             <label for="note">Note* :</label>
             <div class="flex flex-nowarp items-center justify-center">
-                <input class="border-4 border-beige rounded-2xl p-1 pl-3 w-16" name="note" id="note" type="number" min="0" max="5" required>
+                <input class="border-4 border-beige rounded-2xl p-1 pl-3 w-16" name="note" id="note" type="number" min="0" max="5" value="<?php echo $note;?>" required>
                 <img class=" w-7 ml-3" src="../../images/logo/bootstrap_icon/star-fill.svg">
             </div>
             
             <!-- Le commantaire -->
             <label class="mt-10" for="commentaire">Commentaire : </label>
-            <textarea class="border-4 border-beige rounded-2xl w-1/1 p-1 pl-3" name="commentaire" rows="10" cols="100"></textarea>
+            <textarea class="border-4 border-beige rounded-2xl w-1/1 p-1 pl-3" name="commentaire" rows="10" cols="100"><?php echo $commentaire;?></textarea>
 
             <div class="flex mt-10 justify-center md:justify-end w-1/1 ">
                 <button class="cursor-pointer  border-2 border-vertFonce rounded-2xl w-40 h-14 p-0 m-0 mr-10 " type="button"><a href="./details_produit.php?idProduit=<?php echo $idProd; ?>">Annuler</a></button>
-                <?php 
-                    // tableau contenant tous les avis
-                    $avis = [];
-                    foreach($dbh->query("SELECT * FROM sae3_skadjam._avis a 
-                                        INNER JOIN sae3_skadjam._client c 
-                                            ON a.id_compte = c.id_compte 
-                                        WHERE id_produit = $idProd", PDO::FETCH_ASSOC) as $row){
-                        $avis[] = $row;
-                    }
-
-                    // savoir si le client a déjà donner son avis sur le produit
-                    $dejaAvis = false;
-                    foreach($avis as $row){
-                        if ($_SESSION['idCompte'] == $row['id_compte']){
-                            $dejaAvis = true;
-                        }
-                    }
-
-                    if($dejaAvis == false){
-                        $a = '';
-                    }else{
-                        $a = 'disabled';
-                    }
-                ?>
-                <input class="cursor-pointer border-2 border-vertFonce rounded-2xl w-40 h-14 p-0 m-0 md:mr-10" type="submit" name="submit" id="submit" value="Valider" <?php echo $a; ?> >
-                <?php if($a == 'disabled'){echo 'Vous avez déjà mis un commentaire'; }?>
+                <input class="cursor-pointer border-2 border-vertFonce rounded-2xl w-40 h-14 p-0 m-0 md:mr-10" type="submit" name="submit" id="submit" value="Valider" >
             </div>
         </form>
+        <a href="./ajouter_avis.php?idProduit=<?php echo $produit['id_produit']?>&supr=true">supprimer mon avis</a>
     </main>
 
     <?php require(__DIR__ . "/../../php/structure/footer_front.php") ?>

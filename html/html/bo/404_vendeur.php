@@ -19,7 +19,7 @@
 
     <main class="flex flex-col justify-center p-4 min-h-[545px]">
         <h2 class="text-center self-center">ERREUR 404</h2>
-        <p class="text-center self-center">La page n'a pas été trouvé.</p>
+        <p class="text-center self-center">La page n'a pas été trouvée.</p>
 
         <div class="flex justify-center mt-16">
             <a class="inline-block justify-center" href="/html/bo/index_vendeur.php"> 
