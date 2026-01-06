@@ -50,16 +50,7 @@
                                         PDO::FETCH_ASSOC) as $row) {
             $infoPhoto = $row;
         };
-
-        // tableau contenant tous les avis
-        $avis = [];
-        foreach($dbh->query("SELECT * FROM sae3_skadjam._avis a 
-                            INNER JOIN sae3_skadjam._client c 
-                                ON a.id_compte = c.id_compte 
-                            WHERE id_produit = $idProd", PDO::FETCH_ASSOC) as $row){
-            $avis[] = $row;
-        }
-
+        
         // Définition des variables PHP pour récupérer chaque donnée nécessaire
         $libelleProd = $produit["libelle_produit"]; // Nom du produit
         $libelleCat = $categorie["libelle_categorie"]; //Libellé de la catégorie
@@ -67,15 +58,8 @@
         $produitStock = $produit["quantite_stock"]; // Récupère le stock du produit pour savoir si il est disponible ou non
         $nomVendeur = $vendeur["raison_sociale"];
         $produitDesc = $produit["description_produit"];
-        if($avis != null){
-            $noteProd = 0;
-            foreach ($avis as $note) {
-                $noteProd += $note["nb_etoile"];
-            }
-            $noteProd /= count($avis);
-        }else{
-            $noteProd = null;
-        }
+        $noteMoy = $produit["note_moyenne"];
+
         // Définition du lien vers lequel est renvoyé le client en cliquant sur le bouton ajouter au panier
         // Si il est connecté : le produit est ajouté à son panier
         //Si il n'est pas connecté : le visiteur est renvoyé sur la page de connexion
@@ -108,7 +92,7 @@
             <article class="p-2 md:pb-8"> <!-- Titrage -->
                 <h3> <?php echo $libelleProd; ?></h3>
                 <p class="ml-4">Catégorie : <?php echo $libelleCat; ?></p>
-                <div class="ml-10"> <?php echo affichageNote($noteProd); ?> </div>
+                <div class="ml-10"> <?php echo affichageNote($noteMoy); ?> </div>
             </article>
             
             <article class="md:flex md:flex-row md:justify-around">
@@ -161,6 +145,14 @@
             <h3>Avis</h3>
             <div class="flex flex-col-reverse items-center mt-0 md:items-start md:justify-between md:mt-10 md:flex-row">
                 <?php 
+                // tableau contenant tous les avis
+                $avis = [];
+                foreach($dbh->query("SELECT * FROM sae3_skadjam._avis a 
+                                    INNER JOIN sae3_skadjam._client c 
+                                        ON a.id_compte = c.id_compte 
+                                    WHERE id_produit = $idProd", PDO::FETCH_ASSOC) as $row){
+                    $avis[] = $row;
+                }
                 
                 if($avis == null){?>
                     <p class=" md:ml-24">Aucun avis associé à ce produit.</p>
