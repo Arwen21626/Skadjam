@@ -54,7 +54,7 @@
         // Définition des variables PHP pour récupérer chaque donnée nécessaire
         $libelleProd = $produit["libelle_produit"]; // Nom du produit
         $libelleCat = $categorie["libelle_categorie"]; //Libellé de la catégorie
-        $prixTTC = $produit["prix_ttc"]; // Prix du produit
+        $prixTTC = str_replace(".", ",", $produit["prix_ttc"]); // Prix du produit
         $produitStock = $produit["quantite_stock"]; // Récupère le stock du produit pour savoir si il est disponible ou non
         $nomVendeur = $vendeur["raison_sociale"];
         $produitDesc = $produit["description_produit"];
