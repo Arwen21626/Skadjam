@@ -28,7 +28,9 @@
         die();
     }
        
+    //traitement de la modification de la quantite_stock
     if (isset($_POST['qteStock']) && is_array($_POST['qteStock'])) {
+        //màj base de données
         $updateStock = $dbh->prepare("
             UPDATE sae3_skadjam._produit
             SET quantite_stock = :stock

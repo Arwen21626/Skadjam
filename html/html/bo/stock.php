@@ -18,8 +18,6 @@
                             , PDO::FETCH_ASSOC) as $row){
             $tabProduit[] = $row;
         } 
-        
-        //$qteStock = $row['quantite_stock'];
 
     }
 
@@ -27,18 +25,6 @@
         print "Erreur !: " . $e->getMessage() . "<br/>";
         die();
     }
-       
-    /*if(isset($_POST['qteStock']) && (verifQteStock($qteStock))){
-        $qteStock = $_POST['qteStock'];
-        $idProduit = $_POST['id'];
-
-        $updateStock = $dbh->prepare("UPDATE sae3_skadjam._produit
-                                    SET quantite_stock = $qteStock
-                                    WHERE id_produit = $idProduit;") ;
-        $updateStock->execute();
-        echo $idProduit;
-
-    }*/
 
 ?>
 
@@ -71,9 +57,6 @@
                             <th scope="col"><h3>Prix</h3></th>
                             <th scope="col"><h3>Note</h3></th>
                             <th scope="col"><h3>Stock</h3></th>
-                            <!--<th scope="col"></th>
-                            <th scope="col"></th>
-                            <th scope="col"></th>-->
                         </tr>
                     </thead>
                     <tbody>
