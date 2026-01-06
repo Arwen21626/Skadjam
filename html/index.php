@@ -76,7 +76,7 @@
                 $maxPage = sizeof($tabProduit)/PAGE_SIZE;
                 //découpe le catalogue en page de 15 produits
                 $lignes = array_slice($tabProduit, $pageNumber*PAGE_SIZE-PAGE_SIZE, PAGE_SIZE);
-
+                
                 //affiche la photo du produit, son nom, son prix et sa note ?>
                 <div class="grid grid-cols-2 justify-items-center md:grid-cols-3">
                     <?php foreach($lignes as $id => $valeurs){
