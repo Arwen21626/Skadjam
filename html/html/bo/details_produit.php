@@ -59,7 +59,7 @@
 
             <div class="m-4 p-4 space-y-4 content-between">
                 <!--affichage du prix-->
-                <p> <?php echo htmlentities($produit['prix_ttc']); ?>€ (TTC)</p>
+                <p> <?php echo htmlentities(str_replace(".", ",",$produit['prix_ttc'])); ?>€ (TTC)</p>
                 <!--affichage de la quantite-->
                 <?php 
                 $stock = $produit['quantite_stock'];
