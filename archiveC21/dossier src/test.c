@@ -43,13 +43,13 @@ char raisonRefus[
     "Le colis bouge"
 ];
 
-char etatLivraison[
+char livraison[
     "Livré en mains propres",
     "Livré en abscence",
     "Refusé"
 ];
 
-char etatColis[
+char etatLivraison[
     "Chez Alizon",
     "En cours d'acheminement vers le transporteur",
     "Arrivé chez le transporteur",
