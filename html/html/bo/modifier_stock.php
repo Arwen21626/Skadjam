@@ -10,11 +10,7 @@
         $tabProduit = null;           
         //récupère toutes les infos des tables produits et photos
         foreach($dbh->query("SELECT *
-                            FROM sae3_skadjam._produit pr
-                            INNER join sae3_skadjam._montre m
-                                ON pr.id_produit=m.id_produit
-                            INNER JOIN sae3_skadjam._photo ph  
-                                ON ph.id_photo = m.id_photo 
+                            FROM sae3_skadjam._produit pr 
                             INNER JOIN sae3_skadjam._vendeur v
                                 ON pr.id_vendeur = v.id_compte
                             WHERE v.id_compte = $idCompte AND pr.est_supprime = false
@@ -118,7 +114,7 @@
                                                 <?php //création d'un tableau associatif pour récupérer tous les id produits associés à leur stock?>
                                                    name="qteStock[<?php echo $valeurs['id_produit']; ?>]"
                                                    value="<?php echo $valeurs['quantite_stock']; ?>"
-                                                   min="0" class="border-4 border-black rounded-2xl w-30" required
+                                                   min="0" class="border-2 border-black rounded-lg w-30 h-10 p-2" required
                                             >
                                         </td>
                                     </tr>
