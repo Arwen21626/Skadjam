@@ -9,7 +9,7 @@
         $_SESSION['role'] = "visiteur";
         $_SESSION['panier'] = ["nb_produit_total" => 0, // Utilisation des noms de colonne utilisées dans la BDD
                                "montant_total_ttc" => 0,
-                               "contient" => []]; 
+                               "contient" => []]; //format du tableau représentant un produit : ['id' => 25, 'quantite_par_produit' => 2]
     }
 
     require_once(__DIR__ . "/php/verif_role_fo.php");
