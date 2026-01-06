@@ -61,9 +61,6 @@
                             , PDO::FETCH_ASSOC) as $row){
             $produit = $row;
         }
-        
-        
-
 ?> 
 
 
@@ -81,7 +78,7 @@
 
     <main class="p-4 md:pl-8 pr-8 ">
         <h2 class="text-center"><?php echo $produit['libelle_produit'];?></h2>
-        <form class="flex flex-col justify-start items-start m-10" action="./ajouter_avis.php?idProduit=<?php echo $produit['id_produit']?>" method="post">
+        <form class="flex flex-col justify-start items-start m-10 mb-8 md:mb-0" action="./ajouter_avis.php?idProduit=<?php echo $produit['id_produit']?>" method="post">
             <!-- La note -->
             <label for="note">Note* :</label>
             <div class="flex flex-nowarp items-center justify-center">
@@ -93,15 +90,16 @@
             <label class="mt-10" for="commentaire">Commentaire : </label>
             <textarea class="border-4 border-beige rounded-2xl w-1/1 p-1 pl-3" name="commentaire" rows="10" cols="100"><?php echo $commentaire;?></textarea>
 
+            <!-- Validation du formulaire -->
             <div class="flex mt-10 justify-center md:justify-end w-1/1 ">
                 <button class="cursor-pointer  border-2 border-vertFonce rounded-2xl w-40 h-14 p-0 m-0 mr-10 " type="button"><a href="./details_produit.php?idProduit=<?php echo $idProd; ?>">Annuler</a></button>
                 <input class="cursor-pointer border-2 border-vertFonce rounded-2xl w-40 h-14 p-0 m-0 md:mr-10" type="submit" name="submit" id="submit" value="Valider" >
             </div>
         </form>
 
-        <!-- supression -->
+        <!-- Supression -->
         <?php if ($note !== null){ // on peut supprimer un avis que si on est entrain de la modifier ?>
-            <a href="./ajouter_avis.php?idProduit=<?php echo $produit['id_produit']?>&supr=true">supprimer mon avis</a>
+            <a class="ml-10 flex justify-center mb-5 md:inline-block" href="./ajouter_avis.php?idProduit=<?php echo $produit['id_produit']?>&supr=true">Supprimer mon avis</a>
         <?php }?>
     </main>
 
