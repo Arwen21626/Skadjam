@@ -25,7 +25,7 @@
 
             if ($nouvNote>=0 && $nouvNote<=5){
                 // si c'est l'ajout d'un nouvel avis
-                if ($note == null){
+                if ($note === null){
                     $insertionAvis = $dbh->prepare("INSERT INTO sae3_skadjam._avis(nb_etoile, nb_pouce_haut, nb_pouce_bas, contenu_commentaire, id_produit, id_compte) 
                                                     VALUES ($nouvNote, 0, 0, '$nouvCommentaire', $idProd, $idCompte)");
                 }
@@ -47,10 +47,11 @@
         }
     }
     else if(isset($_GET['supr']) && $_GET['supr'] === 'true'){
+        // si c'est une supression de l'avis
         $suprAvis = $dbh->prepare("DELETE FROM sae3_skadjam._avis WHERE id_produit = $idProd AND id_compte = $idCompte");
         $suprAvis->execute();
 
-        //header("location: details_produit.php?idProduit=$idProd");
+        header("location: details_produit.php?idProduit=$idProd");
     }
     else{
         // Récupération des données du produit
@@ -97,7 +98,11 @@
                 <input class="cursor-pointer border-2 border-vertFonce rounded-2xl w-40 h-14 p-0 m-0 md:mr-10" type="submit" name="submit" id="submit" value="Valider" >
             </div>
         </form>
-        <a href="./ajouter_avis.php?idProduit=<?php echo $produit['id_produit']?>&supr=true">supprimer mon avis</a>
+
+        <!-- supression -->
+        <?php if ($note !== null){ // on peut supprimer un avis que si on est entrain de la modifier ?>
+            <a href="./ajouter_avis.php?idProduit=<?php echo $produit['id_produit']?>&supr=true">supprimer mon avis</a>
+        <?php }?>
     </main>
 
     <?php require(__DIR__ . "/../../php/structure/footer_front.php") ?>
