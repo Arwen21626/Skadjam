@@ -78,13 +78,11 @@
                                 <th scope="col"><h3>Prix</h3></th>
                                 <th scope="col"><h3>Note</h3></th>
                                 <th scope="col"><h3>Stock</h3></th>
-                                <!--<th scope="col"></th>
-                                <th scope="col"></th>
-                                <th scope="col"></th>-->
                             </tr>
                         </thead>
                         <tbody>
                             <?php 
+                                //pour changer la classe de css une ligne sur 2
                                 $impair = 0;
                                 $classe;
                                 $classe1 = "py-4";

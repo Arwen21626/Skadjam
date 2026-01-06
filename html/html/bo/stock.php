@@ -61,6 +61,7 @@
                     </thead>
                     <tbody>
                         <?php 
+                            //pour changer la classe de css une ligne sur 2
                             $impair = 0;
                             $classe;
                             $classe1 = "py-4";

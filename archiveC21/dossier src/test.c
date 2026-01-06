@@ -61,7 +61,7 @@ char etatLivraison[
     "En cours d'acheminement vers le centre local",
     "Arrivé au centre local",
     "En cours de livraison",
-
+    livraison
 ];
 
 // Déclaration
@@ -98,7 +98,7 @@ int main() {
 
     size = sizeof(conn_addr);
     cnx = accept(sock, (struct sockaddr *)&conn_addr, (socklen_t *)&size);
-    printf("ACCEPT = %d\n",ret);
+    printf("ACCEPT = %d\n",ret);1
     while (1==1){
         size = read(cnx, buffer, TAILLEB);
         if (strncmp(buffer, "ADD", 3) == 0){
@@ -110,6 +110,7 @@ int main() {
 }
 
 // Etape 1
+// Etat livraison : Chez Alizon
 // ADD numCommande entrepriseExp adresseExp cpExp  nomDest prenomDest adresseDest cpDest adresse syntaxe ex : 6_rue_camelia
 void addCommande(int cnx, char buffer[TAILLEB], bordereaux *bord, int horo){
     char chaine[512];
@@ -125,17 +126,25 @@ void addCommande(int cnx, char buffer[TAILLEB], bordereaux *bord, int horo){
     send(cnx, chaine, strlen(chaine), 0);
 }
 // Etape 2
+// Etat livraison : En cours d'acheminement vers le transporteur
 
 // Etape 3
+// Etat livraison : Arrivé chez le transporteur
 
 // Etape 4
+// Etat livraison : En cours d'acheminement vers la plateforme regionale
 
 // Etape 5
+// Etat livraison : Arrivé à la plateforme regionale
 
 // Etape 6
+// Etat livraison : En cours d'acheminement vers le centre local
 
 // Etape 7
+// Etat livraison : Arrivé au centre local
 
 // Etape 8
+// Etat livraison : En cours de livraison
 
 // Etape 9
+// Etat livraison : 
