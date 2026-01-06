@@ -4,6 +4,28 @@
 
     include __DIR__ .'/../../01_premiere_connexion.php';
     $idCompte = $_SESSION['idCompte'];
+
+    try {     
+        $tabProduit = null;           
+        //récupère toutes les infos des tables produits et photos
+        foreach($dbh->query("SELECT *
+                            FROM sae3_skadjam._produit pr 
+                            INNER JOIN sae3_skadjam._vendeur v
+                                ON pr.id_vendeur = v.id_compte
+                            WHERE v.id_compte = $idCompte AND pr.est_supprime = false
+                            ORDER BY libelle_produit ASC"
+                            , PDO::FETCH_ASSOC) as $row){
+            $tabProduit[] = $row;
+        } 
+        
+        $qteStock = $row['quantite_stock'];
+
+    }
+
+    catch (PDOException $e) {
+        print "Erreur !: " . $e->getMessage() . "<br/>";
+        die();
+    }
 ?>
 
 <!DOCTYPE html>

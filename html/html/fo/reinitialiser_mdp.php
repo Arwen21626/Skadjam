@@ -31,8 +31,8 @@ $mailer = new PHPMailer(true);
 
         // Si l'e-mail est présent, essaie d'envoyer un message à cette adresse
         if(isset($_POST['mail'])){
-            ?><p><?php 
-            try {
+            ?><p><?php
+            try {/*
                 // Configuration SMTP
                 $mailer->isSMTP();
                 $mailer->Host       = 'smtp.gmail.com';
@@ -55,7 +55,7 @@ $mailer = new PHPMailer(true);
 
                 // Envoi
                 $mailer->send();
-
+*/
                 // Permet de savoir quel compte doit changer de mot de passe
                 $_SESSION["adresse_mail"] = $_POST["mail"];
                     
@@ -63,6 +63,9 @@ $mailer = new PHPMailer(true);
             }catch(Exception $e){
                 echo "Erreur : le mail n'a pas été envoyé."; ?></p><?php
             }
+            // Redirection vers la page nouveau_mdp
+            header("Location: http://localhost:8888/html/fo/nouveau_mdp.php");
+            exit();
         }else{
     ?>
     <main class="md:min-h-[800px] min-h-[600px]">
