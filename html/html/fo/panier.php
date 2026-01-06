@@ -286,10 +286,7 @@
                                                     <div class="flex justify-center items-center mb-2 md:mb-0">
                                                         <form method="post" action="/php/retrait_panier.php" >
                                                             <input type="hidden" name="idProduit" value="<?php echo $infoProduitsPanier[$i]["infoProduit"]["id_produit"]; ?>">
-                                                            <input type="hidden" name="quantiteProd" value="<?php echo $infoProduitsPanier[$i]["quantiteProduit"]; ?>">
                                                             <input type="hidden" name="prixTTC" value="<?php echo $infoProduitsPanier[$i]["infoProduit"]["prix_ttc"]; ?>">
-                                                            <input type="hidden" name="quantiteTot" value="<?php echo $nbProduitsTotal; ?>">
-                                                            <input type="hidden" name="prixTot" value="<?php echo $montantTotalTTC; ?>">
                                                             <input type="hidden" name="typeRetrait" value="decrement">
 
                                                             <button class="text-4xl text-center mr-4 cursor-pointer hover:text-rouge"
@@ -312,10 +309,7 @@
                                                     
                                                     <form class="mt-2 md:mt-0" method="post" action="/php/retrait_panier.php">
                                                         <input type="hidden" name="idProduit" value="<?php echo $infoProduitsPanier[$i]["infoProduit"]["id_produit"]; ?>">
-                                                        <input type="hidden" name="quantiteProd" value="<?php echo $infoProduitsPanier[$i]["quantiteProduit"]; ?>">
                                                         <input type="hidden" name="prixTTC" value="<?php echo $infoProduitsPanier[$i]["infoProduit"]["prix_ttc"]; ?>">
-                                                        <input type="hidden" name="quantiteTot" value="<?php echo $nbProduitsTotal; ?>">
-                                                        <input type="hidden" name="prixTot" value="<?php echo $montantTotalTTC; ?>">
                                                         <input type="hidden" name="typeRetrait" value="suppression">
 
                                                         <button class="rounded-2xl border border-black w-48 h-16 self-center cursor-pointer "
