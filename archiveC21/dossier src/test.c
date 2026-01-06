@@ -35,6 +35,7 @@ typedef struct bordereaux{
 
 char numDept["22", "29", "35", "56"];
 
+// Refus possible
 char raisonRefus[
     "Le colis est trop abimé",
     "Le colis a été ouvert",
@@ -43,12 +44,14 @@ char raisonRefus[
     "Le colis bouge"
 ];
 
+// Livraison possible
 char livraison[
     "Livré en mains propres",
     "Livré en abscence",
     "Refusé"
 ];
 
+// Suivi de la livraison
 char etatLivraison[
     "Chez Alizon",
     "En cours d'acheminement vers le transporteur",
