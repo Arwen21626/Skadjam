@@ -33,6 +33,37 @@ typedef struct bordereaux{
     destinataire dest;
 }bordereaux;
 
+char numDept["22", "29", "35", "56"];
+
+// Refus possible
+char raisonRefus[
+    "Le colis est trop abimé",
+    "Le colis a été ouvert",
+    "Le colis n'a pas été commandé",
+    "Le colis est arrivé trop tard",
+    "Le colis bouge"
+];
+
+// Livraison possible
+char livraison[
+    "Livré en mains propres",
+    "Livré en abscence",
+    "Refusé"
+];
+
+// Suivi de la livraison
+char etatLivraison[
+    "Chez Alizon",
+    "En cours d'acheminement vers le transporteur",
+    "Arrivé chez le transporteur",
+    "En cours d'acheminement vers la plateforme regionale",
+    "Arrivé à la plateforme regionale",
+    "En cours d'acheminement vers le centre local",
+    "Arrivé au centre local",
+    "En cours de livraison",
+
+];
+
 // Déclaration
 void addCommande(int cnx, char buffer[TAILLEB], bordereaux *bord, int horo);
 

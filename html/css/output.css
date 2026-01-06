@@ -1182,20 +1182,6 @@ main>h2 {
       background-color: var(--color-beige);
     }
   }
-  .hover\:bg-bleu {
-    &:hover {
-      @media (hover: hover) {
-        background-color: var(--color-bleu);
-      }
-    }
-  }
-  .hover\:bg-rouge {
-    &:hover {
-      @media (hover: hover) {
-        background-color: var(--color-rouge);
-      }
-    }
-  }
   .hover\:bg-\[url\(\/images\/logo\/bootstrap_icon\/cart-fill\.svg\)\] {
     &:hover {
       @media (hover: hover) {
@@ -1256,20 +1242,6 @@ main>h2 {
     &:hover {
       @media (hover: hover) {
         color: var(--color-vertClair);
-      }
-    }
-  }
-  .hover\:text-vertFonce {
-    &:hover {
-      @media (hover: hover) {
-        color: var(--color-vertFonce);
-      }
-    }
-  }
-  .hover\:text-white {
-    &:hover {
-      @media (hover: hover) {
-        color: var(--color-white, #fff);
       }
     }
   }
