@@ -6,20 +6,22 @@
     $idCompte = $_SESSION['idCompte'];
 
     try {     
-        $tabProduit = null;           
+        $tabInfoCommandes = null;           
         //récupère toutes les infos des tables produits et photos
         foreach($dbh->query("SELECT *
-                            FROM sae3_skadjam._produit pr 
+                            FROM sae3_skadjam._produit pr
                             INNER JOIN sae3_skadjam._vendeur v
-                                ON pr.id_vendeur = v.id_compte
-                            WHERE v.id_compte = $idCompte AND pr.est_supprime = false
-                            ORDER BY libelle_produit ASC"
+                                ON v.id_vendeur = pr.id_compte
+                            INNER JOIN sae3_skadjam._details d
+                                ON d.id_produit = pr.id_produit
+                            INNER JOIN sae3_skadjam._commande c
+                                ON c.id_commande = d.id_commande
+                            INNER JOIN sae3_skadjam._facture f
+                                ON f.id_commande = c.id_commande
+                            WHERE v.id_compte = $idCompte"
                             , PDO::FETCH_ASSOC) as $row){
-            $tabProduit[] = $row;
+            $tabInfoCommandes[] = $row;
         } 
-        
-        $qteStock = $row['quantite_stock'];
-
     }
 
     catch (PDOException $e) {

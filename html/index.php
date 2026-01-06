@@ -38,7 +38,7 @@
             <a href="#nosProduits" title="lien vers page les plus vendus">
                 <img src="images/images_accueil/les_plus_vendus.webp" alt="les plus vendus" class="w-90 md:w-150 h-auto justify-self-end">
             </a>
-            <a href="html/fo/commandes.php" title="lien vers page commandes">
+            <a href="html/fo/liste_commandes.php" title="lien vers page commandes">
                 <img src="images/images_accueil/commandes.webp" alt="commandes" class="w-90 md:w-150 h-auto justify-self-start">
             </a>        
         </div>
@@ -76,7 +76,7 @@
                 $maxPage = sizeof($tabProduit)/PAGE_SIZE;
                 //découpe le catalogue en page de 15 produits
                 $lignes = array_slice($tabProduit, $pageNumber*PAGE_SIZE-PAGE_SIZE, PAGE_SIZE);
-
+                
                 //affiche la photo du produit, son nom, son prix et sa note ?>
                 <div class="grid grid-cols-2 justify-items-center md:grid-cols-3">
                     <?php foreach($lignes as $id => $valeurs){

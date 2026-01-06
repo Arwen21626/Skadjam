@@ -106,7 +106,8 @@
 
                             <!--affichage du prix du produit-->   
                             <div class="flex justify-start items-center col-span-2">
-                                <p><?php echo $valeurs['prix_ttc'];?> €</p>
+                                <?php $prix = str_replace(".", ",", $valeurs['prix_ttc'])?>
+                                <p><?php echo $prix;?> €</p>
 
                                 <!--récupération de la note-->
                                 <div class="ml-2 md:ml-10 flex">

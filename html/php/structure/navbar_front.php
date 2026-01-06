@@ -45,7 +45,7 @@
                 </div>
             </a>
 
-            <a class="text-vertFonce hover:text-rouge hidden md:inline-block" href="/html/fo/commandes.php">Commandes</a>
+            <a class="text-vertFonce hover:text-rouge hidden md:inline-block" href="/html/fo/liste_commandes.php">Commandes</a>
         </div>
             
         <div class="md:flex md:flex-col md:justify-center md:items-center">
