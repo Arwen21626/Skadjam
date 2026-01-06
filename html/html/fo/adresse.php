@@ -1,7 +1,7 @@
 <?php 
     session_start();
     require_once __DIR__ . "/../../php/verif_role_fo.php";
-    
+    require_once __DIR__ . "/../../01_premiere_connexion.php";
 
     $erreurNom = false;
     $erreurPrenom = false;
@@ -9,6 +9,7 @@
     $erreurVille = false;
     $erreurCodePostal = false;
 
+    $idClient = $_SESSION['idCompte'];
 
     if(isset($_POST['nom'])){
         include __DIR__ . '/../../php/verification_formulaire.php';
@@ -70,8 +71,8 @@
 </head>
 <?php include(__DIR__ . '/../../php/structure/head_front.php');?>
 <body>
-    <?php include __DIR__ . '/../../php/structure/header_front.php'?>        
-    <?php include(__DIR__ . '/../../php/structure/navbar_front.php');?>
+    <?php include __DIR__ . '/../../php/structure/header_front.php'; ?>        
+    <?php include __DIR__ . '/../../php/structure/navbar_front.php'; ?>
     <main class="flex flex-col justify-center">
         <h2>Adresse de livraison</h2>
         <form class="flex flex-col self-center" method="post">
@@ -79,7 +80,7 @@
             <div class="flex flex-row justify-between">
                 <div class="flex flex-col max-w-70">
                     <label for="nom">Nom* :</label>
-                    <input placeholder="Cobrec" value="<?= isset($_POST['nom'])? $nom : "" ?>" class="pl-2 border-4 border-vertClair rounded-2xl placeholder-gray-500 max-w-70" type="text" name="nom" id="nom" required>
+                    <input placeholder="Cobrec" value="<?= isset($_POST['nom'])? $nom : "" ?>" class="pl-2 border-4 border-vertClair rounded-xl placeholder-gray-500 max-w-70" type="text" name="nom" id="nom" required>
                     <?php 
                     if($erreurNom){ ?>
                         <p class="text-rouge">Une erreur est survenue au niveau de votre nom</p>
@@ -88,7 +89,7 @@
 
                 <div class="flex flex-col max-w-70">
                     <label for="prenom">Prénom* :</label>
-                    <input placeholder="Alizon" value="<?= isset($_POST['prenom'])? $prenom : "" ?>" class="pl-2 border-4 border-vertClair rounded-2xl placeholder-gray-500 max-w-70" type="text" name="prenom" id="prenom" required>
+                    <input placeholder="Alizon" value="<?= isset($_POST['prenom'])? $prenom : "" ?>" class="pl-2 border-4 border-vertClair rounded-xl placeholder-gray-500 max-w-70" type="text" name="prenom" id="prenom" required>
                     <?php 
                     if($erreurPrenom){ ?>
                         <p class="text-rouge">Une erreur est survenue au niveau de votre prénom</p>
@@ -98,7 +99,7 @@
             
             <div class="flex flex-col mt-5">
                 <label for="adresse">Adresse postale* :</label>
-                <input placeholder="1 rue des fleurs" value="<?= isset($_POST['adresse'])? $adresse : "" ?>" class="pl-2 border-4 border-vertClair rounded-2xl placeholder-gray-500 w-200" type="text" name="adresse" id="adresse" required>
+                <input placeholder="1 rue des fleurs" value="<?= isset($_POST['adresse'])? $adresse : "" ?>" class="pl-2 border-4 border-vertClair rounded-xl placeholder-gray-500 w-200" type="text" name="adresse" id="adresse" required>
                 <?php 
                 if($erreurAdresse){ ?>
                     <p class="text-rouge">Une erreur est survenue au niveau de votre adresse</p>
@@ -108,20 +109,20 @@
 
             <div class="flex flex-col mt-5">
                 <label for="complement">Complément :</label>
-                <input placeholder="" value="<?= isset($_POST['complement'])? $complement : "" ?>" class="pl-2 border-4 border-vertClair rounded-2xl placeholder-gray-500 w-200" type="text" name="complement" id="complement">
+                <input placeholder="" value="<?= isset($_POST['complement'])? $complement : "" ?>" class="pl-2 border-4 border-vertClair rounded-xl placeholder-gray-500 w-200" type="text" name="complement" id="complement">
             </div>
             
             <div class="flex flex-col mt-5 ">
                 <div class="flex flex-row justify-between">
                     <div class="flex self-center flex-col">
                         <label for="numBat">Numéro de bâtiment :</label>
-                        <input placeholder="3C" value="<?= isset($_POST['numBat'])? $numBat : "" ?>" class="pl-2 border-4 border-vertClair rounded-2xl placeholder-gray-500" type="text" name="numBat" id="numBat">
+                        <input placeholder="3C" value="<?= isset($_POST['numBat'])? $numBat : "" ?>" class="pl-2 border-4 border-vertClair rounded-xl placeholder-gray-500" type="text" name="numBat" id="numBat">
                     </div>
                     
     
                     <div class="flex flex-col">
                         <label for="numAppart">Numéro d'appartement :</label>
-                        <input placeholder="22C" value="<?= isset($_POST['numAppart'])? $numAppart : "" ?>" class="pl-2 border-4 border-vertClair rounded-2xl placeholder-gray-500" type="text" name="numAppart" id="numAppart">
+                        <input placeholder="22C" value="<?= isset($_POST['numAppart'])? $numAppart : "" ?>" class="pl-2 border-4 border-vertClair rounded-xl placeholder-gray-500" type="text" name="numAppart" id="numAppart">
                     </div>
                     
                 </div>
@@ -130,7 +131,7 @@
             <div class="flex flex-col">
                 <div class="flex flex-col mt-5">
                     <label for="ville">Ville* :</label>
-                    <input placeholder="Lannion" value="<?= isset($_POST['ville'])? $ville : "" ?>" class="pl-2 border-4 border-vertClair rounded-2xl placeholder-gray-500 w-200" type="text" name="ville" id="ville" required>
+                    <input placeholder="Lannion" value="<?= isset($_POST['ville'])? $ville : "" ?>" class="pl-2 border-4 border-vertClair rounded-xl placeholder-gray-500 w-200" type="text" name="ville" id="ville" required>
                     <?php 
                     if($erreurVille){ ?>
                         <p class="text-rouge">Une erreur est survenue au niveau de votre ville</p>
@@ -139,7 +140,7 @@
                 
                 <div class="flex flex-col mt-5">
                     <label for="codePostal">Code postal* :</label>
-                    <input placeholder="22300" value="<?= isset($_POST['codePostal'])? $codePostal : "" ?>" class="pl-2 border-4 border-vertClair rounded-2xl placeholder-gray-500 w-200 " type="text" name="codePostal" id="codePostal" required>
+                    <input placeholder="22300" value="<?= isset($_POST['codePostal'])? $codePostal : "" ?>" class="pl-2 border-4 border-vertClair rounded-xl placeholder-gray-500 w-200 " type="text" name="codePostal" id="codePostal" required>
                     <?php 
                     if($erreurCodePostal){ ?>
                         <p class="text-rouge">Une erreur est survenue au niveau de votre code postal</p>
