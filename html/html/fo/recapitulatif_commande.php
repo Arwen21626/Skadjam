@@ -3,7 +3,7 @@
     require_once __DIR__ . "/../../php/verif_role_fo.php";
     require(__DIR__ . '/../../01_premiere_connexion.php');
     $idCompte = $_SESSION['idCompte'];
-    $idPanier = $_SESSION['idPanier'];
+    $idPanier = $_POST['idPanier'];
 
     $sql = "SELECT *
     FROM sae3_skadjam._panier
@@ -21,7 +21,7 @@
         $date = date("j/n/Y");
         $dbh->beginTransaction();
 
-        // 1️⃣ Insertion de la commande
+        //Insertion de la commande
         $sqlCommande = "
             INSERT INTO sae3_skadjam._commande
             (etat, date_commande, montant_total_ttc, id_client)
@@ -39,7 +39,7 @@
 
         $idCommande = $stmtCommande->fetchColumn();
 
-        // 2️⃣ Insertion de la facture
+        //Insertion de la facture
         $sqlFacture = "
             INSERT INTO sae3_skadjam._facture
             (montant_ht, destinataire, date_commande, id_commande)
@@ -57,7 +57,7 @@
 
         $numeroFacture = $stmtFacture->fetchColumn();
 
-        // 3️⃣ Mise à jour de la commande
+        //Mise à jour de la commande
         $sqlUpdate = "
             UPDATE sae3_skadjam._commande
             SET id_facture = :id_facture
