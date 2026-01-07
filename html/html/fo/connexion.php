@@ -44,18 +44,18 @@
                     {
                         if ($_SESSION['panier']['nb_produit_total'] > 0) 
                         {
-                            // Met à jour le nb de produit total contenu dans le panier
-                            $stmt = $dbh->prepare("UPDATE sae3_skadjam._panier SET nb_produit_total = nb_produit_total + ?");
-                            $stmt->execute([$_SESSION['panier']['nb_produit_total']]);
-
-                            // Met à jour le montant total TTC du panier
-                            $stmt = $dbh->prepare("UPDATE sae3_skadjam._panier SET montant_total_ttc = montant_total_ttc + ?");
-                            $stmt->execute([$_SESSION['panier']['montant_total_ttc']]);
-
                             // Récupère l'id du panier du client
                             $stmt = $dbh->prepare("SELECT id_panier FROM sae3_skadjam._client WHERE id_compte = ?");
                             $stmt->execute([$tab['id_compte']]);
                             $idPanier = $stmt->fetch(PDO::FETCH_ASSOC)['id_panier'];
+
+                            // Met à jour le nb de produit total contenu dans le panier
+                            $stmt = $dbh->prepare("UPDATE sae3_skadjam._panier SET nb_produit_total = nb_produit_total + ? WHERE id_panier = ?");
+                            $stmt->execute([$_SESSION['panier']['nb_produit_total'], $idPanier]);
+
+                            // Met à jour le montant total TTC du panier
+                            $stmt = $dbh->prepare("UPDATE sae3_skadjam._panier SET montant_total_ttc = montant_total_ttc + ? WHERE id_panier = ?");
+                            $stmt->execute([$_SESSION['panier']['montant_total_ttc'], $idPanier]);
 
                             // Récupère tout les id des produits contenu dans le panier
                             $stmt = $dbh->prepare("SELECT id_produit FROM sae3_skadjam._contient WHERE id_panier = ?");
