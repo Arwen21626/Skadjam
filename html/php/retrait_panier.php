@@ -10,7 +10,7 @@ $typeRetrait = $_POST["typeRetrait"];
 $prixTTC = $_POST["prixTTC"];
 
 
-if ($_SESSION['role']['client']) 
+if ($_SESSION['role'] === 'client') 
 {
     // Récupération de l'id du client
     $idClient = $_SESSION["idCompte"];
@@ -48,7 +48,7 @@ if ($_SESSION['role']['client'])
         header("location:/html/fo/panier.php#" . $idProd);
     }
 }
-else if ($_SESSION['role']['visiteur'])
+else if ($_SESSION['role'] === 'visiteur')
 {
     if ($typeRetrait === "suppression" || $quantiteProd === "1") 
     {
@@ -58,8 +58,8 @@ else if ($_SESSION['role']['visiteur'])
         {
             if ($prod['id'] == $idProd) 
             {
-                $_SESSION['montant_total_ttc'] -= $prixTTC;
-                $_SESSION['nb_produit_total'] -= $prod['quantite_par_produit'];
+                $_SESSION['panier']['montant_total_ttc'] -= $prixTTC * $prod['quantite_par_produit'];
+                $_SESSION['panier']['nb_produit_total'] -= $prod['quantite_par_produit'];
                 unset($_SESSION['panier']['contient'][$i]);
                 break;
             }    
@@ -69,9 +69,17 @@ else if ($_SESSION['role']['visiteur'])
     }
     else if ($typeRetrait === "decrement")
     {
+        foreach ($_SESSION['panier']['contient'] as $i => $prod) 
+        {
+            if ($prod['id'] == $idProd) 
+            {
+                $_SESSION['panier']['montant_total_ttc'] -= $prixTTC;
+                $_SESSION['panier']['nb_produit_total']--;
+                $_SESSION['panier']['contient'][$i]['quantite_par_produit']--;
+                break;
+            }    
+        }
         
-        
-
         header("location:/html/fo/panier.php#" . $idProd);
     }
 }

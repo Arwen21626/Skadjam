@@ -8,13 +8,13 @@
   font-family: 'Amiko';
   src: url("/font/Amiko/Amiko-Regular.ttf");
 }
-h1, h2, h3, h4 {
+h1, h2, h3, h4, summary {
   font-family: 'MavenPro';
 }
 h1, h2, h3 {
   font-weight: bold;
 }
-p, a, input, label,button {
+p, a, input, label, button, details {
   font-family: 'Amiko';
 }
 @media (max-width: 768px) {
@@ -425,8 +425,14 @@ main>h2 {
   .mr-16 {
     margin-right: calc(var(--spacing, 0.25rem) * 16);
   }
+  .mr-60 {
+    margin-right: calc(var(--spacing, 0.25rem) * 60);
+  }
   .mb-0\.5 {
     margin-bottom: calc(var(--spacing, 0.25rem) * 0.5);
+  }
+  .mb-1 {
+    margin-bottom: calc(var(--spacing, 0.25rem) * 1);
   }
   .mb-2 {
     margin-bottom: calc(var(--spacing, 0.25rem) * 2);
@@ -451,9 +457,6 @@ main>h2 {
   }
   .mb-15 {
     margin-bottom: calc(var(--spacing, 0.25rem) * 15);
-  }
-  .mb-18 {
-    margin-bottom: calc(var(--spacing, 0.25rem) * 18);
   }
   .mb-20 {
     margin-bottom: calc(var(--spacing, 0.25rem) * 20);
@@ -542,9 +545,6 @@ main>h2 {
   }
   .h-6\! {
     height: calc(var(--spacing, 0.25rem) * 6) !important;
-  }
-  .h-7 {
-    height: calc(var(--spacing, 0.25rem) * 7);
   }
   .h-8\! {
     height: calc(var(--spacing, 0.25rem) * 8) !important;
@@ -659,6 +659,9 @@ main>h2 {
   }
   .w-20 {
     width: calc(var(--spacing, 0.25rem) * 20);
+  }
+  .w-30 {
+    width: calc(var(--spacing, 0.25rem) * 30);
   }
   .w-32 {
     width: calc(var(--spacing, 0.25rem) * 32);
@@ -804,6 +807,9 @@ main>h2 {
   .justify-center {
     justify-content: center;
   }
+  .justify-end {
+    justify-content: flex-end;
+  }
   .justify-evenly {
     justify-content: space-evenly;
   }
@@ -851,11 +857,11 @@ main>h2 {
   .justify-self-start {
     justify-self: flex-start;
   }
-  .overflow-visible {
-    overflow: visible;
-  }
   .rounded-2xl {
     border-radius: var(--radius-2xl, 1rem);
+  }
+  .rounded-lg {
+    border-radius: var(--radius-lg, 0.5rem);
   }
   .rounded-md {
     border-radius: var(--radius-md, 0.375rem);
@@ -1040,23 +1046,13 @@ main>h2 {
   .text-right {
     text-align: right;
   }
-  .-indent-96 {
-    text-indent: calc(var(--spacing, 0.25rem) * -96);
-  }
   .text-4xl {
     font-size: var(--text-4xl, 2.25rem);
     line-height: var(--tw-leading, var(--text-4xl--line-height, calc(2.5 / 2.25)));
   }
-  .font-bold {
-    --tw-font-weight: var(--font-weight-bold, 700);
-    font-weight: var(--font-weight-bold, 700);
-  }
   .font-medium {
     --tw-font-weight: var(--font-weight-medium, 500);
     font-weight: var(--font-weight-medium, 500);
-  }
-  .whitespace-nowrap {
-    white-space: nowrap;
   }
   .text-bleu {
     color: var(--color-bleu);
@@ -1398,12 +1394,6 @@ main>h2 {
       height: calc(var(--spacing, 0.25rem) * 28);
     }
   }
-  .md\:size-auto {
-    @media (width >= 48rem) {
-      width: auto;
-      height: auto;
-    }
-  }
   .md\:h-12\! {
     @media (width >= 48rem) {
       height: calc(var(--spacing, 0.25rem) * 12) !important;
@@ -1570,11 +1560,6 @@ main>h2 {
       border-style: none;
     }
   }
-  .md\:bg-none {
-    @media (width >= 48rem) {
-      background-image: none;
-    }
-  }
   .md\:p-0 {
     @media (width >= 48rem) {
       padding: calc(var(--spacing, 0.25rem) * 0);
@@ -1643,16 +1628,6 @@ main>h2 {
   .md\:text-center {
     @media (width >= 48rem) {
       text-align: center;
-    }
-  }
-  .md\:indent-0 {
-    @media (width >= 48rem) {
-      text-indent: calc(var(--spacing, 0.25rem) * 0);
-    }
-  }
-  .md\:whitespace-normal {
-    @media (width >= 48rem) {
-      white-space: normal;
     }
   }
   .lg\:grid-cols-3 {

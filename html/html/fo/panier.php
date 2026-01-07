@@ -4,13 +4,6 @@
     require_once(__DIR__ . "/../../01_premiere_connexion.php");
     require_once(__DIR__ . "/../../php/fonctions.php");
 
-    
-
-
-    // if ($_SESSION["role"] === "visiteur") {
-    //     header("location:/html/fo/connexion.php");
-    // }
-
     if ($_SESSION["role"] === "client") 
     {
 
@@ -62,7 +55,9 @@
 
             //Mise à jour des attributs nb_produit_total
             $dbh->query("UPDATE sae3_skadjam._panier SET nb_produit_total = $nbProduitsTotal, montant_total_ttc = $montantTotalTTC WHERE id_panier = $idPanier");
-        } 
+        }
+        
+        $lienBtnValiderPanier = "/html/fo/adresse.php";
     }
     else if ($_SESSION['role'] === 'visiteur' && $_SESSION['panier']['nb_produit_total'] > 0) 
     {
@@ -84,14 +79,12 @@
             $infoProduitsPanier[$i]["quantiteProduit"] = $prod["quantite_par_produit"];
             $infoProduitsPanier[$i]["infoPhoto"] = $infoPhoto;
         }
+
+        $lienBtnValiderPanier = "/html/fo/connexion.php";
     }
 
     
 ?>
-
-<pre>
-    <?php print_r($_SESSION['panier']) ?>
-</pre>
 
 <!DOCTYPE html>
 <html lang="fr">
@@ -223,7 +216,7 @@
                                     </button>
                                 </form>
                                 
-                                <form class="flex justify-center" action="/html/fo/adresse.php">
+                                <form class="flex justify-center" action="<?php echo $lienBtnValiderPanier;?>">
                                     <button class="bg-beige rounded-2xl w-20 h-10 mt-2 md:w-40 md:h-14 md:mt-4 cursor-pointer border-black border shadow" type="submit">
                                         Valider le panier
                                     </button>
@@ -346,9 +339,9 @@
                                         </button>
                                     </form>
                                     
-                                    <form class="flex justify-center" action="/html/fo/adresse.php">
+                                    <form class="flex justify-center" action="<?php echo $lienBtnValiderPanier;?>">
                                         <button class="bg-beige rounded-2xl w-20 h-10 mt-2 md:w-40 md:h-14 md:mt-4 cursor-pointer border-black border shadow" type="submit">
-                                            Acheter le panier
+                                            Valider le panier
                                         </button>
                                     </form>
                                     

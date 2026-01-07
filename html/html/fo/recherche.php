@@ -18,19 +18,156 @@
     <?php (include __DIR__ . "/../../php/structure/header_front.php"); ?>
     <?php include(__DIR__ . "/../../php/structure/navbar_front.php"); ?>
 
-    <main class="min-h-[600px]">
-        <h2>Bientôt disponible ...</h2>
-        <div class="flex justify-center mt-15 mb-18">
-            <button class="bg-beige shadow rounded-sm md:rounded-2xl w-35 h-10 md:w-50 md:h-14 px-7"><a href="../../index.php">Retour</a></button>
-        </div>
-        <!--
-        <button class="-indent-96 whitespace-nowrap
-                    size-12 md:size-auto md:bg-none md:indent-0 overflow-visible md:whitespace-normal
-                    bg-beige shadow rounded-2xl w-20 h-7 md:w-40 md:h-14 mt-4">
-        <a href="../fo/index.php">Retour</a></button>-->
+    <main class="md:min-h-[800px] min-h-[600px]">
+        <!-- Barre de recherche -->
+        <aside class="sidebar w-60 p-5 bg-beige">
+            <!-- Filtres -->
+            <section>
+                <h3>Filtres</h3>
+                <!-- Categorie -->
+                 <article>
+                    <details>
+                        <summary class="cursor-pointer mt-1 mb-1">Par catégorie</summary>
+                        <!-- Alimentaire -->
+                        <div>
+                            <input type="checkbox" name="alimentaire" id="alimentaire">
+                            <label for="alimentaire">Alimentaire</label>
+                        </div>
+                        
+
+                        <!-- Vetements -->
+                        <div>
+                            <input type="checkbox" name="alimentaire" id="alimentaire">
+                            <label for="alimentaire">Vetements</label>
+                        </div>
+
+                        <!-- Artisanat -->
+                        <div>
+                            <input type="checkbox" name="alimentaire" id="alimentaire">
+                            <label for="alimentaire">Artisanat</label>
+                        </div>
+
+                        <!-- Goodies -->
+                        <div>
+                            <input type="checkbox" name="alimentaire" id="alimentaire">
+                            <label for="alimentaire">Goodies</label>
+                        </div>
+
+                        <!-- Soin -->
+                        <div>
+                            <input type="checkbox" name="alimentaire" id="alimentaire">
+                            <label for="alimentaire">Soin</label>
+                        </div>
+                    </details>
+                 </article>
+                
+                <!-- Notes -->
+                <article>
+                    <details>
+                        <summary class="cursor-pointer mt-1 mb-1">Par note</summary>
+                        <!-- 1 étoile -->
+                        <div>
+                            <input type="checkbox" name="unE" id="unE">
+                            <label for="alimentaire">1</label>
+                        </div>
+
+                        <!-- 2 étoiles -->
+                        <div>
+                            <input type="checkbox" name="deuxE" id="deuxE">
+                            <label for="alimentaire">2</label>
+                        </div>
+
+                        <!-- 3 étoiles -->
+                        <div>
+                            <input type="checkbox" name="troisE" id="troisE">
+                            <label for="alimentaire">3</label>
+                        </div>
+
+                        <!-- 4 étoiles -->
+                        <div>
+                            <input type="checkbox" name="quatreE" id="quatreE">
+                            <label for="alimentaire">4</label>
+                        </div>
+
+                        <!-- 5 étoiles -->
+                        <div>
+                            <input type="checkbox" name="cinqE" id="cinqE">
+                            <label for="alimentaire">5</label>
+                        </div>
+                    </details>
+                </article>
+                
+                <!-- Tranche de prix -->
+                <article>
+                    <details>
+                        <summary class="cursor-pointer mt-1 mb-1">Par tranche de prix</summary>
+                    </details>
+                </article>
+            </section>
+
+            <section>
+                <h3>Tris</h3>
+                <!-- prix -->
+                <article>
+                    <details>
+                        <summary class="cursor-pointer mt-1 mb-1">Par prix</summary>
+                        <div>
+                            <div>
+                                <input type="radio" name="prixTri" id="prixTri">
+                                <label for="prixTri">Croissant</label>
+                            </div>
+                            <div>
+                                <input type="radio" name="prixTri" id="prixTri">
+                                <label for="prixTri">Décroissant</label>
+                            </div>
+                        </div>
+                    </details>
+                    
+                </article>
+
+                <!-- ordre alpha -->
+                <article>
+                    <details>
+                        <summary class="cursor-pointer mt-1 mb-1">Par ordre alphabétique</summary>
+                        <div>
+                            <div>
+                                <input type="radio" name="alphaTri" id="alphaTri">
+                                <label for="alphaTri">A-Z</label>
+                            </div>
+                            <div>
+                                <input type="radio" name="alphaTri" id="alphaTri">
+                                <label for="alphaTri">Z-A</label>
+                            </div>
+                        </div>
+                    </details>
+                    
+                </article>
+
+                <!-- note -->
+                <article>
+                    <details>
+                        <summary class="cursor-pointer mt-1 mb-1">Par note</summary>
+                        <div>
+                            <div>
+                                <input type="radio" name="noteTri" id="noteTri">
+                                <label for="noteTri">5-1</label>
+                            </div>
+                            <div>
+                                <input type="radio" name="noteTri" id="noteTri">
+                                <label for="noteTri">1-5</label>
+                            </div>
+                        </div>
+                    </details>
+                </article>
+            </section>
+        </aside>
+
+
+        
     </main>
 
     <!--footer-->
     <?php include (__DIR__ . "/../../php/structure/footer_front.php"); ?>
+    <script></script>
 </body>
 </html>
