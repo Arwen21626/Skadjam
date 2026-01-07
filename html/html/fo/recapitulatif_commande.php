@@ -5,7 +5,7 @@
     $idCompte = $_SESSION['idCompte'];
     $idPanier = $_POST['idPanier'];
 
-    $sql = "SELECT 
+    /*$sql = "SELECT 
             pr.libelle_produit,
             pr.prix_ttc,
             v.raison_sociale,
@@ -34,7 +34,7 @@
             d.sous_total,
             p.montant_total_ttc,
             p.nb_produit_total
-        ";
+        ";*/
 
     $stmt = $dbh->prepare($sql);
     $stmt->execute([
