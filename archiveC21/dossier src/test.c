@@ -10,6 +10,7 @@
 #include <time.h>
 #include <regex.h>
 #include <ctype.h>
+#include <errno.h>
 
 #define TAILLEB 1024
 
@@ -33,26 +34,26 @@ typedef struct bordereaux{
     destinataire dest;
 }bordereaux;
 
-char numDept["22", "29", "35", "56"];
+char numDept[4][3] = {"22", "29", "35", "56"};
 
 // Refus possible
-char raisonRefus[
+char raisonRefus[5][128] = {
     "Le colis est trop abimé",
     "Le colis a été ouvert",
     "Le colis n'a pas été commandé",
     "Le colis est arrivé trop tard",
     "Le colis bouge"
-];
+};
 
 // Livraison possible
-char livraison[
+char livraison[3][128] = {
     "Livré en mains propres",
     "Livré en abscence",
     "Refusé"
-];
+};
 
 // Suivi de la livraison
-char etatLivraison[
+char etatLivraison[9][128] = {
     "Chez Alizon",
     "En cours d'acheminement vers le transporteur",
     "Arrivé chez le transporteur",
@@ -61,14 +62,16 @@ char etatLivraison[
     "En cours d'acheminement vers le centre local",
     "Arrivé au centre local",
     "En cours de livraison",
-    livraison
-];
+    "livraison"
+};
 
 // Déclaration
 void addCommande(int cnx, char commande[20], char buffer[TAILLEB], bordereaux *bord, time_t horo);
 int setLog(char message[512], int origin);
 void getHoroLocal(char *buffer, size_t size);
 time_t getHoro();
+int err(char message[128]);
+int connexion(char mdp[128], char user[128]);
 
 time_t horo;
 char cIp[INET_ADDRSTRLEN];
@@ -79,8 +82,10 @@ int main() {
     int ret;
     int size;
     int cnx;
+    char user[128], mdp[128];
     char commande[20];
     char buffer[TAILLEB];
+    char message[1024];
 
     sock = socket(AF_INET, SOCK_STREAM, 0);
     printf("SOCK = %d\n",sock);
@@ -106,6 +111,29 @@ int main() {
     cnx = accept(sock, (struct sockaddr *)&conn_addr, (socklen_t *)&size);
     inet_ntop(AF_INET, &conn_addr.sin_addr, cIp, sizeof(cIp));
     cPort = ntohs(conn_addr.sin_port);
+    setLog("CONNEXION INIT", 1);
+    size = read(cnx, buffer, TAILLEB);
+
+    //format commande CONN user pwd
+    sscanf(buffer, "%s %s %s", commande, user, mdp);
+    int conn = connexion(mdp, user);
+    if ( conn == 0){
+        snprintf(message, sizeof(message), "CONNEXION SUCCESS");
+        setLog(message, 1);
+        send(cnx, message, strlen(message), 0);
+    }else{
+        if (conn == 2){
+            snprintf(message, sizeof(message), "CONNEXION DENIED %s %s", user, mdp);
+            setLog(message, 1);
+            send(cnx, message, strlen(message), 0);
+        }else{
+            snprintf(message, sizeof(message), "ERRER SERVER");
+            setLog(message, 1);
+            send(cnx, message, strlen(message), 0);
+        }
+        return EXIT_FAILURE;
+    }
+
     printf("ACCEPT = %d\n",ret);
     while (1==1){
         size = read(cnx, buffer, TAILLEB);
@@ -128,7 +156,7 @@ void addCommande(int cnx, char commande[20], char buffer[TAILLEB], bordereaux *b
     char chaine[1024];
 
     //recuperation des information de la requete
-    sscanf(buffer, "%s %s %s %s %d %s %s %s %d", commande, bord->numCommande, bord->exp.entreprise, bord->exp.adresse, &bord->exp.codePostal, bord->dest.prenom, bord->dest.nom, bord->dest.adresse, &bord->dest.codePostal);
+    sscanf(buffer, "%s %s %s |%s| %d %s %s |%s| %d", commande, bord->numCommande, bord->exp.entreprise, bord->exp.adresse, &bord->exp.codePostal, bord->dest.prenom, bord->dest.nom, bord->dest.adresse, &bord->dest.codePostal);
     
     //creation numéro de suivi
     for(int i = 0; i < 3 && bord->exp.entreprise[i] != '\0'; i++) {
@@ -177,7 +205,7 @@ time_t getHoro(){
 void getHoroLocal(char *buffer, size_t size){
     time_t currentHoro = getHoro();
     struct tm *t = localtime(&currentHoro);
-    strftime(buffer, size, "%d/%m/%Y %H:%M:%S", t);
+    strftime(buffer, size, "%H:%M:%S", t);
 }
 
 void getFileName(char *buffer, size_t size){
@@ -197,13 +225,43 @@ int setLog(char message[512], int origin){
     logfile = fopen(fileName, "a");
     getHoroLocal(horoLocal, sizeof(horoLocal));
     if (origin == 1){
-        fprintf(logfile, "[ %s ] CLIENT %s:%d %s\n", horoLocal, cIp, cPort, message);
+        fprintf(logfile, "[ %s ] %s:%d CLIENT  %s\n", horoLocal, cIp, cPort, message);
         
     } else {
-        fprintf(logfile, "[ %s ] SERVICE %s\n", horoLocal, message);
+        fprintf(logfile, "[ %s ] %s:%d SERVICE %s\n", horoLocal, cIp, cPort, message);
     }
     fflush(logfile);
     fclose(logfile);
     return 0;
+}
+
+int err(char message[128]){
+    char truc[512];
+    snprintf(truc, sizeof(truc), "%s : %s", message, strerror(errno));
+    setLog(message, 0);
+    return 0;
+}
+
+int connexion(char mdp[128], char user[128]){
+    char line[256];
+    char us[128], pswd[128];
+    char message[128];
+    int ret = 2;
+
+    FILE *connexionFile;
+    connexionFile = fopen("lst_client.data", "a+");
+    if (connexionFile == NULL) {
+        err("Erreur fopen");
+        return 1;
+    }
+
+    while (fgets(line, sizeof(line), connexionFile)){
+        if (sscanf(line, "%128s %128s",us, pswd)){
+            if (strcmp(us, user) == 0 && strcmp(mdp, pswd) == 0){
+                ret = 0;
+            }
+        }
+    }
+    return ret;
 }
 // Etat livraison : 
