@@ -5,6 +5,8 @@
         $_SESSION['role'] = 'visiteur';
     }
 
+    
+
     $erreur = false;
     include __DIR__ . '/../../01_premiere_connexion.php';
     if(isset($_POST['mdp']) && isset($_POST['mail'])){
@@ -79,6 +81,8 @@
 
                             // Supprimer le panier du visiteur 
                             unset($_SESSION['panier']);
+
+
                         }
                         
 
@@ -88,10 +92,10 @@
                 }
     
                 // Initialisation pour une redirection sur le produit si on écrivais un avis par exemple et qu'on devait se connecter
-                $idProduit = 0;
-                if(isset($_POST['idProduit'])){
-                    $idProduit = $_POST['idProduit'];
-                }
+                // if ($_GET['veutAcheter'] == 1)
+                // {
+                //     $_SESSION['veutAcheter'] = "V";
+                // }
                 
                 // Redirection suivant le role
                 if($_SESSION['role'] == 'vendeur'){
@@ -100,8 +104,8 @@
                 }
                 else{
                     // Si on était sur un produit alors redirection dessus
-                    if($_SESSION['role'] == 'client' && $idProduit != 0){
-                        header('Location: ../fo/details_produit.php?idProduit='.$idProduit);
+                    if(isset($_SESSION['veutAcheter'])){
+                        header('Location: ../fo/panier.php');
                         exit;
                     }
                     else{
