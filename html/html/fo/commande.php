@@ -7,8 +7,14 @@
     try {     
         $tabInfoCommandes = null;           
         //récupère toutes les infos des tables produits et photos
-        foreach($dbh->query("SELECT *
+        foreach($dbh->query("SELECT c.id_commande, c.date_commande, p.libelle_produit, p.id_produit, d.quantite, p.prix_ht, p.prix_ttc
                             FROM sae3_skadjam._commande c
+                            INNER JOIN sae3_skadjam._details d
+                                ON d.id_commande = c.id_commande
+                            INNER JOIN sae3_skadjam._produit p
+                                ON p.id_produit = d.id_produit
+                            INNER JOIN sae3_skadjam._vendeur v
+                                ON v.id_compte = p.id_vendeur
                             WHERE c.id_client = $idCompte"
                             , PDO::FETCH_ASSOC) as $row){
             $tabInfoCommandes[] = $row;
@@ -22,11 +28,11 @@
 ?>
 
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Liste de mes commandes</title>
+    <title>Récapitulatif de la commande</title>
 </head>
 <?php include __DIR__ . '/../../php/structure/head_front.php'?>
 <body>
@@ -35,23 +41,27 @@
     <?php include __DIR__ . "/../../php/structure/navbar_front.php"; ?>
 
     <main class="min-h-[600px]">
-        <h2>Liste de mes commandes</h2>
+        <h2>Récapitulatif de la commande</h2>
 
         <?php if($tabInfoCommandes == null){ ?>
-            <p>Votre n'avez pas encore effectué de commande.</p>
+            <p>Erreur : un problème d'affichage de votre récapitulatif de commande est survenu.</p>
         <?php }
 
         else{?>
+            <h4>Numéro de la commande : </h4> 
+            <p></p>
+            <h4>Date : </h4>
+            <p></p>
             <div class="flex justify-center">
                 <?php //tableau des commandes ?>
                 <table class="table-auto w-250">
                     <thead>
                         <tr>
-                            <th scope="col" class="text-left w-125 pl-3"><h3>Numéro de la commande</h3></th>
-                            <th scope="col"><h3>Date</h3></th>
-                            <th scope="col"><h3>Etat</h3></th>
-                            <th scope="col"><h3>Montant total TTC</h3></th>
-                            <th scope="col"></th>
+                            <th scope="col" class="text-left w-125 pl-3"><h3>Article</h3></th>
+                            <th scope="col"><h3>Référence</h3></th>
+                            <th scope="col"><h3>Quantité</h3></th>
+                            <th scope="col"><h3>Prix unitaire HT</h3></th>
+                            <th scope="col"><h3>Prix unitaire TTC</h3></th>
                         </tr>
                     </thead>
                     <tbody>
@@ -89,5 +99,6 @@
 
     <!--footer-->
     <?php include (__DIR__ . "/../../php/structure/footer_front.php"); ?>
+
 </body>
 </html>
