@@ -37,7 +37,54 @@
                     $stmt = $dbh->prepare("SELECT id_compte FROM sae3_skadjam._client WHERE id_compte = ?");
                     $stmt->execute([$_SESSION['idCompte']]);
                     $role = $stmt->fetch(PDO::FETCH_ASSOC);
-                    $_SESSION['role'] = 'client';
+
+                    // Début modif korentin
+                    // Permet d'ajouter tout les éléments du panier du visiteur au panier du compte auquel il se connecte
+                    if ($role !== null)
+                    {
+                        if ($_SESSION['panier']['nb_produit_total'] > 0) 
+                        {
+                            // Met à jour le nb de produit total contenu dans le panier
+                            $stmt = $dbh->prepare("UPDATE sae3_skadjam._panier SET nb_produit_total = nb_produit_total + ?");
+                            $stmt->execute([$_SESSION['panier']['nb_produit_total']]);
+
+                            // Met à jour le montant total TTC du panier
+                            $stmt = $dbh->prepare("UPDATE sae3_skadjam._panier SET montant_total_ttc = montant_total_ttc + ?");
+                            $stmt->execute([$_SESSION['panier']['montant_total_ttc']]);
+
+                            // Récupère l'id du panier du client
+                            $stmt = $dbh->prepare("SELECT id_panier FROM sae3_skadjam._client WHERE id_compte = ?");
+                            $stmt->execute([$tab['id_compte']]);
+                            $idPanier = $stmt->fetch(PDO::FETCH_ASSOC)['id_panier'];
+
+                            // Récupère tout les id des produits contenu dans le panier
+                            $stmt = $dbh->prepare("SELECT id_produit FROM sae3_skadjam._contient WHERE id_panier = ?");
+                            $stmt->execute([$idPanier]);
+                            $listeIdProduits = $stmt->fetchAll(PDO::FETCH_COLUMN);
+                            
+                            foreach ($_SESSION['panier']['contient'] as $i => $produit) 
+                            {
+                                // Si le produit est présent dans le panier du compte client, on ajoute la quantité du panier visiteur
+                                if (in_array($produit['id'], $listeIdProduits)) // Faire attention dans le panier du visiteur dans le $_SESSION, le nom de la clé de l'id du produit est 'id' simple
+                                {
+                                    $stmt = $dbh->prepare("UPDATE sae3_skadjam._contient SET quantite_par_produit = quantite_par_produit + ? WHERE id_produit = ? AND id_panier = ?");
+                                    $stmt->execute([$produit['quantite_par_produit'], $produit['id'], $idPanier]);
+                                }
+                                else // Si le produit n'est pas présent, on insert le produit dans la table contient avec la quantité
+                                {
+                                    $stmt = $dbh->prepare("INSERT INTO sae3_skadjam._contient (id_produit, id_panier, quantite_par_produit) VALUES (?, ?, ?)");
+                                    $stmt->execute([$produit['id'], $idPanier, $produit['quantite_par_produit']]);
+                                }
+                            }
+
+                            // Supprimer le panier du visiteur 
+                            unset($_SESSION['panier']);
+                        }
+                        
+
+                        $_SESSION['role'] = 'client';
+                    }
+                    // Fin modif
                 }
     
                 // Initialisation pour une redirection sur le produit si on écrivais un avis par exemple et qu'on devait se connecter
