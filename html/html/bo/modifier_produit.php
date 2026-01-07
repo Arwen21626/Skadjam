@@ -97,7 +97,7 @@ if (isset($_POST['categorie']) && isset($_POST['nom']) && isset($_POST['prix']) 
     $prixHT = htmlentities($_POST['prix']);
     $qteStock = htmlentities($_POST['qteStock']);
     $enLigne = htmlentities($_POST['mettreEnLigne']);
-    // $enPromotion = htmlentities($_POST['mettreEnPromotion']);
+    $enPromotion = htmlentities($_POST['mettreEnPromotion']);
     $description = htmlentities($_POST['description']);
     $unite = htmlentities($_POST['unite']);
     $qteUnite = htmlentities($_POST['qteUnite']);
@@ -112,9 +112,14 @@ if (isset($_POST['categorie']) && isset($_POST['nom']) && isset($_POST['prix']) 
     if ($_POST['mettreEnLigne'] == false) {
         //S'il n'est pas coché il faut mettre est_masque dans la BDD à true en chaine pour eviter les problèmes
         $enLigne = 'true';
-    }
-    else{
+    }else{
         $enLigne = 'false';
+    }
+
+    if ($_POST['mettreEnPromotion']) {
+        $enPromotion = 'true';
+    }else{
+        $enPromotion = 'false';
     }
 
     //Vérification du prix et du stock
@@ -142,21 +147,107 @@ if (isset($_POST['categorie']) && isset($_POST['nom']) && isset($_POST['prix']) 
 
             //Update du produit
             $updateProduit = $dbh -> query("
-                UPDATE sae3_skadjam._produit SET 
-                libelle_produit = '$nom', 
-                description_produit = '$description', 
-                prix_ht = $prixHT, 
-                prix_ttc = $prixTTC, 
-                est_masque = $enLigne, 
-                quantite_stock = $qteStock, 
-                quantite_unite = $qteUnite, 
-                unite = '$unite', 
-                id_categorie = $idCategorie, 
-                id_vendeur = 1, 
+                UPDATE sae3_skadjam._produit SET
+                libelle_produit = '$nom',
+                description_produit = '$description',
+                prix_ht = $prixHT,
+                prix_ttc = $prixTTC,
+                est_masque = $enLigne,
+                quantite_stock = $qteStock,
+                quantite_unite = $qteUnite,
+                unite = '$unite',
+                id_categorie = $idCategorie,
+                id_vendeur = 1,
                 id_tva = $tva
                 WHERE id_produit = $idProduit
                 ;");
-            
+
+            // Gestion de la promotion
+            if (isset($_POST['mettreEnPromotion'])){
+                try {
+                    $dbh->beginTransaction();
+                    // Vérifier si le produit n'est pas déjà promu
+                    $check = $dbh->prepare("
+                        SELECT 1
+                        FROM sae3_skadjam._promu
+                        WHERE id_produit = :id_produit
+                    ");
+                    $check->execute([':id_produit' => $idProduit]);
+                    
+                    if ($check->rowCount() === 0){
+                        // Création de la promotion
+                        $stmtPromo = $dbh->prepare("
+                            INSERT INTO sae3_skadjam._promotion(
+                                date_debut_promotion,
+                                heure_debut,
+                                id_vendeur,
+                                id_photo
+                            )VALUES(
+                                :date_debut,
+                                '00:00',
+                                :id_vendeur,
+                                :id_photo
+                            )
+                        ");
+                        $stmtPromo->execute([
+                            ':date_debut' => date('d/m/Y'),
+                            ':id_vendeur' => $_SESSION['idCompte'],
+                            ':id_photo'   => $idPhoto ?? null
+                        ]);
+
+                        // Récupération de l'id promotion
+                        $idPromotion = $dbh->lastInsertId();
+
+                        // Lien produit <-> promotion
+                        $stmtPromu = $dbh->prepare("
+                            INSERT INTO sae3_skadjam._promu (
+                                id_promotion,
+                                id_produit
+                            ) VALUES (
+                                :id_promotion,
+                                :id_produit
+                            )
+                        ");
+                        $stmtPromu->execute([
+                            ':id_promotion' => $idPromotion,
+                            ':id_produit'   => $idProduit
+                        ]);
+                    }
+
+                    $dbh->commit();
+
+                } catch (Exception $e) {
+                    $dbh->rollBack();
+                    die("Erreur pendant la mise en promotion : " . $e->getMessage());
+                }
+            }else{
+                $stmt = $dbh->prepare("
+                    SELECT id_promotion
+                    FROM sae3_skadjam._promu
+                    WHERE id_produit = :id_produit
+                ");
+                $stmt->execute([':id_produit' => $idProduit]);
+
+                if ($promo = $stmt->fetch()) {
+
+                    $dbh->beginTransaction();
+
+                    // Supprimer le lien
+                    $dbh->prepare("
+                        DELETE FROM sae3_skadjam._promu
+                        WHERE id_produit = :id_produit
+                    ")->execute([':id_produit' => $idProduit]);
+
+                    // Supprimer la promotion
+                    $dbh->prepare("
+                        DELETE FROM sae3_skadjam._promotion
+                        WHERE id_promotion = :id_promotion
+                    ")->execute([':id_promotion' => $promo['id_promotion']]);
+
+                    $dbh->commit();
+                }
+            }
+
 
             //Update de la photo dans la table photo
             $updatePhoto = $dbh -> query("
@@ -262,10 +353,10 @@ else { ?>
                     </div>
                 
                     <!-- Mettre en promotion -->
-                    <!-- <div class="flex flex-row mr-4 ml-4">
+                    <div class="flex flex-row mr-4 ml-4">
                         <label class="mr-4" for="mettreEnPromotion">Mettre en promotion</label>
-                        <input class="appearance-none w-10 h-10 border-4 border-beige rounded-md checked:bg-beige" type="checkbox" name="mettreEnPromotion" id="mettreEnPromotion">
-                    </div> -->
+                        <input class="cursor-pointer appearance-none w-10 h-10 border-4 border-beige rounded-md checked:bg-beige" type="checkbox" name="mettreEnPromotion" id="mettreEnPromotion" value="1">
+                    </div>
                 </div>
                 <!-- Description -->
                 <div class="col-start-1 col-span-2 row-start-5 flex flex-col m-2 p-2 ">
