@@ -9,7 +9,7 @@
     src: url("/font/Amiko/Amiko-Regular.ttf");
 }
 
-h1, h2, h3, h4 {
+h1, h2, h3, h4, summary {
     font-family: 'MavenPro';
 }
 
@@ -17,7 +17,7 @@ h1, h2, h3 {
     font-weight: bold;
 }
 
-p, a, input, label,button {
+p, a, input, label, button, details{
     font-family: 'Amiko';
 }
 

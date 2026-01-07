@@ -86,10 +86,6 @@
     
 ?>
 
-<pre>
-    <?php print_r($_SESSION['panier']) ?>
-</pre>
-
 <!DOCTYPE html>
 <html lang="fr">
 <head>
