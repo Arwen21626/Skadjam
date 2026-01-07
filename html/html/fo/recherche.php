@@ -20,14 +20,14 @@
 
     <main class="md:min-h-[800px] min-h-[600px]">
         <!-- Barre de recherche -->
-        <aside class="sidebar">
+        <aside class="sidebar w-60 p-5 bg-beige">
             <!-- Filtres -->
             <section>
                 <h3>Filtres</h3>
                 <!-- Categorie -->
                  <article>
                     <details>
-                        <summary>Par catégorie</summary>
+                        <summary class="cursor-pointer mt-1 mb-1">Par catégorie</summary>
                         <!-- Alimentaire -->
                         <div>
                             <input type="checkbox" name="alimentaire" id="alimentaire">
@@ -64,7 +64,7 @@
                 <!-- Notes -->
                 <article>
                     <details>
-                        <summary>Par note</summary>
+                        <summary class="cursor-pointer mt-1 mb-1">Par note</summary>
                         <!-- 1 étoile -->
                         <div>
                             <input type="checkbox" name="unE" id="unE">
@@ -100,7 +100,7 @@
                 <!-- Tranche de prix -->
                 <article>
                     <details>
-                        <summary>Par tranche de prix</summary>
+                        <summary class="cursor-pointer mt-1 mb-1">Par tranche de prix</summary>
                     </details>
                 </article>
             </section>
@@ -110,7 +110,7 @@
                 <!-- prix -->
                 <article>
                     <details>
-                        <summary>Par prix</summary>
+                        <summary class="cursor-pointer mt-1 mb-1">Par prix</summary>
                         <div>
                             <div>
                                 <input type="radio" name="prixTri" id="prixTri">
@@ -128,7 +128,7 @@
                 <!-- ordre alpha -->
                 <article>
                     <details>
-                        <summary>Par ordre alphabétique</summary>
+                        <summary class="cursor-pointer mt-1 mb-1">Par ordre alphabétique</summary>
                         <div>
                             <div>
                                 <input type="radio" name="alphaTri" id="alphaTri">
@@ -146,7 +146,7 @@
                 <!-- note -->
                 <article>
                     <details>
-                        <summary>Par note</summary>
+                        <summary class="cursor-pointer mt-1 mb-1">Par note</summary>
                         <div>
                             <div>
                                 <input type="radio" name="noteTri" id="noteTri">
