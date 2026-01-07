@@ -11,6 +11,7 @@
 #include <regex.h>
 #include <ctype.h>
 #include <errno.h>
+#include <postgresql/libpq-fe.h>
 
 #define TAILLEB 1024
 
@@ -76,6 +77,7 @@ int connexion(char mdp[128], char user[128]);
 time_t horo;
 char cIp[INET_ADDRSTRLEN];
 int cPort;
+PGconn *conn;
 
 int main() {
     int sock;
@@ -86,6 +88,7 @@ int main() {
     char commande[20];
     char buffer[TAILLEB];
     char message[1024];
+    conn = PQconnectdb("host=localhost dbname=sae3_delivraptor user=postgres password=secret");
 
     sock = socket(AF_INET, SOCK_STREAM, 0);
     printf("SOCK = %d\n",sock);
@@ -177,6 +180,7 @@ void addCommande(int cnx, char commande[20], char buffer[TAILLEB], bordereaux *b
 }
 // Etape 2
 // Etat livraison : En cours d'acheminement vers le transporteur
+
 
 // Etape 3
 // Etat livraison : Arrivé chez le transporteur
