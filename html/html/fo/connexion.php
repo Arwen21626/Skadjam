@@ -5,6 +5,8 @@
         $_SESSION['role'] = 'visiteur';
     }
 
+    
+
     $erreur = false;
     include __DIR__ . '/../../01_premiere_connexion.php';
     if(isset($_POST['mdp']) && isset($_POST['mail'])){
@@ -44,18 +46,18 @@
                     {
                         if ($_SESSION['panier']['nb_produit_total'] > 0) 
                         {
-                            // Met à jour le nb de produit total contenu dans le panier
-                            $stmt = $dbh->prepare("UPDATE sae3_skadjam._panier SET nb_produit_total = nb_produit_total + ?");
-                            $stmt->execute([$_SESSION['panier']['nb_produit_total']]);
-
-                            // Met à jour le montant total TTC du panier
-                            $stmt = $dbh->prepare("UPDATE sae3_skadjam._panier SET montant_total_ttc = montant_total_ttc + ?");
-                            $stmt->execute([$_SESSION['panier']['montant_total_ttc']]);
-
                             // Récupère l'id du panier du client
                             $stmt = $dbh->prepare("SELECT id_panier FROM sae3_skadjam._client WHERE id_compte = ?");
                             $stmt->execute([$tab['id_compte']]);
                             $idPanier = $stmt->fetch(PDO::FETCH_ASSOC)['id_panier'];
+
+                            // Met à jour le nb de produit total contenu dans le panier
+                            $stmt = $dbh->prepare("UPDATE sae3_skadjam._panier SET nb_produit_total = nb_produit_total + ? WHERE id_panier = ?");
+                            $stmt->execute([$_SESSION['panier']['nb_produit_total'], $idPanier]);
+
+                            // Met à jour le montant total TTC du panier
+                            $stmt = $dbh->prepare("UPDATE sae3_skadjam._panier SET montant_total_ttc = montant_total_ttc + ? WHERE id_panier = ?");
+                            $stmt->execute([$_SESSION['panier']['montant_total_ttc'], $idPanier]);
 
                             // Récupère tout les id des produits contenu dans le panier
                             $stmt = $dbh->prepare("SELECT id_produit FROM sae3_skadjam._contient WHERE id_panier = ?");
@@ -79,6 +81,8 @@
 
                             // Supprimer le panier du visiteur 
                             unset($_SESSION['panier']);
+
+
                         }
                         
 
@@ -88,10 +92,10 @@
                 }
     
                 // Initialisation pour une redirection sur le produit si on écrivais un avis par exemple et qu'on devait se connecter
-                $idProduit = 0;
-                if(isset($_POST['idProduit'])){
-                    $idProduit = $_POST['idProduit'];
-                }
+                // if ($_GET['veutAcheter'] == 1)
+                // {
+                //     $_SESSION['veutAcheter'] = "V";
+                // }
                 
                 // Redirection suivant le role
                 if($_SESSION['role'] == 'vendeur'){
@@ -100,8 +104,8 @@
                 }
                 else{
                     // Si on était sur un produit alors redirection dessus
-                    if($_SESSION['role'] == 'client' && $idProduit != 0){
-                        header('Location: ../fo/details_produit.php?idProduit='.$idProduit);
+                    if(isset($_SESSION['veutAcheter'])){
+                        header('Location: ../fo/panier.php');
                         exit;
                     }
                     else{

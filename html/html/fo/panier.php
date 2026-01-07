@@ -80,10 +80,8 @@
             $infoProduitsPanier[$i]["infoPhoto"] = $infoPhoto;
         }
 
-        $lienBtnValiderPanier = "/html/fo/connexion.php";
+        $lienBtnValiderPanier = "/html/fo/connexion.php?veutAcheter=1";
     }
-
-    
 ?>
 
 <!DOCTYPE html>

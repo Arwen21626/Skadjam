@@ -3,25 +3,52 @@
     require_once __DIR__ . "/../../php/verif_role_fo.php";
     require(__DIR__ . '/../../01_premiere_connexion.php');
     $idCompte = $_SESSION['idCompte'];
-    $idPanier = $_SESSION['idPanier'];
+    $idPanier = $_POST['idPanier'];
 
-    $sql = "SELECT *
-    FROM sae3_skadjam._panier
-    WHERE id_panier = :id_panier";
+    $sql = "SELECT 
+            pr.libelle_produit,
+            pr.prix_ttc,
+            v.raison_sociale,
+            d.quantite,
+            d.montant_ht,
+            d.sous_total,
+            p.montant_total_ttc,
+            p.nb_produit_total,
+            SUM(d.sous_total) AS montant_total_ht
+        FROM sae3_skadjam._panier p
+        INNER JOIN sae3_skadjam._contient c
+            ON c.id_panier = p.id_panier
+        INNER JOIN sae3_skadjam._produit pr
+            ON pr.id_produit = c.id_produit
+        INNER JOIN sae3_skadjam._details d
+            ON d.id_produit = p.id_produit       
+        INNER JOIN sae3_skadjam._vendeur v
+            ON v.id_compte = pr.id_vendeur
+        WHERE p.id_panier = :id_panier
+        GROUP BY 
+            pr.libelle_produit,
+            pr.prix_ttc,
+            v.raison_sociale,
+            d.quantite,
+            d.montant_ht,
+            d.sous_total,
+            p.montant_total_ttc,
+            p.nb_produit_total
+        ";
 
     $stmt = $dbh->prepare($sql);
     $stmt->execute([
         ':id_panier' => $idPanier
     ]);
 
-    $panier = $stmt->fetch(PDO::FETCH_ASSOC);
+    $infosPanier = $stmt->fetch(PDO::FETCH_ASSOC);
 
     
     try {
         $date = date("j/n/Y");
         $dbh->beginTransaction();
 
-        // 1️⃣ Insertion de la commande
+        //Insertion de la commande
         $sqlCommande = "
             INSERT INTO sae3_skadjam._commande
             (etat, date_commande, montant_total_ttc, id_client)
@@ -33,13 +60,13 @@
         $stmtCommande->execute([
             ':etat' => 'Attente de validation',
             ':date_commande' => $date,
-            ':montant_total_ttc' => $panier['montant_total_ttc'],
+            ':montant_total_ttc' => $infosPanier['montant_total_ttc'],
             ':id_client' => $idCompte
         ]);
 
         $idCommande = $stmtCommande->fetchColumn();
 
-        // 2️⃣ Insertion de la facture
+        //Insertion de la facture
         $sqlFacture = "
             INSERT INTO sae3_skadjam._facture
             (montant_ht, destinataire, date_commande, id_commande)
@@ -50,14 +77,14 @@
         $stmtFacture = $dbh->prepare($sqlFacture);
         $stmtFacture->execute([
             ':montant_ht' => 100.42,
-            ':destinataire' => 3,
-            ':date_commande' => '2026-01-07',
+            ':destinataire' => $idCompte,
+            ':date_commande' => $date,
             ':id_commande' => $idCommande
         ]);
 
         $numeroFacture = $stmtFacture->fetchColumn();
 
-        // 3️⃣ Mise à jour de la commande
+        //Mise à jour de la commande
         $sqlUpdate = "
             UPDATE sae3_skadjam._commande
             SET id_facture = :id_facture
