@@ -196,6 +196,12 @@
                             <a href="connexion.php?idProduit=<?php echo $idProd;?>">Ajouter un avis</a>
                         <?php }?>
                     </button>
+
+                    <!-- Supression d'un avis -->
+                    <?php if ($_SESSION['role'] === 'client' && $dejaAvis){ // on peut supprimer un avis que si on a déjà mit un ?>
+                        <button class="bg-beige rounded-2xl w-48 h-14 mb-4 md:mr-16 hover:text-rouge"><a href="./ajouter_avis.php?idProduit=<?php echo $produit['id_produit']?>&supr=true">Supprimer mon avis</a></button>
+                    <?php }?>
+
                     <?php if($avis != null){?>
                     <!-- Notes -->
                     <section class="md:mr-16 p-5 bg-beige rounded-2xl h-80 w-48 flex flex-col justify-center">
