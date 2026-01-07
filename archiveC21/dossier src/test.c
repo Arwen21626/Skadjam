@@ -33,6 +33,37 @@ typedef struct bordereaux{
     destinataire dest;
 }bordereaux;
 
+char numDept["22", "29", "35", "56"];
+
+// Refus possible
+char raisonRefus[
+    "Le colis est trop abimé",
+    "Le colis a été ouvert",
+    "Le colis n'a pas été commandé",
+    "Le colis est arrivé trop tard",
+    "Le colis bouge"
+];
+
+// Livraison possible
+char livraison[
+    "Livré en mains propres",
+    "Livré en abscence",
+    "Refusé"
+];
+
+// Suivi de la livraison
+char etatLivraison[
+    "Chez Alizon",
+    "En cours d'acheminement vers le transporteur",
+    "Arrivé chez le transporteur",
+    "En cours d'acheminement vers la plateforme regionale",
+    "Arrivé à la plateforme regionale",
+    "En cours d'acheminement vers le centre local",
+    "Arrivé au centre local",
+    "En cours de livraison",
+    livraison
+];
+
 // Déclaration
 void addCommande(int cnx, char commande[20], char buffer[TAILLEB], bordereaux *bord, time_t horo);
 int setLog(char message[512], int origin);
@@ -91,6 +122,7 @@ int main() {
 }
 
 // Etape 1
+// Etat livraison : Chez Alizon
 // ADD numCommande entrepriseExp adresseExp cpExp  nomDest prenomDest adresseDest cpDest adresse syntaxe ex : 6_rue_camelia
 void addCommande(int cnx, char commande[20], char buffer[TAILLEB], bordereaux *bord, time_t horo){
     char chaine[1024];
@@ -116,18 +148,25 @@ void addCommande(int cnx, char commande[20], char buffer[TAILLEB], bordereaux *b
     setLog(chaine, 0);
 }
 // Etape 2
+// Etat livraison : En cours d'acheminement vers le transporteur
 
 // Etape 3
+// Etat livraison : Arrivé chez le transporteur
 
 // Etape 4
+// Etat livraison : En cours d'acheminement vers la plateforme regionale
 
 // Etape 5
+// Etat livraison : Arrivé à la plateforme regionale
 
 // Etape 6
+// Etat livraison : En cours d'acheminement vers le centre local
 
 // Etape 7
+// Etat livraison : Arrivé au centre local
 
 // Etape 8
+// Etat livraison : En cours de livraison
 
 // Etape 9
 time_t getHoro(){
@@ -167,3 +206,4 @@ int setLog(char message[512], int origin){
     fclose(logfile);
     return 0;
 }
+// Etat livraison : 

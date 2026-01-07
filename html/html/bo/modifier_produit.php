@@ -248,7 +248,7 @@ else { ?>
                     <!-- Quantite unité -->
                     </div>
                     <div class="flex flex-col">
-                        <label for="qteUnite">Quantité unité :</label>
+                        <label for="qteUnite">Quantité par unité :</label>
                         <input value="<?php echo($qteUnite) ;?>" class="border-4 border-beige rounded-2xl w-75" type="number" name="qteUnite" id="qteUnite" min="0" required>
                     </div>
                 </div>

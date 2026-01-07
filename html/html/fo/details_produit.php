@@ -54,7 +54,7 @@
         // Définition des variables PHP pour récupérer chaque donnée nécessaire
         $libelleProd = $produit["libelle_produit"]; // Nom du produit
         $libelleCat = $categorie["libelle_categorie"]; //Libellé de la catégorie
-        $prixTTC = $produit["prix_ttc"]; // Prix du produit
+        $prixTTC = str_replace(".", ",", $produit["prix_ttc"]); // Prix du produit
         $produitStock = $produit["quantite_stock"]; // Récupère le stock du produit pour savoir si il est disponible ou non
         $nomVendeur = $vendeur["raison_sociale"];
         $produitDesc = $produit["description_produit"];
@@ -64,14 +64,7 @@
         // Si il est connecté : le produit est ajouté à son panier
         //Si il n'est pas connecté : le visiteur est renvoyé sur la page de connexion
 
-        if ($_SESSION["role"] === "visiteur") 
-        {
-            $lienBtnAjouterPanier = "/html/fo/connexion.php?idProduit=" . $idProd;
-        }
-        else if ($_SESSION["role"] === "client")
-        {
-            $lienBtnAjouterPanier = "/php/ajouter_panier.php";
-        }
+        $lienBtnAjouterPanier = "/php/ajouter_panier.php";
     }
 ?>
 
@@ -203,6 +196,12 @@
                             <a href="connexion.php?idProduit=<?php echo $idProd;?>">Ajouter un avis</a>
                         <?php }?>
                     </button>
+
+                    <!-- Supression d'un avis -->
+                    <?php if ($_SESSION['role'] === 'client' && $dejaAvis){ // on peut supprimer un avis que si on a déjà mit un ?>
+                        <button class="bg-beige rounded-2xl w-48 h-14 mb-4 md:mr-16 hover:text-rouge"><a href="./ajouter_avis.php?idProduit=<?php echo $produit['id_produit']?>&supr=true">Supprimer mon avis</a></button>
+                    <?php }?>
+
                     <?php if($avis != null){?>
                     <!-- Notes -->
                     <section class="md:mr-16 p-5 bg-beige rounded-2xl h-80 w-48 flex flex-col justify-center">

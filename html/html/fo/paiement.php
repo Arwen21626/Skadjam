@@ -102,7 +102,7 @@ if($_SESSION['role'] != 'client'){
                 <div class="flex flex-col md:items-center items-start ml-5 md:ml-0">
                     <div class="flex flex-col mb-5 mt-5">
                         <label for="numero">Numéro de carte* :</label>
-                        <input placeholder="0000 1111 2222 3333" maxlength="16" pattern="[0-9]{16}" value="<?= isset($_POST['numero'])? $numero : "" ?>" class="pl-2 border-4 border-vertClair rounded-2xl placeholder-gray-500 md:w-100 w-75" type="text" name="numero" id="numero" required>
+                        <input placeholder="0000 1111 2222 3333" maxlength="16" pattern="[0-9]{16}" value="<?= isset($_POST['numero'])? $numero : "" ?>" class="pl-2 border-4 border-vertClair rounded-xl placeholder-gray-500 md:w-100 w-75" type="text" name="numero" id="numero" required>
                         <?php
                             if($erreurNumero){ ?>
                                 <p class="text-rouge"><?php echo "Le numéro n'est pas bon";?></p>
@@ -113,9 +113,9 @@ if($_SESSION['role'] != 'client'){
                         <div class="flex flex-col w-100">
                             <label for="expiration">Date d'expiration* :</label>
                             <p class="flex flex-row">
-                                <input placeholder="MM" value="<?= isset($_POST['mois'])? $mois : "" ?>" maxlength="2" pattern="0[1-9]|1[0-2]" class="pl-2 border-4 border-vertClair rounded-2xl placeholder-gray-500 w-15" type="text" name="mois" id="mois" required>
+                                <input placeholder="MM" value="<?= isset($_POST['mois'])? $mois : "" ?>" maxlength="2" pattern="0[1-9]|1[0-2]" class="pl-2 border-4 border-vertClair rounded-xl placeholder-gray-500 w-15" type="text" name="mois" id="mois" required>
                                 /
-                                <input placeholder="AA" value="<?= isset($_POST['annee'])? $annee : "" ?>" maxlength="2" class="pl-2 border-4 border-vertClair rounded-2xl placeholder-gray-500 w-15" type="text" name="annee" id="annee" required>
+                                <input placeholder="AA" value="<?= isset($_POST['annee'])? $annee : "" ?>" maxlength="2" class="pl-2 border-4 border-vertClair rounded-xl placeholder-gray-500 w-15" type="text" name="annee" id="annee" required>
                             </p>
                             <?php if($erreurExpiration){ ?>
                                 <p class="text-rouge"><?php echo "La date n'est pas bonne";?></p>
@@ -125,7 +125,7 @@ if($_SESSION['role'] != 'client'){
         
                         <div class="flex flex-col mt-5">
                             <label for="cryptogramme">Cryptogramme* :</label>
-                            <input placeholder="000" pattern="[0-9]{3}" value="<?= isset($_POST['cryptogramme'])? $cryptogramme : "" ?>" class="pl-2 border-4 border-vertClair rounded-2xl placeholder-gray-500 w-50" type="text" name="cryptogramme" id="cryptogramme" required>
+                            <input placeholder="000" pattern="[0-9]{3}" value="<?= isset($_POST['cryptogramme'])? $cryptogramme : "" ?>" class="pl-2 border-4 border-vertClair rounded-xl placeholder-gray-500 w-50" type="text" name="cryptogramme" id="cryptogramme" required>
                             
                             <?php if($erreurCryptogramme){ ?>
                                 <p class="text-rouge"><?php echo "Le cryptogramme n'est pas bon";?></p>
@@ -134,7 +134,7 @@ if($_SESSION['role'] != 'client'){
                     </div>
                     <div class="flex flex-col mb-5">
                         <label for="nom">Nom du titulaire* :</label>
-                        <input placeholder="M Alizon" value="<?= isset($_POST['nom'])? $nom : "" ?>" class="pl-2 border-4 border-vertClair rounded-2xl placeholder-gray-500 md:w-100 w-75 ml-0" type="text" name="nom" id="nom" required>
+                        <input placeholder="M Alizon" value="<?= isset($_POST['nom'])? $nom : "" ?>" class="pl-2 border-4 border-vertClair rounded-xl placeholder-gray-500 md:w-100 w-75 ml-0" type="text" name="nom" id="nom" required>
                         
                         <?php if($erreurNom){ ?>
                                 <p class="text-rouge"><?php echo "Le nom n'est pas bon";?></p>
@@ -166,8 +166,8 @@ if($_SESSION['role'] != 'client'){
                     </div> -->
                 </div>
                 <div class="flex flex-row justify-center">
-                    <button class="border-vertClair border-2 rounded-2xl w-40 h-14 cursor-pointer m-5"><a href="../fo/adresse.php">Retour</a></button>
-                    <input class="border-vertClair border-2 rounded-2xl w-40 h-14 cursor-pointer m-5" type="submit" value="Suivant">
+                    <button class="border-vertClair border-2 rounded-xl w-40 h-14 cursor-pointer m-5"><a href="../fo/adresse.php">Retour</a></button>
+                    <input class="border-vertClair border-2 rounded-xl w-40 h-14 cursor-pointer m-5" type="submit" value="Suivant">
                 </div>
             </form>
         </main>

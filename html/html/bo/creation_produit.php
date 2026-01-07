@@ -41,7 +41,7 @@ if (isset($_POST['categorie']) && isset($_POST['nom']) && isset($_POST['prix']) 
     //Récupération des champs pour l'insertion
     $idCategorie = htmlentities($_POST['categorie']);
     $nom = htmlentities($_POST['nom']);
-    $prixHT = htmlentities($_POST['prix']);
+    $prixHT = htmlentities(str_replace(",", ".", $_POST['prix']));
     $qteStock = htmlentities($_POST['qteStock']);
     $description = htmlentities($_POST['description']);
     $unite = htmlentities($_POST['unite']);

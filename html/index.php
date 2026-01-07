@@ -9,7 +9,7 @@
         $_SESSION['role'] = "visiteur";
         $_SESSION['panier'] = ["nb_produit_total" => 0, // Utilisation des noms de colonne utilisées dans la BDD
                                "montant_total_ttc" => 0,
-                               "contient" => []]; 
+                               "contient" => []]; //format du tableau représentant un produit : ['id' => 25, 'quantite_par_produit' => 2]
     }
 
     require_once(__DIR__ . "/php/verif_role_fo.php");
@@ -38,7 +38,7 @@
             <a href="#nosProduits" title="lien vers page les plus vendus">
                 <img src="images/images_accueil/les_plus_vendus.webp" alt="les plus vendus" class="w-90 md:w-150 h-auto justify-self-end">
             </a>
-            <a href="html/fo/commandes.php" title="lien vers page commandes">
+            <a href="html/fo/liste_commandes.php" title="lien vers page commandes">
                 <img src="images/images_accueil/commandes.webp" alt="commandes" class="w-90 md:w-150 h-auto justify-self-start">
             </a>        
         </div>
@@ -76,7 +76,7 @@
                 $maxPage = sizeof($tabProduit)/PAGE_SIZE;
                 //découpe le catalogue en page de 15 produits
                 $lignes = array_slice($tabProduit, $pageNumber*PAGE_SIZE-PAGE_SIZE, PAGE_SIZE);
-
+                
                 //affiche la photo du produit, son nom, son prix et sa note ?>
                 <div class="grid grid-cols-2 justify-items-center md:grid-cols-3">
                     <?php foreach($lignes as $id => $valeurs){
@@ -94,7 +94,8 @@
 
                                 <!--affichage du prix du produit-->   
                                 <div class="flex justify-start items-center col-span-2">
-                                    <p><?php echo $valeurs['prix_ttc'];?> €</p>
+                                    <?php $prix = str_replace(".", ",", htmlentities($valeurs['prix_ttc'])) ?>
+                                    <p><?php echo $prix;?> €</p>
 
                                     <!--récupération de la note-->
                                     <div class="w-2/4 ml-2 md:ml-10 flex">

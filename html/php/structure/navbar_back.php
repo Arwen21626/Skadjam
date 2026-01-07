@@ -15,14 +15,14 @@
 
         <div class="flex flex-col justify-center items-center">
 
-            <a class="text-bleu hover:text-beige" href="/html/bo/commandes.php">
+            <a class="text-bleu hover:text-beige" href="/html/bo/liste_commandes.php">
                 <div class="size-12 bg-no-repeat bg-size-[auto_48px]
                             bg-[url(/images/logo/bootstrap_icon/truck.svg)]
                             hover:bg-[url(/images/logo/bootstrap_icon/truck-fill.svg)]">
                 </div>
             </a>
 
-            <a class="text-bleu hover:text-beige" href="/html/bo/commandes.php">Commandes</a>
+            <a class="text-bleu hover:text-beige" href="/html/bo/liste_commandes.php">Commandes</a>
         </div>
 
         <div class="flex flex-col justify-center items-center">
