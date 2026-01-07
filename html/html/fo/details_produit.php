@@ -64,14 +64,7 @@
         // Si il est connecté : le produit est ajouté à son panier
         //Si il n'est pas connecté : le visiteur est renvoyé sur la page de connexion
 
-        if ($_SESSION["role"] === "visiteur") 
-        {
-            $lienBtnAjouterPanier = "/html/fo/connexion.php?idProduit=" . $idProd;
-        }
-        else if ($_SESSION["role"] === "client")
-        {
-            $lienBtnAjouterPanier = "/php/ajouter_panier.php";
-        }
+        $lienBtnAjouterPanier = "/php/ajouter_panier.php";
     }
 ?>
 
