@@ -33,11 +33,7 @@ if ($_SESSION['role'] === 'client')
         WHERE id_panier = :idPanier
     ");
 
-    $rqt->execute([
-        ':idPanier' => $idPanier
-    ]);
-
-
+    
     // Redirection différente selon pourquoi on vide le panier -> façon normal ou lors de l'achat
     if ($typeVider === "normal") 
     {
@@ -45,8 +41,34 @@ if ($_SESSION['role'] === 'client')
     }
     else if ($typeVider === "achat")
     {
+        $stmt = $dbh->prepare("SELECT id_panier FROM sae3_skadjam._panier WHERE id_client = ?");
+        $stmt->execute([$_SESSION['idCompte']]);
+        $idPanierAchete = $stmt->fetch(PDO::FETCH_ASSOC)['id_panier'];
+
+        $stmt = $dbh->prepare("SELECT id_produit, quantite_par_produit, quantite_stock FROM sae3_skadjam._contient NATURAL JOIN sae3_skadjam._produit WHERE id_panier = ?");
+        $stmt->execute([$idPanierAchete]);
+        $res = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+        //màj base de données
+        $updateStock = $dbh->prepare("
+            UPDATE sae3_skadjam._produit
+            SET quantite_stock = :qte
+            WHERE id_produit = :id
+        ");
+
+        foreach ($res as $ligne) {            
+            $updateStock->execute([
+                ':qte' => $ligne['quantite_stock']-$ligne['quantite_par_produit'],
+                ':id'  => $ligne['id_produit']
+            ]);
+        }
+
         header("location:/html/fo/paiement.php?achatValide=" . $achatValide);
     }
+
+    $rqt->execute([
+        ':idPanier' => $idPanier
+    ]);
 }
 else if ($_SESSION['role'] === 'visiteur')
 {
