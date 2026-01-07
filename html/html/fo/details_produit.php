@@ -65,6 +65,13 @@
         //Si il n'est pas connecté : le visiteur est renvoyé sur la page de connexion
 
         $lienBtnAjouterPanier = "/php/ajouter_panier.php";
+
+        // signalement d'un avis
+        if (isset($_GET['signal']) && $_GET['signal'] === "true"){
+            $idCompte = $_SESSION['idCompte'];
+            $signalerAvis = $dbh->prepare("UPDATE sae3_skadjam._avis SET signaler = 'true' WHERE id_produit = $idProd AND id_compte = $idCompte");
+            $signalerAvis->execute();
+        }
     }
 ?>
 
@@ -157,11 +164,12 @@
                     <?php foreach($avis as $row){
                         if ($row['contenu_commentaire'] != ''){?>
                             <section class=" bg-bleu rounded-2xl m-4 p-4 md:w-4xl">
-                                <div class="flex flex-nowrap justify-start items-center w-auto">
+                                <div class="flex flex-nowrap justify-around items-center w-auto">
                                     <h4 class="mr-4">
                                         <?php echo $row['pseudo'];?>
                                     </h4>
                                     <?php echo affichageNote($row['nb_etoile']);?>
+                                    <a class="ml-4 text-black" href="./details_produit.php?idProduit=<?php echo $idProd;?>&signal=true">Signaler</a>
                                 </div>
                                 <p><?php echo $row['contenu_commentaire'];?></p>     
                             </section>
