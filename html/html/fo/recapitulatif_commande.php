@@ -3,18 +3,94 @@
     require_once __DIR__ . "/../../php/verif_role_fo.php";
     require(__DIR__ . '/../../01_premiere_connexion.php');
     $idCompte = $_SESSION['idCompte'];
+    $idPanier = $_SESSION['idPanier'];
+
+    $sql = "SELECT *
+    FROM sae3_skadjam._panier
+    WHERE id_panier = :id_panier";
+
+    $stmt = $dbh->prepare($sql);
+    $stmt->execute([
+        ':id_panier' => $idPanier
+    ]);
+
+    $panier = $stmt->fetch(PDO::FETCH_ASSOC);
+
+    
+    try {
+        $date = date("j/n/Y");
+        $dbh->beginTransaction();
+
+        // 1️⃣ Insertion de la commande
+        $sqlCommande = "
+            INSERT INTO sae3_skadjam._commande
+            (etat, date_commande, montant_total_ttc, id_client)
+            VALUES (:etat, :date_commande, :montant_total_ttc, :id_client)
+            RETURNING id_commande
+        ";
+
+        $stmtCommande = $dbh->prepare($sqlCommande);
+        $stmtCommande->execute([
+            ':etat' => 'Attente de validation',
+            ':date_commande' => $date,
+            ':montant_total_ttc' => $panier['montant_total_ttc'],
+            ':id_client' => $idCompte
+        ]);
+
+        $idCommande = $stmtCommande->fetchColumn();
+
+        // 2️⃣ Insertion de la facture
+        $sqlFacture = "
+            INSERT INTO sae3_skadjam._facture
+            (montant_ht, destinataire, date_commande, id_commande)
+            VALUES (:montant_ht, :destinataire, :date_commande, :id_commande)
+            RETURNING numero_facture
+        ";
+
+        $stmtFacture = $dbh->prepare($sqlFacture);
+        $stmtFacture->execute([
+            ':montant_ht' => 100.42,
+            ':destinataire' => 3,
+            ':date_commande' => '2026-01-07',
+            ':id_commande' => $idCommande
+        ]);
+
+        $numeroFacture = $stmtFacture->fetchColumn();
+
+        // 3️⃣ Mise à jour de la commande
+        $sqlUpdate = "
+            UPDATE sae3_skadjam._commande
+            SET id_facture = :id_facture
+            WHERE id_commande = :id_commande
+        ";
+
+        $stmtUpdate = $dbh->prepare($sqlUpdate);
+        $stmtUpdate->execute([
+            ':id_facture' => $numeroFacture,
+            ':id_commande' => $idCommande
+        ]);
+
+        // Validation
+        $dbh->commit();
+        echo "Commande et facture créées avec succès";
+
+    } 
+    
+    catch (Exception $e) {
+        $dbh->rollBack();
+        echo "Erreur : " . $e->getMessage();
+    }
+
 
     try {     
         $tabInfoCommandes = null;           
-        //récupère toutes les infos des tables produits et photos
-        foreach($dbh->query("SELECT c.id_commande, c.date_commande, p.libelle_produit, p.id_produit, d.quantite, p.prix_ht, p.prix_ttc
-                            FROM sae3_skadjam._commande c
-                            INNER JOIN sae3_skadjam._details d
-                                ON d.id_commande = c.id_commande
-                            INNER JOIN sae3_skadjam._produit p
-                                ON p.id_produit = d.id_produit
-                            INNER JOIN sae3_skadjam._vendeur v
-                                ON v.id_compte = p.id_vendeur
+        //récupère toutes les infos des tables produits, panier et contient
+        foreach($dbh->query("SELECT *
+                            FROM sae3_skadjam._produit pr
+                            INNER JOIN sae3_skadjam._contient c
+                                ON c.id_produit = pr.id_produit
+                            INNER JOIN sae3_skadjam._panier pa
+                                ON pa.id_panier = c.id_panier
                             WHERE c.id_client = $idCompte"
                             , PDO::FETCH_ASSOC) as $row){
             $tabInfoCommandes[] = $row;
