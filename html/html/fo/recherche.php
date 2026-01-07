@@ -141,11 +141,11 @@
                     <div>
                         <div>
                             <input type="radio" name="noteTri" id="noteTri">
-                            <label for="noteTri">1-5</label>
+                            <label for="noteTri">5-1</label>
                         </div>
                         <div>
                             <input type="radio" name="noteTri" id="noteTri">
-                            <label for="noteTri">5-1</label>
+                            <label for="noteTri">1-5</label>
                         </div>
                     </div>
                 </article>
