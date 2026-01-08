@@ -19,19 +19,6 @@
                         , PDO::FETCH_ASSOC) as $row){
         $tabProduit[] = $row;
     }
-
-    //initialisation du numéro de page
-    if(isset($_GET['page'])&& $_GET['page']!==""){
-        $pageNumber = $_GET['page'];
-    }
-    else{
-        $pageNumber = 1;
-    }
-
-    $maxPage = sizeof($tabProduit)/PAGE_SIZE;
-
-    //découpe le catalogue en page de 15 produits
-    $lignes = array_slice($tabProduit, $pageNumber*PAGE_SIZE-PAGE_SIZE, PAGE_SIZE);
 ?>
 
 <!DOCTYPE html>
@@ -47,6 +34,32 @@
 </head>
 
 <body>
+    <script>
+        const tabProd = <?php echo json_encode($tabProduit);?>
+        //initialisation du numéro de page
+        const PAGE_SIZE = 15;
+        var $_GET = [];
+        // Récupération dans l'url
+        var parts = window.location.search.substr(1).split("&");
+        for (var i = 0; i < parts.length; i++) {
+            var temp = parts[i].split("=");
+        }
+
+        if(temp == ""){
+            pageNumber = 1 
+        }else{
+            pageNumber = temp[1]
+        }
+
+        //console.log($_GET['id']); // Affiche la valeur du paramètre 'id'   
+
+        let maxPage = (tabProd.length)/PAGE_SIZE
+        console.log(maxPage)
+
+        let lignes = tabProd.slice(pageNumber*PAGE_SIZE-PAGE_SIZE, PAGE_SIZE)
+        console.log(lignes)
+    </script>
+
     <!--header-->
     <?php (include __DIR__ . "/../../php/structure/header_front.php"); ?>
     <?php include(__DIR__ . "/../../php/structure/navbar_front.php"); ?>
@@ -217,7 +230,6 @@
 
         <div id="prod" class="grid grid-cols-2 justify-items-center md:grid-cols-3">
             <script>
-                const tabProd = <?php echo json_encode($tabProduit);?>
                 // Boucle pour afficher tous les produits
                 tabProd.forEach(prod => {
                     idProduit = prod['id_produit']
@@ -283,26 +295,6 @@
         
         <!--fin du catalogue-->
         <script>
-            const PAGE_SIZE = 15;
-            var $_GET = [];
-            var parts = window.location.search.substr(1).split("&");
-            for (var i = 0; i < parts.length; i++) {
-                var temp = parts[i].split("=");
-            }
-            console.log(temp)
-
-            if(temp == ""){
-                pageNumber = 1 
-            }else{
-                pageNumber = temp[1]
-            }
-
-            //console.log($_GET['id']); // Affiche la valeur du paramètre 'id'   
-
-            let maxPage = (tabProd.length)/PAGE_SIZE
-
-            let lignes = tabProd.slice(pageNumber*PAGE_SIZE-PAGE_SIZE, PAGE_SIZE)
-
             parent = document.getElementsByTagName("main")[0]
             // Pour avoir seulement le main et pas le tableau renvoyé
             let pageChangement = document.createElement("div")
@@ -325,8 +317,8 @@
                 let pageSuiv = document.createElement("a")
                 pageSuiv.href = "recherche.php?page="+(pageNumber+1)+"#nosProduits"
 
-                pagePrec.textContent = "Page suivante"
-                pagePrec.classList.add("lienPage","hover:text-rouge")
+                pageSuiv.textContent = "Page suivante"
+                pageSuiv.classList.add("lienPage","hover:text-rouge")
 
                 parent.appendChild(pageSuiv)
             }
