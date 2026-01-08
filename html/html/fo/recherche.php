@@ -275,7 +275,7 @@
 
                     // Prix
                     let prix = document.createElement("p")
-                    prix.textContent = prod['prix_ttc']+" €"
+                    prix.textContent = prod['prix_ttc'].replace(".", ",")+" €"
                     parent.appendChild(prix)
 
                     // Note
