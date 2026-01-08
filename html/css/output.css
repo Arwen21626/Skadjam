@@ -1004,6 +1004,9 @@ main>h2 {
   .pt-2 {
     padding-top: calc(var(--spacing, 0.25rem) * 2);
   }
+  .pt-15 {
+    padding-top: calc(var(--spacing, 0.25rem) * 15);
+  }
   .pr-1 {
     padding-right: calc(var(--spacing, 0.25rem) * 1);
   }
@@ -1053,6 +1056,9 @@ main>h2 {
   .font-medium {
     --tw-font-weight: var(--font-weight-medium, 500);
     font-weight: var(--font-weight-medium, 500);
+  }
+  .text-black {
+    color: var(--color-black, #000);
   }
   .text-bleu {
     color: var(--color-bleu);
