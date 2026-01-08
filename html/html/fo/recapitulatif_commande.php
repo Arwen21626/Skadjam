@@ -3,6 +3,7 @@
     require_once __DIR__ . "/../../php/verif_role_fo.php";
     require(__DIR__ . '/../../01_premiere_connexion.php');
     $idCompte = $_SESSION['idCompte'];
+    
     $idPanier = 1;
 
     $sql = "SELECT 
@@ -30,15 +31,18 @@
         ':id_panier' => $idPanier
     ]);
 
-    $tabInfosPanier = $stmt->fetch(PDO::FETCH_ASSOC);
-    print_r($tabInfosPanier);
+    $tabInfosPanier = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
     
-    /*try {
-        $date = date("j/n/Y");
+    try {
+        $date = date("Y-m-d");
         $dbh->beginTransaction();
+        echo "debut transaction ";
 
         //Insertion de la commande
+        var_dump($_SESSION['idCompte']);
+        die;
+
         $sqlCommande = "
             INSERT INTO sae3_skadjam._commande
             (etat, date_commande, montant_total_ttc, id_client)
@@ -50,17 +54,19 @@
         $stmtCommande->execute([
             ':etat' => 'Attente de validation',
             ':date_commande' => $date,
-            ':montant_total_ttc' => $tabInfosPanier['montant_total_ttc'],
+            ':montant_total_ttc' => $tabInfosPanier[0]['montant_total_ttc'],
             ':id_client' => $idCompte
         ]);
 
         $idCommande = $stmtCommande->fetchColumn();
+        echo "insertion commande terminéee ";
 
         //Récupération du total du montant hors taxe
         $montant_total_ht = 0;
         foreach($tabInfosPanier as $infoPanier){
             $montant_total_ht = $montant_total_ht + ($infoPanier['sous_total_ht']);
         }
+
 
         //Insertion de la facture
         $sqlFacture = "
@@ -79,6 +85,7 @@
         ]);
 
         $numeroFacture = $stmtFacture->fetchColumn();
+        echo "insertion facture terminée ";
 
         //Mise à jour de la commande
         $sqlUpdate = "
@@ -93,6 +100,8 @@
             ':id_commande' => $idCommande
         ]);
 
+        echo "maj commande terminée ";
+
         // Validation
         $dbh->commit();
         echo "Commande et facture créées avec succès";
@@ -102,27 +111,6 @@
     catch (Exception $e) {
         $dbh->rollBack();
         echo "Erreur : " . $e->getMessage();
-    }*/
-
-
-    /*try {     
-        $tabInfoCommandes = null;           
-        //récupère toutes les infos des tables produits, panier et contient
-        foreach($dbh->query("SELECT *
-                            FROM sae3_skadjam._produit pr
-                            INNER JOIN sae3_skadjam._contient c
-                                ON c.id_produit = pr.id_produit
-                            INNER JOIN sae3_skadjam._panier pa
-                                ON pa.id_panier = c.id_panier
-                            WHERE c.id_client = $idCompte"
-                            , PDO::FETCH_ASSOC) as $row){
-            $tabInfoCommandes[] = $row;
-        } 
     }
-
-    catch (PDOException $e) {
-        print "Erreur !: " . $e->getMessage() . "<br/>";
-        die();
-    }*/
 ?>
 
