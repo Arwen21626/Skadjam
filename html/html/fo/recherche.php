@@ -299,6 +299,7 @@
         
         <!--fin du catalogue-->
         <script>
+            // Passage d'une page à l'autre
             parent = document.getElementsByTagName("main")[0]
             // Pour avoir seulement le main et pas le tableau renvoyé
             let pageChangement = document.createElement("div")
@@ -327,6 +328,8 @@
 
                 parent.appendChild(pageSuiv)
             }
+
+            // EventListener pour les tris et filtres
         </script>
     </main>
 

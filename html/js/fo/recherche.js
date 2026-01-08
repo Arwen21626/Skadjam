@@ -88,3 +88,27 @@ async function affichageNote(note, parent ){
 
 
 // Tris
+function triPrixCroissant(){
+
+}
+
+function triPrixDecroissant(){
+
+}
+
+function triAz(){
+    
+}
+
+function triZa(){
+
+}
+
+function triEtoileCroissant(){
+
+}
+
+function triEtoileDecroissant(){
+    
+}
+// elem.addEventListener("mouseover",modifierTexte)
