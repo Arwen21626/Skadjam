@@ -4,7 +4,6 @@
     require_once(__DIR__ . '/../../01_premiere_connexion.php');
     const PAGE_SIZE = 15;
     require_once(__DIR__ . "/../../../connections_params.php");
-    require_once(__DIR__ . "/../../php/fonctions.php");
 
     //récupère toutes les infos des tables produits et photos
     $tabProduit = [];
@@ -43,6 +42,7 @@
     <link rel="stylesheet" type="text/css" href="../../css/output.css" >
     <link rel="stylesheet" type="text/css" href="../../css/fo/general_front.css" >
     <title>Recherche</title>
+    <?php include __DIR__ . "/php/structure/head_front.php"; ?>
 </head>
 <script>
     const tabProd = <?php echo json_encode($tabProduit);?>
@@ -217,76 +217,68 @@
         </aside>
 
         <div id="prod" class="grid grid-cols-2 justify-items-center md:grid-cols-3">
-            <script>
+            <script src="../../js/fo/recherche.js">
                 // Boucle pour afficher tous les produits
                 tabProd.forEach(prod => {
-                    console.log(prod['prix_ttc'])
+                    idProduit = prod['id_produit']
+                    let parent = document.getElementById("prod")
 
-                        idProduit = prod['id_produit']
-                        let parent = document.getElementById("prod")
-    
-                        // Pour avoir seulement le main et pas le tableau renvoyé
-    
-                        // Section   
-                        let produit = document.createElement("section")
-                        parent.appendChild(produit)
-                        produit.classList.add("bg-bleu", "grid", "grid-cols-[40%_60%]", "w-40", "md:w-80", "h-auto", "p-2", "md:p-3", "m-2")
-                        parent = produit
-    
-                        //Lien
-                        let lien = document.createElement("a")
-                        lien.href = "details_produit.php?idProduit="+idProduit
-                        lien.classList.add("col-span-2", "justify-self-center", "mb-3");
-                        parent.appendChild(lien)
-    
-                        parent = lien
-    
-                        // Image
-                        let image = document.createElement("img")
-                        image.src = prod['url_photo']
-                        image.alt = prod['alt']
-                        image.title = prod['title']
-                        parent.appendChild(image)
-    
-                        // Nom produit
-                        let nom = document.createElement("p")
-                        nom.textContent = prod['libelle_produit']
-                        parent.appendChild(nom)
-                        nom.classList.add("col-span-2")
-    
-                        // Prix et note
-                        let contient = document.createElement("div")
-                        parent.appendChild(contient)
-                        contient.classList.add("flex", "justify-start", "items-center", "col-span-2")
-    
-                        parent = contient
-    
-                        // Prix
-                        let prix = document.createElement("p")
-                        prix.textContent = prod['prix_ttc']+" €"
-                        parent.appendChild(prix)
-    
-                        // Note
-                        let contientNote = document.createElement("div")
-                        parent.appendChild(contientNote)
-                        contientNote.classList.add("w-2/4", "ml-2", "md:ml-10", "flex")
-    
-                        parent = contientNote
-                        // console.log(parent)
+                    // Pour avoir seulement le main et pas le tableau renvoyé
+
+                    // Section   
+                    let produit = document.createElement("section")
+                    parent.appendChild(produit)
+                    produit.classList.add("bg-bleu", "grid", "grid-cols-[40%_60%]", "w-40", "md:w-80", "h-auto", "p-2", "md:p-3", "m-2")
+                    parent = produit
+
+                    //Lien
+                    let lien = document.createElement("a")
+                    lien.href = "details_produit.php?idProduit="+idProduit
+                    lien.classList.add("col-span-2", "justify-self-center", "mb-3");
+                    parent.appendChild(lien)
+
+                    parent = lien
+
+                    // Image
+                    let image = document.createElement("img")
+                    image.src = prod['url_photo']
+                    image.alt = prod['alt']
+                    image.title = prod['title']
+                    parent.appendChild(image)
+
+                    // Nom produit
+                    let nom = document.createElement("p")
+                    nom.textContent = prod['libelle_produit']
+                    parent.appendChild(nom)
+                    nom.classList.add("col-span-2")
+
+                    // Prix et note
+                    let contient = document.createElement("div")
+                    parent.appendChild(contient)
+                    contient.classList.add("flex", "justify-start", "items-center", "col-span-2")
+
+                    parent = contient
+
+                    // Prix
+                    let prix = document.createElement("p")
+                    prix.textContent = prod['prix_ttc']+" €"
+                    parent.appendChild(prix)
+
+                    // Note
+                    let contientNote = document.createElement("div")
+                    parent.appendChild(contientNote)
+                    contientNote.classList.add("w-2/4", "ml-2", "md:ml-10", "flex")
+
+                    parent = contientNote
+                    // console.log(parent)
+
+                    let note = prod['note_moyenne']
+                    affichageNote(note)
+                
                 });
-
-
             </script>
         </div>
-        <!-- str_replace-->
-        <div class="w-2/4 ml-2 md:ml-10 flex">
-            <?php 
-                $note = $valeurs['note_moyenne'];
-                affichageNote($note); 
-            ?>
-        </div>                    
-
-                            
+        <!-- str_replace-->                    
         <?php $dbh = null;?>
         <!--fin du catalogue-->
         <div class="flex flex-row space-x-4 justify-center">
@@ -305,6 +297,5 @@
 
     <!--footer-->
     <?php include (__DIR__ . "/../../php/structure/footer_front.php"); ?>
-    <script></script>
 </body>
 </html>
