@@ -73,6 +73,15 @@ main>h2{
     margin: 0.5em;
 }
 
+input.quantite-prod-panier::-webkit-inner-spin-button,
+input.quantite-prod-panier::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+}
+
+input.quantite-prod-panier {
+    -moz-appearance: textfield;
+}
+
 @import "tailwindcss";
 @tailwind utilities;
 @reference "tailwindcss";
