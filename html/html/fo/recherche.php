@@ -31,6 +31,7 @@
     <title>Recherche</title>
     <?php include __DIR__ . "/../../php/structure/head_front.php"; ?>
     <script src="../../js/fo/recherche.js"></script>
+    <script src="../../js/fo/julien.js"></script>
 </head>
 
 <body>
@@ -86,26 +87,26 @@
 
                         <!-- Vetements -->
                         <div>
-                            <input type="checkbox" name="Vetement" id="Vetement">
-                            <label for="Vetement">Vetements</label>
+                            <input type="checkbox" name="vetement" id="vetement">
+                            <label for="vetement">Vetements</label>
                         </div>
 
                         <!-- Artisanat -->
                         <div>
-                            <input type="checkbox" name="Artisanat" id="Artisanat">
-                            <label for="Artisanat">Artisanat</label>
+                            <input type="checkbox" name="artisanat" id="artisanat">
+                            <label for="artisanat">Artisanat</label>
                         </div>
 
                         <!-- Goodies -->
                         <div>
-                            <input type="checkbox" name="Goodies" id="Goodies">
-                            <label for="Goodies">Goodies</label>
+                            <input type="checkbox" name="goodies" id="goodies">
+                            <label for="goodies">Goodies</label>
                         </div>
 
                         <!-- Soin -->
                         <div>
-                            <input type="checkbox" name="Soin" id="Soin">
-                            <label for="Soin">Soin</label>
+                            <input type="checkbox" name="soin" id="soin">
+                            <label for="soin">Soin</label>
                         </div>
                     </details>
                  </article>
@@ -116,8 +117,8 @@
                         <summary class="cursor-pointer mt-1 mb-1">Par note</summary>
                         <!-- 1 étoile -->
                         <div>
-                            <input type="checkbox" name="unE" id="unE">
-                            <label for="unE">1</label>
+                            <input type="checkbox" name="uneE" id="uneE">
+                            <label for="uneE">1</label>
                         </div>
 
                         <!-- 2 étoiles -->
@@ -168,7 +169,7 @@
                         </div>
                         <div>
                             <input type="checkbox" name="prix5" id="prix5">
-                            <label for="prix5">31,19€ - 71,99€ </label>
+                            <label for="prix5">31,20€ - 71,99€ </label>
                         </div>
                     </details>
                 </article>
@@ -327,7 +328,7 @@
                 parent.appendChild(pageSuiv)
             }
 
-            // EventListener pour les tris et filtres
+            // EventListener pour les tris
             let prixTriCroissant = document.getElementById("prixTriCroissant")
             let prixTriDecroissant = document.getElementById("prixTriDecroissant")
             let alphaTriAZ = document.getElementById("alphaTriAZ")
@@ -363,8 +364,88 @@
 
 
             
+            // EventListener pour les filtres
+            
+            // Categories
+            let CategorieAlimentaire = document.getElementById("alimentaire")
+            let CategorieVetement = document.getElementById("vetement")
+            let CategorieArtisanat = document.getElementById("artisanat")
+            let CategorieGoodies = document.getElementById("goodies")
+            let CategorieSoin = document.getElementById("soin")
 
+            CategorieAlimentaire.addEventListener("click",function () {
+                filtrageCategorieAlimentaire();
+            })
 
+            CategorieVetement.addEventListener("click",function () {
+                filtrageCategorieVetement();
+            })
+
+            CategorieArtisanat.addEventListener("click",function () {
+                filtrageCategorieArtisanat();
+            })
+
+            CategorieGoodies.addEventListener("click",function () {
+                filtrageCategorieGoodies();
+            })
+
+            CategorieSoin.addEventListener("click",function () {
+                filtrageCategorieSoin();
+            })
+            
+            // note
+            let NoteUneE = document.getElementById("uneE")
+            let NoteDeuxE = document.getElementById("deuxE")
+            let NoteTroisE = document.getElementById("troisE")
+            let NoteQuatreE = document.getElementById("quatreE")
+            let NoteCinqE = document.getElementById("cinqE")
+
+            NoteUneE.addEventListener("click",function () {
+                filtrageNote1();
+            })
+
+            NoteDeuxE.addEventListener("click",function () {
+                filtrageNote2();
+            })
+
+            NoteTroisE.addEventListener("click",function () {
+                filtrageNote3();
+            })
+            
+            NoteQuatreE.addEventListener("click",function () {
+                filtrageNote4();
+            })
+
+            NoteCinqE.addEventListener("click",function () {
+                filtrageNote5();
+            })
+
+            // Tranche de prix
+            let TranchePrix1 = document.getElementById("prix1")
+            let TranchePrix2 = document.getElementById("prix2")
+            let TranchePrix3 = document.getElementById("prix3")
+            let TranchePrix4 = document.getElementById("prix4")
+            let TranchePrix5 = document.getElementById("prix5")
+            
+            TranchePrix1.addEventListener("click",function () {
+                filtrageTranchePrix1();
+            })
+
+            TranchePrix2.addEventListener("click",function () {
+                filtrageTranchePrix2();
+            })
+
+            TranchePrix3.addEventListener("click",function () {
+                filtrageTranchePrix3();
+            })
+            
+            TranchePrix4.addEventListener("click",function () {
+                filtrageTranchePrix4();
+            })
+
+            TranchePrix5.addEventListener("click",function () {
+                filtrageTranchePrix5();
+            })
 
 
 
