@@ -1,7 +1,7 @@
 <?php 
-    include __DIR__ . '/01_premiere_connexion.php';
-    require_once __DIR__ . "/../connections_params.php";
-    require_once __DIR__ . "/php/fonctions.php";
+    include __DIR__ . '/../../01_premiere_connexion.php';
+    require_once __DIR__ . "/../../../connections_params.php";
+    require_once __DIR__ . "/../../php/fonctions.php";
     const PAGE_SIZE = 15;
     session_start();
 
@@ -12,7 +12,7 @@
                                "contient" => []]; //format du tableau représentant un produit : ['id' => 25, 'quantite_par_produit' => 2]
     }
 
-    require_once(__DIR__ . "/php/verif_role_fo.php");
+    require_once __DIR__ . "/../../php/verif_role_fo.php";
 ?>
 
 <!DOCTYPE html>
@@ -61,8 +61,7 @@
                                         ON pr.id_vendeur = v.id_compte
                                     INNER JOIN sae3_skadjam._promu pm
                                         ON pr.id_produit = pm.id_produit
-                                    WHERE v.id_compte = $idCompte
-                                        AND pr.est_supprime = false"
+                                    WHERE pr.est_masque = false"
                                     , PDO::FETCH_ASSOC) as $row){
                     $tabProduit[] = $row;
                 }
@@ -70,7 +69,11 @@
                 if($tabProduit == null){ ?>
                     <p>Votre catalogue est vide.</p>
                 <?php }
-
+                
+                $maxPage = sizeof($tabProduit)/PAGE_SIZE;
+                //découpe le catalogue en page de 15 produits
+                $lignes = array_slice($tabProduit, $pageNumber*PAGE_SIZE-PAGE_SIZE, PAGE_SIZE);
+                
                 //affiche la photo du produit, son nom, son prix et sa note, son stock ?>
                 <div class="grid grid-cols-3">
                     <?php foreach($tabProduit as $id => $valeurs){
@@ -109,10 +112,20 @@
                 die();
             }
         ?>
+        <!--fin du catalogue-->
+        <div class="flex flex-row space-x-4 justify-center">
+            <?php if ($pageNumber>1){?>
+            <a class= "lienPage hover:text-rouge" href="<?php echo "./index.php?page=".($pageNumber-1)."#nosProduits";?>">Page précédente</a>
+            <?php }?>
+        
+            <?php if ($pageNumber<$maxPage){?>
+            <a class= "lienPage hover:text-rouge" href="<?php echo "./index.php?page=".($pageNumber+1)."#nosProduits";?>">Page suivante</a>
+            <?php }?>
+        </div>
     </main>
     
     <!--footer-->
-    <?php include(__DIR__ . "/../../php/structure/footer_front.php"); ?>
+    <?php include __DIR__ . "/../../php/structure/footer_front.php"; ?>
 
 </body>
 

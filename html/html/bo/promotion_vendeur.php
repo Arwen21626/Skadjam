@@ -46,7 +46,7 @@
                                     INNER JOIN sae3_skadjam._promu pm
                                         ON pr.id_produit = pm.id_produit
                                     WHERE v.id_compte = $idCompte
-                                        AND pr.est_supprime = false"
+                                    AND pr.est_supprime = false"
                                     , PDO::FETCH_ASSOC) as $row){
                     $tabProduit[] = $row;
                 }
