@@ -80,7 +80,7 @@ if(isset($_POST['pseudo']) && isset($_POST['naissance']) && isset($_POST['nom'])
                         //Supprimer le panier du visiteur
                         unset($_SESSION['panier']);
                     }
-                    //Fin modification Korentin
+                    //Fin modification
 
                     // Sauvegarde de l'id du compte client dans le cookie de session
                     $_SESSION["idCompte"] = $idCompte;
@@ -194,7 +194,10 @@ if(isset($_POST['pseudo']) && isset($_POST['naissance']) && isset($_POST['nom'])
             $dbh = null;
 
             // Redirection vers la page d'accueil
-            if (!$erreur && isset($_POST['mdp']) && isset($_POST['verifMdp'])){ // Si c'est la création d'un compte
+            if ((!$erreur && isset($_POST['mdp']) && isset($_POST['verifMdp'])) && isset($_POST['veutAcheter'])) {
+                header("location: /html/fo/panier.php");
+            }
+            else if (!$erreur && isset($_POST['mdp']) && isset($_POST['verifMdp'])){ // Si c'est la création d'un compte
                 header("location: /index.php");
             } 
             elseif(!$erreur && !isset($_POST['mdp']) && !isset($_POST['verifMdp'])){ // Si c'est la modification d'un compte
