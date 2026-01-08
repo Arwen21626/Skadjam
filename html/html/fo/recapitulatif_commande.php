@@ -3,48 +3,38 @@
     require_once __DIR__ . "/../../php/verif_role_fo.php";
     require(__DIR__ . '/../../01_premiere_connexion.php');
     $idCompte = $_SESSION['idCompte'];
-    $idPanier = $_POST['idPanier'];
+    $idPanier = 1;
 
-    /*$sql = "SELECT 
-            pr.libelle_produit,
-            pr.prix_ttc,
-            v.raison_sociale,
-            d.quantite,
-            d.montant_ht,
-            d.sous_total,
-            p.montant_total_ttc,
-            p.nb_produit_total,
-            SUM(d.sous_total) AS montant_total_ht
-        FROM sae3_skadjam._panier p
-        INNER JOIN sae3_skadjam._contient c
-            ON c.id_panier = p.id_panier
-        INNER JOIN sae3_skadjam._produit pr
-            ON pr.id_produit = c.id_produit
-        INNER JOIN sae3_skadjam._details d
-            ON d.id_produit = p.id_produit       
-        INNER JOIN sae3_skadjam._vendeur v
-            ON v.id_compte = pr.id_vendeur
-        WHERE p.id_panier = :id_panier
-        GROUP BY 
-            pr.libelle_produit,
-            pr.prix_ttc,
-            v.raison_sociale,
-            d.quantite,
-            d.montant_ht,
-            d.sous_total,
-            p.montant_total_ttc,
-            p.nb_produit_total
-        ";*/
+    $sql = "SELECT 
+                pr.libelle_produit,
+                v.raison_sociale,
+                c.quantite_par_produit,
+                pr.prix_ht,
+                pr.prix_ttc,
+                pr.prix_ttc * c.quantite_par_produit as sous_total_ttc,
+                pr.prix_ht * c.quantite_par_produit as sous_total_ht,   
+                p.montant_total_ttc,
+                p.nb_produit_total   
+            FROM sae3_skadjam._panier p
+            INNER JOIN sae3_skadjam._contient c
+                ON c.id_panier = p.id_panier
+            INNER JOIN sae3_skadjam._produit pr
+                ON pr.id_produit = c.id_produit       
+            INNER JOIN sae3_skadjam._vendeur v
+                ON v.id_compte = pr.id_vendeur
+            WHERE p.id_panier = :id_panier
+        ";
 
     $stmt = $dbh->prepare($sql);
     $stmt->execute([
         ':id_panier' => $idPanier
     ]);
 
-    $infosPanier = $stmt->fetch(PDO::FETCH_ASSOC);
+    $tabInfosPanier = $stmt->fetch(PDO::FETCH_ASSOC);
+    print_r($tabInfosPanier);
 
     
-    try {
+    /*try {
         $date = date("j/n/Y");
         $dbh->beginTransaction();
 
@@ -60,11 +50,17 @@
         $stmtCommande->execute([
             ':etat' => 'Attente de validation',
             ':date_commande' => $date,
-            ':montant_total_ttc' => $infosPanier['montant_total_ttc'],
+            ':montant_total_ttc' => $tabInfosPanier['montant_total_ttc'],
             ':id_client' => $idCompte
         ]);
 
         $idCommande = $stmtCommande->fetchColumn();
+
+        //Récupération du total du montant hors taxe
+        $montant_total_ht = 0;
+        foreach($tabInfosPanier as $infoPanier){
+            $montant_total_ht = $montant_total_ht + ($infoPanier['sous_total_ht']);
+        }
 
         //Insertion de la facture
         $sqlFacture = "
@@ -76,7 +72,7 @@
 
         $stmtFacture = $dbh->prepare($sqlFacture);
         $stmtFacture->execute([
-            ':montant_ht' => 100.42,
+            ':montant_ht' => $montant_total_ht,
             ':destinataire' => $idCompte,
             ':date_commande' => $date,
             ':id_commande' => $idCommande
@@ -106,10 +102,10 @@
     catch (Exception $e) {
         $dbh->rollBack();
         echo "Erreur : " . $e->getMessage();
-    }
+    }*/
 
 
-    try {     
+    /*try {     
         $tabInfoCommandes = null;           
         //récupère toutes les infos des tables produits, panier et contient
         foreach($dbh->query("SELECT *
@@ -127,81 +123,6 @@
     catch (PDOException $e) {
         print "Erreur !: " . $e->getMessage() . "<br/>";
         die();
-    }
+    }*/
 ?>
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Récapitulatif de la commande</title>
-</head>
-<?php include __DIR__ . '/../../php/structure/head_front.php'?>
-<body>
-    <!--header-->
-    <?php include __DIR__ . "/../../php/structure/header_front.php"; ?>
-    <?php include __DIR__ . "/../../php/structure/navbar_front.php"; ?>
-
-    <main class="min-h-[600px]">
-        <h2>Récapitulatif de la commande</h2>
-
-        <?php if($tabInfoCommandes == null){ ?>
-            <p>Erreur : un problème d'affichage de votre récapitulatif de commande est survenu.</p>
-        <?php }
-
-        else{?>
-            <h4>Numéro de la commande : </h4> 
-            <p></p>
-            <h4>Date : </h4>
-            <p></p>
-            <div class="flex justify-center">
-                <?php //tableau des commandes ?>
-                <table class="table-auto w-250">
-                    <thead>
-                        <tr>
-                            <th scope="col" class="text-left w-125 pl-3"><h3>Article</h3></th>
-                            <th scope="col"><h3>Vendeur</h3></th>
-                            <th scope="col"><h3>Quantité</h3></th>
-                            <th scope="col"><h3>Prix unitaire HT</h3></th>
-                            <th scope="col"><h3>Prix unitaire TTC</h3></th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <?php 
-                            //pour changer la classe de css une ligne sur 2
-                            $impair = 0;
-                            $classe;
-                            $classe1 = "py-4";
-                            $classe2 = "py-4 bg-bleu";
-                            foreach($tabInfoCommandes as $id => $commande){
-                                $idCommande = $commande['id_commande']; 
-                                $impair ++;
-                                if(fmod($impair, 2) == 0){
-                                    $classe = $classe1;
-                                }
-                                else{
-                                    $classe = $classe2;
-                                }?>
-                                <tr class="<?php echo $classe; ?>">
-                                    <th scope="row" class="text-left py-3 pl-3" ><p><?php echo $idCommande; ?></p></th>
-                                    <td class="text-center py-3"><p><?php echo htmlentities($commande['date_commande']);?></p></td>
-                                    <td class="text-center py-3"><p><?php echo htmlentities($commande['etat']);?></p></td>
-                                    <td class="text-center py-3"><p><?php echo htmlentities($commande['montant_total_ttc']); ?></p></td>
-                                    <td><a href="<?php echo htmlentities("commande.php?idCommande=".$idCommande);?>">
-                                        <img src="../../images/logo/bootstrap_icon/plus-square.svg" alt="voir plus d'informations" class="w-10 h-auto">
-                                    </a></td>
-                                </tr>
-                        <?php }?>
-                    </tbody>
-                </table>
-            </div>
-            <a href="../../index.php" class="flex justify-end mr-60 mt-15"><button class="bg-beige shadow rounded-sm md:rounded-2xl w-35 h-10 md:w-50 md:h-14 px-7 cursor-pointer">Retour</button></a>
-        <?php } ?>
-    </main>
-
-    <!--footer-->
-    <?php include (__DIR__ . "/../../php/structure/footer_front.php"); ?>
-
-</body>
-</html>
