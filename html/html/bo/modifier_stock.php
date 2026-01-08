@@ -122,7 +122,7 @@
                         </tbody>
                     </table>
                     <div class="flex justify-around">
-                        <button class="flex justify-end mt-15 border-2 border-vertFonce rounded-2xl w-40 h-14 cursor-pointer"><a href="../bo/stock.php?idCompte=<?php echo $idCompte ;?>" class="">Retour</a></button>
+                        <a href="../bo/stock.php?idCompte=<?php echo $idCompte ;?>" class="flex justify-center items-center border-2 border-vertFonce rounded-2xl w-40 h-14 cursor-pointer mt-15">Retour</a>
                         <input class="border-2 border-vertFonce rounded-2xl w-40 h-14 cursor-pointer mt-15" type="submit" value="Valider">
                     </div>
                 </form>
