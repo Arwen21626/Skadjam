@@ -1,8 +1,17 @@
 // CATEGORIE
 
+// Alimentaire = 1
+// Vetement = 2
+// Artisanat = 3
+// Goodies = 4
+// Soin = 5
+
+
 tableau = [false, false, false, false, false]
 function filtrageCategorieAlimentaire(tabProd){
+    tab = tabProd;
     tableau[1] = true;
+    tab.filter()
 }
 
 function filtrageCategorieVetement(tabProd){

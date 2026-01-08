@@ -236,6 +236,7 @@
             <script>
                 // Boucle pour afficher tous les produits
                 lignes.forEach(prod => {
+                    
                     idProduit = prod['id_produit']
                     let parent = document.getElementById("prod")
 
@@ -374,23 +375,23 @@
             let CategorieSoin = document.getElementById("soin")
 
             CategorieAlimentaire.addEventListener("click",function () {
-                filtrageCategorieAlimentaire();
+                filtrageCategorieAlimentaire(lignes);
             })
 
             CategorieVetement.addEventListener("click",function () {
-                filtrageCategorieVetement();
+                filtrageCategorieVetement(lignes);
             })
 
             CategorieArtisanat.addEventListener("click",function () {
-                filtrageCategorieArtisanat();
+                filtrageCategorieArtisanat(lignes);
             })
 
             CategorieGoodies.addEventListener("click",function () {
-                filtrageCategorieGoodies();
+                filtrageCategorieGoodies(lignes);
             })
 
             CategorieSoin.addEventListener("click",function () {
-                filtrageCategorieSoin();
+                filtrageCategorieSoin(lignes);
             })
             
             // note
@@ -401,23 +402,23 @@
             let NoteCinqE = document.getElementById("cinqE")
 
             NoteUneE.addEventListener("click",function () {
-                filtrageNote1();
+                filtrageNote1(lignes);
             })
 
             NoteDeuxE.addEventListener("click",function () {
-                filtrageNote2();
+                filtrageNote2(lignes);
             })
 
             NoteTroisE.addEventListener("click",function () {
-                filtrageNote3();
+                filtrageNote3(lignes);
             })
             
             NoteQuatreE.addEventListener("click",function () {
-                filtrageNote4();
+                filtrageNote4(lignes);
             })
 
             NoteCinqE.addEventListener("click",function () {
-                filtrageNote5();
+                filtrageNote5(lignes);
             })
 
             // Tranche de prix
@@ -428,23 +429,23 @@
             let TranchePrix5 = document.getElementById("prix5")
             
             TranchePrix1.addEventListener("click",function () {
-                filtrageTranchePrix1();
+                filtrageTranchePrix1(lignes);
             })
 
             TranchePrix2.addEventListener("click",function () {
-                filtrageTranchePrix2();
+                filtrageTranchePrix2(lignes);
             })
 
             TranchePrix3.addEventListener("click",function () {
-                filtrageTranchePrix3();
+                filtrageTranchePrix3(lignes);
             })
             
             TranchePrix4.addEventListener("click",function () {
-                filtrageTranchePrix4();
+                filtrageTranchePrix4(lignes);
             })
 
             TranchePrix5.addEventListener("click",function () {
-                filtrageTranchePrix5();
+                filtrageTranchePrix5(lignes);
             })
 
 
