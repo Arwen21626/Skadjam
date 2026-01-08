@@ -91,12 +91,18 @@
                     // Fin modif
                 }
     
-                // Initialisation pour une redirection sur le produit si on écrivais un avis par exemple et qu'on devait se connecter
-                // if ($_GET['veutAcheter'] == 1)
-                // {
-                //     $_SESSION['veutAcheter'] = "V";
-                // }
+                // Initialisation pour une redirection sur le panier si le visiteur voulait acheter son panier et qu'il devait se connecter
+                if (isset($_POST['veutAcheter']))
+                {
+                    $_SESSION['veutAcheter'] = "V";
+                }
                 
+                // Initialisation pour une redirection sur le produit si on écrivais un avis par exemple et qu'on devait se connecter
+                $idProduit = 0;
+                if(isset($_POST['idProduit'])){
+                    $idProduit = $_POST['idProduit'];
+                }
+
                 // Redirection suivant le role
                 if($_SESSION['role'] == 'vendeur'){
                     header('Location: ../bo/index_vendeur.php');
@@ -104,8 +110,12 @@
                 }
                 else{
                     // Si on était sur un produit alors redirection dessus
-                    if(isset($_SESSION['veutAcheter'])){
+                    if (isset($_SESSION['veutAcheter'])) {
                         header('Location: ../fo/panier.php');
+                        exit;
+                    }
+                    else if($_SESSION['role'] == 'client' && $idProduit != 0){
+                        header('Location: ../fo/details_produit.php?idProduit='.$idProduit);
                         exit;
                     }
                     else{
@@ -132,7 +142,7 @@
 <html lang="fr">
 <head>
     <?php require_once __DIR__ . "/../../php/structure/head_front.php"?>
-    <title>connexion</title>
+    <title>Connexion</title>
 </head>
 <body>
     <?php require_once __DIR__ . "/../../php/structure/header_front.php"; ?>
@@ -141,7 +151,11 @@
         <form method="post">
         <?php if(isset($_GET['idProduit'])){ ?>
             <input name="idProduit" id="idProduit" value="<?php echo $_GET['idProduit'];?>" class="hidden w-1">
+        
         <?php }?>
+        <?php if (isset($_POST['veutAcheter'])) {?> 
+            <input type="hidden" name="veutAcheter" value="V">
+        <?php } ?>
 
             <div class="flex flex-col items-center md:ml-10 md:mb-7 md:mr-10">
 
@@ -205,10 +219,17 @@
             </div>
         </form>
         <!-- Renvoie sur la page de création d'un compte client -->
-        <div class="flex flex-row flex-wrap justify-center m-2">
-            <p class=" mr-2">Pas encore client ? </p>
-            <a href="./creation_compte_client.php" class="underline! hover:text-rouge">Créer un compte client</a>
-        </div>
+        <?php if (isset($_POST['veutAcheter'])) { //Modification pour rediriger vers le panier si le visiteur se crée un compte pour valider son panier?>
+            <div class="flex flex-row flex-wrap justify-center m-2">
+                <p class=" mr-2">Pas encore client ? </p>
+                <a href="./creation_compte_client.php?veutAcheter=V" class="underline! hover:text-rouge">Créer un compte client</a>
+            </div>
+        <?php } else { ?>
+            <div class="flex flex-row flex-wrap justify-center m-2">
+                <p class=" mr-2">Pas encore client ? </p>
+                <a href="./creation_compte_client.php" class="underline! hover:text-rouge">Créer un compte client</a>
+            </div>
+        <?php } ?>
         <!-- Renvoie sur la page de création d'un compte vendeur -->
         <div class="flex flex-row flex-wrap justify-center m-2">
             <p class=" mr-2">Pas encore vendeur ? </p>
