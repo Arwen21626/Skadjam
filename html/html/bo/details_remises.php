@@ -15,7 +15,7 @@
                                     ON rd.id_produit = pr.id_produit
                                 LEFT JOIN sae3_skadjam._remise r
                                     ON rd.id_remise = r.id_remise
-                                WHERE v.id_compte = 1 AND pr.est_supprime = false
+                                WHERE v.id_compte = $idCompte AND pr.est_supprime = false
                                 ORDER BY libelle_produit ASC;"
                             , PDO::FETCH_ASSOC) as $row){
             $tabProduit[] = $row;
@@ -90,14 +90,18 @@
                                         </div>
                                     </td>
 
-                                    <td class="text-center py-3"><p><?php echo htmlentities(($valeurs['pourcentage_remise'] === null)?"0.00":$valeurs['pourcentage_remise']); ?></p></td>
+                                    <td class="text-center py-3"><p><?php echo htmlentities(($valeurs['pourcentage_remise'] === null)?"0 %":($valeurs['pourcentage_remise']*100).' %'); ?></p></td>
                                 </tr>
                         <?php }?>
                     </tbody>
                 </table>
             </div>
-            <!-- réqcupéré dans stock -->
-            <a href="../bo/modifier_stock.php?idCompte=<?php echo $idCompte ;?>" class="flex justify-end mr-60 mt-15"><button class="border-2 border-vertFonce rounded-2xl w-45 h-14 cursor-pointer">Modifier remises</button></a>
+            <!-- modifier les remises remises -->
+            <div class="flex justify-center mt-15">
+                <button class="border-2 border-vertFonce rounded-2xl w-45 h-14 cursor-pointer">
+                    <a href="../bo/modifier_remises.php" class="">Modifier remises</a>
+                </button>
+            </div>
             
 
         <?php } ?>
