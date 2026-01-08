@@ -34,7 +34,12 @@ if ($_SESSION['role'] !== 'visiteur'){
         <h2 class="flex justify-center text-center">Création du compte client</h2>
 
         <!-- Formulaire -->
-        <form class="flex flex-wrap p-15 pt-0 justify-around" action="../../php/traitement_donnees_compte_client.php" method="post"> 
+        <form class="flex flex-wrap p-15 pt-0 justify-around" action="../../php/traitement_donnees_compte_client.php" method="post">
+            <!-- Ajout d'un attribut au POST nécessaire à la redirection sur le panier en cas de volonté d'achat -->
+            <?php if (isset($_GET['veutAcheter'])) { ?>
+                <input type="hidden" name="veutAcheter" value="V">
+            <?php } ?>
+        
             <!-- Nom -->
             <div class="flex flex-col basis-1/3 m-5 min-w-3xs">
                 <label for="nom">Nom* :</label>
