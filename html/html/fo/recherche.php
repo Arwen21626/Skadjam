@@ -223,8 +223,6 @@
                     idProduit = prod['id_produit']
                     let parent = document.getElementById("prod")
 
-                    // Pour avoir seulement le main et pas le tableau renvoyé
-
                     // Section   
                     let produit = document.createElement("section")
                     parent.appendChild(produit)
@@ -282,19 +280,37 @@
         </div>
         <!-- str_replace-->                    
         <?php $dbh = null;?>
+        
         <!--fin du catalogue-->
-        <div class="flex flex-row space-x-4 justify-center">
-            <?php if ($pageNumber>1){?>
-            <a class= "lienPage hover:text-rouge" href="<?php echo "recherche.php?page=".($pageNumber-1)."#nosProduits";?>">Page précédente</a>
-            <?php }?>
-        
-            <?php if ($pageNumber<$maxPage){?>
-            <a class= "lienPage hover:text-rouge" href="<?php echo "recherche.php?page=".($pageNumber+1)."#nosProduits";?>">Page suivante</a>
-            <?php }?>
-        </div>
-        
+        <script>
+            parent = document.getElementsByTagName("main")[0]
+            // Pour avoir seulement le main et pas le tableau renvoyé
+            let pageChangement = document.createElement("div")
+            pageChangement.classList.add("flex", "flex-row", "space-x-4", "justify-center")
+            parent.appendChild(pageChangement)
 
-        
+            parent = pageChangement
+
+            if(pageNumber > 1){
+                let pagePrec = document.createElement("a")
+                pagePrec.href = "recherche.php?page="+(pageNumber-1)+"#nosProduits"
+
+                pagePrec.textContent = "Page précédente"
+                pagePrec.classList.add("lienPage","hover:text-rouge")
+
+                parent.appendChild(pagePrec)
+            }
+
+            if (pageNumber < maxPage){
+                let pageSuiv = document.createElement("a")
+                pageSuiv.href = "recherche.php?page="+(pageNumber+1)+"#nosProduits"
+
+                pagePrec.textContent = "Page suivante"
+                pagePrec.classList.add("lienPage","hover:text-rouge")
+
+                parent.appendChild(pageSuiv)
+            }
+        </script>
     </main>
 
     <!--footer-->
