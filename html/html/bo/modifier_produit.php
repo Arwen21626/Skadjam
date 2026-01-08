@@ -167,56 +167,51 @@ if (isset($_POST['categorie']) && isset($_POST['nom']) && isset($_POST['prix']) 
                                                     WHERE id_produit = $idProduit;");
 
             // Gestion de la promotion
-            if(isset($_POST['mettreEnPromotion'])){ // La case "Mettre en promotion" est cochée
-                try {
-                    $dbh->beginTransaction();
-                    // Vérifier si le produit n'est pas déjà promu
-                    $checkPromotion = $dbh->query("SELECT *
+
+            // Vérifier si le produit est promu ou non
+                    $estPromu = $dbh->query("SELECT *
                                         FROM sae3_skadjam._promu
                                         WHERE id_produit = $idProduit");
-
-                    if(empty($checkPromotion)){ // Si le produit n'est pas en promotion
-                        // Création de la promotion
-                        $stmtPromo = $dbh->prepare("INSERT INTO sae3_skadjam._promotion(
-                                                        date_debut_promotion,
-                                                        heure_debut,
-                                                        id_vendeur,
-                                                        id_photo
-                                                    )VALUES(
-                                                        :date_debut,
-                                                        '00:00',
-                                                        :id_vendeur,
-                                                        :id_photo
-                                                    )");
-                        $stmtPromo->execute([
-                            ':date_debut' => date('d/m/Y'),
-                            ':id_vendeur' => $_SESSION['idCompte'],
-                            ':id_photo'   => $idPhoto ?? null
-                        ]);
-                        
-                        // Récupération de l'id promotion
-                        $idPromotion = $dbh->lastInsertId();
-
-                        // Lien produit <-> promotion
-                        $stmtPromu = $dbh->query("INSERT INTO sae3_skadjam._promu(
-                                                    id_promotion,
-                                                    id_produit
+                    $estPromu = $estPromu->fetchAll(PDO::FETCH_ASSOC);
+            if(isset($_POST['mettreEnPromotion']) && empty($estPromu)){ // La case "Mettre en promotion" est cochée et que le produit n'est pas déjà promu
+                try {
+                    $dbh->beginTransaction();
+                    // Création de la promotion
+                    $stmtPromo = $dbh->prepare("INSERT INTO sae3_skadjam._promotion(
+                                                    date_debut_promotion,
+                                                    heure_debut,
+                                                    id_vendeur,
+                                                    id_photo
                                                 )VALUES(
-                                                    $idPromotion,
-                                                    $idProduit
+                                                    :date_debut,
+                                                    '00:00',
+                                                    :id_vendeur,
+                                                    :id_photo
                                                 )");
-                    }
+                    $stmtPromo->execute([
+                        ':date_debut' => date('d/m/Y'),
+                        ':id_vendeur' => $_SESSION['idCompte'],
+                        ':id_photo'   => $idPhoto ?? null
+                    ]);
+                    
+                    // Récupération de l'id promotion
+                    $idPromotion = $dbh->lastInsertId();
+
+                    // Lien produit <-> promotion
+                    $stmtPromu = $dbh->query("INSERT INTO sae3_skadjam._promu(
+                                                id_promotion,
+                                                id_produit
+                                            )VALUES(
+                                                $idPromotion,
+                                                $idProduit
+                                            )");
                     $dbh->commit();
                 } catch (Exception $e) {
                     $dbh->rollBack();
                     die("Erreur pendant la mise en promotion : " . $e->getMessage());
                 }
-            }else{ // Si la case "Mettre en promotion" n'est pas cochée
-                $stmt = $dbh->query("SELECT id_promotion
-                                    FROM sae3_skadjam._promu
-                                    WHERE id_produit = $idProduit");
-                $estPromu = $stmt->fetch();
-                if($estPromu){ // Si le produit est en promotion
+            }
+            if(!isset($_POST['mettreEnPromotion']) && !empty($estPromu)){ // Si la case "Mettre en promotion" n'est pas cochée et que le produit est déjà promu
                     $dbh->beginTransaction();
                     // Supprimer le lien
                     $dbh->prepare("DELETE FROM sae3_skadjam._promu
@@ -226,7 +221,6 @@ if (isset($_POST['categorie']) && isset($_POST['nom']) && isset($_POST['prix']) 
                     $dbh->prepare("DELETE FROM sae3_skadjam._promotion
                                     WHERE id_promotion = :id_promotion")->execute([':id_promotion' => $estPromu['id_promotion']]);
                     $dbh->commit();
-                }
             }
 
             //Update de la photo dans la table photo
