@@ -19,19 +19,6 @@
                         , PDO::FETCH_ASSOC) as $row){
         $tabProduit[] = $row;
     }
-
-    //initialisation du numéro de page
-    if(isset($_GET['page'])&& $_GET['page']!==""){
-        $pageNumber = $_GET['page'];
-    }
-    else{
-        $pageNumber = 1;
-    }
-
-    $maxPage = sizeof($tabProduit)/PAGE_SIZE;
-
-    //découpe le catalogue en page de 15 produits
-    $lignes = array_slice($tabProduit, $pageNumber*PAGE_SIZE-PAGE_SIZE, PAGE_SIZE);
 ?>
 
 <!DOCTYPE html>
@@ -47,6 +34,36 @@
 </head>
 
 <body>
+    <script>
+        const tabProd = <?php echo json_encode($tabProduit);?>
+        //initialisation du numéro de page
+        const PAGE_SIZE = 15;
+        var $_GET = [];
+        // Récupération dans l'url
+        var parts = window.location.search.substr(1).split("&");
+        for (var i = 0; i < parts.length; i++) {
+            var temp = parts[i].split("=");
+        }
+        console.log(temp)
+
+        if(temp[0] == ''){
+            pageNumber = 1 
+        }else{
+            pageNumber = temp[1]
+        }
+
+        //console.log($_GET['id']); // Affiche la valeur du paramètre 'id'   
+
+        let maxPage = (tabProd.length)/PAGE_SIZE
+
+        let start = (pageNumber - 1) * PAGE_SIZE;
+        let end = pageNumber * PAGE_SIZE;
+
+        let lignes = tabProd.slice(start, end);
+
+        console.log(lignes)
+    </script>
+
     <!--header-->
     <?php (include __DIR__ . "/../../php/structure/header_front.php"); ?>
     <?php include(__DIR__ . "/../../php/structure/navbar_front.php"); ?>
@@ -217,13 +234,10 @@
 
         <div id="prod" class="grid grid-cols-2 justify-items-center md:grid-cols-3">
             <script>
-                const tabProd = <?php echo json_encode($tabProduit);?>
                 // Boucle pour afficher tous les produits
-                tabProd.forEach(prod => {
+                lignes.forEach(prod => {
                     idProduit = prod['id_produit']
                     let parent = document.getElementById("prod")
-
-                    // Pour avoir seulement le main et pas le tableau renvoyé
 
                     // Section   
                     let produit = document.createElement("section")
@@ -261,7 +275,7 @@
 
                     // Prix
                     let prix = document.createElement("p")
-                    prix.textContent = prod['prix_ttc']+" €"
+                    prix.textContent = prod['prix_ttc'].replace(".", ",")+" €"
                     parent.appendChild(prix)
 
                     // Note
@@ -282,19 +296,38 @@
         </div>
         <!-- str_replace-->                    
         <?php $dbh = null;?>
+        
         <!--fin du catalogue-->
-        <div class="flex flex-row space-x-4 justify-center">
-            <?php if ($pageNumber>1){?>
-            <a class= "lienPage hover:text-rouge" href="<?php echo "recherche.php?page=".($pageNumber-1)."#nosProduits";?>">Page précédente</a>
-            <?php }?>
-        
-            <?php if ($pageNumber<$maxPage){?>
-            <a class= "lienPage hover:text-rouge" href="<?php echo "recherche.php?page=".($pageNumber+1)."#nosProduits";?>">Page suivante</a>
-            <?php }?>
-        </div>
-        
+        <script>
+            parent = document.getElementsByTagName("main")[0]
+            // Pour avoir seulement le main et pas le tableau renvoyé
+            let pageChangement = document.createElement("div")
+            pageChangement.classList.add("flex", "flex-row", "space-x-4", "justify-center")
+            parent.appendChild(pageChangement)
 
-        
+            parent = pageChangement
+
+            if(pageNumber > 1){
+                let pagePrec = document.createElement("a")
+                pagePrec.href = "recherche.php?page="+(pageNumber-1)+"#nosProduits"
+
+                pagePrec.textContent = "Page précédente"
+                pagePrec.classList.add("lienPage","hover:text-rouge")
+
+                parent.appendChild(pagePrec)
+            }
+
+            if (pageNumber < maxPage){
+                let pageSuiv = document.createElement("a")
+                let pageSup = parseInt(pageNumber)+1
+                pageSuiv.href = "recherche.php?page="+(pageSup)+"#nosProduits"
+
+                pageSuiv.textContent = "Page suivante"
+                pageSuiv.classList.add("lienPage","hover:text-rouge")
+
+                parent.appendChild(pageSuiv)
+            }
+        </script>
     </main>
 
     <!--footer-->

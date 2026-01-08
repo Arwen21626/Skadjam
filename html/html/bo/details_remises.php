@@ -1,27 +1,27 @@
 <?php 
     session_start();
-    require_once __DIR__ . "/../../php/verif_role_bo.php";
-    include __DIR__ .'/../../01_premiere_connexion.php';
-    require_once __DIR__ . "/../../php/fonctions.php";
-    require_once __DIR__ . '/../../php/verification_formulaire.php';
+    require_once(__DIR__ . "/../../php/verif_role_bo.php");
+    include(__DIR__ .'/../../01_premiere_connexion.php');
+    require_once(__DIR__ . "/../../php/fonctions.php");
+    require_once(__DIR__ . '/../../php/verification_formulaire.php');
     $idCompte = $_SESSION['idCompte'];
-
     try {     
         $tabProduit = null;           
         //récupère toutes les infos des tables produits
-        foreach($dbh->query("SELECT *
-                            FROM sae3_skadjam._produit pr
-                            INNER JOIN sae3_skadjam._vendeur v
-                                ON pr.id_vendeur = v.id_compte
-                            INNER JOIN sae3_skadjam._promu pm
-                                ON pr.id_produit = pm.id_produit
-                            WHERE v.id_compte = $idCompte AND pr.est_supprime = false
-                            ORDER BY libelle_produit ASC"
+        foreach($dbh->query("SELECT * FROM sae3_skadjam._produit pr
+                                INNER JOIN sae3_skadjam._vendeur v 
+                                    ON pr.id_vendeur = v.id_compte
+                                LEFT JOIN sae3_skadjam._reduit rd
+                                    ON rd.id_produit = pr.id_produit
+                                LEFT JOIN sae3_skadjam._remise r
+                                    ON rd.id_remise = r.id_remise
+                                WHERE v.id_compte = 1 AND pr.est_supprime = false
+                                ORDER BY libelle_produit ASC;"
                             , PDO::FETCH_ASSOC) as $row){
             $tabProduit[] = $row;
-        } 
-
-    }catch(PDOException $e){
+        }
+    }
+    catch (PDOException $e) {
         print "Erreur !: " . $e->getMessage() . "<br/>";
         die();
     }
@@ -30,40 +30,42 @@
 
 <!DOCTYPE html>
 <html lang="fr">
-<?php include __DIR__ . "/../../php/structure/head_back.php";?>
+<?php include(__DIR__ . "/../../php/structure/head_back.php");?>
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Produits promus</title>
+    <title>Remises</title>
 </head>
 <body>
     <!--header-->
-    <?php include __DIR__ . "/../../php/structure/header_back.php"; ?>
-    <?php include __DIR__ . "/../../php/structure/navbar_back.php"; ?>
+    <?php include(__DIR__ . "/../../php/structure/header_back.php"); ?>
+    <?php include(__DIR__ . "/../../php/structure/navbar_back.php"); ?>
 
     <main class="min-h-[545px]">
-        <h2>Vos produits promus</h2>
-
+        <h2>Remises</h2>
+        
         <?php if($tabProduit == null){ ?>
-            <p>Votre catalogue de promotions est vide, vous n'avez donc pas de stock.</p>
-        <?php }
-
+            <p>Votre catalogue de produit est vide.</p>
+        <?php } 
+        
         else{?>
             <div class="flex justify-center">
                 <table class="table-auto w-250">
+                    <!-- en tête du tableau-->
                     <thead>
                         <tr>
                             <th scope="col" class="text-left w-125 pl-3"><h3>Nom du produit</h3></th>
                             <th scope="col"><h3>Prix</h3></th>
+                            <th scope="col"><h3>Prix remisé</h3></th>
                             <th scope="col"><h3>Note</h3></th>
-                            <th scope="col"><h3>Stock</h3></th>
+                            <th scope="col"><h3>Remise</h3></th>
                         </tr>
                     </thead>
+                    <!-- corps du tableau -->
                     <tbody>
                         <?php 
                             //pour changer la classe de css une ligne sur 2
                             $impair = 0;
-                            $classe;
                             $classe1 = "py-4";
                             $classe2 = "py-4 bg-bleu";
                             foreach($tabProduit as $id => $valeurs){
@@ -78,6 +80,7 @@
                                 <tr class="<?php echo $classe; ?>">
                                     <th scope="row" class="text-left py-3 pl-3" ><a href="<?php echo htmlentities("details_produit.php?idProduit=".$idProduit);?>"><?php echo $valeurs['libelle_produit']; ?></a></th>
                                     <td class="text-center py-3"><p><?php echo htmlentities($valeurs['prix_ttc']);?> €</p></td>
+                                    <td class="text-center py-3"><p><?php echo htmlentities($valeurs['prix_remise']);?> €</p></td>
                                     <td class="text-center py-3">
                                         <div class="flex justify-center items-center">
                                             <?php 
@@ -87,19 +90,20 @@
                                         </div>
                                     </td>
 
-                                    <td class="text-center py-3"><p><?php echo htmlentities($valeurs['quantite_stock']); ?></p></td>
+                                    <td class="text-center py-3"><p><?php echo htmlentities(($valeurs['pourcentage_remise'] === null)?"0.00":$valeurs['pourcentage_remise']); ?></p></td>
                                 </tr>
                         <?php }?>
                     </tbody>
                 </table>
             </div>
-            <a href="../bo/modifier_promotion.php?idCompte=<?php echo $idCompte ;?>" class="flex justify-end mr-60 mt-15"><button class="border-2 border-vertFonce rounded-2xl w-45 h-14 cursor-pointer">Modifier stock</button></a>
-
+            <!-- réqcupéré dans stock -->
+            <a href="../bo/modifier_stock.php?idCompte=<?php echo $idCompte ;?>" class="flex justify-end mr-60 mt-15"><button class="border-2 border-vertFonce rounded-2xl w-45 h-14 cursor-pointer">Modifier remises</button></a>
+            
 
         <?php } ?>
     </main>
 
     <!--footer-->
-    <?php include __DIR__ . "/../../php/structure/footer_back.php"; ?>
+    <?php include(__DIR__ . "/../../php/structure/footer_back.php"); ?>
 </body>
 </html>
