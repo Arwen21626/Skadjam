@@ -299,6 +299,7 @@
         
         <!--fin du catalogue-->
         <script>
+            // Passage d'une page à l'autre
             parent = document.getElementsByTagName("main")[0]
             // Pour avoir seulement le main et pas le tableau renvoyé
             let pageChangement = document.createElement("div")
@@ -327,6 +328,46 @@
 
                 parent.appendChild(pageSuiv)
             }
+
+            // EventListener pour les tris et filtres
+            let prixTriCroissant = document.getElementById("prixTriCroissant")
+            let prixTriDecroissant = document.getElementById("prixTriDecroissant")
+            let alphaTriAZ = document.getElementById("alphaTriAZ")
+            let alphaTriZA = document.getElementById("alphaTriZA")
+            let noteTri51 = document.getElementById("noteTri51")
+            let noteTri15 = document.getElementById("noteTri15")
+
+            prixTriCroissant.addEventListener("click",function () {
+                triEtoileDecroissant(tabProd);
+            })
+
+            prixTriDecroissant.addEventListener("click",function () {
+                triEtoileDecroissant(tabProd);
+            })
+
+            alphaTriAZ.addEventListener("click",function () {
+                triEtoileDecroissant(tabProd);
+            })
+
+            alphaTriZA.addEventListener("click",function () {
+                triEtoileDecroissant(tabProd);
+            })
+            
+            noteTri51.addEventListener("click",function () {
+                triEtoileDecroissant(tabProd);
+            })
+            
+            noteTri15.addEventListener("click", function () {
+                triEtoileDecroissant(tabProd);
+            })
+
+
+            
+
+
+
+
+
         </script>
     </main>
 
