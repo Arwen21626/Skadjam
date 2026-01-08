@@ -1,103 +1,105 @@
 <?php 
     session_start();
-    include __DIR__ . '/../../php/verif_role_bo.php';
+    require_once __DIR__ . "/../../php/verif_role_bo.php";
     include __DIR__ .'/../../01_premiere_connexion.php';
     require_once __DIR__ . "/../../php/fonctions.php";
+    require_once __DIR__ . '/../../php/verification_formulaire.php';
     $idCompte = $_SESSION['idCompte'];
+
+    try {     
+        $tabProduit = null;           
+        //récupère toutes les infos des tables produits
+        foreach($dbh->query("SELECT *
+                            FROM sae3_skadjam._produit pr
+                            INNER JOIN sae3_skadjam._vendeur v
+                                ON pr.id_vendeur = v.id_compte
+                            INNER JOIN sae3_skadjam._promu pm
+                                ON pr.id_produit = pm.id_produit
+                            WHERE v.id_compte = $idCompte AND pr.est_supprime = false
+                            ORDER BY libelle_produit ASC"
+                            , PDO::FETCH_ASSOC) as $row){
+            $tabProduit[] = $row;
+        } 
+
+    }catch(PDOException $e){
+        print "Erreur !: " . $e->getMessage() . "<br/>";
+        die();
+    }
+
 ?>
 
 <!DOCTYPE html>
 <html lang="fr">
-<?php include __DIR__."/../../php/structure/head_back.php";?>
-<head> 
+<?php include __DIR__ . "/../../php/structure/head_back.php";?>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Produits promus</title>
-    <style>
-        button a:hover{
-            color: black;
-        }
-    </style>
 </head>
-
-
-
 <body>
     <!--header-->
     <?php include __DIR__ . "/../../php/structure/header_back.php"; ?>
     <?php include __DIR__ . "/../../php/structure/navbar_back.php"; ?>
 
-    <main class=" p-8">
-        <!--Début du catalogue-->
-        <h2 id="vosProduits">Vos produits promus</h2>
+    <main class="min-h-[545px]">
+        <h2>Vos produits promus</h2>
 
-        <?php
+        <?php if($tabProduit == null){ ?>
+            <p>Votre catalogue de promotions est vide, vous n'avez donc pas de stock.</p>
+        <?php }
 
-            $tabProduit = [];
+        else{?>
+            <div class="flex justify-center">
+                <table class="table-auto w-250">
+                    <thead>
+                        <tr>
+                            <th scope="col" class="text-left w-125 pl-3"><h3>Nom du produit</h3></th>
+                            <th scope="col"><h3>Prix</h3></th>
+                            <th scope="col"><h3>Note</h3></th>
+                            <th scope="col"><h3>Stock</h3></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php 
+                            //pour changer la classe de css une ligne sur 2
+                            $impair = 0;
+                            $classe;
+                            $classe1 = "py-4";
+                            $classe2 = "py-4 bg-bleu";
+                            foreach($tabProduit as $id => $valeurs){
+                                $idProduit = $valeurs['id_produit']; 
+                                $impair ++;
+                                if(fmod($impair, 2) == 0){
+                                    $classe = $classe1;
+                                }
+                                else{
+                                    $classe = $classe2;
+                                }?>
+                                <tr class="<?php echo $classe; ?>">
+                                    <th scope="row" class="text-left py-3 pl-3" ><a href="<?php echo htmlentities("details_produit.php?idProduit=".$idProduit);?>"><?php echo $valeurs['libelle_produit']; ?></a></th>
+                                    <td class="text-center py-3"><p><?php echo htmlentities($valeurs['prix_ttc']);?> €</p></td>
+                                    <td class="text-center py-3">
+                                        <div class="flex justify-center items-center">
+                                            <?php 
+                                                $note = $valeurs['note_moyenne'];
+                                                affichageNote($note); 
+                                            ?>
+                                        </div>
+                                    </td>
 
-            try {                
-                //récupère toutes les infos des tables produits et photos
-                foreach($dbh->query("SELECT *
-                                    FROM sae3_skadjam._produit pr
-                                    INNER join sae3_skadjam._montre m
-                                        ON pr.id_produit=m.id_produit
-                                    INNER JOIN sae3_skadjam._photo ph  
-                                        ON ph.id_photo = m.id_photo 
-                                    INNER JOIN sae3_skadjam._vendeur v
-                                        ON pr.id_vendeur = v.id_compte
-                                    INNER JOIN sae3_skadjam._promu pm
-                                        ON pr.id_produit = pm.id_produit
-                                    WHERE v.id_compte = $idCompte
-                                    AND pr.est_supprime = false"
-                                    , PDO::FETCH_ASSOC) as $row){
-                    $tabProduit[] = $row;
-                }
+                                    <td class="text-center py-3"><p><?php echo htmlentities($valeurs['quantite_stock']); ?></p></td>
+                                </tr>
+                        <?php }?>
+                    </tbody>
+                </table>
+            </div>
+            <a href="../bo/modifier_stock.php?idCompte=<?php echo $idCompte ;?>" class="flex justify-end mr-60 mt-15"><button class="border-2 border-vertFonce rounded-2xl w-45 h-14 cursor-pointer">Modifier stocks</button></a>
+            
 
-                if($tabProduit == null){ ?>
-                    <p>Votre catalogue est vide.</p>
-                <?php }
-
-                //affiche la photo du produit, son nom, son prix et sa note, son stock ?>
-                <div class="grid grid-cols-3">
-                    <?php foreach($tabProduit as $id => $valeurs){
-                        $idProduit = $valeurs['id_produit'];?>
-                        <section class="bg-bleu grid grid-cols-[40%_60%] w-80 p-3 m-2">
-                            <!--affichage de la photo-->
-                            <a href= "<?php echo "details_produit.php?idProduit=".$idProduit;?>" class="col-span-2 justify-self-center mb-3">
-                                <img src="<?php echo $valeurs['url_photo'];?>" 
-                                        alt="<?php echo $valeurs['alt'];?>"
-                                        title="<?php echo $valeurs['titre'];?>">
-                            </a>
-
-                            <!--affichage du nom du produit-->
-                            <p class="col-span-2"><?php echo $valeurs['libelle_produit'];?></p> 
-
-                            <!--affichage du prix du produit-->   
-                            <div class="flex justify-start items-center col-span-2">
-                                <?php $prix = str_replace(".", ",", $valeurs['prix_ttc'])?>
-                                <p><?php echo $prix;?> €</p>
-
-                                <!--récupération de la note-->
-                                <div class="ml-2 md:ml-10 flex">
-                                    <?php $note = $valeurs['note_moyenne'];
-                                        affichageNote($note); ?>
-                                </div> 
-                            </div>   
-                             
-                            <!--affichage du stock-->
-                            <p class="col-span-2">En stock : <?php echo $valeurs['quantite_stock'];?></p>       
-                        </section>
-                    <?php } ?>
-                </div>         
-                <?php $dbh = null;
-            }catch(PDOException $e){
-                print "Erreur !: " . $e->getMessage() . "<br/>";
-                die();
-            }
-        ?>
+        <?php } ?>
     </main>
-    
+
     <!--footer-->
-    <?php include(__DIR__ . "/../../php/structure/footer_back.php"); ?>
-
+    <?php include __DIR__ . "/../../php/structure/footer_back.php"; ?>
 </body>
-
 </html>
