@@ -93,7 +93,12 @@
                     </tbody>
                 </table>
             </div>
-            <a href="../bo/modifier_stock.php?idCompte=<?php echo $idCompte ;?>" class="flex justify-end mr-60 mt-15"><button class="border-2 border-vertFonce rounded-2xl w-45 h-14 cursor-pointer">Modifier stocks</button></a>
+            <div class="flex justify-end mr-60 mt-15">
+                <button class="border-2 border-vertFonce rounded-2xl w-45 h-14 cursor-pointer">
+                    <a href="../bo/modifier_stock.php?idCompte=<?php echo $idCompte ;?>" class="">Modifier stocks</a>
+                </button>
+            </div>
+            
             
 
         <?php } ?>
