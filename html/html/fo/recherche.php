@@ -330,6 +330,27 @@
             }
 
             // EventListener pour les tris et filtres
+            let prixTriCroissant = document.getElementById("prixTriCroissant")
+            let prixTriDecroissant = document.getElementById("prixTriDecroissant")
+            let alphaTriAZ = document.getElementById("alphaTriAZ")
+            let alphaTriZA = document.getElementById("alphaTriZA")
+            let noteTri51 = document.getElementById("noteTri51")
+            let noteTri15 = document.getElementById("noteTri15")
+
+            prixTriCroissant.addEventListener("onclick",triPrixCroissant)
+            prixTriDecroissant.addEventListener("onclick",triPrixDecroissant)
+            alphaTriAZ.addEventListener("onclick",triAz)
+            alphaTriZA.addEventListener("onclick",triZa)
+            noteTri51.addEventListener("onclick",triEtoileCroissant)
+            noteTri15.addEventListener("onclick",triEtoileDecroissant)
+
+
+            
+
+
+
+
+
         </script>
     </main>
 
