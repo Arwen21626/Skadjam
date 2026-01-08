@@ -231,7 +231,7 @@
         <div id="prod" class="grid grid-cols-2 justify-items-center md:grid-cols-3">
             <script>
                 // Boucle pour afficher tous les produits
-                tabProd.forEach(prod => {
+                lignes.forEach(prod => {
                     idProduit = prod['id_produit']
                     let parent = document.getElementById("prod")
 
