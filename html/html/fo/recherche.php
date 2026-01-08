@@ -44,7 +44,7 @@
         for (var i = 0; i < parts.length; i++) {
             var temp = parts[i].split("=");
         }
-        console.log(temp)
+        
 
         if(temp[0] == ''){
             pageNumber = 1 
@@ -61,7 +61,6 @@
 
         let lignes = tabProd.slice(start, end);
 
-        console.log(lignes)
     </script>
 
     <!--header-->
@@ -284,7 +283,6 @@
                     contientNote.classList.add("w-2/4", "ml-2", "md:ml-10", "flex")
 
                     parent = contientNote
-                    // console.log(parent)
 
                     let note = prod['note_moyenne']
                     affichageNote(note, parent)
@@ -340,6 +338,8 @@
             prixTriCroissant.addEventListener("click",function () {
                 triEtoileDecroissant(tabProd);
             })
+
+            
 
             prixTriDecroissant.addEventListener("click",function () {
                 triEtoileDecroissant(tabProd);

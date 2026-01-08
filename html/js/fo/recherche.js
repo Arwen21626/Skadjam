@@ -89,11 +89,17 @@ async function affichageNote(note, parent ){
 
 // Tris
 function triPrixCroissant(tab){
-    
+    return(tabProd.sort((a, b) => parseInt(a['prix_ttc']) - parseInt(b['prix_ttc'])))
+    // let tabTrie = tabProd.sort()
+    // console.log(tabTrie)
+    // return tabTrie
 }
 
 function triPrixDecroissant(tab){
-
+    return(tabProd.sort((a, b) => parseInt(b['prix_ttc']) - parseInt(a['prix_ttc'])))
+    // let tabTrie = tabProd.sort() // Pour inverser ? .reverse()
+    // console.log(tabTrie)
+    // return tabTrie
 }
 
 function triAz(tab){
