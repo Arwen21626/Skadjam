@@ -29,7 +29,7 @@
 
     <main class="mt-10">
         <div class="grid grid-cols-2 gap-4 justify-items-center">
-            <a href="#nosProduits" title="lien vers page promotion">
+            <a href="html/fo/promotion.php" title="lien vers page promotion">
                 <img src="images/images_accueil/promotion.webp" alt="promotion" class="w-90 md:w-150 h-auto justify-self-end">
             </a>
             <a href="#nosProduits" title="lien vers page nouveaux produits">

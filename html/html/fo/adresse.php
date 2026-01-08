@@ -154,8 +154,8 @@
             </div>
 
             <div class="flex flex-row mt-5 mb-10 justify-between">
-                <button class="border-vertClair border-2 rounded-2xl w-40 h-14"><a href="/html/fo/panier.php">Retour</a></button>
-                <input class="border-vertClair border-2 rounded-2xl w-40 h-14" type="submit" value="Suivant">
+                <a href="/html/fo/panier.php"><button class="border-vertClair border-2 rounded-2xl w-40 h-14 cursor-pointer">Retour</button></a>
+                <input class="border-vertClair border-2 rounded-2xl w-40 h-14 cursor-pointer" type="submit" value="Suivant">
             </div>
         </form>
     </main>
