@@ -42,6 +42,7 @@
     <link rel="stylesheet" type="text/css" href="../../css/output.css" >
     <link rel="stylesheet" type="text/css" href="../../css/fo/general_front.css" >
     <title>Recherche</title>
+    <?php include __DIR__ . "/php/structure/head_front.php"; ?>
 </head>
 <script>
     const tabProd = <?php echo json_encode($tabProduit);?>
