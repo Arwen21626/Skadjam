@@ -337,12 +337,29 @@
             let noteTri51 = document.getElementById("noteTri51")
             let noteTri15 = document.getElementById("noteTri15")
 
-            prixTriCroissant.addEventListener("onclick",triPrixCroissant)
-            prixTriDecroissant.addEventListener("onclick",triPrixDecroissant)
-            alphaTriAZ.addEventListener("onclick",triAz)
-            alphaTriZA.addEventListener("onclick",triZa)
-            noteTri51.addEventListener("onclick",triEtoileCroissant)
-            noteTri15.addEventListener("onclick",triEtoileDecroissant)
+            prixTriCroissant.addEventListener("click",function () {
+                triEtoileDecroissant(tabProd);
+            })
+
+            prixTriDecroissant.addEventListener("click",function () {
+                triEtoileDecroissant(tabProd);
+            })
+
+            alphaTriAZ.addEventListener("click",function () {
+                triEtoileDecroissant(tabProd);
+            })
+
+            alphaTriZA.addEventListener("click",function () {
+                triEtoileDecroissant(tabProd);
+            })
+            
+            noteTri51.addEventListener("click",function () {
+                triEtoileDecroissant(tabProd);
+            })
+            
+            noteTri15.addEventListener("click", function () {
+                triEtoileDecroissant(tabProd);
+            })
 
 
             
