@@ -44,8 +44,9 @@
         for (var i = 0; i < parts.length; i++) {
             var temp = parts[i].split("=");
         }
+        console.log(temp)
 
-        if(temp == ""){
+        if(temp[0] == ''){
             pageNumber = 1 
         }else{
             pageNumber = temp[1]
@@ -54,9 +55,12 @@
         //console.log($_GET['id']); // Affiche la valeur du paramètre 'id'   
 
         let maxPage = (tabProd.length)/PAGE_SIZE
-        console.log(maxPage)
 
-        let lignes = tabProd.slice(pageNumber*PAGE_SIZE-PAGE_SIZE, PAGE_SIZE)
+        let start = (pageNumber - 1) * PAGE_SIZE;
+        let end = pageNumber * PAGE_SIZE;
+
+        let lignes = tabProd.slice(start, end);
+
         console.log(lignes)
     </script>
 
@@ -271,7 +275,7 @@
 
                     // Prix
                     let prix = document.createElement("p")
-                    prix.textContent = prod['prix_ttc']+" €"
+                    prix.textContent = prod['prix_ttc'].replace(".", ",")+" €"
                     parent.appendChild(prix)
 
                     // Note
@@ -315,7 +319,8 @@
 
             if (pageNumber < maxPage){
                 let pageSuiv = document.createElement("a")
-                pageSuiv.href = "recherche.php?page="+(pageNumber+1)+"#nosProduits"
+                let pageSup = parseInt(pageNumber)+1
+                pageSuiv.href = "recherche.php?page="+(pageSup)+"#nosProduits"
 
                 pageSuiv.textContent = "Page suivante"
                 pageSuiv.classList.add("lienPage","hover:text-rouge")
