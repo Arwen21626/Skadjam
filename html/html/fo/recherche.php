@@ -43,10 +43,9 @@
     <link rel="stylesheet" type="text/css" href="../../css/fo/general_front.css" >
     <title>Recherche</title>
     <?php include __DIR__ . "/../../php/structure/head_front.php"; ?>
+    <script src="../../js/fo/recherche.js"></script>
 </head>
-<script>
-    const tabProd = <?php echo json_encode($tabProduit);?>
-</script>
+
 <body>
     <!--header-->
     <?php (include __DIR__ . "/../../php/structure/header_front.php"); ?>
@@ -217,7 +216,8 @@
         </aside>
 
         <div id="prod" class="grid grid-cols-2 justify-items-center md:grid-cols-3">
-            <script src="../../js/fo/recherche.js">
+            <script>
+                const tabProd = <?php echo json_encode($tabProduit);?>
                 // Boucle pour afficher tous les produits
                 tabProd.forEach(prod => {
                     idProduit = prod['id_produit']
@@ -273,7 +273,9 @@
                     // console.log(parent)
 
                     let note = prod['note_moyenne']
-                    affichageNote(note)
+                    affichageNote(note, parent)
+                    
+                    //setTimeout(function(){console.log('Code waits for 1  second')}, 1000);
                 
                 });
             </script>

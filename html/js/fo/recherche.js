@@ -1,9 +1,8 @@
-function affichageNote(note){
+async function affichageNote(note, parent ){
     // fonction qui affiche une note avec des étoiles
     //affichage d'une note nulle
     let section = document.createElement("section")
-    let parent = contientNote
-
+    
     parent.appendChild(section)
     parent = section
 
@@ -45,6 +44,7 @@ function affichageNote(note){
             etoileD.src = "../../images/logo/bootstrap_icon/star-half.svg"
             etoileD.alt = "demie étoile"
             etoileD.title = "demie étoile"
+            parent.appendChild(etoileD)
             
             // Boucle pour étoiles vides-->
             for(i=0; i<nbEtoileVides; i++){
@@ -52,6 +52,7 @@ function affichageNote(note){
                 etoileV.src = "../../images/logo/bootstrap_icon/star.svg"
                 etoileV.alt = "étoile vide"
                 etoileV.title = "étoile vide"
+                parent.appendChild(etoileV)
             }
         }
         
@@ -64,18 +65,20 @@ function affichageNote(note){
         if(noteFinale != moitie){
             nbEtoileVides = 5-noteFinale;
             //boucle pour étoiles pleines
-            for(i=0; i<$noteFinale; i++){
+            for(i=0; i<noteFinale; i++){
                 let etoilePF = document.createElement("img")
                 etoilePF.src = "../../images/logo/bootstrap_icon/star-fill.svg"
                 etoilePF.alt = "étoile pleine"
                 etoilePF.title = "étoile pleine"
+                parent.appendChild(etoilePF)
             }
             //boucle pour étoiles vides
-            for(i=0; i<$nbEtoilesVides; i++){
+            for(i=0; i<nbEtoileVides; i++){
                 let etoileVF = document.createElement("img")
                 etoileVF.src = "../../images/logo/bootstrap_icon/star.svg"
                 etoileVF.alt = "étoile vide"
                 etoileVF.title = "étoile vide"
+                parent.appendChild(etoileVF)
             }
         }
     }
