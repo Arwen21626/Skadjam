@@ -117,34 +117,38 @@ if (isset($_POST['categorie']) && isset($_POST['nom']) && isset($_POST['prix']) 
             $prixTTC = $prixHT*(1+$pourcentageTVA);
 
             //Insertion du produit
-            $insertionProduit = $dbh -> query("WITH id AS (
+            $insertionProduit = $dbh -> prepare("WITH id AS (
                 INSERT INTO sae3_skadjam._produit 
                 (libelle_produit, description_produit, prix_ht, prix_ttc, est_masque, quantite_stock, quantite_unite, unite, id_categorie, id_vendeur, id_tva)
                 VALUES 
-                ('$nom','$description', $prixHT, $prixTTC, $enLigne, $qteStock, $qteUnite, '$unite', $idCategorie, $idVendeur, $tva)
+                (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
                 RETURNING id_produit)
                 SELECT * FROM id;
                 ");
+            $insertionProduit->execute([$nom,$description,$prixHT,$prixTTC,$enLigne,$qteStock,$qteUnite,$unite,$idCategorie,$idVendeur,$tva]);
             
             foreach ($insertionProduit as $t) {
                 $idProd = $t['id_produit'];
             }
 
             //Insertion de la photo dans la table photo
-            $insertionPhoto = $dbh -> query("WITH id AS (
+            $insertionPhoto = $dbh -> prepare("WITH id AS (
                 INSERT INTO sae3_skadjam._photo 
                 (url_photo, alt, titre)
                 VALUES 
-                ('/images/photo_importees/$nom_photo_finale','$nom','$nom')
+                ('/images/photo_importees/?',? ,?)
                 RETURNING id_photo)
                 SELECT * FROM id;
                 ");
+
+            $insertionPhoto->execute([$nom_photo_finale,$nom,$nom]);
 
             foreach ($insertionPhoto as $t) {
                 $idPhoto = $t['id_photo'];
             }
 
-            $insertionMontre = $dbh -> query("INSERT INTO sae3_skadjam._montre VALUES ($idPhoto,$idProd);");
+            $insertionMontre = $dbh -> prepare("INSERT INTO sae3_skadjam._montre VALUES (?,?);");
+            $insertionMontre->execute([$idPhoto,$idProd]);
 
             header("Location: ./details_produit.php?idProduit=".$idProd);
 
