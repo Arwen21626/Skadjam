@@ -249,7 +249,7 @@ int connexion(char mdp[128], char user[128]){
 }
 
 int connecxionBd(){
-    conn = PQconnectdb("host=127.0.0.1 dbname=postgres user=postgres password=1969:USA");
+    conn = PQconnectdb("host=127.0.0.1 dbname=postgres user=postgres password=mypass");
 
     if (PQstatus(conn) != CONNECTION_OK){
         LOG_SERV(LOG_ERROR, "Erreur connexion BDD : %s", PQerrorMessage(conn));
