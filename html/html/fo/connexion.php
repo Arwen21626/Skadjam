@@ -142,7 +142,7 @@
 <html lang="fr">
 <head>
     <?php require_once __DIR__ . "/../../php/structure/head_front.php"?>
-    <title>connexion</title>
+    <title>Connexion</title>
 </head>
 <body>
     <?php require_once __DIR__ . "/../../php/structure/header_front.php"; ?>
