@@ -2,6 +2,37 @@
     session_start();
     require_once(__DIR__ . '/../../php/verif_role_fo.php');
     require_once(__DIR__ . '/../../01_premiere_connexion.php');
+    const PAGE_SIZE = 15;
+    require_once(__DIR__ . "/../../../connections_params.php");
+    require_once(__DIR__ . "/../../php/fonctions.php");
+
+    //récupère toutes les infos des tables produits et photos
+    $tabProduit = [];
+    foreach($dbh->query("SELECT *
+                        FROM sae3_skadjam._produit pr
+                        INNER JOIN sae3_skadjam._montre m
+                            ON pr.id_produit=m.id_produit
+                        INNER JOIN sae3_skadjam._photo ph  
+                            ON ph.id_photo = m.id_photo 
+                        INNER JOIN sae3_skadjam._vendeur v
+                            ON pr.id_vendeur = v.id_compte
+                        WHERE pr.est_supprime = false AND pr.est_masque = false"
+                        , PDO::FETCH_ASSOC) as $row){
+        $tabProduit[] = $row;
+    }
+
+    //initialisation du numéro de page
+    if(isset($_GET['page'])&& $_GET['page']!==""){
+        $pageNumber = $_GET['page'];
+    }
+    else{
+        $pageNumber = 1;
+    }
+
+    $maxPage = sizeof($tabProduit)/PAGE_SIZE;
+
+    //découpe le catalogue en page de 15 produits
+    $lignes = array_slice($tabProduit, $pageNumber*PAGE_SIZE-PAGE_SIZE, PAGE_SIZE);
 ?>
 
 <!DOCTYPE html>
@@ -13,6 +44,9 @@
     <link rel="stylesheet" type="text/css" href="../../css/fo/general_front.css" >
     <title>Recherche</title>
 </head>
+<script>
+    const tabProd = <?php echo json_encode($tabProduit);?>
+</script>
 <body>
     <!--header-->
     <?php (include __DIR__ . "/../../php/structure/header_front.php"); ?>
@@ -162,6 +196,83 @@
             </section>
         </aside>
 
+        <script>
+            // Boucle pour afficher tous les produits
+            tabProd.forEach(prod => {   
+                idProduit = prod['id_produit']
+                let parent = document.getElementsByTagName("main")[0]
+
+                // Pour avoir seulement le main et pas le tableau renvoyé
+
+                // Section   
+                let produit = document.createElement("section")
+                parent.appendChild(produit)
+
+                parent = produit
+                
+
+                //Lien
+                let lien = document.createElement("a")
+                lien.href = "details_produit.php?idProduit="+idProduit
+                parent.appendChild(lien)
+
+                parent = lien
+
+                // Image
+                let image = document.createElement("img")
+                image.src = prod['url_photo']
+                image.alt = prod['alt']
+                image.title = prod['title']
+                parent.appendChild(image)
+
+                // Nom produit
+                let nom = document.createElement("p")
+                nom.textContent = prod['libelle_produit']
+                parent.appendChild(nom)
+
+                // Prix et note
+                let contient = document.createElement("div")
+                parent.appendChild(contient)
+
+                parent = contient
+
+                // Prix
+                let prix = document.createElement("p")
+                prix.textContent = prod['prix_ttc']+" €"
+                parent.appendChild(prix)
+
+                // Note
+                let contientNote = document.createElement("div")
+                parent.appendChild(contientNote)
+
+                parent = contientNote
+                // console.log(parent)
+            });
+
+
+        </script>
+
+        <!-- str_replace-->
+        <div class="w-2/4 ml-2 md:ml-10 flex">
+            <?php 
+                $note = $valeurs['note_moyenne'];
+                affichageNote($note); 
+            ?>
+        </div>                    
+
+                            
+        <?php $dbh = null;?>
+        <!--fin du catalogue-->
+        <div class="flex flex-row space-x-4 justify-center">
+            <?php if ($pageNumber>1){?>
+            <a class= "lienPage hover:text-rouge" href="<?php echo "recherche.php?page=".($pageNumber-1)."#nosProduits";?>">Page précédente</a>
+            <?php }?>
+        
+            <?php if ($pageNumber<$maxPage){?>
+            <a class= "lienPage hover:text-rouge" href="<?php echo "recherche.php?page=".($pageNumber+1)."#nosProduits";?>">Page suivante</a>
+            <?php }?>
+        </div>
+        
 
         
     </main>
