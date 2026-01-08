@@ -1,0 +1,488 @@
+[00:49:11] [INFO] [SERV] (main.c:62) Démarrage du service Delivraptor
+[00:49:11] [INFO] [SERV] (main.c:72) Socket configuré
+[00:49:11] [INFO] [SERV] (main.c:87) Adresse ip et port configurées
+[00:49:11] [INFO] [SERV] (main.c:92) Socket en écoute
+[00:49:42] [INFO] [SERV] (main.c:100) Connexion accepté
+[00:49:42] [INFO] [CLIENT] [127.0.0.1:56492] Client connecté au service avec succès
+[00:49:42] [INFO] [CLIENT] [127.0.0.1:56492] Authentification réussie
+[00:53:16] [INFO] [SERV] (main.c:62) Démarrage du service Delivraptor
+[00:53:16] [INFO] [SERV] (main.c:72) Socket configuré
+[00:53:16] [INFO] [SERV] (main.c:87) Adresse ip et port configurées
+[00:53:16] [INFO] [SERV] (main.c:92) Socket en écoute
+[01:04:01] [INFO] [SERV] (main.c:62) Démarrage du service Delivraptor
+[01:04:01] [INFO] [SERV] (main.c:72) Socket configuré
+[01:04:01] [INFO] [SERV] (main.c:87) Adresse ip et port configurées
+[01:04:01] [INFO] [SERV] (main.c:92) Socket en écoute
+[01:04:03] [INFO] [SERV] (main.c:100) Connexion accepté
+[01:04:03] [INFO] [CLIENT] [127.0.0.1:43508] Client connecté au service avec succès
+[01:04:03] [INFO] [CLIENT] [127.0.0.1:43508] Authentification réussie
+[01:04:03] [INFO] [CLIENT] [127.0.0.1:43508] Requete ADD
+[01:04:03] [INFO] [CLIENT] [127.0.0.1:43508] Création bordereau pour la commande 144254 alizon
+[01:04:03] [INFO] [CLIENT] [127.0.0.1:43508] BORD ALI1767974897 com144254 ts1767830643
+[01:04:03] [INFO] [CLIENT] [127.0.0.1:43508] Requete ADD
+[01:04:03] [INFO] [CLIENT] [127.0.0.1:43508] Création bordereau pour la commande 144254 alizon
+[01:04:03] [INFO] [CLIENT] [127.0.0.1:43508] BORD ALI1767974897 com144254 ts1767830643
+[01:04:03] [INFO] [CLIENT] [127.0.0.1:43508] Requete ADD
+[01:04:03] [INFO] [CLIENT] [127.0.0.1:43508] Création bordereau pour la commande 144254 alizon
+[01:12:54] [INFO] [SERV] (main.c:62) Démarrage du service Delivraptor
+[01:12:54] [INFO] [SERV] (main.c:72) Socket configuré
+[01:12:54] [INFO] [SERV] (main.c:87) Adresse ip et port configurées
+[01:12:54] [INFO] [SERV] (main.c:92) Socket en écoute
+[01:12:57] [INFO] [SERV] (main.c:100) Connexion accepté
+[01:12:57] [INFO] [CLIENT] [127.0.0.1:52068] Client connecté au service avec succès
+[01:12:57] [INFO] [CLIENT] [127.0.0.1:52068] Authentification réussie
+[01:12:57] [INFO] [SERV] (main.c:130) Connexion a la bdd...
+[01:12:57] [INFO] [SERV] (main.c:235) Connecté a la bdd
+[01:12:57] [INFO] [CLIENT] [127.0.0.1:52068] Requete ADD
+[01:12:57] [INFO] [CLIENT] [127.0.0.1:52068] Création bordereau pour la commande 144254 alizon
+[01:12:57] [INFO] [CLIENT] [127.0.0.1:52068] BORD ALI1767975431 com144254 ts1767831177
+[01:12:57] [INFO] [CLIENT] [127.0.0.1:52068] Requete ADD
+[01:12:57] [INFO] [CLIENT] [127.0.0.1:52068] Création bordereau pour la commande 144254 alizon
+[01:12:57] [INFO] [CLIENT] [127.0.0.1:52068] BORD ALI1767975431 com144254 ts1767831177
+[01:12:57] [INFO] [CLIENT] [127.0.0.1:52068] Requete ADD
+[01:12:57] [INFO] [CLIENT] [127.0.0.1:52068] Création bordereau pour la commande 144254 alizon
+[01:15:09] [INFO] [SERV]   (main.c:62) Démarrage du service Delivraptor
+[01:15:09] [INFO] [SERV]   (main.c:72) Socket configuré
+[01:15:09] [INFO] [SERV]   (main.c:87) Adresse ip et port configurées
+[01:15:09] [INFO] [SERV]   (main.c:92) Socket en écoute
+[01:15:11] [INFO] [SERV]   (main.c:100) Connexion accepté
+[01:15:11] [INFO] [CLIENT] [127.0.0.1:47538] Client connecté au service avec succès
+[01:15:11] [INFO] [CLIENT] [127.0.0.1:47538] Authentification réussie
+[01:15:11] [INFO] [SERV]   (main.c:130) Connexion a la bdd...
+[01:15:11] [INFO] [SERV]   (main.c:235) Connecté a la bdd
+[01:15:11] [INFO] [CLIENT] [127.0.0.1:47538] Requete ADD
+[01:15:11] [INFO] [CLIENT] [127.0.0.1:47538] Création bordereau pour la commande 144254 alizon
+[01:15:11] [INFO] [CLIENT] [127.0.0.1:47538] BORD ALI1767975565 com144254 ts1767831311
+[01:15:11] [INFO] [CLIENT] [127.0.0.1:47538] Requete ADD
+[01:15:11] [INFO] [CLIENT] [127.0.0.1:47538] Création bordereau pour la commande 144254 alizon
+[01:15:11] [INFO] [CLIENT] [127.0.0.1:47538] BORD ALI1767975565 com144254 ts1767831311
+[01:15:11] [INFO] [CLIENT] [127.0.0.1:47538] Requete ADD
+[01:15:11] [INFO] [CLIENT] [127.0.0.1:47538] Création bordereau pour la commande 144254 alizon
+[01:17:49] [INFO] [SERV]   (main.c:62) Démarrage du service Delivraptor
+[01:17:49] [INFO] [SERV]   (main.c:72) Socket configuré
+[01:17:49] [INFO] [SERV]   (main.c:87) Adresse ip et port configurées
+[01:17:49] [INFO] [SERV]   (main.c:92) Socket en écoute
+[01:17:52] [INFO] [SERV]   (main.c:100) Connexion accepté
+[01:17:52] [INFO] [CLIENT] [127.0.0.1:56254] Client connecté au service avec succès
+[01:17:52] [INFO] [CLIENT] [127.0.0.1:56254] Authentification réussie
+[01:17:52] [INFO] [SERV]   (main.c:130) Connexion a la bdd...
+[01:17:52] [INFO] [SERV]   (main.c:235) Connecté a la bdd
+[01:17:52] [INFO] [CLIENT] [127.0.0.1:56254] Requete ADD
+[01:17:52] [INFO] [CLIENT] [127.0.0.1:56254] Création bordereau pour la commande 144254 alizon
+[01:17:52] [INFO] [CLIENT] [127.0.0.1:56254] BORD ALI1767975726 com144254 ts1767831472
+[01:17:52] [INFO] [CLIENT] [127.0.0.1:56254] Requete ADD
+[01:17:52] [INFO] [CLIENT] [127.0.0.1:56254] Création bordereau pour la commande 15223 alizon
+[01:17:52] [INFO] [CLIENT] [127.0.0.1:56254] BORD ALI1767846695 com15223 ts1767831472
+[01:17:52] [INFO] [CLIENT] [127.0.0.1:56254] Requete ADD
+[01:17:52] [INFO] [CLIENT] [127.0.0.1:56254] Création bordereau pour la commande 15223 alizon
+[01:17:52] [INFO] [CLIENT] [127.0.0.1:56254] BORD ALI1767846695 com15223 ts1767831472
+[01:17:52] [INFO] [CLIENT] [127.0.0.1:56254] Requete ADD
+[01:17:52] [INFO] [CLIENT] [127.0.0.1:56254] Création bordereau pour la commande 15223 alizon
+[01:18:02] [INFO] [SERV]   (main.c:62) Démarrage du service Delivraptor
+[01:18:02] [INFO] [SERV]   (main.c:72) Socket configuré
+[01:18:02] [INFO] [SERV]   (main.c:87) Adresse ip et port configurées
+[01:18:02] [INFO] [SERV]   (main.c:92) Socket en écoute
+[01:18:08] [INFO] [SERV]   (main.c:100) Connexion accepté
+[01:18:08] [INFO] [CLIENT] [127.0.0.1:47990] Client connecté au service avec succès
+[01:18:08] [INFO] [CLIENT] [127.0.0.1:47990] Authentification réussie
+[01:18:08] [INFO] [SERV]   (main.c:130) Connexion a la bdd...
+[01:18:08] [INFO] [SERV]   (main.c:235) Connecté a la bdd
+[01:18:08] [INFO] [CLIENT] [127.0.0.1:47990] Requete ADD
+[01:18:08] [INFO] [CLIENT] [127.0.0.1:47990] Création bordereau pour la commande 144254 alizon
+[01:18:08] [INFO] [CLIENT] [127.0.0.1:47990] BORD ALI1767975742 com144254 ts1767831488
+[01:18:08] [INFO] [CLIENT] [127.0.0.1:47990] Requete ADD
+[01:18:08] [INFO] [CLIENT] [127.0.0.1:47990] Création bordereau pour la commande 15223 alizon
+[01:18:08] [INFO] [CLIENT] [127.0.0.1:47990] BORD ALI1767846711 com15223 ts1767831488
+[01:18:08] [INFO] [CLIENT] [127.0.0.1:47990] Requete ADD
+[01:18:08] [INFO] [CLIENT] [127.0.0.1:47990] Création bordereau pour la commande 15223 alizon
+[01:18:08] [INFO] [CLIENT] [127.0.0.1:47990] BORD ALI1767846711 com15223 ts1767831488
+[01:18:08] [INFO] [CLIENT] [127.0.0.1:47990] Requete ADD
+[01:18:08] [INFO] [CLIENT] [127.0.0.1:47990] Création bordereau pour la commande 15223 alizon
+[01:22:01] [INFO] [SERV]   (main.c:62) Démarrage du service Delivraptor
+[01:22:01] [INFO] [SERV]   (main.c:72) Socket configuré
+[01:22:01] [INFO] [SERV]   (main.c:87) Adresse ip et port configurées
+[01:22:01] [INFO] [SERV]   (main.c:92) Socket en écoute
+[01:22:04] [INFO] [SERV]   (main.c:100) Connexion accepté
+[01:22:04] [INFO] [CLIENT] [127.0.0.1:37348] Client connecté au service avec succès
+[01:22:04] [INFO] [CLIENT] [127.0.0.1:37348] Authentification réussie
+[01:22:04] [INFO] [SERV]   (main.c:130) Connexion a la bdd...
+[01:22:04] [INFO] [SERV]   (main.c:236) Connecté a la bdd
+[01:22:04] [INFO] [CLIENT] [127.0.0.1:37348] Requete ADD
+[01:22:04] [INFO] [CLIENT] [127.0.0.1:37348] Création bordereau pour la commande 144254 alizon
+[01:22:04] [INFO] [CLIENT] [127.0.0.1:37348] BORD ALI1767975978 com144254 ts1767831724
+[01:22:04] [INFO] [CLIENT] [127.0.0.1:37348] Requete ADD
+[01:22:04] [INFO] [CLIENT] [127.0.0.1:37348] Création bordereau pour la commande 15223 alizon
+[01:22:04] [INFO] [CLIENT] [127.0.0.1:37348] BORD ALI1767846947 com15223 ts1767831724
+[01:22:04] [INFO] [CLIENT] [127.0.0.1:37348] Requete ADD
+[01:22:04] [INFO] [CLIENT] [127.0.0.1:37348] Création bordereau pour la commande 15223 alizon
+[01:22:04] [INFO] [CLIENT] [127.0.0.1:37348] BORD ALI1767846947 com15223 ts1767831724
+[01:22:04] [INFO] [CLIENT] [127.0.0.1:37348] Requete ADD
+[01:22:04] [INFO] [CLIENT] [127.0.0.1:37348] Création bordereau pour la commande 15223 alizon
+[01:55:57] [INFO] [SERV]   (main.c:62) Démarrage du service Delivraptor
+[01:55:57] [INFO] [SERV]   (main.c:72) Socket configuré
+[01:55:57] [INFO] [SERV]   (main.c:87) Adresse ip et port configurées
+[01:55:57] [INFO] [SERV]   (main.c:92) Socket en écoute
+[01:56:00] [INFO] [SERV]   (main.c:100) Connexion accepté
+[01:56:00] [INFO] [CLIENT] [127.0.0.1:38296] Client connecté au service avec succès
+[01:56:00] [INFO] [CLIENT] [127.0.0.1:38296] Authentification réussie
+[01:56:00] [INFO] [SERV]   (main.c:130) Connexion a la BDD...
+[01:56:00] [INFO] [SERV]   (main.c:259) Connecté a la BDD
+[01:56:00] [INFO] [CLIENT] [127.0.0.1:38296] Requete ADD
+[01:56:00] [INFO] [CLIENT] [127.0.0.1:38296] Création bordereau pour la commande 144254 alizon
+[01:56:00] [INFO] [SERV]   (main.c:171) INSERT recuperation des parametres...
+[01:56:00] [INFO] [SERV]   (main.c:175) INSERT enregistrement en BDD...
+[01:56:00] [ERROR] [SERV]   (main.c:188) Erreur INSERT : ERROR:  relation "deliveraptor._deliveraptor" does not exist
+LINE 1: INSERT INTO deliveraptor._deliveraptor (id_suivi) values ($1...
+                    ^
+
+[01:56:00] [INFO] [CLIENT] [127.0.0.1:38296] BORD ALI1767978014 com144254 ts1767833760
+[01:56:00] [INFO] [CLIENT] [127.0.0.1:38296] Requete ADD
+[01:56:00] [INFO] [CLIENT] [127.0.0.1:38296] Création bordereau pour la commande 15223 alizon
+[01:56:00] [INFO] [SERV]   (main.c:171) INSERT recuperation des parametres...
+[01:56:00] [INFO] [SERV]   (main.c:175) INSERT enregistrement en BDD...
+[01:56:00] [ERROR] [SERV]   (main.c:188) Erreur INSERT : ERROR:  relation "deliveraptor._deliveraptor" does not exist
+LINE 1: INSERT INTO deliveraptor._deliveraptor (id_suivi) values ($1...
+                    ^
+
+[01:56:00] [INFO] [CLIENT] [127.0.0.1:38296] BORD ALI1767848983 com15223 ts1767833760
+[01:56:00] [INFO] [CLIENT] [127.0.0.1:38296] Requete ADD
+[01:56:00] [INFO] [CLIENT] [127.0.0.1:38296] Création bordereau pour la commande 15223 alizon
+[01:56:00] [INFO] [SERV]   (main.c:171) INSERT recuperation des parametres...
+[01:56:00] [INFO] [SERV]   (main.c:175) INSERT enregistrement en BDD...
+[01:56:00] [ERROR] [SERV]   (main.c:188) Erreur INSERT : ERROR:  relation "deliveraptor._deliveraptor" does not exist
+LINE 1: INSERT INTO deliveraptor._deliveraptor (id_suivi) values ($1...
+                    ^
+
+[01:56:00] [INFO] [CLIENT] [127.0.0.1:38296] BORD ALI1767848983 com15223 ts1767833760
+[01:56:00] [INFO] [CLIENT] [127.0.0.1:38296] Requete ADD
+[01:56:00] [INFO] [CLIENT] [127.0.0.1:38296] Création bordereau pour la commande 15223 alizon
+[01:56:00] [INFO] [SERV]   (main.c:171) INSERT recuperation des parametres...
+[01:56:00] [INFO] [SERV]   (main.c:175) INSERT enregistrement en BDD...
+[01:56:00] [ERROR] [SERV]   (main.c:188) Erreur INSERT : ERROR:  relation "deliveraptor._deliveraptor" does not exist
+LINE 1: INSERT INTO deliveraptor._deliveraptor (id_suivi) values ($1...
+                    ^
+
+[01:57:10] [INFO] [SERV]   (main.c:62) Démarrage du service Delivraptor
+[01:57:10] [INFO] [SERV]   (main.c:72) Socket configuré
+[01:57:10] [INFO] [SERV]   (main.c:87) Adresse ip et port configurées
+[01:57:10] [INFO] [SERV]   (main.c:92) Socket en écoute
+[01:57:12] [INFO] [SERV]   (main.c:100) Connexion accepté
+[01:57:12] [INFO] [CLIENT] [127.0.0.1:55320] Client connecté au service avec succès
+[01:57:12] [INFO] [CLIENT] [127.0.0.1:55320] Authentification réussie
+[01:57:12] [INFO] [SERV]   (main.c:130) Connexion a la BDD...
+[01:57:12] [INFO] [SERV]   (main.c:259) Connecté a la BDD
+[01:57:12] [INFO] [CLIENT] [127.0.0.1:55320] Requete ADD
+[01:57:12] [INFO] [CLIENT] [127.0.0.1:55320] Création bordereau pour la commande 144254 alizon
+[01:57:12] [INFO] [SERV]   (main.c:171) INSERT recuperation des parametres...
+[01:57:12] [INFO] [SERV]   (main.c:175) INSERT enregistrement en BDD...
+[01:57:12] [ERROR] [SERV]   (main.c:188) Erreur INSERT : ERROR:  relation "sae3_deliveraptor._deliveraptor" does not exist
+LINE 1: INSERT INTO sae3_deliveraptor._deliveraptor (id_suivi) value...
+                    ^
+
+[01:57:12] [INFO] [CLIENT] [127.0.0.1:55320] BORD ALI1767978086 com144254 ts1767833832
+[01:57:12] [INFO] [CLIENT] [127.0.0.1:55320] Requete ADD
+[01:57:12] [INFO] [CLIENT] [127.0.0.1:55320] Création bordereau pour la commande 15223 alizon
+[01:57:12] [INFO] [SERV]   (main.c:171) INSERT recuperation des parametres...
+[01:57:12] [INFO] [SERV]   (main.c:175) INSERT enregistrement en BDD...
+[01:57:12] [ERROR] [SERV]   (main.c:188) Erreur INSERT : ERROR:  relation "sae3_deliveraptor._deliveraptor" does not exist
+LINE 1: INSERT INTO sae3_deliveraptor._deliveraptor (id_suivi) value...
+                    ^
+
+[01:57:12] [INFO] [CLIENT] [127.0.0.1:55320] BORD ALI1767849055 com15223 ts1767833832
+[01:57:12] [INFO] [CLIENT] [127.0.0.1:55320] Requete ADD
+[01:57:12] [INFO] [CLIENT] [127.0.0.1:55320] Création bordereau pour la commande 15223 alizon
+[01:57:12] [INFO] [SERV]   (main.c:171) INSERT recuperation des parametres...
+[01:57:12] [INFO] [SERV]   (main.c:175) INSERT enregistrement en BDD...
+[01:57:12] [ERROR] [SERV]   (main.c:188) Erreur INSERT : ERROR:  relation "sae3_deliveraptor._deliveraptor" does not exist
+LINE 1: INSERT INTO sae3_deliveraptor._deliveraptor (id_suivi) value...
+                    ^
+
+[01:57:12] [INFO] [CLIENT] [127.0.0.1:55320] BORD ALI1767849055 com15223 ts1767833832
+[01:57:12] [INFO] [CLIENT] [127.0.0.1:55320] Requete ADD
+[01:57:12] [INFO] [CLIENT] [127.0.0.1:55320] Création bordereau pour la commande 15223 alizon
+[01:57:12] [INFO] [SERV]   (main.c:171) INSERT recuperation des parametres...
+[01:57:12] [INFO] [SERV]   (main.c:175) INSERT enregistrement en BDD...
+[01:57:12] [ERROR] [SERV]   (main.c:188) Erreur INSERT : ERROR:  relation "sae3_deliveraptor._deliveraptor" does not exist
+LINE 1: INSERT INTO sae3_deliveraptor._deliveraptor (id_suivi) value...
+                    ^
+
+[01:58:36] [INFO] [SERV]   (main.c:62) Démarrage du service Delivraptor
+[01:58:36] [INFO] [SERV]   (main.c:72) Socket configuré
+[01:58:36] [INFO] [SERV]   (main.c:87) Adresse ip et port configurées
+[01:58:36] [INFO] [SERV]   (main.c:92) Socket en écoute
+[01:58:38] [INFO] [SERV]   (main.c:100) Connexion accepté
+[01:58:38] [INFO] [CLIENT] [127.0.0.1:41236] Client connecté au service avec succès
+[01:58:38] [INFO] [CLIENT] [127.0.0.1:41236] Authentification réussie
+[01:58:38] [INFO] [SERV]   (main.c:130) Connexion a la BDD...
+[01:58:38] [INFO] [SERV]   (main.c:259) Connecté a la BDD
+[01:58:38] [INFO] [CLIENT] [127.0.0.1:41236] Requete ADD
+[01:58:38] [INFO] [CLIENT] [127.0.0.1:41236] Création bordereau pour la commande 144254 alizon
+[01:58:38] [INFO] [SERV]   (main.c:171) INSERT recuperation des parametres...
+[01:58:38] [INFO] [SERV]   (main.c:175) INSERT enregistrement en BDD...
+[01:58:38] [ERROR] [SERV]   (main.c:188) Erreur INSERT : ERROR:  relation "sae3_delivraptor._deliveraptor" does not exist
+LINE 1: INSERT INTO sae3_delivraptor._deliveraptor (id_suivi) values...
+                    ^
+
+[01:58:38] [INFO] [CLIENT] [127.0.0.1:41236] BORD ALI1767978172 com144254 ts1767833918
+[01:58:38] [INFO] [CLIENT] [127.0.0.1:41236] Requete ADD
+[01:58:38] [INFO] [CLIENT] [127.0.0.1:41236] Création bordereau pour la commande 15223 alizon
+[01:58:38] [INFO] [SERV]   (main.c:171) INSERT recuperation des parametres...
+[01:58:38] [INFO] [SERV]   (main.c:175) INSERT enregistrement en BDD...
+[01:58:38] [ERROR] [SERV]   (main.c:188) Erreur INSERT : ERROR:  relation "sae3_delivraptor._deliveraptor" does not exist
+LINE 1: INSERT INTO sae3_delivraptor._deliveraptor (id_suivi) values...
+                    ^
+
+[01:58:38] [INFO] [CLIENT] [127.0.0.1:41236] BORD ALI1767849141 com15223 ts1767833918
+[01:58:38] [INFO] [CLIENT] [127.0.0.1:41236] Requete ADD
+[01:58:38] [INFO] [CLIENT] [127.0.0.1:41236] Création bordereau pour la commande 15223 alizon
+[01:58:38] [INFO] [SERV]   (main.c:171) INSERT recuperation des parametres...
+[01:58:38] [INFO] [SERV]   (main.c:175) INSERT enregistrement en BDD...
+[01:58:38] [ERROR] [SERV]   (main.c:188) Erreur INSERT : ERROR:  relation "sae3_delivraptor._deliveraptor" does not exist
+LINE 1: INSERT INTO sae3_delivraptor._deliveraptor (id_suivi) values...
+                    ^
+
+[01:58:38] [INFO] [CLIENT] [127.0.0.1:41236] BORD ALI1767849141 com15223 ts1767833918
+[01:58:38] [INFO] [CLIENT] [127.0.0.1:41236] Requete ADD
+[01:58:38] [INFO] [CLIENT] [127.0.0.1:41236] Création bordereau pour la commande 15223 alizon
+[01:58:38] [INFO] [SERV]   (main.c:171) INSERT recuperation des parametres...
+[01:58:38] [INFO] [SERV]   (main.c:175) INSERT enregistrement en BDD...
+[01:58:38] [ERROR] [SERV]   (main.c:188) Erreur INSERT : ERROR:  relation "sae3_delivraptor._deliveraptor" does not exist
+LINE 1: INSERT INTO sae3_delivraptor._deliveraptor (id_suivi) values...
+                    ^
+
+[02:08:40] [INFO] [SERV]   (main.c:62) Démarrage du service Delivraptor
+[02:08:40] [INFO] [SERV]   (main.c:72) Socket configuré
+[02:08:40] [INFO] [SERV]   (main.c:87) Adresse ip et port configurées
+[02:08:40] [INFO] [SERV]   (main.c:92) Socket en écoute
+[02:08:43] [INFO] [SERV]   (main.c:100) Connexion accepté
+[02:08:43] [INFO] [CLIENT] [127.0.0.1:43150] Client connecté au service avec succès
+[02:08:43] [INFO] [CLIENT] [127.0.0.1:43150] Authentification réussie
+[02:08:43] [INFO] [SERV]   (main.c:130) Connexion a la BDD...
+[02:08:43] [INFO] [SERV]   (main.c:278) Connecté a la BDD
+[02:10:25] [INFO] [SERV]   (main.c:62) Démarrage du service Delivraptor
+[02:10:25] [INFO] [SERV]   (main.c:72) Socket configuré
+[02:10:25] [INFO] [SERV]   (main.c:87) Adresse ip et port configurées
+[02:10:25] [INFO] [SERV]   (main.c:92) Socket en écoute
+[02:10:36] [INFO] [SERV]   (main.c:100) Connexion accepté
+[02:10:36] [INFO] [CLIENT] [127.0.0.1:36580] Client connecté au service avec succès
+[02:10:36] [INFO] [CLIENT] [127.0.0.1:36580] Authentification réussie
+[02:10:36] [INFO] [SERV]   (main.c:130) Connexion a la BDD...
+[02:10:36] [INFO] [SERV]   (main.c:280) Connecté a la BDD
+[02:13:17] [INFO] [SERV]   (main.c:62) Démarrage du service Delivraptor
+[02:13:17] [INFO] [SERV]   (main.c:72) Socket configuré
+[02:13:17] [INFO] [SERV]   (main.c:87) Adresse ip et port configurées
+[02:13:17] [INFO] [SERV]   (main.c:92) Socket en écoute
+[02:13:22] [INFO] [SERV]   (main.c:62) Démarrage du service Delivraptor
+[02:13:22] [INFO] [SERV]   (main.c:72) Socket configuré
+[02:13:22] [INFO] [SERV]   (main.c:87) Adresse ip et port configurées
+[02:13:22] [INFO] [SERV]   (main.c:92) Socket en écoute
+[02:13:24] [INFO] [SERV]   (main.c:100) Connexion accepté
+[02:13:24] [INFO] [CLIENT] [127.0.0.1:33506] Client connecté au service avec succès
+[02:13:24] [INFO] [CLIENT] [127.0.0.1:33506] Authentification réussie
+[02:13:24] [INFO] [SERV]   (main.c:130) Connexion a la BDD...
+[02:13:24] [INFO] [SERV]   (main.c:281) Connecté a la BDD
+[02:13:24] [INFO] [SERV]   (main.c:146) NEW table enfant
+[02:15:02] [INFO] [SERV]   (main.c:62) Démarrage du service Delivraptor
+[02:15:02] [INFO] [SERV]   (main.c:72) Socket configuré
+[02:15:02] [INFO] [SERV]   (main.c:87) Adresse ip et port configurées
+[02:15:02] [INFO] [SERV]   (main.c:92) Socket en écoute
+[02:15:04] [INFO] [SERV]   (main.c:100) Connexion accepté
+[02:15:04] [INFO] [CLIENT] [127.0.0.1:56024] Client connecté au service avec succès
+[02:15:04] [INFO] [CLIENT] [127.0.0.1:56024] Authentification réussie
+[02:15:04] [INFO] [SERV]   (main.c:130) Connexion a la BDD...
+[02:15:04] [INFO] [SERV]   (main.c:275) Connecté a la BDD
+[02:20:26] [INFO] [SERV]   (main.c:62) Démarrage du service Delivraptor
+[02:20:26] [INFO] [SERV]   (main.c:72) Socket configuré
+[02:20:26] [INFO] [SERV]   (main.c:87) Adresse ip et port configurées
+[02:20:26] [INFO] [SERV]   (main.c:92) Socket en écoute
+[02:20:28] [INFO] [SERV]   (main.c:100) Connexion accepté
+[02:20:28] [INFO] [CLIENT] [127.0.0.1:56184] Client connecté au service avec succès
+[02:20:28] [INFO] [CLIENT] [127.0.0.1:56184] Authentification réussie
+[02:20:28] [INFO] [SERV]   (main.c:130) Connexion a la BDD...
+[02:20:28] [INFO] [SERV]   (main.c:275) Connecté a la BDD
+[02:20:28] [ERROR] [SERV]   (main.c:276) SET search_path...
+[02:20:28] [INFO] [SERV]   (main.c:281) SET search_path success
+[02:20:59] [INFO] [SERV]   (main.c:62) Démarrage du service Delivraptor
+[02:20:59] [INFO] [SERV]   (main.c:72) Socket configuré
+[02:20:59] [INFO] [SERV]   (main.c:87) Adresse ip et port configurées
+[02:20:59] [INFO] [SERV]   (main.c:92) Socket en écoute
+[02:21:02] [INFO] [SERV]   (main.c:100) Connexion accepté
+[02:21:02] [INFO] [CLIENT] [127.0.0.1:46896] Client connecté au service avec succès
+[02:21:02] [INFO] [CLIENT] [127.0.0.1:46896] Authentification réussie
+[02:21:02] [INFO] [SERV]   (main.c:130) Connexion a la BDD...
+[02:21:02] [INFO] [SERV]   (main.c:259) Connecté a la BDD
+[02:21:02] [ERROR] [SERV]   (main.c:260) SET search_path...
+[02:21:02] [INFO] [SERV]   (main.c:265) SET search_path success
+[02:21:02] [INFO] [CLIENT] [127.0.0.1:46896] Requete ADD
+[02:21:02] [INFO] [CLIENT] [127.0.0.1:46896] Création bordereau pour la commande 144254 alizon
+[02:21:02] [INFO] [SERV]   (main.c:171) INSERT recuperation des parametres...
+[02:21:02] [INFO] [SERV]   (main.c:175) INSERT enregistrement en BDD...
+[02:21:02] [ERROR] [SERV]   (main.c:188) Erreur INSERT : ERROR:  relation "sae3_delivraptor._deliveraptor" does not exist
+LINE 1: INSERT INTO sae3_delivraptor._deliveraptor (id_suivi) values...
+                    ^
+
+[02:21:02] [INFO] [CLIENT] [127.0.0.1:46896] BORD ALI1767979516 com144254 ts1767835262
+[02:21:02] [INFO] [CLIENT] [127.0.0.1:46896] Requete ADD
+[02:21:02] [INFO] [CLIENT] [127.0.0.1:46896] Création bordereau pour la commande 15223 alizon
+[02:21:02] [INFO] [SERV]   (main.c:171) INSERT recuperation des parametres...
+[02:21:02] [INFO] [SERV]   (main.c:175) INSERT enregistrement en BDD...
+[02:21:02] [ERROR] [SERV]   (main.c:188) Erreur INSERT : ERROR:  relation "sae3_delivraptor._deliveraptor" does not exist
+LINE 1: INSERT INTO sae3_delivraptor._deliveraptor (id_suivi) values...
+                    ^
+
+[02:21:02] [INFO] [CLIENT] [127.0.0.1:46896] BORD ALI1767850485 com15223 ts1767835262
+[02:21:02] [INFO] [CLIENT] [127.0.0.1:46896] Requete ADD
+[02:21:02] [INFO] [CLIENT] [127.0.0.1:46896] Création bordereau pour la commande 15223 alizon
+[02:21:02] [INFO] [SERV]   (main.c:171) INSERT recuperation des parametres...
+[02:21:02] [INFO] [SERV]   (main.c:175) INSERT enregistrement en BDD...
+[02:21:02] [ERROR] [SERV]   (main.c:188) Erreur INSERT : ERROR:  relation "sae3_delivraptor._deliveraptor" does not exist
+LINE 1: INSERT INTO sae3_delivraptor._deliveraptor (id_suivi) values...
+                    ^
+
+[02:21:02] [INFO] [CLIENT] [127.0.0.1:46896] BORD ALI1767850485 com15223 ts1767835262
+[02:21:02] [INFO] [CLIENT] [127.0.0.1:46896] Requete ADD
+[02:21:02] [INFO] [CLIENT] [127.0.0.1:46896] Création bordereau pour la commande 15223 alizon
+[02:21:02] [INFO] [SERV]   (main.c:171) INSERT recuperation des parametres...
+[02:21:02] [INFO] [SERV]   (main.c:175) INSERT enregistrement en BDD...
+[02:21:02] [ERROR] [SERV]   (main.c:188) Erreur INSERT : ERROR:  relation "sae3_delivraptor._deliveraptor" does not exist
+LINE 1: INSERT INTO sae3_delivraptor._deliveraptor (id_suivi) values...
+                    ^
+
+[02:21:23] [INFO] [SERV]   (main.c:62) Démarrage du service Delivraptor
+[02:21:23] [INFO] [SERV]   (main.c:72) Socket configuré
+[02:21:23] [INFO] [SERV]   (main.c:87) Adresse ip et port configurées
+[02:21:23] [INFO] [SERV]   (main.c:92) Socket en écoute
+[02:21:25] [INFO] [SERV]   (main.c:100) Connexion accepté
+[02:21:25] [INFO] [CLIENT] [127.0.0.1:54850] Client connecté au service avec succès
+[02:21:25] [INFO] [CLIENT] [127.0.0.1:54850] Authentification réussie
+[02:21:25] [INFO] [SERV]   (main.c:130) Connexion a la BDD...
+[02:21:25] [INFO] [SERV]   (main.c:259) Connecté a la BDD
+[02:21:25] [ERROR] [SERV]   (main.c:260) SET search_path...
+[02:21:25] [INFO] [SERV]   (main.c:265) SET search_path success
+[02:21:25] [INFO] [CLIENT] [127.0.0.1:54850] Requete ADD
+[02:21:25] [INFO] [CLIENT] [127.0.0.1:54850] Création bordereau pour la commande 144254 alizon
+[02:21:25] [INFO] [SERV]   (main.c:171) INSERT recuperation des parametres...
+[02:21:25] [INFO] [SERV]   (main.c:175) INSERT enregistrement en BDD...
+[02:21:25] [ERROR] [SERV]   (main.c:188) Erreur INSERT : ERROR:  relation "_deliveraptor" does not exist
+LINE 1: INSERT INTO _deliveraptor (id_suivi) values ($1)
+                    ^
+
+[02:21:25] [INFO] [CLIENT] [127.0.0.1:54850] BORD ALI1767979539 com144254 ts1767835285
+[02:21:25] [INFO] [CLIENT] [127.0.0.1:54850] Requete ADD
+[02:21:25] [INFO] [CLIENT] [127.0.0.1:54850] Création bordereau pour la commande 15223 alizon
+[02:21:25] [INFO] [SERV]   (main.c:171) INSERT recuperation des parametres...
+[02:21:25] [INFO] [SERV]   (main.c:175) INSERT enregistrement en BDD...
+[02:21:25] [ERROR] [SERV]   (main.c:188) Erreur INSERT : ERROR:  relation "_deliveraptor" does not exist
+LINE 1: INSERT INTO _deliveraptor (id_suivi) values ($1)
+                    ^
+
+[02:21:25] [INFO] [CLIENT] [127.0.0.1:54850] BORD ALI1767850508 com15223 ts1767835285
+[02:21:25] [INFO] [CLIENT] [127.0.0.1:54850] Requete ADD
+[02:21:25] [INFO] [CLIENT] [127.0.0.1:54850] Création bordereau pour la commande 15223 alizon
+[02:21:25] [INFO] [SERV]   (main.c:171) INSERT recuperation des parametres...
+[02:21:25] [INFO] [SERV]   (main.c:175) INSERT enregistrement en BDD...
+[02:21:25] [ERROR] [SERV]   (main.c:188) Erreur INSERT : ERROR:  relation "_deliveraptor" does not exist
+LINE 1: INSERT INTO _deliveraptor (id_suivi) values ($1)
+                    ^
+
+[02:21:25] [INFO] [CLIENT] [127.0.0.1:54850] BORD ALI1767850508 com15223 ts1767835285
+[02:21:25] [INFO] [CLIENT] [127.0.0.1:54850] Requete ADD
+[02:21:25] [INFO] [CLIENT] [127.0.0.1:54850] Création bordereau pour la commande 15223 alizon
+[02:21:25] [INFO] [SERV]   (main.c:171) INSERT recuperation des parametres...
+[02:21:25] [INFO] [SERV]   (main.c:175) INSERT enregistrement en BDD...
+[02:21:25] [ERROR] [SERV]   (main.c:188) Erreur INSERT : ERROR:  relation "_deliveraptor" does not exist
+LINE 1: INSERT INTO _deliveraptor (id_suivi) values ($1)
+                    ^
+
+[02:25:22] [INFO] [SERV]   (main.c:62) Démarrage du service Delivraptor
+[02:25:22] [INFO] [SERV]   (main.c:72) Socket configuré
+[02:25:22] [INFO] [SERV]   (main.c:87) Adresse ip et port configurées
+[02:25:22] [INFO] [SERV]   (main.c:92) Socket en écoute
+[02:25:24] [INFO] [SERV]   (main.c:100) Connexion accepté
+[02:25:24] [INFO] [CLIENT] [127.0.0.1:58528] Client connecté au service avec succès
+[02:25:24] [INFO] [CLIENT] [127.0.0.1:58528] Authentification réussie
+[02:25:24] [INFO] [SERV]   (main.c:130) Connexion a la BDD...
+[02:25:24] [INFO] [SERV]   (main.c:259) Connecté a la BDD
+[02:25:24] [ERROR] [SERV]   (main.c:260) SET search_path...
+[02:25:24] [INFO] [SERV]   (main.c:265) SET search_path success
+[02:25:24] [INFO] [SERV]   (main.c:270) Base de données actuelle : postgres
+
+[02:25:24] [INFO] [SERV]   (main.c:276) Schéma courant (search_path) : sae3_delivraptor
+
+[02:25:24] [INFO] [CLIENT] [127.0.0.1:58528] Requete ADD
+[02:25:24] [INFO] [CLIENT] [127.0.0.1:58528] Création bordereau pour la commande 144254 alizon
+[02:25:24] [INFO] [SERV]   (main.c:171) INSERT recuperation des parametres...
+[02:25:24] [INFO] [SERV]   (main.c:175) INSERT enregistrement en BDD...
+[02:25:24] [ERROR] [SERV]   (main.c:188) Erreur INSERT : ERROR:  relation "_deliveraptor" does not exist
+LINE 1: INSERT INTO _deliveraptor (id_suivi) values ($1)
+                    ^
+
+[02:25:24] [INFO] [CLIENT] [127.0.0.1:58528] BORD ALI1767979778 com144254 ts1767835524
+[02:25:24] [INFO] [CLIENT] [127.0.0.1:58528] Requete ADD
+[02:25:24] [INFO] [CLIENT] [127.0.0.1:58528] Création bordereau pour la commande 15223 alizon
+[02:25:24] [INFO] [SERV]   (main.c:171) INSERT recuperation des parametres...
+[02:25:24] [INFO] [SERV]   (main.c:175) INSERT enregistrement en BDD...
+[02:25:24] [ERROR] [SERV]   (main.c:188) Erreur INSERT : ERROR:  relation "_deliveraptor" does not exist
+LINE 1: INSERT INTO _deliveraptor (id_suivi) values ($1)
+                    ^
+
+[02:25:24] [INFO] [CLIENT] [127.0.0.1:58528] BORD ALI1767850747 com15223 ts1767835524
+[02:25:24] [INFO] [CLIENT] [127.0.0.1:58528] Requete ADD
+[02:25:24] [INFO] [CLIENT] [127.0.0.1:58528] Création bordereau pour la commande 15223 alizon
+[02:25:24] [INFO] [SERV]   (main.c:171) INSERT recuperation des parametres...
+[02:25:24] [INFO] [SERV]   (main.c:175) INSERT enregistrement en BDD...
+[02:25:24] [ERROR] [SERV]   (main.c:188) Erreur INSERT : ERROR:  relation "_deliveraptor" does not exist
+LINE 1: INSERT INTO _deliveraptor (id_suivi) values ($1)
+                    ^
+
+[02:25:24] [INFO] [CLIENT] [127.0.0.1:58528] BORD ALI1767850747 com15223 ts1767835524
+[02:25:24] [INFO] [CLIENT] [127.0.0.1:58528] Requete ADD
+[02:25:24] [INFO] [CLIENT] [127.0.0.1:58528] Création bordereau pour la commande 15223 alizon
+[02:25:24] [INFO] [SERV]   (main.c:171) INSERT recuperation des parametres...
+[02:25:24] [INFO] [SERV]   (main.c:175) INSERT enregistrement en BDD...
+[02:25:24] [ERROR] [SERV]   (main.c:188) Erreur INSERT : ERROR:  relation "_deliveraptor" does not exist
+LINE 1: INSERT INTO _deliveraptor (id_suivi) values ($1)
+                    ^
+
+[02:26:47] [INFO] [SERV]   (main.c:62) Démarrage du service Delivraptor
+[02:26:47] [INFO] [SERV]   (main.c:72) Socket configuré
+[02:26:47] [INFO] [SERV]   (main.c:87) Adresse ip et port configurées
+[02:26:47] [INFO] [SERV]   (main.c:92) Socket en écoute
+[02:26:49] [INFO] [SERV]   (main.c:100) Connexion accepté
+[02:26:49] [INFO] [CLIENT] [127.0.0.1:54508] Client connecté au service avec succès
+[02:26:49] [INFO] [CLIENT] [127.0.0.1:54508] Authentification réussie
+[02:26:49] [INFO] [SERV]   (main.c:130) Connexion a la BDD...
+[02:26:49] [INFO] [SERV]   (main.c:259) Connecté a la BDD
+[02:26:49] [ERROR] [SERV]   (main.c:260) SET search_path...
+[02:26:49] [INFO] [SERV]   (main.c:265) SET search_path success
+[02:26:49] [INFO] [SERV]   (main.c:270) Base de données actuelle : postgres
+
+[02:26:49] [INFO] [SERV]   (main.c:276) Schéma courant (search_path) : sae3_delivraptor
+
+[02:26:49] [INFO] [CLIENT] [127.0.0.1:54508] Requete ADD
+[02:26:49] [INFO] [CLIENT] [127.0.0.1:54508] Création bordereau pour la commande 144254 alizon
+[02:26:49] [INFO] [SERV]   (main.c:171) INSERT recuperation des parametres...
+[02:26:49] [INFO] [SERV]   (main.c:175) INSERT enregistrement en BDD...
+[02:26:49] [INFO] [SERV]   (main.c:186) INSERT exécuté avec succès
+[02:26:49] [INFO] [CLIENT] [127.0.0.1:54508] BORD ALI1767979863 com144254 ts1767835609
+[02:26:49] [INFO] [CLIENT] [127.0.0.1:54508] Requete ADD
+[02:26:49] [INFO] [CLIENT] [127.0.0.1:54508] Création bordereau pour la commande 15223 alizon
+[02:26:49] [INFO] [SERV]   (main.c:171) INSERT recuperation des parametres...
+[02:26:49] [INFO] [SERV]   (main.c:175) INSERT enregistrement en BDD...
+[02:26:49] [INFO] [SERV]   (main.c:186) INSERT exécuté avec succès
+[02:26:49] [INFO] [CLIENT] [127.0.0.1:54508] BORD ALI1767850832 com15223 ts1767835609
+[02:26:49] [INFO] [CLIENT] [127.0.0.1:54508] Requete ADD
+[02:26:49] [INFO] [CLIENT] [127.0.0.1:54508] Création bordereau pour la commande 15223 alizon
+[02:26:49] [INFO] [SERV]   (main.c:171) INSERT recuperation des parametres...
+[02:26:49] [INFO] [SERV]   (main.c:175) INSERT enregistrement en BDD...
+[02:26:49] [ERROR] [SERV]   (main.c:188) Erreur INSERT : ERROR:  duplicate key value violates unique constraint "pk_delivraptor"
+DETAIL:  Key (id_suivi)=(ALI1767850832) already exists.
+
+[02:26:49] [INFO] [CLIENT] [127.0.0.1:54508] BORD ALI1767850832 com15223 ts1767835609
+[02:26:49] [INFO] [CLIENT] [127.0.0.1:54508] Requete ADD
+[02:26:49] [INFO] [CLIENT] [127.0.0.1:54508] Création bordereau pour la commande 15223 alizon
+[02:26:49] [INFO] [SERV]   (main.c:171) INSERT recuperation des parametres...
+[02:26:49] [INFO] [SERV]   (main.c:175) INSERT enregistrement en BDD...
+[02:26:49] [ERROR] [SERV]   (main.c:188) Erreur INSERT : ERROR:  duplicate key value violates unique constraint "pk_delivraptor"
+DETAIL:  Key (id_suivi)=(ALI1767850832) already exists.
+

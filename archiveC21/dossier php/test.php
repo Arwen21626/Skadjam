@@ -8,6 +8,10 @@ if ($message === "CONNEXION SUCCESS"){
     fwrite($conn, "ADD 144254 alizon |1 rue branly| 22300 roussel mewen |3 rue machin| 22450");
     $message = fread($conn, $size);
     echo "$message\n";
+
+    fwrite($conn, "ADD 15223 alizon |1 rue branly| 22300 parveau korentin |5 rue bidule| 29130");
+    $message = fread($conn, $size);
+    echo "$message\n";
     fclose($conn);
 
 }
