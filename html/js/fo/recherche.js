@@ -83,3 +83,8 @@ async function affichageNote(note, parent ){
         }
     }
 }
+
+// Filtres
+
+
+// Tris
