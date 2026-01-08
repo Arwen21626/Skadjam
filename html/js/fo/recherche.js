@@ -1,10 +1,8 @@
-import { createElement } from "react";
-
 function affichageNote(note){
     // fonction qui affiche une note avec des étoiles
     //affichage d'une note nulle
     let section = document.createElement("section")
-    let parent = document.getElementsByTagName("main")
+    let parent = contientNote
 
     parent.appendChild(section)
     parent = section
@@ -66,14 +64,14 @@ function affichageNote(note){
         if(noteFinale != moitie){
             nbEtoileVides = 5-noteFinale;
             //boucle pour étoiles pleines
-            for($i=0; $i<$noteFinale; $i++){
+            for(i=0; i<$noteFinale; i++){
                 let etoilePF = document.createElement("img")
                 etoilePF.src = "../../images/logo/bootstrap_icon/star-fill.svg"
                 etoilePF.alt = "étoile pleine"
                 etoilePF.title = "étoile pleine"
             }
             //boucle pour étoiles vides
-            for($i=0; $i<$nbEtoilesVides; $i++){
+            for(i=0; i<$nbEtoilesVides; i++){
                 let etoileVF = document.createElement("img")
                 etoileVF.src = "../../images/logo/bootstrap_icon/star.svg"
                 etoileVF.alt = "étoile vide"

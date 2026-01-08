@@ -4,7 +4,6 @@
     require_once(__DIR__ . '/../../01_premiere_connexion.php');
     const PAGE_SIZE = 15;
     require_once(__DIR__ . "/../../../connections_params.php");
-    require_once(__DIR__ . "/../../php/fonctions.php");
 
     //récupère toutes les infos des tables produits et photos
     $tabProduit = [];
@@ -216,12 +215,12 @@
             </section>
         </aside>
 
-        <div class="grid grid-cols-2 justify-items-center md:grid-cols-3">
-            <script>
+        <div id="prod" class="grid grid-cols-2 justify-items-center md:grid-cols-3">
+            <script src="../../js/fo/recherche.js">
                 // Boucle pour afficher tous les produits
                 tabProd.forEach(prod => {
                     idProduit = prod['id_produit']
-                    let parent = document.getElementsByTagName("main")[0]
+                    let parent = document.getElementById("prod")
 
                     // Pour avoir seulement le main et pas le tableau renvoyé
 
@@ -271,20 +270,14 @@
 
                     parent = contientNote
                     // console.log(parent)
+
+                    let note = prod['note_moyenne']
+                    affichageNote(note)
+                
                 });
-
-
             </script>
         </div>
-        <!-- str_replace-->
-        <div class="w-2/4 ml-2 md:ml-10 flex">
-            <?php 
-                $note = $valeurs['note_moyenne'];
-                affichageNote($note); 
-            ?>
-        </div>                    
-
-                            
+        <!-- str_replace-->                    
         <?php $dbh = null;?>
         <!--fin du catalogue-->
         <div class="flex flex-row space-x-4 justify-center">
@@ -303,6 +296,5 @@
 
     <!--footer-->
     <?php include (__DIR__ . "/../../php/structure/footer_front.php"); ?>
-    <script></script>
 </body>
 </html>
