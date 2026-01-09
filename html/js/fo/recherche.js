@@ -66,7 +66,6 @@ function changementPage(tab){
 }
 
 function afficherProduit(lignes){
-    
     lignes.forEach(prod => {
         
         let idProduit = prod['id_produit']
