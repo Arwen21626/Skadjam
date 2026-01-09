@@ -89,25 +89,25 @@ async function affichageNote(note, parent ){
 
 // Tris
 function triPrixCroissant(tab){
-    return tabProd.sort((a, b) => parseInt(a['prix_ttc']) - parseInt(b['prix_ttc']))
+    return tab.sort((a, b) => parseInt(a['prix_ttc']) - parseInt(b['prix_ttc']))
 }
 
 function triPrixDecroissant(tab){
-    return tabProd.sort((a, b) => parseFloat(b['prix_ttc']) - parseFloat(a['prix_ttc']))
+    return tab.sort((a, b) => parseFloat(b['prix_ttc']) - parseFloat(a['prix_ttc']))
 }
 
 function triAz(tab){
-    return tabProd.sort((a,b) => a['libelle_produit'] - b['libelle_produit'])
+    return tab.sort((a,b) => a['libelle_produit'] - b['libelle_produit'])
 }
 
 function triZa(tab){
-    return tabProd.sort((a,b) => b['libelle_produit'] - a['libelle_produit'])
+    return tab.sort((a,b) => b['libelle_produit'] - a['libelle_produit'])
 }
 
 function triEtoileCroissant(tab){
-    return tabProd.sort((a,b) => parseFloat(b['note_moyenne']) - parseFloat(a['note_moyenne']))
+    return tab.sort((a,b) => parseFloat(b['note_moyenne']) - parseFloat(a['note_moyenne']))
 }
 
 function triEtoileDecroissant(tab){
-    return tabProd.sort((a,b) => parseFloat(a['note_moyenne']) - parseFloat(b['note_moyenne']))
+    return tab.sort((a,b) => parseFloat(a['note_moyenne']) - parseFloat(b['note_moyenne']))
 }

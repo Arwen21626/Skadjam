@@ -284,32 +284,30 @@
 
             // Prix
             prixTriCroissant.addEventListener("click",function () {
-                triEtoileDecroissant(tabProd);
+                afficherProduit(triEtoileDecroissant(tabProd))
             })            
 
             prixTriDecroissant.addEventListener("click",function () {
-                triEtoileDecroissant(tabProd);
+                afficherProduit(triEtoileDecroissant(tabProd))
             })
 
             // Ordre alphabétique
             alphaTriAZ.addEventListener("click",function () {
-                // triAz(tabProd);
+                afficherProduit(triAz(tabProd))
                 
             })
 
             alphaTriZA.addEventListener("click",function () {
-                triZa(tabProd);
+                afficherProduit(triZa(tabProd))
             })
             
             // Note
             noteTri51.addEventListener("click",function () {
-                triEtoileDecroissant(tabProd);
-                
+                afficherProduit(triEtoileDecroissant(tabProd))
             })
             
             noteTri15.addEventListener("click", function () {
-                triEtoileCroissant(tabProd);
-                //console.log(tabProd.sort((a,b) => parseFloat(a['note_moyenne']) - parseFloat(b['note_moyenne'])))
+                afficherProduit(triEtoileCroissant(tabProd))
             })
 
 
