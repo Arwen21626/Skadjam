@@ -234,7 +234,9 @@
 
         <div id="prod" class="grid grid-cols-2 justify-items-center md:grid-cols-3">
             <script>
+            
                 // Boucle pour afficher tous les produits
+                // Faire un if tabProdTrie not null -> afficher le tri ?
                 lignes.forEach(prod => {
                     
                     idProduit = prod['id_produit']
@@ -330,6 +332,7 @@
             }
 
             // EventListener pour les tris
+            console.log(tabProd)
             let prixTriCroissant = document.getElementById("prixTriCroissant")
             let prixTriDecroissant = document.getElementById("prixTriDecroissant")
             let alphaTriAZ = document.getElementById("alphaTriAZ")
@@ -337,30 +340,34 @@
             let noteTri51 = document.getElementById("noteTri51")
             let noteTri15 = document.getElementById("noteTri15")
 
+            // Prix
             prixTriCroissant.addEventListener("click",function () {
                 triEtoileDecroissant(tabProd);
-            })
-
-            
+            })            
 
             prixTriDecroissant.addEventListener("click",function () {
                 triEtoileDecroissant(tabProd);
             })
 
+            // Ordre alphabétique
             alphaTriAZ.addEventListener("click",function () {
-                triEtoileDecroissant(tabProd);
+                // triAz(tabProd);
+                
             })
 
             alphaTriZA.addEventListener("click",function () {
-                triEtoileDecroissant(tabProd);
+                triZa(tabProd);
             })
             
+            // Note
             noteTri51.addEventListener("click",function () {
                 triEtoileDecroissant(tabProd);
+                
             })
             
             noteTri15.addEventListener("click", function () {
-                triEtoileDecroissant(tabProd);
+                triEtoileCroissant(tabProd);
+                //console.log(tabProd.sort((a,b) => parseFloat(a['note_moyenne']) - parseFloat(b['note_moyenne'])))
             })
 
 
