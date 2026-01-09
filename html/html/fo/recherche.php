@@ -2,7 +2,6 @@
     session_start();
     require_once(__DIR__ . '/../../php/verif_role_fo.php');
     require_once(__DIR__ . '/../../01_premiere_connexion.php');
-    const PAGE_SIZE = 15;
     require_once(__DIR__ . "/../../../connections_params.php");
 
     //récupère toutes les infos des tables produits et photos
