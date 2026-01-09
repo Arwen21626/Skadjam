@@ -69,8 +69,8 @@ function envoiTriUrl(){
 }
 
 
-function ecrireURL(tab){
-
+function ecrireURL(){
+    let tab = envoiTriUrl()
     let rep ="?" + tab[0]
 
     if(tab.length > 1){
@@ -118,7 +118,7 @@ function calculNbPages(tabProd){
     return [lignes, pageNumber, maxPage]
 }
 
-function changementPage(tab){
+function changementPage(){
     // Passage d'une page à l'autre
     parent = document.getElementsByTagName("main")[0]
     // Pour avoir seulement le main et pas le tableau renvoyé
@@ -130,8 +130,8 @@ function changementPage(tab){
 
     // let temp = calculNbPages(tabProd)[0]
     
-    let pageNumber = calculNbPages(tab)[1]
-    let maxPage = calculNbPages(tab)[2]
+    let pageNumber = calculNbPages(tabProd)[1]
+    let maxPage = calculNbPages(tabProd)[2]
     
     if(pageNumber > 1){
         let pagePrec = document.createElement("a")
