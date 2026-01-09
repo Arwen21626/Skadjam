@@ -40,6 +40,34 @@ function recupTri(){
         });
     });
 }
+
+function envoiTriUrl(){
+    let tab = recupTri()
+    let envoi = []
+
+    if (tab.includes("croissant")){
+        envoi.push("croissant=true")
+    }
+    else if (tab.includes("decroissant")){
+        envoi.push("decroissant=true")
+    }
+
+    if (tab.includes("az")){
+        envoi.push("az=true")
+    }
+    else if (tab.includes("za")){
+        envoi.push("za=true")
+    }
+
+    if (tab.includes("15")){
+        envoi.push("15=true")
+    }
+    else if (tab.includes("51")){
+        envoi.push("51=true")
+    }
+    return envoi
+}
+
 function calculNbPages(tabProd){
     //initialisation du numéro de page
         const PAGE_SIZE = 15
