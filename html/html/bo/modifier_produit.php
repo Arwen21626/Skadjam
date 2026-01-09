@@ -167,12 +167,11 @@ if (isset($_POST['categorie']) && isset($_POST['nom']) && isset($_POST['prix']) 
                                                     WHERE id_produit = $idProduit;");
 
             // Gestion de la promotion
-
             // Vérifier si le produit est promu ou non
-                    $estPromu = $dbh->query("SELECT *
-                                        FROM sae3_skadjam._promu
-                                        WHERE id_produit = $idProduit");
-                    $estPromu = $estPromu->fetchAll(PDO::FETCH_ASSOC);
+            $estPromu = $dbh->query("SELECT *
+                                    FROM sae3_skadjam._promu
+                                    WHERE id_produit = $idProduit");
+            $estPromu = $estPromu->fetchAll(PDO::FETCH_ASSOC);
             if(isset($_POST['mettreEnPromotion']) && empty($estPromu)){ // La case "Mettre en promotion" est cochée et que le produit n'est pas déjà promu
                 try {
                     $dbh->beginTransaction();

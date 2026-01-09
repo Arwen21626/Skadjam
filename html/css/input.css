@@ -73,12 +73,12 @@ main>h2{
     margin: 0.5em;
 }
 
-input.quantite-prod-panier::-webkit-inner-spin-button,
-input.quantite-prod-panier::-webkit-outer-spin-button {
+input.quantite-prod-input::-webkit-inner-spin-button,
+input.quantite-prod-input::-webkit-outer-spin-button {
     -webkit-appearance: none;
 }
 
-input.quantite-prod-panier {
+input.quantite-prod-input {
     -moz-appearance: textfield;
 }
 
