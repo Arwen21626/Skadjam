@@ -7,32 +7,36 @@
 // Soin = 5
 
 
-tableau = [false, false, false, false, false]
 function filtrageCategorieAlimentaire(tabProd){
-    tab = tabProd;
-    tableau[1] = true;
-    tab.filter()
+    newTab = tabProd.filter(tabProd => tabProd['id_categorie'] === 1)
+    // console.log(newTab)
+    return newTab
 }
 
 function filtrageCategorieVetement(tabProd){
-    tableau[2] = true;
+    newTab = tabProd.filter(tabProd => tabProd['id_categorie'] === 2)
+    return newTab
 }
 
 function filtrageCategorieArtisanat(tabProd){
-    tableau[3] = true;
+    newTab = tabProd.filter(tabProd => tabProd['id_categorie'] === 3)
+    return newTab
 }
 
 function filtrageCategorieGoodies(tabProd){
-    tableau[4] = true;
+    newTab = tabProd.filter(tabProd => tabProd['id_categorie'] === 4)
+    return newTab
 }
 
 function filtrageCategorieSoin(tabProd){
-    tableau[5] = true;
+    newTab = tabProd.filter(tabProd => tabProd['id_categorie'] === 5)
+    return newTab
 }
 
-function filtrageCategorie(){
-    
-}
+
+// function filtrageCategorie(tab){
+//     return tab
+// }
 
 
 // NOTE
