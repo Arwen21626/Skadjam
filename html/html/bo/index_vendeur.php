@@ -73,7 +73,7 @@
                                     INNER join sae3_skadjam._montre m
                                         ON pr.id_produit=m.id_produit
                                     INNER JOIN sae3_skadjam._photo ph  
-                                        ON ph.id_photo = m.id_photo 
+                                        ON ph.id_photo = m.id_photo
                                     INNER JOIN sae3_skadjam._vendeur v
                                         ON pr.id_vendeur = v.id_compte
                                     WHERE v.id_compte = $idCompte
@@ -95,10 +95,11 @@
                     <?php foreach($tabProduit as $id => $valeurs){
                         $idProduit = $valeurs['id_produit'];
                         // Le produit est-il en promotion ?
-                        $estPromu = $dbh->query("SELECT *
-                                                FROM sae3_skadjam._promu
-                                                WHERE id_produit = $idProduit");
-                        $estPromu = $estPromu->fetchAll(PDO::FETCH_ASSOC);?>
+                        $stmt = $dbh->prepare("SELECT *
+                                            FROM sae3_skadjam._promu
+                                            WHERE id_produit = :id_produit");
+                        $stmt->execute([':id_produit' => $idProduit]);
+                        $estPromu = ($stmt->fetch() !== false); ?>
                         <section class="bg-bleu grid grid-cols-[40%_60%] w-80 p-3 m-2">
                             <!--affichage de la photo-->
                             <a href= "<?php echo "details_produit.php?idProduit=".$idProduit;?>" class="col-span-2 justify-self-center mb-3">
@@ -108,7 +109,7 @@
                             </a>
 
                             <!--affichage de la promotion-->
-                            <?php if(!empty($estPromu)){ ?>
+                            <?php if($estPromu){ ?>
                                 <div class="bg-rouge absolute col-span-2 w-74 underline text-beige pt-2 pb-1.5">
                                     <h4 class="text-center text-beige overline m-0"><strong>Promotion</strong></h4>
                                 </div>
