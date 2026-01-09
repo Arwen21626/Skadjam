@@ -30,34 +30,54 @@ function recupTri(){
     });
     
 }
+
+function ecrireURL(tab){
+
+    let rep ="?" + tab[0]
+
+    if(tab.length > 1){
+        for (let i = 1; i < tab.length; i++) {
+            const element = array[i];
+            rep += "&"+tab[i]
+        }
+    }
+    console.log(rep)
+    
+    return rep
+}
+
+function recupURL(){
+    var parts = window.location.search.substr(1).split("&");
+    for (var i = 0; i < parts.length; i++) {
+        var attribut = parts[i].split("=");
+    }
+    return attribut
+}
+
 function calculNbPages(tabProd){
     //initialisation du numéro de page
-        const PAGE_SIZE = 15
-        let pageNumber
-        var $_GET = [];
-        // Récupération dans l'url
-        var parts = window.location.search.substr(1).split("&");
-        for (var i = 0; i < parts.length; i++) {
-            var temp = parts[i].split("=");
-        }
-        
+    const PAGE_SIZE = 15
+    let pageNumber
+    // Récupération dans l'url
+    page = recupURL()
+    
 
-        if(temp[0] == ''){
-            pageNumber = 1 
-        }else{
-            pageNumber = temp[1]
-        }
+    if(page[0] == ''){
+        pageNumber = 1 
+    }else{
+        pageNumber = page[1]
+    }
 
-        //console.log($_GET['id']); // Affiche la valeur du paramètre 'id'   
+    //console.log($_GET['id']); // Affiche la valeur du paramètre 'id'   
 
-        let maxPage = (tabProd.length)/PAGE_SIZE
+    let maxPage = (tabProd.length)/PAGE_SIZE
 
-        let start = (pageNumber - 1) * PAGE_SIZE;
-        let end = pageNumber * PAGE_SIZE;
+    let start = (pageNumber - 1) * PAGE_SIZE;
+    let end = pageNumber * PAGE_SIZE;
 
-        let lignes = tabProd.slice(start, end);
-        
-        return [lignes, pageNumber, maxPage]
+    let lignes = tabProd.slice(start, end);
+    
+    return [lignes, pageNumber, maxPage]
 }
 
 function changementPage(tab){
@@ -72,8 +92,8 @@ function changementPage(tab){
 
     // let temp = calculNbPages(tabProd)[0]
     
-    let pageNumber = calculNbPages(tabProd)[1]
-    let maxPage = calculNbPages(tabProd)[2]
+    let pageNumber = calculNbPages(tab)[1]
+    let maxPage = calculNbPages(tab)[2]
     
     if(pageNumber > 1){
         let pagePrec = document.createElement("a")

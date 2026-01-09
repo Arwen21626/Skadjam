@@ -355,8 +355,6 @@
                 filtrageTranchePrix5(lignes);
             })
 
-
-
         </script>
     </main>
 
