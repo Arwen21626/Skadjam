@@ -45,7 +45,7 @@
         <h2>Vos produits promus</h2>
 
         <?php if($tabProduit == null){ ?>
-            <p>Votre catalogue de promotions est vide, vous n'avez donc pas de stock.</p>
+            <p>Votre catalogue de promotions est vide, vous n'avez donc pas de produit en promotions.</p>
         <?php }
 
         else{?>
@@ -93,8 +93,11 @@
                     </tbody>
                 </table>
             </div>
-            <a href="../bo/modifier_promotion.php?idCompte=<?php echo $idCompte ;?>" class="flex justify-end mr-60 mt-15"><button class="border-2 border-vertFonce rounded-2xl w-45 h-14 cursor-pointer">Modifier stock</button></a>
-
+            <div class="flex justify-center">
+                <button class="border-2 border-vertFonce rounded-2xl w-45 h-14 cursor-pointer my-5">
+                    <a href="../bo/modifier_promotion.php?idCompte=<?php echo $idCompte ;?>" class="">Modifier stocks</a>
+                </button>
+            </div>
 
         <?php } ?>
     </main>
