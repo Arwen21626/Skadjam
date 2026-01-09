@@ -320,12 +320,25 @@ else { ?>
                         <label class="mr-4" for="mettreEnLigne">Mettre en ligne</label>
                         <input class="cursor-pointer appearance-none w-10 h-10 border-4 border-beige rounded-md checked:bg-beige" type="checkbox" name="mettreEnLigne" id="mettreEnLigne" <?php echo ($enLigne == 'true')?'checked':'' ?>>
                     </div>
-                
-                    <!-- Mettre en promotion -->
-                    <div class="flex flex-row mr-4 ml-4">
-                        <label class="mr-4" for="mettreEnPromotion">Mettre en promotion</label>
-                        <input class="cursor-pointer appearance-none w-10 h-10 border-4 border-beige rounded-md checked:bg-beige" type="checkbox" name="mettreEnPromotion" id="mettreEnPromotion" <?php echo ($enPromotion == 'true')?'checked':'' ?>>
-                    </div>
+                    <?php 
+                        $nbPromos = $dbh->prepare("SELECT COUNT(pu.id_promotion)
+                                                FROM sae3_skadjam._promu pu
+                                                INNER JOIN sae3_skadjam._promotion pn 
+                                                    ON pu.id_promotion = pn.id_promotion
+                                                WHERE id_vendeur = :id_vendeur");
+                        $nbPromos->execute([':id_vendeur' => $_SESSION['idCompte']]);
+                        $nbPromos = $nbPromos->fetch(PDO::FETCH_ASSOC);
+                        if($nbPromos['COUNT(pu.id_promotion)'] >= 2 && $enPromotion == 'false'){ // Un vendeur ne peut pas avoir plus de deux promotions ?>
+                            <div class="flex flex-row mr-4 ml-4">
+                                <label class="mr-4 text-rouge" for="mettreEnPromotion">Mettre en promotion (Limite atteinte)</label>
+                                <input disabled class="cursor-not-allowed appearance-none w-10 h-10 border-4 border-beige rounded-md" type="checkbox" name="mettreEnPromotion" id="mettreEnPromotion">
+                            </div>
+                    <?php }else{ ?>
+                            <div class="flex flex-row mr-4 ml-4">
+                                <label class="mr-4" for="mettreEnPromotion">Mettre en promotion</label>
+                                <input class="cursor-pointer appearance-none w-10 h-10 border-4 border-beige rounded-md checked:bg-beige" type="checkbox" name="mettreEnPromotion" id="mettreEnPromotion" <?php echo ($enPromotion == 'true')?'checked':'' ?>>
+                            </div>
+                    <?php } ?>
                 </div>
                 <!-- Description -->
                 <div class="col-start-1 col-span-2 row-start-5 flex flex-col m-2 p-2 ">

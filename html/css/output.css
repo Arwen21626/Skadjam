@@ -365,6 +365,10 @@ input.quantite-prod-input {
   .mx-3 {
     margin-inline: calc(var(--spacing, 0.25rem) * 3);
   }
+  .my-5 {
+    margin-top: calc(var(--spacing, 0.25rem) * 5);
+    margin-bottom: calc(var(--spacing, 0.25rem) * 5);
+  }
   .mt-0 {
     margin-top: calc(var(--spacing, 0.25rem) * 0);
   }
