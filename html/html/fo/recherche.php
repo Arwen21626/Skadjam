@@ -354,6 +354,7 @@
             TranchePrix5.addEventListener("click",function () {
                 filtrageTranchePrix5(lignes);
             })
+
         </script>
     </main>
 
