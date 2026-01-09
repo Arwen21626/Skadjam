@@ -274,7 +274,7 @@ function triZa(tab){
 }
 
 function triEtoileCroissant(tab){
-    let temp = tab.sort((a,b) => parseFloat(a['note_moyenne']) - parseFloat(blur['note_moyenne']))
+    let temp = tab.sort((a,b) => parseFloat(a['note_moyenne']) - parseFloat(b['note_moyenne']))
     console.log(temp)
     return tab.sort((a,b) => parseFloat(a['note_moyenne']) - parseFloat(b['note_moyenne']))
 }
