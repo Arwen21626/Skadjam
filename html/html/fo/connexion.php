@@ -205,7 +205,7 @@
                 <div class="flex flex-col md:flex-row">
                     <div class=" justify-self-center mb-8 mt-4 order-2 md:order-1 md:mb-0 md:mt-0 md:mr-4">
                         <!-- Boutton de retour à l'index.php -->
-                        <button class="cursor-pointer w-64 border-5 border-solid rounded-2xl border-vertClair pl-3" type="button"><a href="/index.php">Annuler</a></button>
+                        <a href="/index.php"><button class="cursor-pointer w-64 border-5 border-solid rounded-2xl border-vertClair pl-3" type="button">Annuler</button></a>
                     </div>
 
                     <div class=" justify-self-center mt-8 mb-4 order-1 md:order-2 md:mb-0 md:mt-0 md:ml-4">
