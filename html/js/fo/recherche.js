@@ -1,10 +1,34 @@
 function recupTri(){
+    let tabChecked = []
     document.querySelectorAll('input[type="radio"]').forEach(radio => {
         radio.addEventListener('change', () => {
-            console.log(radio.value);
-            return radio.value
+            if ((radio.value == "croissant" && tabChecked.includes("decroissant"))) {
+                tabChecked.splice(tabChecked.indexOf("decroissant"),1,radio.value)
+            }
+            else if(radio.value == "decroissant" && tabChecked.includes("croissant")) {
+                tabChecked.splice(tabChecked.indexOf("croissant"),1,radio.value)
+            }
+            else if(radio.value == "az" && tabChecked.includes("za")) {
+                tabChecked.splice(tabChecked.indexOf("za"),1,radio.value)
+            }
+            else if(radio.value == "za" && tabChecked.includes("az")) {
+                tabChecked.splice(tabChecked.indexOf("az"),1,radio.value)
+            }
+            else if(radio.value == "51" && tabChecked.includes("15")) {
+                tabChecked.splice(tabChecked.indexOf("15"),1,radio.value)
+            }
+            else if(radio.value == "15" && tabChecked.includes("51")) {
+                tabChecked.splice(tabChecked.indexOf("51"),1,radio.value)
+            }
+            else{
+                tabChecked.push(radio.value)
+            }
+            console.log(radio.value)
+            console.log(tabChecked)
+            // return tabChecked
         });
     });
+    
 }
 function calculNbPages(tabProd){
     //initialisation du numéro de page
