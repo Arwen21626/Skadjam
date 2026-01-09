@@ -225,7 +225,7 @@
         <!--fin du catalogue-->
         <script>
             changementPage(lignes)
-            recupTri()
+            let tabTri = recupTri()
             // EventListener pour les tris
             let prixTriCroissant = document.getElementById("prixTriCroissant")
             let prixTriDecroissant = document.getElementById("prixTriDecroissant")

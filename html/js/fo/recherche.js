@@ -2,24 +2,37 @@ function recupTri(){
     let tabChecked = []
     document.querySelectorAll('input[type="radio"]').forEach(radio => {
         radio.addEventListener('change', () => {
+            // Si la valeur du radio bouton est 'croissant' et que 'decroissant' est déjà dans le tableau
+            // on le remplace
             if ((radio.value == "croissant" && tabChecked.includes("decroissant"))) {
                 tabChecked.splice(tabChecked.indexOf("decroissant"),1,radio.value)
             }
+            // Si la valeur du radio bouton est 'decroissant' et que 'croissant' est déjà dans le tableau
+            // on le remplace
             else if(radio.value == "decroissant" && tabChecked.includes("croissant")) {
                 tabChecked.splice(tabChecked.indexOf("croissant"),1,radio.value)
             }
+            // Si la valeur du radio bouton est 'az' et que 'za' est déjà dans le tableau
+            // on le remplace
             else if(radio.value == "az" && tabChecked.includes("za")) {
                 tabChecked.splice(tabChecked.indexOf("za"),1,radio.value)
             }
+            // Si la valeur du radio bouton est 'za' et que 'az' est déjà dans le tableau
+            // on le remplace
             else if(radio.value == "za" && tabChecked.includes("az")) {
                 tabChecked.splice(tabChecked.indexOf("az"),1,radio.value)
             }
+            // Si la valeur du radio bouton est '51' et que '15' est déjà dans le tableau
+            // on le remplace
             else if(radio.value == "51" && tabChecked.includes("15")) {
                 tabChecked.splice(tabChecked.indexOf("15"),1,radio.value)
             }
+            // Si la valeur du radio bouton est '15' et que '51' est déjà dans le tableau
+            // on le remplace
             else if(radio.value == "15" && tabChecked.includes("51")) {
                 tabChecked.splice(tabChecked.indexOf("51"),1,radio.value)
             }
+            // Sinon on ajoute la valeur
             else{
                 tabChecked.push(radio.value)
             }
