@@ -235,7 +235,7 @@
         <div id="prod" class="grid grid-cols-2 justify-items-center md:grid-cols-3">
             <script>
                 // Boucle pour afficher tous les produits
-                afficherProduit(lignes)
+                // afficherProduit(lignes)
             </script>
         </div>
         <!-- str_replace-->                    
