@@ -1,3 +1,39 @@
+function calculNbPages(tabProd){
+    //initialisation du numéro de page
+        const PAGE_SIZE = 15
+        let pageNumber
+        var $_GET = [];
+        // Récupération dans l'url
+        var parts = window.location.search.substr(1).split("&");
+        for (var i = 0; i < parts.length; i++) {
+            var temp = parts[i].split("=");
+        }
+        
+
+        if(temp[0] == ''){
+            pageNumber = 1 
+        }else{
+            pageNumber = temp[1]
+        }
+
+        //console.log($_GET['id']); // Affiche la valeur du paramètre 'id'   
+
+        let maxPage = (tabProd.length)/PAGE_SIZE
+
+        let start = (pageNumber - 1) * PAGE_SIZE;
+        let end = pageNumber * PAGE_SIZE;
+
+        let lignes = tabProd.slice(start, end);
+        
+        return [lignes, pageNumber, maxPage]
+}
+
+// function changementPage(tab){
+            
+    
+    
+// }
+
 function afficherProduit(lignes){
     
     lignes.forEach(prod => {

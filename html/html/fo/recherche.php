@@ -36,32 +36,10 @@
 
 <body>
     <script>
-        const tabProd = <?php echo json_encode($tabProduit);?>
-        //initialisation du numéro de page
-        const PAGE_SIZE = 15;
-        var $_GET = [];
-        // Récupération dans l'url
-        var parts = window.location.search.substr(1).split("&");
-        for (var i = 0; i < parts.length; i++) {
-            var temp = parts[i].split("=");
-        }
+        const tabProd = <?php echo json_encode($tabProduit);?>;
         
-
-        if(temp[0] == ''){
-            pageNumber = 1 
-        }else{
-            pageNumber = temp[1]
-        }
-
-        //console.log($_GET['id']); // Affiche la valeur du paramètre 'id'   
-
-        let maxPage = (tabProd.length)/PAGE_SIZE
-
-        let start = (pageNumber - 1) * PAGE_SIZE;
-        let end = pageNumber * PAGE_SIZE;
-
-        let lignes = tabProd.slice(start, end);
-
+        calculNbPages(tabProd)
+        let lignes = calculNbPages(tabProd)[0]
     </script>
 
     <!--header-->
@@ -252,6 +230,11 @@
 
             parent = pageChangement
 
+            // let temp = calculNbPages(tabProd)[0]
+            
+            let pageNumber = calculNbPages(tabProd)[1]
+            let maxPage = calculNbPages(tabProd)[2]
+            
             if(pageNumber > 1){
                 let pagePrec = document.createElement("a")
                 pagePrec.href = "recherche.php?page="+(pageNumber-1)+"#nosProduits"
@@ -274,7 +257,6 @@
             }
 
             // EventListener pour les tris
-            console.log(tabProd)
             let prixTriCroissant = document.getElementById("prixTriCroissant")
             let prixTriDecroissant = document.getElementById("prixTriDecroissant")
             let alphaTriAZ = document.getElementById("alphaTriAZ")
@@ -284,34 +266,38 @@
 
             // Prix
             prixTriCroissant.addEventListener("click",function () {
-                afficherProduit(triPrixCroissant(tabProd))
+                afficherProduit(triPrixCroissant(lignes))
+                // changementPage(lignes)
             })            
 
             prixTriDecroissant.addEventListener("click",function () {
-                afficherProduit(triPrixDecroissant(tabProd))
+                afficherProduit(triPrixDecroissant(lignes))
+                // changementPage(lignes)
             })
 
             // Ordre alphabétique
             alphaTriAZ.addEventListener("click",function () {
-                afficherProduit(triAz(tabProd))
-                // triAz(tabProd)
+                afficherProduit(triAz(lignes))
+                // changementPage(lignes)
                 
             })
 
             alphaTriZA.addEventListener("click",function () {
-                // afficherProduit(triZa(tabProd))
-                triZa(tabProd)
+                afficherProduit(triZa(lignes))
+                // changementPage(lignes)
+                
             })
             
             // Note
             noteTri51.addEventListener("click",function () {
-                // afficherProduit(triEtoileDecroissant(tabProd))
-                triEtoileDecroissant(tabProd)
+                afficherProduit(triEtoileDecroissant(lignes))
+                // changementPage(lignes)
+                
             })
             
             noteTri15.addEventListener("click", function () {
-                // afficherProduit(triEtoileCroissant(tabProd))
-                triEtoileCroissant(tabProd)
+                afficherProduit(triEtoileCroissant(lignes))
+                // changementPage(lignes)
             })
 
 
