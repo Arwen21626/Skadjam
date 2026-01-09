@@ -235,7 +235,7 @@
         <div id="prod" class="grid grid-cols-2 justify-items-center md:grid-cols-3">
             <script>
                 // Boucle pour afficher tous les produits
-                afficherProduit(lignes)
+                // afficherProduit(lignes)
             </script>
         </div>
         <!-- str_replace-->                    
@@ -284,30 +284,34 @@
 
             // Prix
             prixTriCroissant.addEventListener("click",function () {
-                afficherProduit(triEtoileDecroissant(tabProd))
+                afficherProduit(triPrixCroissant(tabProd))
             })            
 
             prixTriDecroissant.addEventListener("click",function () {
-                afficherProduit(triEtoileDecroissant(tabProd))
+                afficherProduit(triPrixDecroissant(tabProd))
             })
 
             // Ordre alphabétique
             alphaTriAZ.addEventListener("click",function () {
                 afficherProduit(triAz(tabProd))
+                // triAz(tabProd)
                 
             })
 
             alphaTriZA.addEventListener("click",function () {
-                afficherProduit(triZa(tabProd))
+                // afficherProduit(triZa(tabProd))
+                triZa(tabProd)
             })
             
             // Note
             noteTri51.addEventListener("click",function () {
-                afficherProduit(triEtoileDecroissant(tabProd))
+                // afficherProduit(triEtoileDecroissant(tabProd))
+                triEtoileDecroissant(tabProd)
             })
             
             noteTri15.addEventListener("click", function () {
-                afficherProduit(triEtoileCroissant(tabProd))
+                // afficherProduit(triEtoileCroissant(tabProd))
+                triEtoileCroissant(tabProd)
             })
 
 
