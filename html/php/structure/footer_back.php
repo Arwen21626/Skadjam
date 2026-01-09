@@ -28,7 +28,7 @@
         </article>
     </section>
 
-    <section class="grid grid-cols-2 gap-1">
+    <section class="grid grid-cols-2 gap-1 p-1">
         <a class="m-1 text-bleu hover:text-beige" href="https://www.facebook.com">
             <img src="/images/logo/reseaux/facebook_back.webp" alt="Facebook" title="Facebook" class="size-12">
         </a>
