@@ -37,8 +37,6 @@
 <body>
     <script>
         const tabProd = <?php echo json_encode($tabProduit);?>;
-        
-        calculNbPages(tabProd)
         let lignes = calculNbPages(tabProd)[0]
     </script>
 
@@ -167,11 +165,11 @@
                         <summary class="cursor-pointer mt-1 mb-1">Par prix</summary>
                         <div>
                             <div>
-                                <input type="radio" name="prixTri" id="prixTriCroissant">
+                                <input type="radio" name="prixTri" id="prixTriCroissant" value="croissant">
                                 <label for="prixTriCroissant">Croissant</label>
                             </div>
                             <div>
-                                <input type="radio" name="prixTri" id="prixTriDecroissant">
+                                <input type="radio" name="prixTri" id="prixTriDecroissant" value="decroissant">
                                 <label for="prixTriDecroissant">Décroissant</label>
                             </div>
                         </div>
@@ -185,11 +183,11 @@
                         <summary class="cursor-pointer mt-1 mb-1">Par ordre alphabétique</summary>
                         <div>
                             <div>
-                                <input type="radio" name="alphaTri" id="alphaTriAZ">
+                                <input type="radio" name="alphaTri" id="alphaTriAZ" value="az">
                                 <label for="alphaTriAZ">A-Z</label>
                             </div>
                             <div>
-                                <input type="radio" name="alphaTri" id="alphaTriZA">
+                                <input type="radio" name="alphaTri" id="alphaTriZA" value="za">
                                 <label for="alphaTriZA">Z-A</label>
                             </div>
                         </div>
@@ -203,11 +201,11 @@
                         <summary class="cursor-pointer mt-1 mb-1">Par note</summary>
                         <div>
                             <div>
-                                <input type="radio" name="noteTri" id="noteTri51">
+                                <input type="radio" name="noteTri" id="noteTri51" value="51">
                                 <label for="noteTri51">5-1</label>
                             </div>
                             <div>
-                                <input type="radio" name="noteTri" id="noteTri15">
+                                <input type="radio" name="noteTri" id="noteTri15" value="15">
                                 <label for="noteTri15">1-5</label>
                             </div>
                         </div>
@@ -228,7 +226,7 @@
         <!--fin du catalogue-->
         <script>
             changementPage(lignes)
-
+            recupTri()
             // EventListener pour les tris
             let prixTriCroissant = document.getElementById("prixTriCroissant")
             let prixTriDecroissant = document.getElementById("prixTriDecroissant")

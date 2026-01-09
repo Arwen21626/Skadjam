@@ -1,3 +1,11 @@
+function recupTri(){
+    document.querySelectorAll('input[type="radio"]').forEach(radio => {
+        radio.addEventListener('change', () => {
+            console.log(radio.value);
+            return radio.value
+        });
+    });
+}
 function calculNbPages(tabProd){
     //initialisation du numéro de page
         const PAGE_SIZE = 15
