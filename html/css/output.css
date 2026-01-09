@@ -56,10 +56,10 @@ main>h2 {
   align-self: center;
   margin: 0.5em;
 }
-input.quantite-prod-panier::-webkit-inner-spin-button, input.quantite-prod-panier::-webkit-outer-spin-button {
+input.quantite-prod-input::-webkit-inner-spin-button, input.quantite-prod-input::-webkit-outer-spin-button {
   -webkit-appearance: none;
 }
-input.quantite-prod-panier {
+input.quantite-prod-input {
   -moz-appearance: textfield;
 }
 @layer theme, base, components, utilities;
@@ -771,6 +771,9 @@ input.quantite-prod-panier {
   .grid-cols-3 {
     grid-template-columns: repeat(3, minmax(0, 1fr));
   }
+  .grid-cols-4 {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
   .grid-cols-\[40\%_60\%\] {
     grid-template-columns: 40% 60%;
   }
@@ -824,6 +827,9 @@ input.quantite-prod-panier {
   }
   .justify-items-center {
     justify-items: center;
+  }
+  .justify-items-end {
+    justify-items: end;
   }
   .gap-0\.5 {
     gap: calc(var(--spacing, 0.25rem) * 0.5);
@@ -1298,6 +1304,11 @@ input.quantite-prod-panier {
       order: 2;
     }
   }
+  .md\:col-span-3 {
+    @media (width >= 48rem) {
+      grid-column: span 3 / span 3;
+    }
+  }
   .md\:mt-0 {
     @media (width >= 48rem) {
       margin-top: calc(var(--spacing, 0.25rem) * 0);
@@ -1499,6 +1510,11 @@ input.quantite-prod-panier {
   .md\:grid-cols-3 {
     @media (width >= 48rem) {
       grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+  }
+  .md\:grid-cols-5 {
+    @media (width >= 48rem) {
+      grid-template-columns: repeat(5, minmax(0, 1fr));
     }
   }
   .md\:grid-rows-4 {
