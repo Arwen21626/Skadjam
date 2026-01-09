@@ -93,6 +93,12 @@
                 <article>
                     <details>
                         <summary class="cursor-pointer mt-1 mb-1">Par note</summary>
+                        <!-- non noté -->
+                        <div>
+                            <input type="checkbox" name="zeroE" id="zeroE">
+                            <label for="zeroE">Non noté</label>
+                        </div>
+
                         <!-- 1 étoile -->
                         <div>
                             <input type="checkbox" name="uneE" id="uneE">
@@ -294,11 +300,16 @@
             })
             
             // note
+            let NoteZeroE = document.getElementById("zeroE")
             let NoteUneE = document.getElementById("uneE")
             let NoteDeuxE = document.getElementById("deuxE")
             let NoteTroisE = document.getElementById("troisE")
             let NoteQuatreE = document.getElementById("quatreE")
             let NoteCinqE = document.getElementById("cinqE")
+
+            NoteZeroE.addEventListener("click",function () {
+                filtrageNoteNonNote(lignes);
+            })
 
             NoteUneE.addEventListener("click",function () {
                 filtrageNote1(lignes);
