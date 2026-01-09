@@ -227,40 +227,7 @@
         
         <!--fin du catalogue-->
         <script>
-            // Passage d'une page à l'autre
-            parent = document.getElementsByTagName("main")[0]
-            // Pour avoir seulement le main et pas le tableau renvoyé
-            let pageChangement = document.createElement("div")
-            pageChangement.classList.add("flex", "flex-row", "space-x-4", "justify-center")
-            parent.appendChild(pageChangement)
-
-            parent = pageChangement
-
-            // let temp = calculNbPages(tabProd)[0]
-            
-            let pageNumber = calculNbPages(tabProd)[1]
-            let maxPage = calculNbPages(tabProd)[2]
-            
-            if(pageNumber > 1){
-                let pagePrec = document.createElement("a")
-                pagePrec.href = "recherche.php?page="+(pageNumber-1)+"#nosProduits"
-
-                pagePrec.textContent = "Page précédente"
-                pagePrec.classList.add("lienPage","hover:text-rouge")
-
-                parent.appendChild(pagePrec)
-            }
-
-            if (pageNumber < maxPage){
-                let pageSuiv = document.createElement("a")
-                let pageSup = parseInt(pageNumber)+1
-                pageSuiv.href = "recherche.php?page="+(pageSup)+"#nosProduits"
-
-                pageSuiv.textContent = "Page suivante"
-                pageSuiv.classList.add("lienPage","hover:text-rouge")
-
-                parent.appendChild(pageSuiv)
-            }
+            changementPage(lignes)
 
             // EventListener pour les tris
             let prixTriCroissant = document.getElementById("prixTriCroissant")
@@ -273,40 +240,29 @@
             // Prix
             prixTriCroissant.addEventListener("click",function () {
                 afficherProduit(triPrixCroissant(lignes))
-                // changementPage(lignes)
             })            
 
             prixTriDecroissant.addEventListener("click",function () {
                 afficherProduit(triPrixDecroissant(lignes))
-                // changementPage(lignes)
             })
 
             // Ordre alphabétique
             alphaTriAZ.addEventListener("click",function () {
                 afficherProduit(triAz(lignes))
-                // changementPage(lignes)
-                
             })
 
             alphaTriZA.addEventListener("click",function () {
                 afficherProduit(triZa(lignes))
-                // changementPage(lignes)
-                
             })
             
             // Note
             noteTri51.addEventListener("click",function () {
                 afficherProduit(triEtoileDecroissant(lignes))
-                // changementPage(lignes)
-                
             })
             
             noteTri15.addEventListener("click", function () {
                 afficherProduit(triEtoileCroissant(lignes))
-                // changementPage(lignes)
             })
-
-
             
             // EventListener pour les filtres
             

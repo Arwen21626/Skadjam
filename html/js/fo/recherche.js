@@ -28,18 +28,48 @@ function calculNbPages(tabProd){
         return [lignes, pageNumber, maxPage]
 }
 
-// function changementPage(tab){
-            
+function changementPage(tab){
+    // Passage d'une page à l'autre
+    parent = document.getElementsByTagName("main")[0]
+    // Pour avoir seulement le main et pas le tableau renvoyé
+    let pageChangement = document.createElement("div")
+    pageChangement.classList.add("flex", "flex-row", "space-x-4", "justify-center")
+    parent.appendChild(pageChangement)
+
+    parent = pageChangement
+
+    // let temp = calculNbPages(tabProd)[0]
     
+    let pageNumber = calculNbPages(tabProd)[1]
+    let maxPage = calculNbPages(tabProd)[2]
     
-// }
+    if(pageNumber > 1){
+        let pagePrec = document.createElement("a")
+        pagePrec.href = "recherche.php?page="+(pageNumber-1)+"#nosProduits"
+
+        pagePrec.textContent = "Page précédente"
+        pagePrec.classList.add("lienPage","hover:text-rouge")
+
+        parent.appendChild(pagePrec)
+    }
+
+    if (pageNumber < maxPage){
+        let pageSuiv = document.createElement("a")
+        let pageSup = parseInt(pageNumber)+1
+        pageSuiv.href = "recherche.php?page="+(pageSup)+"#nosProduits"
+
+        pageSuiv.textContent = "Page suivante"
+        pageSuiv.classList.add("lienPage","hover:text-rouge")
+
+        parent.appendChild(pageSuiv)
+    }
+}
 
 function afficherProduit(lignes){
     
     lignes.forEach(prod => {
-        //console.log(prod)
         
-        idProduit = prod['id_produit']
+        let idProduit = prod['id_produit']
         let parent = document.getElementById("prod")
 
         // Section   
