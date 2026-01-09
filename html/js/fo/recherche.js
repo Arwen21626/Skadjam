@@ -23,12 +23,9 @@ function recupTri(){
             else{
                 tabChecked.push(radio.value)
             }
-            console.log(radio.value)
-            console.log(tabChecked)
-            // return tabChecked
+            return tabChecked
         });
     });
-    
 }
 function calculNbPages(tabProd){
     //initialisation du numéro de page
