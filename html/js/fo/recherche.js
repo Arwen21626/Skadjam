@@ -92,7 +92,6 @@ function envoiTriUrl(){
     return envoi
 }
 
-
 function ecrireURL(){
     
     let tab = envoiTriUrl()
@@ -123,6 +122,8 @@ function recupURL(){
     
     return params
 }
+
+// Uilisation de l'URL pour cocher les cases d'une page à l'autre
 
 // Changement de pages
 function calculNbPages(tabProd){
