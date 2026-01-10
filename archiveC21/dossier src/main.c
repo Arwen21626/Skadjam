@@ -13,34 +13,37 @@
 #include <errno.h>
 #include <postgresql/libpq-fe.h>
 #include "log/logger.h"
+#include "commande/cmd.h"
 
 #define TAILLEB 1024
 
-typedef struct destinataire{
+typedef struct{
     char nom[255];
     char prenom[255];
     char adresse[255];
     int codePostal;
 }destinataire;
 
-typedef struct expediteur{
+typedef struct{
     char entreprise[255];
     char adresse[255];
     int codePostal;
 }expediteur;
 
-typedef struct bordereaux{
+typedef struct {
     char numCommande[255];
     char numSuivi[255];
     expediteur exp;
     destinataire dest;
 }bordereaux;
 
+
 // Déclaration
-void addCommande(int cnx, char commande[20], char buffer[TAILLEB], bordereaux *bord, time_t horo);
+void etape1(int cnx, char buffer[TAILLEB], bordereaux *bord, time_t horo);
 time_t getHoro();
 int connexion(char mdp[128], char user[128]);
 int connecxionBd();
+void getEtat(int cnx, char buffer[TAILLEB]);
 
 time_t horo;
 char cIp[INET_ADDRSTRLEN];
@@ -57,9 +60,10 @@ int main() {
     char buffer[TAILLEB];
     char message[1024];
     log_init();
+    cmd_t cmd;
 
     
-    LOG_SERV(LOG_INFO ,"Démarrage du service Delivraptor");
+    LOG_SERV(LOG_INFO ,"**Démarrage du service Delivraptor**");
     sock = socket(AF_INET, SOCK_STREAM, 0);
     printf("SOCK = %d\n",sock);
 
@@ -133,18 +137,36 @@ int main() {
     printf("ACCEPT = %d\n",ret);
     while (1==1){
         size = read(cnx, buffer, TAILLEB-1);
+        if (size == 0){
+            LOG_CLIENT(LOG_INFO, cIp, cPort, "Client déconnecté");
+            return EXIT_SUCCESS;
+        }
+        LOG_SERV(LOG_DEBUG, "Taille lecture %d", size);
         buffer[size] = '\0';
-        sscanf(buffer, "%s", commande);
-        horo = getHoro();
+        LOG_SERV(LOG_DEBUG, "Buffer value : %s", buffer);
+        cmd = get_commande(buffer);
         
+        horo = getHoro();
         LOG_CLIENT(LOG_INFO, cIp, cPort, "Requete %s", commande);
 
-        if (strncmp(commande, "ADD", 3) == 0){
+
+        switch (cmd)
+        {
+        case CMD_ADD:
             bordereaux bord;
-            addCommande(cnx, commande, buffer, &bord, horo);
-        }else{
+            etape1(cnx, buffer, &bord, horo);
+            break;
+        case CMD_ETA:
+            getEtat(cnx, buffer);
+            break;
+        default:
             LOG_CLIENT(LOG_WARN, cIp, cPort, "Commande non reconnu : %s", commande);
+            snprintf(message, sizeof(message), "CMD ERR NOT_EXIST %s", commande);
+            cmd = CMD_UNKNOWN;
+            send(cnx, message, strlen(message), 0);
+            break;
         }
+        buffer[0] = '\0';
 
     }
     log_close();
@@ -153,54 +175,89 @@ int main() {
 // Etape 1
 // Etat livraison : Chez Alizon
 // ADD numCommande entrepriseExp adresseExp cpExp  nomDest prenomDest adresseDest cpDest adresse syntaxe ex : 6_rue_camelia
-void addCommande(int cnx, char commande[20], char buffer[TAILLEB], bordereaux *bord, time_t horo){
-    char chaine[1024];
+void etape1(int cnx, char buffer[TAILLEB], bordereaux *bord, time_t horo){
+    char message[1024];
+    char err[8] = "BORD ERR";
+    PGresult *res;
+    const char *params[2];
+    char temp[5];
 
     //recuperation des information de la requete
-    sscanf(buffer, "%s %s %s |%s| %d %s %s |%s| %d", commande, bord->numCommande, bord->exp.entreprise, bord->exp.adresse, &bord->exp.codePostal, bord->dest.prenom, bord->dest.nom, bord->dest.adresse, &bord->dest.codePostal);
-    LOG_CLIENT(LOG_INFO, cIp, cPort, "Création bordereau pour la commande %s %s", bord->numCommande, bord->exp.entreprise);
-    //creation numéro de suivi
-    for(int i = 0; i < 3 && bord->exp.entreprise[i] != '\0'; i++) {
-        bord->numSuivi[i] = toupper((unsigned char)bord->exp.entreprise[i]);
+    sscanf(buffer, "%s %s %s |%s| %d %s %s |%s| %d", temp, bord->numCommande, bord->exp.entreprise, bord->exp.adresse, &bord->exp.codePostal, bord->dest.prenom, bord->dest.nom, bord->dest.adresse, &bord->dest.codePostal);
+
+    LOG_CLIENT(LOG_INFO, cIp, cPort, "Informaions récupérées avec succès");
+    
+    //verifier si la commande a deja un bordereau
+    params[0] = bord->numCommande;
+    res = PQexecParams(conn,
+                        "SELECT id_suivi FROM _delivraptor WHERE id_commande = $1",
+                        1,
+                        NULL,
+                        params,
+                        NULL,
+                        NULL,
+                        0);
+
+    if (PQresultStatus(res) != PGRES_TUPLES_OK) {
+        LOG_SERV(LOG_ERROR, "Erreur SELECT: %s\n", PQresultErrorMessage(res));
+        snprintf(message, sizeof(message), "%s NOT_FOUND", err);
+        send(cnx, message, strlen(message), 0);
+        PQclear(res);
+        return;
     }
-    bord->numSuivi[3] = '\0';
-    snprintf(chaine, sizeof(chaine), "%s%ld",bord->numSuivi, atoi(bord->numCommande)+horo);
-    strcpy(bord->numSuivi, chaine);
+    int nrows = PQntuples(res);
 
-    //enregistrement en bdd
-    LOG_SERV(LOG_INFO, "INSERT recuperation des parametres...");
-    const char *params[1];
-    params[0] = bord->numSuivi;
-
-    LOG_SERV(LOG_INFO, "INSERT enregistrement en BDD...");
-    PGresult *res = PQexecParams(conn,
-                                 "INSERT INTO _delivraptor (id_suivi) values ($1)",
-                                 1,
-                                 NULL,
-                                 params,
-                                 NULL,
-                                 NULL,
-                                 0);
-
-    if (PQresultStatus(res) == PGRES_COMMAND_OK) {
-        LOG_SERV(LOG_INFO, "INSERT exécuté avec succès");
-    } else {
-        LOG_SERV(LOG_ERROR, "Erreur INSERT : %s", PQresultErrorMessage(res));
+    if (nrows>0){
+        LOG_SERV(LOG_INFO, "La commande existe deja");
+        strncpy(bord->numSuivi, PQgetvalue(res,0,0), sizeof(bord->numSuivi)-1);
+        LOG_SERV(LOG_INFO, "Renvoi du bordereau");
+    }else{
+        LOG_CLIENT(LOG_INFO, cIp, cPort, "Création bordereau pour la commande %s %s", bord->numCommande, bord->exp.entreprise);
+        //creation numéro de suivi
+        for(int i = 0; i < 3 && bord->exp.entreprise[i] != '\0'; i++) {
+            bord->numSuivi[i] = toupper((unsigned char)bord->exp.entreprise[i]);
+        }
+        bord->numSuivi[3] = '\0';
+        snprintf(message, sizeof(message), "%s%ld",bord->numSuivi, strtol(bord->numCommande,NULL,10)+horo);
+        strcpy(bord->numSuivi, message);
+    
+        //enregistrement en bdd
+        LOG_SERV(LOG_INFO, "INSERT recuperation des parametres...");
+        params[0] = bord->numSuivi;
+        params[1] = bord->numCommande;
+    
+        LOG_SERV(LOG_INFO, "INSERT enregistrement en BDD...");
+        res = PQexecParams(conn,
+                            "INSERT INTO _delivraptor (id_suivi, id_commande) values ($1,$2)",
+                            2,
+                            NULL,
+                            params,
+                            NULL,
+                            NULL,
+                            0);
+    
+        if (PQresultStatus(res) == PGRES_COMMAND_OK) {
+            LOG_SERV(LOG_INFO, "INSERT exécuté avec succès");
+        } else {
+            LOG_SERV(LOG_ERROR, "Erreur INSERT : %s", PQresultErrorMessage(res));
+        }
     }
 
     PQclear(res);
     
     //envoi du numéro de suivi
-    snprintf(chaine, sizeof(chaine), "BORD %s com%s ts%ld",bord->numSuivi, bord->numCommande, horo);
-    send(cnx, chaine, strlen(chaine), 0);
+    snprintf(message, sizeof(message), "BORD %s com%s",bord->numSuivi, bord->numCommande);
+    send(cnx, message, strlen(message), 0);
 
     //ecriture de log
-    LOG_CLIENT(LOG_INFO, cIp, cPort, "%s",chaine);
+    LOG_CLIENT(LOG_INFO, cIp, cPort, "%s",message);
 
 }
 // Etape 2
 // Etat livraison : En cours d'acheminement vers le transporteur
+void etape2(int cnx, char buffer[TAILLEB], bordereaux *bord, time_t horo){
 
+}
 
 // Etape 3
 // Etat livraison : Arrivé chez le transporteur
@@ -249,7 +306,7 @@ int connexion(char mdp[128], char user[128]){
 }
 
 int connecxionBd(){
-    conn = PQconnectdb("host=127.0.0.1 dbname=postgres user=postgres password=mypass");
+    conn = PQconnectdb("host=127.0.0.1 dbname=postgres user=postgres password=1969:USA");
 
     if (PQstatus(conn) != CONNECTION_OK){
         LOG_SERV(LOG_ERROR, "Erreur connexion BDD : %s", PQerrorMessage(conn));
@@ -257,7 +314,7 @@ int connecxionBd(){
         exit(EXIT_FAILURE);
     }
     LOG_SERV(LOG_INFO, "Connecté a la BDD");
-    LOG_SERV(LOG_ERROR, "SET search_path...");
+    LOG_SERV(LOG_INFO, "SET search_path...");
     PGresult *res = PQexec(conn, "SET search_path TO sae3_delivraptor");
     if (PQresultStatus(res) != PGRES_COMMAND_OK) {
         LOG_SERV(LOG_ERROR, "Erreur SET search_path: %s\n", PQresultErrorMessage(res));
@@ -267,15 +324,62 @@ int connecxionBd(){
 
     res = PQexec(conn, "SELECT current_database()");
     if (PQresultStatus(res) == PGRES_TUPLES_OK) {
-        LOG_SERV(LOG_INFO, "Base de données actuelle : %s\n", PQgetvalue(res, 0, 0));
+        LOG_SERV(LOG_INFO, "Base de données actuelle : %s", PQgetvalue(res, 0, 0));
     }
     PQclear(res);
 
     res = PQexec(conn, "SHOW search_path");
     if (PQresultStatus(res) == PGRES_TUPLES_OK) {
-        LOG_SERV(LOG_INFO, "Schéma courant (search_path) : %s\n", PQgetvalue(res, 0, 0));
+        LOG_SERV(LOG_INFO, "Schéma courant (search_path) : %s", PQgetvalue(res, 0, 0));
     }
     PQclear(res);
+    return EXIT_SUCCESS;
+}
+
+
+// Etat livraison : 
+// ETA ALI1245214522
+void getEtat(int cnx, char buffer[TAILLEB]){
+    char temp[5];
+    char id_suivi[14];
+    char etat[3];
+    int  nrows;
+    char message[1024];
+    char err[8] = "ETA ERR"; 
+
+    sscanf(buffer, "%s %s", temp, id_suivi);
+    LOG_CLIENT(LOG_INFO, cIp, cPort, "numéro de suivie récupéré");
+
+    PGresult *res;
+    const char *params[1];
+    params[0] = id_suivi;
+    res = PQexecParams(conn,
+                        "SELECT etat FROM _delivraptor WHERE id_suivi = $1",
+                        1,
+                        NULL,
+                        params,
+                        NULL,
+                        NULL,
+                        0);
+    nrows = PQntuples(res);
+    if (nrows>0){
+        LOG_SERV(LOG_INFO, "Récuperation de l'etat");
+        strncpy(etat, PQgetvalue(res,0,0), sizeof(etat)-1);
+        etat[sizeof(etat) - 1] = '\0';
+        LOG_SERV(LOG_DEBUG, "Etat commande char : %s", etat);
+        LOG_SERV(LOG_DEBUG, "Etat commande int : %d", (int)strtol(etat, NULL, 10));
+        snprintf(message, sizeof(message), "ETA %s eta%d", id_suivi, (int)strtol(etat, NULL, 10));
+        LOG_SERV(LOG_DEBUG, "Message envoyé : %s", message);
+        send(cnx, message,strlen(message), 0);
+    }else{
+        LOG_CLIENT(LOG_INFO, cIp, cPort, "Id_suivi %s n'existe pas", id_suivi);
+        snprintf(message, sizeof(message), "%s NOT_FOUND %s",err, id_suivi);
+        send(cnx, message, strlen(message), 0);
+
+    }
+    PQclear(res);
+}
+
+void nextEtat(int cnx, char buffer[TAILLEB]){
 
 }
-// Etat livraison : 

@@ -7,11 +7,11 @@ static FILE *log_file = NULL;
 
 static const char *lvl_to_string(log_lvl_t level) {
     switch (level) {
-        case LOG_DEBUG: return "DEBUG";
-        case LOG_INFO:  return "INFO";
-        case LOG_WARN:  return "WARN";
-        case LOG_ERROR: return "ERROR";
-        default:        return "UNKNOWN";
+        case LOG_DEBUG: return "[DEBUG]  ";
+        case LOG_INFO:  return "[INFO]   ";
+        case LOG_WARN:  return "[WARN]   ";
+        case LOG_ERROR: return "[ERROR]  ";
+        default:        return "[UNKNOWN]";
     }
 }
 
@@ -45,9 +45,7 @@ void log_message(log_lvl_t level,
                  int line,
                  const char *fmt, ...) {
     
-    log_init();
     if (!log_file){
-        LOG_SERV(LOG_ERROR, "Aucun fichier initialisé");
         return;
     }
     
@@ -62,13 +60,15 @@ void log_message(log_lvl_t level,
     }
 
     if (src == LOG_SRC_CLIENT){
-        fprintf(log_file, "[%s] [%s] [CLIENT] [%s:%d] ",
+        fprintf(log_file, "[%s] %s [CLIENT] (%s:%d) [%s:%d] ",
                 timebuf,
                 lvl_to_string(level),
+                file,
+                line,
                 ip,
                 port);
     }else{
-        fprintf(log_file, "[%s] [%s] [SERV]   (%s:%d) ",
+        fprintf(log_file, "[%s] %s [SERV]   (%s:%d) ",
                 timebuf,
                 lvl_to_string(level),
                 file,
@@ -82,6 +82,5 @@ void log_message(log_lvl_t level,
 
     fprintf(log_file, "\n");
     fflush(log_file);
-    log_close();
 }
 

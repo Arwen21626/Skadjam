@@ -486,3 +486,448 @@ DETAIL:  Key (id_suivi)=(ALI1767850832) already exists.
 [02:26:49] [ERROR] [SERV]   (main.c:188) Erreur INSERT : ERROR:  duplicate key value violates unique constraint "pk_delivraptor"
 DETAIL:  Key (id_suivi)=(ALI1767850832) already exists.
 
+[07:36:33] [INFO] [SERV]   (main.c:62) Démarrage du service Delivraptor
+[07:36:33] [INFO] [SERV]   (main.c:72) Socket configuré
+[07:36:33] [INFO] [SERV]   (main.c:87) Adresse ip et port configurées
+[07:36:33] [INFO] [SERV]   (main.c:92) Socket en écoute
+[07:36:49] [INFO] [SERV]   (main.c:100) Connexion accepté
+[07:36:49] [INFO] [CLIENT] [127.0.0.1:34078] Client connecté au service avec succès
+[07:36:49] [INFO] [CLIENT] [127.0.0.1:34078] Authentification réussie
+[07:36:49] [INFO] [SERV]   (main.c:130) Connexion a la BDD...
+[07:36:49] [ERROR] [SERV]   (main.c:256) Erreur connexion BDD : connection to server at "127.0.0.1", port 5432 failed: FATAL:  password authentication failed for user "postgres"
+connection to server at "127.0.0.1", port 5432 failed: FATAL:  password authentication failed for user "postgres"
+
+[07:37:47] [INFO] [SERV]   (main.c:62) Démarrage du service Delivraptor
+[07:37:47] [INFO] [SERV]   (main.c:72) Socket configuré
+[07:37:47] [INFO] [SERV]   (main.c:87) Adresse ip et port configurées
+[07:37:47] [INFO] [SERV]   (main.c:92) Socket en écoute
+[07:37:50] [INFO] [SERV]   (main.c:100) Connexion accepté
+[07:37:50] [INFO] [CLIENT] [127.0.0.1:48178] Client connecté au service avec succès
+[07:37:50] [INFO] [CLIENT] [127.0.0.1:48178] Authentification réussie
+[07:37:50] [INFO] [SERV]   (main.c:130) Connexion a la BDD...
+[07:37:50] [INFO] [SERV]   (main.c:260) Connecté a la BDD
+[07:37:50] [ERROR] [SERV]   (main.c:261) SET search_path...
+[07:37:50] [INFO] [SERV]   (main.c:266) SET search_path success
+[07:37:50] [INFO] [SERV]   (main.c:271) Base de données actuelle : postgres
+
+[07:37:50] [INFO] [SERV]   (main.c:277) Schéma courant (search_path) : sae3_delivraptor
+
+[07:37:50] [INFO] [CLIENT] [127.0.0.1:48178] Requete ADD
+[07:37:50] [INFO] [CLIENT] [127.0.0.1:48178] Création bordereau pour la commande 144254 alizon
+[07:37:50] [INFO] [SERV]   (main.c:171) INSERT recuperation des parametres...
+[07:37:50] [INFO] [SERV]   (main.c:176) INSERT enregistrement en BDD...
+[07:37:50] [INFO] [SERV]   (main.c:187) INSERT exécuté avec succès
+[07:37:50] [INFO] [CLIENT] [127.0.0.1:48178] BORD ALI1767998524 com144254 ts1767854270
+[07:37:50] [INFO] [CLIENT] [127.0.0.1:48178] Requete ADD
+[07:37:50] [INFO] [CLIENT] [127.0.0.1:48178] Création bordereau pour la commande 15223 alizon
+[07:37:50] [INFO] [SERV]   (main.c:171) INSERT recuperation des parametres...
+[07:37:50] [INFO] [SERV]   (main.c:176) INSERT enregistrement en BDD...
+[07:37:50] [INFO] [SERV]   (main.c:187) INSERT exécuté avec succès
+[07:37:50] [INFO] [CLIENT] [127.0.0.1:48178] BORD ALI1767869493 com15223 ts1767854270
+[07:37:50] [INFO] [CLIENT] [127.0.0.1:48178] Requete ADD
+[07:37:50] [INFO] [CLIENT] [127.0.0.1:48178] Création bordereau pour la commande 15223 alizon
+[07:37:50] [INFO] [SERV]   (main.c:171) INSERT recuperation des parametres...
+[07:37:50] [INFO] [SERV]   (main.c:176) INSERT enregistrement en BDD...
+[07:37:50] [ERROR] [SERV]   (main.c:189) Erreur INSERT : ERROR:  duplicate key value violates unique constraint "pk_delivraptor"
+DETAIL:  Key (id_suivi)=(ALI1767869493) already exists.
+
+[07:37:50] [INFO] [CLIENT] [127.0.0.1:48178] BORD ALI1767869493 com15223 ts1767854270
+[07:37:50] [INFO] [CLIENT] [127.0.0.1:48178] Requete ADD
+[07:37:50] [INFO] [CLIENT] [127.0.0.1:48178] Création bordereau pour la commande 15223 alizon
+[07:37:50] [INFO] [SERV]   (main.c:171) INSERT recuperation des parametres...
+[07:37:50] [INFO] [SERV]   (main.c:176) INSERT enregistrement en BDD...
+[07:37:50] [ERROR] [SERV]   (main.c:189) Erreur INSERT : ERROR:  duplicate key value violates unique constraint "pk_delivraptor"
+DETAIL:  Key (id_suivi)=(ALI1767869493) already exists.
+
+[07:41:40] [INFO] [SERV]   (main.c:62) Démarrage du service Delivraptor
+[07:41:40] [INFO] [SERV]   (main.c:72) Socket configuré
+[07:41:40] [INFO] [SERV]   (main.c:87) Adresse ip et port configurées
+[07:41:40] [INFO] [SERV]   (main.c:92) Socket en écoute
+[07:41:42] [INFO] [SERV]   (main.c:100) Connexion accepté
+[07:41:42] [INFO] [CLIENT] [127.0.0.1:41574] Client connecté au service avec succès
+[07:41:42] [INFO] [CLIENT] [127.0.0.1:41574] Authentification réussie
+[07:41:42] [INFO] [SERV]   (main.c:130) Connexion a la BDD...
+[07:41:42] [INFO] [SERV]   (main.c:260) Connecté a la BDD
+[07:41:42] [ERROR] [SERV]   (main.c:261) SET search_path...
+[07:41:42] [INFO] [SERV]   (main.c:266) SET search_path success
+[07:41:42] [INFO] [SERV]   (main.c:271) Base de données actuelle : postgres
+
+[07:41:42] [INFO] [SERV]   (main.c:277) Schéma courant (search_path) : sae3_delivraptor
+
+[07:41:42] [INFO] [CLIENT] [127.0.0.1:41574] Requete ADD
+[07:41:42] [INFO] [CLIENT] [127.0.0.1:41574] Création bordereau pour la commande 144254 alizon
+[07:41:42] [INFO] [SERV]   (main.c:171) INSERT recuperation des parametres...
+[07:41:42] [INFO] [SERV]   (main.c:176) INSERT enregistrement en BDD...
+[07:41:42] [ERROR] [SERV]   (main.c:189) Erreur INSERT : ERROR:  duplicate key value violates unique constraint "commande_uniq"
+DETAIL:  Key (id_commande)=(144254) already exists.
+
+[07:41:42] [INFO] [CLIENT] [127.0.0.1:41574] BORD ALI1767854502 com144254
+[07:41:42] [INFO] [CLIENT] [127.0.0.1:41574] Requete ADD
+[07:41:42] [INFO] [CLIENT] [127.0.0.1:41574] Création bordereau pour la commande 15223 alizon
+[07:41:42] [INFO] [SERV]   (main.c:171) INSERT recuperation des parametres...
+[07:41:42] [INFO] [SERV]   (main.c:176) INSERT enregistrement en BDD...
+[07:41:42] [ERROR] [SERV]   (main.c:189) Erreur INSERT : ERROR:  duplicate key value violates unique constraint "commande_uniq"
+DETAIL:  Key (id_commande)=(15223) already exists.
+
+[07:41:42] [INFO] [CLIENT] [127.0.0.1:41574] BORD ALI1767854502 com15223
+[07:41:42] [INFO] [CLIENT] [127.0.0.1:41574] Requete ADD
+[07:41:42] [INFO] [CLIENT] [127.0.0.1:41574] Création bordereau pour la commande 15223 alizon
+[07:41:42] [INFO] [SERV]   (main.c:171) INSERT recuperation des parametres...
+[07:41:42] [INFO] [SERV]   (main.c:176) INSERT enregistrement en BDD...
+[07:41:42] [ERROR] [SERV]   (main.c:189) Erreur INSERT : ERROR:  duplicate key value violates unique constraint "commande_uniq"
+DETAIL:  Key (id_commande)=(15223) already exists.
+
+[07:41:42] [INFO] [CLIENT] [127.0.0.1:41574] BORD ALI1767854502 com15223
+[07:41:42] [INFO] [CLIENT] [127.0.0.1:41574] Requete ADD
+[07:41:42] [INFO] [CLIENT] [127.0.0.1:41574] Création bordereau pour la commande 15223 alizon
+[07:41:42] [INFO] [SERV]   (main.c:171) INSERT recuperation des parametres...
+[07:41:42] [INFO] [SERV]   (main.c:176) INSERT enregistrement en BDD...
+[07:41:42] [ERROR] [SERV]   (main.c:189) Erreur INSERT : ERROR:  duplicate key value violates unique constraint "commande_uniq"
+DETAIL:  Key (id_commande)=(15223) already exists.
+
+[08:28:09] [INFO] [SERV]   (main.c:62) Démarrage du service Delivraptor
+[08:28:09] [INFO] [SERV]   (main.c:72) Socket configuré
+[08:28:09] [INFO] [SERV]   (main.c:87) Adresse ip et port configurées
+[08:28:09] [INFO] [SERV]   (main.c:92) Socket en écoute
+[08:28:16] [INFO] [SERV]   (main.c:100) Connexion accepté
+[08:28:16] [INFO] [CLIENT] [127.0.0.1:56452] Client connecté au service avec succès
+[08:28:16] [INFO] [CLIENT] [127.0.0.1:56452] Authentification réussie
+[08:28:16] [INFO] [SERV]   (main.c:130) Connexion a la BDD...
+[08:28:16] [INFO] [SERV]   (main.c:287) Connecté a la BDD
+[08:28:16] [ERROR] [SERV]   (main.c:288) SET search_path...
+[08:28:16] [INFO] [SERV]   (main.c:293) SET search_path success
+[08:28:16] [INFO] [SERV]   (main.c:298) Base de données actuelle : postgres
+
+[08:28:16] [INFO] [SERV]   (main.c:304) Schéma courant (search_path) : sae3_delivraptor
+
+[08:28:16] [INFO] [CLIENT] [127.0.0.1:56452] Requete ADD
+[08:28:16] [INFO] [SERV]   (main.c:183) La commande existe deja
+[08:28:16] [INFO] [SERV]   (main.c:185) Renvoi du bordereau
+[08:28:16] [INFO] [CLIENT] [127.0.0.1:56452] BORD ALI1767998524 com144254
+[08:28:16] [INFO] [CLIENT] [127.0.0.1:56452] Requete ADD
+[08:28:16] [INFO] [SERV]   (main.c:183) La commande existe deja
+[08:28:16] [INFO] [SERV]   (main.c:185) Renvoi du bordereau
+[08:28:16] [INFO] [CLIENT] [127.0.0.1:56452] BORD ALI1767869493 com15223
+[08:28:16] [INFO] [CLIENT] [127.0.0.1:56452] Requete ADD
+[08:28:16] [INFO] [SERV]   (main.c:183) La commande existe deja
+[08:28:16] [INFO] [SERV]   (main.c:185) Renvoi du bordereau
+[08:28:16] [INFO] [CLIENT] [127.0.0.1:56452] BORD ALI1767869493 com15223
+[08:28:16] [INFO] [CLIENT] [127.0.0.1:56452] Requete ADD
+[08:28:16] [INFO] [SERV]   (main.c:183) La commande existe deja
+[08:28:16] [INFO] [SERV]   (main.c:185) Renvoi du bordereau
+[08:33:33] [INFO] [SERV]   (main.c:62) Démarrage du service Delivraptor
+[08:33:33] [INFO] [SERV]   (main.c:72) Socket configuré
+[08:33:33] [INFO] [SERV]   (main.c:87) Adresse ip et port configurées
+[08:33:33] [INFO] [SERV]   (main.c:92) Socket en écoute
+[08:33:36] [INFO] [SERV]   (main.c:100) Connexion accepté
+[08:33:36] [INFO] [CLIENT] [127.0.0.1:41678] Client connecté au service avec succès
+[08:33:36] [INFO] [CLIENT] [127.0.0.1:41678] Authentification réussie
+[08:33:36] [INFO] [SERV]   (main.c:130) Connexion a la BDD...
+[08:33:36] [INFO] [SERV]   (main.c:288) Connecté a la BDD
+[08:33:36] [ERROR] [SERV]   (main.c:289) SET search_path...
+[08:33:36] [INFO] [SERV]   (main.c:294) SET search_path success
+[08:33:36] [INFO] [SERV]   (main.c:299) Base de données actuelle : postgres
+
+[08:33:36] [INFO] [SERV]   (main.c:305) Schéma courant (search_path) : sae3_delivraptor
+
+[08:33:36] [INFO] [CLIENT] [127.0.0.1:41678] Requete ADD
+[08:33:36] [INFO] [SERV]   (main.c:184) La commande existe deja
+[08:33:36] [INFO] [SERV]   (main.c:186) Renvoi du bordereau
+[08:33:36] [INFO] [CLIENT] [127.0.0.1:41678] BORD ALI1767998524 com144254
+[08:33:36] [INFO] [CLIENT] [127.0.0.1:41678] Requete ADD
+[08:33:36] [INFO] [SERV]   (main.c:184) La commande existe deja
+[08:33:36] [INFO] [SERV]   (main.c:186) Renvoi du bordereau
+[08:33:36] [INFO] [CLIENT] [127.0.0.1:41678] BORD ALI1767869493 com15223
+[08:33:36] [INFO] [CLIENT] [127.0.0.1:41678] Requete ADD
+[08:33:36] [INFO] [SERV]   (main.c:184) La commande existe deja
+[08:33:36] [INFO] [SERV]   (main.c:186) Renvoi du bordereau
+[08:33:36] [INFO] [CLIENT] [127.0.0.1:41678] BORD ALI1767869493 com15223
+[08:33:36] [INFO] [CLIENT] [127.0.0.1:41678] Requete ADD
+[08:33:36] [INFO] [SERV]   (main.c:184) La commande existe deja
+[08:33:36] [INFO] [SERV]   (main.c:186) Renvoi du bordereau
+[08:33:55] [INFO] [SERV]   (main.c:62) Démarrage du service Delivraptor
+[08:33:55] [INFO] [SERV]   (main.c:72) Socket configuré
+[08:33:55] [INFO] [SERV]   (main.c:87) Adresse ip et port configurées
+[08:33:55] [INFO] [SERV]   (main.c:92) Socket en écoute
+[08:34:00] [INFO] [SERV]   (main.c:100) Connexion accepté
+[08:34:00] [INFO] [CLIENT] [127.0.0.1:32920] Client connecté au service avec succès
+[08:34:00] [INFO] [CLIENT] [127.0.0.1:32920] Authentification réussie
+[08:34:00] [INFO] [SERV]   (main.c:130) Connexion a la BDD...
+[08:34:00] [INFO] [SERV]   (main.c:288) Connecté a la BDD
+[08:34:00] [ERROR] [SERV]   (main.c:289) SET search_path...
+[08:34:00] [INFO] [SERV]   (main.c:294) SET search_path success
+[08:34:00] [INFO] [SERV]   (main.c:299) Base de données actuelle : postgres
+
+[08:34:00] [INFO] [SERV]   (main.c:305) Schéma courant (search_path) : sae3_delivraptor
+
+[08:34:00] [INFO] [CLIENT] [127.0.0.1:32920] Requete ADD
+[08:34:00] [INFO] [SERV]   (main.c:184) La commande existe deja
+[08:34:00] [INFO] [SERV]   (main.c:186) Renvoi du bordereau
+[08:34:00] [INFO] [CLIENT] [127.0.0.1:32920] BORD ALI1767998524 com144254
+[08:34:00] [INFO] [CLIENT] [127.0.0.1:32920] Requete ADD
+[08:34:00] [INFO] [SERV]   (main.c:184) La commande existe deja
+[08:34:00] [INFO] [SERV]   (main.c:186) Renvoi du bordereau
+[08:34:00] [INFO] [CLIENT] [127.0.0.1:32920] BORD ALI1767869493 com15223
+[08:34:00] [INFO] [CLIENT] [127.0.0.1:32920] Requete ADD
+[08:34:00] [INFO] [SERV]   (main.c:184) La commande existe deja
+[08:34:00] [INFO] [SERV]   (main.c:186) Renvoi du bordereau
+[08:34:00] [INFO] [CLIENT] [127.0.0.1:32920] BORD ALI1767869493 com15223
+[08:34:00] [INFO] [CLIENT] [127.0.0.1:32920] Requete ADD
+[08:34:00] [INFO] [SERV]   (main.c:184) La commande existe deja
+[08:34:00] [INFO] [SERV]   (main.c:186) Renvoi du bordereau
+[08:35:11] [INFO] [SERV]   (main.c:62) Démarrage du service Delivraptor
+[08:35:11] [INFO] [SERV]   (main.c:72) Socket configuré
+[08:35:11] [INFO] [SERV]   (main.c:87) Adresse ip et port configurées
+[08:35:11] [INFO] [SERV]   (main.c:92) Socket en écoute
+[08:35:14] [INFO] [SERV]   (main.c:100) Connexion accepté
+[08:35:14] [INFO] [CLIENT] [127.0.0.1:58176] Client connecté au service avec succès
+[08:35:14] [INFO] [CLIENT] [127.0.0.1:58176] Authentification réussie
+[08:35:14] [INFO] [SERV]   (main.c:130) Connexion a la BDD...
+[08:35:14] [INFO] [SERV]   (main.c:288) Connecté a la BDD
+[08:35:14] [INFO] [SERV]   (main.c:289) SET search_path...
+[08:35:14] [INFO] [SERV]   (main.c:294) SET search_path success
+[08:35:14] [INFO] [SERV]   (main.c:299) Base de données actuelle : postgres
+[08:35:14] [INFO] [SERV]   (main.c:305) Schéma courant (search_path) : sae3_delivraptor
+[08:35:14] [INFO] [CLIENT] [127.0.0.1:58176] Requete ADD
+[08:35:14] [INFO] [SERV]   (main.c:184) La commande existe deja
+[08:35:14] [INFO] [SERV]   (main.c:186) Renvoi du bordereau
+[08:35:14] [INFO] [CLIENT] [127.0.0.1:58176] BORD ALI1767998524 com144254
+[08:35:14] [INFO] [CLIENT] [127.0.0.1:58176] Requete ADD
+[08:35:14] [INFO] [SERV]   (main.c:184) La commande existe deja
+[08:35:14] [INFO] [SERV]   (main.c:186) Renvoi du bordereau
+[08:35:14] [INFO] [CLIENT] [127.0.0.1:58176] BORD ALI1767869493 com15223
+[08:35:14] [INFO] [CLIENT] [127.0.0.1:58176] Requete ADD
+[08:35:14] [INFO] [SERV]   (main.c:184) La commande existe deja
+[08:35:14] [INFO] [SERV]   (main.c:186) Renvoi du bordereau
+[08:35:14] [INFO] [CLIENT] [127.0.0.1:58176] BORD ALI1767869493 com15223
+[08:35:14] [INFO] [CLIENT] [127.0.0.1:58176] Requete ADD
+[08:35:14] [INFO] [SERV]   (main.c:184) La commande existe deja
+[08:35:14] [INFO] [SERV]   (main.c:186) Renvoi du bordereau
+[08:36:12] [INFO] [SERV]   (main.c:62) **Démarrage du service Delivraptor**
+[08:36:12] [INFO] [SERV]   (main.c:72) Socket configuré
+[08:36:12] [INFO] [SERV]   (main.c:87) Adresse ip et port configurées
+[08:36:12] [INFO] [SERV]   (main.c:92) Socket en écoute
+[08:36:19] [INFO] [SERV]   (main.c:100) Connexion accepté
+[08:36:19] [INFO] [CLIENT] [127.0.0.1:57046] Client connecté au service avec succès
+[08:36:19] [INFO] [CLIENT] [127.0.0.1:57046] Authentification réussie
+[08:36:19] [INFO] [SERV]   (main.c:130) Connexion a la BDD...
+[08:36:19] [INFO] [SERV]   (main.c:288) Connecté a la BDD
+[08:36:19] [INFO] [SERV]   (main.c:289) SET search_path...
+[08:36:19] [INFO] [SERV]   (main.c:294) SET search_path success
+[08:36:19] [INFO] [SERV]   (main.c:299) Base de données actuelle : postgres
+[08:36:19] [INFO] [SERV]   (main.c:305) Schéma courant (search_path) : sae3_delivraptor
+[08:36:19] [INFO] [CLIENT] [127.0.0.1:57046] Requete ADD
+[08:36:19] [INFO] [SERV]   (main.c:184) La commande existe deja
+[08:36:19] [INFO] [SERV]   (main.c:186) Renvoi du bordereau
+[08:36:19] [INFO] [CLIENT] [127.0.0.1:57046] BORD ALI1767998524 com144254
+[08:36:19] [INFO] [CLIENT] [127.0.0.1:57046] Requete ADD
+[08:36:19] [INFO] [SERV]   (main.c:184) La commande existe deja
+[08:36:19] [INFO] [SERV]   (main.c:186) Renvoi du bordereau
+[08:36:19] [INFO] [CLIENT] [127.0.0.1:57046] BORD ALI1767869493 com15223
+[08:36:19] [INFO] [CLIENT] [127.0.0.1:57046] Requete ADD
+[08:36:19] [INFO] [SERV]   (main.c:184) La commande existe deja
+[08:36:19] [INFO] [SERV]   (main.c:186) Renvoi du bordereau
+[08:36:19] [INFO] [CLIENT] [127.0.0.1:57046] BORD ALI1767869493 com15223
+[08:36:19] [INFO] [CLIENT] [127.0.0.1:57046] Requete ADD
+[08:36:19] [INFO] [SERV]   (main.c:184) La commande existe deja
+[08:36:19] [INFO] [SERV]   (main.c:186) Renvoi du bordereau
+[08:38:25] [INFO] [SERV]   (main.c:62) **Démarrage du service Delivraptor**
+[08:38:25] [INFO] [SERV]   (main.c:72) Socket configuré
+[08:38:25] [INFO] [SERV]   (main.c:87) Adresse ip et port configurées
+[08:38:25] [INFO] [SERV]   (main.c:92) Socket en écoute
+[08:38:27] [INFO] [SERV]   (main.c:100) Connexion accepté
+[08:38:27] [INFO] [CLIENT] [127.0.0.1:36458] Client connecté au service avec succès
+[08:38:27] [INFO] [CLIENT] [127.0.0.1:36458] Authentification réussie
+[08:38:27] [INFO] [SERV]   (main.c:130) Connexion a la BDD...
+[08:38:27] [INFO] [SERV]   (main.c:288) Connecté a la BDD
+[08:38:27] [INFO] [SERV]   (main.c:289) SET search_path...
+[08:38:27] [INFO] [SERV]   (main.c:294) SET search_path success
+[08:38:27] [INFO] [SERV]   (main.c:299) Base de données actuelle : postgres
+[08:38:27] [INFO] [SERV]   (main.c:305) Schéma courant (search_path) : sae3_delivraptor
+[08:38:27] [INFO] [CLIENT] [127.0.0.1:36458] Requete ADD
+[08:38:27] [INFO] [SERV]   (main.c:184) La commande existe deja
+[08:38:27] [INFO] [SERV]   (main.c:186) Renvoi du bordereau
+[08:38:27] [INFO] [CLIENT] [127.0.0.1:36458] BORD ALI1767998524 com144254
+[08:38:27] [INFO] [CLIENT] [127.0.0.1:36458] Requete ADD
+[08:38:27] [INFO] [SERV]   (main.c:184) La commande existe deja
+[08:38:27] [INFO] [SERV]   (main.c:186) Renvoi du bordereau
+[08:38:27] [INFO] [CLIENT] [127.0.0.1:36458] BORD ALI1767869493 com15223
+[08:38:27] [INFO] [CLIENT] [127.0.0.1:36458] Requete ADD
+[08:38:27] [INFO] [SERV]   (main.c:184) La commande existe deja
+[08:38:27] [INFO] [SERV]   (main.c:186) Renvoi du bordereau
+[08:38:27] [INFO] [CLIENT] [127.0.0.1:36458] BORD ALI1767869493 com15223
+[08:38:27] [INFO] [CLIENT] [127.0.0.1:36458] Requete ADD
+[08:38:27] [INFO] [SERV]   (main.c:184) La commande existe deja
+[08:38:27] [INFO] [SERV]   (main.c:186) Renvoi du bordereau
+[09:40:52] [INFO] [SERV]   (main.c:63) **Démarrage du service Delivraptor**
+[09:40:52] [INFO] [SERV]   (main.c:73) Socket configuré
+[09:40:52] [INFO] [SERV]   (main.c:88) Adresse ip et port configurées
+[09:40:52] [INFO] [SERV]   (main.c:93) Socket en écoute
+[09:40:57] [INFO] [SERV]   (main.c:101) Connexion accepté
+[09:40:57] [INFO] [CLIENT] [127.0.0.1:36270] Client connecté au service avec succès
+[09:40:57] [INFO] [CLIENT] [127.0.0.1:36270] Authentification réussie
+[09:40:57] [INFO] [SERV]   (main.c:131) Connexion a la BDD...
+[09:40:57] [INFO] [SERV]   (main.c:297) Connecté a la BDD
+[09:40:57] [INFO] [SERV]   (main.c:298) SET search_path...
+[09:40:57] [INFO] [SERV]   (main.c:303) SET search_path success
+[09:40:57] [INFO] [SERV]   (main.c:308) Base de données actuelle : postgres
+[09:40:57] [INFO] [SERV]   (main.c:314) Schéma courant (search_path) : sae3_delivraptor
+[09:40:57] [INFO] [CLIENT] [127.0.0.1:36270] Requete ADD
+[09:40:57] [INFO] [CLIENT] [127.0.0.1:36270] Création bordereau pour la commande ADD 144254
+[09:40:57] [INFO] [SERV]   (main.c:205) INSERT recuperation des parametres...
+[09:40:57] [INFO] [SERV]   (main.c:209) INSERT enregistrement en BDD...
+[09:40:57] [ERROR] [SERV]   (main.c:222) Erreur INSERT : ERROR:  new row for relation "_delivraptor" violates check constraint "ch_delivraptor_id_suivi"
+DETAIL:  Failing row contains (1441767861657, ADD, 2026-01-08 09:40:57.309262+01, null, null, null, null, null, null, null, null).
+
+[09:40:57] [INFO] [CLIENT] [127.0.0.1:36270] BORD 1441767861657 comADD
+[09:40:57] [INFO] [CLIENT] [127.0.0.1:36270] Requete ADD
+[09:40:57] [INFO] [CLIENT] [127.0.0.1:36270] Création bordereau pour la commande ADD 15223
+[09:40:57] [INFO] [SERV]   (main.c:205) INSERT recuperation des parametres...
+[09:40:57] [INFO] [SERV]   (main.c:209) INSERT enregistrement en BDD...
+[09:40:57] [ERROR] [SERV]   (main.c:222) Erreur INSERT : ERROR:  new row for relation "_delivraptor" violates check constraint "ch_delivraptor_id_suivi"
+DETAIL:  Failing row contains (1521767861657, ADD, 2026-01-08 09:40:57.309895+01, null, null, null, null, null, null, null, null).
+
+[09:40:57] [INFO] [CLIENT] [127.0.0.1:36270] BORD 1521767861657 comADD
+[09:40:57] [INFO] [CLIENT] [127.0.0.1:36270] Requete ADD
+[09:40:57] [INFO] [CLIENT] [127.0.0.1:36270] Création bordereau pour la commande ADD 15223
+[09:40:57] [INFO] [SERV]   (main.c:205) INSERT recuperation des parametres...
+[09:40:57] [INFO] [SERV]   (main.c:209) INSERT enregistrement en BDD...
+[09:40:57] [ERROR] [SERV]   (main.c:222) Erreur INSERT : ERROR:  new row for relation "_delivraptor" violates check constraint "ch_delivraptor_id_suivi"
+DETAIL:  Failing row contains (1521767861657, ADD, 2026-01-08 09:40:57.310334+01, null, null, null, null, null, null, null, null).
+
+[09:40:57] [INFO] [CLIENT] [127.0.0.1:36270] BORD 1521767861657 comADD
+[09:40:57] [INFO] [CLIENT] [127.0.0.1:36270] Requete ADD
+[09:40:57] [INFO] [CLIENT] [127.0.0.1:36270] Création bordereau pour la commande ADD 15223
+[09:40:57] [INFO] [SERV]   (main.c:205) INSERT recuperation des parametres...
+[09:40:57] [INFO] [SERV]   (main.c:209) INSERT enregistrement en BDD...
+[09:40:57] [ERROR] [SERV]   (main.c:222) Erreur INSERT : ERROR:  new row for relation "_delivraptor" violates check constraint "ch_delivraptor_id_suivi"
+DETAIL:  Failing row contains (1521767861657, ADD, 2026-01-08 09:40:57.310658+01, null, null, null, null, null, null, null, null).
+
+[09:43:01] [INFO] [SERV]   (main.c:63) **Démarrage du service Delivraptor**
+[09:43:01] [INFO] [SERV]   (main.c:73) Socket configuré
+[09:43:01] [INFO] [SERV]   (main.c:88) Adresse ip et port configurées
+[09:43:01] [INFO] [SERV]   (main.c:93) Socket en écoute
+[09:43:03] [INFO] [SERV]   (main.c:101) Connexion accepté
+[09:43:03] [INFO] [CLIENT] [127.0.0.1:53678] Client connecté au service avec succès
+[09:43:03] [INFO] [CLIENT] [127.0.0.1:53678] Authentification réussie
+[09:43:03] [INFO] [SERV]   (main.c:131) Connexion a la BDD...
+[09:43:03] [INFO] [SERV]   (main.c:298) Connecté a la BDD
+[09:43:03] [INFO] [SERV]   (main.c:299) SET search_path...
+[09:43:03] [INFO] [SERV]   (main.c:304) SET search_path success
+[09:43:03] [INFO] [SERV]   (main.c:309) Base de données actuelle : postgres
+[09:43:03] [INFO] [SERV]   (main.c:315) Schéma courant (search_path) : sae3_delivraptor
+[09:43:03] [INFO] [CLIENT] [127.0.0.1:53678] Requete ADD
+[09:43:03] [INFO] [SERV]   (main.c:192) La commande existe deja
+[09:43:03] [INFO] [SERV]   (main.c:194) Renvoi du bordereau
+[09:43:03] [INFO] [CLIENT] [127.0.0.1:53678] BORD ALI1767998524 com144254
+[09:43:03] [INFO] [CLIENT] [127.0.0.1:53678] Requete ADD
+[09:43:03] [INFO] [SERV]   (main.c:192) La commande existe deja
+[09:43:03] [INFO] [SERV]   (main.c:194) Renvoi du bordereau
+[09:43:03] [INFO] [CLIENT] [127.0.0.1:53678] BORD ALI1767869493 com15223
+[09:43:03] [INFO] [CLIENT] [127.0.0.1:53678] Requete ADD
+[09:43:03] [INFO] [SERV]   (main.c:192) La commande existe deja
+[09:43:03] [INFO] [SERV]   (main.c:194) Renvoi du bordereau
+[09:43:03] [INFO] [CLIENT] [127.0.0.1:53678] BORD ALI1767869493 com15223
+[09:43:03] [INFO] [CLIENT] [127.0.0.1:53678] Requete ADD
+[09:43:03] [INFO] [SERV]   (main.c:192) La commande existe deja
+[09:43:03] [INFO] [SERV]   (main.c:194) Renvoi du bordereau
+[10:00:35] [INFO] [SERV]   (main.c:63) **Démarrage du service Delivraptor**
+[10:00:35] [INFO] [SERV]   (main.c:73) Socket configuré
+[10:00:35] [INFO] [SERV]   (main.c:88) Adresse ip et port configurées
+[10:00:35] [INFO] [SERV]   (main.c:93) Socket en écoute
+[10:00:37] [INFO] [SERV]   (main.c:101) Connexion accepté
+[10:00:37] [INFO] [CLIENT] [127.0.0.1:49114] Client connecté au service avec succès
+[10:00:37] [INFO] [CLIENT] [127.0.0.1:49114] Authentification réussie
+[10:00:37] [INFO] [SERV]   (main.c:131) Connexion a la BDD...
+[10:00:37] [INFO] [SERV]   (main.c:297) Connecté a la BDD
+[10:00:37] [INFO] [SERV]   (main.c:298) SET search_path...
+[10:00:37] [INFO] [SERV]   (main.c:303) SET search_path success
+[10:00:37] [INFO] [SERV]   (main.c:308) Base de données actuelle : postgres
+[10:00:37] [INFO] [SERV]   (main.c:314) Schéma courant (search_path) : sae3_delivraptor
+[10:00:37] [INFO] [CLIENT] [127.0.0.1:49114] Requete ADD
+[10:00:37] [INFO] [SERV]   (main.c:192) La commande existe deja
+[10:00:37] [INFO] [SERV]   (main.c:194) Renvoi du bordereau
+[10:00:37] [INFO] [CLIENT] [127.0.0.1:49114] BORD ALI1767998524 com144254
+[10:00:37] [INFO] [CLIENT] [127.0.0.1:49114] Requete ADD
+[10:00:37] [INFO] [SERV]   (main.c:192) La commande existe deja
+[10:00:37] [INFO] [SERV]   (main.c:194) Renvoi du bordereau
+[10:00:37] [INFO] [CLIENT] [127.0.0.1:49114] BORD ALI1767869493 com15223
+[10:00:37] [INFO] [CLIENT] [127.0.0.1:49114] Requete ADD
+[10:00:37] [INFO] [SERV]   (main.c:192) La commande existe deja
+[10:00:37] [INFO] [SERV]   (main.c:194) Renvoi du bordereau
+[10:00:37] [INFO] [CLIENT] [127.0.0.1:49114] BORD ALI1767869493 com15223
+[10:00:37] [INFO] [CLIENT] [127.0.0.1:49114] Requete ADD
+[10:00:37] [INFO] [SERV]   (main.c:192) La commande existe deja
+[10:00:37] [INFO] [SERV]   (main.c:194) Renvoi du bordereau
+[10:20:14] [INFO] [SERV]   (main.c:65) **Démarrage du service Delivraptor**
+[10:20:14] [INFO] [SERV]   (main.c:75) Socket configuré
+[10:20:14] [INFO] [SERV]   (main.c:90) Adresse ip et port configurées
+[10:20:14] [INFO] [SERV]   (main.c:95) Socket en écoute
+[10:20:18] [INFO] [SERV]   (main.c:103) Connexion accepté
+[10:20:18] [INFO] [CLIENT] [127.0.0.1:34188] Client connecté au service avec succès
+[10:20:18] [INFO] [CLIENT] [127.0.0.1:34188] Authentification réussie
+[10:20:18] [INFO] [SERV]   (main.c:133) Connexion a la BDD...
+[10:20:18] [INFO] [SERV]   (main.c:301) Connecté a la BDD
+[10:20:18] [INFO] [SERV]   (main.c:302) SET search_path...
+[10:20:18] [INFO] [SERV]   (main.c:307) SET search_path success
+[10:20:18] [INFO] [SERV]   (main.c:312) Base de données actuelle : postgres
+[10:20:18] [INFO] [SERV]   (main.c:318) Schéma courant (search_path) : sae3_delivraptor
+[10:20:18] [INFO] [CLIENT] [127.0.0.1:34188] Requete ADD
+[10:20:18] [INFO] [CLIENT] [127.0.0.1:34188] Création bordereau pour la commande 144254 alizon
+[10:20:18] [INFO] [SERV]   (main.c:210) INSERT recuperation des parametres...
+[10:20:18] [INFO] [SERV]   (main.c:214) INSERT enregistrement en BDD...
+[10:20:18] [INFO] [SERV]   (main.c:225) INSERT exécuté avec succès
+[10:20:18] [INFO] [CLIENT] [127.0.0.1:34188] BORD ALI1767864018 com144254
+[10:20:18] [INFO] [CLIENT] [127.0.0.1:34188] Requete ADD
+[10:20:18] [INFO] [CLIENT] [127.0.0.1:34188] Création bordereau pour la commande 15223 alizon
+[10:20:18] [INFO] [SERV]   (main.c:210) INSERT recuperation des parametres...
+[10:20:18] [INFO] [SERV]   (main.c:214) INSERT enregistrement en BDD...
+[10:20:18] [ERROR] [SERV]   (main.c:227) Erreur INSERT : ERROR:  duplicate key value violates unique constraint "pk_delivraptor"
+DETAIL:  Key (id_suivi)=(ALI1767864018) already exists.
+
+[10:20:18] [INFO] [CLIENT] [127.0.0.1:34188] BORD ALI1767864018 com15223
+[10:20:18] [INFO] [CLIENT] [127.0.0.1:34188] Requete ADD
+[10:20:18] [INFO] [CLIENT] [127.0.0.1:34188] Création bordereau pour la commande 15223 alizon
+[10:20:18] [INFO] [SERV]   (main.c:210) INSERT recuperation des parametres...
+[10:20:18] [INFO] [SERV]   (main.c:214) INSERT enregistrement en BDD...
+[10:20:18] [ERROR] [SERV]   (main.c:227) Erreur INSERT : ERROR:  duplicate key value violates unique constraint "pk_delivraptor"
+DETAIL:  Key (id_suivi)=(ALI1767864018) already exists.
+
+[10:20:18] [INFO] [CLIENT] [127.0.0.1:34188] BORD ALI1767864018 com15223
+[10:20:18] [INFO] [CLIENT] [127.0.0.1:34188] Requete ADD
+[10:20:18] [INFO] [CLIENT] [127.0.0.1:34188] Création bordereau pour la commande 15223 alizon
+[10:20:18] [INFO] [SERV]   (main.c:210) INSERT recuperation des parametres...
+[10:20:18] [INFO] [SERV]   (main.c:214) INSERT enregistrement en BDD...
+[10:20:18] [ERROR] [SERV]   (main.c:227) Erreur INSERT : ERROR:  duplicate key value violates unique constraint "pk_delivraptor"
+DETAIL:  Key (id_suivi)=(ALI1767864018) already exists.
+
+[10:30:51] [INFO] [SERV]   (main.c:65) **Démarrage du service Delivraptor**
+[10:30:51] [INFO] [SERV]   (main.c:75) Socket configuré
+[10:30:51] [INFO] [SERV]   (main.c:90) Adresse ip et port configurées
+[10:30:51] [INFO] [SERV]   (main.c:95) Socket en écoute
+[10:30:53] [INFO] [SERV]   (main.c:103) Connexion accepté
+[10:30:53] [INFO] [CLIENT] [127.0.0.1:38670] Client connecté au service avec succès
+[10:30:53] [INFO] [CLIENT] [127.0.0.1:38670] Authentification réussie
+[10:30:53] [INFO] [SERV]   (main.c:133) Connexion a la BDD...
+[10:30:53] [INFO] [SERV]   (main.c:301) Connecté a la BDD
+[10:30:53] [INFO] [SERV]   (main.c:302) SET search_path...
+[10:30:53] [INFO] [SERV]   (main.c:307) SET search_path success
+[10:30:53] [INFO] [SERV]   (main.c:312) Base de données actuelle : postgres
+[10:30:53] [INFO] [SERV]   (main.c:318) Schéma courant (search_path) : sae3_delivraptor
+[10:30:53] [INFO] [CLIENT] [127.0.0.1:38670] Requete ADD
+[10:30:53] [INFO] [SERV]   (main.c:196) La commande existe deja
+[10:30:53] [INFO] [SERV]   (main.c:198) Renvoi du bordereau
+[10:30:53] [INFO] [CLIENT] [127.0.0.1:38670] BORD ALI1767864018 com144254
+[10:30:53] [INFO] [CLIENT] [127.0.0.1:38670] Requete ADD
+[10:30:53] [INFO] [CLIENT] [127.0.0.1:38670] Création bordereau pour la commande 15223 alizon
+[10:30:53] [INFO] [SERV]   (main.c:210) INSERT recuperation des parametres...
+[10:30:53] [INFO] [SERV]   (main.c:214) INSERT enregistrement en BDD...
+[10:30:53] [INFO] [SERV]   (main.c:225) INSERT exécuté avec succès
+[10:30:53] [INFO] [CLIENT] [127.0.0.1:38670] BORD ALI1767879876 com15223
+[10:30:53] [INFO] [CLIENT] [127.0.0.1:38670] Requete ADD
+[10:30:53] [INFO] [SERV]   (main.c:196) La commande existe deja
+[10:30:53] [INFO] [SERV]   (main.c:198) Renvoi du bordereau
+[10:30:53] [INFO] [CLIENT] [127.0.0.1:38670] BORD ALI1767879876 com15223
+[10:30:53] [INFO] [CLIENT] [127.0.0.1:38670] Requete ADD
+[10:30:53] [INFO] [SERV]   (main.c:196) La commande existe deja
+[10:30:53] [INFO] [SERV]   (main.c:198) Renvoi du bordereau
