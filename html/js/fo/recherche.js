@@ -1,3 +1,4 @@
+//  Récupération des tris cochés
 function recupTri(){
     let tabChecked = []
     document.querySelectorAll('input[type="radio"]').forEach(radio => {
@@ -41,6 +42,22 @@ function recupTri(){
     });
 }
 
+// Récupération des filtres cochés
+function recupFiltre(){
+    let tabChecked = []
+    document.querySelectorAll('input[type="checkbox"]').forEach(box => {
+        box.addEventListener('change', () => {
+            // Si le filtre n'est pas dans la liste on l'ajoute
+            if ((!tabChecked.includes(box.vaue))) {
+                tabChecked.push(box.value)
+                console.log(tabChecked)
+            }
+            return tabChecked
+        });
+    });
+}
+
+// Récupération et modification de l'URL
 function envoiTriUrl(){
     let tab = recupTri()
     let envoi = []
@@ -92,6 +109,7 @@ function recupURL(){
     return attribut
 }
 
+// Changement de pages
 function calculNbPages(tabProd){
     //initialisation du numéro de page
     const PAGE_SIZE = 15
@@ -155,6 +173,7 @@ function changementPage(){
     }
 }
 
+// Affichage
 function afficherProduit(lignes){
     lignes.forEach(prod => {
         
@@ -214,8 +233,6 @@ function afficherProduit(lignes){
     
     });
 }
-
-
 
 async function affichageNote(note, parent ){
     // fonction qui affiche une note avec des étoiles
