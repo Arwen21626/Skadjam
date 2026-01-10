@@ -679,6 +679,9 @@ input.quantite-prod-input {
   .w-35 {
     width: calc(var(--spacing, 0.25rem) * 35);
   }
+  .w-36 {
+    width: calc(var(--spacing, 0.25rem) * 36);
+  }
   .w-37 {
     width: calc(var(--spacing, 0.25rem) * 37);
   }
@@ -1487,6 +1490,11 @@ input.quantite-prod-input {
   .md\:w-50 {
     @media (width >= 48rem) {
       width: calc(var(--spacing, 0.25rem) * 50);
+    }
+  }
+  .md\:w-74 {
+    @media (width >= 48rem) {
+      width: calc(var(--spacing, 0.25rem) * 74);
     }
   }
   .md\:w-80 {

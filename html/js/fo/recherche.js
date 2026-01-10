@@ -37,8 +37,10 @@ function recupTri(){
             else{
                 tabChecked.push(radio.value)
             }
+            //console.log(tabChecked)
             return tabChecked
         });
+        
     });
 }
 
@@ -60,6 +62,7 @@ function recupFiltre(){
 // Récupération et modification de l'URL
 function envoiTriUrl(){
     let tab = recupTri()
+    console.log(tab)
     let envoi = []
 
     if (tab.includes("croissant")){
@@ -87,26 +90,34 @@ function envoiTriUrl(){
 
 
 function ecrireURL(){
+    
     let tab = envoiTriUrl()
+    //console.log(tab)
+
+    if (tab.length === 0){ return ""}
+
     let rep ="?" + tab[0]
 
     if(tab.length > 1){
         for (let i = 1; i < tab.length; i++) {
-            const element = array[i];
             rep += "&"+tab[i]
         }
     }
-    console.log(rep)
-    
+    window.history.pushState({}, "", rep)
     return rep
 }
 
 function recupURL(){
+    let params = []
+
     var parts = window.location.search.substr(1).split("&");
     for (var i = 0; i < parts.length; i++) {
         var attribut = parts[i].split("=");
+        params.push(attribut)
+        //console.log(params)
     }
-    return attribut
+    
+    return params
 }
 
 // Changement de pages
@@ -159,6 +170,8 @@ function changementPage(){
         pagePrec.classList.add("lienPage","hover:text-rouge")
 
         parent.appendChild(pagePrec)
+
+        pagePrec.addEventListener("click", ecrireURL)
     }
 
     if (pageNumber < maxPage){
@@ -170,6 +183,8 @@ function changementPage(){
         pageSuiv.classList.add("lienPage","hover:text-rouge")
 
         parent.appendChild(pageSuiv)
+
+        pageSuiv.addEventListener("click", ecrireURL)
     }
 }
 

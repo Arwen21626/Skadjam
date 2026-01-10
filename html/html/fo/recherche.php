@@ -224,7 +224,7 @@
         
         <!--fin du catalogue-->
         <script>
-            changementPage(lignes)
+            changementPage()
             let tabTri = recupTri()
             let tabFiltre = recupFiltre()
             // EventListener pour les tris
