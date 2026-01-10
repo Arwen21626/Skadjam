@@ -36,7 +36,8 @@
 <body>
     <script>
         const tabProd = <?php echo json_encode($tabProduit);?>;
-        let lignes = calculNbPages(tabProd)[0]
+        const maxPages = (tabProd.length)/numberOfItems
+        // let lignes = calculNbPages(tabProd)[0]
     </script>
 
     <!--header-->
@@ -215,147 +216,26 @@
 
         <div id="prod" class="grid grid-cols-2 justify-items-center md:grid-cols-3">
             <script>
-                // Boucle pour afficher tous les produits
-                // afficherProduit(lignes)
+                afficherListe()
+                
             </script>
         </div>
         <!-- str_replace-->                    
         <?php $dbh = null;?>
         
         <!--fin du catalogue-->
+        <div class="flex flex-row justify-around">
+            <button id="premierePage">Premiere page</button>
+            <button id="pagePrec">Page prec</button>
+            <button id="pageSuiv">Page suiv</button>
+            <button id="dernierePage">Derniere page</button>
+        </div>
+        
+
         <script>
-            changementPage()
-            let tabTri = recupTri()
-            let tabFiltre = recupFiltre()
-            // EventListener pour les tris
-            let prixTriCroissant = document.getElementById("prixTriCroissant")
-            let prixTriDecroissant = document.getElementById("prixTriDecroissant")
-            let alphaTriAZ = document.getElementById("alphaTriAZ")
-            let alphaTriZA = document.getElementById("alphaTriZA")
-            let noteTri51 = document.getElementById("noteTri51")
-            let noteTri15 = document.getElementById("noteTri15")
-
-            // Prix
-            prixTriCroissant.addEventListener("click",function () {
-                afficherProduit(triPrixCroissant(lignes))
-            })            
-
-            prixTriDecroissant.addEventListener("click",function () {
-                afficherProduit(triPrixDecroissant(lignes))
-            })
-
-            // Ordre alphabétique
-            alphaTriAZ.addEventListener("click",function () {
-                afficherProduit(triAz(lignes))
-            })
-
-            alphaTriZA.addEventListener("click",function () {
-                afficherProduit(triZa(lignes))
-            })
-            
-            // Note
-            noteTri51.addEventListener("click",function () {
-                afficherProduit(triEtoileDecroissant(lignes))
-            })
-            
-            noteTri15.addEventListener("click", function () {
-                afficherProduit(triEtoileCroissant(lignes))
-            })
-            
-            // EventListener pour les filtres
-            
-            // Categories
-            
-            let CategorieVetement = document.getElementById("vetement")
-            let CategorieArtisanat = document.getElementById("artisanat")
-            let CategorieGoodies = document.getElementById("goodies")
-            let CategorieSoin = document.getElementById("soin")
-            let CategorieAlimentaire = document.getElementById("alimentaire")
-
-            CategorieAlimentaire.addEventListener("click",function () {
-                lignes = filtrageCategorieAlimentaire(lignes);
-                afficherProduit(lignes)
-            })
-
-            CategorieVetement.addEventListener("click",function () {
-                lignes = filtrageCategorieVetement(lignes);
-                afficherProduit(lignes)
-            })
-
-            CategorieArtisanat.addEventListener("click",function () {
-                lignes = filtrageCategorieArtisanat(lignes);
-                afficherProduit(lignes)
-            })
-
-            CategorieGoodies.addEventListener("click",function () {
-                lignes = filtrageCategorieGoodies(lignes);
-                afficherProduit(lignes)
-            })
-
-            CategorieSoin.addEventListener("click",function () {
-                lignes = filtrageCategorieSoin(lignes);
-                afficherProduit(lignes)
-            })
-            
-            // note
-            let NoteZeroE = document.getElementById("zeroE")
-            let NoteUneE = document.getElementById("uneE")
-            let NoteDeuxE = document.getElementById("deuxE")
-            let NoteTroisE = document.getElementById("troisE")
-            let NoteQuatreE = document.getElementById("quatreE")
-            let NoteCinqE = document.getElementById("cinqE")
-
-            NoteZeroE.addEventListener("click",function () {
-                filtrageNoteNonNote(lignes);
-            })
-
-            NoteUneE.addEventListener("click",function () {
-                filtrageNote1(lignes);
-            })
-
-            NoteDeuxE.addEventListener("click",function () {
-                filtrageNote2(lignes);
-            })
-
-            NoteTroisE.addEventListener("click",function () {
-                filtrageNote3(lignes);
-            })
-            
-            NoteQuatreE.addEventListener("click",function () {
-                filtrageNote4(lignes);
-            })
-
-            NoteCinqE.addEventListener("click",function () {
-                filtrageNote5(lignes);
-            })
-
-            // Tranche de prix
-            let TranchePrix1 = document.getElementById("prix1")
-            let TranchePrix2 = document.getElementById("prix2")
-            let TranchePrix3 = document.getElementById("prix3")
-            let TranchePrix4 = document.getElementById("prix4")
-            let TranchePrix5 = document.getElementById("prix5")
-            
-            TranchePrix1.addEventListener("click",function () {
-                filtrageTranchePrix1(lignes);
-            })
-
-            TranchePrix2.addEventListener("click",function () {
-                filtrageTranchePrix2(lignes);
-            })
-
-            TranchePrix3.addEventListener("click",function () {
-                filtrageTranchePrix3(lignes);
-            })
-            
-            TranchePrix4.addEventListener("click",function () {
-                filtrageTranchePrix4(lignes);
-            })
-
-            TranchePrix5.addEventListener("click",function () {
-                filtrageTranchePrix5(lignes);
-            })
-
+            ajoutEventListener()
+            // let tabTri = recupTri()
+            // let tabFiltre = recupFiltre()
         </script>
     </main>
 
