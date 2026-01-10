@@ -50,10 +50,14 @@ function recupFiltre(){
     document.querySelectorAll('input[type="checkbox"]').forEach(box => {
         box.addEventListener('change', () => {
             // Si le filtre n'est pas dans la liste on l'ajoute
-            if ((!tabChecked.includes(box.vaue))) {
+            if ((!tabChecked.includes(box.value))) {
                 tabChecked.push(box.value)
-                console.log(tabChecked)
+                
             }
+            else{
+                tabChecked.splice(tabChecked.indexOf(box.value))
+            }
+            console.log(tabChecked)
             return tabChecked
         });
     });
