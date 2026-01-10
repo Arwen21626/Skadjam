@@ -55,32 +55,32 @@
                         <summary class="cursor-pointer mt-1 mb-1">Par catégorie</summary>
                         <!-- Alimentaire -->
                         <div>
-                            <input type="checkbox" name="alimentaire" id="alimentaire">
+                            <input type="checkbox" name="alimentaire" id="alimentaire" value="aimentaire">
                             <label for="alimentaire">Alimentaire</label>
                         </div>
                         
 
                         <!-- Vetements -->
                         <div>
-                            <input type="checkbox" name="vetement" id="vetement">
+                            <input type="checkbox" name="vetement" id="vetement" value="vetement">
                             <label for="vetement">Vetements</label>
                         </div>
 
                         <!-- Artisanat -->
                         <div>
-                            <input type="checkbox" name="artisanat" id="artisanat">
+                            <input type="checkbox" name="artisanat" id="artisanat" value="artisanat">
                             <label for="artisanat">Artisanat</label>
                         </div>
 
                         <!-- Goodies -->
                         <div>
-                            <input type="checkbox" name="goodies" id="goodies">
+                            <input type="checkbox" name="goodies" id="goodies" value="goodies">
                             <label for="goodies">Goodies</label>
                         </div>
 
                         <!-- Soin -->
                         <div>
-                            <input type="checkbox" name="soin" id="soin">
+                            <input type="checkbox" name="soin" id="soin" value="soin">
                             <label for="soin">Soin</label>
                         </div>
                     </details>
@@ -92,37 +92,37 @@
                         <summary class="cursor-pointer mt-1 mb-1">Par note</summary>
                         <!-- non noté -->
                         <div>
-                            <input type="checkbox" name="zeroE" id="zeroE">
+                            <input type="checkbox" name="zeroE" id="zeroE" value="zeroE">
                             <label for="zeroE">Non noté</label>
                         </div>
 
                         <!-- 1 étoile -->
                         <div>
-                            <input type="checkbox" name="uneE" id="uneE">
+                            <input type="checkbox" name="uneE" id="uneE" value="uneE">
                             <label for="uneE">1</label>
                         </div>
 
                         <!-- 2 étoiles -->
                         <div>
-                            <input type="checkbox" name="deuxE" id="deuxE">
+                            <input type="checkbox" name="deuxE" id="deuxE" value="deuxE">
                             <label for="deuxE">2</label>
                         </div>
 
                         <!-- 3 étoiles -->
                         <div>
-                            <input type="checkbox" name="troisE" id="troisE">
+                            <input type="checkbox" name="troisE" id="troisE" value="troisE">
                             <label for="troisE">3</label>
                         </div>
 
                         <!-- 4 étoiles -->
                         <div>
-                            <input type="checkbox" name="quatreE" id="quatreE">
+                            <input type="checkbox" name="quatreE" id="quatreE" value="quatreE">
                             <label for="quatreE">4</label>
                         </div>
 
                         <!-- 5 étoiles -->
                         <div>
-                            <input type="checkbox" name="cinqE" id="cinqE">
+                            <input type="checkbox" name="cinqE" id="cinqE" value="cinqE">
                             <label for="cinqE">5</label>
                         </div>
                     </details>
@@ -133,23 +133,23 @@
                     <details>
                         <summary class="cursor-pointer mt-1 mb-1">Par tranche de prix</summary>
                         <div>
-                            <input type="checkbox" name="prix1" id="prix1">
+                            <input type="checkbox" name="prix1" id="prix1" value="prix1">
                             <label for="prix1">2,99€ - 8,39€ </label>
                         </div>
                         <div>
-                            <input type="checkbox" name="prix2" id="prix2">
+                            <input type="checkbox" name="prix2" id="prix2" value="prix2">
                             <label for="prix2">8,40€ - 13,19€ </label>
                         </div>
                         <div>
-                            <input type="checkbox" name="prix3" id="prix3">
+                            <input type="checkbox" name="prix3" id="prix3" value="prix3">
                             <label for="prix3">13,20€ - 19,19€ </label>
                         </div>
                         <div>
-                            <input type="checkbox" name="prix4" id="prix4">
+                            <input type="checkbox" name="prix4" id="prix4" value="prix4">
                             <label for="prix4">19,20€ - 31,19€ </label>
                         </div>
                         <div>
-                            <input type="checkbox" name="prix5" id="prix5">
+                            <input type="checkbox" name="prix5" id="prix5" value="prix5">
                             <label for="prix5">31,20€ - 71,99€ </label>
                         </div>
                     </details>
@@ -226,6 +226,7 @@
         <script>
             changementPage(lignes)
             let tabTri = recupTri()
+            let tabFiltre = recupFiltre()
             // EventListener pour les tris
             let prixTriCroissant = document.getElementById("prixTriCroissant")
             let prixTriDecroissant = document.getElementById("prixTriDecroissant")
