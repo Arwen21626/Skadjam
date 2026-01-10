@@ -1,57 +1,80 @@
 // CATEGORIE
 
-tableau = [false, false, false, false, false]
-function filtrageCategorieAlimentaire(tabProd){
-    tableau[1] = true;
+// Alimentaire = 1
+function filtrageCategorieAlimentaire(tabProd){ 
+    newTab = tabProd.filter(tabProd => tabProd['id_categorie'] === 1)
+    // console.log(newTab)
+    return newTab
 }
 
+// Vetement = 2
 function filtrageCategorieVetement(tabProd){
-    tableau[2] = true;
+    newTab = tabProd.filter(tabProd => tabProd['id_categorie'] === 2)
+    return newTab
 }
 
+// Artisanat = 3
 function filtrageCategorieArtisanat(tabProd){
-    tableau[3] = true;
+    newTab = tabProd.filter(tabProd => tabProd['id_categorie'] === 3)
+    return newTab
 }
 
+// Goodies = 4
 function filtrageCategorieGoodies(tabProd){
-    tableau[4] = true;
+    newTab = tabProd.filter(tabProd => tabProd['id_categorie'] === 4)
+    return newTab
 }
 
+// Soin = 5
 function filtrageCategorieSoin(tabProd){
-    tableau[5] = true;
+    newTab = tabProd.filter(tabProd => tabProd['id_categorie'] === 5)
+    return newTab
 }
 
-function filtrageCategorie(){
-    
-}
+
+// function filtrageCategorie(tab){
+//     return tab
+// }
+
 
 
 // NOTE
 
-function filtrageNote1(tabProd){
+// non noté
+function filtrageNoteNonNote(tabProd){ 
 
 }
 
-function filtrageNote2(tabProd){
+// 0 à 1.99
+function filtrageNote1(tabProd){ 
 
 }
 
-function filtrageNote3(tabProd){
+// 2 à 2.99
+function filtrageNote2(tabProd){ 
 
 }
 
-function filtrageNote4(tabProd){
+// 3 à 3.99
+function filtrageNote3(tabProd){ 
 
 }
 
-function filtrageNote5(tabProd){
+// 4 à 4.99
+function filtrageNote4(tabProd){ 
+
+}
+
+// 5
+function filtrageNote5(tabProd){ 
 
 }
 
 
 //TRANCHE DE PRIX
 
-function filtrageTranchePrix1(tabProd){ // 2.99 - 8.39
+// 2.99 - 8.39
+function filtrageTranchePrix1(tabProd){ 
 
 }
 
