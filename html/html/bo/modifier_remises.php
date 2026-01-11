@@ -9,19 +9,21 @@
     try {     
         $tabProduit = null;           
         //récupère toutes les infos des tables produits
-        foreach($dbh->query("SELECT * FROM sae3_skadjam._produit pr
+        foreach($dbh->query("SELECT p.id_produit, p.libelle_produit, p.prix_ttc, p.prix_remise, p.note_moyenne, r.pourcentage_remise 
+                                FROM sae3_skadjam._produit p
                                 INNER JOIN sae3_skadjam._vendeur v 
-                                    ON pr.id_vendeur = v.id_compte
+                                    ON p.id_vendeur = v.id_compte
                                 LEFT JOIN sae3_skadjam._reduit rd
-                                    ON rd.id_produit = pr.id_produit
+                                    ON rd.id_produit = p.id_produit
                                 LEFT JOIN sae3_skadjam._remise r
                                     ON rd.id_remise = r.id_remise
-                                WHERE v.id_compte = $idCompte AND pr.est_supprime = false
+                                WHERE v.id_compte = $idCompte AND p.est_supprime = false
                                 ORDER BY libelle_produit ASC;"
                             , PDO::FETCH_ASSOC) as $row){
             $tabProduit[] = $row;
-        } 
+        } print_r($tabProduit);
     }
+    
 
     catch (PDOException $e) {
         print "Erreur !: " . $e->getMessage() . "<br/>";
@@ -30,25 +32,63 @@
 
     //traitement de la modification du pourcentage d'une remise
     if (isset($_POST['pourcentage']) && is_array($_POST['pourcentage'])) {
-        //mise à jour de la base de données
+        // savoir si le produit à déjà une remise ou pas
+
+        // pour la supression d'une remise
+        $deleteRemise = $dbh->prepare("
+            DELETE FROM sae3_skadjam._remise
+            WHERE id_remise = ?");
+        $deleteReduit = $dbh->prepare("
+            DELETE FROM sae3_skadjam._reduit
+            WHERE id_remise = ? AND id_produit = ?");
+
+        // pour créer une nouvelle remise
+        $insertRemise = $dbh->prepare("
+            WITH id_remise AS (
+                INSERT INTO sae3_skadjam._remise(pourcentage_remise, date_debut_remise) 
+                VALUES (?, '?') RETURNING id_remise
+            )
+            INSERT INTO sae3_skadjam._reduit(id_produit, id_remise) 
+                SELECT ?, id_remise FROM id_remise");
+            
+
+        // pour la modification d'une remise
         $updateRemise = $dbh->prepare("
             UPDATE sae3_skadjam._remise
             SET pourcentage_remise = ?
             WHERE id_remise = ?");
         
+        //mise à jour de la base de données
         foreach ($_POST['pourcentage'] as $idProduit => $pourcentage) {
+            $pourcentage = ($pourcentage/100);
+            $existe = false;  //si le produit a déjà une remise
+            echo 'salut';
             foreach($dbh->query("SELECT * FROM sae3_skadjam._reduit WHERE id_produit = $idProduit", PDO::FETCH_ASSOC) as $row){
-                $pourcentage = ($pourcentage/100);
-                if (verifPourcentage($pourcentage)) {
-                    echo $pourcentage.' '.$idProduit.' '.$row['id_remise'];
-
+                $existe = true;
+                echo 'salutpasnormal';
+                // modification d'une remise
+                if (verifPourcentage($pourcentage) && $pourcentage != 0) {
                     $updateRemise->execute([$pourcentage, $row['id_remise']]);
-
+                }
+                // supression d'une remise
+                elseif(verifPourcentage($pourcentage) && $pourcentage == 0){
+                    $deleteReduit->execute([$row['id_remise'], $idProduit]);
+                    $deleteRemise->execute([$pourcentage]);
                 }
                 else{
                     echo "le format du pourcentage n'est pas correcte";
                 }
             }
+            echo 'salutcontinu';
+            // insertion d'une remise
+            if (!$existe && $pourcentage != 0){ // $pourcentage !== 0 ne fonctionne pas 
+                $date = date('d/m/Y'); 
+                echo 'salutok';
+                echo $pourcentage.' '.$date.' '.$idProduit;
+                $insertRemise->execute([$pourcentage, $date, $idProduit]);
+                echo 'salutokfin';
+            }
+            echo 'salut';
         }
         
         header("Location: ./details_remises.php");
@@ -120,7 +160,7 @@
 
                                         <td class="text-center py-3 flex items-center">          
                                             <input type="number"
-                                                <?php //création d'un tableau associatif pour récupérer tous les id produits associés à leur stock?>
+                                                <?php //création d'un tableau associatif pour récupérer tous les id produits associés à leur remise?>
                                                    name="pourcentage[<?php echo $valeurs['id_produit']; ?>]"
                                                    value="<?php echo htmlentities($valeurs['pourcentage_remise'] === null)?0:($valeurs['pourcentage_remise']*100); ?>"
                                                    min="0" max="100" class="border-2 border-black rounded-lg w-30 h-10 p-2" required
