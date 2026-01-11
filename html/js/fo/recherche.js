@@ -158,6 +158,16 @@ function ajoutEventListener(){
     tranchePrix5.addEventListener("click",function () {
         filtrageTranchePrix5(tabProd);
     })
+
+// EventListeners pour l'animation sidebar filtre et tri
+    // Récupératiion des elements
+    let sidebar = document.getElementsByTagName("aside")[0]
+
+    // Fonction
+    sidebar.addEventListener("click", function(){
+        sidebar.classList.toggle('active')
+        console.log("Coucou")
+    })
 }
 
 function firstPage(){

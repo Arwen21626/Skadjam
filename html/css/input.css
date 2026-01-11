@@ -82,6 +82,9 @@ input.quantite-prod-input {
     -moz-appearance: textfield;
 }
 
+/* Animation */
+
+
 @import "tailwindcss";
 @tailwind utilities;
 @reference "tailwindcss";

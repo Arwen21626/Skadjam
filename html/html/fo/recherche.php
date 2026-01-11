@@ -46,7 +46,7 @@
 
     <main class="md:min-h-[800px] min-h-[600px] mt-10">
         <!-- Barre de recherche -->
-        <aside class="sidebar w-60 p-5 bg-beige">
+        <aside class="sidebar scroller bg-beige p-4 -translate-x-full active:translate-0">
             <!-- Filtres -->
             <section>
                 <h3>Filtres</h3>
@@ -217,10 +217,9 @@
         <div id="prod" class="grid grid-cols-2 justify-items-center md:grid-cols-3">
             <script>
                 afficherListe()
-                
             </script>
         </div>
-        <!-- str_replace-->                    
+
         <?php $dbh = null;?>
         
         <!--fin du catalogue-->
@@ -234,8 +233,6 @@
 
         <script>
             ajoutEventListener()
-            // let tabTri = recupTri()
-            // let tabFiltre = recupFiltre()
         </script>
     </main>
 
