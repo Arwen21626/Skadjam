@@ -35,11 +35,11 @@ p, a, input, label, button, details{
         font-size: 25px;
     }
 
-    h4 {
+    h4, summary {
         font-size: 20px;
     }
 
-    p, a, input, label, button {
+    p, a, input, label, button, details {
         font-size: 16px
     }
 }
@@ -58,11 +58,11 @@ p, a, input, label, button, details{
         font-size: 30px;
     }
 
-    h4 {
+    h4, summary{
         font-size: 25px;
     }
 
-    p, a, input, label, button {
+    p, a, input, label, button, details {
         font-size: 20px;
     }
 }
