@@ -1,4 +1,4 @@
-const numberOfItems = 5 //NB produits à afficher
+const numberOfItems = 15 //NB produits à afficher
 let first = 0
 let actualPage
 
@@ -207,13 +207,13 @@ function pageSuivante(){
 
 // Affichage
 function afficherListe(){
-    let tab = ""
-  for(let i = first; i < first + numberOfItems;i++){
-    if(i<tabProd.length){
-      tab = afficherProduit(i)
+let parent = document.getElementById("prod")
+    parent.innerHTML = ""
+    for(let i = first; i < first + numberOfItems;i++){
+        if(i<tabProd.length){
+        afficherProduit(i)
+        }
     }
-  }
-//   numPageInfo();
 }
 
 function afficherProduit(indice){
