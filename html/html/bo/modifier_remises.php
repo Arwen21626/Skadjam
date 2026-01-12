@@ -32,7 +32,6 @@
 
     //traitement de la modification du pourcentage d'une remise
     if (isset($_POST['pourcentage']) && is_array($_POST['pourcentage'])) {
-        // savoir si le produit à déjà une remise ou pas
 
         // pour la supression d'une remise
         $deleteRemise = $dbh->prepare("
