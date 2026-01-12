@@ -10,9 +10,10 @@ cmd_t str_to_cmd(const char *cmd){
 }
 
 cmd_t get_commande(const char *buffer){
-    char commande[5];
+    char commande[16];
     cmd_t cmd;
-    sscanf(buffer, "%s", commande);
+    /* Use width limit to avoid overflow */
+    sscanf(buffer, "%15s", commande);
     cmd = str_to_cmd(commande);
-    return cmd; 
+    return cmd;
 }

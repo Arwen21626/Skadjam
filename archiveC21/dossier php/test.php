@@ -22,7 +22,7 @@ if ($message === "CONNEXION SUCCESS"){
     fwrite($conn, "ADD 15223 alizon |1 rue branly| 22300 parveau korentin |5 rue bidule| 29130");
     $message = fread($conn, $size);
     echo "$message\n";
-        $line = explode(" ", $message);
+    $line = explode(" ", $message);
     if ($line[0] === "BORD"){
         $id_suivie = $line[1];
         fwrite($conn, "ETA " . $id_suivie);
@@ -38,7 +38,7 @@ if ($message === "CONNEXION SUCCESS"){
     fwrite($conn, "ADD a1215m4454 alizon |1 rue branly| 22300 parveau korentin |5 rue bidule| 29130");
     $message = fread($conn, $size);
     echo "$message\n";
-        $line = explode(" ", $message);
+    $line = explode(" ", $message);
     if ($line[0] === "BORD"){
         $id_suivie = $line[1];
         fwrite($conn, "ETA " . $id_suivie);
@@ -55,5 +55,10 @@ if ($message === "CONNEXION SUCCESS"){
 
     
 }
+if (!is_resource($conn) || feof($conn)) {
+    echo "Connexion fermée par le serveur\n";
+    exit;
+}
+
 
 ?>

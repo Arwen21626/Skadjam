@@ -4,6 +4,7 @@
 #include <stdio.h>
 
 typedef enum {
+    INCONNU = 0,
     ETAT1,
     ETAT2,
     ETAT3,
@@ -15,9 +16,10 @@ typedef enum {
     ETAT9
 } etat_t;
 
-etat_t int_to_etat(const char *buffer);
-char msg_etat(etat_t etat);
+void msg_etat(int fd,
+              etat_t etat,
+              const char *num_suivi);
 
-
+etat_t next_etat(etat_t etat);
 
 #endif

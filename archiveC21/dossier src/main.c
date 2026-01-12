@@ -14,6 +14,7 @@
 #include <postgresql/libpq-fe.h>
 #include "log/logger.h"
 #include "commande/cmd.h"
+#include "etat/etat.h"
 
 #define TAILLEB 1024
 
@@ -61,6 +62,7 @@ int main() {
     char message[1024];
     log_init();
     cmd_t cmd;
+    char *line;
 
     
     LOG_SERV(LOG_INFO ,"**Démarrage du service Delivraptor**");
@@ -108,25 +110,37 @@ int main() {
 
     inet_ntop(AF_INET, &conn_addr.sin_addr, cIp, sizeof(cIp));
     cPort = ntohs(conn_addr.sin_port);
-    size = read(cnx, buffer, TAILLEB);
+    size = read(cnx, buffer, TAILLEB-1);
+    if (size <= 0) {
+        LOG_SERV(LOG_ERROR, "Erreur lecture initiale client : %s", strerror(errno));
+        close(cnx);
+        exit(EXIT_FAILURE);
+    }
+    buffer[size] = '\0';
     LOG_CLIENT(LOG_INFO, cIp, cPort, "Client connecté au service avec succès");
     
-    //format commande CONN user pwd
-    sscanf(buffer, "%s %s %s", commande, user, mdp);
+    //format commande CONN user pwd (use width limits)
+    sscanf(buffer, "%19s %127s %127s", commande, user, mdp);
     int connect = connexion(mdp, user);
     if ( connect == 0){
         LOG_CLIENT(LOG_INFO, cIp, cPort, "Authentification réussie");
         snprintf(message, sizeof(message), "CONNEXION SUCCESS");
-        send(cnx, message, strlen(message), 0);
+        if (send(cnx, message, strlen(message), 0) <= 0){
+            LOG_SERV(LOG_WARN, "client déconnecté");
+        }
     }else{
         if (connect == 2){
             LOG_CLIENT(LOG_ERROR, cIp, cPort, "Authentification échoué : Identifiants incorrect");
             snprintf(message, sizeof(message), "CONNEXION DENIED %s %s", user, mdp);
-            send(cnx, message, strlen(message), 0);
+            if (send(cnx, message, strlen(message), 0) <= 0){
+                LOG_SERV(LOG_WARN, "client déconnecté");
+            }
         }else{
             LOG_CLIENT(LOG_ERROR, cIp, cPort, "Authentification échoué : %s", strerror(errno));
             snprintf(message, sizeof(message), "ERRER SERVER");
-            send(cnx, message, strlen(message), 0);
+            if (send(cnx, message, strlen(message), 0) <= 0){
+                LOG_SERV(LOG_WARN, "client déconnecté");
+            }
         }
         exit(EXIT_FAILURE);
     }
@@ -137,36 +151,42 @@ int main() {
     printf("ACCEPT = %d\n",ret);
     while (1==1){
         size = read(cnx, buffer, TAILLEB-1);
-        if (size == 0){
+        if (size <= 0){
             LOG_CLIENT(LOG_INFO, cIp, cPort, "Client déconnecté");
-            return EXIT_SUCCESS;
+            break;
         }
         LOG_SERV(LOG_DEBUG, "Taille lecture %d", size);
         buffer[size] = '\0';
         LOG_SERV(LOG_DEBUG, "Buffer value : %s", buffer);
-        cmd = get_commande(buffer);
-        
-        horo = getHoro();
-        LOG_CLIENT(LOG_INFO, cIp, cPort, "Requete %s", commande);
 
-
-        switch (cmd)
-        {
-        case CMD_ADD:
-            bordereaux bord;
-            etape1(cnx, buffer, &bord, horo);
-            break;
-        case CMD_ETA:
-            getEtat(cnx, buffer);
-            break;
-        default:
-            LOG_CLIENT(LOG_WARN, cIp, cPort, "Commande non reconnu : %s", commande);
-            snprintf(message, sizeof(message), "CMD ERR NOT_EXIST %s", commande);
-            cmd = CMD_UNKNOWN;
-            send(cnx, message, strlen(message), 0);
-            break;
+        line = strtok(buffer, "\n");
+        while (line){
+            cmd = get_commande(line);
+            
+            horo = getHoro();
+            LOG_CLIENT(LOG_INFO, cIp, cPort, "Requete %s", commande);
+    
+    
+            switch (cmd) {
+            case CMD_ADD:
+                bordereaux bord;
+                etape1(cnx, line, &bord, horo);
+                break;
+            case CMD_ETA:
+                getEtat(cnx, line);
+                break;
+            default:
+                LOG_CLIENT(LOG_WARN, cIp, cPort, "Commande non reconnu : %s", commande);
+                snprintf(message, sizeof(message), "CMD ERR NOT_EXIST %s", commande);
+                cmd = CMD_UNKNOWN;
+                if (send(cnx, message, strlen(message), 0) <= 0){
+                    LOG_SERV(LOG_WARN, "client déconnecté");
+                }
+                break;
+            }
+            line = strtok(NULL,"\n");
+            
         }
-        buffer[0] = '\0';
 
     }
     log_close();
@@ -180,10 +200,20 @@ void etape1(int cnx, char buffer[TAILLEB], bordereaux *bord, time_t horo){
     char err[8] = "BORD ERR";
     PGresult *res;
     const char *params[2];
-    char temp[5];
+    char temp[16];
 
-    //recuperation des information de la requete
-    sscanf(buffer, "%s %s %s |%s| %d %s %s |%s| %d", temp, bord->numCommande, bord->exp.entreprise, bord->exp.adresse, &bord->exp.codePostal, bord->dest.prenom, bord->dest.nom, bord->dest.adresse, &bord->dest.codePostal);
+    // récupération des informations de la requête
+    // use %[ˆ|] to read fields that are wrapped between |...| and width limits to avoid overflow
+    sscanf(buffer, "%15s %254s %254s |%254[^|]| %d %254s %254s |%254[^|]| %d",
+        temp,
+        bord->numCommande,
+        bord->exp.entreprise,
+        bord->exp.adresse,
+        &bord->exp.codePostal,
+        bord->dest.prenom,
+        bord->dest.nom,
+        bord->dest.adresse,
+        &bord->dest.codePostal);
 
     LOG_CLIENT(LOG_INFO, cIp, cPort, "Informaions récupérées avec succès");
     
@@ -201,7 +231,9 @@ void etape1(int cnx, char buffer[TAILLEB], bordereaux *bord, time_t horo){
     if (PQresultStatus(res) != PGRES_TUPLES_OK) {
         LOG_SERV(LOG_ERROR, "Erreur SELECT: %s\n", PQresultErrorMessage(res));
         snprintf(message, sizeof(message), "%s NOT_FOUND", err);
-        send(cnx, message, strlen(message), 0);
+        if (send(cnx, message, strlen(message), 0) <= 0){
+            LOG_SERV(LOG_WARN, "client déconnecté");
+        }
         PQclear(res);
         return;
     }
@@ -210,6 +242,7 @@ void etape1(int cnx, char buffer[TAILLEB], bordereaux *bord, time_t horo){
     if (nrows>0){
         LOG_SERV(LOG_INFO, "La commande existe deja");
         strncpy(bord->numSuivi, PQgetvalue(res,0,0), sizeof(bord->numSuivi)-1);
+        bord->numSuivi[sizeof(bord->numSuivi)-1] = '\0';
         LOG_SERV(LOG_INFO, "Renvoi du bordereau");
     }else{
         LOG_CLIENT(LOG_INFO, cIp, cPort, "Création bordereau pour la commande %s %s", bord->numCommande, bord->exp.entreprise);
@@ -221,20 +254,22 @@ void etape1(int cnx, char buffer[TAILLEB], bordereaux *bord, time_t horo){
         snprintf(message, sizeof(message), "%s%ld",bord->numSuivi, strtol(bord->numCommande,NULL,10)+horo);
         strcpy(bord->numSuivi, message);
     
-        //enregistrement en bdd
+    //enregistrement en bdd
         LOG_SERV(LOG_INFO, "INSERT recuperation des parametres...");
         params[0] = bord->numSuivi;
         params[1] = bord->numCommande;
-    
-        LOG_SERV(LOG_INFO, "INSERT enregistrement en BDD...");
-        res = PQexecParams(conn,
-                            "INSERT INTO _delivraptor (id_suivi, id_commande) values ($1,$2)",
-                            2,
-                            NULL,
-                            params,
-                            NULL,
-                            NULL,
-                            0);
+    // clear previous SELECT result before reusing 'res'
+    PQclear(res);
+
+    LOG_SERV(LOG_INFO, "INSERT enregistrement en BDD...");
+    res = PQexecParams(conn,
+                "INSERT INTO _delivraptor (id_suivi, id_commande) values ($1,$2)",
+                2,
+                NULL,
+                params,
+                NULL,
+                NULL,
+                0);
     
         if (PQresultStatus(res) == PGRES_COMMAND_OK) {
             LOG_SERV(LOG_INFO, "INSERT exécuté avec succès");
@@ -243,11 +278,15 @@ void etape1(int cnx, char buffer[TAILLEB], bordereaux *bord, time_t horo){
         }
     }
 
+    // clear the PGresult from either SELECT or INSERT
     PQclear(res);
     
     //envoi du numéro de suivi
     snprintf(message, sizeof(message), "BORD %s com%s",bord->numSuivi, bord->numCommande);
-    send(cnx, message, strlen(message), 0);
+    if (send(cnx, message, strlen(message), 0) <= 0){
+        LOG_SERV(LOG_WARN, "client déconnecté");
+        return;
+    }
 
     //ecriture de log
     LOG_CLIENT(LOG_INFO, cIp, cPort, "%s",message);
@@ -311,7 +350,7 @@ int connecxionBd(){
     if (PQstatus(conn) != CONNECTION_OK){
         LOG_SERV(LOG_ERROR, "Erreur connexion BDD : %s", PQerrorMessage(conn));
         PQfinish(conn);
-        exit(EXIT_FAILURE);
+        return EXIT_FAILURE;
     }
     LOG_SERV(LOG_INFO, "Connecté a la BDD");
     LOG_SERV(LOG_INFO, "SET search_path...");
@@ -340,14 +379,14 @@ int connecxionBd(){
 // Etat livraison : 
 // ETA ALI1245214522
 void getEtat(int cnx, char buffer[TAILLEB]){
-    char temp[5];
-    char id_suivi[14];
-    char etat[3];
+    char temp[16];
+    char id_suivi[256];
+    char etat[16];
     int  nrows;
     char message[1024];
-    char err[8] = "ETA ERR"; 
 
-    sscanf(buffer, "%s %s", temp, id_suivi);
+    /* Use width limits to avoid overflowing id_suivi */
+    sscanf(buffer, "%15s %255s", temp, id_suivi);
     LOG_CLIENT(LOG_INFO, cIp, cPort, "numéro de suivie récupéré");
 
     PGresult *res;
@@ -368,15 +407,13 @@ void getEtat(int cnx, char buffer[TAILLEB]){
         etat[sizeof(etat) - 1] = '\0';
         LOG_SERV(LOG_DEBUG, "Etat commande char : %s", etat);
         LOG_SERV(LOG_DEBUG, "Etat commande int : %d", (int)strtol(etat, NULL, 10));
-        snprintf(message, sizeof(message), "ETA %s eta%d", id_suivi, (int)strtol(etat, NULL, 10));
-        LOG_SERV(LOG_DEBUG, "Message envoyé : %s", message);
-        send(cnx, message,strlen(message), 0);
     }else{
         LOG_CLIENT(LOG_INFO, cIp, cPort, "Id_suivi %s n'existe pas", id_suivi);
-        snprintf(message, sizeof(message), "%s NOT_FOUND %s",err, id_suivi);
-        send(cnx, message, strlen(message), 0);
-
+        strcpy(etat, "0");
     }
+    LOG_SERV(LOG_DEBUG, "Envoi msg etat");
+    msg_etat(cnx, atoi(etat), id_suivi);
+    LOG_SERV(LOG_DEBUG, "Envoi msg etat FIN");
     PQclear(res);
 }
 

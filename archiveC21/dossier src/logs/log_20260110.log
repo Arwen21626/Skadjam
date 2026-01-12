@@ -66,3 +66,585 @@
 [20:56:26] [INFO]    [CLIENT] (main.c:150) [127.0.0.1:60664] Requete CONN
 [20:56:26] [WARN]    [CLIENT] (main.c:163) [127.0.0.1:60664] Commande non reconnu : CONN
 [20:56:26] [INFO]    [CLIENT] (main.c:141) [127.0.0.1:60664] Client déconnecté
+[22:48:02] [INFO]    [SERV]   (./main.c:67) **Démarrage du service Delivraptor**
+[22:48:02] [INFO]    [SERV]   (./main.c:77) Socket configuré
+[22:48:02] [INFO]    [SERV]   (./main.c:92) Adresse ip et port configurées
+[22:48:02] [INFO]    [SERV]   (./main.c:97) Socket en écoute
+[22:48:05] [INFO]    [SERV]   (./main.c:105) Connexion accepté
+[22:48:05] [INFO]    [CLIENT] (./main.c:113) [127.0.0.1:46602] Client connecté au service avec succès
+[22:48:05] [INFO]    [CLIENT] (./main.c:119) [127.0.0.1:46602] Authentification réussie
+[22:48:05] [INFO]    [SERV]   (./main.c:135) Connexion a la BDD...
+[22:48:05] [INFO]    [SERV]   (./main.c:317) Connecté a la BDD
+[22:48:05] [INFO]    [SERV]   (./main.c:318) SET search_path...
+[22:48:05] [INFO]    [SERV]   (./main.c:323) SET search_path success
+[22:48:05] [INFO]    [SERV]   (./main.c:328) Base de données actuelle : postgres
+[22:48:05] [INFO]    [SERV]   (./main.c:334) Schéma courant (search_path) : sae3_delivraptor
+[22:48:05] [DEBUG]   [SERV]   (./main.c:145) Taille lecture 73
+[22:48:05] [DEBUG]   [SERV]   (./main.c:147) Buffer value : ADD 144254 alizon |1 rue branly| 22300 roussel mewen |3 rue machin| 22450
+[22:48:05] [INFO]    [CLIENT] (./main.c:151) [127.0.0.1:46602] Requete CONN
+[22:48:05] [INFO]    [CLIENT] (./main.c:189) [127.0.0.1:46602] Informaions récupérées avec succès
+[22:48:05] [INFO]    [SERV]   (./main.c:212) La commande existe deja
+[22:48:05] [INFO]    [SERV]   (./main.c:214) Renvoi du bordereau
+[22:48:05] [INFO]    [CLIENT] (./main.c:254) [127.0.0.1:46602] BOR ALI1767864018 com144254
+[22:48:05] [DEBUG]   [SERV]   (./main.c:145) Taille lecture 75
+[22:48:05] [DEBUG]   [SERV]   (./main.c:147) Buffer value : ADD 15223 alizon |1 rue branly| 22300 parveau korentin |5 rue bidule| 29130
+[22:48:05] [INFO]    [CLIENT] (./main.c:151) [127.0.0.1:46602] Requete CONN
+[22:48:05] [INFO]    [CLIENT] (./main.c:189) [127.0.0.1:46602] Informaions récupérées avec succès
+[22:48:05] [INFO]    [SERV]   (./main.c:212) La commande existe deja
+[22:48:05] [INFO]    [SERV]   (./main.c:214) Renvoi du bordereau
+[22:48:05] [INFO]    [CLIENT] (./main.c:254) [127.0.0.1:46602] BOR ALI1767879876 com15223
+[22:48:05] [DEBUG]   [SERV]   (./main.c:145) Taille lecture 17
+[22:48:05] [DEBUG]   [SERV]   (./main.c:147) Buffer value : ETA ALI1245369547
+[22:48:05] [INFO]    [CLIENT] (./main.c:151) [127.0.0.1:46602] Requete CONN
+[22:48:05] [INFO]    [CLIENT] (./main.c:351) [127.0.0.1:46602] numéro de suivie récupéré
+[22:48:05] [INFO]    [CLIENT] (./main.c:372) [127.0.0.1:46602] Id_suivi ALI1245369547 n'existe pas
+[22:48:05] [DEBUG]   [SERV]   (./main.c:145) Taille lecture 80
+[22:48:05] [DEBUG]   [SERV]   (./main.c:147) Buffer value : ADD a1215m4454 alizon |1 rue branly| 22300 parveau korentin |5 rue bidule| 29130
+[22:48:05] [INFO]    [CLIENT] (./main.c:151) [127.0.0.1:46602] Requete CONN
+[22:48:05] [INFO]    [CLIENT] (./main.c:189) [127.0.0.1:46602] Informaions récupérées avec succès
+[22:48:05] [INFO]    [SERV]   (./main.c:212) La commande existe deja
+[22:48:05] [INFO]    [SERV]   (./main.c:214) Renvoi du bordereau
+[22:48:05] [INFO]    [CLIENT] (./main.c:254) [127.0.0.1:46602] BOR ALI1767963048 coma1215m4454
+[22:48:05] [DEBUG]   [SERV]   (./main.c:145) Taille lecture 18
+[22:48:05] [DEBUG]   [SERV]   (./main.c:147) Buffer value : ETAT ALI1245369547
+[22:48:05] [INFO]    [CLIENT] (./main.c:151) [127.0.0.1:46602] Requete CONN
+[22:48:05] [WARN]    [CLIENT] (./main.c:164) [127.0.0.1:46602] Commande non reconnu : CONN
+[22:48:05] [INFO]    [CLIENT] (./main.c:142) [127.0.0.1:46602] Client déconnecté
+[22:54:42] [INFO]    [SERV]   (./main.c:67) **Démarrage du service Delivraptor**
+[22:54:42] [INFO]    [SERV]   (./main.c:77) Socket configuré
+[22:54:42] [INFO]    [SERV]   (./main.c:92) Adresse ip et port configurées
+[22:54:42] [INFO]    [SERV]   (./main.c:97) Socket en écoute
+[22:54:45] [INFO]    [SERV]   (./main.c:105) Connexion accepté
+[22:54:45] [INFO]    [CLIENT] (./main.c:113) [127.0.0.1:54926] Client connecté au service avec succès
+[22:54:45] [INFO]    [CLIENT] (./main.c:119) [127.0.0.1:54926] Authentification réussie
+[22:54:45] [INFO]    [SERV]   (./main.c:135) Connexion a la BDD...
+[22:54:45] [INFO]    [SERV]   (./main.c:317) Connecté a la BDD
+[22:54:45] [INFO]    [SERV]   (./main.c:318) SET search_path...
+[22:54:45] [INFO]    [SERV]   (./main.c:323) SET search_path success
+[22:54:45] [INFO]    [SERV]   (./main.c:328) Base de données actuelle : postgres
+[22:54:45] [INFO]    [SERV]   (./main.c:334) Schéma courant (search_path) : sae3_delivraptor
+[22:54:45] [DEBUG]   [SERV]   (./main.c:145) Taille lecture 73
+[22:54:45] [DEBUG]   [SERV]   (./main.c:147) Buffer value : ADD 144254 alizon |1 rue branly| 22300 roussel mewen |3 rue machin| 22450
+[22:54:45] [INFO]    [CLIENT] (./main.c:151) [127.0.0.1:54926] Requete CONN
+[22:54:45] [INFO]    [CLIENT] (./main.c:189) [127.0.0.1:54926] Informaions récupérées avec succès
+[22:54:45] [INFO]    [SERV]   (./main.c:212) La commande existe deja
+[22:54:45] [INFO]    [SERV]   (./main.c:214) Renvoi du bordereau
+[22:54:45] [INFO]    [CLIENT] (./main.c:254) [127.0.0.1:54926] BOR ALI1767864018 com144254
+[22:54:45] [DEBUG]   [SERV]   (./main.c:145) Taille lecture 75
+[22:54:45] [DEBUG]   [SERV]   (./main.c:147) Buffer value : ADD 15223 alizon |1 rue branly| 22300 parveau korentin |5 rue bidule| 29130
+[22:54:45] [INFO]    [CLIENT] (./main.c:151) [127.0.0.1:54926] Requete CONN
+[22:54:45] [INFO]    [CLIENT] (./main.c:189) [127.0.0.1:54926] Informaions récupérées avec succès
+[22:54:45] [INFO]    [SERV]   (./main.c:212) La commande existe deja
+[22:54:45] [INFO]    [SERV]   (./main.c:214) Renvoi du bordereau
+[22:54:45] [INFO]    [CLIENT] (./main.c:254) [127.0.0.1:54926] BOR ALI1767879876 com15223
+[22:54:45] [DEBUG]   [SERV]   (./main.c:145) Taille lecture 17
+[22:54:45] [DEBUG]   [SERV]   (./main.c:147) Buffer value : ETA ALI1245369547
+[22:54:45] [INFO]    [CLIENT] (./main.c:151) [127.0.0.1:54926] Requete CONN
+[22:54:45] [INFO]    [CLIENT] (./main.c:351) [127.0.0.1:54926] numéro de suivie récupéré
+[22:54:45] [INFO]    [CLIENT] (./main.c:372) [127.0.0.1:54926] Id_suivi ALI1245369547 n'existe pas
+[22:54:45] [DEBUG]   [SERV]   (./etat/etat.c:31)  >> Message etat inconnu : (null)
+[22:54:45] [DEBUG]   [SERV]   (./etat/etat.c:41) ETAT (null) message : ETA ERR INCO ALI1245369547
+[22:58:47] [INFO]    [SERV]   (./main.c:67) **Démarrage du service Delivraptor**
+[22:58:47] [INFO]    [SERV]   (./main.c:77) Socket configuré
+[22:58:47] [INFO]    [SERV]   (./main.c:92) Adresse ip et port configurées
+[22:58:47] [INFO]    [SERV]   (./main.c:97) Socket en écoute
+[22:58:49] [INFO]    [SERV]   (./main.c:105) Connexion accepté
+[22:58:49] [INFO]    [CLIENT] (./main.c:113) [127.0.0.1:36770] Client connecté au service avec succès
+[22:58:49] [INFO]    [CLIENT] (./main.c:119) [127.0.0.1:36770] Authentification réussie
+[22:58:49] [INFO]    [SERV]   (./main.c:135) Connexion a la BDD...
+[22:58:49] [INFO]    [SERV]   (./main.c:317) Connecté a la BDD
+[22:58:49] [INFO]    [SERV]   (./main.c:318) SET search_path...
+[22:58:49] [INFO]    [SERV]   (./main.c:323) SET search_path success
+[22:58:49] [INFO]    [SERV]   (./main.c:328) Base de données actuelle : postgres
+[22:58:49] [INFO]    [SERV]   (./main.c:334) Schéma courant (search_path) : sae3_delivraptor
+[22:58:49] [DEBUG]   [SERV]   (./main.c:145) Taille lecture 73
+[22:58:49] [DEBUG]   [SERV]   (./main.c:147) Buffer value : ADD 144254 alizon |1 rue branly| 22300 roussel mewen |3 rue machin| 22450
+[22:58:49] [INFO]    [CLIENT] (./main.c:151) [127.0.0.1:36770] Requete CONN
+[22:58:49] [INFO]    [CLIENT] (./main.c:189) [127.0.0.1:36770] Informaions récupérées avec succès
+[22:58:49] [INFO]    [SERV]   (./main.c:212) La commande existe deja
+[22:58:49] [INFO]    [SERV]   (./main.c:214) Renvoi du bordereau
+[22:58:49] [INFO]    [CLIENT] (./main.c:254) [127.0.0.1:36770] BOR ALI1767864018 com144254
+[22:58:49] [DEBUG]   [SERV]   (./main.c:145) Taille lecture 17
+[22:58:49] [DEBUG]   [SERV]   (./main.c:147) Buffer value : ETA ALI1767864018
+[22:58:49] [INFO]    [CLIENT] (./main.c:151) [127.0.0.1:36770] Requete CONN
+[22:58:49] [INFO]    [CLIENT] (./main.c:351) [127.0.0.1:36770] numéro de suivie récupéré
+[22:58:49] [INFO]    [SERV]   (./main.c:366) Récuperation de l'etat
+[22:58:49] [DEBUG]   [SERV]   (./main.c:369) Etat commande char : 1
+[22:58:49] [DEBUG]   [SERV]   (./main.c:370) Etat commande int : 1
+[23:00:30] [INFO]    [SERV]   (./main.c:67) **Démarrage du service Delivraptor**
+[23:00:30] [INFO]    [SERV]   (./main.c:77) Socket configuré
+[23:00:30] [INFO]    [SERV]   (./main.c:92) Adresse ip et port configurées
+[23:00:30] [INFO]    [SERV]   (./main.c:97) Socket en écoute
+[23:00:33] [INFO]    [SERV]   (./main.c:105) Connexion accepté
+[23:00:33] [INFO]    [CLIENT] (./main.c:113) [127.0.0.1:45056] Client connecté au service avec succès
+[23:00:33] [INFO]    [CLIENT] (./main.c:119) [127.0.0.1:45056] Authentification réussie
+[23:00:33] [INFO]    [SERV]   (./main.c:135) Connexion a la BDD...
+[23:00:33] [INFO]    [SERV]   (./main.c:317) Connecté a la BDD
+[23:00:33] [INFO]    [SERV]   (./main.c:318) SET search_path...
+[23:00:33] [INFO]    [SERV]   (./main.c:323) SET search_path success
+[23:00:33] [INFO]    [SERV]   (./main.c:328) Base de données actuelle : postgres
+[23:00:33] [INFO]    [SERV]   (./main.c:334) Schéma courant (search_path) : sae3_delivraptor
+[23:00:33] [DEBUG]   [SERV]   (./main.c:145) Taille lecture 73
+[23:00:33] [DEBUG]   [SERV]   (./main.c:147) Buffer value : ADD 144254 alizon |1 rue branly| 22300 roussel mewen |3 rue machin| 22450
+[23:00:33] [INFO]    [CLIENT] (./main.c:151) [127.0.0.1:45056] Requete CONN
+[23:00:33] [INFO]    [CLIENT] (./main.c:189) [127.0.0.1:45056] Informaions récupérées avec succès
+[23:00:33] [INFO]    [SERV]   (./main.c:212) La commande existe deja
+[23:00:33] [INFO]    [SERV]   (./main.c:214) Renvoi du bordereau
+[23:00:33] [INFO]    [CLIENT] (./main.c:254) [127.0.0.1:45056] BORD ALI1767864018 com144254
+[23:00:33] [DEBUG]   [SERV]   (./main.c:145) Taille lecture 17
+[23:00:33] [DEBUG]   [SERV]   (./main.c:147) Buffer value : ETA ALI1767864018
+[23:00:33] [INFO]    [CLIENT] (./main.c:151) [127.0.0.1:45056] Requete CONN
+[23:00:33] [INFO]    [CLIENT] (./main.c:351) [127.0.0.1:45056] numéro de suivie récupéré
+[23:00:33] [INFO]    [SERV]   (./main.c:366) Récuperation de l'etat
+[23:00:33] [DEBUG]   [SERV]   (./main.c:369) Etat commande char : 1
+[23:00:33] [DEBUG]   [SERV]   (./main.c:370) Etat commande int : 1
+[23:04:42] [INFO]    [SERV]   (./main.c:67) **Démarrage du service Delivraptor**
+[23:04:42] [INFO]    [SERV]   (./main.c:77) Socket configuré
+[23:04:42] [INFO]    [SERV]   (./main.c:92) Adresse ip et port configurées
+[23:04:42] [INFO]    [SERV]   (./main.c:97) Socket en écoute
+[23:04:44] [INFO]    [SERV]   (./main.c:105) Connexion accepté
+[23:04:44] [INFO]    [CLIENT] (./main.c:113) [127.0.0.1:57310] Client connecté au service avec succès
+[23:04:44] [INFO]    [CLIENT] (./main.c:119) [127.0.0.1:57310] Authentification réussie
+[23:04:44] [INFO]    [SERV]   (./main.c:135) Connexion a la BDD...
+[23:04:44] [INFO]    [SERV]   (./main.c:317) Connecté a la BDD
+[23:04:44] [INFO]    [SERV]   (./main.c:318) SET search_path...
+[23:04:44] [INFO]    [SERV]   (./main.c:323) SET search_path success
+[23:04:44] [INFO]    [SERV]   (./main.c:328) Base de données actuelle : postgres
+[23:04:44] [INFO]    [SERV]   (./main.c:334) Schéma courant (search_path) : sae3_delivraptor
+[23:04:44] [DEBUG]   [SERV]   (./main.c:145) Taille lecture 73
+[23:04:44] [DEBUG]   [SERV]   (./main.c:147) Buffer value : ADD 144254 alizon |1 rue branly| 22300 roussel mewen |3 rue machin| 22450
+[23:04:44] [INFO]    [CLIENT] (./main.c:151) [127.0.0.1:57310] Requete CONN
+[23:04:44] [INFO]    [CLIENT] (./main.c:189) [127.0.0.1:57310] Informaions récupérées avec succès
+[23:04:44] [INFO]    [SERV]   (./main.c:212) La commande existe deja
+[23:04:44] [INFO]    [SERV]   (./main.c:214) Renvoi du bordereau
+[23:04:44] [INFO]    [CLIENT] (./main.c:254) [127.0.0.1:57310] BORD ALI1767864018 com144254
+[23:04:44] [DEBUG]   [SERV]   (./main.c:145) Taille lecture 17
+[23:04:44] [DEBUG]   [SERV]   (./main.c:147) Buffer value : ETA ALI1767864018
+[23:04:44] [INFO]    [CLIENT] (./main.c:151) [127.0.0.1:57310] Requete CONN
+[23:04:44] [INFO]    [CLIENT] (./main.c:351) [127.0.0.1:57310] numéro de suivie récupéré
+[23:04:44] [INFO]    [SERV]   (./main.c:366) Récuperation de l'etat
+[23:04:44] [DEBUG]   [SERV]   (./main.c:369) Etat commande char : 1
+[23:04:44] [DEBUG]   [SERV]   (./main.c:370) Etat commande int : 1
+[23:05:37] [INFO]    [SERV]   (./main.c:67) **Démarrage du service Delivraptor**
+[23:05:37] [INFO]    [SERV]   (./main.c:77) Socket configuré
+[23:05:37] [INFO]    [SERV]   (./main.c:92) Adresse ip et port configurées
+[23:05:37] [INFO]    [SERV]   (./main.c:97) Socket en écoute
+[23:05:42] [INFO]    [SERV]   (./main.c:105) Connexion accepté
+[23:05:42] [INFO]    [CLIENT] (./main.c:113) [127.0.0.1:52364] Client connecté au service avec succès
+[23:05:42] [INFO]    [CLIENT] (./main.c:119) [127.0.0.1:52364] Authentification réussie
+[23:05:42] [INFO]    [SERV]   (./main.c:135) Connexion a la BDD...
+[23:05:42] [INFO]    [SERV]   (./main.c:317) Connecté a la BDD
+[23:05:42] [INFO]    [SERV]   (./main.c:318) SET search_path...
+[23:05:42] [INFO]    [SERV]   (./main.c:323) SET search_path success
+[23:05:42] [INFO]    [SERV]   (./main.c:328) Base de données actuelle : postgres
+[23:05:42] [INFO]    [SERV]   (./main.c:334) Schéma courant (search_path) : sae3_delivraptor
+[23:05:42] [DEBUG]   [SERV]   (./main.c:145) Taille lecture 73
+[23:05:42] [DEBUG]   [SERV]   (./main.c:147) Buffer value : ADD 144254 alizon |1 rue branly| 22300 roussel mewen |3 rue machin| 22450
+[23:05:42] [INFO]    [CLIENT] (./main.c:151) [127.0.0.1:52364] Requete CONN
+[23:05:42] [INFO]    [CLIENT] (./main.c:189) [127.0.0.1:52364] Informaions récupérées avec succès
+[23:05:42] [INFO]    [SERV]   (./main.c:212) La commande existe deja
+[23:05:42] [INFO]    [SERV]   (./main.c:214) Renvoi du bordereau
+[23:05:42] [INFO]    [CLIENT] (./main.c:254) [127.0.0.1:52364] BORD ALI1767864018 com144254
+[23:05:42] [DEBUG]   [SERV]   (./main.c:145) Taille lecture 17
+[23:05:42] [DEBUG]   [SERV]   (./main.c:147) Buffer value : ETA ALI1767864018
+[23:05:42] [INFO]    [CLIENT] (./main.c:151) [127.0.0.1:52364] Requete CONN
+[23:05:42] [INFO]    [CLIENT] (./main.c:351) [127.0.0.1:52364] numéro de suivie récupéré
+[23:05:42] [INFO]    [SERV]   (./main.c:366) Récuperation de l'etat
+[23:05:42] [DEBUG]   [SERV]   (./main.c:369) Etat commande char : 1
+[23:05:42] [DEBUG]   [SERV]   (./main.c:370) Etat commande int : 1
+[23:26:00] [INFO]    [SERV]   (./main.c:68) **Démarrage du service Delivraptor**
+[23:26:00] [INFO]    [SERV]   (./main.c:78) Socket configuré
+[23:26:00] [INFO]    [SERV]   (./main.c:93) Adresse ip et port configurées
+[23:26:00] [INFO]    [SERV]   (./main.c:98) Socket en écoute
+[23:26:02] [INFO]    [SERV]   (./main.c:106) Connexion accepté
+[23:26:02] [INFO]    [CLIENT] (./main.c:114) [127.0.0.1:53680] Client connecté au service avec succès
+[23:26:02] [INFO]    [CLIENT] (./main.c:120) [127.0.0.1:53680] Authentification réussie
+[23:26:02] [INFO]    [SERV]   (./main.c:142) Connexion a la BDD...
+[23:26:02] [INFO]    [SERV]   (./main.c:335) Connecté a la BDD
+[23:26:02] [INFO]    [SERV]   (./main.c:336) SET search_path...
+[23:26:02] [INFO]    [SERV]   (./main.c:341) SET search_path success
+[23:26:02] [INFO]    [SERV]   (./main.c:346) Base de données actuelle : postgres
+[23:26:02] [INFO]    [SERV]   (./main.c:352) Schéma courant (search_path) : sae3_delivraptor
+[23:26:02] [DEBUG]   [SERV]   (./main.c:152) Taille lecture 73
+[23:26:02] [DEBUG]   [SERV]   (./main.c:154) Buffer value : ADD 144254 alizon |1 rue branly| 22300 roussel mewen |3 rue machin| 22450
+[23:26:02] [INFO]    [CLIENT] (./main.c:161) [127.0.0.1:53680] Requete CONN
+[23:26:02] [INFO]    [CLIENT] (./main.c:202) [127.0.0.1:53680] Informaions récupérées avec succès
+[23:26:02] [INFO]    [SERV]   (./main.c:227) La commande existe deja
+[23:26:02] [INFO]    [SERV]   (./main.c:229) Renvoi du bordereau
+[23:26:02] [INFO]    [CLIENT] (./main.c:272) [127.0.0.1:53680] BORD ALI1767864018 com144254
+[23:26:02] [DEBUG]   [SERV]   (./main.c:152) Taille lecture 17
+[23:26:02] [DEBUG]   [SERV]   (./main.c:154) Buffer value : ETA ALI1767864018
+[23:26:02] [INFO]    [CLIENT] (./main.c:161) [127.0.0.1:53680] Requete CONN
+[23:26:02] [INFO]    [CLIENT] (./main.c:369) [127.0.0.1:53680] numéro de suivie récupéré
+[23:26:02] [INFO]    [SERV]   (./main.c:384) Récuperation de l'etat
+[23:26:02] [DEBUG]   [SERV]   (./main.c:387) Etat commande char : 1
+[23:26:02] [DEBUG]   [SERV]   (./main.c:388) Etat commande int : 1
+[23:29:33] [INFO]    [SERV]   (./main.c:68) **Démarrage du service Delivraptor**
+[23:29:33] [INFO]    [SERV]   (./main.c:78) Socket configuré
+[23:29:33] [INFO]    [SERV]   (./main.c:93) Adresse ip et port configurées
+[23:29:33] [INFO]    [SERV]   (./main.c:98) Socket en écoute
+[23:29:35] [INFO]    [SERV]   (./main.c:106) Connexion accepté
+[23:29:35] [INFO]    [CLIENT] (./main.c:114) [127.0.0.1:37268] Client connecté au service avec succès
+[23:29:35] [INFO]    [CLIENT] (./main.c:120) [127.0.0.1:37268] Authentification réussie
+[23:29:35] [INFO]    [SERV]   (./main.c:142) Connexion a la BDD...
+[23:29:35] [INFO]    [SERV]   (./main.c:335) Connecté a la BDD
+[23:29:35] [INFO]    [SERV]   (./main.c:336) SET search_path...
+[23:29:35] [INFO]    [SERV]   (./main.c:341) SET search_path success
+[23:29:35] [INFO]    [SERV]   (./main.c:346) Base de données actuelle : postgres
+[23:29:35] [INFO]    [SERV]   (./main.c:352) Schéma courant (search_path) : sae3_delivraptor
+[23:29:35] [DEBUG]   [SERV]   (./main.c:152) Taille lecture 73
+[23:29:35] [DEBUG]   [SERV]   (./main.c:154) Buffer value : ADD 144254 alizon |1 rue branly| 22300 roussel mewen |3 rue machin| 22450
+[23:29:35] [INFO]    [CLIENT] (./main.c:161) [127.0.0.1:37268] Requete CONN
+[23:29:35] [INFO]    [CLIENT] (./main.c:202) [127.0.0.1:37268] Informaions récupérées avec succès
+[23:29:35] [INFO]    [SERV]   (./main.c:227) La commande existe deja
+[23:29:35] [INFO]    [SERV]   (./main.c:229) Renvoi du bordereau
+[23:29:35] [INFO]    [CLIENT] (./main.c:272) [127.0.0.1:37268] BORD ALI1767864018 com144254
+[23:29:35] [DEBUG]   [SERV]   (./main.c:152) Taille lecture 17
+[23:29:35] [DEBUG]   [SERV]   (./main.c:154) Buffer value : ETA ALI1767864018
+[23:29:35] [INFO]    [CLIENT] (./main.c:161) [127.0.0.1:37268] Requete CONN
+[23:29:35] [INFO]    [CLIENT] (./main.c:369) [127.0.0.1:37268] numéro de suivie récupéré
+[23:29:35] [INFO]    [SERV]   (./main.c:384) Récuperation de l'etat
+[23:29:35] [DEBUG]   [SERV]   (./main.c:387) Etat commande char : 1
+[23:29:35] [DEBUG]   [SERV]   (./main.c:388) Etat commande int : 1
+[23:29:35] [DEBUG]   [SERV]   (./main.c:393) Envoi msg etat
+[23:29:35] [DEBUG]   [SERV]   (./etat/etat.c:28)  >> arrive fn msg_etat
+[23:30:56] [INFO]    [SERV]   (./main.c:68) **Démarrage du service Delivraptor**
+[23:30:56] [INFO]    [SERV]   (./main.c:78) Socket configuré
+[23:30:56] [INFO]    [SERV]   (./main.c:93) Adresse ip et port configurées
+[23:30:56] [INFO]    [SERV]   (./main.c:98) Socket en écoute
+[23:30:58] [INFO]    [SERV]   (./main.c:106) Connexion accepté
+[23:30:58] [INFO]    [CLIENT] (./main.c:114) [127.0.0.1:54292] Client connecté au service avec succès
+[23:30:58] [INFO]    [CLIENT] (./main.c:120) [127.0.0.1:54292] Authentification réussie
+[23:30:58] [INFO]    [SERV]   (./main.c:142) Connexion a la BDD...
+[23:30:59] [INFO]    [SERV]   (./main.c:335) Connecté a la BDD
+[23:30:59] [INFO]    [SERV]   (./main.c:336) SET search_path...
+[23:30:59] [INFO]    [SERV]   (./main.c:341) SET search_path success
+[23:30:59] [INFO]    [SERV]   (./main.c:346) Base de données actuelle : postgres
+[23:30:59] [INFO]    [SERV]   (./main.c:352) Schéma courant (search_path) : sae3_delivraptor
+[23:30:59] [DEBUG]   [SERV]   (./main.c:152) Taille lecture 73
+[23:30:59] [DEBUG]   [SERV]   (./main.c:154) Buffer value : ADD 144254 alizon |1 rue branly| 22300 roussel mewen |3 rue machin| 22450
+[23:30:59] [INFO]    [CLIENT] (./main.c:161) [127.0.0.1:54292] Requete CONN
+[23:30:59] [INFO]    [CLIENT] (./main.c:202) [127.0.0.1:54292] Informaions récupérées avec succès
+[23:30:59] [INFO]    [SERV]   (./main.c:227) La commande existe deja
+[23:30:59] [INFO]    [SERV]   (./main.c:229) Renvoi du bordereau
+[23:30:59] [INFO]    [CLIENT] (./main.c:272) [127.0.0.1:54292] BORD ALI1767864018 com144254
+[23:30:59] [DEBUG]   [SERV]   (./main.c:152) Taille lecture 17
+[23:30:59] [DEBUG]   [SERV]   (./main.c:154) Buffer value : ETA ALI1767864018
+[23:30:59] [INFO]    [CLIENT] (./main.c:161) [127.0.0.1:54292] Requete CONN
+[23:30:59] [INFO]    [CLIENT] (./main.c:369) [127.0.0.1:54292] numéro de suivie récupéré
+[23:30:59] [INFO]    [SERV]   (./main.c:384) Récuperation de l'etat
+[23:30:59] [DEBUG]   [SERV]   (./main.c:387) Etat commande char : 1
+[23:30:59] [DEBUG]   [SERV]   (./main.c:388) Etat commande int : 1
+[23:30:59] [DEBUG]   [SERV]   (./main.c:393) Envoi msg etat
+[23:30:59] [DEBUG]   [SERV]   (./etat/etat.c:28)  >> arrive fn msg_etat : 1
+[23:34:19] [INFO]    [SERV]   (./main.c:68) **Démarrage du service Delivraptor**
+[23:34:19] [INFO]    [SERV]   (./main.c:78) Socket configuré
+[23:34:19] [INFO]    [SERV]   (./main.c:93) Adresse ip et port configurées
+[23:34:19] [INFO]    [SERV]   (./main.c:98) Socket en écoute
+[23:34:21] [INFO]    [SERV]   (./main.c:106) Connexion accepté
+[23:34:21] [INFO]    [CLIENT] (./main.c:114) [127.0.0.1:43766] Client connecté au service avec succès
+[23:34:21] [INFO]    [CLIENT] (./main.c:120) [127.0.0.1:43766] Authentification réussie
+[23:34:21] [INFO]    [SERV]   (./main.c:142) Connexion a la BDD...
+[23:34:21] [INFO]    [SERV]   (./main.c:335) Connecté a la BDD
+[23:34:21] [INFO]    [SERV]   (./main.c:336) SET search_path...
+[23:34:21] [INFO]    [SERV]   (./main.c:341) SET search_path success
+[23:34:21] [INFO]    [SERV]   (./main.c:346) Base de données actuelle : postgres
+[23:34:21] [INFO]    [SERV]   (./main.c:352) Schéma courant (search_path) : sae3_delivraptor
+[23:34:21] [DEBUG]   [SERV]   (./main.c:152) Taille lecture 73
+[23:34:21] [DEBUG]   [SERV]   (./main.c:154) Buffer value : ADD 144254 alizon |1 rue branly| 22300 roussel mewen |3 rue machin| 22450
+[23:34:21] [INFO]    [CLIENT] (./main.c:161) [127.0.0.1:43766] Requete CONN
+[23:34:21] [INFO]    [CLIENT] (./main.c:202) [127.0.0.1:43766] Informaions récupérées avec succès
+[23:34:21] [INFO]    [SERV]   (./main.c:227) La commande existe deja
+[23:34:21] [INFO]    [SERV]   (./main.c:229) Renvoi du bordereau
+[23:34:21] [INFO]    [CLIENT] (./main.c:272) [127.0.0.1:43766] BORD ALI1767864018 com144254
+[23:34:21] [DEBUG]   [SERV]   (./main.c:152) Taille lecture 17
+[23:34:21] [DEBUG]   [SERV]   (./main.c:154) Buffer value : ETA ALI1767864018
+[23:34:21] [INFO]    [CLIENT] (./main.c:161) [127.0.0.1:43766] Requete CONN
+[23:34:21] [INFO]    [CLIENT] (./main.c:369) [127.0.0.1:43766] numéro de suivie récupéré
+[23:34:21] [INFO]    [SERV]   (./main.c:384) Récuperation de l'etat
+[23:34:21] [DEBUG]   [SERV]   (./main.c:387) Etat commande char : 1
+[23:34:21] [DEBUG]   [SERV]   (./main.c:388) Etat commande int : 1
+[23:34:21] [DEBUG]   [SERV]   (./main.c:393) Envoi msg etat
+[23:34:21] [DEBUG]   [SERV]   (./etat/etat.c:28)  >> arrive fn msg_etat : 1
+[23:34:21] [DEBUG]   [SERV]   (./etat/etat.c:32)  >> arrive fn msg_etat : 1
+[23:34:21] [DEBUG]   [SERV]   (./etat/etat.c:35)  >> arrive fn msg_etat : 1
+[23:35:54] [INFO]    [SERV]   (./main.c:68) **Démarrage du service Delivraptor**
+[23:35:54] [INFO]    [SERV]   (./main.c:78) Socket configuré
+[23:35:54] [INFO]    [SERV]   (./main.c:93) Adresse ip et port configurées
+[23:35:54] [INFO]    [SERV]   (./main.c:98) Socket en écoute
+[23:35:56] [INFO]    [SERV]   (./main.c:106) Connexion accepté
+[23:35:56] [INFO]    [CLIENT] (./main.c:114) [127.0.0.1:34330] Client connecté au service avec succès
+[23:35:56] [INFO]    [CLIENT] (./main.c:120) [127.0.0.1:34330] Authentification réussie
+[23:35:56] [INFO]    [SERV]   (./main.c:142) Connexion a la BDD...
+[23:35:56] [INFO]    [SERV]   (./main.c:335) Connecté a la BDD
+[23:35:56] [INFO]    [SERV]   (./main.c:336) SET search_path...
+[23:35:56] [INFO]    [SERV]   (./main.c:341) SET search_path success
+[23:35:56] [INFO]    [SERV]   (./main.c:346) Base de données actuelle : postgres
+[23:35:56] [INFO]    [SERV]   (./main.c:352) Schéma courant (search_path) : sae3_delivraptor
+[23:35:56] [DEBUG]   [SERV]   (./main.c:152) Taille lecture 73
+[23:35:56] [DEBUG]   [SERV]   (./main.c:154) Buffer value : ADD 144254 alizon |1 rue branly| 22300 roussel mewen |3 rue machin| 22450
+[23:35:56] [INFO]    [CLIENT] (./main.c:161) [127.0.0.1:34330] Requete CONN
+[23:35:56] [INFO]    [CLIENT] (./main.c:202) [127.0.0.1:34330] Informaions récupérées avec succès
+[23:35:56] [INFO]    [SERV]   (./main.c:227) La commande existe deja
+[23:35:56] [INFO]    [SERV]   (./main.c:229) Renvoi du bordereau
+[23:35:56] [INFO]    [CLIENT] (./main.c:272) [127.0.0.1:34330] BORD ALI1767864018 com144254
+[23:35:56] [DEBUG]   [SERV]   (./main.c:152) Taille lecture 17
+[23:35:56] [DEBUG]   [SERV]   (./main.c:154) Buffer value : ETA ALI1767864018
+[23:35:56] [INFO]    [CLIENT] (./main.c:161) [127.0.0.1:34330] Requete CONN
+[23:35:56] [INFO]    [CLIENT] (./main.c:369) [127.0.0.1:34330] numéro de suivie récupéré
+[23:35:56] [INFO]    [SERV]   (./main.c:384) Récuperation de l'etat
+[23:35:56] [DEBUG]   [SERV]   (./main.c:387) Etat commande char : 1
+[23:35:56] [DEBUG]   [SERV]   (./main.c:388) Etat commande int : 1
+[23:35:56] [DEBUG]   [SERV]   (./main.c:393) Envoi msg etat
+[23:35:56] [DEBUG]   [SERV]   (./etat/etat.c:28)  >> arrive fn msg_etat av test: 1
+[23:35:56] [DEBUG]   [SERV]   (./etat/etat.c:32)  >> CONNU test: 1
+[23:35:56] [DEBUG]   [SERV]   (./etat/etat.c:34)  >> arrive fn msg_etat ap test: 1
+[23:35:56] [DEBUG]   [SERV]   (./etat/etat.c:37)  >> arrive fn msg_etat av vrai: 1
+[23:41:38] [INFO]    [SERV]   (./main.c:68) **Démarrage du service Delivraptor**
+[23:41:38] [INFO]    [SERV]   (./main.c:78) Socket configuré
+[23:41:38] [INFO]    [SERV]   (./main.c:93) Adresse ip et port configurées
+[23:41:38] [INFO]    [SERV]   (./main.c:98) Socket en écoute
+[23:41:41] [INFO]    [SERV]   (./main.c:106) Connexion accepté
+[23:41:41] [INFO]    [CLIENT] (./main.c:114) [127.0.0.1:50294] Client connecté au service avec succès
+[23:41:41] [INFO]    [CLIENT] (./main.c:120) [127.0.0.1:50294] Authentification réussie
+[23:41:41] [INFO]    [SERV]   (./main.c:142) Connexion a la BDD...
+[23:41:41] [INFO]    [SERV]   (./main.c:335) Connecté a la BDD
+[23:41:41] [INFO]    [SERV]   (./main.c:336) SET search_path...
+[23:41:41] [INFO]    [SERV]   (./main.c:341) SET search_path success
+[23:41:41] [INFO]    [SERV]   (./main.c:346) Base de données actuelle : postgres
+[23:41:41] [INFO]    [SERV]   (./main.c:352) Schéma courant (search_path) : sae3_delivraptor
+[23:41:41] [DEBUG]   [SERV]   (./main.c:152) Taille lecture 73
+[23:41:41] [DEBUG]   [SERV]   (./main.c:154) Buffer value : ADD 144254 alizon |1 rue branly| 22300 roussel mewen |3 rue machin| 22450
+[23:41:41] [INFO]    [CLIENT] (./main.c:161) [127.0.0.1:50294] Requete CONN
+[23:41:41] [INFO]    [CLIENT] (./main.c:202) [127.0.0.1:50294] Informaions récupérées avec succès
+[23:41:41] [INFO]    [SERV]   (./main.c:227) La commande existe deja
+[23:41:41] [INFO]    [SERV]   (./main.c:229) Renvoi du bordereau
+[23:41:41] [INFO]    [CLIENT] (./main.c:272) [127.0.0.1:50294] BORD ALI1767864018 com144254
+[23:41:41] [DEBUG]   [SERV]   (./main.c:152) Taille lecture 17
+[23:41:41] [DEBUG]   [SERV]   (./main.c:154) Buffer value : ETA ALI1767864018
+[23:41:41] [INFO]    [CLIENT] (./main.c:161) [127.0.0.1:50294] Requete CONN
+[23:41:41] [INFO]    [CLIENT] (./main.c:369) [127.0.0.1:50294] numéro de suivie récupéré
+[23:41:41] [INFO]    [SERV]   (./main.c:384) Récuperation de l'etat
+[23:41:41] [DEBUG]   [SERV]   (./main.c:387) Etat commande char : 1
+[23:41:41] [DEBUG]   [SERV]   (./main.c:388) Etat commande int : 1
+[23:41:41] [DEBUG]   [SERV]   (./main.c:393) Envoi msg etat
+[23:41:41] [DEBUG]   [SERV]   (./etat/etat.c:28)  >> arrive fn msg_etat av test: 1
+[23:41:41] [DEBUG]   [SERV]   (./etat/etat.c:32)  >> CONNU test: 1
+[23:41:41] [DEBUG]   [SERV]   (./etat/etat.c:34)  >> arrive fn msg_etat ap test: 1
+[23:41:41] [DEBUG]   [SERV]   (./etat/etat.c:37)  >> arrive fn msg_etat av vrai: 1
+[23:41:41] [DEBUG]   [SERV]   (./etat/etat.c:46)  >> Message etat connu : 1
+[23:41:41] [DEBUG]   [SERV]   (./etat/etat.c:51) ETAT 1 message : ETA TRTC ALI1767864018
+[23:41:41] [DEBUG]   [SERV]   (./etat/etat.c:28)  >> arrive fn msg_etat av test: 1
+[23:41:41] [DEBUG]   [SERV]   (./etat/etat.c:32)  >> CONNU test: 1
+[23:41:41] [DEBUG]   [SERV]   (./etat/etat.c:34)  >> arrive fn msg_etat ap test: 1
+[23:41:41] [DEBUG]   [SERV]   (./etat/etat.c:37)  >> arrive fn msg_etat av vrai: 1
+[23:41:41] [DEBUG]   [SERV]   (./etat/etat.c:46)  >> Message etat connu : 1
+[23:41:41] [DEBUG]   [SERV]   (./etat/etat.c:51) ETAT 1 message : ETA TRTC ALI1767879876
+[23:41:41] [DEBUG]   [SERV]   (./etat/etat.c:28)  >> arrive fn msg_etat av test: 0
+[23:41:41] [DEBUG]   [SERV]   (./etat/etat.c:30)  >> INCONNU test: 0
+[23:41:41] [DEBUG]   [SERV]   (./etat/etat.c:34)  >> arrive fn msg_etat ap test: 0
+[23:41:41] [DEBUG]   [SERV]   (./etat/etat.c:37)  >> arrive fn msg_etat av vrai: 0
+[23:41:41] [DEBUG]   [SERV]   (./etat/etat.c:41)  >> Message etat inconnu : 0
+[23:41:41] [DEBUG]   [SERV]   (./etat/etat.c:51) ETAT 0 message : ETA ERR INCO ALI1245369547
+[23:41:41] [DEBUG]   [SERV]   (./etat/etat.c:28)  >> arrive fn msg_etat av test: 1
+[23:41:41] [DEBUG]   [SERV]   (./etat/etat.c:32)  >> CONNU test: 1
+[23:41:41] [DEBUG]   [SERV]   (./etat/etat.c:34)  >> arrive fn msg_etat ap test: 1
+[23:41:41] [DEBUG]   [SERV]   (./etat/etat.c:37)  >> arrive fn msg_etat av vrai: 1
+[23:41:41] [DEBUG]   [SERV]   (./etat/etat.c:46)  >> Message etat connu : 1
+[23:41:41] [DEBUG]   [SERV]   (./etat/etat.c:51) ETAT 1 message : ETA TRTC ALI1767963048
+[23:42:06] [INFO]    [SERV]   (./main.c:68) **Démarrage du service Delivraptor**
+[23:42:06] [INFO]    [SERV]   (./main.c:78) Socket configuré
+[23:42:06] [INFO]    [SERV]   (./main.c:93) Adresse ip et port configurées
+[23:42:06] [INFO]    [SERV]   (./main.c:98) Socket en écoute
+[23:42:08] [INFO]    [SERV]   (./main.c:106) Connexion accepté
+[23:42:08] [INFO]    [CLIENT] (./main.c:114) [127.0.0.1:39130] Client connecté au service avec succès
+[23:42:08] [INFO]    [CLIENT] (./main.c:120) [127.0.0.1:39130] Authentification réussie
+[23:42:08] [INFO]    [SERV]   (./main.c:142) Connexion a la BDD...
+[23:42:08] [INFO]    [SERV]   (./main.c:335) Connecté a la BDD
+[23:42:08] [INFO]    [SERV]   (./main.c:336) SET search_path...
+[23:42:08] [INFO]    [SERV]   (./main.c:341) SET search_path success
+[23:42:08] [INFO]    [SERV]   (./main.c:346) Base de données actuelle : postgres
+[23:42:08] [INFO]    [SERV]   (./main.c:352) Schéma courant (search_path) : sae3_delivraptor
+[23:42:08] [DEBUG]   [SERV]   (./main.c:152) Taille lecture 73
+[23:42:08] [DEBUG]   [SERV]   (./main.c:154) Buffer value : ADD 144254 alizon |1 rue branly| 22300 roussel mewen |3 rue machin| 22450
+[23:42:08] [INFO]    [CLIENT] (./main.c:161) [127.0.0.1:39130] Requete CONN
+[23:42:08] [INFO]    [CLIENT] (./main.c:202) [127.0.0.1:39130] Informaions récupérées avec succès
+[23:42:08] [INFO]    [SERV]   (./main.c:227) La commande existe deja
+[23:42:08] [INFO]    [SERV]   (./main.c:229) Renvoi du bordereau
+[23:42:08] [INFO]    [CLIENT] (./main.c:272) [127.0.0.1:39130] BORD ALI1767864018 com144254
+[23:42:08] [DEBUG]   [SERV]   (./main.c:152) Taille lecture 17
+[23:42:08] [DEBUG]   [SERV]   (./main.c:154) Buffer value : ETA ALI1767864018
+[23:42:08] [INFO]    [CLIENT] (./main.c:161) [127.0.0.1:39130] Requete CONN
+[23:42:08] [INFO]    [CLIENT] (./main.c:369) [127.0.0.1:39130] numéro de suivie récupéré
+[23:42:08] [INFO]    [SERV]   (./main.c:384) Récuperation de l'etat
+[23:42:08] [DEBUG]   [SERV]   (./main.c:387) Etat commande char : 1
+[23:42:08] [DEBUG]   [SERV]   (./main.c:388) Etat commande int : 1
+[23:42:08] [DEBUG]   [SERV]   (./main.c:393) Envoi msg etat
+[23:42:08] [DEBUG]   [SERV]   (./etat/etat.c:28)  >> arrive fn msg_etat av test: 1
+[23:42:08] [DEBUG]   [SERV]   (./etat/etat.c:32)  >> CONNU test: 1
+[23:42:08] [DEBUG]   [SERV]   (./etat/etat.c:34)  >> arrive fn msg_etat ap test: 1
+[23:42:08] [DEBUG]   [SERV]   (./etat/etat.c:37)  >> arrive fn msg_etat av vrai: 1
+[23:42:08] [DEBUG]   [SERV]   (./etat/etat.c:46)  >> Message etat connu : 1
+[23:42:08] [DEBUG]   [SERV]   (./etat/etat.c:51) ETAT 1 message : ETA TRTC ALI1767864018
+[23:42:18] [INFO]    [SERV]   (./main.c:68) **Démarrage du service Delivraptor**
+[23:42:18] [INFO]    [SERV]   (./main.c:78) Socket configuré
+[23:42:18] [INFO]    [SERV]   (./main.c:93) Adresse ip et port configurées
+[23:42:18] [INFO]    [SERV]   (./main.c:98) Socket en écoute
+[23:42:19] [INFO]    [SERV]   (./main.c:106) Connexion accepté
+[23:42:19] [INFO]    [CLIENT] (./main.c:114) [127.0.0.1:50056] Client connecté au service avec succès
+[23:42:19] [INFO]    [CLIENT] (./main.c:120) [127.0.0.1:50056] Authentification réussie
+[23:42:19] [INFO]    [SERV]   (./main.c:142) Connexion a la BDD...
+[23:42:19] [INFO]    [SERV]   (./main.c:335) Connecté a la BDD
+[23:42:19] [INFO]    [SERV]   (./main.c:336) SET search_path...
+[23:42:19] [INFO]    [SERV]   (./main.c:341) SET search_path success
+[23:42:19] [INFO]    [SERV]   (./main.c:346) Base de données actuelle : postgres
+[23:42:19] [INFO]    [SERV]   (./main.c:352) Schéma courant (search_path) : sae3_delivraptor
+[23:42:19] [DEBUG]   [SERV]   (./main.c:152) Taille lecture 73
+[23:42:19] [DEBUG]   [SERV]   (./main.c:154) Buffer value : ADD 144254 alizon |1 rue branly| 22300 roussel mewen |3 rue machin| 22450
+[23:42:19] [INFO]    [CLIENT] (./main.c:161) [127.0.0.1:50056] Requete CONN
+[23:42:19] [INFO]    [CLIENT] (./main.c:202) [127.0.0.1:50056] Informaions récupérées avec succès
+[23:42:19] [INFO]    [SERV]   (./main.c:227) La commande existe deja
+[23:42:19] [INFO]    [SERV]   (./main.c:229) Renvoi du bordereau
+[23:42:19] [INFO]    [CLIENT] (./main.c:272) [127.0.0.1:50056] BORD ALI1767864018 com144254
+[23:42:19] [DEBUG]   [SERV]   (./main.c:152) Taille lecture 17
+[23:42:19] [DEBUG]   [SERV]   (./main.c:154) Buffer value : ETA ALI1767864018
+[23:42:19] [INFO]    [CLIENT] (./main.c:161) [127.0.0.1:50056] Requete CONN
+[23:42:19] [INFO]    [CLIENT] (./main.c:369) [127.0.0.1:50056] numéro de suivie récupéré
+[23:42:19] [INFO]    [SERV]   (./main.c:384) Récuperation de l'etat
+[23:42:19] [DEBUG]   [SERV]   (./main.c:387) Etat commande char : 1
+[23:42:19] [DEBUG]   [SERV]   (./main.c:388) Etat commande int : 1
+[23:42:19] [DEBUG]   [SERV]   (./main.c:393) Envoi msg etat
+[23:42:19] [DEBUG]   [SERV]   (./etat/etat.c:28)  >> arrive fn msg_etat av test: 1
+[23:42:19] [DEBUG]   [SERV]   (./etat/etat.c:32)  >> CONNU test: 1
+[23:42:19] [DEBUG]   [SERV]   (./etat/etat.c:34)  >> arrive fn msg_etat ap test: 1
+[23:42:19] [DEBUG]   [SERV]   (./etat/etat.c:37)  >> arrive fn msg_etat av vrai: 1
+[23:42:19] [DEBUG]   [SERV]   (./etat/etat.c:46)  >> Message etat connu : 1
+[23:42:19] [DEBUG]   [SERV]   (./etat/etat.c:51) ETAT 1 message : ETA TRTC ALI1767864018
+[23:42:31] [INFO]    [SERV]   (./main.c:68) **Démarrage du service Delivraptor**
+[23:42:31] [INFO]    [SERV]   (./main.c:78) Socket configuré
+[23:42:31] [INFO]    [SERV]   (./main.c:93) Adresse ip et port configurées
+[23:42:31] [INFO]    [SERV]   (./main.c:98) Socket en écoute
+[23:42:32] [INFO]    [SERV]   (./main.c:106) Connexion accepté
+[23:42:32] [INFO]    [CLIENT] (./main.c:114) [127.0.0.1:53742] Client connecté au service avec succès
+[23:42:32] [INFO]    [CLIENT] (./main.c:120) [127.0.0.1:53742] Authentification réussie
+[23:42:32] [INFO]    [SERV]   (./main.c:142) Connexion a la BDD...
+[23:42:32] [INFO]    [SERV]   (./main.c:335) Connecté a la BDD
+[23:42:32] [INFO]    [SERV]   (./main.c:336) SET search_path...
+[23:42:32] [INFO]    [SERV]   (./main.c:341) SET search_path success
+[23:42:32] [INFO]    [SERV]   (./main.c:346) Base de données actuelle : postgres
+[23:42:32] [INFO]    [SERV]   (./main.c:352) Schéma courant (search_path) : sae3_delivraptor
+[23:42:32] [DEBUG]   [SERV]   (./main.c:152) Taille lecture 73
+[23:42:32] [DEBUG]   [SERV]   (./main.c:154) Buffer value : ADD 144254 alizon |1 rue branly| 22300 roussel mewen |3 rue machin| 22450
+[23:42:32] [INFO]    [CLIENT] (./main.c:161) [127.0.0.1:53742] Requete CONN
+[23:42:32] [INFO]    [CLIENT] (./main.c:202) [127.0.0.1:53742] Informaions récupérées avec succès
+[23:42:32] [INFO]    [SERV]   (./main.c:227) La commande existe deja
+[23:42:32] [INFO]    [SERV]   (./main.c:229) Renvoi du bordereau
+[23:42:32] [INFO]    [CLIENT] (./main.c:272) [127.0.0.1:53742] BORD ALI1767864018 com144254
+[23:42:32] [DEBUG]   [SERV]   (./main.c:152) Taille lecture 17
+[23:42:32] [DEBUG]   [SERV]   (./main.c:154) Buffer value : ETA ALI1767864018
+[23:42:32] [INFO]    [CLIENT] (./main.c:161) [127.0.0.1:53742] Requete CONN
+[23:42:32] [INFO]    [CLIENT] (./main.c:369) [127.0.0.1:53742] numéro de suivie récupéré
+[23:42:32] [INFO]    [SERV]   (./main.c:384) Récuperation de l'etat
+[23:42:32] [DEBUG]   [SERV]   (./main.c:387) Etat commande char : 1
+[23:42:32] [DEBUG]   [SERV]   (./main.c:388) Etat commande int : 1
+[23:42:32] [DEBUG]   [SERV]   (./main.c:393) Envoi msg etat
+[23:42:32] [DEBUG]   [SERV]   (./etat/etat.c:28)  >> arrive fn msg_etat av test: 1
+[23:42:32] [DEBUG]   [SERV]   (./etat/etat.c:32)  >> CONNU test: 1
+[23:42:32] [DEBUG]   [SERV]   (./etat/etat.c:34)  >> arrive fn msg_etat ap test: 1
+[23:42:32] [DEBUG]   [SERV]   (./etat/etat.c:37)  >> arrive fn msg_etat av vrai: 1
+[23:42:32] [DEBUG]   [SERV]   (./etat/etat.c:46)  >> Message etat connu : 1
+[23:42:32] [DEBUG]   [SERV]   (./etat/etat.c:51) ETAT 1 message : ETA TRTC ALI1767864018
+[23:42:32] [DEBUG]   [SERV]   (./etat/etat.c:28)  >> arrive fn msg_etat av test: 1
+[23:42:32] [DEBUG]   [SERV]   (./etat/etat.c:32)  >> CONNU test: 1
+[23:42:32] [DEBUG]   [SERV]   (./etat/etat.c:34)  >> arrive fn msg_etat ap test: 1
+[23:42:32] [DEBUG]   [SERV]   (./etat/etat.c:37)  >> arrive fn msg_etat av vrai: 1
+[23:42:32] [DEBUG]   [SERV]   (./etat/etat.c:46)  >> Message etat connu : 1
+[23:42:32] [DEBUG]   [SERV]   (./etat/etat.c:51) ETAT 1 message : ETA TRTC ALI1767879876
+[23:42:32] [DEBUG]   [SERV]   (./etat/etat.c:28)  >> arrive fn msg_etat av test: 0
+[23:42:32] [DEBUG]   [SERV]   (./etat/etat.c:30)  >> INCONNU test: 0
+[23:42:32] [DEBUG]   [SERV]   (./etat/etat.c:34)  >> arrive fn msg_etat ap test: 0
+[23:42:32] [DEBUG]   [SERV]   (./etat/etat.c:37)  >> arrive fn msg_etat av vrai: 0
+[23:42:32] [DEBUG]   [SERV]   (./etat/etat.c:41)  >> Message etat inconnu : 0
+[23:42:32] [DEBUG]   [SERV]   (./etat/etat.c:51) ETAT 0 message : ETA ERR INCO ALI1245369547
+[23:42:32] [DEBUG]   [SERV]   (./etat/etat.c:28)  >> arrive fn msg_etat av test: 1
+[23:42:32] [DEBUG]   [SERV]   (./etat/etat.c:32)  >> CONNU test: 1
+[23:42:32] [DEBUG]   [SERV]   (./etat/etat.c:34)  >> arrive fn msg_etat ap test: 1
+[23:42:32] [DEBUG]   [SERV]   (./etat/etat.c:37)  >> arrive fn msg_etat av vrai: 1
+[23:42:32] [DEBUG]   [SERV]   (./etat/etat.c:46)  >> Message etat connu : 1
+[23:42:32] [DEBUG]   [SERV]   (./etat/etat.c:51) ETAT 1 message : ETA TRTC ALI1767963048
+[23:46:13] [INFO]    [SERV]   (./main.c:68) **Démarrage du service Delivraptor**
+[23:46:13] [INFO]    [SERV]   (./main.c:78) Socket configuré
+[23:46:13] [INFO]    [SERV]   (./main.c:93) Adresse ip et port configurées
+[23:46:13] [INFO]    [SERV]   (./main.c:98) Socket en écoute
+[23:46:15] [INFO]    [SERV]   (./main.c:106) Connexion accepté
+[23:46:15] [INFO]    [CLIENT] (./main.c:114) [127.0.0.1:35284] Client connecté au service avec succès
+[23:46:15] [INFO]    [CLIENT] (./main.c:120) [127.0.0.1:35284] Authentification réussie
+[23:46:15] [INFO]    [SERV]   (./main.c:142) Connexion a la BDD...
+[23:46:15] [INFO]    [SERV]   (./main.c:335) Connecté a la BDD
+[23:46:15] [INFO]    [SERV]   (./main.c:336) SET search_path...
+[23:46:15] [INFO]    [SERV]   (./main.c:341) SET search_path success
+[23:46:15] [INFO]    [SERV]   (./main.c:346) Base de données actuelle : postgres
+[23:46:15] [INFO]    [SERV]   (./main.c:352) Schéma courant (search_path) : sae3_delivraptor
+[23:46:15] [DEBUG]   [SERV]   (./main.c:152) Taille lecture 73
+[23:46:15] [DEBUG]   [SERV]   (./main.c:154) Buffer value : ADD 144254 alizon |1 rue branly| 22300 roussel mewen |3 rue machin| 22450
+[23:46:15] [INFO]    [CLIENT] (./main.c:161) [127.0.0.1:35284] Requete CONN
+[23:46:15] [INFO]    [CLIENT] (./main.c:202) [127.0.0.1:35284] Informaions récupérées avec succès
+[23:46:15] [INFO]    [SERV]   (./main.c:227) La commande existe deja
+[23:46:15] [INFO]    [SERV]   (./main.c:229) Renvoi du bordereau
+[23:46:15] [INFO]    [CLIENT] (./main.c:272) [127.0.0.1:35284] BORD ALI1767864018 com144254
+[23:46:15] [DEBUG]   [SERV]   (./main.c:152) Taille lecture 17
+[23:46:15] [DEBUG]   [SERV]   (./main.c:154) Buffer value : ETA ALI1767864018
+[23:46:15] [INFO]    [CLIENT] (./main.c:161) [127.0.0.1:35284] Requete CONN
+[23:46:15] [INFO]    [CLIENT] (./main.c:369) [127.0.0.1:35284] numéro de suivie récupéré
+[23:46:15] [INFO]    [SERV]   (./main.c:384) Récuperation de l'etat
+[23:46:15] [DEBUG]   [SERV]   (./main.c:387) Etat commande char : 1
+[23:46:15] [DEBUG]   [SERV]   (./main.c:388) Etat commande int : 1
+[23:46:15] [DEBUG]   [SERV]   (./main.c:393) Envoi msg etat
+[23:46:15] [DEBUG]   [SERV]   (./etat/etat.c:28)  >> arrive fn msg_etat av test: 1
+[23:46:15] [DEBUG]   [SERV]   (./etat/etat.c:32)  >> CONNU test: 1
+[23:46:15] [DEBUG]   [SERV]   (./etat/etat.c:34)  >> arrive fn msg_etat ap test: 1
+[23:46:15] [DEBUG]   [SERV]   (./etat/etat.c:37)  >> arrive fn msg_etat av vrai: 1
+[23:46:15] [DEBUG]   [SERV]   (./etat/etat.c:46)  >> Message etat connu : 1
+[23:46:15] [DEBUG]   [SERV]   (./etat/etat.c:51) ETAT 1 message : ETA TRTC ALI1767864018
+[23:46:15] [DEBUG]   [SERV]   (./etat/etat.c:54) ETAT 1 message : ETA TRTC ALI1767864018 envoyé
+[23:46:15] [INFO]    [SERV]   (./etat/etat.c:55) ETAT 1 message : ETA TRTC ALI1767864018 envoyé
+[23:46:17] [INFO]    [SERV]   (./main.c:68) **Démarrage du service Delivraptor**
+[23:46:17] [INFO]    [SERV]   (./main.c:78) Socket configuré
+[23:46:17] [INFO]    [SERV]   (./main.c:93) Adresse ip et port configurées
+[23:46:17] [INFO]    [SERV]   (./main.c:98) Socket en écoute
+[23:46:18] [INFO]    [SERV]   (./main.c:106) Connexion accepté
+[23:46:18] [INFO]    [CLIENT] (./main.c:114) [127.0.0.1:50948] Client connecté au service avec succès
+[23:46:18] [INFO]    [CLIENT] (./main.c:120) [127.0.0.1:50948] Authentification réussie
+[23:46:18] [INFO]    [SERV]   (./main.c:142) Connexion a la BDD...
+[23:46:18] [INFO]    [SERV]   (./main.c:335) Connecté a la BDD
+[23:46:18] [INFO]    [SERV]   (./main.c:336) SET search_path...
+[23:46:18] [INFO]    [SERV]   (./main.c:341) SET search_path success
+[23:46:18] [INFO]    [SERV]   (./main.c:346) Base de données actuelle : postgres
+[23:46:18] [INFO]    [SERV]   (./main.c:352) Schéma courant (search_path) : sae3_delivraptor
+[23:46:18] [DEBUG]   [SERV]   (./main.c:152) Taille lecture 73
+[23:46:18] [DEBUG]   [SERV]   (./main.c:154) Buffer value : ADD 144254 alizon |1 rue branly| 22300 roussel mewen |3 rue machin| 22450
+[23:46:18] [INFO]    [CLIENT] (./main.c:161) [127.0.0.1:50948] Requete CONN
+[23:46:18] [INFO]    [CLIENT] (./main.c:202) [127.0.0.1:50948] Informaions récupérées avec succès
+[23:46:18] [INFO]    [SERV]   (./main.c:227) La commande existe deja
+[23:46:18] [INFO]    [SERV]   (./main.c:229) Renvoi du bordereau
+[23:46:18] [INFO]    [CLIENT] (./main.c:272) [127.0.0.1:50948] BORD ALI1767864018 com144254
+[23:46:18] [DEBUG]   [SERV]   (./main.c:152) Taille lecture 17
+[23:46:18] [DEBUG]   [SERV]   (./main.c:154) Buffer value : ETA ALI1767864018
+[23:46:18] [INFO]    [CLIENT] (./main.c:161) [127.0.0.1:50948] Requete CONN
+[23:46:18] [INFO]    [CLIENT] (./main.c:369) [127.0.0.1:50948] numéro de suivie récupéré
+[23:46:18] [INFO]    [SERV]   (./main.c:384) Récuperation de l'etat
+[23:46:18] [DEBUG]   [SERV]   (./main.c:387) Etat commande char : 1
+[23:46:18] [DEBUG]   [SERV]   (./main.c:388) Etat commande int : 1
+[23:46:18] [DEBUG]   [SERV]   (./main.c:393) Envoi msg etat
+[23:46:18] [DEBUG]   [SERV]   (./etat/etat.c:28)  >> arrive fn msg_etat av test: 1
+[23:46:18] [DEBUG]   [SERV]   (./etat/etat.c:32)  >> CONNU test: 1
+[23:46:18] [DEBUG]   [SERV]   (./etat/etat.c:34)  >> arrive fn msg_etat ap test: 1
+[23:46:18] [DEBUG]   [SERV]   (./etat/etat.c:37)  >> arrive fn msg_etat av vrai: 1
+[23:46:18] [DEBUG]   [SERV]   (./etat/etat.c:46)  >> Message etat connu : 1
+[23:46:18] [DEBUG]   [SERV]   (./etat/etat.c:51) ETAT 1 message : ETA TRTC ALI1767864018
+[23:46:18] [DEBUG]   [SERV]   (./etat/etat.c:54) ETAT 1 message : ETA TRTC ALI1767864018 envoyé
+[23:46:18] [INFO]    [SERV]   (./etat/etat.c:55) ETAT 1 message : ETA TRTC ALI1767864018 envoyé
+[23:46:19] [INFO]    [SERV]   (./main.c:68) **Démarrage du service Delivraptor**
+[23:46:19] [INFO]    [SERV]   (./main.c:78) Socket configuré
+[23:46:19] [INFO]    [SERV]   (./main.c:93) Adresse ip et port configurées
+[23:46:19] [INFO]    [SERV]   (./main.c:98) Socket en écoute
