@@ -233,6 +233,9 @@ input.quantite-prod-input {
   .pointer-events-none {
     pointer-events: none;
   }
+  .visible {
+    visibility: visible;
+  }
   .absolute {
     position: absolute;
   }
@@ -316,6 +319,9 @@ input.quantite-prod-input {
   }
   .row-start-6 {
     grid-row-start: 6;
+  }
+  .row-start-7 {
+    grid-row-start: 7;
   }
   .float-right {
     float: right;
@@ -771,6 +777,14 @@ input.quantite-prod-input {
   .table-auto {
     table-layout: auto;
   }
+  .-translate-x-full {
+    --tw-translate-x: -100%;
+    translate: var(--tw-translate-x) var(--tw-translate-y);
+  }
+  .translate-x-0 {
+    --tw-translate-x: calc(var(--spacing, 0.25rem) * 0);
+    translate: var(--tw-translate-x) var(--tw-translate-y);
+  }
   .cursor-not-allowed {
     cursor: not-allowed;
   }
@@ -815,6 +829,9 @@ input.quantite-prod-input {
   }
   .items-center {
     align-items: center;
+  }
+  .items-end {
+    align-items: flex-end;
   }
   .items-start {
     align-items: flex-start;
@@ -1479,11 +1496,6 @@ input.quantite-prod-input {
       height: calc(var(--spacing, 0.25rem) * 16);
     }
   }
-  .md\:h-96 {
-    @media (width >= 48rem) {
-      height: calc(var(--spacing, 0.25rem) * 96);
-    }
-  }
   .md\:h-225 {
     @media (width >= 48rem) {
       height: calc(var(--spacing, 0.25rem) * 225);
@@ -1527,6 +1539,11 @@ input.quantite-prod-input {
   .md\:w-74 {
     @media (width >= 48rem) {
       width: calc(var(--spacing, 0.25rem) * 74);
+    }
+  }
+  .md\:w-79 {
+    @media (width >= 48rem) {
+      width: calc(var(--spacing, 0.25rem) * 79);
     }
   }
   .md\:w-80 {
@@ -1766,6 +1783,21 @@ input.quantite-prod-input {
     }
   }
 }
+@property --tw-translate-x {
+  syntax: "*";
+  inherits: false;
+  initial-value: 0;
+}
+@property --tw-translate-y {
+  syntax: "*";
+  inherits: false;
+  initial-value: 0;
+}
+@property --tw-translate-z {
+  syntax: "*";
+  inherits: false;
+  initial-value: 0;
+}
 @property --tw-space-y-reverse {
   syntax: "*";
   inherits: false;
@@ -1906,6 +1938,9 @@ input.quantite-prod-input {
 @layer properties {
   @supports ((-webkit-hyphens: none) and (not (margin-trim: inline))) or ((-moz-orient: inline) and (not (color:rgb(from red r g b)))) {
     *, ::before, ::after, ::backdrop {
+      --tw-translate-x: 0;
+      --tw-translate-y: 0;
+      --tw-translate-z: 0;
       --tw-space-y-reverse: 0;
       --tw-space-x-reverse: 0;
       --tw-border-style: solid;

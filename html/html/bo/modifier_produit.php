@@ -36,12 +36,17 @@ foreach($dbh->query("SELECT *,est_masque::CHAR as est_masque_php
                                 ON pr.id_produit = m.id_produit
                             INNER JOIN sae3_skadjam._photo ph
                                 ON m.id_photo = ph.id_photo
+                            LEFT JOIN sae3_skadjam._reduit rd
+                                ON rd.id_produit = pr.id_produit
+                            LEFT JOIN sae3_skadjam._remise r
+                                ON r.id_remise = rd.id_remise
                             WHERE pr.id_produit = $idProduit") as $produit){
 
     //Récupération attribut de produit
     $nom = $produit['libelle_produit'];
     $description = $produit['description_produit'];
     $prixHT = $produit['prix_ht'];
+    $remise = $produit['pourcentage_remise'];
     $enLigne = $produit['est_masque_php']; 
     $qteStock = $produit['quantite_stock'];
     $qteUnite = $produit['quantite_unite'];
@@ -106,6 +111,7 @@ if (isset($_POST['categorie']) && isset($_POST['nom']) && isset($_POST['prix']) 
     $nom = htmlentities($_POST['nom']);
     $prixHT = htmlentities($_POST['prix']);
     $qteStock = htmlentities($_POST['qteStock']);
+    $remise = htmlentities($_POST['remise']);
     $enLigne = htmlentities($_POST['mettreEnLigne']);
     $enPromotion = htmlentities($_POST['mettreEnPromotion']);
     $description = htmlentities($_POST['description']);
@@ -186,7 +192,7 @@ if (isset($_POST['categorie']) && isset($_POST['nom']) && isset($_POST['prix']) 
             if ($caseCochee && !$estPromu) {
                 $dbh->beginTransaction();
                 try {
-                    if(verifDate($dateDebutPromotion) && verifDate($dateFinPromotion)){
+                    if(verifDate($dateDebutPromotion) && verifDate($dateFinPromotion) && $dateFinPromotion >= $dateDebutPromotion && $dateDebutPromotion >= date('Y-m-d')){
                         $stmtPromo = $dbh->prepare("INSERT INTO sae3_skadjam._promotion
                                                     (
                                                         date_debut_promotion,
@@ -248,6 +254,23 @@ if (isset($_POST['categorie']) && isset($_POST['nom']) && isset($_POST['prix']) 
                 }
             }
 
+            // Mise à jour des dates de la promotion existante
+            if($caseCochee && $estPromu){
+                if(verifDate($dateDebutPromotion) && verifDate($dateFinPromotion) && $dateFinPromotion >= $dateDebutPromotion && $dateDebutPromotion >= date('Y-m-d')){
+                    $stmtUpdatePromo = $dbh->prepare("UPDATE sae3_skadjam._promotion
+                                                        SET date_debut_promotion = :date_debut,
+                                                            date_fin_promotion = :date_fin
+                                                        WHERE id_promotion = :id_promotion");
+                    $stmtUpdatePromo->execute([
+                        ':date_debut'   => formatDate($dateDebutPromotion),
+                        ':date_fin'     => formatDate($dateFinPromotion),
+                        ':id_promotion' => $promotion['id_promotion']
+                    ]);
+                }else{
+                    echo "La date de début ou de fin de promotion est invalide.";
+                }
+            }
+
 
             //Update de la photo dans la table photo
             $updatePhoto = $dbh -> query("UPDATE sae3_skadjam._photo SET
@@ -255,6 +278,57 @@ if (isset($_POST['categorie']) && isset($_POST['nom']) && isset($_POST['prix']) 
                                             alt = '$nom', 
                                             titre = '$nom'
                                         WHERE id_photo = $idPhoto;");
+            
+            //Update remise
+            // pour la supression d'une remise
+            $deleteRemise = $dbh->prepare("
+                DELETE FROM sae3_skadjam._remise
+                WHERE id_remise = ?");
+            $deleteReduit = $dbh->prepare("
+                DELETE FROM sae3_skadjam._reduit
+                WHERE id_remise = ? AND id_produit = ?");
+
+            // pour créer une nouvelle remise
+            $insertRemise = $dbh->prepare("
+                WITH id_remise AS (
+                    INSERT INTO sae3_skadjam._remise(pourcentage_remise, date_debut_remise) 
+                    VALUES (?, ?) RETURNING id_remise
+                )
+                INSERT INTO sae3_skadjam._reduit(id_produit, id_remise) 
+                    SELECT ?, id_remise FROM id_remise");
+                
+
+            // pour la modification d'une remise
+            $updateRemise = $dbh->prepare("
+                UPDATE sae3_skadjam._remise
+                SET pourcentage_remise = ?
+                WHERE id_remise = ?");
+            
+            //mise à jour de la base de données
+            $pourcentage = $_POST["remise"];
+            $pourcentage = ($pourcentage/100);
+            $existe = false;  //si le produit a déjà une remise
+            foreach($dbh->query("SELECT * FROM sae3_skadjam._reduit WHERE id_produit = $idProduit", PDO::FETCH_ASSOC) as $row){
+                $existe = true;
+                // modification d'une remise
+                if (verifPourcentage($pourcentage) && $pourcentage != 0) {
+                    $updateRemise->execute([$pourcentage, $row['id_remise']]);
+                }
+                // supression d'une remise
+                elseif(verifPourcentage($pourcentage) && $pourcentage == 0){
+                    $deleteReduit->execute([$row['id_remise'], $idProduit]);
+                    $deleteRemise->execute([$pourcentage]);
+                }
+                else{
+                    echo "le format du pourcentage n'est pas correcte";
+                }
+            }
+            // insertion d'une remise
+            if (!$existe && $pourcentage != 0){
+                $date = date('d/m/Y'); 
+                $insertRemise->execute([$pourcentage, $date, $idProduit]);
+            }
+            
         }catch (PDOException $e) {
             print "Erreur !: " . $e->getMessage() . "<br/>";
             die();
@@ -279,8 +353,8 @@ else { ?>
         </style>
     </head>
     <body>
-        <?php include(__DIR__ . '/../../php/structure/header_back.php');?>
-        <?php include(__DIR__ . '/../../php/structure/navbar_back.php');?>
+        <?php include __DIR__ . '/../../php/structure/header_back.php';?>
+        <?php include __DIR__ . '/../../php/structure/navbar_back.php';?>
         <main>
             <h2>Modifier <?php echo $nom; ?></h2>
             <form class="grid grid-cols-[40%_60%] w-11/12 self-center" action="modifier_produit.php?idProduit=<?php echo $idProduit;?>" method="post" enctype="multipart/form-data">
@@ -302,13 +376,18 @@ else { ?>
                 <div class="col-start-2 row-start-2 flex flex-row justify-between w-200 m-2 p-2">
                     <div class="flex flex-col">
                         <label for="prix">Prix *(hors taxe):</label>
-                        <input value="<?php echo $prixHT;?>" class="border-4 border-beige rounded-2xl w-75" type="number" name="prix" id="prix" min="0.0" step="0.01" required>
+                        <input value="<?php echo $prixHT;?>" class="border-4 border-beige rounded-2xl w-50" type="number" name="prix" id="prix" min="0.0" step="0.01" required>
+                    </div>
+
+                    <div class="flex flex-col">
+                        <label for="remise">Remise (%):</label>
+                        <input value="<?php echo $remise*100;?>" class="border-4 border-beige rounded-2xl w-50" type="number" name="remise" id="remise" min="0" max="100">
                     </div>
 
                     <!-- Quantite en stock -->
                     <div class="flex flex-col">
                         <label for="qteStock">Quantité en stock* :</label>
-                        <input value="<?php echo $qteStock;?>" class="border-4 border-beige rounded-2xl w-75" type="number" name="qteStock" id="qteStock" min="0" required>
+                        <input value="<?php echo $qteStock;?>" class="border-4 border-beige rounded-2xl w-50" type="number" name="qteStock" id="qteStock" min="0" required>
                     </div>
                 </div>
                     
