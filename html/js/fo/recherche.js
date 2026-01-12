@@ -190,7 +190,7 @@ function pagePrecedente(){
 }
 
 function pageSuivante(){
-    if(first+numberOfItems<=tableau.length){
+    if(first+numberOfItems<tableau.length){
         first+=numberOfItems;
         actualPage ++;
         afficherListe();
