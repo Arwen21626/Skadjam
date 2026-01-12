@@ -78,18 +78,22 @@ function filtrageTranchePrix1(tabProd){
 
 }
 
-function filtrageTranchePrix2(tabProd){ // 8.40 - 13.19
+// 8.40 - 13.19
+function filtrageTranchePrix2(tabProd){ 
 
 }
 
-function filtrageTranchePrix3(tabProd){ // 13.20 - 19.19
+// 13.20 - 19.19
+function filtrageTranchePrix3(tabProd){ 
 
 }
 
-function filtrageTranchePrix4(tabProd){ // 19.20 - 31.19
+// 19.20 - 31.19
+function filtrageTranchePrix4(tabProd){ 
 
 }
 
-function filtrageTranchePrix5(tabProd){ // 31.20 - 71.99
+// 31.20 - 71.99
+function filtrageTranchePrix5(tabProd){ 
 
 }

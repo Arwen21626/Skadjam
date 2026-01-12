@@ -190,7 +190,7 @@ function pagePrecedente(){
 }
 
 function pageSuivante(){
-    if(first+numberOfItems<=tableau.length){
+    if(first+numberOfItems<tableau.length){
         first+=numberOfItems;
         actualPage ++;
         afficherListe();
@@ -399,7 +399,10 @@ function triEtoileDecroissant(tab){
     return tab.sort((a,b) => parseFloat(b['note_moyenne']) - parseFloat(a['note_moyenne']))
 }
 
+
+
 // Filtres
+
 // Alimentaire = 1
 function filtrageCategorieAlimentaire(tableau){ 
     newTab = tableau.filter(tabProd => tabProd['id_categorie'] === 1)
@@ -432,7 +435,65 @@ function filtrageCategorieSoin(tableau){
 }
 
 
+// NOTE
 
+// non noté
+function filtrageNoteNonNote(tabProd){ 
+
+}
+
+// 0 à 1.99
+function filtrageNote1(tabProd){ 
+
+}
+
+// 2 à 2.99
+function filtrageNote2(tabProd){ 
+
+}
+
+// 3 à 3.99
+function filtrageNote3(tabProd){ 
+
+}
+
+// 4 à 4.99
+function filtrageNote4(tabProd){ 
+
+}
+
+// 5
+function filtrageNote5(tabProd){ 
+
+}
+
+
+//TRANCHE DE PRIX
+
+// 2.99 - 8.39
+function filtrageTranchePrix1(tabProd){ 
+
+}
+
+// 8.40 - 13.19
+function filtrageTranchePrix2(tabProd){ 
+
+}
+
+// 13.20 - 19.19
+function filtrageTranchePrix3(tabProd){ 
+
+}
+
+// 19.20 - 31.19
+function filtrageTranchePrix4(tabProd){ 
+
+}
+
+// 31.20 - 71.99
+function filtrageTranchePrix5(tabProd){ 
+
+}
 
 
 
