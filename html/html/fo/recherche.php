@@ -26,11 +26,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" type="text/css" href="../../css/output.css" >
-    <link rel="stylesheet" type="text/css" href="../../css/fo/general_front.css" >
     <title>Recherche</title>
     <?php include __DIR__ . "/../../php/structure/head_front.php"; ?>
     <script src="../../js/fo/recherche.js"></script>
-    <script src="../../js/fo/julien.js"></script>
 </head>
 
 <body>
@@ -44,182 +42,183 @@
     <?php (include __DIR__ . "/../../php/structure/header_front.php"); ?>
     <?php include(__DIR__ . "/../../php/structure/navbar_front.php"); ?>
 
-    <!-- Barre de recherche -->
-    <p id="filtresTris">Filtres & tris</p>
-    <aside class="sidebar  bg-beige p-4 md:sticky md:top-16 md:w-80">
-        <!-- Filtres -->
-        <section>
-            <h3>Filtres</h3>
-            <!-- Categorie -->
-                <article>
-                <details>
-                    <summary class="cursor-pointer mt-1 mb-1">Par catégorie</summary>
-                    <!-- Alimentaire -->
-                    <div>
-                        <input type="checkbox" name="alimentaire" id="alimentaire" value="aimentaire">
-                        <label for="alimentaire">Alimentaire</label>
-                    </div>
-                    
-
-                    <!-- Vetements -->
-                    <div>
-                        <input type="checkbox" name="vetement" id="vetement" value="vetement">
-                        <label for="vetement">Vetements</label>
-                    </div>
-
-                    <!-- Artisanat -->
-                    <div>
-                        <input type="checkbox" name="artisanat" id="artisanat" value="artisanat">
-                        <label for="artisanat">Artisanat</label>
-                    </div>
-
-                    <!-- Goodies -->
-                    <div>
-                        <input type="checkbox" name="goodies" id="goodies" value="goodies">
-                        <label for="goodies">Goodies</label>
-                    </div>
-
-                    <!-- Soin -->
-                    <div>
-                        <input type="checkbox" name="soin" id="soin" value="soin">
-                        <label for="soin">Soin</label>
-                    </div>
-                </details>
-                </article>
-            
-            <!-- Notes -->
-            <article>
-                <details>
-                    <summary class="cursor-pointer mt-1 mb-1">Par note</summary>
-                    <!-- non noté -->
-                    <div>
-                        <input type="checkbox" name="zeroE" id="zeroE" value="zeroE">
-                        <label for="zeroE">Non noté</label>
-                    </div>
-
-                    <!-- 1 étoile -->
-                    <div>
-                        <input type="checkbox" name="uneE" id="uneE" value="uneE">
-                        <label for="uneE">1</label>
-                    </div>
-
-                    <!-- 2 étoiles -->
-                    <div>
-                        <input type="checkbox" name="deuxE" id="deuxE" value="deuxE">
-                        <label for="deuxE">2</label>
-                    </div>
-
-                    <!-- 3 étoiles -->
-                    <div>
-                        <input type="checkbox" name="troisE" id="troisE" value="troisE">
-                        <label for="troisE">3</label>
-                    </div>
-
-                    <!-- 4 étoiles -->
-                    <div>
-                        <input type="checkbox" name="quatreE" id="quatreE" value="quatreE">
-                        <label for="quatreE">4</label>
-                    </div>
-
-                    <!-- 5 étoiles -->
-                    <div>
-                        <input type="checkbox" name="cinqE" id="cinqE" value="cinqE">
-                        <label for="cinqE">5</label>
-                    </div>
-                </details>
-            </article>
-            
-            <!-- Tranche de prix -->
-            <article>
-                <details>
-                    <summary class="cursor-pointer mt-1 mb-1">Par tranche de prix</summary>
-                    <div>
-                        <input type="checkbox" name="prix1" id="prix1" value="prix1">
-                        <label for="prix1">2,99€ - 8,39€ </label>
-                    </div>
-                    <div>
-                        <input type="checkbox" name="prix2" id="prix2" value="prix2">
-                        <label for="prix2">8,40€ - 13,19€ </label>
-                    </div>
-                    <div>
-                        <input type="checkbox" name="prix3" id="prix3" value="prix3">
-                        <label for="prix3">13,20€ - 19,19€ </label>
-                    </div>
-                    <div>
-                        <input type="checkbox" name="prix4" id="prix4" value="prix4">
-                        <label for="prix4">19,20€ - 31,19€ </label>
-                    </div>
-                    <div>
-                        <input type="checkbox" name="prix5" id="prix5" value="prix5">
-                        <label for="prix5">31,20€ - 71,99€ </label>
-                    </div>
-                </details>
-            </article>
-        </section>
-
-        <section>
-            <h3>Tris</h3>
-            <!-- prix -->
-            <article>
-                <details>
-                    <summary class="cursor-pointer mt-1 mb-1">Par prix</summary>
-                    <div>
-                        <div>
-                            <input type="radio" name="prixTri" id="prixTriCroissant" value="croissant">
-                            <label for="prixTriCroissant">Croissant</label>
-                        </div>
-                        <div>
-                            <input type="radio" name="prixTri" id="prixTriDecroissant" value="decroissant">
-                            <label for="prixTriDecroissant">Décroissant</label>
-                        </div>
-                    </div>
-                </details>
-                
-            </article>
-
-            <!-- ordre alpha -->
-            <article>
-                <details>
-                    <summary class="cursor-pointer mt-1 mb-1">Par ordre alphabétique</summary>
-                    <div>
-                        <div>
-                            <input type="radio" name="alphaTri" id="alphaTriAZ" value="az">
-                            <label for="alphaTriAZ">A-Z</label>
-                        </div>
-                        <div>
-                            <input type="radio" name="alphaTri" id="alphaTriZA" value="za">
-                            <label for="alphaTriZA">Z-A</label>
-                        </div>
-                    </div>
-                </details>
-                
-            </article>
-
-            <!-- note -->
-            <article>
-                <details>
-                    <summary class="cursor-pointer mt-1 mb-1">Par note</summary>
-                    <div>
-                        <div>
-                            <input type="radio" name="noteTri" id="noteTri51" value="51">
-                            <label for="noteTri51">5-1</label>
-                        </div>
-                        <div>
-                            <input type="radio" name="noteTri" id="noteTri15" value="15">
-                            <label for="noteTri15">1-5</label>
-                        </div>
-                    </div>
-                </details>
-            </article>
-        </section>
-    </aside>
+    
     <main class="md:min-h-[800px] min-h-[600px] mt-10">
-        
+        <!-- Barre de recherche -->
+        <button id="filtresTris">Filtres & tris</button>
+        <aside class="sidebar bg-beige p-4 md:sticky md:top-16 md:left-0 md:w-79 md:h-225 overflow-auto -translate-x-full">
+            <!-- Filtres -->
+            <section>
+                <h3>Filtres</h3>
+                <!-- Categorie -->
+                    <article>
+                    <details>
+                        <summary class="cursor-pointer mt-1 mb-1">Par catégorie</summary>
+                        <!-- Alimentaire -->
+                        <div>
+                            <input type="checkbox" name="alimentaire" id="alimentaire" value="aimentaire">
+                            <label for="alimentaire">Alimentaire</label>
+                        </div>
+                        
 
-        <div id="prod" class="grid grid-cols-2 justify-items-center md:grid-cols-3">
-            <script>
-                afficherListe()
-            </script>
+                        <!-- Vetements -->
+                        <div>
+                            <input type="checkbox" name="vetement" id="vetement" value="vetement">
+                            <label for="vetement">Vetements</label>
+                        </div>
+
+                        <!-- Artisanat -->
+                        <div>
+                            <input type="checkbox" name="artisanat" id="artisanat" value="artisanat">
+                            <label for="artisanat">Artisanat</label>
+                        </div>
+
+                        <!-- Goodies -->
+                        <div>
+                            <input type="checkbox" name="goodies" id="goodies" value="goodies">
+                            <label for="goodies">Goodies</label>
+                        </div>
+
+                        <!-- Soin -->
+                        <div>
+                            <input type="checkbox" name="soin" id="soin" value="soin">
+                            <label for="soin">Soin</label>
+                        </div>
+                    </details>
+                    </article>
+                
+                <!-- Notes -->
+                <article>
+                    <details>
+                        <summary class="cursor-pointer mt-1 mb-1">Par note</summary>
+                        <!-- non noté -->
+                        <div>
+                            <input type="checkbox" name="zeroE" id="zeroE" value="zeroE">
+                            <label for="zeroE">Non noté</label>
+                        </div>
+
+                        <!-- 1 étoile -->
+                        <div>
+                            <input type="checkbox" name="uneE" id="uneE" value="uneE">
+                            <label for="uneE">1</label>
+                        </div>
+
+                        <!-- 2 étoiles -->
+                        <div>
+                            <input type="checkbox" name="deuxE" id="deuxE" value="deuxE">
+                            <label for="deuxE">2</label>
+                        </div>
+
+                        <!-- 3 étoiles -->
+                        <div>
+                            <input type="checkbox" name="troisE" id="troisE" value="troisE">
+                            <label for="troisE">3</label>
+                        </div>
+
+                        <!-- 4 étoiles -->
+                        <div>
+                            <input type="checkbox" name="quatreE" id="quatreE" value="quatreE">
+                            <label for="quatreE">4</label>
+                        </div>
+
+                        <!-- 5 étoiles -->
+                        <div>
+                            <input type="checkbox" name="cinqE" id="cinqE" value="cinqE">
+                            <label for="cinqE">5</label>
+                        </div>
+                    </details>
+                </article>
+                
+                <!-- Tranche de prix -->
+                <article>
+                    <details>
+                        <summary class="cursor-pointer mt-1 mb-1">Par tranche de prix</summary>
+                        <div>
+                            <input type="checkbox" name="prix1" id="prix1" value="prix1">
+                            <label for="prix1">2,99€ - 8,39€ </label>
+                        </div>
+                        <div>
+                            <input type="checkbox" name="prix2" id="prix2" value="prix2">
+                            <label for="prix2">8,40€ - 13,19€ </label>
+                        </div>
+                        <div>
+                            <input type="checkbox" name="prix3" id="prix3" value="prix3">
+                            <label for="prix3">13,20€ - 19,19€ </label>
+                        </div>
+                        <div>
+                            <input type="checkbox" name="prix4" id="prix4" value="prix4">
+                            <label for="prix4">19,20€ - 31,19€ </label>
+                        </div>
+                        <div>
+                            <input type="checkbox" name="prix5" id="prix5" value="prix5">
+                            <label for="prix5">31,20€ - 71,99€ </label>
+                        </div>
+                    </details>
+                </article>
+            </section>
+
+            <section>
+                <h3>Tris</h3>
+                <!-- prix -->
+                <article>
+                    <details>
+                        <summary class="cursor-pointer mt-1 mb-1">Par prix</summary>
+                        <div>
+                            <div>
+                                <input type="radio" name="prixTri" id="prixTriCroissant" value="croissant">
+                                <label for="prixTriCroissant">Croissant</label>
+                            </div>
+                            <div>
+                                <input type="radio" name="prixTri" id="prixTriDecroissant" value="decroissant">
+                                <label for="prixTriDecroissant">Décroissant</label>
+                            </div>
+                        </div>
+                    </details>
+                    
+                </article>
+
+                <!-- ordre alpha -->
+                <article>
+                    <details>
+                        <summary class="cursor-pointer mt-1 mb-1">Par ordre alphabétique</summary>
+                        <div>
+                            <div>
+                                <input type="radio" name="alphaTri" id="alphaTriAZ" value="az">
+                                <label for="alphaTriAZ">A-Z</label>
+                            </div>
+                            <div>
+                                <input type="radio" name="alphaTri" id="alphaTriZA" value="za">
+                                <label for="alphaTriZA">Z-A</label>
+                            </div>
+                        </div>
+                    </details>
+                    
+                </article>
+
+                <!-- note -->
+                <article>
+                    <details>
+                        <summary class="cursor-pointer mt-1 mb-1">Par note</summary>
+                        <div>
+                            <div>
+                                <input type="radio" name="noteTri" id="noteTri51" value="51">
+                                <label for="noteTri51">5-1</label>
+                            </div>
+                            <div>
+                                <input type="radio" name="noteTri" id="noteTri15" value="15">
+                                <label for="noteTri15">1-5</label>
+                            </div>
+                        </div>
+                    </details>
+                </article>
+            </section>
+        </aside>
+        <div id="listeProduit" class="flex justify-end">
+            <div id="prod" class="ml-4 w-4/5 flex flex-row flex-wrap justify-around">
+                <script>
+                    afficherListe()
+                </script>
+            </div>
         </div>
 
         <?php $dbh = null;?>

@@ -9,15 +9,15 @@
 
 static const char *etat_to_str(etat_t etat){
     switch (etat) {
-        case ETAT1 : return "TRTC"; // Traitement de la commande
-        case ETAT2 : return "AVTR"; // Acheminement Vers Transporteur
-        case ETAT3 : return "ARTR"; // Arrivé chez le Transporteur
-        case ETAT4 : return "AVPR"; // Acheminement Vers Plateforme Régionale
-        case ETAT5 : return "ARPR"; // Arrivé à la Plateforme Régionale
-        case ETAT6 : return "AVCL"; // Acheminement Vers Centre Local
-        case ETAT7 : return "ARCL"; // ARrivé au Centre Local
-        case ETAT8 : return "LIVR"; // En cours de LIVRaison
-        case ETAT9 : return "LIVD"; // LIVré
+        case ETAT1 : return "TRTC"; // TRaitemenT de la Commande
+        case ETAT2 : return "ACHTR"; // ACHeminement vers TRansporteur
+        case ETAT3 : return "ARRTR"; // ARRivé chez le TRansporteur
+        case ETAT4 : return "ACHPR"; // ACHeminement vers Plateforme Régionale
+        case ETAT5 : return "ARRPR"; // Arrivé à la Plateforme Régionale
+        case ETAT6 : return "ACHCL"; // ACHeminement vers Centre Local
+        case ETAT7 : return "ARRCL"; // ARRivé au Centre Local
+        case ETAT8 : return "LVRSN"; // En cours de LiVRaiSoN
+        case ETAT9 : return "LVR"; // LIVré
         default    : return "INCO"; //INCOnnu
     }
 }

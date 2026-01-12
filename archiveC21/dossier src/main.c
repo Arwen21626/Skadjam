@@ -45,6 +45,7 @@ time_t getHoro();
 int connexion(char mdp[128], char user[128]);
 int connecxionBd();
 void getEtat(int cnx, char buffer[TAILLEB]);
+void avance();
 
 time_t horo;
 char cIp[INET_ADDRSTRLEN];
@@ -66,6 +67,10 @@ int main() {
 
     
     LOG_SERV(LOG_INFO ,"**Démarrage du service Delivraptor**");
+
+    connecxionBd();
+    avance();
+
     sock = socket(AF_INET, SOCK_STREAM, 0);
     printf("SOCK = %d\n",sock);
 
@@ -119,6 +124,7 @@ int main() {
     buffer[size] = '\0';
     LOG_CLIENT(LOG_INFO, cIp, cPort, "Client connecté au service avec succès");
     
+
     //format commande CONN user pwd (use width limits)
     sscanf(buffer, "%19s %127s %127s", commande, user, mdp);
     int connect = connexion(mdp, user);
@@ -146,8 +152,6 @@ int main() {
     }
 
     LOG_SERV(LOG_INFO, "Connexion a la BDD...");
-    connecxionBd();
-
     printf("ACCEPT = %d\n",ret);
     while (1==1){
         size = read(cnx, buffer, TAILLEB-1);
@@ -345,7 +349,7 @@ int connexion(char mdp[128], char user[128]){
 }
 
 int connecxionBd(){
-    conn = PQconnectdb("host=127.0.0.1 dbname=postgres user=postgres password=1969:USA");
+    conn = PQconnectdb("host=127.0.0.1 dbname=postgres user=postgres password=pasTOUCHE");
 
     if (PQstatus(conn) != CONNECTION_OK){
         LOG_SERV(LOG_ERROR, "Erreur connexion BDD : %s", PQerrorMessage(conn));
@@ -417,6 +421,44 @@ void getEtat(int cnx, char buffer[TAILLEB]){
     PQclear(res);
 }
 
-void nextEtat(int cnx, char buffer[TAILLEB]){
+void avance(){
+    PGresult *res;
+    PGresult *update;
+    const char *params[2];
+    int  nrows;
+    char *id_suivi;
+    char *etat;
+    char next_str[16];
+    int next;
 
+    res = PQexec(conn, "SELECT id_suivi, etat FROM _delivraptor WHERE etat <> 9");
+    nrows = PQntuples(res);
+    if (nrows>0){
+        LOG_SERV(LOG_INFO, "SELECT retourne des éléments");
+        for (int i=0; i<nrows; i++){
+            id_suivi = PQgetvalue(res, i, 0);
+            etat = PQgetvalue(res, i, 1);
+            params[1] = id_suivi;
+            LOG_SERV(LOG_DEBUG, "id suivi : %s, etat %s", id_suivi, etat);
+            next = next_etat(atoi(etat));
+            snprintf(next_str, sizeof(next_str), "%2d", next);
+            params[0] = next_str;
+            
+            LOG_SERV(LOG_DEBUG, "prochain etat : %d", next);
+            update = PQexecParams(conn,
+                                  "UPDATE _delivraptor SET etat = $1 WHERE id_suivi = $2",
+                                  2,
+                                  NULL,
+                                  params,
+                                  NULL,
+                                  NULL,
+                                  0);
+            if (PQresultStatus(update) != PGRES_COMMAND_OK) {
+                LOG_SERV(LOG_DEBUG, "Erreur UPDATE: %s", PQerrorMessage(conn));
+            }
+            PQclear(update);
+        }
+
+    }
+    PQclear(res);
 }

@@ -1,0 +1,920 @@
+[13:28:36] [INFO]    [SERV]   (./main.c:69) **Démarrage du service Delivraptor**
+[13:28:36] [INFO]    [SERV]   (./main.c:79) Socket configuré
+[13:28:36] [INFO]    [SERV]   (./main.c:94) Adresse ip et port configurées
+[13:28:36] [INFO]    [SERV]   (./main.c:99) Socket en écoute
+[13:29:17] [INFO]    [SERV]   (./main.c:107) Connexion accepté
+[13:29:17] [INFO]    [CLIENT] (./main.c:121) [127.0.0.1:33422] Client connecté au service avec succès
+[13:29:17] [INFO]    [CLIENT] (./main.c:127) [127.0.0.1:33422] Authentification réussie
+[13:29:17] [INFO]    [SERV]   (./main.c:149) Connexion a la BDD...
+[13:29:17] [INFO]    [SERV]   (./main.c:356) Connecté a la BDD
+[13:29:17] [INFO]    [SERV]   (./main.c:357) SET search_path...
+[13:29:17] [INFO]    [SERV]   (./main.c:362) SET search_path success
+[13:29:17] [INFO]    [SERV]   (./main.c:367) Base de données actuelle : postgres
+[13:29:17] [INFO]    [SERV]   (./main.c:373) Schéma courant (search_path) : sae3_delivraptor
+[13:29:17] [INFO]    [SERV]   (./main.c:430) SELECT retourne des éléments
+[13:29:17] [DEBUG]   [SERV]   (./main.c:434) id suivi : ALI1767864018, etat 1
+[13:29:17] [DEBUG]   [SERV]   (./main.c:434) id suivi : ALI1767879876, etat 1
+[13:29:17] [DEBUG]   [SERV]   (./main.c:434) id suivi : ALI1767962662, etat 1
+[13:29:17] [DEBUG]   [SERV]   (./main.c:434) id suivi : ALI1767963048, etat 1
+[13:29:17] [DEBUG]   [SERV]   (./main.c:159) Taille lecture 73
+[13:29:17] [DEBUG]   [SERV]   (./main.c:161) Buffer value : ADD 144254 alizon |1 rue branly| 22300 roussel mewen |3 rue machin| 22450
+[13:29:17] [INFO]    [CLIENT] (./main.c:168) [127.0.0.1:33422] Requete CONN
+[13:29:17] [INFO]    [CLIENT] (./main.c:219) [127.0.0.1:33422] Informaions récupérées avec succès
+[13:29:17] [INFO]    [SERV]   (./main.c:244) La commande existe deja
+[13:29:17] [INFO]    [SERV]   (./main.c:247) Renvoi du bordereau
+[13:29:17] [INFO]    [CLIENT] (./main.c:293) [127.0.0.1:33422] BORD ALI1767864018 com144254
+[13:29:17] [DEBUG]   [SERV]   (./main.c:159) Taille lecture 17
+[13:29:17] [DEBUG]   [SERV]   (./main.c:161) Buffer value : ETA ALI1767864018
+[13:29:17] [INFO]    [CLIENT] (./main.c:168) [127.0.0.1:33422] Requete CONN
+[13:29:17] [INFO]    [CLIENT] (./main.c:391) [127.0.0.1:33422] numéro de suivie récupéré
+[13:29:17] [INFO]    [SERV]   (./main.c:406) Récuperation de l'etat
+[13:29:17] [DEBUG]   [SERV]   (./main.c:409) Etat commande char : 1
+[13:29:17] [DEBUG]   [SERV]   (./main.c:410) Etat commande int : 1
+[13:29:17] [DEBUG]   [SERV]   (./main.c:415) Envoi msg etat
+[13:29:17] [DEBUG]   [SERV]   (./etat/etat.c:27)  >> arrive fn msg_etat av test: 1
+[13:29:17] [DEBUG]   [SERV]   (./etat/etat.c:31)  >> CONNU test: 1
+[13:29:17] [DEBUG]   [SERV]   (./etat/etat.c:33)  >> arrive fn msg_etat ap test: 1
+[13:29:17] [DEBUG]   [SERV]   (./etat/etat.c:36)  >> arrive fn msg_etat av vrai: 1
+[13:29:17] [DEBUG]   [SERV]   (./etat/etat.c:47)  >> Message etat connu : 1
+[13:29:17] [DEBUG]   [SERV]   (./etat/etat.c:52) ETAT 1 message : ETA TRTC ALI1767864018
+[13:29:17] [DEBUG]   [SERV]   (./etat/etat.c:55) ETAT 1 message : ETA TRTC ALI1767864018 envoyé
+[13:29:17] [INFO]    [SERV]   (./etat/etat.c:56) ETAT 1 message : ETA TRTC ALI1767864018 envoyé
+[13:29:17] [DEBUG]   [SERV]   (./main.c:417) Envoi msg etat FIN
+[13:29:17] [DEBUG]   [SERV]   (./main.c:159) Taille lecture 75
+[13:29:17] [DEBUG]   [SERV]   (./main.c:161) Buffer value : ADD 15223 alizon |1 rue branly| 22300 parveau korentin |5 rue bidule| 29130
+[13:29:17] [INFO]    [CLIENT] (./main.c:168) [127.0.0.1:33422] Requete CONN
+[13:29:17] [INFO]    [CLIENT] (./main.c:219) [127.0.0.1:33422] Informaions récupérées avec succès
+[13:29:17] [INFO]    [SERV]   (./main.c:244) La commande existe deja
+[13:29:17] [INFO]    [SERV]   (./main.c:247) Renvoi du bordereau
+[13:29:17] [INFO]    [CLIENT] (./main.c:293) [127.0.0.1:33422] BORD ALI1767879876 com15223
+[13:29:17] [DEBUG]   [SERV]   (./main.c:159) Taille lecture 17
+[13:29:17] [DEBUG]   [SERV]   (./main.c:161) Buffer value : ETA ALI1767879876
+[13:29:17] [INFO]    [CLIENT] (./main.c:168) [127.0.0.1:33422] Requete CONN
+[13:29:17] [INFO]    [CLIENT] (./main.c:391) [127.0.0.1:33422] numéro de suivie récupéré
+[13:29:17] [INFO]    [SERV]   (./main.c:406) Récuperation de l'etat
+[13:29:17] [DEBUG]   [SERV]   (./main.c:409) Etat commande char : 1
+[13:29:17] [DEBUG]   [SERV]   (./main.c:410) Etat commande int : 1
+[13:29:17] [DEBUG]   [SERV]   (./main.c:415) Envoi msg etat
+[13:29:17] [DEBUG]   [SERV]   (./etat/etat.c:27)  >> arrive fn msg_etat av test: 1
+[13:29:17] [DEBUG]   [SERV]   (./etat/etat.c:31)  >> CONNU test: 1
+[13:29:17] [DEBUG]   [SERV]   (./etat/etat.c:33)  >> arrive fn msg_etat ap test: 1
+[13:29:17] [DEBUG]   [SERV]   (./etat/etat.c:36)  >> arrive fn msg_etat av vrai: 1
+[13:29:17] [DEBUG]   [SERV]   (./etat/etat.c:47)  >> Message etat connu : 1
+[13:29:17] [DEBUG]   [SERV]   (./etat/etat.c:52) ETAT 1 message : ETA TRTC ALI1767879876
+[13:29:17] [DEBUG]   [SERV]   (./etat/etat.c:55) ETAT 1 message : ETA TRTC ALI1767879876 envoyé
+[13:29:17] [INFO]    [SERV]   (./etat/etat.c:56) ETAT 1 message : ETA TRTC ALI1767879876 envoyé
+[13:29:17] [DEBUG]   [SERV]   (./main.c:417) Envoi msg etat FIN
+[13:29:17] [DEBUG]   [SERV]   (./main.c:159) Taille lecture 17
+[13:29:17] [DEBUG]   [SERV]   (./main.c:161) Buffer value : ETA ALI1245369547
+[13:29:17] [INFO]    [CLIENT] (./main.c:168) [127.0.0.1:33422] Requete CONN
+[13:29:17] [INFO]    [CLIENT] (./main.c:391) [127.0.0.1:33422] numéro de suivie récupéré
+[13:29:17] [INFO]    [CLIENT] (./main.c:412) [127.0.0.1:33422] Id_suivi ALI1245369547 n'existe pas
+[13:29:17] [DEBUG]   [SERV]   (./main.c:415) Envoi msg etat
+[13:29:17] [DEBUG]   [SERV]   (./etat/etat.c:27)  >> arrive fn msg_etat av test: 0
+[13:29:17] [DEBUG]   [SERV]   (./etat/etat.c:29)  >> INCONNU test: 0
+[13:29:17] [DEBUG]   [SERV]   (./etat/etat.c:33)  >> arrive fn msg_etat ap test: 0
+[13:29:17] [DEBUG]   [SERV]   (./etat/etat.c:36)  >> arrive fn msg_etat av vrai: 0
+[13:29:17] [DEBUG]   [SERV]   (./etat/etat.c:42)  >> Message etat inconnu : 0
+[13:29:17] [DEBUG]   [SERV]   (./etat/etat.c:52) ETAT 0 message : ETA ERR INCO ALI1245369547
+[13:29:17] [DEBUG]   [SERV]   (./etat/etat.c:55) ETAT 0 message : ETA ERR INCO ALI1245369547 envoyé
+[13:29:17] [INFO]    [SERV]   (./etat/etat.c:56) ETAT 0 message : ETA ERR INCO ALI1245369547 envoyé
+[13:29:17] [DEBUG]   [SERV]   (./main.c:417) Envoi msg etat FIN
+[13:29:17] [DEBUG]   [SERV]   (./main.c:159) Taille lecture 80
+[13:29:17] [DEBUG]   [SERV]   (./main.c:161) Buffer value : ADD a1215m4454 alizon |1 rue branly| 22300 parveau korentin |5 rue bidule| 29130
+[13:29:17] [INFO]    [CLIENT] (./main.c:168) [127.0.0.1:33422] Requete CONN
+[13:29:17] [INFO]    [CLIENT] (./main.c:219) [127.0.0.1:33422] Informaions récupérées avec succès
+[13:29:17] [INFO]    [SERV]   (./main.c:244) La commande existe deja
+[13:29:17] [INFO]    [SERV]   (./main.c:247) Renvoi du bordereau
+[13:29:17] [INFO]    [CLIENT] (./main.c:293) [127.0.0.1:33422] BORD ALI1767963048 coma1215m4454
+[13:29:17] [DEBUG]   [SERV]   (./main.c:159) Taille lecture 17
+[13:29:17] [DEBUG]   [SERV]   (./main.c:161) Buffer value : ETA ALI1767963048
+[13:29:17] [INFO]    [CLIENT] (./main.c:168) [127.0.0.1:33422] Requete CONN
+[13:29:17] [INFO]    [CLIENT] (./main.c:391) [127.0.0.1:33422] numéro de suivie récupéré
+[13:29:17] [INFO]    [SERV]   (./main.c:406) Récuperation de l'etat
+[13:29:17] [DEBUG]   [SERV]   (./main.c:409) Etat commande char : 1
+[13:29:17] [DEBUG]   [SERV]   (./main.c:410) Etat commande int : 1
+[13:29:17] [DEBUG]   [SERV]   (./main.c:415) Envoi msg etat
+[13:29:17] [DEBUG]   [SERV]   (./etat/etat.c:27)  >> arrive fn msg_etat av test: 1
+[13:29:17] [DEBUG]   [SERV]   (./etat/etat.c:31)  >> CONNU test: 1
+[13:29:17] [DEBUG]   [SERV]   (./etat/etat.c:33)  >> arrive fn msg_etat ap test: 1
+[13:29:17] [DEBUG]   [SERV]   (./etat/etat.c:36)  >> arrive fn msg_etat av vrai: 1
+[13:29:17] [DEBUG]   [SERV]   (./etat/etat.c:47)  >> Message etat connu : 1
+[13:29:17] [DEBUG]   [SERV]   (./etat/etat.c:52) ETAT 1 message : ETA TRTC ALI1767963048
+[13:29:17] [DEBUG]   [SERV]   (./etat/etat.c:55) ETAT 1 message : ETA TRTC ALI1767963048 envoyé
+[13:29:17] [INFO]    [SERV]   (./etat/etat.c:56) ETAT 1 message : ETA TRTC ALI1767963048 envoyé
+[13:29:17] [DEBUG]   [SERV]   (./main.c:417) Envoi msg etat FIN
+[13:29:17] [DEBUG]   [SERV]   (./main.c:159) Taille lecture 18
+[13:29:17] [DEBUG]   [SERV]   (./main.c:161) Buffer value : ETAT ALI1245369547
+[13:29:17] [INFO]    [CLIENT] (./main.c:168) [127.0.0.1:33422] Requete CONN
+[13:29:17] [WARN]    [CLIENT] (./main.c:180) [127.0.0.1:33422] Commande non reconnu : CONN
+[13:29:17] [INFO]    [CLIENT] (./main.c:156) [127.0.0.1:33422] Client déconnecté
+[13:38:42] [INFO]    [SERV]   (./main.c:69) **Démarrage du service Delivraptor**
+[13:38:42] [INFO]    [SERV]   (./main.c:79) Socket configuré
+[13:38:42] [INFO]    [SERV]   (./main.c:94) Adresse ip et port configurées
+[13:38:42] [INFO]    [SERV]   (./main.c:99) Socket en écoute
+[13:38:44] [INFO]    [SERV]   (./main.c:107) Connexion accepté
+[13:38:44] [INFO]    [CLIENT] (./main.c:121) [127.0.0.1:46892] Client connecté au service avec succès
+[13:38:44] [INFO]    [CLIENT] (./main.c:127) [127.0.0.1:46892] Authentification réussie
+[13:38:44] [INFO]    [SERV]   (./main.c:149) Connexion a la BDD...
+[13:38:44] [INFO]    [SERV]   (./main.c:356) Connecté a la BDD
+[13:38:44] [INFO]    [SERV]   (./main.c:357) SET search_path...
+[13:38:44] [INFO]    [SERV]   (./main.c:362) SET search_path success
+[13:38:44] [INFO]    [SERV]   (./main.c:367) Base de données actuelle : postgres
+[13:38:44] [INFO]    [SERV]   (./main.c:373) Schéma courant (search_path) : sae3_delivraptor
+[13:38:44] [INFO]    [SERV]   (./main.c:431) SELECT retourne des éléments
+[13:38:44] [DEBUG]   [SERV]   (./main.c:435) id suivi : ALI1767864018, etat 1
+[13:38:44] [DEBUG]   [SERV]   (./main.c:437) prochain etat : 2
+[13:38:44] [DEBUG]   [SERV]   (./main.c:435) id suivi : ALI1767879876, etat 1
+[13:38:44] [DEBUG]   [SERV]   (./main.c:437) prochain etat : 2
+[13:38:44] [DEBUG]   [SERV]   (./main.c:435) id suivi : ALI1767962662, etat 1
+[13:38:44] [DEBUG]   [SERV]   (./main.c:437) prochain etat : 2
+[13:38:44] [DEBUG]   [SERV]   (./main.c:435) id suivi : ALI1767963048, etat 1
+[13:38:44] [DEBUG]   [SERV]   (./main.c:437) prochain etat : 2
+[13:38:44] [DEBUG]   [SERV]   (./main.c:159) Taille lecture 73
+[13:38:44] [DEBUG]   [SERV]   (./main.c:161) Buffer value : ADD 144254 alizon |1 rue branly| 22300 roussel mewen |3 rue machin| 22450
+[13:38:44] [INFO]    [CLIENT] (./main.c:168) [127.0.0.1:46892] Requete CONN
+[13:38:44] [INFO]    [CLIENT] (./main.c:219) [127.0.0.1:46892] Informaions récupérées avec succès
+[13:38:44] [INFO]    [SERV]   (./main.c:244) La commande existe deja
+[13:38:44] [INFO]    [SERV]   (./main.c:247) Renvoi du bordereau
+[13:38:44] [INFO]    [CLIENT] (./main.c:293) [127.0.0.1:46892] BORD ALI1767864018 com144254
+[13:38:44] [DEBUG]   [SERV]   (./main.c:159) Taille lecture 17
+[13:38:44] [DEBUG]   [SERV]   (./main.c:161) Buffer value : ETA ALI1767864018
+[13:38:44] [INFO]    [CLIENT] (./main.c:168) [127.0.0.1:46892] Requete CONN
+[13:38:44] [INFO]    [CLIENT] (./main.c:391) [127.0.0.1:46892] numéro de suivie récupéré
+[13:38:44] [INFO]    [SERV]   (./main.c:406) Récuperation de l'etat
+[13:38:44] [DEBUG]   [SERV]   (./main.c:409) Etat commande char : 1
+[13:38:44] [DEBUG]   [SERV]   (./main.c:410) Etat commande int : 1
+[13:38:44] [DEBUG]   [SERV]   (./main.c:415) Envoi msg etat
+[13:38:44] [DEBUG]   [SERV]   (./etat/etat.c:27)  >> arrive fn msg_etat av test: 1
+[13:38:44] [DEBUG]   [SERV]   (./etat/etat.c:31)  >> CONNU test: 1
+[13:38:44] [DEBUG]   [SERV]   (./etat/etat.c:33)  >> arrive fn msg_etat ap test: 1
+[13:38:44] [DEBUG]   [SERV]   (./etat/etat.c:36)  >> arrive fn msg_etat av vrai: 1
+[13:38:44] [DEBUG]   [SERV]   (./etat/etat.c:47)  >> Message etat connu : 1
+[13:38:44] [DEBUG]   [SERV]   (./etat/etat.c:52) ETAT 1 message : ETA TRTC ALI1767864018
+[13:38:44] [DEBUG]   [SERV]   (./etat/etat.c:55) ETAT 1 message : ETA TRTC ALI1767864018 envoyé
+[13:38:44] [INFO]    [SERV]   (./etat/etat.c:56) ETAT 1 message : ETA TRTC ALI1767864018 envoyé
+[13:38:44] [DEBUG]   [SERV]   (./main.c:417) Envoi msg etat FIN
+[13:38:44] [DEBUG]   [SERV]   (./main.c:159) Taille lecture 75
+[13:38:44] [DEBUG]   [SERV]   (./main.c:161) Buffer value : ADD 15223 alizon |1 rue branly| 22300 parveau korentin |5 rue bidule| 29130
+[13:38:44] [INFO]    [CLIENT] (./main.c:168) [127.0.0.1:46892] Requete CONN
+[13:38:44] [INFO]    [CLIENT] (./main.c:219) [127.0.0.1:46892] Informaions récupérées avec succès
+[13:38:44] [INFO]    [SERV]   (./main.c:244) La commande existe deja
+[13:38:44] [INFO]    [SERV]   (./main.c:247) Renvoi du bordereau
+[13:38:44] [INFO]    [CLIENT] (./main.c:293) [127.0.0.1:46892] BORD ALI1767879876 com15223
+[13:38:44] [DEBUG]   [SERV]   (./main.c:159) Taille lecture 17
+[13:38:44] [DEBUG]   [SERV]   (./main.c:161) Buffer value : ETA ALI1767879876
+[13:38:44] [INFO]    [CLIENT] (./main.c:168) [127.0.0.1:46892] Requete CONN
+[13:38:44] [INFO]    [CLIENT] (./main.c:391) [127.0.0.1:46892] numéro de suivie récupéré
+[13:38:44] [INFO]    [SERV]   (./main.c:406) Récuperation de l'etat
+[13:38:44] [DEBUG]   [SERV]   (./main.c:409) Etat commande char : 1
+[13:38:44] [DEBUG]   [SERV]   (./main.c:410) Etat commande int : 1
+[13:38:44] [DEBUG]   [SERV]   (./main.c:415) Envoi msg etat
+[13:38:44] [DEBUG]   [SERV]   (./etat/etat.c:27)  >> arrive fn msg_etat av test: 1
+[13:38:44] [DEBUG]   [SERV]   (./etat/etat.c:31)  >> CONNU test: 1
+[13:38:44] [DEBUG]   [SERV]   (./etat/etat.c:33)  >> arrive fn msg_etat ap test: 1
+[13:38:44] [DEBUG]   [SERV]   (./etat/etat.c:36)  >> arrive fn msg_etat av vrai: 1
+[13:38:44] [DEBUG]   [SERV]   (./etat/etat.c:47)  >> Message etat connu : 1
+[13:38:44] [DEBUG]   [SERV]   (./etat/etat.c:52) ETAT 1 message : ETA TRTC ALI1767879876
+[13:38:44] [DEBUG]   [SERV]   (./etat/etat.c:55) ETAT 1 message : ETA TRTC ALI1767879876 envoyé
+[13:38:44] [INFO]    [SERV]   (./etat/etat.c:56) ETAT 1 message : ETA TRTC ALI1767879876 envoyé
+[13:38:44] [DEBUG]   [SERV]   (./main.c:417) Envoi msg etat FIN
+[13:38:44] [DEBUG]   [SERV]   (./main.c:159) Taille lecture 17
+[13:38:44] [DEBUG]   [SERV]   (./main.c:161) Buffer value : ETA ALI1245369547
+[13:38:44] [INFO]    [CLIENT] (./main.c:168) [127.0.0.1:46892] Requete CONN
+[13:38:44] [INFO]    [CLIENT] (./main.c:391) [127.0.0.1:46892] numéro de suivie récupéré
+[13:38:44] [INFO]    [CLIENT] (./main.c:412) [127.0.0.1:46892] Id_suivi ALI1245369547 n'existe pas
+[13:38:44] [DEBUG]   [SERV]   (./main.c:415) Envoi msg etat
+[13:38:44] [DEBUG]   [SERV]   (./etat/etat.c:27)  >> arrive fn msg_etat av test: 0
+[13:38:44] [DEBUG]   [SERV]   (./etat/etat.c:29)  >> INCONNU test: 0
+[13:38:44] [DEBUG]   [SERV]   (./etat/etat.c:33)  >> arrive fn msg_etat ap test: 0
+[13:38:44] [DEBUG]   [SERV]   (./etat/etat.c:36)  >> arrive fn msg_etat av vrai: 0
+[13:38:44] [DEBUG]   [SERV]   (./etat/etat.c:42)  >> Message etat inconnu : 0
+[13:38:44] [DEBUG]   [SERV]   (./etat/etat.c:52) ETAT 0 message : ETA ERR INCO ALI1245369547
+[13:38:44] [DEBUG]   [SERV]   (./etat/etat.c:55) ETAT 0 message : ETA ERR INCO ALI1245369547 envoyé
+[13:38:44] [INFO]    [SERV]   (./etat/etat.c:56) ETAT 0 message : ETA ERR INCO ALI1245369547 envoyé
+[13:38:44] [DEBUG]   [SERV]   (./main.c:417) Envoi msg etat FIN
+[13:38:44] [DEBUG]   [SERV]   (./main.c:159) Taille lecture 80
+[13:38:44] [DEBUG]   [SERV]   (./main.c:161) Buffer value : ADD a1215m4454 alizon |1 rue branly| 22300 parveau korentin |5 rue bidule| 29130
+[13:38:44] [INFO]    [CLIENT] (./main.c:168) [127.0.0.1:46892] Requete CONN
+[13:38:44] [INFO]    [CLIENT] (./main.c:219) [127.0.0.1:46892] Informaions récupérées avec succès
+[13:38:44] [INFO]    [SERV]   (./main.c:244) La commande existe deja
+[13:38:44] [INFO]    [SERV]   (./main.c:247) Renvoi du bordereau
+[13:38:44] [INFO]    [CLIENT] (./main.c:293) [127.0.0.1:46892] BORD ALI1767963048 coma1215m4454
+[13:38:44] [DEBUG]   [SERV]   (./main.c:159) Taille lecture 17
+[13:38:44] [DEBUG]   [SERV]   (./main.c:161) Buffer value : ETA ALI1767963048
+[13:38:44] [INFO]    [CLIENT] (./main.c:168) [127.0.0.1:46892] Requete CONN
+[13:38:44] [INFO]    [CLIENT] (./main.c:391) [127.0.0.1:46892] numéro de suivie récupéré
+[13:38:44] [INFO]    [SERV]   (./main.c:406) Récuperation de l'etat
+[13:38:44] [DEBUG]   [SERV]   (./main.c:409) Etat commande char : 1
+[13:38:44] [DEBUG]   [SERV]   (./main.c:410) Etat commande int : 1
+[13:38:44] [DEBUG]   [SERV]   (./main.c:415) Envoi msg etat
+[13:38:44] [DEBUG]   [SERV]   (./etat/etat.c:27)  >> arrive fn msg_etat av test: 1
+[13:38:44] [DEBUG]   [SERV]   (./etat/etat.c:31)  >> CONNU test: 1
+[13:38:44] [DEBUG]   [SERV]   (./etat/etat.c:33)  >> arrive fn msg_etat ap test: 1
+[13:38:44] [DEBUG]   [SERV]   (./etat/etat.c:36)  >> arrive fn msg_etat av vrai: 1
+[13:38:44] [DEBUG]   [SERV]   (./etat/etat.c:47)  >> Message etat connu : 1
+[13:38:44] [DEBUG]   [SERV]   (./etat/etat.c:52) ETAT 1 message : ETA TRTC ALI1767963048
+[13:38:44] [DEBUG]   [SERV]   (./etat/etat.c:55) ETAT 1 message : ETA TRTC ALI1767963048 envoyé
+[13:38:44] [INFO]    [SERV]   (./etat/etat.c:56) ETAT 1 message : ETA TRTC ALI1767963048 envoyé
+[13:38:44] [DEBUG]   [SERV]   (./main.c:417) Envoi msg etat FIN
+[13:38:44] [DEBUG]   [SERV]   (./main.c:159) Taille lecture 18
+[13:38:44] [DEBUG]   [SERV]   (./main.c:161) Buffer value : ETAT ALI1245369547
+[13:38:44] [INFO]    [CLIENT] (./main.c:168) [127.0.0.1:46892] Requete CONN
+[13:38:44] [WARN]    [CLIENT] (./main.c:180) [127.0.0.1:46892] Commande non reconnu : CONN
+[13:38:44] [INFO]    [CLIENT] (./main.c:156) [127.0.0.1:46892] Client déconnecté
+[14:12:36] [INFO]    [SERV]   (./main.c:69) **Démarrage du service Delivraptor**
+[14:12:36] [INFO]    [SERV]   (./main.c:79) Socket configuré
+[14:12:36] [INFO]    [SERV]   (./main.c:94) Adresse ip et port configurées
+[14:12:36] [INFO]    [SERV]   (./main.c:99) Socket en écoute
+[14:12:39] [INFO]    [SERV]   (./main.c:107) Connexion accepté
+[14:12:39] [INFO]    [CLIENT] (./main.c:121) [127.0.0.1:54490] Client connecté au service avec succès
+[14:12:39] [INFO]    [CLIENT] (./main.c:127) [127.0.0.1:54490] Authentification réussie
+[14:12:39] [INFO]    [SERV]   (./main.c:149) Connexion a la BDD...
+[14:12:39] [INFO]    [SERV]   (./main.c:356) Connecté a la BDD
+[14:12:39] [INFO]    [SERV]   (./main.c:357) SET search_path...
+[14:12:39] [INFO]    [SERV]   (./main.c:362) SET search_path success
+[14:12:39] [INFO]    [SERV]   (./main.c:367) Base de données actuelle : postgres
+[14:12:39] [INFO]    [SERV]   (./main.c:373) Schéma courant (search_path) : sae3_delivraptor
+[14:12:39] [INFO]    [SERV]   (./main.c:434) SELECT retourne des éléments
+[14:12:39] [DEBUG]   [SERV]   (./main.c:439) id suivi : ALI1767864018, etat 1
+[14:12:39] [DEBUG]   [SERV]   (./main.c:444) prochain etat : 2
+[14:12:39] [DEBUG]   [SERV]   (./main.c:454) Erreur UPDATE: ERROR:  invalid input syntax for type integer: "ALI1767864018"
+CONTEXT:  unnamed portal parameter $1 = '...'
+
+[14:12:39] [DEBUG]   [SERV]   (./main.c:439) id suivi : ALI1767879876, etat 1
+[14:12:39] [DEBUG]   [SERV]   (./main.c:444) prochain etat : 2
+[14:12:39] [DEBUG]   [SERV]   (./main.c:454) Erreur UPDATE: ERROR:  invalid input syntax for type integer: "ALI1767879876"
+CONTEXT:  unnamed portal parameter $1 = '...'
+
+[14:12:39] [DEBUG]   [SERV]   (./main.c:439) id suivi : ALI1767962662, etat 1
+[14:12:39] [DEBUG]   [SERV]   (./main.c:444) prochain etat : 2
+[14:12:39] [DEBUG]   [SERV]   (./main.c:454) Erreur UPDATE: ERROR:  invalid input syntax for type integer: "ALI1767962662"
+CONTEXT:  unnamed portal parameter $1 = '...'
+
+[14:12:39] [DEBUG]   [SERV]   (./main.c:439) id suivi : ALI1767963048, etat 1
+[14:12:39] [DEBUG]   [SERV]   (./main.c:444) prochain etat : 2
+[14:12:39] [DEBUG]   [SERV]   (./main.c:454) Erreur UPDATE: ERROR:  invalid input syntax for type integer: "ALI1767963048"
+CONTEXT:  unnamed portal parameter $1 = '...'
+
+[14:12:39] [DEBUG]   [SERV]   (./main.c:159) Taille lecture 73
+[14:12:39] [DEBUG]   [SERV]   (./main.c:161) Buffer value : ADD 144254 alizon |1 rue branly| 22300 roussel mewen |3 rue machin| 22450
+[14:12:39] [INFO]    [CLIENT] (./main.c:168) [127.0.0.1:54490] Requete CONN
+[14:12:39] [INFO]    [CLIENT] (./main.c:219) [127.0.0.1:54490] Informaions récupérées avec succès
+[14:12:39] [INFO]    [SERV]   (./main.c:244) La commande existe deja
+[14:12:39] [INFO]    [SERV]   (./main.c:247) Renvoi du bordereau
+[14:12:39] [INFO]    [CLIENT] (./main.c:293) [127.0.0.1:54490] BORD ALI1767864018 com144254
+[14:12:39] [DEBUG]   [SERV]   (./main.c:159) Taille lecture 17
+[14:12:39] [DEBUG]   [SERV]   (./main.c:161) Buffer value : ETA ALI1767864018
+[14:12:39] [INFO]    [CLIENT] (./main.c:168) [127.0.0.1:54490] Requete CONN
+[14:12:39] [INFO]    [CLIENT] (./main.c:391) [127.0.0.1:54490] numéro de suivie récupéré
+[14:12:39] [INFO]    [SERV]   (./main.c:406) Récuperation de l'etat
+[14:12:39] [DEBUG]   [SERV]   (./main.c:409) Etat commande char : 1
+[14:12:39] [DEBUG]   [SERV]   (./main.c:410) Etat commande int : 1
+[14:12:39] [DEBUG]   [SERV]   (./main.c:415) Envoi msg etat
+[14:12:39] [DEBUG]   [SERV]   (./etat/etat.c:27)  >> arrive fn msg_etat av test: 1
+[14:12:39] [DEBUG]   [SERV]   (./etat/etat.c:31)  >> CONNU test: 1
+[14:12:39] [DEBUG]   [SERV]   (./etat/etat.c:33)  >> arrive fn msg_etat ap test: 1
+[14:12:39] [DEBUG]   [SERV]   (./etat/etat.c:36)  >> arrive fn msg_etat av vrai: 1
+[14:12:39] [DEBUG]   [SERV]   (./etat/etat.c:47)  >> Message etat connu : 1
+[14:12:39] [DEBUG]   [SERV]   (./etat/etat.c:52) ETAT 1 message : ETA TRTC ALI1767864018
+[14:12:39] [DEBUG]   [SERV]   (./etat/etat.c:55) ETAT 1 message : ETA TRTC ALI1767864018 envoyé
+[14:12:39] [INFO]    [SERV]   (./etat/etat.c:56) ETAT 1 message : ETA TRTC ALI1767864018 envoyé
+[14:12:39] [DEBUG]   [SERV]   (./main.c:417) Envoi msg etat FIN
+[14:12:39] [DEBUG]   [SERV]   (./main.c:159) Taille lecture 75
+[14:12:39] [DEBUG]   [SERV]   (./main.c:161) Buffer value : ADD 15223 alizon |1 rue branly| 22300 parveau korentin |5 rue bidule| 29130
+[14:12:39] [INFO]    [CLIENT] (./main.c:168) [127.0.0.1:54490] Requete CONN
+[14:12:39] [INFO]    [CLIENT] (./main.c:219) [127.0.0.1:54490] Informaions récupérées avec succès
+[14:12:39] [INFO]    [SERV]   (./main.c:244) La commande existe deja
+[14:12:39] [INFO]    [SERV]   (./main.c:247) Renvoi du bordereau
+[14:12:39] [INFO]    [CLIENT] (./main.c:293) [127.0.0.1:54490] BORD ALI1767879876 com15223
+[14:12:39] [DEBUG]   [SERV]   (./main.c:159) Taille lecture 17
+[14:12:39] [DEBUG]   [SERV]   (./main.c:161) Buffer value : ETA ALI1767879876
+[14:12:39] [INFO]    [CLIENT] (./main.c:168) [127.0.0.1:54490] Requete CONN
+[14:12:39] [INFO]    [CLIENT] (./main.c:391) [127.0.0.1:54490] numéro de suivie récupéré
+[14:12:39] [INFO]    [SERV]   (./main.c:406) Récuperation de l'etat
+[14:12:39] [DEBUG]   [SERV]   (./main.c:409) Etat commande char : 1
+[14:12:39] [DEBUG]   [SERV]   (./main.c:410) Etat commande int : 1
+[14:12:39] [DEBUG]   [SERV]   (./main.c:415) Envoi msg etat
+[14:12:39] [DEBUG]   [SERV]   (./etat/etat.c:27)  >> arrive fn msg_etat av test: 1
+[14:12:39] [DEBUG]   [SERV]   (./etat/etat.c:31)  >> CONNU test: 1
+[14:12:39] [DEBUG]   [SERV]   (./etat/etat.c:33)  >> arrive fn msg_etat ap test: 1
+[14:12:39] [DEBUG]   [SERV]   (./etat/etat.c:36)  >> arrive fn msg_etat av vrai: 1
+[14:12:39] [DEBUG]   [SERV]   (./etat/etat.c:47)  >> Message etat connu : 1
+[14:12:39] [DEBUG]   [SERV]   (./etat/etat.c:52) ETAT 1 message : ETA TRTC ALI1767879876
+[14:12:39] [DEBUG]   [SERV]   (./etat/etat.c:55) ETAT 1 message : ETA TRTC ALI1767879876 envoyé
+[14:12:39] [INFO]    [SERV]   (./etat/etat.c:56) ETAT 1 message : ETA TRTC ALI1767879876 envoyé
+[14:12:39] [DEBUG]   [SERV]   (./main.c:417) Envoi msg etat FIN
+[14:12:39] [DEBUG]   [SERV]   (./main.c:159) Taille lecture 17
+[14:12:39] [DEBUG]   [SERV]   (./main.c:161) Buffer value : ETA ALI1245369547
+[14:12:39] [INFO]    [CLIENT] (./main.c:168) [127.0.0.1:54490] Requete CONN
+[14:12:39] [INFO]    [CLIENT] (./main.c:391) [127.0.0.1:54490] numéro de suivie récupéré
+[14:12:39] [INFO]    [CLIENT] (./main.c:412) [127.0.0.1:54490] Id_suivi ALI1245369547 n'existe pas
+[14:12:39] [DEBUG]   [SERV]   (./main.c:415) Envoi msg etat
+[14:12:39] [DEBUG]   [SERV]   (./etat/etat.c:27)  >> arrive fn msg_etat av test: 0
+[14:12:39] [DEBUG]   [SERV]   (./etat/etat.c:29)  >> INCONNU test: 0
+[14:12:39] [DEBUG]   [SERV]   (./etat/etat.c:33)  >> arrive fn msg_etat ap test: 0
+[14:12:39] [DEBUG]   [SERV]   (./etat/etat.c:36)  >> arrive fn msg_etat av vrai: 0
+[14:12:39] [DEBUG]   [SERV]   (./etat/etat.c:42)  >> Message etat inconnu : 0
+[14:12:39] [DEBUG]   [SERV]   (./etat/etat.c:52) ETAT 0 message : ETA ERR INCO ALI1245369547
+[14:12:39] [DEBUG]   [SERV]   (./etat/etat.c:55) ETAT 0 message : ETA ERR INCO ALI1245369547 envoyé
+[14:12:39] [INFO]    [SERV]   (./etat/etat.c:56) ETAT 0 message : ETA ERR INCO ALI1245369547 envoyé
+[14:12:39] [DEBUG]   [SERV]   (./main.c:417) Envoi msg etat FIN
+[14:12:39] [DEBUG]   [SERV]   (./main.c:159) Taille lecture 80
+[14:12:39] [DEBUG]   [SERV]   (./main.c:161) Buffer value : ADD a1215m4454 alizon |1 rue branly| 22300 parveau korentin |5 rue bidule| 29130
+[14:12:39] [INFO]    [CLIENT] (./main.c:168) [127.0.0.1:54490] Requete CONN
+[14:12:39] [INFO]    [CLIENT] (./main.c:219) [127.0.0.1:54490] Informaions récupérées avec succès
+[14:12:39] [INFO]    [SERV]   (./main.c:244) La commande existe deja
+[14:12:39] [INFO]    [SERV]   (./main.c:247) Renvoi du bordereau
+[14:12:39] [INFO]    [CLIENT] (./main.c:293) [127.0.0.1:54490] BORD ALI1767963048 coma1215m4454
+[14:12:39] [DEBUG]   [SERV]   (./main.c:159) Taille lecture 17
+[14:12:39] [DEBUG]   [SERV]   (./main.c:161) Buffer value : ETA ALI1767963048
+[14:12:39] [INFO]    [CLIENT] (./main.c:168) [127.0.0.1:54490] Requete CONN
+[14:12:39] [INFO]    [CLIENT] (./main.c:391) [127.0.0.1:54490] numéro de suivie récupéré
+[14:12:39] [INFO]    [SERV]   (./main.c:406) Récuperation de l'etat
+[14:12:39] [DEBUG]   [SERV]   (./main.c:409) Etat commande char : 1
+[14:12:39] [DEBUG]   [SERV]   (./main.c:410) Etat commande int : 1
+[14:12:39] [DEBUG]   [SERV]   (./main.c:415) Envoi msg etat
+[14:12:39] [DEBUG]   [SERV]   (./etat/etat.c:27)  >> arrive fn msg_etat av test: 1
+[14:12:39] [DEBUG]   [SERV]   (./etat/etat.c:31)  >> CONNU test: 1
+[14:12:39] [DEBUG]   [SERV]   (./etat/etat.c:33)  >> arrive fn msg_etat ap test: 1
+[14:12:39] [DEBUG]   [SERV]   (./etat/etat.c:36)  >> arrive fn msg_etat av vrai: 1
+[14:12:39] [DEBUG]   [SERV]   (./etat/etat.c:47)  >> Message etat connu : 1
+[14:12:39] [DEBUG]   [SERV]   (./etat/etat.c:52) ETAT 1 message : ETA TRTC ALI1767963048
+[14:12:39] [DEBUG]   [SERV]   (./etat/etat.c:55) ETAT 1 message : ETA TRTC ALI1767963048 envoyé
+[14:12:39] [INFO]    [SERV]   (./etat/etat.c:56) ETAT 1 message : ETA TRTC ALI1767963048 envoyé
+[14:12:39] [DEBUG]   [SERV]   (./main.c:417) Envoi msg etat FIN
+[14:12:39] [DEBUG]   [SERV]   (./main.c:159) Taille lecture 18
+[14:12:39] [DEBUG]   [SERV]   (./main.c:161) Buffer value : ETAT ALI1245369547
+[14:12:39] [INFO]    [CLIENT] (./main.c:168) [127.0.0.1:54490] Requete CONN
+[14:12:39] [WARN]    [CLIENT] (./main.c:180) [127.0.0.1:54490] Commande non reconnu : CONN
+[14:12:39] [INFO]    [CLIENT] (./main.c:156) [127.0.0.1:54490] Client déconnecté
+[14:16:03] [INFO]    [SERV]   (./main.c:69) **Démarrage du service Delivraptor**
+[14:16:03] [INFO]    [SERV]   (./main.c:79) Socket configuré
+[14:16:03] [INFO]    [SERV]   (./main.c:94) Adresse ip et port configurées
+[14:16:03] [INFO]    [SERV]   (./main.c:99) Socket en écoute
+[14:16:05] [INFO]    [SERV]   (./main.c:107) Connexion accepté
+[14:16:05] [INFO]    [CLIENT] (./main.c:121) [127.0.0.1:35338] Client connecté au service avec succès
+[14:16:05] [INFO]    [CLIENT] (./main.c:127) [127.0.0.1:35338] Authentification réussie
+[14:16:05] [INFO]    [SERV]   (./main.c:149) Connexion a la BDD...
+[14:16:05] [INFO]    [SERV]   (./main.c:356) Connecté a la BDD
+[14:16:05] [INFO]    [SERV]   (./main.c:357) SET search_path...
+[14:16:05] [INFO]    [SERV]   (./main.c:362) SET search_path success
+[14:16:05] [INFO]    [SERV]   (./main.c:367) Base de données actuelle : postgres
+[14:16:05] [INFO]    [SERV]   (./main.c:373) Schéma courant (search_path) : sae3_delivraptor
+[14:16:05] [INFO]    [SERV]   (./main.c:434) SELECT retourne des éléments
+[14:16:05] [DEBUG]   [SERV]   (./main.c:439) id suivi : ALI1767864018, etat 1
+[14:16:05] [DEBUG]   [SERV]   (./main.c:444) prochain etat : 2
+[14:16:05] [DEBUG]   [SERV]   (./main.c:439) id suivi : ALI1767879876, etat 1
+[14:16:05] [DEBUG]   [SERV]   (./main.c:444) prochain etat : 2
+[14:16:05] [DEBUG]   [SERV]   (./main.c:439) id suivi : ALI1767962662, etat 1
+[14:16:05] [DEBUG]   [SERV]   (./main.c:444) prochain etat : 2
+[14:16:05] [DEBUG]   [SERV]   (./main.c:439) id suivi : ALI1767963048, etat 1
+[14:16:05] [DEBUG]   [SERV]   (./main.c:444) prochain etat : 2
+[14:16:05] [DEBUG]   [SERV]   (./main.c:159) Taille lecture 73
+[14:16:05] [DEBUG]   [SERV]   (./main.c:161) Buffer value : ADD 144254 alizon |1 rue branly| 22300 roussel mewen |3 rue machin| 22450
+[14:16:05] [INFO]    [CLIENT] (./main.c:168) [127.0.0.1:35338] Requete CONN
+[14:16:05] [INFO]    [CLIENT] (./main.c:219) [127.0.0.1:35338] Informaions récupérées avec succès
+[14:16:05] [INFO]    [SERV]   (./main.c:244) La commande existe deja
+[14:16:05] [INFO]    [SERV]   (./main.c:247) Renvoi du bordereau
+[14:16:05] [INFO]    [CLIENT] (./main.c:293) [127.0.0.1:35338] BORD ALI1767864018 com144254
+[14:16:05] [DEBUG]   [SERV]   (./main.c:159) Taille lecture 17
+[14:16:05] [DEBUG]   [SERV]   (./main.c:161) Buffer value : ETA ALI1767864018
+[14:16:05] [INFO]    [CLIENT] (./main.c:168) [127.0.0.1:35338] Requete CONN
+[14:16:05] [INFO]    [CLIENT] (./main.c:391) [127.0.0.1:35338] numéro de suivie récupéré
+[14:16:05] [INFO]    [SERV]   (./main.c:406) Récuperation de l'etat
+[14:16:05] [DEBUG]   [SERV]   (./main.c:409) Etat commande char : 2
+[14:16:05] [DEBUG]   [SERV]   (./main.c:410) Etat commande int : 2
+[14:16:05] [DEBUG]   [SERV]   (./main.c:415) Envoi msg etat
+[14:16:05] [DEBUG]   [SERV]   (./etat/etat.c:27)  >> arrive fn msg_etat av test: 2
+[14:16:05] [DEBUG]   [SERV]   (./etat/etat.c:31)  >> CONNU test: 2
+[14:16:05] [DEBUG]   [SERV]   (./etat/etat.c:33)  >> arrive fn msg_etat ap test: 2
+[14:16:05] [DEBUG]   [SERV]   (./etat/etat.c:36)  >> arrive fn msg_etat av vrai: 2
+[14:16:05] [DEBUG]   [SERV]   (./etat/etat.c:47)  >> Message etat connu : 2
+[14:16:05] [DEBUG]   [SERV]   (./etat/etat.c:52) ETAT 2 message : ETA ACHTR ALI1767864018
+[14:16:05] [DEBUG]   [SERV]   (./etat/etat.c:55) ETAT 2 message : ETA ACHTR ALI1767864018 envoyé
+[14:16:05] [INFO]    [SERV]   (./etat/etat.c:56) ETAT 2 message : ETA ACHTR ALI1767864018 envoyé
+[14:16:05] [DEBUG]   [SERV]   (./main.c:417) Envoi msg etat FIN
+[14:16:05] [DEBUG]   [SERV]   (./main.c:159) Taille lecture 75
+[14:16:05] [DEBUG]   [SERV]   (./main.c:161) Buffer value : ADD 15223 alizon |1 rue branly| 22300 parveau korentin |5 rue bidule| 29130
+[14:16:05] [INFO]    [CLIENT] (./main.c:168) [127.0.0.1:35338] Requete CONN
+[14:16:05] [INFO]    [CLIENT] (./main.c:219) [127.0.0.1:35338] Informaions récupérées avec succès
+[14:16:05] [INFO]    [SERV]   (./main.c:244) La commande existe deja
+[14:16:05] [INFO]    [SERV]   (./main.c:247) Renvoi du bordereau
+[14:16:05] [INFO]    [CLIENT] (./main.c:293) [127.0.0.1:35338] BORD ALI1767879876 com15223
+[14:16:05] [DEBUG]   [SERV]   (./main.c:159) Taille lecture 17
+[14:16:05] [DEBUG]   [SERV]   (./main.c:161) Buffer value : ETA ALI1767879876
+[14:16:05] [INFO]    [CLIENT] (./main.c:168) [127.0.0.1:35338] Requete CONN
+[14:16:05] [INFO]    [CLIENT] (./main.c:391) [127.0.0.1:35338] numéro de suivie récupéré
+[14:16:05] [INFO]    [SERV]   (./main.c:406) Récuperation de l'etat
+[14:16:05] [DEBUG]   [SERV]   (./main.c:409) Etat commande char : 2
+[14:16:05] [DEBUG]   [SERV]   (./main.c:410) Etat commande int : 2
+[14:16:05] [DEBUG]   [SERV]   (./main.c:415) Envoi msg etat
+[14:16:05] [DEBUG]   [SERV]   (./etat/etat.c:27)  >> arrive fn msg_etat av test: 2
+[14:16:05] [DEBUG]   [SERV]   (./etat/etat.c:31)  >> CONNU test: 2
+[14:16:05] [DEBUG]   [SERV]   (./etat/etat.c:33)  >> arrive fn msg_etat ap test: 2
+[14:16:05] [DEBUG]   [SERV]   (./etat/etat.c:36)  >> arrive fn msg_etat av vrai: 2
+[14:16:05] [DEBUG]   [SERV]   (./etat/etat.c:47)  >> Message etat connu : 2
+[14:16:05] [DEBUG]   [SERV]   (./etat/etat.c:52) ETAT 2 message : ETA ACHTR ALI1767879876
+[14:16:05] [DEBUG]   [SERV]   (./etat/etat.c:55) ETAT 2 message : ETA ACHTR ALI1767879876 envoyé
+[14:16:05] [INFO]    [SERV]   (./etat/etat.c:56) ETAT 2 message : ETA ACHTR ALI1767879876 envoyé
+[14:16:05] [DEBUG]   [SERV]   (./main.c:417) Envoi msg etat FIN
+[14:16:05] [DEBUG]   [SERV]   (./main.c:159) Taille lecture 17
+[14:16:05] [DEBUG]   [SERV]   (./main.c:161) Buffer value : ETA ALI1245369547
+[14:16:05] [INFO]    [CLIENT] (./main.c:168) [127.0.0.1:35338] Requete CONN
+[14:16:05] [INFO]    [CLIENT] (./main.c:391) [127.0.0.1:35338] numéro de suivie récupéré
+[14:16:05] [INFO]    [CLIENT] (./main.c:412) [127.0.0.1:35338] Id_suivi ALI1245369547 n'existe pas
+[14:16:05] [DEBUG]   [SERV]   (./main.c:415) Envoi msg etat
+[14:16:05] [DEBUG]   [SERV]   (./etat/etat.c:27)  >> arrive fn msg_etat av test: 0
+[14:16:05] [DEBUG]   [SERV]   (./etat/etat.c:29)  >> INCONNU test: 0
+[14:16:05] [DEBUG]   [SERV]   (./etat/etat.c:33)  >> arrive fn msg_etat ap test: 0
+[14:16:05] [DEBUG]   [SERV]   (./etat/etat.c:36)  >> arrive fn msg_etat av vrai: 0
+[14:16:05] [DEBUG]   [SERV]   (./etat/etat.c:42)  >> Message etat inconnu : 0
+[14:16:05] [DEBUG]   [SERV]   (./etat/etat.c:52) ETAT 0 message : ETA ERR INCO ALI1245369547
+[14:16:05] [DEBUG]   [SERV]   (./etat/etat.c:55) ETAT 0 message : ETA ERR INCO ALI1245369547 envoyé
+[14:16:05] [INFO]    [SERV]   (./etat/etat.c:56) ETAT 0 message : ETA ERR INCO ALI1245369547 envoyé
+[14:16:05] [DEBUG]   [SERV]   (./main.c:417) Envoi msg etat FIN
+[14:16:05] [DEBUG]   [SERV]   (./main.c:159) Taille lecture 80
+[14:16:05] [DEBUG]   [SERV]   (./main.c:161) Buffer value : ADD a1215m4454 alizon |1 rue branly| 22300 parveau korentin |5 rue bidule| 29130
+[14:16:05] [INFO]    [CLIENT] (./main.c:168) [127.0.0.1:35338] Requete CONN
+[14:16:05] [INFO]    [CLIENT] (./main.c:219) [127.0.0.1:35338] Informaions récupérées avec succès
+[14:16:05] [INFO]    [SERV]   (./main.c:244) La commande existe deja
+[14:16:05] [INFO]    [SERV]   (./main.c:247) Renvoi du bordereau
+[14:16:05] [INFO]    [CLIENT] (./main.c:293) [127.0.0.1:35338] BORD ALI1767963048 coma1215m4454
+[14:16:05] [DEBUG]   [SERV]   (./main.c:159) Taille lecture 17
+[14:16:05] [DEBUG]   [SERV]   (./main.c:161) Buffer value : ETA ALI1767963048
+[14:16:05] [INFO]    [CLIENT] (./main.c:168) [127.0.0.1:35338] Requete CONN
+[14:16:05] [INFO]    [CLIENT] (./main.c:391) [127.0.0.1:35338] numéro de suivie récupéré
+[14:16:05] [INFO]    [SERV]   (./main.c:406) Récuperation de l'etat
+[14:16:05] [DEBUG]   [SERV]   (./main.c:409) Etat commande char : 2
+[14:16:05] [DEBUG]   [SERV]   (./main.c:410) Etat commande int : 2
+[14:16:05] [DEBUG]   [SERV]   (./main.c:415) Envoi msg etat
+[14:16:05] [DEBUG]   [SERV]   (./etat/etat.c:27)  >> arrive fn msg_etat av test: 2
+[14:16:05] [DEBUG]   [SERV]   (./etat/etat.c:31)  >> CONNU test: 2
+[14:16:05] [DEBUG]   [SERV]   (./etat/etat.c:33)  >> arrive fn msg_etat ap test: 2
+[14:16:05] [DEBUG]   [SERV]   (./etat/etat.c:36)  >> arrive fn msg_etat av vrai: 2
+[14:16:05] [DEBUG]   [SERV]   (./etat/etat.c:47)  >> Message etat connu : 2
+[14:16:05] [DEBUG]   [SERV]   (./etat/etat.c:52) ETAT 2 message : ETA ACHTR ALI1767963048
+[14:16:05] [DEBUG]   [SERV]   (./etat/etat.c:55) ETAT 2 message : ETA ACHTR ALI1767963048 envoyé
+[14:16:05] [INFO]    [SERV]   (./etat/etat.c:56) ETAT 2 message : ETA ACHTR ALI1767963048 envoyé
+[14:16:05] [DEBUG]   [SERV]   (./main.c:417) Envoi msg etat FIN
+[14:16:05] [DEBUG]   [SERV]   (./main.c:159) Taille lecture 18
+[14:16:05] [DEBUG]   [SERV]   (./main.c:161) Buffer value : ETAT ALI1245369547
+[14:16:05] [INFO]    [CLIENT] (./main.c:168) [127.0.0.1:35338] Requete CONN
+[14:16:05] [WARN]    [CLIENT] (./main.c:180) [127.0.0.1:35338] Commande non reconnu : CONN
+[14:16:05] [INFO]    [CLIENT] (./main.c:156) [127.0.0.1:35338] Client déconnecté
+[14:16:30] [INFO]    [SERV]   (./main.c:69) **Démarrage du service Delivraptor**
+[14:16:30] [INFO]    [SERV]   (./main.c:79) Socket configuré
+[14:16:30] [INFO]    [SERV]   (./main.c:94) Adresse ip et port configurées
+[14:16:30] [INFO]    [SERV]   (./main.c:99) Socket en écoute
+[14:16:32] [INFO]    [SERV]   (./main.c:107) Connexion accepté
+[14:16:32] [INFO]    [CLIENT] (./main.c:121) [127.0.0.1:39326] Client connecté au service avec succès
+[14:16:32] [INFO]    [CLIENT] (./main.c:127) [127.0.0.1:39326] Authentification réussie
+[14:16:32] [INFO]    [SERV]   (./main.c:149) Connexion a la BDD...
+[14:16:32] [INFO]    [SERV]   (./main.c:356) Connecté a la BDD
+[14:16:32] [INFO]    [SERV]   (./main.c:357) SET search_path...
+[14:16:32] [INFO]    [SERV]   (./main.c:362) SET search_path success
+[14:16:32] [INFO]    [SERV]   (./main.c:367) Base de données actuelle : postgres
+[14:16:32] [INFO]    [SERV]   (./main.c:373) Schéma courant (search_path) : sae3_delivraptor
+[14:16:32] [INFO]    [SERV]   (./main.c:434) SELECT retourne des éléments
+[14:16:32] [DEBUG]   [SERV]   (./main.c:439) id suivi : ALI1767864018, etat 2
+[14:16:32] [DEBUG]   [SERV]   (./main.c:444) prochain etat : 3
+[14:16:32] [DEBUG]   [SERV]   (./main.c:439) id suivi : ALI1767879876, etat 2
+[14:16:32] [DEBUG]   [SERV]   (./main.c:444) prochain etat : 3
+[14:16:32] [DEBUG]   [SERV]   (./main.c:439) id suivi : ALI1767962662, etat 2
+[14:16:32] [DEBUG]   [SERV]   (./main.c:444) prochain etat : 3
+[14:16:32] [DEBUG]   [SERV]   (./main.c:439) id suivi : ALI1767963048, etat 2
+[14:16:32] [DEBUG]   [SERV]   (./main.c:444) prochain etat : 3
+[14:16:32] [DEBUG]   [SERV]   (./main.c:159) Taille lecture 73
+[14:16:32] [DEBUG]   [SERV]   (./main.c:161) Buffer value : ADD 144254 alizon |1 rue branly| 22300 roussel mewen |3 rue machin| 22450
+[14:16:32] [INFO]    [CLIENT] (./main.c:168) [127.0.0.1:39326] Requete CONN
+[14:16:32] [INFO]    [CLIENT] (./main.c:219) [127.0.0.1:39326] Informaions récupérées avec succès
+[14:16:32] [INFO]    [SERV]   (./main.c:244) La commande existe deja
+[14:16:32] [INFO]    [SERV]   (./main.c:247) Renvoi du bordereau
+[14:16:32] [INFO]    [CLIENT] (./main.c:293) [127.0.0.1:39326] BORD ALI1767864018 com144254
+[14:16:32] [DEBUG]   [SERV]   (./main.c:159) Taille lecture 17
+[14:16:32] [DEBUG]   [SERV]   (./main.c:161) Buffer value : ETA ALI1767864018
+[14:16:32] [INFO]    [CLIENT] (./main.c:168) [127.0.0.1:39326] Requete CONN
+[14:16:32] [INFO]    [CLIENT] (./main.c:391) [127.0.0.1:39326] numéro de suivie récupéré
+[14:16:32] [INFO]    [SERV]   (./main.c:406) Récuperation de l'etat
+[14:16:32] [DEBUG]   [SERV]   (./main.c:409) Etat commande char : 3
+[14:16:32] [DEBUG]   [SERV]   (./main.c:410) Etat commande int : 3
+[14:16:32] [DEBUG]   [SERV]   (./main.c:415) Envoi msg etat
+[14:16:32] [DEBUG]   [SERV]   (./etat/etat.c:27)  >> arrive fn msg_etat av test: 3
+[14:16:32] [DEBUG]   [SERV]   (./etat/etat.c:31)  >> CONNU test: 3
+[14:16:32] [DEBUG]   [SERV]   (./etat/etat.c:33)  >> arrive fn msg_etat ap test: 3
+[14:16:32] [DEBUG]   [SERV]   (./etat/etat.c:36)  >> arrive fn msg_etat av vrai: 3
+[14:16:32] [DEBUG]   [SERV]   (./etat/etat.c:47)  >> Message etat connu : 3
+[14:16:32] [DEBUG]   [SERV]   (./etat/etat.c:52) ETAT 3 message : ETA ARRTR ALI1767864018
+[14:16:32] [DEBUG]   [SERV]   (./etat/etat.c:55) ETAT 3 message : ETA ARRTR ALI1767864018 envoyé
+[14:16:32] [INFO]    [SERV]   (./etat/etat.c:56) ETAT 3 message : ETA ARRTR ALI1767864018 envoyé
+[14:16:32] [DEBUG]   [SERV]   (./main.c:417) Envoi msg etat FIN
+[14:16:32] [DEBUG]   [SERV]   (./main.c:159) Taille lecture 75
+[14:16:32] [DEBUG]   [SERV]   (./main.c:161) Buffer value : ADD 15223 alizon |1 rue branly| 22300 parveau korentin |5 rue bidule| 29130
+[14:16:32] [INFO]    [CLIENT] (./main.c:168) [127.0.0.1:39326] Requete CONN
+[14:16:32] [INFO]    [CLIENT] (./main.c:219) [127.0.0.1:39326] Informaions récupérées avec succès
+[14:16:32] [INFO]    [SERV]   (./main.c:244) La commande existe deja
+[14:16:32] [INFO]    [SERV]   (./main.c:247) Renvoi du bordereau
+[14:16:32] [INFO]    [CLIENT] (./main.c:293) [127.0.0.1:39326] BORD ALI1767879876 com15223
+[14:16:32] [DEBUG]   [SERV]   (./main.c:159) Taille lecture 17
+[14:16:32] [DEBUG]   [SERV]   (./main.c:161) Buffer value : ETA ALI1767879876
+[14:16:32] [INFO]    [CLIENT] (./main.c:168) [127.0.0.1:39326] Requete CONN
+[14:16:32] [INFO]    [CLIENT] (./main.c:391) [127.0.0.1:39326] numéro de suivie récupéré
+[14:16:32] [INFO]    [SERV]   (./main.c:406) Récuperation de l'etat
+[14:16:32] [DEBUG]   [SERV]   (./main.c:409) Etat commande char : 3
+[14:16:32] [DEBUG]   [SERV]   (./main.c:410) Etat commande int : 3
+[14:16:32] [DEBUG]   [SERV]   (./main.c:415) Envoi msg etat
+[14:16:32] [DEBUG]   [SERV]   (./etat/etat.c:27)  >> arrive fn msg_etat av test: 3
+[14:16:32] [DEBUG]   [SERV]   (./etat/etat.c:31)  >> CONNU test: 3
+[14:16:32] [DEBUG]   [SERV]   (./etat/etat.c:33)  >> arrive fn msg_etat ap test: 3
+[14:16:32] [DEBUG]   [SERV]   (./etat/etat.c:36)  >> arrive fn msg_etat av vrai: 3
+[14:16:32] [DEBUG]   [SERV]   (./etat/etat.c:47)  >> Message etat connu : 3
+[14:16:32] [DEBUG]   [SERV]   (./etat/etat.c:52) ETAT 3 message : ETA ARRTR ALI1767879876
+[14:16:32] [DEBUG]   [SERV]   (./etat/etat.c:55) ETAT 3 message : ETA ARRTR ALI1767879876 envoyé
+[14:16:32] [INFO]    [SERV]   (./etat/etat.c:56) ETAT 3 message : ETA ARRTR ALI1767879876 envoyé
+[14:16:32] [DEBUG]   [SERV]   (./main.c:417) Envoi msg etat FIN
+[14:16:32] [DEBUG]   [SERV]   (./main.c:159) Taille lecture 17
+[14:16:32] [DEBUG]   [SERV]   (./main.c:161) Buffer value : ETA ALI1245369547
+[14:16:32] [INFO]    [CLIENT] (./main.c:168) [127.0.0.1:39326] Requete CONN
+[14:16:32] [INFO]    [CLIENT] (./main.c:391) [127.0.0.1:39326] numéro de suivie récupéré
+[14:16:32] [INFO]    [CLIENT] (./main.c:412) [127.0.0.1:39326] Id_suivi ALI1245369547 n'existe pas
+[14:16:32] [DEBUG]   [SERV]   (./main.c:415) Envoi msg etat
+[14:16:32] [DEBUG]   [SERV]   (./etat/etat.c:27)  >> arrive fn msg_etat av test: 0
+[14:16:32] [DEBUG]   [SERV]   (./etat/etat.c:29)  >> INCONNU test: 0
+[14:16:32] [DEBUG]   [SERV]   (./etat/etat.c:33)  >> arrive fn msg_etat ap test: 0
+[14:16:32] [DEBUG]   [SERV]   (./etat/etat.c:36)  >> arrive fn msg_etat av vrai: 0
+[14:16:32] [DEBUG]   [SERV]   (./etat/etat.c:42)  >> Message etat inconnu : 0
+[14:16:32] [DEBUG]   [SERV]   (./etat/etat.c:52) ETAT 0 message : ETA ERR INCO ALI1245369547
+[14:16:32] [DEBUG]   [SERV]   (./etat/etat.c:55) ETAT 0 message : ETA ERR INCO ALI1245369547 envoyé
+[14:16:32] [INFO]    [SERV]   (./etat/etat.c:56) ETAT 0 message : ETA ERR INCO ALI1245369547 envoyé
+[14:16:32] [DEBUG]   [SERV]   (./main.c:417) Envoi msg etat FIN
+[14:16:32] [DEBUG]   [SERV]   (./main.c:159) Taille lecture 80
+[14:16:32] [DEBUG]   [SERV]   (./main.c:161) Buffer value : ADD a1215m4454 alizon |1 rue branly| 22300 parveau korentin |5 rue bidule| 29130
+[14:16:32] [INFO]    [CLIENT] (./main.c:168) [127.0.0.1:39326] Requete CONN
+[14:16:32] [INFO]    [CLIENT] (./main.c:219) [127.0.0.1:39326] Informaions récupérées avec succès
+[14:16:32] [INFO]    [SERV]   (./main.c:244) La commande existe deja
+[14:16:32] [INFO]    [SERV]   (./main.c:247) Renvoi du bordereau
+[14:16:32] [INFO]    [CLIENT] (./main.c:293) [127.0.0.1:39326] BORD ALI1767963048 coma1215m4454
+[14:16:32] [DEBUG]   [SERV]   (./main.c:159) Taille lecture 17
+[14:16:32] [DEBUG]   [SERV]   (./main.c:161) Buffer value : ETA ALI1767963048
+[14:16:32] [INFO]    [CLIENT] (./main.c:168) [127.0.0.1:39326] Requete CONN
+[14:16:32] [INFO]    [CLIENT] (./main.c:391) [127.0.0.1:39326] numéro de suivie récupéré
+[14:16:32] [INFO]    [SERV]   (./main.c:406) Récuperation de l'etat
+[14:16:32] [DEBUG]   [SERV]   (./main.c:409) Etat commande char : 3
+[14:16:32] [DEBUG]   [SERV]   (./main.c:410) Etat commande int : 3
+[14:16:32] [DEBUG]   [SERV]   (./main.c:415) Envoi msg etat
+[14:16:32] [DEBUG]   [SERV]   (./etat/etat.c:27)  >> arrive fn msg_etat av test: 3
+[14:16:32] [DEBUG]   [SERV]   (./etat/etat.c:31)  >> CONNU test: 3
+[14:16:32] [DEBUG]   [SERV]   (./etat/etat.c:33)  >> arrive fn msg_etat ap test: 3
+[14:16:32] [DEBUG]   [SERV]   (./etat/etat.c:36)  >> arrive fn msg_etat av vrai: 3
+[14:16:32] [DEBUG]   [SERV]   (./etat/etat.c:47)  >> Message etat connu : 3
+[14:16:32] [DEBUG]   [SERV]   (./etat/etat.c:52) ETAT 3 message : ETA ARRTR ALI1767963048
+[14:16:32] [DEBUG]   [SERV]   (./etat/etat.c:55) ETAT 3 message : ETA ARRTR ALI1767963048 envoyé
+[14:16:32] [INFO]    [SERV]   (./etat/etat.c:56) ETAT 3 message : ETA ARRTR ALI1767963048 envoyé
+[14:16:32] [DEBUG]   [SERV]   (./main.c:417) Envoi msg etat FIN
+[14:16:32] [DEBUG]   [SERV]   (./main.c:159) Taille lecture 18
+[14:16:32] [DEBUG]   [SERV]   (./main.c:161) Buffer value : ETAT ALI1245369547
+[14:16:32] [INFO]    [CLIENT] (./main.c:168) [127.0.0.1:39326] Requete CONN
+[14:16:32] [WARN]    [CLIENT] (./main.c:180) [127.0.0.1:39326] Commande non reconnu : CONN
+[14:16:32] [INFO]    [CLIENT] (./main.c:156) [127.0.0.1:39326] Client déconnecté
+[14:16:43] [INFO]    [SERV]   (./main.c:69) **Démarrage du service Delivraptor**
+[14:16:43] [INFO]    [SERV]   (./main.c:79) Socket configuré
+[14:16:43] [INFO]    [SERV]   (./main.c:94) Adresse ip et port configurées
+[14:16:43] [INFO]    [SERV]   (./main.c:99) Socket en écoute
+[14:16:48] [INFO]    [SERV]   (./main.c:107) Connexion accepté
+[14:16:48] [INFO]    [CLIENT] (./main.c:121) [127.0.0.1:58202] Client connecté au service avec succès
+[14:16:48] [INFO]    [CLIENT] (./main.c:127) [127.0.0.1:58202] Authentification réussie
+[14:16:48] [INFO]    [SERV]   (./main.c:149) Connexion a la BDD...
+[14:16:48] [INFO]    [SERV]   (./main.c:356) Connecté a la BDD
+[14:16:48] [INFO]    [SERV]   (./main.c:357) SET search_path...
+[14:16:48] [INFO]    [SERV]   (./main.c:362) SET search_path success
+[14:16:48] [INFO]    [SERV]   (./main.c:367) Base de données actuelle : postgres
+[14:16:48] [INFO]    [SERV]   (./main.c:373) Schéma courant (search_path) : sae3_delivraptor
+[14:16:48] [INFO]    [SERV]   (./main.c:434) SELECT retourne des éléments
+[14:16:48] [DEBUG]   [SERV]   (./main.c:439) id suivi : ALI1767864018, etat 3
+[14:16:48] [DEBUG]   [SERV]   (./main.c:444) prochain etat : 4
+[14:16:48] [DEBUG]   [SERV]   (./main.c:439) id suivi : ALI1767879876, etat 3
+[14:16:48] [DEBUG]   [SERV]   (./main.c:444) prochain etat : 4
+[14:16:48] [DEBUG]   [SERV]   (./main.c:439) id suivi : ALI1767962662, etat 3
+[14:16:48] [DEBUG]   [SERV]   (./main.c:444) prochain etat : 4
+[14:16:48] [DEBUG]   [SERV]   (./main.c:439) id suivi : ALI1767963048, etat 3
+[14:16:48] [DEBUG]   [SERV]   (./main.c:444) prochain etat : 4
+[14:16:48] [DEBUG]   [SERV]   (./main.c:159) Taille lecture 73
+[14:16:48] [DEBUG]   [SERV]   (./main.c:161) Buffer value : ADD 144254 alizon |1 rue branly| 22300 roussel mewen |3 rue machin| 22450
+[14:16:48] [INFO]    [CLIENT] (./main.c:168) [127.0.0.1:58202] Requete CONN
+[14:16:48] [INFO]    [CLIENT] (./main.c:219) [127.0.0.1:58202] Informaions récupérées avec succès
+[14:16:48] [INFO]    [SERV]   (./main.c:244) La commande existe deja
+[14:16:48] [INFO]    [SERV]   (./main.c:247) Renvoi du bordereau
+[14:16:48] [INFO]    [CLIENT] (./main.c:293) [127.0.0.1:58202] BORD ALI1767864018 com144254
+[14:16:48] [DEBUG]   [SERV]   (./main.c:159) Taille lecture 17
+[14:16:48] [DEBUG]   [SERV]   (./main.c:161) Buffer value : ETA ALI1767864018
+[14:16:48] [INFO]    [CLIENT] (./main.c:168) [127.0.0.1:58202] Requete CONN
+[14:16:48] [INFO]    [CLIENT] (./main.c:391) [127.0.0.1:58202] numéro de suivie récupéré
+[14:16:48] [INFO]    [SERV]   (./main.c:406) Récuperation de l'etat
+[14:16:48] [DEBUG]   [SERV]   (./main.c:409) Etat commande char : 4
+[14:16:48] [DEBUG]   [SERV]   (./main.c:410) Etat commande int : 4
+[14:16:48] [DEBUG]   [SERV]   (./main.c:415) Envoi msg etat
+[14:16:48] [DEBUG]   [SERV]   (./etat/etat.c:27)  >> arrive fn msg_etat av test: 4
+[14:16:48] [DEBUG]   [SERV]   (./etat/etat.c:31)  >> CONNU test: 4
+[14:16:48] [DEBUG]   [SERV]   (./etat/etat.c:33)  >> arrive fn msg_etat ap test: 4
+[14:16:48] [DEBUG]   [SERV]   (./etat/etat.c:36)  >> arrive fn msg_etat av vrai: 4
+[14:16:48] [DEBUG]   [SERV]   (./etat/etat.c:47)  >> Message etat connu : 4
+[14:16:48] [DEBUG]   [SERV]   (./etat/etat.c:52) ETAT 4 message : ETA ACHPR ALI1767864018
+[14:16:48] [DEBUG]   [SERV]   (./etat/etat.c:55) ETAT 4 message : ETA ACHPR ALI1767864018 envoyé
+[14:16:48] [INFO]    [SERV]   (./etat/etat.c:56) ETAT 4 message : ETA ACHPR ALI1767864018 envoyé
+[14:16:48] [DEBUG]   [SERV]   (./main.c:417) Envoi msg etat FIN
+[14:16:48] [DEBUG]   [SERV]   (./main.c:159) Taille lecture 75
+[14:16:48] [DEBUG]   [SERV]   (./main.c:161) Buffer value : ADD 15223 alizon |1 rue branly| 22300 parveau korentin |5 rue bidule| 29130
+[14:16:48] [INFO]    [CLIENT] (./main.c:168) [127.0.0.1:58202] Requete CONN
+[14:16:48] [INFO]    [CLIENT] (./main.c:219) [127.0.0.1:58202] Informaions récupérées avec succès
+[14:16:48] [INFO]    [SERV]   (./main.c:244) La commande existe deja
+[14:16:48] [INFO]    [SERV]   (./main.c:247) Renvoi du bordereau
+[14:16:48] [INFO]    [CLIENT] (./main.c:293) [127.0.0.1:58202] BORD ALI1767879876 com15223
+[14:16:48] [DEBUG]   [SERV]   (./main.c:159) Taille lecture 17
+[14:16:48] [DEBUG]   [SERV]   (./main.c:161) Buffer value : ETA ALI1767879876
+[14:16:48] [INFO]    [CLIENT] (./main.c:168) [127.0.0.1:58202] Requete CONN
+[14:16:48] [INFO]    [CLIENT] (./main.c:391) [127.0.0.1:58202] numéro de suivie récupéré
+[14:16:48] [INFO]    [SERV]   (./main.c:406) Récuperation de l'etat
+[14:16:48] [DEBUG]   [SERV]   (./main.c:409) Etat commande char : 4
+[14:16:48] [DEBUG]   [SERV]   (./main.c:410) Etat commande int : 4
+[14:16:48] [DEBUG]   [SERV]   (./main.c:415) Envoi msg etat
+[14:16:48] [DEBUG]   [SERV]   (./etat/etat.c:27)  >> arrive fn msg_etat av test: 4
+[14:16:48] [DEBUG]   [SERV]   (./etat/etat.c:31)  >> CONNU test: 4
+[14:16:48] [DEBUG]   [SERV]   (./etat/etat.c:33)  >> arrive fn msg_etat ap test: 4
+[14:16:48] [DEBUG]   [SERV]   (./etat/etat.c:36)  >> arrive fn msg_etat av vrai: 4
+[14:16:48] [DEBUG]   [SERV]   (./etat/etat.c:47)  >> Message etat connu : 4
+[14:16:48] [DEBUG]   [SERV]   (./etat/etat.c:52) ETAT 4 message : ETA ACHPR ALI1767879876
+[14:16:48] [DEBUG]   [SERV]   (./etat/etat.c:55) ETAT 4 message : ETA ACHPR ALI1767879876 envoyé
+[14:16:48] [INFO]    [SERV]   (./etat/etat.c:56) ETAT 4 message : ETA ACHPR ALI1767879876 envoyé
+[14:16:48] [DEBUG]   [SERV]   (./main.c:417) Envoi msg etat FIN
+[14:16:48] [DEBUG]   [SERV]   (./main.c:159) Taille lecture 17
+[14:16:48] [DEBUG]   [SERV]   (./main.c:161) Buffer value : ETA ALI1245369547
+[14:16:48] [INFO]    [CLIENT] (./main.c:168) [127.0.0.1:58202] Requete CONN
+[14:16:48] [INFO]    [CLIENT] (./main.c:391) [127.0.0.1:58202] numéro de suivie récupéré
+[14:16:48] [INFO]    [CLIENT] (./main.c:412) [127.0.0.1:58202] Id_suivi ALI1245369547 n'existe pas
+[14:16:48] [DEBUG]   [SERV]   (./main.c:415) Envoi msg etat
+[14:16:48] [DEBUG]   [SERV]   (./etat/etat.c:27)  >> arrive fn msg_etat av test: 0
+[14:16:48] [DEBUG]   [SERV]   (./etat/etat.c:29)  >> INCONNU test: 0
+[14:16:48] [DEBUG]   [SERV]   (./etat/etat.c:33)  >> arrive fn msg_etat ap test: 0
+[14:16:48] [DEBUG]   [SERV]   (./etat/etat.c:36)  >> arrive fn msg_etat av vrai: 0
+[14:16:48] [DEBUG]   [SERV]   (./etat/etat.c:42)  >> Message etat inconnu : 0
+[14:16:48] [DEBUG]   [SERV]   (./etat/etat.c:52) ETAT 0 message : ETA ERR INCO ALI1245369547
+[14:16:48] [DEBUG]   [SERV]   (./etat/etat.c:55) ETAT 0 message : ETA ERR INCO ALI1245369547 envoyé
+[14:16:48] [INFO]    [SERV]   (./etat/etat.c:56) ETAT 0 message : ETA ERR INCO ALI1245369547 envoyé
+[14:16:48] [DEBUG]   [SERV]   (./main.c:417) Envoi msg etat FIN
+[14:16:48] [DEBUG]   [SERV]   (./main.c:159) Taille lecture 80
+[14:16:48] [DEBUG]   [SERV]   (./main.c:161) Buffer value : ADD a1215m4454 alizon |1 rue branly| 22300 parveau korentin |5 rue bidule| 29130
+[14:16:48] [INFO]    [CLIENT] (./main.c:168) [127.0.0.1:58202] Requete CONN
+[14:16:48] [INFO]    [CLIENT] (./main.c:219) [127.0.0.1:58202] Informaions récupérées avec succès
+[14:16:48] [INFO]    [SERV]   (./main.c:244) La commande existe deja
+[14:16:48] [INFO]    [SERV]   (./main.c:247) Renvoi du bordereau
+[14:16:48] [INFO]    [CLIENT] (./main.c:293) [127.0.0.1:58202] BORD ALI1767963048 coma1215m4454
+[14:16:48] [DEBUG]   [SERV]   (./main.c:159) Taille lecture 17
+[14:16:48] [DEBUG]   [SERV]   (./main.c:161) Buffer value : ETA ALI1767963048
+[14:16:48] [INFO]    [CLIENT] (./main.c:168) [127.0.0.1:58202] Requete CONN
+[14:16:48] [INFO]    [CLIENT] (./main.c:391) [127.0.0.1:58202] numéro de suivie récupéré
+[14:16:48] [INFO]    [SERV]   (./main.c:406) Récuperation de l'etat
+[14:16:48] [DEBUG]   [SERV]   (./main.c:409) Etat commande char : 4
+[14:16:48] [DEBUG]   [SERV]   (./main.c:410) Etat commande int : 4
+[14:16:48] [DEBUG]   [SERV]   (./main.c:415) Envoi msg etat
+[14:16:48] [DEBUG]   [SERV]   (./etat/etat.c:27)  >> arrive fn msg_etat av test: 4
+[14:16:48] [DEBUG]   [SERV]   (./etat/etat.c:31)  >> CONNU test: 4
+[14:16:48] [DEBUG]   [SERV]   (./etat/etat.c:33)  >> arrive fn msg_etat ap test: 4
+[14:16:48] [DEBUG]   [SERV]   (./etat/etat.c:36)  >> arrive fn msg_etat av vrai: 4
+[14:16:48] [DEBUG]   [SERV]   (./etat/etat.c:47)  >> Message etat connu : 4
+[14:16:48] [DEBUG]   [SERV]   (./etat/etat.c:52) ETAT 4 message : ETA ACHPR ALI1767963048
+[14:16:48] [DEBUG]   [SERV]   (./etat/etat.c:55) ETAT 4 message : ETA ACHPR ALI1767963048 envoyé
+[14:16:48] [INFO]    [SERV]   (./etat/etat.c:56) ETAT 4 message : ETA ACHPR ALI1767963048 envoyé
+[14:16:48] [DEBUG]   [SERV]   (./main.c:417) Envoi msg etat FIN
+[14:16:48] [DEBUG]   [SERV]   (./main.c:159) Taille lecture 18
+[14:16:48] [DEBUG]   [SERV]   (./main.c:161) Buffer value : ETAT ALI1245369547
+[14:16:48] [INFO]    [CLIENT] (./main.c:168) [127.0.0.1:58202] Requete CONN
+[14:16:48] [WARN]    [CLIENT] (./main.c:180) [127.0.0.1:58202] Commande non reconnu : CONN
+[14:16:48] [INFO]    [CLIENT] (./main.c:156) [127.0.0.1:58202] Client déconnecté
+[14:16:51] [INFO]    [SERV]   (./main.c:69) **Démarrage du service Delivraptor**
+[14:16:51] [INFO]    [SERV]   (./main.c:79) Socket configuré
+[14:16:51] [INFO]    [SERV]   (./main.c:94) Adresse ip et port configurées
+[14:16:51] [INFO]    [SERV]   (./main.c:99) Socket en écoute
+[14:17:30] [INFO]    [SERV]   (./main.c:107) Connexion accepté
+[14:17:30] [INFO]    [CLIENT] (./main.c:121) [127.0.0.1:50524] Client connecté au service avec succès
+[14:17:30] [INFO]    [CLIENT] (./main.c:127) [127.0.0.1:50524] Authentification réussie
+[14:17:30] [INFO]    [SERV]   (./main.c:149) Connexion a la BDD...
+[14:17:30] [INFO]    [SERV]   (./main.c:356) Connecté a la BDD
+[14:17:30] [INFO]    [SERV]   (./main.c:357) SET search_path...
+[14:17:30] [INFO]    [SERV]   (./main.c:362) SET search_path success
+[14:17:30] [INFO]    [SERV]   (./main.c:367) Base de données actuelle : postgres
+[14:17:30] [INFO]    [SERV]   (./main.c:373) Schéma courant (search_path) : sae3_delivraptor
+[14:17:30] [INFO]    [SERV]   (./main.c:434) SELECT retourne des éléments
+[14:17:30] [DEBUG]   [SERV]   (./main.c:439) id suivi : ALI1767864018, etat 4
+[14:17:30] [DEBUG]   [SERV]   (./main.c:444) prochain etat : 5
+[14:17:30] [DEBUG]   [SERV]   (./main.c:439) id suivi : ALI1767879876, etat 4
+[14:17:30] [DEBUG]   [SERV]   (./main.c:444) prochain etat : 5
+[14:17:30] [DEBUG]   [SERV]   (./main.c:439) id suivi : ALI1767962662, etat 4
+[14:17:30] [DEBUG]   [SERV]   (./main.c:444) prochain etat : 5
+[14:17:30] [DEBUG]   [SERV]   (./main.c:439) id suivi : ALI1767963048, etat 4
+[14:17:30] [DEBUG]   [SERV]   (./main.c:444) prochain etat : 5
+[14:17:30] [DEBUG]   [SERV]   (./main.c:159) Taille lecture 73
+[14:17:30] [DEBUG]   [SERV]   (./main.c:161) Buffer value : ADD 144254 alizon |1 rue branly| 22300 roussel mewen |3 rue machin| 22450
+[14:17:30] [INFO]    [CLIENT] (./main.c:168) [127.0.0.1:50524] Requete CONN
+[14:17:30] [INFO]    [CLIENT] (./main.c:219) [127.0.0.1:50524] Informaions récupérées avec succès
+[14:17:30] [INFO]    [SERV]   (./main.c:244) La commande existe deja
+[14:17:30] [INFO]    [SERV]   (./main.c:247) Renvoi du bordereau
+[14:17:30] [INFO]    [CLIENT] (./main.c:293) [127.0.0.1:50524] BORD ALI1767864018 com144254
+[14:17:30] [DEBUG]   [SERV]   (./main.c:159) Taille lecture 17
+[14:17:30] [DEBUG]   [SERV]   (./main.c:161) Buffer value : ETA ALI1767864018
+[14:17:30] [INFO]    [CLIENT] (./main.c:168) [127.0.0.1:50524] Requete CONN
+[14:17:30] [INFO]    [CLIENT] (./main.c:391) [127.0.0.1:50524] numéro de suivie récupéré
+[14:17:30] [INFO]    [SERV]   (./main.c:406) Récuperation de l'etat
+[14:17:30] [DEBUG]   [SERV]   (./main.c:409) Etat commande char : 5
+[14:17:30] [DEBUG]   [SERV]   (./main.c:410) Etat commande int : 5
+[14:17:30] [DEBUG]   [SERV]   (./main.c:415) Envoi msg etat
+[14:17:30] [DEBUG]   [SERV]   (./etat/etat.c:27)  >> arrive fn msg_etat av test: 5
+[14:17:30] [DEBUG]   [SERV]   (./etat/etat.c:31)  >> CONNU test: 5
+[14:17:30] [DEBUG]   [SERV]   (./etat/etat.c:33)  >> arrive fn msg_etat ap test: 5
+[14:17:30] [DEBUG]   [SERV]   (./etat/etat.c:36)  >> arrive fn msg_etat av vrai: 5
+[14:17:30] [DEBUG]   [SERV]   (./etat/etat.c:47)  >> Message etat connu : 5
+[14:17:30] [DEBUG]   [SERV]   (./etat/etat.c:52) ETAT 5 message : ETA ARRPR ALI1767864018
+[14:17:30] [DEBUG]   [SERV]   (./etat/etat.c:55) ETAT 5 message : ETA ARRPR ALI1767864018 envoyé
+[14:17:30] [INFO]    [SERV]   (./etat/etat.c:56) ETAT 5 message : ETA ARRPR ALI1767864018 envoyé
+[14:17:30] [DEBUG]   [SERV]   (./main.c:417) Envoi msg etat FIN
+[14:17:30] [DEBUG]   [SERV]   (./main.c:159) Taille lecture 75
+[14:17:30] [DEBUG]   [SERV]   (./main.c:161) Buffer value : ADD 15223 alizon |1 rue branly| 22300 parveau korentin |5 rue bidule| 29130
+[14:17:30] [INFO]    [CLIENT] (./main.c:168) [127.0.0.1:50524] Requete CONN
+[14:17:30] [INFO]    [CLIENT] (./main.c:219) [127.0.0.1:50524] Informaions récupérées avec succès
+[14:17:30] [INFO]    [SERV]   (./main.c:244) La commande existe deja
+[14:17:30] [INFO]    [SERV]   (./main.c:247) Renvoi du bordereau
+[14:17:30] [INFO]    [CLIENT] (./main.c:293) [127.0.0.1:50524] BORD ALI1767879876 com15223
+[14:17:30] [DEBUG]   [SERV]   (./main.c:159) Taille lecture 17
+[14:17:30] [DEBUG]   [SERV]   (./main.c:161) Buffer value : ETA ALI1767879876
+[14:17:30] [INFO]    [CLIENT] (./main.c:168) [127.0.0.1:50524] Requete CONN
+[14:17:30] [INFO]    [CLIENT] (./main.c:391) [127.0.0.1:50524] numéro de suivie récupéré
+[14:17:30] [INFO]    [SERV]   (./main.c:406) Récuperation de l'etat
+[14:17:30] [DEBUG]   [SERV]   (./main.c:409) Etat commande char : 5
+[14:17:30] [DEBUG]   [SERV]   (./main.c:410) Etat commande int : 5
+[14:17:30] [DEBUG]   [SERV]   (./main.c:415) Envoi msg etat
+[14:17:30] [DEBUG]   [SERV]   (./etat/etat.c:27)  >> arrive fn msg_etat av test: 5
+[14:17:30] [DEBUG]   [SERV]   (./etat/etat.c:31)  >> CONNU test: 5
+[14:17:30] [DEBUG]   [SERV]   (./etat/etat.c:33)  >> arrive fn msg_etat ap test: 5
+[14:17:30] [DEBUG]   [SERV]   (./etat/etat.c:36)  >> arrive fn msg_etat av vrai: 5
+[14:17:30] [DEBUG]   [SERV]   (./etat/etat.c:47)  >> Message etat connu : 5
+[14:17:30] [DEBUG]   [SERV]   (./etat/etat.c:52) ETAT 5 message : ETA ARRPR ALI1767879876
+[14:17:30] [DEBUG]   [SERV]   (./etat/etat.c:55) ETAT 5 message : ETA ARRPR ALI1767879876 envoyé
+[14:17:30] [INFO]    [SERV]   (./etat/etat.c:56) ETAT 5 message : ETA ARRPR ALI1767879876 envoyé
+[14:17:30] [DEBUG]   [SERV]   (./main.c:417) Envoi msg etat FIN
+[14:17:30] [DEBUG]   [SERV]   (./main.c:159) Taille lecture 17
+[14:17:30] [DEBUG]   [SERV]   (./main.c:161) Buffer value : ETA ALI1245369547
+[14:17:30] [INFO]    [CLIENT] (./main.c:168) [127.0.0.1:50524] Requete CONN
+[14:17:30] [INFO]    [CLIENT] (./main.c:391) [127.0.0.1:50524] numéro de suivie récupéré
+[14:17:30] [INFO]    [CLIENT] (./main.c:412) [127.0.0.1:50524] Id_suivi ALI1245369547 n'existe pas
+[14:17:30] [DEBUG]   [SERV]   (./main.c:415) Envoi msg etat
+[14:17:30] [DEBUG]   [SERV]   (./etat/etat.c:27)  >> arrive fn msg_etat av test: 0
+[14:17:30] [DEBUG]   [SERV]   (./etat/etat.c:29)  >> INCONNU test: 0
+[14:17:30] [DEBUG]   [SERV]   (./etat/etat.c:33)  >> arrive fn msg_etat ap test: 0
+[14:17:30] [DEBUG]   [SERV]   (./etat/etat.c:36)  >> arrive fn msg_etat av vrai: 0
+[14:17:30] [DEBUG]   [SERV]   (./etat/etat.c:42)  >> Message etat inconnu : 0
+[14:17:30] [DEBUG]   [SERV]   (./etat/etat.c:52) ETAT 0 message : ETA ERR INCO ALI1245369547
+[14:17:30] [DEBUG]   [SERV]   (./etat/etat.c:55) ETAT 0 message : ETA ERR INCO ALI1245369547 envoyé
+[14:17:30] [INFO]    [SERV]   (./etat/etat.c:56) ETAT 0 message : ETA ERR INCO ALI1245369547 envoyé
+[14:17:30] [DEBUG]   [SERV]   (./main.c:417) Envoi msg etat FIN
+[14:17:30] [DEBUG]   [SERV]   (./main.c:159) Taille lecture 80
+[14:17:30] [DEBUG]   [SERV]   (./main.c:161) Buffer value : ADD a1215m4454 alizon |1 rue branly| 22300 parveau korentin |5 rue bidule| 29130
+[14:17:30] [INFO]    [CLIENT] (./main.c:168) [127.0.0.1:50524] Requete CONN
+[14:17:30] [INFO]    [CLIENT] (./main.c:219) [127.0.0.1:50524] Informaions récupérées avec succès
+[14:17:30] [INFO]    [SERV]   (./main.c:244) La commande existe deja
+[14:17:30] [INFO]    [SERV]   (./main.c:247) Renvoi du bordereau
+[14:17:30] [INFO]    [CLIENT] (./main.c:293) [127.0.0.1:50524] BORD ALI1767963048 coma1215m4454
+[14:17:30] [DEBUG]   [SERV]   (./main.c:159) Taille lecture 17
+[14:17:30] [DEBUG]   [SERV]   (./main.c:161) Buffer value : ETA ALI1767963048
+[14:17:30] [INFO]    [CLIENT] (./main.c:168) [127.0.0.1:50524] Requete CONN
+[14:17:30] [INFO]    [CLIENT] (./main.c:391) [127.0.0.1:50524] numéro de suivie récupéré
+[14:17:30] [INFO]    [SERV]   (./main.c:406) Récuperation de l'etat
+[14:17:30] [DEBUG]   [SERV]   (./main.c:409) Etat commande char : 5
+[14:17:30] [DEBUG]   [SERV]   (./main.c:410) Etat commande int : 5
+[14:17:30] [DEBUG]   [SERV]   (./main.c:415) Envoi msg etat
+[14:17:30] [DEBUG]   [SERV]   (./etat/etat.c:27)  >> arrive fn msg_etat av test: 5
+[14:17:30] [DEBUG]   [SERV]   (./etat/etat.c:31)  >> CONNU test: 5
+[14:17:30] [DEBUG]   [SERV]   (./etat/etat.c:33)  >> arrive fn msg_etat ap test: 5
+[14:17:30] [DEBUG]   [SERV]   (./etat/etat.c:36)  >> arrive fn msg_etat av vrai: 5
+[14:17:30] [DEBUG]   [SERV]   (./etat/etat.c:47)  >> Message etat connu : 5
+[14:17:30] [DEBUG]   [SERV]   (./etat/etat.c:52) ETAT 5 message : ETA ARRPR ALI1767963048
+[14:17:30] [DEBUG]   [SERV]   (./etat/etat.c:55) ETAT 5 message : ETA ARRPR ALI1767963048 envoyé
+[14:17:30] [INFO]    [SERV]   (./etat/etat.c:56) ETAT 5 message : ETA ARRPR ALI1767963048 envoyé
+[14:17:30] [DEBUG]   [SERV]   (./main.c:417) Envoi msg etat FIN
+[14:17:30] [DEBUG]   [SERV]   (./main.c:159) Taille lecture 18
+[14:17:30] [DEBUG]   [SERV]   (./main.c:161) Buffer value : ETAT ALI1245369547
+[14:17:30] [INFO]    [CLIENT] (./main.c:168) [127.0.0.1:50524] Requete CONN
+[14:17:30] [WARN]    [CLIENT] (./main.c:180) [127.0.0.1:50524] Commande non reconnu : CONN
+[14:17:30] [INFO]    [CLIENT] (./main.c:156) [127.0.0.1:50524] Client déconnecté
+[14:17:33] [INFO]    [SERV]   (./main.c:69) **Démarrage du service Delivraptor**
+[14:17:33] [INFO]    [SERV]   (./main.c:79) Socket configuré
+[14:17:33] [INFO]    [SERV]   (./main.c:94) Adresse ip et port configurées
+[14:17:33] [INFO]    [SERV]   (./main.c:99) Socket en écoute
+[14:17:35] [INFO]    [SERV]   (./main.c:107) Connexion accepté
+[14:17:35] [INFO]    [CLIENT] (./main.c:121) [127.0.0.1:45242] Client connecté au service avec succès
+[14:17:35] [INFO]    [CLIENT] (./main.c:127) [127.0.0.1:45242] Authentification réussie
+[14:17:35] [INFO]    [SERV]   (./main.c:149) Connexion a la BDD...
+[14:17:35] [INFO]    [SERV]   (./main.c:356) Connecté a la BDD
+[14:17:35] [INFO]    [SERV]   (./main.c:357) SET search_path...
+[14:17:35] [INFO]    [SERV]   (./main.c:362) SET search_path success
+[14:17:35] [INFO]    [SERV]   (./main.c:367) Base de données actuelle : postgres
+[14:17:35] [INFO]    [SERV]   (./main.c:373) Schéma courant (search_path) : sae3_delivraptor
+[14:17:35] [INFO]    [SERV]   (./main.c:434) SELECT retourne des éléments
+[14:17:35] [DEBUG]   [SERV]   (./main.c:439) id suivi : ALI1767864018, etat 5
+[14:17:35] [DEBUG]   [SERV]   (./main.c:444) prochain etat : 6
+[14:17:35] [DEBUG]   [SERV]   (./main.c:439) id suivi : ALI1767879876, etat 5
+[14:17:35] [DEBUG]   [SERV]   (./main.c:444) prochain etat : 6
+[14:17:35] [DEBUG]   [SERV]   (./main.c:439) id suivi : ALI1767962662, etat 5
+[14:17:35] [DEBUG]   [SERV]   (./main.c:444) prochain etat : 6
+[14:17:35] [DEBUG]   [SERV]   (./main.c:439) id suivi : ALI1767963048, etat 5
+[14:17:35] [DEBUG]   [SERV]   (./main.c:444) prochain etat : 6
+[14:17:35] [DEBUG]   [SERV]   (./main.c:159) Taille lecture 73
+[14:17:35] [DEBUG]   [SERV]   (./main.c:161) Buffer value : ADD 144254 alizon |1 rue branly| 22300 roussel mewen |3 rue machin| 22450
+[14:17:35] [INFO]    [CLIENT] (./main.c:168) [127.0.0.1:45242] Requete CONN
+[14:17:35] [INFO]    [CLIENT] (./main.c:219) [127.0.0.1:45242] Informaions récupérées avec succès
+[14:17:35] [INFO]    [SERV]   (./main.c:244) La commande existe deja
+[14:17:35] [INFO]    [SERV]   (./main.c:247) Renvoi du bordereau
+[14:17:35] [INFO]    [CLIENT] (./main.c:293) [127.0.0.1:45242] BORD ALI1767864018 com144254
+[14:17:35] [DEBUG]   [SERV]   (./main.c:159) Taille lecture 17
+[14:17:35] [DEBUG]   [SERV]   (./main.c:161) Buffer value : ETA ALI1767864018
+[14:17:35] [INFO]    [CLIENT] (./main.c:168) [127.0.0.1:45242] Requete CONN
+[14:17:35] [INFO]    [CLIENT] (./main.c:391) [127.0.0.1:45242] numéro de suivie récupéré
+[14:17:35] [INFO]    [SERV]   (./main.c:406) Récuperation de l'etat
+[14:17:35] [DEBUG]   [SERV]   (./main.c:409) Etat commande char : 6
+[14:17:35] [DEBUG]   [SERV]   (./main.c:410) Etat commande int : 6
+[14:17:35] [DEBUG]   [SERV]   (./main.c:415) Envoi msg etat
+[14:17:35] [DEBUG]   [SERV]   (./etat/etat.c:27)  >> arrive fn msg_etat av test: 6
+[14:17:35] [DEBUG]   [SERV]   (./etat/etat.c:31)  >> CONNU test: 6
+[14:17:35] [DEBUG]   [SERV]   (./etat/etat.c:33)  >> arrive fn msg_etat ap test: 6
+[14:17:35] [DEBUG]   [SERV]   (./etat/etat.c:36)  >> arrive fn msg_etat av vrai: 6
+[14:17:35] [DEBUG]   [SERV]   (./etat/etat.c:47)  >> Message etat connu : 6
+[14:17:35] [DEBUG]   [SERV]   (./etat/etat.c:52) ETAT 6 message : ETA ACHCL ALI1767864018
+[14:17:35] [DEBUG]   [SERV]   (./etat/etat.c:55) ETAT 6 message : ETA ACHCL ALI1767864018 envoyé
+[14:17:35] [INFO]    [SERV]   (./etat/etat.c:56) ETAT 6 message : ETA ACHCL ALI1767864018 envoyé
+[14:17:35] [DEBUG]   [SERV]   (./main.c:417) Envoi msg etat FIN
+[14:17:35] [DEBUG]   [SERV]   (./main.c:159) Taille lecture 75
+[14:17:35] [DEBUG]   [SERV]   (./main.c:161) Buffer value : ADD 15223 alizon |1 rue branly| 22300 parveau korentin |5 rue bidule| 29130
+[14:17:35] [INFO]    [CLIENT] (./main.c:168) [127.0.0.1:45242] Requete CONN
+[14:17:35] [INFO]    [CLIENT] (./main.c:219) [127.0.0.1:45242] Informaions récupérées avec succès
+[14:17:35] [INFO]    [SERV]   (./main.c:244) La commande existe deja
+[14:17:35] [INFO]    [SERV]   (./main.c:247) Renvoi du bordereau
+[14:17:35] [INFO]    [CLIENT] (./main.c:293) [127.0.0.1:45242] BORD ALI1767879876 com15223
+[14:17:35] [DEBUG]   [SERV]   (./main.c:159) Taille lecture 17
+[14:17:35] [DEBUG]   [SERV]   (./main.c:161) Buffer value : ETA ALI1767879876
+[14:17:35] [INFO]    [CLIENT] (./main.c:168) [127.0.0.1:45242] Requete CONN
+[14:17:35] [INFO]    [CLIENT] (./main.c:391) [127.0.0.1:45242] numéro de suivie récupéré
+[14:17:35] [INFO]    [SERV]   (./main.c:406) Récuperation de l'etat
+[14:17:35] [DEBUG]   [SERV]   (./main.c:409) Etat commande char : 6
+[14:17:35] [DEBUG]   [SERV]   (./main.c:410) Etat commande int : 6
+[14:17:35] [DEBUG]   [SERV]   (./main.c:415) Envoi msg etat
+[14:17:35] [DEBUG]   [SERV]   (./etat/etat.c:27)  >> arrive fn msg_etat av test: 6
+[14:17:35] [DEBUG]   [SERV]   (./etat/etat.c:31)  >> CONNU test: 6
+[14:17:35] [DEBUG]   [SERV]   (./etat/etat.c:33)  >> arrive fn msg_etat ap test: 6
+[14:17:35] [DEBUG]   [SERV]   (./etat/etat.c:36)  >> arrive fn msg_etat av vrai: 6
+[14:17:35] [DEBUG]   [SERV]   (./etat/etat.c:47)  >> Message etat connu : 6
+[14:17:35] [DEBUG]   [SERV]   (./etat/etat.c:52) ETAT 6 message : ETA ACHCL ALI1767879876
+[14:17:35] [DEBUG]   [SERV]   (./etat/etat.c:55) ETAT 6 message : ETA ACHCL ALI1767879876 envoyé
+[14:17:35] [INFO]    [SERV]   (./etat/etat.c:56) ETAT 6 message : ETA ACHCL ALI1767879876 envoyé
+[14:17:35] [DEBUG]   [SERV]   (./main.c:417) Envoi msg etat FIN
+[14:17:35] [DEBUG]   [SERV]   (./main.c:159) Taille lecture 17
+[14:17:35] [DEBUG]   [SERV]   (./main.c:161) Buffer value : ETA ALI1245369547
+[14:17:35] [INFO]    [CLIENT] (./main.c:168) [127.0.0.1:45242] Requete CONN
+[14:17:35] [INFO]    [CLIENT] (./main.c:391) [127.0.0.1:45242] numéro de suivie récupéré
+[14:17:35] [INFO]    [CLIENT] (./main.c:412) [127.0.0.1:45242] Id_suivi ALI1245369547 n'existe pas
+[14:17:35] [DEBUG]   [SERV]   (./main.c:415) Envoi msg etat
+[14:17:35] [DEBUG]   [SERV]   (./etat/etat.c:27)  >> arrive fn msg_etat av test: 0
+[14:17:35] [DEBUG]   [SERV]   (./etat/etat.c:29)  >> INCONNU test: 0
+[14:17:35] [DEBUG]   [SERV]   (./etat/etat.c:33)  >> arrive fn msg_etat ap test: 0
+[14:17:35] [DEBUG]   [SERV]   (./etat/etat.c:36)  >> arrive fn msg_etat av vrai: 0
+[14:17:35] [DEBUG]   [SERV]   (./etat/etat.c:42)  >> Message etat inconnu : 0
+[14:17:35] [DEBUG]   [SERV]   (./etat/etat.c:52) ETAT 0 message : ETA ERR INCO ALI1245369547
+[14:17:35] [DEBUG]   [SERV]   (./etat/etat.c:55) ETAT 0 message : ETA ERR INCO ALI1245369547 envoyé
+[14:17:35] [INFO]    [SERV]   (./etat/etat.c:56) ETAT 0 message : ETA ERR INCO ALI1245369547 envoyé
+[14:17:35] [DEBUG]   [SERV]   (./main.c:417) Envoi msg etat FIN
+[14:17:35] [DEBUG]   [SERV]   (./main.c:159) Taille lecture 80
+[14:17:35] [DEBUG]   [SERV]   (./main.c:161) Buffer value : ADD a1215m4454 alizon |1 rue branly| 22300 parveau korentin |5 rue bidule| 29130
+[14:17:35] [INFO]    [CLIENT] (./main.c:168) [127.0.0.1:45242] Requete CONN
+[14:17:35] [INFO]    [CLIENT] (./main.c:219) [127.0.0.1:45242] Informaions récupérées avec succès
+[14:17:35] [INFO]    [SERV]   (./main.c:244) La commande existe deja
+[14:17:35] [INFO]    [SERV]   (./main.c:247) Renvoi du bordereau
+[14:17:35] [INFO]    [CLIENT] (./main.c:293) [127.0.0.1:45242] BORD ALI1767963048 coma1215m4454
+[14:17:35] [DEBUG]   [SERV]   (./main.c:159) Taille lecture 17
+[14:17:35] [DEBUG]   [SERV]   (./main.c:161) Buffer value : ETA ALI1767963048
+[14:17:35] [INFO]    [CLIENT] (./main.c:168) [127.0.0.1:45242] Requete CONN
+[14:17:35] [INFO]    [CLIENT] (./main.c:391) [127.0.0.1:45242] numéro de suivie récupéré
+[14:17:35] [INFO]    [SERV]   (./main.c:406) Récuperation de l'etat
+[14:17:35] [DEBUG]   [SERV]   (./main.c:409) Etat commande char : 6
+[14:17:35] [DEBUG]   [SERV]   (./main.c:410) Etat commande int : 6
+[14:17:35] [DEBUG]   [SERV]   (./main.c:415) Envoi msg etat
+[14:17:35] [DEBUG]   [SERV]   (./etat/etat.c:27)  >> arrive fn msg_etat av test: 6
+[14:17:35] [DEBUG]   [SERV]   (./etat/etat.c:31)  >> CONNU test: 6
+[14:17:35] [DEBUG]   [SERV]   (./etat/etat.c:33)  >> arrive fn msg_etat ap test: 6
+[14:17:35] [DEBUG]   [SERV]   (./etat/etat.c:36)  >> arrive fn msg_etat av vrai: 6
+[14:17:35] [DEBUG]   [SERV]   (./etat/etat.c:47)  >> Message etat connu : 6
+[14:17:35] [DEBUG]   [SERV]   (./etat/etat.c:52) ETAT 6 message : ETA ACHCL ALI1767963048
+[14:17:35] [DEBUG]   [SERV]   (./etat/etat.c:55) ETAT 6 message : ETA ACHCL ALI1767963048 envoyé
+[14:17:35] [INFO]    [SERV]   (./etat/etat.c:56) ETAT 6 message : ETA ACHCL ALI1767963048 envoyé
+[14:17:35] [DEBUG]   [SERV]   (./main.c:417) Envoi msg etat FIN
+[14:17:35] [DEBUG]   [SERV]   (./main.c:159) Taille lecture 18
+[14:17:35] [DEBUG]   [SERV]   (./main.c:161) Buffer value : ETAT ALI1245369547
+[14:17:35] [INFO]    [CLIENT] (./main.c:168) [127.0.0.1:45242] Requete CONN
+[14:17:35] [WARN]    [CLIENT] (./main.c:180) [127.0.0.1:45242] Commande non reconnu : CONN
+[14:17:35] [INFO]    [CLIENT] (./main.c:156) [127.0.0.1:45242] Client déconnecté

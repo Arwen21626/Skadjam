@@ -1,4 +1,4 @@
-const numberOfItems = 5 //NB produits à afficher
+const numberOfItems = 15 //NB produits à afficher
 let first = 0
 let actualPage
 
@@ -88,7 +88,7 @@ function ajoutEventListener(){
 
     // Fonctions de filtres
         //Catégories
-    categorieAlimentaire.addEventListener("click",function () {CCC
+    categorieAlimentaire.addEventListener("click",function () {
         tabProd = filtrageCategorieAlimentaire(tabProd);
         afficherProduit(tabProd)
     })
@@ -161,12 +161,16 @@ function ajoutEventListener(){
 
 // EventListeners pour l'animation sidebar filtre et tri
     // Récupératiion des elements
+    let boutonSidebar = document.getElementById("filtresTris")
     let sidebar = document.getElementsByTagName("aside")[0]
+    let listeProd = document.getElementById("prod")
 
     // Fonction
-    sidebar.addEventListener("click", function(){
-        sidebar.classList.toggle('active')
-        console.log("Coucou")
+    boutonSidebar.addEventListener("click", function(){
+        boutonSidebar.classList.add("hidden")
+        // prod.classList.add("w-")
+        sidebar.classList.toggle("translate-x-0")
+
     })
 }
 
@@ -207,13 +211,13 @@ function pageSuivante(){
 
 // Affichage
 function afficherListe(){
-    let tab = ""
-  for(let i = first; i < first + numberOfItems;i++){
-    if(i<tabProd.length){
-      tab = afficherProduit(i)
+let parent = document.getElementById("prod")
+    parent.innerHTML = ""
+    for(let i = first; i < first + numberOfItems;i++){
+        if(i<tabProd.length){
+        afficherProduit(i)
+        }
     }
-  }
-//   numPageInfo();
 }
 
 function afficherProduit(indice){
