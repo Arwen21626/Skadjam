@@ -42,11 +42,9 @@
     <?php (include __DIR__ . "/../../php/structure/header_front.php"); ?>
     <?php include(__DIR__ . "/../../php/structure/navbar_front.php"); ?>
 
-    
-    <main class="md:min-h-[800px] min-h-[600px] mt-10">
-        <!-- Barre de recherche -->
+    <!-- Barre de recherche -->
     <p id="filtresTris">Filtres & tris</p>
-    <aside class="sidebar bg-beige p-4 md:sticky md:top-16 md:left-0 md:w-80 md:h-225 overflow-auto">
+    <aside class="sidebar bg-beige p-4 md:sticky md:top-16 md:w-80 md:h-96 ">
         <!-- Filtres -->
         <section>
             <h3>Filtres</h3>
@@ -213,6 +211,8 @@
             </article>
         </section>
     </aside>
+    <main class="md:min-h-[800px] min-h-[600px] mt-10">
+        
 
         <div id="prod" class="grid grid-cols-2 justify-items-center md:grid-cols-3">
             <script>
