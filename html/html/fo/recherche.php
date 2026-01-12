@@ -213,23 +213,24 @@
                 </article>
             </section>
         </aside>
-        <div id="listeProduit" class="flex justify-end">
-            <div id="prod" class="ml-4 w-4/5 flex flex-row flex-wrap justify-around">
+        <div id="listeProduit" class="flex flex-col items-center">
+            <div id="prod" class="flex flex-row flex-wrap justify-around">
                 <script>
                     afficherListe()
                 </script>
+            </div>
+            <!--fin du catalogue-->
+            <div id="changePage" class=" ml-4 w-4/5 flex flex-row justify-around">
+                <button id="premierePage">Premiere page</button>
+                <button id="pagePrec">Page prec</button>
+                <button id="pageSuiv">Page suiv</button>
+                <button id="dernierePage">Derniere page</button>
             </div>
         </div>
 
         <?php $dbh = null;?>
         
-        <!--fin du catalogue-->
-        <div class="flex flex-row justify-around">
-            <button id="premierePage">Premiere page</button>
-            <button id="pagePrec">Page prec</button>
-            <button id="pageSuiv">Page suiv</button>
-            <button id="dernierePage">Derniere page</button>
-        </div>
+        
         
 
         <script>

@@ -233,6 +233,9 @@ input.quantite-prod-input {
   .pointer-events-none {
     pointer-events: none;
   }
+  .visible {
+    visibility: visible;
+  }
   .absolute {
     position: absolute;
   }
@@ -316,6 +319,9 @@ input.quantite-prod-input {
   }
   .row-start-6 {
     grid-row-start: 6;
+  }
+  .row-start-7 {
+    grid-row-start: 7;
   }
   .float-right {
     float: right;
@@ -823,6 +829,9 @@ input.quantite-prod-input {
   }
   .items-center {
     align-items: center;
+  }
+  .items-end {
+    align-items: flex-end;
   }
   .items-start {
     align-items: flex-start;
