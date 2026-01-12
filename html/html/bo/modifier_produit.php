@@ -65,13 +65,12 @@ foreach($dbh->query("SELECT *,est_masque::CHAR as est_masque_php
     // id_promotion != null veut dire que le produit est en promotion
     if($promotion['id_promotion'] != null){
         $enPromotion = 'true';
+        // Récupération des dates de promotion
+        $dateDebutPromotion = formatDate($promotion['date_debut_promotion']);
+        $dateFinPromotion = formatDate($promotion['date_fin_promotion']);
     }else{
         $enPromotion = 'false';
     }
-
-    // Récupération des dates de promotion
-    $dateDebutPromotion = formatDate($promotion['date_debut_promotion']);
-    $dateFinPromotion = formatDate($promotion['date_fin_promotion']);
 
     //Récupération attribut de photo
     $idPhoto = $produit['id_photo'];
@@ -379,7 +378,7 @@ else { ?>
                     </div>
                     <div>
                         <div class="flex flex-row mr-4 ml-4">
-                            <label class="mr-4" for="dateFinPromotion">Fin de promotion* :</label>
+                            <label class="mr-4" for="dateFinPromotion">Fin de promotion :</label>
                             <input class="border-4 border-beige rounded-2xl w-45" type="date" name="dateFinPromotion" id="dateFinPromotion" value="<?php echo $dateFinPromotion != null ? $dateFinPromotion : null; ?>">
                         </div>
                     </div>
@@ -418,7 +417,7 @@ else { ?>
     document.addEventListener('DOMContentLoaded', function() {
         var promoCheck = document.getElementById('promoCheck');
         promoCheck.addEventListener('change', togglePromotionInputs);
-        togglePromotionInputs(); // Initial call to set the correct state on page load
+        togglePromotionInputs();
     });
 </script>
 <?php } ?>
