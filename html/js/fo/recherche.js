@@ -174,14 +174,12 @@ function firstPage(){
     first = 0
     actualPage = 1
     afficherListe()
-    // console.log("Salut")
 }
 
 function lastPage(){
     first = (maxPages * numberOfItems)-numberOfItems;
     actualPage = maxPages;
     afficherListe(); 
-    // console.log("Salut")
 }
 
 function pagePrecedente(){
@@ -190,7 +188,6 @@ function pagePrecedente(){
         actualPage --;
         afficherListe();
     }
-    // console.log("Salut")
 }
 
 function pageSuivante(){
@@ -199,7 +196,6 @@ function pageSuivante(){
         actualPage ++;
         afficherListe();
     }
-    // console.log("Salut")
 }
 
 // function numPageInfo(){
@@ -211,9 +207,10 @@ function pageSuivante(){
 
 // Affichage
 function afficherListe(){
+    let tab = ""
   for(let i = first; i < first + numberOfItems;i++){
     if(i<tabProd.length){
-      afficherProduit(i)
+      tab = afficherProduit(i)
     }
   }
 //   numPageInfo();
