@@ -8,14 +8,15 @@
     try {     
         $tabProduit = null;           
         //récupère toutes les infos des tables produits
-        foreach($dbh->query("SELECT * FROM sae3_skadjam._produit pr
+        foreach($dbh->query("SELECT p.id_produit, p.libelle_produit, p.prix_ttc, p.prix_remise, p.note_moyenne, r.pourcentage_remise 
+                                FROM sae3_skadjam._produit p
                                 INNER JOIN sae3_skadjam._vendeur v 
-                                    ON pr.id_vendeur = v.id_compte
+                                    ON p.id_vendeur = v.id_compte
                                 LEFT JOIN sae3_skadjam._reduit rd
-                                    ON rd.id_produit = pr.id_produit
+                                    ON rd.id_produit = p.id_produit
                                 LEFT JOIN sae3_skadjam._remise r
                                     ON rd.id_remise = r.id_remise
-                                WHERE v.id_compte = $idCompte AND pr.est_supprime = false
+                                WHERE v.id_compte = $idCompte AND p.est_supprime = false
                                 ORDER BY libelle_produit ASC;"
                             , PDO::FETCH_ASSOC) as $row){
             $tabProduit[] = $row;

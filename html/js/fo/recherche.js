@@ -151,12 +151,16 @@ function ajoutEventListener(){
 
 // EventListeners pour l'animation sidebar filtre et tri
     // Récupératiion des elements
+    let boutonSidebar = document.getElementById("filtresTris")
     let sidebar = document.getElementsByTagName("aside")[0]
+    let listeProd = document.getElementById("prod")
 
     // Fonction
-    sidebar.addEventListener("click", function(){
-        sidebar.classList.toggle('active')
-        console.log("Coucou")
+    boutonSidebar.addEventListener("click", function(){
+        boutonSidebar.classList.add("hidden")
+        // prod.classList.add("w-")
+        sidebar.classList.toggle("translate-x-0")
+
     })
 }
 
