@@ -80,30 +80,42 @@
                 //affiche la photo du produit, son nom, son prix et sa note ?>
                 <div class="grid grid-cols-2 justify-items-center md:grid-cols-3">
                     <?php foreach($lignes as $id => $valeurs){
-                        $idProduit = $valeurs['id_produit'];?>
+                        $idProduit = $valeurs['id_produit'];
+                        // Le produit est-il en promotion ?
+                        $stmt = $dbh->prepare("SELECT *
+                                            FROM sae3_skadjam._promu
+                                            WHERE id_produit = :id_produit");
+                        $stmt->execute([':id_produit' => $idProduit]);
+                        $estPromu = ($stmt->fetch() !== false); ?>
                         <section class="bg-bleu grid grid-cols-[40%_60%] w-40 md:w-80 h-auto p-2 md:p-3 m-2">
                             <!--affichage de la photo-->
                             <a href= "<?php echo "html/fo/details_produit.php?idProduit=".$idProduit;?>" class="col-span-2 justify-self-center mb-3">
                                 <img src="<?php echo $valeurs['url_photo'];?>" 
                                         alt="<?php echo $valeurs['alt'];?>"
                                         title="<?php echo $valeurs['titre'];?>">
-                            
-
-                                <!--affichage du nom du produit-->
-                                <p class="col-span-2"><?php echo $valeurs['libelle_produit'];?></p> 
-
-                                <!--affichage du prix du produit-->   
-                                <div class="flex justify-start items-center col-span-2">
-                                    <?php $prix = str_replace(".", ",", htmlentities($valeurs['prix_ttc'])) ?>
-                                    <p><?php echo $prix;?> €</p>
-
-                                    <!--récupération de la note-->
-                                    <div class="w-2/4 ml-2 md:ml-10 flex">
-                                        <?php $note = $valeurs['note_moyenne'];
-                                            affichageNote($note); ?>
-                                    </div> 
-                                </div>
                             </a>
+
+                            <!--affichage de la promotion-->
+                            <?php if($estPromu){ ?>
+                                <div class="bg-rouge absolute col-span-2 w-36 md:w-74 underline text-beige pt-2 pb-1.5">
+                                    <h4 class="text-center text-beige overline m-0"><strong>Promotion</strong></h4>
+                                </div>
+                            <?php } ?>
+
+                            <!--affichage du nom du produit-->
+                            <p class="col-span-2"><?php echo $valeurs['libelle_produit'];?></p> 
+
+                            <!--affichage du prix du produit-->   
+                            <div class="flex justify-start items-center col-span-2">
+                                <?php $prix = str_replace(".", ",", htmlentities($valeurs['prix_ttc'])) ?>
+                                <p><?php echo $prix;?> €</p>
+
+                                <!--récupération de la note-->
+                                <div class="w-2/4 ml-2 md:ml-10 flex">
+                                    <?php $note = $valeurs['note_moyenne'];
+                                        affichageNote($note); ?>
+                                </div> 
+                            </div>
                         </section>
                     <?php } ?>
                 </div>

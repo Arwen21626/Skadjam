@@ -210,3 +210,12 @@ function verifCryptogramme($cryptogramme){
     // Vérifie que le cryptogramme à bien 3 chiffres
     return (preg_match('[0-9]{3}',$cryptogramme));
 }
+
+function verifPourcentage($pourcentage){
+    if ($pourcentage <= 1 && $pourcentage >= 0){
+        return true;
+    }
+    else{
+        return false;
+    }
+}

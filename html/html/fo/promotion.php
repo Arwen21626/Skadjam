@@ -67,7 +67,7 @@
                 }
 
                 if($tabProduit == null){ ?>
-                    <p>Votre catalogue est vide.</p>
+                    <p class="text-center mb-9">Nous n'avons pas de produits en promotion pour le moment.</p>
                 <?php }
                 
                 $maxPage = sizeof($tabProduit)/PAGE_SIZE;
@@ -77,14 +77,27 @@
                 //affiche la photo du produit, son nom, son prix et sa note, son stock ?>
                 <div class="grid grid-cols-3">
                     <?php foreach($tabProduit as $id => $valeurs){
-                        $idProduit = $valeurs['id_produit'];?>
-                        <section class="bg-bleu grid grid-cols-[40%_60%] w-80 p-3 m-2">
+                        $idProduit = $valeurs['id_produit'];
+                        // Le produit est-il en promotion ?
+                        $stmt = $dbh->prepare("SELECT *
+                                                FROM sae3_skadjam._promu
+                                                WHERE id_produit = :id_produit");
+                        $stmt->execute([':id_produit' => $idProduit]);
+                        $estPromu = ($stmt->fetch() !== false); ?>
+                        <section class="bg-bleu grid grid-cols-[40%_60%] w-40 md:w-80 h-auto p-2 md:p-3 m-2">
                             <!--affichage de la photo-->
                             <a href= "<?php echo "details_produit.php?idProduit=".$idProduit;?>" class="col-span-2 justify-self-center mb-3">
                                 <img src="<?php echo $valeurs['url_photo'];?>" 
                                         alt="<?php echo $valeurs['alt'];?>"
                                         title="<?php echo $valeurs['titre'];?>">
                             </a>
+
+                            <!--affichage de la promotion-->
+                            <?php if($estPromu){ ?>
+                                <div class="bg-rouge absolute col-span-2 w-36 md:w-74 underline text-beige pt-2 pb-1.5">
+                                    <h4 class="text-center text-beige overline m-0"><strong>Promotion</strong></h4>
+                                </div>
+                            <?php } ?>
 
                             <!--affichage du nom du produit-->
                             <p class="col-span-2"><?php echo $valeurs['libelle_produit'];?></p> 
@@ -99,10 +112,7 @@
                                     <?php $note = $valeurs['note_moyenne'];
                                         affichageNote($note); ?>
                                 </div> 
-                            </div>   
-                             
-                            <!--affichage du stock-->
-                            <p class="col-span-2">En stock : <?php echo $valeurs['quantite_stock'];?></p>       
+                            </div>    
                         </section>
                     <?php } ?>
                 </div>         

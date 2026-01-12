@@ -39,17 +39,17 @@ foreach($dbh->query('SELECT * from sae3_skadjam._tva', PDO::FETCH_ASSOC) as $row
 
 if (isset($_POST['categorie']) && isset($_POST['nom']) && isset($_POST['prix']) && isset($_POST['qteStock']) && isset($_POST['description']) && isset($_POST['unite'])) {
     //Récupération des champs pour l'insertion
-    $idCategorie = htmlentities($_POST['categorie']);
-    $nom = htmlentities($_POST['nom']);
-    $prixHT = htmlentities(str_replace(",", ".", $_POST['prix']));
-    $qteStock = htmlentities($_POST['qteStock']);
-    $description = htmlentities($_POST['description']);
-    $unite = htmlentities($_POST['unite']);
-    $qteUnite = htmlentities($_POST['qteUnite']);
+    $idCategorie = $_POST['categorie'];
+    $nom = $_POST['nom'];
+    $prixHT = str_replace(",", ".", $_POST['prix']);
+    $qteStock = $_POST['qteStock'];
+    $description = $_POST['description'];
+    $unite = $_POST['unite'];
+    $qteUnite = $_POST['qteUnite'];
 
-    // $enPromotion = htmlentities($_POST['mettreEnPromotion']);
+    // $enPromotion = $_POST['mettreEnPromotion'];
     if(isset($_POST['mettreEnLigne'])){
-        $enLigne = htmlentities($_POST['mettreEnLigne']);
+        $enLigne = $_POST['mettreEnLigne'];
     }
     
 
@@ -136,12 +136,12 @@ if (isset($_POST['categorie']) && isset($_POST['nom']) && isset($_POST['prix']) 
                 INSERT INTO sae3_skadjam._photo 
                 (url_photo, alt, titre)
                 VALUES 
-                ('/images/photo_importees/?',? ,?)
+                (?, ?, ?)
                 RETURNING id_photo)
                 SELECT * FROM id;
                 ");
 
-            $insertionPhoto->execute([$nom_photo_finale,$nom,$nom]);
+            $insertionPhoto->execute(['/images/photo_importees/'.$nom_photo_finale,$nom,$nom]);
 
             foreach ($insertionPhoto as $t) {
                 $idPhoto = $t['id_photo'];
@@ -216,7 +216,7 @@ if (isset($_POST['categorie']) && isset($_POST['nom']) && isset($_POST['prix']) 
                         <select class=" border-4 border-beige rounded-2xl m-2 p-2 w-40 h-14 cursor-pointer" name="categorie" id="categorie" required>
                             <option value="0">Choisir</option>
                             <?php foreach ($tab_categories as $categorie) {?>
-                                <option value="<?php echo $categorie['id_categorie']?>"><?php echo $categorie['libelle_categorie']?></option>
+                                <option value="<?php echo htmlentities($categorie['id_categorie'])?>"><?php echo htmlentities($categorie['libelle_categorie'])?></option>
                             <?php } ?>
                         </select>
                     </div>
@@ -226,7 +226,7 @@ if (isset($_POST['categorie']) && isset($_POST['nom']) && isset($_POST['prix']) 
                         <select class="border-4 border-beige rounded-2xl m-2 p-2 w-40 h-14 cursor-pointer" name="unite" id="unite" required>
                         <option value="0">Choisir</option>
                         <?php foreach ($tab_unite as $unite) {?>
-                            <option value="<?php echo $unite?>"><?php echo $unite?></option>
+                            <option value="<?php echo htmlentities($unite)?>"><?php echo htmlentities($unite)?></option>
                         <?php } ?>
                     </select>
                     </div>
