@@ -8,7 +8,8 @@ if (empty($_SESSION['idCompte'])) {
     die("Erreur : utilisateur non connecté");
 }
 
-$idCompte = (int)$_SESSION['idCompte'];
+$idCompte = $_SESSION['idCompte'];
+//$idPanier = $_SESSION['idPanier'];
 $idPanier = 1;
 
 // === Récupération du panier ===
@@ -40,85 +41,81 @@ if (empty($tabInfosPanier)) {
     die("Erreur : panier vide");
 }
 
-// === Transaction ===
-try {
-    $dbh->beginTransaction();
+try{
 
-    $date = date("Y-m-d");
+    $date_char = date("d/m/Y");
+    //Insertion de la commande
+    $sqlCommande = "INSERT INTO sae3_skadjam._commande (etat, date_commande, montant_total_ttc, id_client)
+                    VALUES (:etat, :date_commande, :montant_total_ttc, :id_client)
+                    RETURNING id_commande";
 
-    // === Insertion de la commande ===
-    $sqlCommande = "
-        INSERT INTO sae3_skadjam._commande
-        (etat, date_commande, montant_total_ttc, id_client)
-        VALUES (:etat, :date_commande, :montant_total_ttc, :id_client)
-        RETURNING id_commande
-    ";
-
+  
     $stmtCommande = $dbh->prepare($sqlCommande);
+
     $stmtCommande->execute([
-    ':etat' => 'Attente de validation',
-    ':date_commande' => $date,
-    ':montant_total_ttc' => $tabInfosPanier[0]['montant_total_ttc'],
-    ':id_client' => $idCompte
+        ':etat' => 'En attente',
+        ':date_commande' => $date_char,
+        ':montant_total_ttc' => $tabInfosPanier[0]['montant_total_ttc'],
+        ':id_client' => $idCompte
     ]);
 
-    $idCommande = $dbh->lastInsertId('sae3_skadjam._commande_id_commande_seq');
-    var_dump($idCommande);
-    die;
-    //$idCommande = $stmtCommande->fetchColumn();
+    $idCommande = $stmtCommande->fetchColumn();
+
     if (!$idCommande) {
-        throw new Exception("Erreur : id_commande non généré");
+        throw new Exception("id_commande non récupéré");
     }
 
-    // === Calcul total HT ===
-    $montant_total_ht = 0;
-    foreach ($tabInfosPanier as $infoPanier) {
-        $montant_total_ht += $infoPanier['sous_total_ht'];
-    }
+    //Insertion dans la table donne (lien entre panier et commande)
+    $sqlDonne = "INSERT INTO sae3_skadjam._donne (id_panier, id_commande)
+                VALUES (:id_panier, :id_commande)";
 
-    // === Insertion de la facture ===
-    $sqlFacture = "
-        INSERT INTO sae3_skadjam._facture
-        (montant_ht, destinataire, date_commande, id_commande)
-        VALUES (:montant_ht, :destinataire, :date_commande, :id_commande)
-        RETURNING numero_facture
-    ";
 
-    $stmtFacture = $dbh->prepare($sqlFacture);
-    $stmtFacture->execute([
-        ':montant_ht' => $montant_total_ht,
-        ':destinataire' => $idCompte,
-        ':date_commande' => $date,
+    $stmtDonne = $dbh->prepare($sqlDonne);
+
+    $stmtDonne->execute([
+        ':id_panier' => $idPanier,
         ':id_commande' => $idCommande
     ]);
 
-    $numeroFacture = $stmtFacture->fetchColumn();
-    if (!$numeroFacture) {
-        throw new Exception("Erreur : numéro_facture non généré");
-    }
+}
 
-    // === Mise à jour de la commande avec l'id_facture ===
-    $sqlUpdate = "
-        UPDATE sae3_skadjam._commande
-        SET id_facture = :id_facture
-        WHERE id_commande = :id_commande
-    ";
-
-    $stmtUpdate = $dbh->prepare($sqlUpdate);
-    $stmtUpdate->execute([
-        ':id_facture' => $numeroFacture,
-        ':id_commande' => $idCommande
-    ]);
-
-    // === Commit ===
-    $dbh->commit();
-
-    echo "Commande et facture créées avec succès !\n";
-    echo "id_commande = $idCommande\n";
-    echo "numero_facture = $numeroFacture\n";
-
-} catch (Exception $e) {
-    $dbh->rollBack();
+catch (Exception $e){
     echo "Erreur : " . $e->getMessage();
 }
 ?>
+
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Récapitulatif de votre commande</title>
+</head>
+<?php include __DIR__ . '/../../php/structure/head_front.php'?>
+<body>
+    <!--header-->
+    <?php include __DIR__ . "/../../php/structure/header_front.php"; ?>
+    <?php include __DIR__ . "/../../php/structure/navbar_front.php"; ?>
+
+    <main class="min-h-[600px]">
+        <h2>Récapitulatif de votre commande</h2>
+        <h3>Numéro de la commande :</h3>
+        <p></p>
+        <h3>Date :</h3>
+        <p></p>
+        <table>
+            <tr>
+                <th>Article</th>
+                <th>Référence</th>
+                <th>Quantité</th>
+                <th>Prix unitaire HT</th>
+                <th>Prix unitaire TTC</th>
+                <th>Prix remisé</th>
+            </tr>
+        </table>
+    </main>
+
+    <!--footer-->
+    <?php include (__DIR__ . "/../../php/structure/footer_front.php"); ?>
+</body>
+</html>
