@@ -2,6 +2,7 @@ const numberOfItems = 15 //NB produits à afficher
 let first = 0
 let actualPage
 
+let tableau = []
 
 function ajoutEventListener(){
 // EventListener pour les boutons de changement de page
@@ -39,29 +40,29 @@ function ajoutEventListener(){
     // Fonctions de tri
         // Prix
     prixTriCroissant.addEventListener("click",function () {
-        afficherProduit(triPrixCroissant(tabProd))
+        afficherProduit(triPrixCroissant(tableau))
     })            
 
     prixTriDecroissant.addEventListener("click",function () {
-        afficherProduit(triPrixDecroissant(tabProd))
+        afficherProduit(triPrixDecroissant(tableau))
     })
 
         // Ordre alphabétique
     alphaTriAZ.addEventListener("click",function () {
-        afficherProduit(triAz(tabProd))
+        afficherProduit(triAz(tableau))
     })
 
     alphaTriZA.addEventListener("click",function () {
-        afficherProduit(triZa(tabProd))
+        afficherProduit(triZa(tableau))
     })
     
         // Note
     noteTri51.addEventListener("click",function () {
-        afficherProduit(triEtoileDecroissant(tabProd))
+        afficherProduit(triEtoileDecroissant(tableau))
     })
     
     noteTri15.addEventListener("click", function () {
-        afficherProduit(triEtoileCroissant(tabProd))
+        afficherProduit(triEtoileCroissant(tableau))
     })
 
 // EventListener pour les filtres
@@ -88,75 +89,64 @@ function ajoutEventListener(){
 
     // Fonctions de filtres
         //Catégories
-    categorieAlimentaire.addEventListener("click",function () {CCC
-        tabProd = filtrageCategorieAlimentaire(tabProd);
-        afficherProduit(tabProd)
+    categorieAlimentaire.addEventListener("click",function () {
+        tableau = filtrageCategorieAlimentaire(tableau);
+        afficherListe()
     })
 
     categorieVetement.addEventListener("click",function () {
-        tabProd = filtrageCategorieVetement(tabProd);
-        afficherProduit(tabProd)
+        tableau = filtrageCategorieVetement(tableau);
+        afficherListe()
     })
 
     categorieArtisanat.addEventListener("click",function () {
-        tabProd = filtrageCategorieArtisanat(tabProd);
-        afficherProduit(tabProd)
+        tableau = filtrageCategorieArtisanat(tableau);
+        afficherListe()
     })
 
     categorieGoodies.addEventListener("click",function () {
-        tabProd = filtrageCategorieGoodies(tabProd);
-        afficherProduit(tabProd)
+        tableau = filtrageCategorieGoodies(tableau);
+        afficherListe()
     })
 
     categorieSoin.addEventListener("click",function () {
-        tabProd = filtrageCategorieSoin(tabProd);
-        afficherProduit(tabProd)
+        tableau = filtrageCategorieSoin(tableau);
+        afficherListe()
     })
     
         // Note
     noteZeroE.addEventListener("click",function () {
-        filtrageNoteNonNote(tabProd);
     })
 
     noteUneE.addEventListener("click",function () {
-        filtrageNote1(tabProd);
     })
 
     noteDeuxE.addEventListener("click",function () {
-        filtrageNote2(tabProd);
     })
 
     noteTroisE.addEventListener("click",function () {
-        filtrageNote3(tabProd);
     })
     
     noteQuatreE.addEventListener("click",function () {
-        filtrageNote4(tabProd);
     })
 
     noteCinqE.addEventListener("click",function () {
-        filtrageNote5(tabProd);
     })
 
     // Tranche de prix
     tranchePrix1.addEventListener("click",function () {
-        filtrageTranchePrix1(tabProd);
     })
 
     tranchePrix2.addEventListener("click",function () {
-        filtrageTranchePrix2(tabProd);
     })
 
     tranchePrix3.addEventListener("click",function () {
-        filtrageTranchePrix3(tabProd);
     })
     
     tranchePrix4.addEventListener("click",function () {
-        filtrageTranchePrix4(tabProd);
     })
 
     tranchePrix5.addEventListener("click",function () {
-        filtrageTranchePrix5(tabProd);
     })
 
 // EventListeners pour l'animation sidebar filtre et tri
@@ -191,7 +181,7 @@ function pagePrecedente(){
 }
 
 function pageSuivante(){
-    if(first+numberOfItems<=tabProd.length){
+    if(first+numberOfItems<=tableau.length){
         first+=numberOfItems;
         actualPage ++;
         afficherListe();
@@ -207,18 +197,22 @@ function pageSuivante(){
 
 // Affichage
 function afficherListe(){
-let parent = document.getElementById("prod")
+    if(tableau.length === 0){
+        tableau = tabProd
+    }
+    let parent = document.getElementById("prod")
     parent.innerHTML = ""
     for(let i = first; i < first + numberOfItems;i++){
-        if(i<tabProd.length){
-        afficherProduit(i)
+        if(i<tableau.length){
+            afficherProduit(i)
         }
     }
 }
 
+
 function afficherProduit(indice){
     let i = indice
-    let idProduit = tabProd[i]['id_produit']
+    let idProduit = tableau[i]['id_produit']
     let parent = document.getElementById("prod")
 
     // Section   
@@ -237,14 +231,14 @@ function afficherProduit(indice){
 
     // Image
     let image = document.createElement("img")
-    image.src = tabProd[i]['url_photo']
-    image.alt = tabProd[i]['alt']
-    image.title = tabProd[i]['title']
+    image.src = tableau[i]['url_photo']
+    image.alt = tableau[i]['alt']
+    image.title = tableau[i]['title']
     parent.appendChild(image)
 
     // Nom produit
     let nom = document.createElement("p")
-    nom.textContent = tabProd[i]['libelle_produit']
+    nom.textContent = tableau[i]['libelle_produit']
     parent.appendChild(nom)
     nom.classList.add("col-span-2")
 
@@ -257,7 +251,7 @@ function afficherProduit(indice){
 
     // Prix
     let prix = document.createElement("p")
-    prix.textContent = tabProd[i]['prix_ttc'].replace(".", ",")+" €"
+    prix.textContent = tableau[i]['prix_ttc'].replace(".", ",")+" €"
     parent.appendChild(prix)
 
     // Note
@@ -267,7 +261,7 @@ function afficherProduit(indice){
 
     parent = contientNote
 
-    let note = tabProd[i]['note_moyenne']
+    let note = tableau[i]['note_moyenne']
     affichageNote(note, parent)
 
     //setTimeout(function(){console.log('Code waits for 1  second')}, 1000);
@@ -362,21 +356,6 @@ async function affichageNote(note, parent ){
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 // Filtres
 
 
@@ -417,7 +396,36 @@ function triEtoileDecroissant(tab){
     return tab.sort((a,b) => parseFloat(b['note_moyenne']) - parseFloat(a['note_moyenne']))
 }
 
+// Alimentaire = 1
+function filtrageCategorieAlimentaire(tableau){ 
+    newTab = tableau.filter(tabProd => tabProd['id_categorie'] === 1)
+    // console.log(newTab)
+    return newTab
+}
 
+// Vetement = 2
+function filtrageCategorieVetement(tableau){
+    newTab = tableau.filter(tabProd => tabProd['id_categorie'] === 2)
+    return newTab
+}
+
+// Artisanat = 3
+function filtrageCategorieArtisanat(tableau){
+    newTab = tableau.filter(tabProd => tabProd['id_categorie'] === 3)
+    return newTab
+}
+
+// Goodies = 4
+function filtrageCategorieGoodies(tableau){
+    newTab = tableau.filter(tabProd => tabProd['id_categorie'] === 4)
+    return newTab
+}
+
+// Soin = 5
+function filtrageCategorieSoin(tableau){
+    newTab = tableau.filter(tabProd => tabProd['id_categorie'] === 5)
+    return newTab
+}
 
 
 
@@ -567,7 +575,7 @@ function triEtoileDecroissant(tab){
 
 
 // Changement de pages
-// function calculNbPages(tabProd){
+// function calculNbPages(tableau){
 //     //initialisation du numéro de page
 //     const PAGE_SIZE = 15
 //     let pageNumber
@@ -583,12 +591,12 @@ function triEtoileDecroissant(tab){
 
 //     //console.log($_GET['id']); // Affiche la valeur du paramètre 'id'   
 
-//     let maxPage = (tabProd.length)/PAGE_SIZE
+//     let maxPage = (tableau.length)/PAGE_SIZE
 
 //     let start = (pageNumber - 1) * PAGE_SIZE;
 //     let end = pageNumber * PAGE_SIZE;
 
-//     let lignes = tabProd.slice(start, end);
+//     let lignes = tableau.slice(start, end);
     
 //     return [lignes, pageNumber, maxPage]
 // }
@@ -603,10 +611,10 @@ function triEtoileDecroissant(tab){
 
 //     parent = pageChangement
 
-//     // let temp = calculNbPages(tabProd)[0]
+//     // let temp = calculNbPages(tableau)[0]
     
-//     let pageNumber = calculNbPages(tabProd)[1]
-//     let maxPage = calculNbPages(tabProd)[2]
+//     let pageNumber = calculNbPages(tableau)[1]
+//     let maxPage = calculNbPages(tableau)[2]
     
 //     if(pageNumber > 1){
 //         let pagePrec = document.createElement("a")
