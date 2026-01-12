@@ -1,9 +1,9 @@
 <?php 
     session_start();
-    require_once(__DIR__ . "/../../php/verif_role_bo.php");
-    include(__DIR__ .'/../../01_premiere_connexion.php');
-    require_once(__DIR__ . "/../../php/fonctions.php");
-    require_once(__DIR__ . '/../../php/verification_formulaire.php');
+    require_once __DIR__ . "/../../php/verif_role_bo.php";
+    include __DIR__ .'/../../01_premiere_connexion.php';
+    require_once __DIR__ . "/../../php/fonctions.php";
+    require_once __DIR__ . '/../../php/verification_formulaire.php';
     $idCompte = $_SESSION['idCompte'];
 
     try {     
@@ -13,6 +13,8 @@
                             FROM sae3_skadjam._produit pr 
                             INNER JOIN sae3_skadjam._vendeur v
                                 ON pr.id_vendeur = v.id_compte
+                            INNER JOIN sae3_skadjam._promu pm
+                                ON pr.id_produit = pm.id_produit
                             WHERE v.id_compte = $idCompte AND pr.est_supprime = false
                             ORDER BY libelle_produit ASC"
                             , PDO::FETCH_ASSOC) as $row){
@@ -44,7 +46,7 @@
             }
         }
         echo "Tous les stocks ont été mis à jour";
-        header("Location: ./stock.php?idCompte=$idCompte");
+        header("Location: ./promotion_vendeur.php?idCompte=$idCompte");
     } 
 ?>
 
@@ -54,7 +56,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Stock</title>
+    <title>Produits promus</title>
 </head>
 <body>
     <!--header-->
@@ -62,7 +64,7 @@
     <?php include(__DIR__ . "/../../php/structure/navbar_back.php"); ?>
 
     <main class="min-h-[545px]">
-        <h2>Stock</h2>
+        <h2>Vos produits promus</h2>
         
         <?php if($tabProduit == null){ ?>
             <p>Votre catalogue de produit est vide, vous n'avez donc pas de stock.</p>
@@ -70,7 +72,7 @@
         
         else{?>
             <div class="flex justify-center">
-                <form action="modifier_stock.php?idCompte=<?php echo $idCompte;?>" method="POST" enctype="multipart/form-data">
+                <form action="modifier_promotion.php?idCompte=<?php echo $idCompte;?>" method="POST" enctype="multipart/form-data">
                     <table class="table-auto w-250">
                         <thead>
                             <tr>
@@ -122,7 +124,7 @@
                         </tbody>
                     </table>
                     <div class="flex justify-around">
-                        <a href="../bo/stock.php?idCompte=<?php echo $idCompte ;?>" class="flex justify-center items-center border-2 border-vertFonce rounded-2xl w-40 h-14 cursor-pointer my-5">Retour</a>
+                        <a href="../bo/promotion_vendeur.php?idCompte=<?php echo $idCompte ;?>" class="flex justify-center items-center border-2 border-vertFonce rounded-2xl w-40 h-14 cursor-pointer my-5">Retour</a>
                         <input class="border-2 border-vertFonce rounded-2xl w-45 h-14 cursor-pointer my-5" type="submit" value="Valider">
                     </div>
                 </form>

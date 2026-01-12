@@ -6,7 +6,7 @@
 
     //Récupération des données sur le produit ainsi que la photo
     $idProd = $_GET['idProduit'];
-
+    
     $produit = "vide";
     foreach($dbh->query("SELECT *
                         from sae3_skadjam._produit pr
@@ -15,7 +15,7 @@
                         inner join sae3_skadjam._photo ph  
                             on ph.id_photo = m.id_photo
                         inner join sae3_skadjam._categorie c
-                            on c.id_categorie = pr.id_categorie 
+                            on c.id_categorie = pr.id_categorie
                         where pr.id_produit = $idProd"
                         , PDO::FETCH_ASSOC) as $row){
         $produit = $row;
@@ -31,7 +31,7 @@
 <html lang="fr">
 <head>
     <?php require(__DIR__ . "/../../php/structure/head_back.php") ?>
-    <title>Détails</title>
+    <title><?php echo $produit['libelle_produit']; ?></title>
 </head>
 <body>
     <!--header-->

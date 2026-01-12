@@ -68,9 +68,21 @@
 
         // signalement d'un avis
         if (isset($_GET['signal']) && $_GET['signal'] === "true"){
+            $idAvis = $_GET['idAvis'];
             $idCompte = $_SESSION['idCompte'];
-            $signalerAvis = $dbh->prepare("UPDATE sae3_skadjam._avis SET signaler = 'true' WHERE id_produit = $idProd AND id_compte = $idCompte");
-            $signalerAvis->execute();
+            
+            $updateAvis = $dbh->prepare("UPDATE sae3_skadjam._avis SET signaler = 'true' WHERE id_avis = ?");
+            $updateAvis->execute([$idAvis]);
+
+            // si un client ou un vendeur signale un commentaire
+            if (!($_SESSION['role'] === 'visiteur')){
+                $insertAsignaler = $dbh->prepare("INSERT INTO sae3_skadjam._a_signaler VALUES (?, ?)");
+                $insertAsignaler->execute([$idAvis, $idCompte]);
+            }
+            //si un visiteur signale un commentaire
+            else{
+                $_SESSION['avis'][$idAvis] = "signaler";
+            }
         }
     }
 ?>
@@ -160,16 +172,43 @@
                 else{?>
 
                 <!-- Commentaire -->
+                
                 <section class=" md:ml-32">
                     <?php foreach($avis as $row){
                         if ($row['contenu_commentaire'] != ''){?>
                             <section class=" bg-bleu rounded-2xl m-4 p-4 md:w-4xl">
-                                <div class="flex flex-nowrap justify-around items-center w-auto">
-                                    <h4 class="mr-4">
+                                <div class="grid grid-cols-4 md:grid-cols-5 justify-items-end">
+                                    <h4 class=" col-span-2 md:col-span-3 justify-self-start">
                                         <?php echo $row['pseudo'];?>
                                     </h4>
-                                    <?php echo affichageNote($row['nb_etoile']);?>
-                                    <a class="ml-4 text-black" href="./details_produit.php?idProduit=<?php echo $idProd;?>&signal=true">Signaler</a>
+                                    <?php echo affichageNote($row['nb_etoile']);
+
+                                    // savoir si l'utilisateur à déjà signaler l'avis il ne faut pas qu'il puisse le resignaler
+                                    $aSignaler = false;
+                                    //pour le visiteur
+                                    if ($_SESSION['role'] === 'visiteur'){
+                                        if (isset($_SESSION['avis'][$row['id_avis']])){
+                                            $aSignaler = true;
+                                        }
+                                    }
+                                    // pour les personne connecter à un compte client ou vendeur
+                                    elseif($_SESSION['role'] === 'client' || $_SESSION['role'] === 'vendeur'){
+                                        $idAvis = $row['id_avis'];
+                                        $idCompte = $_SESSION['idCompte'];
+                                        foreach($dbh->query("SELECT id_avis, id_compte 
+                                                                FROM sae3_skadjam._a_signaler s 
+                                                                WHERE id_compte = $idCompte AND id_avis = $idAvis
+                                                            UNION
+                                                            SELECT id_avis, id_compte 
+                                                                FROM sae3_skadjam._avis a 
+                                                                WHERE id_compte = $idCompte  AND id_avis = $idAvis;", PDO::FETCH_ASSOC) as $avisSignalable){
+                                            $aSignaler = true;
+                                        }
+                                    }
+                                    // affichage ou pas du boutton signaler
+                                    if (!$aSignaler){?>
+                                        <a class="text-black" href="./details_produit.php?idProduit=<?php echo $idProd;?>&signal=true&idAvis=<?php echo $row['id_avis']?>">Signaler</a>
+                                    <?php }?>
                                 </div>
                                 <p><?php echo $row['contenu_commentaire'];?></p>     
                             </section>

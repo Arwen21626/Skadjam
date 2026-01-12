@@ -5,22 +5,22 @@
     require_once(__DIR__ . "/../../php/fonctions.php");
     require_once(__DIR__ . '/../../php/verification_formulaire.php');
     $idCompte = $_SESSION['idCompte'];
-
     try {     
         $tabProduit = null;           
         //récupère toutes les infos des tables produits
-        foreach($dbh->query("SELECT *
-                            FROM sae3_skadjam._produit pr
-                            INNER JOIN sae3_skadjam._vendeur v
-                                ON pr.id_vendeur = v.id_compte
-                            WHERE v.id_compte = $idCompte AND pr.est_supprime = false
-                            ORDER BY libelle_produit ASC"
+        foreach($dbh->query("SELECT * FROM sae3_skadjam._produit pr
+                                INNER JOIN sae3_skadjam._vendeur v 
+                                    ON pr.id_vendeur = v.id_compte
+                                LEFT JOIN sae3_skadjam._reduit rd
+                                    ON rd.id_produit = pr.id_produit
+                                LEFT JOIN sae3_skadjam._remise r
+                                    ON rd.id_remise = r.id_remise
+                                WHERE v.id_compte = $idCompte AND pr.est_supprime = false
+                                ORDER BY libelle_produit ASC;"
                             , PDO::FETCH_ASSOC) as $row){
             $tabProduit[] = $row;
-        } 
-
+        }
     }
-
     catch (PDOException $e) {
         print "Erreur !: " . $e->getMessage() . "<br/>";
         die();
@@ -34,7 +34,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Stock</title>
+    <title>Remises</title>
 </head>
 <body>
     <!--header-->
@@ -42,28 +42,30 @@
     <?php include(__DIR__ . "/../../php/structure/navbar_back.php"); ?>
 
     <main class="min-h-[545px]">
-        <h2>Stock</h2>
+        <h2>Remises</h2>
         
         <?php if($tabProduit == null){ ?>
-            <p>Votre catalogue de produit est vide, vous n'avez donc pas de stock.</p>
+            <p>Votre catalogue de produit est vide.</p>
         <?php } 
         
         else{?>
             <div class="flex justify-center">
                 <table class="table-auto w-250">
+                    <!-- en tête du tableau-->
                     <thead>
                         <tr>
                             <th scope="col" class="text-left w-125 pl-3"><h3>Nom du produit</h3></th>
                             <th scope="col"><h3>Prix</h3></th>
+                            <th scope="col"><h3>Prix remisé</h3></th>
                             <th scope="col"><h3>Note</h3></th>
-                            <th scope="col"><h3>Stock</h3></th>
+                            <th scope="col"><h3>Remise</h3></th>
                         </tr>
                     </thead>
+                    <!-- corps du tableau -->
                     <tbody>
                         <?php 
                             //pour changer la classe de css une ligne sur 2
                             $impair = 0;
-                            $classe;
                             $classe1 = "py-4";
                             $classe2 = "py-4 bg-bleu";
                             foreach($tabProduit as $id => $valeurs){
@@ -78,6 +80,7 @@
                                 <tr class="<?php echo $classe; ?>">
                                     <th scope="row" class="text-left py-3 pl-3" ><a href="<?php echo htmlentities("details_produit.php?idProduit=".$idProduit);?>"><?php echo $valeurs['libelle_produit']; ?></a></th>
                                     <td class="text-center py-3"><p><?php echo htmlentities($valeurs['prix_ttc']);?> €</p></td>
+                                    <td class="text-center py-3"><p><?php echo htmlentities($valeurs['prix_remise']);?> €</p></td>
                                     <td class="text-center py-3">
                                         <div class="flex justify-center items-center">
                                             <?php 
@@ -87,18 +90,18 @@
                                         </div>
                                     </td>
 
-                                    <td class="text-center py-3"><p><?php echo htmlentities($valeurs['quantite_stock']); ?></p></td>
+                                    <td class="text-center py-3"><p><?php echo htmlentities(($valeurs['pourcentage_remise'] === null)?"0 %":($valeurs['pourcentage_remise']*100).' %'); ?></p></td>
                                 </tr>
                         <?php }?>
                     </tbody>
                 </table>
             </div>
-            <div class="flex justify-center">
-                <button class="border-2 border-vertFonce rounded-2xl w-45 h-14 cursor-pointer my-5">
-                    <a href="../bo/modifier_stock.php?idCompte=<?php echo $idCompte ;?>" class="">Modifier stocks</a>
+            <!-- modifier les remises remises -->
+            <div class="flex justify-center mt-15">
+                <button class="border-2 border-vertFonce rounded-2xl w-45 h-14 cursor-pointer">
+                    <a href="../bo/modifier_remises.php" class="">Modifier remises</a>
                 </button>
             </div>
-            
             
 
         <?php } ?>

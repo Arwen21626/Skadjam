@@ -1,9 +1,9 @@
 <?php 
     session_start();
-    require_once(__DIR__ . "/../../php/verif_role_bo.php");
-    include(__DIR__ .'/../../01_premiere_connexion.php');
-    require_once(__DIR__ . "/../../php/fonctions.php");
-    require_once(__DIR__ . '/../../php/verification_formulaire.php');
+    require_once __DIR__ . "/../../php/verif_role_bo.php";
+    include __DIR__ .'/../../01_premiere_connexion.php';
+    require_once __DIR__ . "/../../php/fonctions.php";
+    require_once __DIR__ . '/../../php/verification_formulaire.php';
     $idCompte = $_SESSION['idCompte'];
 
     try {     
@@ -13,15 +13,15 @@
                             FROM sae3_skadjam._produit pr
                             INNER JOIN sae3_skadjam._vendeur v
                                 ON pr.id_vendeur = v.id_compte
+                            INNER JOIN sae3_skadjam._promu pm
+                                ON pr.id_produit = pm.id_produit
                             WHERE v.id_compte = $idCompte AND pr.est_supprime = false
                             ORDER BY libelle_produit ASC"
                             , PDO::FETCH_ASSOC) as $row){
             $tabProduit[] = $row;
         } 
 
-    }
-
-    catch (PDOException $e) {
+    }catch(PDOException $e){
         print "Erreur !: " . $e->getMessage() . "<br/>";
         die();
     }
@@ -30,24 +30,24 @@
 
 <!DOCTYPE html>
 <html lang="fr">
-<?php include(__DIR__ . "/../../php/structure/head_back.php");?>
+<?php include __DIR__ . "/../../php/structure/head_back.php";?>
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Stock</title>
+    <title>Produits promus</title>
 </head>
 <body>
     <!--header-->
-    <?php include(__DIR__ . "/../../php/structure/header_back.php"); ?>
-    <?php include(__DIR__ . "/../../php/structure/navbar_back.php"); ?>
+    <?php include __DIR__ . "/../../php/structure/header_back.php"; ?>
+    <?php include __DIR__ . "/../../php/structure/navbar_back.php"; ?>
 
     <main class="min-h-[545px]">
-        <h2>Stock</h2>
-        
+        <h2>Vos produits promus</h2>
+
         <?php if($tabProduit == null){ ?>
-            <p>Votre catalogue de produit est vide, vous n'avez donc pas de stock.</p>
-        <?php } 
-        
+            <p>Votre catalogue de promotions est vide, vous n'avez donc pas de produit en promotions.</p>
+        <?php }
+
         else{?>
             <div class="flex justify-center">
                 <table class="table-auto w-250">
@@ -95,16 +95,14 @@
             </div>
             <div class="flex justify-center">
                 <button class="border-2 border-vertFonce rounded-2xl w-45 h-14 cursor-pointer my-5">
-                    <a href="../bo/modifier_stock.php?idCompte=<?php echo $idCompte ;?>" class="">Modifier stocks</a>
+                    <a href="../bo/modifier_promotion.php?idCompte=<?php echo $idCompte ;?>" class="">Modifier stocks</a>
                 </button>
             </div>
-            
-            
 
         <?php } ?>
     </main>
 
     <!--footer-->
-    <?php include(__DIR__ . "/../../php/structure/footer_back.php"); ?>
+    <?php include __DIR__ . "/../../php/structure/footer_back.php"; ?>
 </body>
 </html>

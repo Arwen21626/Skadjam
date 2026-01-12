@@ -8,13 +8,14 @@
     $idCompte = $_SESSION['idCompte'];
     
     // récupération des donnée de l'avis précédament donnée
-    foreach($dbh->query("SELECT nb_etoile, contenu_commentaire 
+    foreach($dbh->query("SELECT nb_etoile, contenu_commentaire, id_avis
                         FROM sae3_skadjam._avis 
                         WHERE id_produit = $idProd 
                             AND id_compte = $idCompte"
                         , PDO::FETCH_ASSOC) as $row){
         $note = $row['nb_etoile'];
         $commentaire = $row['contenu_commentaire'];
+        $idAvis = $row['id_avis'];
     }
 
     if(isset($_POST['note'])){
@@ -25,7 +26,7 @@
 
             if ($nouvNote>=0 && $nouvNote<=5){
                 // si c'est l'ajout d'un nouvel avis
-                if ($note == null){
+                if ($note === null){
                     $insertionAvis = $dbh->prepare("INSERT INTO sae3_skadjam._avis(nb_etoile, nb_pouce_haut, nb_pouce_bas, contenu_commentaire, id_produit, id_compte) 
                                                     VALUES ($nouvNote, 0, 0, '$nouvCommentaire', $idProd, $idCompte)");
                 }
@@ -46,10 +47,14 @@
             die();
         }
     }
+    // suppresion d'un avis
     else if(isset($_GET['supr']) && $_GET['supr'] === 'true'){
-        $suprAvis = $dbh->prepare("DELETE FROM sae3_skadjam._avis WHERE id_produit = $idProd AND id_compte = $idCompte");
-        $suprAvis->execute();
-
+        $suprAsignaler = $dbh->prepare("DELETE FROM sae3_skadjam._a_signaler WHERE id_avis = ?");
+        $suprAvis = $dbh->prepare("DELETE FROM sae3_skadjam._avis WHERE id_produit = ? AND id_compte = ?");
+        echo 'salut'.$idProd.' '.$idCompte.' '.$idAvis;
+        $suprAsignaler->execute([$idAvis]);
+        $suprAvis->execute([$idProd, $idCompte]);
+        echo 'salutfin';
         header("location: details_produit.php?idProduit=$idProd");
     }
     else{

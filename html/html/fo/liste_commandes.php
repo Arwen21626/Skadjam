@@ -35,10 +35,10 @@
     <?php include __DIR__ . "/../../php/structure/navbar_front.php"; ?>
 
     <main class="min-h-[600px]">
-        <h2>Liste de mes commandes</h2>
+        <h2 class = "pt-15">Liste de mes commandes</h2>
 
         <?php if($tabInfoCommandes == null){ ?>
-            <p>Votre n'avez pas encore effectué de commande.</p>
+            <p class="pt-15 text-center">Votre n'avez pas encore effectué de commande.</p>
         <?php }
 
         else{?>

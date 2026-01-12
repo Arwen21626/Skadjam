@@ -56,6 +56,32 @@ if(isset($_POST['pseudo']) && isset($_POST['naissance']) && isset($_POST['nom'])
                                                     VALUES($idPanier, '0', '0.0', '$aujourdhui', $idCompte)");
                     $nouvPanier->execute();
 
+                    //Début modification Korentin
+
+                    
+                    if ($_SESSION['panier']['nb_produit_total'] > 0)
+                    {
+                        // Modifie le nombre de produit contenu au total dans le panier
+                        $rqt = $dbh->prepare("UPDATE sae3_skadjam._panier SET nb_produit_total = ? WHERE id_panier = ?");
+                        $rqt->execute([$_SESSION['panier']['nb_produit_total'], $idPanier]);
+
+                        //Modifie le montant total ttc du panier
+                        $rqt = $dbh->prepare("UPDATE sae3_skadjam._panier SET montant_total_ttc = ? WHERE id_panier = ?");
+                        $rqt->execute([$_SESSION['panier']['montant_total_ttc'], $idPanier]);
+
+                        //Insert chaque produit dans la table _contient
+                        foreach ($_SESSION['panier']['contient'] as $i => $produit) 
+                        {
+                            $rqt = $dbh->prepare("INSERT INTO sae3_skadjam._contient (id_produit, id_panier, quantite_par_produit) 
+                                                  VALUES (?, ?, ?)");
+                            $rqt->execute([$produit['id'], $idPanier, $produit['quantite_par_produit']]);
+                        }
+
+                        //Supprimer le panier du visiteur
+                        unset($_SESSION['panier']);
+                    }
+                    //Fin modification
+
                     // Sauvegarde de l'id du compte client dans le cookie de session
                     $_SESSION["idCompte"] = $idCompte;
                     $_SESSION["role"] = 'client';
@@ -168,7 +194,10 @@ if(isset($_POST['pseudo']) && isset($_POST['naissance']) && isset($_POST['nom'])
             $dbh = null;
 
             // Redirection vers la page d'accueil
-            if (!$erreur && isset($_POST['mdp']) && isset($_POST['verifMdp'])){ // Si c'est la création d'un compte
+            if ((!$erreur && isset($_POST['mdp']) && isset($_POST['verifMdp'])) && isset($_POST['veutAcheter'])) {
+                header("location: /html/fo/panier.php");
+            }
+            else if (!$erreur && isset($_POST['mdp']) && isset($_POST['verifMdp'])){ // Si c'est la création d'un compte
                 header("location: /index.php");
             } 
             elseif(!$erreur && !isset($_POST['mdp']) && !isset($_POST['verifMdp'])){ // Si c'est la modification d'un compte
@@ -216,6 +245,7 @@ if(isset($_POST['pseudo']) && isset($_POST['naissance']) && isset($_POST['nom'])
     }
     catch(PDOException $e){
         echo "Erreur dans l'envoie des données dans la base de données.";
+        echo $e->getMessage();
         die();
     }
     

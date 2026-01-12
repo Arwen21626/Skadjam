@@ -1,11 +1,11 @@
 <?php
 session_start();
-include(__DIR__ . '/../../php/verif_role_bo.php');
-include( __DIR__ . '/../../01_premiere_connexion.php');
-require_once(__DIR__ . '/../../php/verification_formulaire.php');
-
+include __DIR__ . '/../../php/verif_role_bo.php';
+include  __DIR__ . '/../../01_premiere_connexion.php';
+require_once __DIR__ . '/../../php/verification_formulaire.php';
 
 $idProduit = $_GET['idProduit'];
+$idCompte = $_SESSION['idCompte'];
 
 //Tableau pour les catégories de la base
 $tab_categories = [];
@@ -28,14 +28,14 @@ foreach($dbh->query('SELECT * from sae3_skadjam._tva', PDO::FETCH_ASSOC) as $row
 
 //Recuperation de toutes les informations du produit
 foreach($dbh->query("SELECT *,est_masque::CHAR as est_masque_php 
-                        FROM sae3_skadjam._produit pr
-                        INNER JOIN sae3_skadjam._categorie c
-                            ON pr.id_categorie = c.id_categorie
-                        INNER JOIN sae3_skadjam._montre m
-                            ON pr.id_produit = m.id_produit
-                        INNER JOIN sae3_skadjam._photo ph
-                            ON m.id_photo = ph.id_photo
-                        WHERE pr.id_produit = $idProduit") as $produit){      
+                            FROM sae3_skadjam._produit pr
+                            INNER JOIN sae3_skadjam._categorie c
+                                ON pr.id_categorie = c.id_categorie
+                            INNER JOIN sae3_skadjam._montre m
+                                ON pr.id_produit = m.id_produit
+                            INNER JOIN sae3_skadjam._photo ph
+                                ON m.id_photo = ph.id_photo
+                            WHERE pr.id_produit = $idProduit") as $produit){
 
     //Récupération attribut de produit
     $nom = $produit['libelle_produit'];
@@ -48,15 +48,26 @@ foreach($dbh->query("SELECT *,est_masque::CHAR as est_masque_php
     $nomCategorie = $produit['libelle_categorie'];
     $idCategorie = $produit['id_categorie'];
 
-    if($enLigne == 'f'){
-        //Si dans la BDD est_masque est a false, il faut mettre enLigne à true ou l'inverse
+    if($enLigne == 'f'){ //Si dans la BDD est_masque est a false, il faut mettre enLigne à true ou l'inverse
         $enLigne = 'true';
-    }
-    else{
+    }else{
         $enLigne = 'false';
     }
 
-    //echo $enLigne;
+    $stmtPromo = $dbh->query("SELECT *
+                                    FROM sae3_skadjam._promu pmu
+                                    INNER JOIN sae3_skadjam._promotion pmo
+                                        ON pmu.id_promotion = pmo.id_promotion
+                                    WHERE pmu.id_produit = $idProduit");
+    $promotion = $stmtPromo->fetch(PDO::FETCH_ASSOC);
+
+
+    if($promotion['id_promotion'] != null){ // id_promotion != null veut dire que le produit est en promotion
+        $enPromotion = 'true';
+    }else{
+        $enPromotion = 'false';
+    }
+
 
     //Récupération attribut de photo
     $idPhoto = $produit['id_photo'];
@@ -82,15 +93,11 @@ if (isset($_POST['categorie']) && isset($_POST['nom']) && isset($_POST['prix']) 
         $destination = __DIR__ . '/../../images/photo_importees';
         $nom_photo_finale = $nom_explode.$currentTime.'.'.$ext;
         move_uploaded_file($nom_serv_photo,$destination.'/'.$nom_photo_finale);
-    }
-    else{
+    }else{
         //Récupération attribut de photo
         $nom_photo_finale = explode('/',$urlPhoto)[3];
     }
     
-    
-
-
     //Récupération des champs pour l'insertion
     $idCategorie = htmlentities($_POST['categorie']);
     $nom = htmlentities($_POST['nom']);
@@ -109,14 +116,14 @@ if (isset($_POST['categorie']) && isset($_POST['nom']) && isset($_POST['prix']) 
         }
     }
     
-    if ($_POST['mettreEnLigne'] == false) {
-        //S'il n'est pas coché il faut mettre est_masque dans la BDD à true en chaine pour eviter les problèmes
+    // S'il n'est pas coché il faut mettre est_masque dans la BDD à true en chaine pour eviter les problèmes
+    if($_POST['mettreEnLigne'] == false){
         $enLigne = 'true';
     }else{
         $enLigne = 'false';
     }
 
-    if ($_POST['mettreEnPromotion']) {
+    if($_POST['mettreEnPromotion'] == false){
         $enPromotion = 'true';
     }else{
         $enPromotion = 'false';
@@ -132,8 +139,7 @@ if (isset($_POST['categorie']) && isset($_POST['nom']) && isset($_POST['prix']) 
                         $pourcentageTVA = $t['pourcentage_tva'];
                     }
                 }
-            }
-            else{
+            }else{
                 foreach ($tab_tva as $t) {
                     if ($t['nom_tva'] === 'normal') {
                         $tva = $t['id_tva'];
@@ -141,131 +147,109 @@ if (isset($_POST['categorie']) && isset($_POST['nom']) && isset($_POST['prix']) 
                     }
                 }
             }
-            
+
             //Calcul prixTTC
             $prixTTC = $prixHT*(1+$pourcentageTVA);
 
             //Update du produit
-            $updateProduit = $dbh -> query("
-                UPDATE sae3_skadjam._produit SET
-                libelle_produit = '$nom',
-                description_produit = '$description',
-                prix_ht = $prixHT,
-                prix_ttc = $prixTTC,
-                est_masque = $enLigne,
-                quantite_stock = $qteStock,
-                quantite_unite = $qteUnite,
-                unite = '$unite',
-                id_categorie = $idCategorie,
-                id_vendeur = 1,
-                id_tva = $tva
-                WHERE id_produit = $idProduit
-                ;");
+            $updateProduit = $dbh -> query("UPDATE sae3_skadjam._produit SET
+                                                        libelle_produit = '$nom',
+                                                        description_produit = '$description',
+                                                        prix_ht = $prixHT,
+                                                        prix_ttc = $prixTTC,
+                                                        est_masque = $enLigne,
+                                                        quantite_stock = $qteStock,
+                                                        quantite_unite = $qteUnite,
+                                                        unite = '$unite',
+                                                        id_categorie = $idCategorie,
+                                                        id_vendeur = $idCompte,
+                                                        id_tva = $tva
+                                                    WHERE id_produit = $idProduit;");
 
             // Gestion de la promotion
-            if (isset($_POST['mettreEnPromotion'])){
+            // Vérifier si le produit est promu ou non
+            $stmt = $dbh->prepare("SELECT pmu.id_promotion
+                                    FROM sae3_skadjam._promu pmu
+                                    WHERE pmu.id_produit = :id_produit");
+            $stmt->execute([':id_produit' => $idProduit]);
+            $promotion = $stmt->fetch(PDO::FETCH_ASSOC);
+
+            $estPromu = ($promotion !== false);
+            $caseCochee = isset($_POST['mettreEnPromotion']);
+
+            // La case "Mettre en promotion" est cochée et que le produit n'est pas déjà promu
+            if ($caseCochee && !$estPromu) {
+                $dbh->beginTransaction();
                 try {
-                    $dbh->beginTransaction();
-                    // Vérifier si le produit n'est pas déjà promu
-                    $check = $dbh->prepare("
-                        SELECT 1
-                        FROM sae3_skadjam._promu
-                        WHERE id_produit = :id_produit
-                    ");
-                    $check->execute([':id_produit' => $idProduit]);
-                    
-                    if ($check->rowCount() === 0){
-                        // Création de la promotion
-                        $stmtPromo = $dbh->prepare("
-                            INSERT INTO sae3_skadjam._promotion(
-                                date_debut_promotion,
-                                heure_debut,
-                                id_vendeur,
-                                id_photo
-                            )VALUES(
-                                :date_debut,
-                                '00:00',
-                                :id_vendeur,
-                                :id_photo
-                            )
-                        ");
-                        $stmtPromo->execute([
-                            ':date_debut' => date('d/m/Y'),
-                            ':id_vendeur' => $_SESSION['idCompte'],
-                            ':id_photo'   => $idPhoto ?? null
-                        ]);
+                    $stmtPromo = $dbh->prepare("INSERT INTO sae3_skadjam._promotion
+                                                (
+                                                    date_debut_promotion,
+                                                    heure_debut,
+                                                    id_vendeur,
+                                                    id_photo
+                                                ) VALUES (
+                                                    :date_debut,
+                                                    '00:00',
+                                                    :id_vendeur,
+                                                    :id_photo
+                                                )");
+                    $stmtPromo->execute([
+                        ':date_debut' => date('d/m/Y'),
+                        ':id_vendeur' => $idCompte,
+                        ':id_photo'   => $idPhoto
+                    ]);
 
-                        // Récupération de l'id promotion
-                        $idPromotion = $dbh->lastInsertId();
+                    $idPromotion = $dbh->lastInsertId();
 
-                        // Lien produit <-> promotion
-                        $stmtPromu = $dbh->prepare("
-                            INSERT INTO sae3_skadjam._promu (
-                                id_promotion,
-                                id_produit
-                            ) VALUES (
-                                :id_promotion,
-                                :id_produit
-                            )
-                        ");
-                        $stmtPromu->execute([
-                            ':id_promotion' => $idPromotion,
-                            ':id_produit'   => $idProduit
-                        ]);
-                    }
-
+                    $stmtPromu = $dbh->prepare("INSERT INTO sae3_skadjam._promu
+                                                        (
+                                                            id_promotion,
+                                                            id_produit
+                                                        ) VALUES (
+                                                            :id_promotion,
+                                                            :id_produit
+                                                        )");
+                    $stmtPromu->execute([
+                        ':id_promotion' => $idPromotion,
+                        ':id_produit'   => $idProduit
+                    ]);
                     $dbh->commit();
-
                 } catch (Exception $e) {
                     $dbh->rollBack();
-                    die("Erreur pendant la mise en promotion : " . $e->getMessage());
+                    throw $e;
                 }
-            }else{
-                $stmt = $dbh->prepare("
-                    SELECT id_promotion
-                    FROM sae3_skadjam._promu
-                    WHERE id_produit = :id_produit
-                ");
-                $stmt->execute([':id_produit' => $idProduit]);
+            }
 
-                if ($promo = $stmt->fetch()) {
+            // Si la case "Mettre en promotion" n'est pas cochée et que le produit est déjà promu
+            if (!$caseCochee && $estPromu) {
+                $dbh->beginTransaction();
+                try {
+                    $dbh->prepare("DELETE FROM sae3_skadjam._promu
+                                    WHERE id_produit = :id_produit")->execute([':id_produit' => $idProduit]);
 
-                    $dbh->beginTransaction();
-
-                    // Supprimer le lien
-                    $dbh->prepare("
-                        DELETE FROM sae3_skadjam._promu
-                        WHERE id_produit = :id_produit
-                    ")->execute([':id_produit' => $idProduit]);
-
-                    // Supprimer la promotion
-                    $dbh->prepare("
-                        DELETE FROM sae3_skadjam._promotion
-                        WHERE id_promotion = :id_promotion
-                    ")->execute([':id_promotion' => $promo['id_promotion']]);
-
+                    $dbh->prepare("DELETE FROM sae3_skadjam._promotion
+                                    WHERE id_promotion = :id_promotion")->execute([':id_promotion' => $promotion['id_promotion']]);
                     $dbh->commit();
+                } catch (Exception $e) {
+                    $dbh->rollBack();
+                    throw $e;
                 }
             }
 
 
             //Update de la photo dans la table photo
-            $updatePhoto = $dbh -> query("
-                UPDATE sae3_skadjam._photo SET
-                url_photo = '/images/photo_importees/$nom_photo_finale', 
-                alt = '$nom', 
-                titre = '$nom'
-                WHERE id_photo = $idPhoto
-                ;");
-
-        }
-        catch (PDOException $e) {
+            $updatePhoto = $dbh -> query("UPDATE sae3_skadjam._photo SET
+                                            url_photo = '/images/photo_importees/$nom_photo_finale', 
+                                            alt = '$nom', 
+                                            titre = '$nom'
+                                        WHERE id_photo = $idPhoto;");
+        }catch (PDOException $e) {
             print "Erreur !: " . $e->getMessage() . "<br/>";
             die();
         }
     }
     else{
-        echo ("Le prix ou la quantité saisi est incorrect.");
+        echo "Le prix ou la quantité saisi est incorrect.";
     }
     header("Location: ./details_produit.php?idProduit=$idProduit");
 }
@@ -275,7 +259,7 @@ else { ?>
 <html lang="fr">
     <?php include(__DIR__."/../../php/structure/head_back.php");?>
     <head>
-        <title>Modifier un produit</title>
+        <title>Modifier <?php echo $nom; ?></title>
         <style>
             button a:hover{
                 color : black;
@@ -286,7 +270,7 @@ else { ?>
         <?php include(__DIR__ . '/../../php/structure/header_back.php');?>
         <?php include(__DIR__ . '/../../php/structure/navbar_back.php');?>
         <main>
-            <h2>Modifier un produit</h2>
+            <h2>Modifier <?php echo $nom; ?></h2>
             <form class="grid grid-cols-[40%_60%] w-11/12 self-center" action="modifier_produit.php?idProduit=<?php echo $idProduit;?>" method="post" enctype="multipart/form-data">
                 <!-- Image -->
                 <div class="row-start-1 row-span-3 m-2 p-4 grid grid-rows-[2/3-1/3] justify-items-center">
@@ -351,22 +335,36 @@ else { ?>
                         <label class="mr-4" for="mettreEnLigne">Mettre en ligne</label>
                         <input class="cursor-pointer appearance-none w-10 h-10 border-4 border-beige rounded-md checked:bg-beige" type="checkbox" name="mettreEnLigne" id="mettreEnLigne" <?php echo ($enLigne == 'true')?'checked':'' ?>>
                     </div>
-                
-                    <!-- Mettre en promotion -->
-                    <div class="flex flex-row mr-4 ml-4">
-                        <label class="mr-4" for="mettreEnPromotion">Mettre en promotion</label>
-                        <input class="cursor-pointer appearance-none w-10 h-10 border-4 border-beige rounded-md checked:bg-beige" type="checkbox" name="mettreEnPromotion" id="mettreEnPromotion" value="1">
-                    </div>
+                    <?php 
+                        $stmtNbPromos = $dbh->prepare("SELECT COUNT(*) AS nb_promotions
+                                                        FROM sae3_skadjam._promu pu
+                                                        INNER JOIN sae3_skadjam._promotion pn
+                                                            ON pu.id_promotion = pn.id_promotion
+                                                        WHERE pn.id_vendeur = :id_vendeur");
+                        $stmtNbPromos->execute([':id_vendeur' => $_SESSION['idCompte']]);
+                        $nbPromos = $stmtNbPromos->fetch(PDO::FETCH_ASSOC)['nb_promotions'];
+
+                        if ($nbPromos >= 2 && $enPromotion === 'false') { ?>
+                            <div class="flex flex-row mr-4 ml-4">
+                                <label class="mr-4 text-rouge">Mettre en promotion (Limite atteinte)</label>
+                                <input type="checkbox" disabled class="cursor-not-allowed appearance-none w-10 h-10 border-4 border-beige rounded-md">
+                            </div>
+                        <?php } else { ?>
+                            <div class="flex flex-row mr-4 ml-4">
+                                <label class="mr-4" for="mettreEnPromotion">Mettre en promotion</label>
+                                <input class="cursor-pointer appearance-none w-10 h-10 border-4 border-beige rounded-md checked:bg-beige" type="checkbox" name="mettreEnPromotion" id="mettreEnPromotion" <?php echo ($enPromotion === 'true') ? 'checked':''; ?>>
+                            </div>
+                        <?php } ?>
                 </div>
                 <!-- Description -->
                 <div class="col-start-1 col-span-2 row-start-5 flex flex-col m-2 p-2 ">
                     <label for="description">Description *:</label>
-                    <textarea class="border-4 border-beige rounded-2xl w-3/4 self-center" name="description" id="description" cols="100" rows="10" required><?php echo($description) ;?></textarea>
+                    <textarea class="border-4 border-beige rounded-2xl w-3/4 self-center" name="description" id="description" cols="100" rows="10" required><?php echo $description ;?></textarea>
                 </div>
                 
                 <!-- Validation -->
                 <div class="col-start-1 col-span-2 row-start-6 flex flex-row justify-around m-4">
-                    <a href="../bo/details_produit.php?idProduit=<?php echo $idProduit ;?>"><button class="border-2 border-vertFonce rounded-2xl w-40 h-14 cursor-pointer">Retour</button></a>
+                    <a href="../bo/details_produit.php?idProduit=<?php echo $idProduit ;?>" class="flex justify-center items-center border-2 border-vertFonce rounded-2xl w-40 h-14 cursor-pointer">Retour</a>
                     <input class="border-2 border-vertFonce rounded-2xl w-40 h-14 cursor-pointer" type="submit" value="Valider">
                 </div>
             </form>
