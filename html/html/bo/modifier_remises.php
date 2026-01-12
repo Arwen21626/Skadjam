@@ -78,7 +78,7 @@
                 }
             }
             // insertion d'une remise
-            if (!$existe && $pourcentage != 0){ // $pourcentage !== 0 ne fonctionne pas 
+            if (!$existe && $pourcentage != 0){
                 $date = date('d/m/Y'); 
                 $insertRemise->execute([$pourcentage, $date, $idProduit]);
             }
