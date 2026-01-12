@@ -1,4 +1,4 @@
-const numberOfItems = 5 //NB produits à afficher
+const numberOfItems = 15 //NB produits à afficher
 let first = 0
 let actualPage
 
@@ -174,14 +174,12 @@ function firstPage(){
     first = 0
     actualPage = 1
     afficherListe()
-    // console.log("Salut")
 }
 
 function lastPage(){
     first = (maxPages * numberOfItems)-numberOfItems;
     actualPage = maxPages;
     afficherListe(); 
-    // console.log("Salut")
 }
 
 function pagePrecedente(){
@@ -190,7 +188,6 @@ function pagePrecedente(){
         actualPage --;
         afficherListe();
     }
-    // console.log("Salut")
 }
 
 function pageSuivante(){
@@ -199,7 +196,6 @@ function pageSuivante(){
         actualPage ++;
         afficherListe();
     }
-    // console.log("Salut")
 }
 
 // function numPageInfo(){
@@ -211,12 +207,13 @@ function pageSuivante(){
 
 // Affichage
 function afficherListe(){
-  for(let i = first; i < first + numberOfItems;i++){
-    if(i<tabProd.length){
-      afficherProduit(i)
+let parent = document.getElementById("prod")
+    parent.innerHTML = ""
+    for(let i = first; i < first + numberOfItems;i++){
+        if(i<tabProd.length){
+        afficherProduit(i)
+        }
     }
-  }
-//   numPageInfo();
 }
 
 function afficherProduit(indice){

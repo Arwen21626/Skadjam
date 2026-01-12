@@ -27,7 +27,6 @@ document.querySelectorAll('.produit').forEach(container => {
     });
 
     btnAjout.addEventListener('click', e => {
-        
         input.value = Number(input.value) + 1;
         prixTot.textContent = ("Prix total : " + (prixTTC * Number(input.value)).toFixed(2) + "€").replace('.', ',');
         nbProdTot.textContent = Number(nbProdTot.textContent) + 1;
@@ -53,8 +52,6 @@ document.querySelectorAll('.produit').forEach(container => {
 
     input.addEventListener('focus', () => {
         input.select();
-        btnAjout.style.display = "none";
-        btnRetrait.style.display = 'none';
     });
 
     input.addEventListener('blur', () => {
@@ -68,8 +65,5 @@ document.querySelectorAll('.produit').forEach(container => {
 
             oldValue = input.value;
         }
-
-        btnAjout.style.display = "block";
-        btnRetrait.style.display = "block";
     })
 });
