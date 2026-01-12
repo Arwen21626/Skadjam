@@ -16,6 +16,10 @@
                             on ph.id_photo = m.id_photo
                         inner join sae3_skadjam._categorie c
                             on c.id_categorie = pr.id_categorie
+                        left join sae3_skadjam._reduit rd
+                            on rd.id_produit = pr.id_produit
+                        left join sae3_skadjam._remise r
+                            on r.id_remise = rd.id_remise
                         where pr.id_produit = $idProd"
                         , PDO::FETCH_ASSOC) as $row){
         $produit = $row;
@@ -59,7 +63,8 @@
 
             <div class="m-4 p-4 space-y-4 content-between">
                 <!--affichage du prix-->
-                <p> <?php echo htmlentities(str_replace(".", ",",$produit['prix_ttc'])); ?>€ (TTC)</p>
+                <p class=" <?php echo ($produit['pourcentage_remise'] !== NULL)?'line-through':'';?>"> <?php echo htmlentities(str_replace(".", ",",$produit['prix_ttc'])); ?>€ (TTC)</p>
+                <p class=" <?php echo ($produit['pourcentage_remise'] !== NULL)?'':'hidden';?>"> <?php echo htmlentities(str_replace(".", ",",$produit['prix_remise'])); ?>€ (TTC)</p>
                 <!--affichage de la quantite-->
                 <?php 
                 $stock = $produit['quantite_stock'];
