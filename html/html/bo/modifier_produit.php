@@ -186,7 +186,7 @@ if (isset($_POST['categorie']) && isset($_POST['nom']) && isset($_POST['prix']) 
             if ($caseCochee && !$estPromu) {
                 $dbh->beginTransaction();
                 try {
-                    if(verifDate($dateDebutPromotion) && verifDate($dateFinPromotion)){
+                    if(verifDate($dateDebutPromotion) && verifDate($dateFinPromotion) && $dateFinPromotion >= $dateDebutPromotion && $dateDebutPromotion >= date('Y-m-d')){
                         $stmtPromo = $dbh->prepare("INSERT INTO sae3_skadjam._promotion
                                                     (
                                                         date_debut_promotion,
@@ -248,6 +248,23 @@ if (isset($_POST['categorie']) && isset($_POST['nom']) && isset($_POST['prix']) 
                 }
             }
 
+            // Mise à jour des dates de la promotion existante
+            if($caseCochee && $estPromu){
+                if(verifDate($dateDebutPromotion) && verifDate($dateFinPromotion) && $dateFinPromotion >= $dateDebutPromotion && $dateDebutPromotion >= date('Y-m-d')){
+                    $stmtUpdatePromo = $dbh->prepare("UPDATE sae3_skadjam._promotion
+                                                        SET date_debut_promotion = :date_debut,
+                                                            date_fin_promotion = :date_fin
+                                                        WHERE id_promotion = :id_promotion");
+                    $stmtUpdatePromo->execute([
+                        ':date_debut'   => formatDate($dateDebutPromotion),
+                        ':date_fin'     => formatDate($dateFinPromotion),
+                        ':id_promotion' => $promotion['id_promotion']
+                    ]);
+                }else{
+                    echo "La date de début ou de fin de promotion est invalide.";
+                }
+            }
+
 
             //Update de la photo dans la table photo
             $updatePhoto = $dbh -> query("UPDATE sae3_skadjam._photo SET
@@ -279,8 +296,8 @@ else { ?>
         </style>
     </head>
     <body>
-        <?php include(__DIR__ . '/../../php/structure/header_back.php');?>
-        <?php include(__DIR__ . '/../../php/structure/navbar_back.php');?>
+        <?php include __DIR__ . '/../../php/structure/header_back.php';?>
+        <?php include __DIR__ . '/../../php/structure/navbar_back.php';?>
         <main>
             <h2>Modifier <?php echo $nom; ?></h2>
             <form class="grid grid-cols-[40%_60%] w-11/12 self-center" action="modifier_produit.php?idProduit=<?php echo $idProduit;?>" method="post" enctype="multipart/form-data">
