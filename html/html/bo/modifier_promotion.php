@@ -67,7 +67,7 @@
         <h2>Vos produits promus</h2>
         
         <?php if($tabProduit == null){ ?>
-            <p>Votre catalogue de produit est vide, vous n'avez donc pas de stock.</p>
+            <p class="text-center">Votre catalogue de promotions est vide, vous n'avez donc pas de produits en promotion.</p>
         <?php } 
         
         else{?>
