@@ -67,7 +67,7 @@
                 }
 
                 if($tabProduit == null){ ?>
-                    <p>Votre catalogue est vide.</p>
+                    <p class="text-center mb-9">Nous n'avons pas de produits en promotion pour le moment.</p>
                 <?php }
                 
                 $maxPage = sizeof($tabProduit)/PAGE_SIZE;
@@ -112,10 +112,7 @@
                                     <?php $note = $valeurs['note_moyenne'];
                                         affichageNote($note); ?>
                                 </div> 
-                            </div>   
-                             
-                            <!--affichage du stock-->
-                            <p class="col-span-2">En stock : <?php echo $valeurs['quantite_stock'];?></p>       
+                            </div>    
                         </section>
                     <?php } ?>
                 </div>         
