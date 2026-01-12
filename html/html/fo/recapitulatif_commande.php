@@ -112,7 +112,11 @@ catch (Exception $e){
                 <th>Prix unitaire TTC</th>
                 <th>Prix remisé</th>
             </tr>
+            <tr>
+
+            </tr>
         </table>
+        <form action=""></form>
     </main>
 
     <!--footer-->
