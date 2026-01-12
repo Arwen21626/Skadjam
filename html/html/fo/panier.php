@@ -57,7 +57,7 @@
             $dbh->query("UPDATE sae3_skadjam._panier SET nb_produit_total = $nbProduitsTotal, montant_total_ttc = $montantTotalTTC WHERE id_panier = $idPanier");
         }
         
-        $lienBtnValiderPanier = "/html/fo/recapitulatif_commande.php?idPanier";
+        $lienBtnValiderPanier = "/html/fo/recapitulatif_commande.php?idPanier=".$idPanier;
     }
     else if ($_SESSION['role'] === 'visiteur' && $_SESSION['panier']['nb_produit_total'] > 0) 
     {
