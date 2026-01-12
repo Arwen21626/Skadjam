@@ -1,4 +1,4 @@
-const numberOfItems = 15 //NB produits à afficher
+const numberOfItems = 24 //NB produits à afficher
 let first = 0
 let actualPage
 
@@ -40,29 +40,29 @@ function ajoutEventListener(){
     // Fonctions de tri
         // Prix
     prixTriCroissant.addEventListener("click",function () {
-        afficherProduit(triPrixCroissant(tableau))
+        afficherListe(triPrixCroissant(tableau))
     })            
 
     prixTriDecroissant.addEventListener("click",function () {
-        afficherProduit(triPrixDecroissant(tableau))
+        afficherListe(triPrixDecroissant(tableau))
     })
 
         // Ordre alphabétique
     alphaTriAZ.addEventListener("click",function () {
-        afficherProduit(triAz(tableau))
+        afficherListe(triAz(tableau))
     })
 
     alphaTriZA.addEventListener("click",function () {
-        afficherProduit(triZa(tableau))
+        afficherListe(triZa(tableau))
     })
     
         // Note
     noteTri51.addEventListener("click",function () {
-        afficherProduit(triEtoileDecroissant(tableau))
+        afficherListe(triEtoileDecroissant(tableau))
     })
     
     noteTri15.addEventListener("click", function () {
-        afficherProduit(triEtoileCroissant(tableau))
+        afficherListe(triEtoileCroissant(tableau))
     })
 
 // EventListener pour les filtres
@@ -153,13 +153,18 @@ function ajoutEventListener(){
     // Récupératiion des elements
     let boutonSidebar = document.getElementById("filtresTris")
     let sidebar = document.getElementsByTagName("aside")[0]
-    let listeProd = document.getElementById("prod")
+    let listeProd = document.getElementById("listeProduit")
+    let prod = document.getElementById("prod")
+    // let changePage = document.getElementById("changePage")
 
     // Fonction
     boutonSidebar.addEventListener("click", function(){
         boutonSidebar.classList.add("hidden")
-        // prod.classList.add("w-")
+        prod.classList.add("ml-4", "w-4/5")
+        listeProd.classList.remove("items-center")
+        listeProd.classList.add("items-end")
         sidebar.classList.toggle("translate-x-0")
+        console.log("fin")
 
     })
 }
@@ -357,12 +362,6 @@ async function affichageNote(note, parent ){
     }
 }
 
-
-
-
-// Filtres
-
-
 // Tris
 function triPrixCroissant(tab){
     let temp = tab.sort((a, b) => parseInt(a['prix_ttc']) - parseInt(b['prix_ttc']))
@@ -400,6 +399,7 @@ function triEtoileDecroissant(tab){
     return tab.sort((a,b) => parseFloat(b['note_moyenne']) - parseFloat(a['note_moyenne']))
 }
 
+// Filtres
 // Alimentaire = 1
 function filtrageCategorieAlimentaire(tableau){ 
     newTab = tableau.filter(tabProd => tabProd['id_categorie'] === 1)
