@@ -6,10 +6,11 @@ class Recupator{
     private $port;
     private $conn = NULL;
     private $numSuivi = NULL;
+    private $etat = NULL;
     private $err = NULL;
 
 
-    public function __construct($ip, $port, $user, $password){
+    public function __construct(string $ip, int $port, string $user, string $password){
         $this->user = $user;
         $this->password = $password;
         $this->ip = $ip;
@@ -71,7 +72,7 @@ class Recupator{
         if ($reponse === false) {
             throw new Exception("Aucune reponse recu pour la commande : $commande");
         }
-
+        $this->close_conn();
         return trim($reponse);
     }
 
@@ -79,14 +80,14 @@ class Recupator{
         string $numCommande, 
         string $nomExp, 
         string $adrExp, 
-        string $cpExp, 
+        int $cpExp, 
         string $nomDest, 
         string $prenomDest, 
         string $adrDest, 
-        string $cpDest)
+        int $cpDest)
         {
             $cmd = sprintf(
-                "ADD %s %s |%s| %s %s %s |%s| %s", 
+                "ADD %s %s |%s| %d %s %s |%s| %d", 
                 $numCommande, 
                 $nomExp, 
                 $adrExp, 
@@ -95,17 +96,21 @@ class Recupator{
                 $nomDest, 
                 $adrDest, 
                 $cpDest);
-                
+
             $reponse = $this->send_commande($cmd);
             if (preg_match('/^BORD\s([A-Z]{3}[0-9]{10})\scom(\d+)$/', $reponse, $m)){
                 $this->numSuivi = $m[1];
 
             }
-            return ;
+            return $this->numSuivi;
         }
 
     public function get_etat(string $numSuivi){
-        return $this->send_commande("ETA $numSuivi");
+        $reponse = $this->send_commande("ETA $numSuivi");
+        if (preg_match('/^ETA\s([A-Z]+)\s([A-Z]{3}[0-9]{10})$/', $reponse, $m)){
+            $this->etat = $m[1];
+        }
+        return $this->etat;
     }
 }
 

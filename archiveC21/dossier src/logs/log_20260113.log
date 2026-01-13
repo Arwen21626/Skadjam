@@ -3758,3 +3758,47 @@
 [23:36:28] [INFO]    [CLIENT] (./main.c:158) [127.0.0.1:46628] Requête reçue: ETAT
 [23:36:28] [WARN]    [CLIENT] (./main.c:185) [127.0.0.1:46628] Commande non reconnue: ETAT
 [23:36:28] [INFO]    [CLIENT] (./main.c:141) [127.0.0.1:46628] Client déconnecté
+[23:41:49] [INFO]    [SERV]   (./main.c:70) Démarrage du service Delivraptor
+[23:41:49] [INFO]    [SERV]   (./main.c:81) Socket configuré
+[23:41:49] [INFO]    [SERV]   (./main.c:96) Adresse ip et port configurées
+[23:41:49] [INFO]    [SERV]   (./main.c:101) Socket en écoute
+[23:42:00] [INFO]    [SERV]   (./main.c:113) Connexion acceptée (fd=5)
+[23:42:00] [DEBUG]   [SERV]   (./main.c:201)  <<Parent pid enfant : 11414
+[23:42:00] [DEBUG]   [SERV]   (./main.c:203)  <<Parent connexion ferme
+[23:42:00] [INFO]    [SERV]   (./main.c:122) Process enfant démarré (pid=11414) pour fd=5
+[23:42:00] [INFO]    [SERV]   (./main.c:124) Connexion à la BDD...
+[23:42:00] [INFO]    [SERV]   (./main.c:400) Connecté a la BDD
+[23:42:00] [INFO]    [SERV]   (./main.c:401) SET search_path...
+[23:42:00] [INFO]    [SERV]   (./main.c:406) SET search_path success
+[23:42:00] [INFO]    [SERV]   (./main.c:411) Base de données actuelle : postgres
+[23:42:00] [INFO]    [SERV]   (./main.c:417) Schéma courant (search_path) : sae3_delivraptor
+[23:42:00] [INFO]    [CLIENT] (./main.c:136) [127.0.0.1:60066] Client connecté
+[23:42:00] [INFO]    [CLIENT] (./main.c:158) [127.0.0.1:60066] Requête reçue: GET
+[23:42:00] [WARN]    [CLIENT] (./main.c:185) [127.0.0.1:60066] Commande non reconnue: GET
+[23:42:00] [INFO]    [CLIENT] (./main.c:158) [127.0.0.1:60066] Requête reçue: Host:
+[23:42:00] [WARN]    [CLIENT] (./main.c:185) [127.0.0.1:60066] Commande non reconnue: Host:
+[23:42:00] [INFO]    [CLIENT] (./main.c:158) [127.0.0.1:60066] Requête reçue: User-Agent:
+[23:42:00] [WARN]    [CLIENT] (./main.c:185) [127.0.0.1:60066] Commande non reconnue: User-Agent:
+[23:42:00] [INFO]    [CLIENT] (./main.c:158) [127.0.0.1:60066] Requête reçue: Accept:
+[23:42:00] [WARN]    [CLIENT] (./main.c:185) [127.0.0.1:60066] Commande non reconnue: Accept:
+[23:42:00] [INFO]    [CLIENT] (./main.c:158) [127.0.0.1:60066] Requête reçue: Accept-Language
+[23:42:00] [WARN]    [CLIENT] (./main.c:185) [127.0.0.1:60066] Commande non reconnue: Accept-Language
+[23:42:00] [INFO]    [CLIENT] (./main.c:158) [127.0.0.1:60066] Requête reçue: Accept-Encoding
+[23:42:00] [WARN]    [CLIENT] (./main.c:185) [127.0.0.1:60066] Commande non reconnue: Accept-Encoding
+[23:42:00] [INFO]    [CLIENT] (./main.c:158) [127.0.0.1:60066] Requête reçue: Connection:
+[23:42:00] [WARN]    [CLIENT] (./main.c:185) [127.0.0.1:60066] Commande non reconnue: Connection:
+[23:42:00] [INFO]    [CLIENT] (./main.c:158) [127.0.0.1:60066] Requête reçue: Cookie:
+[23:42:00] [WARN]    [CLIENT] (./main.c:185) [127.0.0.1:60066] Commande non reconnue: Cookie:
+[23:42:00] [INFO]    [CLIENT] (./main.c:158) [127.0.0.1:60066] Requête reçue: Upgrade-Insecur
+[23:42:00] [WARN]    [CLIENT] (./main.c:185) [127.0.0.1:60066] Commande non reconnue: Upgrade-Insecur
+[23:42:00] [INFO]    [CLIENT] (./main.c:158) [127.0.0.1:60066] Requête reçue: Sec-Fetch-Dest:
+[23:42:00] [WARN]    [CLIENT] (./main.c:185) [127.0.0.1:60066] Commande non reconnue: Sec-Fetch-Dest:
+[23:42:00] [INFO]    [CLIENT] (./main.c:158) [127.0.0.1:60066] Requête reçue: Sec-Fetch-Mode:
+[23:42:00] [WARN]    [CLIENT] (./main.c:185) [127.0.0.1:60066] Commande non reconnue: Sec-Fetch-Mode:
+[23:42:00] [INFO]    [CLIENT] (./main.c:158) [127.0.0.1:60066] Requête reçue: Sec-Fetch-Site:
+[23:42:00] [WARN]    [CLIENT] (./main.c:185) [127.0.0.1:60066] Commande non reconnue: Sec-Fetch-Site:
+[23:42:00] [INFO]    [CLIENT] (./main.c:158) [127.0.0.1:60066] Requête reçue: Sec-Fetch-User:
+[23:42:00] [WARN]    [CLIENT] (./main.c:185) [127.0.0.1:60066] Commande non reconnue: Sec-Fetch-User:
+[23:42:00] [INFO]    [CLIENT] (./main.c:158) [127.0.0.1:60066] Requête reçue: Priority:
+[23:42:00] [WARN]    [CLIENT] (./main.c:185) [127.0.0.1:60066] Commande non reconnue: Priority:
+[23:42:00] [WARN]    [CLIENT] (./main.c:152) [127.0.0.1:60066] Ligne mal formée reçue
