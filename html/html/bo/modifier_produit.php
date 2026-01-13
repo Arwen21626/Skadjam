@@ -54,7 +54,8 @@ foreach($dbh->query("SELECT *,est_masque::CHAR as est_masque_php
     $nomCategorie = $produit['libelle_categorie'];
     $idCategorie = $produit['id_categorie'];
 
-    if($enLigne == 'f'){ //Si dans la BDD est_masque est a false, il faut mettre enLigne à true ou l'inverse
+    // Si dans la BDD est_masque est a false, il faut mettre enLigne à true ou l'inverse
+    if($enLigne == 'f'){
         $enLigne = 'true';
     }else{
         $enLigne = 'false';
@@ -77,13 +78,24 @@ foreach($dbh->query("SELECT *,est_masque::CHAR as est_masque_php
         $enPromotion = 'false';
     }
 
+    // Suppression des promotions expirées
+    if($_SERVER['REQUEST_METHOD'] === 'POST'){
+        $dbh->prepare("DELETE FROM sae3_skadjam._promu
+                        WHERE id_promotion IN (
+                            SELECT id_promotion
+                            FROM sae3_skadjam._promotion
+                            WHERE date_fin_promotion < :current_date
+                        )")->execute([':current_date' => date('Y-m-d')]);
+
+        $dbh->prepare("DELETE FROM sae3_skadjam._promotion
+                        WHERE date_fin_promotion < :current_date")->execute([':current_date' => date('Y-m-d')]);
+    }
+
     //Récupération attribut de photo
     $idPhoto = $produit['id_photo'];
     $urlPhoto = $produit['url_photo'];
     $altPhoto = $produit['alt'];
     $titrePhoto = $produit['titre'];
-
-    
 }
 
 //Traitement du formulaire
@@ -254,8 +266,9 @@ if (isset($_POST['categorie']) && isset($_POST['nom']) && isset($_POST['prix']) 
                 }
             }
 
-            // Mise à jour des dates de la promotion existante
+            // Si la case "Mettre en promotion" est cochée et que le produit est déjà promu
             if($caseCochee && $estPromu){
+                // Mise à jour des dates de la promotion existante
                 if(verifDate($dateDebutPromotion) && verifDate($dateFinPromotion) && $dateFinPromotion >= $dateDebutPromotion && $dateDebutPromotion >= date('Y-m-d')){
                     $stmtUpdatePromo = $dbh->prepare("UPDATE sae3_skadjam._promotion
                                                         SET date_debut_promotion = :date_debut,
@@ -266,11 +279,20 @@ if (isset($_POST['categorie']) && isset($_POST['nom']) && isset($_POST['prix']) 
                         ':date_fin'     => formatDate($dateFinPromotion),
                         ':id_promotion' => $promotion['id_promotion']
                     ]);
-                }else{
+                // Suppression de la date de fin de promotion + Mise à jour de la date de début
+                }else if($dateFinPromotion == null && verifDate($dateDebutPromotion) && $dateDebutPromotion >= date('Y-m-d')){
+                    $stmtUpdatePromo = $dbh->prepare("UPDATE sae3_skadjam._promotion
+                                                        SET date_debut_promotion = :date_debut,
+                                                            date_fin_promotion = NULL
+                                                        WHERE id_promotion = :id_promotion");
+                    $stmtUpdatePromo->execute([
+                        ':date_debut'   => formatDate($dateDebutPromotion),
+                        ':id_promotion' => $promotion['id_promotion']
+                    ]);
+                }else{  
                     echo "La date de début ou de fin de promotion est invalide.";
                 }
             }
-
 
             //Update de la photo dans la table photo
             $updatePhoto = $dbh -> query("UPDATE sae3_skadjam._photo SET

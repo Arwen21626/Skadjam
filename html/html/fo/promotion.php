@@ -2,6 +2,7 @@
     include __DIR__ . '/../../01_premiere_connexion.php';
     require_once __DIR__ . "/../../../connections_params.php";
     require_once __DIR__ . "/../../php/fonctions.php";
+    require_once __DIR__ . "/../../php/modification_variable.php";
     const PAGE_SIZE = 15;
     session_start();
 
@@ -55,15 +56,23 @@
                                     FROM sae3_skadjam._produit pr
                                     INNER join sae3_skadjam._montre m
                                         ON pr.id_produit=m.id_produit
-                                    INNER JOIN sae3_skadjam._photo ph  
+                                    INNER JOIN sae3_skadjam._photo ph
                                         ON ph.id_photo = m.id_photo 
                                     INNER JOIN sae3_skadjam._vendeur v
                                         ON pr.id_vendeur = v.id_compte
-                                    INNER JOIN sae3_skadjam._promu pm
-                                        ON pr.id_produit = pm.id_produit
+                                    INNER JOIN sae3_skadjam._promu pu
+                                        ON pr.id_produit = pu.id_produit
+                                    INNER JOIN sae3_skadjam._promotion pn
+                                        ON pu.id_promotion = pn.id_promotion
                                     WHERE pr.est_masque = false"
                                     , PDO::FETCH_ASSOC) as $row){
-                    $tabProduit[] = $row;
+                    // Formattage des dates
+                    $row['date_debut_promotion'] = formatDate($row['date_debut_promotion']);
+                    $row['date_fin_promotion'] = formatDate($row['date_fin_promotion']);
+                    // La promotion est-elle terminée ou commence-t-elle ?
+                    if($row['date_debut_promotion'] <= date('Y-m-d') && ($row['date_fin_promotion'] >= date('Y-m-d') || $row['date_fin_promotion'] == NULL)){
+                        $tabProduit[] = $row;
+                    }
                 }
 
                 if($tabProduit == null){ ?>
