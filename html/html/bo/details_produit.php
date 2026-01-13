@@ -8,7 +8,9 @@
     $idProd = $_GET['idProduit'];
     
     $produit = "vide";
-    foreach($dbh->query("SELECT *
+    foreach($dbh->query("SELECT pr.id_produit, pr.libelle_produit, pr.note_moyenne, c.libelle_categorie,
+                                ph.url_photo, ph.alt, ph.titre, r.pourcentage_remise, pr.quantite_stock, 
+                                pr.description_produit, pr.prix_ttc, pr.prix_remise
                         from sae3_skadjam._produit pr
                         inner join sae3_skadjam._montre m
                             on pr.id_produit=m.id_produit

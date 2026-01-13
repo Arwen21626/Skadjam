@@ -21,7 +21,7 @@
                                 ORDER BY libelle_produit ASC;"
                             , PDO::FETCH_ASSOC) as $row){
             $tabProduit[] = $row;
-        } print_r($tabProduit);
+        } 
     }
     
 
@@ -32,7 +32,6 @@
 
     //traitement de la modification du pourcentage d'une remise
     if (isset($_POST['pourcentage']) && is_array($_POST['pourcentage'])) {
-        // savoir si le produit à déjà une remise ou pas
 
         // pour la supression d'une remise
         $deleteRemise = $dbh->prepare("
@@ -46,7 +45,7 @@
         $insertRemise = $dbh->prepare("
             WITH id_remise AS (
                 INSERT INTO sae3_skadjam._remise(pourcentage_remise, date_debut_remise) 
-                VALUES (?, '?') RETURNING id_remise
+                VALUES (?, ?) RETURNING id_remise
             )
             INSERT INTO sae3_skadjam._reduit(id_produit, id_remise) 
                 SELECT ?, id_remise FROM id_remise");
@@ -62,10 +61,8 @@
         foreach ($_POST['pourcentage'] as $idProduit => $pourcentage) {
             $pourcentage = ($pourcentage/100);
             $existe = false;  //si le produit a déjà une remise
-            echo 'salut';
             foreach($dbh->query("SELECT * FROM sae3_skadjam._reduit WHERE id_produit = $idProduit", PDO::FETCH_ASSOC) as $row){
                 $existe = true;
-                echo 'salutpasnormal';
                 // modification d'une remise
                 if (verifPourcentage($pourcentage) && $pourcentage != 0) {
                     $updateRemise->execute([$pourcentage, $row['id_remise']]);
@@ -79,16 +76,11 @@
                     echo "le format du pourcentage n'est pas correcte";
                 }
             }
-            echo 'salutcontinu';
             // insertion d'une remise
-            if (!$existe && $pourcentage != 0){ // $pourcentage !== 0 ne fonctionne pas 
+            if (!$existe && $pourcentage != 0){
                 $date = date('d/m/Y'); 
-                echo 'salutok';
-                echo $pourcentage.' '.$date.' '.$idProduit;
                 $insertRemise->execute([$pourcentage, $date, $idProduit]);
-                echo 'salutokfin';
             }
-            echo 'salut';
         }
         
         header("Location: ./details_remises.php");

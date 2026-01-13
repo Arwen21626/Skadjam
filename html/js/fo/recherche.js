@@ -1,7 +1,8 @@
-const numberOfItems = 15 //NB produits à afficher
+const numberOfItems = 24 //NB produits à afficher
 let first = 0
 let actualPage
 
+let tableau = []
 
 function ajoutEventListener(){
 // EventListener pour les boutons de changement de page
@@ -39,29 +40,29 @@ function ajoutEventListener(){
     // Fonctions de tri
         // Prix
     prixTriCroissant.addEventListener("click",function () {
-        afficherProduit(triPrixCroissant(tabProd))
+        afficherListe(triPrixCroissant(tableau))
     })            
 
     prixTriDecroissant.addEventListener("click",function () {
-        afficherProduit(triPrixDecroissant(tabProd))
+        afficherListe(triPrixDecroissant(tableau))
     })
 
         // Ordre alphabétique
     alphaTriAZ.addEventListener("click",function () {
-        afficherProduit(triAz(tabProd))
+        afficherListe(triAz(tableau))
     })
 
     alphaTriZA.addEventListener("click",function () {
-        afficherProduit(triZa(tabProd))
+        afficherListe(triZa(tableau))
     })
     
         // Note
     noteTri51.addEventListener("click",function () {
-        afficherProduit(triEtoileDecroissant(tabProd))
+        afficherListe(triEtoileDecroissant(tableau))
     })
     
     noteTri15.addEventListener("click", function () {
-        afficherProduit(triEtoileCroissant(tabProd))
+        afficherListe(triEtoileCroissant(tableau))
     })
 
 // EventListener pour les filtres
@@ -88,85 +89,90 @@ function ajoutEventListener(){
 
     // Fonctions de filtres
         //Catégories
-    categorieAlimentaire.addEventListener("click",function () {CCC
-        tabProd = filtrageCategorieAlimentaire(tabProd);
-        afficherProduit(tabProd)
+    categorieAlimentaire.addEventListener("click",function () {
+        tableau = filtrageCategorieAlimentaire(tableau);
+        afficherListe()
     })
 
     categorieVetement.addEventListener("click",function () {
-        tabProd = filtrageCategorieVetement(tabProd);
-        afficherProduit(tabProd)
+        tableau = filtrageCategorieVetement(tableau);
+        afficherListe()
     })
 
     categorieArtisanat.addEventListener("click",function () {
-        tabProd = filtrageCategorieArtisanat(tabProd);
-        afficherProduit(tabProd)
+        tableau = filtrageCategorieArtisanat(tableau);
+        afficherListe()
     })
 
     categorieGoodies.addEventListener("click",function () {
-        tabProd = filtrageCategorieGoodies(tabProd);
-        afficherProduit(tabProd)
+        tableau = filtrageCategorieGoodies(tableau);
+        afficherListe()
     })
 
     categorieSoin.addEventListener("click",function () {
-        tabProd = filtrageCategorieSoin(tabProd);
-        afficherProduit(tabProd)
+        tableau = filtrageCategorieSoin(tableau);
+        afficherListe()
     })
     
         // Note
     noteZeroE.addEventListener("click",function () {
-        filtrageNoteNonNote(tabProd);
     })
 
     noteUneE.addEventListener("click",function () {
-        filtrageNote1(tabProd);
     })
 
     noteDeuxE.addEventListener("click",function () {
-        filtrageNote2(tabProd);
     })
 
     noteTroisE.addEventListener("click",function () {
-        filtrageNote3(tabProd);
     })
     
     noteQuatreE.addEventListener("click",function () {
-        filtrageNote4(tabProd);
     })
 
     noteCinqE.addEventListener("click",function () {
-        filtrageNote5(tabProd);
     })
 
     // Tranche de prix
     tranchePrix1.addEventListener("click",function () {
-        filtrageTranchePrix1(tabProd);
     })
 
     tranchePrix2.addEventListener("click",function () {
-        filtrageTranchePrix2(tabProd);
     })
 
     tranchePrix3.addEventListener("click",function () {
-        filtrageTranchePrix3(tabProd);
     })
     
     tranchePrix4.addEventListener("click",function () {
-        filtrageTranchePrix4(tabProd);
     })
 
     tranchePrix5.addEventListener("click",function () {
-        filtrageTranchePrix5(tabProd);
     })
 
 // EventListeners pour l'animation sidebar filtre et tri
     // Récupératiion des elements
+    let boutonSidebar = document.getElementById("filtresTris")
     let sidebar = document.getElementsByTagName("aside")[0]
+    let listeProd = document.getElementById("listeProduit")
+    let prod = document.getElementById("prod")
+    let fermerSidebar = document.getElementById("fermerSidebar")
+    let changePage = document.getElementById("changePage")
 
-    // Fonction
-    sidebar.addEventListener("click", function(){
-        sidebar.classList.toggle('active')
-        console.log("Coucou")
+    // Fonction ouverture
+    boutonSidebar.addEventListener("click", function(){
+        boutonSidebar.classList.add("hidden")
+        prod.classList.add("content-end")
+        sidebar.classList.remove("hidden")
+        sidebar.classList.add("translate-x-0")
+    })
+
+    //Fonction fermeture
+    fermerSidebar.addEventListener("click", function(){
+        // sidebar.classList.remove("translate-x-0")
+        // sidebar.classList.add("hidden")
+        // boutonSidebar.classList.remove("hidden")
+        // prod.classList.remove("ml-4", "w-4/5")
+        // listeProd.classList.remove("items-end")
     })
 }
 
@@ -191,7 +197,7 @@ function pagePrecedente(){
 }
 
 function pageSuivante(){
-    if(first+numberOfItems<=tabProd.length){
+    if(first+numberOfItems<tableau.length){
         first+=numberOfItems;
         actualPage ++;
         afficherListe();
@@ -207,18 +213,22 @@ function pageSuivante(){
 
 // Affichage
 function afficherListe(){
-let parent = document.getElementById("prod")
+    if(tableau.length === 0){
+        tableau = tabProd
+    }
+    let parent = document.getElementById("prod")
     parent.innerHTML = ""
     for(let i = first; i < first + numberOfItems;i++){
-        if(i<tabProd.length){
-        afficherProduit(i)
+        if(i<tableau.length){
+            afficherProduit(i)
         }
     }
 }
 
+
 function afficherProduit(indice){
     let i = indice
-    let idProduit = tabProd[i]['id_produit']
+    let idProduit = tableau[i]['id_produit']
     let parent = document.getElementById("prod")
 
     // Section   
@@ -237,14 +247,14 @@ function afficherProduit(indice){
 
     // Image
     let image = document.createElement("img")
-    image.src = tabProd[i]['url_photo']
-    image.alt = tabProd[i]['alt']
-    image.title = tabProd[i]['title']
+    image.src = tableau[i]['url_photo']
+    image.alt = tableau[i]['alt']
+    image.title = tableau[i]['title']
     parent.appendChild(image)
 
     // Nom produit
     let nom = document.createElement("p")
-    nom.textContent = tabProd[i]['libelle_produit']
+    nom.textContent = tableau[i]['libelle_produit']
     parent.appendChild(nom)
     nom.classList.add("col-span-2")
 
@@ -257,7 +267,7 @@ function afficherProduit(indice){
 
     // Prix
     let prix = document.createElement("p")
-    prix.textContent = tabProd[i]['prix_ttc'].replace(".", ",")+" €"
+    prix.textContent = tableau[i]['prix_ttc'].replace(".", ",")+" €"
     parent.appendChild(prix)
 
     // Note
@@ -267,7 +277,7 @@ function afficherProduit(indice){
 
     parent = contientNote
 
-    let note = tabProd[i]['note_moyenne']
+    let note = tableau[i]['note_moyenne']
     affichageNote(note, parent)
 
     //setTimeout(function(){console.log('Code waits for 1  second')}, 1000);
@@ -359,27 +369,6 @@ async function affichageNote(note, parent ){
     }
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// Filtres
-
-
 // Tris
 function triPrixCroissant(tab){
     let temp = tab.sort((a, b) => parseInt(a['prix_ttc']) - parseInt(b['prix_ttc']))
@@ -419,217 +408,99 @@ function triEtoileDecroissant(tab){
 
 
 
+// Filtres
+
+// Alimentaire = 1
+function filtrageCategorieAlimentaire(tableau){ 
+    newTab = tableau.filter(tabProd => tabProd['id_categorie'] === 1)
+    // console.log(newTab)
+    return newTab
+}
+
+// Vetement = 2
+function filtrageCategorieVetement(tableau){
+    newTab = tableau.filter(tabProd => tabProd['id_categorie'] === 2)
+    return newTab
+}
+
+// Artisanat = 3
+function filtrageCategorieArtisanat(tableau){
+    newTab = tableau.filter(tabProd => tabProd['id_categorie'] === 3)
+    return newTab
+}
+
+// Goodies = 4
+function filtrageCategorieGoodies(tableau){
+    newTab = tableau.filter(tabProd => tabProd['id_categorie'] === 4)
+    return newTab
+}
+
+// Soin = 5
+function filtrageCategorieSoin(tableau){
+    newTab = tableau.filter(tabProd => tabProd['id_categorie'] === 5)
+    return newTab
+}
+
+
+// NOTE
+
+// non noté
+function filtrageNoteNonNote(tabProd){ 
+
+}
+
+// 0 à 1.99
+function filtrageNote1(tabProd){ 
+
+}
+
+// 2 à 2.99
+function filtrageNote2(tabProd){ 
+
+}
+
+// 3 à 3.99
+function filtrageNote3(tabProd){ 
+
+}
+
+// 4 à 4.99
+function filtrageNote4(tabProd){ 
+
+}
+
+// 5
+function filtrageNote5(tabProd){ 
+
+}
+
+
+//TRANCHE DE PRIX
+
+// 2.99 - 8.39
+function filtrageTranchePrix1(tabProd){ 
+
+}
+
+// 8.40 - 13.19
+function filtrageTranchePrix2(tabProd){ 
+
+}
+
+// 13.20 - 19.19
+function filtrageTranchePrix3(tabProd){ 
+
+}
+
+// 19.20 - 31.19
+function filtrageTranchePrix4(tabProd){ 
+
+}
+
+// 31.20 - 71.99
+function filtrageTranchePrix5(tabProd){ 
+
+}
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-//  Récupération des tris cochés
-// function recupTri(){
-//     let tabChecked = []
-//     document.querySelectorAll('input[type="radio"]').forEach(radio => {
-//         radio.addEventListener('change', () => {
-//             // Si la valeur du radio bouton est 'croissant' et que 'decroissant' est déjà dans le tableau
-//             // on le remplace
-//             if ((radio.value == "croissant" && tabChecked.includes("decroissant"))) {
-//                 tabChecked.splice(tabChecked.indexOf("decroissant"),1,radio.value)
-//             }
-//             // Si la valeur du radio bouton est 'decroissant' et que 'croissant' est déjà dans le tableau
-//             // on le remplace
-//             else if(radio.value == "decroissant" && tabChecked.includes("croissant")) {
-//                 tabChecked.splice(tabChecked.indexOf("croissant"),1,radio.value)
-//             }
-//             // Si la valeur du radio bouton est 'az' et que 'za' est déjà dans le tableau
-//             // on le remplace
-//             else if(radio.value == "az" && tabChecked.includes("za")) {
-//                 tabChecked.splice(tabChecked.indexOf("za"),1,radio.value)
-//             }
-//             // Si la valeur du radio bouton est 'za' et que 'az' est déjà dans le tableau
-//             // on le remplace
-//             else if(radio.value == "za" && tabChecked.includes("az")) {
-//                 tabChecked.splice(tabChecked.indexOf("az"),1,radio.value)
-//             }
-//             // Si la valeur du radio bouton est '51' et que '15' est déjà dans le tableau
-//             // on le remplace
-//             else if(radio.value == "51" && tabChecked.includes("15")) {
-//                 tabChecked.splice(tabChecked.indexOf("15"),1,radio.value)
-//             }
-//             // Si la valeur du radio bouton est '15' et que '51' est déjà dans le tableau
-//             // on le remplace
-//             else if(radio.value == "15" && tabChecked.includes("51")) {
-//                 tabChecked.splice(tabChecked.indexOf("51"),1,radio.value)
-//             }
-//             // Sinon on ajoute la valeur
-//             else{
-//                 tabChecked.push(radio.value)
-//             }
-//             //console.log(tabChecked)
-//             return tabChecked
-//         });
-        
-//     });
-// }
-
-// // Récupération des filtres cochés
-// function recupFiltre(){
-//     let tabChecked = []
-//     document.querySelectorAll('input[type="checkbox"]').forEach(box => {
-//         box.addEventListener('change', () => {
-//             // Si le filtre n'est pas dans la liste on l'ajoute
-//             if ((!tabChecked.includes(box.value))) {
-//                 tabChecked.push(box.value)
-                
-//             }
-//             else{
-//                 tabChecked.splice(tabChecked.indexOf(box.value))
-//             }
-//             console.log(tabChecked)
-//             return tabChecked
-//         });
-//     });
-// }
-
-// // Récupération et modification de l'URL
-// function envoiTriUrl(){
-//     let tab = recupTri()
-//     console.log(tab)
-//     let envoi = []
-
-//     if (tab.includes("croissant")){
-//         envoi.push("croissant=true")
-//     }
-//     else if (tab.includes("decroissant")){
-//         envoi.push("decroissant=true")
-//     }
-
-//     if (tab.includes("az")){
-//         envoi.push("az=true")
-//     }
-//     else if (tab.includes("za")){
-//         envoi.push("za=true")
-//     }
-
-//     if (tab.includes("15")){
-//         envoi.push("15=true")
-//     }
-//     else if (tab.includes("51")){
-//         envoi.push("51=true")
-//     }
-//     return envoi
-// }
-
-// function ecrireURL(){
-    
-//     let tab = envoiTriUrl()
-//     //console.log(tab)
-
-//     if (tab.length === 0){ return ""}
-
-//     let rep ="?" + tab[0]
-
-//     if(tab.length > 1){
-//         for (let i = 1; i < tab.length; i++) {
-//             rep += "&"+tab[i]
-//         }
-//     }
-//     window.history.pushState({}, "", rep)
-//     return rep
-// }
-
-// function recupURL(){
-//     let params = []
-
-//     var parts = window.location.search.substr(1).split("&");
-//     for (var i = 0; i < parts.length; i++) {
-//         var attribut = parts[i].split("=");
-//         params.push(attribut)
-//         //console.log(params)
-//     }
-    
-//     return params
-// }
-
-// Uilisation de l'URL pour cocher les cases d'une page à l'autre
-
-
-// Changement de pages
-// function calculNbPages(tabProd){
-//     //initialisation du numéro de page
-//     const PAGE_SIZE = 15
-//     let pageNumber
-//     // Récupération dans l'url
-//     page = recupURL()
-    
-
-//     if(page[0] == ''){
-//         pageNumber = 1 
-//     }else{
-//         pageNumber = page[1]
-//     }
-
-//     //console.log($_GET['id']); // Affiche la valeur du paramètre 'id'   
-
-//     let maxPage = (tabProd.length)/PAGE_SIZE
-
-//     let start = (pageNumber - 1) * PAGE_SIZE;
-//     let end = pageNumber * PAGE_SIZE;
-
-//     let lignes = tabProd.slice(start, end);
-    
-//     return [lignes, pageNumber, maxPage]
-// }
-
-// function changementPage(){
-//     // Passage d'une page à l'autre
-//     parent = document.getElementsByTagName("main")[0]
-//     // Pour avoir seulement le main et pas le tableau renvoyé
-//     let pageChangement = document.createElement("div")
-//     pageChangement.classList.add("flex", "flex-row", "space-x-4", "justify-center")
-//     parent.appendChild(pageChangement)
-
-//     parent = pageChangement
-
-//     // let temp = calculNbPages(tabProd)[0]
-    
-//     let pageNumber = calculNbPages(tabProd)[1]
-//     let maxPage = calculNbPages(tabProd)[2]
-    
-//     if(pageNumber > 1){
-//         let pagePrec = document.createElement("a")
-//         pagePrec.href = "recherche.php?page="+(pageNumber-1)+"#nosProduits"
-
-//         pagePrec.textContent = "Page précédente"
-//         pagePrec.classList.add("lienPage","hover:text-rouge")
-
-//         parent.appendChild(pagePrec)
-
-//         pagePrec.addEventListener("click", ecrireURL)
-//     }
-
-//     if (pageNumber < maxPage){
-//         let pageSuiv = document.createElement("a")
-//         let pageSup = parseInt(pageNumber)+1
-//         pageSuiv.href = "recherche.php?page="+(pageSup)+"#nosProduits"
-
-//         pageSuiv.textContent = "Page suivante"
-//         pageSuiv.classList.add("lienPage","hover:text-rouge")
-
-//         parent.appendChild(pageSuiv)
-
-//         pageSuiv.addEventListener("click", ecrireURL)
-//     }
-// }
