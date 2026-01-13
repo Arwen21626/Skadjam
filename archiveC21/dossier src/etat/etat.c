@@ -24,36 +24,18 @@ static const char *etat_to_str(etat_t etat){
 
 
 void msg_etat(int fd, etat_t etat, const char *num_suivi){
-    LOG_SERV(LOG_DEBUG, " >> arrive fn msg_etat av test: %d", etat);
-    if (etat == INCONNU){
-        LOG_SERV(LOG_DEBUG, " >> INCONNU test: %d", etat);
-    }else{
-        LOG_SERV(LOG_DEBUG, " >> CONNU test: %d", etat);
-    }
-    LOG_SERV(LOG_DEBUG, " >> arrive fn msg_etat ap test: %d", etat);
+    /* Log entry and send concise ETA message */
+    LOG_SERV(LOG_DEBUG, "msg_etat called: %d", etat);
     char message[1024];
-    message[0]='\0';
-     LOG_SERV(LOG_DEBUG, " >> arrive fn msg_etat av vrai: %d", etat);
-
-     /* Do not initialize or close the global logger here. Logger should be
-         managed by the process lifecycle (e.g. main). Re-initializing or
-         closing it here could lead to double-free / corruption. */
-     if (etat == INCONNU){
-        LOG_SERV(LOG_DEBUG, " >> Message etat inconnu : %d",etat);
-        snprintf(message, sizeof(message), "ETA ERR %s %s", 
-                 etat_to_str(etat),
-                 num_suivi);
-    }else{
-        LOG_SERV(LOG_DEBUG, " >> Message etat connu : %d",etat);
+    if (etat == INCONNU) {
+        snprintf(message, sizeof(message), "ETA ERR %s %s",
+                 etat_to_str(etat), num_suivi);
+    } else {
         snprintf(message, sizeof(message), "ETA %s %s",
-                 etat_to_str(etat),
-                 num_suivi);
+                 etat_to_str(etat), num_suivi);
     }
-    LOG_SERV(LOG_DEBUG, "ETAT %d message : %s", etat, message);
-    int size = strlen(message);
-    send(fd, message, size, 0);
-    LOG_SERV(LOG_DEBUG, "ETAT %d message : %s envoyé", etat, message);
-    LOG_SERV(LOG_INFO, "ETAT %d message : %s envoyé", etat, message);
+    send(fd, message, strlen(message), 0);
+    LOG_SERV(LOG_INFO, "ETAT %d envoyé: %s", etat, message);
 }
 
 etat_t next_etat(etat_t etat){
