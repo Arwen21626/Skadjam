@@ -1,8 +1,9 @@
 <?php
-    include(__DIR__ . '/01_premiere_connexion.php');
+    include __DIR__ . '/01_premiere_connexion.php';
     const PAGE_SIZE = 15;
-    require_once(__DIR__ . "/../connections_params.php");
-    require_once(__DIR__ . "/php/fonctions.php");
+    require_once __DIR__ . "/../connections_params.php";
+    require_once __DIR__ . "/php/fonctions.php";
+    require_once __DIR__ . "/php/modification_variable.php";
     session_start();
 
     if (!isset($_SESSION['role'])) {
@@ -96,11 +97,22 @@
                             </a>
 
                             <!--affichage de la promotion-->
-                            <?php if($estPromu){ ?>
+                            <?php if($estPromu){ 
+                                    $stmt = $dbh->prepare("SELECT *
+                                                            FROM sae3_skadjam._promu pu
+                                                            INNER JOIN sae3_skadjam._promotion pn
+                                                                ON pu.id_promotion = pn.id_promotion
+                                                            WHERE pu.id_produit = :id_produit");
+                                    $stmt->execute([':id_produit' => $idProduit]);
+                                    $promotion = $stmt->fetch(PDO::FETCH_ASSOC);
+                                    $debutPromo = formatDate($promotion['date_debut_promotion']);
+                                    $finPromo = formatDate($promotion['date_fin_promotion']);
+                                    if($debutPromo <= date('Y-m-d') && ($finPromo >= date('Y-m-d') || $finPromo == NULL)){
+                                ?>
                                 <div class="bg-rouge absolute col-span-2 w-36 md:w-74 underline text-beige pt-2 pb-1.5">
                                     <h4 class="text-center text-beige overline m-0"><strong>Promotion</strong></h4>
                                 </div>
-                            <?php } ?>
+                            <?php }} ?>
 
                             <!--affichage du nom du produit-->
                             <p class="col-span-2"><?php echo $valeurs['libelle_produit'];?></p> 
@@ -120,9 +132,7 @@
                     <?php } ?>
                 </div>
                 <?php $dbh = null;
-            } 
-
-            catch (PDOException $e) {
+            }catch(PDOException $e){
                 print "Erreur !: " . $e->getMessage() . "<br/>";
                 die();
             }
