@@ -6,8 +6,8 @@
 
     try {     
         $tabInfoCommandes = null;           
-        //récupère toutes les infos des tables produits et photos
-        foreach($dbh->query("SELECT *
+        //récupère toutes les infos de la table commande
+        foreach($dbh->query("SELECT c.id_commande, c.date_commande, c.etat, c.montant_total_ttc
                             FROM sae3_skadjam._commande c
                             WHERE c.id_client = $idCompte"
                             , PDO::FETCH_ASSOC) as $row){
@@ -42,15 +42,15 @@
         <?php }
 
         else{?>
-            <div class="flex justify-center">
+            <div class="flex justify-center mt-15">
                 <?php //tableau des commandes ?>
                 <table class="table-auto w-250">
                     <thead>
                         <tr>
-                            <th scope="col" class="text-left w-125 pl-3"><h3>Numéro de la commande</h3></th>
+                            <th scope="col" class="w-80 pl-3"><h3>N° de commande</h3></th>
                             <th scope="col"><h3>Date</h3></th>
                             <th scope="col"><h3>Etat</h3></th>
-                            <th scope="col"><h3>Montant total TTC</h3></th>
+                            <th scope="col"><h3>Total</h3></th>
                             <th scope="col"></th>
                         </tr>
                     </thead>
@@ -58,20 +58,17 @@
                         <?php 
                             //pour changer la classe de css une ligne sur 2
                             $impair = 0;
-                            $classe;
-                            $classe1 = "py-4";
-                            $classe2 = "py-4 bg-bleu";
                             foreach($tabInfoCommandes as $id => $commande){
                                 $idCommande = $commande['id_commande']; 
                                 $impair ++;
                                 if(fmod($impair, 2) == 0){
-                                    $classe = $classe1;
+                                    $classe = "py-4";
                                 }
                                 else{
-                                    $classe = $classe2;
+                                    $classe = "py-4 bg-bleu";
                                 }?>
                                 <tr class="<?php echo $classe; ?>">
-                                    <th scope="row" class="text-left py-3 pl-3" ><p><?php echo $idCommande; ?></p></th>
+                                    <th scope="row" class="text-center py-3 pl-3" ><p><?php echo $idCommande; ?></p></th>
                                     <td class="text-center py-3"><p><?php echo htmlentities($commande['date_commande']);?></p></td>
                                     <td class="text-center py-3"><p><?php echo htmlentities($commande['etat']);?></p></td>
                                     <td class="text-center py-3"><p><?php echo htmlentities($commande['montant_total_ttc']); ?></p></td>
@@ -83,7 +80,7 @@
                     </tbody>
                 </table>
             </div>
-            <a href="../../index.php" class="flex justify-end mr-60 mt-15"><button class="bg-beige shadow rounded-sm md:rounded-2xl w-35 h-10 md:w-50 md:h-14 px-7 cursor-pointer">Retour</button></a>
+            <a href="../../index.php" class="flex justify-center mt-15 mb-15"><button class="border-vertClair border-2 rounded-sm md:rounded-2xl w-35 h-10 md:w-50 md:h-14 px-7 cursor-pointer">Retour</button></a>
         <?php } ?>
     </main>
 
