@@ -1,4 +1,4 @@
-const numberOfItems = 12 //NB produits à afficher
+const numberOfItems = 24 //NB produits à afficher
 let first = 0
 let actualPage = 1 
 
@@ -100,14 +100,11 @@ function ajoutEventListener(){
         if(categorieAlimentaire.checked){
             checkedCategories.push("alimentaire")
             tableau = filtrageCategorieAlimentaire(tabProd);
-            console.log("check")
             
         }else{
             checkedCategories.pop("alimentaire")
-            console.log("uncheck")
         }
-        
-        console.log("tabAlim " + tableau)
+
         afficherListe()
     })
 
@@ -115,13 +112,10 @@ function ajoutEventListener(){
     categorieVetement.addEventListener("click",function () {
         if(categorieVetement.checked){
             checkedCategories.push("vetement")
-            tableau = filtrageCategorieVetement(tabProd);
-            console.log("check")
+            tableau = filtrageCategorieVetement(tabProd)
         }else{
             checkedCategories.pop("vetement")
-            console.log("uncheck")
         }
-        console.log("tabVet " + tableau)
         afficherListe()
     })
 
@@ -129,13 +123,11 @@ function ajoutEventListener(){
     categorieArtisanat.addEventListener("click",function () {
         if(categorieArtisanat.checked){
             checkedCategories.push("artisanat")
-            tableau = filtrageCategorieArtisanat(tabProd);
-            console.log("check")
+            tableau = filtrageCategorieArtisanat(tabProd)
         }else{
             checkedCategories.pop("artisanat")
-            console.log("uncheck")
         }
-        console.log("tabArt " + tableau)
+
         afficherListe()
     })
 
@@ -143,13 +135,10 @@ function ajoutEventListener(){
     categorieGoodies.addEventListener("click",function () {
         if(categorieGoodies.checked){
             checkedCategories.push("goodies")
-            tableau = filtrageCategorieGoodies(tabProd);
-            console.log("check")
+            tableau = filtrageCategorieGoodies(tabProd)
         }else{
             checkedCategories.pop("goodies")
-            console.log("uncheck")
         }
-        console.log("tabGood " + tableau)
         afficherListe()
     })
 
@@ -158,12 +147,9 @@ function ajoutEventListener(){
         if(categorieSoin.checked){
             checkedCategories.push("soin")
             tableau = filtrageCategorieSoin(tabProd);
-            console.log("check")
         }else{
             checkedCategories.pop("soin")
-            console.log("uncheck")
         }
-        console.log("tabSoin " + tableau)
         afficherListe()
     })
     
@@ -238,20 +224,20 @@ function nbPages(){
 function firstPage(){
     first = 0
     actualPage = 1
-    afficherListe(tableau)
+    afficherListe()
 }
 
 function lastPage(){
     first = (nbPages() * numberOfItems)-numberOfItems;
     actualPage = nbPages();
-    afficherListe(tableau); 
+    afficherListe(); 
 }
 
 function pagePrecedente(){
     if(first-numberOfItems >= 0){
         first-=numberOfItems
         actualPage --;
-        afficherListe(tableau);
+        afficherListe();
     }
 }
 
@@ -259,7 +245,7 @@ function pageSuivante(){
     if(first+numberOfItems<tableau.length){
         first+=numberOfItems;
         actualPage ++;
-        afficherListe(tableau);
+        afficherListe();
     }
 }
 
@@ -271,13 +257,8 @@ function numPageInfo(){
 
 
 // Affichage
-function afficherListe(){
-
-
-    console.log("tableau")
-    console.log(checkedCategories)  
+function afficherListe(){  
     if(checkedCategories.length === 0 /*&& checkedNotes.length === 0 && checkedTranches.length === 0*/){
-        console.log("rien n'est coché")
         tableau = tabProd
     }else{
         for(let i=0; i<checkedCategories.length; i++){
@@ -310,6 +291,7 @@ function afficherListe(){
             afficherProduit(i)
         }
     }
+    console.log(numPageInfo())
     numPageInfo()
 }
 
@@ -490,7 +472,6 @@ function triEtoileDecroissant(tableau){
 // Alimentaire = 1
 function filtrageCategorieAlimentaire(tableau){ 
     newTab = tableau.filter(tabProd => tabProd['id_categorie'] === 1)
-    // console.log(newTab)
     return newTab
 }
 
