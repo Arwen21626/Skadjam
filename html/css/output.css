@@ -455,9 +455,6 @@ input.quantite-prod-input {
   .mr-16 {
     margin-right: calc(var(--spacing, 0.25rem) * 16);
   }
-  .mr-60 {
-    margin-right: calc(var(--spacing, 0.25rem) * 60);
-  }
   .mb-0\.5 {
     margin-bottom: calc(var(--spacing, 0.25rem) * 0.5);
   }
@@ -611,9 +608,6 @@ input.quantite-prod-input {
   }
   .h-120 {
     height: calc(var(--spacing, 0.25rem) * 120);
-  }
-  .h-225 {
-    height: calc(var(--spacing, 0.25rem) * 225);
   }
   .h-auto {
     height: auto;
@@ -879,9 +873,6 @@ input.quantite-prod-input {
   }
   .justify-center {
     justify-content: center;
-  }
-  .justify-end {
-    justify-content: flex-end;
   }
   .justify-evenly {
     justify-content: space-evenly;
