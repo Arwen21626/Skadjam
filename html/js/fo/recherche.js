@@ -1,10 +1,17 @@
-const numberOfItems = 24 //NB produits à afficher
+const numberOfItems = 24 //NB produits à afficher tablette
+// const numberOfItemsPhone = 12 //NB produits à afficher
 let first = 0
 let actualPage
 
 let tableau = []
 
+var checkedCategories = []
+var checkedNotes = []
+var checkedTranches = []
+
+// Ajout des eventListeners
 function ajoutEventListener(){
+    
 // EventListener pour les boutons de changement de page
     // Récupérations des elements
     let premierePage = document.getElementById("premierePage")
@@ -68,49 +75,96 @@ function ajoutEventListener(){
 // EventListener pour les filtres
     // Récupération des elements
         //Catégories
-    let categorieVetement = document.getElementById("vetement")
-    let categorieArtisanat = document.getElementById("artisanat")
-    let categorieGoodies = document.getElementById("goodies")
-    let categorieSoin = document.getElementById("soin")
-    let categorieAlimentaire = document.getElementById("alimentaire")
+    const  categorieVetement = document.getElementById("vetement")
+    const  categorieArtisanat = document.getElementById("artisanat")
+    const  categorieGoodies = document.getElementById("goodies")
+    const  categorieSoin = document.getElementById("soin")
+    const  categorieAlimentaire = document.getElementById("alimentaire")
         // Notes
-    let noteZeroE = document.getElementById("zeroE")
-    let noteUneE = document.getElementById("uneE")
-    let noteDeuxE = document.getElementById("deuxE")
-    let noteTroisE = document.getElementById("troisE")
-    let noteQuatreE = document.getElementById("quatreE")
-    let noteCinqE = document.getElementById("cinqE")
+    const  noteZeroE = document.getElementById("zeroE")
+    const  noteUneE = document.getElementById("uneE")
+    const  noteDeuxE = document.getElementById("deuxE")
+    const  noteTroisE = document.getElementById("troisE")
+    const  noteQuatreE = document.getElementById("quatreE")
+    const  noteCinqE = document.getElementById("cinqE")
         // Tranches de prix
-    let tranchePrix1 = document.getElementById("prix1")
-    let tranchePrix2 = document.getElementById("prix2")
-    let tranchePrix3 = document.getElementById("prix3")
-    let tranchePrix4 = document.getElementById("prix4")
-    let tranchePrix5 = document.getElementById("prix5")
+    const  tranchePrix1 = document.getElementById("prix1")
+    const  tranchePrix2 = document.getElementById("prix2")
+    const  tranchePrix3 = document.getElementById("prix3")
+    const  tranchePrix4 = document.getElementById("prix4")
+    const  tranchePrix5 = document.getElementById("prix5")
 
     // Fonctions de filtres
         //Catégories
+    
     categorieAlimentaire.addEventListener("click",function () {
-        tableau = filtrageCategorieAlimentaire(tableau);
+        if(categorieAlimentaire.checked){
+            checkedCategories.push("alimentaire")
+            tableau = filtrageCategorieAlimentaire(tabProd);
+            console.log("check")
+            
+        }else{
+            checkedCategories.pop("alimentaire")
+            console.log("uncheck")
+        }
+        
+        console.log("tabAlim " + tableau)
         afficherListe()
     })
 
+    
     categorieVetement.addEventListener("click",function () {
-        tableau = filtrageCategorieVetement(tableau);
+        if(categorieVetement.checked){
+            checkedCategories.push("vetement")
+            tableau = filtrageCategorieVetement(tabProd);
+            console.log("check")
+        }else{
+            checkedCategories.pop("vetement")
+            console.log("uncheck")
+        }
+        console.log("tabVet " + tableau)
         afficherListe()
     })
 
+    
     categorieArtisanat.addEventListener("click",function () {
-        tableau = filtrageCategorieArtisanat(tableau);
+        if(categorieArtisanat.checked){
+            checkedCategories.push("artisanat")
+            tableau = filtrageCategorieArtisanat(tabProd);
+            console.log("check")
+        }else{
+            checkedCategories.pop("artisanat")
+            console.log("uncheck")
+        }
+        console.log("tabArt " + tableau)
         afficherListe()
     })
 
+    
     categorieGoodies.addEventListener("click",function () {
-        tableau = filtrageCategorieGoodies(tableau);
+        if(categorieGoodies.checked){
+            checkedCategories.push("goodies")
+            tableau = filtrageCategorieGoodies(tabProd);
+            console.log("check")
+        }else{
+            checkedCategories.pop("goodies")
+            console.log("uncheck")
+        }
+        console.log("tabGood " + tableau)
         afficherListe()
     })
 
+    
     categorieSoin.addEventListener("click",function () {
-        tableau = filtrageCategorieSoin(tableau);
+        if(categorieSoin.checked){
+            checkedCategories.push("soin")
+            tableau = filtrageCategorieSoin(tabProd);
+            console.log("check")
+        }else{
+            checkedCategories.pop("soin")
+            console.log("uncheck")
+        }
+        console.log("tabSoin " + tableau)
         afficherListe()
     })
     
@@ -168,13 +222,19 @@ function ajoutEventListener(){
 
     //Fonction fermeture
     fermerSidebar.addEventListener("click", function(){
-        // sidebar.classList.remove("translate-x-0")
-        // sidebar.classList.add("hidden")
-        // boutonSidebar.classList.remove("hidden")
-        // prod.classList.remove("ml-4", "w-4/5")
-        // listeProd.classList.remove("items-end")
+        sidebar.classList.remove("translate-x-0")
+        sidebar.classList.add("hidden")
+        boutonSidebar.classList.remove("hidden")
+        prod.classList.remove("content-end")
     })
+
+    console.log(checkedCategories)  
+    if(checkedCategories.length === 0 /*&& checkedNotes.length === 0 && checkedTranches.length === 0*/){
+        console.log("rien n'est coché")
+        tableau = tabProd
+    }
 }
+
 
 function firstPage(){
     first = 0
@@ -250,6 +310,7 @@ function afficherProduit(indice){
     image.src = tableau[i]['url_photo']
     image.alt = tableau[i]['alt']
     image.title = tableau[i]['title']
+    image.classList.add("w-auto", "h-80")
     parent.appendChild(image)
 
     // Nom produit

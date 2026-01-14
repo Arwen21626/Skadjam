@@ -260,6 +260,9 @@ input.quantite-prod-input {
   .top-5 {
     top: calc(var(--spacing, 0.25rem) * 5);
   }
+  .top-20 {
+    top: calc(var(--spacing, 0.25rem) * 20);
+  }
   .top-48 {
     top: calc(var(--spacing, 0.25rem) * 48);
   }
@@ -280,6 +283,9 @@ input.quantite-prod-input {
   }
   .bottom-41 {
     bottom: calc(var(--spacing, 0.25rem) * 41);
+  }
+  .left-0 {
+    left: calc(var(--spacing, 0.25rem) * 0);
   }
   .z-10 {
     z-index: 10;
@@ -428,6 +434,9 @@ input.quantite-prod-input {
   .mr-2 {
     margin-right: calc(var(--spacing, 0.25rem) * 2);
   }
+  .mr-3 {
+    margin-right: calc(var(--spacing, 0.25rem) * 3);
+  }
   .mr-4 {
     margin-right: calc(var(--spacing, 0.25rem) * 4);
   }
@@ -439,6 +448,9 @@ input.quantite-prod-input {
   }
   .mr-10 {
     margin-right: calc(var(--spacing, 0.25rem) * 10);
+  }
+  .mr-15 {
+    margin-right: calc(var(--spacing, 0.25rem) * 15);
   }
   .mr-16 {
     margin-right: calc(var(--spacing, 0.25rem) * 16);
@@ -597,6 +609,9 @@ input.quantite-prod-input {
   .h-80 {
     height: calc(var(--spacing, 0.25rem) * 80);
   }
+  .h-225 {
+    height: calc(var(--spacing, 0.25rem) * 225);
+  }
   .h-auto {
     height: auto;
   }
@@ -711,6 +726,9 @@ input.quantite-prod-input {
   .w-50 {
     width: calc(var(--spacing, 0.25rem) * 50);
   }
+  .w-52 {
+    width: calc(var(--spacing, 0.25rem) * 52);
+  }
   .w-60 {
     width: calc(var(--spacing, 0.25rem) * 60);
   }
@@ -720,11 +738,11 @@ input.quantite-prod-input {
   .w-70 {
     width: calc(var(--spacing, 0.25rem) * 70);
   }
-  .w-74 {
-    width: calc(var(--spacing, 0.25rem) * 74);
-  }
   .w-75 {
     width: calc(var(--spacing, 0.25rem) * 75);
+  }
+  .w-79 {
+    width: calc(var(--spacing, 0.25rem) * 79);
   }
   .w-80 {
     width: calc(var(--spacing, 0.25rem) * 80);
@@ -732,8 +750,14 @@ input.quantite-prod-input {
   .w-90 {
     width: calc(var(--spacing, 0.25rem) * 90);
   }
+  .w-96 {
+    width: calc(var(--spacing, 0.25rem) * 96);
+  }
   .w-100 {
     width: calc(var(--spacing, 0.25rem) * 100);
+  }
+  .w-110 {
+    width: calc(var(--spacing, 0.25rem) * 110);
   }
   .w-125 {
     width: calc(var(--spacing, 0.25rem) * 125);
@@ -750,8 +774,8 @@ input.quantite-prod-input {
   .w-250 {
     width: calc(var(--spacing, 0.25rem) * 250);
   }
-  .w-275 {
-    width: calc(var(--spacing, 0.25rem) * 275);
+  .w-280 {
+    width: calc(var(--spacing, 0.25rem) * 280);
   }
   .w-auto {
     width: auto;
@@ -1258,6 +1282,11 @@ input.quantite-prod-input {
       background-color: var(--color-beige);
     }
   }
+  .checked\:bg-black {
+    &:checked {
+      background-color: var(--color-black, #000);
+    }
+  }
   .hover\:bg-\[url\(\/images\/logo\/bootstrap_icon\/cart-fill\.svg\)\] {
     &:hover {
       @media (hover: hover) {
@@ -1374,6 +1403,16 @@ input.quantite-prod-input {
   .md\:order-2 {
     @media (width >= 48rem) {
       order: 2;
+    }
+  }
+  .md\:order-3 {
+    @media (width >= 48rem) {
+      order: 3;
+    }
+  }
+  .md\:order-4 {
+    @media (width >= 48rem) {
+      order: 4;
     }
   }
   .md\:col-span-3 {
@@ -1504,11 +1543,6 @@ input.quantite-prod-input {
       height: calc(var(--spacing, 0.25rem) * 16);
     }
   }
-  .md\:h-225 {
-    @media (width >= 48rem) {
-      height: calc(var(--spacing, 0.25rem) * 225);
-    }
-  }
   .md\:h-auto {
     @media (width >= 48rem) {
       height: auto;
@@ -1567,6 +1601,11 @@ input.quantite-prod-input {
   .md\:w-150 {
     @media (width >= 48rem) {
       width: calc(var(--spacing, 0.25rem) * 150);
+    }
+  }
+  .md\:w-275 {
+    @media (width >= 48rem) {
+      width: calc(var(--spacing, 0.25rem) * 275);
     }
   }
   .md\:w-auto {

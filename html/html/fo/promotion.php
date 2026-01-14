@@ -68,9 +68,11 @@
                                     , PDO::FETCH_ASSOC) as $row){
                     // Formattage des dates
                     $row['date_debut_promotion'] = formatDate($row['date_debut_promotion']);
-                    $row['date_fin_promotion'] = formatDate($row['date_fin_promotion']);
+                    if($row['date_fin_promotion'] !== null){
+                        $finPromo = formatDate($row['date_fin_promotion']);
+                    }
                     // La promotion est-elle terminée ou commence-t-elle ?
-                    if($row['date_debut_promotion'] <= date('Y-m-d') && ($row['date_fin_promotion'] >= date('Y-m-d') || $row['date_fin_promotion'] == NULL)){
+                    if($row['date_debut_promotion'] <= date('Y-m-d') && ($row['date_fin_promotion'] == null || $row['date_fin_promotion'] >= date('Y-m-d'))){
                         $tabProduit[] = $row;
                     }
                 }
@@ -102,9 +104,9 @@
                             </a>
 
                             <!--affichage de la promotion-->
-                            <?php if($estPromu){ ?>
+                            <?php if($estPromu && !empty($valeurs['label'])){ ?>
                                 <div class="bg-rouge absolute col-span-2 w-36 md:w-74 underline text-beige pt-2 pb-1.5">
-                                    <h4 class="text-center text-beige overline m-0"><strong>Promotion</strong></h4>
+                                    <h4 class="text-center text-beige overline m-0"><strong><?php echo htmlspecialchars($valeurs['label']); ?></strong></h4>
                                 </div>
                             <?php } ?>
 

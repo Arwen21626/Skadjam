@@ -25,7 +25,6 @@
             $produitsPanier[] = $row;
         }
         
-        
 
         if (!empty($produitsPanier)) 
         {
@@ -34,7 +33,7 @@
             foreach ($produitsPanier as $i => $value) 
             { 
                 
-                $rqt = $dbh->query("SELECT id_produit, libelle_produit, prix_ttc, note_moyenne
+                $rqt = $dbh->query("SELECT id_produit, libelle_produit, prix_ttc, note_moyenne, quantite_stock
                                     FROM sae3_skadjam._produit WHERE id_produit = " . $produitsPanier[$i]["id_produit"], PDO::FETCH_ASSOC);
                 $infoProduit = $rqt->fetch();
 
@@ -45,27 +44,45 @@
                 $infoPhoto = $rqt->fetch();
 
                 $infoProduitsPanier[$i]["infoProduit"] = $infoProduit;
-                $infoProduitsPanier[$i]["quantiteProduit"] = $produitsPanier[$i]["quantite_par_produit"];
                 $infoProduitsPanier[$i]["infoPhoto"] = $infoPhoto;
 
+                if ($infoProduitsPanier[$i]["infoProduit"]["quantite_stock"] >= $produitsPanier[$i]["quantite_par_produit"])    
+                {
+                    $infoProduitsPanier[$i]["quantiteProduit"] = $produitsPanier[$i]["quantite_par_produit"];
+                }
+                else
+                {
+                    $infoProduitsPanier[$i]["quantiteProduit"] = $infoProduitsPanier[$i]["infoProduit"]["quantite_stock"];
+                    
+                    $rqt = $dbh->prepare("UPDATE sae3_skadjam._contient SET
+                                          quantite_par_produit = ?
+                                          WHERE id_panier = ? AND id_produit = ?");
+                    $rqt->execute([$infoProduitsPanier[$i]['infoProduit']['quantite_stock'], $idPanier, $infoProduit["id_produit"]]);
+                }
+                
+
                 $montantTotalTTC += $infoProduitsPanier[$i]["infoProduit"]["prix_ttc"] * $infoProduitsPanier[$i]["quantiteProduit"];
-                $montantTotalTTC = number_format($montantTotalTTC, 2, ".", "");
                 $nbProduitsTotal += $infoProduitsPanier[$i]["quantiteProduit"];
             }
 
-            //Mise à jour des attributs nb_produit_total
+            
+
+            //Mise à jour des attributs nb_produit_total & montant_total_ttc du panier
             $dbh->query("UPDATE sae3_skadjam._panier SET nb_produit_total = $nbProduitsTotal, montant_total_ttc = $montantTotalTTC WHERE id_panier = $idPanier");
         }
         
-        $lienBtnValiderPanier = "/html/fo/recapitulatif_commande.php?idPanier=".$idPanier;
+        $lienBtnValiderPanier = "/html/fo/recapitulatif_commande.php";
     }
     else if ($_SESSION['role'] === 'visiteur' && $_SESSION['panier']['nb_produit_total'] > 0) 
     {
         $infoProduitsPanier = array();
+        $nbProduitsTotal = 0;
+        $montantTotalTTC = 0;
+
 
         foreach ($_SESSION['panier']['contient'] as $i => $prod) 
         {
-            $rqt = $dbh->query("SELECT id_produit, libelle_produit, prix_ttc, note_moyenne
+            $rqt = $dbh->query("SELECT id_produit, libelle_produit, prix_ttc, note_moyenne, quantite_stock
                                     FROM sae3_skadjam._produit WHERE id_produit = " . $prod['id'], PDO::FETCH_ASSOC);
             $infoProduit = $rqt->fetch(); 
             
@@ -76,13 +93,35 @@
             $infoPhoto = $rqt->fetch();
 
             $infoProduitsPanier[$i]["infoProduit"] = $infoProduit;
-            $infoProduitsPanier[$i]["quantiteProduit"] = $prod["quantite_par_produit"];
             $infoProduitsPanier[$i]["infoPhoto"] = $infoPhoto;
+
+            if ($infoProduitsPanier[$i]["infoProduit"]["quantite_stock"] >= $prod["quantite_par_produit"])    
+            {
+                $infoProduitsPanier[$i]["quantiteProduit"] = $prod["quantite_par_produit"];
+            }
+            else
+            {
+                $infoProduitsPanier[$i]["quantiteProduit"] = $infoProduitsPanier[$i]["infoProduit"]["quantite_stock"];
+                $_SESSION['panier']['contient'][$i]['quantite_par_produit'] = $infoProduitsPanier[$i]['infoProduit']['quantite_stock'];  
+            }
+
+            $infoProduitsPanier[$i]["quantiteProduit"] = $prod["quantite_par_produit"];
+
+            $montantTotalTTC += $infoProduitsPanier[$i]["infoProduit"]["prix_ttc"] * $infoProduitsPanier[$i]["quantiteProduit"];
+            $nbProduitsTotal += $infoProduitsPanier[$i]["quantiteProduit"];
         }
+
+        //Mise à jour des attributs nb_produit_total & montant_total_ttc du panier
+        $_SESSION['panier']['nb_produit_total'] = $nbProduitsTotal;
+        $_SESSION['panier']['montant_total_ttc'] = $montantTotalTTC;
 
         $lienBtnValiderPanier = "/html/fo/connexion.php";
     }
 ?>
+
+<!-- <pre>
+    
+</pre> -->
 
 <!DOCTYPE html>
 <html lang="fr">
@@ -129,7 +168,7 @@
                                                 </div>
                                                 
                                                 <!-- Le conteneur des éléments liés au produit -->
-                                                <div class="text-center md:flex md:flex-col md:justify-evenly prod-info">
+                                                <div class="text-center md:flex md:flex-col md:justify-evenly prod-info stock:<?php echo $infoProduitsPanier[$i]["infoProduit"]["quantite_stock"];?>">
 
                                                     <div class="flex flex-col justify-center items-center mb-3 md:mb-0">
                                                         <h4> <?php echo $infoProduitsPanier[$i]["infoProduit"]["libelle_produit"]; ?></h4>
@@ -137,11 +176,11 @@
                                                     </div>
                                                     
                                                     <div class="prix">
-                                                        <p class="mb-0.5 md:mb-0 prix-u"> <?php echo "Prix unitaire : " . number_format($infoProduitsPanier[$i]["infoProduit"]["prix_ttc"], 2, ',') . "€"; ?></p>
+                                                        <p class="mb-0.5 md:mb-0 prix-u"> <?php echo "Prix unitaire : " . number_format($infoProduitsPanier[$i]["infoProduit"]["prix_ttc"], 2, ',', '') . "€"; ?></p>
                                                         <p class="mt-0.5 md:mt-0 prix-tot"> 
                                                             <?php
                                                                 $prixTot = ($infoProduitsPanier[$i]["infoProduit"]["prix_ttc"] * $infoProduitsPanier[$i]["quantiteProduit"]);
-                                                                $prixTot = number_format($prixTot, 2, ',');
+                                                                $prixTot = number_format($prixTot, 2, ',', '');
                                                                 echo "Prix total : " . $prixTot . "€"; 
                                                             ?>
                                                         </p>
@@ -158,7 +197,7 @@
 
                                                         <input type="text" 
                                                         value="<?php echo $infoProduitsPanier[$i]["quantiteProduit"]; ?>"
-                                                        class="w-16 ml-4 mr-4 text-center quantite-prod-input">
+                                                        class="w-16 ml-4 mr-4 text-center border rounded-sm quantite-prod-input">
 
                                                         
                                                         <button class="text-4xl text-center ml-4 cursor-pointer hover:text-vertClair ajout"
@@ -167,21 +206,12 @@
                                                         </button>
                                                         
                                                     </div>
-                                                    
-                                                    <form class="mt-2 md:mt-0" method="post" action="/php/retrait_panier.php">
-                                                        <input type="hidden" name="idProduit" value="<?php echo $infoProduitsPanier[$i]["infoProduit"]["id_produit"]; ?>">
-                                                        <input type="hidden" name="quantiteProd" value="<?php echo $infoProduitsPanier[$i]["quantiteProduit"]; ?>">
-                                                        <input type="hidden" name="prixTTC" value="<?php echo $infoProduitsPanier[$i]["infoProduit"]["prix_ttc"]; ?>">
-                                                        <input type="hidden" name="quantiteTot" value="<?php echo $nbProduitsTotal; ?>">
-                                                        <input type="hidden" name="prixTot" value="<?php echo $montantTotalTTC; ?>">
-                                                        <input type="hidden" name="typeRetrait" value="suppression">
+                                                                                                        
+                                                    <button class="rounded-2xl border border-black w-48 h-16 self-center cursor-pointer supprimer"
+                                                    type="submit">
+                                                        Supprimer du panier
+                                                    </button>
 
-                                                        <button class="rounded-2xl border border-black w-48 h-16 self-center cursor-pointer "
-                                                        type="submit">
-                                                            Supprimer du panier
-                                                        </button>
-                                                    </form>
-                                                    
                                                 </div>
 
                                             </div>
@@ -200,7 +230,7 @@
 
                                 <div class="inline-flex mt-2 mb-2 md:mb-0 md:mt-4 sous-total">
                                     <p class="mr-2">Sous total :</p>
-                                    <p class="ml-2"><?php echo number_format($montantTotalTTC, 2, ',') . "€"; ?></p>
+                                    <p class="ml-2"><?php echo number_format($montantTotalTTC, 2, ',', '') . "€"; ?></p>
                                 </div>
 
                                 <form class="flex justify-center" method="get" action="/php/vider_panier.php">
@@ -210,14 +240,14 @@
                                     </button>
                                 </form>
                                 
-                                <form class="flex justify-center valider-panier" action="<?php echo $lienBtnValiderPanier;?>">
-                                    <button class="bg-beige rounded-2xl w-20 h-10 mt-2 md:w-40 md:h-14 md:mt-4 cursor-pointer border-black border shadow" type="submit">
+                                <form class="flex justify-center valider-panier" method="get" action="<?php echo $lienBtnValiderPanier;?>">
+                                    <input type="hidden" name="idPanier" value="<?= htmlspecialchars($idPanier) ?>">
+                                    <button class="bg-beige rounded-2xl w-28 p-1 h-10 mt-2 md:p-0 md:w-40 md:h-14 md:mt-4 cursor-pointer border-black border shadow" type="submit">
                                         Valider le panier
                                     </button>
                                 </form>
                                 
                             </div>
-                            <div></div>
                         </div>
                     <?php
                 }
@@ -254,7 +284,7 @@
                                                 </div>
                                                 
                                                 <!-- Le conteneur des éléments liés au produit -->
-                                                <div class="text-center md:flex md:flex-col md:justify-evenly prod-info">
+                                                <div class="text-center md:flex md:flex-col md:justify-evenly prod-info stock:<?php echo $infoProduitsPanier[$i]["infoProduit"]["quantite_stock"];?>">
 
                                                     <div class="flex flex-col justify-center items-center mb-3 md:mb-0">
                                                         <h4> <?php echo $infoProduitsPanier[$i]["infoProduit"]["libelle_produit"]; ?></h4>
@@ -262,11 +292,11 @@
                                                     </div>
                                                     
                                                     <div class="prix">
-                                                        <p class="mb-0.5 md:mb-0 prix-u"> <?php echo "Prix unitaire : " . number_format($infoProduitsPanier[$i]["infoProduit"]["prix_ttc"], 2, ',') . "€"; ?> </p>
+                                                        <p class="mb-0.5 md:mb-0 prix-u"><?php echo "Prix unitaire : " . number_format($infoProduitsPanier[$i]["infoProduit"]["prix_ttc"], 2, ',', '') . "€"; ?></p>
                                                         <p class="mt-0.5 md:mt-0 prix-tot"> 
                                                             <?php
                                                                 $prixTot = ($infoProduitsPanier[$i]["infoProduit"]["prix_ttc"] * $infoProduitsPanier[$i]["quantiteProduit"]);
-                                                                $prixTot = number_format($prixTot, 2, ',');
+                                                                $prixTot = number_format($prixTot, 2, ',', '');
                                                                 echo "Prix total : " . $prixTot . "€"; 
                                                             ?>
                                                         </p>
@@ -292,20 +322,11 @@
                                                         </button>
                                                         
                                                     </div>
-                                                    
-                                                    <form class="mt-2 md:mt-0" method="post" action="/php/retrait_panier.php">
-                                                        <input type="hidden" name="idProduit" value="<?php echo $infoProduitsPanier[$i]["infoProduit"]["id_produit"]; ?>">
-                                                        <input type="hidden" name="quantiteProd" value="<?php echo $infoProduitsPanier[$i]["quantiteProduit"]; ?>">
-                                                        <input type="hidden" name="prixTTC" value="<?php echo $infoProduitsPanier[$i]["infoProduit"]["prix_ttc"]; ?>">
-                                                        <input type="hidden" name="quantiteTot" value="<?php echo $nbProduitsTotal; ?>">
-                                                        <input type="hidden" name="prixTot" value="<?php echo $montantTotalTTC; ?>">
-                                                        <input type="hidden" name="typeRetrait" value="suppression">
 
-                                                        <button class="rounded-2xl border border-black w-48 h-16 self-center cursor-pointer "
-                                                        type="submit">
-                                                            Supprimer du panier
-                                                        </button>
-                                                    </form>
+                                                    <button class="rounded-2xl border border-black w-48 h-16 self-center cursor-pointer supprimer"
+                                                    type="submit">
+                                                        Supprimer du panier
+                                                    </button>
                                                     
                                                 </div>
 
@@ -325,7 +346,7 @@
 
                                     <div class="inline-flex mt-2 mb-2 md:mb-0 md:mt-4 sous-total">
                                         <p class="mr-2">Sous total :</p>
-                                        <p class="ml-2"><?php echo number_format($_SESSION['panier']['montant_total_ttc'], 2, ',') . "€"; ?></p>
+                                        <p class="ml-2"><?php echo number_format($_SESSION['panier']['montant_total_ttc'], 2, ',', '') . "€";?></p>
                                     </div>
 
                                     <form class="flex justify-center" method="get" action="/php/vider_panier.php">
@@ -335,9 +356,9 @@
                                         </button>
                                     </form>
                                     
-                                    <form class="flex justify-center valider-panier" method="post" action="<?php echo $lienBtnValiderPanier;?>">
+                                    <form class="flex justify-center valider-panier" method="get" action="<?php echo $lienBtnValiderPanier;?>">
                                         <input type="hidden" name="veutAcheter" value="V">
-                                        <button class="bg-beige rounded-2xl w-20 h-10 mt-2 md:w-40 md:h-14 md:mt-4 cursor-pointer border-black border shadow" type="submit">
+                                        <button class="bg-beige rounded-2xl w-28 p-1 h-10 mt-2 md:p-0 md:w-40 md:h-14 md:mt-4 cursor-pointer border-black border shadow" type="submit">
                                             Valider le panier
                                         </button>
                                     </form>
