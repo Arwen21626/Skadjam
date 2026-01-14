@@ -56,7 +56,8 @@
                         <summary class="cursor-pointer mt-1 mb-1">Par catégorie</summary>
                         <!-- Alimentaire -->
                         <div>
-                            <input type="checkbox" name="alimentaire" id="alimentaire" value="aimentaire">
+                            
+                            <input type="checkbox" name="alimentaire" id="alimentaire" value="alimentaire">
                             <label for="alimentaire">Alimentaire</label>
                         </div>
                         
