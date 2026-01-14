@@ -106,11 +106,15 @@
                                     $stmt->execute([':id_produit' => $idProduit]);
                                     $promotion = $stmt->fetch(PDO::FETCH_ASSOC);
                                     $debutPromo = formatDate($promotion['date_debut_promotion']);
-                                    $finPromo = formatDate($promotion['date_fin_promotion']);
-                                    if($debutPromo <= date('Y-m-d') && ($finPromo >= date('Y-m-d') || $finPromo == NULL)){
+                                    $finPromo = null;
+                                    if($promotion['date_fin_promotion'] !== null){
+                                        $finPromo = formatDate($promotion['date_fin_promotion']);
+                                    }
+                                    $labelPromo = $promotion['label'];
+                                    if($debutPromo <= date('Y-m-d') && ($finPromo == null || $finPromo >= date('Y-m-d')) && !empty($labelPromo)){
                                 ?>
                                 <div class="bg-rouge absolute col-span-2 w-36 md:w-74 underline text-beige pt-2 pb-1.5">
-                                    <h4 class="text-center text-beige overline m-0"><strong>Promotion</strong></h4>
+                                    <h4 class="text-center text-beige overline m-0"><strong><?php echo htmlspecialchars($labelPromo); ?></strong></h4>
                                 </div>
                             <?php }} ?>
 

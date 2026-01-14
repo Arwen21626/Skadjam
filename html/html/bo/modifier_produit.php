@@ -134,7 +134,7 @@ if (isset($_POST['categorie']) && isset($_POST['nom']) && isset($_POST['prix']) 
     $dateFinPromotion = htmlentities($_POST['dateFinPromotion']);
     $dateFinPromotion = trim($dateFinPromotion);
     $dateFinPromotion = ($dateFinPromotion === '') ? null : $dateFinPromotion;
-    $labelPromo = isset($_POST['labelPromo']) ? htmlentities($_POST['labelPromo']) : null;
+    $labelPromo = isset($_POST['labelPromo']) ? $_POST['labelPromo'] : null;
 
     // Récupération du nom de la catégorie pour la gestion de la tva
     foreach ($tab_categories as $c) {
@@ -309,6 +309,7 @@ if (isset($_POST['categorie']) && isset($_POST['nom']) && isset($_POST['prix']) 
 
             // Si la case "Mettre en promotion" est cochée et que le produit est déjà promu
             if($caseCochee && $estPromu){
+                $idPromotion = $promotion['id_promotion'];
                 // Mise à jour des dates de la promotion existante
                 if(verifDate($dateDebutPromotion) && $dateDebutPromotion >= date('Y-m-d')){
                     if(verifDate($dateFinPromotion) && $dateFinPromotion >= $dateDebutPromotion){
