@@ -5,9 +5,9 @@ let actualPage
 
 let tableau = []
 
-let checkedCategories = []
-let checkedNotes = []
-let checkedTranches = []
+var checkedCategories = []
+var checkedNotes = []
+var checkedTranches = []
 
 // Ajout des eventListeners
 function ajoutEventListener(){
@@ -104,7 +104,7 @@ function ajoutEventListener(){
             console.log("check")
             
         }else{
-            //checkedCategories.pop("alimentaire")
+            checkedCategories.pop("alimentaire")
             console.log("uncheck")
         }
         
@@ -119,7 +119,7 @@ function ajoutEventListener(){
             tableau = filtrageCategorieVetement(tabProd);
             console.log("check")
         }else{
-            //checkedCategories.pop("vetement")
+            checkedCategories.pop("vetement")
             console.log("uncheck")
         }
         console.log("tabVet " + tableau)
@@ -133,7 +133,7 @@ function ajoutEventListener(){
             tableau = filtrageCategorieArtisanat(tabProd);
             console.log("check")
         }else{
-            //checkedCategories.pop("artisanat")
+            checkedCategories.pop("artisanat")
             console.log("uncheck")
         }
         console.log("tabArt " + tableau)
@@ -147,7 +147,7 @@ function ajoutEventListener(){
             tableau = filtrageCategorieGoodies(tabProd);
             console.log("check")
         }else{
-            //checkedCategories.pop("goodies")
+            checkedCategories.pop("goodies")
             console.log("uncheck")
         }
         console.log("tabGood " + tableau)
@@ -161,7 +161,7 @@ function ajoutEventListener(){
             tableau = filtrageCategorieSoin(tabProd);
             console.log("check")
         }else{
-            //checkedCategories.pop("soin")
+            checkedCategories.pop("soin")
             console.log("uncheck")
         }
         console.log("tabSoin " + tableau)
