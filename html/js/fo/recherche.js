@@ -1,7 +1,6 @@
-const numberOfItems = 24 //NB produits à afficher tablette
-// const numberOfItemsPhone = 12 //NB produits à afficher
+const numberOfItems = 12 //NB produits à afficher
 let first = 0
-let actualPage
+let actualPage = 1 
 
 let tableau = []
 
@@ -213,20 +212,20 @@ function ajoutEventListener(){
     let changePage = document.getElementById("changePage")
 
     // Fonction ouverture
-    boutonSidebar.addEventListener("click", function(){
-        boutonSidebar.classList.add("hidden")
-        prod.classList.add("content-end")
-        sidebar.classList.remove("hidden")
-        sidebar.classList.add("translate-x-0")
-    })
+    // boutonSidebar.addEventListener("click", function(){
+    //     boutonSidebar.classList.add("hidden")
+    //     prod.classList.add("content-end")
+    //     sidebar.classList.remove("hidden")
+    //     sidebar.classList.add("translate-x-0")
+    // })
 
     //Fonction fermeture
-    fermerSidebar.addEventListener("click", function(){
-        sidebar.classList.remove("translate-x-0")
-        sidebar.classList.add("hidden")
-        boutonSidebar.classList.remove("hidden")
-        prod.classList.remove("content-end")
-    })
+    // fermerSidebar.addEventListener("click", function(){
+    //     sidebar.classList.remove("translate-x-0")
+    //     sidebar.classList.add("hidden")
+    //     boutonSidebar.classList.remove("hidden")
+    //     prod.classList.remove("content-end")
+    // })
 
     console.log(checkedCategories)  
     if(checkedCategories.length === 0 /*&& checkedNotes.length === 0 && checkedTranches.length === 0*/){
@@ -235,24 +234,28 @@ function ajoutEventListener(){
     }
 }
 
+function nbPages(){
+    maxPages = parseInt((tableau.length)/numberOfItems)
+    return maxPages
+}
 
 function firstPage(){
     first = 0
     actualPage = 1
-    afficherListe()
+    afficherListe(tableau)
 }
 
 function lastPage(){
-    first = (maxPages * numberOfItems)-numberOfItems;
-    actualPage = maxPages;
-    afficherListe(); 
+    first = (nbPages() * numberOfItems)-numberOfItems;
+    actualPage = nbPages();
+    afficherListe(tableau); 
 }
 
 function pagePrecedente(){
     if(first-numberOfItems >= 0){
         first-=numberOfItems
         actualPage --;
-        afficherListe();
+        afficherListe(tableau);
     }
 }
 
@@ -260,15 +263,15 @@ function pageSuivante(){
     if(first+numberOfItems<tableau.length){
         first+=numberOfItems;
         actualPage ++;
-        afficherListe();
+        afficherListe(tableau);
     }
 }
 
-// function numPageInfo(){
-//   document.getElementById('pageInfo').innerHTML = `
-//     Page ${actualPage} / ${maxPages}
-//   `
-// }
+function numPageInfo(){
+  let pageInfo = document.getElementById("pageInfo")
+  console.log(pageInfo)
+  pageInfo.textContent = (actualPage+"/"+nbPages())
+}
 
 
 // Affichage
@@ -283,6 +286,7 @@ function afficherListe(){
             afficherProduit(i)
         }
     }
+    numPageInfo()
 }
 
 
@@ -431,40 +435,28 @@ async function affichageNote(note, parent ){
 }
 
 // Tris
-function triPrixCroissant(tab){
-    let temp = tab.sort((a, b) => parseInt(a['prix_ttc']) - parseInt(b['prix_ttc']))
-    console.log(temp)
-    return tab.sort((a, b) => parseInt(a['prix_ttc']) - parseInt(b['prix_ttc']))
+function triPrixCroissant(tableau){
+    return tableau.sort((a, b) => parseInt(a['prix_ttc']) - parseInt(b['prix_ttc']))
 }
 
-function triPrixDecroissant(tab){
-    let temp = tab.sort((a, b) => parseFloat(b['prix_ttc']) - parseFloat(a['prix_ttc']))
-    console.log(temp)
-    return tab.sort((a, b) => parseFloat(b['prix_ttc']) - parseFloat(a['prix_ttc']))
+function triPrixDecroissant(tableau){
+    return tableau.sort((a, b) => parseFloat(b['prix_ttc']) - parseFloat(a['prix_ttc']))
 }
 
-function triAz(tab){
-    let temp = tab.sort((a,b) => a['libelle_produit'].localeCompare(b['libelle_produit']))
-    console.log(temp)
-    return tab.sort((a,b) => a['libelle_produit'].localeCompare(b['libelle_produit']))
+function triAz(tableau){
+    return tableau.sort((a,b) => a['libelle_produit'].localeCompare(b['libelle_produit']))
 }
 
-function triZa(tab){
-    let temp = tab.sort((a,b) => b['libelle_produit'].localeCompare(a['libelle_produit']))
-    console.log(temp)
-    return tab.sort((a,b) => b['libelle_produit'].localeCompare(a['libelle_produit']))
+function triZa(tableau){
+    return tableau.sort((a,b) => b['libelle_produit'].localeCompare(a['libelle_produit']))
 }
 
-function triEtoileCroissant(tab){
-    let temp = tab.sort((a,b) => parseFloat(a['note_moyenne']) - parseFloat(b['note_moyenne']))
-    console.log(temp)
-    return tab.sort((a,b) => parseFloat(a['note_moyenne']) - parseFloat(b['note_moyenne']))
+function triEtoileCroissant(tableau){
+    return tableau.sort((a,b) => parseFloat(a['note_moyenne']) - parseFloat(b['note_moyenne']))
 }
 
-function triEtoileDecroissant(tab){
-    let temp = tab.sort((a,b) => parseFloat(b['note_moyenne']) - parseFloat(a['note_moyenne']))
-    console.log(temp)
-    return tab.sort((a,b) => parseFloat(b['note_moyenne']) - parseFloat(a['note_moyenne']))
+function triEtoileDecroissant(tableau){
+    return tableau.sort((a,b) => parseFloat(b['note_moyenne']) - parseFloat(a['note_moyenne']))
 }
 
 

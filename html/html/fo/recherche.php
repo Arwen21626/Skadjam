@@ -34,8 +34,6 @@
 <body>
     <script>
         const tabProd = <?php echo json_encode($tabProduit);?>;
-        const maxPages = (tabProd.length)/numberOfItems
-        // let lignes = calculNbPages(tabProd)[0]
     </script>
 
     <!--header-->
@@ -45,15 +43,15 @@
     
     <main class="md:min-h-[800px] min-h-[600px]">
         <!-- Barre de recherche -->
-        <button id="filtresTris">Filtres & tris</button>
-        <aside class="sidebar overflow-auto hidden float-left bg-beige p-4 sticky w-52 h-225 md:top-16 md:left-0 md:w-79  ">
+        <button id="filtresTris" class="md:hidden">Filtres & tris</button>
+        <aside class="sidebar hidden overflow-auto bg-beige p-4 md:sticky md:block md:w-79 md:h-225 md:top-16 md:float-left">
             
             <!-- Filtres -->
             <section>
                 
                 <div class="flex flex-row justify-between">
                     <h3>Filtres</h3>
-                    <img id="fermerSidebar"src="../../images/logo/bootstrap_icon/x-large.svg" alt="Fermer" class="flex self-center w-8">
+                    <img id="fermerSidebar"src="../../images/logo/bootstrap_icon/x-large.svg" alt="Fermer" class="flex self-center w-8 md:hidden">
                 </div>
                 
                 <!-- Categorie -->
@@ -228,12 +226,13 @@
             </article>
             <!--fin du catalogue-->
             <article id="changePage" class="grid grid-cols-2 md:flex md:flex-row md:justify-around w-96 md:w-275">
-                <button id="pagePrec" class="md:order-2">Page prec</button>
-                <button id="pageSuiv" class="md:order-3">Page suiv</button>
-                <button id="premierePage" class="md:order-1">Premiere page</button>
-                <button id="dernierePage" class="md:order-4">Derniere page</button>
+                <button id="pagePrec" class="md:order-2">|<</button>
+                <button id="pageSuiv" class="md:order-4">>|</button>
+                <p id="pageInfo" class="md:order-3"></p>
+                <button id="premierePage" class="md:order-1"><<</button>
+                <button id="dernierePage" class="md:order-5">>></button>
             </article>
-</section>
+        </section>
 
         <?php $dbh = null;?>
 
