@@ -46,7 +46,7 @@
     <main class="md:min-h-[800px] min-h-[600px] mt-10">
         <!-- Barre de recherche -->
         <button id="filtresTris">Filtres & tris</button>
-        <aside class="sidebar bg-beige p-4 md:sticky md:top-16 md:left-0 md:w-79 md:h-225 overflow-auto hidden absolute top-0 float-left">
+        <aside class="sidebar bg-beige p-4 md:sticky md:top-16 md:left-0 md:w-79 md:h-225 overflow-auto hidden float-left">
             
             <!-- Filtres -->
             <section>
@@ -62,7 +62,8 @@
                         <summary class="cursor-pointer mt-1 mb-1">Par catégorie</summary>
                         <!-- Alimentaire -->
                         <div>
-                            <input type="checkbox" name="alimentaire" id="alimentaire" value="aimentaire">
+                            
+                            <input type="checkbox" name="alimentaire" id="alimentaire" value="alimentaire">
                             <label for="alimentaire">Alimentaire</label>
                         </div>
                         
