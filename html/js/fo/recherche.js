@@ -294,7 +294,7 @@ function afficherProduit(indice){
     // Section   
     let produit = document.createElement("section")
     parent.appendChild(produit)
-    produit.classList.add("bg-bleu", "grid", "grid-cols-[40%_60%]", "w-40", "md:w-80", "h-auto", "p-2", "md:p-3", "m-2")
+    produit.classList.add("bg-bleu", "grid", "grid-cols-[40%_60%]", "w-40", "h-110", "md:w-80", "p-2", "md:p-3", "m-2")
     parent = produit
 
     //Lien
@@ -310,7 +310,7 @@ function afficherProduit(indice){
     image.src = tableau[i]['url_photo']
     image.alt = tableau[i]['alt']
     image.title = tableau[i]['title']
-    image.classList.add("w-auto", "h-80")
+    image.classList.add("w-auto", "h-80", "w-30", "justify-self-center")
     parent.appendChild(image)
 
     // Nom produit

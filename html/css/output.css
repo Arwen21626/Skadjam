@@ -609,6 +609,9 @@ input.quantite-prod-input {
   .h-80 {
     height: calc(var(--spacing, 0.25rem) * 80);
   }
+  .h-110 {
+    height: calc(var(--spacing, 0.25rem) * 110);
+  }
   .h-225 {
     height: calc(var(--spacing, 0.25rem) * 225);
   }
@@ -696,8 +699,8 @@ input.quantite-prod-input {
   .w-16 {
     width: calc(var(--spacing, 0.25rem) * 16);
   }
-  .w-20 {
-    width: calc(var(--spacing, 0.25rem) * 20);
+  .w-28 {
+    width: calc(var(--spacing, 0.25rem) * 28);
   }
   .w-30 {
     width: calc(var(--spacing, 0.25rem) * 30);
