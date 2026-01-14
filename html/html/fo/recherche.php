@@ -46,7 +46,7 @@
     <main class="md:min-h-[800px] min-h-[600px] mt-10">
         <!-- Barre de recherche -->
         <button id="filtresTris">Filtres & tris</button>
-        <aside class="sidebar bg-beige p-4 md:sticky md:top-16 md:left-0 md:w-79 md:h-225 overflow-auto hidden float-left">
+        <aside class="sidebar overflow-auto hidden float-left bg-beige p-4 sticky w-52 h-225 md:top-16 md:left-0 md:w-79  ">
             
             <!-- Filtres -->
             <section>
@@ -58,7 +58,7 @@
                 
                 <!-- Categorie -->
                     <article>
-                    <details>
+                    <details open>
                         <summary class="cursor-pointer mt-1 mb-1">Par catégorie</summary>
                         <!-- Alimentaire -->
                         <div>
@@ -96,7 +96,7 @@
                 
                 <!-- Notes -->
                 <article>
-                    <details>
+                    <details open>
                         <summary class="cursor-pointer mt-1 mb-1">Par note</summary>
                         <!-- non noté -->
                         <div>
@@ -138,7 +138,7 @@
                 
                 <!-- Tranche de prix -->
                 <article>
-                    <details>
+                    <details open>
                         <summary class="cursor-pointer mt-1 mb-1">Par tranche de prix</summary>
                         <div>
                             <input type="checkbox" name="prix1" id="prix1" value="prix1">
@@ -168,7 +168,7 @@
                 <h3>Tris</h3>
                 <!-- prix -->
                 <article>
-                    <details>
+                    <details open>
                         <summary class="cursor-pointer mt-1 mb-1">Par prix</summary>
                         <div>
                             <div>
@@ -186,7 +186,7 @@
 
                 <!-- ordre alpha -->
                 <article>
-                    <details>
+                    <details open>
                         <summary class="cursor-pointer mt-1 mb-1">Par ordre alphabétique</summary>
                         <div>
                             <div>
@@ -204,7 +204,7 @@
 
                 <!-- note -->
                 <article>
-                    <details>
+                    <details open>
                         <summary class="cursor-pointer mt-1 mb-1">Par note</summary>
                         <div>
                             <div>
@@ -220,20 +220,20 @@
                 </article>
             </section>
         </aside>
-        <div id="listeProduit" class="flex flex-col items-center">
-            <div id="prod" class="flex flex-row flex-wrap justify-around w-auto">
+        <section id="listeProduit" class="flex flex-col items-center">
+            <article id="prod" class="flex flex-row flex-wrap justify-around w-auto">
                 <script>
                     afficherListe()
                 </script>
-            </div>
+            </article>
             <!--fin du catalogue-->
-            <div id="changePage" class="flex flex-row justify-around w-275">
-                <button id="premierePage">Premiere page</button>
-                <button id="pagePrec">Page prec</button>
-                <button id="pageSuiv">Page suiv</button>
-                <button id="dernierePage">Derniere page</button>
-            </div>
-        </div>
+            <article id="changePage" class="grid grid-cols-2 md:flex md:flex-row md:justify-around w-96 md:w-275">
+                <button id="pagePrec" class="md:order-2">Page prec</button>
+                <button id="pageSuiv" class="md:order-3">Page suiv</button>
+                <button id="premierePage" class="md:order-1">Premiere page</button>
+                <button id="dernierePage" class="md:order-4">Derniere page</button>
+            </article>
+</section>
 
         <?php $dbh = null;?>
 
