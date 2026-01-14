@@ -9,8 +9,8 @@ if (empty($_SESSION['idCompte'])) {
 }
 
 $idCompte = $_SESSION['idCompte'];
-//$idPanier = $_SESSION['idPanier'];
-$idPanier = 1;
+$idPanier = $_GET['idPanier'];
+//$idPanier = 1;
 
 // === Récupération du panier ===
 try{ $sql = "SELECT 
