@@ -9,7 +9,7 @@ while (1) {
     echo "==============================\n";
 
     echo "[CHRONOS] Connexion au serveur...\n";
-    $conn = fsockopen("127.0.0.1", 8080, $errno, $errstr, 5);
+    $conn = fsockopen("127.0.0.1", 8081, $errno, $errstr, 5);
 
     if (!$conn) {
         echo "[ERREUR] Impossible de se connecter : $errstr ($errno)\n";

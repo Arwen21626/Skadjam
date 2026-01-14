@@ -10,6 +10,8 @@
 #include <errno.h>
 
 #define TAILLEB 1024
+extern int opt_f;
+extern char *arg_f;
 
 typedef struct{
     char nom[255];
@@ -38,7 +40,6 @@ extern PGconn *conn;
 void add_bord(int fd, char buffer[TAILLEB], bordereaux *bord, time_t horo);
 void handle_conn(int fd, const char *line);
 int auth_user(const char *user, const char *pwd);
-void handle_conn(int fd, const char *line);
 
 
 #endif

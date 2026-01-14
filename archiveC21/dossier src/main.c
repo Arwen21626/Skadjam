@@ -16,9 +16,12 @@
 #include "commande/cmd.h"
 #include "model/client.h"
 #include "etat/etat.h"
+#include <getopt.h>
 
 // Déclaration
 time_t getHoro();
+void print_help();
+void manage_opt(int argc, char *argv[]);
 int init_server();
 void run_server_loop();
 void handle_client(int fd, struct sockaddr_in conn_addr);
@@ -31,18 +34,72 @@ void chomp(char *s);
 time_t horo;
 char cIp[INET_ADDRSTRLEN];
 int cPort;
+int sPort = -1;
 PGconn *conn;
 int sock;
+int opt_h = 0;
+int opt_f = 0;
+char *arg_f;
+int opt_p = 0;
 
 int main(int argc, char *argv[]) {
     log_init();
+    manage_opt(argc, argv);
     init_server();
     run_server_loop();
     log_close();
     return 0;
 }
 
+void manage_opt(int argc, char *argv[]){
+    int opt;
+    static struct option long_options[] = {
+        {"port", required_argument, 0, 'p'},
+        {"help", no_argument, 0, 'h'},
+        {"file", required_argument, 0, 'f'},
+        {0,0,0,0}
+    };
+
+    while ((opt = getopt_long(argc, argv, "p:hf:", long_options, NULL)) != -1){
+        switch (opt) {
+            case 'h':
+                print_help();
+                exit(0);
+            case 'f':
+                opt_f = 1;
+                arg_f = optarg;
+                break;
+            case 'p':
+                char *endptr;
+                opt_p = 1;
+                errno = 0;
+                sPort = strtol(optarg, &endptr, 10);
+
+                if (errno != 0 || *endptr != '\0' || sPort <= 0 || sPort > 65535){
+                    fprintf(stdout, "Port invalide : %s\n", optarg);
+                    exit(EXIT_FAILURE);
+                }
+                break;
+            case '?':
+                print_help();
+                exit(0);
+        }  
+    }
+    if (opt_p == 0){
+        fprintf(stdout, "Erreur : le port est obligatoire\n");
+        exit(EXIT_FAILURE);
+    }
+
+    if (opt_f == 0){
+        fprintf(stdout, "Erreur : le fichier est obligatoir\n");
+        exit(EXIT_FAILURE);
+    }
+}
+
 int init_server() {
+    if (sPort == -1){
+        exit(EXIT_FAILURE);
+    }
     LOG_SERV(LOG_INFO, "Démarrage du service Delivraptor");
 
     sock = socket(AF_INET, SOCK_STREAM, 0);
@@ -56,7 +113,7 @@ int init_server() {
 
     struct sockaddr_in addr = {
         .sin_family = AF_INET,
-        .sin_port = htons(8080),
+        .sin_port = htons(sPort),
         .sin_addr.s_addr = inet_addr("127.0.0.1")
     };
 
@@ -173,6 +230,28 @@ void process_commands(int fd, char *buffer) {
     }
 }
 
+#include <stdio.h>
+#include <stdlib.h>
+
+void print_help() {
+    printf(
+        "Usage: delivraptor [OPTIONS]\n"
+        "\n"
+        "Options:\n"
+        "  -h, --help                   Affiche cette aide et quitte\n"
+        "  -p, --port <port>            Définit le port d'écoute du serveur\n"
+        "  -f, --file <filename.log>    Active le mode debug (logs détaillés)\n"
+        "\n"
+        "Description:\n"
+        "  Delivraptor est un serveur TCP permettant la gestion des\n"
+        "  commandes, bordereaux et états de livraison.\n"
+        "\n"
+        "Exemples:\n"
+        "  delivraptor -p 8080\n"
+        "  delivraptor --port 9090\n"
+        "\n"
+    );
+}
 
 
 

@@ -1,5 +1,5 @@
 <?php
-class Recupator{
+class Recupraptor{
     private $user;
     private $password;
     private $ip;

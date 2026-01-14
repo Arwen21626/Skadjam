@@ -127,7 +127,7 @@ int auth_user(const char *user, const char *pwd) {
     char line[256];
     char us[128], pswd[128];
 
-    FILE *f = fopen("lst_client.data", "r");
+    FILE *f = fopen(arg_f, "r");
     if (!f) {
         LOG_SERV(LOG_ERROR, "Impossible d'ouvrir lst_client.data : %s", strerror(errno));
         return -1; // erreur serveur
