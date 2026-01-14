@@ -28,10 +28,10 @@ void msg_etat(int fd, etat_t etat, const char *num_suivi){
     LOG_SERV(LOG_DEBUG, "msg_etat called: %d", etat);
     char message[1024];
     if (etat == INCONNU) {
-        snprintf(message, sizeof(message), "ETA ERR %s %s",
+        snprintf(message, sizeof(message), "ETA ERR %s %s\n",
                  etat_to_str(etat), num_suivi);
     } else {
-        snprintf(message, sizeof(message), "ETA %s %s",
+        snprintf(message, sizeof(message), "ETA %s %s\n",
                  etat_to_str(etat), num_suivi);
     }
     send(fd, message, strlen(message), 0);

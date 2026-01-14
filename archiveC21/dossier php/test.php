@@ -82,6 +82,8 @@ if (!is_resource($conn) || feof($conn)) {
 include __DIR__ . '/recupator.php';
 
 $rpr = new Recupator("127.0.0.1", 8080, "mewen", "1234");
-$ret = $rpr->create_bord("15244", "alison", "4 avenue fosh", 22300, "roussel", "mewen", "5 rue machin", 22450);
+$ret = $rpr->create_bord("14222", "alison", "4 avenue fosh", 22300, "roussel", "mewen", "5 rue machin", 22450);
 echo $ret;
+$etat = $rpr->get_etat($ret);
+echo $etat;
 ?>

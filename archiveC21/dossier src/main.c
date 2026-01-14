@@ -139,6 +139,7 @@ int main(int argc, char *argv[]) {
                 size = read(cnx, buffer, TAILLEB-1);
                 if (size <= 0) {
                     LOG_CLIENT(LOG_INFO, cIp, cPort, "Client déconnecté");
+                    close(cnx);
                     break;
                 }
                 buffer[size] = '\0';
@@ -242,9 +243,9 @@ void add_bord(int fd, char buffer[TAILLEB], bordereaux *bord, time_t horo){
                         NULL,
                         0);
 
-    if (PQresultStatus(res) != PGRES_TUPLES_OK) {
+        if (PQresultStatus(res) != PGRES_TUPLES_OK) {
         LOG_SERV(LOG_ERROR, "Erreur SELECT: %s\n", PQresultErrorMessage(res));
-        snprintf(message, sizeof(message), "%s NOT_FOUND", err);
+        snprintf(message, sizeof(message), "%s NOT_FOUND\n", err);
         if (send(fd, message, strlen(message), 0) <= 0){
             LOG_SERV(LOG_WARN, "client déconnecté");
         }
@@ -304,7 +305,7 @@ void add_bord(int fd, char buffer[TAILLEB], bordereaux *bord, time_t horo){
     PQclear(res);
     
     //envoi du numéro de suivi
-    snprintf(message, sizeof(message), "BORD %s com%s",bord->numSuivi, bord->numCommande);
+    snprintf(message, sizeof(message), "BORD %s com%s\n",bord->numSuivi, bord->numCommande);
     if (send(fd, message, strlen(message), 0) <= 0){
         LOG_SERV(LOG_WARN, "client déconnecté");
         return;
@@ -362,16 +363,16 @@ int connexion(int fd, char mdp[128], char user[128]){
     fclose(connexionFile);
     //format commande CONN user pwd (use width limits)
         
-    if ( ret == 0){
+        if ( ret == 0){
         LOG_CLIENT(LOG_INFO, cIp, cPort, "Authentification réussie");
-        snprintf(message, sizeof(message), "CONNEXION SUCCESS");
+        snprintf(message, sizeof(message), "CONNEXION SUCCESS\n");
     }else{
         if (ret == 2){
             LOG_CLIENT(LOG_ERROR, cIp, cPort, "Authentification échoué : Identifiants incorrect");
-            snprintf(message, sizeof(message), "CONNEXION DENIED %s %s", user, mdp);
+            snprintf(message, sizeof(message), "CONNEXION DENIED %s %s\n", user, mdp);
         }else{
             LOG_CLIENT(LOG_ERROR, cIp, cPort, "Authentification échoué : %s", strerror(errno));
-            snprintf(message, sizeof(message), "ERRER SERVER");   
+            snprintf(message, sizeof(message), "ERRER SERVER\n");   
         }
         send(fd, "CONNEXION DENIED\n", 17, 0);
         close(fd);
