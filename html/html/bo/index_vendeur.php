@@ -125,7 +125,7 @@
                                             $finPromo = formatDate($promotion['date_fin_promotion']);
                                         }
                                         $labelPromo = $promotion['label'];
-                                        if($debutPromo <= date('Y-m-d') && ($finPromo === null || $finPromo >= date('Y-m-d'))){
+                                        if($debutPromo <= date('Y-m-d') && ($finPromo === null || $finPromo >= date('Y-m-d')) && !empty($labelPromo)){
                                     ?>
                                     <!-- Affichage de la bannière -->
                                     <div class="bg-rouge absolute col-span-2 w-36 md:w-74 underline text-beige pt-2 pb-1.5">
