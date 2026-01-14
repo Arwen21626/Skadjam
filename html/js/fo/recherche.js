@@ -168,11 +168,10 @@ function ajoutEventListener(){
 
     //Fonction fermeture
     fermerSidebar.addEventListener("click", function(){
-        // sidebar.classList.remove("translate-x-0")
-        // sidebar.classList.add("hidden")
-        // boutonSidebar.classList.remove("hidden")
-        // prod.classList.remove("ml-4", "w-4/5")
-        // listeProd.classList.remove("items-end")
+        sidebar.classList.remove("translate-x-0")
+        sidebar.classList.add("hidden")
+        boutonSidebar.classList.remove("hidden")
+        prod.classList.remove("content-end")
     })
 }
 
