@@ -225,7 +225,7 @@
                 </script>
             </article>
             <!--fin du catalogue-->
-            <article id="changePage" class="grid grid-cols-2 md:flex md:flex-row md:justify-around w-96 md:w-275">
+            <article id="changePage" class="grid grid-cols-2 md:flex md:flex-row md:justify-around w-96 md:w-275 md:sticky bottom-0">
                 <button id="pagePrec" class="md:order-2">|<</button>
                 <button id="pageSuiv" class="md:order-4">>|</button>
                 <p id="pageInfo" class="md:order-3"></p>

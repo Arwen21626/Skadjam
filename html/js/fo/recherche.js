@@ -231,7 +231,7 @@ function ajoutEventListener(){
 }
 
 function nbPages(){
-    maxPages = parseInt((tableau.length)/numberOfItems)
+    maxPages = Math.ceil((tableau.length)/numberOfItems)
     return maxPages
 }
 
