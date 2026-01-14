@@ -82,21 +82,21 @@
         <h2 class="mt-10">Récapitulatif de la commande</h2>
 
         <div class="ml-5 flex flex-row items-end mt-10">
-            <h3>Numéro de la commande : </h3> 
+            <h3 class="mr-3">Numéro de la commande : </h3> 
             <p><?php echo $idCommande;?></p>
         </div>
-        
-        <div class="ml-5 flex flex-row items-end mt-10">
-            <h3>Date : </h3>
+
+        <div class="ml-5 flex flex-row items-end">
+            <h3 class="mr-3">Date : </h3>
             <p><?php echo $date;?></p>
         </div>
 
-        <div class="flex justify-center">
+        <div class="flex justify-center mt-10">
             <?php //tableau des commandes ?>
-            <table class="table-auto w-250">
+            <table class="table-auto w-280">
                 <thead>
                     <tr>
-                        <th class="text-left w-125 pl-3"><h4>Article</h4></th>
+                        <th class="text-left w-110 pl-3"><h4>Article</h4></th>
                         <th class="pr-3"><h4>Référence</h4></th>
                         <th class="pr-3"><h4>Quantité</h4></th>
                         <th class="pr-3"><h4>Prix unitaire HT</h4></th>
