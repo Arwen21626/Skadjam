@@ -123,3 +123,60 @@ void add_bord(int fd, char buffer[TAILLEB], bordereaux *bord, time_t horo) {
     send_bordereau_response(fd, bord);
 }
 
+int auth_user(const char *user, const char *pwd) {
+    char line[256];
+    char us[128], pswd[128];
+
+    FILE *f = fopen("lst_client.data", "r");
+    if (!f) {
+        LOG_SERV(LOG_ERROR, "Impossible d'ouvrir lst_client.data : %s", strerror(errno));
+        return -1; // erreur serveur
+    }
+
+    while (fgets(line, sizeof(line), f)) {
+        if (sscanf(line, "%127s %127s", us, pswd) == 2) {
+            if (strcmp(us, user) == 0 && strcmp(pswd, pwd) == 0) {
+                fclose(f);
+                return 0; // OK
+            }
+        }
+    }
+
+    fclose(f);
+    return 1; // identifiants incorrects
+}
+
+void handle_conn(int fd, const char *line) {
+    char cmd[16], user[128], pwd[128];
+    char response[256];
+
+    // Extraction des paramètres
+    if (sscanf(line, "%15s %127s %127s", cmd, user, pwd) != 3) {
+        LOG_CLIENT(LOG_WARN, cIp, cPort, "CONN: format invalide");
+        send(fd, "CONNEXION DENIED\n", 18, 0);
+        return;
+    }
+
+    LOG_CLIENT(LOG_INFO, cIp, cPort, "Tentative d'authentification pour '%s'", user);
+
+    int status = auth_user(user, pwd);
+
+    if (status == 0) {
+        LOG_CLIENT(LOG_INFO, cIp, cPort, "Authentification réussie pour '%s'", user);
+        snprintf(response, sizeof(response), "CONNEXION SUCCESS\n");
+        send(fd, response, strlen(response), 0);
+        return;
+    }
+
+    if (status == 1) {
+        LOG_CLIENT(LOG_WARN, cIp, cPort, "Authentification échouée : mauvais identifiants");
+        snprintf(response, sizeof(response), "CONNEXION DENIED\n");
+        send(fd, response, strlen(response), 0);
+        return;
+    }
+
+    // status == -1 → erreur serveur
+    LOG_SERV(LOG_ERROR, "Erreur interne lors de l'authentification");
+    send(fd, "ERR SERVER\n", 11, 0);
+}
+

@@ -19,7 +19,10 @@
 
 // Déclaration
 time_t getHoro();
-int connexion(int fd, char mdp[128], char user[128]);
+int init_server();
+void run_server_loop();
+void handle_client(int fd, struct sockaddr_in conn_addr);
+void process_commands(int fd, char *buffer);
 int connecxionBd();
 void getEtat(int fd, char buffer[TAILLEB]);
 void avance();
@@ -29,206 +32,152 @@ time_t horo;
 char cIp[INET_ADDRSTRLEN];
 int cPort;
 PGconn *conn;
+int sock;
 
 int main(int argc, char *argv[]) {
-    int sock;
-    int ret;
-    int size;
-    int cnx;
-    char user[128], mdp[128];
-    char commande[20];
-    char buffer[TAILLEB];
-    char message[1024];
-    cmd_t cmd;
-    char *line;
     log_init();
+    init_server();
+    run_server_loop();
+    log_close();
+    return 0;
+}
 
-    
-    LOG_SERV(LOG_INFO ,"Démarrage du service Delivraptor");
+int init_server() {
+    LOG_SERV(LOG_INFO, "Démarrage du service Delivraptor");
 
     sock = socket(AF_INET, SOCK_STREAM, 0);
-    printf("SOCK = %d\n", sock);
+    if (sock < 0) {
+        LOG_SERV(LOG_ERROR, "Erreur socket(): %s", strerror(errno));
+        exit(EXIT_FAILURE);
+    }
 
     int opt = 1;
-    if (setsockopt(sock, SOL_SOCKET, SO_REUSEADDR, &opt, sizeof(opt))) {
-        LOG_SERV(LOG_ERROR, "setsockopt failed: %s", strerror(errno));
-        perror("setsockopt");
+    setsockopt(sock, SOL_SOCKET, SO_REUSEADDR, &opt, sizeof(opt));
+
+    struct sockaddr_in addr = {
+        .sin_family = AF_INET,
+        .sin_port = htons(8080),
+        .sin_addr.s_addr = inet_addr("127.0.0.1")
+    };
+
+    if (bind(sock, (struct sockaddr *)&addr, sizeof(addr)) < 0) {
+        LOG_SERV(LOG_ERROR, "Erreur bind(): %s", strerror(errno));
         exit(EXIT_FAILURE);
     }
-    LOG_SERV(LOG_INFO, "Socket configuré");
 
-    struct sockaddr_in addr;
+    if (listen(sock, 10) < 0) {
+        LOG_SERV(LOG_ERROR, "Erreur listen(): %s", strerror(errno));
+        exit(EXIT_FAILURE);
+    }
+
+    LOG_SERV(LOG_INFO, "Serveur prêt sur 127.0.0.1:8080");
+    return sock;
+}
+
+void run_server_loop() {
     struct sockaddr_in conn_addr;
+    socklen_t size = sizeof(conn_addr);
 
-    addr.sin_addr.s_addr = inet_addr("127.0.0.1"); //Adresse ip
-    addr.sin_family = AF_INET;
-    addr.sin_port = htons(8080); //Choix du port d'ecoute
-    ret = bind(sock, (struct sockaddr *)&addr, sizeof(addr));
-    printf("BIND = %d\n",ret);
-    
-    if (ret!=0){
-        LOG_SERV(LOG_ERROR, "Erreur socket : %s", strerror(errno));
-        exit(EXIT_FAILURE);
-    }
-    LOG_SERV(LOG_INFO, "Adresse ip et port configurées");
-
-    ret = listen(sock, 10); //Taille de la liste d'attente
-    printf("LISTEN = %d\n",ret);
-    if (ret==0){
-        LOG_SERV(LOG_INFO, "Socket en écoute");
-    }else{
-        LOG_SERV(LOG_ERROR, "Erreur socket : %s", strerror(errno));
-    }
-
-    size = sizeof(conn_addr);
-    while (1){
-        cnx = accept(sock, (struct sockaddr *)&conn_addr, (socklen_t *)&size);
+    while (1) {
+        int cnx = accept(sock, (struct sockaddr *)&conn_addr, &size);
         if (cnx < 0) {
-            LOG_SERV(LOG_ERROR, "accept failed: %s", strerror(errno));
+            LOG_SERV(LOG_ERROR, "Erreur accept(): %s", strerror(errno));
             continue;
         }
+
         LOG_SERV(LOG_INFO, "Connexion acceptée (fd=%d)", cnx);
 
         pid_t pid = fork();
         if (pid < 0) {
-            LOG_SERV(LOG_ERROR, "fork failed: %s", strerror(errno));
+            LOG_SERV(LOG_ERROR, "Erreur fork(): %s", strerror(errno));
             close(cnx);
             continue;
-        } else if (pid == 0) {
-            /* enfant */
-            LOG_SERV(LOG_INFO, "Process enfant démarré (pid=%d) pour fd=%d", getpid(), cnx);
+        }
 
-            LOG_SERV(LOG_INFO, "Connexion à la BDD...");
-            connecxionBd();
-
-            if (cnx >= 0) {
-                close(sock);
-            } else {
-                LOG_SERV(LOG_ERROR, "socket invalide après accept: %s", strerror(errno));
-                close(cnx);
-            }
-            
-            inet_ntop(AF_INET, &conn_addr.sin_addr, cIp, sizeof(cIp));
-            cPort = ntohs(conn_addr.sin_port);
-            LOG_CLIENT(LOG_INFO, cIp, cPort, "Client connecté");
-
-            while (1) {
-                size = read(cnx, buffer, TAILLEB-1);
-                if (size <= 0) {
-                    LOG_CLIENT(LOG_INFO, cIp, cPort, "Client déconnecté");
-                    close(cnx);
-                    break;
-                }
-                buffer[size] = '\0';
-
-                line = strtok(buffer, "\n");
-                while (line) {
-                    if (line) chomp(line);
-                    /* extraire et logger la commande */
-                    char cmdstr[16] = {0};
-                    if (sscanf(line, "%15s", cmdstr) != 1) {
-                        LOG_CLIENT(LOG_WARN, cIp, cPort, "Ligne mal formée reçue");
-                        line = strtok(NULL, "\n");
-                        continue;
-                    }
-                    cmd = get_commande(cmdstr);
-                    horo = getHoro();
-                    LOG_CLIENT(LOG_INFO, cIp, cPort, "Requête reçue: %s", cmdstr);
-
-                    switch (cmd) {
-                        case CMD_CONN: {
-                            /* format: CONN user pwd */
-                            if (sscanf(line, "%19s %127s %127s", commande, user, mdp) == 3) {
-                                if (connexion(cnx, mdp, user) == 0) {
-                                    LOG_CLIENT(LOG_INFO, cIp, cPort, "Authentification OK pour %s", user);
-                                } else {
-                                    LOG_CLIENT(LOG_WARN, cIp, cPort, "Authentification échouée pour %s", user);
-                                }
-                            } else {
-                                LOG_CLIENT(LOG_WARN, cIp, cPort, "CONN: mauvais format");
-                            }
-                        } break;
-                        case CMD_ADD: {
-                            bordereaux bord;
-                            add_bord(cnx, line, &bord, horo);
-                        } break;
-                        case CMD_ETA: {
-                            getEtat(cnx, line);
-                        } break;
-                        case CMD_NEXT: {
-                            avance();
-                            send(cnx, "next success\n", strlen("next success\n"), 0);
-                        } break;
-                        default: {
-                            LOG_CLIENT(LOG_WARN, cIp, cPort, "Commande non reconnue: %s", cmdstr);
-                            snprintf(message, sizeof(message), "CMD ERR NOT_EXIST %s", cmdstr);
-                            cmd = CMD_UNKNOWN;
-                            if (send(cnx, message, strlen(message), 0) <= 0) {
-                                LOG_SERV(LOG_WARN, "client déconnecté");
-                            }
-                        } break;
-                    }
-
-                    line = strtok(NULL, "\n");
-                }
-            }
-
+        if (pid == 0) {
+            // Processus enfant
+            close(sock);
+            handle_client(cnx, conn_addr);
             close(cnx);
             _exit(0);
-        }else{
-            LOG_SERV(LOG_DEBUG, " <<Parent pid enfant : %d", pid);
-            close(cnx);
-            LOG_SERV(LOG_DEBUG, " <<Parent connexion ferme");
         }
+
+        // Processus parent
+        close(cnx);
     }
-    log_close();
 }
+
+void handle_client(int fd, struct sockaddr_in conn_addr) {
+    inet_ntop(AF_INET, &conn_addr.sin_addr, cIp, sizeof(cIp));
+    cPort = ntohs(conn_addr.sin_port);
+
+    LOG_CLIENT(LOG_INFO, cIp, cPort, "Client connecté");
+
+    connecxionBd();
+
+    char buffer[TAILLEB];
+    int size;
+
+    while ((size = read(fd, buffer, TAILLEB - 1)) > 0) {
+        buffer[size] = '\0';
+        process_commands(fd, buffer);
+    }
+
+    LOG_CLIENT(LOG_INFO, cIp, cPort, "Client déconnecté");
+}
+
+void process_commands(int fd, char *buffer) {
+    char *line = strtok(buffer, "\n");
+
+    while (line) {
+        chomp(line);
+
+        char cmdstr[16];
+        if (sscanf(line, "%15s", cmdstr) != 1) {
+            LOG_CLIENT(LOG_WARN, cIp, cPort, "Commande vide ou invalide");
+            line = strtok(NULL, "\n");
+            continue;
+        }
+
+        cmd_t cmd = get_commande(cmdstr);
+        horo = getHoro();
+
+        LOG_CLIENT(LOG_INFO, cIp, cPort, "Commande reçue : %s", cmdstr);
+
+        switch (cmd) {
+            case CMD_CONN:
+                handle_conn(fd, line);
+                break;
+
+            case CMD_ADD: {
+                bordereaux bord;
+                add_bord(fd, line, &bord, horo);
+            } break;
+
+            case CMD_ETA:
+                getEtat(fd, line);
+                break;
+
+            case CMD_NEXT:
+                avance();
+                send(fd, "next success\n", 14, 0);
+                break;
+
+            default:
+                LOG_CLIENT(LOG_WARN, cIp, cPort, "Commande inconnue : %s", cmdstr);
+                send(fd, "CMD ERR NOT_EXIST\n", 19, 0);
+                break;
+        }
+
+        line = strtok(NULL, "\n");
+    }
+}
+
+
+
 
 time_t getHoro(){
     return time(NULL);
-}
-
-int connexion(int fd, char mdp[128], char user[128]){
-    char line[256];
-    char us[128], pswd[128];
-    char message[512];
-    int ret = 2;
-    FILE *connexionFile;
-    connexionFile = fopen("lst_client.data", "r");
-    if (connexionFile == NULL) {
-        return errno;
-    }
-
-    while (fgets(line, sizeof(line), connexionFile)){
-        if (sscanf(line, "%127s %127s",us, pswd) == 2){
-            if (strcmp(us, user) == 0 && strcmp(mdp, pswd) == 0){
-                ret = 0;
-                break;
-            }
-        }
-    }
-    fclose(connexionFile);
-    //format commande CONN user pwd (use width limits)
-        
-        if ( ret == 0){
-        LOG_CLIENT(LOG_INFO, cIp, cPort, "Authentification réussie");
-        snprintf(message, sizeof(message), "CONNEXION SUCCESS\n");
-    }else{
-        if (ret == 2){
-            LOG_CLIENT(LOG_ERROR, cIp, cPort, "Authentification échoué : Identifiants incorrect");
-            snprintf(message, sizeof(message), "CONNEXION DENIED %s %s\n", user, mdp);
-        }else{
-            LOG_CLIENT(LOG_ERROR, cIp, cPort, "Authentification échoué : %s", strerror(errno));
-            snprintf(message, sizeof(message), "ERRER SERVER\n");   
-        }
-        send(fd, "CONNEXION DENIED\n", 17, 0);
-        close(fd);
-        return -1;
-    }
-    if (send(fd, message, strlen(message), 0) <= 0){
-        LOG_SERV(LOG_WARN, "client déconnecté");
-    }
-    return ret;
 }
 
 int connecxionBd(){
