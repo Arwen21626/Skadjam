@@ -46,17 +46,16 @@
     <?php include(__DIR__ . "/../../php/structure/navbar_back.php"); ?>
 
     
-    <main class="md:min-h-[800px] min-h-[600px] mt-10">
+    <main class="min-h-[600px]">
         <!-- Barre de recherche -->
         <button id="filtresTris">Filtres & tris</button>
-        <aside class="sidebar overflow-auto hidden float-left bg-beige p-4 sticky w-52 h-225 md:top-16 md:left-0 md:w-79  ">
-            
+        <aside class="sidebar overflow-auto hidden float-left bg-vertFonce text-bleu p-4 sticky w-79 h-auto top-20 left-0">
             <!-- Filtres -->
             <section>
                 
                 <div class="flex flex-row justify-between">
                     <h3>Filtres</h3>
-                    <img id="fermerSidebar"src="../../images/logo/bootstrap_icon/x-large.svg" alt="Fermer" class="flex self-center w-8">
+                    <img id="fermerSidebar"src="../../images/logo/bootstrap_icon/x-large-bleu.svg" alt="Fermer" class="flex self-center w-8 ">
                 </div>
                 
                 <!-- Categorie -->
