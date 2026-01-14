@@ -49,6 +49,18 @@ try{ $sql = "SELECT
     $total_ht = 0;
     $total_ttc = $tabInfosPanier[0]['montant_total_ttc'];
     $total_remise = 0;
+    $v_quantite_totale = 0;
+    $v_total_ht = 0;
+    $v_total_ttc = 0;
+    $v_total_remise = 0;
+    $tabVendeur = [];
+
+    foreach($tabInfosPanier as $ligne){
+        if(in_array($ligne['id_vendeur'], $tabVendeur) == false){
+            $tabVendeur[$ligne['id_vendeur']] = $ligne['raison_sociale'];
+        }
+    }
+
 }
 catch (Exception $e){
     echo "Erreur : " . $e->getMessage();
@@ -89,6 +101,8 @@ if(isset($_POST['case'])){
         ':id_panier' => $idPanier,
         ':id_commande' => $idCommande
     ]);
+
+    header("Location: ./adresse.php");
 }
     
 ?>
@@ -107,63 +121,91 @@ if(isset($_POST['case'])){
     <?php include __DIR__ . "/../../php/structure/navbar_front.php"; ?>
 
     <main class="min-h-[600px]">
-        <!--<h2>Récapitulatif de votre commande</h2>
-        <h3>Numéro de la commande :</h3>
+        <h2 class="mt-10">Récapitulatif de votre commande</h2>
+        <!--<h3>Numéro de la commande :</h3>
         <p></p>-->
-        <h3>Date :</h3>
-        <p><?php echo date("d/m/Y");?></p>
-
-        <div class="flex justify-center">
+        <div class="ml-5 flex flex-row items-end mt-10">
+            <h3 class="mr-3">Date :</h3>
+            <p><?php echo date("d/m/Y");?></p>
+        </div>
+        
+        <div class="flex justify-center mt-10">
             <table class="table-auto w-280">
                 <thead>
                     <tr>
                         <th class="text-left w-110 pl-3"><h4>Article</h4></th>
-                        <th><h4>Référence</h4></th>
-                        <th><h4>Quantité</h4></th>
-                        <th><h4>Prix unitaire HT</h4></th>
-                        <th><h4>Prix unitaire TTC</h4></th>
-                        <th><h4>Prix remisé</h4></th>
+                        <th class="pr-3"><h4>Référence</h4></th>
+                        <th class="pr-3"><h4>Quantité</h4></th>
+                        <th class="pr-3"><h4>Prix unitaire HT</h4></th>
+                        <th class="pr-3"><h4>Prix unitaire TTC</h4></th>
+                        <th class="pr-3"><h4>Prix remisé</h4></th>
                     </tr>
                 </thead>
                 <tbody>
                     <?php $impair = 0;
-                    foreach($tabInfosPanier as $ligne){ 
-                        $impair ++;
-                        if(fmod($impair, 2) == 0){
-                            $classe = "py-4";
-                        }
-                        else{
-                            $classe = "py-4 bg-bleu";
-                        }?>
+                    foreach($tabVendeur as $vendeur){ ?>
                         <tr class="<?php echo $classe; ?>">
-                            <td class="text-left py-3 pl-3"><p><?php echo $ligne['libelle_produit'];?></p></td>
-                            <td class="text-center py-3"><p><?php echo $ligne['id_produit'];?></p></td>
-                            <td class="text-center py-3"><p><?php echo $ligne['quantite_par_produit'];?></p></td>
-                            <td class="text-center py-3"><p><?php echo $ligne['prix_ht'];?></p></td>
-                            <td class="text-center py-3"><p><?php echo $ligne['prix_ttc'];?></p></td>
-                            <td class="text-center py-3"><p><?php echo $ligne['prix_remise'];?></p></td>
-                            <?php $total_ht = $total_ht + $ligne['sous_total_ht'];
-                            $total_remise = $total_remise + $ligne['prix_remise'];?>
+                                <td colspan="6" class="py-3 pl-3"><h4>Vendeur : <?php echo $vendeur ;?></h4></td>
+                        </tr>
+                        <?php foreach($tabInfosPanier as $ligne){ 
+                            if($ligne['raison_sociale'] == $vendeur){
+                                $impair ++;
+                                if(fmod($impair, 2) == 0){
+                                    $classe = "py-4";
+                                }
+                                else{
+                                    $classe = "py-4 bg-bleu";
+                                }?>
+                                <tr class="<?php echo $classe; ?>">
+                                    <td class="text-left py-3 pl-3"><p><?php echo $ligne['libelle_produit'];?></p></td>
+                                    <td class="text-center py-3"><p><?php echo $ligne['id_produit'];?></p></td>
+                                    <td class="text-center py-3"><p><?php echo $ligne['quantite_par_produit'];?></p></td>
+                                    <td class="text-center py-3"><p><?php echo $ligne['prix_ht'];?></p></td>
+                                    <td class="text-center py-3"><p><?php echo $ligne['prix_ttc'];?></p></td>
+                                    <td class="text-center py-3"><p><?php echo $ligne['prix_remise'];?></p></td>
+                                    <?php 
+                                        //calcul du total de la commande
+                                        $total_ht = $total_ht + $ligne['sous_total_ht'];
+                                        $total_remise = $total_remise + $ligne['prix_remise'];
+
+                                        //calcul du sous-total par vendeur
+                                        $v_quantite_totale = $v_quantite_totale + $ligne['quantite_par_produit'];
+                                        $v_total_ht = $v_total_ht + $ligne['sous_total_ht'];
+                                        $v_total_ttc = $v_total_ttc + $ligne['prix_ttc'];
+                                        $v_total_remise = $v_total_remise + $ligne['prix_remise'];
+                                    ?>
+                                </tr>
+                            <?php } 
+                        } ?>
+                        <tr class="<?php echo $classe; ?>">
+                            <td colspan="2" class="text-left w-110 pl-3"><p>Sous-total :</p></td>
+                            <td class="text-center py-3"><p><?php echo $v_quantite_totale;?></p></td>
+                            <td class="text-center py-3"><p><?php echo $v_total_ht;?></p></td>
+                            <td class="text-center py-3"><p><?php echo $v_total_ttc;?></p></td>
+                            <td class="text-center py-3"><p><?php echo $v_total_remise;?></p></td>
                         </tr>
                     <?php } ?>
                 </tbody>
                 <tfoot>
-                    <td><p>Total :</p></td>
-                    <td><p><?php echo $quantite_totale;?></p></td>
-                    <td><p><?php echo $total_ht;?></p></td>
-                    <td><p><?php echo $total_ttc;?></p></td>
-                    <td><p><?php echo $total_remise;?></p></td>
+                    <td colspan="2" class="text-left w-110 pl-3"><p>Total :</p></td>
+                    <td class="text-center py-3"><p><?php echo $quantite_totale;?></p></td>
+                    <td class="text-center py-3"><p><?php echo $total_ht;?></p></td>
+                    <td class="text-center py-3"><p><?php echo $total_ttc;?></p></td>
+                    <td class="text-center py-3"><p><?php echo $total_remise;?></p></td>
                 </tfoot>
             </table>
         </div>
-        <div class="flex justify-center">
+        
             <form action="recapitulatif_commande.php" action="POST">
-                <a href="cgv_fo.php">J’ai lu et j’accepte les conditions générales de vente : </a>
-                <input type="checkbox" name="case" id="case">
-                <a href="../fo/panier.php?idPanier=<?php echo $idPanier ;?>" class="flex justify-center items-center border-2 border-vertClair rounded-2xl w-40 h-14 cursor-pointer my-5">Annuler</a>
-                <input class="flex justify-center items-center border-2 border-vertClair rounded-2xl w-40 h-14 cursor-pointer my-5" type="submit" name="valider" value="Valider">
+                <div class="flex items-center mt-10">
+                    <a href="cgv_fo.php" class="ml-5 mr-5">J’ai lu et j’accepte les conditions générales de vente : </a>
+                    <input type="checkbox" class="cursor-pointer appearance-none w-10 h-10 border-4 border-black rounded-md checked:bg-black" name="case" id="case">
+                </div>
+                <div class="flex justify-center mt-10 mb-10">
+                    <a href="../fo/panier.php?idPanier=<?php echo $idPanier ;?>" class="flex justify-center items-center border-2 border-vertClair rounded-2xl w-40 h-14 cursor-pointer my-5 mr-15">Annuler</a>
+                    <input class="flex justify-center items-center border-2 border-vertClair rounded-2xl w-40 h-14 cursor-pointer my-5" type="submit" name="valider" value="Valider">
+                </div>
             </form>
-        </div>
     </main>
 
     <!--footer-->
