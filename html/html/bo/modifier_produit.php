@@ -63,19 +63,20 @@ foreach($dbh->query("SELECT *,est_masque::CHAR as est_masque_php
 
     $stmtPromo = $dbh->query("SELECT *
                                     FROM sae3_skadjam._promu pmu
-                                    INNER JOIN sae3_skadjam._promotion pmo
-                                        ON pmu.id_promotion = pmo.id_promotion
+                                    INNER JOIN sae3_skadjam._promotion pmn
+                                        ON pmu.id_promotion = pmn.id_promotion
                                     WHERE pmu.id_produit = $idProduit");
     $promotion = $stmtPromo->fetch(PDO::FETCH_ASSOC);
 
     // id_promotion != null veut dire que le produit est en promotion
     if($promotion['id_promotion'] != null){
-        $enPromotion = 'true';
-        // Récupération des dates de promotion
+        $caseCochee = true;
+        // Récupération des infos de promotion
         $dateDebutPromotion = formatDate($promotion['date_debut_promotion']);
-        $dateFinPromotion = formatDate($promotion['date_fin_promotion']);
+        $dateFinPromotion = $promotion['date_fin_promotion'] !== null ? formatDate($promotion['date_fin_promotion']) : null;
+        $labelPromo = $promotion['label'];
     }else{
-        $enPromotion = 'false';
+        $caseCochee = false;
     }
 
     // Suppression des promotions expirées
@@ -118,21 +119,24 @@ if (isset($_POST['categorie']) && isset($_POST['nom']) && isset($_POST['prix']) 
         $nom_photo_finale = explode('/',$urlPhoto)[3];
     }
     
-    //Récupération des champs pour l'insertion
+    // Récupération des champs pour l'insertion
     $idCategorie = htmlentities($_POST['categorie']);
     $nom = htmlentities($_POST['nom']);
     $prixHT = htmlentities($_POST['prix']);
     $qteStock = htmlentities($_POST['qteStock']);
     $remise = htmlentities($_POST['remise']);
     $enLigne = htmlentities($_POST['mettreEnLigne']);
-    $enPromotion = htmlentities($_POST['mettreEnPromotion']);
     $description = htmlentities($_POST['description']);
     $unite = htmlentities($_POST['unite']);
     $qteUnite = htmlentities($_POST['qteUnite']);
+    // Champs spécifiques à la promotion
     $dateDebutPromotion = isset($_POST['dateDebutPromotion']) ? htmlentities($_POST['dateDebutPromotion']) : date('Y-m-d');
-    $dateFinPromotion = isset($_POST['dateFinPromotion']) ? htmlentities($_POST['dateFinPromotion']) : null;
+    $dateFinPromotion = htmlentities($_POST['dateFinPromotion']);
+    $dateFinPromotion = trim($dateFinPromotion);
+    $dateFinPromotion = ($dateFinPromotion === '') ? null : $dateFinPromotion;
+    $labelPromo = isset($_POST['labelPromo']) ? htmlentities($_POST['labelPromo']) : null;
 
-    //Récupération du nom de la catégorie pour la gestion de la tva
+    // Récupération du nom de la catégorie pour la gestion de la tva
     foreach ($tab_categories as $c) {
         if ($c['id_categorie'] == $idCategorie) {
             $nomCategorie = $c['libelle_categorie'];
@@ -146,13 +150,8 @@ if (isset($_POST['categorie']) && isset($_POST['nom']) && isset($_POST['prix']) 
         $enLigne = 'false';
     }
 
-    if($_POST['mettreEnPromotion'] == false){
-        $enPromotion = 'true';
-    }else{
-        $enPromotion = 'false';
-    }
 
-    //Vérification du prix et du stock
+    // Vérification du prix et du stock
     if (verifPrix($prixHT) && verifQteStock($qteStock)){
         try{
             if ($nomCategorie == 'Alimentaire') {
@@ -191,59 +190,99 @@ if (isset($_POST['categorie']) && isset($_POST['nom']) && isset($_POST['prix']) 
 
             // Gestion de la promotion
             // Vérifier si le produit est promu ou non
-            $stmt = $dbh->prepare("SELECT pmu.id_promotion
-                                    FROM sae3_skadjam._promu pmu
-                                    WHERE pmu.id_produit = :id_produit");
+            $stmt = $dbh->prepare("SELECT id_promotion 
+                                    FROM sae3_skadjam._promu 
+                                    WHERE id_produit = :id_produit");
             $stmt->execute([':id_produit' => $idProduit]);
             $promotion = $stmt->fetch(PDO::FETCH_ASSOC);
 
-            $estPromu = ($promotion !== false);
+            $estPromu = !empty($promotion);
             $caseCochee = isset($_POST['mettreEnPromotion']);
 
             // La case "Mettre en promotion" est cochée et que le produit n'est pas déjà promu
             if ($caseCochee && !$estPromu) {
                 $dbh->beginTransaction();
+                // Création de la promotion
                 try {
-                    if(verifDate($dateDebutPromotion) && verifDate($dateFinPromotion) && $dateFinPromotion >= $dateDebutPromotion && $dateDebutPromotion >= date('Y-m-d')){
-                        $stmtPromo = $dbh->prepare("INSERT INTO sae3_skadjam._promotion
-                                                    (
-                                                        date_debut_promotion,
-                                                        date_fin_promotion,
-                                                        heure_debut,
-                                                        id_vendeur,
-                                                        id_photo
-                                                    ) VALUES (
-                                                        :date_debut,
-                                                        :date_fin,
-                                                        '00:00',
-                                                        :id_vendeur,
-                                                        :id_photo
-                                                    )");
-                        $stmtPromo->execute([
-                            ':date_debut' => formatDate($dateDebutPromotion),
-                            ':date_fin'   => formatDate($dateFinPromotion),
-                            ':id_vendeur' => $idCompte,
-                            ':id_photo'   => $idPhoto
-                        ]);
-
-                        $idPromotion = $dbh->lastInsertId();
-
-                        $stmtPromu = $dbh->prepare("INSERT INTO sae3_skadjam._promu
-                                                            (
-                                                                id_promotion,
-                                                                id_produit
-                                                            ) VALUES (
-                                                                :id_promotion,
-                                                                :id_produit
-                                                            )");
-                        $stmtPromu->execute([
-                            ':id_promotion' => $idPromotion,
-                            ':id_produit'   => $idProduit
-                        ]);
-                        $dbh->commit();
+                    if(verifDate($dateDebutPromotion) && $dateDebutPromotion >= date('Y-m-d')){
+                        // Une date de fin à été ajoutée
+                        if(verifDate($dateFinPromotion) && $dateFinPromotion >= $dateDebutPromotion){
+                            $stmtPromo = $dbh->prepare("INSERT INTO sae3_skadjam._promotion
+                                                        (
+                                                            date_debut_promotion,
+                                                            date_fin_promotion,
+                                                            heure_debut,
+                                                            id_vendeur,
+                                                            id_photo
+                                                        ) VALUES (
+                                                            :date_debut,
+                                                            :date_fin,
+                                                            '00:00',
+                                                            :id_vendeur,
+                                                            :id_photo
+                                                        )");
+                            $stmtPromo->execute([
+                                ':date_debut' => formatDate($dateDebutPromotion),
+                                ':date_fin'   => formatDate($dateFinPromotion),
+                                ':id_vendeur' => $idCompte,
+                                ':id_photo'   => $idPhoto
+                            ]);
+                        // Si aucune date de fin n'a été ajoutée
+                        }else if($dateFinPromotion === null){
+                            $stmtPromo = $dbh->prepare("INSERT INTO sae3_skadjam._promotion
+                                                        (
+                                                            date_debut_promotion,
+                                                            date_fin_promotion,
+                                                            heure_debut,
+                                                            id_vendeur,
+                                                            id_photo
+                                                        ) VALUES (
+                                                            :date_debut,
+                                                            :date_fin,
+                                                            '00:00',
+                                                            :id_vendeur,
+                                                            :id_photo
+                                                        )");
+                            $stmtPromo->execute([
+                                ':date_debut' => formatDate($dateDebutPromotion),
+                                ':date_fin'   => null,
+                                ':id_vendeur' => $idCompte,
+                                ':id_photo'   => $idPhoto
+                            ]);
+                        }else{
+                            echo "La date de fin de promotion est invalide.";
+                        }
                     }else{
-                        echo "La date de début ou de fin de promotion est invalide.";
+                        echo "La date de début de promotion est invalide.";
                     }
+                    
+                    $idPromotion = $dbh->lastInsertId();
+
+                    if(strlen($labelPromo) < 20){
+                        $stmtLibelle = $dbh->prepare("UPDATE sae3_skadjam._promotion
+                                                    SET label = :label
+                                                    WHERE id_promotion = :id_promotion");
+                        $stmtLibelle->execute([
+                            ':label' => $labelPromo,
+                            ':id_promotion' => $idPromotion
+                        ]);
+                    }else{
+                        echo "Le libellé de la promotion est invalide.";
+                    }
+
+                    $stmtPromu = $dbh->prepare("INSERT INTO sae3_skadjam._promu
+                                                (
+                                                    id_promotion,
+                                                    id_produit
+                                                ) VALUES (
+                                                    :id_promotion,
+                                                    :id_produit
+                                                )");
+                    $stmtPromu->execute([
+                        ':id_promotion' => $idPromotion,
+                        ':id_produit'   => $idProduit
+                    ]);
+                    $dbh->commit();
                 } catch (Exception $e) {
                     $dbh->rollBack();
                     throw $e;
@@ -253,6 +292,8 @@ if (isset($_POST['categorie']) && isset($_POST['nom']) && isset($_POST['prix']) 
             // Si la case "Mettre en promotion" n'est pas cochée et que le produit est déjà promu
             if (!$caseCochee && $estPromu) {
                 $dbh->beginTransaction();
+                $idPromotion = $promotion['id_promotion'];
+                // Suppression de la promotion existante
                 try {
                     $dbh->prepare("DELETE FROM sae3_skadjam._promu
                                     WHERE id_produit = :id_produit")->execute([':id_produit' => $idProduit]);
@@ -269,28 +310,46 @@ if (isset($_POST['categorie']) && isset($_POST['nom']) && isset($_POST['prix']) 
             // Si la case "Mettre en promotion" est cochée et que le produit est déjà promu
             if($caseCochee && $estPromu){
                 // Mise à jour des dates de la promotion existante
-                if(verifDate($dateDebutPromotion) && verifDate($dateFinPromotion) && $dateFinPromotion >= $dateDebutPromotion && $dateDebutPromotion >= date('Y-m-d')){
-                    $stmtUpdatePromo = $dbh->prepare("UPDATE sae3_skadjam._promotion
+                if(verifDate($dateDebutPromotion) && $dateDebutPromotion >= date('Y-m-d')){
+                    if(verifDate($dateFinPromotion) && $dateFinPromotion >= $dateDebutPromotion){
+                        $stmtUpdatePromo = $dbh->prepare("UPDATE sae3_skadjam._promotion
                                                         SET date_debut_promotion = :date_debut,
                                                             date_fin_promotion = :date_fin
                                                         WHERE id_promotion = :id_promotion");
-                    $stmtUpdatePromo->execute([
-                        ':date_debut'   => formatDate($dateDebutPromotion),
-                        ':date_fin'     => formatDate($dateFinPromotion),
-                        ':id_promotion' => $promotion['id_promotion']
-                    ]);
-                // Suppression de la date de fin de promotion + Mise à jour de la date de début
-                }else if($dateFinPromotion == null && verifDate($dateDebutPromotion) && $dateDebutPromotion >= date('Y-m-d')){
-                    $stmtUpdatePromo = $dbh->prepare("UPDATE sae3_skadjam._promotion
+                        $stmtUpdatePromo->execute([
+                            ':date_debut'   => formatDate($dateDebutPromotion),
+                            ':date_fin'     => formatDate($dateFinPromotion),
+                            ':id_promotion' => $idPromotion
+                        ]);
+                    // Suppression de la date de fin de promotion + Mise à jour de la date de début
+                    }else if($dateFinPromotion === null){
+                        $stmtUpdatePromo = $dbh->prepare("UPDATE sae3_skadjam._promotion
                                                         SET date_debut_promotion = :date_debut,
-                                                            date_fin_promotion = NULL
+                                                            date_fin_promotion = :date_fin
                                                         WHERE id_promotion = :id_promotion");
-                    $stmtUpdatePromo->execute([
-                        ':date_debut'   => formatDate($dateDebutPromotion),
-                        ':id_promotion' => $promotion['id_promotion']
+                        $stmtUpdatePromo->execute([
+                            ':date_debut'   => formatDate($dateDebutPromotion),
+                            ':date_fin'     => null,
+                            ':id_promotion' => $idPromotion
+                        ]);
+                    }else{  
+                        echo "La date de fin de promotion est invalide.";
+                    }
+                }else{
+                    echo "La date de début de promotion est invalide.";
+                }
+
+                // Mise à jour du libellé de la promotion
+                if(strlen($labelPromo) < 20){
+                    $stmtLibelle = $dbh->prepare("UPDATE sae3_skadjam._promotion SET
+                                                label = :label
+                                                WHERE id_promotion = :id_promotion");
+                    $stmtLibelle->execute([
+                        ':label' => $labelPromo,
+                        ':id_promotion' => $idPromotion
                     ]);
-                }else{  
-                    echo "La date de début ou de fin de promotion est invalide.";
+                }else{
+                    echo "Le libellé de la promotion est invalide.";
                 }
             }
 
@@ -355,8 +414,7 @@ if (isset($_POST['categorie']) && isset($_POST['nom']) && isset($_POST['prix']) 
             print "Erreur !: " . $e->getMessage() . "<br/>";
             die();
         }
-    }
-    else{
+    }else{
         echo "Le prix ou la quantité saisi est incorrect.";
     }
     header("Location: ./details_produit.php?idProduit=$idProduit");
@@ -446,7 +504,7 @@ else { ?>
                     <!-- Mettre en ligne -->
                     <div class="flex flex-row mr-4 ml-4">
                         <label class="mr-4" for="mettreEnLigne">Mettre en ligne</label>
-                        <input class="cursor-pointer appearance-none w-10 h-10 border-4 border-beige rounded-md checked:bg-beige" type="checkbox" name="mettreEnLigne" id="mettreEnLigne" <?php echo ($enLigne == 'true')?'checked':'' ?>>
+                        <input class="cursor-pointer appearance-none w-10 h-10 border-4 border-beige rounded-md checked:bg-beige" type="checkbox" name="mettreEnLigne" id="mettreEnLigne" <?php echo ($enLigne == 'true') ? 'checked' : ''; ?>>
                     </div>
                     <?php 
                         $stmtNbPromos = $dbh->prepare("SELECT COUNT(*) AS nb_promotions
@@ -457,7 +515,7 @@ else { ?>
                         $stmtNbPromos->execute([':id_vendeur' => $_SESSION['idCompte']]);
                         $nbPromos = $stmtNbPromos->fetch(PDO::FETCH_ASSOC)['nb_promotions'];
 
-                        if ($nbPromos >= 2 && $enPromotion === 'false') { ?>
+                        if ($nbPromos >= 2 && !$caseCochee) { ?>
                             <div class="flex flex-row mr-4 ml-4">
                                 <label class="mr-4 text-rouge">Mettre en promotion (Limite atteinte)</label>
                                 <input type="checkbox" disabled class="cursor-not-allowed appearance-none w-10 h-10 border-4 border-beige rounded-md">
@@ -465,22 +523,30 @@ else { ?>
                         <?php } else { ?>
                             <div class="flex flex-row mr-4 ml-4">
                                 <label class="mr-4" for="mettreEnPromotion">Mettre en promotion</label>
-                                <input id="promoCheck" class="cursor-pointer appearance-none w-10 h-10 border-4 border-beige rounded-md checked:bg-beige" type="checkbox" name="mettreEnPromotion" id="mettreEnPromotion" <?php echo ($enPromotion === 'true') ? 'checked':''; ?>>
+                                <input id="promoCheck" class="cursor-pointer appearance-none w-10 h-10 border-4 border-beige rounded-md checked:bg-beige" type="checkbox" name="mettreEnPromotion" id="mettreEnPromotion" <?php echo $caseCochee ? 'checked' : ''; ?>>
                             </div>
                         <?php } ?>
                 </div>
                 <!-- Inputs liés aux promotions -->
-                <div id="promoInputs" class="col-start-1 row-start-5 col-span-2 flex flex-row justify-around m-2 p-2">
-                    <div>
-                        <div class="flex flex-row mr-4 ml-4">
-                            <label class="mr-4" for="dateDebutPromotion">Début de promotion* :</label>
-                            <input class="border-4 border-beige rounded-2xl w-45" type="date" name="dateDebutPromotion" id="dateDebutPromotion" value="<?php echo $dateDebutPromotion != null ? $dateDebutPromotion : date('Y-m-d'); ?>" required>
+                <div id="promoInputs" class="col-start-1 row-start-5 col-span-2 flex flex-col">
+                    <div class="flex flex-row justify-around m-2 p-2">
+                        <div>
+                            <div class="flex flex-row mr-4 ml-4">
+                                <label class="mr-4" for="dateDebutPromotion">Début de promotion* :</label>
+                                <input class="border-4 border-beige rounded-2xl w-45" type="date" name="dateDebutPromotion" id="dateDebutPromotion" value="<?php echo $dateDebutPromotion !== null ? $dateDebutPromotion : date('Y-m-d'); ?>" required>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="flex flex-row mr-4 ml-4">
+                                <label class="mr-4" for="dateFinPromotion">Fin de promotion :</label>
+                                <input class="border-4 border-beige rounded-2xl w-45" type="date" name="dateFinPromotion" id="dateFinPromotion" value="<?php echo $dateFinPromotion; ?>">
+                            </div>
                         </div>
                     </div>
-                    <div>
+                    <div class="flex flex-row justify-around m-2 p-2">
                         <div class="flex flex-row mr-4 ml-4">
-                            <label class="mr-4" for="dateFinPromotion">Fin de promotion :</label>
-                            <input class="border-4 border-beige rounded-2xl w-45" type="date" name="dateFinPromotion" id="dateFinPromotion" value="<?php echo $dateFinPromotion != null ? $dateFinPromotion : null; ?>">
+                            <label class="mr-4" for="labelPromo">Libellé de la promotion :</label>
+                            <input class="border-4 border-beige rounded-2xl w-45" type="text" name="labelPromo" id="labelPromo" value="<?php echo $labelPromo;?>">
                         </div>
                     </div>
                 </div>
@@ -498,11 +564,12 @@ else { ?>
                 </div>
             </form>
         </main>
-        <?php include(__DIR__ . '/../../php/structure/footer_back.php');?> 
+        <?php include __DIR__ . '/../../php/structure/footer_back.php';?> 
         <script src="../../js/bo/changement_image_produits.js"></script>
     </body>
 </html>
 <script>
+    // Fonction pour afficher/cacher les inputs de promotion
     function togglePromotionInputs(){
         var promoCheck = document.getElementById('promoCheck');
         var promoInputs = document.getElementById('promoInputs');
@@ -515,6 +582,7 @@ else { ?>
             promoInputs.style.height = '0';
         }
     }
+    // Quand "Mettre en promotion" est coché, afficher les inputs de promotion
     document.addEventListener('DOMContentLoaded', function() {
         var promoCheck = document.getElementById('promoCheck');
         promoCheck.addEventListener('change', togglePromotionInputs);

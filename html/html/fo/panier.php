@@ -25,7 +25,6 @@
             $produitsPanier[] = $row;
         }
         
-        
 
         if (!empty($produitsPanier)) 
         {
@@ -57,7 +56,7 @@
             $dbh->query("UPDATE sae3_skadjam._panier SET nb_produit_total = $nbProduitsTotal, montant_total_ttc = $montantTotalTTC WHERE id_panier = $idPanier");
         }
         
-        $lienBtnValiderPanier = "/html/fo/recapitulatif_commande.php?idPanier=".$idPanier;
+        $lienBtnValiderPanier = "/html/fo/recapitulatif_commande.php";
     }
     else if ($_SESSION['role'] === 'visiteur' && $_SESSION['panier']['nb_produit_total'] > 0) 
     {
@@ -210,14 +209,14 @@
                                     </button>
                                 </form>
                                 
-                                <form class="flex justify-center valider-panier" action="<?php echo $lienBtnValiderPanier;?>">
+                                <form class="flex justify-center valider-panier" method="get" action="<?php echo $lienBtnValiderPanier;?>">
+                                    <input type="hidden" name="idPanier" value="<?= htmlspecialchars($idPanier) ?>">
                                     <button class="bg-beige rounded-2xl w-20 h-10 mt-2 md:w-40 md:h-14 md:mt-4 cursor-pointer border-black border shadow" type="submit">
                                         Valider le panier
                                     </button>
                                 </form>
                                 
                             </div>
-                            <div></div>
                         </div>
                     <?php
                 }
@@ -335,7 +334,7 @@
                                         </button>
                                     </form>
                                     
-                                    <form class="flex justify-center valider-panier" method="post" action="<?php echo $lienBtnValiderPanier;?>">
+                                    <form class="flex justify-center valider-panier" method="get" action="<?php echo $lienBtnValiderPanier;?>">
                                         <input type="hidden" name="veutAcheter" value="V">
                                         <button class="bg-beige rounded-2xl w-20 h-10 mt-2 md:w-40 md:h-14 md:mt-4 cursor-pointer border-black border shadow" type="submit">
                                             Valider le panier

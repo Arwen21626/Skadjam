@@ -5,6 +5,11 @@ let actualPage
 
 let tableau = []
 
+let checkedCategories = []
+let checkedNotes = []
+let checkedTranches = []
+
+// Ajout des eventListeners
 function ajoutEventListener(){
     
 // EventListener pour les boutons de changement de page
@@ -94,10 +99,12 @@ function ajoutEventListener(){
     
     categorieAlimentaire.addEventListener("click",function () {
         if(categorieAlimentaire.checked){
+            checkedCategories.push("alimentaire")
             tableau = filtrageCategorieAlimentaire(tabProd);
             console.log("check")
             
         }else{
+            checkedCategories.pop("alimentaire")
             console.log("uncheck")
         }
         
@@ -108,9 +115,11 @@ function ajoutEventListener(){
     
     categorieVetement.addEventListener("click",function () {
         if(categorieVetement.checked){
+            checkedCategories.push("vetement")
             tableau = filtrageCategorieVetement(tabProd);
             console.log("check")
         }else{
+            checkedCategories.pop("vetement")
             console.log("uncheck")
         }
         console.log("tabVet " + tableau)
@@ -120,9 +129,11 @@ function ajoutEventListener(){
     
     categorieArtisanat.addEventListener("click",function () {
         if(categorieArtisanat.checked){
+            checkedCategories.push("artisanat")
             tableau = filtrageCategorieArtisanat(tabProd);
             console.log("check")
         }else{
+            checkedCategories.pop("artisanat")
             console.log("uncheck")
         }
         console.log("tabArt " + tableau)
@@ -132,9 +143,11 @@ function ajoutEventListener(){
     
     categorieGoodies.addEventListener("click",function () {
         if(categorieGoodies.checked){
+            checkedCategories.push("goodies")
             tableau = filtrageCategorieGoodies(tabProd);
             console.log("check")
         }else{
+            checkedCategories.pop("goodies")
             console.log("uncheck")
         }
         console.log("tabGood " + tableau)
@@ -144,9 +157,11 @@ function ajoutEventListener(){
     
     categorieSoin.addEventListener("click",function () {
         if(categorieSoin.checked){
+            checkedCategories.push("soin")
             tableau = filtrageCategorieSoin(tabProd);
             console.log("check")
         }else{
+            checkedCategories.pop("soin")
             console.log("uncheck")
         }
         console.log("tabSoin " + tableau)
@@ -207,17 +222,21 @@ function ajoutEventListener(){
 
     //Fonction fermeture
     fermerSidebar.addEventListener("click", function(){
-        sidebar.classList.remove("translate-x-0")
-        sidebar.classList.add("hidden")
-        boutonSidebar.classList.remove("hidden")
-        prod.classList.remove("content-end")
+        // sidebar.classList.remove("translate-x-0")
+        // sidebar.classList.add("hidden")
+        // boutonSidebar.classList.remove("hidden")
+        // prod.classList.remove("ml-4", "w-4/5")
+        // listeProd.classList.remove("items-end")
     })
 
-    if(!categorieAlimentaire.checked && !categorieVetement.checked && !categorieArtisanat.checked && !categorieGoodies.checked && !categorieSoin.checked){
+    console.log(ch)
+    if(checkedCategories.length === 0 && checkedNotes.length === 0 && checkedTranches.length === 0){
         console.log("rien n'est coché")
         tableau = tabProd
     }
 }
+
+
 
 function firstPage(){
     first = 0
@@ -293,7 +312,7 @@ function afficherProduit(indice){
     image.src = tableau[i]['url_photo']
     image.alt = tableau[i]['alt']
     image.title = tableau[i]['title']
-    image.classList
+    image.classList.add("w-auto", "h-80")
     parent.appendChild(image)
 
     // Nom produit
