@@ -30,14 +30,14 @@
         <!-- Recherche -->
         <div class="md:flex md:flex-col md:justify-center md:items-center">
 
-            <a href="/html/fo/recherche.php">
+            <a href="/html/bo/recherche.php">
                 <div class="size-12 bg-no-repeat bg-size-[auto_48px] 
                 bg-[url(/images/logo/bootstrap_icon/search.svg)] 
                 hover:bg-[url(/images/logo/bootstrap_icon/search-selected.svg)]">
                 </div>
             </a>
 
-            <a class="text-bleu hover:text-rouge hidden md:inline-block" href="/html/html/bo/recherche.php">Recherche</a>
+            <a class="text-bleu hover:text-rouge hidden md:inline-block" href="/html/bo/recherche.php">Recherche</a>
         </div>
 
 

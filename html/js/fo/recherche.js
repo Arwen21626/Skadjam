@@ -1,5 +1,5 @@
 const numberOfItems = 24 //NB produits à afficher tablette
-const numberOfItemsPhone = 12 //NB produits à afficher
+// const numberOfItemsPhone = 12 //NB produits à afficher
 let first = 0
 let actualPage
 
@@ -222,11 +222,10 @@ function ajoutEventListener(){
 
     //Fonction fermeture
     fermerSidebar.addEventListener("click", function(){
-        // sidebar.classList.remove("translate-x-0")
-        // sidebar.classList.add("hidden")
-        // boutonSidebar.classList.remove("hidden")
-        // prod.classList.remove("ml-4", "w-4/5")
-        // listeProd.classList.remove("items-end")
+        sidebar.classList.remove("translate-x-0")
+        sidebar.classList.add("hidden")
+        boutonSidebar.classList.remove("hidden")
+        prod.classList.remove("content-end")
     })
 
     console.log(ch)
@@ -235,7 +234,6 @@ function ajoutEventListener(){
         tableau = tabProd
     }
 }
-
 
 
 function firstPage(){
