@@ -103,7 +103,7 @@ function ajoutEventListener(){
             console.log("check")
             
         }else{
-            checkedCategories.pop("alimentaire")
+            //checkedCategories.pop("alimentaire")
             console.log("uncheck")
         }
         
@@ -118,7 +118,7 @@ function ajoutEventListener(){
             tableau = filtrageCategorieVetement(tabProd);
             console.log("check")
         }else{
-            checkedCategories.pop("vetement")
+            //checkedCategories.pop("vetement")
             console.log("uncheck")
         }
         console.log("tabVet " + tableau)
@@ -132,7 +132,7 @@ function ajoutEventListener(){
             tableau = filtrageCategorieArtisanat(tabProd);
             console.log("check")
         }else{
-            checkedCategories.pop("artisanat")
+            //checkedCategories.pop("artisanat")
             console.log("uncheck")
         }
         console.log("tabArt " + tableau)
@@ -146,7 +146,7 @@ function ajoutEventListener(){
             tableau = filtrageCategorieGoodies(tabProd);
             console.log("check")
         }else{
-            checkedCategories.pop("goodies")
+            //checkedCategories.pop("goodies")
             console.log("uncheck")
         }
         console.log("tabGood " + tableau)
@@ -160,7 +160,7 @@ function ajoutEventListener(){
             tableau = filtrageCategorieSoin(tabProd);
             console.log("check")
         }else{
-            checkedCategories.pop("soin")
+            //checkedCategories.pop("soin")
             console.log("uncheck")
         }
         console.log("tabSoin " + tableau)
@@ -221,15 +221,14 @@ function ajoutEventListener(){
 
     //Fonction fermeture
     fermerSidebar.addEventListener("click", function(){
-        // sidebar.classList.remove("translate-x-0")
-        // sidebar.classList.add("hidden")
-        // boutonSidebar.classList.remove("hidden")
-        // prod.classList.remove("ml-4", "w-4/5")
-        // listeProd.classList.remove("items-end")
+        sidebar.classList.remove("translate-x-0")
+        sidebar.classList.add("hidden")
+        boutonSidebar.classList.remove("hidden")
+        prod.classList.remove("content-end")
     })
 
-    console.log(ch)
-    if(checkedCategories.length === 0 && checkedNotes.length === 0 && checkedTranches.length === 0){
+    console.log(checkedCategories)  
+    if(checkedCategories.length === 0 /*&& checkedNotes.length === 0 && checkedTranches.length === 0*/){
         console.log("rien n'est coché")
         tableau = tabProd
     }
