@@ -242,7 +242,7 @@
                                 
                                 <form class="flex justify-center valider-panier" method="get" action="<?php echo $lienBtnValiderPanier;?>">
                                     <input type="hidden" name="idPanier" value="<?= htmlspecialchars($idPanier) ?>">
-                                    <button class="bg-beige rounded-2xl w-20 h-10 mt-2 md:w-40 md:h-14 md:mt-4 cursor-pointer border-black border shadow" type="submit">
+                                    <button class="bg-beige rounded-2xl w-28 p-1 h-10 mt-2 md:p-0 md:w-40 md:h-14 md:mt-4 cursor-pointer border-black border shadow" type="submit">
                                         Valider le panier
                                     </button>
                                 </form>
@@ -358,7 +358,7 @@
                                     
                                     <form class="flex justify-center valider-panier" method="get" action="<?php echo $lienBtnValiderPanier;?>">
                                         <input type="hidden" name="veutAcheter" value="V">
-                                        <button class="bg-beige rounded-2xl w-20 h-10 mt-2 md:w-40 md:h-14 md:mt-4 cursor-pointer border-black border shadow" type="submit">
+                                        <button class="bg-beige rounded-2xl w-28 p-1 h-10 mt-2 md:p-0 md:w-40 md:h-14 md:mt-4 cursor-pointer border-black border shadow" type="submit">
                                             Valider le panier
                                         </button>
                                     </form>
