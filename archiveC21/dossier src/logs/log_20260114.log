@@ -2272,3 +2272,740 @@
 [01:20:06] [INFO]    [CLIENT] (./main.c:166) [127.0.0.1:57300] Authentification OK pour mewen
 [01:20:06] [INFO]    [CLIENT] (./main.c:159) [127.0.0.1:57300] Requête reçue: NEXT
 [01:20:06] [INFO]    [CLIENT] (./main.c:141) [127.0.0.1:57300] Client déconnecté
+[01:20:36] [INFO]    [SERV]   (./main.c:113) Connexion acceptée (fd=5)
+[01:20:36] [DEBUG]   [SERV]   (./main.c:202)  <<Parent pid enfant : 22793
+[01:20:36] [DEBUG]   [SERV]   (./main.c:204)  <<Parent connexion ferme
+[01:20:36] [INFO]    [SERV]   (./main.c:122) Process enfant démarré (pid=22793) pour fd=5
+[01:20:36] [INFO]    [SERV]   (./main.c:124) Connexion à la BDD...
+[01:20:36] [INFO]    [SERV]   (./main.c:401) Connecté a la BDD
+[01:20:36] [INFO]    [SERV]   (./main.c:402) SET search_path...
+[01:20:36] [INFO]    [SERV]   (./main.c:407) SET search_path success
+[01:20:36] [INFO]    [SERV]   (./main.c:412) Base de données actuelle : postgres
+[01:20:36] [INFO]    [SERV]   (./main.c:418) Schéma courant (search_path) : sae3_delivraptor
+[01:20:36] [INFO]    [CLIENT] (./main.c:136) [127.0.0.1:57726] Client connecté
+[01:20:36] [INFO]    [CLIENT] (./main.c:159) [127.0.0.1:57726] Requête reçue: CONN
+[01:20:36] [INFO]    [CLIENT] (./main.c:367) [127.0.0.1:57726] Authentification réussie
+[01:20:36] [INFO]    [CLIENT] (./main.c:166) [127.0.0.1:57726] Authentification OK pour mewen
+[01:20:36] [INFO]    [CLIENT] (./main.c:159) [127.0.0.1:57726] Requête reçue: NEXT
+[01:20:36] [INFO]    [CLIENT] (./main.c:141) [127.0.0.1:57726] Client déconnecté
+[01:21:06] [INFO]    [SERV]   (./main.c:113) Connexion acceptée (fd=5)
+[01:21:06] [DEBUG]   [SERV]   (./main.c:202)  <<Parent pid enfant : 22833
+[01:21:06] [DEBUG]   [SERV]   (./main.c:204)  <<Parent connexion ferme
+[01:21:06] [INFO]    [SERV]   (./main.c:122) Process enfant démarré (pid=22833) pour fd=5
+[01:21:06] [INFO]    [SERV]   (./main.c:124) Connexion à la BDD...
+[01:21:06] [INFO]    [SERV]   (./main.c:401) Connecté a la BDD
+[01:21:06] [INFO]    [SERV]   (./main.c:402) SET search_path...
+[01:21:06] [INFO]    [SERV]   (./main.c:407) SET search_path success
+[01:21:06] [INFO]    [SERV]   (./main.c:412) Base de données actuelle : postgres
+[01:21:06] [INFO]    [SERV]   (./main.c:418) Schéma courant (search_path) : sae3_delivraptor
+[01:21:06] [INFO]    [CLIENT] (./main.c:136) [127.0.0.1:52032] Client connecté
+[01:21:06] [INFO]    [CLIENT] (./main.c:159) [127.0.0.1:52032] Requête reçue: CONN
+[01:21:06] [INFO]    [CLIENT] (./main.c:367) [127.0.0.1:52032] Authentification réussie
+[01:21:06] [INFO]    [CLIENT] (./main.c:166) [127.0.0.1:52032] Authentification OK pour mewen
+[01:21:06] [INFO]    [CLIENT] (./main.c:159) [127.0.0.1:52032] Requête reçue: NEXT
+[01:21:06] [INFO]    [CLIENT] (./main.c:141) [127.0.0.1:52032] Client déconnecté
+[01:21:36] [INFO]    [SERV]   (./main.c:113) Connexion acceptée (fd=5)
+[01:21:36] [DEBUG]   [SERV]   (./main.c:202)  <<Parent pid enfant : 22876
+[01:21:36] [DEBUG]   [SERV]   (./main.c:204)  <<Parent connexion ferme
+[01:21:36] [INFO]    [SERV]   (./main.c:122) Process enfant démarré (pid=22876) pour fd=5
+[01:21:36] [INFO]    [SERV]   (./main.c:124) Connexion à la BDD...
+[01:21:36] [INFO]    [SERV]   (./main.c:401) Connecté a la BDD
+[01:21:36] [INFO]    [SERV]   (./main.c:402) SET search_path...
+[01:21:36] [INFO]    [SERV]   (./main.c:407) SET search_path success
+[01:21:36] [INFO]    [SERV]   (./main.c:412) Base de données actuelle : postgres
+[01:21:36] [INFO]    [SERV]   (./main.c:418) Schéma courant (search_path) : sae3_delivraptor
+[01:21:36] [INFO]    [CLIENT] (./main.c:136) [127.0.0.1:35570] Client connecté
+[01:21:36] [INFO]    [CLIENT] (./main.c:159) [127.0.0.1:35570] Requête reçue: CONN
+[01:21:36] [INFO]    [CLIENT] (./main.c:367) [127.0.0.1:35570] Authentification réussie
+[01:21:36] [INFO]    [CLIENT] (./main.c:166) [127.0.0.1:35570] Authentification OK pour mewen
+[01:21:36] [INFO]    [CLIENT] (./main.c:159) [127.0.0.1:35570] Requête reçue: NEXT
+[01:21:36] [INFO]    [CLIENT] (./main.c:141) [127.0.0.1:35570] Client déconnecté
+[01:22:06] [INFO]    [SERV]   (./main.c:113) Connexion acceptée (fd=5)
+[01:22:06] [DEBUG]   [SERV]   (./main.c:202)  <<Parent pid enfant : 22988
+[01:22:06] [DEBUG]   [SERV]   (./main.c:204)  <<Parent connexion ferme
+[01:22:06] [INFO]    [SERV]   (./main.c:122) Process enfant démarré (pid=22988) pour fd=5
+[01:22:06] [INFO]    [SERV]   (./main.c:124) Connexion à la BDD...
+[01:22:06] [INFO]    [SERV]   (./main.c:401) Connecté a la BDD
+[01:22:06] [INFO]    [SERV]   (./main.c:402) SET search_path...
+[01:22:06] [INFO]    [SERV]   (./main.c:407) SET search_path success
+[01:22:06] [INFO]    [SERV]   (./main.c:412) Base de données actuelle : postgres
+[01:22:06] [INFO]    [SERV]   (./main.c:418) Schéma courant (search_path) : sae3_delivraptor
+[01:22:06] [INFO]    [CLIENT] (./main.c:136) [127.0.0.1:40778] Client connecté
+[01:22:06] [INFO]    [CLIENT] (./main.c:159) [127.0.0.1:40778] Requête reçue: CONN
+[01:22:06] [INFO]    [CLIENT] (./main.c:367) [127.0.0.1:40778] Authentification réussie
+[01:22:06] [INFO]    [CLIENT] (./main.c:166) [127.0.0.1:40778] Authentification OK pour mewen
+[01:22:06] [INFO]    [CLIENT] (./main.c:159) [127.0.0.1:40778] Requête reçue: NEXT
+[01:22:06] [INFO]    [CLIENT] (./main.c:141) [127.0.0.1:40778] Client déconnecté
+[01:22:36] [INFO]    [SERV]   (./main.c:113) Connexion acceptée (fd=5)
+[01:22:36] [DEBUG]   [SERV]   (./main.c:202)  <<Parent pid enfant : 23030
+[01:22:36] [DEBUG]   [SERV]   (./main.c:204)  <<Parent connexion ferme
+[01:22:36] [INFO]    [SERV]   (./main.c:122) Process enfant démarré (pid=23030) pour fd=5
+[01:22:36] [INFO]    [SERV]   (./main.c:124) Connexion à la BDD...
+[01:22:36] [INFO]    [SERV]   (./main.c:401) Connecté a la BDD
+[01:22:36] [INFO]    [SERV]   (./main.c:402) SET search_path...
+[01:22:36] [INFO]    [SERV]   (./main.c:407) SET search_path success
+[01:22:36] [INFO]    [SERV]   (./main.c:412) Base de données actuelle : postgres
+[01:22:36] [INFO]    [SERV]   (./main.c:418) Schéma courant (search_path) : sae3_delivraptor
+[01:22:36] [INFO]    [CLIENT] (./main.c:136) [127.0.0.1:41806] Client connecté
+[01:22:36] [INFO]    [CLIENT] (./main.c:159) [127.0.0.1:41806] Requête reçue: CONN
+[01:22:36] [INFO]    [CLIENT] (./main.c:367) [127.0.0.1:41806] Authentification réussie
+[01:22:36] [INFO]    [CLIENT] (./main.c:166) [127.0.0.1:41806] Authentification OK pour mewen
+[01:22:36] [INFO]    [CLIENT] (./main.c:159) [127.0.0.1:41806] Requête reçue: NEXT
+[01:22:36] [INFO]    [CLIENT] (./main.c:141) [127.0.0.1:41806] Client déconnecté
+[01:23:06] [INFO]    [SERV]   (./main.c:113) Connexion acceptée (fd=5)
+[01:23:06] [DEBUG]   [SERV]   (./main.c:202)  <<Parent pid enfant : 23097
+[01:23:06] [DEBUG]   [SERV]   (./main.c:204)  <<Parent connexion ferme
+[01:23:06] [INFO]    [SERV]   (./main.c:122) Process enfant démarré (pid=23097) pour fd=5
+[01:23:06] [INFO]    [SERV]   (./main.c:124) Connexion à la BDD...
+[01:23:06] [INFO]    [SERV]   (./main.c:401) Connecté a la BDD
+[01:23:06] [INFO]    [SERV]   (./main.c:402) SET search_path...
+[01:23:06] [INFO]    [SERV]   (./main.c:407) SET search_path success
+[01:23:06] [INFO]    [SERV]   (./main.c:412) Base de données actuelle : postgres
+[01:23:06] [INFO]    [SERV]   (./main.c:418) Schéma courant (search_path) : sae3_delivraptor
+[01:23:06] [INFO]    [CLIENT] (./main.c:136) [127.0.0.1:58508] Client connecté
+[01:23:06] [INFO]    [CLIENT] (./main.c:159) [127.0.0.1:58508] Requête reçue: CONN
+[01:23:06] [INFO]    [CLIENT] (./main.c:367) [127.0.0.1:58508] Authentification réussie
+[01:23:06] [INFO]    [CLIENT] (./main.c:166) [127.0.0.1:58508] Authentification OK pour mewen
+[01:23:06] [INFO]    [CLIENT] (./main.c:159) [127.0.0.1:58508] Requête reçue: NEXT
+[01:23:06] [INFO]    [CLIENT] (./main.c:141) [127.0.0.1:58508] Client déconnecté
+[01:23:36] [INFO]    [SERV]   (./main.c:113) Connexion acceptée (fd=5)
+[01:23:36] [DEBUG]   [SERV]   (./main.c:202)  <<Parent pid enfant : 23139
+[01:23:36] [DEBUG]   [SERV]   (./main.c:204)  <<Parent connexion ferme
+[01:23:36] [INFO]    [SERV]   (./main.c:122) Process enfant démarré (pid=23139) pour fd=5
+[01:23:36] [INFO]    [SERV]   (./main.c:124) Connexion à la BDD...
+[01:23:36] [INFO]    [SERV]   (./main.c:401) Connecté a la BDD
+[01:23:36] [INFO]    [SERV]   (./main.c:402) SET search_path...
+[01:23:36] [INFO]    [SERV]   (./main.c:407) SET search_path success
+[01:23:36] [INFO]    [SERV]   (./main.c:412) Base de données actuelle : postgres
+[01:23:36] [INFO]    [SERV]   (./main.c:418) Schéma courant (search_path) : sae3_delivraptor
+[01:23:36] [INFO]    [CLIENT] (./main.c:136) [127.0.0.1:53760] Client connecté
+[01:23:36] [INFO]    [CLIENT] (./main.c:159) [127.0.0.1:53760] Requête reçue: CONN
+[01:23:36] [INFO]    [CLIENT] (./main.c:367) [127.0.0.1:53760] Authentification réussie
+[01:23:36] [INFO]    [CLIENT] (./main.c:166) [127.0.0.1:53760] Authentification OK pour mewen
+[01:23:36] [INFO]    [CLIENT] (./main.c:159) [127.0.0.1:53760] Requête reçue: NEXT
+[01:23:36] [INFO]    [CLIENT] (./main.c:141) [127.0.0.1:53760] Client déconnecté
+[01:24:06] [INFO]    [SERV]   (./main.c:113) Connexion acceptée (fd=5)
+[01:24:06] [DEBUG]   [SERV]   (./main.c:202)  <<Parent pid enfant : 23185
+[01:24:06] [DEBUG]   [SERV]   (./main.c:204)  <<Parent connexion ferme
+[01:24:06] [INFO]    [SERV]   (./main.c:122) Process enfant démarré (pid=23185) pour fd=5
+[01:24:06] [INFO]    [SERV]   (./main.c:124) Connexion à la BDD...
+[01:24:06] [INFO]    [SERV]   (./main.c:401) Connecté a la BDD
+[01:24:06] [INFO]    [SERV]   (./main.c:402) SET search_path...
+[01:24:06] [INFO]    [SERV]   (./main.c:407) SET search_path success
+[01:24:06] [INFO]    [SERV]   (./main.c:412) Base de données actuelle : postgres
+[01:24:06] [INFO]    [SERV]   (./main.c:418) Schéma courant (search_path) : sae3_delivraptor
+[01:24:06] [INFO]    [CLIENT] (./main.c:136) [127.0.0.1:51976] Client connecté
+[01:24:06] [INFO]    [CLIENT] (./main.c:159) [127.0.0.1:51976] Requête reçue: CONN
+[01:24:06] [INFO]    [CLIENT] (./main.c:367) [127.0.0.1:51976] Authentification réussie
+[01:24:06] [INFO]    [CLIENT] (./main.c:166) [127.0.0.1:51976] Authentification OK pour mewen
+[01:24:06] [INFO]    [CLIENT] (./main.c:159) [127.0.0.1:51976] Requête reçue: NEXT
+[01:24:06] [INFO]    [CLIENT] (./main.c:141) [127.0.0.1:51976] Client déconnecté
+[01:24:36] [INFO]    [SERV]   (./main.c:113) Connexion acceptée (fd=5)
+[01:24:36] [DEBUG]   [SERV]   (./main.c:202)  <<Parent pid enfant : 23238
+[01:24:36] [DEBUG]   [SERV]   (./main.c:204)  <<Parent connexion ferme
+[01:24:36] [INFO]    [SERV]   (./main.c:122) Process enfant démarré (pid=23238) pour fd=5
+[01:24:36] [INFO]    [SERV]   (./main.c:124) Connexion à la BDD...
+[01:24:36] [INFO]    [SERV]   (./main.c:401) Connecté a la BDD
+[01:24:36] [INFO]    [SERV]   (./main.c:402) SET search_path...
+[01:24:36] [INFO]    [SERV]   (./main.c:407) SET search_path success
+[01:24:36] [INFO]    [SERV]   (./main.c:412) Base de données actuelle : postgres
+[01:24:36] [INFO]    [SERV]   (./main.c:418) Schéma courant (search_path) : sae3_delivraptor
+[01:24:36] [INFO]    [CLIENT] (./main.c:136) [127.0.0.1:37172] Client connecté
+[01:24:36] [INFO]    [CLIENT] (./main.c:159) [127.0.0.1:37172] Requête reçue: CONN
+[01:24:36] [INFO]    [CLIENT] (./main.c:367) [127.0.0.1:37172] Authentification réussie
+[01:24:36] [INFO]    [CLIENT] (./main.c:166) [127.0.0.1:37172] Authentification OK pour mewen
+[01:24:36] [INFO]    [CLIENT] (./main.c:159) [127.0.0.1:37172] Requête reçue: NEXT
+[01:24:36] [INFO]    [CLIENT] (./main.c:141) [127.0.0.1:37172] Client déconnecté
+[01:25:06] [INFO]    [SERV]   (./main.c:113) Connexion acceptée (fd=5)
+[01:25:06] [DEBUG]   [SERV]   (./main.c:202)  <<Parent pid enfant : 23285
+[01:25:06] [DEBUG]   [SERV]   (./main.c:204)  <<Parent connexion ferme
+[01:25:06] [INFO]    [SERV]   (./main.c:122) Process enfant démarré (pid=23285) pour fd=5
+[01:25:06] [INFO]    [SERV]   (./main.c:124) Connexion à la BDD...
+[01:25:06] [INFO]    [SERV]   (./main.c:401) Connecté a la BDD
+[01:25:06] [INFO]    [SERV]   (./main.c:402) SET search_path...
+[01:25:06] [INFO]    [SERV]   (./main.c:407) SET search_path success
+[01:25:06] [INFO]    [SERV]   (./main.c:412) Base de données actuelle : postgres
+[01:25:06] [INFO]    [SERV]   (./main.c:418) Schéma courant (search_path) : sae3_delivraptor
+[01:25:06] [INFO]    [CLIENT] (./main.c:136) [127.0.0.1:38236] Client connecté
+[01:25:06] [INFO]    [CLIENT] (./main.c:159) [127.0.0.1:38236] Requête reçue: CONN
+[01:25:06] [INFO]    [CLIENT] (./main.c:367) [127.0.0.1:38236] Authentification réussie
+[01:25:06] [INFO]    [CLIENT] (./main.c:166) [127.0.0.1:38236] Authentification OK pour mewen
+[01:25:06] [INFO]    [CLIENT] (./main.c:159) [127.0.0.1:38236] Requête reçue: NEXT
+[01:25:06] [INFO]    [CLIENT] (./main.c:141) [127.0.0.1:38236] Client déconnecté
+[01:25:36] [INFO]    [SERV]   (./main.c:113) Connexion acceptée (fd=5)
+[01:25:36] [DEBUG]   [SERV]   (./main.c:202)  <<Parent pid enfant : 23333
+[01:25:36] [DEBUG]   [SERV]   (./main.c:204)  <<Parent connexion ferme
+[01:25:36] [INFO]    [SERV]   (./main.c:122) Process enfant démarré (pid=23333) pour fd=5
+[01:25:36] [INFO]    [SERV]   (./main.c:124) Connexion à la BDD...
+[01:25:36] [INFO]    [SERV]   (./main.c:401) Connecté a la BDD
+[01:25:36] [INFO]    [SERV]   (./main.c:402) SET search_path...
+[01:25:36] [INFO]    [SERV]   (./main.c:407) SET search_path success
+[01:25:36] [INFO]    [SERV]   (./main.c:412) Base de données actuelle : postgres
+[01:25:36] [INFO]    [SERV]   (./main.c:418) Schéma courant (search_path) : sae3_delivraptor
+[01:25:36] [INFO]    [CLIENT] (./main.c:136) [127.0.0.1:35008] Client connecté
+[01:25:36] [INFO]    [CLIENT] (./main.c:159) [127.0.0.1:35008] Requête reçue: CONN
+[01:25:36] [INFO]    [CLIENT] (./main.c:367) [127.0.0.1:35008] Authentification réussie
+[01:25:36] [INFO]    [CLIENT] (./main.c:166) [127.0.0.1:35008] Authentification OK pour mewen
+[01:25:36] [INFO]    [CLIENT] (./main.c:159) [127.0.0.1:35008] Requête reçue: NEXT
+[01:25:36] [INFO]    [CLIENT] (./main.c:141) [127.0.0.1:35008] Client déconnecté
+[01:26:06] [INFO]    [SERV]   (./main.c:113) Connexion acceptée (fd=5)
+[01:26:06] [DEBUG]   [SERV]   (./main.c:202)  <<Parent pid enfant : 23379
+[01:26:06] [DEBUG]   [SERV]   (./main.c:204)  <<Parent connexion ferme
+[01:26:06] [INFO]    [SERV]   (./main.c:122) Process enfant démarré (pid=23379) pour fd=5
+[01:26:06] [INFO]    [SERV]   (./main.c:124) Connexion à la BDD...
+[01:26:06] [INFO]    [SERV]   (./main.c:401) Connecté a la BDD
+[01:26:06] [INFO]    [SERV]   (./main.c:402) SET search_path...
+[01:26:06] [INFO]    [SERV]   (./main.c:407) SET search_path success
+[01:26:06] [INFO]    [SERV]   (./main.c:412) Base de données actuelle : postgres
+[01:26:06] [INFO]    [SERV]   (./main.c:418) Schéma courant (search_path) : sae3_delivraptor
+[01:26:06] [INFO]    [CLIENT] (./main.c:136) [127.0.0.1:53406] Client connecté
+[01:26:06] [INFO]    [CLIENT] (./main.c:159) [127.0.0.1:53406] Requête reçue: CONN
+[01:26:06] [INFO]    [CLIENT] (./main.c:367) [127.0.0.1:53406] Authentification réussie
+[01:26:06] [INFO]    [CLIENT] (./main.c:166) [127.0.0.1:53406] Authentification OK pour mewen
+[01:26:06] [INFO]    [CLIENT] (./main.c:159) [127.0.0.1:53406] Requête reçue: NEXT
+[01:26:06] [INFO]    [CLIENT] (./main.c:141) [127.0.0.1:53406] Client déconnecté
+[01:26:36] [INFO]    [SERV]   (./main.c:113) Connexion acceptée (fd=5)
+[01:26:36] [DEBUG]   [SERV]   (./main.c:202)  <<Parent pid enfant : 23435
+[01:26:36] [DEBUG]   [SERV]   (./main.c:204)  <<Parent connexion ferme
+[01:26:36] [INFO]    [SERV]   (./main.c:122) Process enfant démarré (pid=23435) pour fd=5
+[01:26:36] [INFO]    [SERV]   (./main.c:124) Connexion à la BDD...
+[01:26:36] [INFO]    [SERV]   (./main.c:401) Connecté a la BDD
+[01:26:36] [INFO]    [SERV]   (./main.c:402) SET search_path...
+[01:26:36] [INFO]    [SERV]   (./main.c:407) SET search_path success
+[01:26:36] [INFO]    [SERV]   (./main.c:412) Base de données actuelle : postgres
+[01:26:36] [INFO]    [SERV]   (./main.c:418) Schéma courant (search_path) : sae3_delivraptor
+[01:26:36] [INFO]    [CLIENT] (./main.c:136) [127.0.0.1:37204] Client connecté
+[01:26:36] [INFO]    [CLIENT] (./main.c:159) [127.0.0.1:37204] Requête reçue: CONN
+[01:26:36] [INFO]    [CLIENT] (./main.c:367) [127.0.0.1:37204] Authentification réussie
+[01:26:36] [INFO]    [CLIENT] (./main.c:166) [127.0.0.1:37204] Authentification OK pour mewen
+[01:26:36] [INFO]    [CLIENT] (./main.c:159) [127.0.0.1:37204] Requête reçue: NEXT
+[01:26:36] [INFO]    [CLIENT] (./main.c:141) [127.0.0.1:37204] Client déconnecté
+[01:27:06] [INFO]    [SERV]   (./main.c:113) Connexion acceptée (fd=5)
+[01:27:06] [DEBUG]   [SERV]   (./main.c:202)  <<Parent pid enfant : 23495
+[01:27:06] [DEBUG]   [SERV]   (./main.c:204)  <<Parent connexion ferme
+[01:27:06] [INFO]    [SERV]   (./main.c:122) Process enfant démarré (pid=23495) pour fd=5
+[01:27:06] [INFO]    [SERV]   (./main.c:124) Connexion à la BDD...
+[01:27:06] [INFO]    [SERV]   (./main.c:401) Connecté a la BDD
+[01:27:06] [INFO]    [SERV]   (./main.c:402) SET search_path...
+[01:27:06] [INFO]    [SERV]   (./main.c:407) SET search_path success
+[01:27:06] [INFO]    [SERV]   (./main.c:412) Base de données actuelle : postgres
+[01:27:06] [INFO]    [SERV]   (./main.c:418) Schéma courant (search_path) : sae3_delivraptor
+[01:27:06] [INFO]    [CLIENT] (./main.c:136) [127.0.0.1:34746] Client connecté
+[01:27:06] [INFO]    [CLIENT] (./main.c:159) [127.0.0.1:34746] Requête reçue: CONN
+[01:27:06] [INFO]    [CLIENT] (./main.c:367) [127.0.0.1:34746] Authentification réussie
+[01:27:06] [INFO]    [CLIENT] (./main.c:166) [127.0.0.1:34746] Authentification OK pour mewen
+[01:27:06] [INFO]    [CLIENT] (./main.c:159) [127.0.0.1:34746] Requête reçue: NEXT
+[01:27:06] [INFO]    [CLIENT] (./main.c:141) [127.0.0.1:34746] Client déconnecté
+[01:27:36] [INFO]    [SERV]   (./main.c:113) Connexion acceptée (fd=5)
+[01:27:36] [DEBUG]   [SERV]   (./main.c:202)  <<Parent pid enfant : 23544
+[01:27:36] [DEBUG]   [SERV]   (./main.c:204)  <<Parent connexion ferme
+[01:27:36] [INFO]    [SERV]   (./main.c:122) Process enfant démarré (pid=23544) pour fd=5
+[01:27:36] [INFO]    [SERV]   (./main.c:124) Connexion à la BDD...
+[01:27:36] [INFO]    [SERV]   (./main.c:401) Connecté a la BDD
+[01:27:36] [INFO]    [SERV]   (./main.c:402) SET search_path...
+[01:27:36] [INFO]    [SERV]   (./main.c:407) SET search_path success
+[01:27:36] [INFO]    [SERV]   (./main.c:412) Base de données actuelle : postgres
+[01:27:36] [INFO]    [SERV]   (./main.c:418) Schéma courant (search_path) : sae3_delivraptor
+[01:27:36] [INFO]    [CLIENT] (./main.c:136) [127.0.0.1:44708] Client connecté
+[01:27:36] [INFO]    [CLIENT] (./main.c:159) [127.0.0.1:44708] Requête reçue: CONN
+[01:27:36] [INFO]    [CLIENT] (./main.c:367) [127.0.0.1:44708] Authentification réussie
+[01:27:36] [INFO]    [CLIENT] (./main.c:166) [127.0.0.1:44708] Authentification OK pour mewen
+[01:27:36] [INFO]    [CLIENT] (./main.c:159) [127.0.0.1:44708] Requête reçue: NEXT
+[01:27:36] [INFO]    [CLIENT] (./main.c:141) [127.0.0.1:44708] Client déconnecté
+[01:28:06] [INFO]    [SERV]   (./main.c:113) Connexion acceptée (fd=5)
+[01:28:06] [DEBUG]   [SERV]   (./main.c:202)  <<Parent pid enfant : 23586
+[01:28:06] [DEBUG]   [SERV]   (./main.c:204)  <<Parent connexion ferme
+[01:28:06] [INFO]    [SERV]   (./main.c:122) Process enfant démarré (pid=23586) pour fd=5
+[01:28:06] [INFO]    [SERV]   (./main.c:124) Connexion à la BDD...
+[01:28:06] [INFO]    [SERV]   (./main.c:401) Connecté a la BDD
+[01:28:06] [INFO]    [SERV]   (./main.c:402) SET search_path...
+[01:28:06] [INFO]    [SERV]   (./main.c:407) SET search_path success
+[01:28:06] [INFO]    [SERV]   (./main.c:412) Base de données actuelle : postgres
+[01:28:06] [INFO]    [SERV]   (./main.c:418) Schéma courant (search_path) : sae3_delivraptor
+[01:28:06] [INFO]    [CLIENT] (./main.c:136) [127.0.0.1:48468] Client connecté
+[01:28:06] [INFO]    [CLIENT] (./main.c:159) [127.0.0.1:48468] Requête reçue: CONN
+[01:28:06] [INFO]    [CLIENT] (./main.c:367) [127.0.0.1:48468] Authentification réussie
+[01:28:06] [INFO]    [CLIENT] (./main.c:166) [127.0.0.1:48468] Authentification OK pour mewen
+[01:28:06] [INFO]    [CLIENT] (./main.c:159) [127.0.0.1:48468] Requête reçue: NEXT
+[01:28:06] [INFO]    [CLIENT] (./main.c:141) [127.0.0.1:48468] Client déconnecté
+[01:28:36] [INFO]    [SERV]   (./main.c:113) Connexion acceptée (fd=5)
+[01:28:36] [DEBUG]   [SERV]   (./main.c:202)  <<Parent pid enfant : 23631
+[01:28:36] [DEBUG]   [SERV]   (./main.c:204)  <<Parent connexion ferme
+[01:28:36] [INFO]    [SERV]   (./main.c:122) Process enfant démarré (pid=23631) pour fd=5
+[01:28:36] [INFO]    [SERV]   (./main.c:124) Connexion à la BDD...
+[01:28:36] [INFO]    [SERV]   (./main.c:401) Connecté a la BDD
+[01:28:36] [INFO]    [SERV]   (./main.c:402) SET search_path...
+[01:28:36] [INFO]    [SERV]   (./main.c:407) SET search_path success
+[01:28:36] [INFO]    [SERV]   (./main.c:412) Base de données actuelle : postgres
+[01:28:36] [INFO]    [SERV]   (./main.c:418) Schéma courant (search_path) : sae3_delivraptor
+[01:28:36] [INFO]    [CLIENT] (./main.c:136) [127.0.0.1:43160] Client connecté
+[01:28:36] [INFO]    [CLIENT] (./main.c:159) [127.0.0.1:43160] Requête reçue: CONN
+[01:28:36] [INFO]    [CLIENT] (./main.c:367) [127.0.0.1:43160] Authentification réussie
+[01:28:36] [INFO]    [CLIENT] (./main.c:166) [127.0.0.1:43160] Authentification OK pour mewen
+[01:28:36] [INFO]    [CLIENT] (./main.c:159) [127.0.0.1:43160] Requête reçue: NEXT
+[01:28:36] [INFO]    [CLIENT] (./main.c:141) [127.0.0.1:43160] Client déconnecté
+[01:29:06] [INFO]    [SERV]   (./main.c:113) Connexion acceptée (fd=5)
+[01:29:06] [DEBUG]   [SERV]   (./main.c:202)  <<Parent pid enfant : 23673
+[01:29:06] [DEBUG]   [SERV]   (./main.c:204)  <<Parent connexion ferme
+[01:29:06] [INFO]    [SERV]   (./main.c:122) Process enfant démarré (pid=23673) pour fd=5
+[01:29:06] [INFO]    [SERV]   (./main.c:124) Connexion à la BDD...
+[01:29:06] [INFO]    [SERV]   (./main.c:401) Connecté a la BDD
+[01:29:06] [INFO]    [SERV]   (./main.c:402) SET search_path...
+[01:29:06] [INFO]    [SERV]   (./main.c:407) SET search_path success
+[01:29:06] [INFO]    [SERV]   (./main.c:412) Base de données actuelle : postgres
+[01:29:06] [INFO]    [SERV]   (./main.c:418) Schéma courant (search_path) : sae3_delivraptor
+[01:29:06] [INFO]    [CLIENT] (./main.c:136) [127.0.0.1:44504] Client connecté
+[01:29:06] [INFO]    [CLIENT] (./main.c:159) [127.0.0.1:44504] Requête reçue: CONN
+[01:29:06] [INFO]    [CLIENT] (./main.c:367) [127.0.0.1:44504] Authentification réussie
+[01:29:06] [INFO]    [CLIENT] (./main.c:166) [127.0.0.1:44504] Authentification OK pour mewen
+[01:29:06] [INFO]    [CLIENT] (./main.c:159) [127.0.0.1:44504] Requête reçue: NEXT
+[01:29:06] [INFO]    [CLIENT] (./main.c:141) [127.0.0.1:44504] Client déconnecté
+[01:29:36] [INFO]    [SERV]   (./main.c:113) Connexion acceptée (fd=5)
+[01:29:36] [DEBUG]   [SERV]   (./main.c:202)  <<Parent pid enfant : 23717
+[01:29:36] [DEBUG]   [SERV]   (./main.c:204)  <<Parent connexion ferme
+[01:29:36] [INFO]    [SERV]   (./main.c:122) Process enfant démarré (pid=23717) pour fd=5
+[01:29:36] [INFO]    [SERV]   (./main.c:124) Connexion à la BDD...
+[01:29:36] [INFO]    [SERV]   (./main.c:401) Connecté a la BDD
+[01:29:36] [INFO]    [SERV]   (./main.c:402) SET search_path...
+[01:29:36] [INFO]    [SERV]   (./main.c:407) SET search_path success
+[01:29:36] [INFO]    [SERV]   (./main.c:412) Base de données actuelle : postgres
+[01:29:36] [INFO]    [SERV]   (./main.c:418) Schéma courant (search_path) : sae3_delivraptor
+[01:29:36] [INFO]    [CLIENT] (./main.c:136) [127.0.0.1:40662] Client connecté
+[01:29:36] [INFO]    [CLIENT] (./main.c:159) [127.0.0.1:40662] Requête reçue: CONN
+[01:29:36] [INFO]    [CLIENT] (./main.c:367) [127.0.0.1:40662] Authentification réussie
+[01:29:36] [INFO]    [CLIENT] (./main.c:166) [127.0.0.1:40662] Authentification OK pour mewen
+[01:29:36] [INFO]    [CLIENT] (./main.c:159) [127.0.0.1:40662] Requête reçue: NEXT
+[01:29:36] [INFO]    [CLIENT] (./main.c:141) [127.0.0.1:40662] Client déconnecté
+[01:30:06] [INFO]    [SERV]   (./main.c:113) Connexion acceptée (fd=5)
+[01:30:06] [DEBUG]   [SERV]   (./main.c:202)  <<Parent pid enfant : 23757
+[01:30:06] [DEBUG]   [SERV]   (./main.c:204)  <<Parent connexion ferme
+[01:30:06] [INFO]    [SERV]   (./main.c:122) Process enfant démarré (pid=23757) pour fd=5
+[01:30:06] [INFO]    [SERV]   (./main.c:124) Connexion à la BDD...
+[01:30:06] [INFO]    [SERV]   (./main.c:401) Connecté a la BDD
+[01:30:06] [INFO]    [SERV]   (./main.c:402) SET search_path...
+[01:30:06] [INFO]    [SERV]   (./main.c:407) SET search_path success
+[01:30:06] [INFO]    [SERV]   (./main.c:412) Base de données actuelle : postgres
+[01:30:06] [INFO]    [SERV]   (./main.c:418) Schéma courant (search_path) : sae3_delivraptor
+[01:30:06] [INFO]    [CLIENT] (./main.c:136) [127.0.0.1:60864] Client connecté
+[01:30:06] [INFO]    [CLIENT] (./main.c:159) [127.0.0.1:60864] Requête reçue: CONN
+[01:30:06] [INFO]    [CLIENT] (./main.c:367) [127.0.0.1:60864] Authentification réussie
+[01:30:06] [INFO]    [CLIENT] (./main.c:166) [127.0.0.1:60864] Authentification OK pour mewen
+[01:30:06] [INFO]    [CLIENT] (./main.c:159) [127.0.0.1:60864] Requête reçue: NEXT
+[01:30:06] [INFO]    [CLIENT] (./main.c:141) [127.0.0.1:60864] Client déconnecté
+[01:30:36] [INFO]    [SERV]   (./main.c:113) Connexion acceptée (fd=5)
+[01:30:36] [DEBUG]   [SERV]   (./main.c:202)  <<Parent pid enfant : 23804
+[01:30:36] [DEBUG]   [SERV]   (./main.c:204)  <<Parent connexion ferme
+[01:30:36] [INFO]    [SERV]   (./main.c:122) Process enfant démarré (pid=23804) pour fd=5
+[01:30:36] [INFO]    [SERV]   (./main.c:124) Connexion à la BDD...
+[01:30:36] [INFO]    [SERV]   (./main.c:401) Connecté a la BDD
+[01:30:36] [INFO]    [SERV]   (./main.c:402) SET search_path...
+[01:30:36] [INFO]    [SERV]   (./main.c:407) SET search_path success
+[01:30:36] [INFO]    [SERV]   (./main.c:412) Base de données actuelle : postgres
+[01:30:36] [INFO]    [SERV]   (./main.c:418) Schéma courant (search_path) : sae3_delivraptor
+[01:30:36] [INFO]    [CLIENT] (./main.c:136) [127.0.0.1:48298] Client connecté
+[01:30:36] [INFO]    [CLIENT] (./main.c:159) [127.0.0.1:48298] Requête reçue: CONN
+[01:30:36] [INFO]    [CLIENT] (./main.c:367) [127.0.0.1:48298] Authentification réussie
+[01:30:36] [INFO]    [CLIENT] (./main.c:166) [127.0.0.1:48298] Authentification OK pour mewen
+[01:30:36] [INFO]    [CLIENT] (./main.c:159) [127.0.0.1:48298] Requête reçue: NEXT
+[01:30:36] [INFO]    [CLIENT] (./main.c:141) [127.0.0.1:48298] Client déconnecté
+[01:31:06] [INFO]    [SERV]   (./main.c:113) Connexion acceptée (fd=5)
+[01:31:06] [DEBUG]   [SERV]   (./main.c:202)  <<Parent pid enfant : 23833
+[01:31:06] [DEBUG]   [SERV]   (./main.c:204)  <<Parent connexion ferme
+[01:31:06] [INFO]    [SERV]   (./main.c:122) Process enfant démarré (pid=23833) pour fd=5
+[01:31:06] [INFO]    [SERV]   (./main.c:124) Connexion à la BDD...
+[01:31:06] [INFO]    [SERV]   (./main.c:401) Connecté a la BDD
+[01:31:06] [INFO]    [SERV]   (./main.c:402) SET search_path...
+[01:31:06] [INFO]    [SERV]   (./main.c:407) SET search_path success
+[01:31:06] [INFO]    [SERV]   (./main.c:412) Base de données actuelle : postgres
+[01:31:06] [INFO]    [SERV]   (./main.c:418) Schéma courant (search_path) : sae3_delivraptor
+[01:31:06] [INFO]    [CLIENT] (./main.c:136) [127.0.0.1:56800] Client connecté
+[01:31:06] [INFO]    [CLIENT] (./main.c:159) [127.0.0.1:56800] Requête reçue: CONN
+[01:31:06] [INFO]    [CLIENT] (./main.c:367) [127.0.0.1:56800] Authentification réussie
+[01:31:06] [INFO]    [CLIENT] (./main.c:166) [127.0.0.1:56800] Authentification OK pour mewen
+[01:31:06] [INFO]    [CLIENT] (./main.c:159) [127.0.0.1:56800] Requête reçue: NEXT
+[01:31:06] [INFO]    [CLIENT] (./main.c:141) [127.0.0.1:56800] Client déconnecté
+[01:31:36] [INFO]    [SERV]   (./main.c:113) Connexion acceptée (fd=5)
+[01:31:36] [DEBUG]   [SERV]   (./main.c:202)  <<Parent pid enfant : 23895
+[01:31:36] [DEBUG]   [SERV]   (./main.c:204)  <<Parent connexion ferme
+[01:31:36] [INFO]    [SERV]   (./main.c:122) Process enfant démarré (pid=23895) pour fd=5
+[01:31:36] [INFO]    [SERV]   (./main.c:124) Connexion à la BDD...
+[01:31:36] [INFO]    [SERV]   (./main.c:401) Connecté a la BDD
+[01:31:36] [INFO]    [SERV]   (./main.c:402) SET search_path...
+[01:31:36] [INFO]    [SERV]   (./main.c:407) SET search_path success
+[01:31:36] [INFO]    [SERV]   (./main.c:412) Base de données actuelle : postgres
+[01:31:36] [INFO]    [SERV]   (./main.c:418) Schéma courant (search_path) : sae3_delivraptor
+[01:31:36] [INFO]    [CLIENT] (./main.c:136) [127.0.0.1:57552] Client connecté
+[01:31:36] [INFO]    [CLIENT] (./main.c:159) [127.0.0.1:57552] Requête reçue: CONN
+[01:31:36] [INFO]    [CLIENT] (./main.c:367) [127.0.0.1:57552] Authentification réussie
+[01:31:36] [INFO]    [CLIENT] (./main.c:166) [127.0.0.1:57552] Authentification OK pour mewen
+[01:31:36] [INFO]    [CLIENT] (./main.c:159) [127.0.0.1:57552] Requête reçue: NEXT
+[01:31:36] [INFO]    [CLIENT] (./main.c:141) [127.0.0.1:57552] Client déconnecté
+[01:32:06] [INFO]    [SERV]   (./main.c:113) Connexion acceptée (fd=5)
+[01:32:06] [DEBUG]   [SERV]   (./main.c:202)  <<Parent pid enfant : 23942
+[01:32:06] [DEBUG]   [SERV]   (./main.c:204)  <<Parent connexion ferme
+[01:32:06] [INFO]    [SERV]   (./main.c:122) Process enfant démarré (pid=23942) pour fd=5
+[01:32:06] [INFO]    [SERV]   (./main.c:124) Connexion à la BDD...
+[01:32:06] [INFO]    [SERV]   (./main.c:401) Connecté a la BDD
+[01:32:06] [INFO]    [SERV]   (./main.c:402) SET search_path...
+[01:32:06] [INFO]    [SERV]   (./main.c:407) SET search_path success
+[01:32:06] [INFO]    [SERV]   (./main.c:412) Base de données actuelle : postgres
+[01:32:06] [INFO]    [SERV]   (./main.c:418) Schéma courant (search_path) : sae3_delivraptor
+[01:32:06] [INFO]    [CLIENT] (./main.c:136) [127.0.0.1:37120] Client connecté
+[01:32:06] [INFO]    [CLIENT] (./main.c:159) [127.0.0.1:37120] Requête reçue: CONN
+[01:32:06] [INFO]    [CLIENT] (./main.c:367) [127.0.0.1:37120] Authentification réussie
+[01:32:06] [INFO]    [CLIENT] (./main.c:166) [127.0.0.1:37120] Authentification OK pour mewen
+[01:32:06] [INFO]    [CLIENT] (./main.c:159) [127.0.0.1:37120] Requête reçue: NEXT
+[01:32:06] [INFO]    [CLIENT] (./main.c:141) [127.0.0.1:37120] Client déconnecté
+[01:32:36] [INFO]    [SERV]   (./main.c:113) Connexion acceptée (fd=5)
+[01:32:36] [DEBUG]   [SERV]   (./main.c:202)  <<Parent pid enfant : 23990
+[01:32:36] [DEBUG]   [SERV]   (./main.c:204)  <<Parent connexion ferme
+[01:32:36] [INFO]    [SERV]   (./main.c:122) Process enfant démarré (pid=23990) pour fd=5
+[01:32:36] [INFO]    [SERV]   (./main.c:124) Connexion à la BDD...
+[01:32:36] [INFO]    [SERV]   (./main.c:401) Connecté a la BDD
+[01:32:36] [INFO]    [SERV]   (./main.c:402) SET search_path...
+[01:32:36] [INFO]    [SERV]   (./main.c:407) SET search_path success
+[01:32:36] [INFO]    [SERV]   (./main.c:412) Base de données actuelle : postgres
+[01:32:36] [INFO]    [SERV]   (./main.c:418) Schéma courant (search_path) : sae3_delivraptor
+[01:32:36] [INFO]    [CLIENT] (./main.c:136) [127.0.0.1:41768] Client connecté
+[01:32:36] [INFO]    [CLIENT] (./main.c:159) [127.0.0.1:41768] Requête reçue: CONN
+[01:32:36] [INFO]    [CLIENT] (./main.c:367) [127.0.0.1:41768] Authentification réussie
+[01:32:36] [INFO]    [CLIENT] (./main.c:166) [127.0.0.1:41768] Authentification OK pour mewen
+[01:32:36] [INFO]    [CLIENT] (./main.c:159) [127.0.0.1:41768] Requête reçue: NEXT
+[01:32:36] [INFO]    [CLIENT] (./main.c:141) [127.0.0.1:41768] Client déconnecté
+[01:33:06] [INFO]    [SERV]   (./main.c:113) Connexion acceptée (fd=5)
+[01:33:06] [DEBUG]   [SERV]   (./main.c:202)  <<Parent pid enfant : 24026
+[01:33:06] [DEBUG]   [SERV]   (./main.c:204)  <<Parent connexion ferme
+[01:33:06] [INFO]    [SERV]   (./main.c:122) Process enfant démarré (pid=24026) pour fd=5
+[01:33:06] [INFO]    [SERV]   (./main.c:124) Connexion à la BDD...
+[01:33:06] [INFO]    [SERV]   (./main.c:401) Connecté a la BDD
+[01:33:06] [INFO]    [SERV]   (./main.c:402) SET search_path...
+[01:33:06] [INFO]    [SERV]   (./main.c:407) SET search_path success
+[01:33:06] [INFO]    [SERV]   (./main.c:412) Base de données actuelle : postgres
+[01:33:06] [INFO]    [SERV]   (./main.c:418) Schéma courant (search_path) : sae3_delivraptor
+[01:33:06] [INFO]    [CLIENT] (./main.c:136) [127.0.0.1:48128] Client connecté
+[01:33:06] [INFO]    [CLIENT] (./main.c:159) [127.0.0.1:48128] Requête reçue: CONN
+[01:33:06] [INFO]    [CLIENT] (./main.c:367) [127.0.0.1:48128] Authentification réussie
+[01:33:06] [INFO]    [CLIENT] (./main.c:166) [127.0.0.1:48128] Authentification OK pour mewen
+[01:33:06] [INFO]    [CLIENT] (./main.c:159) [127.0.0.1:48128] Requête reçue: NEXT
+[01:33:06] [INFO]    [CLIENT] (./main.c:141) [127.0.0.1:48128] Client déconnecté
+[01:33:36] [INFO]    [SERV]   (./main.c:113) Connexion acceptée (fd=5)
+[01:33:36] [DEBUG]   [SERV]   (./main.c:202)  <<Parent pid enfant : 24077
+[01:33:36] [DEBUG]   [SERV]   (./main.c:204)  <<Parent connexion ferme
+[01:33:36] [INFO]    [SERV]   (./main.c:122) Process enfant démarré (pid=24077) pour fd=5
+[01:33:36] [INFO]    [SERV]   (./main.c:124) Connexion à la BDD...
+[01:33:36] [INFO]    [SERV]   (./main.c:401) Connecté a la BDD
+[01:33:36] [INFO]    [SERV]   (./main.c:402) SET search_path...
+[01:33:36] [INFO]    [SERV]   (./main.c:407) SET search_path success
+[01:33:36] [INFO]    [SERV]   (./main.c:412) Base de données actuelle : postgres
+[01:33:36] [INFO]    [SERV]   (./main.c:418) Schéma courant (search_path) : sae3_delivraptor
+[01:33:36] [INFO]    [CLIENT] (./main.c:136) [127.0.0.1:56296] Client connecté
+[01:33:36] [INFO]    [CLIENT] (./main.c:159) [127.0.0.1:56296] Requête reçue: CONN
+[01:33:36] [INFO]    [CLIENT] (./main.c:367) [127.0.0.1:56296] Authentification réussie
+[01:33:36] [INFO]    [CLIENT] (./main.c:166) [127.0.0.1:56296] Authentification OK pour mewen
+[01:33:36] [INFO]    [CLIENT] (./main.c:159) [127.0.0.1:56296] Requête reçue: NEXT
+[01:33:36] [INFO]    [CLIENT] (./main.c:141) [127.0.0.1:56296] Client déconnecté
+[01:34:06] [INFO]    [SERV]   (./main.c:113) Connexion acceptée (fd=5)
+[01:34:06] [DEBUG]   [SERV]   (./main.c:202)  <<Parent pid enfant : 24124
+[01:34:06] [DEBUG]   [SERV]   (./main.c:204)  <<Parent connexion ferme
+[01:34:06] [INFO]    [SERV]   (./main.c:122) Process enfant démarré (pid=24124) pour fd=5
+[01:34:06] [INFO]    [SERV]   (./main.c:124) Connexion à la BDD...
+[01:34:06] [INFO]    [SERV]   (./main.c:401) Connecté a la BDD
+[01:34:06] [INFO]    [SERV]   (./main.c:402) SET search_path...
+[01:34:06] [INFO]    [SERV]   (./main.c:407) SET search_path success
+[01:34:06] [INFO]    [SERV]   (./main.c:412) Base de données actuelle : postgres
+[01:34:06] [INFO]    [SERV]   (./main.c:418) Schéma courant (search_path) : sae3_delivraptor
+[01:34:06] [INFO]    [CLIENT] (./main.c:136) [127.0.0.1:42470] Client connecté
+[01:34:06] [INFO]    [CLIENT] (./main.c:159) [127.0.0.1:42470] Requête reçue: CONN
+[01:34:06] [INFO]    [CLIENT] (./main.c:367) [127.0.0.1:42470] Authentification réussie
+[01:34:06] [INFO]    [CLIENT] (./main.c:166) [127.0.0.1:42470] Authentification OK pour mewen
+[01:34:06] [INFO]    [CLIENT] (./main.c:159) [127.0.0.1:42470] Requête reçue: NEXT
+[01:34:06] [INFO]    [CLIENT] (./main.c:141) [127.0.0.1:42470] Client déconnecté
+[01:34:36] [INFO]    [SERV]   (./main.c:113) Connexion acceptée (fd=5)
+[01:34:36] [DEBUG]   [SERV]   (./main.c:202)  <<Parent pid enfant : 24173
+[01:34:36] [DEBUG]   [SERV]   (./main.c:204)  <<Parent connexion ferme
+[01:34:36] [INFO]    [SERV]   (./main.c:122) Process enfant démarré (pid=24173) pour fd=5
+[01:34:36] [INFO]    [SERV]   (./main.c:124) Connexion à la BDD...
+[01:34:36] [INFO]    [SERV]   (./main.c:401) Connecté a la BDD
+[01:34:36] [INFO]    [SERV]   (./main.c:402) SET search_path...
+[01:34:36] [INFO]    [SERV]   (./main.c:407) SET search_path success
+[01:34:36] [INFO]    [SERV]   (./main.c:412) Base de données actuelle : postgres
+[01:34:36] [INFO]    [SERV]   (./main.c:418) Schéma courant (search_path) : sae3_delivraptor
+[01:34:36] [INFO]    [CLIENT] (./main.c:136) [127.0.0.1:44846] Client connecté
+[01:34:36] [INFO]    [CLIENT] (./main.c:159) [127.0.0.1:44846] Requête reçue: CONN
+[01:34:36] [INFO]    [CLIENT] (./main.c:367) [127.0.0.1:44846] Authentification réussie
+[01:34:36] [INFO]    [CLIENT] (./main.c:166) [127.0.0.1:44846] Authentification OK pour mewen
+[01:34:36] [INFO]    [CLIENT] (./main.c:159) [127.0.0.1:44846] Requête reçue: NEXT
+[01:34:36] [INFO]    [CLIENT] (./main.c:141) [127.0.0.1:44846] Client déconnecté
+[01:35:06] [INFO]    [SERV]   (./main.c:113) Connexion acceptée (fd=5)
+[01:35:06] [DEBUG]   [SERV]   (./main.c:202)  <<Parent pid enfant : 24215
+[01:35:06] [DEBUG]   [SERV]   (./main.c:204)  <<Parent connexion ferme
+[01:35:06] [INFO]    [SERV]   (./main.c:122) Process enfant démarré (pid=24215) pour fd=5
+[01:35:06] [INFO]    [SERV]   (./main.c:124) Connexion à la BDD...
+[01:35:06] [INFO]    [SERV]   (./main.c:401) Connecté a la BDD
+[01:35:06] [INFO]    [SERV]   (./main.c:402) SET search_path...
+[01:35:06] [INFO]    [SERV]   (./main.c:407) SET search_path success
+[01:35:06] [INFO]    [SERV]   (./main.c:412) Base de données actuelle : postgres
+[01:35:06] [INFO]    [SERV]   (./main.c:418) Schéma courant (search_path) : sae3_delivraptor
+[01:35:06] [INFO]    [CLIENT] (./main.c:136) [127.0.0.1:48388] Client connecté
+[01:35:06] [INFO]    [CLIENT] (./main.c:159) [127.0.0.1:48388] Requête reçue: CONN
+[01:35:06] [INFO]    [CLIENT] (./main.c:367) [127.0.0.1:48388] Authentification réussie
+[01:35:06] [INFO]    [CLIENT] (./main.c:166) [127.0.0.1:48388] Authentification OK pour mewen
+[01:35:06] [INFO]    [CLIENT] (./main.c:159) [127.0.0.1:48388] Requête reçue: NEXT
+[01:35:06] [INFO]    [CLIENT] (./main.c:141) [127.0.0.1:48388] Client déconnecté
+[01:35:36] [INFO]    [SERV]   (./main.c:113) Connexion acceptée (fd=5)
+[01:35:36] [DEBUG]   [SERV]   (./main.c:202)  <<Parent pid enfant : 24260
+[01:35:36] [DEBUG]   [SERV]   (./main.c:204)  <<Parent connexion ferme
+[01:35:36] [INFO]    [SERV]   (./main.c:122) Process enfant démarré (pid=24260) pour fd=5
+[01:35:36] [INFO]    [SERV]   (./main.c:124) Connexion à la BDD...
+[01:35:36] [INFO]    [SERV]   (./main.c:401) Connecté a la BDD
+[01:35:36] [INFO]    [SERV]   (./main.c:402) SET search_path...
+[01:35:36] [INFO]    [SERV]   (./main.c:407) SET search_path success
+[01:35:36] [INFO]    [SERV]   (./main.c:412) Base de données actuelle : postgres
+[01:35:36] [INFO]    [SERV]   (./main.c:418) Schéma courant (search_path) : sae3_delivraptor
+[01:35:36] [INFO]    [CLIENT] (./main.c:136) [127.0.0.1:45402] Client connecté
+[01:35:36] [INFO]    [CLIENT] (./main.c:159) [127.0.0.1:45402] Requête reçue: CONN
+[01:35:36] [INFO]    [CLIENT] (./main.c:367) [127.0.0.1:45402] Authentification réussie
+[01:35:36] [INFO]    [CLIENT] (./main.c:166) [127.0.0.1:45402] Authentification OK pour mewen
+[01:35:36] [INFO]    [CLIENT] (./main.c:159) [127.0.0.1:45402] Requête reçue: NEXT
+[01:35:36] [INFO]    [CLIENT] (./main.c:141) [127.0.0.1:45402] Client déconnecté
+[01:36:06] [INFO]    [SERV]   (./main.c:113) Connexion acceptée (fd=5)
+[01:36:06] [DEBUG]   [SERV]   (./main.c:202)  <<Parent pid enfant : 24299
+[01:36:06] [DEBUG]   [SERV]   (./main.c:204)  <<Parent connexion ferme
+[01:36:06] [INFO]    [SERV]   (./main.c:122) Process enfant démarré (pid=24299) pour fd=5
+[01:36:06] [INFO]    [SERV]   (./main.c:124) Connexion à la BDD...
+[01:36:06] [INFO]    [SERV]   (./main.c:401) Connecté a la BDD
+[01:36:06] [INFO]    [SERV]   (./main.c:402) SET search_path...
+[01:36:06] [INFO]    [SERV]   (./main.c:407) SET search_path success
+[01:36:06] [INFO]    [SERV]   (./main.c:412) Base de données actuelle : postgres
+[01:36:06] [INFO]    [SERV]   (./main.c:418) Schéma courant (search_path) : sae3_delivraptor
+[01:36:06] [INFO]    [CLIENT] (./main.c:136) [127.0.0.1:54912] Client connecté
+[01:36:06] [INFO]    [CLIENT] (./main.c:159) [127.0.0.1:54912] Requête reçue: CONN
+[01:36:06] [INFO]    [CLIENT] (./main.c:367) [127.0.0.1:54912] Authentification réussie
+[01:36:06] [INFO]    [CLIENT] (./main.c:166) [127.0.0.1:54912] Authentification OK pour mewen
+[01:36:06] [INFO]    [CLIENT] (./main.c:159) [127.0.0.1:54912] Requête reçue: NEXT
+[01:36:06] [INFO]    [CLIENT] (./main.c:141) [127.0.0.1:54912] Client déconnecté
+[01:36:36] [INFO]    [SERV]   (./main.c:113) Connexion acceptée (fd=5)
+[01:36:36] [DEBUG]   [SERV]   (./main.c:202)  <<Parent pid enfant : 24362
+[01:36:36] [DEBUG]   [SERV]   (./main.c:204)  <<Parent connexion ferme
+[01:36:36] [INFO]    [SERV]   (./main.c:122) Process enfant démarré (pid=24362) pour fd=5
+[01:36:36] [INFO]    [SERV]   (./main.c:124) Connexion à la BDD...
+[01:36:36] [INFO]    [SERV]   (./main.c:401) Connecté a la BDD
+[01:36:36] [INFO]    [SERV]   (./main.c:402) SET search_path...
+[01:36:36] [INFO]    [SERV]   (./main.c:407) SET search_path success
+[01:36:36] [INFO]    [SERV]   (./main.c:412) Base de données actuelle : postgres
+[01:36:36] [INFO]    [SERV]   (./main.c:418) Schéma courant (search_path) : sae3_delivraptor
+[01:36:36] [INFO]    [CLIENT] (./main.c:136) [127.0.0.1:47166] Client connecté
+[01:36:36] [INFO]    [CLIENT] (./main.c:159) [127.0.0.1:47166] Requête reçue: CONN
+[01:36:36] [INFO]    [CLIENT] (./main.c:367) [127.0.0.1:47166] Authentification réussie
+[01:36:36] [INFO]    [CLIENT] (./main.c:166) [127.0.0.1:47166] Authentification OK pour mewen
+[01:36:36] [INFO]    [CLIENT] (./main.c:159) [127.0.0.1:47166] Requête reçue: NEXT
+[01:36:36] [INFO]    [CLIENT] (./main.c:141) [127.0.0.1:47166] Client déconnecté
+[01:37:06] [INFO]    [SERV]   (./main.c:113) Connexion acceptée (fd=5)
+[01:37:06] [DEBUG]   [SERV]   (./main.c:202)  <<Parent pid enfant : 24408
+[01:37:06] [DEBUG]   [SERV]   (./main.c:204)  <<Parent connexion ferme
+[01:37:06] [INFO]    [SERV]   (./main.c:122) Process enfant démarré (pid=24408) pour fd=5
+[01:37:06] [INFO]    [SERV]   (./main.c:124) Connexion à la BDD...
+[01:37:06] [INFO]    [SERV]   (./main.c:401) Connecté a la BDD
+[01:37:06] [INFO]    [SERV]   (./main.c:402) SET search_path...
+[01:37:06] [INFO]    [SERV]   (./main.c:407) SET search_path success
+[01:37:06] [INFO]    [SERV]   (./main.c:412) Base de données actuelle : postgres
+[01:37:06] [INFO]    [SERV]   (./main.c:418) Schéma courant (search_path) : sae3_delivraptor
+[01:37:06] [INFO]    [CLIENT] (./main.c:136) [127.0.0.1:50730] Client connecté
+[01:37:06] [INFO]    [CLIENT] (./main.c:159) [127.0.0.1:50730] Requête reçue: CONN
+[01:37:06] [INFO]    [CLIENT] (./main.c:367) [127.0.0.1:50730] Authentification réussie
+[01:37:06] [INFO]    [CLIENT] (./main.c:166) [127.0.0.1:50730] Authentification OK pour mewen
+[01:37:06] [INFO]    [CLIENT] (./main.c:159) [127.0.0.1:50730] Requête reçue: NEXT
+[01:37:06] [INFO]    [CLIENT] (./main.c:141) [127.0.0.1:50730] Client déconnecté
+[01:37:36] [INFO]    [SERV]   (./main.c:113) Connexion acceptée (fd=5)
+[01:37:36] [DEBUG]   [SERV]   (./main.c:202)  <<Parent pid enfant : 24463
+[01:37:36] [DEBUG]   [SERV]   (./main.c:204)  <<Parent connexion ferme
+[01:37:36] [INFO]    [SERV]   (./main.c:122) Process enfant démarré (pid=24463) pour fd=5
+[01:37:36] [INFO]    [SERV]   (./main.c:124) Connexion à la BDD...
+[01:37:36] [INFO]    [SERV]   (./main.c:401) Connecté a la BDD
+[01:37:36] [INFO]    [SERV]   (./main.c:402) SET search_path...
+[01:37:36] [INFO]    [SERV]   (./main.c:407) SET search_path success
+[01:37:36] [INFO]    [SERV]   (./main.c:412) Base de données actuelle : postgres
+[01:37:36] [INFO]    [SERV]   (./main.c:418) Schéma courant (search_path) : sae3_delivraptor
+[01:37:36] [INFO]    [CLIENT] (./main.c:136) [127.0.0.1:51244] Client connecté
+[01:37:36] [INFO]    [CLIENT] (./main.c:159) [127.0.0.1:51244] Requête reçue: CONN
+[01:37:36] [INFO]    [CLIENT] (./main.c:367) [127.0.0.1:51244] Authentification réussie
+[01:37:36] [INFO]    [CLIENT] (./main.c:166) [127.0.0.1:51244] Authentification OK pour mewen
+[01:37:36] [INFO]    [CLIENT] (./main.c:159) [127.0.0.1:51244] Requête reçue: NEXT
+[01:37:36] [INFO]    [CLIENT] (./main.c:141) [127.0.0.1:51244] Client déconnecté
+[01:38:06] [INFO]    [SERV]   (./main.c:113) Connexion acceptée (fd=5)
+[01:38:06] [DEBUG]   [SERV]   (./main.c:202)  <<Parent pid enfant : 24511
+[01:38:06] [DEBUG]   [SERV]   (./main.c:204)  <<Parent connexion ferme
+[01:38:06] [INFO]    [SERV]   (./main.c:122) Process enfant démarré (pid=24511) pour fd=5
+[01:38:06] [INFO]    [SERV]   (./main.c:124) Connexion à la BDD...
+[01:38:06] [INFO]    [SERV]   (./main.c:401) Connecté a la BDD
+[01:38:06] [INFO]    [SERV]   (./main.c:402) SET search_path...
+[01:38:06] [INFO]    [SERV]   (./main.c:407) SET search_path success
+[01:38:06] [INFO]    [SERV]   (./main.c:412) Base de données actuelle : postgres
+[01:38:06] [INFO]    [SERV]   (./main.c:418) Schéma courant (search_path) : sae3_delivraptor
+[01:38:06] [INFO]    [CLIENT] (./main.c:136) [127.0.0.1:53206] Client connecté
+[01:38:06] [INFO]    [CLIENT] (./main.c:159) [127.0.0.1:53206] Requête reçue: CONN
+[01:38:06] [INFO]    [CLIENT] (./main.c:367) [127.0.0.1:53206] Authentification réussie
+[01:38:06] [INFO]    [CLIENT] (./main.c:166) [127.0.0.1:53206] Authentification OK pour mewen
+[01:38:06] [INFO]    [CLIENT] (./main.c:159) [127.0.0.1:53206] Requête reçue: NEXT
+[01:38:06] [INFO]    [CLIENT] (./main.c:141) [127.0.0.1:53206] Client déconnecté
+[01:38:36] [INFO]    [SERV]   (./main.c:113) Connexion acceptée (fd=5)
+[01:38:36] [DEBUG]   [SERV]   (./main.c:202)  <<Parent pid enfant : 24547
+[01:38:36] [DEBUG]   [SERV]   (./main.c:204)  <<Parent connexion ferme
+[01:38:36] [INFO]    [SERV]   (./main.c:122) Process enfant démarré (pid=24547) pour fd=5
+[01:38:36] [INFO]    [SERV]   (./main.c:124) Connexion à la BDD...
+[01:38:36] [INFO]    [SERV]   (./main.c:401) Connecté a la BDD
+[01:38:36] [INFO]    [SERV]   (./main.c:402) SET search_path...
+[01:38:36] [INFO]    [SERV]   (./main.c:407) SET search_path success
+[01:38:36] [INFO]    [SERV]   (./main.c:412) Base de données actuelle : postgres
+[01:38:36] [INFO]    [SERV]   (./main.c:418) Schéma courant (search_path) : sae3_delivraptor
+[01:38:36] [INFO]    [CLIENT] (./main.c:136) [127.0.0.1:35442] Client connecté
+[01:38:36] [INFO]    [CLIENT] (./main.c:159) [127.0.0.1:35442] Requête reçue: CONN
+[01:38:36] [INFO]    [CLIENT] (./main.c:367) [127.0.0.1:35442] Authentification réussie
+[01:38:36] [INFO]    [CLIENT] (./main.c:166) [127.0.0.1:35442] Authentification OK pour mewen
+[01:38:36] [INFO]    [CLIENT] (./main.c:159) [127.0.0.1:35442] Requête reçue: NEXT
+[01:38:36] [INFO]    [CLIENT] (./main.c:141) [127.0.0.1:35442] Client déconnecté
+[01:39:06] [INFO]    [SERV]   (./main.c:113) Connexion acceptée (fd=5)
+[01:39:06] [DEBUG]   [SERV]   (./main.c:202)  <<Parent pid enfant : 24595
+[01:39:06] [DEBUG]   [SERV]   (./main.c:204)  <<Parent connexion ferme
+[01:39:06] [INFO]    [SERV]   (./main.c:122) Process enfant démarré (pid=24595) pour fd=5
+[01:39:06] [INFO]    [SERV]   (./main.c:124) Connexion à la BDD...
+[01:39:06] [INFO]    [SERV]   (./main.c:401) Connecté a la BDD
+[01:39:06] [INFO]    [SERV]   (./main.c:402) SET search_path...
+[01:39:06] [INFO]    [SERV]   (./main.c:407) SET search_path success
+[01:39:06] [INFO]    [SERV]   (./main.c:412) Base de données actuelle : postgres
+[01:39:06] [INFO]    [SERV]   (./main.c:418) Schéma courant (search_path) : sae3_delivraptor
+[01:39:06] [INFO]    [CLIENT] (./main.c:136) [127.0.0.1:48080] Client connecté
+[01:39:06] [INFO]    [CLIENT] (./main.c:159) [127.0.0.1:48080] Requête reçue: CONN
+[01:39:06] [INFO]    [CLIENT] (./main.c:367) [127.0.0.1:48080] Authentification réussie
+[01:39:06] [INFO]    [CLIENT] (./main.c:166) [127.0.0.1:48080] Authentification OK pour mewen
+[01:39:06] [INFO]    [CLIENT] (./main.c:159) [127.0.0.1:48080] Requête reçue: NEXT
+[01:39:06] [INFO]    [CLIENT] (./main.c:141) [127.0.0.1:48080] Client déconnecté
+[01:39:36] [INFO]    [SERV]   (./main.c:113) Connexion acceptée (fd=5)
+[01:39:36] [DEBUG]   [SERV]   (./main.c:202)  <<Parent pid enfant : 24694
+[01:39:36] [DEBUG]   [SERV]   (./main.c:204)  <<Parent connexion ferme
+[01:39:36] [INFO]    [SERV]   (./main.c:122) Process enfant démarré (pid=24694) pour fd=5
+[01:39:36] [INFO]    [SERV]   (./main.c:124) Connexion à la BDD...
+[01:39:36] [INFO]    [SERV]   (./main.c:401) Connecté a la BDD
+[01:39:36] [INFO]    [SERV]   (./main.c:402) SET search_path...
+[01:39:36] [INFO]    [SERV]   (./main.c:407) SET search_path success
+[01:39:36] [INFO]    [SERV]   (./main.c:412) Base de données actuelle : postgres
+[01:39:36] [INFO]    [SERV]   (./main.c:418) Schéma courant (search_path) : sae3_delivraptor
+[01:39:36] [INFO]    [CLIENT] (./main.c:136) [127.0.0.1:47510] Client connecté
+[01:39:36] [INFO]    [CLIENT] (./main.c:159) [127.0.0.1:47510] Requête reçue: CONN
+[01:39:36] [INFO]    [CLIENT] (./main.c:367) [127.0.0.1:47510] Authentification réussie
+[01:39:36] [INFO]    [CLIENT] (./main.c:166) [127.0.0.1:47510] Authentification OK pour mewen
+[01:39:36] [INFO]    [CLIENT] (./main.c:159) [127.0.0.1:47510] Requête reçue: NEXT
+[01:39:36] [INFO]    [CLIENT] (./main.c:141) [127.0.0.1:47510] Client déconnecté
+[01:40:06] [INFO]    [SERV]   (./main.c:113) Connexion acceptée (fd=5)
+[01:40:06] [DEBUG]   [SERV]   (./main.c:202)  <<Parent pid enfant : 24739
+[01:40:06] [DEBUG]   [SERV]   (./main.c:204)  <<Parent connexion ferme
+[01:40:06] [INFO]    [SERV]   (./main.c:122) Process enfant démarré (pid=24739) pour fd=5
+[01:40:06] [INFO]    [SERV]   (./main.c:124) Connexion à la BDD...
+[01:40:06] [INFO]    [SERV]   (./main.c:401) Connecté a la BDD
+[01:40:06] [INFO]    [SERV]   (./main.c:402) SET search_path...
+[01:40:06] [INFO]    [SERV]   (./main.c:407) SET search_path success
+[01:40:06] [INFO]    [SERV]   (./main.c:412) Base de données actuelle : postgres
+[01:40:06] [INFO]    [SERV]   (./main.c:418) Schéma courant (search_path) : sae3_delivraptor
+[01:40:06] [INFO]    [CLIENT] (./main.c:136) [127.0.0.1:43678] Client connecté
+[01:40:06] [INFO]    [CLIENT] (./main.c:159) [127.0.0.1:43678] Requête reçue: CONN
+[01:40:06] [INFO]    [CLIENT] (./main.c:367) [127.0.0.1:43678] Authentification réussie
+[01:40:06] [INFO]    [CLIENT] (./main.c:166) [127.0.0.1:43678] Authentification OK pour mewen
+[01:40:06] [INFO]    [CLIENT] (./main.c:159) [127.0.0.1:43678] Requête reçue: NEXT
+[01:40:06] [INFO]    [CLIENT] (./main.c:141) [127.0.0.1:43678] Client déconnecté
+[01:40:36] [INFO]    [SERV]   (./main.c:113) Connexion acceptée (fd=5)
+[01:40:36] [DEBUG]   [SERV]   (./main.c:202)  <<Parent pid enfant : 24802
+[01:40:36] [DEBUG]   [SERV]   (./main.c:204)  <<Parent connexion ferme
+[01:40:36] [INFO]    [SERV]   (./main.c:122) Process enfant démarré (pid=24802) pour fd=5
+[01:40:36] [INFO]    [SERV]   (./main.c:124) Connexion à la BDD...
+[01:40:36] [INFO]    [SERV]   (./main.c:401) Connecté a la BDD
+[01:40:36] [INFO]    [SERV]   (./main.c:402) SET search_path...
+[01:40:36] [INFO]    [SERV]   (./main.c:407) SET search_path success
+[01:40:36] [INFO]    [SERV]   (./main.c:412) Base de données actuelle : postgres
+[01:40:36] [INFO]    [SERV]   (./main.c:418) Schéma courant (search_path) : sae3_delivraptor
+[01:40:36] [INFO]    [CLIENT] (./main.c:136) [127.0.0.1:60120] Client connecté
+[01:40:36] [INFO]    [CLIENT] (./main.c:159) [127.0.0.1:60120] Requête reçue: CONN
+[01:40:36] [INFO]    [CLIENT] (./main.c:367) [127.0.0.1:60120] Authentification réussie
+[01:40:36] [INFO]    [CLIENT] (./main.c:166) [127.0.0.1:60120] Authentification OK pour mewen
+[01:40:36] [INFO]    [CLIENT] (./main.c:159) [127.0.0.1:60120] Requête reçue: NEXT
+[01:40:36] [INFO]    [CLIENT] (./main.c:141) [127.0.0.1:60120] Client déconnecté
+[01:41:06] [INFO]    [SERV]   (./main.c:113) Connexion acceptée (fd=5)
+[01:41:06] [DEBUG]   [SERV]   (./main.c:202)  <<Parent pid enfant : 24849
+[01:41:06] [DEBUG]   [SERV]   (./main.c:204)  <<Parent connexion ferme
+[01:41:06] [INFO]    [SERV]   (./main.c:122) Process enfant démarré (pid=24849) pour fd=5
+[01:41:06] [INFO]    [SERV]   (./main.c:124) Connexion à la BDD...
+[01:41:06] [INFO]    [SERV]   (./main.c:401) Connecté a la BDD
+[01:41:06] [INFO]    [SERV]   (./main.c:402) SET search_path...
+[01:41:06] [INFO]    [SERV]   (./main.c:407) SET search_path success
+[01:41:06] [INFO]    [SERV]   (./main.c:412) Base de données actuelle : postgres
+[01:41:06] [INFO]    [SERV]   (./main.c:418) Schéma courant (search_path) : sae3_delivraptor
+[01:41:06] [INFO]    [CLIENT] (./main.c:136) [127.0.0.1:56056] Client connecté
+[01:41:06] [INFO]    [CLIENT] (./main.c:159) [127.0.0.1:56056] Requête reçue: CONN
+[01:41:06] [INFO]    [CLIENT] (./main.c:367) [127.0.0.1:56056] Authentification réussie
+[01:41:06] [INFO]    [CLIENT] (./main.c:166) [127.0.0.1:56056] Authentification OK pour mewen
+[01:41:06] [INFO]    [CLIENT] (./main.c:159) [127.0.0.1:56056] Requête reçue: NEXT
+[01:41:06] [INFO]    [CLIENT] (./main.c:141) [127.0.0.1:56056] Client déconnecté
+[01:49:30] [INFO]    [SERV]   (./main.c:47) Démarrage du service Delivraptor
+[01:49:30] [INFO]    [SERV]   (./main.c:58) Socket configuré
+[01:49:30] [INFO]    [SERV]   (./main.c:73) Adresse ip et port configurées
+[01:49:30] [INFO]    [SERV]   (./main.c:78) Socket en écoute
+[01:49:33] [INFO]    [SERV]   (./main.c:90) Connexion acceptée (fd=5)
+[01:49:33] [DEBUG]   [SERV]   (./main.c:179)  <<Parent pid enfant : 25664
+[01:49:33] [DEBUG]   [SERV]   (./main.c:181)  <<Parent connexion ferme
+[01:49:33] [INFO]    [SERV]   (./main.c:99) Process enfant démarré (pid=25664) pour fd=5
+[01:49:33] [INFO]    [SERV]   (./main.c:101) Connexion à la BDD...
+[01:49:33] [INFO]    [SERV]   (./main.c:248) Connecté a la BDD
+[01:49:33] [INFO]    [SERV]   (./main.c:249) SET search_path...
+[01:49:33] [INFO]    [SERV]   (./main.c:254) SET search_path success
+[01:49:33] [INFO]    [SERV]   (./main.c:259) Base de données actuelle : postgres
+[01:49:33] [INFO]    [SERV]   (./main.c:265) Schéma courant (search_path) : sae3_delivraptor
+[01:49:33] [INFO]    [CLIENT] (./main.c:113) [127.0.0.1:47934] Client connecté
+[01:49:33] [INFO]    [CLIENT] (./main.c:136) [127.0.0.1:47934] Requête reçue: CONN
+[01:49:33] [INFO]    [CLIENT] (./main.c:214) [127.0.0.1:47934] Authentification réussie
+[01:49:33] [INFO]    [CLIENT] (./main.c:143) [127.0.0.1:47934] Authentification OK pour mewen
+[01:49:33] [INFO]    [CLIENT] (./main.c:136) [127.0.0.1:47934] Requête reçue: NEXT
+[01:49:33] [INFO]    [CLIENT] (./main.c:118) [127.0.0.1:47934] Client déconnecté
+[01:49:36] [INFO]    [SERV]   (./main.c:90) Connexion acceptée (fd=5)
+[01:49:36] [DEBUG]   [SERV]   (./main.c:179)  <<Parent pid enfant : 25670
+[01:49:36] [DEBUG]   [SERV]   (./main.c:181)  <<Parent connexion ferme
+[01:49:36] [INFO]    [SERV]   (./main.c:99) Process enfant démarré (pid=25670) pour fd=5
+[01:49:36] [INFO]    [SERV]   (./main.c:101) Connexion à la BDD...
+[01:49:36] [INFO]    [SERV]   (./main.c:248) Connecté a la BDD
+[01:49:36] [INFO]    [SERV]   (./main.c:249) SET search_path...
+[01:49:36] [INFO]    [SERV]   (./main.c:254) SET search_path success
+[01:49:36] [INFO]    [SERV]   (./main.c:259) Base de données actuelle : postgres
+[01:49:36] [INFO]    [SERV]   (./main.c:265) Schéma courant (search_path) : sae3_delivraptor
+[01:49:36] [INFO]    [CLIENT] (./main.c:113) [127.0.0.1:47946] Client connecté
+[01:49:36] [INFO]    [CLIENT] (./main.c:136) [127.0.0.1:47946] Requête reçue: CONN
+[01:49:36] [INFO]    [CLIENT] (./main.c:214) [127.0.0.1:47946] Authentification réussie
+[01:49:36] [INFO]    [CLIENT] (./main.c:143) [127.0.0.1:47946] Authentification OK pour mewen
+[01:49:36] [INFO]    [CLIENT] (./main.c:136) [127.0.0.1:47946] Requête reçue: ADD
+[01:49:36] [INFO]    [CLIENT] (./model/clien.c:29) [127.0.0.1:47946] ADD: données extraites avec succès
+[01:49:36] [INFO]    [SERV]   (./model/clien.c:55) Bordereau existant trouvé : ALI1768363329
+[01:49:36] [INFO]    [CLIENT] (./model/clien.c:108) [127.0.0.1:47946] Réponse envoyée : BORD ALI1768363329 com14222
+
+[01:49:36] [INFO]    [CLIENT] (./main.c:118) [127.0.0.1:47946] Client déconnecté
+[01:49:36] [INFO]    [SERV]   (./main.c:90) Connexion acceptée (fd=5)
+[01:49:36] [DEBUG]   [SERV]   (./main.c:179)  <<Parent pid enfant : 25672
+[01:49:36] [DEBUG]   [SERV]   (./main.c:181)  <<Parent connexion ferme
+[01:49:36] [INFO]    [SERV]   (./main.c:99) Process enfant démarré (pid=25672) pour fd=5
+[01:49:36] [INFO]    [SERV]   (./main.c:101) Connexion à la BDD...
+[01:49:36] [INFO]    [SERV]   (./main.c:248) Connecté a la BDD
+[01:49:36] [INFO]    [SERV]   (./main.c:249) SET search_path...
+[01:49:36] [INFO]    [SERV]   (./main.c:254) SET search_path success
+[01:49:36] [INFO]    [SERV]   (./main.c:259) Base de données actuelle : postgres
+[01:49:36] [INFO]    [SERV]   (./main.c:265) Schéma courant (search_path) : sae3_delivraptor
+[01:49:36] [INFO]    [CLIENT] (./main.c:113) [127.0.0.1:47958] Client connecté
+[01:49:36] [INFO]    [CLIENT] (./main.c:136) [127.0.0.1:47958] Requête reçue: CONN
+[01:49:36] [INFO]    [CLIENT] (./main.c:214) [127.0.0.1:47958] Authentification réussie
+[01:49:36] [INFO]    [CLIENT] (./main.c:143) [127.0.0.1:47958] Authentification OK pour mewen
+[01:49:36] [INFO]    [CLIENT] (./main.c:136) [127.0.0.1:47958] Requête reçue: ETA
+[01:49:36] [INFO]    [CLIENT] (./main.c:282) [127.0.0.1:47958] numéro de suivie récupéré
+[01:49:36] [INFO]    [SERV]   (./main.c:297) Récuperation de l'etat
+[01:49:36] [DEBUG]   [SERV]   (./main.c:300) Etat commande char : 9
+[01:49:36] [DEBUG]   [SERV]   (./main.c:301) Etat commande int : 9
+[01:49:36] [DEBUG]   [SERV]   (./main.c:306) Envoi msg etat
+[01:49:36] [DEBUG]   [SERV]   (./etat/etat.c:28) msg_etat called: 9
+[01:49:36] [INFO]    [SERV]   (./etat/etat.c:38) ETAT 9 envoyé: ETA LVR ALI1768363329
+
+[01:49:36] [DEBUG]   [SERV]   (./main.c:308) Envoi msg etat FIN
+[01:49:36] [INFO]    [CLIENT] (./main.c:118) [127.0.0.1:47958] Client déconnecté

@@ -14,33 +14,10 @@
 #include <postgresql/libpq-fe.h>
 #include "log/logger.h"
 #include "commande/cmd.h"
+#include "model/client.h"
 #include "etat/etat.h"
 
-#define TAILLEB 1024
-
-typedef struct{
-    char nom[255];
-    char prenom[255];
-    char adresse[255];
-    int codePostal;
-}destinataire;
-
-typedef struct{
-    char entreprise[255];
-    char adresse[255];
-    int codePostal;
-}expediteur;
-
-typedef struct {
-    char numCommande[255];
-    char numSuivi[512];
-    expediteur exp;
-    destinataire dest;
-}bordereaux;
-
-
 // Déclaration
-void add_bord(int fd, char buffer[TAILLEB], bordereaux *bord, time_t horo);
 time_t getHoro();
 int connexion(int fd, char mdp[128], char user[128]);
 int connecxionBd();
@@ -207,136 +184,6 @@ int main(int argc, char *argv[]) {
     log_close();
 }
 
-// Etape 1
-// Etat livraison : Chez Alizon
-// ADD numCommande entrepriseExp adresseExp cpExp  nomDest prenomDest adresseDest cpDest
-void add_bord(int fd, char buffer[TAILLEB], bordereaux *bord, time_t horo){
-    char message[1024];
-    char err[8] = "BORD ERR";
-    PGresult *res;
-    const char *params[2];
-    char temp[16];
-
-    // récupération des informations de la requête
-    // use %[ˆ|] to read fields that are wrapped between |...| and width limits to avoid overflow
-    sscanf(buffer, "%15s %254s %254s |%254[^|]| %d %254s %254s |%254[^|]| %d",
-        temp,
-        bord->numCommande,
-        bord->exp.entreprise,
-        bord->exp.adresse,
-        &bord->exp.codePostal,
-        bord->dest.prenom,
-        bord->dest.nom,
-        bord->dest.adresse,
-        &bord->dest.codePostal);
-
-    LOG_CLIENT(LOG_INFO, cIp, cPort, "Informaions récupérées avec succès");
-    
-    //verifier si la commande a deja un bordereau
-    params[0] = bord->numCommande;
-    res = PQexecParams(conn,
-                        "SELECT id_suivi FROM _delivraptor WHERE id_commande = $1",
-                        1,
-                        NULL,
-                        params,
-                        NULL,
-                        NULL,
-                        0);
-
-        if (PQresultStatus(res) != PGRES_TUPLES_OK) {
-        LOG_SERV(LOG_ERROR, "Erreur SELECT: %s\n", PQresultErrorMessage(res));
-        snprintf(message, sizeof(message), "%s NOT_FOUND\n", err);
-        if (send(fd, message, strlen(message), 0) <= 0){
-            LOG_SERV(LOG_WARN, "client déconnecté");
-        }
-        PQclear(res);
-        return;
-    }
-    int nrows = PQntuples(res);
-
-    if (nrows>0){
-        LOG_SERV(LOG_INFO, "La commande existe deja");
-        strncpy(bord->numSuivi, PQgetvalue(res,0,0), sizeof(bord->numSuivi)-1);
-        bord->numSuivi[sizeof(bord->numSuivi)-1] = '\0';
-        LOG_SERV(LOG_INFO, "Renvoi du bordereau");
-    }else{
-        LOG_CLIENT(LOG_INFO, cIp, cPort, "Création bordereau pour la commande %s %s", bord->numCommande, bord->exp.entreprise);
-        //creation numéro de suivi
-        for(int i = 0; i < 3 && bord->exp.entreprise[i] != '\0'; i++) {
-            bord->numSuivi[i] = toupper((unsigned char)bord->exp.entreprise[i]);
-        }
-        bord->numSuivi[3] = '\0';
-        /* build tracking id directly into bord->numSuivi using a small prefix buffer to avoid large intermediate copies */
-    char prefix[8];
-    /* copy first 3 chars (we set 3-letter prefix above) to avoid large-source snprintf warnings */
-    prefix[0] = bord->numSuivi[0];
-    prefix[1] = bord->numSuivi[1];
-    prefix[2] = bord->numSuivi[2];
-    prefix[3] = '\0';
-        long cmdnum = strtol(bord->numCommande, NULL, 10);
-        if (cmdnum == 0 && bord->numCommande[0] != '0') cmdnum = 0; /* fallback if not numeric */
-        snprintf(bord->numSuivi, sizeof(bord->numSuivi), "%s%ld", prefix, cmdnum + horo);
-    
-        //enregistrement en bdd
-        LOG_SERV(LOG_INFO, "INSERT recuperation des parametres...");
-        params[0] = bord->numSuivi;
-        params[1] = bord->numCommande;
-        // clear previous SELECT result before reusing 'res'
-        PQclear(res);
-
-        LOG_SERV(LOG_INFO, "INSERT enregistrement en BDD...");
-        res = PQexecParams(conn,
-                    "INSERT INTO _delivraptor (id_suivi, id_commande) values ($1,$2)",
-                    2,
-                    NULL,
-                    params,
-                    NULL,
-                    NULL,
-                    0);
-        
-        if (PQresultStatus(res) == PGRES_COMMAND_OK) {
-            LOG_SERV(LOG_INFO, "INSERT exécuté avec succès");
-        } else {
-            LOG_SERV(LOG_ERROR, "Erreur INSERT : %s", PQresultErrorMessage(res));
-        }
-    }
-
-    // clear the PGresult from either SELECT or INSERT
-    PQclear(res);
-    
-    //envoi du numéro de suivi
-    snprintf(message, sizeof(message), "BORD %s com%s\n",bord->numSuivi, bord->numCommande);
-    if (send(fd, message, strlen(message), 0) <= 0){
-        LOG_SERV(LOG_WARN, "client déconnecté");
-        return;
-    }
-
-    //ecriture de log
-    LOG_CLIENT(LOG_INFO, cIp, cPort, "%s",message);
-
-}
-// Etape 2
-// Etat livraison : En cours d'acheminement vers le transporteur
-
-// Etape 3
-// Etat livraison : Arrivé chez le transporteur
-
-// Etape 4
-// Etat livraison : En cours d'acheminement vers la plateforme regionale
-
-// Etape 5
-// Etat livraison : Arrivé à la plateforme regionale
-
-// Etape 6
-// Etat livraison : En cours d'acheminement vers le centre local
-
-// Etape 7
-// Etat livraison : Arrivé au centre local
-
-// Etape 8
-// Etat livraison : En cours de livraison
-
-// Etape 9
 time_t getHoro(){
     return time(NULL);
 }
