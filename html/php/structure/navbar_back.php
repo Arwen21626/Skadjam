@@ -37,7 +37,7 @@
                 </div>
             </a>
 
-            <a class="text-vertFonce hover:text-rouge hidden md:inline-block" href="/html/fo/recherche.php">Recherche</a>
+            <a class="text-bleu hover:text-rouge hidden md:inline-block" href="/html/fo/recherche.php">Recherche</a>
         </div>
 
 
