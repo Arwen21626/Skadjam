@@ -24,6 +24,7 @@
 
     <section class="flex justify-around items-center p-1">
 
+        <!-- Accueil -->
         <div class="md:flex md:flex-col md:justify-center md:items-center">
 
             <a class="items-center" href="/index.php">
@@ -36,6 +37,7 @@
             <a class="text-vertFonce hover:text-rouge hidden md:inline-block" href="/index.php">Accueil</a>
         </div>
             
+        <!-- Commandes -->
         <div class="md:flex md:flex-col md:justify-center md:items-center">
 
             <a  href="/html/fo/recapitulatif_commande.php">
@@ -47,7 +49,8 @@
 
             <a class="text-vertFonce hover:text-rouge hidden md:inline-block" href="/html/fo/recapitulatif_commande.php">Commandes</a>
         </div>
-            
+        
+        <!-- Recherche -->
         <div class="md:flex md:flex-col md:justify-center md:items-center">
 
             <a href="/html/fo/recherche.php">
@@ -60,6 +63,7 @@
             <a class="text-vertFonce hover:text-rouge hidden md:inline-block" href="/html/fo/recherche.php">Recherche</a>
         </div>
 
+        <!-- Panier -->
         <div class="md:flex md:flex-col md:justify-center md:items-center">
 
             <a href="/html/fo/panier.php">
@@ -71,7 +75,8 @@
 
             <a class="text-vertFonce hover:text-rouge hidden md:inline-block" href="/html/fo/panier.php">Panier</a>
         </div>
-            
+        
+        <!-- Profil -->
         <div class="md:flex md:flex-col md:justify-center md:items-center">
 
             <a href=<?php echo $urlProfil ?>>
