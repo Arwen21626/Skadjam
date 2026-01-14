@@ -40,14 +40,14 @@
         <!-- Commandes -->
         <div class="md:flex md:flex-col md:justify-center md:items-center">
 
-            <a  href="/html/fo/recapitulatif_commande.php">
+            <a  href="/html/fo/liste_commandes.php">
                 <div class="size-12 bg-no-repeat bg-size-[auto_48px] 
                 bg-[url(/images/logo/bootstrap_icon/truck.svg)] 
                 hover:bg-[url(/images/logo/bootstrap_icon/truck-fill.svg)]">
                 </div>
             </a>
 
-            <a class="text-vertFonce hover:text-rouge hidden md:inline-block" href="/html/fo/recapitulatif_commande.php">Commandes</a>
+            <a class="text-vertFonce hover:text-rouge hidden md:inline-block" href="/html/fo/liste_commandes.php">Commandes</a>
         </div>
         
         <!-- Recherche -->
