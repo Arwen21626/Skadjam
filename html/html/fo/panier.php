@@ -313,7 +313,7 @@
 
                                                         <input type="text" 
                                                         value="<?php echo $infoProduitsPanier[$i]["quantiteProduit"]; ?>"
-                                                        class="w-16 ml-4 mr-4 text-center quantite-prod-input">
+                                                        class="w-16 ml-4 mr-4 text-center border rounded-sm quantite-prod-input">
 
                                                         
                                                         <button class="text-4xl text-center ml-4 cursor-pointer hover:text-vertClair ajout"
