@@ -1,4 +1,5 @@
-const numberOfItems = 24 //NB produits à afficher
+const numberOfItems = 24 //NB produits à afficher tablette
+const numberOfItemsPhone = 12 //NB produits à afficher
 let first = 0
 let actualPage
 

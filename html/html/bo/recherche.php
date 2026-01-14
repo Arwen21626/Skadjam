@@ -1,21 +1,24 @@
 <?php
     session_start();
-    require_once(__DIR__ . '/../../php/verif_role_fo.php');
+    require_once(__DIR__ . '/../../php/verif_role_bo.php');
     require_once(__DIR__ . '/../../01_premiere_connexion.php');
     require_once(__DIR__ . "/../../../connections_params.php");
 
     //récupère toutes les infos des tables produits et photos
+    $idVendeur = $_SESSION['idCompte'];
     $tabProduit = [];
     foreach($dbh->query("SELECT *
-                        FROM sae3_skadjam._produit pr
-                        INNER JOIN sae3_skadjam._montre m
-                            ON pr.id_produit=m.id_produit
-                        INNER JOIN sae3_skadjam._photo ph  
-                            ON ph.id_photo = m.id_photo 
-                        INNER JOIN sae3_skadjam._vendeur v
-                            ON pr.id_vendeur = v.id_compte
-                        WHERE pr.est_supprime = false AND pr.est_masque = false"
-                        , PDO::FETCH_ASSOC) as $row){
+        FROM sae3_skadjam._produit pr
+        INNER join sae3_skadjam._montre m
+            ON pr.id_produit=m.id_produit
+        INNER JOIN sae3_skadjam._photo ph  
+            ON ph.id_photo = m.id_photo
+        INNER JOIN sae3_skadjam._vendeur v
+            ON pr.id_vendeur = v.id_compte
+        WHERE v.id_compte = $idVendeur
+            AND pr.est_supprime = false"
+        , PDO::FETCH_ASSOC) as $row){
+
         $tabProduit[] = $row;
     }
 ?>
@@ -27,7 +30,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" type="text/css" href="../../css/output.css" >
     <title>Recherche</title>
-    <?php include __DIR__ . "/../../php/structure/head_front.php"; ?>
+    <?php include __DIR__ . "/../../php/structure/head_back.php"; ?>
     <script src="../../js/fo/recherche.js"></script>
 </head>
 
@@ -39,8 +42,8 @@
     </script>
 
     <!--header-->
-    <?php (include __DIR__ . "/../../php/structure/header_front.php"); ?>
-    <?php include(__DIR__ . "/../../php/structure/navbar_front.php"); ?>
+    <?php (include __DIR__ . "/../../php/structure/header_back.php"); ?>
+    <?php include(__DIR__ . "/../../php/structure/navbar_back.php"); ?>
 
     
     <main class="md:min-h-[800px] min-h-[600px] mt-10">
@@ -220,6 +223,10 @@
                 </article>
             </section>
         </aside>
+        <?php if($tabProduit == null){ ?>
+                    <p>Votre catalogue est vide.</p>
+        <?php }
+        else{ ?>
         <section id="listeProduit" class="flex flex-col items-center">
             <article id="prod" class="flex flex-row flex-wrap justify-around w-auto">
                 <script>
@@ -233,7 +240,8 @@
                 <button id="premierePage" class="md:order-1">Premiere page</button>
                 <button id="dernierePage" class="md:order-4">Derniere page</button>
             </article>
-</section>
+        </section>
+        <?php } ?>
 
         <?php $dbh = null;?>
 
