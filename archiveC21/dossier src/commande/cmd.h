@@ -6,6 +6,7 @@ typedef enum{
     CMD_ADD,
     CMD_ETA,
     CMD_NEXT,
+    CMD_CONN,
 } cmd_t;
 
 cmd_t str_to_cmd(const char *cmd);

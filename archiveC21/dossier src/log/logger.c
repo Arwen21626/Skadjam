@@ -33,6 +33,7 @@ void log_init() {
 void log_close() {
     if (log_file) {
         fclose(log_file);
+        log_file = NULL;
     }
 }
 
@@ -46,6 +47,23 @@ void log_message(log_lvl_t level,
                  const char *fmt, ...) {
     
     if (!log_file){
+        /* fallback: write to stderr if file not available */
+        FILE *out = stderr;
+        time_t now = time(NULL);
+        struct tm *t = localtime(&now);
+        char timebuf[9];
+        strftime(timebuf, sizeof(timebuf), "%H:%M:%S", t);
+        if (src == LOG_SRC_CLIENT) {
+            fprintf(out, "[%s] %s [CLIENT] (%s:%d) [%s:%d] ", timebuf, lvl_to_string(level), file, line, ip, port);
+        } else {
+            fprintf(out, "[%s] %s [SERV]   (%s:%d) ", timebuf, lvl_to_string(level), file, line);
+        }
+        va_list args2;
+        va_start(args2, fmt);
+        vfprintf(out, fmt, args2);
+        va_end(args2);
+        fprintf(out, "\n");
+        fflush(out);
         return;
     }
     
