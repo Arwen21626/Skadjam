@@ -46,10 +46,16 @@
     <main class="md:min-h-[800px] min-h-[600px] mt-10">
         <!-- Barre de recherche -->
         <button id="filtresTris">Filtres & tris</button>
-        <aside class="sidebar bg-beige p-4 md:sticky md:top-16 md:left-0 md:w-79 md:h-225 overflow-auto -translate-x-full">
+        <aside class="sidebar bg-beige p-4 md:sticky md:top-16 md:left-0 md:w-79 md:h-225 overflow-auto hidden absolute top-0 float-left">
+            
             <!-- Filtres -->
             <section>
-                <h3>Filtres</h3>
+                
+                <div class="flex flex-row justify-between">
+                    <h3>Filtres</h3>
+                    <img id="fermerSidebar"src="../../images/logo/bootstrap_icon/x-large.svg" alt="Fermer" class="flex self-center w-8">
+                </div>
+                
                 <!-- Categorie -->
                     <article>
                     <details>
@@ -215,13 +221,13 @@
             </section>
         </aside>
         <div id="listeProduit" class="flex flex-col items-center">
-            <div id="prod" class="flex flex-row flex-wrap justify-around">
+            <div id="prod" class="flex flex-row flex-wrap justify-around w-auto">
                 <script>
                     afficherListe()
                 </script>
             </div>
             <!--fin du catalogue-->
-            <div id="changePage" class=" ml-4 w-4/5 flex flex-row justify-around">
+            <div id="changePage" class="flex flex-row justify-around w-275">
                 <button id="premierePage">Premiere page</button>
                 <button id="pagePrec">Page prec</button>
                 <button id="pageSuiv">Page suiv</button>
@@ -230,9 +236,6 @@
         </div>
 
         <?php $dbh = null;?>
-        
-        
-        
 
         <script>
             ajoutEventListener()

@@ -193,18 +193,24 @@ function ajoutEventListener(){
     let sidebar = document.getElementsByTagName("aside")[0]
     let listeProd = document.getElementById("listeProduit")
     let prod = document.getElementById("prod")
-    // let changePage = document.getElementById("changePage")
+    let fermerSidebar = document.getElementById("fermerSidebar")
+    let changePage = document.getElementById("changePage")
 
-    // Fonction
+    // Fonction ouverture
     boutonSidebar.addEventListener("click", function(){
         boutonSidebar.classList.add("hidden")
-        prod.classList.add("ml-4", "w-4/5")
-        listeProd.classList.remove("items-center")
-        listeProd.classList.add("items-end")
-        sidebar.classList.toggle("translate-x-0")
-        console.log("fin")
+        prod.classList.add("content-end")
+        sidebar.classList.remove("hidden")
+        sidebar.classList.add("translate-x-0")
+    })
 
-        console.log(tableau)
+    //Fonction fermeture
+    fermerSidebar.addEventListener("click", function(){
+        // sidebar.classList.remove("translate-x-0")
+        // sidebar.classList.add("hidden")
+        // boutonSidebar.classList.remove("hidden")
+        // prod.classList.remove("ml-4", "w-4/5")
+        // listeProd.classList.remove("items-end")
     })
 
     if(!categorieAlimentaire.checked && !categorieVetement.checked && !categorieArtisanat.checked && !categorieGoodies.checked && !categorieSoin.checked){

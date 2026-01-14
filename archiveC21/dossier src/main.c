@@ -33,26 +33,27 @@ typedef struct{
 
 typedef struct {
     char numCommande[255];
-    char numSuivi[255];
+    char numSuivi[512];
     expediteur exp;
     destinataire dest;
 }bordereaux;
 
 
 // Déclaration
-void etape1(int cnx, char buffer[TAILLEB], bordereaux *bord, time_t horo);
+void add_bord(int fd, char buffer[TAILLEB], bordereaux *bord, time_t horo);
 time_t getHoro();
-int connexion(char mdp[128], char user[128]);
+int connexion(int fd, char mdp[128], char user[128]);
 int connecxionBd();
-void getEtat(int cnx, char buffer[TAILLEB]);
+void getEtat(int fd, char buffer[TAILLEB]);
 void avance();
+void chomp(char *s);
 
 time_t horo;
 char cIp[INET_ADDRSTRLEN];
 int cPort;
 PGconn *conn;
 
-int main() {
+int main(int argc, char *argv[]) {
     int sock;
     int ret;
     int size;
@@ -61,22 +62,19 @@ int main() {
     char commande[20];
     char buffer[TAILLEB];
     char message[1024];
-    log_init();
     cmd_t cmd;
     char *line;
+    log_init();
 
     
-    LOG_SERV(LOG_INFO ,"**Démarrage du service Delivraptor**");
-
-    connecxionBd();
-    avance();
+    LOG_SERV(LOG_INFO ,"Démarrage du service Delivraptor");
 
     sock = socket(AF_INET, SOCK_STREAM, 0);
-    printf("SOCK = %d\n",sock);
+    printf("SOCK = %d\n", sock);
 
     int opt = 1;
     if (setsockopt(sock, SOL_SOCKET, SO_REUSEADDR, &opt, sizeof(opt))) {
-        LOG_SERV(LOG_ERROR, "Erreur socket : %s",strerror(errno));
+        LOG_SERV(LOG_ERROR, "setsockopt failed: %s", strerror(errno));
         perror("setsockopt");
         exit(EXIT_FAILURE);
     }
@@ -106,100 +104,112 @@ int main() {
     }
 
     size = sizeof(conn_addr);
-    cnx = accept(sock, (struct sockaddr *)&conn_addr, (socklen_t *)&size);
-    if (cnx>=0){
-        LOG_SERV(LOG_INFO, "Connexion accepté");
-    }else{
-        LOG_SERV(LOG_ERROR, "Erreur socket : %s", strerror(errno));
-    }
-
-    inet_ntop(AF_INET, &conn_addr.sin_addr, cIp, sizeof(cIp));
-    cPort = ntohs(conn_addr.sin_port);
-    size = read(cnx, buffer, TAILLEB-1);
-    if (size <= 0) {
-        LOG_SERV(LOG_ERROR, "Erreur lecture initiale client : %s", strerror(errno));
-        close(cnx);
-        exit(EXIT_FAILURE);
-    }
-    buffer[size] = '\0';
-    LOG_CLIENT(LOG_INFO, cIp, cPort, "Client connecté au service avec succès");
-    
-
-    //format commande CONN user pwd (use width limits)
-    sscanf(buffer, "%19s %127s %127s", commande, user, mdp);
-    int connect = connexion(mdp, user);
-    if ( connect == 0){
-        LOG_CLIENT(LOG_INFO, cIp, cPort, "Authentification réussie");
-        snprintf(message, sizeof(message), "CONNEXION SUCCESS");
-        if (send(cnx, message, strlen(message), 0) <= 0){
-            LOG_SERV(LOG_WARN, "client déconnecté");
+    while (1){
+        cnx = accept(sock, (struct sockaddr *)&conn_addr, (socklen_t *)&size);
+        if (cnx < 0) {
+            LOG_SERV(LOG_ERROR, "accept failed: %s", strerror(errno));
+            continue;
         }
-    }else{
-        if (connect == 2){
-            LOG_CLIENT(LOG_ERROR, cIp, cPort, "Authentification échoué : Identifiants incorrect");
-            snprintf(message, sizeof(message), "CONNEXION DENIED %s %s", user, mdp);
-            if (send(cnx, message, strlen(message), 0) <= 0){
-                LOG_SERV(LOG_WARN, "client déconnecté");
+        LOG_SERV(LOG_INFO, "Connexion acceptée (fd=%d)", cnx);
+
+        pid_t pid = fork();
+        if (pid < 0) {
+            LOG_SERV(LOG_ERROR, "fork failed: %s", strerror(errno));
+            close(cnx);
+            continue;
+        } else if (pid == 0) {
+            /* enfant */
+            LOG_SERV(LOG_INFO, "Process enfant démarré (pid=%d) pour fd=%d", getpid(), cnx);
+
+            LOG_SERV(LOG_INFO, "Connexion à la BDD...");
+            connecxionBd();
+
+            if (cnx >= 0) {
+                close(sock);
+            } else {
+                LOG_SERV(LOG_ERROR, "socket invalide après accept: %s", strerror(errno));
+                close(cnx);
             }
-        }else{
-            LOG_CLIENT(LOG_ERROR, cIp, cPort, "Authentification échoué : %s", strerror(errno));
-            snprintf(message, sizeof(message), "ERRER SERVER");
-            if (send(cnx, message, strlen(message), 0) <= 0){
-                LOG_SERV(LOG_WARN, "client déconnecté");
-            }
-        }
-        exit(EXIT_FAILURE);
-    }
-
-    LOG_SERV(LOG_INFO, "Connexion a la BDD...");
-    printf("ACCEPT = %d\n",ret);
-    while (1==1){
-        size = read(cnx, buffer, TAILLEB-1);
-        if (size <= 0){
-            LOG_CLIENT(LOG_INFO, cIp, cPort, "Client déconnecté");
-            break;
-        }
-        LOG_SERV(LOG_DEBUG, "Taille lecture %d", size);
-        buffer[size] = '\0';
-        LOG_SERV(LOG_DEBUG, "Buffer value : %s", buffer);
-
-        line = strtok(buffer, "\n");
-        while (line){
-            cmd = get_commande(line);
             
-            horo = getHoro();
-            LOG_CLIENT(LOG_INFO, cIp, cPort, "Requete %s", commande);
-    
-    
-            switch (cmd) {
-            case CMD_ADD:
-                bordereaux bord;
-                etape1(cnx, line, &bord, horo);
-                break;
-            case CMD_ETA:
-                getEtat(cnx, line);
-                break;
-            default:
-                LOG_CLIENT(LOG_WARN, cIp, cPort, "Commande non reconnu : %s", commande);
-                snprintf(message, sizeof(message), "CMD ERR NOT_EXIST %s", commande);
-                cmd = CMD_UNKNOWN;
-                if (send(cnx, message, strlen(message), 0) <= 0){
-                    LOG_SERV(LOG_WARN, "client déconnecté");
+            inet_ntop(AF_INET, &conn_addr.sin_addr, cIp, sizeof(cIp));
+            cPort = ntohs(conn_addr.sin_port);
+            LOG_CLIENT(LOG_INFO, cIp, cPort, "Client connecté");
+
+            while (1) {
+                size = read(cnx, buffer, TAILLEB-1);
+                if (size <= 0) {
+                    LOG_CLIENT(LOG_INFO, cIp, cPort, "Client déconnecté");
+                    break;
                 }
-                break;
-            }
-            line = strtok(NULL,"\n");
-            
-        }
+                buffer[size] = '\0';
 
+                line = strtok(buffer, "\n");
+                while (line) {
+                    if (line) chomp(line);
+                    /* extraire et logger la commande */
+                    char cmdstr[16] = {0};
+                    if (sscanf(line, "%15s", cmdstr) != 1) {
+                        LOG_CLIENT(LOG_WARN, cIp, cPort, "Ligne mal formée reçue");
+                        line = strtok(NULL, "\n");
+                        continue;
+                    }
+                    cmd = get_commande(cmdstr);
+                    horo = getHoro();
+                    LOG_CLIENT(LOG_INFO, cIp, cPort, "Requête reçue: %s", cmdstr);
+
+                    switch (cmd) {
+                        case CMD_CONN: {
+                            /* format: CONN user pwd */
+                            if (sscanf(line, "%19s %127s %127s", commande, user, mdp) == 3) {
+                                if (connexion(cnx, mdp, user) == 0) {
+                                    LOG_CLIENT(LOG_INFO, cIp, cPort, "Authentification OK pour %s", user);
+                                } else {
+                                    LOG_CLIENT(LOG_WARN, cIp, cPort, "Authentification échouée pour %s", user);
+                                }
+                            } else {
+                                LOG_CLIENT(LOG_WARN, cIp, cPort, "CONN: mauvais format");
+                            }
+                        } break;
+                        case CMD_ADD: {
+                            bordereaux bord;
+                            add_bord(cnx, line, &bord, horo);
+                        } break;
+                        case CMD_ETA: {
+                            getEtat(cnx, line);
+                        } break;
+                        case CMD_NEXT: {
+                            avance();
+                            send(cnx, "next success\n", strlen("next success\n"), 0);
+                        } break;
+                        default: {
+                            LOG_CLIENT(LOG_WARN, cIp, cPort, "Commande non reconnue: %s", cmdstr);
+                            snprintf(message, sizeof(message), "CMD ERR NOT_EXIST %s", cmdstr);
+                            cmd = CMD_UNKNOWN;
+                            if (send(cnx, message, strlen(message), 0) <= 0) {
+                                LOG_SERV(LOG_WARN, "client déconnecté");
+                            }
+                        } break;
+                    }
+
+                    line = strtok(NULL, "\n");
+                }
+            }
+
+            close(cnx);
+            _exit(0);
+        }else{
+            LOG_SERV(LOG_DEBUG, " <<Parent pid enfant : %d", pid);
+            close(cnx);
+            LOG_SERV(LOG_DEBUG, " <<Parent connexion ferme");
+        }
     }
     log_close();
 }
 
 // Etape 1
 // Etat livraison : Chez Alizon
-// ADD numCommande entrepriseExp adresseExp cpExp  nomDest prenomDest adresseDest cpDest adresse syntaxe ex : 6_rue_camelia
-void etape1(int cnx, char buffer[TAILLEB], bordereaux *bord, time_t horo){
+// ADD numCommande entrepriseExp adresseExp cpExp  nomDest prenomDest adresseDest cpDest
+void add_bord(int fd, char buffer[TAILLEB], bordereaux *bord, time_t horo){
     char message[1024];
     char err[8] = "BORD ERR";
     PGresult *res;
@@ -235,7 +245,7 @@ void etape1(int cnx, char buffer[TAILLEB], bordereaux *bord, time_t horo){
     if (PQresultStatus(res) != PGRES_TUPLES_OK) {
         LOG_SERV(LOG_ERROR, "Erreur SELECT: %s\n", PQresultErrorMessage(res));
         snprintf(message, sizeof(message), "%s NOT_FOUND", err);
-        if (send(cnx, message, strlen(message), 0) <= 0){
+        if (send(fd, message, strlen(message), 0) <= 0){
             LOG_SERV(LOG_WARN, "client déconnecté");
         }
         PQclear(res);
@@ -255,26 +265,34 @@ void etape1(int cnx, char buffer[TAILLEB], bordereaux *bord, time_t horo){
             bord->numSuivi[i] = toupper((unsigned char)bord->exp.entreprise[i]);
         }
         bord->numSuivi[3] = '\0';
-        snprintf(message, sizeof(message), "%s%ld",bord->numSuivi, strtol(bord->numCommande,NULL,10)+horo);
-        strcpy(bord->numSuivi, message);
+        /* build tracking id directly into bord->numSuivi using a small prefix buffer to avoid large intermediate copies */
+    char prefix[8];
+    /* copy first 3 chars (we set 3-letter prefix above) to avoid large-source snprintf warnings */
+    prefix[0] = bord->numSuivi[0];
+    prefix[1] = bord->numSuivi[1];
+    prefix[2] = bord->numSuivi[2];
+    prefix[3] = '\0';
+        long cmdnum = strtol(bord->numCommande, NULL, 10);
+        if (cmdnum == 0 && bord->numCommande[0] != '0') cmdnum = 0; /* fallback if not numeric */
+        snprintf(bord->numSuivi, sizeof(bord->numSuivi), "%s%ld", prefix, cmdnum + horo);
     
-    //enregistrement en bdd
+        //enregistrement en bdd
         LOG_SERV(LOG_INFO, "INSERT recuperation des parametres...");
         params[0] = bord->numSuivi;
         params[1] = bord->numCommande;
-    // clear previous SELECT result before reusing 'res'
-    PQclear(res);
+        // clear previous SELECT result before reusing 'res'
+        PQclear(res);
 
-    LOG_SERV(LOG_INFO, "INSERT enregistrement en BDD...");
-    res = PQexecParams(conn,
-                "INSERT INTO _delivraptor (id_suivi, id_commande) values ($1,$2)",
-                2,
-                NULL,
-                params,
-                NULL,
-                NULL,
-                0);
-    
+        LOG_SERV(LOG_INFO, "INSERT enregistrement en BDD...");
+        res = PQexecParams(conn,
+                    "INSERT INTO _delivraptor (id_suivi, id_commande) values ($1,$2)",
+                    2,
+                    NULL,
+                    params,
+                    NULL,
+                    NULL,
+                    0);
+        
         if (PQresultStatus(res) == PGRES_COMMAND_OK) {
             LOG_SERV(LOG_INFO, "INSERT exécuté avec succès");
         } else {
@@ -287,7 +305,7 @@ void etape1(int cnx, char buffer[TAILLEB], bordereaux *bord, time_t horo){
     
     //envoi du numéro de suivi
     snprintf(message, sizeof(message), "BORD %s com%s",bord->numSuivi, bord->numCommande);
-    if (send(cnx, message, strlen(message), 0) <= 0){
+    if (send(fd, message, strlen(message), 0) <= 0){
         LOG_SERV(LOG_WARN, "client déconnecté");
         return;
     }
@@ -298,9 +316,6 @@ void etape1(int cnx, char buffer[TAILLEB], bordereaux *bord, time_t horo){
 }
 // Etape 2
 // Etat livraison : En cours d'acheminement vers le transporteur
-void etape2(int cnx, char buffer[TAILLEB], bordereaux *bord, time_t horo){
-
-}
 
 // Etape 3
 // Etat livraison : Arrivé chez le transporteur
@@ -325,19 +340,19 @@ time_t getHoro(){
     return time(NULL);
 }
 
-int connexion(char mdp[128], char user[128]){
+int connexion(int fd, char mdp[128], char user[128]){
     char line[256];
     char us[128], pswd[128];
-    char message[128];
+    char message[512];
     int ret = 2;
     FILE *connexionFile;
-    connexionFile = fopen("lst_client.data", "a+");
+    connexionFile = fopen("lst_client.data", "r");
     if (connexionFile == NULL) {
         return errno;
     }
 
     while (fgets(line, sizeof(line), connexionFile)){
-        if (sscanf(line, "%128s %128s",us, pswd)){
+        if (sscanf(line, "%127s %127s",us, pswd) == 2){
             if (strcmp(us, user) == 0 && strcmp(mdp, pswd) == 0){
                 ret = 0;
                 break;
@@ -345,11 +360,37 @@ int connexion(char mdp[128], char user[128]){
         }
     }
     fclose(connexionFile);
+    //format commande CONN user pwd (use width limits)
+        
+    if ( ret == 0){
+        LOG_CLIENT(LOG_INFO, cIp, cPort, "Authentification réussie");
+        snprintf(message, sizeof(message), "CONNEXION SUCCESS");
+    }else{
+        if (ret == 2){
+            LOG_CLIENT(LOG_ERROR, cIp, cPort, "Authentification échoué : Identifiants incorrect");
+            snprintf(message, sizeof(message), "CONNEXION DENIED %s %s", user, mdp);
+        }else{
+            LOG_CLIENT(LOG_ERROR, cIp, cPort, "Authentification échoué : %s", strerror(errno));
+            snprintf(message, sizeof(message), "ERRER SERVER");   
+        }
+        send(fd, "CONNEXION DENIED\n", 17, 0);
+        close(fd);
+        return -1;
+    }
+    if (send(fd, message, strlen(message), 0) <= 0){
+        LOG_SERV(LOG_WARN, "client déconnecté");
+    }
     return ret;
 }
 
 int connecxionBd(){
-    conn = PQconnectdb("host=127.0.0.1 dbname=postgres user=postgres password=pasTOUCHE");
+    char *host = getenv("DB_HOST");
+    char *dbname = getenv("DB_NAME");
+    char *user = getenv("DB_USER");
+    char *password = getenv("DB_PASSWORD");
+    char connInfo[512];
+    snprintf(connInfo, sizeof(connInfo), "host=%s dbname=%s user=%s password=%s", host, dbname, user, password);
+    conn = PQconnectdb(connInfo);
 
     if (PQstatus(conn) != CONNECTION_OK){
         LOG_SERV(LOG_ERROR, "Erreur connexion BDD : %s", PQerrorMessage(conn));
@@ -382,12 +423,11 @@ int connecxionBd(){
 
 // Etat livraison : 
 // ETA ALI1245214522
-void getEtat(int cnx, char buffer[TAILLEB]){
+void getEtat(int fd, char buffer[TAILLEB]){
     char temp[16];
     char id_suivi[256];
     char etat[16];
     int  nrows;
-    char message[1024];
 
     /* Use width limits to avoid overflowing id_suivi */
     sscanf(buffer, "%15s %255s", temp, id_suivi);
@@ -413,10 +453,10 @@ void getEtat(int cnx, char buffer[TAILLEB]){
         LOG_SERV(LOG_DEBUG, "Etat commande int : %d", (int)strtol(etat, NULL, 10));
     }else{
         LOG_CLIENT(LOG_INFO, cIp, cPort, "Id_suivi %s n'existe pas", id_suivi);
-        strcpy(etat, "0");
+    snprintf(etat, sizeof(etat), "0");
     }
     LOG_SERV(LOG_DEBUG, "Envoi msg etat");
-    msg_etat(cnx, atoi(etat), id_suivi);
+    msg_etat(fd, atoi(etat), id_suivi);
     LOG_SERV(LOG_DEBUG, "Envoi msg etat FIN");
     PQclear(res);
 }
@@ -461,4 +501,11 @@ void avance(){
 
     }
     PQclear(res);
+}
+
+void chomp(char *s) {
+    size_t len = strlen(s);
+    while (len > 0 && (s[len - 1] == '\n' || s[len - 1] == '\r')) {
+        s[--len] = '\0';
+    }
 }
