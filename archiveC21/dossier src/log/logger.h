@@ -2,6 +2,10 @@
 #define LOGGER_H
 
 #include <stdio.h>
+#include <time.h>
+#include <stdarg.h>
+
+
 
 typedef enum {
     LOG_DEBUG,

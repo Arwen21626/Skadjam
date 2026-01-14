@@ -1,7 +1,5 @@
 // logger.c
 #include "logger.h"
-#include <time.h>
-#include <stdarg.h>
 
 static FILE *log_file = NULL;
 
@@ -22,7 +20,6 @@ void log_init() {
     time_t now = time(NULL);
     struct tm *t = localtime(&now);
     strftime(datebuf, sizeof(datebuf), "%Y%m%d", t);
-    snprintf(filename, sizeof(filename), "logs/log_%s.log", datebuf);
 
     log_file = fopen(filename, "a");
     if (!log_file) {

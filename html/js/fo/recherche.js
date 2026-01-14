@@ -4,9 +4,9 @@ let actualPage = 1
 
 let tableau = []
 
-let checkedCategories = []
-let checkedNotes = []
-let checkedTranches = []
+var checkedCategories = []
+var checkedNotes = []
+var checkedTranches = []
 
 // Ajout des eventListeners
 function ajoutEventListener(){
@@ -103,7 +103,7 @@ function ajoutEventListener(){
             console.log("check")
             
         }else{
-            //checkedCategories.pop("alimentaire")
+            checkedCategories.pop("alimentaire")
             console.log("uncheck")
         }
         
@@ -118,7 +118,7 @@ function ajoutEventListener(){
             tableau = filtrageCategorieVetement(tabProd);
             console.log("check")
         }else{
-            //checkedCategories.pop("vetement")
+            checkedCategories.pop("vetement")
             console.log("uncheck")
         }
         console.log("tabVet " + tableau)
@@ -132,7 +132,7 @@ function ajoutEventListener(){
             tableau = filtrageCategorieArtisanat(tabProd);
             console.log("check")
         }else{
-            //checkedCategories.pop("artisanat")
+            checkedCategories.pop("artisanat")
             console.log("uncheck")
         }
         console.log("tabArt " + tableau)
@@ -146,7 +146,7 @@ function ajoutEventListener(){
             tableau = filtrageCategorieGoodies(tabProd);
             console.log("check")
         }else{
-            //checkedCategories.pop("goodies")
+            checkedCategories.pop("goodies")
             console.log("uncheck")
         }
         console.log("tabGood " + tableau)
@@ -160,7 +160,7 @@ function ajoutEventListener(){
             tableau = filtrageCategorieSoin(tabProd);
             console.log("check")
         }else{
-            //checkedCategories.pop("soin")
+            checkedCategories.pop("soin")
             console.log("uncheck")
         }
         console.log("tabSoin " + tableau)
@@ -227,11 +227,7 @@ function ajoutEventListener(){
     //     prod.classList.remove("content-end")
     // })
 
-    console.log(checkedCategories)  
-    if(checkedCategories.length === 0 /*&& checkedNotes.length === 0 && checkedTranches.length === 0*/){
-        console.log("rien n'est coché")
-        tableau = tabProd
-    }
+    
 }
 
 function nbPages(){
@@ -276,6 +272,34 @@ function numPageInfo(){
 
 // Affichage
 function afficherListe(){
+
+
+    console.log("tableau")
+    console.log(checkedCategories)  
+    if(checkedCategories.length === 0 /*&& checkedNotes.length === 0 && checkedTranches.length === 0*/){
+        console.log("rien n'est coché")
+        tableau = tabProd
+    }else{
+        for(let i=0; i<checkedCategories.length; i++){
+            if(checkedCategories[i] === "alimentaire"){
+                tableau = tableau.concat(filtrageCategorieAlimentaire(tabProd));
+            }
+            if(checkedCategories[i] === "vetement"){
+                tableau = tableau.concat(filtrageCategorieVetement(tabProd));
+            }
+            if(checkedCategories[i] === "artisanat"){
+                tableau = tableau.concat(filtrageCategorieArtisanat(tabProd));
+            }
+            if(checkedCategories[i] === "goodies"){
+                tableau = tableau.concat(filtrageCategorieGoodies(tabProd));
+            }
+            if(checkedCategories[i] === "soin"){
+                tableau = tableau.concat(filtrageCategorieSoin(tabProd));
+            }
+        }
+    }
+
+
     if(tableau.length === 0){
         tableau = tabProd
     }
@@ -298,7 +322,7 @@ function afficherProduit(indice){
     // Section   
     let produit = document.createElement("section")
     parent.appendChild(produit)
-    produit.classList.add("bg-bleu", "grid", "grid-cols-[40%_60%]", "w-40", "md:w-80", "h-auto", "p-2", "md:p-3", "m-2")
+    produit.classList.add("bg-bleu", "grid", "grid-cols-[40%_60%]", "w-40", "h-120", "md:w-80", "p-2", "md:p-3", "m-2")
     parent = produit
 
     //Lien
@@ -314,14 +338,14 @@ function afficherProduit(indice){
     image.src = tableau[i]['url_photo']
     image.alt = tableau[i]['alt']
     image.title = tableau[i]['title']
-    image.classList.add("w-auto", "h-80")
+    image.classList.add("w-auto", "h-80", "w-50", "justify-self-center")
     parent.appendChild(image)
 
     // Nom produit
     let nom = document.createElement("p")
     nom.textContent = tableau[i]['libelle_produit']
     parent.appendChild(nom)
-    nom.classList.add("col-span-2")
+    nom.classList.add("col-span-2", "w-70")
 
     // Prix et note
     let contient = document.createElement("div")

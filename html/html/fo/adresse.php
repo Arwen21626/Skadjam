@@ -10,6 +10,7 @@
     $erreurCodePostal = false;
 
     $idClient = $_SESSION['idCompte'];
+    $idPanier = $_REQUEST['idPanier'];
 
     if(isset($_POST['nom'])){
         include __DIR__ . '/../../php/verification_formulaire.php';
@@ -154,7 +155,7 @@
             </div>
 
             <div class="flex flex-row mt-5 mb-10 justify-between">
-                <a href="/html/fo/panier.php"><button class="border-vertClair border-2 rounded-2xl w-40 h-14 cursor-pointer">Retour</button></a>
+                <a href="/html/fo/recapitulatif_commande.php?idPanier=<?php echo $idPanier ;?>" class="border-vertClair border-2 rounded-2xl w-40 h-14 cursor-pointer flex justify-center items-center">Retour</a>
                 <input class="border-vertClair border-2 rounded-2xl w-40 h-14 cursor-pointer" type="submit" value="Suivant">
             </div>
         </form>

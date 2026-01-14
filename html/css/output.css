@@ -609,6 +609,9 @@ input.quantite-prod-input {
   .h-80 {
     height: calc(var(--spacing, 0.25rem) * 80);
   }
+  .h-225 {
+    height: calc(var(--spacing, 0.25rem) * 225);
+  }
   .h-auto {
     height: auto;
   }
@@ -1269,6 +1272,11 @@ input.quantite-prod-input {
       @media (hover: hover) {
         display: none;
       }
+    }
+  }
+  .checked\:border-vertFonce {
+    &:checked {
+      border-color: var(--color-vertFonce);
     }
   }
   .checked\:bg-beige {

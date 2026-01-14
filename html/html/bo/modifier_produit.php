@@ -424,7 +424,7 @@ else { ?>
 
 <!DOCTYPE html>
 <html lang="fr">
-    <?php include(__DIR__."/../../php/structure/head_back.php");?>
+    <?php include __DIR__."/../../php/structure/head_back.php";?>
     <head>
         <title>Modifier <?php echo $nom; ?></title>
         <style>
@@ -443,7 +443,7 @@ else { ?>
                 <div class="row-start-1 row-span-3 m-2 p-4 grid grid-rows-[2/3-1/3] justify-items-center">
                     <input type="file" id="photo" name="photo" class="hidden">
                     <!-- label qui agit comme bouton -->
-                    <label id="labelImage" for="photo" class=" w-60 h-60 rounded-xl image-produit" style="background-image: url(' <?php echo $urlPhoto ?>'); background-repeat: no-repeat; background-position: center; background-size: 100%;"></label>
+                    <label id="labelImage" for="photo" class=" w-60 h-60 rounded-xl image-produit" style="background-image: url('<?php echo $urlPhoto ?>'); background-repeat: no-repeat; background-position: center; background-size: 100%;"></label>
                     <label class="cursor-pointer" for="photo">Ajouter une image*</label>
                 </div>
                 
@@ -515,18 +515,11 @@ else { ?>
                                                         WHERE pn.id_vendeur = :id_vendeur");
                         $stmtNbPromos->execute([':id_vendeur' => $_SESSION['idCompte']]);
                         $nbPromos = $stmtNbPromos->fetch(PDO::FETCH_ASSOC)['nb_promotions'];
-
-                        if ($nbPromos >= 2 && !$caseCochee) { ?>
-                            <div class="flex flex-row mr-4 ml-4">
-                                <label class="mr-4 text-rouge">Mettre en promotion (Limite atteinte)</label>
-                                <input type="checkbox" disabled class="cursor-not-allowed appearance-none w-10 h-10 border-4 border-beige rounded-md">
-                            </div>
-                        <?php } else { ?>
-                            <div class="flex flex-row mr-4 ml-4">
-                                <label class="mr-4" for="mettreEnPromotion">Mettre en promotion</label>
-                                <input id="promoCheck" class="cursor-pointer appearance-none w-10 h-10 border-4 border-beige rounded-md checked:bg-beige" type="checkbox" name="mettreEnPromotion" id="mettreEnPromotion" <?php echo $caseCochee ? 'checked' : ''; ?>>
-                            </div>
-                        <?php } ?>
+                    ?>
+                    <div class="flex flex-row mr-4 ml-4">
+                        <label class="mr-4" for="mettreEnPromotion">Mettre en promotion<?php if ($nbPromos >= 2 && !$caseCochee) { echo " (Limite atteinte)"; } ?></label>
+                        <input id="promoCheck" type="checkbox" name="mettreEnPromotion" class="<?php echo ($nbPromos >= 2 && !$caseCochee) ? 'cursor-not-allowed' : 'cursor-pointer'; ?> appearance-none w-10 h-10 border-4 border-beige rounded-md checked:bg-beige checked:border-vertFonce" <?php echo $caseCochee ? 'checked' : ''; ?> <?php echo ($nbPromos >= 2 && !$caseCochee) ? 'disabled' : ''; ?>>
+                    </div>
                 </div>
                 <!-- Inputs liés aux promotions -->
                 <div id="promoInputs" class="col-start-1 row-start-5 col-span-2 flex flex-col">
@@ -574,7 +567,7 @@ else { ?>
     function togglePromotionInputs(){
         var promoCheck = document.getElementById('promoCheck');
         var promoInputs = document.getElementById('promoInputs');
-        if(promoCheck.checked){
+        if(promoCheck.checked && !promoCheck.disabled){
             promoInputs.style.display='flex';
             promoInputs.style.visibility = 'visible';
             promoInputs.style.height = 'auto';

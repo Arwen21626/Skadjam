@@ -61,7 +61,7 @@
                         <!-- Alimentaire -->
                         <div>
                             
-                            <input type="checkbox" name="alimentaire" id="alimentaire" value="alimentaire">
+                            <input type="checkbox" name="alimentaire" id="alimentaire" value="alimentaire" class="h-5 w-5">
                             <label for="alimentaire">Alimentaire</label>
                         </div>
                         

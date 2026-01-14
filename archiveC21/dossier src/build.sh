@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Nom de l'exécutable
-OUTPUT="main"
+OUTPUT="delivraptor"
 
 # Récupération de tous les fichiers .c (récursif)
 C_FILES=$(find . -type f -name "*.c")
