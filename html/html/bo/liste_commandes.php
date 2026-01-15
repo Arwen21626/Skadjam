@@ -1,19 +1,26 @@
 <?php
     session_start();
-    require_once __DIR__ . "/../../php/verif_role_fo.php";
+    
+    echo $_SESSION['role'];
+    echo'ici';
+    require_once __DIR__ . "/../../php/verif_role_bo.php";
     require(__DIR__ . '/../../01_premiere_connexion.php');
     $idCompte = $_SESSION['idCompte'];
 
     try {     
         $tabInfoCommandes = null;           
         //récupère toutes les infos de la table commande
-        foreach($dbh->query("SELECT c.id_commande, c.date_commande, c.etat, c.montant_total_ttc
+        foreach($dbh->query("SELECT DISTINCT
+                                c.id_commande,
+                                c.date_commande,
+                                c.etat,
+                                c.montant_total_ttc
                             FROM sae3_skadjam._commande c
                             INNER JOIN sae3_skadjam._details d
-                            ON d.id_commande = c.id_commande
+                                ON d.id_commande = c.id_commande
                             INNER JOIN sae3_skadjam._produit p
-                            ON p.
-                            WHERE c.id_vendeur = $idCompte"
+                                ON p.id_produit = d.id_produit
+                            WHERE p.id_vendeur = $idCompte;"
                             , PDO::FETCH_ASSOC) as $row){
             $tabInfoCommandes[] = $row;
         } 
@@ -32,11 +39,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Liste de mes commandes</title>
 </head>
-<?php include __DIR__ . '/../../php/structure/head_front.php'?>
+<?php include __DIR__ . '/../../php/structure/head_back.php'?>
 <body>
     <!--header-->
-    <?php include __DIR__ . "/../../php/structure/header_front.php"; ?>
-    <?php include __DIR__ . "/../../php/structure/navbar_front.php"; ?>
+    <?php include __DIR__ . "/../../php/structure/header_back.php"; ?>
+    <?php include __DIR__ . "/../../php/structure/navbar_back.php"; ?>
 
     <main class="min-h-[600px]">
         <h2 class = "pt-15">Liste de mes commandes</h2>
@@ -84,11 +91,11 @@
                     </tbody>
                 </table>
             </div>
-            <a href="../../index.php" class="flex justify-center mt-15 mb-15"><button class="border-vertClair border-2 rounded-sm md:rounded-2xl w-35 h-10 md:w-50 md:h-14 px-7 cursor-pointer">Retour</button></a>
+            <a href="../../index_vendeur.php" class="flex justify-center mt-15 mb-15"><button class="border-vertFonce border-2 rounded-sm md:rounded-2xl w-35 h-10 md:w-50 md:h-14 px-7 cursor-pointer">Retour</button></a>
         <?php } ?>
     </main>
 
     <!--footer-->
-    <?php include (__DIR__ . "/../../php/structure/footer_front.php"); ?>
+    <?php include (__DIR__ . "/../../php/structure/footer_back.php"); ?>
 </body>
 </html>
