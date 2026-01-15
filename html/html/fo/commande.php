@@ -142,7 +142,7 @@
                                         $v_quantite_totale = $v_quantite_totale + $ligne['quantite'];
                                         $v_total_ht = $v_total_ht + $ligne['sous_total'];
                                         $v_total_ttc += $ligne['prix_ttc'] * $ligne['quantite'];
-                                        $v_total_remise = $v_total_remise + $ligne['prix_remise'];
+                                        $v_total_remise +=  $ligne['prix_remise'] * $ligne['quantite'];
                                     ?>
                                 </tr>
                             <?php } 
