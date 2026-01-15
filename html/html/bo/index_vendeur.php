@@ -142,7 +142,6 @@
 
                                 <!--affichage du prix du produit-->   
                                 <div class="flex justify-start items-center col-span-2">
-                                    <?php //$prix = str_replace(".", ",", $valeurs['prix_ttc'])?>
                                     <p class="inline-block <?php echo ($valeurs['pourcentage_remise'] !== NULL)?'line-through':'';?>"> <?php echo htmlentities(str_replace(".", ",",$valeurs['prix_ttc'])); ?>€</p>
                                     <p class=" pl-3 <?php echo ($valeurs['pourcentage_remise'] !== NULL)?'':'hidden';?>"> <?php echo htmlentities(str_replace(".", ",",$valeurs['prix_remise'])); ?>€</p>
                                     <p class="pl-2 inline-block"> (TTC) </p>
