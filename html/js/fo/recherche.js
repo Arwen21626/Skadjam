@@ -1,4 +1,5 @@
 import "./../variables.js";
+
 // Ajout des eventListeners
 function ajoutEventListener(){
     tableau = []

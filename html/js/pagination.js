@@ -1,4 +1,5 @@
 import "./variables.js";
+
 function nbPages(){
     let maxPages = Math.ceil((tableau.length)/numberOfItems)
     return maxPages
