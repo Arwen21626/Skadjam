@@ -227,12 +227,12 @@
                 </script>
             </article>
             <!--fin du catalogue-->
-            <article id="changePage" class="grid grid-cols-2 md:flex md:flex-row md:justify-around w-96 md:w-275">
-                <button id="pagePrec" class="md:order-2">|<</button>
-                <button id="pageSuiv" class="md:order-4">>|</button>
-                <p id="pageInfo" class="md:order-3"></p>
-                <button id="premierePage" class="md:order-1"><<</button>
-                <button id="dernierePage" class="md:order-5">>></button>
+            <article id="changePage" class="flex flex-row justify-around w-96 md:w-275 m-3">
+                <button id="premierePage"><<</button>
+                <button id="pagePrec">|<</button>
+                <p id="pageInfo"></p>
+                <button id="pageSuiv" class="">>|</button>
+                <button id="dernierePage">>></button>
             </article>
         </section>
 

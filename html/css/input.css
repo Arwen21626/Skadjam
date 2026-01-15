@@ -23,11 +23,11 @@ p, a, input, label, button, details{
 
 @media (max-width: 768px) {
 
-    h1 {
+    h1{
         font-size: 48px;
     }
 
-    h2 {
+    h2, #pageInfo, #pagePrec, #pageSuiv, #premierePage, #dernierePage {
         font-size: 30px;
     }
 
