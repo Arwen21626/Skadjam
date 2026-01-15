@@ -10,7 +10,6 @@ var checkedCategories = []
 var checkedNotes = []
 var checkedTranches = []
 
-
 function toggleFiltre(tableau, valeur) {
     if (tableau.includes(valeur)) {
         tableau.splice(tableau.indexOf(valeur), 1);
