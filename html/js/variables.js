@@ -1,13 +1,13 @@
 // Variables et constantes pour la pagination
-const numberOfItems = 24
-let first = 0
-let actualPage = 1
+export const numberOfItems = 24
+export let first = 0
+export let actualPage = 1
 
 
-let tableau = []
+export let tableau = []
 
 // Variables et constantes pour les filtres
-var checkedCategories = []
-var checkedNotes = []
-var checkedTranches = []
+export var checkedCategories = []
+export var checkedNotes = []
+export var checkedTranches = []
 

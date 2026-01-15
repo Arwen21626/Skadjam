@@ -1,4 +1,4 @@
-import "./../variables.js";
+import * as variables from "./../variables.js";
 
 function toggleFiltre(tableau, valeur) {
     if (tableau.includes(valeur)) {
@@ -6,8 +6,8 @@ function toggleFiltre(tableau, valeur) {
     } else {
         tableau.push(valeur);
     }
-    first = 0;
-    actualPage = 1;
+    variables.first = 0;
+    variables.actualPage = 1;
     afficherListe();
 }
 
