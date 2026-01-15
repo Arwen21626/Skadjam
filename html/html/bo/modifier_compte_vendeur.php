@@ -1,212 +1,146 @@
 <?php
-if ($_SERVER["REQUEST_METHOD"] === "POST") {
+session_start();
+include __DIR__ . "/../../php/verif_role_bo.php";
+include __DIR__ . "/../../01_premiere_connexion.php";
+include __DIR__ . '/../../php/modification_variable.php';
+include __DIR__ . '/../../php/verification_formulaire.php';
 
-    if (isset($_POST["deconnexion"])){
-        session_unset();
-        session_destroy();
-        header("Location:../../index.php");
-        exit();
-    }else{
+//Connection à la base de données
+$dbh = new PDO("$driver:host=$server;port=$port;dbname=$dbname", $user, $pass); 
+$dbh->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC);
 
-        // Traitement du formulaire de modification du profil vendeur
-        // Récupération des données du formulaire
-        $temps  = time();
-    
-    
-        $newDenom = $_POST['denom'];
-        $newSiren = $_POST['siren'];
-        $newDescription = $_POST['description'];
-        $newNom = $_POST['nom'];
-        $newPrenom = $_POST['prenom'];
-        $newTel = $_POST['tel'];
-        $newMail = $_POST['mail'];
-        $newAdresse = modifierSiegeSocial($_POST['adresse']);
-        if ($newAdresse != -1){
-            $newVille = $newAdresse['ville'];
-            $newCp = $newAdresse['cp'];
-            $newAdresse = $newAdresse['adresse'];
+$idCompte = $_SESSION["idCompte"];
+
+// Préparation des données qui vont remplir les champs du formulaire
+// Récupération du comptes clients
+foreach($dbh->query("SELECT * FROM sae3_skadjam._compte c
+                                INNER JOIN sae3_skadjam._vendeur v
+                                    ON c.id_compte = v.id_compte
+                                WHERE c.id_compte = $idCompte", PDO::FETCH_ASSOC) as $ligne){
+    // Infos compte
+    $nom = $ligne['nom_compte'];
+    $prenom = $ligne['prenom_compte'];
+    $mail = $ligne['adresse_mail'];
+    $tel = $ligne['numero_telephone'];
+    $tel = "0" . substr($tel, 3);
+
+    // Infos vendeur
+    $denom = $ligne["raison_sociale"];
+    $siren = $ligne["siren"];
+    $iban = $ligne["iban"];
+    $raisonSociale = $ligne["raison_sociale"];
+    $description = isset($ligne["description_vendeur"]) ? $ligne["description_vendeur"] : "Aucune description.";
+}
+// Infos adresse
+foreach($dbh->query("SELECT * FROM sae3_skadjam._compte c
+                    INNER JOIN sae3_skadjam._habite h
+                        ON c.id_compte = h.id_compte
+                    INNER JOIN sae3_skadjam._adresse a
+                        ON h.id_adresse = a.id_adresse
+                    WHERE c.id_compte = $idCompte", PDO::FETCH_ASSOC) as $adresseData){
+    $adresse = $adresseData["adresse_postale"];
+    $num = $adresseData["numero_rue"];
+    $numBis = $adresseData["complement_adresse"];
+    $cp = $adresseData["code_postal"];
+    $ville = $adresseData["ville"];
+}
+
+
+?>
+
+<!DOCTYPE html>
+<html lang="fr">
+<?php include (__DIR__ . "/../../php/structure/head_back.php");?>
+<head>
+    <title>Modification du compte vendeur</title>
+    <style>
+        button a:hover {
+            color: #000; 
         }
+    </style>
+</head>
 
-        $image = $_FILES['image'];
-        $imageSupprimee = ($_POST['imageSupprimee']==="true")? true : false ; // 'true' ou 'false'
-     
-        if ($image['size'] === 0){
-            $image = null;
-        }else{
-            $urlPhoto = "images/images_vendeur/" . $temps;
-            $imageAlt = explode(".",$image['name'])[0];
-            $imageTitre = explode(".",$image['name'])[0];
-        }
-    
-        $erreurs = [];
-        // Validation des données
-        /* NOM */
-        if (!verifNomPrenom($newNom)) $erreurs["nom"] = "Lettre majuscule ou minuscule seulement";
-    
-        /* PRENOM */
-        if (!verifNomPrenom($newPrenom)) $erreurs["prenom"] = "Lettre majuscule ou minuscule seulement";
-    
-        /* MAIL */
-        if (!verifMail($newMail)) $erreurs["mail"] = "Format incorrecte";
-    
-        /* TEL */
-        if (!verifTelephone($newTel)) $erreurs["tel"] = "Numéro à 10 chiffres";
-    
-        /* RS */
-        if (!verifDenomination($newDenom)) $erreurs["denomination"] = "Autorisé majuscules, minuscules et chiffres";
-    
-        /* SIREN */
-        if (!verifSiren($newSiren)) $erreurs["siren"] = "Numéro SIREN invalide, taille 9";
-    
-        /* ##### ADRESSE ##### */
-        if ($newAdresse == -1){
-            $erreurs["adresse"] = "format de l'adresse doit etre : <br> 4 [bis] rue camélia, Paris, 75011";
-        }else{
-            if (!verifCp($newCp)) $erreurs["cp"] = "Code postale invalide";
-        
-            if (!verifVille($newVille)) $erreurs["ville"] = "Format ville incorrect";
-        
-            if (!verifAdresse($newAdresse)) $erreurs["adresse"] = "Format de l'adresse invalide";
+<body>
+    <?php include __DIR__."/../../php/structure/header_back.php"; ?>
+    <main style="margin: 0" class="flex flex-col justify-center">
+        <?php include __DIR__."/../../php/structure/navbar_back.php"; ?>
 
-        }
-        
-        // Vérifier la taille
-        if ($image) {
-            if ($image['error'] !== UPLOAD_ERR_OK) $erreurs['imageTelechargement'] = "Erreur lors du téléchargement de l'image.";
-            
-            $formatAutorise = ['image/jpeg', 'image/png', 'image/webp'];
-            if (!in_array($image['type'], $formatAutorise))  $erreurs['imageFormat'] = "Format d'image non autorisé. Seuls les formats JPEG, PNG et WEBP sont autorisés.";
-            
-            if ($image['size'] > 5 * 1024 * 1024) $erreurs['imageTaille'] = "L'image dépasse la taille maximale de 5 Mo.";
-    
-        }
-    
-        $temp = tabAdresse($newAdresse);
-        $newNumero = $temp[0];
-        $newCompNum = $temp[1];
-        $newAdresse = $temp[2];
-    
-        // Mettre à jour la base de données avec les nouvelles valeurs
-        if (empty($erreurs)) {
-        
-    
-            try {
-                $dbh->beginTransaction();
-    
-                // Mettre à jour les informations du compte
-                $stmt = $dbh->prepare("UPDATE sae3_skadjam._compte SET nom_compte = ?, prenom_compte = ?, adresse_mail = ?, numero_telephone = ? WHERE id_compte = ?");
-                $stmt->execute([$newNom, $newPrenom, $newMail, formatTel($newTel), $idCompte]);
-        
-                // Mettre à jour les informations du vendeur
-                $stmt = $dbh->prepare("UPDATE sae3_skadjam._vendeur SET raison_sociale = ?, siren = ?, description_vendeur = ? WHERE id_compte = ?");
-                $stmt->execute([$newDenom, $newSiren, $newDescription, $idCompte]);
-        
-                // Mettre à jour l'adresse 
-                $stmt = $dbh->prepare("UPDATE sae3_skadjam._adresse AS a SET adresse_postale = ?, complement_adresse = ?, numero_rue = ?, code_postal = ?, ville = ? FROM sae3_skadjam._habite AS h WHERE a.id_adresse = h.id_adresse AND h.id_compte = ?");
-                $stmt->execute([$newAdresse, $newCompNum, $newNumero, $newCp, $newVille, $idCompte]);
-    
-                //si l'image est supprimee
-                if ($imageSupprimee){
-    
-                    //supprimer le lien entre l'image et le compte
-                    $stmt = $dbh->prepare("DELETE FROM sae3_skadjam._presente WHERE id_photo = ?");
-                    $stmt->execute([$tabPhoto['id_photo']]);
-    
-                    //supprimer l'image
-                    $stmt = $dbh->prepare("DELETE FROM sae3_skadjam._photo where id_photo = ?");
-                    $stmt->execute([$tabPhoto['id_photo']]);
-                }else{
-                    if ($image){
-                        move_uploaded_file($image['tmp_name'], __DIR__ . "/../../" . $urlPhoto);
-                        if ($tabPhoto) {
-                            // Mettre à jour la photo existante
-                            $stmt = $dbh->prepare("UPDATE sae3_skadjam._photo SET url_photo = ?, alt = ?, titre = ? WHERE id_photo = ?");
-                            $stmt->execute([$urlPhoto, $imageAlt, $imageTitre, $tabPhoto['id_photo']]);
-    
-                        }else {
-                            // Insérer une nouvelle photo
-                            $stmt = $dbh->prepare("INSERT INTO sae3_skadjam._photo (url_photo, alt, titre) VALUES (?, ?, ?) RETURNING id_photo");
-                            $stmt->execute([$urlPhoto, $imageAlt, $imageTitre]);
-                            $newPhotoId = $stmt->fetchColumn();
-            
-                            // Lier la nouvelle photo au vendeur
-                            $stmt = $dbh->prepare("INSERT INTO sae3_skadjam._presente (id_vendeur, id_photo) VALUES (?, ?)");
-                            $stmt->execute([$idCompte, $newPhotoId]);
-                        }
-                    }
-                }
-    
-                
-    
-                $dbh->commit();
-    
-                // Rediriger ou afficher un message de succès
-                header("Location: profil_vendeur.php");
-                exit;
-            } catch (PDOException $e) {
-                echo "Erreur lors de la mise à jour : " . $e->getMessage();
-                exit;
-            }
-        }
-    }
-
-}?>
-
-<div class="container-image relative flex items-center justify-center w-80 border-4 border-solid rounded-2xl border-beige mb-3">
-                        <img class="image-vendeur w-80 rounded-2xl" src="<?= "../../" .  $photo["url_photo"] ?>" alt="<?= $photo["alt"] ?>" title="<?= $photo["titre"] ?>">
-
-                        <button type="button" class="bouton-poubelle group/poubelle cursor-pointer ml-4 float-right absolute top-2 right-2 bg-beige rounded-sm p-1">
-                            <img src="../../images/logo/bootstrap_icon/trash.svg" alt="supprimer-image" title="supprimer-image" class=" w-8! h-8! block group-hover/poubelle:hidden">
-                            <img src="../../images/logo/bootstrap_icon/trash-fill.svg" alt="supprimer-image" title="supprimer-image" class=" w-8! h-8! hidden group-hover/poubelle:block">
-                        </button>
-                                
-                    </div>
-
-                    if ($tabPhoto){ 
-                    $photo = $tabPhoto;
-                    ?>
-                    <div class="container-image relative flex items-center justify-center w-80 border-4 border-solid rounded-2xl border-beige mb-3">
-                        <img class="image-vendeur w-80 rounded-2xl" src="<?= "../../" .  $photo["url_photo"] ?>" alt="<?= $photo["alt"] ?>" title="<?= $photo["titre"] ?>">
-                    </div>
-
-                <?php }else{ ?>
-                    <div class="container-image vide relative flex items-center justify-center w-80 h-80 mb-3 bg-beige rounded-2xl">
-                        <img class="image-vendeur w-80 rounded-2xl" src="../../images/logo/bootstrap_icon/image.svg" alt="aucune image" title="aucune image">
-                        <button type="button" class="bouton-poubelle group/poubelle cursor-pointer ml-4 float-right absolute top-2 right-2 bg-beige rounded-sm p-1 hidden">
-                            <img src="../../images/logo/bootstrap_icon/trash.svg" alt="supprimer-image" title="supprimer-image" class=" w-8! h-8! block group-hover/poubelle:hidden">
-                            <img src="../../images/logo/bootstrap_icon/trash-fill.svg" alt="supprimer-image" title="supprimer-image" class=" w-8! h-8! hidden group-hover/poubelle:block">
-                        </button>
-                    
-                    </div>
-
-                    
-                <?php } ?>
-                <?php
-                if ($tabPhoto){ ?>
-                    <label class="label-image cursor-pointer w-80 rounded-2xl  bg-beige p-2 text-center"  for="image">Modifier l'image</label>
-                <?php
-                } else { ?>
-                    <label class="label-image cursor-pointer w-80 rounded-2xl bg-beige p-2 text-center"  for="image">Ajouter une image</label>
-                <?php
-                }
-
-                <button type="button" class="bouton-annuler-image <?= ($tabPhoto) ? "image-modifie" : "image-ajoute" ?> hidden cursor-pointer w-80 rounded-2xl bg-beige p-2 text-center mt-2">Annuler la modification</button>
-                <input type="text" name="adresse" class="champ-text w-full ml-5 hidden border-4 border-solid rounded-2xl p-1 border-beige pl-3" value="<?= "$num $numBis $adresse, $ville, $cp" ?>" placeholder="XX [bis] rue camélia, Paris, 75011">
-                    <?= (isset($erreurs["adresse"])) ? "<p class=\"text-rouge\">" . $erreurs["adresse"] . " </p>" : '' ?>
-                    <?= (isset($erreurs["ville"])) ? "<p class=\"text-rouge\">" . $erreurs["ville"] . " </p>" : '' ?>
-                    <?= (isset($erreurs["cp"])) ? "<p class=\"text-rouge\">" . $erreurs["cp"] . " </p>" : '' ?>
-                <input type="text" name="siren" class="champ-text w-full ml-5 hidden border-4 border-solid rounded-2xl p-1 border-beige pl-3" value="<?= $siren ?>">
-                    <?= (isset($erreurs["siren"])) ? "<p class=\"text-rouge\">" . $erreurs["siren"] . " </p>" : '' ?>
-                <input type="text" name="nom" class="champ-text w-full ml-5 hidden border-4 border-solid rounded-2xl p-1 border-beige pl-3" value="<?= $nom ?>">
-                    <?= (isset($erreurs["nom"])) ? "<p class=\"text-rouge\">" . $erreurs["nom"] . " </p>" : '' ?>
-                <input type="text" name="prenom" class="champ-text w-full ml-5 hidden border-4 border-solid rounded-2xl p-1 border-beige pl-3" value="<?= $prenom ?>">
-                    <?= (isset($erreurs["prenom"])) ? "<p class=\"text-rouge\">" . $erreurs["prenom"] . " </p>" : '' ?>
-                <input type="text" name="tel" class="champ-text w-full ml-5 hidden border-4 border-solid rounded-2xl p-1 border-beige pl-3" value="<?= $tel ?>">
-                    <?= (isset($erreurs["tel"])) ? "<p class=\"text-rouge\">" . $erreurs["tel"] . " </p>" : '' ?>
-                <input type="text" name="mail" class="champ-text w-full ml-5 hidden border-4 border-solid rounded-2xl p-1 border-beige pl-3" value="<?= $mail ?>">
-                    <?= (isset($erreurs["mail"])) ? "<p class=\"text-rouge\">" . $erreurs["mail"] . " </p>" : '' ?>
-                <textarea name="description" class="textarea champ-text ml-5 hidden border-4 border-solid rounded-2xl p-1 border-beige pl-3 w-full h-40"><?= $description ?></textarea>
-                <div class="flex flex-row justify-around mt-8 mb-8 @max-[768px]:flex-col @max-[768px]:items-center">
-                    <a href="profil_vendeur.php" class="cursor-pointer text-center block w-64 border-4 border-solid rounded-2xl border-beige p-1 pl-3">Annuler</a>
-                    <input type="submit" value="Valider" class="cursor-pointer w-64 border-4 border-solid rounded-2xl p-1 border-beige pl-3 @max-[768px]:mt-2" id="valider">
+        <h2 class="flex justify-center text-center">Modification du compte vendeur</h2>
+        <!-- Formulaire -->
+        <form class="flex flex-wrap p-15 pt-0 justify-around"  action="../../php/traitement_donnees_compte_vendeur.php" method="post"> 
+            <h3>Informations vendeur :</h3>
+            <div class="flex flex-row flex-wrap justify-between ml-10 mb-7 mr-10 @max-[768px]:ml-5 @max-[768px]:mr-5">
+                <div class="flex flex-col items-start mt-6 w-fit @max-[768px]:mt-2">
+                    <label for="nom">Nom * :</label>
+                    <input class="ml-5 border-4 border-solid rounded-2xl border-beige p-1 pl-3 mb-4 @max-[768px]:ml-2 max-w-3/4 @max-[768px]:pl-2" type="text" id="nom" name="nom" value="<?= $nom; ?>" size="25" required >
                 </div>
+                <div class="flex flex-col items-start mt-6 w-fit @max-[768px]:mt-2">
+                    <label for="prenom">Prénom * :</label>
+                    <input class="ml-5 border-4 border-solid rounded-2xl border-beige p-1 pl-3 mb-4 @max-[768px]:ml-2 max-w-3/4 @max-[768px]:pl-2 " type="text" id="prenom" name="prenom" value="<?= $prenom; ?>" size="25" required>
+                </div>
+                <div class="flex flex-col items-start mt-6 w-fit @max-[768px]:mt-2">
+                    <label for="mail">Mail * :</label>
+                    <input class="ml-5 border-4 border-solid rounded-2xl border-beige p-1 pl-3 mb-4 @max-[768px]:ml-2 max-w-3/4 @max-[768px]:pl-2 " type="email" id="mail" name="mail" value="<?= $mail; ?>" size="40" required>
+                </div>
+                <div class="flex flex-col items-start mt-6 w-fit @max-[768px]:mt-2">
+                    <label for="tel">Numéro de téléphone * :</label>
+                    <input class="ml-5 border-4 border-solid rounded-2xl border-beige p-1 pl-3 mb-4 @max-[768px]:ml-2 max-w-3/4 @max-[768px]:pl-2 " type="tel" id="tel" name="tel" value="<?= $tel; ?>" size="16" required>
+                </div>
+            </div>
+
+            <h3>Informations entreprise :</h3>
+            <div class="flex flex-row flex-wrap justify-between ml-10 mb-7 mr-10">
+                <div class="flex flex-col items-start mt-6 w-fit @max-[768px]:mt-2">
+                    <label for="raisonSociale">Raison sociale de l'entreprise * :</label>
+                    <input class="ml-5 border-4 border-solid rounded-2xl border-beige p-1 pl-3 mb-4 @max-[768px]:ml-2 max-w-3/4 @max-[768px]:pl-2 " type="text" id="raisonSociale" name="raisonSociale" value="<?= $raisonSociale; ?>" size="40" required>
+                </div>
+                <div class="flex flex-col items-start mt-6 w-fit @max-[768px]:mt-2">
+                    <label for="denomination">Nom de l'entreprise * :</label>
+                    <input class="ml-5 border-4 border-solid rounded-2xl border-beige p-1 pl-3 mb-4 @max-[768px]:ml-2 max-w-3/4 @max-[768px]:pl-2 " type="text" id="denomination" name="denomination" value="<?= $denom; ?>" size="40" required>
+                </div> 
+                <div class="flex flex-col items-start mt-6 w-fit @max-[768px]:mt-2">
+                    <label for="siren">Numéro de SIREN * :</label>
+                    <input class="ml-5 border-4 border-solid rounded-2xl border-beige p-1 pl-3 mb-4 @max-[768px]:ml-2 max-w-3/4 @max-[768px]:pl-2 " type="text" id="siren" name="siren" value="<?= $siren; ?>" size="11" required>
+                </div>
+                <div class="flex flex-col items-start mt-6 w-fit @max-[768px]:mt-2">
+                    <label for="iban">Numéro de IBAN * :</label>
+                    <input class="ml-5 border-4 border-solid rounded-2xl border-beige p-1 pl-3 mb-4 @max-[768px]:ml-2 max-w-3/4 @max-[768px]:pl-2 " type="text" id="iban" name="iban" value="<?= $iban; ?>" placeholder="FR" size="40" required>
+                </div>
+            </div>
+
+            <!-- ########## ADRESSE ########## -->
+            <h3>Siège social :</h3>
+            <div class="flex flex-row flex-wrap justify-between ml-10 mb-7 mr-10">
+                <div class="flex flex-col items-start mt-6 w-fit @max-[768px]:mt-2">
+                    <label for="adresse">Adresse * :</label>
+                    <input class="ml-5 border-4 border-solid rounded-2xl border-beige p-1 pl-3 mb-4 @max-[768px]:ml-2 max-w-3/4 @max-[768px]:pl-2 " type="text" id="adresse" name="adresse" value="<?= $num . (isset($numBis) ? " $numBis" : " ") . $adresse; ?>" size="60" placeholder="ex : 3 rue des camélias" required>
+                </div>
+                <div class="flex flex-col items-start mt-6 w-fit @max-[768px]:mt-2">
+                    <label for="ville">Ville * :</label>
+                    <input class="ml-5 border-4 border-solid rounded-2xl border-beige p-1 pl-3 mb-4 @max-[768px]:ml-2 max-w-3/4 @max-[768px]:pl-2 " type="text" id="ville" name="ville" value="<?= $ville; ?>" size="30" required>
+                </div>
+                <div class="flex flex-col items-start mt-6 w-fit @max-[768px]:mt-2">
+                    <label for="cp">Code Postal * :</label>
+                    <input class="ml-5 border-4 border-solid rounded-2xl border-beige p-1 pl-3 mb-4 @max-[768px]:ml-2 max-w-3/4 @max-[768px]:pl-2 " type="text" id="cp" name="cp" value="<?= $cp; ?>" size="10" required>
+                </div>
+                
+            </div>
+
+            <!-- Valider le formulaire -->
+            <div class="flex mt-10 justify-center md:justify-end w-1/1">
+                <button class="cursor-pointer border-2 border-vertFonce rounded-2xl w-40 h-14 p-0 m-0 mr-10" type="button"><a href="./profil_vendeur.php">Annuler</a></button>
+                <input class="cursor-pointer border-2 border-vertFonce rounded-2xl w-40  h-14 p-0 m-0 md:mr-10" type="Submit" name="submit" id="submit" value="Valider">
+            </div>
+        </form>
+    </main>
+
+    <?php 
+    // Import du footer
+    include __DIR__ . "/../../php/structure/footer_back.php";
+
+    // Fermer la connexion à la base de données
+    $dbh = null;
+    ?>
+
+</body>
+</html>

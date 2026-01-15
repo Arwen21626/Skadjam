@@ -33,7 +33,7 @@ foreach($dbh->query("SELECT * FROM sae3_skadjam._compte c
 <html lang="fr">
 <?php include (__DIR__ . "/../../php/structure/head_front.php");?>
 <head>
-    <title>Modification d'un compte client</title>
+    <title>Modification du compte client</title>
     <style>
         button a:hover {
             color: #000; 
