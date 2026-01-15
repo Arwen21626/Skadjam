@@ -5,6 +5,7 @@ require_once __DIR__ . "/../../php/verif_role_fo.php";
 if($_SESSION['role'] != 'client'){
     header('Location: /index.php');
 }else{
+    include __DIR__ . "/../../connexion_recupraptor.php";
     include(__DIR__ . '/../../php/verification_formulaire.php');
     include __DIR__ . '/../../01_premiere_connexion.php';
     
@@ -21,6 +22,39 @@ if($_SESSION['role'] != 'client'){
     // Chope l'attribut Get du script vider panier
     if (isset($_GET["achatValide"])) {
         $achatValide = $_GET["achatValide"];
+    }
+
+    //Récupération du panier
+    $idPanier = $_REQUEST['idPanier'];
+    $sql = "SELECT 
+            pr.libelle_produit,
+            pr.id_produit,
+            pr.id_vendeur,
+            v.raison_sociale,
+            c.quantite_par_produit,
+            pr.prix_ht,
+            pr.prix_ttc,
+            pr.prix_remise,
+            pr.prix_ttc * c.quantite_par_produit as sous_total_ttc,
+            pr.prix_ht * c.quantite_par_produit as sous_total_ht,
+            p.montant_total_ttc,
+            p.nb_produit_total
+        FROM sae3_skadjam._panier p
+        INNER JOIN sae3_skadjam._contient c
+            ON c.id_panier = p.id_panier
+        INNER JOIN sae3_skadjam._produit pr
+            ON pr.id_produit = c.id_produit
+        INNER JOIN sae3_skadjam._vendeur v
+            ON v.id_compte = pr.id_vendeur
+        WHERE p.id_panier = :id_panier
+    ";
+
+    $stmt = $dbh->prepare($sql);
+    $stmt->execute([':id_panier' => $idPanier]);
+    $tabInfosPanier = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+    if (empty($tabInfosPanier)) {
+        die("Erreur : panier vide");
     }
 
     if(isset($_POST['numero']) && $achatValide === false){
@@ -72,6 +106,41 @@ if($_SESSION['role'] != 'client'){
 
         if(($erreurCryptogramme == false && $erreurExpiration == false && $erreurNom == false && $erreurNumero == false) || $achatValide == true){
             $achatValide = true;
+
+            //Insertion de la commande
+            $date_char = date("d/m/Y");
+            $sqlCommande = "INSERT INTO sae3_skadjam._commande (etat, date_commande, montant_total_ttc, id_client)
+                            VALUES (:etat, :date_commande, :montant_total_ttc, :id_client)
+                            RETURNING id_commande";
+
+            $stmtCommande = $dbh->prepare($sqlCommande);
+
+            $stmtCommande->execute([
+                ':etat' => 'En attente',
+                ':date_commande' => $date_char,
+                ':montant_total_ttc' => $tabInfosPanier[0]['montant_total_ttc'],
+                ':id_client' => $idCompte
+            ]);
+
+            $idCommande = $stmtCommande->fetchColumn();
+
+            if (!$idCommande) {
+                throw new Exception("id_commande non récupéré");
+            }
+
+            //Insertion dans la table donne (lien entre panier et commande)
+            $sqlDonne = "INSERT INTO sae3_skadjam._donne (id_panier, id_commande)
+                        VALUES (:id_panier, :id_commande)";
+
+
+            $stmtDonne = $dbh->prepare($sqlDonne);
+
+            $stmtDonne->execute([
+                ':id_panier' => $idPanier,
+                ':id_commande' => $idCommande
+            ]);
+
+            $ret = $rpr->create_bord("15", "alizon", "1 rue branly", 22300, $_POST["nom"], "machin", "6 rue bidule", 22450);
             header("location:/php/vider_panier.php?typeVider=achat&achatValide=" . $achatValide);
         }
         

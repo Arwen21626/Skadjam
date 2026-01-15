@@ -9,6 +9,10 @@
         //récupère toutes les infos de la table commande
         foreach($dbh->query("SELECT c.id_commande, c.date_commande, c.etat, c.montant_total_ttc
                             FROM sae3_skadjam._commande c
+                            INNER JOIN sae3_skadjam._details d
+                            ON d.id_commande = c.id_commande
+                            INNER JOIN sae3_skadjam._produit p
+                            ON p.
                             WHERE c.id_vendeur = $idCompte"
                             , PDO::FETCH_ASSOC) as $row){
             $tabInfoCommandes[] = $row;

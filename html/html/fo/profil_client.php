@@ -78,7 +78,7 @@ if (isset($_POST['logout'])) {
                     <tbody>
                         <tr class="py-4">
                             <th class="py-3 w-37 md:w-auto"><p class="text-left">Pseudo :</p></th>
-                            <td class="py-3"><h3><?php echo htmlentities($pseudo); ?></h2></td>
+                            <td class="py-3"><h3><?php echo htmlentities($pseudo); ?></h3></td>
                         </tr>
                         <tr class="py-4">
                             <th class="py-3"><p class="text-left">Prénom et nom :</p></th>

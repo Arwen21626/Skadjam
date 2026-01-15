@@ -114,8 +114,8 @@
                         else{
                             $classe = "py-4 bg-bleu";
                         }?>
-                        <tr class="<?php echo $classe; ?>">
-                            <td colspan="6" class="text-left py-3 pl-3"><h4>Vendeur : <?php echo $vendeur ;?></h4></td>
+                        <tr class="<?php echo $classe; ?> border-t-2 border-solid border-black">
+                            <th colspan="6" class="text-left py-3 pl-3"><h4>Vendeur : <?php echo $vendeur ;?></h4></th>
                         </tr>
                         <?php foreach($tabInfosCommande as $ligne){ 
                             if($ligne['raison_sociale'] == $vendeur){

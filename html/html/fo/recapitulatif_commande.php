@@ -70,45 +70,11 @@ catch (Exception $e){
     echo "Erreur : " . $e->getMessage();
 }
 
-//création commande, détails et facture si cgv cochées et btn valider appuyé
+//acceptation des cgv --> redirection vers adresse.php
 if (isset($_POST['valider'])) {
     if (!isset($_POST['case'])) {
         die("Erreur : vous devez accepter les CGV");
     }
-    $date_char = date("d/m/Y");
-    //Insertion de la commande
-    $sqlCommande = "INSERT INTO sae3_skadjam._commande (etat, date_commande, montant_total_ttc, id_client)
-                    VALUES (:etat, :date_commande, :montant_total_ttc, :id_client)
-                    RETURNING id_commande";
-
-
-    $stmtCommande = $dbh->prepare($sqlCommande);
-
-    $stmtCommande->execute([
-        ':etat' => 'En attente',
-        ':date_commande' => $date_char,
-        ':montant_total_ttc' => $tabInfosPanier[0]['montant_total_ttc'],
-        ':id_client' => $idCompte
-    ]);
-
-    $idCommande = $stmtCommande->fetchColumn();
-
-    if (!$idCommande) {
-        throw new Exception("id_commande non récupéré");
-    }
-
-    //Insertion dans la table donne (lien entre panier et commande)
-    $sqlDonne = "INSERT INTO sae3_skadjam._donne (id_panier, id_commande)
-                VALUES (:id_panier, :id_commande)";
-
-
-    $stmtDonne = $dbh->prepare($sqlDonne);
-
-    $stmtDonne->execute([
-        ':id_panier' => $idPanier,
-        ':id_commande' => $idCommande
-    ]);
-
     header("Location: ./adresse.php?idPanier=$idPanier");
     exit;
 }
@@ -160,8 +126,8 @@ if (isset($_POST['valider'])) {
                             else{
                                 $classe = "py-4 bg-bleu";
                             }?>
-                            <tr class="<?php echo $classe; ?>">
-                                <td colspan="6" class="text-left py-3 pl-3"><h4>Vendeur : <?php echo $vendeur ;?></h4></td>
+                            <tr class="<?php echo $classe; ?> border-t-2 border-solid border-black">
+                                <th colspan="6" class="text-left py-3 pl-3"><h4>Vendeur : <?php echo $vendeur ;?></h4></th>
                             </tr>
                             <?php foreach($tabInfosPanier as $ligne){ 
                                 if($ligne['raison_sociale'] == $vendeur){
