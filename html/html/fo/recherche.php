@@ -29,6 +29,7 @@
     <title>Recherche</title>
     <?php include __DIR__ . "/../../php/structure/head_front.php"; ?>
     <script src="../../js/fo/recherche.js"></script>
+    <script src="../../js/pagination.js"></script>
 </head>
 
 <body>
