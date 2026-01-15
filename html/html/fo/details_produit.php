@@ -12,9 +12,18 @@
 
     // Requête pour récupérer les infos du produit
     $produit = "vide";
-    foreach($dbh->query("SELECT *
+    
+    foreach($dbh->query("SELECT id_categorie, id_vendeur, libelle_produit, prix_ttc,prix_remise, 
+                            quantite_stock, description_produit, 
+                            note_moyenne, pourcentage_remise
                          FROM sae3_skadjam._produit pr
-                         WHERE pr.id_produit = $idProd AND pr.est_supprime = false AND pr.est_masque = false"
+                            left join sae3_skadjam._reduit rd
+                                on rd.id_produit = pr.id_produit
+                            left join sae3_skadjam._remise r
+                                on r.id_remise = rd.id_remise
+                         WHERE pr.id_produit = $idProd 
+                            AND pr.est_supprime = false 
+                            AND pr.est_masque = false"
                         , PDO::FETCH_ASSOC) as $row){
         $produit = $row;
     }
@@ -55,10 +64,12 @@
         $libelleProd = $produit["libelle_produit"]; // Nom du produit
         $libelleCat = $categorie["libelle_categorie"]; //Libellé de la catégorie
         $prixTTC = str_replace(".", ",", $produit["prix_ttc"]); // Prix du produit
+        $prixRemise = str_replace(".",",", $produit["prix_remise"]); // Prix du produit remiser
         $produitStock = $produit["quantite_stock"]; // Récupère le stock du produit pour savoir si il est disponible ou non
         $nomVendeur = $vendeur["raison_sociale"];
         $produitDesc = $produit["description_produit"];
         $noteMoy = $produit["note_moyenne"];
+        $pourcentage = $produit['pourcentage_remise'];
 
         // Définition du lien vers lequel est renvoyé le client en cliquant sur le bouton ajouter au panier
         // Si il est connecté : le produit est ajouté à son panier
@@ -114,7 +125,9 @@
 
                 <div class="p-2 flex flex-col items-start md:items-center">
                     <div class="flex md:flex-col md:mb-4">
-                        <h3 class="text-center pr-2 self-center"> <?php echo $prixTTC ?>€</h3>
+                        <h3 class="text-center pr-2 self-center <?php echo ($pourcentage !== NULL)?'line-through':'';?>"> <?php echo $prixTTC ?>€</h3>
+                        <h3 class="text-center pr-2 self-center <?php echo ($pourcentage !== NULL)?'':'hidden';?>"> <?php echo $prixRemise ?>€</h3>
+                
                         <p class="text-center pl-2 mt-1 self-center">
                             <?php 
                                 if ($produitStock > 0) { // Le stock est supérieur à 0, le produit est disponible

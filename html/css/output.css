@@ -24,13 +24,13 @@ p, a, input, label, button, details {
   h2, #pageInfo, #pagePrec, #pageSuiv, #premierePage, #dernierePage {
     font-size: 30px;
   }
-  h3 {
+  h3, summary {
     font-size: 25px;
   }
-  h4, summary, #filtresTris {
+  h4, #filtresTris, .labelDetails {
     font-size: 20px;
   }
-  p, a, input, label, button, details {
+  p, a, input, label, button {
     font-size: 16px;
   }
 }
@@ -47,7 +47,7 @@ p, a, input, label, button, details {
   h4, summary {
     font-size: 25px;
   }
-  p, a, input, label, button, details {
+  p, a, input, label, button {
     font-size: 20px;
   }
 }
