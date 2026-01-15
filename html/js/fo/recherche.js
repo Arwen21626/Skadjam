@@ -217,7 +217,7 @@ function ajoutEventListener(){
 }
 
 function nbPages(){
-    maxPages = Math.ceil((tableau.length)/numberOfItems)
+    let maxPages = Math.ceil((tableau.length)/numberOfItems)
     return maxPages
 }
 
@@ -251,7 +251,6 @@ function pageSuivante(){
 
 function numPageInfo(){
   let pageInfo = document.getElementById("pageInfo")
-  console.log(pageInfo)
   pageInfo.textContent = (actualPage+"/"+nbPages())
 }
 
@@ -291,7 +290,6 @@ function afficherListe(){
             afficherProduit(i)
         }
     }
-    console.log(numPageInfo())
     numPageInfo()
 }
 
@@ -304,7 +302,7 @@ function afficherProduit(indice){
     // Section   
     let produit = document.createElement("section")
     parent.appendChild(produit)
-    produit.classList.add("bg-bleu", "grid", "grid-cols-[40%_60%]", "w-40", "h-120", "md:w-80", "p-2", "md:p-3", "m-2")
+    produit.classList.add("bg-bleu", "grid", "grid-cols-[40%_60%]", "w-40", "h-auto","p-2", "m-2", "md:h-120", "md:w-80", "md:p-3")
     parent = produit
 
     //Lien
@@ -320,14 +318,14 @@ function afficherProduit(indice){
     image.src = tableau[i]['url_photo']
     image.alt = tableau[i]['alt']
     image.title = tableau[i]['title']
-    image.classList.add("w-auto", "h-80", "w-50", "justify-self-center")
+    image.classList.add("w-auto", "h-40", "md:h-80", "justify-self-center")
     parent.appendChild(image)
 
     // Nom produit
     let nom = document.createElement("p")
     nom.textContent = tableau[i]['libelle_produit']
     parent.appendChild(nom)
-    nom.classList.add("col-span-2", "w-70")
+    nom.classList.add("col-span-2", "w-35", "md:w-70")
 
     // Prix et note
     let contient = document.createElement("div")

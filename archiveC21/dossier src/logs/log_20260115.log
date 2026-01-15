@@ -1,0 +1,34 @@
+[07:57:35] [INFO]    [SERV]   (./main.c:103) Démarrage du service Delivraptor
+[07:57:35] [INFO]    [SERV]   (./main.c:130) Serveur prêt sur 127.0.0.1:8080
+[08:03:17] [INFO]    [SERV]   (./main.c:145) Connexion acceptée (fd=5)
+[08:03:17] [INFO]    [CLIENT] (./main.c:171) [127.0.0.1:48416] Client connecté
+[08:03:17] [INFO]    [SERV]   (./main.c:276) Connecté a la BDD
+[08:03:17] [INFO]    [SERV]   (./main.c:277) SET search_path...
+[08:03:17] [INFO]    [SERV]   (./main.c:282) SET search_path success
+[08:03:17] [INFO]    [SERV]   (./main.c:287) Base de données actuelle : postgres
+[08:03:17] [INFO]    [SERV]   (./main.c:293) Schéma courant (search_path) : sae3_delivraptor
+[08:03:17] [INFO]    [CLIENT] (./main.c:202) [127.0.0.1:48416] Commande reçue : CONN
+[08:03:17] [INFO]    [CLIENT] (./model/clien.c:160) [127.0.0.1:48416] Tentative d'authentification pour 'mewen'
+[08:03:17] [INFO]    [CLIENT] (./model/clien.c:165) [127.0.0.1:48416] Authentification réussie pour 'mewen'
+[08:03:17] [INFO]    [CLIENT] (./main.c:202) [127.0.0.1:48416] Commande reçue : ADD
+[08:03:17] [INFO]    [CLIENT] (./model/clien.c:29) [127.0.0.1:48416] ADD: données extraites avec succès
+[08:03:17] [INFO]    [SERV]   (./model/clien.c:55) Bordereau existant trouvé : ALI1768404069
+[08:03:17] [INFO]    [CLIENT] (./model/clien.c:108) [127.0.0.1:48416] Réponse envoyée : BORD ALI1768404069 com15
+
+[08:03:17] [INFO]    [CLIENT] (./main.c:183) [127.0.0.1:48416] Client déconnecté
+[08:31:05] [INFO]    [SERV]   (./main.c:145) Connexion acceptée (fd=5)
+[08:31:05] [INFO]    [CLIENT] (./main.c:171) [127.0.0.1:46052] Client connecté
+[08:31:05] [INFO]    [SERV]   (./main.c:276) Connecté a la BDD
+[08:31:05] [INFO]    [SERV]   (./main.c:277) SET search_path...
+[08:31:05] [INFO]    [SERV]   (./main.c:282) SET search_path success
+[08:31:05] [INFO]    [SERV]   (./main.c:287) Base de données actuelle : postgres
+[08:31:05] [INFO]    [SERV]   (./main.c:293) Schéma courant (search_path) : sae3_delivraptor
+[08:31:05] [INFO]    [CLIENT] (./main.c:202) [127.0.0.1:46052] Commande reçue : CONN
+[08:31:05] [INFO]    [CLIENT] (./model/clien.c:160) [127.0.0.1:46052] Tentative d'authentification pour 'mewen'
+[08:31:05] [INFO]    [CLIENT] (./model/clien.c:165) [127.0.0.1:46052] Authentification réussie pour 'mewen'
+[08:31:05] [INFO]    [CLIENT] (./main.c:202) [127.0.0.1:46052] Commande reçue : ADD
+[08:31:05] [INFO]    [CLIENT] (./model/clien.c:29) [127.0.0.1:46052] ADD: données extraites avec succès
+[08:31:05] [INFO]    [SERV]   (./model/clien.c:55) Bordereau existant trouvé : ALI1768404069
+[08:31:05] [INFO]    [CLIENT] (./model/clien.c:108) [127.0.0.1:46052] Réponse envoyée : BORD ALI1768404069 com15
+
+[08:31:05] [INFO]    [CLIENT] (./main.c:183) [127.0.0.1:46052] Client déconnecté

@@ -4,6 +4,10 @@
     require(__DIR__ . '/../../01_premiere_connexion.php');
     $idCompte = $_SESSION['idCompte'];
 
+    if($idCompte == null){
+        echo "Vous n'êtes pas connecté.";
+    }
+
     try {     
         $tabInfoCommandes = null;           
         //récupère toutes les infos de la table commande
