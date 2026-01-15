@@ -1,7 +1,6 @@
-const numberOfItems = 24 //NB produits à afficher tablette
-// const numberOfItemsPhone = 12 //NB produits à afficher
+const numberOfItems = 24 //NB produits à afficher
 let first = 0
-let actualPage
+let actualPage = 1 
 
 let tableau = []
 
@@ -101,14 +100,11 @@ function ajoutEventListener(){
         if(categorieAlimentaire.checked){
             checkedCategories.push("alimentaire")
             tableau = filtrageCategorieAlimentaire(tabProd);
-            console.log("check")
             
         }else{
             checkedCategories.pop("alimentaire")
-            console.log("uncheck")
         }
-        
-        console.log("tabAlim " + tableau)
+
         afficherListe()
     })
 
@@ -116,13 +112,10 @@ function ajoutEventListener(){
     categorieVetement.addEventListener("click",function () {
         if(categorieVetement.checked){
             checkedCategories.push("vetement")
-            tableau = filtrageCategorieVetement(tabProd);
-            console.log("check")
+            tableau = filtrageCategorieVetement(tabProd)
         }else{
             checkedCategories.pop("vetement")
-            console.log("uncheck")
         }
-        console.log("tabVet " + tableau)
         afficherListe()
     })
 
@@ -130,13 +123,11 @@ function ajoutEventListener(){
     categorieArtisanat.addEventListener("click",function () {
         if(categorieArtisanat.checked){
             checkedCategories.push("artisanat")
-            tableau = filtrageCategorieArtisanat(tabProd);
-            console.log("check")
+            tableau = filtrageCategorieArtisanat(tabProd)
         }else{
             checkedCategories.pop("artisanat")
-            console.log("uncheck")
         }
-        console.log("tabArt " + tableau)
+
         afficherListe()
     })
 
@@ -144,13 +135,10 @@ function ajoutEventListener(){
     categorieGoodies.addEventListener("click",function () {
         if(categorieGoodies.checked){
             checkedCategories.push("goodies")
-            tableau = filtrageCategorieGoodies(tabProd);
-            console.log("check")
+            tableau = filtrageCategorieGoodies(tabProd)
         }else{
             checkedCategories.pop("goodies")
-            console.log("uncheck")
         }
-        console.log("tabGood " + tableau)
         afficherListe()
     })
 
@@ -159,12 +147,9 @@ function ajoutEventListener(){
         if(categorieSoin.checked){
             checkedCategories.push("soin")
             tableau = filtrageCategorieSoin(tabProd);
-            console.log("check")
         }else{
             checkedCategories.pop("soin")
-            console.log("uncheck")
         }
-        console.log("tabSoin " + tableau)
         afficherListe()
     })
     
@@ -213,28 +198,28 @@ function ajoutEventListener(){
     let changePage = document.getElementById("changePage")
 
     // Fonction ouverture
-    boutonSidebar.addEventListener("click", function(){
-        boutonSidebar.classList.add("hidden")
-        prod.classList.add("content-end")
-        sidebar.classList.remove("hidden")
-        sidebar.classList.add("translate-x-0")
-    })
+    // boutonSidebar.addEventListener("click", function(){
+    //     boutonSidebar.classList.add("hidden")
+    //     prod.classList.add("content-end")
+    //     sidebar.classList.remove("hidden")
+    //     sidebar.classList.add("translate-x-0")
+    // })
 
     //Fonction fermeture
-    fermerSidebar.addEventListener("click", function(){
-        sidebar.classList.remove("translate-x-0")
-        sidebar.classList.add("hidden")
-        boutonSidebar.classList.remove("hidden")
-        prod.classList.remove("content-end")
-    })
+    // fermerSidebar.addEventListener("click", function(){
+    //     sidebar.classList.remove("translate-x-0")
+    //     sidebar.classList.add("hidden")
+    //     boutonSidebar.classList.remove("hidden")
+    //     prod.classList.remove("content-end")
+    // })
 
-    console.log(checkedCategories)  
-    if(checkedCategories.length === 0 /*&& checkedNotes.length === 0 && checkedTranches.length === 0*/){
-        console.log("rien n'est coché")
-        tableau = tabProd
-    }
+    
 }
 
+function nbPages(){
+    let maxPages = Math.ceil((tableau.length)/numberOfItems)
+    return maxPages
+}
 
 function firstPage(){
     first = 0
@@ -243,8 +228,8 @@ function firstPage(){
 }
 
 function lastPage(){
-    first = (maxPages * numberOfItems)-numberOfItems;
-    actualPage = maxPages;
+    first = (nbPages() * numberOfItems)-numberOfItems;
+    actualPage = nbPages();
     afficherListe(); 
 }
 
@@ -264,15 +249,37 @@ function pageSuivante(){
     }
 }
 
-// function numPageInfo(){
-//   document.getElementById('pageInfo').innerHTML = `
-//     Page ${actualPage} / ${maxPages}
-//   `
-// }
+function numPageInfo(){
+  let pageInfo = document.getElementById("pageInfo")
+  pageInfo.textContent = (actualPage+"/"+nbPages())
+}
 
 
 // Affichage
-function afficherListe(){
+function afficherListe(){  
+    if(checkedCategories.length === 0 /*&& checkedNotes.length === 0 && checkedTranches.length === 0*/){
+        tableau = tabProd
+    }else{
+        for(let i=0; i<checkedCategories.length; i++){
+            if(checkedCategories[i] === "alimentaire"){
+                tableau = tableau.concat(filtrageCategorieAlimentaire(tabProd));
+            }
+            if(checkedCategories[i] === "vetement"){
+                tableau = tableau.concat(filtrageCategorieVetement(tabProd));
+            }
+            if(checkedCategories[i] === "artisanat"){
+                tableau = tableau.concat(filtrageCategorieArtisanat(tabProd));
+            }
+            if(checkedCategories[i] === "goodies"){
+                tableau = tableau.concat(filtrageCategorieGoodies(tabProd));
+            }
+            if(checkedCategories[i] === "soin"){
+                tableau = tableau.concat(filtrageCategorieSoin(tabProd));
+            }
+        }
+    }
+
+
     if(tableau.length === 0){
         tableau = tabProd
     }
@@ -283,6 +290,7 @@ function afficherListe(){
             afficherProduit(i)
         }
     }
+    numPageInfo()
 }
 
 
@@ -294,7 +302,7 @@ function afficherProduit(indice){
     // Section   
     let produit = document.createElement("section")
     parent.appendChild(produit)
-    produit.classList.add("bg-bleu", "grid", "grid-cols-[40%_60%]", "w-40", "h-110", "md:w-80", "p-2", "md:p-3", "m-2")
+    produit.classList.add("bg-bleu", "grid", "grid-cols-[40%_60%]", "w-40", "h-120", "md:w-80", "p-2", "md:p-3", "m-2")
     parent = produit
 
     //Lien
@@ -310,14 +318,14 @@ function afficherProduit(indice){
     image.src = tableau[i]['url_photo']
     image.alt = tableau[i]['alt']
     image.title = tableau[i]['title']
-    image.classList.add("w-auto", "h-80", "w-30", "justify-self-center")
+    image.classList.add("w-auto", "h-80", "w-50", "justify-self-center")
     parent.appendChild(image)
 
     // Nom produit
     let nom = document.createElement("p")
     nom.textContent = tableau[i]['libelle_produit']
     parent.appendChild(nom)
-    nom.classList.add("col-span-2")
+    nom.classList.add("col-span-2", "w-70")
 
     // Prix et note
     let contient = document.createElement("div")
@@ -431,40 +439,28 @@ async function affichageNote(note, parent ){
 }
 
 // Tris
-function triPrixCroissant(tab){
-    let temp = tab.sort((a, b) => parseInt(a['prix_ttc']) - parseInt(b['prix_ttc']))
-    console.log(temp)
-    return tab.sort((a, b) => parseInt(a['prix_ttc']) - parseInt(b['prix_ttc']))
+function triPrixCroissant(tableau){
+    return tableau.sort((a, b) => parseInt(a['prix_ttc']) - parseInt(b['prix_ttc']))
 }
 
-function triPrixDecroissant(tab){
-    let temp = tab.sort((a, b) => parseFloat(b['prix_ttc']) - parseFloat(a['prix_ttc']))
-    console.log(temp)
-    return tab.sort((a, b) => parseFloat(b['prix_ttc']) - parseFloat(a['prix_ttc']))
+function triPrixDecroissant(tableau){
+    return tableau.sort((a, b) => parseFloat(b['prix_ttc']) - parseFloat(a['prix_ttc']))
 }
 
-function triAz(tab){
-    let temp = tab.sort((a,b) => a['libelle_produit'].localeCompare(b['libelle_produit']))
-    console.log(temp)
-    return tab.sort((a,b) => a['libelle_produit'].localeCompare(b['libelle_produit']))
+function triAz(tableau){
+    return tableau.sort((a,b) => a['libelle_produit'].localeCompare(b['libelle_produit']))
 }
 
-function triZa(tab){
-    let temp = tab.sort((a,b) => b['libelle_produit'].localeCompare(a['libelle_produit']))
-    console.log(temp)
-    return tab.sort((a,b) => b['libelle_produit'].localeCompare(a['libelle_produit']))
+function triZa(tableau){
+    return tableau.sort((a,b) => b['libelle_produit'].localeCompare(a['libelle_produit']))
 }
 
-function triEtoileCroissant(tab){
-    let temp = tab.sort((a,b) => parseFloat(a['note_moyenne']) - parseFloat(b['note_moyenne']))
-    console.log(temp)
-    return tab.sort((a,b) => parseFloat(a['note_moyenne']) - parseFloat(b['note_moyenne']))
+function triEtoileCroissant(tableau){
+    return tableau.sort((a,b) => parseFloat(a['note_moyenne']) - parseFloat(b['note_moyenne']))
 }
 
-function triEtoileDecroissant(tab){
-    let temp = tab.sort((a,b) => parseFloat(b['note_moyenne']) - parseFloat(a['note_moyenne']))
-    console.log(temp)
-    return tab.sort((a,b) => parseFloat(b['note_moyenne']) - parseFloat(a['note_moyenne']))
+function triEtoileDecroissant(tableau){
+    return tableau.sort((a,b) => parseFloat(b['note_moyenne']) - parseFloat(a['note_moyenne']))
 }
 
 
@@ -474,7 +470,6 @@ function triEtoileDecroissant(tab){
 // Alimentaire = 1
 function filtrageCategorieAlimentaire(tableau){ 
     newTab = tableau.filter(tabProd => tabProd['id_categorie'] === 1)
-    // console.log(newTab)
     return newTab
 }
 

@@ -37,8 +37,6 @@
 <body>
     <script>
         const tabProd = <?php echo json_encode($tabProduit);?>;
-        const maxPages = (tabProd.length)/numberOfItems
-        // let lignes = calculNbPages(tabProd)[0]
     </script>
 
     <!--header-->
@@ -48,8 +46,7 @@
     
     <main class="min-h-[600px]">
         <!-- Barre de recherche -->
-        <button id="filtresTris">Filtres & tris</button>
-        <aside class="sidebar overflow-auto hidden float-left bg-vertFonce text-bleu p-4 sticky w-79 h-auto top-20 left-0">
+        <aside class="sidebar overflow-auto float-left bg-vertFonce text-bleu p-4 sticky w-79 h-225 top-20">
             <!-- Filtres -->
             <section>
                 
@@ -229,15 +226,18 @@
         <section id="listeProduit" class="flex flex-col items-center">
             <article id="prod" class="flex flex-row flex-wrap justify-around w-auto">
                 <script>
-                    afficherListe()
+                    document.addEventListener("DOMContentLoaded", () => {
+                        afficherListe()
+                    });
                 </script>
             </article>
             <!--fin du catalogue-->
-            <article id="changePage" class="grid grid-cols-2 md:flex md:flex-row md:justify-around w-96 md:w-275">
-                <button id="pagePrec" class="md:order-2">Page prec</button>
-                <button id="pageSuiv" class="md:order-3">Page suiv</button>
-                <button id="premierePage" class="md:order-1">Premiere page</button>
-                <button id="dernierePage" class="md:order-4">Derniere page</button>
+            <article id="changePage" class="flex flex-row justify-around w-96">
+                <button id="pagePrec" class="md:order-2">|<</button>
+                <button id="pageSuiv" class="md:order-4">>|</button>
+                <p id="pageInfo" class="md:order-3"></p>
+                <button id="premierePage" class="md:order-1"><<</button>
+                <button id="dernierePage" class="md:order-5">>></button>
             </article>
         </section>
         <?php } ?>
