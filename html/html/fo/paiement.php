@@ -121,8 +121,19 @@ if($_SESSION['role'] != 'client'){
                 ':montant_total_ttc' => $tabInfosPanier[0]['montant_total_ttc'],
                 ':id_client' => $idCompte
             ]);
-
             $idCommande = $stmtCommande->fetchColumn();
+
+            //creation numéro de suivi
+            $id_suivi = $rpr->create_bord($idCommande, "alizon", "1 rue branly", 22300, $_POST["nom"], "machin", "6 rue bidule", 22450);
+            
+            //recuperation de l'etat de la commande
+            $etat = $rpr->get_etat($id_suivi);
+
+            $commande = "INSERT INTO sae3_skajam._commande (id_suivi, etat) VALUES (?,?)";
+            $stmt = $dbh->prepare($commande);
+            if (!$stmt->execute([$id_suivi, $etat])){
+                throw new Exception("insertion numero de suivi et etat");
+            }
 
             if (!$idCommande) {
                 throw new Exception("id_commande non récupéré");
@@ -140,7 +151,7 @@ if($_SESSION['role'] != 'client'){
                 ':id_commande' => $idCommande
             ]);
 
-            $ret = $rpr->create_bord("15", "alizon", "1 rue branly", 22300, $_POST["nom"], "machin", "6 rue bidule", 22450);
+            
             header("location:/php/vider_panier.php?typeVider=achat&achatValide=" . $achatValide);
         }
         
