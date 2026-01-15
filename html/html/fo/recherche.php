@@ -221,7 +221,9 @@
         <section id="listeProduit" class="flex flex-col items-center">
             <article id="prod" class="flex flex-row flex-wrap justify-around w-auto">
                 <script>
-                    afficherListe()
+                    document.addEventListener("DOMContentLoaded", () => {
+                        afficherListe()
+                    });
                 </script>
             </article>
             <!--fin du catalogue-->

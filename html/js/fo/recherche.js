@@ -217,7 +217,7 @@ function ajoutEventListener(){
 }
 
 function nbPages(){
-    maxPages = Math.ceil((tableau.length)/numberOfItems)
+    let maxPages = Math.ceil((tableau.length)/numberOfItems)
     return maxPages
 }
 
@@ -251,7 +251,6 @@ function pageSuivante(){
 
 function numPageInfo(){
   let pageInfo = document.getElementById("pageInfo")
-  console.log(pageInfo)
   pageInfo.textContent = (actualPage+"/"+nbPages())
 }
 
@@ -291,7 +290,6 @@ function afficherListe(){
             afficherProduit(i)
         }
     }
-    console.log(numPageInfo())
     numPageInfo()
 }
 
