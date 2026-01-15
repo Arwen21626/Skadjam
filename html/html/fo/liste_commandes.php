@@ -2,6 +2,7 @@
     session_start();
     require_once __DIR__ . "/../../php/verif_role_fo.php";
     require(__DIR__ . '/../../01_premiere_connexion.php');
+    include __DIR__ . '/../../connexion_recupraptor.php';
     $idCompte = $_SESSION['idCompte'];
 
     if($idCompte == null){
@@ -9,6 +10,7 @@
     }
 
     try {     
+
         $tabInfoCommandes = null;           
         //récupère toutes les infos de la table commande
         foreach($dbh->query("SELECT c.id_commande, c.date_commande, c.etat, c.montant_total_ttc
@@ -16,6 +18,8 @@
                             WHERE c.id_client = $idCompte
                             ORDER BY c.date_commande DESC, c.id_commande DESC;"
                             , PDO::FETCH_ASSOC) as $row){
+
+            
             $tabInfoCommandes[] = $row;
         } 
     }
