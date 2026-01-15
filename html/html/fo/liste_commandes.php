@@ -40,19 +40,19 @@
     <?php include __DIR__ . "/../../php/structure/navbar_front.php"; ?>
 
     <main class="min-h-[600px]">
-        <h2 class = "pt-15">Liste de mes commandes</h2>
+        <h2 class = "md:pt-15 pt-10">Liste de mes commandes</h2>
 
         <?php if($tabInfoCommandes == null){ ?>
             <p class="pt-15 text-center">Votre n'avez pas encore effectué de commande.</p>
         <?php }
 
         else{?>
-            <div class="flex justify-center mt-15">
+            <div class="flex justify-center md:mt-15 mt-10">
                 <?php //tableau des commandes ?>
-                <table class="table-auto w-250">
+                <table class="table-auto md:w-250 w-95">
                     <thead>
                         <tr>
-                            <th scope="col" class="w-80 pl-3"><h3>N° de commande</h3></th>
+                            <th scope="col" class="md:w-80 pl-3"><h3>N°</h3></th>
                             <th scope="col"><h3>Date</h3></th>
                             <th scope="col"><h3>Etat</h3></th>
                             <th scope="col"><h3>Total</h3></th>
@@ -73,19 +73,19 @@
                                     $classe = "py-4 bg-bleu";
                                 }?>
                                 <tr class="<?php echo $classe; ?>">
-                                    <th scope="row" class="text-center py-3 pl-3" ><p><?php echo $idCommande; ?></p></th>
+                                    <th scope="row" class="text-left pl-5 md:text-center py-3 md:pl-3" ><p><?php echo $idCommande; ?></p></th>
                                     <td class="text-center py-3"><p><?php echo htmlentities($commande['date_commande']);?></p></td>
                                     <td class="text-center py-3"><p><?php echo htmlentities($commande['etat']);?></p></td>
                                     <td class="text-center py-3"><p><?php echo htmlentities($commande['montant_total_ttc']); ?></p></td>
                                     <td><a href="<?php echo htmlentities("commande.php?idCommande=".$idCommande);?>">
-                                        <img src="../../images/logo/bootstrap_icon/plus-square.svg" alt="voir plus d'informations" class="w-10 h-auto">
+                                        <img src="../../images/logo/bootstrap_icon/plus-square.svg" alt="voir plus d'informations" class="w-8 md:w-10 h-auto">
                                     </a></td>
                                 </tr>
                         <?php }?>
                     </tbody>
                 </table>
             </div>
-            <a href="../../index.php" class="flex justify-center mt-15 mb-15"><button class="border-vertClair border-2 rounded-sm md:rounded-2xl w-35 h-10 md:w-50 md:h-14 px-7 cursor-pointer">Retour</button></a>
+            <a href="../../index.php" class="flex justify-center mt-15 mb-15"><button class="border-vertClair border-4 rounded-lg md:rounded-2xl w-35 h-10 md:w-50 md:h-14 px-7 cursor-pointer">Retour</button></a>
         <?php } ?>
     </main>
 
