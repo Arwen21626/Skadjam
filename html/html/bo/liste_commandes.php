@@ -1,8 +1,5 @@
 <?php
     session_start();
-    
-    echo $_SESSION['role'];
-    echo'ici';
     require_once __DIR__ . "/../../php/verif_role_bo.php";
     require(__DIR__ . '/../../01_premiere_connexion.php');
     $idCompte = $_SESSION['idCompte'];
@@ -20,7 +17,8 @@
                                 ON d.id_commande = c.id_commande
                             INNER JOIN sae3_skadjam._produit p
                                 ON p.id_produit = d.id_produit
-                            WHERE p.id_vendeur = $idCompte;"
+                            WHERE p.id_vendeur = $idCompte
+                            ORDER BY c.date_commande DESC, c.id_commande DESC;"
                             , PDO::FETCH_ASSOC) as $row){
             $tabInfoCommandes[] = $row;
         } 
