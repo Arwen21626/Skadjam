@@ -10,6 +10,7 @@ var checkedTranches = []
 
 // Ajout des eventListeners
 function ajoutEventListener(){
+    tableau = []
     
 // EventListener pour les boutons de changement de page
     // Récupérations des elements
@@ -80,7 +81,7 @@ function ajoutEventListener(){
     const  categorieSoin = document.getElementById("soin")
     const  categorieAlimentaire = document.getElementById("alimentaire")
         // Notes
-    const  noteZeroE = document.getElementById("zeroE")
+    const noteNonNote = document.getElementById("nonNote")
     const  noteUneE = document.getElementById("uneE")
     const  noteDeuxE = document.getElementById("deuxE")
     const  noteTroisE = document.getElementById("troisE")
@@ -95,7 +96,6 @@ function ajoutEventListener(){
 
     // Fonctions de filtres
         //Catégories
-    
     categorieAlimentaire.addEventListener("click",function () {
         if(categorieAlimentaire.checked){
             checkedCategories.push("alimentaire")
@@ -104,7 +104,6 @@ function ajoutEventListener(){
         }else{
             checkedCategories.pop("alimentaire")
         }
-
         afficherListe()
     })
 
@@ -127,7 +126,6 @@ function ajoutEventListener(){
         }else{
             checkedCategories.pop("artisanat")
         }
-
         afficherListe()
     })
 
@@ -154,22 +152,69 @@ function ajoutEventListener(){
     })
     
         // Note
-    noteZeroE.addEventListener("click",function () {
+
+    noteNonNote.addEventListener("click",function () {
+        if(noteNonNote.checked){
+            checkedNotes.push("0")
+            tableau = filtrageNoteNonNote(tabProd);
+            
+        }else{
+            checkedNotes.pop("0")
+        }
+        afficherListe()
     })
 
     noteUneE.addEventListener("click",function () {
+        if(noteUneE.checked){
+            checkedNotes.push("1")
+            tableau = filtrageNote1(tabProd);
+            
+        }else{
+            checkedNotes.pop("1")
+        }
+        afficherListe()
     })
 
     noteDeuxE.addEventListener("click",function () {
+        if(noteDeuxE.checked){
+            checkedNotes.push("2")
+            tableau = filtrageNote2(tabProd);
+            
+        }else{
+            checkedNotes.pop("2")
+        }
+        afficherListe()
     })
 
     noteTroisE.addEventListener("click",function () {
+        if(noteTroisE.checked){
+            checkedNotes.push("3")
+            tableau = filtrageNote3(tabProd);
+            
+        }else{
+            checkedNotes.pop("3")
+        }
+        afficherListe()
     })
     
     noteQuatreE.addEventListener("click",function () {
+        if(noteQuatreE.checked){
+            checkedNotes.push("4")
+            tableau = filtrageNote4(tabProd);
+        }else{
+            checkedNotes.pop("4")
+        }
+        afficherListe()
     })
 
     noteCinqE.addEventListener("click",function () {
+        if(noteCinqE.checked){
+            checkedNotes.push("5")
+            tableau = filtrageNote5(tabProd);
+        }else{
+            checkedNotes.pop("5")
+        }
+        afficherListe()
     })
 
     // Tranche de prix
@@ -192,26 +237,19 @@ function ajoutEventListener(){
     // Récupératiion des elements
     let boutonSidebar = document.getElementById("filtresTris")
     let sidebar = document.getElementsByTagName("aside")[0]
-    let listeProd = document.getElementById("listeProduit")
-    let prod = document.getElementById("prod")
     let fermerSidebar = document.getElementById("fermerSidebar")
-    let changePage = document.getElementById("changePage")
 
     // Fonction ouverture
-    // boutonSidebar.addEventListener("click", function(){
-    //     boutonSidebar.classList.add("hidden")
-    //     prod.classList.add("content-end")
-    //     sidebar.classList.remove("hidden")
-    //     sidebar.classList.add("translate-x-0")
-    // })
+    boutonSidebar.addEventListener("click", function(){
+        boutonSidebar.classList.add("hidden")
+        sidebar.classList.remove("hidden")
+    })
 
     //Fonction fermeture
-    // fermerSidebar.addEventListener("click", function(){
-    //     sidebar.classList.remove("translate-x-0")
-    //     sidebar.classList.add("hidden")
-    //     boutonSidebar.classList.remove("hidden")
-    //     prod.classList.remove("content-end")
-    // })
+    fermerSidebar.addEventListener("click", function(){
+        sidebar.classList.add("hidden")
+        boutonSidebar.classList.remove("hidden")
+    })
 
     
 }
@@ -250,39 +288,81 @@ function pageSuivante(){
 }
 
 function numPageInfo(){
-  let pageInfo = document.getElementById("pageInfo")
-  pageInfo.textContent = (actualPage+"/"+nbPages())
+    let pageInfo = document.getElementById("pageInfo")
+    pageInfo.textContent = (actualPage+"/"+nbPages())
 }
 
+let ali = false
+let vet = false
+let art = false
+let goo = false
+let soi = false
+
+let not0 = false
+let not1 = false
+let not2 = false
+let not3 = false
+let not4 = false
+let not5 = false
 
 // Affichage
-function afficherListe(){  
-    if(checkedCategories.length === 0 /*&& checkedNotes.length === 0 && checkedTranches.length === 0*/){
+function afficherListe(){
+    
+
+    if(checkedCategories.length === 0 && checkedNotes.length === 0 /*&& checkedTranches.length === 0*/){
         tableau = tabProd
     }else{
         for(let i=0; i<checkedCategories.length; i++){
-            if(checkedCategories[i] === "alimentaire"){
+            if(checkedCategories[i] === "alimentaire" && !ali){
                 tableau = tableau.concat(filtrageCategorieAlimentaire(tabProd));
+                ali = true
             }
-            if(checkedCategories[i] === "vetement"){
+            if(checkedCategories[i] === "vetement" && !vet){
                 tableau = tableau.concat(filtrageCategorieVetement(tabProd));
+                vet = true
             }
-            if(checkedCategories[i] === "artisanat"){
+            if(checkedCategories[i] === "artisanat" && !art){
                 tableau = tableau.concat(filtrageCategorieArtisanat(tabProd));
+                art = true
             }
-            if(checkedCategories[i] === "goodies"){
+            if(checkedCategories[i] === "goodies" && !goo){
                 tableau = tableau.concat(filtrageCategorieGoodies(tabProd));
+                goo = true
             }
-            if(checkedCategories[i] === "soin"){
+            if(checkedCategories[i] === "soin" && !soi){
                 tableau = tableau.concat(filtrageCategorieSoin(tabProd));
+                soi = true
+            }
+        }
+
+        for(let j=0; j<checkedNotes.length; j++){
+            if(checkedNotes[j] === "0" && !not0){
+                tableau = tableau.concat(filtrageNoteNonNote(tabProd));
+                not0 = true;
+            }
+            if(checkedNotes[j] === "1" && !not1){
+                tableau = tableau.concat(filtrageNote1(tabProd));
+                not1 = true;
+            }
+            if(checkedNotes[j] === "2" && !not2){
+                tableau = tableau.concat(filtrageNote2(tabProd));
+                not2 = true;
+            }
+            if(checkedNotes[j] === "3" && !not3){
+                tableau = tableau.concat(filtrageNote3(tabProd));
+                not3 = true;
+            }
+            if(checkedNotes[j] === "4" && !not4){
+                tableau = tableau.concat(filtrageNote4(tabProd));
+                not4 = true;
+            }
+            if(checkedNotes[j] === "5" && !not5){
+                tableau = tableau.concat(filtrageNote5(tabProd));
+                not5 = true;
             }
         }
     }
 
-
-    if(tableau.length === 0){
-        tableau = tabProd
-    }
     let parent = document.getElementById("prod")
     parent.innerHTML = ""
     for(let i = first; i < first + numberOfItems;i++){
@@ -501,60 +581,66 @@ function filtrageCategorieSoin(tableau){
 // NOTE
 
 // non noté
-function filtrageNoteNonNote(tabProd){ 
-
+function filtrageNoteNonNote(tableau){ 
+    newTab = tableau.filter(tabProd => tabProd['note_moyenne'] === null)
+    return newTab
 }
 
 // 0 à 1.99
-function filtrageNote1(tabProd){ 
-
+function filtrageNote1(tableau){ 
+    newTab = tableau.filter(tabProd => tabProd['note_moyenne'] >= "0.0" && tabProd['note_moyenne'] < "2")
+    return newTab
 }
 
 // 2 à 2.99
-function filtrageNote2(tabProd){ 
-
+function filtrageNote2(tableau){ 
+    newTab = tableau.filter(tabProd => tabProd['note_moyenne'] >= "2.0" && tabProd['note_moyenne'] < "3")
+    return newTab
 }
 
 // 3 à 3.99
-function filtrageNote3(tabProd){ 
-
+function filtrageNote3(tableau){
+    newTab = tableau.filter(tabProd => tabProd['note_moyenne'] >= "3.0" && tabProd['note_moyenne'] < "4")
+    return newTab
 }
 
 // 4 à 4.99
-function filtrageNote4(tabProd){ 
-
+function filtrageNote4(tableau){
+    newTab = tableau.filter(tabProd => tabProd['note_moyenne'] >= "4.0" && tabProd['note_moyenne'] < "5")
+    return newTab
 }
 
 // 5
-function filtrageNote5(tabProd){ 
-
+function filtrageNote5(tableau){
+    newTab = tableau.filter(tabProd => tabProd['note_moyenne'] === "5.0")
+    return newTab
 }
 
 
 //TRANCHE DE PRIX
 
 // 2.99 - 8.39
-function filtrageTranchePrix1(tabProd){ 
+function filtrageTranchePrix1(tableau){ 
 
 }
 
 // 8.40 - 13.19
-function filtrageTranchePrix2(tabProd){ 
+function filtrageTranchePrix2(tableau){ 
 
 }
 
 // 13.20 - 19.19
-function filtrageTranchePrix3(tabProd){ 
+function filtrageTranchePrix3(tableau){ 
 
 }
 
 // 19.20 - 31.19
-function filtrageTranchePrix4(tabProd){ 
+function filtrageTranchePrix4(tableau){ 
 
 }
 
 // 31.20 - 71.99
-function filtrageTranchePrix5(tabProd){ 
+function filtrageTranchePrix5(tableau){ 
 
 }
 

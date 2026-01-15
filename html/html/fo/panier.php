@@ -24,7 +24,6 @@
                             ORDER BY id_produit ASC") as $row) {
             $produitsPanier[] = $row;
         }
-        
 
         if (!empty($produitsPanier)) 
         {
@@ -43,8 +42,16 @@
                 $rqt = $dbh->query("SELECT url_photo, alt, titre FROM sae3_skadjam._photo WHERE id_photo = $idPhoto", PDO::FETCH_ASSOC);
                 $infoPhoto = $rqt->fetch();
 
+                $rqt = $dbh->query("SELECT r.id_remise, r.pourcentage_remise, p.id_produit, p.prix_remise
+                                    FROM sae3_skadjam._produit p
+                                        LEFT JOIN sae3_skadjam._reduit rd ON rd.id_produit = p.id_produit
+                                        LEFT JOIN sae3_skadjam._remise r ON r.id_remise = rd.id_remise
+                                    WHERE p.id_produit = ".$produitsPanier[$i]["id_produit"], PDO::FETCH_ASSOC);
+                $infoRemise = $rqt->fetch();
+
                 $infoProduitsPanier[$i]["infoProduit"] = $infoProduit;
                 $infoProduitsPanier[$i]["infoPhoto"] = $infoPhoto;
+                $infoProduitsPanier[$i]["infoRemise"] = $infoRemise;
 
                 if ($infoProduitsPanier[$i]["infoProduit"]["quantite_stock"] >= $produitsPanier[$i]["quantite_par_produit"])    
                 {
@@ -92,8 +99,16 @@
             $rqt = $dbh->query("SELECT url_photo, alt, titre FROM sae3_skadjam._photo WHERE id_photo = $idPhoto", PDO::FETCH_ASSOC);
             $infoPhoto = $rqt->fetch();
 
+            $rqt = $dbh->query("SELECT r.id_remise, r.pourcentage_remise, p.id_produit, p.prix_remise
+                                    FROM sae3_skadjam._produit p
+                                        LEFT JOIN sae3_skadjam._reduit rd ON rd.id_produit = p.id_produit
+                                        LEFT JOIN sae3_skadjam._remise r ON r.id_remise = rd.id_remise
+                                    WHERE p.id_produit = ".$prod['id'], PDO::FETCH_ASSOC);
+            $infoRemise = $rqt->fetch();
+
             $infoProduitsPanier[$i]["infoProduit"] = $infoProduit;
             $infoProduitsPanier[$i]["infoPhoto"] = $infoPhoto;
+            $infoProduitsPanier[$i]["infoRemise"] = $infoRemise;
 
             if ($infoProduitsPanier[$i]["infoProduit"]["quantite_stock"] >= $prod["quantite_par_produit"])    
             {
@@ -119,9 +134,6 @@
     }
 ?>
 
-<!-- <pre>
-    
-</pre> -->
 
 <!DOCTYPE html>
 <html lang="fr">
@@ -176,6 +188,7 @@
                                                     </div>
                                                     
                                                     <div class="prix">
+
                                                         <p class="mb-0.5 md:mb-0 prix-u"> <?php echo "Prix unitaire : " . number_format($infoProduitsPanier[$i]["infoProduit"]["prix_ttc"], 2, ',', '') . "€"; ?></p>
                                                         <p class="mt-0.5 md:mt-0 prix-tot"> 
                                                             <?php
@@ -292,12 +305,16 @@
                                                     </div>
                                                     
                                                     <div class="prix">
-                                                        <p class="mb-0.5 md:mb-0 prix-u"><?php echo "Prix unitaire : " . number_format($infoProduitsPanier[$i]["infoProduit"]["prix_ttc"], 2, ',', '') . "€"; ?></p>
+                                                        <p class="inline-block">Prix unitaire :</p>
+                                                        <p class="<?php echo ($infoProduitsPanier[$i]['infoRemise']['id_remise'] !== NULL)?'line-through':'';?> inline-block"> <?php echo htmlentities(str_replace(".", ",",$infoProduitsPanier[$i]['infoProduit']['prix_ttc'])); ?>€</p> 
+                                                        <p class="<?php echo ($infoProduitsPanier[$i]['infoRemise']['id_remise'] !== NULL)?'inline-block':' hidden';?> pl-3"><?php echo htmlentities(str_replace(".", ",",$infoProduitsPanier[$i]['infoRemise']['prix_remise'])); ?>€ </p>
+                                                        <p class="inline-block">(TTC)</p>
+                                                        
                                                         <p class="mt-0.5 md:mt-0 prix-tot"> 
                                                             <?php
-                                                                $prixTot = ($infoProduitsPanier[$i]["infoProduit"]["prix_ttc"] * $infoProduitsPanier[$i]["quantiteProduit"]);
+                                                                $prixTot = ($infoProduitsPanier[$i]["infoRemise"]["prix_remise"] * $infoProduitsPanier[$i]["quantiteProduit"]);
                                                                 $prixTot = number_format($prixTot, 2, ',', '');
-                                                                echo "Prix total : " . $prixTot . "€"; 
+                                                                echo "Prix total : " . $prixTot . "€";
                                                             ?>
                                                         </p>
                                                     </div>
