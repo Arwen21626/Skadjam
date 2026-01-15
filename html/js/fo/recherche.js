@@ -8,6 +8,18 @@ var checkedCategories = []
 var checkedNotes = []
 var checkedTranches = []
 
+
+function toggleFiltre(tableau, valeur) {
+    if (tableau.includes(valeur)) {
+        tableau.splice(tableau.indexOf(valeur), 1);
+    } else {
+        tableau.push(valeur);
+    }
+    first = 0;
+    actualPage = 1;
+    afficherListe();
+}
+
 // Ajout des eventListeners
 function ajoutEventListener(){
     tableau = []
@@ -96,160 +108,74 @@ function ajoutEventListener(){
 
     // Fonctions de filtres
         //Catégories
-    categorieAlimentaire.addEventListener("click",function () {
-        if(categorieAlimentaire.checked){
-            checkedCategories.push("alimentaire")
-            tableau = filtrageCategorieAlimentaire(tabProd)
-            actualPage = 1
-            first = 0
-            
-        }else{
-            checkedCategories.pop("alimentaire")
-        }
-        afficherListe()
-    })
+    categorieAlimentaire.addEventListener("change", function () {
+        toggleFiltre(checkedCategories, "alimentaire", this);
+    });
 
-    
-    categorieVetement.addEventListener("click",function () {
-        if(categorieVetement.checked){
-            checkedCategories.push("vetement")
-            tableau = filtrageCategorieVetement(tabProd)
-            actualPage = 1
-            first = 0
-        }else{
-            checkedCategories.pop("vetement")
-        }
-        afficherListe()
-    })
+    categorieVetement.addEventListener("change", function () {
+        toggleFiltre(checkedCategories, "vetement", this);
+    });
 
-    
-    categorieArtisanat.addEventListener("click",function () {
-        if(categorieArtisanat.checked){
-            checkedCategories.push("artisanat")
-            tableau = filtrageCategorieArtisanat(tabProd)
-            actualPage = 1
-            first = 0
-        }else{
-            checkedCategories.pop("artisanat")
-        }
-        afficherListe()
-    })
+    categorieArtisanat.addEventListener("change", function () {
+        toggleFiltre(checkedCategories, "artisanat", this);
+    });
 
-    
-    categorieGoodies.addEventListener("click",function () {
-        if(categorieGoodies.checked){
-            checkedCategories.push("goodies")
-            tableau = filtrageCategorieGoodies(tabProd)
-            actualPage = 1
-            first = 0
-        }else{
-            checkedCategories.pop("goodies")
-        }
-        afficherListe()
-    })
+    categorieGoodies.addEventListener("change", function () {
+        toggleFiltre(checkedCategories, "goodies", this);
+    });
 
-    
-    categorieSoin.addEventListener("click",function () {
-        if(categorieSoin.checked){
-            checkedCategories.push("soin")
-            tableau = filtrageCategorieSoin(tabProd);
-            actualPage = 1
-            first = 0
-        }else{
-            checkedCategories.pop("soin")
-        }
-        afficherListe()
-    })
+    categorieSoin.addEventListener("change", function () {
+        toggleFiltre(checkedCategories, "soin", this);
+    });
+
     
         // Note
 
-    noteNonNote.addEventListener("click",function () {
-        if(noteNonNote.checked){
-            checkedNotes.push("0")
-            tableau = filtrageNoteNonNote(tabProd);
-            actualPage = 1
-            first = 0
-        }else{
-            checkedNotes.pop("0")
-        }
-        afficherListe()
-    })
+    noteNonNote.addEventListener("change", function () {
+        toggleFiltre(checkedNotes, "0", this);
+    });
 
-    noteUneE.addEventListener("click",function () {
-        if(noteUneE.checked){
-            checkedNotes.push("1")
-            tableau = filtrageNote1(tabProd);
-            actualPage = 1
-            first = 0
-        }else{
-            checkedNotes.pop("1")
-        }
-        afficherListe()
-    })
+    noteUneE.addEventListener("change", function () {
+        toggleFiltre(checkedNotes, "1", this);
+    });
 
-    noteDeuxE.addEventListener("click",function () {
-        if(noteDeuxE.checked){
-            checkedNotes.push("2")
-            tableau = filtrageNote2(tabProd);
-            actualPage = 1
-            first = 0
-        }else{
-            checkedNotes.pop("2")
-        }
-        afficherListe()
-    })
+    noteDeuxE.addEventListener("change", function () {
+        toggleFiltre(checkedNotes, "2", this);
+    });
 
-    noteTroisE.addEventListener("click",function () {
-        if(noteTroisE.checked){
-            checkedNotes.push("3")
-            tableau = filtrageNote3(tabProd);
-            actualPage = 1
-            first = 0            
-        }else{
-            checkedNotes.pop("3")
-        }
-        afficherListe()
-    })
-    
-    noteQuatreE.addEventListener("click",function () {
-        if(noteQuatreE.checked){
-            checkedNotes.push("4")
-            tableau = filtrageNote4(tabProd);
-            actualPage = 1
-            first = 0
-        }else{
-            checkedNotes.pop("4")
-        }
-        afficherListe()
-    })
+    noteTroisE.addEventListener("change", function () {
+        toggleFiltre(checkedNotes, "3", this);
+    });
 
-    noteCinqE.addEventListener("click",function () {
-        if(noteCinqE.checked){
-            checkedNotes.push("5")
-            tableau = filtrageNote5(tabProd);
-            actualPage = 1
-            first = 0
-        }else{
-            checkedNotes.pop("5")
-        }
-        afficherListe()
-    })
+    noteQuatreE.addEventListener("change", function () {
+        toggleFiltre(checkedNotes, "4", this);
+    });
+
+    noteCinqE.addEventListener("change", function () {
+        toggleFiltre(checkedNotes, "5", this);
+    });
+
 
     // Tranche de prix
-    tranchePrix1.addEventListener("click",function () {
-    })
+    tranchePrix1.addEventListener("change", function () {
+        toggleFiltre(checkedTranches, "prix1", this);
+    });
 
-    tranchePrix2.addEventListener("click",function () {
-    })
+    tranchePrix2.addEventListener("change", function () {
+        toggleFiltre(checkedTranches, "prix2", this);
+    });
 
-    tranchePrix3.addEventListener("click",function () {
-    })
-    
-    tranchePrix4.addEventListener("click",function () {
-    })
+    tranchePrix3.addEventListener("change", function () {
+        toggleFiltre(checkedTranches, "prix3", this);
+    });
 
-    tranchePrix5.addEventListener("click",function () {
-    })
+    tranchePrix4.addEventListener("change", function () {
+        toggleFiltre(checkedTranches, "prix4", this);
+    });
+
+    tranchePrix5.addEventListener("change", function () {
+        toggleFiltre(checkedTranches, "prix5", this);
+    });
 
 // EventListeners pour l'animation sidebar filtre et tri
     // Récupératiion des elements
@@ -310,89 +236,68 @@ function numPageInfo(){
     pageInfo.textContent = (actualPage+"/"+nbPages())
 }
 
-let ali = false
-let vet = false
-let art = false
-let goo = false
-let soi = false
-
-let not0 = false
-let not1 = false
-let not2 = false
-let not3 = false
-let not4 = false
-let not5 = false
-
 // Affichage
-function afficherListe(){
-    
+function afficherListe() {
 
-    if(checkedCategories.length === 0 && checkedNotes.length === 0 /*&& checkedTranches.length === 0*/){
-        tableau = tabProd
-        actualPage = 1
-        first = 0
-    }else{
-        
-        for(let i=0; i<checkedCategories.length; i++){
-            if(checkedCategories[i] === "alimentaire" && !ali){
-                tableau = tableau.concat(filtrageCategorieAlimentaire(tabProd));
-                ali = true
-            }
-            if(checkedCategories[i] === "vetement" && !vet){
-                tableau = tableau.concat(filtrageCategorieVetement(tabProd));
-                vet = true
-            }
-            if(checkedCategories[i] === "artisanat" && !art){
-                tableau = tableau.concat(filtrageCategorieArtisanat(tabProd));
-                art = true
-            }
-            if(checkedCategories[i] === "goodies" && !goo){
-                tableau = tableau.concat(filtrageCategorieGoodies(tabProd));
-                goo = true
-            }
-            if(checkedCategories[i] === "soin" && !soi){
-                tableau = tableau.concat(filtrageCategorieSoin(tabProd));
-                soi = true
-            }
-        }
+    // TOUJOURS repartir de tabprod
+    tableau = tabProd;
 
-        for(let j=0; j<checkedNotes.length; j++){
-            if(checkedNotes[j] === "0" && !not0){
-                tableau = tableau.concat(filtrageNoteNonNote(tabProd));
-                not0 = true;
-            }
-            if(checkedNotes[j] === "1" && !not1){
-                tableau = tableau.concat(filtrageNote1(tabProd));
-                not1 = true;
-            }
-            if(checkedNotes[j] === "2" && !not2){
-                tableau = tableau.concat(filtrageNote2(tabProd));
-                not2 = true;
-            }
-            if(checkedNotes[j] === "3" && !not3){
-                tableau = tableau.concat(filtrageNote3(tabProd));
-                not3 = true;
-            }
-            if(checkedNotes[j] === "4" && !not4){
-                tableau = tableau.concat(filtrageNote4(tabProd));
-                not4 = true;
-            }
-            if(checkedNotes[j] === "5" && !not5){
-                tableau = tableau.concat(filtrageNote5(tabProd));
-                not5 = true;
-            }
-        }
+    // FILTRE CATÉGORIES
+    if (checkedCategories.length > 0) {
+        tableau = tableau.filter(prod => {
+            if (checkedCategories.includes("alimentaire") && prod.id_categorie === 1) return true;
+            if (checkedCategories.includes("vetement") && prod.id_categorie === 2) return true;
+            if (checkedCategories.includes("artisanat") && prod.id_categorie === 3) return true;
+            if (checkedCategories.includes("goodies") && prod.id_categorie === 4) return true;
+            if (checkedCategories.includes("soin") && prod.id_categorie === 5) return true;
+            return false;
+        });
     }
 
-    let parent = document.getElementById("prod")
-    parent.innerHTML = ""
-    for(let i = first; i < first + numberOfItems;i++){
-        if(i<tableau.length){
-            afficherProduit(i)
-        }
+    // FILTRE NOTES
+    if (checkedNotes.length > 0) {
+        tableau = tableau.filter(prod => {
+            let note = prod.note_moyenne;
+
+            if (note === null) return checkedNotes.includes("0");
+
+            note = parseFloat(note);
+
+            if (checkedNotes.includes("1") && note < 2) return true;
+            if (checkedNotes.includes("2") && note >= 2 && note < 3) return true;
+            if (checkedNotes.includes("3") && note >= 3 && note < 4) return true;
+            if (checkedNotes.includes("4") && note >= 4 && note < 5) return true;
+            if (checkedNotes.includes("5") && note === 5) return true;
+
+            return false;
+        });
     }
-    numPageInfo()
+
+    // FILTRE TRANCHE DE PRIX
+    if (checkedTranches.length > 0) {
+        tableau = tableau.filter(prod => {
+            let prix = parseFloat(prod.prix_ttc);
+
+            if (checkedTranches.includes("prix1") && prix >= 2.99 && prix <= 8.39) return true;
+            if (checkedTranches.includes("prix2") && prix >= 8.40 && prix <= 13.19) return true;
+            if (checkedTranches.includes("prix3") && prix >= 13.20 && prix <= 19.19) return true;
+            if (checkedTranches.includes("prix4") && prix >= 19.20 && prix <= 31.19) return true;
+            if (checkedTranches.includes("prix5") && prix >= 31.20 && prix <= 71.99) return true;
+
+            return false;
+        });
+    }
+    // PAGINATION & AFFICHAGE
+    let parent = document.getElementById("prod");
+    parent.innerHTML = "";
+
+    for (let i = first; i < first + numberOfItems && i < tableau.length; i++) {
+        afficherProduit(i);
+    }
+
+    numPageInfo();
 }
+
 
 
 function afficherProduit(indice){
