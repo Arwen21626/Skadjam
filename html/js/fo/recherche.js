@@ -375,20 +375,22 @@ function afficherListe(){
 
 
 function afficherProduit(indice){
+    
     let i = indice
+    console.log(tableau[i])
     let idProduit = tableau[i]['id_produit']
     let parent = document.getElementById("prod")
 
     // Section   
     let produit = document.createElement("section")
     parent.appendChild(produit)
-    produit.classList.add("bg-bleu", "grid", "grid-cols-[40%_60%]", "w-40", "h-auto","p-2", "m-2", "md:h-120", "md:w-80", "md:p-3")
+    produit.classList.add("bg-bleu","flex", "flex-col", "items-center", "w-40", "h-auto","p-2", "m-2", /*"md:h-120", */"md:w-80", "md:p-3")
     parent = produit
 
     //Lien
     let lien = document.createElement("a")
     lien.href = "details_produit.php?idProduit="+idProduit
-    lien.classList.add("col-span-2", "justify-self-center", "mb-3");
+    lien.classList.add("mb-3");
     parent.appendChild(lien)
 
     parent = lien
@@ -405,24 +407,33 @@ function afficherProduit(indice){
     let nom = document.createElement("p")
     nom.textContent = tableau[i]['libelle_produit']
     parent.appendChild(nom)
-    nom.classList.add("col-span-2", "w-35", "md:w-70")
+    nom.classList.add("w-35", "md:w-70")
 
     // Prix et note
-    let contient = document.createElement("div")
-    parent.appendChild(contient)
-    contient.classList.add("flex", "justify-start", "items-center", "col-span-2")
+    let contientPrix = document.createElement("article")
+    parent.appendChild(contientPrix)
+    contientPrix.classList.add("flex","flex-row", "justify-between", "items-center")
 
-    parent = contient
+    parent = contientPrix
 
-    // Prix
-    let prix = document.createElement("p")
-    prix.textContent = tableau[i]['prix_ttc'].replace(".", ",")+" €"
-    parent.appendChild(prix)
+    // Prix TTC
+    let prixTTC = document.createElement("p")
+    prixTTC.textContent = tableau[i]['prix_ttc'].replace(".", ",")+" € (TTC)"
+    parent.appendChild(prixTTC)
+
+    let prixRemise = document.createElement("p")
+    prixRemise.textContent = tableau[i]['prix_remise'].replace(".", ",")+" € (TTC)"
+    parent.appendChild(prixRemise)
+
+    if (tableau[i]['prix_remise'] == tableau[i]['prix_ttc']) {
+        prixRemise.classList.add("hidden")
+    }
 
     // Note
     let contientNote = document.createElement("div")
+    parent = lien   
     parent.appendChild(contientNote)
-    contientNote.classList.add("w-2/4", "ml-2", "md:ml-10", "flex")
+    contientNote.classList.add("flex")
 
     parent = contientNote
 
