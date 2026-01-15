@@ -254,9 +254,6 @@ input.quantite-prod-input {
   .top-0 {
     top: calc(var(--spacing, 0.25rem) * 0);
   }
-  .top-2 {
-    top: calc(var(--spacing, 0.25rem) * 2);
-  }
   .top-20 {
     top: calc(var(--spacing, 0.25rem) * 20);
   }
@@ -265,9 +262,6 @@ input.quantite-prod-input {
   }
   .right-0 {
     right: calc(var(--spacing, 0.25rem) * 0);
-  }
-  .right-2 {
-    right: calc(var(--spacing, 0.25rem) * 2);
   }
   .right-4 {
     right: calc(var(--spacing, 0.25rem) * 4);
@@ -331,9 +325,6 @@ input.quantite-prod-input {
   }
   .float-left {
     float: left;
-  }
-  .float-right {
-    float: right;
   }
   .container {
     width: 100%;
@@ -579,9 +570,6 @@ input.quantite-prod-input {
   .h-6\! {
     height: calc(var(--spacing, 0.25rem) * 6) !important;
   }
-  .h-8\! {
-    height: calc(var(--spacing, 0.25rem) * 8) !important;
-  }
   .h-9\! {
     height: calc(var(--spacing, 0.25rem) * 9) !important;
   }
@@ -674,9 +662,6 @@ input.quantite-prod-input {
   }
   .w-8 {
     width: calc(var(--spacing, 0.25rem) * 8);
-  }
-  .w-8\! {
-    width: calc(var(--spacing, 0.25rem) * 8) !important;
   }
   .w-9\! {
     width: calc(var(--spacing, 0.25rem) * 9) !important;
@@ -1243,20 +1228,6 @@ input.quantite-prod-input {
       }
     }
   }
-  .group-hover\/poubelle\:block {
-    &:is(:where(.group\/poubelle):hover *) {
-      @media (hover: hover) {
-        display: block;
-      }
-    }
-  }
-  .group-hover\/poubelle\:hidden {
-    &:is(:where(.group\/poubelle):hover *) {
-      @media (hover: hover) {
-        display: none;
-      }
-    }
-  }
   .group-hover\/valider\:block {
     &:is(:where(.group\/valider):hover *) {
       @media (hover: hover) {
@@ -1281,9 +1252,9 @@ input.quantite-prod-input {
       background-color: var(--color-beige);
     }
   }
-  .checked\:bg-black {
+  .checked\:bg-vertClair {
     &:checked {
-      background-color: var(--color-black, #000);
+      background-color: var(--color-vertClair);
     }
   }
   .hover\:bg-\[url\(\/images\/logo\/bootstrap_icon\/cart-fill\.svg\)\] {
@@ -1670,6 +1641,11 @@ input.quantite-prod-input {
   .md\:grid-cols-3 {
     @media (width >= 48rem) {
       grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+  }
+  .md\:grid-cols-4 {
+    @media (width >= 48rem) {
+      grid-template-columns: repeat(4, minmax(0, 1fr));
     }
   }
   .md\:grid-cols-5 {
