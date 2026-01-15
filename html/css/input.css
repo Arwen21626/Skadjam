@@ -35,7 +35,7 @@ p, a, input, label, button, details{
         font-size: 25px;
     }
 
-    h4, summary {
+    h4, summary, #filtresTris {
         font-size: 20px;
     }
 
