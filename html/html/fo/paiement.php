@@ -131,35 +131,44 @@ if($_SESSION['role'] != 'client'){
                 $idCommande = $stmtCommande->fetchColumn();
     
                 //creation numéro de suivi
-                $id_suivi = $rpr->create_bord($idCommande, "alizon", "1 rue branly", 22300, $_POST["nom"], "machin", "6 rue bidule", 22450);
+                try{
+                    $id_suivi = $rpr->create_bord($idCommande, "alizon", "1 rue branly", 22300, $_POST["nom"], "machin", "6 rue bidule", 22450);
+                    if ($etat = $rpr->get_etat($id_suivi)){
+
+                        $commande = "UPDATE sae3_skadjam._commande SET id_suivi = ?, etat = ? WHERE id_commande = ?";
+                        
+                        //recuperation de l'etat de la commande
+                        $stmt = $dbh->prepare($commande);
+                        if (!$stmt->execute([$id_suivi, $etat, $idCommande])){
+                            throw new Exception("insertion numero de suivi et etat");
+                        }
+                    }
+                } catch (Exception $e){
+                    echo ($e->getMessage());
+                }finally{
                 
-                //recuperation de l'etat de la commande
-                $etat = $rpr->get_etat($id_suivi);
-    
-                $commande = "UPDATE sae3_skadjam._commande SET id_suivi = ?, etat = ? WHERE id_commande = ?";
-                $stmt = $dbh->prepare($commande);
-                if (!$stmt->execute([$id_suivi, $etat, $idCommande])){
-                    throw new Exception("insertion numero de suivi et etat");
+                    if (!$idCommande) {
+                        throw new Exception("id_commande non récupéré");
+                    }
+        
+                    //Insertion dans la table donne (lien entre panier et commande)
+                    $sqlDonne = "INSERT INTO sae3_skadjam._donne (id_panier, id_commande)
+                                VALUES (:id_panier, :id_commande)";
+        
+        
+                    $stmtDonne = $dbh->prepare($sqlDonne);
+        
+                    $stmtDonne->execute([
+                        ':id_panier' => $idPanier,
+                        ':id_commande' => $idCommande
+                    ]);
+        
+                    
+                    header("location:/php/vider_panier.php?typeVider=achat&achatValide=" . $achatValide);
+
                 }
     
-                if (!$idCommande) {
-                    throw new Exception("id_commande non récupéré");
-                }
     
-                //Insertion dans la table donne (lien entre panier et commande)
-                $sqlDonne = "INSERT INTO sae3_skadjam._donne (id_panier, id_commande)
-                            VALUES (:id_panier, :id_commande)";
-    
-    
-                $stmtDonne = $dbh->prepare($sqlDonne);
-    
-                $stmtDonne->execute([
-                    ':id_panier' => $idPanier,
-                    ':id_commande' => $idCommande
-                ]);
-    
-                
-                header("location:/php/vider_panier.php?typeVider=achat&achatValide=" . $achatValide);
             }
             
         }

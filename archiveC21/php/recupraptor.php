@@ -1,16 +1,20 @@
 <?php
 class Recupraptor{
-    private $user;
-    private $password;
-    private $ip;
-    private $port;
+    private $user = NULL;
+    private $password = NULL;
+    private $ip = NULL;
+    private $port = NULL;
     private $conn = NULL;
     private $numSuivi = NULL;
     private $etat = NULL;
     private $err = NULL;
 
 
-    public function __construct(string $ip, int $port, string $user, string $password){
+    public function __construct($ip, $port, $user, $password){
+        if (!$user || !$password || !$ip || !$port){
+            throw new Exception("Erreur auth : user = {$user} password = {$password} ip = {$ip} port = {$port}");
+        }
+
         $this->user = $user;
         $this->password = $password;
         $this->ip = $ip;
@@ -106,16 +110,20 @@ class Recupraptor{
                 $adrDest, 
                 $cpDest);
 
-            $reponse = $this->send_commande($cmd);
+            if ($reponse = $this->send_commande($cmd)){
+                if (preg_match('/^BORD\s([A-Z]{3}[0-9]{10})\scom(\d+)$/', $reponse, $m)){
+                    $this->numSuivi = $m[1];
+                } else {
+                    throw new Exception("Réponde non géré");
+                }
+    
+                return $this->numSuivi;
 
-
-            if (preg_match('/^BORD\s([A-Z]{3}[0-9]{10})\scom(\d+)$/', $reponse, $m)){
-                $this->numSuivi = $m[1];
-            } else {
-                throw new Exception("Réponde non géré");
+            }else{
+                throw new Exception("non connecté");
             }
-
-            return $this->numSuivi;
+            return false;
+            
         }
 
     public function get_etat(string $numSuivi){

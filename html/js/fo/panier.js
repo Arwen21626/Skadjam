@@ -1,4 +1,25 @@
-// Temps passé sur le ticket BUG 19 : 6h
+// Gestion de la popup (va peut être bouger dans un autre fichier)
+
+function sleep(ms){
+    return new Promise(resolve => setTimeout(resolve, ms));
+}
+
+function closePopup() {
+    popup = document.getElementById("popup-overlay").classList.remove("active");
+}
+
+async function showPopUp(ms){
+    document.getElementById("popup-overlay").classList.add("active");
+    await sleep(ms);
+    closePopup()
+}
+
+const urlParams = new URLSearchParams(window.location.search);
+
+if (urlParams.get("panierModif") === "V"){
+    showPopUp(3000);
+}
+
 // Gestion de la sauvegarde des modifications dans la BDD
 
 const formPanier = document.getElementsByClassName("valider-panier")[0];
@@ -36,6 +57,7 @@ if (formPanier) { //Chech si le formulaire de validation du panier (un élément
         }
 
         input.value = newQuantity;
+        
     }
 
 
