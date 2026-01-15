@@ -5,6 +5,7 @@ require_once __DIR__ . "/../../php/verif_role_fo.php";
 if($_SESSION['role'] != 'client'){
     header('Location: /index.php');
 }else{
+    include __DIR__ . "/../../connexion_recupraptor.php";
     include(__DIR__ . '/../../php/verification_formulaire.php');
     include __DIR__ . '/../../01_premiere_connexion.php';
     
@@ -72,6 +73,7 @@ if($_SESSION['role'] != 'client'){
 
         if(($erreurCryptogramme == false && $erreurExpiration == false && $erreurNom == false && $erreurNumero == false) || $achatValide == true){
             $achatValide = true;
+            $ret = $rpr->create_bord("15", "alizon", "1 rue branly", 22300, $_POST["nom"], "machin", "6 rue bidule", 22450);
             header("location:/php/vider_panier.php?typeVider=achat&achatValide=" . $achatValide);
         }
         

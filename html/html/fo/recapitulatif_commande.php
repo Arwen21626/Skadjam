@@ -83,14 +83,13 @@ if (isset($_POST['valider'])) {
 
 
     $stmtCommande = $dbh->prepare($sqlCommande);
-
+    
     $stmtCommande->execute([
         ':etat' => 'En attente',
         ':date_commande' => $date_char,
         ':montant_total_ttc' => $tabInfosPanier[0]['montant_total_ttc'],
         ':id_client' => $idCompte
     ]);
-
     $idCommande = $stmtCommande->fetchColumn();
 
     if (!$idCommande) {
