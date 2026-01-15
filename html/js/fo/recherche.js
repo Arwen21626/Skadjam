@@ -1,15 +1,5 @@
 import "./../variables.js";
 
-const numberOfItems = 24 //NB produits à afficher
-let first = 0
-let actualPage = 1 
-
-let tableau = []
-
-var checkedCategories = []
-var checkedNotes = []
-var checkedTranches = []
-
 function toggleFiltre(tableau, valeur) {
     if (tableau.includes(valeur)) {
         tableau.splice(tableau.indexOf(valeur), 1);
