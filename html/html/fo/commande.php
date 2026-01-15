@@ -114,8 +114,8 @@
                         else{
                             $classe = "py-4 bg-bleu";
                         }?>
-                        <tr class="<?php echo $classe; ?>">
-                            <td colspan="6" class="text-left py-3 pl-3"><h4>Vendeur : <?php echo $vendeur ;?></h4></td>
+                        <tr class="<?php echo $classe; ?> border-t-2 border-solid border-black">
+                            <th colspan="6" class="text-left py-3 pl-3"><h4>Vendeur : <?php echo $vendeur ;?></h4></th>
                         </tr>
                         <?php foreach($tabInfosCommande as $ligne){ 
                             if($ligne['raison_sociale'] == $vendeur){
@@ -142,7 +142,7 @@
                                         $v_quantite_totale = $v_quantite_totale + $ligne['quantite'];
                                         $v_total_ht = $v_total_ht + $ligne['sous_total'];
                                         $v_total_ttc += $ligne['prix_ttc'] * $ligne['quantite'];
-                                        $v_total_remise = $v_total_remise + $ligne['prix_remise'];
+                                        $v_total_remise +=  $ligne['prix_remise'] * $ligne['quantite'];
                                     ?>
                                 </tr>
                             <?php } 

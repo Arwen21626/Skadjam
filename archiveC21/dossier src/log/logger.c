@@ -20,8 +20,8 @@ void log_init() {
     time_t now = time(NULL);
     struct tm *t = localtime(&now);
     strftime(datebuf, sizeof(datebuf), "%Y%m%d", t);
-
-    log_file = fopen(filename, "a");
+    snprintf(filename, sizeof(filename), "logs/log_%s.log",datebuf);
+    log_file = fopen(filename, "a+");
     if (!log_file) {
         perror("Impossible d'ouvrir le fichier de log");
     }
