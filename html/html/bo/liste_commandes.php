@@ -7,18 +7,24 @@
     try {     
         $tabInfoCommandes = null;           
         //récupère toutes les infos de la table commande
-        foreach($dbh->query("SELECT DISTINCT
+        foreach($dbh->query("SELECT
                                 c.id_commande,
                                 c.date_commande,
                                 c.etat,
-                                c.montant_total_ttc
+                                p.id_vendeur,
+                                SUM(d.quantite * p.prix_ttc) AS total_commande_vendeur_ttc
                             FROM sae3_skadjam._commande c
                             INNER JOIN sae3_skadjam._details d
                                 ON d.id_commande = c.id_commande
                             INNER JOIN sae3_skadjam._produit p
                                 ON p.id_produit = d.id_produit
                             WHERE p.id_vendeur = $idCompte
-                            ORDER BY c.date_commande DESC, c.id_commande DESC;"
+                            GROUP BY
+                                c.id_commande,
+                                c.date_commande,
+                                c.etat,
+                                p.id_vendeur
+                            ORDER BY c.id_commande DESC;"
                             , PDO::FETCH_ASSOC) as $row){
             $tabInfoCommandes[] = $row;
         } 
@@ -80,7 +86,7 @@
                                     <th scope="row" class="text-center py-3 pl-3" ><p><?php echo $idCommande; ?></p></th>
                                     <td class="text-center py-3"><p><?php echo htmlentities($commande['date_commande']);?></p></td>
                                     <td class="text-center py-3"><p><?php echo htmlentities($commande['etat']);?></p></td>
-                                    <td class="text-center py-3"><p><?php echo htmlentities($commande['montant_total_ttc']); ?></p></td>
+                                    <td class="text-center py-3"><p><?php echo htmlentities($commande['total_commande_vendeur_ttc']); ?></p></td>
                                     <td><a href="<?php echo htmlentities("commande.php?idCommande=".$idCommande);?>">
                                         <img src="../../images/logo/bootstrap_icon/plus-square.svg" alt="voir plus d'informations" class="w-10 h-auto">
                                     </a></td>
@@ -89,7 +95,7 @@
                     </tbody>
                 </table>
             </div>
-            <a href="../../index_vendeur.php" class="flex justify-center mt-15 mb-15"><button class="border-vertFonce border-2 rounded-sm md:rounded-2xl w-35 h-10 md:w-50 md:h-14 px-7 cursor-pointer">Retour</button></a>
+            <a href="index_vendeur.php" class="flex justify-center mt-15 mb-15"><button class="border-vertFonce border-2 rounded-sm md:rounded-2xl w-35 h-10 md:w-50 md:h-14 px-7 cursor-pointer">Retour</button></a>
         <?php } ?>
     </main>
 
