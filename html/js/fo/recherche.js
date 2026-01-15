@@ -1,13 +1,4 @@
-const numberOfItems = 24 //NB produits à afficher
-let first = 0
-let actualPage = 1 
-
-let tableau = []
-
-var checkedCategories = []
-var checkedNotes = []
-var checkedTranches = []
-
+import "./../variables.js";
 // Ajout des eventListeners
 function ajoutEventListener(){
     tableau = []
@@ -272,61 +263,9 @@ function ajoutEventListener(){
     
 }
 
-function nbPages(){
-    let maxPages = Math.ceil((tableau.length)/numberOfItems)
-    return maxPages
-}
-
-function firstPage(){
-    first = 0
-    actualPage = 1
-    afficherListe()
-}
-
-function lastPage(){
-    first = (nbPages() * numberOfItems)-numberOfItems;
-    actualPage = nbPages();
-    afficherListe(); 
-}
-
-function pagePrecedente(){
-    if(first-numberOfItems >= 0){
-        first-=numberOfItems
-        actualPage --;
-        afficherListe();
-    }
-}
-
-function pageSuivante(){
-    if(first+numberOfItems<tableau.length){
-        first+=numberOfItems;
-        actualPage ++;
-        afficherListe();
-    }
-}
-
-function numPageInfo(){
-    let pageInfo = document.getElementById("pageInfo")
-    pageInfo.textContent = (actualPage+"/"+nbPages())
-}
-
-let ali = false
-let vet = false
-let art = false
-let goo = false
-let soi = false
-
-let not0 = false
-let not1 = false
-let not2 = false
-let not3 = false
-let not4 = false
-let not5 = false
-
 // Affichage
 function afficherListe(){
     
-
     if(checkedCategories.length === 0 && checkedNotes.length === 0 /*&& checkedTranches.length === 0*/){
         tableau = tabProd
         actualPage = 1
@@ -405,7 +344,7 @@ function afficherProduit(indice){
     // Section   
     let produit = document.createElement("section")
     parent.appendChild(produit)
-    produit.classList.add("bg-bleu","flex", "flex-col", "items-center", "w-40", "h-auto","p-2", "m-2", /*"md:h-120", */"md:w-80", "md:p-3")
+    produit.classList.add("bg-bleu","flex", "flex-col", "w-40", "h-auto","p-2", "m-2", "md:w-80", "md:p-3")
     parent = produit
 
     //Lien
@@ -428,7 +367,6 @@ function afficherProduit(indice){
     let nom = document.createElement("p")
     nom.textContent = tableau[i]['libelle_produit']
     parent.appendChild(nom)
-    nom.classList.add("w-35", "md:w-70")
 
     // Prix et note
     let contientPrix = document.createElement("article")
@@ -440,6 +378,7 @@ function afficherProduit(indice){
     // Prix TTC
     let prixTTC = document.createElement("p")
     prixTTC.textContent = tableau[i]['prix_ttc'].replace(".", ",")+" € (TTC)"
+    prixTTC.classList.add("line-through")
     parent.appendChild(prixTTC)
 
     let prixRemise = document.createElement("p")
@@ -448,6 +387,7 @@ function afficherProduit(indice){
 
     if (tableau[i]['prix_remise'] == tableau[i]['prix_ttc']) {
         prixRemise.classList.add("hidden")
+        prixTTC.classList.remove("line-through")
     }
 
     // Note
@@ -574,8 +514,6 @@ function triEtoileCroissant(tableau){
 function triEtoileDecroissant(tableau){
     return tableau.sort((a,b) => parseFloat(b['note_moyenne']) - parseFloat(a['note_moyenne']))
 }
-
-
 
 // Filtres
 
