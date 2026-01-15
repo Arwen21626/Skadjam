@@ -60,34 +60,33 @@
                         <summary class="cursor-pointer mt-1 mb-1">Par catégorie</summary>
                         <!-- Alimentaire -->
                         <div>
-                            
                             <input type="checkbox" name="alimentaire" id="alimentaire" value="alimentaire" class="h-5 w-5">
-                            <label for="alimentaire">Alimentaire</label>
+                            <label for="alimentaire" class="labelDetails">Alimentaire</label>
                         </div>
                         
 
                         <!-- Vetements -->
                         <div>
                             <input type="checkbox" name="vetement" id="vetement" value="vetement" class="h-5 w-5">
-                            <label for="vetement">Vetements</label>
+                            <label for="vetement" class="labelDetails">Vetements</label>
                         </div>
 
                         <!-- Artisanat -->
                         <div>
                             <input type="checkbox" name="artisanat" id="artisanat" value="artisanat" class="h-5 w-5">
-                            <label for="artisanat">Artisanat</label>
+                            <label for="artisanat" class="labelDetails">Artisanat</label>
                         </div>
 
                         <!-- Goodies -->
                         <div>
                             <input type="checkbox" name="goodies" id="goodies" value="goodies" class="h-5 w-5">
-                            <label for="goodies">Goodies</label>
+                            <label for="goodies" class="labelDetails">Goodies</label>
                         </div>
 
                         <!-- Soin -->
                         <div>
                             <input type="checkbox" name="soin" id="soin" value="soin" class="h-5 w-5">
-                            <label for="soin">Soin</label>
+                            <label for="soin" class="labelDetails">Soin</label>
                         </div>
                     </details>
                     </article>
@@ -99,37 +98,37 @@
                         <!-- non noté -->
                         <div>
                             <input type="checkbox" name="nonNote" id="nonNote" value="nonNote" class="h-5 w-5">
-                            <label for="nonNote">Non noté</label>
+                            <label for="nonNote" class="labelDetails">Non noté</label>
                         </div>
 
                         <!-- 1 étoile -->
                         <div>
                             <input type="checkbox" name="uneE" id="uneE" value="uneE" class="h-5 w-5">
-                            <label for="uneE">1</label>
+                            <label for="uneE" class="labelDetails">1</label>
                         </div>
 
                         <!-- 2 étoiles -->
                         <div>
                             <input type="checkbox" name="deuxE" id="deuxE" value="deuxE" class="h-5 w-5">
-                            <label for="deuxE">2</label>
+                            <label for="deuxE" class="labelDetails">2</label>
                         </div>
 
                         <!-- 3 étoiles -->
                         <div>
                             <input type="checkbox" name="troisE" id="troisE" value="troisE" class="h-5 w-5">
-                            <label for="troisE">3</label>
+                            <label for="troisE" class="labelDetails">3</label>
                         </div>
 
                         <!-- 4 étoiles -->
                         <div>
                             <input type="checkbox" name="quatreE" id="quatreE" value="quatreE" class="h-5 w-5">
-                            <label for="quatreE">4</label>
+                            <label for="quatreE" class="labelDetails">4</label>
                         </div>
 
                         <!-- 5 étoiles -->
                         <div>
                             <input type="checkbox" name="cinqE" id="cinqE" value="cinqE" class="h-5 w-5">
-                            <label for="cinqE">5</label>
+                            <label for="cinqE" class="labelDetails">5</label>
                         </div>
                     </details>
                 </article>
@@ -140,23 +139,23 @@
                         <summary class="cursor-pointer mt-1 mb-1">Par tranche de prix</summary>
                         <div>
                             <input type="checkbox" name="prix1" id="prix1" value="prix1" class="h-5 w-5">
-                            <label for="prix1">2,99€ - 8,39€ </label>
+                            <label for="prix1" class="labelDetails">2,99€ - 8,39€ </label>
                         </div>
                         <div>
                             <input type="checkbox" name="prix2" id="prix2" value="prix2" class="h-5 w-5">
-                            <label for="prix2">8,40€ - 13,19€ </label>
+                            <label for="prix2" class="labelDetails">8,40€ - 13,19€ </label>
                         </div>
                         <div>
                             <input type="checkbox" name="prix3" id="prix3" value="prix3" class="h-5 w-5">
-                            <label for="prix3">13,20€ - 19,19€ </label>
+                            <label for="prix3" class="labelDetails">13,20€ - 19,19€ </label>
                         </div>
                         <div>
                             <input type="checkbox" name="prix4" id="prix4" value="prix4" class="h-5 w-5">
-                            <label for="prix4">19,20€ - 31,19€ </label>
+                            <label for="prix4" class="labelDetails">19,20€ - 31,19€ </label>
                         </div>
                         <div>
                             <input type="checkbox" name="prix5" id="prix5" value="prix5" class="h-5 w-5">
-                            <label for="prix5">31,20€ - 71,99€ </label>
+                            <label for="prix5" class="labelDetails">31,20€ - 71,99€ </label>
                         </div>
                     </details>
                 </article>
@@ -171,11 +170,11 @@
                         <div>
                             <div>
                                 <input type="radio" name="prixTri" id="prixTriCroissant" value="croissant" class="h-5 w-5">
-                                <label for="prixTriCroissant">Croissant</label>
+                                <label for="prixTriCroissant" class="labelDetails">Croissant</label>
                             </div>
                             <div>
                                 <input type="radio" name="prixTri" id="prixTriDecroissant" value="decroissant" class="h-5 w-5">
-                                <label for="prixTriDecroissant">Décroissant</label>
+                                <label for="prixTriDecroissant" class="labelDetails">Décroissant</label>
                             </div>
                         </div>
                     </details>
@@ -189,11 +188,11 @@
                         <div>
                             <div>
                                 <input type="radio" name="alphaTri" id="alphaTriAZ" value="az" class="h-5 w-5">
-                                <label for="alphaTriAZ">A-Z</label>
+                                <label for="alphaTriAZ" class="labelDetails">A-Z</label>
                             </div>
                             <div>
                                 <input type="radio" name="alphaTri" id="alphaTriZA" value="za" class="h-5 w-5">
-                                <label for="alphaTriZA">Z-A</label>
+                                <label for="alphaTriZA" class="labelDetails">Z-A</label>
                             </div>
                         </div>
                     </details>
@@ -207,11 +206,11 @@
                         <div>
                             <div>
                                 <input type="radio" name="noteTri" id="noteTri51" value="51" class="h-5 w-5">
-                                <label for="noteTri51">5-1</label>
+                                <label for="noteTri51" class="labelDetails">5-1</label>
                             </div>
                             <div>
                                 <input type="radio" name="noteTri" id="noteTri15" value="15" class="h-5 w-5">
-                                <label for="noteTri15">1-5</label>
+                                <label for="noteTri15" class="labelDetails">1-5</label>
                             </div>
                         </div>
                     </details>
