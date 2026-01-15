@@ -38,7 +38,7 @@
             <a href="../bo/stock.php" title="lien vers page stock">
                 <img src="../../images/images_accueil/stock.webp" alt="stock" class="w-150 h-auto justify-self-end">
             </a>
-            <a href="../bo/commandes.php" title="lien vers page commandes">
+            <a href="../bo/liste_commandes.php" title="lien vers page commandes">
                 <img src="../../images/images_accueil/commandes.webp" alt="commandes" class="w-150 h-auto justify-self-start">
             </a>        
         </div>
@@ -69,7 +69,8 @@
 
             try {                
                 //récupère toutes les infos des tables produits et photos
-                foreach($dbh->query("SELECT *
+                foreach($dbh->query("SELECT pr.libelle_produit, pr.id_produit, url_photo, alt, titre, prix_ttc, quantite_stock, 
+                                        note_moyenne, prix_remise, pourcentage_remise
                                     FROM sae3_skadjam._produit pr
                                     INNER join sae3_skadjam._montre m
                                         ON pr.id_produit=m.id_produit
@@ -77,6 +78,10 @@
                                         ON ph.id_photo = m.id_photo
                                     INNER JOIN sae3_skadjam._vendeur v
                                         ON pr.id_vendeur = v.id_compte
+                                    left join sae3_skadjam._reduit rd
+                                        on rd.id_produit = pr.id_produit
+                                    left join sae3_skadjam._remise r
+                                        on r.id_remise = rd.id_remise
                                     WHERE v.id_compte = $idCompte
                                         AND pr.est_supprime = false"
                                     , PDO::FETCH_ASSOC) as $row){
@@ -138,8 +143,10 @@
 
                                 <!--affichage du prix du produit-->   
                                 <div class="flex justify-start items-center col-span-2">
-                                    <?php $prix = str_replace(".", ",", $valeurs['prix_ttc'])?>
-                                    <p><?php echo $prix;?> €</p>
+                                    <p class="inline-block <?php echo ($valeurs['pourcentage_remise'] !== NULL)?'line-through':'';?>"> <?php echo htmlentities(str_replace(".", ",",$valeurs['prix_ttc'])); ?>€</p>
+                                    <p class=" pl-3 <?php echo ($valeurs['pourcentage_remise'] !== NULL)?'':'hidden';?>"> <?php echo htmlentities(str_replace(".", ",",$valeurs['prix_remise'])); ?>€</p>
+                                    <p class="pl-2 inline-block"> (TTC) </p>
+            
 
                                     <!--récupération de la note-->
                                     <div class="ml-2 md:ml-10 flex">

@@ -142,12 +142,12 @@ if(isset($_SESSION["idCompte"])) {
             <p class="attribut-text mt-4"><?= $description ?></p>
         </div>
         <div class="flex flex-row justify-around items-center mt-7 mb-15">
-                <!-- Modifier les informations du client (sauf le mot de passe) -->
+                <!-- Modifier les informations du vendeur (sauf le mot de passe) -->
                 <form action="modifier_compte_vendeur.php" method="post">
                     <input class="cursor-pointer border-4 rounded-xl p-2 m-1 border-beige w-75" type="submit" value="Modifier mes informations">
                 </form>
 
-                <!-- Modifier le mot de passe du client -->
+                <!-- Modifier le mot de passe du vendeur -->
                 <form action="nouveau_mdp.php">
                     <?php $_SESSION['adresse_mail'] = $mail; ?>
                     <input class="cursor-pointer border-4 rounded-xl p-2 m-1 border-beige w-75" type="submit" value="Modifier mon mot de passe">    

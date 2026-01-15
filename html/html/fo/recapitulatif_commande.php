@@ -202,7 +202,7 @@ if (isset($_POST['valider'])) {
         
             <div class="flex items-center mt-10">
                 <a href="cgv_fo.php" class="ml-5 mr-5">J’ai lu et j’accepte les conditions générales de vente : </a>
-                <input type="checkbox" class="cursor-pointer appearance-none w-10 h-10 border-4 border-black rounded-md checked:bg-black" name="case" id="case">
+                <input type="checkbox" class="cursor-pointer appearance-none w-10 h-10 border-4 border-vertClair rounded-md checked:bg-vertClair" name="case" id="case">
             </div>
             <div class="flex justify-center mt-10 mb-10">
                 <a href="../fo/panier.php?idPanier=<?php echo $idPanier ;?>" class="flex justify-center items-center border-2 border-vertClair rounded-2xl w-40 h-14 cursor-pointer my-5 mr-15">Annuler</a>

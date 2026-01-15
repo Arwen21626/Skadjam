@@ -1,6 +1,6 @@
 <?php
     include __DIR__ . '/01_premiere_connexion.php';
-    const PAGE_SIZE = 15;
+    const PAGE_SIZE = 12;
     require_once __DIR__ . "/../connections_params.php";
     require_once __DIR__ . "/php/fonctions.php";
     require_once __DIR__ . "/php/modification_variable.php";
@@ -61,7 +61,7 @@
 
             try {                
                 //récupère toutes les infos des tables produits et photos
-                foreach($dbh->query("SELECT *
+                foreach($dbh->query("SELECT pr.libelle_produit, pr.id_produit, url_photo, alt, titre, prix_ttc, quantite_stock, note_moyenne, prix_remise, pourcentage_remise
                                     FROM sae3_skadjam._produit pr
                                     INNER JOIN sae3_skadjam._montre m
                                         ON pr.id_produit=m.id_produit
@@ -69,6 +69,10 @@
                                         ON ph.id_photo = m.id_photo 
                                     INNER JOIN sae3_skadjam._vendeur v
                                         ON pr.id_vendeur = v.id_compte
+                                    left join sae3_skadjam._reduit rd
+                                        on rd.id_produit = pr.id_produit
+                                    left join sae3_skadjam._remise r
+                                        on r.id_remise = rd.id_remise
                                     WHERE pr.est_supprime = false AND pr.est_masque = false"
                                     , PDO::FETCH_ASSOC) as $row){
                     $tabProduit[] = $row;
@@ -79,7 +83,7 @@
                 $lignes = array_slice($tabProduit, $pageNumber*PAGE_SIZE-PAGE_SIZE, PAGE_SIZE);
                 
                 //affiche la photo du produit, son nom, son prix et sa note ?>
-                <div class="grid grid-cols-2 justify-items-center md:grid-cols-3">
+                <div class="grid grid-cols-2 justify-items-center md:grid-cols-4">
                     <?php foreach($lignes as $id => $valeurs){
                         $idProduit = $valeurs['id_produit'];
                         // Le produit est-il en promotion ?
@@ -88,12 +92,13 @@
                                             WHERE id_produit = :id_produit");
                         $stmt->execute([':id_produit' => $idProduit]);
                         $estPromu = ($stmt->fetch() !== false); ?>
-                        <section class="bg-bleu grid grid-cols-[40%_60%] w-40 md:w-80 h-auto p-2 md:p-3 m-2">
+                        <section class="bg-bleu grid grid-cols-[40%_60%] w-40 h-auto p-2 m-2 md:h-120 md:w-80 md:p-3">
                             <!--affichage de la photo-->
                             <a href= "<?php echo "html/fo/details_produit.php?idProduit=".$idProduit;?>" class="col-span-2 justify-self-center mb-3">
                                 <img src="<?php echo $valeurs['url_photo'];?>" 
                                         alt="<?php echo $valeurs['alt'];?>"
-                                        title="<?php echo $valeurs['titre'];?>">
+                                        title="<?php echo $valeurs['titre'];?>"
+                                        class="w-auto h-40 md:h-80 justify-self-center">
                             </a>
 
                             <!--affichage de la promotion-->
@@ -119,12 +124,13 @@
                             <?php }} ?>
 
                             <!--affichage du nom du produit-->
-                            <p class="col-span-2"><?php echo $valeurs['libelle_produit'];?></p> 
+                            <p class="col-span-2 w-35 md:w-70"><?php echo $valeurs['libelle_produit'];?></p> 
 
                             <!--affichage du prix du produit-->   
                             <div class="flex justify-start items-center col-span-2">
-                                <?php $prix = str_replace(".", ",", htmlentities($valeurs['prix_ttc'])) ?>
-                                <p><?php echo $prix;?> €</p>
+                                <p class="inline-block <?php echo ($valeurs['pourcentage_remise'] !== NULL)?'line-through':'';?>"> <?php echo htmlentities(str_replace(".", ",",$valeurs['prix_ttc'])); ?>€</p>
+                                <p class=" pl-3 <?php echo ($valeurs['pourcentage_remise'] !== NULL)?'':'hidden';?>"> <?php echo htmlentities(str_replace(".", ",",$valeurs['prix_remise'])); ?>€</p>
+                                <p class="pl-2 inline-block"> (TTC) </p>
 
                                 <!--récupération de la note-->
                                 <div class="w-2/4 ml-2 md:ml-10 flex">

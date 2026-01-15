@@ -31,15 +31,15 @@ p, a, input, label, button, details{
         font-size: 30px;
     }
 
-    h3 {
+    h3, summary {
         font-size: 25px;
     }
 
-    h4, summary {
+    h4, #filtresTris, .labelDetails {
         font-size: 20px;
     }
 
-    p, a, input, label, button, details {
+    p, a, input, label, button {
         font-size: 16px
     }
 }
@@ -62,7 +62,7 @@ p, a, input, label, button, details{
         font-size: 25px;
     }
 
-    p, a, input, label, button, details {
+    p, a, input, label, button {
         font-size: 20px;
     }
 }
