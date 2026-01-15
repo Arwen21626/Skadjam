@@ -18,144 +18,153 @@ if($_SESSION['role'] != 'client'){
     $erreurCarteCadeau = false;
     $erreurCodePromo = false;
     $enregistrerCarte = false;
+    $idCompte = $_SESSION['idCompte'];
 
     // Chope l'attribut Get du script vider panier
     if (isset($_GET["achatValide"])) {
         $achatValide = $_GET["achatValide"];
-    }
+    }else{
 
-    //Récupération du panier
-    $idPanier = $_REQUEST['idPanier'];
-    $sql = "SELECT 
-            pr.libelle_produit,
-            pr.id_produit,
-            pr.id_vendeur,
-            v.raison_sociale,
-            c.quantite_par_produit,
-            pr.prix_ht,
-            pr.prix_ttc,
-            pr.prix_remise,
-            pr.prix_ttc * c.quantite_par_produit as sous_total_ttc,
-            pr.prix_ht * c.quantite_par_produit as sous_total_ht,
-            p.montant_total_ttc,
-            p.nb_produit_total
-        FROM sae3_skadjam._panier p
-        INNER JOIN sae3_skadjam._contient c
-            ON c.id_panier = p.id_panier
-        INNER JOIN sae3_skadjam._produit pr
-            ON pr.id_produit = c.id_produit
-        INNER JOIN sae3_skadjam._vendeur v
-            ON v.id_compte = pr.id_vendeur
-        WHERE p.id_panier = :id_panier
-    ";
-
-    $stmt = $dbh->prepare($sql);
-    $stmt->execute([':id_panier' => $idPanier]);
-    $tabInfosPanier = $stmt->fetchAll(PDO::FETCH_ASSOC);
-
-    if (empty($tabInfosPanier)) {
-        die("Erreur : panier vide");
-    }
-
-    if(isset($_POST['numero']) && $achatValide === false){
-    // Initialisation des variables
-        
-
-        $numero = htmlentities($_POST['numero']);
-        $mois = htmlentities($_POST['mois']);
-        $annee = htmlentities($_POST['annee']);
-        $expiration = $mois . '/' . $annee;
-        $cryptogramme = htmlentities($_POST['cryptogramme']);
-        $nom = htmlentities($_POST['nom']);
-
-        
-
-        if(isset($_POST['enregistrerCarte'])){
-            $enregistrerCarte = htmlentities($_POST['enregistrerCarte']);
+        //Récupération du panier
+        $commande = "SELECT id_panier FROM sae3_skadjam._panier WHERE id_client = ?";
+        $stmt = $dbh->prepare($commande);
+        $stmt->execute([$idCompte]);
+        $idPanier = $stmt->fetch(PDO::FETCH_ASSOC)['id_panier'];
+        $sql = "SELECT 
+                pr.libelle_produit,
+                pr.id_produit,
+                pr.id_vendeur,
+                v.raison_sociale,
+                c.quantite_par_produit,
+                pr.prix_ht,
+                pr.prix_ttc,
+                pr.prix_remise,
+                pr.prix_ttc * c.quantite_par_produit as sous_total_ttc,
+                pr.prix_ht * c.quantite_par_produit as sous_total_ht,
+                p.montant_total_ttc,
+                p.nb_produit_total
+            FROM sae3_skadjam._panier p
+            INNER JOIN sae3_skadjam._contient c
+                ON c.id_panier = p.id_panier
+            INNER JOIN sae3_skadjam._produit pr
+                ON pr.id_produit = c.id_produit
+            INNER JOIN sae3_skadjam._vendeur v
+                ON v.id_compte = pr.id_vendeur
+            WHERE p.id_panier = :id_panier
+        ";
+    
+        $stmt = $dbh->prepare($sql);
+        $stmt->execute([':id_panier' => $idPanier]);
+        $tabInfosPanier = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    
+        if (empty($tabInfosPanier)) {
+            die("Erreur : panier vide : " . $idPanier);
         }
-
-        if(isset($_POST['codePromo'])){
-            $codePromo = htmlentities($_POST['codePromo']);
-        }
-        
-        if(isset($_POST['carteCadeau'])){
-            $carteCadeau = htmlentities($_POST['carteCadeau']);
-        }
-
-        //echo $_POST['expiration']; // 22/25
-        if(!verifExpiration($expiration)){
-            $erreurExpiration = true;
-        }
-        if(!verifNomPrenom($nom)){
-            $erreurNom = true;
-        }
-        if(!verifNumCarte($numero)){
-            $erreurNumero = true;
-        }
-
-        if(isset($enregistrerCarte)){
-            if($enregistrerCarte == 'on'){
-                $numeroHasher = password_hash($numero, PASSWORD_DEFAULT);
-                $cryptogrammeHasher = password_hash($cryptogramme, PASSWORD_DEFAULT);
-
-                $idCompte = $_SESSION['idCompte'];
-                $nouvCarte = $dbh->prepare("INSERT INTO sae3_skadjam._carte_bancaire(numero_carte, cryptogramme, nom, expiration, id_client) VALUES('$numeroHasher', '$cryptogrammeHasher', '$nom', $expiration, $idCompte)");
-                $nouvCarte->execute();
-            }
-        }
-
-        if(($erreurCryptogramme == false && $erreurExpiration == false && $erreurNom == false && $erreurNumero == false) || $achatValide == true){
-            $achatValide = true;
-
-            //Insertion de la commande
-            $date_char = date("d/m/Y");
-            $sqlCommande = "INSERT INTO sae3_skadjam._commande (etat, date_commande, montant_total_ttc, id_client)
-                            VALUES (:etat, :date_commande, :montant_total_ttc, :id_client)
-                            RETURNING id_commande";
-
-            $stmtCommande = $dbh->prepare($sqlCommande);
-
-            $stmtCommande->execute([
-                ':etat' => 'En attente',
-                ':date_commande' => $date_char,
-                ':montant_total_ttc' => $tabInfosPanier[0]['montant_total_ttc'],
-                ':id_client' => $idCompte
-            ]);
-            $idCommande = $stmtCommande->fetchColumn();
-
-            //creation numéro de suivi
-            $id_suivi = $rpr->create_bord($idCommande, "alizon", "1 rue branly", 22300, $_POST["nom"], "machin", "6 rue bidule", 22450);
+    
+        if(isset($_POST['numero']) && $achatValide === false){
+        // Initialisation des variables
             
-            //recuperation de l'etat de la commande
-            $etat = $rpr->get_etat($id_suivi);
-
-            $commande = "INSERT INTO sae3_skajam._commande (id_suivi, etat) VALUES (?,?)";
-            $stmt = $dbh->prepare($commande);
-            if (!$stmt->execute([$id_suivi, $etat])){
-                throw new Exception("insertion numero de suivi et etat");
-            }
-
-            if (!$idCommande) {
-                throw new Exception("id_commande non récupéré");
-            }
-
-            //Insertion dans la table donne (lien entre panier et commande)
-            $sqlDonne = "INSERT INTO sae3_skadjam._donne (id_panier, id_commande)
-                        VALUES (:id_panier, :id_commande)";
-
-
-            $stmtDonne = $dbh->prepare($sqlDonne);
-
-            $stmtDonne->execute([
-                ':id_panier' => $idPanier,
-                ':id_commande' => $idCommande
-            ]);
-
+    
+            $numero = htmlentities($_POST['numero']);
+            $mois = htmlentities($_POST['mois']);
+            $annee = htmlentities($_POST['annee']);
+            $expiration = $mois . '/' . $annee;
+            $cryptogramme = htmlentities($_POST['cryptogramme']);
+            $nom = htmlentities($_POST['nom']);
+    
             
-            header("location:/php/vider_panier.php?typeVider=achat&achatValide=" . $achatValide);
+    
+            if(isset($_POST['enregistrerCarte'])){
+                $enregistrerCarte = htmlentities($_POST['enregistrerCarte']);
+            }
+    
+            if(isset($_POST['codePromo'])){
+                $codePromo = htmlentities($_POST['codePromo']);
+            }
+            
+            if(isset($_POST['carteCadeau'])){
+                $carteCadeau = htmlentities($_POST['carteCadeau']);
+            }
+    
+            //echo $_POST['expiration']; // 22/25
+            if(!verifExpiration($expiration)){
+                $erreurExpiration = true;
+            }
+            if(!verifNomPrenom($nom)){
+                $erreurNom = true;
+            }
+            if(!verifNumCarte($numero)){
+                $erreurNumero = true;
+            }
+    
+            if(isset($enregistrerCarte)){
+                if($enregistrerCarte == 'on'){
+                    $numeroHasher = password_hash($numero, PASSWORD_DEFAULT);
+                    $cryptogrammeHasher = password_hash($cryptogramme, PASSWORD_DEFAULT);
+    
+                    
+                    echo $idCompte;
+                    $nouvCarte = $dbh->prepare("INSERT INTO sae3_skadjam._carte_bancaire(numero_carte, cryptogramme, nom, expiration, id_client) VALUES('$numeroHasher', '$cryptogrammeHasher', '$nom', $expiration, $idCompte)");
+                    $nouvCarte->execute();
+                }
+            }
+    
+            if(($erreurCryptogramme == false && $erreurExpiration == false && $erreurNom == false && $erreurNumero == false) || $achatValide == true){
+                $achatValide = true;
+    
+                //Insertion de la commande
+                $date_char = date("d/m/Y");
+                $sqlCommande = "INSERT INTO sae3_skadjam._commande (etat, date_commande, montant_total_ttc, id_client)
+                                VALUES (:etat, :date_commande, :montant_total_ttc, :id_client)
+                                RETURNING id_commande";
+    
+                $stmtCommande = $dbh->prepare($sqlCommande);
+    
+                if (!$stmtCommande->execute([
+                    ':etat' => 'En attente',
+                    ':date_commande' => $date_char,
+                    ':montant_total_ttc' => $tabInfosPanier[0]['montant_total_ttc'],
+                    ':id_client' => $idCompte
+                ])){
+                    throw new Exception("id_client : " . $idCompte);
+                }
+                $idCommande = $stmtCommande->fetchColumn();
+    
+                //creation numéro de suivi
+                $id_suivi = $rpr->create_bord($idCommande, "alizon", "1 rue branly", 22300, $_POST["nom"], "machin", "6 rue bidule", 22450);
+                
+                //recuperation de l'etat de la commande
+                $etat = $rpr->get_etat($id_suivi);
+    
+                $commande = "UPDATE sae3_skadjam._commande SET id_suivi = ?, etat = ? WHERE id_commande = ?";
+                $stmt = $dbh->prepare($commande);
+                if (!$stmt->execute([$id_suivi, $etat, $idCommande])){
+                    throw new Exception("insertion numero de suivi et etat");
+                }
+    
+                if (!$idCommande) {
+                    throw new Exception("id_commande non récupéré");
+                }
+    
+                //Insertion dans la table donne (lien entre panier et commande)
+                $sqlDonne = "INSERT INTO sae3_skadjam._donne (id_panier, id_commande)
+                            VALUES (:id_panier, :id_commande)";
+    
+    
+                $stmtDonne = $dbh->prepare($sqlDonne);
+    
+                $stmtDonne->execute([
+                    ':id_panier' => $idPanier,
+                    ':id_commande' => $idCommande
+                ]);
+    
+                
+                header("location:/php/vider_panier.php?typeVider=achat&achatValide=" . $achatValide);
+            }
+            
         }
-        
     }
+
 }
 ?>
 
