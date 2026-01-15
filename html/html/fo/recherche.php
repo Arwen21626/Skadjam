@@ -41,7 +41,7 @@
     <?php include(__DIR__ . "/../../php/structure/navbar_front.php"); ?>
 
     
-    <main class="md:min-h-[800px] min-h-[600px]">
+    <main class="md:min-h-[900px] min-h-[600px]">
         <!-- Barre de recherche -->
         <button id="filtresTris" class="md:hidden underline  m-2">Filtres & tris</button>
         <aside class="sidebar hidden overflow-auto bg-beige/90 w-full h-auto fixed top-0 bottom-10 md:bg-beige p-4 md:sticky md:block md:w-79 md:h-225 md:top-16 md:float-left">
