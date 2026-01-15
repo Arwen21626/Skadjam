@@ -732,6 +732,9 @@ input.quantite-prod-input {
   .w-90 {
     width: calc(var(--spacing, 0.25rem) * 90);
   }
+  .w-95 {
+    width: calc(var(--spacing, 0.25rem) * 95);
+  }
   .w-96 {
     width: calc(var(--spacing, 0.25rem) * 96);
   }
@@ -1065,6 +1068,9 @@ input.quantite-prod-input {
   .pt-2 {
     padding-top: calc(var(--spacing, 0.25rem) * 2);
   }
+  .pt-10 {
+    padding-top: calc(var(--spacing, 0.25rem) * 10);
+  }
   .pt-15 {
     padding-top: calc(var(--spacing, 0.25rem) * 15);
   }
@@ -1100,6 +1106,9 @@ input.quantite-prod-input {
   }
   .pl-3 {
     padding-left: calc(var(--spacing, 0.25rem) * 3);
+  }
+  .pl-5 {
+    padding-left: calc(var(--spacing, 0.25rem) * 5);
   }
   .pl-12 {
     padding-left: calc(var(--spacing, 0.25rem) * 12);
@@ -1410,6 +1419,11 @@ input.quantite-prod-input {
       margin-top: calc(var(--spacing, 0.25rem) * 10);
     }
   }
+  .md\:mt-15 {
+    @media (width >= 48rem) {
+      margin-top: calc(var(--spacing, 0.25rem) * 15);
+    }
+  }
   .md\:mr-4 {
     @media (width >= 48rem) {
       margin-right: calc(var(--spacing, 0.25rem) * 4);
@@ -1558,9 +1572,19 @@ input.quantite-prod-input {
       min-height: 800px;
     }
   }
+  .md\:min-h-\[900px\] {
+    @media (width >= 48rem) {
+      min-height: 900px;
+    }
+  }
   .md\:w-4xl {
     @media (width >= 48rem) {
       width: var(--container-4xl, 56rem);
+    }
+  }
+  .md\:w-10 {
+    @media (width >= 48rem) {
+      width: calc(var(--spacing, 0.25rem) * 10);
     }
   }
   .md\:w-12\! {
@@ -1606,6 +1630,11 @@ input.quantite-prod-input {
   .md\:w-150 {
     @media (width >= 48rem) {
       width: calc(var(--spacing, 0.25rem) * 150);
+    }
+  }
+  .md\:w-250 {
+    @media (width >= 48rem) {
+      width: calc(var(--spacing, 0.25rem) * 250);
     }
   }
   .md\:w-275 {
@@ -1759,6 +1788,11 @@ input.quantite-prod-input {
       padding-top: calc(var(--spacing, 0.25rem) * 5);
     }
   }
+  .md\:pt-15 {
+    @media (width >= 48rem) {
+      padding-top: calc(var(--spacing, 0.25rem) * 15);
+    }
+  }
   .md\:pr-1 {
     @media (width >= 48rem) {
       padding-right: calc(var(--spacing, 0.25rem) * 1);
@@ -1782,6 +1816,11 @@ input.quantite-prod-input {
   .md\:pl-1 {
     @media (width >= 48rem) {
       padding-left: calc(var(--spacing, 0.25rem) * 1);
+    }
+  }
+  .md\:pl-3 {
+    @media (width >= 48rem) {
+      padding-left: calc(var(--spacing, 0.25rem) * 3);
     }
   }
   .md\:pl-8 {
