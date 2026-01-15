@@ -85,7 +85,7 @@
                                         AND pr.est_supprime = false"
                                     , PDO::FETCH_ASSOC) as $row){
                     $tabProduit[] = $row;
-                }print_r($row);
+                }
 
                 if($tabProduit == null){ ?>
                     <p>Votre catalogue est vide.</p>
