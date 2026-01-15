@@ -1,3 +1,5 @@
+import "./../variables.js";
+
 const numberOfItems = 24 //NB produits à afficher
 let first = 0
 let actualPage = 1 
