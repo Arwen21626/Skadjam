@@ -99,7 +99,9 @@ function ajoutEventListener(){
     categorieAlimentaire.addEventListener("click",function () {
         if(categorieAlimentaire.checked){
             checkedCategories.push("alimentaire")
-            tableau = filtrageCategorieAlimentaire(tabProd);
+            tableau = filtrageCategorieAlimentaire(tabProd)
+            actualPage = 1
+            first = 0
             
         }else{
             checkedCategories.pop("alimentaire")
@@ -112,6 +114,8 @@ function ajoutEventListener(){
         if(categorieVetement.checked){
             checkedCategories.push("vetement")
             tableau = filtrageCategorieVetement(tabProd)
+            actualPage = 1
+            first = 0
         }else{
             checkedCategories.pop("vetement")
         }
@@ -123,6 +127,8 @@ function ajoutEventListener(){
         if(categorieArtisanat.checked){
             checkedCategories.push("artisanat")
             tableau = filtrageCategorieArtisanat(tabProd)
+            actualPage = 1
+            first = 0
         }else{
             checkedCategories.pop("artisanat")
         }
@@ -134,6 +140,8 @@ function ajoutEventListener(){
         if(categorieGoodies.checked){
             checkedCategories.push("goodies")
             tableau = filtrageCategorieGoodies(tabProd)
+            actualPage = 1
+            first = 0
         }else{
             checkedCategories.pop("goodies")
         }
@@ -145,6 +153,8 @@ function ajoutEventListener(){
         if(categorieSoin.checked){
             checkedCategories.push("soin")
             tableau = filtrageCategorieSoin(tabProd);
+            actualPage = 1
+            first = 0
         }else{
             checkedCategories.pop("soin")
         }
@@ -157,7 +167,8 @@ function ajoutEventListener(){
         if(noteNonNote.checked){
             checkedNotes.push("0")
             tableau = filtrageNoteNonNote(tabProd);
-            
+            actualPage = 1
+            first = 0
         }else{
             checkedNotes.pop("0")
         }
@@ -168,7 +179,8 @@ function ajoutEventListener(){
         if(noteUneE.checked){
             checkedNotes.push("1")
             tableau = filtrageNote1(tabProd);
-            
+            actualPage = 1
+            first = 0
         }else{
             checkedNotes.pop("1")
         }
@@ -179,7 +191,8 @@ function ajoutEventListener(){
         if(noteDeuxE.checked){
             checkedNotes.push("2")
             tableau = filtrageNote2(tabProd);
-            
+            actualPage = 1
+            first = 0
         }else{
             checkedNotes.pop("2")
         }
@@ -190,7 +203,8 @@ function ajoutEventListener(){
         if(noteTroisE.checked){
             checkedNotes.push("3")
             tableau = filtrageNote3(tabProd);
-            
+            actualPage = 1
+            first = 0            
         }else{
             checkedNotes.pop("3")
         }
@@ -201,6 +215,8 @@ function ajoutEventListener(){
         if(noteQuatreE.checked){
             checkedNotes.push("4")
             tableau = filtrageNote4(tabProd);
+            actualPage = 1
+            first = 0
         }else{
             checkedNotes.pop("4")
         }
@@ -211,6 +227,8 @@ function ajoutEventListener(){
         if(noteCinqE.checked){
             checkedNotes.push("5")
             tableau = filtrageNote5(tabProd);
+            actualPage = 1
+            first = 0
         }else{
             checkedNotes.pop("5")
         }
@@ -311,7 +329,10 @@ function afficherListe(){
 
     if(checkedCategories.length === 0 && checkedNotes.length === 0 /*&& checkedTranches.length === 0*/){
         tableau = tabProd
+        actualPage = 1
+        first = 0
     }else{
+        
         for(let i=0; i<checkedCategories.length; i++){
             if(checkedCategories[i] === "alimentaire" && !ali){
                 tableau = tableau.concat(filtrageCategorieAlimentaire(tabProd));

@@ -157,7 +157,7 @@ if(isset($_POST['pseudo']) && isset($_POST['naissance']) && isset($_POST['nom'])
 
                                 $modifAdresse->execute();
                             }
-                            // Erreurs consernant le format de l'adresse
+                            // Erreurs concernant le format de l'adresse
                             elseif(!verifAdresse($numRue.' '.$complement.' '.$nomRue)){
                                 $erreur = true;
                                 echo "Erreur : sur l'adresse numéro $compteur, le format de l'adresse postale n'est pas correcte. ";
@@ -171,7 +171,7 @@ if(isset($_POST['pseudo']) && isset($_POST['naissance']) && isset($_POST['nom'])
                             elseif(!verifCp($codePostal)){
                                 $erreur = true;
                                 echo "Erreur : sur l'adresse numéro $compteur, le format du code postale n'est pas correcte. ";
-                                echo "Il doit contnire exactement 5 chiffres.";
+                                echo "Il doit contenir exactement 5 chiffres.";
                             }
                         }
                         // erreur si l'un des champs obligatoire des adresses n'est pas rempli
@@ -182,7 +182,7 @@ if(isset($_POST['pseudo']) && isset($_POST['naissance']) && isset($_POST['nom'])
                         $compteur++;
                     }
                 }
-                // Erreur consernant l'unicité du mail
+                // Erreur concernant l'unicité du mail
                 elseif(!mailUnique($mail) || !($ancienMail === $mail)){
                     $erreur = true;
                     echo "Erreur : le mail saisie existe déjà. ";
@@ -242,14 +242,12 @@ if(isset($_POST['pseudo']) && isset($_POST['naissance']) && isset($_POST['nom'])
 
             <a href="../html/fo/creation_compte_client.php">Retour</a>
         <?php }
-    }
-    catch(PDOException $e){
+    }catch(PDOException $e){
         echo "Erreur dans l'envoie des données dans la base de données.";
         echo $e->getMessage();
         die();
     }
     
-}
-else{
+}else{
     echo "vous n'avez pas rempli tous les champs obligatoires.";
 }

@@ -68,6 +68,7 @@ foreach($dbh->query("SELECT * FROM sae3_skadjam._compte c
         <h2 class="flex justify-center text-center">Modification du compte vendeur</h2>
         <!-- Formulaire -->
         <form class="flex flex-wrap p-15 pt-0 justify-around"  action="../../php/traitement_donnees_compte_vendeur.php" method="post"> 
+            <!-- Vendeur -->
             <h3>Informations vendeur :</h3>
             <div class="flex flex-row flex-wrap justify-between ml-10 mb-7 mr-10 @max-[768px]:ml-5 @max-[768px]:mr-5">
                 <div class="flex flex-col items-start mt-6 w-fit @max-[768px]:mt-2">
@@ -88,6 +89,7 @@ foreach($dbh->query("SELECT * FROM sae3_skadjam._compte c
                 </div>
             </div>
 
+            <!-- Entreprise -->
             <h3>Informations entreprise :</h3>
             <div class="flex flex-row flex-wrap justify-between ml-10 mb-7 mr-10">
                 <div class="flex flex-col items-start mt-6 w-fit @max-[768px]:mt-2">
@@ -108,7 +110,7 @@ foreach($dbh->query("SELECT * FROM sae3_skadjam._compte c
                 </div>
             </div>
 
-            <!-- ########## ADRESSE ########## -->
+            <!-- Adresse -->
             <h3>Siège social :</h3>
             <div class="flex flex-row flex-wrap justify-between ml-10 mb-7 mr-10">
                 <div class="flex flex-col items-start mt-6 w-fit @max-[768px]:mt-2">

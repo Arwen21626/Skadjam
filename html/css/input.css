@@ -82,7 +82,50 @@ input.quantite-prod-input {
     -moz-appearance: textfield;
 }
 
-/* Animation */
+/* Popup - Animation */
+
+
+
+#popup-overlay {
+    display: none;
+    position: fixed;
+    bottom: 10rem;
+    right: 10rem;
+    align-items: center;
+    justify-content: center;
+    z-index: 9999;
+    width: 320px;
+    height: 160px;
+}
+
+#popup-overlay.active {
+    display: flex;
+    
+}
+
+.popup {
+    background-color: white;
+    padding: 20px, 30px;
+    border-radius: 12px;
+    width: 320px;
+    border-width: 1px;
+    border-color: black;
+    text-align: center;
+    animation: popupIn 0.3s ease;
+}
+
+@keyframes popupIn {
+
+    from {
+        transform: scale(0.9);
+        opacity: 0;
+    }
+    to {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
 
 
 @import "tailwindcss";
