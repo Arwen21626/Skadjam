@@ -70,7 +70,7 @@ catch (Exception $e){
     echo "Erreur : " . $e->getMessage();
 }
 
-//création commande, détails et facture si cgv cochées et btn valider appuyé
+//acceptation des cgv --> redirection vers adresse.php
 if (isset($_POST['valider'])) {
     if (!isset($_POST['case'])) {
         die("Erreur : vous devez accepter les CGV");
