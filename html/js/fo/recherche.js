@@ -1,4 +1,5 @@
 import * as variables from "./../variables.js";
+import * as changePage from "./../pagination.js"
 
 function toggleFiltre(tableau, valeur) {
     if (tableau.includes(valeur)) {
@@ -13,7 +14,7 @@ function toggleFiltre(tableau, valeur) {
 
 // Ajout des eventListeners
 function ajoutEventListener(){
-    tableau = []
+    variables.tableau = []
     
 // EventListener pour les boutons de changement de page
     // Récupérations des elements
@@ -24,19 +25,19 @@ function ajoutEventListener(){
 
     // Fonctions pour les boutons
     premierePage.addEventListener("click",function(){
-        firstPage()
+        changePage.firstPage()
     })
     
     pagePrec.addEventListener("click",function(){
-        pagePrecedente()
+        changePage.pagePrecedente()
     })
 
     pageSuiv.addEventListener("click",function(){
-        pageSuivante()
+        changePage.pageSuivante()
     })
 
     dernierePage.addEventListener("click",function(){
-        lastPage()
+        changePage.lastPage()
     })
 // EventListener pour les tris
     // Récupération des elements
@@ -50,29 +51,29 @@ function ajoutEventListener(){
     // Fonctions de tri
         // Prix
     prixTriCroissant.addEventListener("click",function () {
-        afficherListe(triPrixCroissant(tableau))
+        afficherListe(triPrixCroissant(variables.tableau))
     })            
 
     prixTriDecroissant.addEventListener("click",function () {
-        afficherListe(triPrixDecroissant(tableau))
+        afficherListe(triPrixDecroissant(variables.tableau))
     })
 
         // Ordre alphabétique
     alphaTriAZ.addEventListener("click",function () {
-        afficherListe(triAz(tableau))
+        afficherListe(triAz(variables.tableau))
     })
 
     alphaTriZA.addEventListener("click",function () {
-        afficherListe(triZa(tableau))
+        afficherListe(triZa(variables.tableau))
     })
     
         // Note
     noteTri51.addEventListener("click",function () {
-        afficherListe(triEtoileDecroissant(tableau))
+        afficherListe(triEtoileDecroissant(variables.tableau))
     })
     
     noteTri15.addEventListener("click", function () {
-        afficherListe(triEtoileCroissant(tableau))
+        afficherListe(triEtoileCroissant(variables.tableau))
     })
 
 // EventListener pour les filtres
@@ -193,7 +194,7 @@ function ajoutEventListener(){
 function afficherListe() {
 
     // TOUJOURS repartir de tabprod
-    tableau = tabProd;
+    variables.tableau = tabProd;
 
     // FILTRE CATÉGORIES
     if (checkedCategories.length > 0) {
@@ -209,7 +210,7 @@ function afficherListe() {
 
     // FILTRE NOTES
     if (checkedNotes.length > 0) {
-        tableau = tableau.filter(prod => {
+        variables.tableau = variables.tableau.filter(prod => {
             let note = prod.note_moyenne;
 
             if (note === null) return checkedNotes.includes("0");
@@ -228,7 +229,7 @@ function afficherListe() {
 
     // FILTRE TRANCHE DE PRIX
     if (checkedTranches.length > 0) {
-        tableau = tableau.filter(prod => {
+        variables.tableau = variables.tableau.filter(prod => {
             let prix = parseFloat(prod.prix_ttc);
 
             if (checkedTranches.includes("prix1") && prix >= 2.99 && prix <= 8.39) return true;
@@ -244,7 +245,7 @@ function afficherListe() {
     let parent = document.getElementById("prod");
     parent.innerHTML = "";
 
-    for (let i = first; i < first + numberOfItems && i < tableau.length; i++) {
+    for (let i = first; i < first + variables.numberOfItems && i < tableau.length; i++) {
         afficherProduit(i);
     }
 
@@ -256,8 +257,8 @@ function afficherListe() {
 function afficherProduit(indice){
     
     let i = indice
-    console.log(tableau[i])
-    let idProduit = tableau[i]['id_produit']
+    
+    let idProduit = variables.tableau[i]['id_produit']
     let parent = document.getElementById("prod")
 
     // Section   
@@ -276,15 +277,15 @@ function afficherProduit(indice){
 
     // Image
     let image = document.createElement("img")
-    image.src = tableau[i]['url_photo']
-    image.alt = tableau[i]['alt']
-    image.title = tableau[i]['title']
+    image.src = variables.tableau[i]['url_photo']
+    image.alt = variables.tableau[i]['alt']
+    image.title = variables.tableau[i]['title']
     image.classList.add("w-auto", "h-40", "md:h-80", "justify-self-center")
     parent.appendChild(image)
 
     // Nom produit
     let nom = document.createElement("p")
-    nom.textContent = tableau[i]['libelle_produit']
+    nom.textContent = variables.tableau[i]['libelle_produit']
     parent.appendChild(nom)
 
     // Prix et note
@@ -296,15 +297,15 @@ function afficherProduit(indice){
 
     // Prix TTC
     let prixTTC = document.createElement("p")
-    prixTTC.textContent = tableau[i]['prix_ttc'].replace(".", ",")+" € (TTC)"
+    prixTTC.textContent = variables.tableau[i]['prix_ttc'].replace(".", ",")+" € (TTC)"
     prixTTC.classList.add("line-through")
     parent.appendChild(prixTTC)
 
     let prixRemise = document.createElement("p")
-    prixRemise.textContent = tableau[i]['prix_remise'].replace(".", ",")+" € (TTC)"
+    prixRemise.textContent = variables.tableau[i]['prix_remise'].replace(".", ",")+" € (TTC)"
     parent.appendChild(prixRemise)
 
-    if (tableau[i]['prix_remise'] == tableau[i]['prix_ttc']) {
+    if (variables.tableau[i]['prix_remise'] == variables.tableau[i]['prix_ttc']) {
         prixRemise.classList.add("hidden")
         prixTTC.classList.remove("line-through")
     }
@@ -317,13 +318,13 @@ function afficherProduit(indice){
 
     parent = contientNote
 
-    let note = tableau[i]['note_moyenne']
+    let note = variables.tableau[i]['note_moyenne']
     affichageNote(note, parent)
 
     //setTimeout(function(){console.log('Code waits for 1  second')}, 1000);
 }
 
-async function affichageNote(note, parent ){
+async function affichageNote(note, parent){
     // fonction qui affiche une note avec des étoiles
     //affichage d'une note nulle
     let section = document.createElement("section")
@@ -410,28 +411,28 @@ async function affichageNote(note, parent ){
 }
 
 // Tris
-function triPrixCroissant(tableau){
-    return tableau.sort((a, b) => parseInt(a['prix_ttc']) - parseInt(b['prix_ttc']))
+function triPrixCroissant(){
+    return variables.tableau.sort((a, b) => parseInt(a['prix_ttc']) - parseInt(b['prix_ttc']))
 }
 
-function triPrixDecroissant(tableau){
+function triPrixDecroissant(){
     return tableau.sort((a, b) => parseFloat(b['prix_ttc']) - parseFloat(a['prix_ttc']))
 }
 
-function triAz(tableau){
-    return tableau.sort((a,b) => a['libelle_produit'].localeCompare(b['libelle_produit']))
+function triAz(){
+    return variables.tableau.sort((a,b) => a['libelle_produit'].localeCompare(b['libelle_produit']))
 }
 
 function triZa(tableau){
-    return tableau.sort((a,b) => b['libelle_produit'].localeCompare(a['libelle_produit']))
+    return variables.tableau.sort((a,b) => b['libelle_produit'].localeCompare(a['libelle_produit']))
 }
 
 function triEtoileCroissant(tableau){
-    return tableau.sort((a,b) => parseFloat(a['note_moyenne']) - parseFloat(b['note_moyenne']))
+    return variables.tableau.sort((a,b) => parseFloat(a['note_moyenne']) - parseFloat(b['note_moyenne']))
 }
 
 function triEtoileDecroissant(tableau){
-    return tableau.sort((a,b) => parseFloat(b['note_moyenne']) - parseFloat(a['note_moyenne']))
+    return variables.tableau.sort((a,b) => parseFloat(b['note_moyenne']) - parseFloat(a['note_moyenne']))
 }
 
 // Filtres
