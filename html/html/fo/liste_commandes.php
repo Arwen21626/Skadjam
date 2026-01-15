@@ -5,7 +5,7 @@
     $idCompte = $_SESSION['idCompte'];
 
     if($idCompte == null){
-        echo "Vous n'êtes pas connecté.";
+        die("Erreur : Vous n'êtes pas connecté.");
     }
 
     try {     
