@@ -13,7 +13,8 @@
         //récupère toutes les infos de la table commande
         foreach($dbh->query("SELECT c.id_commande, c.date_commande, c.etat, c.montant_total_ttc
                             FROM sae3_skadjam._commande c
-                            WHERE c.id_client = $idCompte"
+                            WHERE c.id_client = $idCompte
+                            ORDER BY c.date_commande DESC, c.id_commande DESC;"
                             , PDO::FETCH_ASSOC) as $row){
             $tabInfoCommandes[] = $row;
         } 
