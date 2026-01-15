@@ -1,0 +1,125 @@
+Vendeur 
+
+Email : m.le.gall@menhirco.bzh
+Mot de passe : Malo_Menhir22
+ 
+Email : enora.legoff@breizhd.bzh
+Mot de passe : Enora#BD25
+ 
+Email : tanguy.cadic@goemlab.bzh
+Mot de passe : Tanguy_GM88
+ 
+Email : maelle.ld@embrunz.bzh
+Mot de passe : Maelle*2025
+ 
+Email : erwan.conan@armsea.bzh
+Mot de passe : ArMor#56
+ 
+Email : yuna.cariou@kersweet.bzh
+Mot de passe : Yuna@KS33
+ 
+Email : judicael.lb@triforge.bzh
+Mot de passe : Triskell44!
+ 
+Email : aziliz.riou@kerbooks.bzh
+Mot de passe : KBooks_20
+ 
+Email : gwilherm.salaun@bspirit.bzh
+Mot de passe : Distil#99
+ 
+Email : nolwenn.prigent@bdelices.bzh
+Mot de passe : Npw_2025
+ 
+Email : ronan.madec@cuirbzh.bzh
+Mot de passe : Cuir_RM88
+ 
+Email : annaig.perret@kouignhouse.bzh
+Mot de passe : Kouign#25
+ 
+Email : alan.leguen@kornbrew.bzh
+Mot de passe : Korn@B2025
+ 
+Email : katell.lozach@arzjewels.bzh
+Mot de passe : Katell*BJ
+ 
+Email : jorj.caradec@argoatmeat.bzh
+Mot de passe : Argoat56!
+ 
+Email : sterenn.gourmelon@bzhmode.bzh
+Mot de passe : Sg_Mode09
+ 
+Email : yann.abiven@pabwood.bzh
+Mot de passe : Yann_PAB44
+ 
+Email : rozenn.hemon@florabzh.bzh
+Mot de passe : Roz_Fl0ra
+ 
+Email : maodan.leroux@bzlait.bzh
+Mot de passe : Lait#2025
+ 
+Email : erell.pengam@gwenherb.bzh
+Mot de passe : Herb_Er33
+ 
+--------------------------------------------------------------------------------------------------------------------------------------------------
+ 
+Client
+
+Email : celine76@baron.fr
+Mot de passe : Mot_de_passe1 (le mot de passe a été changé pendant la review donc à vérifier (peut-être exemple_2_MDP))
+ 
+Email : suzannepires@club-internet.fr
+Mot de passe : Mot_de_passe2
+ 
+Email : rcollin@clement.net
+Mot de passe : Mot_de_passe3
+ 
+Email : alphonse96@launay.com
+Mot de passe : Mot_de_passe4
+ 
+Email : nverdier@lopes.com
+Mot de passe : Mot_de_passe5
+ 
+Email : bleclerc@marques.com
+Mot de passe : Mot_de_passe6
+ 
+Email : tlebon@jourdan.com
+Mot de passe : Mot_de_passe7
+ 
+Email : victoire21@free.fr
+Mot de passe : Mot_de_passe8
+ 
+Email : christine97@noos.fr
+Mot de passe : Mot_de_passe9
+ 
+Email : clegrand@vallet.fr
+Mot de passe : Mot_de_passe10
+ 
+Email : ylaurent@dbmail.com
+Mot de passe : Mot_de_passe11
+ 
+Email : honoregosselin@millet.fr
+Mot de passe : Mot_de_passe12
+ 
+Email : gomesvincent@breton.com
+Mot de passe : Mot_de_passe13
+ 
+Email : yvesnoel@faure.fr
+Mot de passe : Mot_de_passe14
+ 
+Email : sebastiendenis@dubois.fr
+Mot de passe : Mot_de_passe15
+ 
+Email : kbailly@tiscali.fr
+Mot de passe : Mot_de_passe16
+ 
+Email : bernardchevallier@chevallier.org
+Mot de passe : Mot_de_passe17
+ 
+Email : pmallet@bouygtel.fr
+Mot de passe : Mot_de_passe18
+ 
+Email : lalbert@live.com
+Mot de passe : Mot_de_passe19
+ 
+Email : rolandgrenier@blanchet.com
+Mot de passe : Mot_de_passe20

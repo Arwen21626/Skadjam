@@ -1,6 +1,6 @@
 <?php
     include __DIR__ . '/01_premiere_connexion.php';
-    const PAGE_SIZE = 24;
+    const PAGE_SIZE = 12;
     require_once __DIR__ . "/../connections_params.php";
     require_once __DIR__ . "/php/fonctions.php";
     require_once __DIR__ . "/php/modification_variable.php";
