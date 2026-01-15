@@ -192,26 +192,19 @@ function ajoutEventListener(){
     // Récupératiion des elements
     let boutonSidebar = document.getElementById("filtresTris")
     let sidebar = document.getElementsByTagName("aside")[0]
-    let listeProd = document.getElementById("listeProduit")
-    let prod = document.getElementById("prod")
     let fermerSidebar = document.getElementById("fermerSidebar")
-    let changePage = document.getElementById("changePage")
 
     // Fonction ouverture
-    // boutonSidebar.addEventListener("click", function(){
-    //     boutonSidebar.classList.add("hidden")
-    //     prod.classList.add("content-end")
-    //     sidebar.classList.remove("hidden")
-    //     sidebar.classList.add("translate-x-0")
-    // })
+    boutonSidebar.addEventListener("click", function(){
+        boutonSidebar.classList.add("hidden")
+        sidebar.classList.remove("hidden")
+    })
 
     //Fonction fermeture
-    // fermerSidebar.addEventListener("click", function(){
-    //     sidebar.classList.remove("translate-x-0")
-    //     sidebar.classList.add("hidden")
-    //     boutonSidebar.classList.remove("hidden")
-    //     prod.classList.remove("content-end")
-    // })
+    fermerSidebar.addEventListener("click", function(){
+        sidebar.classList.add("hidden")
+        boutonSidebar.classList.remove("hidden")
+    })
 
     
 }

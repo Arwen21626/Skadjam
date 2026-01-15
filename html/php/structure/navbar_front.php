@@ -20,7 +20,7 @@
     }
 ?>
 
-<nav class="bg-beige fixed bottom-0 w-full z-10 md:sticky md:top-0">
+<nav class="bg-beige fixed left-0 right-0 bottom-0 w-full z-10 md:sticky md:top-0">
 
     <section class="flex justify-around items-center p-1">
 
