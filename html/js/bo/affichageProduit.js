@@ -68,6 +68,6 @@ function afficherProduit(indice){
     parent = lien
 
     let stock = document.createElement("p")
-    stock.textContent = tableau[i]['qte_stock']
+    stock.textContent = "Stock : "+tableau[i]['quantite_stock']
     parent.appendChild(stock)
 }

@@ -54,12 +54,7 @@
             
             <!-- Filtres -->
             <section>
-                
-                <div class="flex flex-row justify-between">
-                    <h3>Filtres</h3>
-                    <img id="fermerSidebar"src="../../images/logo/bootstrap_icon/x-large.svg" alt="Fermer" class="flex self-center w-8 md:hidden">
-                </div>
-                
+                 <h3>Filtres</h3>
                 <!-- Categorie -->
                     <article>
                     <details open>
