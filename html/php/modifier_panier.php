@@ -55,5 +55,5 @@ else if ($_SESSION['role'] === 'visiteur'){
     }
 }
 
-header("location:/html/fo/panier.php");
+header("location:/html/fo/panier.php?panierModif=V");
 ?>

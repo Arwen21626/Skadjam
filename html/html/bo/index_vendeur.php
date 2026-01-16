@@ -43,15 +43,11 @@
             </a>        
         </div>
 
-
         <div class="mt-15 flex flex-row justify-around">
             <a href="../bo/creation_produit.php"><button class="border-2 border-vertFonce rounded-2xl w-auto h-14 px-7 cursor-pointer">Créer un produit</button></a>
             <a href="../bo/details_remises.php"><button class="border-2 border-vertFonce rounded-2xl w-auto h-14 px-7 cursor-pointer">Consulter les remises</button></a>
             <a href="../bo/vider_catalogue.php"><button class="border-2 border-vertFonce rounded-2xl w-auto h-14 px-7 cursor-pointer">Vider le catalogue</button></a>
         </div>
-
-        
-
 
         <!--Début du catalogue-->
         <h2 id="vosProduits">Vos produits</h2>
@@ -97,7 +93,7 @@
                 $lignes = array_slice($tabProduit, $pageNumber*PAGE_SIZE-PAGE_SIZE, PAGE_SIZE); 
 
                 //affiche la photo du produit, son nom, son prix et sa note, son stock ?>
-                <div class="grid grid-cols-3">
+                <div class="flex flex-row flex-wrap justify-around">
                     <?php 
                         foreach($tabProduit as $id => $valeurs){
                             $idProduit = $valeurs['id_produit'];
@@ -107,13 +103,14 @@
                                                 WHERE id_produit = :id_produit");
                             $stmt->execute([':id_produit' => $idProduit]);
                             $estPromu = (!empty($stmt->fetch())); ?>
-                            <section class="bg-bleu grid grid-cols-[40%_60%] w-80 p-3 m-2">
+                            <section class="bg-bleu flex flex-col w-40 h-auto p-2 m-2 md:w-80 md:p-3">
                                 <!--affichage de la photo-->
-                                <a href= "<?php echo "details_produit.php?idProduit=".$idProduit;?>" class="col-span-2 justify-self-center mb-3">
-                                    <img src="<?php echo $valeurs['url_photo'];?>" 
-                                            alt="<?php echo $valeurs['alt'];?>"
-                                            title="<?php echo $valeurs['titre'];?>">
-                                </a>
+                                <a href= "<?php echo "details_produit.php?idProduit=".$idProduit;?>" class="mb-3">
+                                    <img class="w-auto h-40 md:h-80 justify-self-center" 
+                                        src="<?php echo $valeurs['url_photo'];?>" 
+                                        alt="<?php echo $valeurs['alt'];?>"
+                                        title="<?php echo $valeurs['titre'];?>">
+                                
 
                                 <!--affichage de la promotion-->
                                 <?php if($estPromu){ 
@@ -139,24 +136,23 @@
                                 <?php }} ?>
 
                                 <!--affichage du nom du produit-->
-                                <p class="col-span-2"><?php echo $valeurs['libelle_produit'];?></p> 
+                                <p><?php echo $valeurs['libelle_produit'];?></p> 
 
                                 <!--affichage du prix du produit-->   
-                                <div class="flex justify-start items-center col-span-2">
-                                    <p class="inline-block <?php echo ($valeurs['pourcentage_remise'] !== NULL)?'line-through':'';?>"> <?php echo htmlentities(str_replace(".", ",",$valeurs['prix_ttc'])); ?>€</p>
-                                    <p class=" pl-3 <?php echo ($valeurs['pourcentage_remise'] !== NULL)?'':'hidden';?>"> <?php echo htmlentities(str_replace(".", ",",$valeurs['prix_remise'])); ?>€</p>
-                                    <p class="pl-2 inline-block"> (TTC) </p>
-            
+                                <div class="flex flex-row justify-between items-center">
+                                    <p class="<?php echo ($valeurs['pourcentage_remise'] !== NULL)?'line-through':'';?>"> <?php echo htmlentities(str_replace(".", ",",$valeurs['prix_ttc'])); ?>€ (TTC)</p>
+                                    <p class="<?php echo ($valeurs['pourcentage_remise'] !== NULL)?'':'hidden';?>"> <?php echo htmlentities(str_replace(".", ",",$valeurs['prix_remise'])); ?>€ (TTC)</p>
 
-                                    <!--récupération de la note-->
-                                    <div class="ml-2 md:ml-10 flex">
-                                        <?php $note = $valeurs['note_moyenne'];
-                                            affichageNote($note); ?>
-                                    </div>
+                                </div>
+                                <!--récupération de la note-->
+                                <div class="flex">
+                                    <?php $note = $valeurs['note_moyenne'];
+                                        affichageNote($note); ?>
                                 </div>
                                 
                                 <!--affichage du stock-->
-                                <p class="col-span-2">En stock : <?php echo $valeurs['quantite_stock'];?></p>       
+                                <p class="col-span-2">En stock : <?php echo $valeurs['quantite_stock'];?></p>
+                                </a>      
                             </section>
                     <?php } ?>
                 </div>         
@@ -169,16 +165,20 @@
             }
         ?>
         <!--fin du catalogue-->
-
-        <?php if ($pageNumber>1){?>
-        <a class= "lienPage" href="<?php echo "./index_vendeur.php?page=".($pageNumber-1)."#vosProduits";?>">Page précédente</a>
-        <?php }?>
-    
-        <?php if ($pageNumber<$maxPage){?>
-        <a class= "lienPage" href="<?php echo "./index_vendeur.php?page=".($pageNumber+1)."#vosProduits";?>">Page suivante</a>
-        <?php }?>
-
+        <div class="flex flex-row justify-around w-96">
+            <button id="pagePrec" class="md:order-2">|<</button>
+            <button id="pageSuiv" class="md:order-4">>|</button>
+            <p id="pageInfo" class="md:order-3"></p>
+            <button id="premierePage" class="md:order-1"><<</button>
+            <button id="dernierePage" class="md:order-5">>></button>
+        </div>
     </main>
+    <script src=""></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            numPageInfo()
+        });
+    </script>
     
     <!--footer-->
     <?php include(__DIR__ . "/../../php/structure/footer_back.php"); ?>

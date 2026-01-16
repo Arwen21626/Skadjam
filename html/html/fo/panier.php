@@ -141,25 +141,39 @@
     <?php include(__DIR__ . "/../../php/structure/head_front.php");?>
     <title>Panier</title>
 </head>
-<body>
+<body
+    <?php 
+        if ($_SESSION['role'] === 'client' && !empty($produitsPanier)){
+            echo 'class="pb-28 md:pb-0"';
+        }
+        else if ($_SESSION['role'] === 'visiteur' && $_SESSION['panier']['nb_produit_total'] > 0) {
+            echo 'class="pb-28 md:pb-0"';
+        }
+    ?>
+>
     <?php include(__DIR__ . "/../../php/structure/header_front.php") ?>
     <?php include(__DIR__ . "/../../php/structure/navbar_front.php") ?>
 
-    
+    <div id="popup-overlay">
+        <div class="popup p-2">
+            <h4>Votre panier a bien été modifié !</h4>
+            <button class=" pl-2 pr-2 border rounded-sm cursor-pointer" onclick="closePopup()">OK</button>
+        </div>
+    </div>
     
         <?php
             if ($_SESSION['role'] === 'client') {
 
                 if (empty($produitsPanier)) {
                     ?>
-                        <main class="min-h-[360px] md:min-h-[620px] md:p-4 flex justify-center">
+                        <main class="min-h-[420px] md:min-h-[620px] md:p-4 flex justify-center">
                             <h2 class="md:text-center self-center">Votre panier est vide</h2>
                     <?php
                 }
                 else
                 {
                     ?>
-                        <main class="md:min-h-[620px] md:p-4 md:grid md:grid-cols-2 md:relative">
+                        <main class="min-h-[420px] md:min-h-[620px] md:p-4 md:grid md:grid-cols-2 md:relative">
 
                             <div id="conteneur-produit" class="flex flex-col">
                                 <?php
@@ -255,7 +269,7 @@
                                 
                                 <form class="flex justify-center valider-panier" method="get" action="<?php echo $lienBtnValiderPanier;?>">
                                     <input type="hidden" name="idPanier" value="<?= htmlspecialchars($idPanier) ?>">
-                                    <button class="bg-beige rounded-2xl w-28 p-1 h-10 mt-2 md:p-0 md:w-40 md:h-14 md:mt-4 cursor-pointer border-black border shadow" type="submit">
+                                    <button class="bg-beige rounded-2xl w-56 p-1 h-10 mt-2 md:p-0 md:w-40 md:h-14 md:mt-4 cursor-pointer border-black border shadow" type="submit">
                                         Valider le panier
                                     </button>
                                 </form>
@@ -269,14 +283,14 @@
 
                 if ($_SESSION['panier']['nb_produit_total'] === 0) {
                     ?>
-                        <main class="min-h-[360px] md:min-h-[620px] md:p-4 flex justify-center">
+                        <main class="min-h-[420px] md:min-h-[620px] md:p-4 flex justify-center">
                             <h2 class="md:text-center self-center">Votre panier est vide</h2>
                     <?php
                 }
                 else
                 {
                     ?>
-                        <main class="md:min-h-[620px] md:p-4 md:grid md:grid-cols-2 md:relative">
+                        <main class="min-h-[420px] md:min-h-[620px] md:p-4 md:grid md:grid-cols-2 md:relative">
 
                             <div id="conteneur-produit" class="flex flex-col">
                                 <?php
@@ -375,7 +389,7 @@
                                     
                                     <form class="flex justify-center valider-panier" method="get" action="<?php echo $lienBtnValiderPanier;?>">
                                         <input type="hidden" name="veutAcheter" value="V">
-                                        <button class="bg-beige rounded-2xl w-28 p-1 h-10 mt-2 md:p-0 md:w-40 md:h-14 md:mt-4 cursor-pointer border-black border shadow" type="submit">
+                                        <button class="bg-beige rounded-2xl w-56 p-1 h-10 mt-2 md:p-0 md:w-40 md:h-14 md:mt-4 cursor-pointer border-black border shadow" type="submit">
                                             Valider le panier
                                         </button>
                                     </form>
