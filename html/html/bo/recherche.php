@@ -31,8 +31,13 @@
     <link rel="stylesheet" type="text/css" href="../../css/output.css" >
     <title>Recherche</title>
     <?php include __DIR__ . "/../../php/structure/head_back.php"; ?>
-    <script src="../../js/pagination.js"></script>
     <script src="../../js/fo/recherche.js"></script>
+    <script src="../../js/affichageListeProduits.js"></script>
+    <script src="../../js/bo/affichageProduit.js"></script>
+    <script src="../../js/pagination.js"></script>
+    <script src="../../js/tris.js"></script>
+    <script src="../../js/filtres.js"></script>
+    <script src="../../js/affichageNote.js"></script>
 </head>
 
 <body>
@@ -45,7 +50,7 @@
     <?php include(__DIR__ . "/../../php/structure/navbar_back.php"); ?>
 
     
-    <main class="min-h-[600px]">
+    <main class="min-h-[800px]">
         <!-- Barre de recherche -->
         <aside class="sidebar overflow-auto float-left bg-vertFonce text-bleu p-4 sticky w-79 h-225 top-20">
             <!-- Filtres -->
@@ -251,6 +256,6 @@
     </main>
 
     <!--footer-->
-    <?php include (__DIR__ . "/../../php/structure/footer_front.php"); ?>
+    <?php include (__DIR__ . "/../../php/structure/footer_back.php"); ?>
 </body>
 </html>

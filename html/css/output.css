@@ -658,6 +658,9 @@ input.quantite-prod-input {
   .min-h-\[650x\] {
     min-height: 650x;
   }
+  .min-h-\[800px\] {
+    min-height: 800px;
+  }
   .w-1 {
     width: calc(var(--spacing, 0.25rem) * 1);
   }
@@ -990,6 +993,9 @@ input.quantite-prod-input {
   }
   .border-black {
     border-color: var(--color-black, #000);
+  }
+  .border-red-500 {
+    border-color: var(--color-red-500, oklch(63.7% 0.237 25.331));
   }
   .border-vertClair {
     border-color: var(--color-vertClair);
@@ -1541,6 +1547,11 @@ input.quantite-prod-input {
   .md\:inline-block {
     @media (width >= 48rem) {
       display: inline-block;
+    }
+  }
+  .md\:inline-flex {
+    @media (width >= 48rem) {
+      display: inline-flex;
     }
   }
   .md\:size-1\/4 {

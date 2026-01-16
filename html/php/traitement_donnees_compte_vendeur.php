@@ -28,6 +28,7 @@ if (isset($_POST["nom"]) && isset($_POST["prenom"]) && isset($_POST["mail"]) && 
             $ville = htmlentities($_POST["ville"]);
             $cp = htmlentities($_POST["cp"]);
             $siren = htmlentities($_POST["siren"]);
+            $description = isset($_POST["description"]) ? $_POST["description"] : "";
             $temp = tabAdresse($adresse);
             $numero = $temp[0];
             $compNum = $temp[1];
@@ -50,7 +51,7 @@ if (isset($_POST["nom"]) && isset($_POST["prenom"]) && isset($_POST["mail"]) && 
                                             WHERE id_compte = $idCompte");
 
                 $modifVendeur = $dbh->prepare("UPDATE sae3_skadjam._vendeur
-                                            SET denomination = '$denomination', raison_sociale = '$raisonSociale', iban = '$iban', siren = '$siren'
+                                            SET denomination = '$denomination', raison_sociale = '$raisonSociale', iban = '$iban', siren = '$siren', description_vendeur = '$description'
                                             WHERE id_compte = $idCompte");
                 $modifCompte->execute();
                 $modifVendeur->execute();
