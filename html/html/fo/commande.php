@@ -71,6 +71,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Récapitulatif de la commande</title>
+    <link href="/css/print.css" media="print" rel="stylesheet" />
 </head>
 <?php include __DIR__ . '/../../php/structure/head_front.php'?>
 <body>
@@ -79,11 +80,12 @@
     <?php include __DIR__ . "/../../php/structure/navbar_front.php"; ?>
 
     <main class="min-h-[600px]">
+        <button id="imprimer">Imprimer</button>
         <h2 class="mt-10">Récapitulatif de la commande</h2>
 
         <div class="ml-5 flex flex-row items-end mt-10">
             <h3 class="mr-3">Numéro de la commande : </h3> 
-            <p><?php echo $idCommande;?></p>
+            <p id="numeroCommande"><?php echo $idCommande;?></p>
         </div>
 
         <div class="ml-5 flex flex-row items-end">
@@ -187,6 +189,34 @@
         </div>
         <a href="liste_commandes.php" class="flex justify-center mt-15 mb-15"><button class="border-vertClair border-2 rounded-sm md:rounded-2xl w-35 h-10 md:w-50 md:h-14 px-7 cursor-pointer">Retour</button></a>
     </main>
+    <script>
+        let btnImprimmer = document.getElementById("imprimer");
+        let numeroCommande = document.getElementById("numeroCommande");
+
+        function fermerPageImpression() {
+            // fermer la page d'impression
+            document.body.removeChild(this); 
+        }
+
+        function gestionPageImpression() {
+            // définie quand est ce qu'on peut fermer la page d'impression
+            // et définie un iframe de type impression
+            this.contentWindow.onbeforeunload = fermerPageImpression;
+            this.contentWindow.onafterprint = fermerPageImpression;
+            this.contentWindow.print(); // indique que c'est une page qui permet d'imprimmer
+        }
+        function affichagePageImpression(){
+            const hideFrame = document.createElement("iframe");
+            hideFrame.onload = gestionPageImpression;
+            
+            hideFrame.src = "commande.php?idCommande="+numeroCommande.innerText;
+            document.body.appendChild(hideFrame); // ajoute dans le body le iframe pour l'impression
+        }
+
+        
+
+        btnImprimmer.addEventListener("click", () => {affichagePageImpression()});
+    </script>
 
     <!--footer-->
     <?php include (__DIR__ . "/../../php/structure/footer_front.php"); ?>
