@@ -155,9 +155,9 @@
     <?php include(__DIR__ . "/../../php/structure/navbar_front.php") ?>
 
     <div id="popup-overlay">
-        <div class="popup p-2">
-            <h4>Votre panier a bien été modifié !</h4>
-            <button class=" pl-2 pr-2 border rounded-sm cursor-pointer" onclick="closePopup()">OK</button>
+        <div id="popup-modif" class="popup p-2 border-vertFonce shadow-xl">
+            <p>Votre panier a bien été modifié !</p>
+            <button class="pl-2 pr-2 border-2 border-vertClair rounded-sm cursor-pointer" onclick="closePopup()">OK</button>
         </div>
     </div>
     

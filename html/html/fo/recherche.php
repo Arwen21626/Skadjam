@@ -28,8 +28,13 @@
     <link rel="stylesheet" type="text/css" href="../../css/output.css" >
     <title>Recherche</title>
     <?php include __DIR__ . "/../../php/structure/head_front.php"; ?>
-    <script src="../../js/fo/recherche.js"></script>
+    <script src="../../js/recherche.js"></script>
+    <script src="../../js/affichageListeProduits.js"></script>
+    <script src="../../js/fo/affichageProduit.js"></script>
     <script src="../../js/pagination.js"></script>
+    <script src="../../js/tris.js"></script>
+    <script src="../../js/filtres.js"></script>
+    <script src="../../js/affichageNote.js"></script>
 </head>
 
 <body>
@@ -49,12 +54,7 @@
             
             <!-- Filtres -->
             <section>
-                
-                <div class="flex flex-row justify-between">
-                    <h3>Filtres</h3>
-                    <img id="fermerSidebar"src="../../images/logo/bootstrap_icon/x-large.svg" alt="Fermer" class="flex self-center w-8 md:hidden">
-                </div>
-                
+                 <h3>Filtres</h3>
                 <!-- Categorie -->
                     <article>
                     <details open>
@@ -140,7 +140,7 @@
                         <summary class="cursor-pointer mt-1 mb-1">Par tranche de prix</summary>
                         <div>
                             <input type="checkbox" name="prix1" id="prix1" value="prix1" class="h-5 w-5">
-                            <label for="prix1" class="labelDetails">2,99€ - 8,39€ </label>
+                            <label for="prix1" class="labelDetails">0€ - 8,39€ </label>
                         </div>
                         <div>
                             <input type="checkbox" name="prix2" id="prix2" value="prix2" class="h-5 w-5">

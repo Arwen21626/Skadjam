@@ -65,7 +65,7 @@ input.quantite-prod-input {
 #popup-overlay {
   display: none;
   position: fixed;
-  bottom: 10rem;
+  bottom: 0;
   right: 10rem;
   align-items: center;
   justify-content: center;
@@ -76,24 +76,39 @@ input.quantite-prod-input {
 #popup-overlay.active {
   display: flex;
 }
+.popup.desactivate {
+  animation: popupOut 1s forwards;
+}
 .popup {
   background-color: white;
   padding: 20px, 30px;
   border-radius: 12px;
   width: 320px;
-  border-width: 1px;
-  border-color: black;
+  border-width: 3px;
   text-align: center;
-  animation: popupIn 0.3s ease;
+  animation: popupIn 1s forwards;
+}
+.popup > button {
+  box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px;
+}
+.popup > button:hover {
+  box-shadow: none;
+}
+@keyframes popupOut {
+  from {
+    transform: translateY(-50px);
+  }
+  to {
+    transform: translateY(260px);
+    display: none;
+  }
 }
 @keyframes popupIn {
   from {
-    transform: scale(0.9);
-    opacity: 0;
+    transform: translateY(260px);
   }
   to {
-    transform: scale(1);
-    opacity: 1;
+    transform: translateY(-50px);
   }
 }
 @layer theme, base, components, utilities;
@@ -658,6 +673,9 @@ input.quantite-prod-input {
   .min-h-\[650x\] {
     min-height: 650x;
   }
+  .min-h-\[800px\] {
+    min-height: 800px;
+  }
   .w-1 {
     width: calc(var(--spacing, 0.25rem) * 1);
   }
@@ -991,6 +1009,9 @@ input.quantite-prod-input {
   .border-black {
     border-color: var(--color-black, #000);
   }
+  .border-red-500 {
+    border-color: var(--color-red-500, oklch(63.7% 0.237 25.331));
+  }
   .border-vertClair {
     border-color: var(--color-vertClair);
   }
@@ -1198,6 +1219,10 @@ input.quantite-prod-input {
   }
   .shadow {
     --tw-shadow: 0 1px 3px 0 var(--tw-shadow-color, rgb(0 0 0 / 0.1)), 0 1px 2px -1px var(--tw-shadow-color, rgb(0 0 0 / 0.1));
+    box-shadow: var(--tw-inset-shadow), var(--tw-inset-ring-shadow), var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow);
+  }
+  .shadow-xl {
+    --tw-shadow: 0 20px 25px -5px var(--tw-shadow-color, rgb(0 0 0 / 0.1)), 0 8px 10px -6px var(--tw-shadow-color, rgb(0 0 0 / 0.1));
     box-shadow: var(--tw-inset-shadow), var(--tw-inset-ring-shadow), var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow);
   }
   .blur {
@@ -1541,6 +1566,11 @@ input.quantite-prod-input {
   .md\:inline-block {
     @media (width >= 48rem) {
       display: inline-block;
+    }
+  }
+  .md\:inline-flex {
+    @media (width >= 48rem) {
+      display: inline-flex;
     }
   }
   .md\:size-1\/4 {
