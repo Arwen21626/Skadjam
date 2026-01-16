@@ -73,7 +73,8 @@ catch (Exception $e){
 //acceptation des cgv --> redirection vers adresse.php
 if (isset($_POST['valider'])) {
     if (!isset($_POST['case'])) {
-        die("Erreur : vous devez accepter les CGV");
+        header("Location : ./recapitulatif_commande?idPanier=$idPanier?case=$case");
+        exit;
     }
     header("Location: ./adresse.php?idPanier=$idPanier");
     exit;
@@ -199,20 +200,28 @@ if (isset($_POST['valider'])) {
                 </table>
             </div>
         
-        
+
             <div class="flex items-center mt-10">
-                <a href="cgv_fo.php" class="ml-5 mr-5">J’ai lu et j’accepte les conditions générales de vente : </a>
-                <input type="checkbox" class="cursor-pointer appearance-none w-10 h-10 border-4 border-vertClair rounded-md checked:bg-vertClair" name="case" id="case">
+                <a href="cgv_fo.php" class="ml-5 mr-5">
+                    J’ai lu et j’accepte les conditions générales de vente :
+                </a>
+                <input type="checkbox" id="case" name="case" class="cursor-pointer appearance-none w-10 h-10 border-4 border-vertClair rounded-md checked:bg-vertClair">
+                <span id="error-cgv" class="ml-4 text-red-600 hidden">Vous devez accepter les CGV.</span>
             </div>
+
             <div class="flex justify-center mt-10 mb-10">
-                <a href="../fo/panier.php?idPanier=<?php echo $idPanier ;?>" class="flex justify-center items-center border-2 border-vertClair rounded-2xl w-40 h-14 cursor-pointer my-5 mr-15">Annuler</a>
+                <a href="../fo/panier.php?idPanier=<?php echo $idPanier ;?>" 
+                   class="flex justify-center items-center border-2 border-vertClair rounded-2xl w-40 h-14 cursor-pointer my-5 mr-15">Annuler</a>
                 <input type="hidden" name="idPanier" value="<?= $idPanier ?>">
-                <input class="flex justify-center items-center border-2 border-vertClair rounded-2xl w-40 h-14 cursor-pointer my-5" type="submit" name="valider" value="Valider">
+                <input class="flex justify-center items-center border-2 border-vertClair rounded-2xl w-40 h-14 cursor-pointer my-5" 
+                       type="submit" name="valider" value="Valider" onclick="return verifierCGV()">
+
             </div>
         </form>
     </main>
 
     <!--footer-->
     <?php include (__DIR__ . "/../../php/structure/footer_front.php"); ?>
+    <script src="../../js/fo/recap_commande.js"></script>
 </body>
 </html>
