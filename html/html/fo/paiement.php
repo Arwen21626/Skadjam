@@ -104,8 +104,8 @@ if($_SESSION['role'] != 'client'){
     
                     
                     echo $idCompte;
-                    $nouvCarte = $dbh->prepare("INSERT INTO sae3_skadjam._carte_bancaire(numero_carte, cryptogramme, nom, expiration, id_client) VALUES('$numeroHasher', '$cryptogrammeHasher', '$nom', $expiration, $idCompte)");
-                    $nouvCarte->execute();
+                    $nouvCarte = $dbh->prepare("INSERT INTO sae3_skadjam._carte_bancaire(numero_carte, cryptogramme, nom, expiration, id_client) VALUES(?, ?, ?, ?, ?)");
+                    $nouvCarte->execute([$numeroHasher, $nom, $expiration, $idCompte]);
                 }
             }
     
@@ -200,7 +200,7 @@ if($_SESSION['role'] != 'client'){
                 <div class="flex flex-col md:items-center items-start ml-5 md:ml-0">
                     <div class="flex flex-col mb-5 mt-5">
                         <label for="numero">Numéro de carte* :</label>
-                        <input placeholder="0000 1111 2222 3333" maxlength="16" pattern="[0-9]{16}" value="<?= isset($_POST['numero'])? $numero : "" ?>" class="pl-2 border-4 border-vertClair rounded-xl placeholder-gray-500 md:w-100 w-75" type="text" name="numero" id="numero" required>
+                        <input placeholder="0000 1111 2222 3333" maxlength="19" value="<?= isset($_POST['numero'])? $numero : "" ?>" class="pl-2 border-4 border-vertClair rounded-xl placeholder-gray-500 md:w-100 w-75" type="text" name="numero" id="numero" required>
                         <?php
                             if($erreurNumero){ ?>
                                 <p class="text-rouge"><?php echo "Le numéro n'est pas bon";?></p>

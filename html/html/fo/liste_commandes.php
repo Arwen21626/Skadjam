@@ -6,7 +6,7 @@
     $idCompte = $_SESSION['idCompte'];
 
     if($idCompte == null){
-        die("Erreur : Vous n'êtes pas connecté.");
+        header('Location: ./connexion.php');
     }
 
     try {     
@@ -69,7 +69,7 @@
                 <table class="table-auto md:w-250 w-95">
                     <thead>
                         <tr>
-                            <th scope="col" class="md:w-80 pl-3"><h3>N°</h3></th>
+                            <th scope="col" class="md:w-80 pl-3"><h3 class="md:hidden">N°</h3><h3 class="hidden md:inline-flex">Numéro de commande</h3></th>
                             <th scope="col"><h3>Date</h3></th>
                             <th scope="col"><h3>Etat</h3></th>
                             <th scope="col"><h3>Total</h3></th>
