@@ -1,0 +1,364 @@
+[12:52:13] [INFO]    [SERV]   (./main.c:99) Démarrage du service Delivraptor
+[12:52:13] [INFO]    [SERV]   (./main.c:126) Serveur prêt sur 127.0.0.1:8080
+[12:53:01] [INFO]    [SERV]   (./main.c:141) Connexion acceptée (fd=5)
+[12:53:01] [INFO]    [CLIENT] (./main.c:167) [127.0.0.1:50694] Client connecté
+[12:53:01] [INFO]    [SERV]   (./main.c:273) Connecté a la BDD
+[12:53:01] [INFO]    [SERV]   (./main.c:274) SET search_path...
+[12:53:01] [INFO]    [SERV]   (./main.c:279) SET search_path success
+[12:53:01] [INFO]    [SERV]   (./main.c:284) Base de données actuelle : postgres
+[12:53:01] [INFO]    [SERV]   (./main.c:290) Schéma courant (search_path) : sae3_delivraptor
+[12:53:01] [INFO]    [CLIENT] (./main.c:198) [127.0.0.1:50694] Commande reçue : CONN
+[12:53:01] [INFO]    [CLIENT] (./model/clien.c:160) [127.0.0.1:50694] Tentative d'authentification pour 'test'
+[12:53:01] [INFO]    [CLIENT] (./model/clien.c:165) [127.0.0.1:50694] Authentification réussie pour 'test'
+[12:53:01] [INFO]    [CLIENT] (./main.c:198) [127.0.0.1:50694] Commande reçue : NEXT
+[12:53:01] [INFO]    [CLIENT] (./main.c:179) [127.0.0.1:50694] Client déconnecté
+[12:54:01] [INFO]    [SERV]   (./main.c:141) Connexion acceptée (fd=5)
+[12:54:01] [INFO]    [CLIENT] (./main.c:167) [127.0.0.1:35022] Client connecté
+[12:54:01] [INFO]    [SERV]   (./main.c:273) Connecté a la BDD
+[12:54:01] [INFO]    [SERV]   (./main.c:274) SET search_path...
+[12:54:01] [INFO]    [SERV]   (./main.c:279) SET search_path success
+[12:54:01] [INFO]    [SERV]   (./main.c:284) Base de données actuelle : postgres
+[12:54:01] [INFO]    [SERV]   (./main.c:290) Schéma courant (search_path) : sae3_delivraptor
+[12:54:01] [INFO]    [CLIENT] (./main.c:198) [127.0.0.1:35022] Commande reçue : CONN
+[12:54:01] [INFO]    [CLIENT] (./model/clien.c:160) [127.0.0.1:35022] Tentative d'authentification pour 'test'
+[12:54:01] [INFO]    [CLIENT] (./model/clien.c:165) [127.0.0.1:35022] Authentification réussie pour 'test'
+[12:54:01] [INFO]    [CLIENT] (./main.c:198) [127.0.0.1:35022] Commande reçue : NEXT
+[12:54:01] [INFO]    [CLIENT] (./main.c:179) [127.0.0.1:35022] Client déconnecté
+[12:55:01] [INFO]    [SERV]   (./main.c:141) Connexion acceptée (fd=5)
+[12:55:01] [INFO]    [CLIENT] (./main.c:167) [127.0.0.1:44446] Client connecté
+[12:55:01] [INFO]    [SERV]   (./main.c:273) Connecté a la BDD
+[12:55:01] [INFO]    [SERV]   (./main.c:274) SET search_path...
+[12:55:01] [INFO]    [SERV]   (./main.c:279) SET search_path success
+[12:55:01] [INFO]    [SERV]   (./main.c:284) Base de données actuelle : postgres
+[12:55:01] [INFO]    [SERV]   (./main.c:290) Schéma courant (search_path) : sae3_delivraptor
+[12:55:01] [INFO]    [CLIENT] (./main.c:198) [127.0.0.1:44446] Commande reçue : CONN
+[12:55:01] [INFO]    [CLIENT] (./model/clien.c:160) [127.0.0.1:44446] Tentative d'authentification pour 'test'
+[12:55:01] [INFO]    [CLIENT] (./model/clien.c:165) [127.0.0.1:44446] Authentification réussie pour 'test'
+[12:55:01] [INFO]    [CLIENT] (./main.c:198) [127.0.0.1:44446] Commande reçue : NEXT
+[12:55:01] [INFO]    [CLIENT] (./main.c:179) [127.0.0.1:44446] Client déconnecté
+[12:56:01] [INFO]    [SERV]   (./main.c:141) Connexion acceptée (fd=5)
+[12:56:01] [INFO]    [CLIENT] (./main.c:167) [127.0.0.1:52118] Client connecté
+[12:56:01] [INFO]    [SERV]   (./main.c:273) Connecté a la BDD
+[12:56:01] [INFO]    [SERV]   (./main.c:274) SET search_path...
+[12:56:01] [INFO]    [SERV]   (./main.c:279) SET search_path success
+[12:56:01] [INFO]    [SERV]   (./main.c:284) Base de données actuelle : postgres
+[12:56:01] [INFO]    [SERV]   (./main.c:290) Schéma courant (search_path) : sae3_delivraptor
+[12:56:01] [INFO]    [CLIENT] (./main.c:198) [127.0.0.1:52118] Commande reçue : CONN
+[12:56:01] [INFO]    [CLIENT] (./model/clien.c:160) [127.0.0.1:52118] Tentative d'authentification pour 'test'
+[12:56:01] [INFO]    [CLIENT] (./model/clien.c:165) [127.0.0.1:52118] Authentification réussie pour 'test'
+[12:56:01] [INFO]    [CLIENT] (./main.c:198) [127.0.0.1:52118] Commande reçue : NEXT
+[12:56:01] [INFO]    [CLIENT] (./main.c:179) [127.0.0.1:52118] Client déconnecté
+[12:57:01] [INFO]    [SERV]   (./main.c:141) Connexion acceptée (fd=5)
+[12:57:01] [INFO]    [CLIENT] (./main.c:167) [127.0.0.1:49862] Client connecté
+[12:57:01] [INFO]    [SERV]   (./main.c:273) Connecté a la BDD
+[12:57:01] [INFO]    [SERV]   (./main.c:274) SET search_path...
+[12:57:01] [INFO]    [SERV]   (./main.c:279) SET search_path success
+[12:57:01] [INFO]    [SERV]   (./main.c:284) Base de données actuelle : postgres
+[12:57:01] [INFO]    [SERV]   (./main.c:290) Schéma courant (search_path) : sae3_delivraptor
+[12:57:01] [INFO]    [CLIENT] (./main.c:198) [127.0.0.1:49862] Commande reçue : CONN
+[12:57:01] [INFO]    [CLIENT] (./model/clien.c:160) [127.0.0.1:49862] Tentative d'authentification pour 'test'
+[12:57:01] [INFO]    [CLIENT] (./model/clien.c:165) [127.0.0.1:49862] Authentification réussie pour 'test'
+[12:57:01] [INFO]    [CLIENT] (./main.c:198) [127.0.0.1:49862] Commande reçue : NEXT
+[12:57:01] [INFO]    [CLIENT] (./main.c:179) [127.0.0.1:49862] Client déconnecté
+[12:58:01] [INFO]    [SERV]   (./main.c:141) Connexion acceptée (fd=5)
+[12:58:01] [INFO]    [CLIENT] (./main.c:167) [127.0.0.1:54522] Client connecté
+[12:58:01] [INFO]    [SERV]   (./main.c:273) Connecté a la BDD
+[12:58:01] [INFO]    [SERV]   (./main.c:274) SET search_path...
+[12:58:01] [INFO]    [SERV]   (./main.c:279) SET search_path success
+[12:58:01] [INFO]    [SERV]   (./main.c:284) Base de données actuelle : postgres
+[12:58:01] [INFO]    [SERV]   (./main.c:290) Schéma courant (search_path) : sae3_delivraptor
+[12:58:01] [INFO]    [CLIENT] (./main.c:198) [127.0.0.1:54522] Commande reçue : CONN
+[12:58:01] [INFO]    [CLIENT] (./model/clien.c:160) [127.0.0.1:54522] Tentative d'authentification pour 'test'
+[12:58:01] [INFO]    [CLIENT] (./model/clien.c:165) [127.0.0.1:54522] Authentification réussie pour 'test'
+[12:58:01] [INFO]    [CLIENT] (./main.c:198) [127.0.0.1:54522] Commande reçue : NEXT
+[12:58:01] [INFO]    [CLIENT] (./main.c:179) [127.0.0.1:54522] Client déconnecté
+[12:59:01] [INFO]    [SERV]   (./main.c:141) Connexion acceptée (fd=5)
+[12:59:01] [INFO]    [CLIENT] (./main.c:167) [127.0.0.1:33958] Client connecté
+[12:59:01] [INFO]    [SERV]   (./main.c:273) Connecté a la BDD
+[12:59:01] [INFO]    [SERV]   (./main.c:274) SET search_path...
+[12:59:01] [INFO]    [SERV]   (./main.c:279) SET search_path success
+[12:59:01] [INFO]    [SERV]   (./main.c:284) Base de données actuelle : postgres
+[12:59:01] [INFO]    [SERV]   (./main.c:290) Schéma courant (search_path) : sae3_delivraptor
+[12:59:01] [INFO]    [CLIENT] (./main.c:198) [127.0.0.1:33958] Commande reçue : CONN
+[12:59:01] [INFO]    [CLIENT] (./model/clien.c:160) [127.0.0.1:33958] Tentative d'authentification pour 'test'
+[12:59:01] [INFO]    [CLIENT] (./model/clien.c:165) [127.0.0.1:33958] Authentification réussie pour 'test'
+[12:59:01] [INFO]    [CLIENT] (./main.c:198) [127.0.0.1:33958] Commande reçue : NEXT
+[12:59:01] [INFO]    [CLIENT] (./main.c:179) [127.0.0.1:33958] Client déconnecté
+[13:00:01] [INFO]    [SERV]   (./main.c:141) Connexion acceptée (fd=5)
+[13:00:01] [INFO]    [CLIENT] (./main.c:167) [127.0.0.1:49026] Client connecté
+[13:00:01] [INFO]    [SERV]   (./main.c:273) Connecté a la BDD
+[13:00:01] [INFO]    [SERV]   (./main.c:274) SET search_path...
+[13:00:01] [INFO]    [SERV]   (./main.c:279) SET search_path success
+[13:00:01] [INFO]    [SERV]   (./main.c:284) Base de données actuelle : postgres
+[13:00:01] [INFO]    [SERV]   (./main.c:290) Schéma courant (search_path) : sae3_delivraptor
+[13:00:01] [INFO]    [CLIENT] (./main.c:198) [127.0.0.1:49026] Commande reçue : CONN
+[13:00:01] [INFO]    [CLIENT] (./model/clien.c:160) [127.0.0.1:49026] Tentative d'authentification pour 'test'
+[13:00:01] [INFO]    [CLIENT] (./model/clien.c:165) [127.0.0.1:49026] Authentification réussie pour 'test'
+[13:00:01] [INFO]    [CLIENT] (./main.c:198) [127.0.0.1:49026] Commande reçue : NEXT
+[13:00:01] [INFO]    [CLIENT] (./main.c:179) [127.0.0.1:49026] Client déconnecté
+[13:01:01] [INFO]    [SERV]   (./main.c:141) Connexion acceptée (fd=5)
+[13:01:01] [INFO]    [CLIENT] (./main.c:167) [127.0.0.1:60294] Client connecté
+[13:01:01] [INFO]    [SERV]   (./main.c:273) Connecté a la BDD
+[13:01:01] [INFO]    [SERV]   (./main.c:274) SET search_path...
+[13:01:01] [INFO]    [SERV]   (./main.c:279) SET search_path success
+[13:01:01] [INFO]    [SERV]   (./main.c:284) Base de données actuelle : postgres
+[13:01:01] [INFO]    [SERV]   (./main.c:290) Schéma courant (search_path) : sae3_delivraptor
+[13:01:01] [INFO]    [CLIENT] (./main.c:198) [127.0.0.1:60294] Commande reçue : CONN
+[13:01:01] [INFO]    [CLIENT] (./model/clien.c:160) [127.0.0.1:60294] Tentative d'authentification pour 'test'
+[13:01:01] [INFO]    [CLIENT] (./model/clien.c:165) [127.0.0.1:60294] Authentification réussie pour 'test'
+[13:01:01] [INFO]    [CLIENT] (./main.c:198) [127.0.0.1:60294] Commande reçue : NEXT
+[13:01:01] [INFO]    [CLIENT] (./main.c:179) [127.0.0.1:60294] Client déconnecté
+[13:38:00] [INFO]    [SERV]   (./main.c:103) Démarrage du service Delivraptor
+[13:38:00] [INFO]    [SERV]   (./main.c:130) Serveur prêt sur 127.0.0.1:6969
+[13:38:01] [INFO]    [SERV]   (./main.c:145) Connexion acceptée (fd=5)
+[13:38:01] [INFO]    [CLIENT] (./main.c:171) [127.0.0.1:57584] Client connecté
+[13:38:01] [INFO]    [SERV]   (./main.c:276) Connecté a la BDD
+[13:38:01] [INFO]    [SERV]   (./main.c:277) SET search_path...
+[13:38:01] [INFO]    [SERV]   (./main.c:282) SET search_path success
+[13:38:01] [INFO]    [SERV]   (./main.c:287) Base de données actuelle : postgres
+[13:38:01] [INFO]    [SERV]   (./main.c:293) Schéma courant (search_path) : sae3_delivraptor
+[13:38:01] [INFO]    [CLIENT] (./main.c:202) [127.0.0.1:57584] Commande reçue : CONN
+[13:38:01] [INFO]    [CLIENT] (./model/clien.c:160) [127.0.0.1:57584] Tentative d'authentification pour 'test'
+[13:38:01] [INFO]    [CLIENT] (./model/clien.c:165) [127.0.0.1:57584] Authentification réussie pour 'test'
+[13:38:01] [INFO]    [CLIENT] (./main.c:202) [127.0.0.1:57584] Commande reçue : NEXT
+[13:38:01] [INFO]    [CLIENT] (./main.c:183) [127.0.0.1:57584] Client déconnecté
+[13:38:09] [INFO]    [SERV]   (./main.c:145) Connexion acceptée (fd=5)
+[13:38:09] [INFO]    [CLIENT] (./main.c:171) [127.0.0.1:40950] Client connecté
+[13:38:09] [INFO]    [SERV]   (./main.c:276) Connecté a la BDD
+[13:38:09] [INFO]    [SERV]   (./main.c:277) SET search_path...
+[13:38:09] [INFO]    [SERV]   (./main.c:282) SET search_path success
+[13:38:09] [INFO]    [SERV]   (./main.c:287) Base de données actuelle : postgres
+[13:38:09] [INFO]    [SERV]   (./main.c:293) Schéma courant (search_path) : sae3_delivraptor
+[13:38:09] [INFO]    [CLIENT] (./main.c:202) [127.0.0.1:40950] Commande reçue : CONN
+[13:38:09] [INFO]    [CLIENT] (./model/clien.c:160) [127.0.0.1:40950] Tentative d'authentification pour 'test'
+[13:38:09] [INFO]    [CLIENT] (./model/clien.c:165) [127.0.0.1:40950] Authentification réussie pour 'test'
+[13:38:09] [INFO]    [CLIENT] (./main.c:202) [127.0.0.1:40950] Commande reçue : ETA
+[13:38:09] [INFO]    [CLIENT] (./main.c:310) [127.0.0.1:40950] numéro de suivie récupéré
+[13:38:09] [INFO]    [SERV]   (./main.c:325) Récuperation de l'etat
+[13:38:09] [DEBUG]   [SERV]   (./main.c:328) Etat commande char : 9
+[13:38:09] [DEBUG]   [SERV]   (./main.c:329) Etat commande int : 9
+[13:38:09] [DEBUG]   [SERV]   (./main.c:334) Envoi msg etat
+[13:38:09] [DEBUG]   [SERV]   (./etat/etat.c:28) msg_etat called: 9
+[13:38:09] [INFO]    [SERV]   (./etat/etat.c:38) ETAT 9 envoyé: ETA LVR ALI1768464846
+
+[13:38:09] [DEBUG]   [SERV]   (./main.c:336) Envoi msg etat FIN
+[13:38:09] [INFO]    [CLIENT] (./main.c:183) [127.0.0.1:40950] Client déconnecté
+[13:38:09] [INFO]    [SERV]   (./main.c:145) Connexion acceptée (fd=5)
+[13:38:09] [INFO]    [CLIENT] (./main.c:171) [127.0.0.1:40966] Client connecté
+[13:38:09] [INFO]    [SERV]   (./main.c:276) Connecté a la BDD
+[13:38:09] [INFO]    [SERV]   (./main.c:277) SET search_path...
+[13:38:09] [INFO]    [SERV]   (./main.c:282) SET search_path success
+[13:38:09] [INFO]    [SERV]   (./main.c:287) Base de données actuelle : postgres
+[13:38:09] [INFO]    [SERV]   (./main.c:293) Schéma courant (search_path) : sae3_delivraptor
+[13:38:09] [INFO]    [CLIENT] (./main.c:202) [127.0.0.1:40966] Commande reçue : CONN
+[13:38:09] [INFO]    [CLIENT] (./model/clien.c:160) [127.0.0.1:40966] Tentative d'authentification pour 'test'
+[13:38:09] [INFO]    [CLIENT] (./model/clien.c:165) [127.0.0.1:40966] Authentification réussie pour 'test'
+[13:38:09] [INFO]    [CLIENT] (./main.c:202) [127.0.0.1:40966] Commande reçue : ETA
+[13:38:09] [INFO]    [CLIENT] (./main.c:310) [127.0.0.1:40966] numéro de suivie récupéré
+[13:38:09] [INFO]    [SERV]   (./main.c:325) Récuperation de l'etat
+[13:38:09] [DEBUG]   [SERV]   (./main.c:328) Etat commande char : 9
+[13:38:09] [DEBUG]   [SERV]   (./main.c:329) Etat commande int : 9
+[13:38:09] [DEBUG]   [SERV]   (./main.c:334) Envoi msg etat
+[13:38:09] [DEBUG]   [SERV]   (./etat/etat.c:28) msg_etat called: 9
+[13:38:09] [INFO]    [SERV]   (./etat/etat.c:38) ETAT 9 envoyé: ETA LVR ALI1768468340
+
+[13:38:09] [DEBUG]   [SERV]   (./main.c:336) Envoi msg etat FIN
+[13:38:09] [INFO]    [CLIENT] (./main.c:183) [127.0.0.1:40966] Client déconnecté
+[13:38:09] [INFO]    [SERV]   (./main.c:145) Connexion acceptée (fd=5)
+[13:38:09] [INFO]    [CLIENT] (./main.c:171) [127.0.0.1:40980] Client connecté
+[13:38:09] [INFO]    [SERV]   (./main.c:276) Connecté a la BDD
+[13:38:09] [INFO]    [SERV]   (./main.c:277) SET search_path...
+[13:38:09] [INFO]    [SERV]   (./main.c:282) SET search_path success
+[13:38:09] [INFO]    [SERV]   (./main.c:287) Base de données actuelle : postgres
+[13:38:09] [INFO]    [SERV]   (./main.c:293) Schéma courant (search_path) : sae3_delivraptor
+[13:38:09] [INFO]    [CLIENT] (./main.c:202) [127.0.0.1:40980] Commande reçue : CONN
+[13:38:09] [INFO]    [CLIENT] (./model/clien.c:160) [127.0.0.1:40980] Tentative d'authentification pour 'test'
+[13:38:09] [INFO]    [CLIENT] (./model/clien.c:165) [127.0.0.1:40980] Authentification réussie pour 'test'
+[13:38:09] [INFO]    [CLIENT] (./main.c:202) [127.0.0.1:40980] Commande reçue : ETA
+[13:38:09] [INFO]    [CLIENT] (./main.c:310) [127.0.0.1:40980] numéro de suivie récupéré
+[13:38:09] [INFO]    [SERV]   (./main.c:325) Récuperation de l'etat
+[13:38:09] [DEBUG]   [SERV]   (./main.c:328) Etat commande char : 9
+[13:38:09] [DEBUG]   [SERV]   (./main.c:329) Etat commande int : 9
+[13:38:09] [DEBUG]   [SERV]   (./main.c:334) Envoi msg etat
+[13:38:09] [DEBUG]   [SERV]   (./etat/etat.c:28) msg_etat called: 9
+[13:38:09] [INFO]    [SERV]   (./etat/etat.c:38) ETAT 9 envoyé: ETA LVR ALI1768467472
+
+[13:38:09] [DEBUG]   [SERV]   (./main.c:336) Envoi msg etat FIN
+[13:38:09] [INFO]    [CLIENT] (./main.c:183) [127.0.0.1:40980] Client déconnecté
+[13:38:09] [INFO]    [SERV]   (./main.c:145) Connexion acceptée (fd=5)
+[13:38:09] [INFO]    [CLIENT] (./main.c:171) [127.0.0.1:40992] Client connecté
+[13:38:09] [INFO]    [SERV]   (./main.c:276) Connecté a la BDD
+[13:38:09] [INFO]    [SERV]   (./main.c:277) SET search_path...
+[13:38:09] [INFO]    [SERV]   (./main.c:282) SET search_path success
+[13:38:09] [INFO]    [SERV]   (./main.c:287) Base de données actuelle : postgres
+[13:38:09] [INFO]    [SERV]   (./main.c:293) Schéma courant (search_path) : sae3_delivraptor
+[13:38:09] [INFO]    [CLIENT] (./main.c:202) [127.0.0.1:40992] Commande reçue : CONN
+[13:38:09] [INFO]    [CLIENT] (./model/clien.c:160) [127.0.0.1:40992] Tentative d'authentification pour 'test'
+[13:38:09] [INFO]    [CLIENT] (./model/clien.c:165) [127.0.0.1:40992] Authentification réussie pour 'test'
+[13:38:09] [INFO]    [CLIENT] (./main.c:202) [127.0.0.1:40992] Commande reçue : ETA
+[13:38:09] [INFO]    [CLIENT] (./main.c:310) [127.0.0.1:40992] numéro de suivie récupéré
+[13:38:09] [INFO]    [SERV]   (./main.c:325) Récuperation de l'etat
+[13:38:09] [DEBUG]   [SERV]   (./main.c:328) Etat commande char : 9
+[13:38:09] [DEBUG]   [SERV]   (./main.c:329) Etat commande int : 9
+[13:38:09] [DEBUG]   [SERV]   (./main.c:334) Envoi msg etat
+[13:38:09] [DEBUG]   [SERV]   (./etat/etat.c:28) msg_etat called: 9
+[13:38:09] [INFO]    [SERV]   (./etat/etat.c:38) ETAT 9 envoyé: ETA LVR ALI1768466693
+
+[13:38:09] [DEBUG]   [SERV]   (./main.c:336) Envoi msg etat FIN
+[13:38:09] [INFO]    [CLIENT] (./main.c:183) [127.0.0.1:40992] Client déconnecté
+[13:39:01] [INFO]    [SERV]   (./main.c:145) Connexion acceptée (fd=5)
+[13:39:01] [INFO]    [CLIENT] (./main.c:171) [127.0.0.1:60602] Client connecté
+[13:39:01] [INFO]    [SERV]   (./main.c:276) Connecté a la BDD
+[13:39:01] [INFO]    [SERV]   (./main.c:277) SET search_path...
+[13:39:01] [INFO]    [SERV]   (./main.c:282) SET search_path success
+[13:39:01] [INFO]    [SERV]   (./main.c:287) Base de données actuelle : postgres
+[13:39:01] [INFO]    [SERV]   (./main.c:293) Schéma courant (search_path) : sae3_delivraptor
+[13:39:01] [INFO]    [CLIENT] (./main.c:202) [127.0.0.1:60602] Commande reçue : CONN
+[13:39:01] [INFO]    [CLIENT] (./model/clien.c:160) [127.0.0.1:60602] Tentative d'authentification pour 'test'
+[13:39:01] [INFO]    [CLIENT] (./model/clien.c:165) [127.0.0.1:60602] Authentification réussie pour 'test'
+[13:39:01] [INFO]    [CLIENT] (./main.c:202) [127.0.0.1:60602] Commande reçue : NEXT
+[13:39:01] [INFO]    [CLIENT] (./main.c:183) [127.0.0.1:60602] Client déconnecté
+[13:40:01] [INFO]    [SERV]   (./main.c:145) Connexion acceptée (fd=5)
+[13:40:01] [INFO]    [CLIENT] (./main.c:171) [127.0.0.1:43158] Client connecté
+[13:40:01] [INFO]    [SERV]   (./main.c:276) Connecté a la BDD
+[13:40:01] [INFO]    [SERV]   (./main.c:277) SET search_path...
+[13:40:01] [INFO]    [SERV]   (./main.c:282) SET search_path success
+[13:40:01] [INFO]    [SERV]   (./main.c:287) Base de données actuelle : postgres
+[13:40:01] [INFO]    [SERV]   (./main.c:293) Schéma courant (search_path) : sae3_delivraptor
+[13:40:01] [INFO]    [CLIENT] (./main.c:202) [127.0.0.1:43158] Commande reçue : CONN
+[13:40:01] [INFO]    [CLIENT] (./model/clien.c:160) [127.0.0.1:43158] Tentative d'authentification pour 'test'
+[13:40:01] [INFO]    [CLIENT] (./model/clien.c:165) [127.0.0.1:43158] Authentification réussie pour 'test'
+[13:40:01] [INFO]    [CLIENT] (./main.c:202) [127.0.0.1:43158] Commande reçue : NEXT
+[13:40:01] [INFO]    [CLIENT] (./main.c:183) [127.0.0.1:43158] Client déconnecté
+[13:41:01] [INFO]    [SERV]   (./main.c:145) Connexion acceptée (fd=5)
+[13:41:01] [INFO]    [CLIENT] (./main.c:171) [127.0.0.1:59252] Client connecté
+[13:41:01] [INFO]    [SERV]   (./main.c:276) Connecté a la BDD
+[13:41:01] [INFO]    [SERV]   (./main.c:277) SET search_path...
+[13:41:01] [INFO]    [SERV]   (./main.c:282) SET search_path success
+[13:41:01] [INFO]    [SERV]   (./main.c:287) Base de données actuelle : postgres
+[13:41:01] [INFO]    [SERV]   (./main.c:293) Schéma courant (search_path) : sae3_delivraptor
+[13:41:01] [INFO]    [CLIENT] (./main.c:202) [127.0.0.1:59252] Commande reçue : CONN
+[13:41:01] [INFO]    [CLIENT] (./model/clien.c:160) [127.0.0.1:59252] Tentative d'authentification pour 'test'
+[13:41:01] [INFO]    [CLIENT] (./model/clien.c:165) [127.0.0.1:59252] Authentification réussie pour 'test'
+[13:41:01] [INFO]    [CLIENT] (./main.c:202) [127.0.0.1:59252] Commande reçue : NEXT
+[13:41:01] [INFO]    [CLIENT] (./main.c:183) [127.0.0.1:59252] Client déconnecté
+[13:42:01] [INFO]    [SERV]   (./main.c:145) Connexion acceptée (fd=5)
+[13:42:01] [INFO]    [CLIENT] (./main.c:171) [127.0.0.1:39268] Client connecté
+[13:42:01] [INFO]    [SERV]   (./main.c:276) Connecté a la BDD
+[13:42:01] [INFO]    [SERV]   (./main.c:277) SET search_path...
+[13:42:01] [INFO]    [SERV]   (./main.c:282) SET search_path success
+[13:42:01] [INFO]    [SERV]   (./main.c:287) Base de données actuelle : postgres
+[13:42:01] [INFO]    [SERV]   (./main.c:293) Schéma courant (search_path) : sae3_delivraptor
+[13:42:01] [INFO]    [CLIENT] (./main.c:202) [127.0.0.1:39268] Commande reçue : CONN
+[13:42:01] [INFO]    [CLIENT] (./model/clien.c:160) [127.0.0.1:39268] Tentative d'authentification pour 'test'
+[13:42:01] [INFO]    [CLIENT] (./model/clien.c:165) [127.0.0.1:39268] Authentification réussie pour 'test'
+[13:42:01] [INFO]    [CLIENT] (./main.c:202) [127.0.0.1:39268] Commande reçue : NEXT
+[13:42:01] [INFO]    [CLIENT] (./main.c:183) [127.0.0.1:39268] Client déconnecté
+[13:42:53] [INFO]    [SERV]   (./main.c:145) Connexion acceptée (fd=5)
+[13:42:53] [INFO]    [CLIENT] (./main.c:171) [127.0.0.1:52574] Client connecté
+[13:42:53] [INFO]    [SERV]   (./main.c:276) Connecté a la BDD
+[13:42:53] [INFO]    [SERV]   (./main.c:277) SET search_path...
+[13:42:53] [INFO]    [SERV]   (./main.c:282) SET search_path success
+[13:42:53] [INFO]    [SERV]   (./main.c:287) Base de données actuelle : postgres
+[13:42:53] [INFO]    [SERV]   (./main.c:293) Schéma courant (search_path) : sae3_delivraptor
+[13:42:53] [INFO]    [CLIENT] (./main.c:202) [127.0.0.1:52574] Commande reçue : CONN
+[13:42:53] [INFO]    [CLIENT] (./model/clien.c:160) [127.0.0.1:52574] Tentative d'authentification pour 'test'
+[13:42:53] [INFO]    [CLIENT] (./model/clien.c:165) [127.0.0.1:52574] Authentification réussie pour 'test'
+[13:42:53] [INFO]    [CLIENT] (./main.c:202) [127.0.0.1:52574] Commande reçue : ETA
+[13:42:53] [INFO]    [CLIENT] (./main.c:310) [127.0.0.1:52574] numéro de suivie récupéré
+[13:42:53] [INFO]    [SERV]   (./main.c:325) Récuperation de l'etat
+[13:42:53] [DEBUG]   [SERV]   (./main.c:328) Etat commande char : 9
+[13:42:53] [DEBUG]   [SERV]   (./main.c:329) Etat commande int : 9
+[13:42:53] [DEBUG]   [SERV]   (./main.c:334) Envoi msg etat
+[13:42:53] [DEBUG]   [SERV]   (./etat/etat.c:28) msg_etat called: 9
+[13:42:53] [INFO]    [SERV]   (./etat/etat.c:38) ETAT 9 envoyé: ETA LVR ALI1768464846
+
+[13:42:53] [DEBUG]   [SERV]   (./main.c:336) Envoi msg etat FIN
+[13:42:53] [INFO]    [CLIENT] (./main.c:183) [127.0.0.1:52574] Client déconnecté
+[13:42:53] [INFO]    [SERV]   (./main.c:145) Connexion acceptée (fd=5)
+[13:42:53] [INFO]    [CLIENT] (./main.c:171) [127.0.0.1:52584] Client connecté
+[13:42:53] [INFO]    [SERV]   (./main.c:276) Connecté a la BDD
+[13:42:53] [INFO]    [SERV]   (./main.c:277) SET search_path...
+[13:42:53] [INFO]    [SERV]   (./main.c:282) SET search_path success
+[13:42:53] [INFO]    [SERV]   (./main.c:287) Base de données actuelle : postgres
+[13:42:53] [INFO]    [SERV]   (./main.c:293) Schéma courant (search_path) : sae3_delivraptor
+[13:42:53] [INFO]    [CLIENT] (./main.c:202) [127.0.0.1:52584] Commande reçue : CONN
+[13:42:53] [INFO]    [CLIENT] (./model/clien.c:160) [127.0.0.1:52584] Tentative d'authentification pour 'test'
+[13:42:53] [INFO]    [CLIENT] (./model/clien.c:165) [127.0.0.1:52584] Authentification réussie pour 'test'
+[13:42:53] [INFO]    [CLIENT] (./main.c:202) [127.0.0.1:52584] Commande reçue : ETA
+[13:42:53] [INFO]    [CLIENT] (./main.c:310) [127.0.0.1:52584] numéro de suivie récupéré
+[13:42:53] [INFO]    [SERV]   (./main.c:325) Récuperation de l'etat
+[13:42:53] [DEBUG]   [SERV]   (./main.c:328) Etat commande char : 9
+[13:42:53] [DEBUG]   [SERV]   (./main.c:329) Etat commande int : 9
+[13:42:53] [DEBUG]   [SERV]   (./main.c:334) Envoi msg etat
+[13:42:53] [DEBUG]   [SERV]   (./etat/etat.c:28) msg_etat called: 9
+[13:42:53] [INFO]    [SERV]   (./etat/etat.c:38) ETAT 9 envoyé: ETA LVR ALI1768468340
+
+[13:42:53] [DEBUG]   [SERV]   (./main.c:336) Envoi msg etat FIN
+[13:42:53] [INFO]    [CLIENT] (./main.c:183) [127.0.0.1:52584] Client déconnecté
+[13:42:53] [INFO]    [SERV]   (./main.c:145) Connexion acceptée (fd=5)
+[13:42:53] [INFO]    [CLIENT] (./main.c:171) [127.0.0.1:52592] Client connecté
+[13:42:53] [INFO]    [SERV]   (./main.c:276) Connecté a la BDD
+[13:42:53] [INFO]    [SERV]   (./main.c:277) SET search_path...
+[13:42:53] [INFO]    [SERV]   (./main.c:282) SET search_path success
+[13:42:53] [INFO]    [SERV]   (./main.c:287) Base de données actuelle : postgres
+[13:42:53] [INFO]    [SERV]   (./main.c:293) Schéma courant (search_path) : sae3_delivraptor
+[13:42:53] [INFO]    [CLIENT] (./main.c:202) [127.0.0.1:52592] Commande reçue : CONN
+[13:42:53] [INFO]    [CLIENT] (./model/clien.c:160) [127.0.0.1:52592] Tentative d'authentification pour 'test'
+[13:42:53] [INFO]    [CLIENT] (./model/clien.c:165) [127.0.0.1:52592] Authentification réussie pour 'test'
+[13:42:53] [INFO]    [CLIENT] (./main.c:202) [127.0.0.1:52592] Commande reçue : ETA
+[13:42:53] [INFO]    [CLIENT] (./main.c:310) [127.0.0.1:52592] numéro de suivie récupéré
+[13:42:53] [INFO]    [SERV]   (./main.c:325) Récuperation de l'etat
+[13:42:53] [DEBUG]   [SERV]   (./main.c:328) Etat commande char : 9
+[13:42:53] [DEBUG]   [SERV]   (./main.c:329) Etat commande int : 9
+[13:42:53] [DEBUG]   [SERV]   (./main.c:334) Envoi msg etat
+[13:42:53] [DEBUG]   [SERV]   (./etat/etat.c:28) msg_etat called: 9
+[13:42:53] [INFO]    [SERV]   (./etat/etat.c:38) ETAT 9 envoyé: ETA LVR ALI1768467472
+
+[13:42:53] [DEBUG]   [SERV]   (./main.c:336) Envoi msg etat FIN
+[13:42:53] [INFO]    [CLIENT] (./main.c:183) [127.0.0.1:52592] Client déconnecté
+[13:42:53] [INFO]    [SERV]   (./main.c:145) Connexion acceptée (fd=5)
+[13:42:53] [INFO]    [CLIENT] (./main.c:171) [127.0.0.1:52596] Client connecté
+[13:42:53] [INFO]    [SERV]   (./main.c:276) Connecté a la BDD
+[13:42:53] [INFO]    [SERV]   (./main.c:277) SET search_path...
+[13:42:53] [INFO]    [SERV]   (./main.c:282) SET search_path success
+[13:42:53] [INFO]    [SERV]   (./main.c:287) Base de données actuelle : postgres
+[13:42:53] [INFO]    [SERV]   (./main.c:293) Schéma courant (search_path) : sae3_delivraptor
+[13:42:53] [INFO]    [CLIENT] (./main.c:202) [127.0.0.1:52596] Commande reçue : CONN
+[13:42:53] [INFO]    [CLIENT] (./model/clien.c:160) [127.0.0.1:52596] Tentative d'authentification pour 'test'
+[13:42:53] [INFO]    [CLIENT] (./model/clien.c:165) [127.0.0.1:52596] Authentification réussie pour 'test'
+[13:42:53] [INFO]    [CLIENT] (./main.c:202) [127.0.0.1:52596] Commande reçue : ETA
+[13:42:53] [INFO]    [CLIENT] (./main.c:310) [127.0.0.1:52596] numéro de suivie récupéré
+[13:42:53] [INFO]    [SERV]   (./main.c:325) Récuperation de l'etat
+[13:42:53] [DEBUG]   [SERV]   (./main.c:328) Etat commande char : 9
+[13:42:53] [DEBUG]   [SERV]   (./main.c:329) Etat commande int : 9
+[13:42:53] [DEBUG]   [SERV]   (./main.c:334) Envoi msg etat
+[13:42:53] [DEBUG]   [SERV]   (./etat/etat.c:28) msg_etat called: 9
+[13:42:53] [INFO]    [SERV]   (./etat/etat.c:38) ETAT 9 envoyé: ETA LVR ALI1768466693
+
+[13:42:53] [DEBUG]   [SERV]   (./main.c:336) Envoi msg etat FIN
+[13:42:53] [INFO]    [CLIENT] (./main.c:183) [127.0.0.1:52596] Client déconnecté
+[13:43:01] [INFO]    [SERV]   (./main.c:145) Connexion acceptée (fd=5)
+[13:43:01] [INFO]    [CLIENT] (./main.c:171) [127.0.0.1:36634] Client connecté
+[13:43:01] [INFO]    [SERV]   (./main.c:276) Connecté a la BDD
+[13:43:01] [INFO]    [SERV]   (./main.c:277) SET search_path...
+[13:43:01] [INFO]    [SERV]   (./main.c:282) SET search_path success
+[13:43:01] [INFO]    [SERV]   (./main.c:287) Base de données actuelle : postgres
+[13:43:01] [INFO]    [SERV]   (./main.c:293) Schéma courant (search_path) : sae3_delivraptor
+[13:43:01] [INFO]    [CLIENT] (./main.c:202) [127.0.0.1:36634] Commande reçue : CONN
+[13:43:01] [INFO]    [CLIENT] (./model/clien.c:160) [127.0.0.1:36634] Tentative d'authentification pour 'test'
+[13:43:01] [INFO]    [CLIENT] (./model/clien.c:165) [127.0.0.1:36634] Authentification réussie pour 'test'
+[13:43:01] [INFO]    [CLIENT] (./main.c:202) [127.0.0.1:36634] Commande reçue : NEXT
+[13:43:01] [INFO]    [CLIENT] (./main.c:183) [127.0.0.1:36634] Client déconnecté
+[13:44:01] [INFO]    [SERV]   (./main.c:145) Connexion acceptée (fd=5)
+[13:44:01] [INFO]    [CLIENT] (./main.c:171) [127.0.0.1:41930] Client connecté
+[13:44:02] [INFO]    [SERV]   (./main.c:276) Connecté a la BDD
+[13:44:02] [INFO]    [SERV]   (./main.c:277) SET search_path...
+[13:44:02] [INFO]    [SERV]   (./main.c:282) SET search_path success
+[13:44:02] [INFO]    [SERV]   (./main.c:287) Base de données actuelle : postgres
+[13:44:02] [INFO]    [SERV]   (./main.c:293) Schéma courant (search_path) : sae3_delivraptor
+[13:44:02] [INFO]    [CLIENT] (./main.c:202) [127.0.0.1:41930] Commande reçue : CONN
+[13:44:02] [INFO]    [CLIENT] (./model/clien.c:160) [127.0.0.1:41930] Tentative d'authentification pour 'test'
+[13:44:02] [INFO]    [CLIENT] (./model/clien.c:165) [127.0.0.1:41930] Authentification réussie pour 'test'
+[13:44:02] [INFO]    [CLIENT] (./main.c:202) [127.0.0.1:41930] Commande reçue : NEXT
+[13:44:02] [INFO]    [CLIENT] (./main.c:183) [127.0.0.1:41930] Client déconnecté

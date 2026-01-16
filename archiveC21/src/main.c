@@ -127,7 +127,7 @@ int init_server() {
         exit(EXIT_FAILURE);
     }
 
-    LOG_SERV(LOG_INFO, "Serveur prêt sur 127.0.0.1:8080");
+    LOG_SERV(LOG_INFO, "Serveur prêt sur 127.0.0.1:%d", sPort);
     return sock;
 }
 

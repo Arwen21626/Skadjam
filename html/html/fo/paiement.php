@@ -144,7 +144,7 @@ if($_SESSION['role'] != 'client'){
                         }
                     }
                 } catch (Exception $e){
-                    echo ($e->getMessage());
+                    echo ($e->getMessage() . "<br>");
                 }finally{
                 
                     if (!$idCommande) {
