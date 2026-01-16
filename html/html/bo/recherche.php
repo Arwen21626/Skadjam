@@ -123,7 +123,7 @@
 
                         <!-- 4 étoiles -->
                         <div>
-                            <input type="checkbox" name="quatreE" id="quatreE" value="quatreE" class="triFiltre -5 w-5">
+                            <input type="checkbox" name="quatreE" id="quatreE" value="quatreE" class="triFiltre h-5 w-5">
                             <label for="quatreE" class="labelDetails">4</label>
                         </div>
 
