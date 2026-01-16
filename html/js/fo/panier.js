@@ -1,5 +1,12 @@
 import * as Popup from "../popup.js";
 
+const btnClosePopUp = document.getElementById("popup-modif").querySelector("button");
+
+btnClosePopUp.addEventListener("click", () => {
+
+    Popup.closePopup("popup-modif");
+});
+
 Popup.showPopUp(3000, "panierModif");
 
 // Gestion de la sauvegarde des modifications dans la BDD
@@ -12,7 +19,6 @@ if (formPanier) { //Chech si le formulaire de validation du panier (un élément
 
     function UpdatePanier(idProd, newQuantity, price) {
 
-        console.log(price);
         if (!hasChanged) {
             formPanier.querySelector('button').textContent = "Valider les modifications";
             formPanier.action = "/php/modifier_panier.php";
