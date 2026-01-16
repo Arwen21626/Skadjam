@@ -8,5 +8,5 @@ function afficherListe(tab) {
         afficherProduit(tab,i);
     }
 
-    numPageInfo();
+    numPageInfo(tab);
 }
