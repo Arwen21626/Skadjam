@@ -130,7 +130,7 @@
                                         if($debutPromo <= date('Y-m-d') && ($finPromo === null || $finPromo >= date('Y-m-d')) && !empty($labelPromo)){
                                     ?>
                                     <!-- Affichage de la bannière -->
-                                    <div class="bg-rouge absolute col-span-2 w-36 md:w-74 underline text-beige pt-2 pb-1.5">
+                                    <div class="bg-rouge absolute w-36 md:w-74 underline text-beige pt-2 pb-1.5">
                                         <h4 class="text-center text-beige overline m-0"><strong><?php echo htmlspecialchars($labelPromo); ?></strong></h4>
                                     </div>
                                 <?php }} ?>
@@ -151,7 +151,7 @@
                                 </div>
                                 
                                 <!--affichage du stock-->
-                                <p class="col-span-2">En stock : <?php echo $valeurs['quantite_stock'];?></p>
+                                <p>En stock : <?php echo $valeurs['quantite_stock'];?></p>
                                 </a>      
                             </section>
                     <?php } ?>

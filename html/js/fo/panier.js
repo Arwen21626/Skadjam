@@ -1,24 +1,13 @@
-// Gestion de la popup (va peut être bouger dans un autre fichier)
+import * as Popup from "../popup.js";
 
-function sleep(ms){
-    return new Promise(resolve => setTimeout(resolve, ms));
-}
+const btnClosePopUp = document.getElementById("popup-modif").querySelector("button");
 
-function closePopup() {
-    popup = document.getElementById("popup-overlay").classList.remove("active");
-}
+btnClosePopUp.addEventListener("click", () => {
 
-async function showPopUp(ms){
-    document.getElementById("popup-overlay").classList.add("active");
-    await sleep(ms);
-    closePopup()
-}
+    Popup.closePopup("popup-modif");
+});
 
-const urlParams = new URLSearchParams(window.location.search);
-
-if (urlParams.get("panierModif") === "V"){
-    showPopUp(3000);
-}
+Popup.showPopUp(3000, "panierModif");
 
 // Gestion de la sauvegarde des modifications dans la BDD
 
@@ -47,7 +36,7 @@ if (formPanier) { //Chech si le formulaire de validation du panier (un élément
             input.type = 'hidden';
             input.name = inputName + '[quantite]';
 
-            inputPrix = document.createElement('input');
+            let inputPrix = document.createElement('input');
             inputPrix.type = 'hidden';
             inputPrix.name = inputName + '[prix]';
             inputPrix.value = price;
@@ -67,6 +56,7 @@ if (formPanier) { //Chech si le formulaire de validation du panier (un élément
     let nbProdTot = document.getElementById('conteneur-info_panier').querySelector('.nb-prod-total').getElementsByTagName('p')[1];
 
     document.querySelectorAll('.produit').forEach(container => {
+        
         // Récupères les éléments d'une carte produit
         let input = container.querySelector('.prod-info').querySelector('.quantite-prod').querySelector('input'); // Input de la quantité
         let btnRetrait = container.querySelector('.prod-info').querySelector('.quantite-prod').querySelector('.retrait');

@@ -45,6 +45,16 @@ if(isset($_SESSION["idCompte"])) {
             $siren = $vendeur["siren"];
             $description = $vendeur["description_vendeur"];
         }
+        // Infos photo
+        $tabPhoto = null;
+
+        $reqPhoto = $dbh->prepare("SELECT ph.url_photo, ph.alt, ph.titre
+                                    FROM sae3_skadjam._photo ph
+                                    INNER JOIN sae3_skadjam._presente pr
+                                        ON ph.id_photo = pr.id_photo
+                                    WHERE pr.id_vendeur = $idCompte");
+        $reqPhoto->execute();
+        $tabPhoto = $reqPhoto->fetch();
 
         // Infos adresse
         foreach($dbh->query("SELECT * FROM sae3_skadjam._compte c
@@ -78,19 +88,15 @@ if(isset($_SESSION["idCompte"])) {
         <h2 class="m-8">Mon Profil</h2>
         <div class="flex flex-row items-center justify-between">
             <div class=" flex flex-col w-fit">
-                <?php 
-                if ($tabPhoto){ 
-                    $photo = $tabPhoto;
-                    ?>
+                <?php if ($tabPhoto && !empty($tabPhoto['url_photo'])) { ?>
                     <div class="container-image relative flex items-center justify-center w-80 border-4 border-solid rounded-2xl border-beige mb-3">
-                        <img class="image-vendeur w-80 rounded-2xl" src="<?= "../../" .  $photo["url_photo"] ?>" alt="<?= $photo["alt"] ?>" title="<?= $photo["titre"] ?>">
+                        <img class="image-vendeur w-80 rounded-2xl" src="<?= '../../' . htmlspecialchars($tabPhoto['url_photo']) ?>" alt="<?= htmlspecialchars($tabPhoto['alt']) ?>" title="<?= htmlspecialchars($tabPhoto['titre']) ?>">
                     </div>
-                <?php }else{ ?>
+                <?php } else { ?>
                     <div class="container-image vide relative flex items-center justify-center w-80 h-80 mb-3 bg-beige rounded-2xl">
                         <img class="image-vendeur w-80 rounded-2xl" src="../../images/logo/bootstrap_icon/image.svg" alt="aucune image" title="aucune image">
                     </div>
                 <?php } ?>
-
                 <input type="file" id="image" name="image" accept="image/png, image/jpeg, image/webp" hidden>
             </div>
 

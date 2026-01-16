@@ -89,7 +89,7 @@ input.quantite-prod-input {
 #popup-overlay {
     display: none;
     position: fixed;
-    bottom: 10rem;
+    bottom: 0;
     right: 10rem;
     align-items: center;
     justify-content: center;
@@ -103,26 +103,49 @@ input.quantite-prod-input {
     
 }
 
+.popup.desactive {
+    animation: popupOut 1s forwards;
+}
+
 .popup {
     background-color: white;
     padding: 20px, 30px;
     border-radius: 12px;
     width: 320px;
-    border-width: 1px;
-    border-color: black;
+    border-width: 3px;
     text-align: center;
-    animation: popupIn 0.3s ease;
+    animation: popupIn 1s forwards;
+}
+
+.popup > button{
+
+    box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px;
+}
+
+.popup > button:hover {
+    box-shadow: none;
+}
+
+@keyframes popupOut {
+
+    from {
+        transform: translateY(-50px);
+    }
+    to {
+        transform: translateY(260px);
+        display: none;
+    }
 }
 
 @keyframes popupIn {
 
     from {
-        transform: scale(0.9);
-        opacity: 0;
+        transform: translateY(260px);
+        /* opacity: 0; */
     }
     to {
-        transform: scale(1);
-        opacity: 1;
+        transform: translateY(-50px);
+        /* opacity: 1; */
     }
 }
 
