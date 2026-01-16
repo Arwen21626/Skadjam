@@ -15,8 +15,12 @@ function toggleFiltre(tab, valeur) {
 }
 
 function filtre(){
-    // FILTRE CATÉGORIES
+    
+    console.log(checkedCategories)
+
     tab = JSON.parse(JSON.stringify(tabProd))
+    
+    // FILTRE CATÉGORIES
     if (checkedCategories.length > 0) {
         tab = tab.filter(prod => {
             if (checkedCategories.includes("alimentaire") && prod.id_categorie === 1) return true;
@@ -60,5 +64,7 @@ function filtre(){
             return false;
         });
     }
+
+    console.log(tab)
     return tab
 }
