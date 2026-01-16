@@ -10,10 +10,6 @@ require_once __DIR__."/../../connections_params.php"; // données de connexion �
 if (isset($_POST["nom"]) && isset($_POST["prenom"]) && isset($_POST["mail"]) && isset($_POST["tel"]) && isset($_POST["denomination"]) && isset($_POST["raisonSociale"]) && isset($_POST["iban"]) && isset($_POST["adresse"]) && isset($_POST["ville"]) && isset($_POST["cp"]) && isset($_POST["siren"])){
     // Récupération des données du formulaire
     try{
-        // Connexion à la base de données
-        $dbh = new PDO("$driver:host=$server;port=$port;dbname=$dbname", $user, $pass); 
-        $dbh->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC);
-
         // Vérification que toutes les données commune à la création et à la modification d'un compte client sont correcte
         if (verifNomPrenom($_POST['nom']) && verifNomPrenom($_POST['prenom']) && verifTelephone($_POST['tel']) && verifDenomination($_POST['denomination']) && verifDenomination($_POST['raisonSociale']) && verifIban($_POST['iban']) && verifSiren($_POST['siren']) && verifCp($_POST['cp']) && verifVille($_POST['ville']) && verifAdresse($_POST['adresse'])){
             //récuperer les attributs du post
@@ -29,6 +25,7 @@ if (isset($_POST["nom"]) && isset($_POST["prenom"]) && isset($_POST["mail"]) && 
             $cp = htmlentities($_POST["cp"]);
             $siren = htmlentities($_POST["siren"]);
             $description = isset($_POST["description"]) ? $_POST["description"] : "";
+            $idPhoto = htmlentities($_POST["idPhoto"]);
             $temp = tabAdresse($adresse);
             $numero = $temp[0];
             $compNum = $temp[1];
@@ -103,12 +100,35 @@ if (isset($_POST["nom"]) && isset($_POST["prenom"]) && isset($_POST["mail"]) && 
                 $erreur = true;
                 echo "Erreur : le mail saisie existe déjà. ";
             }
-        
-        // Fermer la connexion à la base de données
-        $dbh = null;
 
-        // Redirection vers la page d'accueil
-        header("location: ../html/bo/profil_vendeur.php");
+            $nom_photo_finale = basename($urlPhoto);
+
+            if (isset($_FILES['photo']) && $_FILES['photo']['error'] === UPLOAD_ERR_OK) {
+                $typesAutorises = ['image/jpeg', 'image/png', 'image/webp'];
+                if (in_array($_FILES['photo']['type'], $typesAutorises)) {
+                    // Supprimer ancienne photo
+                    $anciennePhotoPath = __DIR__ . '/../../images/photo_importees/' . basename($urlPhoto);
+                    if (file_exists($anciennePhotoPath) && strpos($urlPhoto, 'image.svg') === false) {
+                        unlink($anciennePhotoPath);
+                    }
+                    // Nouvelle photo
+                    $ext = explode('/', $_FILES['photo']['type'])[1];
+                    $nom_photo_finale = explode(' ', trim($nom))[0] . '_' . time() . '.' . $ext;
+                    $destination = __DIR__ . '/../../images/photo_importees';
+                    move_uploaded_file(
+                        $_FILES['photo']['tmp_name'],
+                        $destination . '/' . $nom_photo_finale
+                    );
+                }
+            }
+
+
+
+            // Fermer la connexion à la base de données
+            $dbh = null;
+
+            // Redirection vers la page d'accueil
+            header("location: ../html/bo/profil_vendeur.php");
 
         // Messages d'erreurs si l'un des champs est mal rempli
         }else{ 
