@@ -199,51 +199,9 @@ function afficherListe() {
     // TOUJOURS repartir de tabprod
     tableau = tabProd;
 
-    // FILTRE CATÉGORIES
-    if (checkedCategories.length > 0) {
-        tableau = tableau.filter(prod => {
-            if (checkedCategories.includes("alimentaire") && prod.id_categorie === 1) return true;
-            if (checkedCategories.includes("vetement") && prod.id_categorie === 2) return true;
-            if (checkedCategories.includes("artisanat") && prod.id_categorie === 3) return true;
-            if (checkedCategories.includes("goodies") && prod.id_categorie === 4) return true;
-            if (checkedCategories.includes("soin") && prod.id_categorie === 5) return true;
-            return false;
-        });
-    }
-
-    // FILTRE NOTES
-    if (checkedNotes.length > 0) {
-        tableau = tableau.filter(prod => {
-            let note = prod.note_moyenne;
-
-            if (note === null) return checkedNotes.includes("0");
-
-            note = parseFloat(note);
-
-            if (checkedNotes.includes("1") && note < 2) return true;
-            if (checkedNotes.includes("2") && note >= 2 && note < 3) return true;
-            if (checkedNotes.includes("3") && note >= 3 && note < 4) return true;
-            if (checkedNotes.includes("4") && note >= 4 && note < 5) return true;
-            if (checkedNotes.includes("5") && note === 5) return true;
-
-            return false;
-        });
-    }
-
-    // FILTRE TRANCHE DE PRIX
-    if (checkedTranches.length > 0) {
-        tableau = tableau.filter(prod => {
-            let prix = parseFloat(prod.prix_ttc);
-
-            if (checkedTranches.includes("prix1") && prix >= 2.99 && prix <= 8.39) return true;
-            if (checkedTranches.includes("prix2") && prix >= 8.40 && prix <= 13.19) return true;
-            if (checkedTranches.includes("prix3") && prix >= 13.20 && prix <= 19.19) return true;
-            if (checkedTranches.includes("prix4") && prix >= 19.20 && prix <= 31.19) return true;
-            if (checkedTranches.includes("prix5") && prix >= 31.20 && prix <= 71.99) return true;
-
-            return false;
-        });
-    }
+    // FILTRAGE
+    filtre()
+    
     // PAGINATION & AFFICHAGE
     let parent = document.getElementById("prod");
     parent.innerHTML = "";
@@ -436,104 +394,49 @@ function triEtoileDecroissant(tableau){
     return tableau.sort((a,b) => parseFloat(b['note_moyenne']) - parseFloat(a['note_moyenne']))
 }
 
-// Filtres
+function filtre(){
+    // FILTRE CATÉGORIES
+    if (checkedCategories.length > 0) {
+        tableau = tableau.filter(prod => {
+            if (checkedCategories.includes("alimentaire") && prod.id_categorie === 1) return true;
+            if (checkedCategories.includes("vetement") && prod.id_categorie === 2) return true;
+            if (checkedCategories.includes("artisanat") && prod.id_categorie === 3) return true;
+            if (checkedCategories.includes("goodies") && prod.id_categorie === 4) return true;
+            if (checkedCategories.includes("soin") && prod.id_categorie === 5) return true;
+            return false;
+        });
+    }
 
-// Alimentaire = 1
-function filtrageCategorieAlimentaire(tableau){ 
-    newTab = tableau.filter(tabProd => tabProd['id_categorie'] === 1)
-    return newTab
+    // FILTRE NOTES
+    if (checkedNotes.length > 0) {
+        tableau = tableau.filter(prod => {
+            let note = prod.note_moyenne;
+
+            if (note === null) return checkedNotes.includes("0");
+
+            note = parseFloat(note);
+
+            if (checkedNotes.includes("1") && note < "2") return true;
+            if (checkedNotes.includes("2") && note >= "2" && note < "3") return true;
+            if (checkedNotes.includes("3") && note >= "3" && note < "4") return true;
+            if (checkedNotes.includes("4") && note >= "4" && note < "5") return true;
+            if (checkedNotes.includes("5") && note == "5") return true;
+
+            return false;
+        });
+    }
+
+    // FILTRE TRANCHE DE PRIX
+    if (checkedTranches.length > 0) {
+        tableau = tableau.filter(prod => {
+            let prix = parseFloat(prod.prix_ttc);
+
+            if (checkedTranches.includes("prix1") && prix >= "2.99" && prix <= "8.39") return true;
+            if (checkedTranches.includes("prix2") && prix >= "8.40" && prix <= "13.19") return true;
+            if (checkedTranches.includes("prix3") && prix >= "13.20" && prix <= "19.19") return true;
+            if (checkedTranches.includes("prix4") && prix >= "19.20" && prix <= "31.19") return true;
+            if (checkedTranches.includes("prix5") && prix >= "31.20" && prix <= "71.99") return true;
+            return false;
+        });
+    }
 }
-
-// Vetement = 2
-function filtrageCategorieVetement(tableau){
-    newTab = tableau.filter(tabProd => tabProd['id_categorie'] === 2)
-    return newTab
-}
-
-// Artisanat = 3
-function filtrageCategorieArtisanat(tableau){
-    newTab = tableau.filter(tabProd => tabProd['id_categorie'] === 3)
-    return newTab
-}
-
-// Goodies = 4
-function filtrageCategorieGoodies(tableau){
-    newTab = tableau.filter(tabProd => tabProd['id_categorie'] === 4)
-    return newTab
-}
-
-// Soin = 5
-function filtrageCategorieSoin(tableau){
-    newTab = tableau.filter(tabProd => tabProd['id_categorie'] === 5)
-    return newTab
-}
-
-
-// NOTE
-
-// non noté
-function filtrageNoteNonNote(tableau){ 
-    newTab = tableau.filter(tabProd => tabProd['note_moyenne'] === null)
-    return newTab
-}
-
-// 0 à 1.99
-function filtrageNote1(tableau){ 
-    newTab = tableau.filter(tabProd => tabProd['note_moyenne'] >= "0.0" && tabProd['note_moyenne'] < "2")
-    return newTab
-}
-
-// 2 à 2.99
-function filtrageNote2(tableau){ 
-    newTab = tableau.filter(tabProd => tabProd['note_moyenne'] >= "2.0" && tabProd['note_moyenne'] < "3")
-    return newTab
-}
-
-// 3 à 3.99
-function filtrageNote3(tableau){
-    newTab = tableau.filter(tabProd => tabProd['note_moyenne'] >= "3.0" && tabProd['note_moyenne'] < "4")
-    return newTab
-}
-
-// 4 à 4.99
-function filtrageNote4(tableau){
-    newTab = tableau.filter(tabProd => tabProd['note_moyenne'] >= "4.0" && tabProd['note_moyenne'] < "5")
-    return newTab
-}
-
-// 5
-function filtrageNote5(tableau){
-    newTab = tableau.filter(tabProd => tabProd['note_moyenne'] === "5.0")
-    return newTab
-}
-
-
-//TRANCHE DE PRIX
-
-// 2.99 - 8.39
-function filtrageTranchePrix1(tableau){ 
-
-}
-
-// 8.40 - 13.19
-function filtrageTranchePrix2(tableau){ 
-
-}
-
-// 13.20 - 19.19
-function filtrageTranchePrix3(tableau){ 
-
-}
-
-// 19.20 - 31.19
-function filtrageTranchePrix4(tableau){ 
-
-}
-
-// 31.20 - 71.99
-function filtrageTranchePrix5(tableau){ 
-
-}
-
-
-
