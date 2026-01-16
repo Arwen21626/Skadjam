@@ -1,12 +1,12 @@
-function triPrixCroissant(){
+function triPrixCroissant(tableau){
     return tableau.sort((a, b) => parseInt(a['prix_ttc']) - parseInt(b['prix_ttc']))
 }
 
-function triPrixDecroissant(){
+function triPrixDecroissant(tableau){
     return tableau.sort((a, b) => parseFloat(b['prix_ttc']) - parseFloat(a['prix_ttc']))
 }
 
-function triAz(){
+function triAz(tableau){
     return tableau.sort((a,b) => a['libelle_produit'].localeCompare(b['libelle_produit']))
 }
 
