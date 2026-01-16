@@ -2,11 +2,16 @@ var checkedCategories = []
 var checkedNotes = []
 var checkedTranches = []
 
-let tableau = []
+let copieProd = JSON.parse(JSON.stringify(tabProd))
 
 // Ajout des eventListeners
 function ajoutEventListener(){
-    tableau = []
+
+    let tabInputTriFiltre = document.getElementsByClassName("triFiltre")
+
+    tabInputTriFiltre.addEventListener("click", function(){
+        afficherListe()
+    })
     
 // EventListener pour les boutons de changement de page
     // Récupérations des elements
@@ -43,29 +48,29 @@ function ajoutEventListener(){
     // Fonctions de tri
         // Prix
     prixTriCroissant.addEventListener("click",function () {
-        afficherListe(triPrixCroissant(tableau))
+        copieProd = triPrixCroissant(copieProd)
     })            
 
     prixTriDecroissant.addEventListener("click",function () {
-        afficherListe(triPrixDecroissant(tableau))
+        copieProd = triPrixDecroissant(copieProd)
     })
 
         // Ordre alphabétique
     alphaTriAZ.addEventListener("click",function () {
-        afficherListe(triAz(tableau))
+        copieProd = triAz(copieProd)
     })
 
     alphaTriZA.addEventListener("click",function () {
-        afficherListe(triZa(tableau))
+        copieProd = triZa(copieProd)
     })
     
         // Note
     noteTri51.addEventListener("click",function () {
-        afficherListe(triEtoileDecroissant(tableau))
+        copieProd = triEtoileDecroissant(copieProd)
     })
     
     noteTri15.addEventListener("click", function () {
-        afficherListe(triEtoileCroissant(tableau))
+        copieProd = triEtoileCroissant(copieProd)
     })
 
 // EventListener pour les filtres
@@ -178,6 +183,4 @@ function ajoutEventListener(){
         sidebar.classList.add("hidden")
         boutonSidebar.classList.remove("hidden")
     })
-
-    
 }
