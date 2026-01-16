@@ -1,27 +1,6 @@
-// Gestion de la popup (va peut être bouger dans un autre fichier)
+import * as Popup from "../popup.js";
 
-function sleep(ms){
-    return new Promise(resolve => setTimeout(resolve, ms));
-}
-
-function closePopup() {
-    // popup = document.getElementById("popup-overlay").classList.remove("active");
-    document.getElementById("popup-modif").classList.add("desactivate");
-
-}
-
-async function showPopUp(ms){
-    document.getElementById("popup-overlay").classList.add("active");
-    await sleep(ms);
-    closePopup()
-}
-
-const urlParams = new URLSearchParams(window.location.search);
-
-if (urlParams.get("panierModif") === "V"){
-    showPopUp(2000);
-
-}
+Popup.showPopUp(3000, "panierModif");
 
 // Gestion de la sauvegarde des modifications dans la BDD
 
@@ -33,6 +12,7 @@ if (formPanier) { //Chech si le formulaire de validation du panier (un élément
 
     function UpdatePanier(idProd, newQuantity, price) {
 
+        console.log(price);
         if (!hasChanged) {
             formPanier.querySelector('button').textContent = "Valider les modifications";
             formPanier.action = "/php/modifier_panier.php";
@@ -50,7 +30,7 @@ if (formPanier) { //Chech si le formulaire de validation du panier (un élément
             input.type = 'hidden';
             input.name = inputName + '[quantite]';
 
-            inputPrix = document.createElement('input');
+            let inputPrix = document.createElement('input');
             inputPrix.type = 'hidden';
             inputPrix.name = inputName + '[prix]';
             inputPrix.value = price;
