@@ -49,7 +49,12 @@ export function showPopUp(ms, getAttribute = null) {
 
         //Permet de retirer l'attribut Get de l'URL pour empêcher de réafficher la popup 
         // si l'utilisateur rafraîchit la page
-        history.replaceState(null, "", window.location.pathname); 
+
+        const url = new URL(window.location.href); // Récupère l'url actuelle
+
+        url.searchParams.delete(getAttribute); // Supprime seulement l'attribut utilisé pour afficher la popup
+
+        history.replaceState(null, "", url.toString()); // Modifie l'url de la page pour empêcher le réaffichage de la popup en cas de réactualisation
     }
     else {
         // Ici vous pouvez ajoutez un fonctionnement d'affichage différent 
