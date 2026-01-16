@@ -1,7 +1,3 @@
-var checkedCategories = []
-var checkedNotes = []
-var checkedTranches = []
-
 let copieProd = JSON.parse(JSON.stringify(tabProd))
 
 // Ajout des eventListeners
@@ -9,9 +5,11 @@ function ajoutEventListener(){
 
     let tabInputTriFiltre = document.getElementsByClassName("triFiltre")
 
-    tabInputTriFiltre.addEventListener("click", function(){
-        afficherListe()
-    })
+    for (let i = 0; i < tabInputTriFiltre.length; i++){
+        tabInputTriFiltre[i].addEventListener("click", function(){
+            afficherListe(copieProd)
+        })
+    }
     
 // EventListener pour les boutons de changement de page
     // Récupérations des elements
@@ -98,72 +96,73 @@ function ajoutEventListener(){
     // Fonctions de filtres
         //Catégories
     categorieAlimentaire.addEventListener("change", function () {
-        toggleFiltre(checkedCategories, "alimentaire", this);
+        copieProd = toggleFiltre(checkedCategories, "alimentaire", this);
     });
 
     categorieVetement.addEventListener("change", function () {
-        toggleFiltre(checkedCategories, "vetement", this);
+        copieProd = toggleFiltre(checkedCategories, "vetement", this);
     });
 
     categorieArtisanat.addEventListener("change", function () {
-        toggleFiltre(checkedCategories, "artisanat", this);
+        copieProd = toggleFiltre(checkedCategories, "artisanat", this);
     });
 
     categorieGoodies.addEventListener("change", function () {
-        toggleFiltre(checkedCategories, "goodies", this);
+        copieProd = toggleFiltre(checkedCategories, "goodies", this);
     });
 
     categorieSoin.addEventListener("change", function () {
-        toggleFiltre(checkedCategories, "soin", this);
+        copieProd = toggleFiltre(checkedCategories, "soin", this);
     });
 
     
         // Note
-
     noteNonNote.addEventListener("change", function () {
-        toggleFiltre(checkedNotes, "0", this);
+        console.log(copieProd)
+        copieProd = toggleFiltre(checkedNotes, "0", this);
+        console.log(copieProd)
     });
 
     noteUneE.addEventListener("change", function () {
-        toggleFiltre(checkedNotes, "1", this);
+        copieProd = toggleFiltre(checkedNotes, "1", this);
     });
 
     noteDeuxE.addEventListener("change", function () {
-        toggleFiltre(checkedNotes, "2", this);
+        copieProd = toggleFiltre(checkedNotes, "2", this);
     });
 
     noteTroisE.addEventListener("change", function () {
-        toggleFiltre(checkedNotes, "3", this);
+        copieProd = toggleFiltre(checkedNotes, "3", this);
     });
 
     noteQuatreE.addEventListener("change", function () {
-        toggleFiltre(checkedNotes, "4", this);
+        copieProd = toggleFiltre(checkedNotes, "4", this);
     });
 
     noteCinqE.addEventListener("change", function () {
-        toggleFiltre(checkedNotes, "5", this);
+        copieProd = toggleFiltre(checkedNotes, "5", this);
     });
 
 
-    // Tranche de prix
+        // Tranche de prix
     tranchePrix1.addEventListener("change", function () {
-        toggleFiltre(checkedTranches, "prix1", this);
+        copieProd = toggleFiltre(checkedTranches, "prix1", this);
     });
 
     tranchePrix2.addEventListener("change", function () {
-        toggleFiltre(checkedTranches, "prix2", this);
+        copieProd = toggleFiltre(checkedTranches, "prix2", this);
     });
 
     tranchePrix3.addEventListener("change", function () {
-        toggleFiltre(checkedTranches, "prix3", this);
+        copieProd = toggleFiltre(checkedTranches, "prix3", this);
     });
 
     tranchePrix4.addEventListener("change", function () {
-        toggleFiltre(checkedTranches, "prix4", this);
+        copieProd = toggleFiltre(checkedTranches, "prix4", this);
     });
 
     tranchePrix5.addEventListener("change", function () {
-        toggleFiltre(checkedTranches, "prix5", this);
+        copieProd = toggleFiltre(checkedTranches, "prix5", this);
     });
 
 // EventListeners pour l'animation sidebar filtre et tri

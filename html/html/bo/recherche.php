@@ -31,6 +31,9 @@
     <link rel="stylesheet" type="text/css" href="../../css/output.css" >
     <title>Recherche</title>
     <?php include __DIR__ . "/../../php/structure/head_back.php"; ?>
+    <script>
+        const tabProd = <?php echo json_encode($tabProduit);?>;
+    </script>
     <script src="../../js/recherche.js"></script>
     <script src="../../js/affichageListeProduits.js"></script>
     <script src="../../js/bo/affichageProduit.js"></script>
@@ -41,10 +44,7 @@
 </head>
 
 <body>
-    <script>
-        const tabProd = <?php echo json_encode($tabProduit);?>;
-    </script>
-
+    
     <!--header-->
     <?php (include __DIR__ . "/../../php/structure/header_back.php"); ?>
     <?php include(__DIR__ . "/../../php/structure/navbar_back.php"); ?>
@@ -227,7 +227,7 @@
             <article id="prod" class="flex flex-row flex-wrap justify-around w-auto">
                 <script>
                     document.addEventListener("DOMContentLoaded", () => {
-                        afficherListe()
+                        afficherListe(tabProd)
                     });
                 </script>
             </article>

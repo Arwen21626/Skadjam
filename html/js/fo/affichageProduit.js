@@ -1,4 +1,4 @@
-function afficherProduit(indice){
+function afficherProduit(tableau, indice){
     
     let i = indice
     
