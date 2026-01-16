@@ -43,7 +43,7 @@ if(isset($_SESSION["idCompte"])) {
             // Infos vendeur
             $denom = $vendeur["raison_sociale"];
             $siren = $vendeur["siren"];
-            $description = isset($vendeur["description_vendeur"]) ? $vendeur["description_vendeur"] : "Aucune description.";
+            $description = $vendeur["description_vendeur"];
         }
 
         // Infos adresse
@@ -139,7 +139,7 @@ if(isset($_SESSION["idCompte"])) {
         </div>
         <div class="description mt-8 mb-20 modif-attribut flex flex-col items-center">
             <h3 class="mb-2">Description :</h3>
-            <p class="attribut-text mt-4"><?= $description ?></p>
+            <p class="attribut-text mt-4"><?= $description != '' ? $description : 'Aucune description.'; ?></p>
         </div>
         <div class="flex flex-row justify-around items-center mt-7 mb-15">
                 <!-- Modifier les informations du vendeur (sauf le mot de passe) -->

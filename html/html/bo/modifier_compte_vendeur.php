@@ -29,7 +29,7 @@ foreach($dbh->query("SELECT * FROM sae3_skadjam._compte c
     $siren = $ligne["siren"];
     $iban = $ligne["iban"];
     $raisonSociale = $ligne["raison_sociale"];
-    $description = isset($ligne["description_vendeur"]) ? $ligne["description_vendeur"] : "Aucune description.";
+    $description = $ligne["description_vendeur"] != '' ? $ligne["description_vendeur"] : "Aucune description.";
 }
 // Infos adresse
 foreach($dbh->query("SELECT * FROM sae3_skadjam._compte c
@@ -67,65 +67,78 @@ foreach($dbh->query("SELECT * FROM sae3_skadjam._compte c
 
         <h2 class="flex justify-center text-center">Modification du compte vendeur</h2>
         <!-- Formulaire -->
-        <form class="flex flex-wrap p-15 pt-0 justify-around"  action="../../php/traitement_donnees_compte_vendeur.php" method="post"> 
+        <form class="flex flex-col flex-wrap p-15 pt-0 justify-around"  action="../../php/traitement_donnees_compte_vendeur.php" method="post"> 
             <!-- Vendeur -->
             <h3>Informations vendeur :</h3>
             <div class="flex flex-row flex-wrap justify-between ml-10 mb-7 mr-10 @max-[768px]:ml-5 @max-[768px]:mr-5">
                 <div class="flex flex-col items-start mt-6 w-fit @max-[768px]:mt-2">
                     <label for="nom">Nom * :</label>
-                    <input class="ml-5 border-4 border-solid rounded-2xl border-beige p-1 pl-3 mb-4 @max-[768px]:ml-2 max-w-3/4 @max-[768px]:pl-2" type="text" id="nom" name="nom" value="<?= $nom; ?>" size="25" required >
+                    <input class="ml-5 border-4 border-solid rounded-2xl border-beige p-1 pl-3 mb-4 w-1/1" type="text" id="nom" name="nom" value="<?= $nom; ?>" size="30" required >
                 </div>
                 <div class="flex flex-col items-start mt-6 w-fit @max-[768px]:mt-2">
                     <label for="prenom">Prénom * :</label>
-                    <input class="ml-5 border-4 border-solid rounded-2xl border-beige p-1 pl-3 mb-4 @max-[768px]:ml-2 max-w-3/4 @max-[768px]:pl-2 " type="text" id="prenom" name="prenom" value="<?= $prenom; ?>" size="25" required>
+                    <input class="ml-5 border-4 border-solid rounded-2xl border-beige p-1 pl-3 mb-4 w-1/1" type="text" id="prenom" name="prenom" value="<?= $prenom; ?>" size="30" required>
                 </div>
                 <div class="flex flex-col items-start mt-6 w-fit @max-[768px]:mt-2">
                     <label for="mail">Mail * :</label>
-                    <input class="ml-5 border-4 border-solid rounded-2xl border-beige p-1 pl-3 mb-4 @max-[768px]:ml-2 max-w-3/4 @max-[768px]:pl-2 " type="email" id="mail" name="mail" value="<?= $mail; ?>" size="40" required>
+                    <input class="ml-5 border-4 border-solid rounded-2xl border-beige p-1 pl-3 mb-4 w-1/1" type="email" id="mail" name="mail" value="<?= $mail; ?>" size="30" required>
                 </div>
                 <div class="flex flex-col items-start mt-6 w-fit @max-[768px]:mt-2">
                     <label for="tel">Numéro de téléphone * :</label>
-                    <input class="ml-5 border-4 border-solid rounded-2xl border-beige p-1 pl-3 mb-4 @max-[768px]:ml-2 max-w-3/4 @max-[768px]:pl-2 " type="tel" id="tel" name="tel" value="<?= $tel; ?>" size="16" required>
+                    <input class="ml-5 border-4 border-solid rounded-2xl border-beige p-1 pl-3 mb-4 w-1/1" type="tel" id="tel" name="tel" value="<?= $tel; ?>" size="10" required>
                 </div>
             </div>
 
             <!-- Entreprise -->
             <h3>Informations entreprise :</h3>
-            <div class="flex flex-row flex-wrap justify-between ml-10 mb-7 mr-10">
-                <div class="flex flex-col items-start mt-6 w-fit @max-[768px]:mt-2">
-                    <label for="raisonSociale">Raison sociale de l'entreprise * :</label>
-                    <input class="ml-5 border-4 border-solid rounded-2xl border-beige p-1 pl-3 mb-4 @max-[768px]:ml-2 max-w-3/4 @max-[768px]:pl-2 " type="text" id="raisonSociale" name="raisonSociale" value="<?= $raisonSociale; ?>" size="40" required>
+            <div class="flex flex-col flex-wrap">
+                <div class="flex flex-row no-wrap justify-between ml-10 mr-10 @max-[768px]:ml-5 @max-[768px]:mr-5">
+                    <div class="flex flex-col items-start mt-6 w-fit @max-[768px]:mt-2">
+                        <label for="raisonSociale">Raison sociale de l'entreprise * :</label>
+                        <input class="ml-5 border-4 border-solid rounded-2xl border-beige p-1 pl-3 mb-4 w-1/1" type="text" id="raisonSociale" name="raisonSociale" value="<?= $raisonSociale; ?>" size="30" required>
+                    </div>
+                    <div class="flex flex-col items-start mt-6 w-fit @max-[768px]:mt-2">
+                        <label for="denomination">Nom de l'entreprise * :</label>
+                        <input class="ml-5 border-4 border-solid rounded-2xl border-beige p-1 pl-3 mb-4 w-1/1" type="text" id="denomination" name="denomination" value="<?= $denom; ?>" size="30" required>
+                    </div> 
                 </div>
-                <div class="flex flex-col items-start mt-6 w-fit @max-[768px]:mt-2">
-                    <label for="denomination">Nom de l'entreprise * :</label>
-                    <input class="ml-5 border-4 border-solid rounded-2xl border-beige p-1 pl-3 mb-4 @max-[768px]:ml-2 max-w-3/4 @max-[768px]:pl-2 " type="text" id="denomination" name="denomination" value="<?= $denom; ?>" size="40" required>
-                </div> 
-                <div class="flex flex-col items-start mt-6 w-fit @max-[768px]:mt-2">
-                    <label for="siren">Numéro de SIREN * :</label>
-                    <input class="ml-5 border-4 border-solid rounded-2xl border-beige p-1 pl-3 mb-4 @max-[768px]:ml-2 max-w-3/4 @max-[768px]:pl-2 " type="text" id="siren" name="siren" value="<?= $siren; ?>" size="11" required>
-                </div>
-                <div class="flex flex-col items-start mt-6 w-fit @max-[768px]:mt-2">
-                    <label for="iban">Numéro de IBAN * :</label>
-                    <input class="ml-5 border-4 border-solid rounded-2xl border-beige p-1 pl-3 mb-4 @max-[768px]:ml-2 max-w-3/4 @max-[768px]:pl-2 " type="text" id="iban" name="iban" value="<?= $iban; ?>" placeholder="FR" size="40" required>
+                <div class="flex flex-row no-wrap justify-between ml-10 mb-7 mr-10 @max-[768px]:ml-5 @max-[768px]:mr-5">
+                    <div class="flex flex-col items-start mt-6 w-fit @max-[768px]:mt-2">
+                        <label for="siren">Numéro de SIREN * :</label>
+                        <input class="ml-5 border-4 border-solid rounded-2xl border-beige p-1 pl-3 mb-4 w-1/1" type="text" id="siren" name="siren" value="<?= $siren; ?>" size="10" required>
+                    </div>
+                    <div class="flex flex-col items-start mt-6 w-fit @max-[768px]:mt-2">
+                        <label for="iban">Numéro de IBAN * :</label>
+                        <input class="ml-5 border-4 border-solid rounded-2xl border-beige p-1 pl-3 mb-4 w-1/1" type="text" id="iban" name="iban" value="<?= $iban; ?>" placeholder="FR" size="30" required>
+                    </div>
                 </div>
             </div>
 
             <!-- Adresse -->
             <h3>Siège social :</h3>
-            <div class="flex flex-row flex-wrap justify-between ml-10 mb-7 mr-10">
-                <div class="flex flex-col items-start mt-6 w-fit @max-[768px]:mt-2">
-                    <label for="adresse">Adresse * :</label>
-                    <input class="ml-5 border-4 border-solid rounded-2xl border-beige p-1 pl-3 mb-4 @max-[768px]:ml-2 max-w-3/4 @max-[768px]:pl-2 " type="text" id="adresse" name="adresse" value="<?= $num . (isset($numBis) ? " $numBis" : " ") . $adresse; ?>" size="60" placeholder="ex : 3 rue des camélias" required>
+            <div class="flex flex-col no-wrap justify-between ml-10 mb-7 mr-10">
+                <div class="flex flex-row no-wrap justify-between">
+                    <div class="flex flex-col no-wrap items-start mt-6 w-fit @max-[768px]:mt-2">
+                        <label for="adresse">Adresse * :</label>
+                        <input class="ml-5 border-4 border-solid rounded-2xl border-beige p-1 pl-3 mb-4 @max-[768px]:ml-2 max-w-3/4 @max-[768px]:pl-2 " type="text" id="adresse" name="adresse" value="<?= $num . (isset($numBis) ? " $numBis" : " ") . $adresse; ?>" size="50" placeholder="ex : 3 rue des camélias" required>
+                    </div>
                 </div>
-                <div class="flex flex-col items-start mt-6 w-fit @max-[768px]:mt-2">
-                    <label for="ville">Ville * :</label>
-                    <input class="ml-5 border-4 border-solid rounded-2xl border-beige p-1 pl-3 mb-4 @max-[768px]:ml-2 max-w-3/4 @max-[768px]:pl-2 " type="text" id="ville" name="ville" value="<?= $ville; ?>" size="30" required>
+                <div class="flex flex-row no-wrap justify-between">
+                    <div class="flex flex-col items-start mt-6 w-fit @max-[768px]:mt-2">
+                        <label for="ville">Ville * :</label>
+                        <input class="ml-5 border-4 border-solid rounded-2xl border-beige p-1 pl-3 mb-4 @max-[768px]:ml-2 max-w-3/4 @max-[768px]:pl-2 " type="text" id="ville" name="ville" value="<?= $ville; ?>" size="50" required>
+                    </div>
+                    <div class="flex flex-col items-start mt-6 w-fit @max-[768px]:mt-2">
+                        <label for="cp">Code Postal * :</label>
+                        <input class="ml-5 border-4 border-solid rounded-2xl border-beige p-1 pl-3 mb-4 @max-[768px]:ml-2 max-w-3/4 @max-[768px]:pl-2 " type="text" id="cp" name="cp" value="<?= $cp; ?>" size="10" required>
+                    </div>
                 </div>
-                <div class="flex flex-col items-start mt-6 w-fit @max-[768px]:mt-2">
-                    <label for="cp">Code Postal * :</label>
-                    <input class="ml-5 border-4 border-solid rounded-2xl border-beige p-1 pl-3 mb-4 @max-[768px]:ml-2 max-w-3/4 @max-[768px]:pl-2 " type="text" id="cp" name="cp" value="<?= $cp; ?>" size="10" required>
-                </div>
-                
+            </div>
+
+            <!-- Description -->
+            <h3>Description :</h3>
+            <div class="flex flex-col no-wrap justify-between ml-10 mb-7 mr-10">
+                <textarea class="ml-5 border-4 border-solid rounded-2xl border-beige p-1 pl-3 mb-4 w-1/1" id="description" name="description" rows="5"><?= isset($description) ? $description : ''; ?></textarea>
             </div>
 
             <!-- Valider le formulaire -->
