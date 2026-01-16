@@ -1,0 +1,10 @@
+@media print {
+  /* All your print styles go here */
+  header, footer, nav, a, button {
+    display: none !important;
+  }
+  section{
+    display: block;
+  }
+  
+}
