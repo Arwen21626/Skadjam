@@ -5,7 +5,9 @@ function sleep(ms){
 }
 
 function closePopup() {
-    popup = document.getElementById("popup-overlay").classList.remove("active");
+    // popup = document.getElementById("popup-overlay").classList.remove("active");
+    document.getElementById("popup-modif").classList.add("desactivate");
+
 }
 
 async function showPopUp(ms){
@@ -17,7 +19,8 @@ async function showPopUp(ms){
 const urlParams = new URLSearchParams(window.location.search);
 
 if (urlParams.get("panierModif") === "V"){
-    showPopUp(3000);
+    showPopUp(2000);
+
 }
 
 // Gestion de la sauvegarde des modifications dans la BDD
@@ -67,6 +70,7 @@ if (formPanier) { //Chech si le formulaire de validation du panier (un élément
     let nbProdTot = document.getElementById('conteneur-info_panier').querySelector('.nb-prod-total').getElementsByTagName('p')[1];
 
     document.querySelectorAll('.produit').forEach(container => {
+        
         // Récupères les éléments d'une carte produit
         let input = container.querySelector('.prod-info').querySelector('.quantite-prod').querySelector('input'); // Input de la quantité
         let btnRetrait = container.querySelector('.prod-info').querySelector('.quantite-prod').querySelector('.retrait');
