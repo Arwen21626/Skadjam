@@ -71,7 +71,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Récapitulatif de la commande</title>
-    <link href="/css/print.css" media="print" rel="stylesheet" />
 </head>
 <?php include __DIR__ . '/../../php/structure/head_front.php'?>
 <body>
@@ -80,13 +79,15 @@
     <?php include __DIR__ . "/../../php/structure/navbar_front.php"; ?>
 
     <main class="min-h-[600px]">
-        <button id="imprimer">Imprimer</button>
+        
         <h2 class="mt-10">Récapitulatif de la commande</h2>
 
         <div class="ml-5 flex flex-row items-end mt-10">
             <h3 class="mr-3">Numéro de la commande : </h3> 
             <p id="numeroCommande"><?php echo $idCommande;?></p>
         </div>
+        
+        <button id="imprimer">Imprimer</button>
 
         <div class="ml-5 flex flex-row items-end">
             <h3 class="mr-3">Date : </h3>
@@ -206,14 +207,11 @@
             this.contentWindow.print(); // indique que c'est une page qui permet d'imprimmer
         }
         function affichagePageImpression(){
-            const hideFrame = document.createElement("iframe");
+            const hideFrame = document.createElement("iframe"); // création d'un iframe
             hideFrame.onload = gestionPageImpression;
-            
-            hideFrame.src = "commande.php?idCommande="+numeroCommande.innerText;
+            hideFrame.src = "../facture.php?idCommande="+numeroCommande.innerText;
             document.body.appendChild(hideFrame); // ajoute dans le body le iframe pour l'impression
         }
-
-        
 
         btnImprimmer.addEventListener("click", () => {affichagePageImpression()});
     </script>
