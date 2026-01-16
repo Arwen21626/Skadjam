@@ -28,8 +28,13 @@
     <link rel="stylesheet" type="text/css" href="../../css/output.css" >
     <title>Recherche</title>
     <?php include __DIR__ . "/../../php/structure/head_front.php"; ?>
-    <script src="../../js/fo/recherche.js"></script>
+    <script src="../../js/recherche.js"></script>
+    <script src="../../js/affichageListeProduits.js"></script>
+    <script src="../../js/fo/affichageProduit.js"></script>
     <script src="../../js/pagination.js"></script>
+    <script src="../../js/tris.js"></script>
+    <script src="../../js/filtres.js"></script>
+    <script src="../../js/affichageNote.js"></script>
 </head>
 
 <body>
