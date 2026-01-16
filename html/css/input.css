@@ -103,7 +103,7 @@ input.quantite-prod-input {
     
 }
 
-.popup.desactivate {
+.popup.desactive {
     animation: popupOut 1s forwards;
 }
 
