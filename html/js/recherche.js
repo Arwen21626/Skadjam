@@ -20,19 +20,19 @@ function ajoutEventListener(){
 
     // Fonctions pour les boutons
     premierePage.addEventListener("click",function(){
-        firstPage()
+        firstPage(copieProd)
     })
     
     pagePrec.addEventListener("click",function(){
-        pagePrecedente()
+        pagePrecedente(copieProd)
     })
 
     pageSuiv.addEventListener("click",function(){
-        pageSuivante()
+        pageSuivante(copieProd)
     })
 
     dernierePage.addEventListener("click",function(){
-        lastPage()
+        lastPage(copieProd)
     })
 // EventListener pour les tris
     // Récupération des elements

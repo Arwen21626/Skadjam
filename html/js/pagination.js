@@ -2,40 +2,40 @@ const numberOfItems = 24
 let first = 0
 let actualPage = 1
 
-function nbPages(){
-    let maxPages = Math.ceil((tableau.length)/numberOfItems)
+function nbPages(tab){
+    let maxPages = Math.ceil((tab.length)/numberOfItems)
     return maxPages
 }
 
-function firstPage(){
+function firstPage(tab){
     first = 0
     actualPage = 1
-    afficherListe()
+    afficherListe(tab)
 }
 
-function lastPage(){
-    first = (nbPages() * numberOfItems)-numberOfItems;
-    actualPage = nbPages();
-    afficherListe(); 
+function lastPage(tab){
+    first = (nbPages(tab) * numberOfItems)-numberOfItems;
+    actualPage = nbPages(tab);
+    afficherListe(tab); 
 }
 
-function pagePrecedente(){
+function pagePrecedente(tab){
     if(first-numberOfItems >= 0){
         first-=numberOfItems
         actualPage --;
-        afficherListe();
+        afficherListe(tab);
     }
 }
 
-function pageSuivante(){
-    if(first+numberOfItems<tableau.length){
+function pageSuivante(tab){
+    if(first+numberOfItems<tab.length){
         first+=numberOfItems;
         actualPage ++;
-        afficherListe();
+        afficherListe(tab);
     }
 }
 
-function numPageInfo(){
+function numPageInfo(tab){
     let pageInfo = document.getElementById("pageInfo")
-    pageInfo.textContent = (actualPage+"/"+nbPages())
+    pageInfo.textContent = (actualPage+"/"+nbPages(tab))
 }
