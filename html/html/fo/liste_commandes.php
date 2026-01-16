@@ -5,7 +5,7 @@
     $idCompte = $_SESSION['idCompte'];
 
     if($idCompte == null){
-        die("Erreur : Vous n'êtes pas connecté.");
+        header('Location: ./connexion.php');
     }
 
     try {     
