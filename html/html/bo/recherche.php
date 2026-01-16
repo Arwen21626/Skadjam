@@ -31,9 +31,8 @@
     <link rel="stylesheet" type="text/css" href="../../css/output.css" >
     <title>Recherche</title>
     <?php include __DIR__ . "/../../php/structure/head_back.php"; ?>
+    <script src="../../js/pagination.js"></script>
     <script src="../../js/fo/recherche.js"></script>
-    <script type="module" src="../../js/pagination.js"></script>
-    <script type="module" src="../../js/variables.js"></script>
 </head>
 
 <body>

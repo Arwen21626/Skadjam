@@ -1,4 +1,8 @@
+var checkedCategories = []
+var checkedNotes = []
+var checkedTranches = []
 
+let tableau = []
 
 function toggleFiltre(tableau, valeur) {
     if (tableau.includes(valeur)) {
@@ -24,19 +28,19 @@ function ajoutEventListener(){
 
     // Fonctions pour les boutons
     premierePage.addEventListener("click",function(){
-        changePage.firstPage()
+        firstPage()
     })
     
     pagePrec.addEventListener("click",function(){
-        changePage.pagePrecedente()
+        pagePrecedente()
     })
 
     pageSuiv.addEventListener("click",function(){
-        changePage.pageSuivante()
+        pageSuivante()
     })
 
     dernierePage.addEventListener("click",function(){
-        changePage.lastPage()
+        lastPage()
     })
 // EventListener pour les tris
     // Récupération des elements
