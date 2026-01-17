@@ -178,7 +178,6 @@ function verifAdresse($adresse){
 function verifNumCarte($num){
     $exp = explode(" ", $num);
     $numero = $exp[0].$exp[1].$exp[2].$exp[3];
-    echo $numero;
     //Vérfie que le numéro à bien 16 chiffres
     return (preg_match('/[0-9]{16}/',$numero));
 }
