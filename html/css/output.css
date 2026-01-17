@@ -1626,11 +1626,6 @@ input.quantite-prod-input {
       height: calc(var(--spacing, 0.25rem) * 80);
     }
   }
-  .md\:h-120 {
-    @media (width >= 48rem) {
-      height: calc(var(--spacing, 0.25rem) * 120);
-    }
-  }
   .md\:h-225 {
     @media (width >= 48rem) {
       height: calc(var(--spacing, 0.25rem) * 225);

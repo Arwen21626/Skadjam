@@ -35,7 +35,7 @@
     <?php include __DIR__ . "/../../php/structure/header_front.php"; ?>
     <?php include __DIR__ . "/../../php/structure/navbar_front.php"; ?>
 
-    <main class=" p-8">
+    <main class="min-h-[600px] p-8">
         <!--Début du catalogue-->
         <h2 id="vosProduits">Nos promotions</h2>
 

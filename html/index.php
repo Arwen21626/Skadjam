@@ -92,17 +92,16 @@
                                             WHERE id_produit = :id_produit");
                         $stmt->execute([':id_produit' => $idProduit]);
                         $estPromu = ($stmt->fetch() !== false); ?>
-                        <section class="bg-bleu grid grid-cols-[40%_60%] w-40 h-auto p-2 m-2 md:h-120 md:w-80 md:p-3">
+                        <section class="bg-bleu flex flex-col w-40 h-auto p-2 m-2 md:w-80 md:p-3">
                             <!--affichage de la photo-->
                             <a href= "<?php echo "html/fo/details_produit.php?idProduit=".$idProduit;?>" class="col-span-2 justify-self-center mb-3">
                                 <img src="<?php echo $valeurs['url_photo'];?>" 
                                         alt="<?php echo $valeurs['alt'];?>"
                                         title="<?php echo $valeurs['titre'];?>"
                                         class="w-auto h-40 md:h-80 justify-self-center">
-                            </a>
 
-                            <!--affichage de la promotion-->
-                            <?php if($estPromu){ 
+                                <!--affichage de la promotion-->
+                                <?php if($estPromu){ 
                                     $stmt = $dbh->prepare("SELECT *
                                                             FROM sae3_skadjam._promu pu
                                                             INNER JOIN sae3_skadjam._promotion pn
@@ -121,21 +120,22 @@
                                 <div class="bg-rouge absolute w-36 md:w-74 underline text-beige pt-2 pb-1.5">
                                     <h4 class="text-center text-beige overline m-0"><strong><?php echo htmlspecialchars($labelPromo); ?></strong></h4>
                                 </div>
-                            <?php }} ?>
+                                <?php }} ?>
 
-                            <!--affichage du nom du produit-->
-                            <p><?php echo $valeurs['libelle_produit'];?></p> 
+                                <!--affichage du nom du produit-->
+                                <p><?php echo $valeurs['libelle_produit'];?></p> 
 
-                            <!--affichage du prix du produit-->   
-                            <div class="flex flex-row justify-between items-center">
-                                <p class="inline-block <?php echo ($valeurs['pourcentage_remise'] !== NULL)?'line-through':'';?>"> <?php echo htmlentities(str_replace(".", ",",$valeurs['prix_ttc'])); ?>€ (TTC)</p>
-                                <p class=" pl-3 <?php echo ($valeurs['pourcentage_remise'] !== NULL)?'':'hidden';?>"> <?php echo htmlentities(str_replace(".", ",",$valeurs['prix_remise'])); ?>€ (TTC)</p>
-                            </div>
-                            <!--récupération de la note-->
-                            <div class="flex">
-                                <?php $note = $valeurs['note_moyenne'];
-                                    affichageNote($note); ?>
-                            </div> 
+                                <!--affichage du prix du produit-->   
+                                <div class="flex flex-row justify-between items-center">
+                                    <p class="inline-block <?php echo ($valeurs['pourcentage_remise'] !== NULL)?'line-through':'';?>"> <?php echo htmlentities(str_replace(".", ",",$valeurs['prix_ttc'])); ?>€ (TTC)</p>
+                                    <p class=" pl-3 <?php echo ($valeurs['pourcentage_remise'] !== NULL)?'':'hidden';?>"> <?php echo htmlentities(str_replace(".", ",",$valeurs['prix_remise'])); ?>€ (TTC)</p>
+                                </div>
+                                <!--récupération de la note-->
+                                <div class="flex">
+                                    <?php $note = $valeurs['note_moyenne'];
+                                        affichageNote($note); ?>
+                                </div>
+                            </a> 
                         </section>
                     <?php } ?>
                 </div>
