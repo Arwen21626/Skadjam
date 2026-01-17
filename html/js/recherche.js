@@ -2,14 +2,6 @@ let copieProd = JSON.parse(JSON.stringify(tabProd))
 
 // Ajout des eventListeners
 function ajoutEventListener(){
-
-    //let tabInputTriFiltre = document.getElementsByClassName("triFiltre")
-
-    // for (let i = 0; i < tabInputTriFiltre.length; i++){
-    //     tabInputTriFiltre[i].addEventListener("click", function(){
-    //         afficherListe(copieProd)
-    //     })
-    // }
     
 // EventListener pour les boutons de changement de page
     // Récupérations des elements

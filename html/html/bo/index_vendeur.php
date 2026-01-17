@@ -13,11 +13,11 @@
 <?php include(__DIR__."/../../php/structure/head_back.php");?>
 <head> 
     <title>Accueil</title>
-    <style>
-        button a:hover{
-            color: black;
-        }
-    </style>
+    <script src="../../js/pagination.js"></script>
+    <script>
+        const tabProd = <?php echo json_encode($tabProduit);?>;
+        let copieProd = JSON.parse(JSON.stringify(tabProd));
+    </script>
 </head>
 
 
@@ -27,7 +27,7 @@
     <?php include(__DIR__ . "/../../php/structure/header_back.php"); ?>
     <?php include(__DIR__ . "/../../php/structure/navbar_back.php"); ?>
 
-    <main class=" p-8">
+    <main class="p-8">
         <div class="grid grid-cols-2 gap-4 justify-items-center">
             <a href="../bo/promotion_vendeur.php" title="lien vers page promotion">
                 <img src="../../images/images_accueil/promotion.webp" alt="promotion" class="w-150 h-auto justify-self-end">
@@ -164,21 +164,16 @@
                 die();
             }
         ?>
-        <!--fin du catalogue-->
-        <div class="flex flex-row justify-around w-96">
-            <button id="pagePrec" class="md:order-2">|<</button>
-            <button id="pageSuiv" class="md:order-4">>|</button>
-            <p id="pageInfo" class="md:order-3"></p>
-            <button id="premierePage" class="md:order-1"><<</button>
-            <button id="dernierePage" class="md:order-5">>></button>
+        <div class="flex flex-row space-x-4 justify-center">
+            <?php if ($pageNumber>1){?>
+            <a class= "lienPage hover:text-rouge" href="<?php echo "./index_vendeur.php?page=".($pageNumber-1)."#vosProduits";?>">Page précédente</a>
+            <?php }?>
+        
+            <?php if ($pageNumber<$maxPage){?>
+            <a class= "lienPage hover:text-rouge" href="<?php echo "./index_vendeur.php?page=".($pageNumber+1)."#vosProduits";?>">Page suivante</a>
+            <?php }?>
         </div>
     </main>
-    <script src=""></script>
-    <script>
-        document.addEventListener("DOMContentLoaded", () => {
-            numPageInfo()
-        });
-    </script>
     
     <!--footer-->
     <?php include(__DIR__ . "/../../php/structure/footer_back.php"); ?>

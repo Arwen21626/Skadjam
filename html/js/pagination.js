@@ -2,6 +2,7 @@ const numberOfItems = 24
 let first = 0
 let actualPage = 1
 
+
 function nbPages(tab){
     let maxPages = Math.ceil((tab.length)/numberOfItems)
     return maxPages
@@ -39,3 +40,4 @@ function numPageInfo(tab){
     let pageInfo = document.getElementById("pageInfo")
     pageInfo.textContent = (actualPage+"/"+nbPages(tab))
 }
+
