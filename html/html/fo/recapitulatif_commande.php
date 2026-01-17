@@ -100,9 +100,7 @@ if (isset($_POST['valider'])) {
 
     <main class="min-h-[600px]">
         <h2 class="mt-10">Récapitulatif de votre commande</h2>
-        <!--<h3>Numéro de la commande :</h3>
-        <p></p>-->
-        
+                
         <div class="flex items-center justify-between mt-10 px-5">
             <h3>Date : <?php echo date("d/m/Y"); ?></h3>
             <!-- bouton annuler (mobile) -->

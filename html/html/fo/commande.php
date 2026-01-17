@@ -52,11 +52,6 @@
         $sous_total_final = 0;
         $total_ligne = 0;
         $total_final = 0;
-        /*$total_remise = 0;
-        $v_quantite_totale = 0;
-        $v_total_ht = 0;
-        $v_total_ttc = 0;
-        $v_total_remise = 0;*/
 
         foreach($tabInfosCommande as $ligne){
             if(in_array($ligne['id_vendeur'], $tabVendeur) == false){
@@ -88,21 +83,18 @@
         
         <h2 class="mt-10">Récapitulatif de la commande</h2>
 
-        <div class="ml-5 flex flex-row items-end mt-10">
+        <div class="ml-5 flex flex-row items-center mt-10">
             <h3 class="mr-3">Numéro de la commande : </h3> 
-            <p id="numeroCommande"><?php echo $idCommande;?></p>
+            <h3 id="numeroCommande"><?php echo $idCommande;?></h3>
         </div>
         
         <button id="imprimer">Imprimer</button>
 
-        <div class="ml-5 flex flex-row items-end">
-            <h3 class="mr-3">Date : </h3>
-            <p><?php echo $date;?></p>
-        </div>
+        <h3 class="ml-5 mr-3">Date : <?php echo $date;?></h3>
 
-        <div class="flex justify-center mt-10">
-            <?php //tableau des commandes ?>
-            <table class="table-auto w-280">
+        <div class="flex justify-center md:mt-10">
+        <!--TABLEAU DES COMMANDES VERSION TABLETTE-->
+            <table class="table-auto w-280 md:inline-table hidden">
                 <thead>
                     <tr>
                         <th class="text-left w-90 pl-3"><h4>Article</h4></th>
@@ -150,20 +142,12 @@
                                     }?>
                                     <td class="text-center py-3"><p><?php echo $total_ligne;?></p></td>
                                     <?php 
-                                        //calcul du total de la commande
+                                        //calcul du total ht de la commande
                                         $total_ht = $total_ht + $ligne['sous_total_ht'];
+                                        //calcul du sous total final par vendeur
                                         $sous_total_final += $total_ligne;
+                                        //calcul du nombre de produit final
                                         $quantite_totale += $ligne['quantite'];
-                                        
-                                        //calcul du total de la commande
-                                        /*$quantite_totale += $ligne['quantite'];
-                                        $total_remise += $ligne['prix_remise'] * $ligne['quantite'];
-
-                                        //calcul du sous-total par vendeur
-                                        $v_quantite_totale = $v_quantite_totale + $ligne['quantite'];
-                                        $v_total_ht = $v_total_ht + $ligne['sous_total'];
-                                        $v_total_ttc += $ligne['prix_ttc'] * $ligne['quantite'];
-                                        $v_total_remise +=  $ligne['prix_remise'] * $ligne['quantite'];*/
                                     ?>
                                 </tr>
                             <?php } 
@@ -178,15 +162,8 @@
                         <tr class="<?php echo $classe; ?>">
                             <th colspan="5" class="text-left w-90 pl-3"><p>Sous-total :</p></th>
                             <th class="text-center py-3"><p><?php echo $sous_total_final;?></p></th>
-                            <!--<th class="text-center py-3"><p><?php //echo $v_total_ht;?></p></th>
-                            <th class="text-center py-3"><p><?php //echo $v_total_ttc;?></p></th>
-                            <th class="text-center py-3"><p><?php //echo $v_total_remise;?></p></th>-->
                         </tr>
                         <?php 
-                            /*$v_quantite_totale = 0;
-                            $v_total_ht = 0;
-                            $v_total_ttc = 0;
-                            $v_total_remise = 0;*/
                             $total_final += $sous_total_final;
                             $sous_total_final = 0;
                     } ?>
@@ -206,6 +183,90 @@
                         <th></th>
                         <th class="text-center py-3"><h4><?php echo $quantite_totale;?></h4></th>
                         <th class="text-center py-3"><h4><?php echo $total_final;?></h4></th>
+                    </tr>
+                </tfoot>
+            </table>
+
+            <!--TABLEAU VERSION TELEPHONE-->
+            <table class="table-auto w-95 md:hidden block mt-6">
+                <tbody>
+                    <?php $ligneIndex = 0;
+                    function ligneCouleur(&$i) {
+                        $i++;
+                        return ($i % 2 === 0) ? 'bg-bleu' : '';
+                    }
+
+                    foreach($tabVendeur as $vendeur){ ?>
+                        <tr class="py-4 <?= ligneCouleur($ligneIndex) ?> border-t-2 border-solid border-black">
+                            <th colspan="2" class="text-left py-2 pl-3"><h4>Vendeur : <?php echo $vendeur ;?></h4></th>
+                        </tr>
+                        <?php foreach($tabInfosCommande as $ligne){ 
+                            if($ligne['raison_sociale'] == $vendeur){ ?>  
+                                <tr class="py-4 <?= ligneCouleur($ligneIndex) ?>">
+                                    <th class="text-left py-2 pl-3"><h4 class="w-40">Article</h4></th>
+                                    <td class="text-left"><p><?php echo $ligne['id_produit'];?> - <?php echo $ligne['libelle_produit'];?></p></td>
+                                </tr>
+                                <tr class="py-4 <?= ligneCouleur($ligneIndex) ?>">
+                                    <th class="text-left py-2 pl-3"><h4>Prix HT</h4></th>
+                                    <td class="text-left"><p><?php echo $ligne['prix_ht'];?></p></td>
+                                </tr>
+                                <tr class="py-4 <?= ligneCouleur($ligneIndex) ?>">
+                                    <th class="text-left py-2 pl-3"><h4>Prix TTC</h4></th>
+                                        <td class="text-left"><p><?php echo $ligne['prix_ttc'];?></p></td>
+                                </tr>
+                                <tr class="py-4 <?= ligneCouleur($ligneIndex) ?>">
+                                    <th class="text-left py-2 pl-3"><h4>% remise</h4></th>
+                                    <td class="text-left"><p><?php echo $ligne['pourcentage_remise']*100;?></p></td>
+                                </tr>
+                                <tr class="py-4 <?= ligneCouleur($ligneIndex) ?>">
+                                    <th class="text-left py-2 pl-3"><h4>Quantité</h4></th>
+                                    <td class="text-left"><p><?php echo $ligne['quantite'];?></p></td>
+                                </tr>
+                                <tr class="py-4 <?= ligneCouleur($ligneIndex) ?> border-b-2 border-solid border-black">
+                                    <th class="text-left py-2 pl-3"><h4>Total produit</h4></th>
+                                    <?php if($ligne['prix_remise'] != $ligne['prix_ttc']){ 
+                                        $total_ligne = $ligne['remise'] * $ligne['quantite'] ;    
+                                    } 
+                                    else{
+                                        $total_ligne = $ligne['prix_ttc'] * $ligne['quantite'] ;
+                                    } ?>
+                                    <td class="text-left"><p><?php echo $total_ligne;?></p></td>
+                                </tr>
+
+                                <?php 
+                                    //calcul du total ht de la commande
+                                    $total_ht = $total_ht + $ligne['sous_total_ht'];
+                                    //calcul du sous total final par vendeur
+                                    $sous_total_final += $total_ligne;   
+                                    //calcul du nombre de produit final
+                                    $quantite_totale += $ligne['quantite'];       
+                            } 
+                        } ?>
+                        <tr class="py-4 <?= ligneCouleur($ligneIndex) ?>">
+                            <th class="text-left py-2 pl-3"><h4>Sous-total vendeur</h4></th>
+                            <th class="text-left"><p><?php echo $sous_total_final;?></p></th>
+                        </tr>
+                        <?php
+                            $total_final += $sous_total_final;
+                            $sous_total_final = 0;
+                    } ?>
+                </tbody>
+                <tfoot>
+                    <tr class="py-4 <?= ligneCouleur($ligneIndex) ?> border-t-2 border-solid border-black">
+                        <th class="text-left py-2 pl-3"><h4>Total HT : </h4></th>
+                        <th class="text-left"><h4><?php echo $total_ht;?></h4></th>
+                    </tr>
+                    <tr class="py-4 <?= ligneCouleur($ligneIndex) ?>">
+                        <th class="text-left py-2 pl-3"><h4>Total TTC : </h4></th>
+                        <th class="text-left"><h4><?php echo $total_ttc;?></h4></th>
+                    </tr>
+                    <tr class="py-4 <?= ligneCouleur($ligneIndex) ?>">
+                        <th class="text-left py-2 pl-3"><h4>Quantité totale : </h4></th>
+                        <th class="text-left"><h4><?php echo $quantite_totale;?></h4></th>
+                    </tr>
+                    <tr class="py-4 <?= ligneCouleur($ligneIndex) ?>">
+                        <th class="text-left py-2 pl-3"><h4>Total Final : </h4></th>
+                        <th class="text-left"><h4><?php echo $total_final;?></h4></th>
                     </tr>
                 </tfoot>
             </table>
