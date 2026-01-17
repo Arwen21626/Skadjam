@@ -61,6 +61,7 @@ if (isset($_POST['logout'])) {
                                         WHERE c.id_compte = $id", PDO::FETCH_ASSOC) as $adresse){
                     $numRue[$nbAdresse] = $adresse['numero_rue'];
                     $adressePostale[$nbAdresse] = $adresse['adresse_postale'];
+                    $complement[$nbAdresse] = $adresse['complement_adresse'];
                     $batiment[$nbAdresse] = " " . $adresse['numero_bat'];
                     $appartement[$nbAdresse] = " " . $adresse['numero_appart'];
                     $codePostal[$nbAdresse] = $adresse['code_postal'];
@@ -94,7 +95,7 @@ if (isset($_POST['logout'])) {
                                 <td class="py-3">
                                     <?php for ($i=0; $i < $nbAdresse; $i++) { // Affiche toutes les adresses du client 
                                         $j=$i+1;?>
-                                    <p> n°<?php echo "$j : $numRue[$i] $adressePostale[$i]$batiment[$i]$appartement[$i], $codePostal[$i] $ville[$i]"; ?></p>
+                                    <p> n°<?php echo "$j : $numRue[$i] $complement[$i] $adressePostale[$i]$batiment[$i]$appartement[$i], $codePostal[$i] $ville[$i]"; ?></p>
                                     <?php } ?>
                                 </td>
                             </tr>
