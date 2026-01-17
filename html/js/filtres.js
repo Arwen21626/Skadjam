@@ -1,18 +1,28 @@
-function toggleFiltre(tableau, valeur) {
-    if (tableau.includes(valeur)) {
-        tableau.splice(tableau.indexOf(valeur), 1);
+var checkedCategories = []
+var checkedNotes = []
+var checkedTranches = []
+
+function toggleFiltre(tab, valeur) {
+    if (tab.includes(valeur)) {
+        tab.splice(tab.indexOf(valeur), 1);
     } else {
-        tableau.push(valeur);
+        tab.push(valeur);
     }
     first = 0;
     actualPage = 1;
-    afficherListe();
+    tab = filtre()
+    return tab
 }
 
 function filtre(){
+    
+    console.log(checkedCategories)
+
+    tab = JSON.parse(JSON.stringify(tabProd))
+    
     // FILTRE CATÉGORIES
     if (checkedCategories.length > 0) {
-        tableau = tableau.filter(prod => {
+        tab = tab.filter(prod => {
             if (checkedCategories.includes("alimentaire") && prod.id_categorie === 1) return true;
             if (checkedCategories.includes("vetement") && prod.id_categorie === 2) return true;
             if (checkedCategories.includes("artisanat") && prod.id_categorie === 3) return true;
@@ -24,7 +34,7 @@ function filtre(){
 
     // FILTRE NOTES
     if (checkedNotes.length > 0) {
-        tableau = tableau.filter(prod => {
+        tab = tab.filter(prod => {
             let note = prod.note_moyenne;
 
             if (note === null) return checkedNotes.includes("0");
@@ -43,7 +53,7 @@ function filtre(){
 
     // FILTRE TRANCHE DE PRIX
     if (checkedTranches.length > 0) {
-        tableau = tableau.filter(prod => {
+        tab = tab.filter(prod => {
             let prix = parseFloat(prod.prix_ttc);
 
             if (checkedTranches.includes("prix1") && prix >= "2.99" && prix <= "8.39") return true;
@@ -54,4 +64,7 @@ function filtre(){
             return false;
         });
     }
+
+    console.log(tab)
+    return tab
 }

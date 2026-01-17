@@ -1,18 +1,12 @@
-function afficherListe() {
-
-    // TOUJOURS repartir de tabprod
-    tableau = tabProd;
-
-    // FILTRAGE
-    filtre()
-    
-    // PAGINATION & AFFICHAGE
+function afficherListe(tab) {
+    //Remise à 0 de la page
     let parent = document.getElementById("prod");
     parent.innerHTML = "";
 
-    for (let i = first; i < first + numberOfItems && i < tableau.length; i++) {
-        afficherProduit(i);
+    // Affichage de la liste de produit
+    for (let i = first; i < first + numberOfItems && i < tab.length; i++) {
+        afficherProduit(tab,i);
     }
 
-    numPageInfo();
+    numPageInfo(tab);
 }

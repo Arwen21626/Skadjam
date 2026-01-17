@@ -28,6 +28,9 @@
     <link rel="stylesheet" type="text/css" href="../../css/output.css" >
     <title>Recherche</title>
     <?php include __DIR__ . "/../../php/structure/head_front.php"; ?>
+    <script>
+        const tabProd = <?php echo json_encode($tabProduit);?>;
+    </script>
     <script src="../../js/recherche.js"></script>
     <script src="../../js/affichageListeProduits.js"></script>
     <script src="../../js/fo/affichageProduit.js"></script>
@@ -38,9 +41,7 @@
 </head>
 
 <body>
-    <script>
-        const tabProd = <?php echo json_encode($tabProduit);?>;
-    </script>
+    
 
     <!--header-->
     <?php (include __DIR__ . "/../../php/structure/header_front.php"); ?>
@@ -54,7 +55,10 @@
             
             <!-- Filtres -->
             <section>
-                 <h3>Filtres</h3>
+                <div class="flex flex-row justify-between">
+                    <h3>Filtres</h3>
+                    <img id="fermerSidebar"src="../../images/logo/bootstrap_icon/x-large.svg" alt="Fermer" class="flex self-center w-8 md:hidden">
+                </div>
                 <!-- Categorie -->
                     <article>
                     <details open>
@@ -122,7 +126,7 @@
 
                         <!-- 4 étoiles -->
                         <div>
-                            <input type="checkbox" name="quatreE" id="quatreE" value="quatreE" class="triFiltre -5 w-5">
+                            <input type="checkbox" name="quatreE" id="quatreE" value="quatreE" class="triFiltre h-5 w-5">
                             <label for="quatreE" class="labelDetails">4</label>
                         </div>
 
@@ -222,7 +226,7 @@
             <article id="prod" class="flex flex-row flex-wrap justify-around w-auto">
                 <script>
                     document.addEventListener("DOMContentLoaded", () => {
-                        afficherListe()
+                        afficherListe(tabProd)
                     });
                 </script>
             </article>
