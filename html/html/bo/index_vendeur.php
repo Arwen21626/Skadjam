@@ -4,7 +4,7 @@
     include __DIR__ .'/../../01_premiere_connexion.php';
     require_once __DIR__ . "/../../php/fonctions.php";
     require_once __DIR__ . "/../../php/modification_variable.php";
-    const PAGE_SIZE = 15;
+    const PAGE_SIZE = 24;
     $idCompte = $_SESSION['idCompte'];
 ?>
 
@@ -13,13 +13,7 @@
 <?php include(__DIR__."/../../php/structure/head_back.php");?>
 <head> 
     <title>Accueil</title>
-    <script src="../../js/pagination.js"></script>
-    <script>
-        const tabProd = <?php echo json_encode($tabProduit);?>;
-        let copieProd = JSON.parse(JSON.stringify(tabProd));
-    </script>
 </head>
-
 
 
 <body>
@@ -60,7 +54,6 @@
             else{
                 $pageNumber = 1;
             }
-
             $tabProduit = [];
 
             try {                
@@ -164,9 +157,11 @@
                 die();
             }
         ?>
+        <!--fin du catalogue-->
         <div class="flex flex-row space-x-4 justify-center">
             <?php if ($pageNumber>1){?>
             <a class= "lienPage hover:text-rouge" href="<?php echo "./index_vendeur.php?page=".($pageNumber-1)."#vosProduits";?>">Page précédente</a>
+            
             <?php }?>
         
             <?php if ($pageNumber<$maxPage){?>
