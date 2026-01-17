@@ -19,8 +19,7 @@
                 p.prix_ttc, 
                 p.prix_remise,
                 c.montant_total_ttc,
-                d.sous_total,
-                f.montant_ht
+                d.sous_total
                 FROM sae3_skadjam._commande c
                 INNER JOIN sae3_skadjam._details d
                     ON d.id_commande = c.id_commande
