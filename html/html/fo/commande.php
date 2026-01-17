@@ -28,8 +28,6 @@
                     ON p.id_produit = d.id_produit
                 INNER JOIN sae3_skadjam._vendeur v
                     ON v.id_compte = p.id_vendeur
-                INNER JOIN sae3_skadjam._facture f
-                    ON f.numero_facture = c.id_facture
                 WHERE c.id_commande = :id_commande";
 
         $stmt = $dbh->prepare($sql);
