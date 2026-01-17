@@ -157,7 +157,7 @@
     <div id="popup-overlay">
         <div id="popup-modif" class="popup p-2 border-vertFonce shadow-xl">
             <p>Votre panier a bien été modifié !</p>
-            <button class="pl-2 pr-2 border-2 border-vertClair rounded-sm cursor-pointer" onclick="closePopup('popup-modif')">OK</button>
+            <button class="pl-2 pr-2 border-2 border-vertClair rounded-sm cursor-pointer">OK</button>
         </div>
     </div>
     
