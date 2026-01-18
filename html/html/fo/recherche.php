@@ -38,6 +38,7 @@
     <script src="../../js/tris.js"></script>
     <script src="../../js/filtres.js"></script>
     <script src="../../js/affichageNote.js"></script>
+    
 </head>
 
 <body>
@@ -246,6 +247,7 @@
             ajoutEventListener()
         </script>
     </main>
+    <script src="../../js/fo/animSidebar.js"></script>
 
     <!--footer-->
     <?php include (__DIR__ . "/../../php/structure/footer_front.php"); ?>

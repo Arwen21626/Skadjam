@@ -21,3 +21,12 @@ function triEtoileCroissant(tableau){
 function triEtoileDecroissant(tableau){
     return tableau.sort((a,b) => parseFloat(b['note_moyenne']) - parseFloat(a['note_moyenne']))
 }
+
+function triStockCroissant(tableau){
+    console.log(tableau)
+    return tableau.sort((a,b) => a['quantite_stock'] - b['quantite_stock'])
+}
+
+function triStockDecroissant(tableau){
+    return tableau.sort((a,b) => b['quantite_stock'] - a['quantite_stock'])
+}
