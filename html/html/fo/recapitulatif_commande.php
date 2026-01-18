@@ -100,9 +100,7 @@ if (isset($_POST['valider'])) {
 
     <main class="min-h-[600px]">
         <h2 class="mt-10">Récapitulatif de votre commande</h2>
-        <!--<h3>Numéro de la commande :</h3>
-        <p></p>-->
-        
+                
         <div class="flex items-center justify-between mt-10 px-5">
             <h3>Date : <?php echo date("d/m/Y"); ?></h3>
             <!-- bouton annuler (mobile) -->
@@ -156,7 +154,7 @@ if (isset($_POST['valider'])) {
                                         <td class="text-center py-3"><p><?php echo $ligne['pourcentage_remise']*100;?>%</p></td>
                                         <td class="text-center py-3"><p><?php echo $ligne['quantite_par_produit'];?></p></td>
                                         <?php if($ligne['prix_remise'] != $ligne['prix_ttc']){ 
-                                            $total_ligne = $ligne['remise'] * $ligne['quantite_par_produit'] ;    
+                                            $total_ligne = $ligne['prix_remise'] * $ligne['quantite_par_produit'] ;    
                                         } 
                                         else{
                                             $total_ligne = $ligne['prix_ttc'] * $ligne['quantite_par_produit'] ;

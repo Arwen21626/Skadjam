@@ -56,30 +56,27 @@
         if(isset($_POST['enregistrerAdr'])){
             // mettre dans habite
             if($_POST['enregistrerAdr'] == 'on' && ($erreurAdresse == false && $erreurVille == false && $erreurCodePostal == false)){
-                $nouvCarte = $dbh->prepare("INSERT INTO sae3_skadjam._adresse(
+                $nouvAdr = $dbh->prepare("WITH id_nouv_adr AS (INSERT INTO sae3_skadjam._adresse(
                                                 adresse_postale, complement_adresse, numero_rue, 
                                                 numero_bat, numero_appart, code_postal, ville
                                             ) 
-                                            VALUES(?, ?, ?, ?, ?, ?, ?)");
-                echo "salut 2 : $adresseExplode[2], $adresseExplode[1], $adresseExplode[0],
-                                    $numBat, $numAppart, $codePostal, $ville";
-                $nouvCarte->execute([$adresseExplode[2], $adresseExplode[1], $adresseExplode[0],
+                                            VALUES(?, ?, ?, ?, ?, ?, ?) RETURNING id_adresse)
+                                          INSERT INTO sae3_skadjam._habite(id_adresse, id_compte) SELECT id_adresse, $idClient FROM id_nouv_adr");
+                $nouvAdr->execute([$adresseExplode[2], $adresseExplode[1], $adresseExplode[0],
                                     $numBat, $numAppart, $codePostal, $ville]);
             }
         }
         // Si tout est bon alors redirection vers la page paiement
         if($erreurNom == false && $erreurPrenom == false && $erreurAdresse == false && $erreurVille == false && $erreurCodePostal == false){
-            $nouvCarte = $dbh->prepare("INSERT INTO sae3_skadjam._adresse_livraison(
+            $nouvAdrLivraison = $dbh->prepare("INSERT INTO sae3_skadjam._adresse_livraison(
                                                 adresse_postale, complement_adresse, numero_rue, 
                                                 numero_bat, numero_appart, code_postal, ville
                                             ) 
-                                            VALUES(?, ?, ?, ?, ?, ?, ?)");
-                echo "salut 0 : $adresseExplode[2], $numAdr,
-                                    $numBat, $numAppart, $codePostal, $ville";
-                $nouvCarte->execute([$adresseExplode[2], $adresseExplode[1], $adresseExplode[0],
+                                            VALUES(?, ?, ?, ?, ?, ?, ?) RETURNING id_adresse");
+                $nouvAdrLivraison->execute([$adresseExplode[2], $adresseExplode[1], $adresseExplode[0],
                                     $numBat, $numAppart, $codePostal, $ville]);
-
-            header('Location: /html/fo/paiement.php?idPanier=' . $idPanier);
+            $idAdresse = $nouvAdrLivraison->fetchColumn();;
+            header('Location: /html/fo/paiement.php?idPanier=' . $idPanier.'&idAdresse='.$idAdresse);
         }
 
     }
