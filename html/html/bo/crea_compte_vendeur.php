@@ -248,7 +248,7 @@ if (isset($_POST["nom"])){
                 <input type="checkbox" id="cgu" name="cgu" required class="ml-10 w-5 h-5 @max-[768px]:ml-2 mt-3">
             </div>
             <div class="flex flex-row justify-around mt-8 mb-8 @max-[768px]:flex-col @max-[768px]:items-center">
-                <input type="reset" value="Annuler" class="cursor-pointer w-64 border-4 border-solid rounded-2xl border-beige p-1 pl-3">
+                <button class="cursor-pointer w-64 border-4 border-solid rounded-2xl border-beige p-1 pl-3" type="button"><a href="/index.php">Annuler</a></button>
                 <input type="submit" value="Valider" class="cursor-pointer w-64 border-4 border-solid rounded-2xl border-beige p-1 pl-3 @max-[768px]:mt-2">
             </div>
         </form>

@@ -338,7 +338,7 @@ if (isset($_POST['categorie']) && isset($_POST['nom']) && isset($_POST['prix']) 
                     <!-- Remise -->
                     <div class="flex flex-col">
                         <label for="remise">Remise (%):</label>
-                        <input value="<?php echo $remise*100;?>" class="border-4 border-beige rounded-2xl w-40 m-2 placeholder-gray-500" type="number" name="remise" id="remise" min="0" max="100">
+                        <input value="<?php echo $remise*100;?>" placeholder="0" class="border-4 border-beige rounded-2xl w-40 m-2 placeholder-gray-500" type="number" name="remise" id="remise" min="0" max="100">
                     </div>
 
                     <!-- Quantite en stock -->
@@ -409,7 +409,7 @@ if (isset($_POST['categorie']) && isset($_POST['nom']) && isset($_POST['prix']) 
                     <div class="flex flex-row justify-around m-2 p-2">
                         <div class="flex flex-row mr-4 ml-4">
                             <label class="mr-4" for="labelPromo">Libellé de la promotion :</label>
-                            <input class="border-4 border-beige rounded-2xl w-45" type="text" name="labelPromo" id="labelPromo" value="<?php echo $labelPromo;?>">
+                            <input class="border-4 border-beige rounded-2xl w-45" maxlength="20" type="text" name="labelPromo" id="labelPromo" value="<?php echo $labelPromo;?>">
                         </div>
                     </div>
                 </div>
