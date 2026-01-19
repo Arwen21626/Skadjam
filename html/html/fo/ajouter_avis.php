@@ -89,7 +89,7 @@
             <!-- La note -->
             <label for="note">Note* :</label>
             <div class="flex flex-nowarp items-center justify-center">
-                <input class="border-4 border-beige rounded-2xl p-1 pl-3 w-16" name="note" id="note" type="number" min="0" max="5" value="<?php echo $note;?>" required>
+                <input class="border-4 border-beige rounded-2xl p-1 pl-3 w-16" name="note" id="note" type="number" min="0" max="5" value="<?php if(isset($note)){echo $note;}?>" required>
                 <img class=" w-7 ml-3" src="../../images/logo/bootstrap_icon/star-fill.svg">
             </div>
             
