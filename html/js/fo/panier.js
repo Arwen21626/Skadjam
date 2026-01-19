@@ -1,58 +1,127 @@
-/* Question prochain DM ou autre : est ce que le prix remise peut être tout le 
-    temps utilisé pour calc le prix tot ?
-*/
-
 import * as Popup from "../popup.js";
 
-const btnClosePopUp = document.getElementById("popup-modif-panier").querySelector("button");
+const conteneurProd = document.getElementById("conteneur-produit");
 
-btnClosePopUp.addEventListener("click", () => {
+if (conteneurProd) { //Chech si un élément de la page panier  est présent ou non pour éviter d'exécuter le script JS pour rien si la page est vide (cas panier vide)
 
-    Popup.closePopup("popup-modif-panier");
-});
-
-Popup.showPopUp("popup-modif-panier", 3000, "panierModif");
-
-// Gestion de la sauvegarde des modifications dans la BDD
-
-const formPanier = document.getElementsByClassName("valider-panier")[0];
-
-if (formPanier) { //Chech si le formulaire de validation du panier (un élément de la page panier quand il n'est pas vide) est présent ou non
     // Variable utilisé dans la fonction ci-dessous pour vérifier si le panier a déjà été modifié ou pas encore
     let hasChanged = false;
 
+    //Définitions des fonctions
     function UpdatePanier(idProd, newQuantity, price) {
 
-        if (!hasChanged) {
-            formPanier.querySelector('button').textContent = "Valider les modifications";
-            formPanier.action = "/php/modifier_panier.php";
-            formPanier.method = "post";
-            hasChanged = true;
+        const formPanier = document.getElementsByClassName("valider-panier")[0]; // Récupère directement le formulaire pour valider le panier
+        const divFormPanier = document.getElementsByClassName("valider-panier-div")[0]; // Récupère la div remplaçant le formulaire
+
+        if (formPanier) {
+
+            if (!hasChanged) {
+                formPanier.querySelector('button').textContent = "Valider les modifications";
+                formPanier.action = "/php/modifier_panier.php";
+                formPanier.method = "post";
+                hasChanged = true;
+            }
+
+            const inputName = 'produits[' + idProd + ']';
+
+            let input = formPanier.querySelector('input[name="' + inputName + '[quantite]"]');
+
+            if (!input) {
+
+                input = document.createElement('input');
+                input.type = 'hidden';
+                input.name = inputName + '[quantite]';
+
+                let inputPrix = document.createElement('input');
+                inputPrix.type = 'hidden';
+                inputPrix.name = inputName + '[prix]';
+                inputPrix.value = price;
+
+                formPanier.appendChild(input);
+                formPanier.appendChild(inputPrix);
+            }
+
+            input.value = newQuantity;
         }
+        else if (divFormPanier) {
 
-        const inputName = 'produits[' + idProd + ']';
 
-        let input = formPanier.querySelector('input[name="' + inputName + '[quantite]"]');
+            if (!hasChanged) {
+                let btnForm = divFormPanier.querySelector('button');
+                btnForm.textContent = "Valider les modifications";
+                btnForm.classList.remove("bg-rouge");
+                btnForm.classList.add("bg-beige");
 
-        if (!input) {
+                let formModifPanier = document.createElement('form');
+                formModifPanier.action = "/php/modifier_panier.php";
+                formModifPanier.method = "post";
 
-            input = document.createElement('input');
-            input.type = 'hidden';
-            input.name = inputName + '[quantite]';
+                divFormPanier.removeChild(btnForm);
+                formModifPanier.appendChild(btnForm);
+                divFormPanier.appendChild(formModifPanier);
 
-            let inputPrix = document.createElement('input');
-            inputPrix.type = 'hidden';
-            inputPrix.name = inputName + '[prix]';
-            inputPrix.value = price;
+                hasChanged = true;
+            }
 
-            formPanier.appendChild(input);
-            formPanier.appendChild(inputPrix);
+            let formModifPanier = divFormPanier.querySelector('form');
+
+            const inputName = 'produits[' + idProd + ']';
+
+            let input = formModifPanier.querySelector('input[name="' + inputName + '[quantite]"]');
+
+            if (!input) {
+
+                input = document.createElement('input');
+                input.type = 'hidden';
+                input.name = inputName + '[quantite]';
+
+                let inputPrix = document.createElement('input');
+                inputPrix.type = 'hidden';
+                inputPrix.name = inputName + '[prix]';
+                inputPrix.value = price;
+
+                formModifPanier.appendChild(input);
+                formModifPanier.appendChild(inputPrix);
+            }
+
+            input.value = newQuantity;
         }
-
-        input.value = newQuantity;
+        
         
     }
 
+    function showPopUpErreurPanier(idPopup, ms) {
+        Popup.showPopUp(idPopup, ms);
+    }
+
+    /* Gestion de l'affichage des popups */
+
+    // Affichage de la popup d'erreur de validation du panier
+    const btnValiderPanier = document.getElementById("btnValiderPanier");
+
+    if (btnValiderPanier) {
+        
+        btnValiderPanier.addEventListener("click", () => {
+            showPopUpErreurPanier("popup-erreur-valider-panier", 5000);
+        });
+    }
+    
+
+    // Ajout des fonctions sur les boutons pour fermer les popups
+    const btnClosePopUpInfo = document.getElementById("popup-modif-panier").querySelector("button");
+    const btnClosePopUpErr = document.getElementById("popup-erreur-valider-panier").querySelector("button");
+
+    btnClosePopUpInfo.addEventListener("click", () => {
+
+        Popup.closePopup("popup-modif-panier");
+    });
+
+    btnClosePopUpErr.addEventListener("click", () => {
+        Popup.closePopup("popup-erreur-valider-panier");
+    })
+
+    // Affiche la popup
+    Popup.showPopUp("popup-modif-panier", 3000, "panierModif");
 
     // Sous total du panier
     let sousTotal = document.getElementById('conteneur-info_panier').querySelector('.sous-total').getElementsByTagName('p')[1];
