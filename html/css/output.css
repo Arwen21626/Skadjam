@@ -804,6 +804,9 @@ input.quantite-prod-input {
   .w-150 {
     width: calc(var(--spacing, 0.25rem) * 150);
   }
+  .w-155 {
+    width: calc(var(--spacing, 0.25rem) * 155);
+  }
   .w-175 {
     width: calc(var(--spacing, 0.25rem) * 175);
   }
