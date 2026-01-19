@@ -75,6 +75,9 @@ input.quantite-prod-input {
 #popup-overlay.active {
   display: flex;
 }
+#popup-overlay.desactive {
+  display: none;
+}
 .popup.desactive {
   animation: popupOut 1s forwards;
 }
@@ -1525,6 +1528,11 @@ input.quantite-prod-input {
   .md\:mb-7 {
     @media (width >= 48rem) {
       margin-bottom: calc(var(--spacing, 0.25rem) * 7);
+    }
+  }
+  .md\:mb-15 {
+    @media (width >= 48rem) {
+      margin-bottom: calc(var(--spacing, 0.25rem) * 15);
     }
   }
   .md\:ml-0 {

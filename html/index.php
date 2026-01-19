@@ -94,7 +94,7 @@
                         $estPromu = ($stmt->fetch() !== false); ?>
                         <section class="bg-bleu flex flex-col w-40 h-auto p-2 m-2 md:w-80 md:p-3">
                             <!--affichage de la photo-->
-                            <a href= "<?php echo "html/fo/details_produit.php?idProduit=".$idProduit;?>" class="col-span-2 justify-self-center mb-3">
+                            <a href= "<?php echo "html/fo/details_produit.php?idProduit=".$idProduit;?>" class="justify-self-center mb-3">
                                 <img src="<?php echo $valeurs['url_photo'];?>" 
                                         alt="<?php echo $valeurs['alt'];?>"
                                         title="<?php echo $valeurs['titre'];?>"
@@ -131,7 +131,7 @@
                                     $labelPromo = $promotion['label'];
                                     if($debutPromo <= date('Y-m-d') && ($finPromo == null || $finPromo >= date('Y-m-d')) && !empty($labelPromo)){
                                 ?>
-                                <div class="bg-rouge absolute col-span-2 w-36 md:w-74 underline text-beige pt-2 pb-1.5">
+                                <div class="bg-rouge absolute w-36 md:w-74 underline text-beige pt-2 pb-1.5">
                                     <h4 class="text-center text-beige overline m-0"><strong><?php echo htmlspecialchars($labelPromo); ?></strong></h4>
                                 </div>
                                 <?php }} ?>
