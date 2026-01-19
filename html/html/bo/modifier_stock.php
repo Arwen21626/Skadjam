@@ -43,7 +43,6 @@
                 $updateStock->execute();
             }
         }
-        echo "Tous les stocks ont été mis à jour";
         header("Location: ./stock.php?idCompte=$idCompte");
     } 
 ?>
