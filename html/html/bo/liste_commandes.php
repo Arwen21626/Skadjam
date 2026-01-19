@@ -13,7 +13,7 @@
                                 c.date_commande,
                                 c.etat,
                                 p.id_vendeur,
-                                SUM(d.quantite * p.prix_ttc) AS total_commande_vendeur_ttc
+                                SUM(d.quantite * p.prix_remise) AS total_commande_vendeur
                             FROM sae3_skadjam._commande c
                             INNER JOIN sae3_skadjam._details d
                                 ON d.id_commande = c.id_commande
@@ -53,16 +53,19 @@
     <main class="min-h-[600px]">
         <h2 class = "pt-15">Liste de mes commandes</h2>
 
+        <!---affichage si aucune commande de passée--->
         <?php if($tabInfoCommandes == null){ ?>
             <p class="pt-15 text-center">Personne n'a encore effectué de commande chez vous.</p>
+            <a href="index_vendeur.php" class="flex justify-center md:mt-15 md:mb-15 mt-5 mb-5"><button class="border-vertFonce border-2 rounded-lg md:rounded-2xl w-35 h-10 md:w-50 md:h-14 px-7 cursor-pointer">Retour</button></a>
         <?php }
 
         else{?>
             <div class="flex justify-center mt-15">
-                <?php //tableau des commandes ?>
+                <!---tableau liste des commandes--->
                 <table class="table-auto w-250">
                     <thead>
                         <tr>
+                            <!---noms des colonnes--->
                             <th scope="col" class="w-80 pl-3"><h3>N° de commande</h3></th>
                             <th scope="col"><h3>Date</h3></th>
                             <th scope="col"><h3>Etat</h3></th>
@@ -71,23 +74,15 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <?php 
-                            //pour changer la classe de css une ligne sur 2
-                            $impair = 0;
+                        <?php $ligneIndex = 1;
                             foreach($tabInfoCommandes as $id => $commande){
-                                $idCommande = $commande['id_commande']; 
-                                $impair ++;
-                                if(fmod($impair, 2) == 0){
-                                    $classe = "py-4";
-                                }
-                                else{
-                                    $classe = "py-4 bg-bleu";
-                                }?>
-                                <tr class="<?php echo $classe; ?>">
+                                $idCommande = $commande['id_commande']; ?>
+                                <tr class="py-4 <?= ligneCouleur($ligneIndex)?>">
+                                    <!---informtaions de chacune des commandes--->
                                     <th scope="row" class="text-center py-3 pl-3" ><p><?php echo $idCommande; ?></p></th>
                                     <td class="text-center py-3"><p><?php echo htmlentities($commande['date_commande']);?></p></td>
                                     <td class="text-center py-3"><p><?php echo htmlentities($commande['etat']);?></p></td>
-                                    <td class="text-center py-3"><p><?php echo htmlentities($commande['total_commande_vendeur_ttc']); ?></p></td>
+                                    <td class="text-center py-3"><p><?php echo htmlentities($commande['total_commande_vendeur']); ?></p></td>
                                     <td><a href="<?php echo htmlentities("commande.php?idCommande=".$idCommande);?>">
                                         <img src="../../images/logo/bootstrap_icon/plus-square.svg" alt="voir plus d'informations" class="w-10 h-auto">
                                     </a></td>
@@ -96,6 +91,7 @@
                     </tbody>
                 </table>
             </div>
+            <!---bouton retour--->
             <a href="index_vendeur.php" class="flex justify-center mt-15 mb-15"><button class="border-vertFonce border-2 rounded-sm md:rounded-2xl w-35 h-10 md:w-50 md:h-14 px-7 cursor-pointer">Retour</button></a>
         <?php } ?>
     </main>

@@ -105,7 +105,7 @@
                                         title="<?php echo $valeurs['titre'];?>">
                                         
                                 <!--affichage du nom du produit-->
-                                <p><?php echo $valeurs['libelle_produit'];?></p> 
+                                <p class=" max-w-36"><?php echo $valeurs['libelle_produit'];?></p> 
 
                                 <!--affichage du prix du produit-->   
                                 <div class="flex flex-row justify-between items-center">
