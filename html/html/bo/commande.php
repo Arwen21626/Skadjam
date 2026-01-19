@@ -143,12 +143,14 @@
                 </tfoot>
             </table>
         </div>
+        <!---bouton retour--->
         <a href="liste_commandes.php" class="flex justify-center mt-15 mb-15"><button class="border-vertFonce border-2 rounded-sm md:rounded-2xl w-35 h-10 md:w-50 md:h-14 px-7 cursor-pointer">Retour</button></a>
     </main>
     
-
     <!--footer-->
     <?php include (__DIR__ . "/../../php/structure/footer_back.php"); ?>
+
+    <!---script pour l'impression d'une facture--->
     <script>
         let btnImprimmer = document.getElementById("imprimer");
         let numeroCommande = document.getElementById("numeroCommande");
