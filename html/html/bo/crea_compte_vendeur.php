@@ -243,10 +243,11 @@ if (isset($_POST["nom"])){
                 </div>
             </div>
 
-            <div class="flex flex-row flex-wrap items-center mt-2 mb-2">
-                <label for="cgu" class="underline! cursor-pointer hover:text-rouge">J'ai lu et j'acccepte les conditions générales d'utilisation :</label>
-                <input type="checkbox" id="cgu" name="cgu" required class="cursor-pointer ml-10 w-5 h-5 @max-[768px]:ml-2">
+            <div class="flex flex-row flex-wrap justify-center mt-2 mb-2">
+                <label for="cgu" class="underline! cursor-pointer hover:text-rouge">J'ai lu et j'acccepte les conditions générales d'utilisation</label>
+                <input type="checkbox" id="cgu" name="cgu" required class="cursor-pointer ml-5 w-5 h-5">
             </div>
+
             <div class="flex flex-row justify-around mt-8 mb-8 @max-[768px]:flex-col @max-[768px]:items-center">
                 <button class="cursor-pointer w-64 border-4 border-solid rounded-2xl border-beige p-1 pl-3" type="button"><a href="/index.php">Annuler</a></button>
                 <input type="submit" value="Valider" class="cursor-pointer w-64 border-4 border-solid rounded-2xl border-beige p-1 pl-3 @max-[768px]:mt-2">

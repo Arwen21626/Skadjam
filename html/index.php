@@ -44,7 +44,6 @@
             </a>        
         </div>
 
-
         <!--Début du catalogue-->
         <h2 id="nosProduits">Nos produits</h2>
 
@@ -52,8 +51,7 @@
             //initialisation du numéro de page
             if(isset($_GET['page'])&& $_GET['page']!==""){
                 $pageNumber = $_GET['page'];
-            }
-            else{
+            }else{
                 $pageNumber = 1;
             }
 
@@ -94,7 +92,7 @@
                         $estPromu = ($stmt->fetch() !== false); ?>
                         <section class="bg-bleu flex flex-col w-40 h-auto p-2 m-2 md:w-80 md:p-3">
                             <!--affichage de la photo-->
-                            <a href= "<?php echo "html/fo/details_produit.php?idProduit=".$idProduit;?>" class="col-span-2 justify-self-center mb-3">
+                            <a href= "<?php echo "html/fo/details_produit.php?idProduit=".$idProduit;?>" class="mb-3">
                                 <img src="<?php echo $valeurs['url_photo'];?>" 
                                         alt="<?php echo $valeurs['alt'];?>"
                                         title="<?php echo $valeurs['titre'];?>"
@@ -131,7 +129,7 @@
                                     $labelPromo = $promotion['label'];
                                     if($debutPromo <= date('Y-m-d') && ($finPromo == null || $finPromo >= date('Y-m-d')) && !empty($labelPromo)){
                                 ?>
-                                <div class="bg-rouge absolute col-span-2 w-36 md:w-74 underline text-beige pt-2 pb-1.5">
+                                <div class="bg-rouge absolute w-36 md:w-74 underline text-beige pt-2 pb-1.5">
                                     <h4 class="text-center text-beige overline m-0"><strong><?php echo htmlspecialchars($labelPromo); ?></strong></h4>
                                 </div>
                                 <?php }} ?>
@@ -146,12 +144,12 @@
         ?>
         <!--fin du catalogue-->
         <div class="flex flex-row space-x-4 justify-center">
-            <?php if ($pageNumber>1){?>
-            <a class= "lienPage hover:text-rouge" href="<?php echo "./index.php?page=".($pageNumber-1)."#nosProduits";?>">Page précédente</a>
+            <?php if($pageNumber>1){?>
+            <a class= "lienPage hover:text-rouge" href="<?php echo "./index.php?page=". $pageNumber-1 ."#nosProduits";?>">Page précédente</a>
             <?php }?>
         
-            <?php if ($pageNumber<$maxPage){?>
-            <a class= "lienPage hover:text-rouge" href="<?php echo "./index.php?page=".($pageNumber+1)."#nosProduits";?>">Page suivante</a>
+            <?php if($pageNumber<$maxPage){?>
+            <a class= "lienPage hover:text-rouge" href="<?php echo "./index.php?page=". $pageNumber+1 ."#nosProduits";?>">Page suivante</a>
             <?php }?>
         </div>
     </main>

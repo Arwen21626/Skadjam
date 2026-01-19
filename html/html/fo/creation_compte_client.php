@@ -91,8 +91,8 @@ if ($_SESSION['role'] !== 'visiteur'){
 
             <!-- Acceptation des CGU -->
             <div class="flex flex-row flex-wrap items-center mt-2 mb-2">
-                <label for="cgu" class="underline! cursor-pointer hover:text-rouge">J'ai lu et j'acccepte les conditions générales d'utilisation :</label>
-                <input type="checkbox" id="cgu" name="cgu" required class="cursor-pointer ml-10 w-5 h-5 @max-[768px]:ml-2">
+                <label for="cgu" class="underline! cursor-pointer hover:text-rouge">J'ai lu et j'acccepte les conditions générales d'utilisation</label>
+                <input type="checkbox" id="cgu" name="cgu" required class="cursor-pointer ml-5 w-5 h-5">
             </div>
 
             <!-- Validation ou pas du formulaire -->
@@ -103,15 +103,15 @@ if ($_SESSION['role'] !== 'visiteur'){
         </form>
         <div class="flex flex-row flex-wrap justify-center">
             <!-- Lien vers la page de connexion -->
-            <div class="flex flex-row flex-wrap justify-center ml-10 mr-10 mb-10">
-                <p>Vous avez déjà un compte ? </p>
-                <a class="hover:text-rouge" style="text-decoration-line: underline" href="connexion.php">Connectez vous</a> 
+            <div class="hover:text-rouge flex flex-row flex-wrap justify-center ml-10 mr-10 mb-10">
+                <a href="connexion.php">Vous avez déjà un compte ? </a>
+                <a style="text-decoration-line: underline" href="connexion.php">Connectez vous</a> 
             </div>
 
             <!-- Lien vers la création d'un compte vendeur -->
-            <div class="flex flex-row flex-wrap justify-center ml-10 mr-10 mb-10">
-                <p>Vous êtes un vendeur ? </p>
-                <a class="hover:text-rouge" style="text-decoration-line: underline" href="../bo/crea_compte_vendeur.php">Créer un compte vendeur</a> 
+            <div class="hover:text-rouge flex flex-row flex-wrap justify-center ml-10 mr-10 mb-10">
+                <a href="../bo/crea_compte_vendeur.php">Vous êtes un vendeur ? </a>
+                <a style="text-decoration-line: underline" href="../bo/crea_compte_vendeur.php">Créer un compte vendeur</a> 
             </div>
         </div>
     </main>
