@@ -50,6 +50,7 @@
         $v_total_ht = 0;
         $v_total_ttc = 0;
         $total_ligne = 0;
+        $v_total_final = 0;
     }
 
     catch (PDOException $e) {
@@ -84,12 +85,12 @@
             <!---date--->
             <h3 class="ml-5 mr-3">Date : <?php echo $date;?></h3>
             <!---bouton imprimer--->
-            <button id="imprimer" class="border-vertFonce border-4 rounded-lg md:rounded-2xl w-35 h-10 md:w-50 md:h-14 px-7 mr-5 cursor-pointer hidden md:block">Imprimer</button>
+            <button id="imprimer" class="border-vertFonce border-2 rounded-2xl w-50 h-14 px-7 mr-5 cursor-pointer">Imprimer</button>
         </div>
 
         <div class="flex justify-center mt-10">
             <?php //tableau de la commande ?>
-            <table class="table-auto w-280">
+            <table class="table-auto w-290">
                 <thead>
                     <tr>
                         <!---noms des colonnes--->
@@ -102,7 +103,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <?php $ligneIndex = 0;
+                    <?php $ligneIndex = 1;
                         foreach($tabInfosCommande as $ligne){ ?>
                             <tr class="py-4 <?= ligneCouleur($ligneIndex)?>">
                                 <!---affichage des informations de chaque produit de la commande--->
@@ -130,22 +131,26 @@
                         <?php } ?>
                 </tbody>
                 <tfoot>
+                    <!---affichage des totaux de la commande--->
                     <tr class="py-4 <?= ligneCouleur($ligneIndex)?>">
-                        <th colspan="2" class="text-left w-110 pl-3"><h4>Total :</h4></th>
-                        <th class="text-center py-3"><h4><?php echo $v_quantite_totale;?></h4></th>
+                        <th class="text-left w-90 pl-3"><h4>Total :</h4></th>
                         <th class="text-center py-3"><h4><?php echo $v_total_ht;?></h4></th>
                         <th class="text-center py-3"><h4><?php echo $v_total_ttc;?></h4></th>
-                        <th class="text-center py-3"><h4><?php echo $v_total_remise;?></h4></th>
+                        <th></th>
+                        <th class="text-center py-3"><h4><?php echo $v_quantite_totale;?></h4></th>
+                        <th class="text-center py-3"><h4><?php echo $v_total_final;?></h4></th>
                     </tr>
                 </tfoot>
             </table>
         </div>
+        <!---bouton retour--->
         <a href="liste_commandes.php" class="flex justify-center mt-15 mb-15"><button class="border-vertFonce border-2 rounded-sm md:rounded-2xl w-35 h-10 md:w-50 md:h-14 px-7 cursor-pointer">Retour</button></a>
     </main>
     
-
     <!--footer-->
     <?php include (__DIR__ . "/../../php/structure/footer_back.php"); ?>
+
+    <!---script pour l'impression d'une facture--->
     <script>
         let btnImprimmer = document.getElementById("imprimer");
         let numeroCommande = document.getElementById("numeroCommande");

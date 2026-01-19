@@ -3,7 +3,7 @@
     require_once __DIR__ . "/../../../connections_params.php";
     require_once __DIR__ . "/../../php/fonctions.php";
     require_once __DIR__ . "/../../php/modification_variable.php";
-    const PAGE_SIZE = 15;
+    const PAGE_SIZE = 24;
     session_start();
 
     if (!isset($_SESSION['role'])) {
@@ -87,7 +87,7 @@
                 $lignes = array_slice($tabProduit, $pageNumber*PAGE_SIZE-PAGE_SIZE, PAGE_SIZE);
                 
                 //affiche la photo du produit, son nom, son prix et sa note, son stock ?>
-                <div class="grid grid-cols-3">
+                <div class="flex flex-row flex-wrap justify-around">
                     <?php foreach($tabProduit as $id => $valeurs){
                         $idProduit = $valeurs['id_produit'];
                         // Le produit est-il en promotion ?

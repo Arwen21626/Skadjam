@@ -56,7 +56,7 @@ foreach($dbh->query("SELECT v.raison_sociale, cvend.adresse_mail as mail_vendeur
                 'sousTotal' => $row['sous_total']
             ];
             
-        if ($info[$row['numero_facture']]['montantFacture'] !== null){
+        if (isset($info[$row['numero_facture']]['montantFacture'])){
             $info[$row['numero_facture']]['montantFacture'] = $info[$row['numero_facture']]['montantFacture']+$row['sous_total'];
         }
         else{
