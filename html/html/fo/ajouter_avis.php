@@ -43,7 +43,6 @@
             }
         } catch (PDOException $e) {
             print "Erreur lors de l'envoie des données vers la base de données";
-            echo $e;
             die();
         }
     }
@@ -53,6 +52,7 @@
         $suprAvis = $dbh->prepare("DELETE FROM sae3_skadjam._avis WHERE id_produit = ? AND id_compte = ?");
         $suprAsignaler->execute([$idAvis]);
         $suprAvis->execute([$idProd, $idCompte]);
+        
         header("location: details_produit.php?idProduit=$idProd");
     }
     else{
