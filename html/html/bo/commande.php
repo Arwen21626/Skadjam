@@ -18,8 +18,7 @@
                 p.prix_ttc, 
                 p.prix_remise,
                 c.montant_total_ttc,
-                d.sous_total,
-                f.montant_ht
+                d.sous_total
                 FROM sae3_skadjam._commande c
                 INNER JOIN sae3_skadjam._details d
                     ON d.id_commande = c.id_commande
@@ -27,8 +26,6 @@
                     ON p.id_produit = d.id_produit
                 INNER JOIN sae3_skadjam._vendeur v
                     ON v.id_compte = p.id_vendeur
-                INNER JOIN sae3_skadjam._facture f
-                    ON f.numero_facture = c.id_facture
                 WHERE c.id_commande = :id_commande AND p.id_vendeur = :id_vendeur";
 
         $stmt = $dbh->prepare($sql);
@@ -74,9 +71,11 @@
     <main class="min-h-[600px]">
         <h2 class="mt-10">Récapitulatif de la commande</h2>
 
+        <button class ="ml-5" id="imprimer">Imprimer</button>
+
         <div class="ml-5 flex flex-row items-end mt-10">
             <h3 class="mr-3">Numéro de la commande : </h3> 
-            <p><?php echo $idCommande;?></p>
+            <p id="numeroCommande"><?php echo $idCommande;?></p>
         </div>
 
         <div class="ml-5 flex flex-row items-end">
@@ -148,9 +147,34 @@
         </div>
         <a href="liste_commandes.php" class="flex justify-center mt-15 mb-15"><button class="border-vertFonce border-2 rounded-sm md:rounded-2xl w-35 h-10 md:w-50 md:h-14 px-7 cursor-pointer">Retour</button></a>
     </main>
+    
 
     <!--footer-->
     <?php include (__DIR__ . "/../../php/structure/footer_back.php"); ?>
+    <script>
+        let btnImprimmer = document.getElementById("imprimer");
+        let numeroCommande = document.getElementById("numeroCommande");
 
+        function fermerPageImpression() {
+            // fermer la page d'impression
+            document.body.removeChild(this); 
+        }
+
+        function gestionPageImpression() {
+            // définie quand est ce qu'on peut fermer la page d'impression
+            // et définie un iframe de type impression
+            this.contentWindow.onbeforeunload = fermerPageImpression;
+            this.contentWindow.onafterprint = fermerPageImpression;
+            this.contentWindow.print(); // indique que c'est une page qui permet d'imprimmer
+        }
+        function affichagePageImpression(){
+            const hideFrame = document.createElement("iframe"); // création d'un iframe
+            hideFrame.onload = gestionPageImpression;
+            hideFrame.src = "../facture.php?idCommande="+numeroCommande.innerText;
+            document.body.appendChild(hideFrame); // ajoute dans le body le iframe pour l'impression
+        }
+
+        btnImprimmer.addEventListener("click", () => {affichagePageImpression()});
+    </script>
 </body>
 </html>
