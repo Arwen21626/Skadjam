@@ -78,22 +78,26 @@ input.quantite-prod-input {
 #popup-overlay.desactive {
   display: none;
 }
+.popup.active {
+  display: block;
+  animation: popupIn 1s forwards;
+}
 .popup.desactive {
   animation: popupOut 1s forwards;
 }
 .popup {
+  display: none;
   background-color: white;
   padding: 20px, 30px;
   border-radius: 12px;
   width: 320px;
   border-width: 3px;
   text-align: center;
-  animation: popupIn 1s forwards;
 }
-.popup > div > button, .a-button {
+.popup div > button, .popup > button, .a-button {
   box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px;
 }
-.popup > div > button:hover, .a-button:hover {
+.popup div > button:hover, .popup > button:hover, .a-button:hover {
   box-shadow: none;
 }
 @keyframes popupOut {
@@ -1531,6 +1535,11 @@ input.quantite-prod-input {
   .md\:mb-7 {
     @media (width >= 48rem) {
       margin-bottom: calc(var(--spacing, 0.25rem) * 7);
+    }
+  }
+  .md\:mb-15 {
+    @media (width >= 48rem) {
+      margin-bottom: calc(var(--spacing, 0.25rem) * 15);
     }
   }
   .md\:ml-0 {

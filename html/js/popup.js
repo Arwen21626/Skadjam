@@ -28,6 +28,7 @@ export async function openPopUp(idPopup, ms){
     // puis appel la fonction pour lancer l'animation pour "fermer" la popup
 
     document.getElementById("popup-overlay").classList.add("active");
+    document.getElementById(idPopup).classList.add("active");
     await sleep(ms);
     closePopup(idPopup);
 }
