@@ -909,9 +909,6 @@ input.quantite-prod-input::-webkit-inner-spin-button, input.quantite-prod-input:
   .items-center {
     align-items: center;
   }
-  .items-end {
-    align-items: flex-end;
-  }
   .items-start {
     align-items: flex-start;
   }
@@ -976,9 +973,6 @@ input.quantite-prod-input::-webkit-inner-spin-button, input.quantite-prod-input:
   }
   .overflow-auto {
     overflow: auto;
-  }
-  .overflow-hidden {
-    overflow: hidden;
   }
   .rounded-2xl {
     border-radius: var(--radius-2xl, 1rem);
@@ -1353,11 +1347,6 @@ input.quantite-prod-input::-webkit-inner-spin-button, input.quantite-prod-input:
   .checked\:bg-beige {
     &:checked {
       background-color: var(--color-beige);
-    }
-  }
-  .checked\:bg-vertClair {
-    &:checked {
-      background-color: var(--color-vertClair);
     }
   }
   .hover\:bg-\[url\(\/images\/logo\/bootstrap_icon\/cart-fill\.svg\)\] {
@@ -1869,11 +1858,6 @@ input.quantite-prod-input::-webkit-inner-spin-button, input.quantite-prod-input:
   .md\:rounded-2xl {
     @media (width >= 48rem) {
       border-radius: var(--radius-2xl, 1rem);
-    }
-  }
-  .md\:rounded-md {
-    @media (width >= 48rem) {
-      border-radius: var(--radius-md, 0.375rem);
     }
   }
   .md\:border-none {
