@@ -56,12 +56,12 @@
         <!---affichage si aucune commande de passée--->
         <?php if($tabInfoCommandes == null){ ?>
             <p class="pt-15 text-center">Personne n'a encore effectué de commande chez vous.</p>
-            <a href="../../index.php" class="flex justify-center md:mt-15 md:mb-15 mt-5 mb-5"><button class="border-vertFonce border-2 rounded-lg md:rounded-2xl w-35 h-10 md:w-50 md:h-14 px-7 cursor-pointer">Retour</button></a>
+            <a href="index_vendeur.php" class="flex justify-center md:mt-15 md:mb-15 mt-5 mb-5"><button class="border-vertFonce border-2 rounded-lg md:rounded-2xl w-35 h-10 md:w-50 md:h-14 px-7 cursor-pointer">Retour</button></a>
         <?php }
 
         else{?>
             <div class="flex justify-center mt-15">
-                <?php //tableau liste des commandes ?>
+                <!---tableau liste des commandes--->
                 <table class="table-auto w-250">
                     <thead>
                         <tr>
