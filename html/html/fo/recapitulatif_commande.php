@@ -192,7 +192,7 @@ if (isset($_POST['valider'])) {
                             else{
                                 $classe = "py-4 bg-bleu";
                             };?>
-                        <tr class="<?php echo $classe; ?>">
+                        <tr class="<?php echo $classe; ?> border-t-2 border-solid border-black">
                             <th class="text-left w-90 pl-3"><h4>Total :</h4></th>
                             <th class="text-center py-3"><h4><?php echo $total_ht;?></h4></th>
                             <th class="text-center py-3"><h4><?php echo $total_ttc;?></h4></th>
@@ -252,8 +252,8 @@ if (isset($_POST['valider'])) {
    
                                     <?php 
                                         //calcul du total de la commande
-                                        $total_ht = $total_ht + $ligne['sous_total_ht'];
-                                        $sous_total_final += $total_ligne;          
+                                        //$total_ht = $total_ht + $ligne['sous_total_ht'];
+                                        $sous_total_final += $total_ligne;        
                                 } 
                             } ?>
                             <tr class="py-4 <?= ligneCouleur($ligneIndex) ?>">
@@ -261,7 +261,7 @@ if (isset($_POST['valider'])) {
                                 <th class="text-left"><p><?php echo $sous_total_final;?></p></th>
                             </tr>
                             <?php
-                                $total_final += $sous_total_final;
+                                //$total_final += $sous_total_final;
                                 $sous_total_final = 0;
                         } ?>
                     </tbody>
@@ -289,7 +289,7 @@ if (isset($_POST['valider'])) {
 
             <div class="flex items-center mt-10">
                 <input type="checkbox" id="case" name="case" class="cursor-pointer appearance-none w-10 h-10 border-4 border-vertClair rounded-sm md:rounded-md checked:bg-vertClair ml-3">
-                <a href="cgv_fo.php" class="ml-5">
+                <a href="cgv_fo.php" class="ml-5 underline">
                     J’ai lu et j’accepte les conditions générales <br class="md:hidden"> de vente
                 </a> 
                 <span id="error-cgv" class="ml-2 text-rouge hidden">Vous devez accepter les CGV.</span>    
