@@ -90,7 +90,6 @@ input.quantite-prod-input {
     display: none;
     position: fixed;
     bottom: 0;
-    right: 10rem;
     align-items: center;
     justify-content: center;
     z-index: 9999;
@@ -101,6 +100,10 @@ input.quantite-prod-input {
 #popup-overlay.active {
     display: flex;
     
+}
+
+#popup-overlay.desactive {
+    display: none;
 }
 
 .popup.desactive {
@@ -117,12 +120,12 @@ input.quantite-prod-input {
     animation: popupIn 1s forwards;
 }
 
-.popup > button{
+.popup > div > button, .a-button {
 
     box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px;
 }
 
-.popup > button:hover {
+.popup > div > button:hover, .a-button:hover {
     box-shadow: none;
 }
 

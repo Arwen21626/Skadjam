@@ -74,13 +74,8 @@ if ($_SESSION['role'] === 'client')
 
         if ($_POST["pageDeRetour"] === "details") 
         {
-            header("location:/html/fo/details_produit.php?idProduit=" . $idProd);
+            header("location:/html/fo/details_produit.php?idProduit=" . $idProd . "&panierAjouter=1");
         }
-        else if ($_POST["pageDeRetour"] === "panier")
-        {
-            header("location:/html/fo/panier.php#" . $idProd);
-        }
-        
     }
 }
 else if ($_SESSION['role'] === 'visiteur')
@@ -120,12 +115,9 @@ else if ($_SESSION['role'] === 'visiteur')
 
         if ($_POST["pageDeRetour"] === "details") 
         {
-            header("location:/html/fo/details_produit.php?idProduit=" . $idProd);
+            header("location:/html/fo/details_produit.php?idProduit=" . $idProd . "&panierAjouter=1");
         }
-        else if ($_POST["pageDeRetour"] === "panier")
-        {
-            header("location:/html/fo/panier.php#" . $idProd);
-        }
+        
     }
 }
 

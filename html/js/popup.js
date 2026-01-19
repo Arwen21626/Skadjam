@@ -14,12 +14,14 @@ export function sleep(ms){
     return new Promise(resolve => setTimeout(resolve, ms));
 }
 
-export function closePopup(idPopup) {
+export async function closePopup(idPopup) {
     // Ajoute la class à la popup qui lancera l'animation pour "fermer" la popup
     document.getElementById(idPopup).classList.add("desactive");
+    //await sleep(1000);
+    document.getElementById("popup-overlay").classList.add("desactive");
 }
 
-export async function openPopUp(ms){
+export async function openPopUp(idPopup, ms){
     
     // Fonction asynchrone qui affiche la popup en "activant" l'overlay de la popup
     // Met une pause de millisecondes indiqué par ms
@@ -27,10 +29,10 @@ export async function openPopUp(ms){
 
     document.getElementById("popup-overlay").classList.add("active");
     await sleep(ms);
-    closePopup("popup-modif")
+    closePopup(idPopup);
 }
 
-export function showPopUp(ms, getAttribute = null) {
+export function showPopUp(idPopup, ms, getAttribute = null) {
 
     /*  Si l'affichage de votre popup nécessite un attribut get 
         Par exemple vous faites un traitement qui redirige vers votre page, au moment de la redirection
@@ -44,7 +46,7 @@ export function showPopUp(ms, getAttribute = null) {
         const urlParams = new URLSearchParams(window.location.search);
 
         if (urlParams.has(getAttribute)){
-            openPopUp(ms);
+            openPopUp(idPopup, ms);
         } 
 
         //Permet de retirer l'attribut Get de l'URL pour empêcher de réafficher la popup 
