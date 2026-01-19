@@ -4,9 +4,11 @@
     require_once __DIR__ . "/../../php/fonctions.php";
     require(__DIR__ . '/../../01_premiere_connexion.php');
     include __DIR__ . '/../../connexion_recupraptor.php';
-    $idCompte = $_SESSION['idCompte'];
+    
 
-    if(isset($idCompte)){
+    if(isset($_SESSION['idCompte'])){
+        $idCompte = $_SESSION['idCompte'];
+    }else{
         header('Location: ./connexion.php');
     }
 
