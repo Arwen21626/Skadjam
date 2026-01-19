@@ -11,17 +11,32 @@
 
     try {     
 
-        $tabInfoCommandes = null;           
+        $tabInfoCommandes = null; 
+        $etat;          
         //récupère toutes les infos de la table commande
-        foreach($dbh->query("SELECT c.id_commande, c.date_commande, c.etat, c.montant_total_ttc
+        foreach($dbh->query("SELECT c.id_suivi, c.id_commande, c.date_commande, c.etat, c.montant_total_ttc
                             FROM sae3_skadjam._commande c
                             WHERE c.id_client = $idCompte
                             ORDER BY c.date_commande DESC, c.id_commande DESC;"
                             , PDO::FETCH_ASSOC) as $row){
-
+            $idSuivi = $row['id_suivi'];
+            $id_commande = $row['id_commande'];
+            try{
+                $etat[$id_commande] = $rpr->get_etat($idSuivi);
+                $query = "UPDATE sae3_skadjam._commande SET etat = ? WHERE id_suivi = ?";
+                $stmt = $dbh->prepare($query);
+                $stmt->execute([$etat[$row['id_commande']], $idSuivi]);
+            }catch (Exception $e){
+                echo "Recupraptor Erreur : " . $e->getMessage() . "<br>";
+            }catch (TypeError $e){
+                echo "Recupraptor Erreur : " . $e->getMessage() . "<br>";
+            }finally{
+                $tabInfoCommandes[] = $row;
+                
+            }
             
-            $tabInfoCommandes[] = $row;
         } 
+
     }
 
     catch (PDOException $e) {
@@ -47,7 +62,7 @@
         <h2 class = "md:pt-15 pt-10">Liste de mes commandes</h2>
 
         <?php if($tabInfoCommandes == null){ ?>
-            <p class="pt-15 text-center">Votre n'avez pas encore effectué de commande.</p>
+            <p class="pt-15 text-center">Vous n'avez pas encore effectué de commande.</p>
         <?php }
 
         else{?>
@@ -63,6 +78,7 @@
                             <th scope="col"></th>
                         </tr>
                     </thead>
+                    
                     <tbody>
                         <?php 
                             //pour changer la classe de css une ligne sur 2
@@ -79,7 +95,7 @@
                                 <tr class="<?php echo $classe; ?>">
                                     <th scope="row" class="text-left pl-5 md:text-center py-3 md:pl-3" ><p><?php echo $idCommande; ?></p></th>
                                     <td class="text-center py-3"><p><?php echo htmlentities($commande['date_commande']);?></p></td>
-                                    <td class="text-center py-3"><p><?php echo htmlentities($commande['etat']);?></p></td>
+                                    <td class="text-center py-3"><p><?= $etat[$idCommande] ?></p></td>
                                     <td class="text-center py-3"><p><?php echo htmlentities($commande['montant_total_ttc']); ?></p></td>
                                     <td><a href="<?php echo htmlentities("commande.php?idCommande=".$idCommande);?>">
                                         <img src="../../images/logo/bootstrap_icon/plus-square.svg" alt="voir plus d'informations" class="w-8 md:w-10 h-auto">

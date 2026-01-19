@@ -88,9 +88,10 @@
             <h3 id="numeroCommande"><?php echo $idCommande;?></h3>
         </div>
         
-        <button id="imprimer">Imprimer</button>
-
-        <h3 class="ml-5 mr-3">Date : <?php echo $date;?></h3>
+        <div class="flex justify-between">
+            <h3 class="ml-5 mr-3">Date : <?php echo $date;?></h3>
+            <button id="imprimer" class="border-vertClair border-4 rounded-lg md:rounded-2xl w-35 h-10 md:w-50 md:h-14 px-7 mr-5 cursor-pointer">Imprimer</button>
+        </div>
 
         <div class="flex justify-center md:mt-10">
         <!--TABLEAU DES COMMANDES VERSION TABLETTE-->
@@ -271,7 +272,7 @@
                 </tfoot>
             </table>
         </div>
-        <a href="liste_commandes.php" class="flex justify-center mt-15 mb-15"><button class="border-vertClair border-2 rounded-sm md:rounded-2xl w-35 h-10 md:w-50 md:h-14 px-7 cursor-pointer">Retour</button></a>
+        <a href="liste_commandes.php" class="flex justify-center mt-15 mb-15"><button class="border-vertClair border-4 rounded-lg md:rounded-2xl w-35 h-10 md:w-50 md:h-14 px-7 cursor-pointer">Retour</button></a>
     </main>
     <script>
         let btnImprimmer = document.getElementById("imprimer");

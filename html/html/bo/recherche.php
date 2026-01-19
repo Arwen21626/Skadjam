@@ -165,7 +165,24 @@
 
             <section>
                 <h3>Tris</h3>
-                <!-- prix -->
+                <!-- Stock -->
+                <article>
+                    <details open>
+                        <summary class="cursor-pointer mt-1 mb-1">Par stock</summary>
+                        <div>
+                            <div>
+                                <input type="radio" name="stockTri" id="stockTriCroissant" value="croissant" class="triFiltre h-5 w-5">
+                                <label for="stockTriCroissant" class="labelDetails">Croissant</label>
+                            </div>
+                            <div>
+                                <input type="radio" name="prixTri" id="stockTriDecroissant" value="decroissant" class="triFiltre h-5 w-5">
+                                <label for="stockTriDecroissant" class="labelDetails">Décroissant</label>
+                            </div>
+                        </div>
+                    </details>
+                    
+                </article>
+                <!-- Prix -->
                 <article>
                     <details open>
                         <summary class="cursor-pointer mt-1 mb-1">Par prix</summary>

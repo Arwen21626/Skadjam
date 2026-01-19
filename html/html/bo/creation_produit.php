@@ -1,8 +1,9 @@
 <?php
 session_start();
-include(__DIR__ . '/../../php/verif_role_bo.php');
-include( __DIR__ . '/../../01_premiere_connexion.php');
-require_once(__DIR__ . '/../../php/verification_formulaire.php');
+include __DIR__ . '/../../php/verif_role_bo.php';
+include __DIR__ . '/../../01_premiere_connexion.php';
+require_once __DIR__ . '/../../php/verification_formulaire.php';
+require_once __DIR__ . '/../../php/modification_variable.php';
 
 
 
@@ -46,8 +47,13 @@ if (isset($_POST['categorie']) && isset($_POST['nom']) && isset($_POST['prix']) 
     $description = $_POST['description'];
     $unite = $_POST['unite'];
     $qteUnite = $_POST['qteUnite'];
+    // Champs spécifiques à la promotion
+    $dateDebutPromotion = isset($_POST['dateDebutPromotion']) ? htmlentities($_POST['dateDebutPromotion']) : date('Y-m-d');
+    $dateFinPromotion = htmlentities($_POST['dateFinPromotion']);
+    $dateFinPromotion = trim($dateFinPromotion);
+    $dateFinPromotion = ($dateFinPromotion === '') ? null : $dateFinPromotion;
+    $labelPromo = isset($_POST['labelPromo']) ? $_POST['labelPromo'] : null;
 
-    // $enPromotion = $_POST['mettreEnPromotion'];
     if(isset($_POST['mettreEnLigne'])){
         $enLigne = $_POST['mettreEnLigne'];
     }
@@ -71,7 +77,6 @@ if (isset($_POST['categorie']) && isset($_POST['nom']) && isset($_POST['prix']) 
     else{
         $enLigne = 'true';
     }
-    
 
     //Gestion de la photo
     $typePhoto = $_FILES['photo']['type'];
@@ -145,6 +150,99 @@ if (isset($_POST['categorie']) && isset($_POST['nom']) && isset($_POST['prix']) 
 
             foreach ($insertionPhoto as $t) {
                 $idPhoto = $t['id_photo'];
+            }
+
+            // Gestion de la promotion
+            $caseCochee = isset($_POST['mettreEnPromotion']);
+
+            // La case "Mettre en promotion" est cochée
+            if ($caseCochee) {
+                $dbh->beginTransaction();
+                // Création de la promotion
+                try {
+                    if(verifDate($dateDebutPromotion) && $dateDebutPromotion >= date('Y-m-d')){
+                        // Une date de fin à été ajoutée
+                        if(verifDate($dateFinPromotion) && $dateFinPromotion >= $dateDebutPromotion){
+                            $stmtPromo = $dbh->prepare("INSERT INTO sae3_skadjam._promotion
+                                                        (
+                                                            date_debut_promotion,
+                                                            date_fin_promotion,
+                                                            heure_debut,
+                                                            id_vendeur,
+                                                            id_photo
+                                                        ) VALUES (
+                                                            :date_debut,
+                                                            :date_fin,
+                                                            '00:00',
+                                                            :id_vendeur,
+                                                            :id_photo
+                                                        )");
+                            $stmtPromo->execute([
+                                ':date_debut' => formatDate($dateDebutPromotion),
+                                ':date_fin'   => formatDate($dateFinPromotion),
+                                ':id_vendeur' => $idVendeur,
+                                ':id_photo'   => $idPhoto
+                            ]);
+                        // Si aucune date de fin n'a été ajoutée
+                        }else if($dateFinPromotion === null){
+                            $stmtPromo = $dbh->prepare("INSERT INTO sae3_skadjam._promotion
+                                                        (
+                                                            date_debut_promotion,
+                                                            date_fin_promotion,
+                                                            heure_debut,
+                                                            id_vendeur,
+                                                            id_photo
+                                                        ) VALUES (
+                                                            :date_debut,
+                                                            :date_fin,
+                                                            '00:00',
+                                                            :id_vendeur,
+                                                            :id_photo
+                                                        )");
+                            $stmtPromo->execute([
+                                ':date_debut' => formatDate($dateDebutPromotion),
+                                ':date_fin'   => null,
+                                ':id_vendeur' => $idVendeur,
+                                ':id_photo'   => $idPhoto
+                            ]);
+                        }else{
+                            echo "La date de fin de promotion est invalide.";
+                        }
+                    }else{
+                        echo "La date de début de promotion est invalide.";
+                    }
+                    
+                    $idPromotion = $dbh->lastInsertId();
+
+                    if(strlen($labelPromo) < 20){
+                        $stmtLibelle = $dbh->prepare("UPDATE sae3_skadjam._promotion
+                                                    SET label = :label
+                                                    WHERE id_promotion = :id_promotion");
+                        $stmtLibelle->execute([
+                            ':label' => $labelPromo,
+                            ':id_promotion' => $idPromotion
+                        ]);
+                    }else{
+                        echo "Le libellé de la promotion est invalide.";
+                    }
+
+                    $stmtPromu = $dbh->prepare("INSERT INTO sae3_skadjam._promu
+                                                (
+                                                    id_promotion,
+                                                    id_produit
+                                                ) VALUES (
+                                                    :id_promotion,
+                                                    :id_produit
+                                                )");
+                    $stmtPromu->execute([
+                        ':id_promotion' => $idPromotion,
+                        ':id_produit'   => $idProd
+                    ]);
+                    $dbh->commit();
+                } catch (Exception $e) {
+                    $dbh->rollBack();
+                    throw $e;
+                }
             }
 
             $insertionMontre = $dbh -> prepare("INSERT INTO sae3_skadjam._montre VALUES (?,?);");
@@ -242,24 +340,47 @@ if (isset($_POST['categorie']) && isset($_POST['nom']) && isset($_POST['prix']) 
                     <!-- Mettre en ligne -->
                     <div class="flex flex-row mr-4 ml-4">
                         <label class="mr-4" for="mettreEnLigne">Mettre en ligne</label>
-                        <input class="appearance-none w-10 h-10 border-4 border-beige rounded-md checked:bg-beige cursor-pointer" type="checkbox" name="mettreEnLigne" id="mettreEnLigne">
+                        <input class="appearance-none w-10 h-10 border-4 border-beige rounded-md checked:bg-beige checked:border-vertFonce cursor-pointer" type="checkbox" name="mettreEnLigne" id="mettreEnLigne">
                     </div>
                 
                     <!-- Mettre en promotion -->
-                    <!-- <div class="flex flex-row mr-4 ml-4">
-                        <label class="mr-4" for="mettreEnPromotion">Mettre en promotion</label>
-                        <input class="appearance-none w-10 h-10 border-4 border-beige rounded-md checked:bg-beige" type="checkbox" name="mettreEnPromotion" id="mettreEnPromotion">
-                    </div> -->
+                    <div class="flex flex-row mr-4 ml-4">
+                        <label class="mr-4" for="mettreEnPromotion">Mettre en promotion<?php if ($nbPromos >= 2 && !$caseCochee) { echo " (Limite atteinte)"; } ?></label>
+                        <input id="promoCheck" type="checkbox" name="mettreEnPromotion" class="<?php echo ($nbPromos >= 2 && !$caseCochee) ? 'cursor-not-allowed' : 'cursor-pointer'; ?> appearance-none w-10 h-10 border-4 border-beige rounded-md checked:bg-beige checked:border-vertFonce" <?php echo ($nbPromos >= 2 && !$caseCochee) ? 'disabled' : ''; ?>>
+                    </div>
+                </div>
+                <!-- Inputs liés aux promotions -->
+                <div id="promoInputs" class="col-start-1 row-start-5 col-span-2 flex flex-col">
+                    <div class="flex flex-row justify-around m-2 p-2">
+                        <div>
+                            <div class="flex flex-row mr-4 ml-4">
+                                <label class="mr-4" for="dateDebutPromotion">Début de promotion* :</label>
+                                <input class="border-4 border-beige rounded-2xl w-45" type="date" name="dateDebutPromotion" id="dateDebutPromotion" value="<?php echo $dateDebutPromotion !== null ? $dateDebutPromotion : date('Y-m-d'); ?>" required>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="flex flex-row mr-4 ml-4">
+                                <label class="mr-4" for="dateFinPromotion">Fin de promotion :</label>
+                                <input class="border-4 border-beige rounded-2xl w-45" type="date" name="dateFinPromotion" id="dateFinPromotion" value="<?php echo $dateFinPromotion; ?>">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="flex flex-row justify-around m-2 p-2">
+                        <div class="flex flex-row mr-4 ml-4">
+                            <label class="mr-4" for="labelPromo">Libellé de la promotion :</label>
+                            <input class="border-4 border-beige rounded-2xl w-45" type="text" name="labelPromo" id="labelPromo" value="<?php echo $labelPromo;?>">
+                        </div>
+                    </div>
                 </div>
                 
                 <!-- Description -->
-                <div class="col-start-1 col-span-2 row-start-5 flex flex-col m-2 p-2 ">
+                <div class="col-start-1 col-span-2 row-start-6 flex flex-col m-2 p-2 ">
                     <label for="description">Description *:</label>
                     <textarea placeholder="Pot de confiture de fraises des bois" class="border-4 border-beige rounded-2xl w-3/4 self-center placeholder-gray-500" name="description" id="description" cols="100" rows="10" required></textarea>
                 </div>
                 
                 <!-- Validation -->
-                <div class="col-start-1 col-span-2 row-start-6 flex flex-row justify-around m-4">
+                <div class="col-start-1 col-span-2 row-start-7 flex flex-row justify-around m-4">
                     <button class="border-2 border-vertFonce rounded-2xl w-40 h-14 cursor-pointer"><a href="../bo/index_vendeur.php">Retour</a></button>                    
                     <input class="border-2 border-vertFonce rounded-2xl w-40 h-14 cursor-pointer" type="submit" value="Valider">
                 </div>
@@ -268,4 +389,25 @@ if (isset($_POST['categorie']) && isset($_POST['nom']) && isset($_POST['prix']) 
         <?php include(__DIR__ . '/../../php/structure/footer_back.php');?>
         <script src="../../js/bo/changement_image_produits.js"></script>
     </body>
+    <script>
+        // Fonction pour afficher/cacher les inputs de promotion
+        function togglePromotionInputs(){
+            var promoCheck = document.getElementById('promoCheck');
+            var promoInputs = document.getElementById('promoInputs');
+            if(promoCheck.checked && !promoCheck.disabled){
+                promoInputs.style.display='flex';
+                promoInputs.style.visibility = 'visible';
+                promoInputs.style.height = 'auto';
+            }else{
+                promoInputs.style.visibility = 'hidden';
+                promoInputs.style.height = '0';
+            }
+        }
+        // Quand "Mettre en promotion" est coché, afficher les inputs de promotion
+        document.addEventListener('DOMContentLoaded', function() {
+            var promoCheck = document.getElementById('promoCheck');
+            promoCheck.addEventListener('change', togglePromotionInputs);
+            togglePromotionInputs();
+        });
+    </script>
 </html>

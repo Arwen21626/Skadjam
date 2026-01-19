@@ -21,8 +21,8 @@
     <article class="flex flex-col max-w-1/2 pt-1 pr-2 pb-2 pl-2 md:max-w-fit md:pt-0.5 md:pr-1 md:pb-1 md:pl-1">
         <h3 class="m-2">À propos</h3>
 
-        <a class="hover:text-rouge m-1" href="#Insérer lien page info sur la COBREC">Qui sommes-nous ?</a>
-        <a class="hover:text-rouge m-1" href="#Insérer lien vers le Site de la COBREC">Site de la COBREC</a>
+        <a class="hover:text-rouge m-1" href="https://www.cobrec.co.uk/">Qui sommes-nous ?</a>
+        <a class="hover:text-rouge m-1" href="https://www.cobrec.co.uk/">Site de la COBREC</a>
     </article>
 
     <article class="flex flex-col max-w-1/2 pt-1 pr-2 pb-2 pl-2 md:max-w-fit md:pt-0.5 md:pr-1 md:pb-1 md:pl-1">

@@ -21,7 +21,7 @@ if (isset($_POST['logout'])) {
 // Vérifier si le client est connecter
 if(isset($_SESSION["idCompte"])) {
     // Connexion à la session
-    $idCompte = (int) $_SESSION["idCompte"];
+    $idVendeur = $_SESSION["idCompte"];
 
     try{
         $dbh = new PDO("$driver:host=$server;port=$port;dbname=$dbname",$user,$pass);
@@ -32,7 +32,7 @@ if(isset($_SESSION["idCompte"])) {
         foreach($dbh->query("SELECT * FROM sae3_skadjam._compte c
                                 INNER JOIN sae3_skadjam._vendeur v
                                     ON c.id_compte = v.id_compte
-                                WHERE c.id_compte = $idCompte", PDO::FETCH_ASSOC) as $vendeur){
+                                WHERE c.id_compte = $idVendeur", PDO::FETCH_ASSOC) as $vendeur){
             // Infos compte
             $nom = $vendeur['nom_compte'];
             $prenom = $vendeur['prenom_compte'];
@@ -49,10 +49,10 @@ if(isset($_SESSION["idCompte"])) {
         $tabPhoto = null;
 
         $reqPhoto = $dbh->prepare("SELECT ph.url_photo, ph.alt, ph.titre
-                                    FROM sae3_skadjam._photo ph
-                                    INNER JOIN sae3_skadjam._presente pr
-                                        ON ph.id_photo = pr.id_photo
-                                    WHERE pr.id_vendeur = $idCompte");
+                                    FROM sae3_skadjam._presente pr
+                                    INNER JOIN sae3_skadjam._photo ph
+                                        ON pr.id_photo = ph.id_photo
+                                    WHERE pr.id_vendeur = $idVendeur");
         $reqPhoto->execute();
         $tabPhoto = $reqPhoto->fetch();
 
@@ -62,7 +62,7 @@ if(isset($_SESSION["idCompte"])) {
                                 ON c.id_compte = h.id_compte
                             INNER JOIN sae3_skadjam._adresse a
                                 ON h.id_adresse = a.id_adresse
-                            WHERE c.id_compte = $idCompte", PDO::FETCH_ASSOC) as $adresseData){
+                            WHERE c.id_compte = $idVendeur", PDO::FETCH_ASSOC) as $adresseData){
             $adresse = $adresseData["adresse_postale"];
             $num = $adresseData["numero_rue"];
             $numBis = $adresseData["complement_adresse"];
@@ -90,7 +90,7 @@ if(isset($_SESSION["idCompte"])) {
             <div class=" flex flex-col w-fit">
                 <?php if ($tabPhoto && !empty($tabPhoto['url_photo'])) { ?>
                     <div class="container-image relative flex items-center justify-center w-80 border-4 border-solid rounded-2xl border-beige mb-3">
-                        <img class="image-vendeur w-80 rounded-2xl" src="<?= '../../' . htmlspecialchars($tabPhoto['url_photo']) ?>" alt="<?= htmlspecialchars($tabPhoto['alt']) ?>" title="<?= htmlspecialchars($tabPhoto['titre']) ?>">
+                        <img class="image-vendeur w-80 rounded-xl" src="<?= '../..' . htmlspecialchars($tabPhoto['url_photo']) ?>" alt="<?= htmlspecialchars($tabPhoto['alt']) ?>" title="<?= htmlspecialchars($tabPhoto['alt']) ?>">
                     </div>
                 <?php } else { ?>
                     <div class="container-image vide relative flex items-center justify-center w-80 h-80 mb-3 bg-beige rounded-2xl">

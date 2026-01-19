@@ -250,6 +250,7 @@
             ajoutEventListener()
         </script>
     </main>
+    <script src="../../js/fo/animSidebar.js"></script>
 
     <!--footer-->
     <?php include (__DIR__ . "/../../php/structure/footer_front.php"); ?>
