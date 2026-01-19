@@ -74,4 +74,5 @@ void add_bord(PGconn *conn, int fd, char buffer[TAILLEB]) {
         LOG_SERV(LOG_ERROR, "BORD ERR SEND");
         return;
     }
+    LOG_SERV(LOG_DEBUG, "Sorti SEND_BORD");
 }
