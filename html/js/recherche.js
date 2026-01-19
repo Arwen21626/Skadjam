@@ -1,12 +1,7 @@
-var checkedCategories = []
-var checkedNotes = []
-var checkedTranches = []
-
-let tableau = []
+let copieProd = JSON.parse(JSON.stringify(tabProd))
 
 // Ajout des eventListeners
 function ajoutEventListener(){
-    tableau = []
     
 // EventListener pour les boutons de changement de page
     // Récupérations des elements
@@ -17,19 +12,19 @@ function ajoutEventListener(){
 
     // Fonctions pour les boutons
     premierePage.addEventListener("click",function(){
-        firstPage()
+        firstPage(copieProd)
     })
     
     pagePrec.addEventListener("click",function(){
-        pagePrecedente()
+        pagePrecedente(copieProd)
     })
 
     pageSuiv.addEventListener("click",function(){
-        pageSuivante()
+        pageSuivante(copieProd)
     })
 
     dernierePage.addEventListener("click",function(){
-        lastPage()
+        lastPage(copieProd)
     })
 // EventListener pour les tris
     // Récupération des elements
@@ -39,34 +34,55 @@ function ajoutEventListener(){
     let alphaTriZA = document.getElementById("alphaTriZA")
     let noteTri51 = document.getElementById("noteTri51")
     let noteTri15 = document.getElementById("noteTri15")
+    let stockTriCroissant = document.getElementById("stockTriCroissant")
+    let stockTriDecroissant = document.getElementById("stockTriDecroissant")
 
     // Fonctions de tri
         // Prix
-    prixTriCroissant.addEventListener("click",function () {
-        afficherListe(triPrixCroissant(tableau))
+    prixTriCroissant.addEventListener("change",function () {
+        copieProd = triPrixCroissant(copieProd)
+        afficherListe(copieProd)
     })            
 
-    prixTriDecroissant.addEventListener("click",function () {
-        afficherListe(triPrixDecroissant(tableau))
+    prixTriDecroissant.addEventListener("change",function () {
+        copieProd = triPrixDecroissant(copieProd)
+        afficherListe(copieProd)
     })
 
         // Ordre alphabétique
-    alphaTriAZ.addEventListener("click",function () {
-        afficherListe(triAz(tableau))
+    alphaTriAZ.addEventListener("change",function () {
+        copieProd = triAz(copieProd)
+        afficherListe(copieProd)
     })
 
-    alphaTriZA.addEventListener("click",function () {
-        afficherListe(triZa(tableau))
+    alphaTriZA.addEventListener("change",function () {
+        copieProd = triZa(copieProd)
+        afficherListe(copieProd)
     })
     
         // Note
-    noteTri51.addEventListener("click",function () {
-        afficherListe(triEtoileDecroissant(tableau))
+    noteTri51.addEventListener("change",function () {
+        copieProd = triEtoileDecroissant(copieProd)
+        afficherListe(copieProd)
     })
     
-    noteTri15.addEventListener("click", function () {
-        afficherListe(triEtoileCroissant(tableau))
+    noteTri15.addEventListener("change", function () {
+        copieProd = triEtoileCroissant(copieProd)
+        afficherListe(copieProd)
     })
+
+    if(stockTriCroissant != null && stockTriDecroissant != null){
+        stockTriCroissant.addEventListener("change",function () {
+            copieProd = triStockCroissant(copieProd)
+            afficherListe(copieProd)
+        })
+
+        stockTriDecroissant.addEventListener("change",function () {
+            copieProd = triStockDecroissant(copieProd)
+            afficherListe(copieProd)
+        })
+    }
+     
 
 // EventListener pour les filtres
     // Récupération des elements
@@ -93,91 +109,107 @@ function ajoutEventListener(){
     // Fonctions de filtres
         //Catégories
     categorieAlimentaire.addEventListener("change", function () {
-        toggleFiltre(checkedCategories, "alimentaire", this);
+        copieProd = toggleFiltre(checkedCategories, "alimentaire", this);
+        afficherListe(copieProd)
     });
 
     categorieVetement.addEventListener("change", function () {
-        toggleFiltre(checkedCategories, "vetement", this);
+        copieProd = toggleFiltre(checkedCategories, "vetement", this);
+        afficherListe(copieProd)
     });
 
     categorieArtisanat.addEventListener("change", function () {
-        toggleFiltre(checkedCategories, "artisanat", this);
+        copieProd = toggleFiltre(checkedCategories, "artisanat", this);
+        afficherListe(copieProd)
     });
 
     categorieGoodies.addEventListener("change", function () {
-        toggleFiltre(checkedCategories, "goodies", this);
+        copieProd = toggleFiltre(checkedCategories, "goodies", this);
+        afficherListe(copieProd)
     });
 
     categorieSoin.addEventListener("change", function () {
-        toggleFiltre(checkedCategories, "soin", this);
+        copieProd = toggleFiltre(checkedCategories, "soin", this);
+        afficherListe(copieProd)
     });
 
     
         // Note
-
     noteNonNote.addEventListener("change", function () {
-        toggleFiltre(checkedNotes, "0", this);
+        copieProd = toggleFiltre(checkedNotes, "0", this);
+        afficherListe(copieProd)
     });
 
     noteUneE.addEventListener("change", function () {
-        toggleFiltre(checkedNotes, "1", this);
+        copieProd = toggleFiltre(checkedNotes, "1", this);
+        afficherListe(copieProd)
     });
 
     noteDeuxE.addEventListener("change", function () {
-        toggleFiltre(checkedNotes, "2", this);
+        copieProd = toggleFiltre(checkedNotes, "2", this);
+        afficherListe(copieProd)
     });
 
     noteTroisE.addEventListener("change", function () {
-        toggleFiltre(checkedNotes, "3", this);
+        copieProd = toggleFiltre(checkedNotes, "3", this);
+        afficherListe(copieProd)
     });
 
     noteQuatreE.addEventListener("change", function () {
-        toggleFiltre(checkedNotes, "4", this);
+        copieProd = toggleFiltre(checkedNotes, "4", this);
+        afficherListe(copieProd)
     });
 
     noteCinqE.addEventListener("change", function () {
-        toggleFiltre(checkedNotes, "5", this);
+        copieProd = toggleFiltre(checkedNotes, "5", this);
+        afficherListe(copieProd)
     });
 
 
-    // Tranche de prix
+        // Tranche de prix
     tranchePrix1.addEventListener("change", function () {
-        toggleFiltre(checkedTranches, "prix1", this);
+        copieProd = toggleFiltre(checkedTranches, "prix1", this);
+        afficherListe(copieProd)
     });
 
     tranchePrix2.addEventListener("change", function () {
-        toggleFiltre(checkedTranches, "prix2", this);
+        copieProd = toggleFiltre(checkedTranches, "prix2", this);
+        afficherListe(copieProd)
     });
 
     tranchePrix3.addEventListener("change", function () {
-        toggleFiltre(checkedTranches, "prix3", this);
+        copieProd = toggleFiltre(checkedTranches, "prix3", this);
+        afficherListe(copieProd)
     });
 
     tranchePrix4.addEventListener("change", function () {
-        toggleFiltre(checkedTranches, "prix4", this);
+        copieProd = toggleFiltre(checkedTranches, "prix4", this);
+        afficherListe(copieProd)
     });
 
     tranchePrix5.addEventListener("change", function () {
-        toggleFiltre(checkedTranches, "prix5", this);
+        copieProd = toggleFiltre(checkedTranches, "prix5", this);
+        afficherListe(copieProd)
     });
 
-// EventListeners pour l'animation sidebar filtre et tri
+    // EventListeners pour l'animation sidebar filtre et tri
     // Récupératiion des elements
     let boutonSidebar = document.getElementById("filtresTris")
     let sidebar = document.getElementsByTagName("aside")[0]
     let fermerSidebar = document.getElementById("fermerSidebar")
 
-    // Fonction ouverture
-    boutonSidebar.addEventListener("click", function(){
-        boutonSidebar.classList.add("hidden")
-        sidebar.classList.remove("hidden")
-    })
+    if(boutonSidebar != null){
+        // Fonction ouverture
+        boutonSidebar.addEventListener("click", function(){
+            boutonSidebar.classList.add("hidden")
+            sidebar.classList.remove("hidden")
+        })
 
-    //Fonction fermeture
-    fermerSidebar.addEventListener("click", function(){
-        sidebar.classList.add("hidden")
-        boutonSidebar.classList.remove("hidden")
-    })
-
+        //Fonction fermeture
+        fermerSidebar.addEventListener("click", function(){
+            sidebar.classList.add("hidden")
+            boutonSidebar.classList.remove("hidden")
+        })
+    }
     
 }

@@ -155,9 +155,9 @@
     <?php include(__DIR__ . "/../../php/structure/navbar_front.php") ?>
 
     <div id="popup-overlay">
-        <div class="popup p-2">
-            <h4>Votre panier a bien été modifié !</h4>
-            <button class=" pl-2 pr-2 border rounded-sm cursor-pointer" onclick="closePopup()">OK</button>
+        <div id="popup-modif" class="popup p-2 border-vertFonce shadow-xl">
+            <p>Votre panier a bien été modifié !</p>
+            <button class="pl-2 pr-2 border-2 border-vertClair rounded-sm cursor-pointer">OK</button>
         </div>
     </div>
     
@@ -194,7 +194,7 @@
                                                 </div>
                                                 
                                                 <!-- Le conteneur des éléments liés au produit -->
-                                                <div class="text-center md:flex md:flex-col md:justify-evenly prod-info stock:<?php echo $infoProduitsPanier[$i]["infoProduit"]["quantite_stock"];?>">
+                                                <div class="text-center gap-4 md:flex md:flex-col md:justify-evenly prod-info stock:<?php echo $infoProduitsPanier[$i]["infoProduit"]["quantite_stock"];?>">
 
                                                     <div class="flex flex-col justify-center items-center mb-3 md:mb-0">
                                                         <h4> <?php echo $infoProduitsPanier[$i]["infoProduit"]["libelle_produit"]; ?></h4>
@@ -407,6 +407,6 @@
     <?php include(__DIR__ . "/../../php/structure/footer_front.php") ?>
 </body>
 
-<script src="/js/fo/panier.js"></script>
+<script type="module" src="/js/fo/panier.js"></script>
 
 </html>

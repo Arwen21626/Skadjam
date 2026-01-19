@@ -4,7 +4,7 @@
     include __DIR__ .'/../../01_premiere_connexion.php';
     require_once __DIR__ . "/../../php/fonctions.php";
     require_once __DIR__ . "/../../php/modification_variable.php";
-    const PAGE_SIZE = 15;
+    const PAGE_SIZE = 24;
     $idCompte = $_SESSION['idCompte'];
 ?>
 
@@ -13,13 +13,7 @@
 <?php include(__DIR__."/../../php/structure/head_back.php");?>
 <head> 
     <title>Accueil</title>
-    <style>
-        button a:hover{
-            color: black;
-        }
-    </style>
 </head>
-
 
 
 <body>
@@ -27,7 +21,7 @@
     <?php include(__DIR__ . "/../../php/structure/header_back.php"); ?>
     <?php include(__DIR__ . "/../../php/structure/navbar_back.php"); ?>
 
-    <main class=" p-8">
+    <main class="p-8">
         <div class="grid grid-cols-2 gap-4 justify-items-center">
             <a href="../bo/promotion_vendeur.php" title="lien vers page promotion">
                 <img src="../../images/images_accueil/promotion.webp" alt="promotion" class="w-150 h-auto justify-self-end">
@@ -60,7 +54,6 @@
             else{
                 $pageNumber = 1;
             }
-
             $tabProduit = [];
 
             try {                
@@ -110,8 +103,25 @@
                                         src="<?php echo $valeurs['url_photo'];?>" 
                                         alt="<?php echo $valeurs['alt'];?>"
                                         title="<?php echo $valeurs['titre'];?>">
-                                
+                                        
+                                <!--affichage du nom du produit-->
+                                <p><?php echo $valeurs['libelle_produit'];?></p> 
 
+                                <!--affichage du prix du produit-->   
+                                <div class="flex flex-row justify-between items-center">
+                                    <p class="<?php echo ($valeurs['pourcentage_remise'] !== NULL)?'line-through':'';?>"> <?php echo htmlentities(str_replace(".", ",",$valeurs['prix_ttc'])); ?>€ (TTC)</p>
+                                    <p class="<?php echo ($valeurs['pourcentage_remise'] !== NULL)?'':'hidden';?>"> <?php echo htmlentities(str_replace(".", ",",$valeurs['prix_remise'])); ?>€ (TTC)</p>
+
+                                </div>
+                                <!--récupération de la note-->
+                                <div class="flex">
+                                    <?php $note = $valeurs['note_moyenne'];
+                                        affichageNote($note); ?>
+                                </div>
+                                
+                                <!--affichage du stock-->
+                                <p>En stock : <?php echo $valeurs['quantite_stock'];?></p>
+                                </a>     
                                 <!--affichage de la promotion-->
                                 <?php if($estPromu){ 
                                         $stmt = $dbh->prepare("SELECT *
@@ -130,29 +140,10 @@
                                         if($debutPromo <= date('Y-m-d') && ($finPromo === null || $finPromo >= date('Y-m-d')) && !empty($labelPromo)){
                                     ?>
                                     <!-- Affichage de la bannière -->
-                                    <div class="bg-rouge absolute col-span-2 w-36 md:w-74 underline text-beige pt-2 pb-1.5">
+                                    <div class="bg-rouge absolute w-36 md:w-74 underline text-beige pt-2 pb-1.5">
                                         <h4 class="text-center text-beige overline m-0"><strong><?php echo htmlspecialchars($labelPromo); ?></strong></h4>
                                     </div>
-                                <?php }} ?>
-
-                                <!--affichage du nom du produit-->
-                                <p><?php echo $valeurs['libelle_produit'];?></p> 
-
-                                <!--affichage du prix du produit-->   
-                                <div class="flex flex-row justify-between items-center">
-                                    <p class="<?php echo ($valeurs['pourcentage_remise'] !== NULL)?'line-through':'';?>"> <?php echo htmlentities(str_replace(".", ",",$valeurs['prix_ttc'])); ?>€ (TTC)</p>
-                                    <p class="<?php echo ($valeurs['pourcentage_remise'] !== NULL)?'':'hidden';?>"> <?php echo htmlentities(str_replace(".", ",",$valeurs['prix_remise'])); ?>€ (TTC)</p>
-
-                                </div>
-                                <!--récupération de la note-->
-                                <div class="flex">
-                                    <?php $note = $valeurs['note_moyenne'];
-                                        affichageNote($note); ?>
-                                </div>
-                                
-                                <!--affichage du stock-->
-                                <p class="col-span-2">En stock : <?php echo $valeurs['quantite_stock'];?></p>
-                                </a>      
+                                <?php }} ?> 
                             </section>
                     <?php } ?>
                 </div>         
@@ -165,20 +156,17 @@
             }
         ?>
         <!--fin du catalogue-->
-        <div class="flex flex-row justify-around w-96">
-            <button id="pagePrec" class="md:order-2">|<</button>
-            <button id="pageSuiv" class="md:order-4">>|</button>
-            <p id="pageInfo" class="md:order-3"></p>
-            <button id="premierePage" class="md:order-1"><<</button>
-            <button id="dernierePage" class="md:order-5">>></button>
+        <div class="flex flex-row space-x-4 justify-center">
+            <?php if ($pageNumber>1){?>
+            <a class= "lienPage hover:text-rouge" href="<?php echo "./index_vendeur.php?page=".($pageNumber-1)."#vosProduits";?>">Page précédente</a>
+            
+            <?php }?>
+        
+            <?php if ($pageNumber<$maxPage){?>
+            <a class= "lienPage hover:text-rouge" href="<?php echo "./index_vendeur.php?page=".($pageNumber+1)."#vosProduits";?>">Page suivante</a>
+            <?php }?>
         </div>
     </main>
-    <script src=""></script>
-    <script>
-        document.addEventListener("DOMContentLoaded", () => {
-            numPageInfo()
-        });
-    </script>
     
     <!--footer-->
     <?php include(__DIR__ . "/../../php/structure/footer_back.php"); ?>
