@@ -67,7 +67,7 @@ if ($_SESSION['role'] !== 'visiteur'){
             <!-- Téléphone -->
             <div class="flex flex-col basis-1/3 m-5 min-w-3xs">
                 <label for="telephone">Telephone* :</label>
-                <input class="border-4 border-beige rounded-2xl w-1/1 p-1 pl-3" type="tel" name="telephone" id="telephone" placeholder="0604030201" pattern="0[0-9]{9}" required>
+                <input class="border-4 border-beige rounded-2xl w-1/1 p-1 pl-3 placeholder-gray-500" type="tel" name="telephone" id="telephone" placeholder="0604030201" pattern="0[0-9]{9}" required>
             </div>
 
             <!-- Adresse email -->
@@ -91,8 +91,8 @@ if ($_SESSION['role'] !== 'visiteur'){
 
             <!-- Acceptation des CGU -->
             <div class="flex flex-row flex-wrap items-center mt-2 mb-2">
-                <label for="cgu" class="underline! cursor-pointer hover:text-rouge">J'ai lu et j'acccepte les conditions générales d'utilisation :</label>
-                <input type="checkbox" id="cgu" name="cgu" required class="cursor-pointer ml-10 w-5 h-5 @max-[768px]:ml-2">
+                <label for="cgu" class="underline! cursor-pointer hover:text-rouge">J'ai lu et j'acccepte les conditions générales d'utilisation</label>
+                <input type="checkbox" id="cgu" name="cgu" required class="cursor-pointer ml-5 w-5 h-5">
             </div>
 
             <!-- Validation ou pas du formulaire -->
