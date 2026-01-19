@@ -152,7 +152,9 @@
 
         function fermerPageImpression() {
             // fermer la page d'impression
-            document.body.removeChild(this); 
+            let iframe = document.getElementsByTagName("iframe")[0];
+            let body = document.getElementsByTagName("body")[0];
+            body.removeChild(iframe); 
         }
 
         function gestionPageImpression() {
