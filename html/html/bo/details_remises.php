@@ -64,21 +64,10 @@
                     </thead>
                     <!-- corps du tableau -->
                     <tbody>
-                        <?php 
-                            //pour changer la classe de css une ligne sur 2
-                            $impair = 0;
-                            $classe1 = "py-4";
-                            $classe2 = "py-4 bg-bleu";
+                        <?php $ligneIndex = 0;
                             foreach($tabProduit as $id => $valeurs){
-                                $idProduit = $valeurs['id_produit']; 
-                                $impair ++;
-                                if(fmod($impair, 2) == 0){
-                                    $classe = $classe1;
-                                }
-                                else{
-                                    $classe = $classe2;
-                                }?>
-                                <tr class="<?php echo $classe; ?>">
+                                $idProduit = $valeurs['id_produit'];?>
+                                <tr class="py-4 <?= ligneCouleur($ligneIndex) ?>">
                                     <th scope="row" class="text-left py-3 pl-3" ><a href="<?php echo htmlentities("details_produit.php?idProduit=".$idProduit);?>"><?php echo $valeurs['libelle_produit']; ?></a></th>
                                     <td class="text-center py-3"><p><?php echo htmlentities($valeurs['prix_ttc']);?> €</p></td>
                                     <td class="text-center py-3"><p><?php echo htmlentities($valeurs['prix_remise']);?> €</p></td>

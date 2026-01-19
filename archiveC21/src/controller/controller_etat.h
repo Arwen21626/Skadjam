@@ -14,7 +14,9 @@ typedef enum {
     ETAT6,
     ETAT7,
     ETAT8,
-    ETAT9
+    LVR,
+    LVRAB,
+    REFU
 } etat_t;
 
 extern char cIp[INET_ADDRSTRLEN];
