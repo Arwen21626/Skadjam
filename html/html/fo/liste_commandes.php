@@ -62,7 +62,7 @@
         <h2 class = "md:pt-15 pt-10">Liste de mes commandes</h2>
 
         <?php if($tabInfoCommandes == null){ ?>
-            <p class="pt-15 text-center">Votre n'avez pas encore effectué de commande.</p>
+            <p class="pt-15 text-center">Vous n'avez pas encore effectué de commande.</p>
         <?php }
 
         else{?>
