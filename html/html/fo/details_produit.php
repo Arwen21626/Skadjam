@@ -270,7 +270,7 @@
 
                     <!-- Supression d'un avis -->
                     <?php if ($_SESSION['role'] === 'client' && $dejaAvis){ // on peut supprimer un avis que si on a déjà mit un ?>
-                        <button class="bg-beige rounded-2xl w-48 h-14 mb-4 md:mr-16 hover:text-rouge"><a href="<?php __DIR__."/ajouter_avis.php?idProduit=".$produit['id_produit']?>&supr=true">Supprimer mon avis</a></button>
+                        <button class="bg-beige rounded-2xl w-48 h-14 mb-4 md:mr-16 hover:text-rouge"><a href="<?php __DIR__."/ajouter_avis.php?idProduit=".$produit['id_produit']."&supr=true"; ?>">Supprimer mon avis</a></button>
                     <?php }?>
 
                     <?php if($avis != null){?>
