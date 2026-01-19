@@ -4,9 +4,11 @@
     require_once __DIR__ . "/../../php/fonctions.php";
     require(__DIR__ . '/../../01_premiere_connexion.php');
     include __DIR__ . '/../../connexion_recupraptor.php';
-    $idCompte = $_SESSION['idCompte'];
+    
 
-    if($idCompte == null){
+    if(isset($_SESSION['idCompte'])){
+        $idCompte = $_SESSION['idCompte'];
+    }else{
         header('Location: ./connexion.php');
     }
 
@@ -23,17 +25,19 @@
             $idSuivi = $row['id_suivi'];
             $id_commande = $row['id_commande'];
             try{
-                $etat[$id_commande] = $rpr->get_etat($idSuivi);
+                $etat[$id_commande] = $rpr->get_etat($idSuivi)[0];
                 $query = "UPDATE sae3_skadjam._commande SET etat = ? WHERE id_suivi = ?";
                 $stmt = $dbh->prepare($query);
                 $stmt->execute([$etat[$row['id_commande']], $idSuivi]);
             }catch (Exception $e){
                 echo "Recupraptor Erreur : " . $e->getMessage() . "<br>";
+                $etat[$id_commande] = 'err';
             }catch (TypeError $e){
                 echo "Recupraptor Erreur : " . $e->getMessage() . "<br>";
+                $etat[$id_commande] = 'err';
             }finally{
                 $tabInfoCommandes[] = $row;
-                $etat[$id_commande] = "état_test"; 
+                
                 
             }
             

@@ -26,7 +26,7 @@
 
             if ($nouvNote>=0 && $nouvNote<=5){
                 // si c'est l'ajout d'un nouvel avis
-                if ($note === null){
+                if ($nouvNote === null){
                     $insertionAvis = $dbh->prepare("INSERT INTO sae3_skadjam._avis(nb_etoile, nb_pouce_haut, nb_pouce_bas, contenu_commentaire, id_produit, id_compte) 
                                                     VALUES ($nouvNote, 0, 0, '$nouvCommentaire', $idProd, $idCompte)");
                 }
@@ -87,13 +87,13 @@
             <!-- La note -->
             <label for="note">Note* :</label>
             <div class="flex flex-nowarp items-center justify-center">
-                <input class="border-4 border-beige rounded-2xl p-1 pl-3 w-16" name="note" id="note" type="number" min="0" max="5" value="<?php echo $note;?>" required>
+                <input class="border-4 border-beige rounded-2xl p-1 pl-3 w-16" name="note" id="note" type="number" min="0" max="5" value="<?php if(isset($note)){echo $note;}?>" required>
                 <img class=" w-7 ml-3" src="../../images/logo/bootstrap_icon/star-fill.svg">
             </div>
             
             <!-- Le commantaire -->
             <label class="mt-10" for="commentaire">Commentaire : </label>
-            <textarea class="border-4 border-beige rounded-2xl w-1/1 p-1 pl-3" name="commentaire" rows="10" cols="100"><?php echo $commentaire;?></textarea>
+            <textarea class="border-4 border-beige rounded-2xl w-1/1 p-1 pl-3" name="commentaire" rows="10" cols="100"><?php if(isset($commentaire)){echo $commentaire;}?></textarea>
 
             <div class="flex mt-10 justify-center md:justify-end w-1/1 ">
                 <button class="cursor-pointer  border-2 border-vertFonce rounded-2xl w-40 h-14 p-0 m-0 mr-10 " type="button"><a href="./details_produit.php?idProduit=<?php echo $idProd; ?>">Annuler</a></button>
@@ -101,7 +101,7 @@
             </div>
         </form>
         <!-- Supression -->
-        <?php if ($note !== null){ // on peut supprimer un avis que si on est entrain de la modifier ?>
+        <?php if (isset($note) && $note != null){ // on peut supprimer un avis que si on est entrain de la modifier ?>
             <a class="ml-10 flex justify-center mb-5 md:inline-block" href="./ajouter_avis.php?idProduit=<?php echo $produit['id_produit']?>&supr=true">Supprimer mon avis</a>
         <?php }?>
     </main>

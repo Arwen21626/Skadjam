@@ -8,6 +8,8 @@
     où vous utilisez un script JS qui utilise des fonctions/variables etc importé d'un autre fichier
 */
 
+let popupOpened = false;
+
 export function sleep(ms){
     // Fonction pour mettre une pause dans une exécution (par exemple pour attendre avant de fermer la popup)
     // à utiliser dans une fonction asynchrone (mot clé async) avec la syntaxe : await sleep(ms);
@@ -16,9 +18,17 @@ export function sleep(ms){
 
 export async function closePopup(idPopup) {
     // Ajoute la class à la popup qui lancera l'animation pour "fermer" la popup
-    document.getElementById(idPopup).classList.add("desactive");
+
+    let overlay = document.getElementById("popup-overlay");
+    let popup = document.getElementById(idPopup)
+
+    popup.classList.add("desactive");
     await sleep(1000);
-    document.getElementById("popup-overlay").classList.add("desactive");
+    overlay.classList.add("desactive");
+    overlay.classList.remove("active");
+    popup.classList.remove("active");
+
+    popupOpened = false;
 }
 
 export async function openPopUp(idPopup, ms){
@@ -27,10 +37,26 @@ export async function openPopUp(idPopup, ms){
     // Met une pause de millisecondes indiqué par ms
     // puis appel la fonction pour lancer l'animation pour "fermer" la popup
 
-    document.getElementById("popup-overlay").classList.add("active");
-    document.getElementById(idPopup).classList.add("active");
-    await sleep(ms);
-    closePopup(idPopup);
+    if (!popupOpened) {
+        popupOpened = true;
+
+        let overlay = document.getElementById("popup-overlay");
+        let popup = document.getElementById(idPopup);
+
+        if (overlay.classList.contains("desactive")) {
+            overlay.classList.remove("desactive");
+        }
+
+        if (popup.classList.contains("desactive")) {
+            popup.classList.remove("desactive")
+        }
+
+        overlay.classList.add("active");
+        popup.classList.add("active");
+        await sleep(ms);
+        closePopup(idPopup);
+    }
+    
 }
 
 export function showPopUp(idPopup, ms, getAttribute = null) {
@@ -62,7 +88,7 @@ export function showPopUp(idPopup, ms, getAttribute = null) {
     else {
         // Ici vous pouvez ajoutez un fonctionnement d'affichage différent 
         // si vous ne passez pas par un attribut Get
-
+        openPopUp(idPopup, ms);
     }
          
 }

@@ -754,9 +754,6 @@ input.quantite-prod-input {
   .w-36 {
     width: calc(var(--spacing, 0.25rem) * 36);
   }
-  .w-37 {
-    width: calc(var(--spacing, 0.25rem) * 37);
-  }
   .w-40 {
     width: calc(var(--spacing, 0.25rem) * 40);
   }
@@ -777,6 +774,9 @@ input.quantite-prod-input {
   }
   .w-64 {
     width: calc(var(--spacing, 0.25rem) * 64);
+  }
+  .w-65 {
+    width: calc(var(--spacing, 0.25rem) * 65);
   }
   .w-70 {
     width: calc(var(--spacing, 0.25rem) * 70);
@@ -814,8 +814,8 @@ input.quantite-prod-input {
   .w-155 {
     width: calc(var(--spacing, 0.25rem) * 155);
   }
-  .w-175 {
-    width: calc(var(--spacing, 0.25rem) * 175);
+  .w-180 {
+    width: calc(var(--spacing, 0.25rem) * 180);
   }
   .w-250 {
     width: calc(var(--spacing, 0.25rem) * 250);
@@ -846,6 +846,9 @@ input.quantite-prod-input {
   }
   .max-w-3\/4 {
     max-width: calc(3/4 * 100%);
+  }
+  .max-w-36 {
+    max-width: calc(var(--spacing, 0.25rem) * 36);
   }
   .max-w-70 {
     max-width: calc(var(--spacing, 0.25rem) * 70);
@@ -913,9 +916,6 @@ input.quantite-prod-input {
   .items-center {
     align-items: center;
   }
-  .items-end {
-    align-items: flex-end;
-  }
   .items-start {
     align-items: flex-start;
   }
@@ -980,9 +980,6 @@ input.quantite-prod-input {
   }
   .overflow-auto {
     overflow: auto;
-  }
-  .overflow-hidden {
-    overflow: hidden;
   }
   .rounded-2xl {
     border-radius: var(--radius-2xl, 1rem);
@@ -1362,11 +1359,6 @@ input.quantite-prod-input {
       background-color: var(--color-beige);
     }
   }
-  .checked\:bg-vertClair {
-    &:checked {
-      background-color: var(--color-vertClair);
-    }
-  }
   .hover\:bg-\[url\(\/images\/logo\/bootstrap_icon\/cart-fill\.svg\)\] {
     &:hover {
       @media (hover: hover) {
@@ -1743,6 +1735,11 @@ input.quantite-prod-input {
       width: calc(var(--spacing, 0.25rem) * 80);
     }
   }
+  .md\:w-90 {
+    @media (width >= 48rem) {
+      width: calc(var(--spacing, 0.25rem) * 90);
+    }
+  }
   .md\:w-100 {
     @media (width >= 48rem) {
       width: calc(var(--spacing, 0.25rem) * 100);
@@ -1876,11 +1873,6 @@ input.quantite-prod-input {
   .md\:rounded-2xl {
     @media (width >= 48rem) {
       border-radius: var(--radius-2xl, 1rem);
-    }
-  }
-  .md\:rounded-md {
-    @media (width >= 48rem) {
-      border-radius: var(--radius-md, 0.375rem);
     }
   }
   .md\:border-none {

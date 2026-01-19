@@ -1,29 +1,33 @@
 let copieProd = JSON.parse(JSON.stringify(tabProd))
 
-function barreDeRecherche(tableau, mot){
-    let tableauRecherche = []
-    tablean.filter(prod => {
-        let nom = prod['libelle_produit'].toLowerCase()
-        let recherche = mot.toLowerCase()
-        if(nom.includes(recherche)){
-            tableauRecherche.push(prod)
-        }
-    });
-    first = 0
-    actualPage = 1
-    return tableauRecherche
+
+function barreDeRecherche(original, mot) {
+    first = 0;
+    actualPage = 1;
+
+    if (!mot || mot.trim() === "") {
+        return original;
+    }
+
+    const recherche = mot.toLowerCase().trim();
+
+    return original.filter(({ libelle_produit }) =>
+        libelle_produit.toLowerCase().includes(recherche)
+    );
 }
+
+
 
 // Ajout des eventListeners
 function ajoutEventListener(){
-    
 // EventListener pour les boutons de changement de page
     // Barre de recherche
     let barreRecherche = document.getElementById("recherche")
 
     barreRecherche.addEventListener("input",function(){
-        recherche = barreDeRecherche(barreRecherche.value)
-        afficherListe(copieProd, recherche)
+        copieBarre = barreDeRecherche(copieProd, barreRecherche.value)
+        console.log(copieBarre)
+        afficherListe(copieBarre)
     })
 
     // Récupérations des elements

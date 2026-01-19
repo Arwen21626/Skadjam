@@ -3,6 +3,7 @@
     require_once __DIR__ . "/../../php/verif_role_fo.php";
     require_once __DIR__ . "/../../php/fonctions.php";
     require(__DIR__ . '/../../01_premiere_connexion.php');
+    include __DIR__ . '/../../connexion_recupraptor.php';
     $idCompte = $_SESSION['idCompte'];
     $idCommande = $_GET['idCommande'];
 
@@ -66,6 +67,22 @@
         print "Erreur !: " . $e->getMessage() . "<br/>";
         die();
     }
+    $raison = 0;
+    try {
+        $query = "SELECT etat, id_suivi FROM sae3_skadjam._commande WHERE id_commande = ?";
+        $stmt = $dbh->prepare($query);
+        $stmt->execute([$idCommande]);
+        $res = $stmt->fetch(PDO::FETCH_ASSOC);
+        $etat = $res['etat'];
+
+        if ($etat === "Refusé"){
+            $raison = $rpr->get_etat($res['id_suivi'])[1];
+        }
+    } catch (Exception $e){
+        echo "Erreur : " . $e->getMessage();
+        $etat = "err";
+    }
+
 ?>
 
 <!DOCTYPE html>
@@ -257,6 +274,19 @@
                 </tfoot>
             </table>
         </div>
+
+        <!---Indicateur d'etat de livraison--->
+        <div>
+            <p>Etat de la livraison : <?= $etat ?></p>
+
+        <?php
+        if ($raison!=0){ ?>
+            <p>Raison : <?= $raison ?></p>
+            
+            </div>
+        <?php
+        } ?>
+
         <!---bouton retour version tablette--->
         <a href="liste_commandes.php" class="hidden md:flex justify-center mt-15 mb-15"><button class="border-vertClair border-4 rounded-lg md:rounded-2xl w-35 h-10 md:w-50 md:h-14 px-7 cursor-pointer">Retour</button></a>
         

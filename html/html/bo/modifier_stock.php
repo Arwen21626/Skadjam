@@ -9,7 +9,7 @@
     try {     
         $tabProduit = null;           
         //récupère toutes les infos des tables produits et photos
-        foreach($dbh->query("SELECT *
+        foreach($dbh->query("SELECT pr.id_produit, pr.libelle_produit, pr.prix_ttc, pr.note_moyenne, pr.quantite_stock
                             FROM sae3_skadjam._produit pr 
                             INNER JOIN sae3_skadjam._vendeur v
                                 ON pr.id_vendeur = v.id_compte
@@ -43,7 +43,6 @@
                 $updateStock->execute();
             }
         }
-        echo "Tous les stocks ont été mis à jour";
         header("Location: ./stock.php?idCompte=$idCompte");
     } 
 ?>
@@ -114,11 +113,11 @@
                             <?php }?>
                         </tbody>
                     </table>
-                    <div class="flex justify-around">
+                    <div class="flex justify-around mt-10">
                         <!---bouton annuler--->
-                        <a href="../bo/stock.php?idCompte=<?php echo $idCompte ;?>" class="flex justify-center items-center border-2 border-vertFonce rounded-2xl w-40 h-14 cursor-pointer my-5">Retour</a>
+                        <a href="../bo/stock.php?idCompte=<?php echo $idCompte ;?>" class="flex justify-center items-center border-2 border-vertFonce rounded-2xl w-40 h-14 cursor-pointer my-5">Annuler</a>
                         <!---bouton valider--->
-                        <input class="border-2 border-vertFonce rounded-2xl w-45 h-14 cursor-pointer my-5" type="submit" value="Valider">
+                        <input class="border-2 border-vertFonce rounded-2xl w-40 h-14 cursor-pointer my-5" type="submit" value="Valider">
                     </div>
                 </form>
             </div>
