@@ -6,15 +6,19 @@
 
     //récupère toutes les infos des tables produits et photos
     $tabProduit = [];
-    foreach($dbh->query("SELECT *
-                        FROM sae3_skadjam._produit pr
-                        INNER JOIN sae3_skadjam._montre m
-                            ON pr.id_produit=m.id_produit
-                        INNER JOIN sae3_skadjam._photo ph  
-                            ON ph.id_photo = m.id_photo 
-                        INNER JOIN sae3_skadjam._vendeur v
-                            ON pr.id_vendeur = v.id_compte
-                        WHERE pr.est_supprime = false AND pr.est_masque = false"
+    foreach($dbh->query("SELECT pr.id_produit, libelle_produit, description_produit, prix_ttc, prix_remise, quantite_stock, id_categorie, pr.id_vendeur, note_moyenne, ph.id_photo, url_photo, alt, titre, id_compte, pu.id_promotion, label
+                                    FROM sae3_skadjam._produit pr
+                                    INNER JOIN sae3_skadjam._montre m
+                                        ON pr.id_produit=m.id_produit
+                                    INNER JOIN sae3_skadjam._photo ph  
+                                        ON ph.id_photo = m.id_photo 
+                                    INNER JOIN sae3_skadjam._vendeur v
+                                        ON pr.id_vendeur = v.id_compte
+                                    LEFT JOIN sae3_skadjam._promu pu
+                                        ON pu.id_produit = pr.id_produit
+                                    LEFT JOIN sae3_skadjam._promotion pm
+                                        ON pu.id_promotion = pm.id_promotion
+                                    WHERE pr.est_supprime = false AND pr.est_masque = false"
                         , PDO::FETCH_ASSOC) as $row){
         $tabProduit[] = $row;
     }
