@@ -453,13 +453,14 @@ else { ?>
                     <input value="<?php echo $nom;?>" class="border-4 border-beige rounded-2xl m-2" type="text" name="nom" id="nom" required>
                 </div>
 
-                <!-- Prix hors taxe -->
                 <div class="col-start-2 row-start-2 flex flex-row justify-between w-155 m-2 p-2">
+                    <!-- Prix hors taxe -->
                     <div class="flex flex-col">
                         <label for="prix">Prix *(hors taxe):</label>
                         <input value="<?php echo $prixHT;?>" class="border-4 border-beige rounded-2xl w-40 m-2" type="number" name="prix" id="prix" min="0.0" step="0.01" required>
                     </div>
 
+                    <!-- Remise -->
                     <div class="flex flex-col">
                         <label for="remise">Remise (%):</label>
                         <input value="<?php echo $remise*100;?>" class="border-4 border-beige rounded-2xl w-40 m-2" type="number" name="remise" id="remise" min="0" max="100">
