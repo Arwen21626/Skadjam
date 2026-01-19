@@ -528,7 +528,7 @@ else { ?>
                         <div>
                             <div class="flex flex-row mr-4 ml-4">
                                 <label class="mr-4" for="dateDebutPromotion">Début de promotion* :</label>
-                                <input class="border-4 border-beige rounded-2xl w-45" type="date" name="dateDebutPromotion" id="dateDebutPromotion" value="<?php isset($dateDebutPromotion) ? $dateDebutPromotion : date('Y-m-d'); ?>" required>
+                                <input class="border-4 border-beige rounded-2xl w-45" type="date" name="dateDebutPromotion" id="dateDebutPromotion" value="<?php echo $dateDebutPromotion !== null ? $dateDebutPromotion : date('Y-m-d'); ?>" required>
                             </div>
                         </div>
                         <div>
