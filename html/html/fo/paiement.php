@@ -139,7 +139,7 @@ if($_SESSION['role'] != 'client'){
                         
                         //recuperation de l'etat de la commande
                         $stmt = $dbh->prepare($commande);
-                        if (!$stmt->execute([$id_suivi, $etat, $idCommande])){
+                        if (!$stmt->execute([$id_suivi, $etat[0], $idCommande])){
                             throw new Exception("insertion numero de suivi et etat");
                         }
                     }

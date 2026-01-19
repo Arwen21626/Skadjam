@@ -124,6 +124,7 @@ void run_server_loop() {
             // Processus enfant
             close(sock);
             handle_client(cnx, conn_addr);
+            LOG_SERV(LOG_DEBUG, "close connexion");
             close(cnx);
             _exit(0);
         }
@@ -146,6 +147,7 @@ void handle_client(int fd, struct sockaddr_in conn_addr) {
 
     while ((size = read(fd, buffer, TAILLEB - 1)) > 0) {
         buffer[size] = '\0';
+        LOG_SERV(LOG_DEBUG, "process commande");
         process_commands(fd, buffer);
     }
 
@@ -156,7 +158,9 @@ void process_commands(int fd, char *buffer) {
     char *line = strtok(buffer, "\n");
 
     while (line) {
+        LOG_SERV(LOG_DEBUG, "debut line %s", line);
         chomp(line);
+        LOG_SERV(LOG_DEBUG, "ap chomp line %s", line);
 
         char cmdstr[16];
         if (sscanf(line, "%15s", cmdstr) != 1) {
@@ -177,6 +181,7 @@ void process_commands(int fd, char *buffer) {
 
             case CMD_ADD: {
                 add_bord(conn, fd, line);
+                LOG_SERV(LOG_DEBUG, "sortie add bord");
             } break;
 
             case CMD_ETA:
@@ -193,7 +198,7 @@ void process_commands(int fd, char *buffer) {
                 send(fd, "CMD ERR NOT_EXIST\n", 19, 0);
                 break;
         }
-
+        LOG_SERV(LOG_DEBUG, "fin line %s", line);
         line = strtok(NULL, "\n");
     }
 }

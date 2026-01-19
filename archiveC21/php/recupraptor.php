@@ -93,6 +93,7 @@ class Recupraptor{
             $reponse = trim(fgets($this->conn));
             if ($reponse != "END"){
                 $message .= $reponse;
+                $len += strlen($message);
             }else{
                 $fin = 1;
             }
@@ -139,16 +140,22 @@ class Recupraptor{
             case "ARRCL" : return "Expédié";
             case "LVRSN" : return "En cours de livraison";
             case "LVR" : return "Livré";
+            case "LVRAB" : return "Livré absent";
+            case "REFU" : return "Refusé";
             default : return "Inconnu";
         }
     }
 
     public function get_etat(string $numSuivi){
-
+        $message = NULL;
         if ($reponse = $this->send_commande("ETA $numSuivi")){
-            $str_etat = Recupraptor::etat_to_str($reponse);
+            preg_match("/^([A-Z]+)\s/", $reponse, $etat_reponse);
+            if (trim($etat_reponse[1]) === "REFU"){
+                preg_match("/msg:\s*(.+)$/", $reponse, $message);
+            }
+            $str_etat = Recupraptor::etat_to_str(trim($etat_reponse[1]));
             $this->etat = $str_etat;
-            return $this->etat;
+            return [$this->etat, $message];
         }else{
             throw new Exception("ERREUR non connecté");
         }
