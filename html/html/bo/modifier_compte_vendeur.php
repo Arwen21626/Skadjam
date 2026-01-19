@@ -112,51 +112,79 @@ if (isset($_POST["nom"]) && isset($_POST["prenom"]) && isset($_POST["mail"]) && 
                     }
                 }
             // Erreur concernant l'unicité du mail
-            }else if(!mailUnique($mail) && !($ancienMail === $mail)){
+            }else if(!mailUnique($mail) && $ancienMail !== $mail){
                 $erreur = true;
                 echo "Erreur : le mail saisie existe déjà. ";
             }
 
             $urlPhoto = '/images/logo/bootstrap_icon/image.svg';
 
-            $reqPhoto = $dbh->prepare("SELECT ph.url_photo, ph.id_photo
+            // Récupération de la photo existante (si elle existe)
+            $reqPhoto = $dbh->prepare("SELECT ph.id_photo, ph.url_photo
                                         FROM sae3_skadjam._presente pr
                                         INNER JOIN sae3_skadjam._photo ph
                                             ON pr.id_photo = ph.id_photo
                                         WHERE pr.id_vendeur = $idCompte");
             $reqPhoto->execute();
 
-            if ($row = $reqPhoto->fetch()) {
-                $urlPhoto = $row['url_photo'];
-                $idPhoto = $row['id_photo'];
-            }
+            $photoExistante = $reqPhoto->fetch();
 
+            // Traitement upload
             if (isset($_FILES['photo']) && $_FILES['photo']['error'] === UPLOAD_ERR_OK) {
                 $typesAutorises = ['image/jpeg', 'image/png', 'image/webp'];
-                if (in_array($_FILES['photo']['type'], $typesAutorises)) {
-                    // Supprimer ancienne photo
-                    $anciennePhotoPath = __DIR__ . '/../..' . basename($urlPhoto);
-                    if (file_exists($anciennePhotoPath) && strpos($urlPhoto, 'image.svg') === false) {
-                        unlink($anciennePhotoPath);
-                    }
-                    // Nouvelle photo
-                    $ext = explode('/', $_FILES['photo']['type'])[1];
-                    $nomPhoto = explode(' ', trim($nom))[0] . '_' . time() . '.' . $ext;
-                    $destination = __DIR__ . '/../../images/images_vendeur';
-                    move_uploaded_file(
-                        $_FILES['photo']['tmp_name'],
-                        $destination . '/' . $nomPhoto
-                    );
+                if (!in_array($_FILES['photo']['type'], $typesAutorises)) {
+                    die("Format d'image non autorisé");
                 }
-                $updatePhoto = $dbh->prepare("UPDATE sae3_skadjam._photo
-                                                SET url_photo = :url, alt = :alt, titre = :titre
-                                                WHERE id_photo = :id_photo");
 
-                $updatePhoto->execute([':url' => '/images/images_vendeur/' . $nomPhoto,
-                                        ':alt' => $denom,
-                                        ':titre' => $denom,
-                                        ':id_photo' => $idPhoto]);
+                // Génération nom fichier
+                $ext = pathinfo($_FILES['photo']['name'], PATHINFO_EXTENSION);
+                $nomPhoto = explode(' ', $nom)[0] . '_' . time() . '.' . $ext;
+                $urlPhoto = '/images/images_vendeur/' . $nomPhoto;
+
+                // Déplacement fichier
+                move_uploaded_file($_FILES['photo']['tmp_name'], '../../' . $urlPhoto);
+
+                // Aucune photo existante
+                if(!$photoExistante){
+                    // Insertion photo
+                    $insertPhoto = $dbh->prepare("INSERT INTO sae3_skadjam._photo(url_photo,alt,titre)
+                                                VALUES(:urlPhoto,:denomination,:nomPhoto)");
+                    $insertPhoto->execute([
+                        'urlPhoto'   => $urlPhoto,
+                        'denomination' => $denomination,
+                        'nomPhoto'   => $nomPhoto
+                    ]);
+
+                    $idPhoto = $dbh->lastInsertId();
+
+                    // Liaison vendeur <-> photo
+                    $insertPresente = $dbh->prepare("INSERT INTO sae3_skadjam._presente(id_vendeur,id_photo)
+                                                    VALUES($idCompte,$idPhoto)");
+                    $insertPresente->execute();
+
+                // Photo existante
+                }else{
+                    // Suppression ancienne photo (si pas image par défaut)
+                    if ($photoExistante['url_photo'] !== 'image.svg') {
+                        $anciennePath = __DIR__ . '/../../images/images_vendeur/' . $photoExistante['url_photo'];
+                        if (file_exists($anciennePath)) {
+                            unlink($anciennePath);
+                        }
+                    }
+
+                    // Mise à jour photo
+                    $updatePhoto = $dbh->prepare("UPDATE sae3_skadjam._photo
+                                                SET url_photo = :url, alt = :alt, titre = :titre
+                                                WHERE id_photo = :idPhoto");
+                    $updatePhoto->execute([
+                        'url'     => $urlPhoto,
+                        'alt'     => $denomination,
+                        'titre'   => $nomPhoto,
+                        'idPhoto' => $photoExistante['id_photo']
+                    ]);
+                }
             }
+
 
             // Fermer la connexion à la base de données
             $dbh = null;
