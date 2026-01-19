@@ -91,8 +91,8 @@ if ($_SESSION['role'] !== 'visiteur'){
 
             <!-- Acceptation des CGU -->
             <div class="flex flex-row flex-wrap items-center mt-2 mb-2">
-                <label for="cgu" class="underline! cursor-pointer hover:text-rouge">J'ai lu et j'acccepte les conditions générales d'utilisation :</label>
-                <input type="checkbox" id="cgu" name="cgu" required class="cursor-pointer ml-10 w-5 h-5 @max-[768px]:ml-2">
+                <label for="cgu" class="underline! cursor-pointer hover:text-rouge">J'ai lu et j'acccepte les conditions générales d'utilisation</label>
+                <input type="checkbox" id="cgu" name="cgu" required class="cursor-pointer ml-5 w-5 h-5">
             </div>
 
             <!-- Validation ou pas du formulaire -->
