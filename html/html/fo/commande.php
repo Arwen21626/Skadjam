@@ -97,8 +97,8 @@
             <h3 id="numeroCommande"><?php echo $idCommande;?></h3>
         </div>
         
-        <!---date--->
         <div class="md:flex md:justify-between">
+            <!---date--->
             <h3 class="ml-5 mr-3">Date : <?php echo $date;?></h3>
             <!---bouton imprimer page format tablette--->
             <button id="imprimer" class="border-vertClair border-4 rounded-lg md:rounded-2xl w-35 h-10 md:w-50 md:h-14 px-7 mr-5 cursor-pointer hidden md:block">Imprimer</button>
