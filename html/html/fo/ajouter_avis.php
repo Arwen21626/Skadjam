@@ -51,10 +51,8 @@
     else if(isset($_GET['supr']) && $_GET['supr'] === 'true'){
         $suprAsignaler = $dbh->prepare("DELETE FROM sae3_skadjam._a_signaler WHERE id_avis = ?");
         $suprAvis = $dbh->prepare("DELETE FROM sae3_skadjam._avis WHERE id_produit = ? AND id_compte = ?");
-        echo 'salut'.$idProd.' '.$idCompte.' '.$idAvis;
         $suprAsignaler->execute([$idAvis]);
         $suprAvis->execute([$idProd, $idCompte]);
-        echo 'salutfin';
         header("location: details_produit.php?idProduit=$idProd");
     }
     else{
