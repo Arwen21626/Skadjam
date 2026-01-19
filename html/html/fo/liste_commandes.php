@@ -35,7 +35,7 @@
                 $etat[$id_commande] = 'err';
             }finally{
                 $tabInfoCommandes[] = $row;
-                $etat[$id_commande] = "état_test"; 
+                
                 
             }
             

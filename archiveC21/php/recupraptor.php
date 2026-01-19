@@ -155,7 +155,7 @@ class Recupraptor{
             }
             $str_etat = Recupraptor::etat_to_str(trim($etat_reponse[1]));
             $this->etat = $str_etat;
-            return [$this->etat, $message];
+            return [$this->etat, $message[1]];
         }else{
             throw new Exception("ERREUR non connecté");
         }
