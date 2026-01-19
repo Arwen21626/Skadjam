@@ -102,11 +102,9 @@ if($_SESSION['role'] != 'client'){
                 if($enregistrerCarte == 'on'){
                     $numeroHasher = password_hash($numero, PASSWORD_DEFAULT);
                     $cryptogrammeHasher = password_hash($cryptogramme, PASSWORD_DEFAULT);
-    
-                    
-                    echo $idCompte;
+
                     $nouvCarte = $dbh->prepare("INSERT INTO sae3_skadjam._carte_bancaire(numero_carte, cryptogramme, nom, expiration, id_client) VALUES(?, ?, ?, ?, ?)");
-                    $nouvCarte->execute([$numeroHasher, $nom, $expiration, $idCompte]);
+                    $nouvCarte->execute([$numeroHasher, $cryptogrammeHasher, $nom, $expiration, $idCompte]);
                 }
             }
     

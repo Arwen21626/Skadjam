@@ -98,14 +98,14 @@
                             $estPromu = (!empty($stmt->fetch())); ?>
                             <section class="bg-bleu flex flex-col w-40 h-auto p-2 m-2 md:w-80 md:p-3">
                                 <!--affichage de la photo-->
-                                <a href= "<?php echo "details_produit.php?idProduit=".$idProduit;?>" class="mb-3">
+                                <a href= "<?php echo "details_produit.php?idProduit=".$idProduit;?>" class=" mb-3">
                                     <img class="w-auto h-40 md:h-80 justify-self-center" 
                                         src="<?php echo $valeurs['url_photo'];?>" 
                                         alt="<?php echo $valeurs['alt'];?>"
                                         title="<?php echo $valeurs['titre'];?>">
                                         
                                 <!--affichage du nom du produit-->
-                                <p><?php echo $valeurs['libelle_produit'];?></p> 
+                                <p class=" max-w-36"><?php echo $valeurs['libelle_produit'];?></p> 
 
                                 <!--affichage du prix du produit-->   
                                 <div class="flex flex-row justify-between items-center">

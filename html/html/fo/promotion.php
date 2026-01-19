@@ -3,7 +3,7 @@
     require_once __DIR__ . "/../../../connections_params.php";
     require_once __DIR__ . "/../../php/fonctions.php";
     require_once __DIR__ . "/../../php/modification_variable.php";
-    const PAGE_SIZE = 15;
+    const PAGE_SIZE = 24;
     session_start();
 
     if (!isset($_SESSION['role'])) {
@@ -64,7 +64,8 @@
                                         ON pr.id_produit = pu.id_produit
                                     INNER JOIN sae3_skadjam._promotion pn
                                         ON pu.id_promotion = pn.id_promotion
-                                    WHERE pr.est_masque = false"
+                                    WHERE pr.est_masque = false
+                                    AND pr.est_supprime = false"
                                     , PDO::FETCH_ASSOC) as $row){
                     // Formattage des dates
                     $row['date_debut_promotion'] = formatDate($row['date_debut_promotion']);
@@ -86,7 +87,7 @@
                 $lignes = array_slice($tabProduit, $pageNumber*PAGE_SIZE-PAGE_SIZE, PAGE_SIZE);
                 
                 //affiche la photo du produit, son nom, son prix et sa note, son stock ?>
-                <div class="grid grid-cols-3">
+                <div class="flex flex-row flex-wrap justify-around">
                     <?php foreach($tabProduit as $id => $valeurs){
                         $idProduit = $valeurs['id_produit'];
                         // Le produit est-il en promotion ?
@@ -95,33 +96,32 @@
                                                 WHERE id_produit = :id_produit");
                         $stmt->execute([':id_produit' => $idProduit]);
                         $estPromu = ($stmt->fetch() !== false); ?>
-                        <section class="bg-bleu grid grid-cols-[40%_60%] w-40 md:w-80 h-auto p-2 md:p-3 m-2">
+                        <section class="bg-bleu flex flex-col w-40 h-auto p-2 m-2 md:w-80 md:p-3">
                             <!--affichage de la photo-->
-                            <a href= "<?php echo "details_produit.php?idProduit=".$idProduit;?>" class="col-span-2 justify-self-center mb-3">
+                            <a href= "<?php echo "details_produit.php?idProduit=".$idProduit;?>" class="mb-3">
                                 <img src="<?php echo $valeurs['url_photo'];?>" 
                                         alt="<?php echo $valeurs['alt'];?>"
                                         title="<?php echo $valeurs['titre'];?>"
                                         class="w-auto h-40 md:h-80 justify-self-center">
 
-                            <!--affichage du nom du produit-->
-                            <p class="col-span-2"><?php echo $valeurs['libelle_produit'];?></p> 
+                                <!--affichage du nom du produit-->
+                                <p><?php echo $valeurs['libelle_produit'];?></p> 
 
-                            <!--affichage du prix du produit-->   
-                            <div class="flex justify-start items-center col-span-2">
-                                <?php $prix = str_replace(".", ",", $valeurs['prix_ttc'])?>
-                                <p><?php echo $prix;?> €</p>
-
+                                <!--affichage du prix du produit-->   
+                                <div class="flex flex-row justify-between items-center">
+                                        <p class="inline-block <?php echo ($valeurs['pourcentage_remise'] !== NULL)?'line-through':'';?>"> <?php echo htmlentities(str_replace(".", ",",$valeurs['prix_ttc'])); ?>€ (TTC)</p>
+                                        <p class=" pl-3 <?php echo ($valeurs['pourcentage_remise'] !== NULL)?'':'hidden';?>"> <?php echo htmlentities(str_replace(".", ",",$valeurs['prix_remise'])); ?>€ (TTC)</p>
+                                </div>
                                 <!--récupération de la note-->
-                                <div class="ml-2 md:ml-10 flex">
+                                <div class="flex">
                                     <?php $note = $valeurs['note_moyenne'];
                                         affichageNote($note); ?>
-                                </div> 
-                            </div>    
+                                </div>   
                             </a>
 
                             <!--affichage de la promotion-->
                             <?php if($estPromu && !empty($valeurs['label'])){ ?>
-                                <div class="bg-rouge absolute col-span-2 w-36 md:w-74 underline text-beige pt-2 pb-1.5">
+                                <div class="bg-rouge absolute w-36 md:w-74 underline text-beige pt-2 pb-1.5">
                                     <h4 class="text-center text-beige overline m-0"><strong><?php echo htmlspecialchars($valeurs['label']); ?></strong></h4>
                                 </div>
                             <?php } ?>

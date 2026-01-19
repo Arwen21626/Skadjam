@@ -9,7 +9,7 @@ if ($_SESSION['role'] !== 'visiteur'){
 
 <!DOCTYPE html>
 <html lang="fr">
-<?php include (__DIR__."/../../php/structure/head_front.php");?>
+<?php include __DIR__."/../../php/structure/head_front.php";?>
 <head>
     <title>Création d'un compte client</title>
     <style>
@@ -22,13 +22,13 @@ if ($_SESSION['role'] !== 'visiteur'){
 <body>
     <?php
     // Import du header
-    include (__DIR__."/../../php/structure/header_front.php");  
+    include __DIR__."/../../php/structure/header_front.php";
     ?>
     
     <main style="margin: 0" class="flex flex-col justify-center">
         <?php
         // Import de la bar de navigation
-        include (__DIR__."/../../php/structure/navbar_front.php");    
+        include __DIR__."/../../php/structure/navbar_front.php";
         ?>
 
         <h2 class="flex justify-center text-center">Création du compte client</h2>
@@ -67,7 +67,7 @@ if ($_SESSION['role'] !== 'visiteur'){
             <!-- Téléphone -->
             <div class="flex flex-col basis-1/3 m-5 min-w-3xs">
                 <label for="telephone">Telephone* :</label>
-                <input class="border-4 border-beige rounded-2xl w-1/1 p-1 pl-3" type="tel" name="telephone" id="telephone" placeholder="0604030201" pattern="0[0-9]{9}" required>
+                <input class="border-4 border-beige rounded-2xl w-1/1 p-1 pl-3 placeholder-gray-500" type="tel" name="telephone" id="telephone" placeholder="0604030201" pattern="0[0-9]{9}" required>
             </div>
 
             <!-- Adresse email -->
@@ -89,29 +89,36 @@ if ($_SESSION['role'] !== 'visiteur'){
                 <input class="border-4 border-beige rounded-2xl w-1/1 p-1 pl-3" type="password" name="verifMdp" id="verifMdp" required>
             </div>
 
+            <!-- Acceptation des CGU -->
+            <div class="flex flex-row flex-wrap items-center mt-2 mb-2">
+                <label for="cgu" class="underline! cursor-pointer hover:text-rouge">J'ai lu et j'acccepte les conditions générales d'utilisation</label>
+                <input type="checkbox" id="cgu" name="cgu" required class="cursor-pointer ml-5 w-5 h-5">
+            </div>
+
+            <!-- Validation ou pas du formulaire -->
+            <div class="flex mt-10 justify-center md:justify-end w-1/1 ">
+                <button class="cursor-pointer border-2 border-vertFonce rounded-2xl w-40 h-14 p-0 m-0 mr-10" type="button"><a href="/index.php">Annuler</a></button>
+                <input class="cursor-pointer border-2 border-vertFonce rounded-2xl w-40 h-14 p-0 m-0 md:mr-10" type="Submit" name="submit" id="submit" value="S'inscrire">
+            </div>
+        </form>
+        <div class="flex flex-row flex-wrap justify-center">
             <!-- Lien vers la page de connexion -->
-            <div class="flex mt-10 flex-col w-1/1 items-start">
-                <p>Vous avez déjà un compte ?</p>
+            <div class="hover:text-rouge flex flex-row flex-wrap justify-center ml-10 mr-10 mb-10">
+                <a href="connexion.php">Vous avez déjà un compte ? </a>
                 <a style="text-decoration-line: underline" href="connexion.php">Connectez vous</a> 
             </div>
 
             <!-- Lien vers la création d'un compte vendeur -->
-            <div class="flex mt-10 flex-col w-1/1 items-start">
-                <p>Vous êtes un vendeur ?</p>
+            <div class="hover:text-rouge flex flex-row flex-wrap justify-center ml-10 mr-10 mb-10">
+                <a href="../bo/crea_compte_vendeur.php">Vous êtes un vendeur ? </a>
                 <a style="text-decoration-line: underline" href="../bo/crea_compte_vendeur.php">Créer un compte vendeur</a> 
             </div>
-            
-            <!-- Validation ou pas du formulaire -->
-            <div class="flex mt-10 justify-center md:justify-end w-1/1 ">
-                <button class="cursor-pointer  border-2 border-vertFonce rounded-2xl w-40 h-14 p-0 m-0 mr-10 " type="button"><a href="/index.php">Annuler</a></button>
-                <input class="cursor-pointer border-2 border-vertFonce rounded-2xl w-40 h-14 p-0 m-0 md:mr-10" type="Submit" name="submit" id="submit" value="S'inscrire">
-            </div>
-        </form>
+        </div>
     </main>
 
     <?php 
     // Import du footer
-    include (__DIR__."/../../php/structure/footer_front.php");
+    include __DIR__."/../../php/structure/footer_front.php";
     ?>
 
 </body>

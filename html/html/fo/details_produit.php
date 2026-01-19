@@ -109,6 +109,17 @@
     <?php require(__DIR__ . "/../../php/structure/header_front.php"); ?>
     <?php require(__DIR__ . "/../../php/structure/navbar_front.php"); ?>
 
+    <div id="popup-overlay" class="right-12 md:right-40">
+        <div id="popup-ajouter-panier" class="popup p-4 border-vertFonce shadow-xl">
+            <p>Le produit a bien été ajouté à votre panier !</p>
+            <div class="flex justify-around mt-2">
+                <button class="pl-2 pr-2 border-2 border-vertClair rounded-sm cursor-pointer">OK</button>
+                <a href="/html/fo/panier.php" class="a-button pl-2 pr-2 border-2 border-vertClair rounded-sm cursor-pointer">Voir le panier</a>
+            </div>
+        </div>
+    </div>
+    
+
     <main class="p-4 md:pl-8 pr-8">
         <!-- Section Description -->
         <section class="flex flex-col ">
@@ -290,9 +301,22 @@
                     <?php }?>
                 </div>
             </div>
-        </sectiob>
+        </section>
     </main>
 
     <?php require(__DIR__ . "/../../php/structure/footer_front.php") ?>
 </body>
+
+<script type="module">
+    import * as Popup from "../../js/popup.js";
+
+    const btnClosePopUp = document.getElementById("popup-ajouter-panier").querySelector("button");
+
+    btnClosePopUp.addEventListener("click", () => {
+        Popup.closePopup("popup-ajouter-panier");
+    });
+
+    Popup.showPopUp("popup-ajouter-panier", 5000, "panierAjouter");
+</script>
+
 </html>

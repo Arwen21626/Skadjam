@@ -1,20 +1,24 @@
 <?php
     session_start();
-    require_once(__DIR__ . '/../../php/verif_role_fo.php');
-    require_once(__DIR__ . '/../../01_premiere_connexion.php');
-    require_once(__DIR__ . "/../../../connections_params.php");
+    require_once __DIR__ . '/../../php/verif_role_fo.php';
+    require_once __DIR__ . '/../../01_premiere_connexion.php';
+    require_once __DIR__ . "/../../../connections_params.php";
 
     //récupère toutes les infos des tables produits et photos
     $tabProduit = [];
-    foreach($dbh->query("SELECT *
-                        FROM sae3_skadjam._produit pr
-                        INNER JOIN sae3_skadjam._montre m
-                            ON pr.id_produit=m.id_produit
-                        INNER JOIN sae3_skadjam._photo ph  
-                            ON ph.id_photo = m.id_photo 
-                        INNER JOIN sae3_skadjam._vendeur v
-                            ON pr.id_vendeur = v.id_compte
-                        WHERE pr.est_supprime = false AND pr.est_masque = false"
+    foreach($dbh->query("SELECT pr.id_produit, libelle_produit, description_produit, prix_ttc, prix_remise, quantite_stock, id_categorie, pr.id_vendeur, note_moyenne, ph.id_photo, url_photo, alt, titre, id_compte, pu.id_promotion, label
+                                    FROM sae3_skadjam._produit pr
+                                    INNER JOIN sae3_skadjam._montre m
+                                        ON pr.id_produit=m.id_produit
+                                    INNER JOIN sae3_skadjam._photo ph  
+                                        ON ph.id_photo = m.id_photo 
+                                    INNER JOIN sae3_skadjam._vendeur v
+                                        ON pr.id_vendeur = v.id_compte
+                                    LEFT JOIN sae3_skadjam._promu pu
+                                        ON pu.id_produit = pr.id_produit
+                                    LEFT JOIN sae3_skadjam._promotion pm
+                                        ON pu.id_promotion = pm.id_promotion
+                                    WHERE pr.est_supprime = false AND pr.est_masque = false"
                         , PDO::FETCH_ASSOC) as $row){
         $tabProduit[] = $row;
     }
@@ -31,6 +35,7 @@
     <script>
         const tabProd = <?php echo json_encode($tabProduit);?>;
     </script>
+    <script src="../../js/barre_recherche.js"></script>
     <script src="../../js/recherche.js"></script>
     <script src="../../js/affichageListeProduits.js"></script>
     <script src="../../js/fo/affichageProduit.js"></script>
@@ -45,14 +50,16 @@
     
 
     <!--header-->
-    <?php (include __DIR__ . "/../../php/structure/header_front.php"); ?>
-    <?php include(__DIR__ . "/../../php/structure/navbar_front.php"); ?>
+    <?php include __DIR__ . "/../../php/structure/header_front.php"; ?>
+    <?php include __DIR__ . "/../../php/structure/navbar_front.php"; ?>
 
     
     <main class="md:min-h-[900px] min-h-[600px]">
         <!-- Barre de recherche -->
+        <input type="text" id="recherche" class="border-4 border-vertClair rounded-xl placeholder-gray-500 md:w-267 w-95 p-2 md:ml-7 ml-6 mt-4 mb-4" placeholder="Rechercher un produit...">
         <button id="filtresTris" class="md:hidden underline  m-2">Filtres & tris</button>
-        <aside class="sidebar hidden overflow-auto bg-beige/90 w-full h-auto fixed top-0 bottom-10 md:bg-beige p-4 md:sticky md:block md:w-79 md:h-225 md:top-16 md:float-left">
+        <!-- Aside -->
+        <aside class="sidebar hidden overflow-auto bg-beige/90 w-110 h-auto fixed top-0 bottom-10 md:bg-beige p-4 md:sticky md:block md:w-79 md:h-225 md:top-16 md:float-left">
             
             <!-- Filtres -->
             <section>
@@ -184,7 +191,6 @@
                             </div>
                         </div>
                     </details>
-                    
                 </article>
 
                 <!-- ordre alpha -->
@@ -250,6 +256,6 @@
     <script src="../../js/fo/animSidebar.js"></script>
 
     <!--footer-->
-    <?php include (__DIR__ . "/../../php/structure/footer_front.php"); ?>
+    <?php include __DIR__ . "/../../php/structure/footer_front.php"; ?>
 </body>
 </html>

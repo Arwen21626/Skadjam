@@ -1,6 +1,7 @@
 <?php
     session_start();
     require_once __DIR__ . "/../../php/verif_role_fo.php";
+    require_once __DIR__ . "/../../php/fonctions.php";
     require(__DIR__ . '/../../01_premiere_connexion.php');
     include __DIR__ . '/../../connexion_recupraptor.php';
     $idCompte = $_SESSION['idCompte'];
@@ -34,6 +35,7 @@
                 $etat[$id_commande] = 'err';
             }finally{
                 $tabInfoCommandes[] = $row;
+                $etat[$id_commande] = "état_test"; 
                 
             }
             
@@ -61,18 +63,24 @@
     <?php include __DIR__ . "/../../php/structure/navbar_front.php"; ?>
 
     <main class="min-h-[600px]">
-        <h2 class = "md:pt-15 pt-10">Liste de mes commandes</h2>
 
+        <!---affichage si aucune commande de passée--->
         <?php if($tabInfoCommandes == null){ ?>
-            <p class="pt-15 text-center">Vous n'avez pas encore effectué de commande.</p>
+            <h2 class = "md:pt-15 pt-5">Liste de mes commandes</h2>
+            <p class="md:pt-15 pt-5 text-center">Vous n'avez pas encore effectué de commande.</p>
+            <a href="../../index.php" class="flex justify-center md:mt-15 md:mb-15 mt-5 mb-5"><button class="border-vertClair border-4 rounded-lg md:rounded-2xl w-35 h-10 md:w-50 md:h-14 px-7 cursor-pointer">Retour</button></a>
         <?php }
 
         else{?>
+            <!---bouton retour en haut de page version téléphone--->
+            <a href="../../index.php" class="flex justify-start ml-5 mt-5 md:hidden cursor-pointer">< Retour</a>
+            <h2 class = "md:pt-15 pt-5">Liste de mes commandes</h2>
             <div class="flex justify-center md:mt-15 mt-10">
-                <?php //tableau des commandes ?>
+                <?php //tableau liste des commandes ?>
                 <table class="table-auto md:w-250 w-95">
                     <thead>
                         <tr>
+                            <!---noms des colonnes--->
                             <th scope="col" class="md:w-80 pl-3"><h3 class="md:hidden">N°</h3><h3 class="hidden md:inline-flex">Numéro de commande</h3></th>
                             <th scope="col"><h3>Date</h3></th>
                             <th scope="col"><h3>Etat</h3></th>
@@ -82,19 +90,11 @@
                     </thead>
                     
                     <tbody>
-                        <?php 
-                            //pour changer la classe de css une ligne sur 2
-                            $impair = 0;
+                        <?php $ligneIndex = 1;
                             foreach($tabInfoCommandes as $id => $commande){
-                                $idCommande = $commande['id_commande']; 
-                                $impair ++;
-                                if(fmod($impair, 2) == 0){
-                                    $classe = "py-4";
-                                }
-                                else{
-                                    $classe = "py-4 bg-bleu";
-                                }?>
-                                <tr class="<?php echo $classe; ?>">
+                                $idCommande = $commande['id_commande']; ?>
+                                <tr class="py-4 <?= ligneCouleur($ligneIndex)?>">
+                                    <!---informtaions de chacune des commandes--->
                                     <th scope="row" class="text-left pl-5 md:text-center py-3 md:pl-3" ><p><?php echo $idCommande; ?></p></th>
                                     <td class="text-center py-3"><p><?php echo htmlentities($commande['date_commande']);?></p></td>
                                     <td class="text-center py-3"><p><?= $etat[$idCommande] ?></p></td>
@@ -107,6 +107,7 @@
                     </tbody>
                 </table>
             </div>
+            <!---bouton retour--->
             <a href="../../index.php" class="flex justify-center mt-15 mb-15"><button class="border-vertClair border-4 rounded-lg md:rounded-2xl w-35 h-10 md:w-50 md:h-14 px-7 cursor-pointer">Retour</button></a>
         <?php } ?>
     </main>

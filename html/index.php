@@ -13,7 +13,7 @@
                                "contient" => []]; //format du tableau représentant un produit : ['id' => 25, 'quantite_par_produit' => 2]
     }
 
-    require_once(__DIR__ . "/php/verif_role_fo.php");
+    require_once __DIR__ . "/php/verif_role_fo.php";
 ?>
 
 <!DOCTYPE html>
@@ -25,8 +25,8 @@
 <body>
     <!--header-->
     
-    <?php (include __DIR__ . "/php/structure/header_front.php"); ?>
-    <?php include(__DIR__ . "/php/structure/navbar_front.php"); ?>
+    <?php include __DIR__ . "/php/structure/header_front.php"; ?>
+    <?php include __DIR__ . "/php/structure/navbar_front.php"; ?>
 
     <main class="mt-10">
         <div class="grid grid-cols-2 gap-4 justify-items-center">
@@ -44,7 +44,6 @@
             </a>        
         </div>
 
-
         <!--Début du catalogue-->
         <h2 id="nosProduits">Nos produits</h2>
 
@@ -52,8 +51,7 @@
             //initialisation du numéro de page
             if(isset($_GET['page'])&& $_GET['page']!==""){
                 $pageNumber = $_GET['page'];
-            }
-            else{
+            }else{
                 $pageNumber = 1;
             }
 
@@ -94,19 +92,19 @@
                         $estPromu = ($stmt->fetch() !== false); ?>
                         <section class="bg-bleu flex flex-col w-40 h-auto p-2 m-2 md:w-80 md:p-3">
                             <!--affichage de la photo-->
-                            <a href= "<?php echo "html/fo/details_produit.php?idProduit=".$idProduit;?>" class="col-span-2 justify-self-center mb-3">
-                                <img src="<?php echo $valeurs['url_photo'];?>" 
-                                        alt="<?php echo $valeurs['alt'];?>"
-                                        title="<?php echo $valeurs['titre'];?>"
+                            <a href= "<?= 'html/fo/details_produit.php?idProduit='.$idProduit;?>" class="mb-3">
+                                <img src="<?= $valeurs['url_photo'];?>" 
+                                        alt="<?= $valeurs['alt'];?>"
+                                        title="<?= $valeurs['titre'];?>"
                                         class="w-auto h-40 md:h-80 justify-self-center">
 
                                 <!--affichage du nom du produit-->
-                                <p><?php echo $valeurs['libelle_produit'];?></p> 
+                                <p><?= $valeurs['libelle_produit'];?></p> 
 
                                 <!--affichage du prix du produit-->   
                                 <div class="flex flex-row justify-between items-center">
-                                    <p class="inline-block <?php echo ($valeurs['pourcentage_remise'] !== NULL)?'line-through':'';?>"> <?php echo htmlentities(str_replace(".", ",",$valeurs['prix_ttc'])); ?>€ (TTC)</p>
-                                    <p class=" pl-3 <?php echo ($valeurs['pourcentage_remise'] !== NULL)?'':'hidden';?>"> <?php echo htmlentities(str_replace(".", ",",$valeurs['prix_remise'])); ?>€ (TTC)</p>
+                                    <p class="inline-block <?= ($valeurs['pourcentage_remise'] !== NULL)?'line-through':'';?>"> <?= htmlentities(str_replace(".", ",",$valeurs['prix_ttc'])); ?>€ (TTC)</p>
+                                    <p class=" pl-3 <?= ($valeurs['pourcentage_remise'] !== NULL)?'':'hidden';?>"> <?= htmlentities(str_replace(".", ",",$valeurs['prix_remise'])); ?>€ (TTC)</p>
                                 </div>
                                 <!--récupération de la note-->
                                 <div class="flex">
@@ -131,8 +129,8 @@
                                     $labelPromo = $promotion['label'];
                                     if($debutPromo <= date('Y-m-d') && ($finPromo == null || $finPromo >= date('Y-m-d')) && !empty($labelPromo)){
                                 ?>
-                                <div class="bg-rouge absolute col-span-2 w-36 md:w-74 underline text-beige pt-2 pb-1.5">
-                                    <h4 class="text-center text-beige overline m-0"><strong><?php echo htmlspecialchars($labelPromo); ?></strong></h4>
+                                <div class="bg-rouge absolute w-36 md:w-74 underline text-beige pt-2 pb-1.5">
+                                    <h4 class="text-center text-beige overline m-0"><strong><?= htmlspecialchars($labelPromo); ?></strong></h4>
                                 </div>
                                 <?php }} ?>
                         </section>
@@ -146,18 +144,18 @@
         ?>
         <!--fin du catalogue-->
         <div class="flex flex-row space-x-4 justify-center">
-            <?php if ($pageNumber>1){?>
-            <a class= "lienPage hover:text-rouge" href="<?php echo "./index.php?page=".($pageNumber-1)."#nosProduits";?>">Page précédente</a>
+            <?php if($pageNumber>1){?>
+            <a class= "lienPage hover:text-rouge" href="<?= "./index.php?page=". $pageNumber-1 ."#nosProduits";?>">Page précédente</a>
             <?php }?>
         
-            <?php if ($pageNumber<$maxPage){?>
-            <a class= "lienPage hover:text-rouge" href="<?php echo "./index.php?page=".($pageNumber+1)."#nosProduits";?>">Page suivante</a>
+            <?php if($pageNumber<$maxPage){?>
+            <a class= "lienPage hover:text-rouge" href="<?= "./index.php?page=". $pageNumber+1 ."#nosProduits";?>">Page suivante</a>
             <?php }?>
         </div>
     </main>
     
     <!--footer-->
-    <?php require (__DIR__ . "/php/structure/footer_front.php"); ?>
+    <?php require __DIR__ . "/php/structure/footer_front.php"; ?>
 
 </body>
 
