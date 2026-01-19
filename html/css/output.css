@@ -966,6 +966,9 @@ input.quantite-prod-input {
   .overflow-auto {
     overflow: auto;
   }
+  .overflow-hidden {
+    overflow: hidden;
+  }
   .rounded-2xl {
     border-radius: var(--radius-2xl, 1rem);
   }
