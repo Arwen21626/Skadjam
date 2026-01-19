@@ -290,7 +290,7 @@ if (isset($_POST['valider'])) {
             <div class="flex items-center mt-10">
                 <input type="checkbox" id="case" name="case" class="cursor-pointer appearance-none w-10 h-10 border-4 border-vertClair rounded-sm md:rounded-md checked:bg-vertClair ml-3">
                 <a href="cgv_fo.php" class="ml-5">
-                    J’ai lu et j’accepte les conditions générales <br> de vente
+                    J’ai lu et j’accepte les conditions générales <br class="md:hidden"> de vente
                 </a> 
                 <span id="error-cgv" class="ml-2 text-rouge hidden">Vous devez accepter les CGV.</span>    
             </div>

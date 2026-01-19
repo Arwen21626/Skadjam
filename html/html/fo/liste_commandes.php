@@ -32,6 +32,7 @@
                 echo "Recupraptor Erreur : " . $e->getMessage() . "<br>";
             }finally{
                 $tabInfoCommandes[] = $row;
+                $etat[$id_commande] = "état_test"; 
                 
             }
             
@@ -63,9 +64,11 @@
 
         <?php if($tabInfoCommandes == null){ ?>
             <p class="pt-15 text-center">Vous n'avez pas encore effectué de commande.</p>
+            <a href="../../index.php" class="flex justify-center md:mt-15 md:mb-15 mt-5 mb-5"><button class="border-vertClair border-4 rounded-lg md:rounded-2xl w-35 h-10 md:w-50 md:h-14 px-7 cursor-pointer">Retour</button></a>
         <?php }
 
         else{?>
+            <a href="../../index.php" class="flex justify-center mt-5 mb-5 md:hidden"><button class="border-vertClair border-4 rounded-lg w-35 h-10 px-7 cursor-pointer">Retour</button></a>
             <div class="flex justify-center md:mt-15 mt-10">
                 <?php //tableau des commandes ?>
                 <table class="table-auto md:w-250 w-95">

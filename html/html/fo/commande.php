@@ -83,14 +83,19 @@
         
         <h2 class="mt-10">Récapitulatif de la commande</h2>
 
+        <div class="flex justify-between md:hidden mr-5 ml-5">
+            <a href="liste_commandes.php" class="flex justify-center"><button class="border-vertClair border-4 rounded-lg w-35 h-10 px-7 cursor-pointer">Retour</button></a>
+            <button id="imprimer" class="border-vertClair border-4 rounded-lg w-35 h-10 px-7 cursor-pointer">Imprimer</button>
+        </div>
+
         <div class="ml-5 flex flex-row items-center mt-10">
             <h3 class="mr-3">Numéro de la commande : </h3> 
             <h3 id="numeroCommande"><?php echo $idCommande;?></h3>
         </div>
         
-        <div class="flex justify-between">
+        <div class="md:flex md:justify-between">
             <h3 class="ml-5 mr-3">Date : <?php echo $date;?></h3>
-            <button id="imprimer" class="border-vertClair border-4 rounded-lg md:rounded-2xl w-35 h-10 md:w-50 md:h-14 px-7 mr-5 cursor-pointer">Imprimer</button>
+            <button id="imprimer" class="border-vertClair border-4 rounded-lg md:rounded-2xl w-35 h-10 md:w-50 md:h-14 px-7 mr-5 cursor-pointer hidden md:block">Imprimer</button>
         </div>
 
         <div class="flex justify-center md:mt-10">
