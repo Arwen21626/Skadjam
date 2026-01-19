@@ -1,6 +1,7 @@
 <?php
     session_start();
     require_once __DIR__ . "/../../php/verif_role_bo.php";
+    require_once __DIR__ . "/../../php/fonctions.php";
     require(__DIR__ . '/../../01_premiere_connexion.php');
     $idCompte = $_SESSION['idCompte'];
 

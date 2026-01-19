@@ -88,7 +88,7 @@
         <!---boutons retour et imprimer en haut de la page format téléphone--->
         <div class="flex justify-between md:hidden m-10">
             <a href="liste_commandes.php" class="flex justify-center"><button class="border-vertClair border-4 rounded-lg w-35 h-10 px-7 cursor-pointer">Retour</button></a>
-            <button id="imprimer" class="border-vertClair border-4 rounded-lg w-35 h-10 px-7 cursor-pointer">Imprimer</button>
+            <button class="imprimer border-vertClair border-4 rounded-lg w-35 h-10 px-7 cursor-pointer">Imprimer</button>
         </div>
 
         <!---numéro de commande--->
@@ -97,11 +97,11 @@
             <h3 id="numeroCommande"><?php echo $idCommande;?></h3>
         </div>
         
-        <!---date--->
         <div class="md:flex md:justify-between">
+            <!---date--->
             <h3 class="ml-5 mr-3">Date : <?php echo $date;?></h3>
             <!---bouton imprimer page format tablette--->
-            <button id="imprimer" class="border-vertClair border-4 rounded-lg md:rounded-2xl w-35 h-10 md:w-50 md:h-14 px-7 mr-5 cursor-pointer hidden md:block">Imprimer</button>
+            <button class="imprimer border-vertClair border-4 rounded-lg md:rounded-2xl w-35 h-10 md:w-50 md:h-14 px-7 mr-5 cursor-pointer hidden md:block">Imprimer</button>
         </div>
 
         <div class="flex justify-center md:mt-10">
@@ -263,18 +263,23 @@
         <!---boutons retour et imprimer version téléphone--->
         <div class="flex justify-between md:hidden m-10">
             <a href="liste_commandes.php" class="flex justify-center"><button class="border-vertClair border-4 rounded-lg w-35 h-10 px-7 cursor-pointer">Retour</button></a>
-            <button id="imprimer" class="border-vertClair border-4 rounded-lg w-35 h-10 px-7 cursor-pointer">Imprimer</button>
+            <button class="imprimer border-vertClair border-4 rounded-lg w-35 h-10 px-7 cursor-pointer">Imprimer</button>
         </div>
     </main>
 
-    <!---script pour l'impression d'une facture--->
+    <!--footer-->
+    <?php include (__DIR__ . "/../../php/structure/footer_front.php"); ?>
+
+        <!---script pour l'impression d'une facture--->
     <script>
-        let btnImprimmer = document.getElementById("imprimer");
+        let btnImprimmer = document.getElementsByClassName("imprimer");
         let numeroCommande = document.getElementById("numeroCommande");
 
         function fermerPageImpression() {
             // fermer la page d'impression
-            document.body.removeChild(this); 
+            let iframe = document.getElementsByTagName("iframe")[0];
+            let body = document.getElementsByTagName("body")[0];
+            body.removeChild(iframe); 
         }
 
         function gestionPageImpression() {
@@ -291,11 +296,10 @@
             document.body.appendChild(hideFrame); // ajoute dans le body le iframe pour l'impression
         }
 
-        btnImprimmer.addEventListener("click", () => {affichagePageImpression()});
+        btnImprimmer[0].addEventListener("click", () => {affichagePageImpression()});
+        btnImprimmer[1].addEventListener("click", () => {affichagePageImpression()});
+        btnImprimmer[2].addEventListener("click", () => {affichagePageImpression()});
+
     </script>
-
-    <!--footer-->
-    <?php include (__DIR__ . "/../../php/structure/footer_front.php"); ?>
-
 </body>
 </html>
