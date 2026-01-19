@@ -13,7 +13,7 @@
                                "contient" => []]; //format du tableau représentant un produit : ['id' => 25, 'quantite_par_produit' => 2]
     }
 
-    require_once(__DIR__ . "/php/verif_role_fo.php");
+    require_once __DIR__ . "/php/verif_role_fo.php";
 ?>
 
 <!DOCTYPE html>
@@ -25,8 +25,8 @@
 <body>
     <!--header-->
     
-    <?php (include __DIR__ . "/php/structure/header_front.php"); ?>
-    <?php include(__DIR__ . "/php/structure/navbar_front.php"); ?>
+    <?php include __DIR__ . "/php/structure/header_front.php"; ?>
+    <?php include __DIR__ . "/php/structure/navbar_front.php"; ?>
 
     <main class="mt-10">
         <div class="grid grid-cols-2 gap-4 justify-items-center">
@@ -157,7 +157,7 @@
     </main>
     
     <!--footer-->
-    <?php require (__DIR__ . "/php/structure/footer_front.php"); ?>
+    <?php require __DIR__ . "/php/structure/footer_front.php"; ?>
 
 </body>
 

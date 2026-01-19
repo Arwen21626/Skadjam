@@ -1,8 +1,8 @@
 <?php
     session_start();
-    require_once(__DIR__ . '/../../php/verif_role_fo.php');
-    require_once(__DIR__ . '/../../01_premiere_connexion.php');
-    require_once(__DIR__ . "/../../../connections_params.php");
+    require_once __DIR__ . '/../../php/verif_role_fo.php';
+    require_once __DIR__ . '/../../01_premiere_connexion.php';
+    require_once __DIR__ . "/../../../connections_params.php";
 
     //récupère toutes les infos des tables produits et photos
     $tabProduit = [];
@@ -46,8 +46,8 @@
     
 
     <!--header-->
-    <?php (include __DIR__ . "/../../php/structure/header_front.php"); ?>
-    <?php include(__DIR__ . "/../../php/structure/navbar_front.php"); ?>
+    <?php include __DIR__ . "/../../php/structure/header_front.php"; ?>
+    <?php include __DIR__ . "/../../php/structure/navbar_front.php"; ?>
 
     
     <main class="md:min-h-[900px] min-h-[600px]">
@@ -187,7 +187,6 @@
                             </div>
                         </div>
                     </details>
-                    
                 </article>
 
                 <!-- ordre alpha -->
@@ -253,6 +252,6 @@
     <script src="../../js/fo/animSidebar.js"></script>
 
     <!--footer-->
-    <?php include (__DIR__ . "/../../php/structure/footer_front.php"); ?>
+    <?php include __DIR__ . "/../../php/structure/footer_front.php"; ?>
 </body>
 </html>

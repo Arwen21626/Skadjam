@@ -99,7 +99,6 @@ input.quantite-prod-input {
 
 #popup-overlay.active {
     display: flex;
-    
 }
 
 #popup-overlay.desactive {
@@ -144,11 +143,9 @@ input.quantite-prod-input {
 
     from {
         transform: translateY(260px);
-        /* opacity: 0; */
     }
     to {
         transform: translateY(-50px);
-        /* opacity: 1; */
     }
 }
 

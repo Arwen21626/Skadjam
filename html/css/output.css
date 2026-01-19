@@ -75,6 +75,9 @@ input.quantite-prod-input {
 #popup-overlay.active {
   display: flex;
 }
+#popup-overlay.desactive {
+  display: none;
+}
 .popup.desactive {
   animation: popupOut 1s forwards;
 }
