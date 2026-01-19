@@ -6,7 +6,7 @@
     include __DIR__ . '/../../connexion_recupraptor.php';
     $idCompte = $_SESSION['idCompte'];
 
-    if(!isset($_SESSION['idCompte'])){
+    if(isset($idCompte)){
         header('Location: ./connexion.php');
     }
 
