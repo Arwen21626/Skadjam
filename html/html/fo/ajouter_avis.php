@@ -103,7 +103,7 @@
             </div>
         </form>
         <!-- Supression -->
-        <?php if ($note !== null){ // on peut supprimer un avis que si on est entrain de la modifier ?>
+        <?php if (isset($note)){ // on peut supprimer un avis que si on est entrain de la modifier ?>
             <a class="ml-10 flex justify-center mb-5 md:inline-block" href="./ajouter_avis.php?idProduit=<?php echo $produit['id_produit']?>&supr=true">Supprimer mon avis</a>
         <?php }?>
     </main>
