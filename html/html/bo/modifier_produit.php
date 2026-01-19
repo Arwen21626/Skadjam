@@ -436,7 +436,7 @@ else { ?>
     <body>
         <?php include __DIR__ . '/../../php/structure/header_back.php';?>
         <?php include __DIR__ . '/../../php/structure/navbar_back.php';?>
-        <main>
+        <main class="flex flex-col items-center">
             <h2>Modifier <?php echo $nom; ?></h2>
             <form class="grid grid-cols-[40%_60%] w-11/12 self-center" action="modifier_produit.php?idProduit=<?php echo $idProduit;?>" method="post" enctype="multipart/form-data">
                 <!-- Image -->
@@ -448,35 +448,35 @@ else { ?>
                 </div>
                 
                 <!-- Nom produit -->
-                <div class="col-start-2 row-start-1 flex flex-col w-200 m-2 p-2">
+                <div class="col-start-2 row-start-1 flex flex-col w-155 m-2 p-2">
                     <label for="nom">Nom produit *:</label>
-                    <input value="<?php echo $nom;?>" class=" border-4 border-beige rounded-2xl" type="text" name="nom" id="nom" required>
+                    <input value="<?php echo $nom;?>" class="border-4 border-beige rounded-2xl m-2" type="text" name="nom" id="nom" required>
                 </div>
 
                 <!-- Prix hors taxe -->
-                <div class="col-start-2 row-start-2 flex flex-row justify-between w-200 m-2 p-2">
+                <div class="col-start-2 row-start-2 flex flex-row justify-between w-155 m-2 p-2">
                     <div class="flex flex-col">
                         <label for="prix">Prix *(hors taxe):</label>
-                        <input value="<?php echo $prixHT;?>" class="border-4 border-beige rounded-2xl w-50" type="number" name="prix" id="prix" min="0.0" step="0.01" required>
+                        <input value="<?php echo $prixHT;?>" class="border-4 border-beige rounded-2xl w-40 m-2" type="number" name="prix" id="prix" min="0.0" step="0.01" required>
                     </div>
 
                     <div class="flex flex-col">
                         <label for="remise">Remise (%):</label>
-                        <input value="<?php echo $remise*100;?>" class="border-4 border-beige rounded-2xl w-50" type="number" name="remise" id="remise" min="0" max="100">
+                        <input value="<?php echo $remise*100;?>" class="border-4 border-beige rounded-2xl w-40 m-2" type="number" name="remise" id="remise" min="0" max="100">
                     </div>
 
                     <!-- Quantite en stock -->
                     <div class="flex flex-col">
                         <label for="qteStock">Quantité en stock* :</label>
-                        <input value="<?php echo $qteStock;?>" class="border-4 border-beige rounded-2xl w-50" type="number" name="qteStock" id="qteStock" min="0" required>
+                        <input value="<?php echo $qteStock;?>" class="border-4 border-beige rounded-2xl w-40 m-2" type="number" name="qteStock" id="qteStock" min="0" required>
                     </div>
                 </div>
                     
-                <div class="col-start-2 row-start-3 col-span-2 flex flex-row justify-between w-200 m-2 p-2">
+                <div class="col-start-2 row-start-3 col-span-2 flex flex-row justify-between w-155 m-2 p-2">
                     <!-- Catégorie -->
                     <div class="flex flex-col">
                         <label for="categorie">Catégorie* :</label>
-                        <select class=" border-4 border-beige rounded-2xl m-2 p-2 w-45 h-14 cursor-pointer" name="categorie" id="categorie" required>
+                        <select class="border-4 border-beige rounded-2xl m-2 p-2 w-40 h-14 cursor-pointer" name="categorie" id="categorie" required>
                             <option value="<?php echo $idCategorie;?>"><?php echo $nomCategorie;?></option>
                             <?php foreach ($tab_categories as $categorie) {?>
                                 <option value="<?php echo $categorie['id_categorie']?>"><?php echo $categorie['libelle_categorie']?></option>
@@ -486,7 +486,7 @@ else { ?>
                     <!-- Unité -->
                     <div class="flex flex-col">
                         <label for="unite">Unité* :</label>
-                        <select class="border-4 border-beige rounded-2xl m-2 p-2 w-45 h-14 cursor-pointer" name="unite" id="unite" required>
+                        <select class="border-4 border-beige rounded-2xl m-2 p-2 w-40 h-14 cursor-pointer" name="unite" id="unite" required>
                         <option value="<?php echo $unite;?>"><?php echo $unite;?></option>
                         <?php foreach ($tab_unite as $unite) {?>
                             <option value="<?php echo $unite;?>"><?php echo $unite;?></option>
@@ -496,7 +496,7 @@ else { ?>
                     </div>
                     <div class="flex flex-col">
                         <label for="qteUnite">Quantité par unité :</label>
-                        <input value="<?php echo $qteUnite;?>" class="border-4 border-beige rounded-2xl w-75" type="number" name="qteUnite" id="qteUnite" min="0" required>
+                        <input value="<?php echo $qteUnite;?>" class="border-4 border-beige rounded-2xl w-40 m-2" type="number" name="qteUnite" id="qteUnite" min="0" required>
                     </div>
                 </div>
 

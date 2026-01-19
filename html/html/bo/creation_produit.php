@@ -274,8 +274,8 @@ if (isset($_POST['categorie']) && isset($_POST['nom']) && isset($_POST['prix']) 
         </style>
     </head>
     <body>
-        <?php include(__DIR__ . '/../../php/structure/header_back.php');?>
-        <?php include(__DIR__ . '/../../php/structure/navbar_back.php');?>
+        <?php include __DIR__ . '/../../php/structure/header_back.php';?>
+        <?php include __DIR__ . '/../../php/structure/navbar_back.php';?>
         <main class="flex flex-col items-center">
             <h2>Création d'un produit</h2>
             <form class="grid grid-cols-[40%_60%] w-4/5 self-center" action="creation_produit.php" method="post" enctype="multipart/form-data">
@@ -289,25 +289,25 @@ if (isset($_POST['categorie']) && isset($_POST['nom']) && isset($_POST['prix']) 
                 </div>
 
                 <!-- Nom produit -->
-                <div class="col-start-2 row-start-1 flex flex-col w-200 m-2 p-2">
+                <div class="col-start-2 row-start-1 flex flex-col w-155 m-2 p-2">
                     <label for="nom">Nom produit *:</label>
                     <input placeholder="Confiture fraises des bois 200g" class=" border-4 border-beige rounded-2xl placeholder-gray-500" type="text" name="nom" id="nom" required>
                 </div>
 
-                <div class="col-start-2 row-start-2 flex flex-row justify-between w-200 m-2 p-2">
+                <div class="col-start-2 row-start-2 flex flex-row justify-between w-155 m-2 p-2">
                     <!-- Prix ht -->
                     <div class="flex flex-col">
                         <label for="prix">Prix *(hors taxe):</label>
-                        <input placeholder="3.99" class="border-4 border-beige rounded-2xl w-75 placeholder-gray-500" type="number" name="prix" id="prix" min="0.0" step="0.01" required>
+                        <input placeholder="3.99" class="border-4 border-beige rounded-2xl w-40 m-2 placeholder-gray-500" type="number" name="prix" id="prix" min="0.0" step="0.01" required>
                     </div>
                     <!-- Quantite en stock -->
                     <div class="flex flex-col">
                         <label for="qteStock">Quantité en stock* :</label>
-                        <input placeholder="50" class="border-4 border-beige rounded-2xl w-75 placeholder-gray-500" type="number" name="qteStock" id="qteStock" min="0" required>
+                        <input placeholder="50" class="border-4 border-beige rounded-2xl w-40 m-2 placeholder-gray-500" type="number" name="qteStock" id="qteStock" min="0" required>
                     </div>
                 </div>
                     
-                <div class="col-start-2 row-start-3 col-span-2 flex flex-row justify-between w-200 m-2 p-2">
+                <div class="col-start-2 row-start-3 col-span-2 flex flex-row justify-between w-155 m-2 p-2">
                     <!-- Catégorie -->
                     <div class="flex flex-col">
                         <label for="categorie">Catégorie* :</label>
@@ -331,7 +331,7 @@ if (isset($_POST['categorie']) && isset($_POST['nom']) && isset($_POST['prix']) 
                     <!-- Quantité par unité -->
                     <div class="flex flex-col">
                         <label for="qteUnite">Quantité par unité :</label>
-                        <input placeholder="200" class="border-4 border-beige rounded-2xl w-75 placeholder-gray-500" type="number" name="qteUnite" id="qteUnite" min="0" required>
+                        <input placeholder="200" class="border-4 border-beige rounded-2xl w-40 m-2 placeholder-gray-500" type="number" name="qteUnite" id="qteUnite" min="0" required>
                     </div>
                 </div>
 
@@ -386,7 +386,7 @@ if (isset($_POST['categorie']) && isset($_POST['nom']) && isset($_POST['prix']) 
                 </div>
             </form>
         </main>
-        <?php include(__DIR__ . '/../../php/structure/footer_back.php');?>
+        <?php include __DIR__ . '/../../php/structure/footer_back.php';?>
         <script src="../../js/bo/changement_image_produits.js"></script>
     </body>
     <script>
