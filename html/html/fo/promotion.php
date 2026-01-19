@@ -96,33 +96,32 @@
                                                 WHERE id_produit = :id_produit");
                         $stmt->execute([':id_produit' => $idProduit]);
                         $estPromu = ($stmt->fetch() !== false); ?>
-                        <section class="bg-bleu grid grid-cols-[40%_60%] w-40 md:w-80 h-auto p-2 md:p-3 m-2">
+                        <section class="bg-bleu flex flex-col w-40 h-auto p-2 m-2 md:w-80 md:p-3">
                             <!--affichage de la photo-->
-                            <a href= "<?php echo "details_produit.php?idProduit=".$idProduit;?>" class="col-span-2 justify-self-center mb-3">
+                            <a href= "<?php echo "details_produit.php?idProduit=".$idProduit;?>" class="mb-3">
                                 <img src="<?php echo $valeurs['url_photo'];?>" 
                                         alt="<?php echo $valeurs['alt'];?>"
                                         title="<?php echo $valeurs['titre'];?>"
                                         class="w-auto h-40 md:h-80 justify-self-center">
 
-                            <!--affichage du nom du produit-->
-                            <p class="col-span-2"><?php echo $valeurs['libelle_produit'];?></p> 
+                                <!--affichage du nom du produit-->
+                                <p><?php echo $valeurs['libelle_produit'];?></p> 
 
-                            <!--affichage du prix du produit-->   
-                            <div class="flex justify-start items-center col-span-2">
-                                <?php $prix = str_replace(".", ",", $valeurs['prix_ttc'])?>
-                                <p><?php echo $prix;?> €</p>
-
+                                <!--affichage du prix du produit-->   
+                                <div class="flex flex-row justify-between items-center">
+                                        <p class="inline-block <?php echo ($valeurs['pourcentage_remise'] !== NULL)?'line-through':'';?>"> <?php echo htmlentities(str_replace(".", ",",$valeurs['prix_ttc'])); ?>€ (TTC)</p>
+                                        <p class=" pl-3 <?php echo ($valeurs['pourcentage_remise'] !== NULL)?'':'hidden';?>"> <?php echo htmlentities(str_replace(".", ",",$valeurs['prix_remise'])); ?>€ (TTC)</p>
+                                </div>
                                 <!--récupération de la note-->
-                                <div class="ml-2 md:ml-10 flex">
+                                <div class="flex">
                                     <?php $note = $valeurs['note_moyenne'];
                                         affichageNote($note); ?>
-                                </div> 
-                            </div>    
+                                </div>   
                             </a>
 
                             <!--affichage de la promotion-->
                             <?php if($estPromu && !empty($valeurs['label'])){ ?>
-                                <div class="bg-rouge absolute col-span-2 w-36 md:w-74 underline text-beige pt-2 pb-1.5">
+                                <div class="bg-rouge absolute w-36 md:w-74 underline text-beige pt-2 pb-1.5">
                                     <h4 class="text-center text-beige overline m-0"><strong><?php echo htmlspecialchars($valeurs['label']); ?></strong></h4>
                                 </div>
                             <?php } ?>

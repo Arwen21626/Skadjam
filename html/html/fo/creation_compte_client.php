@@ -103,15 +103,15 @@ if ($_SESSION['role'] !== 'visiteur'){
         </form>
         <div class="flex flex-row flex-wrap justify-center">
             <!-- Lien vers la page de connexion -->
-            <div class="flex flex-row flex-wrap justify-center ml-10 mr-10 mb-10">
-                <p>Vous avez déjà un compte ? </p>
-                <a class="hover:text-rouge" style="text-decoration-line: underline" href="connexion.php">Connectez vous</a> 
+            <div class="hover:text-rouge flex flex-row flex-wrap justify-center ml-10 mr-10 mb-10">
+                <a href="connexion.php">Vous avez déjà un compte ? </a>
+                <a style="text-decoration-line: underline" href="connexion.php">Connectez vous</a> 
             </div>
 
             <!-- Lien vers la création d'un compte vendeur -->
-            <div class="flex flex-row flex-wrap justify-center ml-10 mr-10 mb-10">
-                <p>Vous êtes un vendeur ? </p>
-                <a class="hover:text-rouge" style="text-decoration-line: underline" href="../bo/crea_compte_vendeur.php">Créer un compte vendeur</a> 
+            <div class="hover:text-rouge flex flex-row flex-wrap justify-center ml-10 mr-10 mb-10">
+                <a href="../bo/crea_compte_vendeur.php">Vous êtes un vendeur ? </a>
+                <a style="text-decoration-line: underline" href="../bo/crea_compte_vendeur.php">Créer un compte vendeur</a> 
             </div>
         </div>
     </main>

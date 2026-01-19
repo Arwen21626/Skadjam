@@ -134,9 +134,7 @@
     }
 ?>
 
-<pre>
-    <?php print_r($infoProduitsPanier); ?>
-</pre>
+
 
 <!DOCTYPE html>
 <html lang="fr">
