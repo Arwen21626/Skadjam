@@ -1,9 +1,31 @@
 let copieProd = JSON.parse(JSON.stringify(tabProd))
 
+function barreDeRecherche(tableau, mot){
+    let tableauRecherche = []
+    tablean.filter(prod => {
+        let nom = prod['libelle_produit'].toLowerCase()
+        let recherche = mot.toLowerCase()
+        if(nom.includes(recherche)){
+            tableauRecherche.push(prod)
+        }
+    });
+    first = 0
+    actualPage = 1
+    return tableauRecherche
+}
+
 // Ajout des eventListeners
 function ajoutEventListener(){
     
 // EventListener pour les boutons de changement de page
+    // Barre de recherche
+    let barreRecherche = document.getElementById("recherche")
+
+    barreRecherche.addEventListener("input",function(){
+        recherche = barreDeRecherche(barreRecherche.value)
+        afficherListe(copieProd, recherche)
+    })
+
     // Récupérations des elements
     let premierePage = document.getElementById("premierePage")
     let pagePrec = document.getElementById("pagePrec")
@@ -195,3 +217,4 @@ function ajoutEventListener(){
         boutonSidebar.classList.remove("hidden")
     })
 }
+
