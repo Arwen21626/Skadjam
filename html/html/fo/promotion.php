@@ -64,7 +64,8 @@
                                         ON pr.id_produit = pu.id_produit
                                     INNER JOIN sae3_skadjam._promotion pn
                                         ON pu.id_promotion = pn.id_promotion
-                                    WHERE pr.est_masque = false"
+                                    WHERE pr.est_masque = false
+                                    AND pr.est_supprime = false"
                                     , PDO::FETCH_ASSOC) as $row){
                     // Formattage des dates
                     $row['date_debut_promotion'] = formatDate($row['date_debut_promotion']);
