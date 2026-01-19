@@ -1,4 +1,3 @@
-// logger.c
 #include "logger.h"
 
 static FILE *log_file = NULL;

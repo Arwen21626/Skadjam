@@ -4,6 +4,8 @@
 #include <stdio.h>
 #include <time.h>
 #include <stdarg.h>
+#include <netinet/in.h>
+
 
 
 
@@ -18,6 +20,9 @@ typedef enum {
     LOG_SRC_CLIENT,
     LOG_SRC_SERV
 } log_src_t;
+
+extern char cIp[INET_ADDRSTRLEN];
+extern int cPort;
 
 void log_init();
 void log_close();

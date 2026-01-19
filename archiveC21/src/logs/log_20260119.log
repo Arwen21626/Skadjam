@@ -1,0 +1,815 @@
+[09:46:16] [INFO]    [SERV]   (./serveur/serveur.c:72) Démarrage du service Delivraptor
+[09:46:16] [INFO]    [SERV]   (./serveur/serveur.c:99) Serveur prêt sur 127.0.0.1:6969
+[09:46:48] [INFO]    [SERV]   (./serveur/serveur.c:114) Connexion acceptée (fd=5)
+[09:46:48] [INFO]    [CLIENT] (./serveur/serveur.c:140) [127.0.0.1:60682] Client connecté
+[09:46:48] [INFO]    [SERV]   (./bdd/bdd.c:20) Connecté a la BDD
+[09:46:48] [INFO]    [SERV]   (./bdd/bdd.c:21) SET search_path...
+[09:46:48] [INFO]    [SERV]   (./bdd/bdd.c:26) SET search_path success
+[09:46:48] [INFO]    [SERV]   (./bdd/bdd.c:31) Base de données actuelle : postgres
+[09:46:48] [INFO]    [SERV]   (./bdd/bdd.c:37) Schéma courant (search_path) : sae3_delivraptor
+[09:46:48] [INFO]    [CLIENT] (./serveur/serveur.c:171) [127.0.0.1:60682] Commande reçue : CONN
+[09:46:48] [INFO]    [CLIENT] (./serveur/serveur.c:212) [127.0.0.1:60682] Tentative d'authentification pour 'test'
+[09:46:48] [INFO]    [CLIENT] (./serveur/serveur.c:217) [127.0.0.1:60682] Authentification réussie pour 'test'
+[09:46:48] [INFO]    [CLIENT] (./serveur/serveur.c:171) [127.0.0.1:60682] Commande reçue : ETA
+[09:46:48] [INFO]    [CLIENT] (./controller/controller_etat.c:49) [127.0.0.1:60682] ETA: données extraites avec succès
+[09:46:48] [DEBUG]   [SERV]   (./sender/sender_global.c:14)  >> CMD ETA
+SIZE 3
+
+[09:46:48] [DEBUG]   [SERV]   (./sender/sender_global.c:14)  >> LVR
+[09:46:48] [DEBUG]   [SERV]   (./sender/sender_global.c:14)  >> 
+END
+
+[09:46:48] [DEBUG]   [SERV]   (./sender/sender_etat.c:12) PARAM d'envoi ETA : ALI1768744305
+[09:46:48] [INFO]    [CLIENT] (./serveur/serveur.c:152) [127.0.0.1:60682] Client déconnecté
+[09:46:48] [INFO]    [SERV]   (./serveur/serveur.c:114) Connexion acceptée (fd=5)
+[09:46:48] [INFO]    [CLIENT] (./serveur/serveur.c:140) [127.0.0.1:60692] Client connecté
+[09:46:48] [INFO]    [SERV]   (./bdd/bdd.c:20) Connecté a la BDD
+[09:46:48] [INFO]    [SERV]   (./bdd/bdd.c:21) SET search_path...
+[09:46:48] [INFO]    [SERV]   (./bdd/bdd.c:26) SET search_path success
+[09:46:48] [INFO]    [SERV]   (./bdd/bdd.c:31) Base de données actuelle : postgres
+[09:46:48] [INFO]    [SERV]   (./bdd/bdd.c:37) Schéma courant (search_path) : sae3_delivraptor
+[09:46:48] [INFO]    [CLIENT] (./serveur/serveur.c:171) [127.0.0.1:60692] Commande reçue : CONN
+[09:46:48] [INFO]    [CLIENT] (./serveur/serveur.c:212) [127.0.0.1:60692] Tentative d'authentification pour 'test'
+[09:46:48] [INFO]    [CLIENT] (./serveur/serveur.c:217) [127.0.0.1:60692] Authentification réussie pour 'test'
+[09:46:48] [INFO]    [CLIENT] (./serveur/serveur.c:171) [127.0.0.1:60692] Commande reçue : ETA
+[09:46:48] [INFO]    [CLIENT] (./controller/controller_etat.c:49) [127.0.0.1:60692] ETA: données extraites avec succès
+[09:46:48] [DEBUG]   [SERV]   (./sender/sender_global.c:14)  >> CMD ETA
+SIZE 3
+
+[09:46:48] [DEBUG]   [SERV]   (./sender/sender_global.c:14)  >> LVR
+[09:46:48] [DEBUG]   [SERV]   (./sender/sender_global.c:14)  >> 
+END
+
+[09:46:48] [DEBUG]   [SERV]   (./sender/sender_etat.c:12) PARAM d'envoi ETA : ALI1768743214
+[09:46:48] [INFO]    [CLIENT] (./serveur/serveur.c:152) [127.0.0.1:60692] Client déconnecté
+[09:46:48] [INFO]    [SERV]   (./serveur/serveur.c:114) Connexion acceptée (fd=5)
+[09:46:48] [INFO]    [CLIENT] (./serveur/serveur.c:140) [127.0.0.1:60706] Client connecté
+[09:46:48] [INFO]    [SERV]   (./bdd/bdd.c:20) Connecté a la BDD
+[09:46:48] [INFO]    [SERV]   (./bdd/bdd.c:21) SET search_path...
+[09:46:48] [INFO]    [SERV]   (./bdd/bdd.c:26) SET search_path success
+[09:46:48] [INFO]    [SERV]   (./bdd/bdd.c:31) Base de données actuelle : postgres
+[09:46:48] [INFO]    [SERV]   (./bdd/bdd.c:37) Schéma courant (search_path) : sae3_delivraptor
+[09:46:48] [INFO]    [CLIENT] (./serveur/serveur.c:171) [127.0.0.1:60706] Commande reçue : CONN
+[09:46:48] [INFO]    [CLIENT] (./serveur/serveur.c:212) [127.0.0.1:60706] Tentative d'authentification pour 'test'
+[09:46:48] [INFO]    [CLIENT] (./serveur/serveur.c:217) [127.0.0.1:60706] Authentification réussie pour 'test'
+[09:46:48] [INFO]    [CLIENT] (./serveur/serveur.c:171) [127.0.0.1:60706] Commande reçue : ETA
+[09:46:48] [INFO]    [CLIENT] (./controller/controller_etat.c:49) [127.0.0.1:60706] ETA: données extraites avec succès
+[09:46:48] [DEBUG]   [SERV]   (./sender/sender_global.c:14)  >> CMD ETA
+SIZE 3
+
+[09:46:48] [DEBUG]   [SERV]   (./sender/sender_global.c:14)  >> LVR
+[09:46:48] [DEBUG]   [SERV]   (./sender/sender_global.c:14)  >> 
+END
+
+[09:46:48] [DEBUG]   [SERV]   (./sender/sender_etat.c:12) PARAM d'envoi ETA : ALI1768742549
+[09:46:48] [INFO]    [CLIENT] (./serveur/serveur.c:152) [127.0.0.1:60706] Client déconnecté
+[09:46:48] [INFO]    [SERV]   (./serveur/serveur.c:114) Connexion acceptée (fd=5)
+[09:46:48] [INFO]    [CLIENT] (./serveur/serveur.c:140) [127.0.0.1:60716] Client connecté
+[09:46:48] [INFO]    [SERV]   (./bdd/bdd.c:20) Connecté a la BDD
+[09:46:48] [INFO]    [SERV]   (./bdd/bdd.c:21) SET search_path...
+[09:46:48] [INFO]    [SERV]   (./bdd/bdd.c:26) SET search_path success
+[09:46:48] [INFO]    [SERV]   (./bdd/bdd.c:31) Base de données actuelle : postgres
+[09:46:48] [INFO]    [SERV]   (./bdd/bdd.c:37) Schéma courant (search_path) : sae3_delivraptor
+[09:46:48] [INFO]    [CLIENT] (./serveur/serveur.c:171) [127.0.0.1:60716] Commande reçue : CONN
+[09:46:48] [INFO]    [CLIENT] (./serveur/serveur.c:212) [127.0.0.1:60716] Tentative d'authentification pour 'test'
+[09:46:48] [INFO]    [CLIENT] (./serveur/serveur.c:217) [127.0.0.1:60716] Authentification réussie pour 'test'
+[09:46:48] [INFO]    [CLIENT] (./serveur/serveur.c:171) [127.0.0.1:60716] Commande reçue : ETA
+[09:46:48] [INFO]    [CLIENT] (./controller/controller_etat.c:49) [127.0.0.1:60716] ETA: données extraites avec succès
+[09:46:48] [DEBUG]   [SERV]   (./sender/sender_global.c:14)  >> CMD ETA
+SIZE 3
+
+[09:46:48] [DEBUG]   [SERV]   (./sender/sender_global.c:14)  >> LVR
+[09:46:48] [DEBUG]   [SERV]   (./sender/sender_global.c:14)  >> 
+END
+
+[09:46:48] [DEBUG]   [SERV]   (./sender/sender_etat.c:12) PARAM d'envoi ETA : ALI1768693235
+[09:46:48] [INFO]    [CLIENT] (./serveur/serveur.c:152) [127.0.0.1:60716] Client déconnecté
+[09:47:01] [INFO]    [SERV]   (./serveur/serveur.c:114) Connexion acceptée (fd=5)
+[09:47:01] [INFO]    [CLIENT] (./serveur/serveur.c:140) [127.0.0.1:55648] Client connecté
+[09:47:01] [INFO]    [SERV]   (./bdd/bdd.c:20) Connecté a la BDD
+[09:47:01] [INFO]    [SERV]   (./bdd/bdd.c:21) SET search_path...
+[09:47:01] [INFO]    [SERV]   (./bdd/bdd.c:26) SET search_path success
+[09:47:01] [INFO]    [SERV]   (./bdd/bdd.c:31) Base de données actuelle : postgres
+[09:47:01] [INFO]    [SERV]   (./bdd/bdd.c:37) Schéma courant (search_path) : sae3_delivraptor
+[09:47:01] [INFO]    [CLIENT] (./serveur/serveur.c:171) [127.0.0.1:55648] Commande reçue : CONN
+[09:47:01] [INFO]    [CLIENT] (./serveur/serveur.c:212) [127.0.0.1:55648] Tentative d'authentification pour 'test'
+[09:47:01] [INFO]    [CLIENT] (./serveur/serveur.c:217) [127.0.0.1:55648] Authentification réussie pour 'test'
+[09:47:01] [INFO]    [CLIENT] (./serveur/serveur.c:171) [127.0.0.1:55648] Commande reçue : NEXT
+[09:47:01] [DEBUG]   [SERV]   (./controller/controller_etat.c:80) AVANCE ARR
+[09:47:01] [DEBUG]   [SERV]   (./model/model_etat.c:25) GET ALL ETA ARR
+[09:47:01] [DEBUG]   [SERV]   (./model/model_etat.c:33) GET ALL ETA DB success
+[09:47:01] [DEBUG]   [SERV]   (./model/model_etat.c:40) GET ALL ETA DB create bord...
+[09:47:01] [DEBUG]   [SERV]   (./model/model_etat.c:45) GET ALL ETA DB create bord fin
+[09:47:01] [INFO]    [SERV]   (./controller/controller_etat.c:85) GET ALL ETAT success
+[09:47:01] [DEBUG]   [SERV]   (./controller/controller_etat.c:87) count value : 0
+[09:47:01] [INFO]    [SERV]   (./controller/controller_etat.c:97) AVANCE success
+[09:47:01] [INFO]    [CLIENT] (./serveur/serveur.c:152) [127.0.0.1:55648] Client déconnecté
+[09:47:35] [INFO]    [SERV]   (./serveur/serveur.c:114) Connexion acceptée (fd=5)
+[09:47:35] [INFO]    [CLIENT] (./serveur/serveur.c:140) [127.0.0.1:48372] Client connecté
+[09:47:35] [INFO]    [SERV]   (./bdd/bdd.c:20) Connecté a la BDD
+[09:47:35] [INFO]    [SERV]   (./bdd/bdd.c:21) SET search_path...
+[09:47:35] [INFO]    [SERV]   (./bdd/bdd.c:26) SET search_path success
+[09:47:35] [INFO]    [SERV]   (./bdd/bdd.c:31) Base de données actuelle : postgres
+[09:47:35] [INFO]    [SERV]   (./bdd/bdd.c:37) Schéma courant (search_path) : sae3_delivraptor
+[09:47:35] [INFO]    [CLIENT] (./serveur/serveur.c:171) [127.0.0.1:48372] Commande reçue : CONN
+[09:47:35] [INFO]    [CLIENT] (./serveur/serveur.c:212) [127.0.0.1:48372] Tentative d'authentification pour 'test'
+[09:47:35] [INFO]    [CLIENT] (./serveur/serveur.c:217) [127.0.0.1:48372] Authentification réussie pour 'test'
+[09:47:35] [INFO]    [CLIENT] (./serveur/serveur.c:171) [127.0.0.1:48372] Commande reçue : ADD
+[09:47:35] [DEBUG]   [SERV]   (./controller/controller_bord.c:12) CMD ADD value 5
+[09:47:35] [INFO]    [CLIENT] (./controller/controller_bord.c:19) [127.0.0.1:48372] ADD: données extraites avec succès
+[09:47:35] [DEBUG]   [SERV]   (./controller/controller_bord.c:48) BORD AV FIND 
+[09:47:35] [DEBUG]   [SERV]   (./model/model_bord.c:16) BORD BD AV 
+[09:47:35] [DEBUG]   [SERV]   (./model/model_bord.c:22) BORD BD AP 
+[09:47:35] [DEBUG]   [SERV]   (./controller/controller_bord.c:54) BORD IF EXIST 
+[09:47:35] [DEBUG]   [SERV]   (./controller/controller_bord.c:24) BORD CREATE NEW : id_commande 5 horo 1768812455
+[09:47:35] [DEBUG]   [SERV]   (./controller/controller_bord.c:35) BORD CREATED : id_suivi ALI1768812460
+[09:47:35] [DEBUG]   [SERV]   (./controller/controller_bord.c:61) BORD CREATE ALI1768812460
+[09:47:35] [DEBUG]   [SERV]   (./controller/controller_bord.c:67) BORD ADD ALI1768812460
+[09:47:35] [DEBUG]   [SERV]   (./sender/sender_global.c:14)  >> CMD BORD
+SIZE 13
+
+[09:47:35] [DEBUG]   [SERV]   (./sender/sender_global.c:14)  >> ALI1768812460
+[09:47:35] [DEBUG]   [SERV]   (./sender/sender_global.c:14)  >> 
+END
+
+[09:47:35] [DEBUG]   [SERV]   (./sender/sender_bord.c:24) PARAM d'envoi BORD : ALI1768812460
+[09:47:35] [INFO]    [CLIENT] (./serveur/serveur.c:152) [127.0.0.1:48372] Client déconnecté
+[09:47:35] [INFO]    [SERV]   (./serveur/serveur.c:114) Connexion acceptée (fd=5)
+[09:47:35] [INFO]    [CLIENT] (./serveur/serveur.c:140) [127.0.0.1:48388] Client connecté
+[09:47:35] [INFO]    [SERV]   (./bdd/bdd.c:20) Connecté a la BDD
+[09:47:35] [INFO]    [SERV]   (./bdd/bdd.c:21) SET search_path...
+[09:47:35] [INFO]    [SERV]   (./bdd/bdd.c:26) SET search_path success
+[09:47:35] [INFO]    [SERV]   (./bdd/bdd.c:31) Base de données actuelle : postgres
+[09:47:35] [INFO]    [SERV]   (./bdd/bdd.c:37) Schéma courant (search_path) : sae3_delivraptor
+[09:47:35] [INFO]    [CLIENT] (./serveur/serveur.c:171) [127.0.0.1:48388] Commande reçue : CONN
+[09:47:35] [INFO]    [CLIENT] (./serveur/serveur.c:212) [127.0.0.1:48388] Tentative d'authentification pour 'test'
+[09:47:35] [INFO]    [CLIENT] (./serveur/serveur.c:217) [127.0.0.1:48388] Authentification réussie pour 'test'
+[09:47:35] [INFO]    [CLIENT] (./serveur/serveur.c:171) [127.0.0.1:48388] Commande reçue : ETA
+[09:47:35] [INFO]    [CLIENT] (./controller/controller_etat.c:49) [127.0.0.1:48388] ETA: données extraites avec succès
+[09:47:35] [DEBUG]   [SERV]   (./sender/sender_global.c:14)  >> CMD ETA
+SIZE 4
+
+[09:47:35] [DEBUG]   [SERV]   (./sender/sender_global.c:14)  >> TRTC
+[09:47:35] [DEBUG]   [SERV]   (./sender/sender_global.c:14)  >> 
+END
+
+[09:47:35] [DEBUG]   [SERV]   (./sender/sender_etat.c:12) PARAM d'envoi ETA : ALI1768812460
+[09:47:35] [INFO]    [CLIENT] (./serveur/serveur.c:152) [127.0.0.1:48388] Client déconnecté
+[09:47:37] [INFO]    [SERV]   (./serveur/serveur.c:114) Connexion acceptée (fd=5)
+[09:47:37] [INFO]    [CLIENT] (./serveur/serveur.c:140) [127.0.0.1:48402] Client connecté
+[09:47:37] [INFO]    [SERV]   (./bdd/bdd.c:20) Connecté a la BDD
+[09:47:37] [INFO]    [SERV]   (./bdd/bdd.c:21) SET search_path...
+[09:47:37] [INFO]    [SERV]   (./bdd/bdd.c:26) SET search_path success
+[09:47:37] [INFO]    [SERV]   (./bdd/bdd.c:31) Base de données actuelle : postgres
+[09:47:37] [INFO]    [SERV]   (./bdd/bdd.c:37) Schéma courant (search_path) : sae3_delivraptor
+[09:47:37] [INFO]    [CLIENT] (./serveur/serveur.c:171) [127.0.0.1:48402] Commande reçue : CONN
+[09:47:37] [INFO]    [CLIENT] (./serveur/serveur.c:212) [127.0.0.1:48402] Tentative d'authentification pour 'test'
+[09:47:37] [INFO]    [CLIENT] (./serveur/serveur.c:217) [127.0.0.1:48402] Authentification réussie pour 'test'
+[09:47:37] [INFO]    [CLIENT] (./serveur/serveur.c:171) [127.0.0.1:48402] Commande reçue : ETA
+[09:47:37] [INFO]    [CLIENT] (./controller/controller_etat.c:49) [127.0.0.1:48402] ETA: données extraites avec succès
+[09:47:37] [DEBUG]   [SERV]   (./sender/sender_global.c:14)  >> CMD ETA
+SIZE 4
+
+[09:47:37] [DEBUG]   [SERV]   (./sender/sender_global.c:14)  >> TRTC
+[09:47:37] [DEBUG]   [SERV]   (./sender/sender_global.c:14)  >> 
+END
+
+[09:47:37] [DEBUG]   [SERV]   (./sender/sender_etat.c:12) PARAM d'envoi ETA : ALI1768812460
+[09:47:37] [INFO]    [CLIENT] (./serveur/serveur.c:152) [127.0.0.1:48402] Client déconnecté
+[09:47:37] [INFO]    [SERV]   (./serveur/serveur.c:114) Connexion acceptée (fd=5)
+[09:47:37] [INFO]    [CLIENT] (./serveur/serveur.c:140) [127.0.0.1:48412] Client connecté
+[09:47:37] [INFO]    [SERV]   (./bdd/bdd.c:20) Connecté a la BDD
+[09:47:37] [INFO]    [SERV]   (./bdd/bdd.c:21) SET search_path...
+[09:47:37] [INFO]    [SERV]   (./bdd/bdd.c:26) SET search_path success
+[09:47:37] [INFO]    [SERV]   (./bdd/bdd.c:31) Base de données actuelle : postgres
+[09:47:37] [INFO]    [SERV]   (./bdd/bdd.c:37) Schéma courant (search_path) : sae3_delivraptor
+[09:47:37] [INFO]    [CLIENT] (./serveur/serveur.c:171) [127.0.0.1:48412] Commande reçue : CONN
+[09:47:37] [INFO]    [CLIENT] (./serveur/serveur.c:212) [127.0.0.1:48412] Tentative d'authentification pour 'test'
+[09:47:37] [INFO]    [CLIENT] (./serveur/serveur.c:217) [127.0.0.1:48412] Authentification réussie pour 'test'
+[09:47:37] [INFO]    [CLIENT] (./serveur/serveur.c:171) [127.0.0.1:48412] Commande reçue : ETA
+[09:47:37] [INFO]    [CLIENT] (./controller/controller_etat.c:49) [127.0.0.1:48412] ETA: données extraites avec succès
+[09:47:37] [DEBUG]   [SERV]   (./sender/sender_global.c:14)  >> CMD ETA
+SIZE 3
+
+[09:47:37] [DEBUG]   [SERV]   (./sender/sender_global.c:14)  >> LVR
+[09:47:37] [DEBUG]   [SERV]   (./sender/sender_global.c:14)  >> 
+END
+
+[09:47:37] [DEBUG]   [SERV]   (./sender/sender_etat.c:12) PARAM d'envoi ETA : ALI1768744305
+[09:47:37] [INFO]    [CLIENT] (./serveur/serveur.c:152) [127.0.0.1:48412] Client déconnecté
+[09:47:37] [INFO]    [SERV]   (./serveur/serveur.c:114) Connexion acceptée (fd=5)
+[09:47:37] [INFO]    [CLIENT] (./serveur/serveur.c:140) [127.0.0.1:48418] Client connecté
+[09:47:37] [INFO]    [SERV]   (./bdd/bdd.c:20) Connecté a la BDD
+[09:47:37] [INFO]    [SERV]   (./bdd/bdd.c:21) SET search_path...
+[09:47:37] [INFO]    [SERV]   (./bdd/bdd.c:26) SET search_path success
+[09:47:37] [INFO]    [SERV]   (./bdd/bdd.c:31) Base de données actuelle : postgres
+[09:47:37] [INFO]    [SERV]   (./bdd/bdd.c:37) Schéma courant (search_path) : sae3_delivraptor
+[09:47:37] [INFO]    [CLIENT] (./serveur/serveur.c:171) [127.0.0.1:48418] Commande reçue : CONN
+[09:47:37] [INFO]    [CLIENT] (./serveur/serveur.c:212) [127.0.0.1:48418] Tentative d'authentification pour 'test'
+[09:47:37] [INFO]    [CLIENT] (./serveur/serveur.c:217) [127.0.0.1:48418] Authentification réussie pour 'test'
+[09:47:37] [INFO]    [CLIENT] (./serveur/serveur.c:171) [127.0.0.1:48418] Commande reçue : ETA
+[09:47:37] [INFO]    [CLIENT] (./controller/controller_etat.c:49) [127.0.0.1:48418] ETA: données extraites avec succès
+[09:47:37] [DEBUG]   [SERV]   (./sender/sender_global.c:14)  >> CMD ETA
+SIZE 3
+
+[09:47:37] [DEBUG]   [SERV]   (./sender/sender_global.c:14)  >> LVR
+[09:47:37] [DEBUG]   [SERV]   (./sender/sender_global.c:14)  >> 
+END
+
+[09:47:37] [DEBUG]   [SERV]   (./sender/sender_etat.c:12) PARAM d'envoi ETA : ALI1768743214
+[09:47:37] [INFO]    [CLIENT] (./serveur/serveur.c:152) [127.0.0.1:48418] Client déconnecté
+[09:47:37] [INFO]    [SERV]   (./serveur/serveur.c:114) Connexion acceptée (fd=5)
+[09:47:37] [INFO]    [CLIENT] (./serveur/serveur.c:140) [127.0.0.1:48422] Client connecté
+[09:47:37] [INFO]    [SERV]   (./bdd/bdd.c:20) Connecté a la BDD
+[09:47:37] [INFO]    [SERV]   (./bdd/bdd.c:21) SET search_path...
+[09:47:37] [INFO]    [SERV]   (./bdd/bdd.c:26) SET search_path success
+[09:47:37] [INFO]    [SERV]   (./bdd/bdd.c:31) Base de données actuelle : postgres
+[09:47:37] [INFO]    [SERV]   (./bdd/bdd.c:37) Schéma courant (search_path) : sae3_delivraptor
+[09:47:37] [INFO]    [CLIENT] (./serveur/serveur.c:171) [127.0.0.1:48422] Commande reçue : CONN
+[09:47:37] [INFO]    [CLIENT] (./serveur/serveur.c:212) [127.0.0.1:48422] Tentative d'authentification pour 'test'
+[09:47:37] [INFO]    [CLIENT] (./serveur/serveur.c:217) [127.0.0.1:48422] Authentification réussie pour 'test'
+[09:47:37] [INFO]    [CLIENT] (./serveur/serveur.c:171) [127.0.0.1:48422] Commande reçue : ETA
+[09:47:37] [INFO]    [CLIENT] (./controller/controller_etat.c:49) [127.0.0.1:48422] ETA: données extraites avec succès
+[09:47:37] [DEBUG]   [SERV]   (./sender/sender_global.c:14)  >> CMD ETA
+SIZE 3
+
+[09:47:37] [DEBUG]   [SERV]   (./sender/sender_global.c:14)  >> LVR
+[09:47:37] [DEBUG]   [SERV]   (./sender/sender_global.c:14)  >> 
+END
+
+[09:47:37] [DEBUG]   [SERV]   (./sender/sender_etat.c:12) PARAM d'envoi ETA : ALI1768742549
+[09:47:37] [INFO]    [CLIENT] (./serveur/serveur.c:152) [127.0.0.1:48422] Client déconnecté
+[09:47:37] [INFO]    [SERV]   (./serveur/serveur.c:114) Connexion acceptée (fd=5)
+[09:47:37] [INFO]    [CLIENT] (./serveur/serveur.c:140) [127.0.0.1:48436] Client connecté
+[09:47:37] [INFO]    [SERV]   (./bdd/bdd.c:20) Connecté a la BDD
+[09:47:37] [INFO]    [SERV]   (./bdd/bdd.c:21) SET search_path...
+[09:47:37] [INFO]    [SERV]   (./bdd/bdd.c:26) SET search_path success
+[09:47:37] [INFO]    [SERV]   (./bdd/bdd.c:31) Base de données actuelle : postgres
+[09:47:37] [INFO]    [SERV]   (./bdd/bdd.c:37) Schéma courant (search_path) : sae3_delivraptor
+[09:47:37] [INFO]    [CLIENT] (./serveur/serveur.c:171) [127.0.0.1:48436] Commande reçue : CONN
+[09:47:37] [INFO]    [CLIENT] (./serveur/serveur.c:212) [127.0.0.1:48436] Tentative d'authentification pour 'test'
+[09:47:37] [INFO]    [CLIENT] (./serveur/serveur.c:217) [127.0.0.1:48436] Authentification réussie pour 'test'
+[09:47:37] [INFO]    [CLIENT] (./serveur/serveur.c:171) [127.0.0.1:48436] Commande reçue : ETA
+[09:47:37] [INFO]    [CLIENT] (./controller/controller_etat.c:49) [127.0.0.1:48436] ETA: données extraites avec succès
+[09:47:37] [DEBUG]   [SERV]   (./sender/sender_global.c:14)  >> CMD ETA
+SIZE 3
+
+[09:47:37] [DEBUG]   [SERV]   (./sender/sender_global.c:14)  >> LVR
+[09:47:37] [DEBUG]   [SERV]   (./sender/sender_global.c:14)  >> 
+END
+
+[09:47:37] [DEBUG]   [SERV]   (./sender/sender_etat.c:12) PARAM d'envoi ETA : ALI1768693235
+[09:47:37] [INFO]    [CLIENT] (./serveur/serveur.c:152) [127.0.0.1:48436] Client déconnecté
+[09:48:01] [INFO]    [SERV]   (./serveur/serveur.c:114) Connexion acceptée (fd=5)
+[09:48:01] [INFO]    [CLIENT] (./serveur/serveur.c:140) [127.0.0.1:36304] Client connecté
+[09:48:01] [INFO]    [SERV]   (./bdd/bdd.c:20) Connecté a la BDD
+[09:48:01] [INFO]    [SERV]   (./bdd/bdd.c:21) SET search_path...
+[09:48:01] [INFO]    [SERV]   (./bdd/bdd.c:26) SET search_path success
+[09:48:01] [INFO]    [SERV]   (./bdd/bdd.c:31) Base de données actuelle : postgres
+[09:48:01] [INFO]    [SERV]   (./bdd/bdd.c:37) Schéma courant (search_path) : sae3_delivraptor
+[09:48:01] [INFO]    [CLIENT] (./serveur/serveur.c:171) [127.0.0.1:36304] Commande reçue : CONN
+[09:48:01] [INFO]    [CLIENT] (./serveur/serveur.c:212) [127.0.0.1:36304] Tentative d'authentification pour 'test'
+[09:48:01] [INFO]    [CLIENT] (./serveur/serveur.c:217) [127.0.0.1:36304] Authentification réussie pour 'test'
+[09:48:01] [INFO]    [CLIENT] (./serveur/serveur.c:171) [127.0.0.1:36304] Commande reçue : NEXT
+[09:48:01] [DEBUG]   [SERV]   (./controller/controller_etat.c:80) AVANCE ARR
+[09:48:01] [DEBUG]   [SERV]   (./model/model_etat.c:25) GET ALL ETA ARR
+[09:48:01] [DEBUG]   [SERV]   (./model/model_etat.c:33) GET ALL ETA DB success
+[09:48:01] [DEBUG]   [SERV]   (./model/model_etat.c:40) GET ALL ETA DB create bord...
+[09:48:01] [DEBUG]   [SERV]   (./model/model_etat.c:45) GET ALL ETA DB create bord fin
+[09:48:01] [INFO]    [SERV]   (./controller/controller_etat.c:85) GET ALL ETAT success
+[09:48:01] [DEBUG]   [SERV]   (./controller/controller_etat.c:87) count value : 1
+[09:48:01] [DEBUG]   [SERV]   (./controller/controller_etat.c:90) id=ALI1768812460, etat=1 -> next=2
+[09:48:01] [INFO]    [SERV]   (./model/model_etat.c:60) ETA UPDATE : ALI1768812460 etat 2
+[09:48:01] [ERROR]   [SERV]   (./controller/controller_etat.c:94) AVANCE UPDATE pour ALI1768812460
+[09:48:01] [INFO]    [SERV]   (./controller/controller_etat.c:97) AVANCE success
+[09:48:01] [INFO]    [CLIENT] (./serveur/serveur.c:152) [127.0.0.1:36304] Client déconnecté
+[09:48:44] [INFO]    [SERV]   (./serveur/serveur.c:114) Connexion acceptée (fd=5)
+[09:48:44] [INFO]    [CLIENT] (./serveur/serveur.c:140) [127.0.0.1:36204] Client connecté
+[09:48:44] [INFO]    [SERV]   (./bdd/bdd.c:20) Connecté a la BDD
+[09:48:44] [INFO]    [SERV]   (./bdd/bdd.c:21) SET search_path...
+[09:48:44] [INFO]    [SERV]   (./bdd/bdd.c:26) SET search_path success
+[09:48:44] [INFO]    [SERV]   (./bdd/bdd.c:31) Base de données actuelle : postgres
+[09:48:44] [INFO]    [SERV]   (./bdd/bdd.c:37) Schéma courant (search_path) : sae3_delivraptor
+[09:48:44] [INFO]    [CLIENT] (./serveur/serveur.c:171) [127.0.0.1:36204] Commande reçue : CONN
+[09:48:44] [INFO]    [CLIENT] (./serveur/serveur.c:212) [127.0.0.1:36204] Tentative d'authentification pour 'test'
+[09:48:44] [INFO]    [CLIENT] (./serveur/serveur.c:217) [127.0.0.1:36204] Authentification réussie pour 'test'
+[09:48:44] [INFO]    [CLIENT] (./serveur/serveur.c:171) [127.0.0.1:36204] Commande reçue : ETA
+[09:48:44] [INFO]    [CLIENT] (./controller/controller_etat.c:49) [127.0.0.1:36204] ETA: données extraites avec succès
+[09:48:44] [DEBUG]   [SERV]   (./sender/sender_global.c:14)  >> CMD ETA
+SIZE 5
+
+[09:48:44] [DEBUG]   [SERV]   (./sender/sender_global.c:14)  >> ACHTR
+[09:48:44] [DEBUG]   [SERV]   (./sender/sender_global.c:14)  >> 
+END
+
+[09:48:44] [DEBUG]   [SERV]   (./sender/sender_etat.c:12) PARAM d'envoi ETA : ALI1768812460
+[09:48:44] [INFO]    [CLIENT] (./serveur/serveur.c:152) [127.0.0.1:36204] Client déconnecté
+[09:48:44] [INFO]    [SERV]   (./serveur/serveur.c:114) Connexion acceptée (fd=5)
+[09:48:44] [INFO]    [CLIENT] (./serveur/serveur.c:140) [127.0.0.1:36210] Client connecté
+[09:48:44] [INFO]    [SERV]   (./bdd/bdd.c:20) Connecté a la BDD
+[09:48:44] [INFO]    [SERV]   (./bdd/bdd.c:21) SET search_path...
+[09:48:44] [INFO]    [SERV]   (./bdd/bdd.c:26) SET search_path success
+[09:48:44] [INFO]    [SERV]   (./bdd/bdd.c:31) Base de données actuelle : postgres
+[09:48:44] [INFO]    [SERV]   (./bdd/bdd.c:37) Schéma courant (search_path) : sae3_delivraptor
+[09:48:44] [INFO]    [CLIENT] (./serveur/serveur.c:171) [127.0.0.1:36210] Commande reçue : CONN
+[09:48:44] [INFO]    [CLIENT] (./serveur/serveur.c:212) [127.0.0.1:36210] Tentative d'authentification pour 'test'
+[09:48:44] [INFO]    [CLIENT] (./serveur/serveur.c:217) [127.0.0.1:36210] Authentification réussie pour 'test'
+[09:48:44] [INFO]    [CLIENT] (./serveur/serveur.c:171) [127.0.0.1:36210] Commande reçue : ETA
+[09:48:44] [INFO]    [CLIENT] (./controller/controller_etat.c:49) [127.0.0.1:36210] ETA: données extraites avec succès
+[09:48:44] [DEBUG]   [SERV]   (./sender/sender_global.c:14)  >> CMD ETA
+SIZE 3
+
+[09:48:44] [DEBUG]   [SERV]   (./sender/sender_global.c:14)  >> LVR
+[09:48:44] [DEBUG]   [SERV]   (./sender/sender_global.c:14)  >> 
+END
+
+[09:48:44] [DEBUG]   [SERV]   (./sender/sender_etat.c:12) PARAM d'envoi ETA : ALI1768744305
+[09:48:44] [INFO]    [CLIENT] (./serveur/serveur.c:152) [127.0.0.1:36210] Client déconnecté
+[09:48:44] [INFO]    [SERV]   (./serveur/serveur.c:114) Connexion acceptée (fd=5)
+[09:48:44] [INFO]    [CLIENT] (./serveur/serveur.c:140) [127.0.0.1:36226] Client connecté
+[09:48:44] [INFO]    [SERV]   (./bdd/bdd.c:20) Connecté a la BDD
+[09:48:44] [INFO]    [SERV]   (./bdd/bdd.c:21) SET search_path...
+[09:48:44] [INFO]    [SERV]   (./bdd/bdd.c:26) SET search_path success
+[09:48:44] [INFO]    [SERV]   (./bdd/bdd.c:31) Base de données actuelle : postgres
+[09:48:44] [INFO]    [SERV]   (./bdd/bdd.c:37) Schéma courant (search_path) : sae3_delivraptor
+[09:48:44] [INFO]    [CLIENT] (./serveur/serveur.c:171) [127.0.0.1:36226] Commande reçue : CONN
+[09:48:44] [INFO]    [CLIENT] (./serveur/serveur.c:212) [127.0.0.1:36226] Tentative d'authentification pour 'test'
+[09:48:44] [INFO]    [CLIENT] (./serveur/serveur.c:217) [127.0.0.1:36226] Authentification réussie pour 'test'
+[09:48:44] [INFO]    [CLIENT] (./serveur/serveur.c:171) [127.0.0.1:36226] Commande reçue : ETA
+[09:48:44] [INFO]    [CLIENT] (./controller/controller_etat.c:49) [127.0.0.1:36226] ETA: données extraites avec succès
+[09:48:44] [DEBUG]   [SERV]   (./sender/sender_global.c:14)  >> CMD ETA
+SIZE 3
+
+[09:48:44] [DEBUG]   [SERV]   (./sender/sender_global.c:14)  >> LVR
+[09:48:44] [DEBUG]   [SERV]   (./sender/sender_global.c:14)  >> 
+END
+
+[09:48:44] [DEBUG]   [SERV]   (./sender/sender_etat.c:12) PARAM d'envoi ETA : ALI1768743214
+[09:48:44] [INFO]    [CLIENT] (./serveur/serveur.c:152) [127.0.0.1:36226] Client déconnecté
+[09:48:44] [INFO]    [SERV]   (./serveur/serveur.c:114) Connexion acceptée (fd=5)
+[09:48:44] [INFO]    [CLIENT] (./serveur/serveur.c:140) [127.0.0.1:36230] Client connecté
+[09:48:44] [INFO]    [SERV]   (./bdd/bdd.c:20) Connecté a la BDD
+[09:48:44] [INFO]    [SERV]   (./bdd/bdd.c:21) SET search_path...
+[09:48:44] [INFO]    [SERV]   (./bdd/bdd.c:26) SET search_path success
+[09:48:44] [INFO]    [SERV]   (./bdd/bdd.c:31) Base de données actuelle : postgres
+[09:48:44] [INFO]    [SERV]   (./bdd/bdd.c:37) Schéma courant (search_path) : sae3_delivraptor
+[09:48:44] [INFO]    [CLIENT] (./serveur/serveur.c:171) [127.0.0.1:36230] Commande reçue : CONN
+[09:48:44] [INFO]    [CLIENT] (./serveur/serveur.c:212) [127.0.0.1:36230] Tentative d'authentification pour 'test'
+[09:48:44] [INFO]    [CLIENT] (./serveur/serveur.c:217) [127.0.0.1:36230] Authentification réussie pour 'test'
+[09:48:44] [INFO]    [CLIENT] (./serveur/serveur.c:171) [127.0.0.1:36230] Commande reçue : ETA
+[09:48:44] [INFO]    [CLIENT] (./controller/controller_etat.c:49) [127.0.0.1:36230] ETA: données extraites avec succès
+[09:48:44] [DEBUG]   [SERV]   (./sender/sender_global.c:14)  >> CMD ETA
+SIZE 3
+
+[09:48:44] [DEBUG]   [SERV]   (./sender/sender_global.c:14)  >> LVR
+[09:48:44] [DEBUG]   [SERV]   (./sender/sender_global.c:14)  >> 
+END
+
+[09:48:44] [DEBUG]   [SERV]   (./sender/sender_etat.c:12) PARAM d'envoi ETA : ALI1768742549
+[09:48:44] [INFO]    [CLIENT] (./serveur/serveur.c:152) [127.0.0.1:36230] Client déconnecté
+[09:48:44] [INFO]    [SERV]   (./serveur/serveur.c:114) Connexion acceptée (fd=5)
+[09:48:44] [INFO]    [CLIENT] (./serveur/serveur.c:140) [127.0.0.1:36236] Client connecté
+[09:48:44] [INFO]    [SERV]   (./bdd/bdd.c:20) Connecté a la BDD
+[09:48:44] [INFO]    [SERV]   (./bdd/bdd.c:21) SET search_path...
+[09:48:44] [INFO]    [SERV]   (./bdd/bdd.c:26) SET search_path success
+[09:48:44] [INFO]    [SERV]   (./bdd/bdd.c:31) Base de données actuelle : postgres
+[09:48:44] [INFO]    [SERV]   (./bdd/bdd.c:37) Schéma courant (search_path) : sae3_delivraptor
+[09:48:44] [INFO]    [CLIENT] (./serveur/serveur.c:171) [127.0.0.1:36236] Commande reçue : CONN
+[09:48:44] [INFO]    [CLIENT] (./serveur/serveur.c:212) [127.0.0.1:36236] Tentative d'authentification pour 'test'
+[09:48:44] [INFO]    [CLIENT] (./serveur/serveur.c:217) [127.0.0.1:36236] Authentification réussie pour 'test'
+[09:48:44] [INFO]    [CLIENT] (./serveur/serveur.c:171) [127.0.0.1:36236] Commande reçue : ETA
+[09:48:44] [INFO]    [CLIENT] (./controller/controller_etat.c:49) [127.0.0.1:36236] ETA: données extraites avec succès
+[09:48:44] [DEBUG]   [SERV]   (./sender/sender_global.c:14)  >> CMD ETA
+SIZE 3
+
+[09:48:44] [DEBUG]   [SERV]   (./sender/sender_global.c:14)  >> LVR
+[09:48:44] [DEBUG]   [SERV]   (./sender/sender_global.c:14)  >> 
+END
+
+[09:48:44] [DEBUG]   [SERV]   (./sender/sender_etat.c:12) PARAM d'envoi ETA : ALI1768693235
+[09:48:44] [INFO]    [CLIENT] (./serveur/serveur.c:152) [127.0.0.1:36236] Client déconnecté
+[09:49:01] [INFO]    [SERV]   (./serveur/serveur.c:114) Connexion acceptée (fd=5)
+[09:49:01] [INFO]    [CLIENT] (./serveur/serveur.c:140) [127.0.0.1:57386] Client connecté
+[09:49:01] [INFO]    [SERV]   (./bdd/bdd.c:20) Connecté a la BDD
+[09:49:01] [INFO]    [SERV]   (./bdd/bdd.c:21) SET search_path...
+[09:49:01] [INFO]    [SERV]   (./bdd/bdd.c:26) SET search_path success
+[09:49:01] [INFO]    [SERV]   (./bdd/bdd.c:31) Base de données actuelle : postgres
+[09:49:01] [INFO]    [SERV]   (./bdd/bdd.c:37) Schéma courant (search_path) : sae3_delivraptor
+[09:49:01] [INFO]    [CLIENT] (./serveur/serveur.c:171) [127.0.0.1:57386] Commande reçue : CONN
+[09:49:01] [INFO]    [CLIENT] (./serveur/serveur.c:212) [127.0.0.1:57386] Tentative d'authentification pour 'test'
+[09:49:01] [INFO]    [CLIENT] (./serveur/serveur.c:217) [127.0.0.1:57386] Authentification réussie pour 'test'
+[09:49:01] [INFO]    [CLIENT] (./serveur/serveur.c:171) [127.0.0.1:57386] Commande reçue : NEXT
+[09:49:01] [DEBUG]   [SERV]   (./controller/controller_etat.c:80) AVANCE ARR
+[09:49:01] [DEBUG]   [SERV]   (./model/model_etat.c:25) GET ALL ETA ARR
+[09:49:01] [DEBUG]   [SERV]   (./model/model_etat.c:33) GET ALL ETA DB success
+[09:49:01] [DEBUG]   [SERV]   (./model/model_etat.c:40) GET ALL ETA DB create bord...
+[09:49:01] [DEBUG]   [SERV]   (./model/model_etat.c:45) GET ALL ETA DB create bord fin
+[09:49:01] [INFO]    [SERV]   (./controller/controller_etat.c:85) GET ALL ETAT success
+[09:49:01] [DEBUG]   [SERV]   (./controller/controller_etat.c:87) count value : 1
+[09:49:01] [DEBUG]   [SERV]   (./controller/controller_etat.c:90) id=ALI1768812460, etat=2 -> next=3
+[09:49:01] [INFO]    [SERV]   (./model/model_etat.c:60) ETA UPDATE : ALI1768812460 etat 3
+[09:49:01] [ERROR]   [SERV]   (./controller/controller_etat.c:94) AVANCE UPDATE pour ALI1768812460
+[09:49:01] [INFO]    [SERV]   (./controller/controller_etat.c:97) AVANCE success
+[09:49:01] [INFO]    [CLIENT] (./serveur/serveur.c:152) [127.0.0.1:57386] Client déconnecté
+[09:50:01] [INFO]    [SERV]   (./serveur/serveur.c:114) Connexion acceptée (fd=5)
+[09:50:01] [INFO]    [CLIENT] (./serveur/serveur.c:140) [127.0.0.1:46410] Client connecté
+[09:50:01] [INFO]    [SERV]   (./bdd/bdd.c:20) Connecté a la BDD
+[09:50:01] [INFO]    [SERV]   (./bdd/bdd.c:21) SET search_path...
+[09:50:01] [INFO]    [SERV]   (./bdd/bdd.c:26) SET search_path success
+[09:50:01] [INFO]    [SERV]   (./bdd/bdd.c:31) Base de données actuelle : postgres
+[09:50:01] [INFO]    [SERV]   (./bdd/bdd.c:37) Schéma courant (search_path) : sae3_delivraptor
+[09:50:01] [INFO]    [CLIENT] (./serveur/serveur.c:171) [127.0.0.1:46410] Commande reçue : CONN
+[09:50:01] [INFO]    [CLIENT] (./serveur/serveur.c:212) [127.0.0.1:46410] Tentative d'authentification pour 'test'
+[09:50:01] [INFO]    [CLIENT] (./serveur/serveur.c:217) [127.0.0.1:46410] Authentification réussie pour 'test'
+[09:50:01] [INFO]    [CLIENT] (./serveur/serveur.c:171) [127.0.0.1:46410] Commande reçue : NEXT
+[09:50:01] [DEBUG]   [SERV]   (./controller/controller_etat.c:80) AVANCE ARR
+[09:50:01] [DEBUG]   [SERV]   (./model/model_etat.c:25) GET ALL ETA ARR
+[09:50:01] [DEBUG]   [SERV]   (./model/model_etat.c:33) GET ALL ETA DB success
+[09:50:01] [DEBUG]   [SERV]   (./model/model_etat.c:40) GET ALL ETA DB create bord...
+[09:50:01] [DEBUG]   [SERV]   (./model/model_etat.c:45) GET ALL ETA DB create bord fin
+[09:50:01] [INFO]    [SERV]   (./controller/controller_etat.c:85) GET ALL ETAT success
+[09:50:01] [DEBUG]   [SERV]   (./controller/controller_etat.c:87) count value : 1
+[09:50:01] [DEBUG]   [SERV]   (./controller/controller_etat.c:90) id=ALI1768812460, etat=3 -> next=4
+[09:50:01] [INFO]    [SERV]   (./model/model_etat.c:60) ETA UPDATE : ALI1768812460 etat 4
+[09:50:01] [ERROR]   [SERV]   (./controller/controller_etat.c:94) AVANCE UPDATE pour ALI1768812460
+[09:50:01] [INFO]    [SERV]   (./controller/controller_etat.c:97) AVANCE success
+[09:50:01] [INFO]    [CLIENT] (./serveur/serveur.c:152) [127.0.0.1:46410] Client déconnecté
+[09:50:42] [INFO]    [SERV]   (./serveur/serveur.c:114) Connexion acceptée (fd=5)
+[09:50:42] [INFO]    [CLIENT] (./serveur/serveur.c:140) [127.0.0.1:53614] Client connecté
+[09:50:42] [INFO]    [SERV]   (./bdd/bdd.c:20) Connecté a la BDD
+[09:50:42] [INFO]    [SERV]   (./bdd/bdd.c:21) SET search_path...
+[09:50:42] [INFO]    [SERV]   (./bdd/bdd.c:26) SET search_path success
+[09:50:42] [INFO]    [SERV]   (./bdd/bdd.c:31) Base de données actuelle : postgres
+[09:50:42] [INFO]    [SERV]   (./bdd/bdd.c:37) Schéma courant (search_path) : sae3_delivraptor
+[09:50:42] [INFO]    [CLIENT] (./serveur/serveur.c:171) [127.0.0.1:53614] Commande reçue : CONN
+[09:50:42] [INFO]    [CLIENT] (./serveur/serveur.c:212) [127.0.0.1:53614] Tentative d'authentification pour 'test'
+[09:50:42] [INFO]    [CLIENT] (./serveur/serveur.c:217) [127.0.0.1:53614] Authentification réussie pour 'test'
+[09:50:42] [INFO]    [CLIENT] (./serveur/serveur.c:171) [127.0.0.1:53614] Commande reçue : ETA
+[09:50:42] [INFO]    [CLIENT] (./controller/controller_etat.c:49) [127.0.0.1:53614] ETA: données extraites avec succès
+[09:50:42] [DEBUG]   [SERV]   (./sender/sender_global.c:14)  >> CMD ETA
+SIZE 5
+
+[09:50:42] [DEBUG]   [SERV]   (./sender/sender_global.c:14)  >> ACHPR
+[09:50:42] [DEBUG]   [SERV]   (./sender/sender_global.c:14)  >> 
+END
+
+[09:50:42] [DEBUG]   [SERV]   (./sender/sender_etat.c:12) PARAM d'envoi ETA : ALI1768812460
+[09:50:42] [INFO]    [CLIENT] (./serveur/serveur.c:152) [127.0.0.1:53614] Client déconnecté
+[09:50:42] [INFO]    [SERV]   (./serveur/serveur.c:114) Connexion acceptée (fd=5)
+[09:50:42] [INFO]    [CLIENT] (./serveur/serveur.c:140) [127.0.0.1:53630] Client connecté
+[09:50:42] [INFO]    [SERV]   (./bdd/bdd.c:20) Connecté a la BDD
+[09:50:42] [INFO]    [SERV]   (./bdd/bdd.c:21) SET search_path...
+[09:50:42] [INFO]    [SERV]   (./bdd/bdd.c:26) SET search_path success
+[09:50:42] [INFO]    [SERV]   (./bdd/bdd.c:31) Base de données actuelle : postgres
+[09:50:42] [INFO]    [SERV]   (./bdd/bdd.c:37) Schéma courant (search_path) : sae3_delivraptor
+[09:50:42] [INFO]    [CLIENT] (./serveur/serveur.c:171) [127.0.0.1:53630] Commande reçue : CONN
+[09:50:42] [INFO]    [CLIENT] (./serveur/serveur.c:212) [127.0.0.1:53630] Tentative d'authentification pour 'test'
+[09:50:42] [INFO]    [CLIENT] (./serveur/serveur.c:217) [127.0.0.1:53630] Authentification réussie pour 'test'
+[09:50:42] [INFO]    [CLIENT] (./serveur/serveur.c:171) [127.0.0.1:53630] Commande reçue : ETA
+[09:50:42] [INFO]    [CLIENT] (./controller/controller_etat.c:49) [127.0.0.1:53630] ETA: données extraites avec succès
+[09:50:42] [DEBUG]   [SERV]   (./sender/sender_global.c:14)  >> CMD ETA
+SIZE 3
+
+[09:50:42] [DEBUG]   [SERV]   (./sender/sender_global.c:14)  >> LVR
+[09:50:42] [DEBUG]   [SERV]   (./sender/sender_global.c:14)  >> 
+END
+
+[09:50:42] [DEBUG]   [SERV]   (./sender/sender_etat.c:12) PARAM d'envoi ETA : ALI1768744305
+[09:50:42] [INFO]    [CLIENT] (./serveur/serveur.c:152) [127.0.0.1:53630] Client déconnecté
+[09:50:42] [INFO]    [SERV]   (./serveur/serveur.c:114) Connexion acceptée (fd=5)
+[09:50:42] [INFO]    [CLIENT] (./serveur/serveur.c:140) [127.0.0.1:53632] Client connecté
+[09:50:42] [INFO]    [SERV]   (./bdd/bdd.c:20) Connecté a la BDD
+[09:50:42] [INFO]    [SERV]   (./bdd/bdd.c:21) SET search_path...
+[09:50:42] [INFO]    [SERV]   (./bdd/bdd.c:26) SET search_path success
+[09:50:42] [INFO]    [SERV]   (./bdd/bdd.c:31) Base de données actuelle : postgres
+[09:50:42] [INFO]    [SERV]   (./bdd/bdd.c:37) Schéma courant (search_path) : sae3_delivraptor
+[09:50:42] [INFO]    [CLIENT] (./serveur/serveur.c:171) [127.0.0.1:53632] Commande reçue : CONN
+[09:50:42] [INFO]    [CLIENT] (./serveur/serveur.c:212) [127.0.0.1:53632] Tentative d'authentification pour 'test'
+[09:50:42] [INFO]    [CLIENT] (./serveur/serveur.c:217) [127.0.0.1:53632] Authentification réussie pour 'test'
+[09:50:42] [INFO]    [CLIENT] (./serveur/serveur.c:171) [127.0.0.1:53632] Commande reçue : ETA
+[09:50:42] [INFO]    [CLIENT] (./controller/controller_etat.c:49) [127.0.0.1:53632] ETA: données extraites avec succès
+[09:50:42] [DEBUG]   [SERV]   (./sender/sender_global.c:14)  >> CMD ETA
+SIZE 3
+
+[09:50:42] [DEBUG]   [SERV]   (./sender/sender_global.c:14)  >> LVR
+[09:50:42] [DEBUG]   [SERV]   (./sender/sender_global.c:14)  >> 
+END
+
+[09:50:42] [DEBUG]   [SERV]   (./sender/sender_etat.c:12) PARAM d'envoi ETA : ALI1768743214
+[09:50:42] [INFO]    [CLIENT] (./serveur/serveur.c:152) [127.0.0.1:53632] Client déconnecté
+[09:50:42] [INFO]    [SERV]   (./serveur/serveur.c:114) Connexion acceptée (fd=5)
+[09:50:42] [INFO]    [CLIENT] (./serveur/serveur.c:140) [127.0.0.1:53644] Client connecté
+[09:50:42] [INFO]    [SERV]   (./bdd/bdd.c:20) Connecté a la BDD
+[09:50:42] [INFO]    [SERV]   (./bdd/bdd.c:21) SET search_path...
+[09:50:42] [INFO]    [SERV]   (./bdd/bdd.c:26) SET search_path success
+[09:50:42] [INFO]    [SERV]   (./bdd/bdd.c:31) Base de données actuelle : postgres
+[09:50:42] [INFO]    [SERV]   (./bdd/bdd.c:37) Schéma courant (search_path) : sae3_delivraptor
+[09:50:42] [INFO]    [CLIENT] (./serveur/serveur.c:171) [127.0.0.1:53644] Commande reçue : CONN
+[09:50:42] [INFO]    [CLIENT] (./serveur/serveur.c:212) [127.0.0.1:53644] Tentative d'authentification pour 'test'
+[09:50:42] [INFO]    [CLIENT] (./serveur/serveur.c:217) [127.0.0.1:53644] Authentification réussie pour 'test'
+[09:50:42] [INFO]    [CLIENT] (./serveur/serveur.c:171) [127.0.0.1:53644] Commande reçue : ETA
+[09:50:42] [INFO]    [CLIENT] (./controller/controller_etat.c:49) [127.0.0.1:53644] ETA: données extraites avec succès
+[09:50:42] [DEBUG]   [SERV]   (./sender/sender_global.c:14)  >> CMD ETA
+SIZE 3
+
+[09:50:42] [DEBUG]   [SERV]   (./sender/sender_global.c:14)  >> LVR
+[09:50:42] [DEBUG]   [SERV]   (./sender/sender_global.c:14)  >> 
+END
+
+[09:50:42] [DEBUG]   [SERV]   (./sender/sender_etat.c:12) PARAM d'envoi ETA : ALI1768742549
+[09:50:42] [INFO]    [CLIENT] (./serveur/serveur.c:152) [127.0.0.1:53644] Client déconnecté
+[09:50:42] [INFO]    [SERV]   (./serveur/serveur.c:114) Connexion acceptée (fd=5)
+[09:50:42] [INFO]    [CLIENT] (./serveur/serveur.c:140) [127.0.0.1:53646] Client connecté
+[09:50:42] [INFO]    [SERV]   (./bdd/bdd.c:20) Connecté a la BDD
+[09:50:42] [INFO]    [SERV]   (./bdd/bdd.c:21) SET search_path...
+[09:50:42] [INFO]    [SERV]   (./bdd/bdd.c:26) SET search_path success
+[09:50:42] [INFO]    [SERV]   (./bdd/bdd.c:31) Base de données actuelle : postgres
+[09:50:42] [INFO]    [SERV]   (./bdd/bdd.c:37) Schéma courant (search_path) : sae3_delivraptor
+[09:50:42] [INFO]    [CLIENT] (./serveur/serveur.c:171) [127.0.0.1:53646] Commande reçue : CONN
+[09:50:42] [INFO]    [CLIENT] (./serveur/serveur.c:212) [127.0.0.1:53646] Tentative d'authentification pour 'test'
+[09:50:42] [INFO]    [CLIENT] (./serveur/serveur.c:217) [127.0.0.1:53646] Authentification réussie pour 'test'
+[09:50:42] [INFO]    [CLIENT] (./serveur/serveur.c:171) [127.0.0.1:53646] Commande reçue : ETA
+[09:50:42] [INFO]    [CLIENT] (./controller/controller_etat.c:49) [127.0.0.1:53646] ETA: données extraites avec succès
+[09:50:42] [DEBUG]   [SERV]   (./sender/sender_global.c:14)  >> CMD ETA
+SIZE 3
+
+[09:50:42] [DEBUG]   [SERV]   (./sender/sender_global.c:14)  >> LVR
+[09:50:42] [DEBUG]   [SERV]   (./sender/sender_global.c:14)  >> 
+END
+
+[09:50:42] [DEBUG]   [SERV]   (./sender/sender_etat.c:12) PARAM d'envoi ETA : ALI1768693235
+[09:50:42] [INFO]    [CLIENT] (./serveur/serveur.c:152) [127.0.0.1:53646] Client déconnecté
+[09:51:02] [INFO]    [SERV]   (./serveur/serveur.c:114) Connexion acceptée (fd=5)
+[09:51:02] [INFO]    [CLIENT] (./serveur/serveur.c:140) [127.0.0.1:54480] Client connecté
+[09:51:02] [INFO]    [SERV]   (./bdd/bdd.c:20) Connecté a la BDD
+[09:51:02] [INFO]    [SERV]   (./bdd/bdd.c:21) SET search_path...
+[09:51:02] [INFO]    [SERV]   (./bdd/bdd.c:26) SET search_path success
+[09:51:02] [INFO]    [SERV]   (./bdd/bdd.c:31) Base de données actuelle : postgres
+[09:51:02] [INFO]    [SERV]   (./bdd/bdd.c:37) Schéma courant (search_path) : sae3_delivraptor
+[09:51:02] [INFO]    [CLIENT] (./serveur/serveur.c:171) [127.0.0.1:54480] Commande reçue : CONN
+[09:51:02] [INFO]    [CLIENT] (./serveur/serveur.c:212) [127.0.0.1:54480] Tentative d'authentification pour 'test'
+[09:51:02] [INFO]    [CLIENT] (./serveur/serveur.c:217) [127.0.0.1:54480] Authentification réussie pour 'test'
+[09:51:02] [INFO]    [CLIENT] (./serveur/serveur.c:171) [127.0.0.1:54480] Commande reçue : NEXT
+[09:51:02] [DEBUG]   [SERV]   (./controller/controller_etat.c:80) AVANCE ARR
+[09:51:02] [DEBUG]   [SERV]   (./model/model_etat.c:25) GET ALL ETA ARR
+[09:51:02] [DEBUG]   [SERV]   (./model/model_etat.c:33) GET ALL ETA DB success
+[09:51:02] [DEBUG]   [SERV]   (./model/model_etat.c:40) GET ALL ETA DB create bord...
+[09:51:02] [DEBUG]   [SERV]   (./model/model_etat.c:45) GET ALL ETA DB create bord fin
+[09:51:02] [INFO]    [SERV]   (./controller/controller_etat.c:85) GET ALL ETAT success
+[09:51:02] [DEBUG]   [SERV]   (./controller/controller_etat.c:87) count value : 1
+[09:51:02] [DEBUG]   [SERV]   (./controller/controller_etat.c:90) id=ALI1768812460, etat=4 -> next=5
+[09:51:02] [INFO]    [SERV]   (./model/model_etat.c:60) ETA UPDATE : ALI1768812460 etat 5
+[09:51:02] [ERROR]   [SERV]   (./controller/controller_etat.c:94) AVANCE UPDATE pour ALI1768812460
+[09:51:02] [INFO]    [SERV]   (./controller/controller_etat.c:97) AVANCE success
+[09:51:02] [INFO]    [CLIENT] (./serveur/serveur.c:152) [127.0.0.1:54480] Client déconnecté
+[09:52:01] [INFO]    [SERV]   (./serveur/serveur.c:114) Connexion acceptée (fd=5)
+[09:52:01] [INFO]    [CLIENT] (./serveur/serveur.c:140) [127.0.0.1:59910] Client connecté
+[09:52:01] [INFO]    [SERV]   (./bdd/bdd.c:20) Connecté a la BDD
+[09:52:01] [INFO]    [SERV]   (./bdd/bdd.c:21) SET search_path...
+[09:52:01] [INFO]    [SERV]   (./bdd/bdd.c:26) SET search_path success
+[09:52:01] [INFO]    [SERV]   (./bdd/bdd.c:31) Base de données actuelle : postgres
+[09:52:01] [INFO]    [SERV]   (./bdd/bdd.c:37) Schéma courant (search_path) : sae3_delivraptor
+[09:52:01] [INFO]    [CLIENT] (./serveur/serveur.c:171) [127.0.0.1:59910] Commande reçue : CONN
+[09:52:01] [INFO]    [CLIENT] (./serveur/serveur.c:212) [127.0.0.1:59910] Tentative d'authentification pour 'test'
+[09:52:01] [INFO]    [CLIENT] (./serveur/serveur.c:217) [127.0.0.1:59910] Authentification réussie pour 'test'
+[09:52:01] [INFO]    [CLIENT] (./serveur/serveur.c:171) [127.0.0.1:59910] Commande reçue : NEXT
+[09:52:01] [DEBUG]   [SERV]   (./controller/controller_etat.c:80) AVANCE ARR
+[09:52:01] [DEBUG]   [SERV]   (./model/model_etat.c:25) GET ALL ETA ARR
+[09:52:01] [DEBUG]   [SERV]   (./model/model_etat.c:33) GET ALL ETA DB success
+[09:52:01] [DEBUG]   [SERV]   (./model/model_etat.c:40) GET ALL ETA DB create bord...
+[09:52:01] [DEBUG]   [SERV]   (./model/model_etat.c:45) GET ALL ETA DB create bord fin
+[09:52:01] [INFO]    [SERV]   (./controller/controller_etat.c:85) GET ALL ETAT success
+[09:52:01] [DEBUG]   [SERV]   (./controller/controller_etat.c:87) count value : 1
+[09:52:01] [DEBUG]   [SERV]   (./controller/controller_etat.c:90) id=ALI1768812460, etat=5 -> next=6
+[09:52:01] [INFO]    [SERV]   (./model/model_etat.c:60) ETA UPDATE : ALI1768812460 etat 6
+[09:52:01] [ERROR]   [SERV]   (./controller/controller_etat.c:94) AVANCE UPDATE pour ALI1768812460
+[09:52:01] [INFO]    [SERV]   (./controller/controller_etat.c:97) AVANCE success
+[09:52:01] [INFO]    [CLIENT] (./serveur/serveur.c:152) [127.0.0.1:59910] Client déconnecté
+[09:53:01] [INFO]    [SERV]   (./serveur/serveur.c:114) Connexion acceptée (fd=5)
+[09:53:01] [INFO]    [CLIENT] (./serveur/serveur.c:140) [127.0.0.1:54882] Client connecté
+[09:53:01] [INFO]    [SERV]   (./bdd/bdd.c:20) Connecté a la BDD
+[09:53:01] [INFO]    [SERV]   (./bdd/bdd.c:21) SET search_path...
+[09:53:01] [INFO]    [SERV]   (./bdd/bdd.c:26) SET search_path success
+[09:53:01] [INFO]    [SERV]   (./bdd/bdd.c:31) Base de données actuelle : postgres
+[09:53:01] [INFO]    [SERV]   (./bdd/bdd.c:37) Schéma courant (search_path) : sae3_delivraptor
+[09:53:01] [INFO]    [CLIENT] (./serveur/serveur.c:171) [127.0.0.1:54882] Commande reçue : CONN
+[09:53:01] [INFO]    [CLIENT] (./serveur/serveur.c:212) [127.0.0.1:54882] Tentative d'authentification pour 'test'
+[09:53:01] [INFO]    [CLIENT] (./serveur/serveur.c:217) [127.0.0.1:54882] Authentification réussie pour 'test'
+[09:53:01] [INFO]    [CLIENT] (./serveur/serveur.c:171) [127.0.0.1:54882] Commande reçue : NEXT
+[09:53:01] [DEBUG]   [SERV]   (./controller/controller_etat.c:80) AVANCE ARR
+[09:53:01] [DEBUG]   [SERV]   (./model/model_etat.c:25) GET ALL ETA ARR
+[09:53:01] [DEBUG]   [SERV]   (./model/model_etat.c:33) GET ALL ETA DB success
+[09:53:01] [DEBUG]   [SERV]   (./model/model_etat.c:40) GET ALL ETA DB create bord...
+[09:53:01] [DEBUG]   [SERV]   (./model/model_etat.c:45) GET ALL ETA DB create bord fin
+[09:53:01] [INFO]    [SERV]   (./controller/controller_etat.c:85) GET ALL ETAT success
+[09:53:01] [DEBUG]   [SERV]   (./controller/controller_etat.c:87) count value : 1
+[09:53:01] [DEBUG]   [SERV]   (./controller/controller_etat.c:90) id=ALI1768812460, etat=6 -> next=7
+[09:53:01] [INFO]    [SERV]   (./model/model_etat.c:60) ETA UPDATE : ALI1768812460 etat 7
+[09:53:01] [ERROR]   [SERV]   (./controller/controller_etat.c:94) AVANCE UPDATE pour ALI1768812460
+[09:53:01] [INFO]    [SERV]   (./controller/controller_etat.c:97) AVANCE success
+[09:53:01] [INFO]    [CLIENT] (./serveur/serveur.c:152) [127.0.0.1:54882] Client déconnecté
+[09:54:06] [INFO]    [SERV]   (./serveur/serveur.c:72) Démarrage du service Delivraptor
+[09:54:06] [INFO]    [SERV]   (./serveur/serveur.c:99) Serveur prêt sur 127.0.0.1:6969
+[09:54:41] [INFO]    [SERV]   (./serveur/serveur.c:114) Connexion acceptée (fd=5)
+[09:54:41] [INFO]    [CLIENT] (./serveur/serveur.c:140) [127.0.0.1:57324] Client connecté
+[09:54:41] [INFO]    [SERV]   (./bdd/bdd.c:20) Connecté a la BDD
+[09:54:41] [INFO]    [SERV]   (./bdd/bdd.c:21) SET search_path...
+[09:54:41] [INFO]    [SERV]   (./bdd/bdd.c:26) SET search_path success
+[09:54:41] [INFO]    [SERV]   (./bdd/bdd.c:31) Base de données actuelle : postgres
+[09:54:41] [INFO]    [SERV]   (./bdd/bdd.c:37) Schéma courant (search_path) : sae3_delivraptor
+[09:54:41] [INFO]    [CLIENT] (./serveur/serveur.c:171) [127.0.0.1:57324] Commande reçue : CONN
+[09:54:41] [INFO]    [CLIENT] (./serveur/serveur.c:212) [127.0.0.1:57324] Tentative d'authentification pour 'test'
+[09:54:41] [INFO]    [CLIENT] (./serveur/serveur.c:217) [127.0.0.1:57324] Authentification réussie pour 'test'
+[09:54:41] [INFO]    [CLIENT] (./serveur/serveur.c:171) [127.0.0.1:57324] Commande reçue : ADD
+[09:54:41] [DEBUG]   [SERV]   (./controller/controller_bord.c:12) CMD ADD value 6
+[09:54:41] [INFO]    [CLIENT] (./controller/controller_bord.c:19) [127.0.0.1:57324] ADD: données extraites avec succès
+[09:54:41] [DEBUG]   [SERV]   (./controller/controller_bord.c:48) BORD AV FIND 
+[09:54:41] [DEBUG]   [SERV]   (./model/model_bord.c:16) BORD BD AV 
+[09:54:41] [DEBUG]   [SERV]   (./model/model_bord.c:22) BORD BD AP 
+[09:54:41] [DEBUG]   [SERV]   (./controller/controller_bord.c:54) BORD IF EXIST 
+[09:54:41] [DEBUG]   [SERV]   (./controller/controller_bord.c:24) BORD CREATE NEW : id_commande 6 horo 1768812881
+[09:54:41] [DEBUG]   [SERV]   (./controller/controller_bord.c:35) BORD CREATED : id_suivi ALI1768812887
+[09:54:41] [DEBUG]   [SERV]   (./controller/controller_bord.c:61) BORD CREATE ALI1768812887
+[09:54:41] [DEBUG]   [SERV]   (./controller/controller_bord.c:67) BORD ADD ALI1768812887
+[09:54:41] [DEBUG]   [SERV]   (./sender/sender_global.c:14)  >> CMD BORD
+SIZE 13
+
+[09:54:41] [DEBUG]   [SERV]   (./sender/sender_global.c:14)  >> ALI1768812887
+[09:54:41] [DEBUG]   [SERV]   (./sender/sender_global.c:14)  >> 
+END
+
+[09:54:41] [DEBUG]   [SERV]   (./sender/sender_bord.c:24) PARAM d'envoi BORD : ALI1768812887
+[09:54:41] [INFO]    [CLIENT] (./serveur/serveur.c:152) [127.0.0.1:57324] Client déconnecté
+[09:54:41] [INFO]    [SERV]   (./serveur/serveur.c:114) Connexion acceptée (fd=5)
+[09:54:41] [INFO]    [CLIENT] (./serveur/serveur.c:140) [127.0.0.1:57332] Client connecté
+[09:54:41] [INFO]    [SERV]   (./bdd/bdd.c:20) Connecté a la BDD
+[09:54:41] [INFO]    [SERV]   (./bdd/bdd.c:21) SET search_path...
+[09:54:41] [INFO]    [SERV]   (./bdd/bdd.c:26) SET search_path success
+[09:54:41] [INFO]    [SERV]   (./bdd/bdd.c:31) Base de données actuelle : postgres
+[09:54:41] [INFO]    [SERV]   (./bdd/bdd.c:37) Schéma courant (search_path) : sae3_delivraptor
+[09:54:41] [INFO]    [CLIENT] (./serveur/serveur.c:171) [127.0.0.1:57332] Commande reçue : CONN
+[09:54:41] [INFO]    [CLIENT] (./serveur/serveur.c:212) [127.0.0.1:57332] Tentative d'authentification pour 'test'
+[09:54:41] [INFO]    [CLIENT] (./serveur/serveur.c:217) [127.0.0.1:57332] Authentification réussie pour 'test'
+[09:54:41] [INFO]    [CLIENT] (./serveur/serveur.c:171) [127.0.0.1:57332] Commande reçue : ETA
+[09:54:41] [INFO]    [CLIENT] (./controller/controller_etat.c:49) [127.0.0.1:57332] ETA: données extraites avec succès
+[09:54:41] [DEBUG]   [SERV]   (./sender/sender_global.c:14)  >> CMD ETA
+SIZE 4
+
+[09:54:41] [DEBUG]   [SERV]   (./sender/sender_global.c:14)  >> TRTC
+[09:54:41] [DEBUG]   [SERV]   (./sender/sender_global.c:14)  >> 
+END
+
+[09:54:41] [DEBUG]   [SERV]   (./sender/sender_etat.c:12) PARAM d'envoi ETA : ALI1768812887
+[09:54:42] [INFO]    [CLIENT] (./serveur/serveur.c:152) [127.0.0.1:57332] Client déconnecté
+[09:54:45] [INFO]    [SERV]   (./serveur/serveur.c:114) Connexion acceptée (fd=5)
+[09:54:45] [INFO]    [CLIENT] (./serveur/serveur.c:140) [127.0.0.1:44120] Client connecté
+[09:54:45] [INFO]    [SERV]   (./bdd/bdd.c:20) Connecté a la BDD
+[09:54:45] [INFO]    [SERV]   (./bdd/bdd.c:21) SET search_path...
+[09:54:45] [INFO]    [SERV]   (./bdd/bdd.c:26) SET search_path success
+[09:54:45] [INFO]    [SERV]   (./bdd/bdd.c:31) Base de données actuelle : postgres
+[09:54:45] [INFO]    [SERV]   (./bdd/bdd.c:37) Schéma courant (search_path) : sae3_delivraptor
+[09:54:45] [INFO]    [CLIENT] (./serveur/serveur.c:171) [127.0.0.1:44120] Commande reçue : CONN
+[09:54:45] [INFO]    [CLIENT] (./serveur/serveur.c:212) [127.0.0.1:44120] Tentative d'authentification pour 'test'
+[09:54:45] [INFO]    [CLIENT] (./serveur/serveur.c:217) [127.0.0.1:44120] Authentification réussie pour 'test'
+[09:54:45] [INFO]    [CLIENT] (./serveur/serveur.c:171) [127.0.0.1:44120] Commande reçue : ETA
+[09:54:45] [INFO]    [CLIENT] (./controller/controller_etat.c:49) [127.0.0.1:44120] ETA: données extraites avec succès
+[09:54:45] [DEBUG]   [SERV]   (./sender/sender_global.c:14)  >> CMD ETA
+SIZE 4
+
+[09:54:45] [DEBUG]   [SERV]   (./sender/sender_global.c:14)  >> TRTC
+[09:54:45] [DEBUG]   [SERV]   (./sender/sender_global.c:14)  >> 
+END
+
+[09:54:45] [DEBUG]   [SERV]   (./sender/sender_etat.c:12) PARAM d'envoi ETA : ALI1768812887
+[09:54:45] [INFO]    [CLIENT] (./serveur/serveur.c:152) [127.0.0.1:44120] Client déconnecté
+[09:54:45] [INFO]    [SERV]   (./serveur/serveur.c:114) Connexion acceptée (fd=5)
+[09:54:45] [INFO]    [CLIENT] (./serveur/serveur.c:140) [127.0.0.1:44134] Client connecté
+[09:54:45] [INFO]    [SERV]   (./bdd/bdd.c:20) Connecté a la BDD
+[09:54:45] [INFO]    [SERV]   (./bdd/bdd.c:21) SET search_path...
+[09:54:45] [INFO]    [SERV]   (./bdd/bdd.c:26) SET search_path success
+[09:54:45] [INFO]    [SERV]   (./bdd/bdd.c:31) Base de données actuelle : postgres
+[09:54:45] [INFO]    [SERV]   (./bdd/bdd.c:37) Schéma courant (search_path) : sae3_delivraptor
+[09:54:45] [INFO]    [CLIENT] (./serveur/serveur.c:171) [127.0.0.1:44134] Commande reçue : CONN
+[09:54:45] [INFO]    [CLIENT] (./serveur/serveur.c:212) [127.0.0.1:44134] Tentative d'authentification pour 'test'
+[09:54:45] [INFO]    [CLIENT] (./serveur/serveur.c:217) [127.0.0.1:44134] Authentification réussie pour 'test'
+[09:54:45] [INFO]    [CLIENT] (./serveur/serveur.c:171) [127.0.0.1:44134] Commande reçue : ETA
+[09:54:45] [INFO]    [CLIENT] (./controller/controller_etat.c:49) [127.0.0.1:44134] ETA: données extraites avec succès
+[09:54:45] [DEBUG]   [SERV]   (./sender/sender_global.c:14)  >> CMD ETA
+SIZE 5
+
+[09:54:45] [DEBUG]   [SERV]   (./sender/sender_global.c:14)  >> ARRCL
+[09:54:45] [DEBUG]   [SERV]   (./sender/sender_global.c:14)  >> 
+END
+
+[09:54:45] [DEBUG]   [SERV]   (./sender/sender_etat.c:12) PARAM d'envoi ETA : ALI1768812460
+[09:54:45] [INFO]    [CLIENT] (./serveur/serveur.c:152) [127.0.0.1:44134] Client déconnecté
+[09:54:45] [INFO]    [SERV]   (./serveur/serveur.c:114) Connexion acceptée (fd=5)
+[09:54:45] [INFO]    [CLIENT] (./serveur/serveur.c:140) [127.0.0.1:44142] Client connecté
+[09:54:45] [INFO]    [SERV]   (./bdd/bdd.c:20) Connecté a la BDD
+[09:54:45] [INFO]    [SERV]   (./bdd/bdd.c:21) SET search_path...
+[09:54:45] [INFO]    [SERV]   (./bdd/bdd.c:26) SET search_path success
+[09:54:45] [INFO]    [SERV]   (./bdd/bdd.c:31) Base de données actuelle : postgres
+[09:54:45] [INFO]    [SERV]   (./bdd/bdd.c:37) Schéma courant (search_path) : sae3_delivraptor
+[09:54:45] [INFO]    [CLIENT] (./serveur/serveur.c:171) [127.0.0.1:44142] Commande reçue : CONN
+[09:54:45] [INFO]    [CLIENT] (./serveur/serveur.c:212) [127.0.0.1:44142] Tentative d'authentification pour 'test'
+[09:54:45] [INFO]    [CLIENT] (./serveur/serveur.c:217) [127.0.0.1:44142] Authentification réussie pour 'test'
+[09:54:45] [INFO]    [CLIENT] (./serveur/serveur.c:171) [127.0.0.1:44142] Commande reçue : ETA
+[09:54:45] [INFO]    [CLIENT] (./controller/controller_etat.c:49) [127.0.0.1:44142] ETA: données extraites avec succès
+[09:54:45] [DEBUG]   [SERV]   (./sender/sender_global.c:14)  >> CMD ETA
+SIZE 3
+
+[09:54:45] [DEBUG]   [SERV]   (./sender/sender_global.c:14)  >> LVR
+[09:54:45] [DEBUG]   [SERV]   (./sender/sender_global.c:14)  >> 
+END
+
+[09:54:45] [DEBUG]   [SERV]   (./sender/sender_etat.c:12) PARAM d'envoi ETA : ALI1768744305
+[09:54:45] [INFO]    [CLIENT] (./serveur/serveur.c:152) [127.0.0.1:44142] Client déconnecté
+[09:54:45] [INFO]    [SERV]   (./serveur/serveur.c:114) Connexion acceptée (fd=5)
+[09:54:45] [INFO]    [CLIENT] (./serveur/serveur.c:140) [127.0.0.1:44158] Client connecté
+[09:54:45] [INFO]    [SERV]   (./bdd/bdd.c:20) Connecté a la BDD
+[09:54:45] [INFO]    [SERV]   (./bdd/bdd.c:21) SET search_path...
+[09:54:45] [INFO]    [SERV]   (./bdd/bdd.c:26) SET search_path success
+[09:54:45] [INFO]    [SERV]   (./bdd/bdd.c:31) Base de données actuelle : postgres
+[09:54:45] [INFO]    [SERV]   (./bdd/bdd.c:37) Schéma courant (search_path) : sae3_delivraptor
+[09:54:45] [INFO]    [CLIENT] (./serveur/serveur.c:171) [127.0.0.1:44158] Commande reçue : CONN
+[09:54:45] [INFO]    [CLIENT] (./serveur/serveur.c:212) [127.0.0.1:44158] Tentative d'authentification pour 'test'
+[09:54:45] [INFO]    [CLIENT] (./serveur/serveur.c:217) [127.0.0.1:44158] Authentification réussie pour 'test'
+[09:54:45] [INFO]    [CLIENT] (./serveur/serveur.c:171) [127.0.0.1:44158] Commande reçue : ETA
+[09:54:45] [INFO]    [CLIENT] (./controller/controller_etat.c:49) [127.0.0.1:44158] ETA: données extraites avec succès
+[09:54:45] [DEBUG]   [SERV]   (./sender/sender_global.c:14)  >> CMD ETA
+SIZE 3
+
+[09:54:45] [DEBUG]   [SERV]   (./sender/sender_global.c:14)  >> LVR
+[09:54:45] [DEBUG]   [SERV]   (./sender/sender_global.c:14)  >> 
+END
+
+[09:54:45] [DEBUG]   [SERV]   (./sender/sender_etat.c:12) PARAM d'envoi ETA : ALI1768743214
+[09:54:45] [INFO]    [CLIENT] (./serveur/serveur.c:152) [127.0.0.1:44158] Client déconnecté
+[09:54:45] [INFO]    [SERV]   (./serveur/serveur.c:114) Connexion acceptée (fd=5)
+[09:54:45] [INFO]    [CLIENT] (./serveur/serveur.c:140) [127.0.0.1:44164] Client connecté
+[09:54:45] [INFO]    [SERV]   (./bdd/bdd.c:20) Connecté a la BDD
+[09:54:45] [INFO]    [SERV]   (./bdd/bdd.c:21) SET search_path...
+[09:54:45] [INFO]    [SERV]   (./bdd/bdd.c:26) SET search_path success
+[09:54:45] [INFO]    [SERV]   (./bdd/bdd.c:31) Base de données actuelle : postgres
+[09:54:45] [INFO]    [SERV]   (./bdd/bdd.c:37) Schéma courant (search_path) : sae3_delivraptor
+[09:54:45] [INFO]    [CLIENT] (./serveur/serveur.c:171) [127.0.0.1:44164] Commande reçue : CONN
+[09:54:45] [INFO]    [CLIENT] (./serveur/serveur.c:212) [127.0.0.1:44164] Tentative d'authentification pour 'test'
+[09:54:45] [INFO]    [CLIENT] (./serveur/serveur.c:217) [127.0.0.1:44164] Authentification réussie pour 'test'
+[09:54:45] [INFO]    [CLIENT] (./serveur/serveur.c:171) [127.0.0.1:44164] Commande reçue : ETA
+[09:54:45] [INFO]    [CLIENT] (./controller/controller_etat.c:49) [127.0.0.1:44164] ETA: données extraites avec succès
+[09:54:45] [DEBUG]   [SERV]   (./sender/sender_global.c:14)  >> CMD ETA
+SIZE 3
+
+[09:54:45] [DEBUG]   [SERV]   (./sender/sender_global.c:14)  >> LVR
+[09:54:45] [DEBUG]   [SERV]   (./sender/sender_global.c:14)  >> 
+END
+
+[09:54:45] [DEBUG]   [SERV]   (./sender/sender_etat.c:12) PARAM d'envoi ETA : ALI1768742549
+[09:54:45] [INFO]    [CLIENT] (./serveur/serveur.c:152) [127.0.0.1:44164] Client déconnecté
+[09:54:45] [INFO]    [SERV]   (./serveur/serveur.c:114) Connexion acceptée (fd=5)
+[09:54:45] [INFO]    [CLIENT] (./serveur/serveur.c:140) [127.0.0.1:44168] Client connecté
+[09:54:45] [INFO]    [SERV]   (./bdd/bdd.c:20) Connecté a la BDD
+[09:54:45] [INFO]    [SERV]   (./bdd/bdd.c:21) SET search_path...
+[09:54:45] [INFO]    [SERV]   (./bdd/bdd.c:26) SET search_path success
+[09:54:45] [INFO]    [SERV]   (./bdd/bdd.c:31) Base de données actuelle : postgres
+[09:54:45] [INFO]    [SERV]   (./bdd/bdd.c:37) Schéma courant (search_path) : sae3_delivraptor
+[09:54:45] [INFO]    [CLIENT] (./serveur/serveur.c:171) [127.0.0.1:44168] Commande reçue : CONN
+[09:54:45] [INFO]    [CLIENT] (./serveur/serveur.c:212) [127.0.0.1:44168] Tentative d'authentification pour 'test'
+[09:54:45] [INFO]    [CLIENT] (./serveur/serveur.c:217) [127.0.0.1:44168] Authentification réussie pour 'test'
+[09:54:45] [INFO]    [CLIENT] (./serveur/serveur.c:171) [127.0.0.1:44168] Commande reçue : ETA
+[09:54:45] [INFO]    [CLIENT] (./controller/controller_etat.c:49) [127.0.0.1:44168] ETA: données extraites avec succès
+[09:54:45] [DEBUG]   [SERV]   (./sender/sender_global.c:14)  >> CMD ETA
+SIZE 3
+
+[09:54:45] [DEBUG]   [SERV]   (./sender/sender_global.c:14)  >> LVR
+[09:54:45] [DEBUG]   [SERV]   (./sender/sender_global.c:14)  >> 
+END
+
+[09:54:45] [DEBUG]   [SERV]   (./sender/sender_etat.c:12) PARAM d'envoi ETA : ALI1768693235
+[09:54:45] [INFO]    [CLIENT] (./serveur/serveur.c:152) [127.0.0.1:44168] Client déconnecté
+[09:55:01] [INFO]    [SERV]   (./serveur/serveur.c:114) Connexion acceptée (fd=5)
+[09:55:01] [INFO]    [CLIENT] (./serveur/serveur.c:140) [127.0.0.1:39104] Client connecté
+[09:55:01] [INFO]    [SERV]   (./bdd/bdd.c:20) Connecté a la BDD
+[09:55:01] [INFO]    [SERV]   (./bdd/bdd.c:21) SET search_path...
+[09:55:01] [INFO]    [SERV]   (./bdd/bdd.c:26) SET search_path success
+[09:55:01] [INFO]    [SERV]   (./bdd/bdd.c:31) Base de données actuelle : postgres
+[09:55:01] [INFO]    [SERV]   (./bdd/bdd.c:37) Schéma courant (search_path) : sae3_delivraptor
+[09:55:01] [INFO]    [CLIENT] (./serveur/serveur.c:171) [127.0.0.1:39104] Commande reçue : CONN
+[09:55:01] [INFO]    [CLIENT] (./serveur/serveur.c:212) [127.0.0.1:39104] Tentative d'authentification pour 'test'
+[09:55:01] [INFO]    [CLIENT] (./serveur/serveur.c:217) [127.0.0.1:39104] Authentification réussie pour 'test'
+[09:55:01] [INFO]    [CLIENT] (./serveur/serveur.c:171) [127.0.0.1:39104] Commande reçue : NEXT
+[09:55:01] [DEBUG]   [SERV]   (./controller/controller_etat.c:80) AVANCE ARR
+[09:55:01] [DEBUG]   [SERV]   (./model/model_etat.c:25) GET ALL ETA ARR
+[09:55:01] [DEBUG]   [SERV]   (./model/model_etat.c:33) GET ALL ETA DB success
+[09:55:01] [DEBUG]   [SERV]   (./model/model_etat.c:40) GET ALL ETA DB create bord...
+[09:55:01] [DEBUG]   [SERV]   (./model/model_etat.c:45) GET ALL ETA DB create bord fin
+[09:55:01] [INFO]    [SERV]   (./controller/controller_etat.c:85) GET ALL ETAT success
+[09:55:01] [DEBUG]   [SERV]   (./controller/controller_etat.c:87) count value : 2
+[09:55:01] [DEBUG]   [SERV]   (./controller/controller_etat.c:90) id=ALI1768812460, etat=7 -> next=8
+[09:55:01] [INFO]    [SERV]   (./model/model_etat.c:60) ETA UPDATE : ALI1768812460 etat 8
+[09:55:01] [ERROR]   [SERV]   (./controller/controller_etat.c:94) AVANCE UPDATE pour ALI1768812460
+[09:55:01] [DEBUG]   [SERV]   (./controller/controller_etat.c:90) id=ALI1768812887, etat=1 -> next=2
+[09:55:01] [INFO]    [SERV]   (./model/model_etat.c:60) ETA UPDATE : ALI1768812887 etat 2
+[09:55:01] [ERROR]   [SERV]   (./controller/controller_etat.c:94) AVANCE UPDATE pour ALI1768812887
+[09:55:01] [INFO]    [SERV]   (./controller/controller_etat.c:97) AVANCE success
+[09:55:01] [INFO]    [CLIENT] (./serveur/serveur.c:152) [127.0.0.1:39104] Client déconnecté

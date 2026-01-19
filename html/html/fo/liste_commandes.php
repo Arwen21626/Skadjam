@@ -11,20 +11,21 @@
 
     try {     
 
-        $tabInfoCommandes = null;           
+        $tabInfoCommandes = null; 
+        $etat;          
         //récupère toutes les infos de la table commande
         foreach($dbh->query("SELECT c.id_suivi, c.id_commande, c.date_commande, c.etat, c.montant_total_ttc
                             FROM sae3_skadjam._commande c
                             WHERE c.id_client = $idCompte
                             ORDER BY c.date_commande DESC, c.id_commande DESC;"
                             , PDO::FETCH_ASSOC) as $row){
-            $etat = NULL;
             $idSuivi = $row['id_suivi'];
+            $id_commande = $row['id_commande'];
             try{
-                $etat = $rpr->get_etat($idSuivi);
+                $etat[$id_commande] = $rpr->get_etat($idSuivi);
                 $query = "UPDATE sae3_skadjam._commande SET etat = ? WHERE id_suivi = ?";
                 $stmt = $dbh->prepare($query);
-                $stmt->execute([$etat, $idSuivi]);
+                $stmt->execute([$etat[$row['id_commande']], $idSuivi]);
             }catch (Exception $e){
                 echo "Recupraptor Erreur : " . $e->getMessage() . "<br>";
             }catch (TypeError $e){
@@ -35,6 +36,7 @@
             }
             
         } 
+
     }
 
     catch (PDOException $e) {
@@ -76,6 +78,7 @@
                             <th scope="col"></th>
                         </tr>
                     </thead>
+                    
                     <tbody>
                         <?php 
                             //pour changer la classe de css une ligne sur 2
@@ -92,7 +95,7 @@
                                 <tr class="<?php echo $classe; ?>">
                                     <th scope="row" class="text-left pl-5 md:text-center py-3 md:pl-3" ><p><?php echo $idCommande; ?></p></th>
                                     <td class="text-center py-3"><p><?php echo htmlentities($commande['date_commande']);?></p></td>
-                                    <td class="text-center py-3"><p><?= $etat ?></p></td>
+                                    <td class="text-center py-3"><p><?= $etat[$idCommande] ?></p></td>
                                     <td class="text-center py-3"><p><?php echo htmlentities($commande['montant_total_ttc']); ?></p></td>
                                     <td><a href="<?php echo htmlentities("commande.php?idCommande=".$idCommande);?>">
                                         <img src="../../images/logo/bootstrap_icon/plus-square.svg" alt="voir plus d'informations" class="w-8 md:w-10 h-auto">
