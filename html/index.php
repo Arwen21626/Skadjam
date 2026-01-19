@@ -96,7 +96,7 @@
                                 <img src="<?= $valeurs['url_photo'];?>" 
                                         alt="<?= $valeurs['alt'];?>"
                                         title="<?= $valeurs['titre'];?>"
-                                        class="w-full h-40 md:h-80 justify-self-center">
+                                        class="w-auto h-40 md:h-80 justify-self-center">
 
                                 <!--affichage du nom du produit-->
                                 <p><?= $valeurs['libelle_produit'];?></p> 
