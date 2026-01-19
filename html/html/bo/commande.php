@@ -85,7 +85,7 @@
             <!---date--->
             <h3 class="ml-5 mr-3">Date : <?php echo $date;?></h3>
             <!---bouton imprimer--->
-            <button id="imprimer" class="border-vertFonce border-2 rounded-2xl w-50 h-14 px-7 mr-5 cursor-pointer">Imprimer</button>
+            <button id="imprimer" class="border-vertFonce border-2 rounded-2xl w-65 h-14 px-7 mr-5 cursor-pointer">Imprimer la facture</button>
         </div>
 
         <div class="flex justify-center mt-10">
