@@ -1,13 +1,17 @@
+/* Question prochain DM ou autre : est ce que le prix remise peut être tout le 
+    temps utilisé pour calc le prix tot ?
+*/
+
 import * as Popup from "../popup.js";
 
-const btnClosePopUp = document.getElementById("popup-modif").querySelector("button");
+const btnClosePopUp = document.getElementById("popup-modif-panier").querySelector("button");
 
 btnClosePopUp.addEventListener("click", () => {
 
-    Popup.closePopup("popup-modif");
+    Popup.closePopup("popup-modif-panier");
 });
 
-Popup.showPopUp(3000, "panierModif");
+Popup.showPopUp("popup-modif-panier", 3000, "panierModif");
 
 // Gestion de la sauvegarde des modifications dans la BDD
 
@@ -67,7 +71,7 @@ if (formPanier) { //Chech si le formulaire de validation du panier (un élément
         let idProduit = container.id;
 
         // Récupères les éléments des prix d'un produit
-        let prixTTC = Number(container.querySelector('.prod-info').querySelector('.prix').querySelector('.prix-u').textContent.split(':', 2)[1].replace('€', '').replace(',', '.').trim());
+        let prixTTC = Number(container.querySelector('.prod-info').querySelector('.prix').querySelector('.prix-u').textContent.replace('€', '').replace(',', '.'));
         let prixTot = container.querySelector('.prod-info').querySelector('.prix').querySelector('.prix-tot'); //Prix total d'un produit
 
         let lenClassList = container.querySelector('.prod-info').classList.length //Récupère la longueur de la liste des class de la div représentant les infos d'un produit
