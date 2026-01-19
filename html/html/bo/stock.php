@@ -85,7 +85,7 @@
                 </table>
             </div>
             <div class="flex justify-around mt-10">
-                <!---bouton annuler--->
+                <!---bouton retour--->
                 <a href="index_vendeur.php" class="flex justify-center items-center border-2 border-vertFonce rounded-2xl w-45 h-14 cursor-pointer my-5">Retour</a>
                 <!---bouton modifier stock--->
                 <button class="border-2 border-vertFonce rounded-2xl w-45 h-14 cursor-pointer my-5">

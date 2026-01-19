@@ -8,9 +8,6 @@
             </a>
         </div>
         
-        <h1 class="text-vertFonce m-0 text-right pt-1 pr-2
-                    md:text-center md:pt-5">
-            Alizon
-        </h1>
+        <h1 class="text-vertFonce m-0 text-right pt-1 pr-2 md:text-center md:pt-5">Alizon</h1>
     </section>
 </header>
