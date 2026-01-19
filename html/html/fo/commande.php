@@ -105,7 +105,7 @@
         </div>
 
         <div class="flex justify-center md:mt-10">
-        <!--TABLEAU LISTE DES COMMANDES VERSION TABLETTE-->
+        <!--TABLEAU DE LA COMMANDE VERSION TABLETTE-->
             <table class="table-auto w-290 md:inline-table hidden">
                 <thead>
                     <tr>
@@ -178,7 +178,7 @@
                 </tfoot>
             </table>
 
-            <!--TABLEAU LISTE DES COMMANDES VERSION TELEPHONE-->
+            <!--TABLEAU DE LA COMMANDE VERSION TELEPHONE-->
             <table class="table-auto w-95 md:hidden block mt-6">
                 <tbody>
                     <?php $ligneIndex = 0;
