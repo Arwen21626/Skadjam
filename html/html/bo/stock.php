@@ -9,7 +9,7 @@
     try {     
         $tabProduit = null;           
         //récupère toutes les infos des tables produits
-        foreach($dbh->query("SELECT *
+        foreach($dbh->query("SELECT pr.id_produit, pr.libelle_produit, pr.prix_ttc, pr.note_moyenne, pr.quantite_stock
                             FROM sae3_skadjam._produit pr
                             INNER JOIN sae3_skadjam._vendeur v
                                 ON pr.id_vendeur = v.id_compte
@@ -44,12 +44,15 @@
     <main class="min-h-[545px]">
         <h2>Stock</h2>
         
+        <!---affichage si catalogue vide--->
         <?php if($tabProduit == null){ ?>
             <p>Votre catalogue de produit est vide, vous n'avez donc pas de stock.</p>
+            <a href="index_vendeur.php" class="flex justify-center md:mt-15 md:mb-15 mt-5 mb-5"><button class="border-vertFonce border-2 rounded-lg md:rounded-2xl w-35 h-10 md:w-50 md:h-14 px-7 cursor-pointer">Retour</button></a>
         <?php } 
         
         else{?>
             <div class="flex justify-center">
+                <!---tableau liste des stocks--->
                 <table class="table-auto w-250">
                     <thead>
                         <tr>
@@ -60,22 +63,11 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <?php 
-                            //pour changer la classe de css une ligne sur 2
-                            $impair = 0;
-                            $classe;
-                            $classe1 = "py-4";
-                            $classe2 = "py-4 bg-bleu";
+                        <?php $ligneIndex = 1;
                             foreach($tabProduit as $id => $valeurs){
-                                $idProduit = $valeurs['id_produit']; 
-                                $impair ++;
-                                if(fmod($impair, 2) == 0){
-                                    $classe = $classe1;
-                                }
-                                else{
-                                    $classe = $classe2;
-                                }?>
-                                <tr class="<?php echo $classe; ?>">
+                                $idProduit = $valeurs['id_produit'];?>
+                                <tr class="py-4 <?= ligneCouleur($ligneIndex)?>">
+                                    <!---informations des stocks--->
                                     <td scope="row" class="text-left py-3 pl-3" ><a href="<?php echo htmlentities("details_produit.php?idProduit=".$idProduit);?>"><?php echo $valeurs['libelle_produit']; ?></a></td>
                                     <td class="text-center py-3"><p><?php echo htmlentities($valeurs['prix_ttc']);?> €</p></td>
                                     <td class="text-center py-3">
@@ -86,21 +78,20 @@
                                             ?>
                                         </div>
                                     </td>
-
                                     <td class="text-center py-3"><p><?php echo htmlentities($valeurs['quantite_stock']); ?></p></td>
                                 </tr>
                         <?php }?>
                     </tbody>
                 </table>
             </div>
-            <div class="flex justify-center">
+            <div class="flex justify-around mt-10">
+                <!---bouton annuler--->
+                <a href="index_vendeur.php" class="flex justify-center items-center border-2 border-vertFonce rounded-2xl w-45 h-14 cursor-pointer my-5">Retour</a>
+                <!---bouton modifier stock--->
                 <button class="border-2 border-vertFonce rounded-2xl w-45 h-14 cursor-pointer my-5">
-                    <a href="../bo/modifier_stock.php?idCompte=<?php echo $idCompte ;?>" class="">Modifier stocks</a>
+                    <a href="../bo/modifier_stock.php?idCompte=<?php echo $idCompte ;?>" class="">Modifier le stock</a>
                 </button>
             </div>
-            
-            
-
         <?php } ?>
     </main>
 

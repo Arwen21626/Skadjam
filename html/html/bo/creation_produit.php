@@ -47,6 +47,7 @@ if (isset($_POST['categorie']) && isset($_POST['nom']) && isset($_POST['prix']) 
     $description = $_POST['description'];
     $unite = $_POST['unite'];
     $qteUnite = $_POST['qteUnite'];
+    $remise = $_POST['remise'];
     // Champs spécifiques à la promotion
     $dateDebutPromotion = isset($_POST['dateDebutPromotion']) ? htmlentities($_POST['dateDebutPromotion']) : date('Y-m-d');
     $dateFinPromotion = htmlentities($_POST['dateFinPromotion']);
@@ -150,6 +151,39 @@ if (isset($_POST['categorie']) && isset($_POST['nom']) && isset($_POST['prix']) 
 
             foreach ($insertionPhoto as $t) {
                 $idPhoto = $t['id_photo'];
+            }
+
+            // Créer une nouvelle remise
+            $insertRemise = $dbh->prepare("WITH id_remise AS (
+                                                INSERT INTO sae3_skadjam._remise(pourcentage_remise, date_debut_remise) 
+                                                VALUES (?, ?) RETURNING id_remise
+                                            )
+                                            INSERT INTO sae3_skadjam._reduit(id_produit, id_remise) 
+                                                SELECT ?, id_remise FROM id_remise");
+
+            //mise à jour de la base de données
+            $pourcentage = $remise;
+            $pourcentage = $pourcentage/100;
+            $existe = false;  //si le produit a déjà une remise
+            foreach($dbh->query("SELECT * FROM sae3_skadjam._reduit WHERE id_produit = $idProd", PDO::FETCH_ASSOC) as $row){
+                $existe = true;
+                // modification d'une remise
+                if (verifPourcentage($pourcentage) && $pourcentage != 0) {
+                    $updateRemise->execute([$pourcentage, $row['id_remise']]);
+                }
+                // supression d'une remise
+                elseif(verifPourcentage($pourcentage) && $pourcentage == 0){
+                    $deleteReduit->execute([$row['id_remise'], $idProd]);
+                    $deleteRemise->execute([$pourcentage]);
+                }
+                else{
+                    echo "le format du pourcentage n'est pas correcte";
+                }
+            }
+            // insertion d'une remise
+            if (!$existe && $pourcentage != 0){
+                $date = date('d/m/Y'); 
+                $insertRemise->execute([$pourcentage, $date, $idProd]);
             }
 
             // Gestion de la promotion
@@ -274,8 +308,8 @@ if (isset($_POST['categorie']) && isset($_POST['nom']) && isset($_POST['prix']) 
         </style>
     </head>
     <body>
-        <?php include(__DIR__ . '/../../php/structure/header_back.php');?>
-        <?php include(__DIR__ . '/../../php/structure/navbar_back.php');?>
+        <?php include __DIR__ . '/../../php/structure/header_back.php';?>
+        <?php include __DIR__ . '/../../php/structure/navbar_back.php';?>
         <main class="flex flex-col items-center">
             <h2>Création d'un produit</h2>
             <form class="grid grid-cols-[40%_60%] w-4/5 self-center" action="creation_produit.php" method="post" enctype="multipart/form-data">
@@ -289,25 +323,32 @@ if (isset($_POST['categorie']) && isset($_POST['nom']) && isset($_POST['prix']) 
                 </div>
 
                 <!-- Nom produit -->
-                <div class="col-start-2 row-start-1 flex flex-col w-200 m-2 p-2">
+                <div class="col-start-2 row-start-1 flex flex-col w-155 m-2 p-2">
                     <label for="nom">Nom produit *:</label>
-                    <input placeholder="Confiture fraises des bois 200g" class=" border-4 border-beige rounded-2xl placeholder-gray-500" type="text" name="nom" id="nom" required>
+                    <input placeholder="Confiture fraises des bois 200g" class=" border-4 border-beige rounded-2xl placeholder-gray-500" type="text" name="nom" id="nom" maxlength="100" required>
                 </div>
 
-                <div class="col-start-2 row-start-2 flex flex-row justify-between w-200 m-2 p-2">
+                <div class="col-start-2 row-start-2 flex flex-row justify-between w-155 m-2 p-2">
                     <!-- Prix ht -->
                     <div class="flex flex-col">
                         <label for="prix">Prix *(hors taxe):</label>
-                        <input placeholder="3.99" class="border-4 border-beige rounded-2xl w-75 placeholder-gray-500" type="number" name="prix" id="prix" min="0.0" step="0.01" required>
+                        <input placeholder="3.99" class="border-4 border-beige rounded-2xl w-40 m-2 placeholder-gray-500" type="number" name="prix" id="prix" min="0.0" step="0.01" max="99999999.99" required>
                     </div>
+
+                    <!-- Remise -->
+                    <div class="flex flex-col">
+                        <label for="remise">Remise (%):</label>
+                        <input value="<?php echo $remise*100;?>" placeholder="0" class="border-4 border-beige rounded-2xl w-40 m-2 placeholder-gray-500" type="number" name="remise" id="remise" min="0" max="100">
+                    </div>
+
                     <!-- Quantite en stock -->
                     <div class="flex flex-col">
                         <label for="qteStock">Quantité en stock* :</label>
-                        <input placeholder="50" class="border-4 border-beige rounded-2xl w-75 placeholder-gray-500" type="number" name="qteStock" id="qteStock" min="0" required>
+                        <input placeholder="50" class="border-4 border-beige rounded-2xl w-40 m-2 placeholder-gray-500" type="number" name="qteStock" id="qteStock" min="0" max="999999999" required>
                     </div>
                 </div>
                     
-                <div class="col-start-2 row-start-3 col-span-2 flex flex-row justify-between w-200 m-2 p-2">
+                <div class="col-start-2 row-start-3 col-span-2 flex flex-row justify-between w-155 m-2 p-2">
                     <!-- Catégorie -->
                     <div class="flex flex-col">
                         <label for="categorie">Catégorie* :</label>
@@ -331,7 +372,7 @@ if (isset($_POST['categorie']) && isset($_POST['nom']) && isset($_POST['prix']) 
                     <!-- Quantité par unité -->
                     <div class="flex flex-col">
                         <label for="qteUnite">Quantité par unité :</label>
-                        <input placeholder="200" class="border-4 border-beige rounded-2xl w-75 placeholder-gray-500" type="number" name="qteUnite" id="qteUnite" min="0" required>
+                        <input placeholder="200" class="border-4 border-beige rounded-2xl w-40 m-2 placeholder-gray-500" type="number" name="qteUnite" id="qteUnite" min="0" max="999999999"required>
                     </div>
                 </div>
 
@@ -368,7 +409,7 @@ if (isset($_POST['categorie']) && isset($_POST['nom']) && isset($_POST['prix']) 
                     <div class="flex flex-row justify-around m-2 p-2">
                         <div class="flex flex-row mr-4 ml-4">
                             <label class="mr-4" for="labelPromo">Libellé de la promotion :</label>
-                            <input class="border-4 border-beige rounded-2xl w-45" type="text" name="labelPromo" id="labelPromo" value="<?php echo $labelPromo;?>">
+                            <input class="border-4 border-beige rounded-2xl w-45" maxlength="20" type="text" name="labelPromo" id="labelPromo" value="<?php echo $labelPromo;?>">
                         </div>
                     </div>
                 </div>
@@ -386,7 +427,7 @@ if (isset($_POST['categorie']) && isset($_POST['nom']) && isset($_POST['prix']) 
                 </div>
             </form>
         </main>
-        <?php include(__DIR__ . '/../../php/structure/footer_back.php');?>
+        <?php include __DIR__ . '/../../php/structure/footer_back.php';?>
         <script src="../../js/bo/changement_image_produits.js"></script>
     </body>
     <script>

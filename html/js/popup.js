@@ -17,7 +17,7 @@ export function sleep(ms){
 export async function closePopup(idPopup) {
     // Ajoute la class à la popup qui lancera l'animation pour "fermer" la popup
     document.getElementById(idPopup).classList.add("desactive");
-    //await sleep(1000);
+    await sleep(1000);
     document.getElementById("popup-overlay").classList.add("desactive");
 }
 
@@ -28,6 +28,7 @@ export async function openPopUp(idPopup, ms){
     // puis appel la fonction pour lancer l'animation pour "fermer" la popup
 
     document.getElementById("popup-overlay").classList.add("active");
+    document.getElementById(idPopup).classList.add("active");
     await sleep(ms);
     closePopup(idPopup);
 }

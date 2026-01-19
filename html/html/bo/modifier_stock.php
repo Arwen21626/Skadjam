@@ -9,7 +9,7 @@
     try {     
         $tabProduit = null;           
         //récupère toutes les infos des tables produits et photos
-        foreach($dbh->query("SELECT *
+        foreach($dbh->query("SELECT pr.id_produit, pr.libelle_produit, pr.prix_ttc, pr.note_moyenne, pr.quantite_stock
                             FROM sae3_skadjam._produit pr 
                             INNER JOIN sae3_skadjam._vendeur v
                                 ON pr.id_vendeur = v.id_compte
@@ -64,16 +64,20 @@
     <main class="min-h-[545px]">
         <h2>Stock</h2>
         
+        <!---affichage si catalogue vide--->
         <?php if($tabProduit == null){ ?>
             <p>Votre catalogue de produit est vide, vous n'avez donc pas de stock.</p>
+            <a href="index_vendeur.php" class="flex justify-center md:mt-15 md:mb-15 mt-5 mb-5"><button class="border-vertFonce border-2 rounded-lg md:rounded-2xl w-35 h-10 md:w-50 md:h-14 px-7 cursor-pointer">Retour</button></a>
         <?php } 
         
         else{?>
             <div class="flex justify-center">
+                <!---tableau liste des stocks--->
                 <form action="modifier_stock.php?idCompte=<?php echo $idCompte;?>" method="POST" enctype="multipart/form-data">
                     <table class="table-auto w-250">
                         <thead>
                             <tr>
+                                <!---noms des colonnes--->
                                 <th scope="col" class="text-left w-125 pl-3"><h3>Nom du produit</h3></th>
                                 <th scope="col"><h3>Prix</h3></th>
                                 <th scope="col"><h3>Note</h3></th>
@@ -81,24 +85,13 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <?php 
-                                //pour changer la classe de css une ligne sur 2
-                                $impair = 0;
-                                $classe;
-                                $classe1 = "py-4";
-                                $classe2 = "py-4 bg-bleu";
+                            <?php $ligneIndex = 1;
                                 foreach($tabProduit as $id => $valeurs){
                                     $idProduit = $valeurs['id_produit']; 
-                                    $qteStock = $valeurs['quantite_stock'];
-                                    $impair ++;
-                                    if(fmod($impair, 2) == 0){
-                                        $classe = $classe1;
-                                    }
-                                    else{
-                                        $classe = $classe2;
-                                    }?>
-                                    <tr class="<?php echo $classe; ?>">
-                                        <th scope="row" class="text-left py-3 pl-3" ><a href="<?php echo htmlentities("details_produit.php?idProduit=".$idProduit);?>"><?php echo $valeurs['libelle_produit']; ?></a></th>
+                                    $qteStock = $valeurs['quantite_stock'];?>
+                                    <!---informations des stocks--->
+                                    <tr class="py-4 <?= ligneCouleur($ligneIndex)?>">
+                                        <td scope="row" class="text-left py-3 pl-3" ><a href="<?php echo htmlentities("details_produit.php?idProduit=".$idProduit);?>"><?php echo $valeurs['libelle_produit']; ?></a></td>
                                         <td class="text-center py-3"><p><?php echo htmlentities($valeurs['prix_ttc']);?> €</p></td>
                                         <td class="text-center py-3">
                                             <div class="flex justify-center items-center">
@@ -121,9 +114,11 @@
                             <?php }?>
                         </tbody>
                     </table>
-                    <div class="flex justify-around">
-                        <a href="../bo/stock.php?idCompte=<?php echo $idCompte ;?>" class="flex justify-center items-center border-2 border-vertFonce rounded-2xl w-40 h-14 cursor-pointer my-5">Retour</a>
-                        <input class="border-2 border-vertFonce rounded-2xl w-45 h-14 cursor-pointer my-5" type="submit" value="Valider">
+                    <div class="flex justify-around mt-10">
+                        <!---bouton annuler--->
+                        <a href="../bo/stock.php?idCompte=<?php echo $idCompte ;?>" class="flex justify-center items-center border-2 border-vertFonce rounded-2xl w-40 h-14 cursor-pointer my-5">Annuler</a>
+                        <!---bouton valider--->
+                        <input class="border-2 border-vertFonce rounded-2xl w-40 h-14 cursor-pointer my-5" type="submit" value="Valider">
                     </div>
                 </form>
             </div>

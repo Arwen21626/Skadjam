@@ -1,6 +1,7 @@
 <?php
 session_start();
 require_once __DIR__ . "/../../php/verif_role_fo.php";
+require_once __DIR__ . "/../../php/fonctions.php";
 require(__DIR__ . '/../../01_premiere_connexion.php');
 
 // === Vérification utilisateur et panier ===
@@ -102,6 +103,7 @@ if (isset($_POST['valider'])) {
         <h2 class="mt-10">Récapitulatif de votre commande</h2>
                 
         <div class="flex items-center justify-between mt-10 px-5">
+            <!---date de la commande--->
             <h3>Date : <?php echo date("d/m/Y"); ?></h3>
             <!-- bouton annuler (mobile) -->
             <a href="../fo/panier.php?idPanier=<?php echo $idPanier; ?>"
@@ -113,10 +115,11 @@ if (isset($_POST['valider'])) {
 
         <form action="recapitulatif_commande.php" method="post">
             <div class="flex flex-col items-center justify-center md:mt-10 mt-6">
-                <?php//TABLEAU VERSION TABLETTE ?>
+                <!-- TABLEAU VERSION TABLETTE -->
                 <table class="table-auto w-280 md:inline-table hidden">
                     <thead>
                         <tr>
+                            <!---noms des colonnes--->
                             <th class="text-left w-90 pl-3"><h4>Article</h4></th>
                             <th class="pr-3"><h4>Prix unitaire HT</h4></th>
                             <th class="pr-3"><h4>Prix unitaire TTC</h4></th>
@@ -126,33 +129,22 @@ if (isset($_POST['valider'])) {
                         </tr>
                     </thead>
                     <tbody>
-                        <?php $impair = 1;
-                        foreach($tabVendeur as $vendeur){
-                            $impair ++;
-                            if(fmod($impair, 2) == 0){
-                                $classe = "py-4";
-                            }
-                            else{
-                                $classe = "py-4 bg-bleu";
-                            }?>
-                            <tr class="<?php echo $classe; ?> border-t-2 border-solid border-black">
+                        <?php $ligneIndex = 0;
+                        foreach($tabVendeur as $vendeur){?>
+                            <!---affichage du vendeur--->
+                            <tr class="py-4 <?= ligneCouleur($ligneIndex)?> border-t-2 border-solid border-black">
                                 <th colspan="6" class="text-left py-3 pl-3"><h4>Vendeur : <?php echo $vendeur ;?></h4></th>
                             </tr>
                             <?php foreach($tabInfosPanier as $ligne){ 
-                                if($ligne['raison_sociale'] == $vendeur){
-                                    $impair ++;
-                                    if(fmod($impair, 2) == 0){
-                                        $classe = "py-4";
-                                    }
-                                    else{
-                                        $classe = "py-4 bg-bleu";
-                                    }?>
-                                    <tr class="<?php echo $classe; ?>">
+                                if($ligne['raison_sociale'] == $vendeur){?>
+                                    <!---affichage des informations de chaque produit de la commande--->
+                                    <tr class="py-4 <?= ligneCouleur($ligneIndex)?>">
                                         <td class="text-left py-3 pl-3"><p><?php echo $ligne['id_produit'];?> - <?php echo $ligne['libelle_produit'];?></p></td>
                                         <td class="text-center py-3"><p><?php echo $ligne['prix_ht'];?></p></td>
                                         <td class="text-center py-3"><p><?php echo $ligne['prix_ttc'];?></p></td>
                                         <td class="text-center py-3"><p><?php echo $ligne['pourcentage_remise']*100;?>%</p></td>
                                         <td class="text-center py-3"><p><?php echo $ligne['quantite_par_produit'];?></p></td>
+                                        <!---affichage du total de ligne (quantite et remise comprise)--->
                                         <?php if($ligne['prix_remise'] != $ligne['prix_ttc']){ 
                                             $total_ligne = $ligne['prix_remise'] * $ligne['quantite_par_produit'] ;    
                                         } 
@@ -161,38 +153,28 @@ if (isset($_POST['valider'])) {
                                         } ?>
                                         <td class="text-center py-3"><p><?php echo $total_ligne;?></p></td>
                                         <?php 
-                                            //calcul du total de la commande
+                                            //calcul du total ht de la commande
                                             $total_ht = $total_ht + $ligne['sous_total_ht'];
+                                            //calcul du sous total final par vendeur
                                             $sous_total_final += $total_ligne;
                                         ?>
                                     </tr>
                                 <?php } 
-                            }
-                            $impair ++;
-                            if(fmod($impair, 2) == 0){
-                                $classe = "py-4";
-                            }
-                            else{
-                                $classe = "py-4 bg-bleu";
                             }?>
-                            <tr class="<?php echo $classe; ?>">
+                            <!---sous-total par vendeur--->
+                            <tr class="py-4 <?= ligneCouleur($ligneIndex)?>">
                                 <th colspan="5" class="text-left w-90 pl-3"><p>Sous-total :</p></th>
                                 <th class="text-center py-3"><p><?php echo $sous_total_final;?></p></th>
                             </tr>
                             <?php
+                                //calcul du total final de la commande remise(s) comprise(s)
                                 $total_final += $sous_total_final;
                                 $sous_total_final = 0;
                         } ?>
                     </tbody>
                     <tfoot>
-                        <?php $impair ++;
-                            if(fmod($impair, 2) == 0){
-                                $classe = "py-4";
-                            }
-                            else{
-                                $classe = "py-4 bg-bleu";
-                            };?>
-                        <tr class="<?php echo $classe; ?>">
+                        <!---affichage des totaux de la commande--->
+                        <tr class="py-4 <?= ligneCouleur($ligneIndex)?> border-t-2 border-solid border-black">
                             <th class="text-left w-90 pl-3"><h4>Total :</h4></th>
                             <th class="text-center py-3"><h4><?php echo $total_ht;?></h4></th>
                             <th class="text-center py-3"><h4><?php echo $total_ttc;?></h4></th>
@@ -203,22 +185,19 @@ if (isset($_POST['valider'])) {
                     </tfoot>
                 </table>
 
-                
-                <?php// VERSION TELEPHONE ?>
+
+                <!-- VERSION TELEPHONE -->
                 <table class="table-auto w-95 md:hidden block mt-6">
                     <tbody>
                         <?php $ligneIndex = 0;
-                        function ligneCouleur(&$i) {
-                            $i++;
-                            return ($i % 2 === 0) ? 'bg-bleu' : '';
-                        }
-
                         foreach($tabVendeur as $vendeur){ ?>
+                            <!---affichage du vendeur--->
                             <tr class="py-4 <?= ligneCouleur($ligneIndex) ?> border-t-2 border-solid border-black">
                                 <th colspan="2" class="text-left py-2 pl-3"><h4>Vendeur : <?php echo $vendeur ;?></h4></th>
                             </tr>
                             <?php foreach($tabInfosPanier as $ligne){ 
-                                if($ligne['raison_sociale'] == $vendeur){ ?>  
+                                if($ligne['raison_sociale'] == $vendeur){ ?> 
+                                    <!---affichage des informations de chaque produit de la commande---> 
                                     <tr class="py-4 <?= ligneCouleur($ligneIndex) ?>">
                                         <th class="text-left py-2 pl-3"><h4 class="w-40">Article</h4></th>
                                         <td class="text-left"><p><?php echo $ligne['id_produit'];?> - <?php echo $ligne['libelle_produit'];?></p></td>
@@ -239,6 +218,7 @@ if (isset($_POST['valider'])) {
                                         <th class="text-left py-2 pl-3"><h4>Quantité</h4></th>
                                         <td class="text-left"><p><?php echo $ligne['quantite_par_produit'];?></p></td>
                                     </tr>
+                                    <!---affichage du total du produit (quantite et remise comprise)--->
                                     <tr class="py-4 <?= ligneCouleur($ligneIndex) ?> border-b-2 border-solid border-black">
                                         <th class="text-left py-2 pl-3"><h4>Total produit</h4></th>
                                         <?php if($ligne['prix_remise'] != $ligne['prix_ttc']){ 
@@ -251,21 +231,21 @@ if (isset($_POST['valider'])) {
                                     </tr>
    
                                     <?php 
-                                        //calcul du total de la commande
-                                        $total_ht = $total_ht + $ligne['sous_total_ht'];
-                                        $sous_total_final += $total_ligne;          
+                                        //calcul du sous-total par vendeur
+                                        $sous_total_final += $total_ligne;        
                                 } 
                             } ?>
+                            <!---sous-total par vendeur--->
                             <tr class="py-4 <?= ligneCouleur($ligneIndex) ?>">
                                 <th class="text-left py-2 pl-3"><h4>Sous-total vendeur</h4></th>
                                 <th class="text-left"><p><?php echo $sous_total_final;?></p></th>
                             </tr>
                             <?php
-                                $total_final += $sous_total_final;
                                 $sous_total_final = 0;
                         } ?>
                     </tbody>
                     <tfoot>
+                        <!---affichage des totaux de la commande--->
                         <tr class="py-4 <?= ligneCouleur($ligneIndex) ?> border-t-2 border-solid border-black">
                             <th class="text-left py-2 pl-3"><h4>Total HT : </h4></th>
                             <th class="text-left"><h4><?php echo $total_ht;?></h4></th>
@@ -286,19 +266,21 @@ if (isset($_POST['valider'])) {
                 </table>
             </div>
         
-
-            <div class="flex items-center mt-10">
-                <input type="checkbox" id="case" name="case" class="cursor-pointer appearance-none w-10 h-10 border-4 border-vertClair rounded-sm md:rounded-md checked:bg-vertClair ml-3">
-                <a href="cgv_fo.php" class="ml-5">
-                    J’ai lu et j’accepte les conditions générales <br class="md:hidden"> de vente
-                </a> 
+            <!---case à cocher : acceptation des cgv--->
+            <div class="flex flex-row flex-wrap justify-center mt-10 mb-2">
+                <label for="case" class="underline! cursor-pointer hover:text-rouge">J'ai lu et j'acccepte les conditions générales de vente</label>
+                <input type="checkbox" id="case" name="case" required class="cursor-pointer ml-5 w-5 h-5">
                 <span id="error-cgv" class="ml-2 text-rouge hidden">Vous devez accepter les CGV.</span>    
             </div>
 
+            <!---boutons annuler et valider--->
             <div class="flex justify-center mt-10 mb-10">
+                <!---bouton annuler--->
                 <a href="../fo/panier.php?idPanier=<?php echo $idPanier ;?>" 
                    class="flex justify-center items-center border-2 border-vertClair rounded-2xl w-40 h-14 cursor-pointer my-5 mr-15">Annuler</a>
+                   <!---récupération de l'id panier--->
                 <input type="hidden" name="idPanier" value="<?= $idPanier ?>">
+                <!---bouton valider--->
                 <input class="flex justify-center items-center border-2 border-vertClair rounded-2xl w-40 h-14 cursor-pointer my-5" 
                        type="submit" name="valider" value="Valider" onclick="return verifierCGV()">
 

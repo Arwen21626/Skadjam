@@ -2,9 +2,9 @@
 session_start();
 require_once __DIR__ . "/../../php/verif_role_fo.php";
 
-require_once(__DIR__ . "/../../php/verification_formulaire.php"); // fonctions qui vérifient les données des formulaires
-require_once(__DIR__ . "/../../php/modification_variable.php"); // fonctions qui vérifient les données des formulaires
-require_once(__DIR__ . "/../../../connections_params.php"); // données de connexion à la base de données
+require_once __DIR__ . "/../../php/verification_formulaire.php"; // fonctions qui vérifient les données des formulaires
+require_once __DIR__ . "/../../php/modification_variable.php"; // fonctions qui vérifient les données des formulaires
+require_once __DIR__ . "/../../../connections_params.php"; // données de connexion à la base de données
 
 //Connection à la base de données
 $dbh = new PDO("$driver:host=$server;port=$port;dbname=$dbname", $user, $pass); 
@@ -31,7 +31,7 @@ foreach($dbh->query("SELECT * FROM sae3_skadjam._compte c
 
 <!DOCTYPE html>
 <html lang="fr">
-<?php include (__DIR__ . "/../../php/structure/head_front.php");?>
+<?php include __DIR__ . "/../../php/structure/head_front.php";?>
 <head>
     <title>Modification du compte client</title>
     <style>
@@ -44,12 +44,12 @@ foreach($dbh->query("SELECT * FROM sae3_skadjam._compte c
 <body>
     <?php
     // Import du header
-    include (__DIR__."/../../php/structure/header_front.php");
+    include __DIR__."/../../php/structure/header_front.php";
     ?>
     <main style="margin: 0" class="flex flex-col justify-center">
         <?php
         // Import de la bar de navigation
-        include (__DIR__."/../../php/structure/navbar_front.php");    
+        include __DIR__."/../../php/structure/navbar_front.php";
         ?>
 
         <h2 class="flex justify-center text-center">Modification du compte client</h2>
