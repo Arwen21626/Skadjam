@@ -325,14 +325,14 @@ if (isset($_POST['categorie']) && isset($_POST['nom']) && isset($_POST['prix']) 
                 <!-- Nom produit -->
                 <div class="col-start-2 row-start-1 flex flex-col w-155 m-2 p-2">
                     <label for="nom">Nom produit *:</label>
-                    <input placeholder="Confiture fraises des bois 200g" class=" border-4 border-beige rounded-2xl placeholder-gray-500" type="text" name="nom" id="nom" required>
+                    <input placeholder="Confiture fraises des bois 200g" class=" border-4 border-beige rounded-2xl placeholder-gray-500" type="text" name="nom" id="nom" maxlength="100" required>
                 </div>
 
                 <div class="col-start-2 row-start-2 flex flex-row justify-between w-155 m-2 p-2">
                     <!-- Prix ht -->
                     <div class="flex flex-col">
                         <label for="prix">Prix *(hors taxe):</label>
-                        <input placeholder="3.99" class="border-4 border-beige rounded-2xl w-40 m-2 placeholder-gray-500" type="number" name="prix" id="prix" min="0.0" step="0.01" required>
+                        <input placeholder="3.99" class="border-4 border-beige rounded-2xl w-40 m-2 placeholder-gray-500" type="number" name="prix" id="prix" min="0.0" step="0.01" max="99999999.99" required>
                     </div>
 
                     <!-- Remise -->
@@ -344,7 +344,7 @@ if (isset($_POST['categorie']) && isset($_POST['nom']) && isset($_POST['prix']) 
                     <!-- Quantite en stock -->
                     <div class="flex flex-col">
                         <label for="qteStock">Quantité en stock* :</label>
-                        <input placeholder="50" class="border-4 border-beige rounded-2xl w-40 m-2 placeholder-gray-500" type="number" name="qteStock" id="qteStock" min="0" required>
+                        <input placeholder="50" class="border-4 border-beige rounded-2xl w-40 m-2 placeholder-gray-500" type="number" name="qteStock" id="qteStock" min="0" max="999999999" required>
                     </div>
                 </div>
                     
@@ -372,7 +372,7 @@ if (isset($_POST['categorie']) && isset($_POST['nom']) && isset($_POST['prix']) 
                     <!-- Quantité par unité -->
                     <div class="flex flex-col">
                         <label for="qteUnite">Quantité par unité :</label>
-                        <input placeholder="200" class="border-4 border-beige rounded-2xl w-40 m-2 placeholder-gray-500" type="number" name="qteUnite" id="qteUnite" min="0" required>
+                        <input placeholder="200" class="border-4 border-beige rounded-2xl w-40 m-2 placeholder-gray-500" type="number" name="qteUnite" id="qteUnite" min="0" max="999999999"required>
                     </div>
                 </div>
 
