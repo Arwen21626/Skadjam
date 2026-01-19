@@ -1,6 +1,7 @@
 <?php
     session_start();
     require_once __DIR__ . "/../../php/verif_role_fo.php";
+    require_once __DIR__ . "/../../php/fonctions.php";
     require(__DIR__ . '/../../01_premiere_connexion.php');
     $idCompte = $_SESSION['idCompte'];
     $idCommande = $_GET['idCommande'];
@@ -21,7 +22,8 @@
                 r.pourcentage_remise,
                 p.prix_ttc * d.quantite as sous_total_ttc,
                 c.montant_total_ttc,
-                d.sous_total as sous_total_ht
+                p.prix_ht * d.quantite as sous_total_ht,
+                p.prix_remise * d.quantite as sous_total_remise
                 FROM sae3_skadjam._commande c
                 INNER JOIN sae3_skadjam._details d
                     ON d.id_commande = c.id_commande
@@ -104,7 +106,7 @@
 
         <div class="flex justify-center md:mt-10">
         <!--TABLEAU LISTE DES COMMANDES VERSION TABLETTE-->
-            <table class="table-auto w-280 md:inline-table hidden">
+            <table class="table-auto w-290 md:inline-table hidden">
                 <thead>
                     <tr>
                         <!---noms des colonnes--->
@@ -118,33 +120,22 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <?php $impair = 1;
-                    foreach($tabVendeur as $vendeur){
-                        $impair ++;
-                        if(fmod($impair, 2) == 0){
-                            $classe = "py-4";
-                        }
-                        else{
-                            $classe = "py-4 bg-bleu";
-                        }?>
-                        <tr class="<?php echo $classe; ?> border-t-2 border-solid border-black">
+                    <?php $ligneIndex = 0;
+                    foreach($tabVendeur as $vendeur){?>
+                        <!---affichage du vendeur--->
+                        <tr class="py-4 <?= ligneCouleur($ligneIndex)?> border-t-2 border-solid border-black">
                             <th colspan="6" class="text-left py-3 pl-3"><h4>Vendeur : <?php echo $vendeur ;?></h4></th>
                         </tr>
                         <?php foreach($tabInfosCommande as $ligne){ 
-                            if($ligne['raison_sociale'] == $vendeur){
-                                $impair ++;
-                                if(fmod($impair, 2) == 0){
-                                    $classe = "py-4";
-                                }
-                                else{
-                                    $classe = "py-4 bg-bleu";
-                                }?>
-                                <tr class="<?php echo $classe; ?>">
+                            if($ligne['raison_sociale'] == $vendeur){?>
+                                <!---affichage des informations de chaque produit de la commande--->
+                                <tr class="py-4 <?= ligneCouleur($ligneIndex)?>">
                                     <td class="text-left py-3 pl-3"><p><?php echo $ligne['id_produit'];?> - <?php echo $ligne['libelle_produit'];?></p></td>
                                     <td class="text-center py-3"><p><?php echo $ligne['prix_ht'];?></p></td>
                                     <td class="text-center py-3"><p><?php echo $ligne['prix_ttc'];?></p></td>
                                     <td class="text-center py-3"><p><?php echo $ligne['pourcentage_remise']*100;?>%</p></td>
                                     <td class="text-center py-3"><p><?php echo $ligne['quantite'];?></p></td>
+                                    <!---affichage du total de ligne (quantite et remise comprise)--->
                                     <?php if($ligne['prix_remise'] != $ligne['prix_ttc']){ 
                                             $total_ligne = $ligne['prix_remise'] * $ligne['quantite'] ;    
                                     } 
@@ -154,7 +145,7 @@
                                     <td class="text-center py-3"><p><?php echo $total_ligne;?></p></td>
                                     <?php 
                                         //calcul du total ht de la commande
-                                        $total_ht = $total_ht + $ligne['sous_total_ht'];
+                                        $total_ht += $ligne['sous_total_ht'];
                                         //calcul du sous total final par vendeur
                                         $sous_total_final += $total_ligne;
                                         //calcul du nombre de produit final
@@ -162,32 +153,21 @@
                                     ?>
                                 </tr>
                             <?php } 
-                        }
-                        $impair ++;
-                        if(fmod($impair, 2) == 0){
-                            $classe = "py-4";
-                        }
-                        else{
-                            $classe = "py-4 bg-bleu";
                         }?>
-                        <tr class="<?php echo $classe; ?>">
+                        <!---sous-total par vendeur--->
+                        <tr class="py-4 <?= ligneCouleur($ligneIndex)?>">
                             <th colspan="5" class="text-left w-90 pl-3"><p>Sous-total :</p></th>
                             <th class="text-center py-3"><p><?php echo $sous_total_final;?></p></th>
                         </tr>
                         <?php 
+                            //calcul du total final de la commande remise(s) comprise(s)
                             $total_final += $sous_total_final;
                             $sous_total_final = 0;
                     } ?>
                 </tbody>
                 <tfoot>
-                    <?php $impair ++;
-                        if(fmod($impair, 2) == 0){
-                            $classe = "py-4";
-                        }
-                        else{
-                            $classe = "py-4 bg-bleu";
-                        };?>
-                    <tr class="<?php echo $classe; ?>">
+                    <!---affichage des totaux de la commande--->
+                    <tr class="py-4 <?= ligneCouleur($ligneIndex)?>">
                         <th class="text-left w-90 pl-3"><h4>Total :</h4></th>
                         <th class="text-center py-3"><h4><?php echo $total_ht;?></h4></th>
                         <th class="text-center py-3"><h4><?php echo $total_ttc;?></h4></th>
@@ -202,17 +182,14 @@
             <table class="table-auto w-95 md:hidden block mt-6">
                 <tbody>
                     <?php $ligneIndex = 0;
-                    function ligneCouleur(&$i) {
-                        $i++;
-                        return ($i % 2 === 0) ? 'bg-bleu' : '';
-                    }
-
                     foreach($tabVendeur as $vendeur){ ?>
+                    <!---affichage du vendeur--->
                         <tr class="py-4 <?= ligneCouleur($ligneIndex) ?> border-t-2 border-solid border-black">
                             <th colspan="2" class="text-left py-2 pl-3"><h4>Vendeur : <?php echo $vendeur ;?></h4></th>
                         </tr>
                         <?php foreach($tabInfosCommande as $ligne){ 
                             if($ligne['raison_sociale'] == $vendeur){ ?>  
+                                <!---affichage des informations de chaque produit de la commande--->
                                 <tr class="py-4 <?= ligneCouleur($ligneIndex) ?>">
                                     <th class="text-left py-2 pl-3"><h4 class="w-40">Article</h4></th>
                                     <td class="text-left"><p><?php echo $ligne['id_produit'];?> - <?php echo $ligne['libelle_produit'];?></p></td>
@@ -233,6 +210,7 @@
                                     <th class="text-left py-2 pl-3"><h4>Quantité</h4></th>
                                     <td class="text-left"><p><?php echo $ligne['quantite'];?></p></td>
                                 </tr>
+                                <!---affichage du total du produit (quantite et remise comprise)--->
                                 <tr class="py-4 <?= ligneCouleur($ligneIndex) ?> border-b-2 border-solid border-black">
                                     <th class="text-left py-2 pl-3"><h4>Total produit</h4></th>
                                     <?php if($ligne['prix_remise'] != $ligne['prix_ttc']){ 
@@ -245,24 +223,21 @@
                                 </tr>
 
                                 <?php 
-                                    //calcul du total ht de la commande
-                                    $total_ht = $total_ht + $ligne['sous_total_ht'];
-                                    //calcul du sous total final par vendeur
-                                    $sous_total_final += $total_ligne;   
-                                    //calcul du nombre de produit final
-                                    $quantite_totale += $ligne['quantite'];       
+                                    //calcul du sous-total par vendeur
+                                    $sous_total_final += $total_ligne;         
                             } 
                         } ?>
+                        <!---sous-total par vendeur--->
                         <tr class="py-4 <?= ligneCouleur($ligneIndex) ?>">
                             <th class="text-left py-2 pl-3"><h4>Sous-total vendeur</h4></th>
                             <th class="text-left"><p><?php echo $sous_total_final;?></p></th>
                         </tr>
                         <?php
-                            $total_final += $sous_total_final;
                             $sous_total_final = 0;
                     } ?>
                 </tbody>
                 <tfoot>
+                    <!---affichage des totaux de la commande--->
                     <tr class="py-4 <?= ligneCouleur($ligneIndex) ?> border-t-2 border-solid border-black">
                         <th class="text-left py-2 pl-3"><h4>Total HT : </h4></th>
                         <th class="text-left"><h4><?php echo $total_ht;?></h4></th>
@@ -282,13 +257,17 @@
                 </tfoot>
             </table>
         </div>
+        <!---bouton retour version tablette--->
         <a href="liste_commandes.php" class="hidden md:flex justify-center mt-15 mb-15"><button class="border-vertClair border-4 rounded-lg md:rounded-2xl w-35 h-10 md:w-50 md:h-14 px-7 cursor-pointer">Retour</button></a>
         
+        <!---boutons retour et imprimer version téléphone--->
         <div class="flex justify-between md:hidden m-10">
             <a href="liste_commandes.php" class="flex justify-center"><button class="border-vertClair border-4 rounded-lg w-35 h-10 px-7 cursor-pointer">Retour</button></a>
             <button id="imprimer" class="border-vertClair border-4 rounded-lg w-35 h-10 px-7 cursor-pointer">Imprimer</button>
         </div>
     </main>
+
+    <!---script pour l'impression d'une facture--->
     <script>
         let btnImprimmer = document.getElementById("imprimer");
         let numeroCommande = document.getElementById("numeroCommande");
