@@ -83,26 +83,31 @@
         
         <h2 class="mt-10">Récapitulatif de la commande</h2>
 
-        <div class="flex justify-between md:hidden mr-5 ml-5">
+        <!---boutons retour et imprimer en haut de la page format téléphone--->
+        <div class="flex justify-between md:hidden m-10">
             <a href="liste_commandes.php" class="flex justify-center"><button class="border-vertClair border-4 rounded-lg w-35 h-10 px-7 cursor-pointer">Retour</button></a>
             <button id="imprimer" class="border-vertClair border-4 rounded-lg w-35 h-10 px-7 cursor-pointer">Imprimer</button>
         </div>
 
+        <!---numéro de commande--->
         <div class="ml-5 flex flex-row items-center mt-10">
             <h3 class="mr-3">Numéro de la commande : </h3> 
             <h3 id="numeroCommande"><?php echo $idCommande;?></h3>
         </div>
         
+        <!---date--->
         <div class="md:flex md:justify-between">
             <h3 class="ml-5 mr-3">Date : <?php echo $date;?></h3>
+            <!---bouton imprimer page format tablette--->
             <button id="imprimer" class="border-vertClair border-4 rounded-lg md:rounded-2xl w-35 h-10 md:w-50 md:h-14 px-7 mr-5 cursor-pointer hidden md:block">Imprimer</button>
         </div>
 
         <div class="flex justify-center md:mt-10">
-        <!--TABLEAU DES COMMANDES VERSION TABLETTE-->
+        <!--TABLEAU LISTE DES COMMANDES VERSION TABLETTE-->
             <table class="table-auto w-280 md:inline-table hidden">
                 <thead>
                     <tr>
+                        <!---noms des colonnes--->
                         <th class="text-left w-90 pl-3"><h4>Article</h4></th>
                         <th class="pr-3"><h4>Prix unitaire HT</h4></th>
                         <th class="pr-3"><h4>Prix unitaire TTC</h4></th>
@@ -193,7 +198,7 @@
                 </tfoot>
             </table>
 
-            <!--TABLEAU VERSION TELEPHONE-->
+            <!--TABLEAU LISTE DES COMMANDES VERSION TELEPHONE-->
             <table class="table-auto w-95 md:hidden block mt-6">
                 <tbody>
                     <?php $ligneIndex = 0;
@@ -277,7 +282,12 @@
                 </tfoot>
             </table>
         </div>
-        <a href="liste_commandes.php" class="flex justify-center mt-15 mb-15"><button class="border-vertClair border-4 rounded-lg md:rounded-2xl w-35 h-10 md:w-50 md:h-14 px-7 cursor-pointer">Retour</button></a>
+        <a href="liste_commandes.php" class="hidden md:flex justify-center mt-15 mb-15"><button class="border-vertClair border-4 rounded-lg md:rounded-2xl w-35 h-10 md:w-50 md:h-14 px-7 cursor-pointer">Retour</button></a>
+        
+        <div class="flex justify-between md:hidden m-10">
+            <a href="liste_commandes.php" class="flex justify-center"><button class="border-vertClair border-4 rounded-lg w-35 h-10 px-7 cursor-pointer">Retour</button></a>
+            <button id="imprimer" class="border-vertClair border-4 rounded-lg w-35 h-10 px-7 cursor-pointer">Imprimer</button>
+        </div>
     </main>
     <script>
         let btnImprimmer = document.getElementById("imprimer");

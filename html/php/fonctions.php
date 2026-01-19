@@ -56,3 +56,10 @@ function affichageNote($note){
     } 
     ?></section><?php
 }
+
+
+function ligneCouleur(&$i) {
+    //fonction qui met le fond d'une ligne de commande ou de stock en bleu
+    $i++;
+    return ($i % 2 === 0) ? 'bg-bleu' : '';
+}
