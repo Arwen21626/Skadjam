@@ -6,7 +6,6 @@ require(__DIR__ . '/../01_premiere_connexion.php');
 $idCommande = $_GET['idCommande'];
 
 // récupération de tous les produits de la commande
-$donnees = [];
 
 foreach($dbh->query("SELECT v.raison_sociale, cvend.adresse_mail as mail_vendeur, a.adresse_postale as adresse_postale_vendeur, a.complement_adresse as complement_adresse_vendeur, 
                         a.numero_rue as numero_rue_vendeur, a.code_postal as code_postal_vendeur, a.ville as ville_vendeur, c.date_commande, al.numero_bat as numero_bat_client, 
@@ -56,8 +55,13 @@ foreach($dbh->query("SELECT v.raison_sociale, cvend.adresse_mail as mail_vendeur
                 'quantite' => $row['quantite'],
                 'sousTotal' => $row['sous_total']
             ];
-        
-        $info[$row['numero_facture']]['montantFacture'] = $info[$row['numero_facture']]['montantFacture']+$row['sous_total'];
+            
+        if ($info[$row['numero_facture']]['montantFacture'] !== null){
+            $info[$row['numero_facture']]['montantFacture'] = $info[$row['numero_facture']]['montantFacture']+$row['sous_total'];
+        }
+        else{
+            $info[$row['numero_facture']]['montantFacture'] = $row['sous_total'];
+        }
     }
     
 }
