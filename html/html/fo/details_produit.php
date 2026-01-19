@@ -199,8 +199,19 @@
                 
                 <section class=" md:ml-32">
                     <?php foreach($avis as $row){
-                        if ($row['contenu_commentaire'] != ''){?>
-                            <section class=" bg-bleu rounded-2xl m-4 p-4 md:w-4xl">
+                        if ($row['contenu_commentaire'] != ''){
+                            $idAvis = $row['id_avis'];
+                            $stmt = $dbh->prepare("SELECT id_avis, raison_sociale, contenu_reponse FROM sae3_skadjam._reponse r
+                                                    INNER JOIN sae3_skadjam._vendeur v
+                                                        ON r.id_compte = v.id_compte 
+                                                    WHERE id_avis = ?");
+                            $stmt->execute([$idAvis]);
+                            $reponse = $stmt->fetch(PDO::FETCH_ASSOC);
+                            
+                            $aReponse = ($reponse['id_avis']!==null)?true:false;
+                            ?>
+                            <section class=" bg-bleu m-4 p-4 md:w-4xl <?php echo $aReponse?'mb-0 rounded-t-2xl':'rounded-2xl'?>">
+
                                 <div class="grid grid-cols-4 md:grid-cols-5 justify-items-end">
                                     <h4 class=" col-span-2 md:col-span-3 justify-self-start">
                                         <?php echo $row['pseudo'];?>
@@ -236,6 +247,16 @@
                                 </div>
                                 <p><?php echo $row['contenu_commentaire'];?></p>     
                             </section>
+                            <?php if($reponse["id_avis"] !== null){?>
+                            <section class=" bg-beige m-4 mt-0 p-4 w-4xl rounded-b-2xl">
+                                <div class="grid grid-cols-4 md:grid-cols-5 justify-items-end w-auto">
+                                    <h4 class="mr-4 col-span-2 md:col-span-3 justify-self-start">
+                                        <?php echo $reponse['raison_sociale']; ?>
+                                    </h4>
+                                </div>
+                                <p><?php echo $reponse['contenu_reponse'];?></p>     
+                            </section>
+                            <?php }?>
                         <?php }
                     }?>
                 </section>
