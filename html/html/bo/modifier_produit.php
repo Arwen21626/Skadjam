@@ -69,7 +69,7 @@ foreach($dbh->query("SELECT *,est_masque::CHAR as est_masque_php
     $promotion = $stmtPromo->fetch(PDO::FETCH_ASSOC);
 
     // id_promotion != null veut dire que le produit est en promotion
-    if($promotion['id_promotion'] != null){
+    if( isset($promotion['id_promotion']) && $promotion['id_promotion'] != null){
         $caseCochee = true;
         // Récupération des infos de promotion
         $dateDebutPromotion = formatDate($promotion['date_debut_promotion']);
