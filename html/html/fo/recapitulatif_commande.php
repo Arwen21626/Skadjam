@@ -115,7 +115,7 @@ if (isset($_POST['valider'])) {
 
         <form action="recapitulatif_commande.php" method="post">
             <div class="flex flex-col items-center justify-center md:mt-10 mt-6">
-                <?php//TABLEAU VERSION TABLETTE ?>
+                <!-- TABLEAU VERSION TABLETTE -->
                 <table class="table-auto w-280 md:inline-table hidden">
                     <thead>
                         <tr>
@@ -185,8 +185,8 @@ if (isset($_POST['valider'])) {
                     </tfoot>
                 </table>
 
-                
-                <?php// VERSION TELEPHONE ?>
+
+                <!-- VERSION TELEPHONE -->
                 <table class="table-auto w-95 md:hidden block mt-6">
                     <tbody>
                         <?php $ligneIndex = 0;
@@ -267,11 +267,9 @@ if (isset($_POST['valider'])) {
             </div>
         
             <!---case à cocher : acceptation des cgv--->
-            <div class="flex items-center mt-10 ml-3">
-                <input type="checkbox" id="case" name="case" class="cursor-pointer appearance-none w-10 h-10 border-4 border-vertClair rounded-sm md:rounded-md checked:bg-vertClair ml-3">
-                <a href="cgv_fo.php" class="ml-5 underline">
-                    J’ai lu et j’accepte les conditions <br class="md:hidden"> générales de vente
-                </a> 
+            <div class="flex flex-row flex-wrap justify-center mt-10 mb-2">
+                <label for="case" class="underline! cursor-pointer hover:text-rouge">J'ai lu et j'acccepte les conditions générales de vente</label>
+                <input type="checkbox" id="case" name="case" required class="cursor-pointer ml-5 w-5 h-5">
                 <span id="error-cgv" class="ml-2 text-rouge hidden">Vous devez accepter les CGV.</span>    
             </div>
 
