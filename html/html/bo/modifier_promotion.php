@@ -45,7 +45,6 @@
                 $updateStock->execute();
             }
         }
-        echo "Tous les stocks ont été mis à jour";
         header("Location: ./promotion_vendeur.php?idCompte=$idCompte");
     } 
 ?>
