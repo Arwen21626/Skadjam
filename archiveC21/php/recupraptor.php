@@ -117,7 +117,6 @@ class Recupraptor{
                 );
 
             if ($reponse = $this->send_commande($cmd)){
-
                 $this->numSuivi = $reponse;
                 return $this->numSuivi;
 
@@ -128,11 +127,27 @@ class Recupraptor{
             
         }
 
+
+    static private function etat_to_str($etat){
+        switch ($etat){
+            case "TRTC" : return "En attente";
+            case "ACHTR" :
+            case "ARRTR" :
+            case "ACHPR" :
+            case "ARRPR" :
+            case "ACHCL" :
+            case "ARRCL" : return "Expédié";
+            case "LVRSN" : return "En cours de livraison";
+            case "LVR" : return "Livré";
+            default : return "Inconnu";
+        }
+    }
+
     public function get_etat(string $numSuivi){
 
         if ($reponse = $this->send_commande("ETA $numSuivi")){
-
-            $this->etat = $reponse;
+            $str_etat = Recupraptor::etat_to_str($reponse);
+            $this->etat = $str_etat;
             return $this->etat;
         }else{
             throw new Exception("ERREUR non connecté");
