@@ -31,6 +31,7 @@
     <script>
         const tabProd = <?php echo json_encode($tabProduit);?>;
     </script>
+    <script src="../../js/barre_recherche.js"></script>
     <script src="../../js/recherche.js"></script>
     <script src="../../js/affichageListeProduits.js"></script>
     <script src="../../js/fo/affichageProduit.js"></script>
@@ -51,8 +52,10 @@
     
     <main class="md:min-h-[900px] min-h-[600px]">
         <!-- Barre de recherche -->
+        <input type="text" id="recherche" class="border-4 border-vertClair rounded-xl placeholder-gray-500 md:w-267 w-95 p-2 md:ml-7 ml-6 mt-4 mb-4" placeholder="Rechercher un produit...">
         <button id="filtresTris" class="md:hidden underline  m-2">Filtres & tris</button>
-        <aside class="sidebar hidden overflow-auto bg-beige/90 w-full h-auto fixed top-0 bottom-10 md:bg-beige p-4 md:sticky md:block md:w-79 md:h-225 md:top-16 md:float-left">
+        <!-- Aside -->
+        <aside class="sidebar hidden overflow-auto bg-beige/90 w-110 h-auto fixed top-0 bottom-10 md:bg-beige p-4 md:sticky md:block md:w-79 md:h-225 md:top-16 md:float-left">
             
             <!-- Filtres -->
             <section>

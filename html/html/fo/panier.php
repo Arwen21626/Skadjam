@@ -68,7 +68,7 @@
                 }
                 
 
-                $montantTotalTTC += $infoProduitsPanier[$i]["infoProduit"]["prix_ttc"] * $infoProduitsPanier[$i]["quantiteProduit"];
+                $montantTotalTTC += $infoProduitsPanier[$i]["infoRemise"]["prix_remise"] * $infoProduitsPanier[$i]["quantiteProduit"];
                 $nbProduitsTotal += $infoProduitsPanier[$i]["quantiteProduit"];
             }
 
@@ -122,7 +122,7 @@
 
             $infoProduitsPanier[$i]["quantiteProduit"] = $prod["quantite_par_produit"];
 
-            $montantTotalTTC += $infoProduitsPanier[$i]["infoProduit"]["prix_ttc"] * $infoProduitsPanier[$i]["quantiteProduit"];
+            $montantTotalTTC += $infoProduitsPanier[$i]["infoRemise"]["prix_remise"] * $infoProduitsPanier[$i]["quantiteProduit"];
             $nbProduitsTotal += $infoProduitsPanier[$i]["quantiteProduit"];
         }
 
@@ -154,9 +154,9 @@
     <?php include(__DIR__ . "/../../php/structure/header_front.php") ?>
     <?php include(__DIR__ . "/../../php/structure/navbar_front.php") ?>
 
-    <div id="popup-overlay">
-        <div id="popup-modif" class="popup p-2 border-vertFonce shadow-xl">
-            <p>Votre panier a bien été modifié !</p>
+    <div id="popup-overlay" class="right-12 md:right-40">
+        <div id="popup-modif-panier" class="popup p-2 border-vertFonce shadow-xl">
+            <p>Vos modifications ont bien été enregistrées !</p>
             <button class="pl-2 pr-2 border-2 border-vertClair rounded-sm cursor-pointer">OK</button>
         </div>
     </div>
@@ -202,13 +202,16 @@
                                                     </div>
                                                     
                                                     <div class="prix">
-
-                                                        <p class="mb-0.5 md:mb-0 prix-u"> <?php echo "Prix unitaire : " . number_format($infoProduitsPanier[$i]["infoProduit"]["prix_ttc"], 2, ',', '') . "€"; ?></p>
+                                                        <p class="inline-block">Prix unitaire :</p>
+                                                        <p class="<?php echo ($infoProduitsPanier[$i]['infoRemise']['id_remise'] !== NULL)?'line-through':'';?> inline-block"> <?php echo htmlentities(str_replace(".", ",",$infoProduitsPanier[$i]['infoProduit']['prix_ttc'])); ?>€</p> 
+                                                        <p class="<?php echo ($infoProduitsPanier[$i]['infoRemise']['id_remise'] !== NULL)?'inline-block':' hidden';?> prix-u pl-3"><?php echo htmlentities(str_replace(".", ",",$infoProduitsPanier[$i]['infoRemise']['prix_remise'])); ?>€ </p>
+                                                        <p class="inline-block">(TTC)</p>
+                                                        
                                                         <p class="mt-0.5 md:mt-0 prix-tot"> 
                                                             <?php
-                                                                $prixTot = ($infoProduitsPanier[$i]["infoProduit"]["prix_ttc"] * $infoProduitsPanier[$i]["quantiteProduit"]);
+                                                                $prixTot = ($infoProduitsPanier[$i]["infoRemise"]["prix_remise"] * $infoProduitsPanier[$i]["quantiteProduit"]);
                                                                 $prixTot = number_format($prixTot, 2, ',', '');
-                                                                echo "Prix total : " . $prixTot . "€"; 
+                                                                echo "Prix total : " . $prixTot . "€";
                                                             ?>
                                                         </p>
                                                     </div>
@@ -320,8 +323,8 @@
                                                     
                                                     <div class="prix">
                                                         <p class="inline-block">Prix unitaire :</p>
-                                                        <p class="<?php echo ($infoProduitsPanier[$i]['infoRemise']['id_remise'] !== NULL)?'line-through':'';?> inline-block"> <?php echo htmlentities(str_replace(".", ",",$infoProduitsPanier[$i]['infoProduit']['prix_ttc'])); ?>€</p> 
-                                                        <p class="<?php echo ($infoProduitsPanier[$i]['infoRemise']['id_remise'] !== NULL)?'inline-block':' hidden';?> pl-3"><?php echo htmlentities(str_replace(".", ",",$infoProduitsPanier[$i]['infoRemise']['prix_remise'])); ?>€ </p>
+                                                        <p class="<?php echo ($infoProduitsPanier[$i]['infoRemise']['id_remise'] !== NULL)?'line-through':'';?> inline-block"><?php echo htmlentities(str_replace(".", ",",$infoProduitsPanier[$i]['infoProduit']['prix_ttc'])); ?>€</p> 
+                                                        <p class="<?php echo ($infoProduitsPanier[$i]['infoRemise']['id_remise'] !== NULL)?'inline-block':' hidden';?> prix-u pl-3"><?php echo htmlentities(str_replace(".", ",",$infoProduitsPanier[$i]['infoRemise']['prix_remise'])); ?>€</p>
                                                         <p class="inline-block">(TTC)</p>
                                                         
                                                         <p class="mt-0.5 md:mt-0 prix-tot"> 

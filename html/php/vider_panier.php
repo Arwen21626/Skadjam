@@ -37,7 +37,7 @@ if ($_SESSION['role'] === 'client')
     // Redirection différente selon pourquoi on vide le panier -> façon normal ou lors de l'achat
     if ($typeVider === "normal") 
     {
-        header("location:/html/fo/panier.php");
+        header("location:/html/fo/panier.php?panierModif=V");
     }
     else if ($typeVider === "achat")
     {
@@ -76,7 +76,7 @@ else if ($_SESSION['role'] === 'visiteur')
     $_SESSION['panier']['montant_total_ttc'] = 0;
     $_SESSION['panier']['contient'] = [];
 
-    header("location:/html/fo/panier.php");
+    header("location:/html/fo/panier.php?panierModif=V");
 }
 
 

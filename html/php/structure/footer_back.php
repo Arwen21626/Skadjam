@@ -17,8 +17,8 @@
 
         <article class="flex flex-col p-1">
             <h3 class="m-2">À propos</h3>
-            <a class="m-1 text-bleu hover:text-beige" href="Insérer lien page info sur la COBREC">Qui sommes-nous ?</a>
-            <a class="m-1 text-bleu hover:text-beige" href="Insérer lien vers le Site de la COBREC">Site de la COBREC</a>
+            <a class="m-1 text-bleu hover:text-beige" href="https://www.cobrec.co.uk/">Qui sommes-nous ?</a>
+            <a class="m-1 text-bleu hover:text-beige" href="https://www.cobrec.co.uk/">Site de la COBREC</a>
         </article>
 
         <article class="flex flex-col p-1">
