@@ -146,21 +146,6 @@ if($_SESSION['role'] != 'client'){
                 } catch (Exception $e){
                     echo ($e->getMessage() . "<br>");
                 }finally{
-                    if (!$idCommande) {
-                        throw new Exception("id_commande non récupéré");
-                    }
-
-                    //Insertion dans la table donne (lien entre panier et commande)
-                    $sqlDonne = "INSERT INTO sae3_skadjam._donne (id_panier, id_commande)
-                                VALUES (:id_panier, :id_commande)";
-        
-        
-                    $stmtDonne = $dbh->prepare($sqlDonne);
-
-                    $stmtDonne->execute([
-                        ':id_panier' => $idPanier,
-                        ':id_commande' => $idCommande
-                    ]);
                     
                     header("location:/php/vider_panier.php?typeVider=achat&achatValide=" . $achatValide);
 
