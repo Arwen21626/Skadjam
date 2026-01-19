@@ -100,15 +100,8 @@
                             <a href= "<?php echo "details_produit.php?idProduit=".$idProduit;?>" class="col-span-2 justify-self-center mb-3">
                                 <img src="<?php echo $valeurs['url_photo'];?>" 
                                         alt="<?php echo $valeurs['alt'];?>"
-                                        title="<?php echo $valeurs['titre'];?>">
-                            </a>
-
-                            <!--affichage de la promotion-->
-                            <?php if($estPromu && !empty($valeurs['label'])){ ?>
-                                <div class="bg-rouge absolute col-span-2 w-36 md:w-74 underline text-beige pt-2 pb-1.5">
-                                    <h4 class="text-center text-beige overline m-0"><strong><?php echo htmlspecialchars($valeurs['label']); ?></strong></h4>
-                                </div>
-                            <?php } ?>
+                                        title="<?php echo $valeurs['titre'];?>"
+                                        class="w-auto h-40 md:h-80 justify-self-center">
 
                             <!--affichage du nom du produit-->
                             <p class="col-span-2"><?php echo $valeurs['libelle_produit'];?></p> 
@@ -124,6 +117,14 @@
                                         affichageNote($note); ?>
                                 </div> 
                             </div>    
+                            </a>
+
+                            <!--affichage de la promotion-->
+                            <?php if($estPromu && !empty($valeurs['label'])){ ?>
+                                <div class="bg-rouge absolute col-span-2 w-36 md:w-74 underline text-beige pt-2 pb-1.5">
+                                    <h4 class="text-center text-beige overline m-0"><strong><?php echo htmlspecialchars($valeurs['label']); ?></strong></h4>
+                                </div>
+                            <?php } ?>
                         </section>
                     <?php } ?>
                 </div>         

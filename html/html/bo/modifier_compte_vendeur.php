@@ -135,30 +135,28 @@ if (isset($_POST["nom"]) && isset($_POST["prenom"]) && isset($_POST["mail"]) && 
                 $typesAutorises = ['image/jpeg', 'image/png', 'image/webp'];
                 if (in_array($_FILES['photo']['type'], $typesAutorises)) {
                     // Supprimer ancienne photo
-                    $anciennePhotoPath = __DIR__ . '/../../images/photo_importees/' . basename($urlPhoto);
+                    $anciennePhotoPath = __DIR__ . '/../..' . basename($urlPhoto);
                     if (file_exists($anciennePhotoPath) && strpos($urlPhoto, 'image.svg') === false) {
                         unlink($anciennePhotoPath);
                     }
                     // Nouvelle photo
                     $ext = explode('/', $_FILES['photo']['type'])[1];
-                    $nom_photo_finale = explode(' ', trim($nom))[0] . '_' . time() . '.' . $ext;
-                    $destination = __DIR__ . '/../../images/photo_importees';
+                    $nomPhoto = explode(' ', trim($nom))[0] . '_' . time() . '.' . $ext;
+                    $destination = __DIR__ . '/../../images/images_vendeur';
                     move_uploaded_file(
                         $_FILES['photo']['tmp_name'],
-                        $destination . '/' . $nom_photo_finale
+                        $destination . '/' . $nomPhoto
                     );
                 }
                 $updatePhoto = $dbh->prepare("UPDATE sae3_skadjam._photo
                                                 SET url_photo = :url, alt = :alt, titre = :titre
-                                                WHERE id_photo = :idPhoto");
+                                                WHERE id_photo = :id_photo");
 
-                $updatePhoto->execute([':url' => '/images/photo_importees/' . $nom_photo_finale,
-                                        ':alt' => $nom . ' ' . $prenom,
-                                        ':titre' => $nom . ' ' . $prenom,
-                                        ':idPhoto' => $idPhoto]);
+                $updatePhoto->execute([':url' => '/images/images_vendeur/' . $nomPhoto,
+                                        ':alt' => $denom,
+                                        ':titre' => $denom,
+                                        ':id_photo' => $idPhoto]);
             }
-
-
 
             // Fermer la connexion à la base de données
             $dbh = null;

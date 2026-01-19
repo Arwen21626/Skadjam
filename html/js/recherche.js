@@ -34,6 +34,8 @@ function ajoutEventListener(){
     let alphaTriZA = document.getElementById("alphaTriZA")
     let noteTri51 = document.getElementById("noteTri51")
     let noteTri15 = document.getElementById("noteTri15")
+    let stockTriCroissant = document.getElementById("stockTriCroissant")
+    let stockTriDecroissant = document.getElementById("stockTriDecroissant")
 
     // Fonctions de tri
         // Prix
@@ -68,6 +70,19 @@ function ajoutEventListener(){
         copieProd = triEtoileCroissant(copieProd)
         afficherListe(copieProd)
     })
+
+    if(stockTriCroissant != null && stockTriDecroissant != null){
+        stockTriCroissant.addEventListener("change",function () {
+            copieProd = triStockCroissant(copieProd)
+            afficherListe(copieProd)
+        })
+
+        stockTriDecroissant.addEventListener("change",function () {
+            copieProd = triStockDecroissant(copieProd)
+            afficherListe(copieProd)
+        })
+    }
+     
 
 // EventListener pour les filtres
     // Récupération des elements
@@ -177,21 +192,24 @@ function ajoutEventListener(){
         afficherListe(copieProd)
     });
 
-// EventListeners pour l'animation sidebar filtre et tri
+    // EventListeners pour l'animation sidebar filtre et tri
     // Récupératiion des elements
     let boutonSidebar = document.getElementById("filtresTris")
     let sidebar = document.getElementsByTagName("aside")[0]
     let fermerSidebar = document.getElementById("fermerSidebar")
 
-    // Fonction ouverture
-    boutonSidebar.addEventListener("click", function(){
-        boutonSidebar.classList.add("hidden")
-        sidebar.classList.remove("hidden")
-    })
+    if(boutonSidebar != null){
+        // Fonction ouverture
+        boutonSidebar.addEventListener("click", function(){
+            boutonSidebar.classList.add("hidden")
+            sidebar.classList.remove("hidden")
+        })
 
-    //Fonction fermeture
-    fermerSidebar.addEventListener("click", function(){
-        sidebar.classList.add("hidden")
-        boutonSidebar.classList.remove("hidden")
-    })
+        //Fonction fermeture
+        fermerSidebar.addEventListener("click", function(){
+            sidebar.classList.add("hidden")
+            boutonSidebar.classList.remove("hidden")
+        })
+    }
+    
 }
