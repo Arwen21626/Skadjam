@@ -132,7 +132,7 @@ if($_SESSION['role'] != 'client'){
 
                 //creation numéro de suivi
                 try{
-                    $id_suivi = $rpr->create_bord($idCommande, "alizon", "1 rue branly", 22300, $_POST["nom"], "machin", "6 rue bidule", 22450);
+                    $id_suivi = $rpr->create_bord($idCommande, "alizon");
                     if ($etat = $rpr->get_etat($id_suivi)){
 
                         $commande = "UPDATE sae3_skadjam._commande SET id_suivi = ?, etat = ? WHERE id_commande = ?";
@@ -144,7 +144,7 @@ if($_SESSION['role'] != 'client'){
                         }
                     }
                 } catch (Exception $e){
-                    echo ($e->getMessage());
+                    echo ($e->getMessage() . "<br>");
                 }finally{
                     if (!$idCommande) {
                         throw new Exception("id_commande non récupéré");

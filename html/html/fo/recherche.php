@@ -1,8 +1,8 @@
 <?php
     session_start();
-    require_once(__DIR__ . '/../../php/verif_role_fo.php');
-    require_once(__DIR__ . '/../../01_premiere_connexion.php');
-    require_once(__DIR__ . "/../../../connections_params.php");
+    require_once __DIR__ . '/../../php/verif_role_fo.php';
+    require_once __DIR__ . '/../../01_premiere_connexion.php';
+    require_once __DIR__ . "/../../../connections_params.php";
 
     //récupère toutes les infos des tables produits et photos
     $tabProduit = [];
@@ -31,6 +31,7 @@
     <script>
         const tabProd = <?php echo json_encode($tabProduit);?>;
     </script>
+    <script src="../../js/barre_recherche.js"></script>
     <script src="../../js/recherche.js"></script>
     <script src="../../js/affichageListeProduits.js"></script>
     <script src="../../js/fo/affichageProduit.js"></script>
@@ -38,20 +39,23 @@
     <script src="../../js/tris.js"></script>
     <script src="../../js/filtres.js"></script>
     <script src="../../js/affichageNote.js"></script>
+    
 </head>
 
 <body>
     
 
     <!--header-->
-    <?php (include __DIR__ . "/../../php/structure/header_front.php"); ?>
-    <?php include(__DIR__ . "/../../php/structure/navbar_front.php"); ?>
+    <?php include __DIR__ . "/../../php/structure/header_front.php"; ?>
+    <?php include __DIR__ . "/../../php/structure/navbar_front.php"; ?>
 
     
     <main class="md:min-h-[900px] min-h-[600px]">
         <!-- Barre de recherche -->
+        <input type="text" id="recherche" class="border-4 border-vertClair rounded-xl placeholder-gray-500 md:w-267 w-95 p-2 md:ml-7 ml-6 mt-4 mb-4" placeholder="Rechercher un produit...">
         <button id="filtresTris" class="md:hidden underline  m-2">Filtres & tris</button>
-        <aside class="sidebar hidden overflow-auto bg-beige/90 w-full h-auto fixed top-0 bottom-10 md:bg-beige p-4 md:sticky md:block md:w-79 md:h-225 md:top-16 md:float-left">
+        <!-- Aside -->
+        <aside class="sidebar hidden overflow-auto bg-beige/90 w-110 h-auto fixed top-0 bottom-10 md:bg-beige p-4 md:sticky md:block md:w-79 md:h-225 md:top-16 md:float-left">
             
             <!-- Filtres -->
             <section>
@@ -183,7 +187,6 @@
                             </div>
                         </div>
                     </details>
-                    
                 </article>
 
                 <!-- ordre alpha -->
@@ -246,8 +249,9 @@
             ajoutEventListener()
         </script>
     </main>
+    <script src="../../js/fo/animSidebar.js"></script>
 
     <!--footer-->
-    <?php include (__DIR__ . "/../../php/structure/footer_front.php"); ?>
+    <?php include __DIR__ . "/../../php/structure/footer_front.php"; ?>
 </body>
 </html>

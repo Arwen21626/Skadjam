@@ -64,6 +64,10 @@ class Recupraptor{
     }
 
     private function send_commande(string $commande) : string {
+        $fin = 0;
+        $len = 0;
+        $message = "";
+
 
         if (!$this->conn){
             $this->init_conn();
@@ -74,70 +78,83 @@ class Recupraptor{
             throw new Exception("Erreur envoie de la commande : $commande");
         }
 
+        $reponse = trim(fgets($this->conn));
+        if (!preg_match("/^CMD\s([A-Z]+)$/", $reponse, $cmd)){
+            throw new Exception("ERREUR CMD FORMAT");
+        }
 
-        $reponse = fgets($this->conn);
+        $reponse = trim(fgets($this->conn));
+        if (!preg_match("/^SIZE\s[0-9]+$/", $reponse, $taille)){
+            throw new Exception("ERREUR CMD FORMAT");
+        }
 
-        if ($reponse === false) {
-            throw new Exception("Aucune reponse recu pour la commande : $commande");
+
+        while (!$fin){
+            $reponse = trim(fgets($this->conn));
+            if ($reponse != "END"){
+                $message .= $reponse;
+            }else{
+                $fin = 1;
+            }
+
         }
 
 
         $this->close_conn();
-
-        $clean = trim($reponse);
-        return $clean;
+        return $message;
     }
 
     public function create_bord(
         string $numCommande, 
-        string $nomExp, 
-        string $adrExp, 
-        int $cpExp, 
-        string $nomDest, 
-        string $prenomDest, 
-        string $adrDest, 
-        int $cpDest)
+        string $nomExp
+        )
         {
 
             $cmd = sprintf(
-                "ADD %s %s |%s| %d %s %s |%s| %d", 
-                $numCommande, 
-                $nomExp, 
-                $adrExp, 
-                $cpExp, 
-                $prenomDest, 
-                $nomDest, 
-                $adrDest, 
-                $cpDest);
+                "ADD %s %s",
+                $nomExp,
+                $numCommande
+                );
 
             if ($reponse = $this->send_commande($cmd)){
-                if (preg_match('/^BORD\s([A-Z]{3}[0-9]{10})\scom(\d+)$/', $reponse, $m)){
-                    $this->numSuivi = $m[1];
-                } else {
-                    throw new Exception("Réponde non géré");
-                }
-    
+                $this->numSuivi = $reponse;
                 return $this->numSuivi;
 
             }else{
-                throw new Exception("non connecté");
+                throw new Exception("ERREUR non connecté");
             }
             return false;
             
         }
 
+
+    static private function etat_to_str($etat){
+        switch ($etat){
+            case "TRTC" : return "En attente";
+            case "ACHTR" :
+            case "ARRTR" :
+            case "ACHPR" :
+            case "ARRPR" :
+            case "ACHCL" :
+            case "ARRCL" : return "Expédié";
+            case "LVRSN" : return "En cours de livraison";
+            case "LVR" : return "Livré";
+            default : return "Inconnu";
+        }
+    }
+
     public function get_etat(string $numSuivi){
 
-        $reponse = $this->send_commande("ETA $numSuivi");
-
-
-        if (preg_match('/^ETA\s([A-Z]+)\s([A-Z]{3}[0-9]{10})$/', $reponse, $m)){
-            $this->etat = $m[1];
-        } else {
-            throw new Exception("Réponde non géré");
+        if ($reponse = $this->send_commande("ETA $numSuivi")){
+            $str_etat = Recupraptor::etat_to_str($reponse);
+            $this->etat = $str_etat;
+            return $this->etat;
+        }else{
+            throw new Exception("ERREUR non connecté");
         }
 
-        return $this->etat;
+
+        return false;
     }
 }
 ?>

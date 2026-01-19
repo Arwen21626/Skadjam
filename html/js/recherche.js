@@ -1,9 +1,31 @@
 let copieProd = JSON.parse(JSON.stringify(tabProd))
 
+function barreDeRecherche(tableau, mot){
+    let tableauRecherche = []
+    tablean.filter(prod => {
+        let nom = prod['libelle_produit'].toLowerCase()
+        let recherche = mot.toLowerCase()
+        if(nom.includes(recherche)){
+            tableauRecherche.push(prod)
+        }
+    });
+    first = 0
+    actualPage = 1
+    return tableauRecherche
+}
+
 // Ajout des eventListeners
 function ajoutEventListener(){
     
 // EventListener pour les boutons de changement de page
+    // Barre de recherche
+    let barreRecherche = document.getElementById("recherche")
+
+    barreRecherche.addEventListener("input",function(){
+        recherche = barreDeRecherche(barreRecherche.value)
+        afficherListe(copieProd, recherche)
+    })
+
     // Récupérations des elements
     let premierePage = document.getElementById("premierePage")
     let pagePrec = document.getElementById("pagePrec")
@@ -34,6 +56,8 @@ function ajoutEventListener(){
     let alphaTriZA = document.getElementById("alphaTriZA")
     let noteTri51 = document.getElementById("noteTri51")
     let noteTri15 = document.getElementById("noteTri15")
+    let stockTriCroissant = document.getElementById("stockTriCroissant")
+    let stockTriDecroissant = document.getElementById("stockTriDecroissant")
 
     // Fonctions de tri
         // Prix
@@ -68,6 +92,19 @@ function ajoutEventListener(){
         copieProd = triEtoileCroissant(copieProd)
         afficherListe(copieProd)
     })
+
+    if(stockTriCroissant != null && stockTriDecroissant != null){
+        stockTriCroissant.addEventListener("change",function () {
+            copieProd = triStockCroissant(copieProd)
+            afficherListe(copieProd)
+        })
+
+        stockTriDecroissant.addEventListener("change",function () {
+            copieProd = triStockDecroissant(copieProd)
+            afficherListe(copieProd)
+        })
+    }
+     
 
 // EventListener pour les filtres
     // Récupération des elements
@@ -177,21 +214,24 @@ function ajoutEventListener(){
         afficherListe(copieProd)
     });
 
-// EventListeners pour l'animation sidebar filtre et tri
+    // EventListeners pour l'animation sidebar filtre et tri
     // Récupératiion des elements
     let boutonSidebar = document.getElementById("filtresTris")
     let sidebar = document.getElementsByTagName("aside")[0]
     let fermerSidebar = document.getElementById("fermerSidebar")
 
-    // Fonction ouverture
-    boutonSidebar.addEventListener("click", function(){
-        boutonSidebar.classList.add("hidden")
-        sidebar.classList.remove("hidden")
-    })
+    if(boutonSidebar != null){
+        // Fonction ouverture
+        boutonSidebar.addEventListener("click", function(){
+            boutonSidebar.classList.add("hidden")
+            sidebar.classList.remove("hidden")
+        })
 
-    //Fonction fermeture
-    fermerSidebar.addEventListener("click", function(){
-        sidebar.classList.add("hidden")
-        boutonSidebar.classList.remove("hidden")
-    })
+        //Fonction fermeture
+        fermerSidebar.addEventListener("click", function(){
+            sidebar.classList.add("hidden")
+            boutonSidebar.classList.remove("hidden")
+        })
+    }
+    
 }

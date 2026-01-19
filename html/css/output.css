@@ -66,7 +66,6 @@ input.quantite-prod-input {
   display: none;
   position: fixed;
   bottom: 0;
-  right: 10rem;
   align-items: center;
   justify-content: center;
   z-index: 9999;
@@ -76,22 +75,29 @@ input.quantite-prod-input {
 #popup-overlay.active {
   display: flex;
 }
+#popup-overlay.desactive {
+  display: none;
+}
+.popup.active {
+  display: block;
+  animation: popupIn 1s forwards;
+}
 .popup.desactive {
   animation: popupOut 1s forwards;
 }
 .popup {
+  display: none;
   background-color: white;
   padding: 20px, 30px;
   border-radius: 12px;
   width: 320px;
   border-width: 3px;
   text-align: center;
-  animation: popupIn 1s forwards;
 }
-.popup > button {
+.popup div > button, .popup > button, .a-button {
   box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px;
 }
-.popup > button:hover {
+.popup div > button:hover, .popup > button:hover, .a-button:hover {
   box-shadow: none;
 }
 @keyframes popupOut {
@@ -315,6 +321,9 @@ input.quantite-prod-input {
   .right-4 {
     right: calc(var(--spacing, 0.25rem) * 4);
   }
+  .right-12 {
+    right: calc(var(--spacing, 0.25rem) * 12);
+  }
   .bottom-0 {
     bottom: calc(var(--spacing, 0.25rem) * 0);
   }
@@ -497,9 +506,6 @@ input.quantite-prod-input {
   }
   .mr-16 {
     margin-right: calc(var(--spacing, 0.25rem) * 16);
-  }
-  .mb-0\.5 {
-    margin-bottom: calc(var(--spacing, 0.25rem) * 0.5);
   }
   .mb-1 {
     margin-bottom: calc(var(--spacing, 0.25rem) * 1);
@@ -801,6 +807,9 @@ input.quantite-prod-input {
   }
   .w-150 {
     width: calc(var(--spacing, 0.25rem) * 150);
+  }
+  .w-155 {
+    width: calc(var(--spacing, 0.25rem) * 155);
   }
   .w-175 {
     width: calc(var(--spacing, 0.25rem) * 175);
@@ -1428,6 +1437,11 @@ input.quantite-prod-input {
       top: calc(var(--spacing, 0.25rem) * 48);
     }
   }
+  .md\:right-40 {
+    @media (width >= 48rem) {
+      right: calc(var(--spacing, 0.25rem) * 40);
+    }
+  }
   .md\:bottom-14 {
     @media (width >= 48rem) {
       bottom: calc(var(--spacing, 0.25rem) * 14);
@@ -1523,6 +1537,11 @@ input.quantite-prod-input {
       margin-bottom: calc(var(--spacing, 0.25rem) * 7);
     }
   }
+  .md\:mb-15 {
+    @media (width >= 48rem) {
+      margin-bottom: calc(var(--spacing, 0.25rem) * 15);
+    }
+  }
   .md\:ml-0 {
     @media (width >= 48rem) {
       margin-left: calc(var(--spacing, 0.25rem) * 0);
@@ -1536,6 +1555,11 @@ input.quantite-prod-input {
   .md\:ml-5 {
     @media (width >= 48rem) {
       margin-left: calc(var(--spacing, 0.25rem) * 5);
+    }
+  }
+  .md\:ml-7 {
+    @media (width >= 48rem) {
+      margin-left: calc(var(--spacing, 0.25rem) * 7);
     }
   }
   .md\:ml-10 {
@@ -1676,6 +1700,11 @@ input.quantite-prod-input {
       width: calc(var(--spacing, 0.25rem) * 50);
     }
   }
+  .md\:w-70 {
+    @media (width >= 48rem) {
+      width: calc(var(--spacing, 0.25rem) * 70);
+    }
+  }
   .md\:w-74 {
     @media (width >= 48rem) {
       width: calc(var(--spacing, 0.25rem) * 74);
@@ -1701,9 +1730,19 @@ input.quantite-prod-input {
       width: calc(var(--spacing, 0.25rem) * 150);
     }
   }
+  .md\:w-200 {
+    @media (width >= 48rem) {
+      width: calc(var(--spacing, 0.25rem) * 200);
+    }
+  }
   .md\:w-250 {
     @media (width >= 48rem) {
       width: calc(var(--spacing, 0.25rem) * 250);
+    }
+  }
+  .md\:w-267 {
+    @media (width >= 48rem) {
+      width: calc(var(--spacing, 0.25rem) * 267);
     }
   }
   .md\:w-275 {
@@ -1804,6 +1843,11 @@ input.quantite-prod-input {
   .md\:gap-1 {
     @media (width >= 48rem) {
       gap: calc(var(--spacing, 0.25rem) * 1);
+    }
+  }
+  .md\:self-center {
+    @media (width >= 48rem) {
+      align-self: center;
     }
   }
   .md\:rounded-2xl {

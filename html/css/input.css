@@ -84,13 +84,10 @@ input.quantite-prod-input {
 
 /* Popup - Animation */
 
-
-
 #popup-overlay {
     display: none;
     position: fixed;
     bottom: 0;
-    right: 10rem;
     align-items: center;
     justify-content: center;
     z-index: 9999;
@@ -100,7 +97,15 @@ input.quantite-prod-input {
 
 #popup-overlay.active {
     display: flex;
-    
+}
+
+#popup-overlay.desactive {
+    display: none;
+}
+
+.popup.active {
+    display: block;
+    animation: popupIn 1s forwards;
 }
 
 .popup.desactive {
@@ -108,21 +113,21 @@ input.quantite-prod-input {
 }
 
 .popup {
+    display: none;
     background-color: white;
     padding: 20px, 30px;
     border-radius: 12px;
     width: 320px;
     border-width: 3px;
     text-align: center;
-    animation: popupIn 1s forwards;
 }
 
-.popup > button{
+.popup div > button, .popup > button, .a-button {
 
     box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px;
 }
 
-.popup > button:hover {
+.popup div > button:hover, .popup > button:hover, .a-button:hover {
     box-shadow: none;
 }
 
@@ -141,11 +146,9 @@ input.quantite-prod-input {
 
     from {
         transform: translateY(260px);
-        /* opacity: 0; */
     }
     to {
         transform: translateY(-50px);
-        /* opacity: 1; */
     }
 }
 
