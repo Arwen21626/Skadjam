@@ -115,7 +115,7 @@ if (isset($_POST['valider'])) {
 
         <form action="recapitulatif_commande.php" method="post">
             <div class="flex flex-col items-center justify-center md:mt-10 mt-6">
-                <?php//TABLEAU VERSION TABLETTE ?>
+                <!-- TABLEAU VERSION TABLETTE -->
                 <table class="table-auto w-280 md:inline-table hidden">
                     <thead>
                         <tr>
@@ -185,8 +185,8 @@ if (isset($_POST['valider'])) {
                     </tfoot>
                 </table>
 
-                
-                <?php// VERSION TELEPHONE ?>
+
+                <!-- VERSION TELEPHONE -->
                 <table class="table-auto w-95 md:hidden block mt-6">
                     <tbody>
                         <?php $ligneIndex = 0;
