@@ -89,24 +89,31 @@ if ($_SESSION['role'] !== 'visiteur'){
                 <input class="border-4 border-beige rounded-2xl w-1/1 p-1 pl-3" type="password" name="verifMdp" id="verifMdp" required>
             </div>
 
-            <!-- Lien vers la page de connexion -->
-            <div class="flex mt-10 flex-col w-1/1 items-start">
-                <p>Vous avez déjà un compte ?</p>
-                <a style="text-decoration-line: underline" href="connexion.php">Connectez vous</a> 
+            <!-- Acceptation des CGU -->
+            <div class="flex flex-row flex-wrap items-center mt-2 mb-2">
+                <label for="cgu" class="underline! cursor-pointer hover:text-rouge">J'ai lu et j'acccepte les conditions générales d'utilisation :</label>
+                <input type="checkbox" id="cgu" name="cgu" required class="cursor-pointer ml-10 w-5 h-5 @max-[768px]:ml-2">
             </div>
 
-            <!-- Lien vers la création d'un compte vendeur -->
-            <div class="flex mt-10 flex-col w-1/1 items-start">
-                <p>Vous êtes un vendeur ?</p>
-                <a style="text-decoration-line: underline" href="../bo/crea_compte_vendeur.php">Créer un compte vendeur</a> 
-            </div>
-            
             <!-- Validation ou pas du formulaire -->
             <div class="flex mt-10 justify-center md:justify-end w-1/1 ">
                 <button class="cursor-pointer border-2 border-vertFonce rounded-2xl w-40 h-14 p-0 m-0 mr-10" type="button"><a href="/index.php">Annuler</a></button>
                 <input class="cursor-pointer border-2 border-vertFonce rounded-2xl w-40 h-14 p-0 m-0 md:mr-10" type="Submit" name="submit" id="submit" value="S'inscrire">
             </div>
         </form>
+        <div class="flex flex-row flex-wrap justify-center">
+            <!-- Lien vers la page de connexion -->
+            <div class="flex flex-row flex-wrap justify-center ml-10 mr-10 mb-10">
+                <p>Vous avez déjà un compte ? </p>
+                <a class="hover:text-rouge" style="text-decoration-line: underline" href="connexion.php">Connectez vous</a> 
+            </div>
+
+            <!-- Lien vers la création d'un compte vendeur -->
+            <div class="flex flex-row flex-wrap justify-center ml-10 mr-10 mb-10">
+                <p>Vous êtes un vendeur ? </p>
+                <a class="hover:text-rouge" style="text-decoration-line: underline" href="../bo/crea_compte_vendeur.php">Créer un compte vendeur</a> 
+            </div>
+        </div>
     </main>
 
     <?php 
