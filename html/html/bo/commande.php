@@ -90,7 +90,7 @@
 
         <div class="flex justify-center mt-10">
             <?php //tableau de la commande ?>
-            <table class="table-auto w-280">
+            <table class="table-auto w-290">
                 <thead>
                     <tr>
                         <!---noms des colonnes--->
@@ -103,7 +103,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <?php $ligneIndex = 0;
+                    <?php $ligneIndex = 1;
                         foreach($tabInfosCommande as $ligne){ ?>
                             <tr class="py-4 <?= ligneCouleur($ligneIndex)?>">
                                 <!---affichage des informations de chaque produit de la commande--->
@@ -133,7 +133,7 @@
                 <tfoot>
                     <!---affichage des totaux de la commande--->
                     <tr class="py-4 <?= ligneCouleur($ligneIndex)?>">
-                        <th colspan="2" class="text-left w-110 pl-3"><h4>Total :</h4></th>
+                        <th class="text-left w-90 pl-3"><h4>Total :</h4></th>
                         <th class="text-center py-3"><h4><?php echo $v_total_ht;?></h4></th>
                         <th class="text-center py-3"><h4><?php echo $v_total_ttc;?></h4></th>
                         <th></th>
