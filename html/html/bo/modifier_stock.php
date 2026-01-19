@@ -9,7 +9,7 @@
     try {     
         $tabProduit = null;           
         //récupère toutes les infos des tables produits et photos
-        foreach($dbh->query("SELECT *
+        foreach($dbh->query("SELECT pr.id_produit, pr.libelle_produit, pr.prix_ttc, pr.note_moyenne, pr.quantite_stock
                             FROM sae3_skadjam._produit pr 
                             INNER JOIN sae3_skadjam._vendeur v
                                 ON pr.id_vendeur = v.id_compte
