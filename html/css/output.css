@@ -1247,9 +1247,6 @@ input.quantite-prod-input {
   .text-gray-300 {
     color: var(--color-gray-300, oklch(87.2% 0.01 258.338));
   }
-  .text-gray-400 {
-    color: var(--color-gray-400, oklch(70.7% 0.022 261.325));
-  }
   .text-rouge {
     color: var(--color-rouge);
   }
@@ -1730,6 +1727,11 @@ input.quantite-prod-input {
   .md\:w-50 {
     @media (width >= 48rem) {
       width: calc(var(--spacing, 0.25rem) * 50);
+    }
+  }
+  .md\:w-65 {
+    @media (width >= 48rem) {
+      width: calc(var(--spacing, 0.25rem) * 65);
     }
   }
   .md\:w-70 {
