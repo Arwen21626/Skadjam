@@ -268,7 +268,7 @@ if (isset($_POST['valider'])) {
         
             <!---case à cocher : acceptation des cgv--->
             <div class="flex flex-row flex-wrap justify-center mt-10 mb-2">
-                <label for="case" class="underline! cursor-pointer hover:text-rouge">J'ai lu et j'acccepte les conditions générales de vente</label>
+                <label for="case" class="underline! cursor-pointer hover:text-rouge">J'ai lu et j'acccepte les conditions <br class="md:hidden"> générales de vente</label>
                 <input type="checkbox" id="case" name="case" required class="cursor-pointer ml-5 w-5 h-5">
                 <span id="error-cgv" class="ml-2 text-rouge hidden">Vous devez accepter les CGV.</span>    
             </div>
