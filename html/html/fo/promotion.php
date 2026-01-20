@@ -109,11 +109,11 @@
 
                                 <!--affichage du prix du produit-->   
                                 <div class="flex flex-row justify-between items-center">
-                                    <p class="inline-block <?php if (isset($valeurs['pourcentage_remise'])) {echo ("line-through");}?>">
+                                    <p class="inline-block <?php if ($valeurs['prix_ttc'] !== $valeurs['prix_remise']) {echo ("line-through");}?>">
                                     <?php echo (htmlentities(str_replace(".", ",",$valeurs['prix_ttc'])));?>
                                     € (TTC)</p>
 
-                                    <p class="pl-3 <?php if (isset($valeurs['pourcentage_remise'])) { echo ("");} else{echo ("hidden");}?>">
+                                    <p class="pl-3 <?php if ($valeurs['prix_ttc'] !== $valeurs['prix_remise']) { echo ("");} else{echo ("hidden");}?>">
                                     <?php echo (htmlentities(str_replace(".", ",",$valeurs['prix_remise'])));?>
                                     € (TTC)</p>
                                 </div>
