@@ -285,17 +285,17 @@
         </div>
 
         <!---Indicateur d'etat de livraison--->
-        <div class="ml-5">
-            <h3 class="mt-10 mb-10">Etat de la livraison : <?= $etat ?></h3>
-            <img src="../../images/photo_importees/befbf1768829378.png" alt="image test">
-
+        <div>
+            <h3 class="ml-5 mt-10 mb-10">Etat de la livraison : <?= $etat ?></h3>
         <?php
         if ($raison!=0){ ?>
             <p>Raison : <?= $raison ?></p>
             </div>
         <?php
         } else if ($image != 0){?>
-            <img src="<?= "../../images".$img_url ?>" alt="<?= $img_url ?>" width="350px">
+            <div class="flex md:justify-start md:ml-5 justify-center">
+                <img src="<?= "../../images".$img_url ?>" alt="<?= $img_url ?>" class="w-xs">
+            </div>
         <?php } ?>
 
         <!---bouton retour version tablette--->
