@@ -109,15 +109,8 @@
 
                                 <!--affichage du prix du produit-->   
                                 <div class="flex flex-row justify-between items-center">
-                                    <p class="inline-block <?php if (isset($valeurs['pourcentage_remise'])) {echo ("line-through");}?>">
-                                    <?php echo (htmlentities(str_replace(".", ",",$valeurs['prix_ttc'])));?>
-                                    € (TTC)</p>
-
-                                    <?php if (!isset($valeurs['pourcentage_remise'])) { ?>
-                                        <p class="pl-3 <?php echo ("hidden");?>">
-                                        <?php echo (htmlentities(str_replace(".", ",",$valeurs['prix_remise'])));?>
-                                    € (TTC)</p>
-                                    <?php } ?>
+                                    <p class="inline-block <?php echo ($valeurs['pourcentage_remise'] !== NULL?'line-through':'');?>"> <?php echo (htmlentities(str_replace(".", ",",$valeurs['prix_ttc']))); ?>€ (TTC)</p>
+                                    <p class=" pl-3 <? echo ($valeurs['pourcentage_remise'] !== NULL?'':'hidden');?>"> <?php echo (htmlentities(str_replace(".", ",",$valeurs['prix_remise']))); ?>€ (TTC)</p>
                                 </div>
                                 <!--récupération de la note-->
                                 <div class="flex">
@@ -129,7 +122,7 @@
                             <!--affichage de la promotion-->
                             <?php if($estPromu && !empty($valeurs['label'])){ ?>
                                 <div class="bg-rouge absolute w-36 md:w-74 underline text-beige pt-2 pb-1.5">
-                                    <h4 class="text-center text-beige overline m-0"><?php echo htmlspecialchars($valeurs['label']); ?></h4>
+                                    <h4 class="text-center text-beige overline m-0"><strong><?php echo htmlspecialchars($valeurs['label']); ?></strong></h4>
                                 </div>
                             <?php } ?>
                         </section>
@@ -144,11 +137,11 @@
         <!--fin du catalogue-->
         <div class="flex flex-row space-x-4 justify-center">
             <?php if ($pageNumber>1){?>
-            <a class= "lienPage hover:text-rouge underline" href="<?php echo "./index.php?page=".($pageNumber-1)."#nosProduits";?>">Page précédente</a>
+            <a class= "lienPage hover:text-rouge" href="<?php echo "./index.php?page=".($pageNumber-1)."#nosProduits";?>">Page précédente</a>
             <?php }?>
         
             <?php if ($pageNumber<$maxPage){?>
-            <a class= "lienPage hover:text-rouge underline" href="<?php echo "./index.php?page=".($pageNumber+1)."#nosProduits";?>">Page suivante</a>
+            <a class= "lienPage hover:text-rouge" href="<?php echo "./index.php?page=".($pageNumber+1)."#nosProduits";?>">Page suivante</a>
             <?php }?>
         </div>
     </main>
