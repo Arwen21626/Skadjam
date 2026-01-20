@@ -28,18 +28,18 @@ int db_get_raison(PGconn *conn, const char *id_suivi, char *raison){
         "SELECT raison_refus FROM _delivraptor WHERE id_suivi = $1",
         1, NULL, params, NULL, NULL, 0);
 
-    LOG_SERV(LOG_INFO, "RAISON GET : %s etat %d", id_suivi, raison);
-
-    if (PQresultStatus(res) != PGRES_TUPLES_OK) {
-        PQclear(res);
-        return 0;
-    }
-
-    int n = PQntuples(res);
-    if (n>0){
-        strcpy(raison, PQgetvalue(res, 0, 0));
-    }
-
+        
+        if (PQresultStatus(res) != PGRES_TUPLES_OK) {
+            PQclear(res);
+            return 0;
+        }
+        
+        int n = PQntuples(res);
+        if (n>0){
+            strcpy(raison, PQgetvalue(res, 0, 0));
+        }
+        LOG_SERV(LOG_INFO, "RAISON GET : %s etat %d", id_suivi, raison);
+        
     PQclear(res);
     return 1;
 }
@@ -95,14 +95,15 @@ int db_update_raison(PGconn *conn, const char *id_suivi, char *message){
         "UPDATE _delivraptor SET raison_refus = $1 WHERE id_suivi = $2",
         2, NULL, params, NULL, NULL, 0);
 
-    if (PQresultStatus(res) != PGRES_TUPLES_OK) {
+    if (PQresultStatus(res) != PGRES_COMMAND_OK) {
         LOG_SERV(LOG_ERROR, "err update raison %s",PQresultErrorMessage(res));
         PQclear(res);
         return 0;
     }
 
-    LOG_SERV(LOG_INFO, "RAISON UPDATE : %s raison %d", id_suivi, message);
-    int ok = PQresultStatus(res) == PGRES_COMMAND_OK;
+    LOG_SERV(LOG_INFO, "RAISON UPDATE : %s raison %s", id_suivi, message);
+
+
     PQclear(res);
-    return ok ? 1 : 0;
+    return 1;
 }

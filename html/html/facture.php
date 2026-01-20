@@ -90,7 +90,7 @@ foreach($dbh->query("SELECT v.raison_sociale, cvend.adresse_mail as mail_vendeur
             </section>
             <section class=" max-w-1/3">
                 <h2>Destinataire</h2>
-                <p><?php echo $nomClient?></p>
+                <p><?php echo $nomClient.' '.$prenomClient?></p>
                 <p><?php echo $mailClient?></p>
                 <p><?php echo $adrClient?></p>
             </section>

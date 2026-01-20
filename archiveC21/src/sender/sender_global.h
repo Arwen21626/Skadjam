@@ -10,6 +10,6 @@
 #include <errno.h>
 
 int push(int fd, const char *msg, const char *cmd);
-int push_binary(int fd, const void *data, size_t size, char cmd);
+int push_binary(int fd, const void *data, size_t size, char *cmd);
 
 #endif

@@ -16,6 +16,7 @@
 #include "../bdd/bdd.h"
 #include "../controller/controller_bord.h"
 #include "../controller/controller_etat.h"
+#include "../controller/controller_img.h"
 
 extern int opt_f;
 extern int opt_p;

@@ -39,10 +39,10 @@ int push(int fd, const char *msg, const char *cmd) {
     return 1;
 }
 
-int push_binary(int fd, const void *data, size_t size, char cmd) {
+int push_binary(int fd, const void *data, size_t size, char *cmd) {
     char header[128];
 
-    snprintf(header, sizeof(header), "CMD %d\nSIZE %zu\n", cmd, size);
+    snprintf(header, sizeof(header), "CMD %s\nSIZE %zu\n", cmd, size);
 
     if (send_all(fd, header, strlen(header)) < 0)
         return 0;

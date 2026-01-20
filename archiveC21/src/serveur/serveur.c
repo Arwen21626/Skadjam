@@ -149,6 +149,7 @@ void handle_client(int fd, struct sockaddr_in conn_addr) {
         buffer[size] = '\0';
         LOG_SERV(LOG_DEBUG, "process commande");
         process_commands(fd, buffer);
+        LOG_SERV(LOG_DEBUG, "sorti process commande");
     }
 
     LOG_CLIENT(LOG_INFO, cIp, cPort, "Client déconnecté");
@@ -179,10 +180,10 @@ void process_commands(int fd, char *buffer) {
                 handle_conn(fd, line);
                 break;
 
-            case CMD_ADD: {
+            case CMD_ADD: 
                 add_bord(conn, fd, line);
                 LOG_SERV(LOG_DEBUG, "sortie add bord");
-            } break;
+                break;
 
             case CMD_ETA:
                 get_etat(conn, fd, line);
@@ -191,6 +192,10 @@ void process_commands(int fd, char *buffer) {
             case CMD_NEXT:
                 avance(conn);
                 send(fd, "next success\n", 14, 0);
+                break;
+            
+            case CMD_IMG:
+                get_img(conn, fd, line);
                 break;
 
             default:
@@ -201,6 +206,7 @@ void process_commands(int fd, char *buffer) {
         LOG_SERV(LOG_DEBUG, "fin line %s", line);
         line = strtok(NULL, "\n");
     }
+    LOG_SERV(LOG_DEBUG, "Sortie line");
 }
 
 void handle_conn(int fd, const char *line) {

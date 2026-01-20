@@ -67,7 +67,10 @@
         print "Erreur !: " . $e->getMessage() . "<br/>";
         die();
     }
+
     $raison = 0;
+    $image = 0;
+
     try {
         $query = "SELECT etat, id_suivi FROM sae3_skadjam._commande WHERE id_commande = ?";
         $stmt = $dbh->prepare($query);
@@ -76,7 +79,13 @@
         $etat = $res['etat'];
 
         if ($etat === "Refusé"){
-            $raison = $rpr->get_etat($res['id_suivi'])[1];
+            $rpr->get_etat($res['id_suivi']);
+            $raison = $rpr->get_raison();
+            
+        }else if ($etat === "Livré absent"){
+            $rpr->get_etat($res['id_suivi']);
+            $img_url = $rpr->get_image_url();
+            $image = 1;
         }
     } catch (Exception $e){
         echo "Erreur : " . $e->getMessage();
@@ -117,8 +126,8 @@
         <div class="md:flex md:justify-between">
             <!---date--->
             <h3 class="ml-5 mr-3">Date : <?php echo $date;?></h3>
-            <!---bouton imprimer page format tablette--->
-            <button class="imprimer border-vertClair border-4 rounded-lg md:rounded-2xl w-35 h-10 md:w-50 md:h-14 px-7 mr-5 cursor-pointer hidden md:block">Imprimer</button>
+            <!---bouton imprimer page--->
+            <button class="imprimer border-vertClair border-4 rounded-lg md:rounded-2xl w-35 h-10 md:w-65 md:h-14 px-7 mr-5 cursor-pointer hidden md:block">Imprimer <div class="hidden md:inline-block">la facture</div></button>
         </div>
 
         <div class="flex justify-center md:mt-10">
@@ -276,16 +285,18 @@
         </div>
 
         <!---Indicateur d'etat de livraison--->
-        <div>
-            <p>Etat de la livraison : <?= $etat ?></p>
+        <div class="ml-5">
+            <h3 class="mt-10 mb-10">Etat de la livraison : <?= $etat ?></h3>
+            <img src="../../images/photo_importees/befbf1768829378.png" alt="image test">
 
         <?php
         if ($raison!=0){ ?>
             <p>Raison : <?= $raison ?></p>
-            
             </div>
         <?php
-        } ?>
+        } else if ($image != 0){?>
+            <img src="<?= "../../images".$img_url ?>" alt="<?= $img_url ?>" width="350px">
+        <?php } ?>
 
         <!---bouton retour version tablette--->
         <a href="liste_commandes.php" class="hidden md:flex justify-center mt-15 mb-15"><button class="border-vertClair border-4 rounded-lg md:rounded-2xl w-35 h-10 md:w-50 md:h-14 px-7 cursor-pointer">Retour</button></a>
