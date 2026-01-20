@@ -20,6 +20,7 @@ typedef enum{
     CMD_ETA,
     CMD_NEXT,
     CMD_CONN,
+    CMD_IMG,
 } cmd_t;
 
 const char *cmd_to_str(cmd_t cmd);

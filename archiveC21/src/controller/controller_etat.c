@@ -99,14 +99,12 @@ void get_etat(PGconn *conn, int fd, char buffer[TAILLEB]){
             return;
         }
     }else{
-        
         if (!send_etat(fd, str_etat, id_suivi)){
             LOG_SERV(LOG_ERROR, "ETA ERR SEND");
             return;
         }
-    }
 
-    
+    } 
 }
 
 void avance(PGconn *conn) {
@@ -135,6 +133,11 @@ void avance(PGconn *conn) {
                 snprintf(message, sizeof(message), "%s", raisonRefus[ale]);
                 if (!db_update_raison(conn, list[i].id_suivi, message)){
                     LOG_SERV(LOG_ERROR, "AVANCE UPDATE pour %s", list[i].id_suivi);
+                }
+            }
+            if (next == LVRAB){
+                if (!db_add_image(conn, list[i].id_suivi)){
+                    LOG_SERV(LOG_ERROR, "AVANCE UPDATE image %s", list[i].id_suivi);
                 }
             }
     }

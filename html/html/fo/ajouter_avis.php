@@ -28,11 +28,11 @@
                 // si c'est l'ajout d'un nouvel avis
                 if ($nouvNote === null){
                     $insertionAvis = $dbh->prepare("INSERT INTO sae3_skadjam._avis(nb_etoile, nb_pouce_haut, nb_pouce_bas, contenu_commentaire, id_produit, id_compte) 
-                                                    VALUES (?, 0, 0, '?', ?, ?)");
+                                                    VALUES (?, 0, 0, ?, ?, ?)");
                 }
                 // si c'est la modification d'un avis
                 else{
-                    $insertionAvis = $dbh->prepare("UPDATE sae3_skadjam._avis SET nb_etoile = ?, contenu_commentaire = '?'
+                    $insertionAvis = $dbh->prepare("UPDATE sae3_skadjam._avis SET nb_etoile = ?, contenu_commentaire = ?
                                                     WHERE id_produit = ? AND id_compte = ?");
                 }
                 $insertionAvis->execute([$nouvNote, $nouvCommentaire, $idProd, $idCompte]);

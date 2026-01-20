@@ -3,6 +3,7 @@
 
 #include "../model/model_etat.h"
 #include "../sender/sender_etat.h"
+#include "../model/model_img.h"
 
 typedef enum {
     INCONNU = 0,
