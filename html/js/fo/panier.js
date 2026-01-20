@@ -5,6 +5,14 @@ const conteneurProd = document.getElementById("conteneur-produit");
 // Affiche la popup
 Popup.showPopUp("popup-modif-panier", 3000, "panierModif");
 
+// Ajout de la fonction pour fermer la popup info via le bouton OK 
+const btnClosePopUpInfo = document.getElementById("popup-modif-panier").querySelector("button");
+
+btnClosePopUpInfo.addEventListener("click", () => {
+
+    Popup.closePopup("popup-modif-panier");
+});
+
 if (conteneurProd) { //Chech si un élément de la page panier  est présent ou non pour éviter d'exécuter le script JS pour rien si la page est vide (cas panier vide)
 
     // Variable utilisé dans la fonction ci-dessous pour vérifier si le panier a déjà été modifié ou pas encore
@@ -112,13 +120,8 @@ if (conteneurProd) { //Chech si un élément de la page panier  est présent ou 
     
 
     // Ajout des fonctions sur les boutons pour fermer les popups
-    const btnClosePopUpInfo = document.getElementById("popup-modif-panier").querySelector("button");
+    
     const btnClosePopUpErr = document.getElementById("popup-erreur-valider-panier").querySelector("button");
-
-    btnClosePopUpInfo.addEventListener("click", () => {
-
-        Popup.closePopup("popup-modif-panier");
-    });
 
     btnClosePopUpErr.addEventListener("click", () => {
         Popup.closePopup("popup-erreur-valider-panier");
@@ -146,6 +149,11 @@ if (conteneurProd) { //Chech si un élément de la page panier  est présent ou 
 
         let lenClassList = container.querySelector('.prod-info').classList.length //Récupère la longueur de la liste des class de la div représentant les infos d'un produit
         let quantiteStock = Number(container.querySelector('.prod-info').classList[lenClassList - 1].split(':', 2)[1]);
+
+        if (quantiteStock === 0) {
+            container.classList.add("border-4");
+            container.classList.add("border-rouge");
+        }
 
         let oldValue = input.value;
 

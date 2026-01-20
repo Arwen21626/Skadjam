@@ -268,7 +268,7 @@
                                 <tr class="py-4 <?= ligneCouleur($ligneIndex) ?> border-b-2 border-solid border-black">
                                     <th class="text-left py-2 pl-3"><h4>Total produit</h4></th>
                                     <?php if($ligne['prix_remise'] != $ligne['prix_ttc']){ 
-                                        $total_ligne = $ligne['remise'] * $ligne['quantite'] ;    
+                                        $total_ligne = $ligne['prix_remise'] * $ligne['quantite'] ;    
                                     } 
                                     else{
                                         $total_ligne = $ligne['prix_ttc'] * $ligne['quantite'] ;

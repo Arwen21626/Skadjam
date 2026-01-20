@@ -844,6 +844,9 @@ input.quantite-prod-input {
   .w-full {
     width: 100%;
   }
+  .w-xs {
+    width: var(--container-xs, 20rem);
+  }
   .max-w-1\/1 {
     max-width: calc(1/1 * 100%);
   }
@@ -936,6 +939,9 @@ input.quantite-prod-input {
   }
   .justify-center {
     justify-content: center;
+  }
+  .justify-end {
+    justify-content: flex-end;
   }
   .justify-evenly {
     justify-content: space-evenly;
@@ -1057,6 +1063,9 @@ input.quantite-prod-input {
   }
   .border-red-500 {
     border-color: var(--color-red-500, oklch(63.7% 0.237 25.331));
+  }
+  .border-rouge {
+    border-color: var(--color-rouge);
   }
   .border-vertClair {
     border-color: var(--color-vertClair);
@@ -1901,6 +1910,11 @@ input.quantite-prod-input {
   .md\:justify-evenly {
     @media (width >= 48rem) {
       justify-content: space-evenly;
+    }
+  }
+  .md\:justify-start {
+    @media (width >= 48rem) {
+      justify-content: flex-start;
     }
   }
   .md\:gap-1 {

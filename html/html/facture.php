@@ -80,26 +80,29 @@ foreach($dbh->query("SELECT v.raison_sociale, cvend.adresse_mail as mail_vendeur
 <body class=" max-w-1/1">
     <?php foreach ($info as $id => $row){?>
         <div class="h-full break-after-page">
-        <h1> Facture n°<?php echo $id?></h1>
-        <div class="flex mb-8">
-            <section class=" max-w-1/3">
+        <h1 class=" mb-3"> Facture n°<?php echo $id?></h1>
+        
+        <section class=" max-w-1/3  mb-5"> 
+            <p class="font-bold">n° de commande : <?php echo $idCommande?></p>
+            <p>date : <?php echo $dateCommande?></p>
+            <p>payment immédiat</p>
+        </section>
+
+        <div class="grid grid-cols-2 mb-8 w-1/1 justify-end">
+            <section class=" max-w-1/2 justify-self-start">
                 <h2>Emmeteur</h2>
                 <p><?php echo $row['vendeur']['raisonSocial']?></p>
                 <p><?php echo $row['vendeur']['mailVendeur']?></p>
                 <p><?php echo $row['vendeur']['adresseVendeur']?></p>
             </section>
-            <section class=" max-w-1/3">
+            <section class=" max-w-1/2">
                 <h2>Destinataire</h2>
-                <p><?php echo $nomClient?></p>
+                <p><?php echo $nomClient.' '.$prenomClient?></p>
                 <p><?php echo $mailClient?></p>
                 <p><?php echo $adrClient?></p>
             </section>
-            <section class=" max-w-1/3"> 
-                <p class="font-bold">n° de commande : <?php echo $idCommande?></p>
-                <p>date : <?php echo $dateCommande?></p>
-                <p>payment immédiat</p>
-            </section>
         </div>
+        
         <table class="w-1/1">
             <thead>
                 <th class="border-r-2 p-1 w-3/8">article</th>
