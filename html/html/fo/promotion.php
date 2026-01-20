@@ -114,8 +114,8 @@
                                     € (TTC)</p>
 
                                     <?php if (!isset($valeurs['pourcentage_remise'])) { ?>
-                                    <p class="pl-3 <?php echo ("hidden");}?>">
-                                    <?php echo (htmlentities(str_replace(".", ",",$valeurs['prix_remise'])));?>
+                                        <p class="pl-3 <?php echo ("hidden");?>">
+                                        <?php echo (htmlentities(str_replace(".", ",",$valeurs['prix_remise'])));?>
                                     € (TTC)</p>
                                     <?php } ?>
                                 </div>
