@@ -4,6 +4,8 @@
     require_once(__DIR__ . "/../../01_premiere_connexion.php");
     require_once(__DIR__ . "/../../php/fonctions.php");
 
+    $peutValider = true;
+
     if ($_SESSION["role"] === "client") 
     {
 
@@ -53,7 +55,7 @@
                 $infoProduitsPanier[$i]["infoPhoto"] = $infoPhoto;
                 $infoProduitsPanier[$i]["infoRemise"] = $infoRemise;
 
-                if ($infoProduitsPanier[$i]["infoProduit"]["quantite_stock"] >= $produitsPanier[$i]["quantite_par_produit"])    
+                if ($infoProduitsPanier[$i]["infoProduit"]["quantite_stock"] > $produitsPanier[$i]["quantite_par_produit"])    
                 {
                     $infoProduitsPanier[$i]["quantiteProduit"] = $produitsPanier[$i]["quantite_par_produit"];
                 }
@@ -65,6 +67,10 @@
                                           quantite_par_produit = ?
                                           WHERE id_panier = ? AND id_produit = ?");
                     $rqt->execute([$infoProduitsPanier[$i]['infoProduit']['quantite_stock'], $idPanier, $infoProduit["id_produit"]]);
+
+                    if ($infoProduitsPanier[$i]["infoProduit"]["quantite_stock"] == 0) {
+                        $peutValider = false;
+                    }
                 }
                 
 
@@ -110,7 +116,7 @@
             $infoProduitsPanier[$i]["infoPhoto"] = $infoPhoto;
             $infoProduitsPanier[$i]["infoRemise"] = $infoRemise;
 
-            if ($infoProduitsPanier[$i]["infoProduit"]["quantite_stock"] >= $prod["quantite_par_produit"])    
+            if ($infoProduitsPanier[$i]["infoProduit"]["quantite_stock"] > $prod["quantite_par_produit"])    
             {
                 $infoProduitsPanier[$i]["quantiteProduit"] = $prod["quantite_par_produit"];
             }
@@ -118,9 +124,13 @@
             {
                 $infoProduitsPanier[$i]["quantiteProduit"] = $infoProduitsPanier[$i]["infoProduit"]["quantite_stock"];
                 $_SESSION['panier']['contient'][$i]['quantite_par_produit'] = $infoProduitsPanier[$i]['infoProduit']['quantite_stock'];  
-            }
 
-            // $infoProduitsPanier[$i]["quantiteProduit"] = $prod["quantite_par_produit"];
+                
+                if ($infoProduitsPanier[$i]["infoProduit"]["quantite_stock"] == 0) {
+
+                    $peutValider = false;
+                }
+            }
 
             $montantTotalTTC += $infoProduitsPanier[$i]["infoRemise"]["prix_remise"] * $infoProduitsPanier[$i]["quantiteProduit"];
             $nbProduitsTotal += $infoProduitsPanier[$i]["quantiteProduit"];
@@ -133,8 +143,6 @@
         $lienBtnValiderPanier = "/html/fo/connexion.php";
     }
 ?>
-
-
 
 <!DOCTYPE html>
 <html lang="fr">
@@ -278,12 +286,30 @@
                                     </button>
                                 </form>
                                 
-                                <form class="flex justify-center valider-panier" method="get" action="<?php echo $lienBtnValiderPanier;?>">
-                                    <input type="hidden" name="idPanier" value="<?= htmlspecialchars($idPanier) ?>">
-                                    <button class="bg-beige rounded-2xl w-56 p-1 h-10 mt-2 md:p-0 md:w-40 md:h-14 md:mt-4 cursor-pointer border-black border shadow" type="submit">
-                                        Valider le panier
-                                    </button>
-                                </form>
+                                <?php 
+                                    if ($peutValider) 
+                                    {
+                                        ?>
+                                            <form class="flex justify-center valider-panier" method="get" action="<?php echo $lienBtnValiderPanier;?>">
+                                                <input type="hidden" name="idPanier" value="<?= htmlspecialchars($idPanier) ?>">
+                                                <button class="bg-beige rounded-2xl w-56 p-1 h-10 mt-2 md:p-0 md:w-40 md:h-14 md:mt-4 cursor-pointer border-black border shadow" type="submit">
+                                                    Valider le panier
+                                                </button>
+                                            </form>
+                                        <?php
+                                    }
+                                    else if (!$peutValider)
+                                    {
+                                        ?>
+                                            <div class="flex justify-center valider-panier-div">
+                                                <button id="btnValiderPanier" class="bg-rouge rounded-2xl w-56 p-1 h-10 mt-2 md:p-0 md:w-40 md:h-14 md:mt-4 cursor-pointer border-black border shadow">
+                                                Valider le panier
+                                                </button>
+                                            </div>
+                                        <?php
+                                    }
+                                ?>
+                                
                             </div>
                         </div>
 
@@ -311,12 +337,29 @@
                                     </button>
                                 </form>
                                 
-                                <form class="flex justify-center valider-panier" method="get" action="<?php echo $lienBtnValiderPanier;?>">
-                                    <input type="hidden" name="veutAcheter" value="V">
-                                    <button class="bg-beige rounded-2xl w-56 p-1 h-10 mt-2 md:p-0 md:w-40 md:h-14 md:mt-4 cursor-pointer border-black border shadow" type="submit">
-                                        Valider le panier
-                                    </button>
-                                </form>
+                                <?php 
+                                    if ($peutValider) 
+                                    {
+                                        ?>
+                                            <form class="flex justify-center valider-panier" method="get" action="<?php echo $lienBtnValiderPanier;?>">
+                                                <input type="hidden" name="idPanier" value="<?= htmlspecialchars($idPanier) ?>">
+                                                <button class="bg-beige rounded-2xl w-56 p-1 h-10 mt-2 md:p-0 md:w-40 md:h-14 md:mt-4 cursor-pointer border-black border shadow" type="submit">
+                                                    Valider le panier
+                                                </button>
+                                            </form>
+                                        <?php
+                                    }
+                                    else if (!$peutValider)
+                                    {
+                                        ?>
+                                            <div class="flex justify-center valider-panier-div">
+                                                <button id="btnValiderPanier" class="bg-rouge rounded-2xl w-56 p-1 h-10 mt-2 md:p-0 md:w-40 md:h-14 md:mt-4 cursor-pointer border-black border shadow">
+                                                Valider le panier
+                                                </button>
+                                            </div>
+                                        <?php
+                                    }
+                                ?>
                                 
                             </div>
                             <div></div>

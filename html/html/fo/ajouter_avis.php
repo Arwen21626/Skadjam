@@ -43,7 +43,6 @@
             }
         } catch (PDOException $e) {
             print "Erreur lors de l'envoie des données vers la base de données";
-            echo $e;
             die();
         }
     }
@@ -51,10 +50,9 @@
     else if(isset($_GET['supr']) && $_GET['supr'] === 'true'){
         $suprAsignaler = $dbh->prepare("DELETE FROM sae3_skadjam._a_signaler WHERE id_avis = ?");
         $suprAvis = $dbh->prepare("DELETE FROM sae3_skadjam._avis WHERE id_produit = ? AND id_compte = ?");
-        echo 'salut'.$idProd.' '.$idCompte.' '.$idAvis;
         $suprAsignaler->execute([$idAvis]);
         $suprAvis->execute([$idProd, $idCompte]);
-        echo 'salutfin';
+        
         header("location: details_produit.php?idProduit=$idProd");
     }
     else{
@@ -89,7 +87,7 @@
             <!-- La note -->
             <label for="note">Note* :</label>
             <div class="flex flex-nowarp items-center justify-center">
-                <input class="border-4 border-beige rounded-2xl p-1 pl-3 w-16" name="note" id="note" type="number" min="0" max="5" value="<?php echo $note;?>" required>
+                <input class="border-4 border-beige rounded-2xl p-1 pl-3 w-16" name="note" id="note" type="number" min="0" max="5" value="<?php if(isset($note)){echo $note;}?>" required>
                 <img class=" w-7 ml-3" src="../../images/logo/bootstrap_icon/star-fill.svg">
             </div>
             
@@ -103,7 +101,7 @@
             </div>
         </form>
         <!-- Supression -->
-        <?php if ($note !== null){ // on peut supprimer un avis que si on est entrain de la modifier ?>
+        <?php if (isset($note) && $note != null){ // on peut supprimer un avis que si on est entrain de la modifier ?>
             <a class="ml-10 flex justify-center mb-5 md:inline-block" href="./ajouter_avis.php?idProduit=<?php echo $produit['id_produit']?>&supr=true">Supprimer mon avis</a>
         <?php }?>
     </main>
