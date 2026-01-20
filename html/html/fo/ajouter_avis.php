@@ -26,7 +26,7 @@
 
             if ($nouvNote>=0 && $nouvNote<=5){
                 // si c'est l'ajout d'un nouvel avis
-                if (!isset($nouvNote)){
+                if (!isset($note)){
                     $insertionAvis = $dbh->prepare("INSERT INTO sae3_skadjam._avis(nb_etoile, nb_pouce_haut, nb_pouce_bas, contenu_commentaire, id_produit, id_compte) 
                                                     VALUES (?, 0, 0, ?, ?, ?)");
                 }
