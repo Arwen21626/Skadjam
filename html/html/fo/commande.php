@@ -107,6 +107,9 @@
     <?php include __DIR__ . "/../../php/structure/header_front.php"; ?>
     <?php include __DIR__ . "/../../php/structure/navbar_front.php"; ?>
 
+    <div id="div_lvr" class="hidden fixed bg-black/50 inset-0 z-10 items-center justify-center">
+        <img id="img_lvr" src="../../images<?= $img_url ?>" alt="image livraison" class=" w-2xs md:w-2xl rounded-2xl shadow-lg">
+    </div>
     <main class="min-h-[600px]">
         
         <h2 class="mt-10">Récapitulatif de la commande</h2>
@@ -123,12 +126,37 @@
             <h3 id="numeroCommande"><?php echo $idCommande;?></h3>
         </div>
         
-        <div class="md:flex md:justify-between">
+        <div class="md:flex md:justify-between items-center">
             <!---date--->
             <h3 class="ml-5 mr-3">Date : <?php echo $date;?></h3>
             <!---bouton imprimer page--->
             <button class="imprimer border-vertClair border-4 rounded-lg md:rounded-2xl w-35 h-10 md:w-65 md:h-14 px-7 mr-5 cursor-pointer hidden md:block">Imprimer <div class="hidden md:inline-block">la facture</div></button>
         </div>
+
+        <div class="ml-5 flex flex-row md:items-center">
+            <h3 class="mr-3">
+                <span class="block md:hidden">Etat :</span>
+                <span class="hidden md:block"> Etat de la livraison :</span>
+            </h3> 
+            <h3 id="numeroCommande"><?= $etat ?></h3>
+        </div>
+        
+        <?php
+        if ($raison != 0){ ?>
+        <div class="ml-5 flex flex-row items-center mt-5">
+            <h3 class="mr-3">Raison : </h3> 
+            <h3 id="numeroCommande"><?= $raison ?></h3>
+        </div>
+        <?php
+        } else if ($image != 0){ ?>
+        <button id="btn_img" class="border-vertClair border-4 rounded-lg mt-2 ml-5 md:rounded-2xl w-35 h-10 md:w-50 md:h-14 px-1 md:px-7 cursor-pointer">
+            Pièce jointe
+        </button>
+
+
+        <?php
+        }
+        ?>
 
         <div class="flex justify-center md:mt-10">
         <!--TABLEAU DE LA COMMANDE VERSION TABLETTE-->
@@ -283,18 +311,6 @@
                 </tfoot>
             </table>
         </div>
-        <!---Indicateur d'etat de livraison--->
-        <div>
-            <p>Etat de la livraison : <?= $etat ?></p>
-
-        <?php
-        if ($raison!=0){ ?>
-            <p>Raison : <?= $raison ?></p>
-            </div>
-        <?php
-        } else if ($image != 0){?>
-            <img src="<?= "../../images".$img_url ?>" alt="<?= $img_url ?>" width="350px">
-        <?php } ?>
 
         <!---bouton retour version tablette--->
         <a href="liste_commandes.php" class="hidden md:flex justify-center mt-15 mb-15"><button class="border-vertClair border-4 rounded-lg md:rounded-2xl w-35 h-10 md:w-50 md:h-14 px-7 cursor-pointer">Retour</button></a>
@@ -338,6 +354,24 @@
         btnImprimmer[0].addEventListener("click", () => {affichagePageImpression()});
         btnImprimmer[1].addEventListener("click", () => {affichagePageImpression()});
         btnImprimmer[2].addEventListener("click", () => {affichagePageImpression()});
+
+        const divImage = document.getElementById("div_lvr");
+        const btnImage = document.getElementById("btn_img");
+        const imageLvr = document.getElementById("img_lvr")
+        btnImage.addEventListener("click" , (e) => {
+            e.stopPropagation();
+            divImage.classList.remove("hidden");
+            divImage.classList.add("flex");
+            document.body.style.overflow = "hidden"
+        });
+
+        document.addEventListener("click" , (e) => {
+            if (!imageLvr.contains(e.target)){
+                divImage.classList.remove("flex");
+                divImage.classList.add("hidden");
+                document.body.style.overflow = ""
+            }
+        })
 
     </script>
 </body>
