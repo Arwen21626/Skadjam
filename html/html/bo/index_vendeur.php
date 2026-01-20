@@ -141,7 +141,7 @@
                                     ?>
                                     <!-- Affichage de la bannière -->
                                     <div class="bg-rouge absolute w-36 md:w-74 underline text-beige pt-2 pb-1.5">
-                                        <h4 class="text-center text-beige overline m-0"><strong><?php echo htmlspecialchars($labelPromo); ?></strong></h4>
+                                        <h4 class="text-center text-beige overline m-0"><?php echo htmlspecialchars($labelPromo); ?></h4>
                                     </div>
                                 <?php }} ?> 
                             </section>

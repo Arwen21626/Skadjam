@@ -109,7 +109,10 @@
 
                                 <!--affichage du prix du produit-->   
                                 <div class="flex flex-row justify-between items-center">
-                                    <p class="inline-block <?php echo (($valeurs['pourcentage_remise'] !== NULL)?'line-through':'');?>"> <?php echo (htmlentities(str_replace(".", ",",$valeurs['prix_ttc']))); ?>€ (TTC)</p>
+                                    <p class="inline-block <?php if (isset($valeurs['pourcentage_remise'])) {echo ("line-through");}?>">
+                                    <?php echo (htmlentities(str_replace(".", ",",$valeurs['prix_ttc'])));?>
+                                    € (TTC)</p>
+
                                     <p class=" pl-3 <?php echo (($valeurs['pourcentage_remise'] !== NULL)?'':'hidden');?>"> <?php echo (htmlentities(str_replace(".", ",",$valeurs['prix_remise']))); ?>€ (TTC)</p>
                                 </div>
                                 <!--récupération de la note-->
@@ -122,7 +125,7 @@
                             <!--affichage de la promotion-->
                             <?php if($estPromu && !empty($valeurs['label'])){ ?>
                                 <div class="bg-rouge absolute w-36 md:w-74 underline text-beige pt-2 pb-1.5">
-                                    <h4 class="text-center text-beige overline m-0"><strong><?php echo htmlspecialchars($valeurs['label']); ?></strong></h4>
+                                    <h4 class="text-center text-beige overline m-0"><?php echo htmlspecialchars($valeurs['label']); ?></h4>
                                 </div>
                             <?php } ?>
                         </section>
