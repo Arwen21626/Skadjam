@@ -285,8 +285,9 @@
         </div>
 
         <!---Indicateur d'etat de livraison--->
-        <div>
-            <h3 class="ml-5 mt-10">Etat de la livraison : <?= $etat ?></h3>
+        <div class="ml-5">
+            <h3 class="mt-10 mb-10">Etat de la livraison : <?= $etat ?></h3>
+            <img src="../../images/photo_importees/befbf1768829378.png" alt="image test">
 
         <?php
         if ($raison!=0){ ?>
