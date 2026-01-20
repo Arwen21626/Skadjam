@@ -86,8 +86,6 @@
             $rpr->get_etat($res['id_suivi']);
             $img_url = $rpr->get_image_url();
             $image = 1;
-            print_r("<br>ABSENT<br> img = " . $image);
-            print_r("<br>url : " . $img_url);
         }
     } catch (Exception $e){
         echo "Erreur : " . $e->getMessage();
