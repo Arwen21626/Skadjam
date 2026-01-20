@@ -47,7 +47,7 @@
         }
     }
     // suppresion d'un avis
-    if(isset($_GET['supr']) && $_GET['supr'] === 'true'){
+    else if(isset($_GET['supr']) && $_GET['supr'] === 'true'){
         $suprAsignaler = $dbh->prepare("DELETE FROM sae3_skadjam._a_signaler WHERE id_avis = ?");
         $suprAvis = $dbh->prepare("DELETE FROM sae3_skadjam._avis WHERE id_produit = ? AND id_compte = ?");
         $suprAsignaler->execute([$idAvis]);
