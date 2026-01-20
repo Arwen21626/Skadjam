@@ -23,7 +23,7 @@
             $idSuivi = $row['id_suivi'];
             $id_commande = $row['id_commande'];
             try{
-                $etat[$id_commande] = $rpr->get_etat($idSuivi)[0];
+                $etat[$id_commande] = $rpr->get_etat($idSuivi);
                 $query = "UPDATE sae3_skadjam._commande SET etat = ? WHERE id_suivi = ?";
                 $stmt = $dbh->prepare($query);
                 $stmt->execute([$etat[$row['id_commande']], $idSuivi]);

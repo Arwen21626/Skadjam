@@ -16,6 +16,7 @@ const char *cmd_to_str(cmd_t cmd){
         case CMD_ETA : return "ETA"; 
         case CMD_NEXT : return "NEXT"; 
         case CMD_CONN : return "CONN"; 
+        case CMD_IMG : return "IMG";
         default : return "UNKNOWN";
     }
 }
@@ -25,6 +26,7 @@ cmd_t str_to_cmd(const char *cmd){
     if (strcmp(cmd, "ETA") == 0) return CMD_ETA;
     if (strcmp(cmd, "NEXT") == 0) return CMD_NEXT;
     if (strcmp(cmd, "CONN") == 0) return CMD_CONN;
+    if (strcmp(cmd, "IMG") == 0) return CMD_IMG;
     return CMD_UNKNOWN;
 }
 

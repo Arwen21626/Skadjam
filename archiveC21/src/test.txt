@@ -170,8 +170,6 @@ void addCommande(int cnx, char commande[20], char buffer[TAILLEB], bordereaux *b
     bord->numSuivi[3] = '\0';
     snprintf(chaine, sizeof(chaine), "%s%ld",bord->numSuivi, atoi(bord->numCommande)+horo);
     strcpy(bord->numSuivi, chaine);
-
-    
     
     //envoi du numéro de suivi
     snprintf(chaine, sizeof(chaine), "BORD %s com%s ts%ld",bord->numSuivi, bord->numCommande, horo);

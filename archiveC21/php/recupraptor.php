@@ -7,6 +7,8 @@ class Recupraptor{
     private $conn = NULL;
     private $numSuivi = NULL;
     private $etat = NULL;
+    private $raison = NULL;
+    private $image = NULL;
     private $err = NULL;
 
 
@@ -80,26 +82,41 @@ class Recupraptor{
 
         $reponse = trim(fgets($this->conn));
         if (!preg_match("/^CMD\s([A-Z]+)$/", $reponse, $cmd)){
-            throw new Exception("ERREUR CMD FORMAT");
+            throw new Exception("ERREUR CMD FORMAT : cmd " . $reponse);
         }
 
         $reponse = trim(fgets($this->conn));
-        if (!preg_match("/^SIZE\s[0-9]+$/", $reponse, $taille)){
-            throw new Exception("ERREUR CMD FORMAT");
+        if (!preg_match("/^SIZE\s([0-9]+)$/", $reponse, $taille)){
+            throw new Exception("ERREUR SIZE FORMAT : size " . $reponse);
         }
 
-
-        while (!$fin){
-            $reponse = trim(fgets($this->conn));
-            if ($reponse != "END"){
-                $message .= $reponse;
-                $len += strlen($message);
-            }else{
-                $fin = 1;
+        if ($taille[1]<255){
+            while (!$fin){
+                $reponse = trim(fgets($this->conn));
+                if ($reponse != "END"){
+                    $message .= $reponse;
+                    $len += strlen($message);
+                }else{
+                    $fin = 1;
+                }
+    
             }
-
+        }else{
+            while (!$fin){
+                $reponse = fgets($this->conn);
+                if (trim($reponse) != "END"){
+                    $message .= $reponse;
+                    $len += strlen($message);
+                }else{
+                    $fin = 1;
+                }
+    
+            }
         }
 
+        print_r($taille);
+        print_r("<br>size = " . $taille[1] . " recu : " . $len . "<br>");
+        print_r("truc" . strlen($message));
 
         $this->close_conn();
         return $message;
@@ -148,20 +165,67 @@ class Recupraptor{
 
     public function get_etat(string $numSuivi){
         $message = NULL;
+        
+        print_r("<br>GET ETA start : id_suivi " . $numSuivi . "<br>");
         if ($reponse = $this->send_commande("ETA $numSuivi")){
-            preg_match("/^([A-Z]+)\s/", $reponse, $etat_reponse);
-            if (trim($etat_reponse[1]) === "REFU"){
-                preg_match("/msg:\s*(.+)$/", $reponse, $message);
+            if(!preg_match("/^([A-Z]+)\s/", $reponse, $res)){
+                throw new Exception("ERREUR GET ETAT regex ETAT");
+            }else{
+                $etat_reponse = $res[1];
+                print_r($reponse);
+                print_r("<br>GET ETA : id_suivi " . $numSuivi . " etat " . $etat_reponse . "<br>");
+                if (trim($etat_reponse) === "REFU"){
+                    if (!preg_match("/msg:\s*(.+)$/", $reponse, $res)){
+                        throw new Exception("ERREUR GET ETAT regex MESSAGE");
+                    }
+                    $message = $res[1];
+                    print_r("<br>GET ETA REFU  : id_suivi " . $numSuivi . " message " . $message . "<br>");
+                    $this->raison = $message;
+                }
+
+                if (trim($etat_reponse) === "LVRAB"){
+                    $this->get_img($numSuivi);
+                }
+                $str_etat = Recupraptor::etat_to_str(trim($etat_reponse));
+                $this->etat = $str_etat;
+                return $this->etat;
             }
-            $str_etat = Recupraptor::etat_to_str(trim($etat_reponse[1]));
-            $this->etat = $str_etat;
-            return [$this->etat, $message[1]];
         }else{
             throw new Exception("ERREUR non connecté");
         }
 
 
         return false;
+    }
+
+    public function get_raison(){
+        return $this->raison;
+    }
+
+    public function get_image_url(){
+        return $this->image;
+    }
+
+    public function get_img(string $numSuivi){
+        $racine = $_SERVER['DOCUMENT_ROOT'];
+        $tmpDir = $racine . "/images/tmp_images";
+
+        if (!is_dir($tmpDir)){
+            mkdir($tmpDir, 0777, true);
+        }
+
+        if ($reponse = $this->send_commande("IMG $numSuivi")){
+            print_r("<br>reponse img succes");
+            $tmpFile = tempnam($tmpDir, "img_");
+            $jpgFile = $tmpFile . ".jpg";
+            rename($tmpFile, $jpgFile);
+
+            file_put_contents($jpgFile, $reponse);
+            $url = "/tmp_images/" . basename($jpgFile);
+            
+            $this->image = $url;
+            print_r($jpgFile);
+        }
     }
 }
 ?>

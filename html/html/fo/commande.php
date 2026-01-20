@@ -67,7 +67,10 @@
         print "Erreur !: " . $e->getMessage() . "<br/>";
         die();
     }
+
     $raison = 0;
+    $image = 0;
+
     try {
         $query = "SELECT etat, id_suivi FROM sae3_skadjam._commande WHERE id_commande = ?";
         $stmt = $dbh->prepare($query);
@@ -76,7 +79,15 @@
         $etat = $res['etat'];
 
         if ($etat === "Refusé"){
-            $raison = $rpr->get_etat($res['id_suivi'])[1];
+            $rpr->get_etat($res['id_suivi']);
+            $raison = $rpr->get_raison();
+            
+        }else if ($etat === "Livré absent"){
+            $rpr->get_etat($res['id_suivi']);
+            $img_url = $rpr->get_image_url();
+            $image = 1;
+            print_r("<br>ABSENT<br> img = " . $image);
+            print_r("<br>url : " . $img_url);
         }
     } catch (Exception $e){
         echo "Erreur : " . $e->getMessage();
@@ -274,7 +285,6 @@
                 </tfoot>
             </table>
         </div>
-
         <!---Indicateur d'etat de livraison--->
         <div>
             <p>Etat de la livraison : <?= $etat ?></p>
@@ -282,10 +292,11 @@
         <?php
         if ($raison!=0){ ?>
             <p>Raison : <?= $raison ?></p>
-            
             </div>
         <?php
-        } ?>
+        } else if ($image != 0){?>
+            <img src="<?= "../../images".$img_url ?>" alt="<?= $img_url ?>">
+        <?php } ?>
 
         <!---bouton retour version tablette--->
         <a href="liste_commandes.php" class="hidden md:flex justify-center mt-15 mb-15"><button class="border-vertClair border-4 rounded-lg md:rounded-2xl w-35 h-10 md:w-50 md:h-14 px-7 cursor-pointer">Retour</button></a>
