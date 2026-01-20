@@ -109,8 +109,8 @@
 
                                 <!--affichage du prix du produit-->   
                                 <div class="flex flex-row justify-between items-center">
-                                        <p class="inline-block <?php if(isset($valeurs['pourcentage_remise']) && $valeurs['pourcentage_remise'] !== NULL){ echo "line-through";};?>"> <?php echo htmlentities(str_replace(".", ",",$valeurs['prix_ttc'])); ?>€ (TTC)</p>
-                                        <p class=" pl-3 <?php if(isset($valeurs['pourcentage_remise'])){ echo "hidden";}?>"> <?php echo htmlentities(str_replace(".", ",",$valeurs['prix_remise'])); ?>€ (TTC)</p>
+                                    <p class="inline-block <?php echo (($valeurs['pourcentage_remise'] !== NULL)?'line-through':'');?>"> <?php echo (htmlentities(str_replace(".", ",",$valeurs['prix_ttc']))); ?>€ (TTC)</p>
+                                    <p class=" pl-3 <?php echo (($valeurs['pourcentage_remise'] !== NULL)?'':'hidden');?>"> <?php echo (htmlentities(str_replace(".", ",",$valeurs['prix_remise']))); ?>€ (TTC)</p>
                                 </div>
                                 <!--récupération de la note-->
                                 <div class="flex">

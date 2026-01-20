@@ -150,6 +150,11 @@ if (conteneurProd) { //Chech si un élément de la page panier  est présent ou 
         let lenClassList = container.querySelector('.prod-info').classList.length //Récupère la longueur de la liste des class de la div représentant les infos d'un produit
         let quantiteStock = Number(container.querySelector('.prod-info').classList[lenClassList - 1].split(':', 2)[1]);
 
+        if (quantiteStock === 0) {
+            container.classList.add("border-4");
+            container.classList.add("border-rouge");
+        }
+
         let oldValue = input.value;
 
         btnRetrait.addEventListener('click', () => {
