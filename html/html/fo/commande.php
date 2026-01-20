@@ -293,7 +293,7 @@
             </div>
         <?php
         } else if ($image != 0){?>
-            <img src="<?= "../../images".$img_url ?>" alt="<?= $img_url ?>">
+            <img src="<?= "../../images".$img_url ?>" alt="<?= $img_url ?>" width="350px">
         <?php } ?>
 
         <!---bouton retour version tablette--->

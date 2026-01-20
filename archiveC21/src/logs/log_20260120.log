@@ -17373,3 +17373,1302 @@ END
 [07:48:01] [DEBUG]   [SERV]   (./serveur/serveur.c:152) sorti process commande
 [07:48:01] [INFO]    [CLIENT] (./serveur/serveur.c:155) [127.0.0.1:52102] Client déconnecté
 [07:48:01] [DEBUG]   [SERV]   (./serveur/serveur.c:127) close connexion
+[07:49:01] [INFO]    [SERV]   (./serveur/serveur.c:114) Connexion acceptée (fd=5)
+[07:49:01] [INFO]    [CLIENT] (./serveur/serveur.c:141) [127.0.0.1:33540] Client connecté
+[07:49:01] [INFO]    [SERV]   (./bdd/bdd.c:20) Connecté a la BDD
+[07:49:01] [INFO]    [SERV]   (./bdd/bdd.c:21) SET search_path...
+[07:49:01] [INFO]    [SERV]   (./bdd/bdd.c:26) SET search_path success
+[07:49:01] [INFO]    [SERV]   (./bdd/bdd.c:31) Base de données actuelle : postgres
+[07:49:01] [INFO]    [SERV]   (./bdd/bdd.c:37) Schéma courant (search_path) : sae3_delivraptor
+[07:49:01] [DEBUG]   [SERV]   (./serveur/serveur.c:150) process commande
+[07:49:01] [DEBUG]   [SERV]   (./serveur/serveur.c:162) debut line CONN test 1234
+[07:49:01] [DEBUG]   [SERV]   (./serveur/serveur.c:164) ap chomp line CONN test 1234
+[07:49:01] [INFO]    [CLIENT] (./serveur/serveur.c:176) [127.0.0.1:33540] Commande reçue : CONN
+[07:49:01] [INFO]    [CLIENT] (./serveur/serveur.c:223) [127.0.0.1:33540] Tentative d'authentification pour 'test'
+[07:49:01] [INFO]    [CLIENT] (./serveur/serveur.c:228) [127.0.0.1:33540] Authentification réussie pour 'test'
+[07:49:01] [DEBUG]   [SERV]   (./serveur/serveur.c:206) fin line CONN test 1234
+[07:49:01] [DEBUG]   [SERV]   (./serveur/serveur.c:209) Sortie line
+[07:49:01] [DEBUG]   [SERV]   (./serveur/serveur.c:152) sorti process commande
+[07:49:01] [DEBUG]   [SERV]   (./serveur/serveur.c:150) process commande
+[07:49:01] [DEBUG]   [SERV]   (./serveur/serveur.c:162) debut line NEXT
+[07:49:01] [DEBUG]   [SERV]   (./serveur/serveur.c:164) ap chomp line NEXT
+[07:49:01] [INFO]    [CLIENT] (./serveur/serveur.c:176) [127.0.0.1:33540] Commande reçue : NEXT
+[07:49:01] [DEBUG]   [SERV]   (./controller/controller_etat.c:115) AVANCE ARR
+[07:49:01] [DEBUG]   [SERV]   (./model/model_etat.c:48) GET ALL ETA ARR
+[07:49:01] [DEBUG]   [SERV]   (./model/model_etat.c:56) GET ALL ETA DB success
+[07:49:01] [DEBUG]   [SERV]   (./model/model_etat.c:63) GET ALL ETA DB create bord...
+[07:49:01] [DEBUG]   [SERV]   (./model/model_etat.c:68) GET ALL ETA DB create bord fin
+[07:49:01] [INFO]    [SERV]   (./controller/controller_etat.c:120) GET ALL ETAT success
+[07:49:01] [DEBUG]   [SERV]   (./controller/controller_etat.c:122) count value : 0
+[07:49:01] [INFO]    [SERV]   (./controller/controller_etat.c:144) AVANCE success
+[07:49:01] [DEBUG]   [SERV]   (./serveur/serveur.c:206) fin line NEXT
+[07:49:01] [DEBUG]   [SERV]   (./serveur/serveur.c:209) Sortie line
+[07:49:01] [DEBUG]   [SERV]   (./serveur/serveur.c:152) sorti process commande
+[07:49:01] [INFO]    [CLIENT] (./serveur/serveur.c:155) [127.0.0.1:33540] Client déconnecté
+[07:49:01] [DEBUG]   [SERV]   (./serveur/serveur.c:127) close connexion
+[07:49:09] [INFO]    [SERV]   (./serveur/serveur.c:114) Connexion acceptée (fd=5)
+[07:49:09] [INFO]    [CLIENT] (./serveur/serveur.c:141) [127.0.0.1:48288] Client connecté
+[07:49:09] [INFO]    [SERV]   (./bdd/bdd.c:20) Connecté a la BDD
+[07:49:09] [INFO]    [SERV]   (./bdd/bdd.c:21) SET search_path...
+[07:49:09] [INFO]    [SERV]   (./bdd/bdd.c:26) SET search_path success
+[07:49:09] [INFO]    [SERV]   (./bdd/bdd.c:31) Base de données actuelle : postgres
+[07:49:09] [INFO]    [SERV]   (./bdd/bdd.c:37) Schéma courant (search_path) : sae3_delivraptor
+[07:49:09] [DEBUG]   [SERV]   (./serveur/serveur.c:150) process commande
+[07:49:09] [DEBUG]   [SERV]   (./serveur/serveur.c:162) debut line CONN test 1234
+[07:49:09] [DEBUG]   [SERV]   (./serveur/serveur.c:164) ap chomp line CONN test 1234
+[07:49:09] [INFO]    [CLIENT] (./serveur/serveur.c:176) [127.0.0.1:48288] Commande reçue : CONN
+[07:49:09] [INFO]    [CLIENT] (./serveur/serveur.c:223) [127.0.0.1:48288] Tentative d'authentification pour 'test'
+[07:49:09] [INFO]    [CLIENT] (./serveur/serveur.c:228) [127.0.0.1:48288] Authentification réussie pour 'test'
+[07:49:09] [DEBUG]   [SERV]   (./serveur/serveur.c:206) fin line CONN test 1234
+[07:49:09] [DEBUG]   [SERV]   (./serveur/serveur.c:209) Sortie line
+[07:49:09] [DEBUG]   [SERV]   (./serveur/serveur.c:152) sorti process commande
+[07:49:09] [DEBUG]   [SERV]   (./serveur/serveur.c:150) process commande
+[07:49:09] [DEBUG]   [SERV]   (./serveur/serveur.c:162) debut line ETA ALI1768859451
+[07:49:09] [DEBUG]   [SERV]   (./serveur/serveur.c:164) ap chomp line ETA ALI1768859451
+[07:49:09] [INFO]    [CLIENT] (./serveur/serveur.c:176) [127.0.0.1:48288] Commande reçue : ETA
+[07:49:09] [INFO]    [CLIENT] (./controller/controller_etat.c:69) [127.0.0.1:48288] ETA: données extraites avec succès
+[07:49:09] [DEBUG]   [SERV]   (./sender/sender_global.c:14)  >> CMD ETA
+SIZE 19
+
+[07:49:09] [DEBUG]   [SERV]   (./sender/sender_global.c:14)  >> LVRAB ALI1768859451
+[07:49:09] [DEBUG]   [SERV]   (./sender/sender_global.c:14)  >> 
+END
+
+[07:49:09] [DEBUG]   [SERV]   (./sender/sender_etat.c:14) PARAM d'envoi ETA : ALI1768859451
+[07:49:09] [DEBUG]   [SERV]   (./serveur/serveur.c:206) fin line ETA ALI1768859451
+[07:49:09] [DEBUG]   [SERV]   (./serveur/serveur.c:209) Sortie line
+[07:49:09] [DEBUG]   [SERV]   (./serveur/serveur.c:152) sorti process commande
+[07:49:09] [INFO]    [CLIENT] (./serveur/serveur.c:155) [127.0.0.1:48288] Client déconnecté
+[07:49:09] [DEBUG]   [SERV]   (./serveur/serveur.c:127) close connexion
+[07:49:09] [INFO]    [SERV]   (./serveur/serveur.c:114) Connexion acceptée (fd=5)
+[07:49:09] [INFO]    [CLIENT] (./serveur/serveur.c:141) [127.0.0.1:48298] Client connecté
+[07:49:09] [INFO]    [SERV]   (./bdd/bdd.c:20) Connecté a la BDD
+[07:49:09] [INFO]    [SERV]   (./bdd/bdd.c:21) SET search_path...
+[07:49:09] [INFO]    [SERV]   (./bdd/bdd.c:26) SET search_path success
+[07:49:09] [INFO]    [SERV]   (./bdd/bdd.c:31) Base de données actuelle : postgres
+[07:49:09] [INFO]    [SERV]   (./bdd/bdd.c:37) Schéma courant (search_path) : sae3_delivraptor
+[07:49:09] [DEBUG]   [SERV]   (./serveur/serveur.c:150) process commande
+[07:49:09] [DEBUG]   [SERV]   (./serveur/serveur.c:162) debut line CONN test 1234
+[07:49:09] [DEBUG]   [SERV]   (./serveur/serveur.c:164) ap chomp line CONN test 1234
+[07:49:09] [INFO]    [CLIENT] (./serveur/serveur.c:176) [127.0.0.1:48298] Commande reçue : CONN
+[07:49:09] [INFO]    [CLIENT] (./serveur/serveur.c:223) [127.0.0.1:48298] Tentative d'authentification pour 'test'
+[07:49:09] [INFO]    [CLIENT] (./serveur/serveur.c:228) [127.0.0.1:48298] Authentification réussie pour 'test'
+[07:49:09] [DEBUG]   [SERV]   (./serveur/serveur.c:206) fin line CONN test 1234
+[07:49:09] [DEBUG]   [SERV]   (./serveur/serveur.c:209) Sortie line
+[07:49:09] [DEBUG]   [SERV]   (./serveur/serveur.c:152) sorti process commande
+[07:49:09] [DEBUG]   [SERV]   (./serveur/serveur.c:150) process commande
+[07:49:09] [DEBUG]   [SERV]   (./serveur/serveur.c:162) debut line IMG ALI1768859451
+[07:49:09] [DEBUG]   [SERV]   (./serveur/serveur.c:164) ap chomp line IMG ALI1768859451
+[07:49:09] [INFO]    [CLIENT] (./serveur/serveur.c:176) [127.0.0.1:48298] Commande reçue : IMG
+[07:49:09] [INFO]    [CLIENT] (./controller/controller_img.c:17) [127.0.0.1:48298] ETA: données extraites avec succès
+[07:49:09] [INFO]    [SERV]   (./controller/controller_img.c:32) ETAT LVRAB id ALI1768859451 process...
+[07:49:09] [INFO]    [SERV]   (./model/model_img.c:33) IMAGE GET REQUEST : id ALI1768859451
+[07:49:09] [INFO]    [SERV]   (./model/model_img.c:54) IMAGE GET REQUEST SUCCESS : id ALI1768859451 adresse image/livraison.jpg
+[07:49:09] [INFO]    [SERV]   (./model/model_img.c:61) IMAGE OPEN : id ALI1768859451
+[07:49:09] [INFO]    [SERV]   (./controller/controller_img.c:38) ETAT LVRAB id ALI1768859451 size...
+[07:49:09] [INFO]    [SERV]   (./controller/controller_img.c:51) ETAT LVRAB id ALI1768859451 read...
+[07:49:09] [INFO]    [SERV]   (./controller/controller_img.c:60) IMG SIZE 486556 content 9D27C010
+[07:49:09] [INFO]    [SERV]   (./controller/controller_img.c:62) IMG id ALI1768859451 send...
+[07:49:09] [INFO]    [SERV]   (./sender/sender_img.c:4) SEND IMG start...
+[07:49:09] [DEBUG]   [SERV]   (./sender/sender_global.c:14)  >> CMD IMG
+SIZE 486556
+
+[07:49:09] [DEBUG]   [SERV]   (./sender/sender_global.c:14)  >> �����ICC_PROFILE
+[07:49:09] [DEBUG]   [SERV]   (./sender/sender_global.c:14)  >> 
+END
+
+[07:49:09] [DEBUG]   [SERV]   (./sender/sender_img.c:13) PARAM d'envoi img success
+[07:49:09] [INFO]    [SERV]   (./controller/controller_img.c:70) ETAT LVRAB id ALI1768859451 close...
+[07:49:09] [INFO]    [SERV]   (./controller/controller_img.c:73) ETAT LVRAB id ALI1768859451 close
+[07:49:09] [DEBUG]   [SERV]   (./serveur/serveur.c:206) fin line IMG ALI1768859451
+[07:49:09] [DEBUG]   [SERV]   (./serveur/serveur.c:209) Sortie line
+[07:49:09] [DEBUG]   [SERV]   (./serveur/serveur.c:152) sorti process commande
+[07:49:09] [INFO]    [CLIENT] (./serveur/serveur.c:155) [127.0.0.1:48298] Client déconnecté
+[07:49:09] [DEBUG]   [SERV]   (./serveur/serveur.c:127) close connexion
+[07:49:09] [INFO]    [SERV]   (./serveur/serveur.c:114) Connexion acceptée (fd=5)
+[07:49:09] [INFO]    [CLIENT] (./serveur/serveur.c:141) [127.0.0.1:48308] Client connecté
+[07:49:09] [INFO]    [SERV]   (./bdd/bdd.c:20) Connecté a la BDD
+[07:49:09] [INFO]    [SERV]   (./bdd/bdd.c:21) SET search_path...
+[07:49:09] [INFO]    [SERV]   (./bdd/bdd.c:26) SET search_path success
+[07:49:09] [INFO]    [SERV]   (./bdd/bdd.c:31) Base de données actuelle : postgres
+[07:49:09] [INFO]    [SERV]   (./bdd/bdd.c:37) Schéma courant (search_path) : sae3_delivraptor
+[07:49:09] [DEBUG]   [SERV]   (./serveur/serveur.c:150) process commande
+[07:49:09] [DEBUG]   [SERV]   (./serveur/serveur.c:162) debut line CONN test 1234
+[07:49:09] [DEBUG]   [SERV]   (./serveur/serveur.c:164) ap chomp line CONN test 1234
+[07:49:09] [INFO]    [CLIENT] (./serveur/serveur.c:176) [127.0.0.1:48308] Commande reçue : CONN
+[07:49:09] [INFO]    [CLIENT] (./serveur/serveur.c:223) [127.0.0.1:48308] Tentative d'authentification pour 'test'
+[07:49:09] [INFO]    [CLIENT] (./serveur/serveur.c:228) [127.0.0.1:48308] Authentification réussie pour 'test'
+[07:49:09] [DEBUG]   [SERV]   (./serveur/serveur.c:206) fin line CONN test 1234
+[07:49:09] [DEBUG]   [SERV]   (./serveur/serveur.c:209) Sortie line
+[07:49:09] [DEBUG]   [SERV]   (./serveur/serveur.c:152) sorti process commande
+[07:49:09] [DEBUG]   [SERV]   (./serveur/serveur.c:150) process commande
+[07:49:09] [DEBUG]   [SERV]   (./serveur/serveur.c:162) debut line ETA ALI1768859422
+[07:49:09] [DEBUG]   [SERV]   (./serveur/serveur.c:164) ap chomp line ETA ALI1768859422
+[07:49:09] [INFO]    [CLIENT] (./serveur/serveur.c:176) [127.0.0.1:48308] Commande reçue : ETA
+[07:49:09] [INFO]    [CLIENT] (./controller/controller_etat.c:69) [127.0.0.1:48308] ETA: données extraites avec succès
+[07:49:09] [DEBUG]   [SERV]   (./sender/sender_global.c:14)  >> CMD ETA
+SIZE 19
+
+[07:49:09] [DEBUG]   [SERV]   (./sender/sender_global.c:14)  >> LVRAB ALI1768859422
+[07:49:09] [DEBUG]   [SERV]   (./sender/sender_global.c:14)  >> 
+END
+
+[07:49:09] [DEBUG]   [SERV]   (./sender/sender_etat.c:14) PARAM d'envoi ETA : ALI1768859422
+[07:49:09] [DEBUG]   [SERV]   (./serveur/serveur.c:206) fin line ETA ALI1768859422
+[07:49:09] [DEBUG]   [SERV]   (./serveur/serveur.c:209) Sortie line
+[07:49:09] [DEBUG]   [SERV]   (./serveur/serveur.c:152) sorti process commande
+[07:49:09] [INFO]    [CLIENT] (./serveur/serveur.c:155) [127.0.0.1:48308] Client déconnecté
+[07:49:09] [DEBUG]   [SERV]   (./serveur/serveur.c:127) close connexion
+[07:49:09] [INFO]    [SERV]   (./serveur/serveur.c:114) Connexion acceptée (fd=5)
+[07:49:09] [INFO]    [CLIENT] (./serveur/serveur.c:141) [127.0.0.1:48310] Client connecté
+[07:49:09] [INFO]    [SERV]   (./bdd/bdd.c:20) Connecté a la BDD
+[07:49:09] [INFO]    [SERV]   (./bdd/bdd.c:21) SET search_path...
+[07:49:09] [INFO]    [SERV]   (./bdd/bdd.c:26) SET search_path success
+[07:49:09] [INFO]    [SERV]   (./bdd/bdd.c:31) Base de données actuelle : postgres
+[07:49:09] [INFO]    [SERV]   (./bdd/bdd.c:37) Schéma courant (search_path) : sae3_delivraptor
+[07:49:09] [DEBUG]   [SERV]   (./serveur/serveur.c:150) process commande
+[07:49:09] [DEBUG]   [SERV]   (./serveur/serveur.c:162) debut line CONN test 1234
+[07:49:09] [DEBUG]   [SERV]   (./serveur/serveur.c:164) ap chomp line CONN test 1234
+[07:49:09] [INFO]    [CLIENT] (./serveur/serveur.c:176) [127.0.0.1:48310] Commande reçue : CONN
+[07:49:09] [INFO]    [CLIENT] (./serveur/serveur.c:223) [127.0.0.1:48310] Tentative d'authentification pour 'test'
+[07:49:09] [INFO]    [CLIENT] (./serveur/serveur.c:228) [127.0.0.1:48310] Authentification réussie pour 'test'
+[07:49:09] [DEBUG]   [SERV]   (./serveur/serveur.c:206) fin line CONN test 1234
+[07:49:09] [DEBUG]   [SERV]   (./serveur/serveur.c:209) Sortie line
+[07:49:09] [DEBUG]   [SERV]   (./serveur/serveur.c:152) sorti process commande
+[07:49:09] [DEBUG]   [SERV]   (./serveur/serveur.c:150) process commande
+[07:49:09] [DEBUG]   [SERV]   (./serveur/serveur.c:162) debut line IMG ALI1768859422
+[07:49:09] [DEBUG]   [SERV]   (./serveur/serveur.c:164) ap chomp line IMG ALI1768859422
+[07:49:09] [INFO]    [CLIENT] (./serveur/serveur.c:176) [127.0.0.1:48310] Commande reçue : IMG
+[07:49:09] [INFO]    [CLIENT] (./controller/controller_img.c:17) [127.0.0.1:48310] ETA: données extraites avec succès
+[07:49:09] [INFO]    [SERV]   (./controller/controller_img.c:32) ETAT LVRAB id ALI1768859422 process...
+[07:49:09] [INFO]    [SERV]   (./model/model_img.c:33) IMAGE GET REQUEST : id ALI1768859422
+[07:49:09] [INFO]    [SERV]   (./model/model_img.c:54) IMAGE GET REQUEST SUCCESS : id ALI1768859422 adresse image/livraison.jpg
+[07:49:09] [INFO]    [SERV]   (./model/model_img.c:61) IMAGE OPEN : id ALI1768859422
+[07:49:09] [INFO]    [SERV]   (./controller/controller_img.c:38) ETAT LVRAB id ALI1768859422 size...
+[07:49:09] [INFO]    [SERV]   (./controller/controller_img.c:51) ETAT LVRAB id ALI1768859422 read...
+[07:49:09] [INFO]    [SERV]   (./controller/controller_img.c:60) IMG SIZE 486556 content 9D27C010
+[07:49:09] [INFO]    [SERV]   (./controller/controller_img.c:62) IMG id ALI1768859422 send...
+[07:49:09] [INFO]    [SERV]   (./sender/sender_img.c:4) SEND IMG start...
+[07:49:09] [DEBUG]   [SERV]   (./sender/sender_global.c:14)  >> CMD IMG
+SIZE 486556
+
+[07:49:09] [DEBUG]   [SERV]   (./sender/sender_global.c:14)  >> �����ICC_PROFILE
+[07:49:09] [DEBUG]   [SERV]   (./sender/sender_global.c:14)  >> 
+END
+
+[07:49:09] [DEBUG]   [SERV]   (./sender/sender_img.c:13) PARAM d'envoi img success
+[07:49:09] [INFO]    [SERV]   (./controller/controller_img.c:70) ETAT LVRAB id ALI1768859422 close...
+[07:49:09] [INFO]    [SERV]   (./controller/controller_img.c:73) ETAT LVRAB id ALI1768859422 close
+[07:49:09] [DEBUG]   [SERV]   (./serveur/serveur.c:206) fin line IMG ALI1768859422
+[07:49:09] [DEBUG]   [SERV]   (./serveur/serveur.c:209) Sortie line
+[07:49:09] [DEBUG]   [SERV]   (./serveur/serveur.c:152) sorti process commande
+[07:49:09] [INFO]    [CLIENT] (./serveur/serveur.c:155) [127.0.0.1:48310] Client déconnecté
+[07:49:09] [DEBUG]   [SERV]   (./serveur/serveur.c:127) close connexion
+[07:49:09] [INFO]    [SERV]   (./serveur/serveur.c:114) Connexion acceptée (fd=5)
+[07:49:09] [INFO]    [CLIENT] (./serveur/serveur.c:141) [127.0.0.1:48318] Client connecté
+[07:49:09] [INFO]    [SERV]   (./bdd/bdd.c:20) Connecté a la BDD
+[07:49:09] [INFO]    [SERV]   (./bdd/bdd.c:21) SET search_path...
+[07:49:09] [INFO]    [SERV]   (./bdd/bdd.c:26) SET search_path success
+[07:49:09] [INFO]    [SERV]   (./bdd/bdd.c:31) Base de données actuelle : postgres
+[07:49:09] [INFO]    [SERV]   (./bdd/bdd.c:37) Schéma courant (search_path) : sae3_delivraptor
+[07:49:09] [DEBUG]   [SERV]   (./serveur/serveur.c:150) process commande
+[07:49:09] [DEBUG]   [SERV]   (./serveur/serveur.c:162) debut line CONN test 1234
+[07:49:09] [DEBUG]   [SERV]   (./serveur/serveur.c:164) ap chomp line CONN test 1234
+[07:49:09] [INFO]    [CLIENT] (./serveur/serveur.c:176) [127.0.0.1:48318] Commande reçue : CONN
+[07:49:09] [INFO]    [CLIENT] (./serveur/serveur.c:223) [127.0.0.1:48318] Tentative d'authentification pour 'test'
+[07:49:09] [INFO]    [CLIENT] (./serveur/serveur.c:228) [127.0.0.1:48318] Authentification réussie pour 'test'
+[07:49:09] [DEBUG]   [SERV]   (./serveur/serveur.c:206) fin line CONN test 1234
+[07:49:09] [DEBUG]   [SERV]   (./serveur/serveur.c:209) Sortie line
+[07:49:09] [DEBUG]   [SERV]   (./serveur/serveur.c:152) sorti process commande
+[07:49:09] [DEBUG]   [SERV]   (./serveur/serveur.c:150) process commande
+[07:49:09] [DEBUG]   [SERV]   (./serveur/serveur.c:162) debut line ETA ALI1768859392
+[07:49:09] [DEBUG]   [SERV]   (./serveur/serveur.c:164) ap chomp line ETA ALI1768859392
+[07:49:09] [INFO]    [CLIENT] (./serveur/serveur.c:176) [127.0.0.1:48318] Commande reçue : ETA
+[07:49:09] [INFO]    [CLIENT] (./controller/controller_etat.c:69) [127.0.0.1:48318] ETA: données extraites avec succès
+[07:49:09] [DEBUG]   [SERV]   (./sender/sender_global.c:14)  >> CMD ETA
+SIZE 17
+
+[07:49:09] [DEBUG]   [SERV]   (./sender/sender_global.c:14)  >> LVR ALI1768859392
+[07:49:09] [DEBUG]   [SERV]   (./sender/sender_global.c:14)  >> 
+END
+
+[07:49:09] [DEBUG]   [SERV]   (./sender/sender_etat.c:14) PARAM d'envoi ETA : ALI1768859392
+[07:49:09] [DEBUG]   [SERV]   (./serveur/serveur.c:206) fin line ETA ALI1768859392
+[07:49:09] [DEBUG]   [SERV]   (./serveur/serveur.c:209) Sortie line
+[07:49:09] [DEBUG]   [SERV]   (./serveur/serveur.c:152) sorti process commande
+[07:49:10] [INFO]    [CLIENT] (./serveur/serveur.c:155) [127.0.0.1:48318] Client déconnecté
+[07:49:10] [DEBUG]   [SERV]   (./serveur/serveur.c:127) close connexion
+[07:49:10] [INFO]    [SERV]   (./serveur/serveur.c:114) Connexion acceptée (fd=5)
+[07:49:10] [INFO]    [CLIENT] (./serveur/serveur.c:141) [127.0.0.1:48326] Client connecté
+[07:49:10] [INFO]    [SERV]   (./bdd/bdd.c:20) Connecté a la BDD
+[07:49:10] [INFO]    [SERV]   (./bdd/bdd.c:21) SET search_path...
+[07:49:10] [INFO]    [SERV]   (./bdd/bdd.c:26) SET search_path success
+[07:49:10] [INFO]    [SERV]   (./bdd/bdd.c:31) Base de données actuelle : postgres
+[07:49:10] [INFO]    [SERV]   (./bdd/bdd.c:37) Schéma courant (search_path) : sae3_delivraptor
+[07:49:10] [DEBUG]   [SERV]   (./serveur/serveur.c:150) process commande
+[07:49:10] [DEBUG]   [SERV]   (./serveur/serveur.c:162) debut line CONN test 1234
+[07:49:10] [DEBUG]   [SERV]   (./serveur/serveur.c:164) ap chomp line CONN test 1234
+[07:49:10] [INFO]    [CLIENT] (./serveur/serveur.c:176) [127.0.0.1:48326] Commande reçue : CONN
+[07:49:10] [INFO]    [CLIENT] (./serveur/serveur.c:223) [127.0.0.1:48326] Tentative d'authentification pour 'test'
+[07:49:10] [INFO]    [CLIENT] (./serveur/serveur.c:228) [127.0.0.1:48326] Authentification réussie pour 'test'
+[07:49:10] [DEBUG]   [SERV]   (./serveur/serveur.c:206) fin line CONN test 1234
+[07:49:10] [DEBUG]   [SERV]   (./serveur/serveur.c:209) Sortie line
+[07:49:10] [DEBUG]   [SERV]   (./serveur/serveur.c:152) sorti process commande
+[07:49:10] [DEBUG]   [SERV]   (./serveur/serveur.c:150) process commande
+[07:49:10] [DEBUG]   [SERV]   (./serveur/serveur.c:162) debut line ETA ALI1768858851
+[07:49:10] [DEBUG]   [SERV]   (./serveur/serveur.c:164) ap chomp line ETA ALI1768858851
+[07:49:10] [INFO]    [CLIENT] (./serveur/serveur.c:176) [127.0.0.1:48326] Commande reçue : ETA
+[07:49:10] [INFO]    [CLIENT] (./controller/controller_etat.c:69) [127.0.0.1:48326] ETA: données extraites avec succès
+[07:49:10] [INFO]    [SERV]   (./model/model_etat.c:41) RAISON GET : ALI1768858851 etat 715603392
+[07:49:10] [DEBUG]   [SERV]   (./sender/sender_global.c:14)  >> CMD ETA
+SIZE 55
+
+[07:49:10] [DEBUG]   [SERV]   (./sender/sender_global.c:14)  >> REFU ALI1768858851 msg:Le colis n'a pas été commandé
+[07:49:10] [DEBUG]   [SERV]   (./sender/sender_global.c:14)  >> 
+END
+
+[07:49:10] [DEBUG]   [SERV]   (./sender/sender_etat.c:29) PARAM d'envoi ETA : ALI1768858851
+[07:49:10] [DEBUG]   [SERV]   (./serveur/serveur.c:206) fin line ETA ALI1768858851
+[07:49:10] [DEBUG]   [SERV]   (./serveur/serveur.c:209) Sortie line
+[07:49:10] [DEBUG]   [SERV]   (./serveur/serveur.c:152) sorti process commande
+[07:49:10] [INFO]    [CLIENT] (./serveur/serveur.c:155) [127.0.0.1:48326] Client déconnecté
+[07:49:10] [DEBUG]   [SERV]   (./serveur/serveur.c:127) close connexion
+[07:49:10] [INFO]    [SERV]   (./serveur/serveur.c:114) Connexion acceptée (fd=5)
+[07:49:10] [INFO]    [CLIENT] (./serveur/serveur.c:141) [127.0.0.1:48334] Client connecté
+[07:49:10] [INFO]    [SERV]   (./bdd/bdd.c:20) Connecté a la BDD
+[07:49:10] [INFO]    [SERV]   (./bdd/bdd.c:21) SET search_path...
+[07:49:10] [INFO]    [SERV]   (./bdd/bdd.c:26) SET search_path success
+[07:49:10] [INFO]    [SERV]   (./bdd/bdd.c:31) Base de données actuelle : postgres
+[07:49:10] [INFO]    [SERV]   (./bdd/bdd.c:37) Schéma courant (search_path) : sae3_delivraptor
+[07:49:10] [DEBUG]   [SERV]   (./serveur/serveur.c:150) process commande
+[07:49:10] [DEBUG]   [SERV]   (./serveur/serveur.c:162) debut line CONN test 1234
+[07:49:10] [DEBUG]   [SERV]   (./serveur/serveur.c:164) ap chomp line CONN test 1234
+[07:49:10] [INFO]    [CLIENT] (./serveur/serveur.c:176) [127.0.0.1:48334] Commande reçue : CONN
+[07:49:10] [INFO]    [CLIENT] (./serveur/serveur.c:223) [127.0.0.1:48334] Tentative d'authentification pour 'test'
+[07:49:10] [INFO]    [CLIENT] (./serveur/serveur.c:228) [127.0.0.1:48334] Authentification réussie pour 'test'
+[07:49:10] [DEBUG]   [SERV]   (./serveur/serveur.c:206) fin line CONN test 1234
+[07:49:10] [DEBUG]   [SERV]   (./serveur/serveur.c:209) Sortie line
+[07:49:10] [DEBUG]   [SERV]   (./serveur/serveur.c:152) sorti process commande
+[07:49:10] [DEBUG]   [SERV]   (./serveur/serveur.c:150) process commande
+[07:49:10] [DEBUG]   [SERV]   (./serveur/serveur.c:162) debut line ETA ALI1768858823
+[07:49:10] [DEBUG]   [SERV]   (./serveur/serveur.c:164) ap chomp line ETA ALI1768858823
+[07:49:10] [INFO]    [CLIENT] (./serveur/serveur.c:176) [127.0.0.1:48334] Commande reçue : ETA
+[07:49:10] [INFO]    [CLIENT] (./controller/controller_etat.c:69) [127.0.0.1:48334] ETA: données extraites avec succès
+[07:49:10] [INFO]    [SERV]   (./model/model_etat.c:41) RAISON GET : ALI1768858823 etat 715603392
+[07:49:10] [DEBUG]   [SERV]   (./sender/sender_global.c:14)  >> CMD ETA
+SIZE 37
+
+[07:49:10] [DEBUG]   [SERV]   (./sender/sender_global.c:14)  >> REFU ALI1768858823 msg:Le colis bouge
+[07:49:10] [DEBUG]   [SERV]   (./sender/sender_global.c:14)  >> 
+END
+
+[07:49:10] [DEBUG]   [SERV]   (./sender/sender_etat.c:29) PARAM d'envoi ETA : ALI1768858823
+[07:49:10] [DEBUG]   [SERV]   (./serveur/serveur.c:206) fin line ETA ALI1768858823
+[07:49:10] [DEBUG]   [SERV]   (./serveur/serveur.c:209) Sortie line
+[07:49:10] [DEBUG]   [SERV]   (./serveur/serveur.c:152) sorti process commande
+[07:49:10] [INFO]    [CLIENT] (./serveur/serveur.c:155) [127.0.0.1:48334] Client déconnecté
+[07:49:10] [DEBUG]   [SERV]   (./serveur/serveur.c:127) close connexion
+[07:49:10] [INFO]    [SERV]   (./serveur/serveur.c:114) Connexion acceptée (fd=5)
+[07:49:10] [INFO]    [CLIENT] (./serveur/serveur.c:141) [127.0.0.1:48340] Client connecté
+[07:49:10] [INFO]    [SERV]   (./bdd/bdd.c:20) Connecté a la BDD
+[07:49:10] [INFO]    [SERV]   (./bdd/bdd.c:21) SET search_path...
+[07:49:10] [INFO]    [SERV]   (./bdd/bdd.c:26) SET search_path success
+[07:49:10] [INFO]    [SERV]   (./bdd/bdd.c:31) Base de données actuelle : postgres
+[07:49:10] [INFO]    [SERV]   (./bdd/bdd.c:37) Schéma courant (search_path) : sae3_delivraptor
+[07:49:10] [DEBUG]   [SERV]   (./serveur/serveur.c:150) process commande
+[07:49:10] [DEBUG]   [SERV]   (./serveur/serveur.c:162) debut line CONN test 1234
+[07:49:10] [DEBUG]   [SERV]   (./serveur/serveur.c:164) ap chomp line CONN test 1234
+[07:49:10] [INFO]    [CLIENT] (./serveur/serveur.c:176) [127.0.0.1:48340] Commande reçue : CONN
+[07:49:10] [INFO]    [CLIENT] (./serveur/serveur.c:223) [127.0.0.1:48340] Tentative d'authentification pour 'test'
+[07:49:10] [INFO]    [CLIENT] (./serveur/serveur.c:228) [127.0.0.1:48340] Authentification réussie pour 'test'
+[07:49:10] [DEBUG]   [SERV]   (./serveur/serveur.c:206) fin line CONN test 1234
+[07:49:10] [DEBUG]   [SERV]   (./serveur/serveur.c:209) Sortie line
+[07:49:10] [DEBUG]   [SERV]   (./serveur/serveur.c:152) sorti process commande
+[07:49:10] [DEBUG]   [SERV]   (./serveur/serveur.c:150) process commande
+[07:49:10] [DEBUG]   [SERV]   (./serveur/serveur.c:162) debut line ETA ALI1768858793
+[07:49:10] [DEBUG]   [SERV]   (./serveur/serveur.c:164) ap chomp line ETA ALI1768858793
+[07:49:10] [INFO]    [CLIENT] (./serveur/serveur.c:176) [127.0.0.1:48340] Commande reçue : ETA
+[07:49:10] [INFO]    [CLIENT] (./controller/controller_etat.c:69) [127.0.0.1:48340] ETA: données extraites avec succès
+[07:49:10] [INFO]    [SERV]   (./model/model_etat.c:41) RAISON GET : ALI1768858793 etat 715603392
+[07:49:10] [DEBUG]   [SERV]   (./sender/sender_global.c:14)  >> CMD ETA
+SIZE 47
+
+[07:49:10] [DEBUG]   [SERV]   (./sender/sender_global.c:14)  >> REFU ALI1768858793 msg:Le colis est trop abimé
+[07:49:10] [DEBUG]   [SERV]   (./sender/sender_global.c:14)  >> 
+END
+
+[07:49:10] [DEBUG]   [SERV]   (./sender/sender_etat.c:29) PARAM d'envoi ETA : ALI1768858793
+[07:49:10] [DEBUG]   [SERV]   (./serveur/serveur.c:206) fin line ETA ALI1768858793
+[07:49:10] [DEBUG]   [SERV]   (./serveur/serveur.c:209) Sortie line
+[07:49:10] [DEBUG]   [SERV]   (./serveur/serveur.c:152) sorti process commande
+[07:49:10] [INFO]    [CLIENT] (./serveur/serveur.c:155) [127.0.0.1:48340] Client déconnecté
+[07:49:10] [DEBUG]   [SERV]   (./serveur/serveur.c:127) close connexion
+[07:49:10] [INFO]    [SERV]   (./serveur/serveur.c:114) Connexion acceptée (fd=5)
+[07:49:10] [INFO]    [CLIENT] (./serveur/serveur.c:141) [127.0.0.1:48344] Client connecté
+[07:49:10] [INFO]    [SERV]   (./bdd/bdd.c:20) Connecté a la BDD
+[07:49:10] [INFO]    [SERV]   (./bdd/bdd.c:21) SET search_path...
+[07:49:10] [INFO]    [SERV]   (./bdd/bdd.c:26) SET search_path success
+[07:49:10] [INFO]    [SERV]   (./bdd/bdd.c:31) Base de données actuelle : postgres
+[07:49:10] [INFO]    [SERV]   (./bdd/bdd.c:37) Schéma courant (search_path) : sae3_delivraptor
+[07:49:10] [DEBUG]   [SERV]   (./serveur/serveur.c:150) process commande
+[07:49:10] [DEBUG]   [SERV]   (./serveur/serveur.c:162) debut line CONN test 1234
+[07:49:10] [DEBUG]   [SERV]   (./serveur/serveur.c:164) ap chomp line CONN test 1234
+[07:49:10] [INFO]    [CLIENT] (./serveur/serveur.c:176) [127.0.0.1:48344] Commande reçue : CONN
+[07:49:10] [INFO]    [CLIENT] (./serveur/serveur.c:223) [127.0.0.1:48344] Tentative d'authentification pour 'test'
+[07:49:10] [INFO]    [CLIENT] (./serveur/serveur.c:228) [127.0.0.1:48344] Authentification réussie pour 'test'
+[07:49:10] [DEBUG]   [SERV]   (./serveur/serveur.c:206) fin line CONN test 1234
+[07:49:10] [DEBUG]   [SERV]   (./serveur/serveur.c:209) Sortie line
+[07:49:10] [DEBUG]   [SERV]   (./serveur/serveur.c:152) sorti process commande
+[07:49:10] [DEBUG]   [SERV]   (./serveur/serveur.c:150) process commande
+[07:49:10] [DEBUG]   [SERV]   (./serveur/serveur.c:162) debut line ETA ALI1768858762
+[07:49:10] [DEBUG]   [SERV]   (./serveur/serveur.c:164) ap chomp line ETA ALI1768858762
+[07:49:10] [INFO]    [CLIENT] (./serveur/serveur.c:176) [127.0.0.1:48344] Commande reçue : ETA
+[07:49:10] [INFO]    [CLIENT] (./controller/controller_etat.c:69) [127.0.0.1:48344] ETA: données extraites avec succès
+[07:49:10] [INFO]    [SERV]   (./model/model_etat.c:41) RAISON GET : ALI1768858762 etat 715603392
+[07:49:10] [DEBUG]   [SERV]   (./sender/sender_global.c:14)  >> CMD ETA
+SIZE 53
+
+[07:49:10] [DEBUG]   [SERV]   (./sender/sender_global.c:14)  >> REFU ALI1768858762 msg:Le colis est arrivé trop tard
+[07:49:10] [DEBUG]   [SERV]   (./sender/sender_global.c:14)  >> 
+END
+
+[07:49:10] [DEBUG]   [SERV]   (./sender/sender_etat.c:29) PARAM d'envoi ETA : ALI1768858762
+[07:49:10] [DEBUG]   [SERV]   (./serveur/serveur.c:206) fin line ETA ALI1768858762
+[07:49:10] [DEBUG]   [SERV]   (./serveur/serveur.c:209) Sortie line
+[07:49:10] [DEBUG]   [SERV]   (./serveur/serveur.c:152) sorti process commande
+[07:49:10] [INFO]    [CLIENT] (./serveur/serveur.c:155) [127.0.0.1:48344] Client déconnecté
+[07:49:10] [DEBUG]   [SERV]   (./serveur/serveur.c:127) close connexion
+[07:49:12] [INFO]    [SERV]   (./serveur/serveur.c:114) Connexion acceptée (fd=5)
+[07:49:12] [INFO]    [CLIENT] (./serveur/serveur.c:141) [127.0.0.1:48360] Client connecté
+[07:49:12] [INFO]    [SERV]   (./bdd/bdd.c:20) Connecté a la BDD
+[07:49:12] [INFO]    [SERV]   (./bdd/bdd.c:21) SET search_path...
+[07:49:12] [INFO]    [SERV]   (./bdd/bdd.c:26) SET search_path success
+[07:49:12] [INFO]    [SERV]   (./bdd/bdd.c:31) Base de données actuelle : postgres
+[07:49:12] [INFO]    [SERV]   (./bdd/bdd.c:37) Schéma courant (search_path) : sae3_delivraptor
+[07:49:12] [DEBUG]   [SERV]   (./serveur/serveur.c:150) process commande
+[07:49:12] [DEBUG]   [SERV]   (./serveur/serveur.c:162) debut line CONN test 1234
+[07:49:12] [DEBUG]   [SERV]   (./serveur/serveur.c:164) ap chomp line CONN test 1234
+[07:49:12] [INFO]    [CLIENT] (./serveur/serveur.c:176) [127.0.0.1:48360] Commande reçue : CONN
+[07:49:12] [INFO]    [CLIENT] (./serveur/serveur.c:223) [127.0.0.1:48360] Tentative d'authentification pour 'test'
+[07:49:12] [INFO]    [CLIENT] (./serveur/serveur.c:228) [127.0.0.1:48360] Authentification réussie pour 'test'
+[07:49:12] [DEBUG]   [SERV]   (./serveur/serveur.c:206) fin line CONN test 1234
+[07:49:12] [DEBUG]   [SERV]   (./serveur/serveur.c:209) Sortie line
+[07:49:12] [DEBUG]   [SERV]   (./serveur/serveur.c:152) sorti process commande
+[07:49:12] [DEBUG]   [SERV]   (./serveur/serveur.c:150) process commande
+[07:49:12] [DEBUG]   [SERV]   (./serveur/serveur.c:162) debut line ETA ALI1768859451
+[07:49:12] [DEBUG]   [SERV]   (./serveur/serveur.c:164) ap chomp line ETA ALI1768859451
+[07:49:12] [INFO]    [CLIENT] (./serveur/serveur.c:176) [127.0.0.1:48360] Commande reçue : ETA
+[07:49:12] [INFO]    [CLIENT] (./controller/controller_etat.c:69) [127.0.0.1:48360] ETA: données extraites avec succès
+[07:49:12] [DEBUG]   [SERV]   (./sender/sender_global.c:14)  >> CMD ETA
+SIZE 19
+
+[07:49:12] [DEBUG]   [SERV]   (./sender/sender_global.c:14)  >> LVRAB ALI1768859451
+[07:49:12] [DEBUG]   [SERV]   (./sender/sender_global.c:14)  >> 
+END
+
+[07:49:12] [DEBUG]   [SERV]   (./sender/sender_etat.c:14) PARAM d'envoi ETA : ALI1768859451
+[07:49:12] [DEBUG]   [SERV]   (./serveur/serveur.c:206) fin line ETA ALI1768859451
+[07:49:12] [DEBUG]   [SERV]   (./serveur/serveur.c:209) Sortie line
+[07:49:12] [DEBUG]   [SERV]   (./serveur/serveur.c:152) sorti process commande
+[07:49:12] [INFO]    [CLIENT] (./serveur/serveur.c:155) [127.0.0.1:48360] Client déconnecté
+[07:49:12] [DEBUG]   [SERV]   (./serveur/serveur.c:127) close connexion
+[07:49:12] [INFO]    [SERV]   (./serveur/serveur.c:114) Connexion acceptée (fd=5)
+[07:49:12] [INFO]    [CLIENT] (./serveur/serveur.c:141) [127.0.0.1:48370] Client connecté
+[07:49:12] [INFO]    [SERV]   (./bdd/bdd.c:20) Connecté a la BDD
+[07:49:12] [INFO]    [SERV]   (./bdd/bdd.c:21) SET search_path...
+[07:49:12] [INFO]    [SERV]   (./bdd/bdd.c:26) SET search_path success
+[07:49:12] [INFO]    [SERV]   (./bdd/bdd.c:31) Base de données actuelle : postgres
+[07:49:12] [INFO]    [SERV]   (./bdd/bdd.c:37) Schéma courant (search_path) : sae3_delivraptor
+[07:49:12] [DEBUG]   [SERV]   (./serveur/serveur.c:150) process commande
+[07:49:12] [DEBUG]   [SERV]   (./serveur/serveur.c:162) debut line CONN test 1234
+[07:49:12] [DEBUG]   [SERV]   (./serveur/serveur.c:164) ap chomp line CONN test 1234
+[07:49:12] [INFO]    [CLIENT] (./serveur/serveur.c:176) [127.0.0.1:48370] Commande reçue : CONN
+[07:49:12] [INFO]    [CLIENT] (./serveur/serveur.c:223) [127.0.0.1:48370] Tentative d'authentification pour 'test'
+[07:49:12] [INFO]    [CLIENT] (./serveur/serveur.c:228) [127.0.0.1:48370] Authentification réussie pour 'test'
+[07:49:12] [DEBUG]   [SERV]   (./serveur/serveur.c:206) fin line CONN test 1234
+[07:49:12] [DEBUG]   [SERV]   (./serveur/serveur.c:209) Sortie line
+[07:49:12] [DEBUG]   [SERV]   (./serveur/serveur.c:152) sorti process commande
+[07:49:12] [DEBUG]   [SERV]   (./serveur/serveur.c:150) process commande
+[07:49:12] [DEBUG]   [SERV]   (./serveur/serveur.c:162) debut line IMG ALI1768859451
+[07:49:12] [DEBUG]   [SERV]   (./serveur/serveur.c:164) ap chomp line IMG ALI1768859451
+[07:49:12] [INFO]    [CLIENT] (./serveur/serveur.c:176) [127.0.0.1:48370] Commande reçue : IMG
+[07:49:12] [INFO]    [CLIENT] (./controller/controller_img.c:17) [127.0.0.1:48370] ETA: données extraites avec succès
+[07:49:12] [INFO]    [SERV]   (./controller/controller_img.c:32) ETAT LVRAB id ALI1768859451 process...
+[07:49:12] [INFO]    [SERV]   (./model/model_img.c:33) IMAGE GET REQUEST : id ALI1768859451
+[07:49:12] [INFO]    [SERV]   (./model/model_img.c:54) IMAGE GET REQUEST SUCCESS : id ALI1768859451 adresse image/livraison.jpg
+[07:49:12] [INFO]    [SERV]   (./model/model_img.c:61) IMAGE OPEN : id ALI1768859451
+[07:49:12] [INFO]    [SERV]   (./controller/controller_img.c:38) ETAT LVRAB id ALI1768859451 size...
+[07:49:12] [INFO]    [SERV]   (./controller/controller_img.c:51) ETAT LVRAB id ALI1768859451 read...
+[07:49:12] [INFO]    [SERV]   (./controller/controller_img.c:60) IMG SIZE 486556 content 9D27C010
+[07:49:12] [INFO]    [SERV]   (./controller/controller_img.c:62) IMG id ALI1768859451 send...
+[07:49:12] [INFO]    [SERV]   (./sender/sender_img.c:4) SEND IMG start...
+[07:49:12] [DEBUG]   [SERV]   (./sender/sender_global.c:14)  >> CMD IMG
+SIZE 486556
+
+[07:49:12] [DEBUG]   [SERV]   (./sender/sender_global.c:14)  >> �����ICC_PROFILE
+[07:49:12] [DEBUG]   [SERV]   (./sender/sender_global.c:14)  >> 
+END
+
+[07:49:12] [DEBUG]   [SERV]   (./sender/sender_img.c:13) PARAM d'envoi img success
+[07:49:12] [INFO]    [SERV]   (./controller/controller_img.c:70) ETAT LVRAB id ALI1768859451 close...
+[07:49:12] [INFO]    [SERV]   (./controller/controller_img.c:73) ETAT LVRAB id ALI1768859451 close
+[07:49:12] [DEBUG]   [SERV]   (./serveur/serveur.c:206) fin line IMG ALI1768859451
+[07:49:12] [DEBUG]   [SERV]   (./serveur/serveur.c:209) Sortie line
+[07:49:12] [DEBUG]   [SERV]   (./serveur/serveur.c:152) sorti process commande
+[07:49:12] [INFO]    [CLIENT] (./serveur/serveur.c:155) [127.0.0.1:48370] Client déconnecté
+[07:49:12] [DEBUG]   [SERV]   (./serveur/serveur.c:127) close connexion
+[07:49:20] [INFO]    [SERV]   (./serveur/serveur.c:114) Connexion acceptée (fd=5)
+[07:49:20] [INFO]    [CLIENT] (./serveur/serveur.c:141) [127.0.0.1:47382] Client connecté
+[07:49:20] [INFO]    [SERV]   (./bdd/bdd.c:20) Connecté a la BDD
+[07:49:20] [INFO]    [SERV]   (./bdd/bdd.c:21) SET search_path...
+[07:49:20] [INFO]    [SERV]   (./bdd/bdd.c:26) SET search_path success
+[07:49:20] [INFO]    [SERV]   (./bdd/bdd.c:31) Base de données actuelle : postgres
+[07:49:20] [INFO]    [SERV]   (./bdd/bdd.c:37) Schéma courant (search_path) : sae3_delivraptor
+[07:49:20] [DEBUG]   [SERV]   (./serveur/serveur.c:150) process commande
+[07:49:20] [DEBUG]   [SERV]   (./serveur/serveur.c:162) debut line CONN test 1234
+[07:49:20] [DEBUG]   [SERV]   (./serveur/serveur.c:164) ap chomp line CONN test 1234
+[07:49:20] [INFO]    [CLIENT] (./serveur/serveur.c:176) [127.0.0.1:47382] Commande reçue : CONN
+[07:49:20] [INFO]    [CLIENT] (./serveur/serveur.c:223) [127.0.0.1:47382] Tentative d'authentification pour 'test'
+[07:49:20] [INFO]    [CLIENT] (./serveur/serveur.c:228) [127.0.0.1:47382] Authentification réussie pour 'test'
+[07:49:20] [DEBUG]   [SERV]   (./serveur/serveur.c:206) fin line CONN test 1234
+[07:49:20] [DEBUG]   [SERV]   (./serveur/serveur.c:209) Sortie line
+[07:49:20] [DEBUG]   [SERV]   (./serveur/serveur.c:152) sorti process commande
+[07:49:20] [DEBUG]   [SERV]   (./serveur/serveur.c:150) process commande
+[07:49:20] [DEBUG]   [SERV]   (./serveur/serveur.c:162) debut line ETA ALI1768859451
+[07:49:20] [DEBUG]   [SERV]   (./serveur/serveur.c:164) ap chomp line ETA ALI1768859451
+[07:49:20] [INFO]    [CLIENT] (./serveur/serveur.c:176) [127.0.0.1:47382] Commande reçue : ETA
+[07:49:20] [INFO]    [CLIENT] (./controller/controller_etat.c:69) [127.0.0.1:47382] ETA: données extraites avec succès
+[07:49:20] [DEBUG]   [SERV]   (./sender/sender_global.c:14)  >> CMD ETA
+SIZE 19
+
+[07:49:20] [DEBUG]   [SERV]   (./sender/sender_global.c:14)  >> LVRAB ALI1768859451
+[07:49:20] [DEBUG]   [SERV]   (./sender/sender_global.c:14)  >> 
+END
+
+[07:49:20] [DEBUG]   [SERV]   (./sender/sender_etat.c:14) PARAM d'envoi ETA : ALI1768859451
+[07:49:20] [DEBUG]   [SERV]   (./serveur/serveur.c:206) fin line ETA ALI1768859451
+[07:49:20] [DEBUG]   [SERV]   (./serveur/serveur.c:209) Sortie line
+[07:49:20] [DEBUG]   [SERV]   (./serveur/serveur.c:152) sorti process commande
+[07:49:20] [INFO]    [CLIENT] (./serveur/serveur.c:155) [127.0.0.1:47382] Client déconnecté
+[07:49:20] [DEBUG]   [SERV]   (./serveur/serveur.c:127) close connexion
+[07:49:20] [INFO]    [SERV]   (./serveur/serveur.c:114) Connexion acceptée (fd=5)
+[07:49:20] [INFO]    [CLIENT] (./serveur/serveur.c:141) [127.0.0.1:47386] Client connecté
+[07:49:20] [INFO]    [SERV]   (./bdd/bdd.c:20) Connecté a la BDD
+[07:49:20] [INFO]    [SERV]   (./bdd/bdd.c:21) SET search_path...
+[07:49:20] [INFO]    [SERV]   (./bdd/bdd.c:26) SET search_path success
+[07:49:20] [INFO]    [SERV]   (./bdd/bdd.c:31) Base de données actuelle : postgres
+[07:49:20] [INFO]    [SERV]   (./bdd/bdd.c:37) Schéma courant (search_path) : sae3_delivraptor
+[07:49:20] [DEBUG]   [SERV]   (./serveur/serveur.c:150) process commande
+[07:49:20] [DEBUG]   [SERV]   (./serveur/serveur.c:162) debut line CONN test 1234
+[07:49:20] [DEBUG]   [SERV]   (./serveur/serveur.c:164) ap chomp line CONN test 1234
+[07:49:20] [INFO]    [CLIENT] (./serveur/serveur.c:176) [127.0.0.1:47386] Commande reçue : CONN
+[07:49:20] [INFO]    [CLIENT] (./serveur/serveur.c:223) [127.0.0.1:47386] Tentative d'authentification pour 'test'
+[07:49:20] [INFO]    [CLIENT] (./serveur/serveur.c:228) [127.0.0.1:47386] Authentification réussie pour 'test'
+[07:49:20] [DEBUG]   [SERV]   (./serveur/serveur.c:206) fin line CONN test 1234
+[07:49:20] [DEBUG]   [SERV]   (./serveur/serveur.c:209) Sortie line
+[07:49:20] [DEBUG]   [SERV]   (./serveur/serveur.c:152) sorti process commande
+[07:49:20] [DEBUG]   [SERV]   (./serveur/serveur.c:150) process commande
+[07:49:20] [DEBUG]   [SERV]   (./serveur/serveur.c:162) debut line IMG ALI1768859451
+[07:49:20] [DEBUG]   [SERV]   (./serveur/serveur.c:164) ap chomp line IMG ALI1768859451
+[07:49:20] [INFO]    [CLIENT] (./serveur/serveur.c:176) [127.0.0.1:47386] Commande reçue : IMG
+[07:49:20] [INFO]    [CLIENT] (./controller/controller_img.c:17) [127.0.0.1:47386] ETA: données extraites avec succès
+[07:49:20] [INFO]    [SERV]   (./controller/controller_img.c:32) ETAT LVRAB id ALI1768859451 process...
+[07:49:20] [INFO]    [SERV]   (./model/model_img.c:33) IMAGE GET REQUEST : id ALI1768859451
+[07:49:20] [INFO]    [SERV]   (./model/model_img.c:54) IMAGE GET REQUEST SUCCESS : id ALI1768859451 adresse image/livraison.jpg
+[07:49:20] [INFO]    [SERV]   (./model/model_img.c:61) IMAGE OPEN : id ALI1768859451
+[07:49:20] [INFO]    [SERV]   (./controller/controller_img.c:38) ETAT LVRAB id ALI1768859451 size...
+[07:49:20] [INFO]    [SERV]   (./controller/controller_img.c:51) ETAT LVRAB id ALI1768859451 read...
+[07:49:20] [INFO]    [SERV]   (./controller/controller_img.c:60) IMG SIZE 486556 content 9D27C010
+[07:49:20] [INFO]    [SERV]   (./controller/controller_img.c:62) IMG id ALI1768859451 send...
+[07:49:20] [INFO]    [SERV]   (./sender/sender_img.c:4) SEND IMG start...
+[07:49:20] [DEBUG]   [SERV]   (./sender/sender_global.c:14)  >> CMD IMG
+SIZE 486556
+
+[07:49:20] [DEBUG]   [SERV]   (./sender/sender_global.c:14)  >> �����ICC_PROFILE
+[07:49:20] [DEBUG]   [SERV]   (./sender/sender_global.c:14)  >> 
+END
+
+[07:49:20] [DEBUG]   [SERV]   (./sender/sender_img.c:13) PARAM d'envoi img success
+[07:49:20] [INFO]    [SERV]   (./controller/controller_img.c:70) ETAT LVRAB id ALI1768859451 close...
+[07:49:20] [INFO]    [SERV]   (./controller/controller_img.c:73) ETAT LVRAB id ALI1768859451 close
+[07:49:20] [DEBUG]   [SERV]   (./serveur/serveur.c:206) fin line IMG ALI1768859451
+[07:49:20] [DEBUG]   [SERV]   (./serveur/serveur.c:209) Sortie line
+[07:49:20] [DEBUG]   [SERV]   (./serveur/serveur.c:152) sorti process commande
+[07:49:20] [INFO]    [CLIENT] (./serveur/serveur.c:155) [127.0.0.1:47386] Client déconnecté
+[07:49:20] [DEBUG]   [SERV]   (./serveur/serveur.c:127) close connexion
+[07:49:20] [INFO]    [SERV]   (./serveur/serveur.c:114) Connexion acceptée (fd=5)
+[07:49:20] [INFO]    [CLIENT] (./serveur/serveur.c:141) [127.0.0.1:47402] Client connecté
+[07:49:20] [INFO]    [SERV]   (./bdd/bdd.c:20) Connecté a la BDD
+[07:49:20] [INFO]    [SERV]   (./bdd/bdd.c:21) SET search_path...
+[07:49:20] [INFO]    [SERV]   (./bdd/bdd.c:26) SET search_path success
+[07:49:20] [INFO]    [SERV]   (./bdd/bdd.c:31) Base de données actuelle : postgres
+[07:49:20] [INFO]    [SERV]   (./bdd/bdd.c:37) Schéma courant (search_path) : sae3_delivraptor
+[07:49:20] [DEBUG]   [SERV]   (./serveur/serveur.c:150) process commande
+[07:49:20] [DEBUG]   [SERV]   (./serveur/serveur.c:162) debut line CONN test 1234
+[07:49:20] [DEBUG]   [SERV]   (./serveur/serveur.c:164) ap chomp line CONN test 1234
+[07:49:20] [INFO]    [CLIENT] (./serveur/serveur.c:176) [127.0.0.1:47402] Commande reçue : CONN
+[07:49:20] [INFO]    [CLIENT] (./serveur/serveur.c:223) [127.0.0.1:47402] Tentative d'authentification pour 'test'
+[07:49:20] [INFO]    [CLIENT] (./serveur/serveur.c:228) [127.0.0.1:47402] Authentification réussie pour 'test'
+[07:49:20] [DEBUG]   [SERV]   (./serveur/serveur.c:206) fin line CONN test 1234
+[07:49:20] [DEBUG]   [SERV]   (./serveur/serveur.c:209) Sortie line
+[07:49:20] [DEBUG]   [SERV]   (./serveur/serveur.c:152) sorti process commande
+[07:49:20] [DEBUG]   [SERV]   (./serveur/serveur.c:150) process commande
+[07:49:20] [DEBUG]   [SERV]   (./serveur/serveur.c:162) debut line ETA ALI1768859422
+[07:49:20] [DEBUG]   [SERV]   (./serveur/serveur.c:164) ap chomp line ETA ALI1768859422
+[07:49:20] [INFO]    [CLIENT] (./serveur/serveur.c:176) [127.0.0.1:47402] Commande reçue : ETA
+[07:49:20] [INFO]    [CLIENT] (./controller/controller_etat.c:69) [127.0.0.1:47402] ETA: données extraites avec succès
+[07:49:20] [DEBUG]   [SERV]   (./sender/sender_global.c:14)  >> CMD ETA
+SIZE 19
+
+[07:49:20] [DEBUG]   [SERV]   (./sender/sender_global.c:14)  >> LVRAB ALI1768859422
+[07:49:20] [DEBUG]   [SERV]   (./sender/sender_global.c:14)  >> 
+END
+
+[07:49:20] [DEBUG]   [SERV]   (./sender/sender_etat.c:14) PARAM d'envoi ETA : ALI1768859422
+[07:49:20] [DEBUG]   [SERV]   (./serveur/serveur.c:206) fin line ETA ALI1768859422
+[07:49:20] [DEBUG]   [SERV]   (./serveur/serveur.c:209) Sortie line
+[07:49:20] [DEBUG]   [SERV]   (./serveur/serveur.c:152) sorti process commande
+[07:49:20] [INFO]    [CLIENT] (./serveur/serveur.c:155) [127.0.0.1:47402] Client déconnecté
+[07:49:20] [DEBUG]   [SERV]   (./serveur/serveur.c:127) close connexion
+[07:49:20] [INFO]    [SERV]   (./serveur/serveur.c:114) Connexion acceptée (fd=5)
+[07:49:20] [INFO]    [CLIENT] (./serveur/serveur.c:141) [127.0.0.1:47410] Client connecté
+[07:49:20] [INFO]    [SERV]   (./bdd/bdd.c:20) Connecté a la BDD
+[07:49:20] [INFO]    [SERV]   (./bdd/bdd.c:21) SET search_path...
+[07:49:20] [INFO]    [SERV]   (./bdd/bdd.c:26) SET search_path success
+[07:49:20] [INFO]    [SERV]   (./bdd/bdd.c:31) Base de données actuelle : postgres
+[07:49:20] [INFO]    [SERV]   (./bdd/bdd.c:37) Schéma courant (search_path) : sae3_delivraptor
+[07:49:20] [DEBUG]   [SERV]   (./serveur/serveur.c:150) process commande
+[07:49:20] [DEBUG]   [SERV]   (./serveur/serveur.c:162) debut line CONN test 1234
+[07:49:20] [DEBUG]   [SERV]   (./serveur/serveur.c:164) ap chomp line CONN test 1234
+[07:49:20] [INFO]    [CLIENT] (./serveur/serveur.c:176) [127.0.0.1:47410] Commande reçue : CONN
+[07:49:20] [INFO]    [CLIENT] (./serveur/serveur.c:223) [127.0.0.1:47410] Tentative d'authentification pour 'test'
+[07:49:20] [INFO]    [CLIENT] (./serveur/serveur.c:228) [127.0.0.1:47410] Authentification réussie pour 'test'
+[07:49:20] [DEBUG]   [SERV]   (./serveur/serveur.c:206) fin line CONN test 1234
+[07:49:20] [DEBUG]   [SERV]   (./serveur/serveur.c:209) Sortie line
+[07:49:20] [DEBUG]   [SERV]   (./serveur/serveur.c:152) sorti process commande
+[07:49:20] [DEBUG]   [SERV]   (./serveur/serveur.c:150) process commande
+[07:49:20] [DEBUG]   [SERV]   (./serveur/serveur.c:162) debut line IMG ALI1768859422
+[07:49:20] [DEBUG]   [SERV]   (./serveur/serveur.c:164) ap chomp line IMG ALI1768859422
+[07:49:20] [INFO]    [CLIENT] (./serveur/serveur.c:176) [127.0.0.1:47410] Commande reçue : IMG
+[07:49:20] [INFO]    [CLIENT] (./controller/controller_img.c:17) [127.0.0.1:47410] ETA: données extraites avec succès
+[07:49:20] [INFO]    [SERV]   (./controller/controller_img.c:32) ETAT LVRAB id ALI1768859422 process...
+[07:49:20] [INFO]    [SERV]   (./model/model_img.c:33) IMAGE GET REQUEST : id ALI1768859422
+[07:49:20] [INFO]    [SERV]   (./model/model_img.c:54) IMAGE GET REQUEST SUCCESS : id ALI1768859422 adresse image/livraison.jpg
+[07:49:20] [INFO]    [SERV]   (./model/model_img.c:61) IMAGE OPEN : id ALI1768859422
+[07:49:20] [INFO]    [SERV]   (./controller/controller_img.c:38) ETAT LVRAB id ALI1768859422 size...
+[07:49:20] [INFO]    [SERV]   (./controller/controller_img.c:51) ETAT LVRAB id ALI1768859422 read...
+[07:49:20] [INFO]    [SERV]   (./controller/controller_img.c:60) IMG SIZE 486556 content 9D27C010
+[07:49:20] [INFO]    [SERV]   (./controller/controller_img.c:62) IMG id ALI1768859422 send...
+[07:49:20] [INFO]    [SERV]   (./sender/sender_img.c:4) SEND IMG start...
+[07:49:20] [DEBUG]   [SERV]   (./sender/sender_global.c:14)  >> CMD IMG
+SIZE 486556
+
+[07:49:20] [DEBUG]   [SERV]   (./sender/sender_global.c:14)  >> �����ICC_PROFILE
+[07:49:20] [DEBUG]   [SERV]   (./sender/sender_global.c:14)  >> 
+END
+
+[07:49:20] [DEBUG]   [SERV]   (./sender/sender_img.c:13) PARAM d'envoi img success
+[07:49:20] [INFO]    [SERV]   (./controller/controller_img.c:70) ETAT LVRAB id ALI1768859422 close...
+[07:49:20] [INFO]    [SERV]   (./controller/controller_img.c:73) ETAT LVRAB id ALI1768859422 close
+[07:49:20] [DEBUG]   [SERV]   (./serveur/serveur.c:206) fin line IMG ALI1768859422
+[07:49:20] [DEBUG]   [SERV]   (./serveur/serveur.c:209) Sortie line
+[07:49:20] [DEBUG]   [SERV]   (./serveur/serveur.c:152) sorti process commande
+[07:49:20] [INFO]    [CLIENT] (./serveur/serveur.c:155) [127.0.0.1:47410] Client déconnecté
+[07:49:20] [DEBUG]   [SERV]   (./serveur/serveur.c:127) close connexion
+[07:49:20] [INFO]    [SERV]   (./serveur/serveur.c:114) Connexion acceptée (fd=5)
+[07:49:20] [INFO]    [CLIENT] (./serveur/serveur.c:141) [127.0.0.1:47424] Client connecté
+[07:49:20] [INFO]    [SERV]   (./bdd/bdd.c:20) Connecté a la BDD
+[07:49:20] [INFO]    [SERV]   (./bdd/bdd.c:21) SET search_path...
+[07:49:20] [INFO]    [SERV]   (./bdd/bdd.c:26) SET search_path success
+[07:49:20] [INFO]    [SERV]   (./bdd/bdd.c:31) Base de données actuelle : postgres
+[07:49:20] [INFO]    [SERV]   (./bdd/bdd.c:37) Schéma courant (search_path) : sae3_delivraptor
+[07:49:20] [DEBUG]   [SERV]   (./serveur/serveur.c:150) process commande
+[07:49:20] [DEBUG]   [SERV]   (./serveur/serveur.c:162) debut line CONN test 1234
+[07:49:20] [DEBUG]   [SERV]   (./serveur/serveur.c:164) ap chomp line CONN test 1234
+[07:49:20] [INFO]    [CLIENT] (./serveur/serveur.c:176) [127.0.0.1:47424] Commande reçue : CONN
+[07:49:20] [INFO]    [CLIENT] (./serveur/serveur.c:223) [127.0.0.1:47424] Tentative d'authentification pour 'test'
+[07:49:20] [INFO]    [CLIENT] (./serveur/serveur.c:228) [127.0.0.1:47424] Authentification réussie pour 'test'
+[07:49:20] [DEBUG]   [SERV]   (./serveur/serveur.c:206) fin line CONN test 1234
+[07:49:20] [DEBUG]   [SERV]   (./serveur/serveur.c:209) Sortie line
+[07:49:20] [DEBUG]   [SERV]   (./serveur/serveur.c:152) sorti process commande
+[07:49:20] [DEBUG]   [SERV]   (./serveur/serveur.c:150) process commande
+[07:49:20] [DEBUG]   [SERV]   (./serveur/serveur.c:162) debut line ETA ALI1768859392
+[07:49:20] [DEBUG]   [SERV]   (./serveur/serveur.c:164) ap chomp line ETA ALI1768859392
+[07:49:20] [INFO]    [CLIENT] (./serveur/serveur.c:176) [127.0.0.1:47424] Commande reçue : ETA
+[07:49:20] [INFO]    [CLIENT] (./controller/controller_etat.c:69) [127.0.0.1:47424] ETA: données extraites avec succès
+[07:49:20] [DEBUG]   [SERV]   (./sender/sender_global.c:14)  >> CMD ETA
+SIZE 17
+
+[07:49:20] [DEBUG]   [SERV]   (./sender/sender_global.c:14)  >> LVR ALI1768859392
+[07:49:20] [DEBUG]   [SERV]   (./sender/sender_global.c:14)  >> 
+END
+
+[07:49:20] [DEBUG]   [SERV]   (./sender/sender_etat.c:14) PARAM d'envoi ETA : ALI1768859392
+[07:49:20] [DEBUG]   [SERV]   (./serveur/serveur.c:206) fin line ETA ALI1768859392
+[07:49:20] [DEBUG]   [SERV]   (./serveur/serveur.c:209) Sortie line
+[07:49:20] [DEBUG]   [SERV]   (./serveur/serveur.c:152) sorti process commande
+[07:49:20] [INFO]    [CLIENT] (./serveur/serveur.c:155) [127.0.0.1:47424] Client déconnecté
+[07:49:20] [DEBUG]   [SERV]   (./serveur/serveur.c:127) close connexion
+[07:49:20] [INFO]    [SERV]   (./serveur/serveur.c:114) Connexion acceptée (fd=5)
+[07:49:20] [INFO]    [CLIENT] (./serveur/serveur.c:141) [127.0.0.1:47436] Client connecté
+[07:49:20] [INFO]    [SERV]   (./bdd/bdd.c:20) Connecté a la BDD
+[07:49:20] [INFO]    [SERV]   (./bdd/bdd.c:21) SET search_path...
+[07:49:20] [INFO]    [SERV]   (./bdd/bdd.c:26) SET search_path success
+[07:49:20] [INFO]    [SERV]   (./bdd/bdd.c:31) Base de données actuelle : postgres
+[07:49:20] [INFO]    [SERV]   (./bdd/bdd.c:37) Schéma courant (search_path) : sae3_delivraptor
+[07:49:20] [DEBUG]   [SERV]   (./serveur/serveur.c:150) process commande
+[07:49:20] [DEBUG]   [SERV]   (./serveur/serveur.c:162) debut line CONN test 1234
+[07:49:20] [DEBUG]   [SERV]   (./serveur/serveur.c:164) ap chomp line CONN test 1234
+[07:49:20] [INFO]    [CLIENT] (./serveur/serveur.c:176) [127.0.0.1:47436] Commande reçue : CONN
+[07:49:20] [INFO]    [CLIENT] (./serveur/serveur.c:223) [127.0.0.1:47436] Tentative d'authentification pour 'test'
+[07:49:20] [INFO]    [CLIENT] (./serveur/serveur.c:228) [127.0.0.1:47436] Authentification réussie pour 'test'
+[07:49:20] [DEBUG]   [SERV]   (./serveur/serveur.c:206) fin line CONN test 1234
+[07:49:20] [DEBUG]   [SERV]   (./serveur/serveur.c:209) Sortie line
+[07:49:20] [DEBUG]   [SERV]   (./serveur/serveur.c:152) sorti process commande
+[07:49:20] [DEBUG]   [SERV]   (./serveur/serveur.c:150) process commande
+[07:49:20] [DEBUG]   [SERV]   (./serveur/serveur.c:162) debut line ETA ALI1768858851
+[07:49:20] [DEBUG]   [SERV]   (./serveur/serveur.c:164) ap chomp line ETA ALI1768858851
+[07:49:20] [INFO]    [CLIENT] (./serveur/serveur.c:176) [127.0.0.1:47436] Commande reçue : ETA
+[07:49:20] [INFO]    [CLIENT] (./controller/controller_etat.c:69) [127.0.0.1:47436] ETA: données extraites avec succès
+[07:49:20] [INFO]    [SERV]   (./model/model_etat.c:41) RAISON GET : ALI1768858851 etat 715603392
+[07:49:20] [DEBUG]   [SERV]   (./sender/sender_global.c:14)  >> CMD ETA
+SIZE 55
+
+[07:49:20] [DEBUG]   [SERV]   (./sender/sender_global.c:14)  >> REFU ALI1768858851 msg:Le colis n'a pas été commandé
+[07:49:20] [DEBUG]   [SERV]   (./sender/sender_global.c:14)  >> 
+END
+
+[07:49:20] [DEBUG]   [SERV]   (./sender/sender_etat.c:29) PARAM d'envoi ETA : ALI1768858851
+[07:49:20] [DEBUG]   [SERV]   (./serveur/serveur.c:206) fin line ETA ALI1768858851
+[07:49:20] [DEBUG]   [SERV]   (./serveur/serveur.c:209) Sortie line
+[07:49:20] [DEBUG]   [SERV]   (./serveur/serveur.c:152) sorti process commande
+[07:49:20] [INFO]    [CLIENT] (./serveur/serveur.c:155) [127.0.0.1:47436] Client déconnecté
+[07:49:20] [DEBUG]   [SERV]   (./serveur/serveur.c:127) close connexion
+[07:49:20] [INFO]    [SERV]   (./serveur/serveur.c:114) Connexion acceptée (fd=5)
+[07:49:20] [INFO]    [CLIENT] (./serveur/serveur.c:141) [127.0.0.1:47446] Client connecté
+[07:49:20] [INFO]    [SERV]   (./bdd/bdd.c:20) Connecté a la BDD
+[07:49:20] [INFO]    [SERV]   (./bdd/bdd.c:21) SET search_path...
+[07:49:20] [INFO]    [SERV]   (./bdd/bdd.c:26) SET search_path success
+[07:49:20] [INFO]    [SERV]   (./bdd/bdd.c:31) Base de données actuelle : postgres
+[07:49:20] [INFO]    [SERV]   (./bdd/bdd.c:37) Schéma courant (search_path) : sae3_delivraptor
+[07:49:20] [DEBUG]   [SERV]   (./serveur/serveur.c:150) process commande
+[07:49:20] [DEBUG]   [SERV]   (./serveur/serveur.c:162) debut line CONN test 1234
+[07:49:20] [DEBUG]   [SERV]   (./serveur/serveur.c:164) ap chomp line CONN test 1234
+[07:49:20] [INFO]    [CLIENT] (./serveur/serveur.c:176) [127.0.0.1:47446] Commande reçue : CONN
+[07:49:20] [INFO]    [CLIENT] (./serveur/serveur.c:223) [127.0.0.1:47446] Tentative d'authentification pour 'test'
+[07:49:20] [INFO]    [CLIENT] (./serveur/serveur.c:228) [127.0.0.1:47446] Authentification réussie pour 'test'
+[07:49:20] [DEBUG]   [SERV]   (./serveur/serveur.c:206) fin line CONN test 1234
+[07:49:20] [DEBUG]   [SERV]   (./serveur/serveur.c:209) Sortie line
+[07:49:20] [DEBUG]   [SERV]   (./serveur/serveur.c:152) sorti process commande
+[07:49:20] [DEBUG]   [SERV]   (./serveur/serveur.c:150) process commande
+[07:49:20] [DEBUG]   [SERV]   (./serveur/serveur.c:162) debut line ETA ALI1768858823
+[07:49:20] [DEBUG]   [SERV]   (./serveur/serveur.c:164) ap chomp line ETA ALI1768858823
+[07:49:20] [INFO]    [CLIENT] (./serveur/serveur.c:176) [127.0.0.1:47446] Commande reçue : ETA
+[07:49:20] [INFO]    [CLIENT] (./controller/controller_etat.c:69) [127.0.0.1:47446] ETA: données extraites avec succès
+[07:49:20] [INFO]    [SERV]   (./model/model_etat.c:41) RAISON GET : ALI1768858823 etat 715603392
+[07:49:20] [DEBUG]   [SERV]   (./sender/sender_global.c:14)  >> CMD ETA
+SIZE 37
+
+[07:49:20] [DEBUG]   [SERV]   (./sender/sender_global.c:14)  >> REFU ALI1768858823 msg:Le colis bouge
+[07:49:20] [DEBUG]   [SERV]   (./sender/sender_global.c:14)  >> 
+END
+
+[07:49:20] [DEBUG]   [SERV]   (./sender/sender_etat.c:29) PARAM d'envoi ETA : ALI1768858823
+[07:49:20] [DEBUG]   [SERV]   (./serveur/serveur.c:206) fin line ETA ALI1768858823
+[07:49:20] [DEBUG]   [SERV]   (./serveur/serveur.c:209) Sortie line
+[07:49:20] [DEBUG]   [SERV]   (./serveur/serveur.c:152) sorti process commande
+[07:49:20] [INFO]    [CLIENT] (./serveur/serveur.c:155) [127.0.0.1:47446] Client déconnecté
+[07:49:20] [DEBUG]   [SERV]   (./serveur/serveur.c:127) close connexion
+[07:49:20] [INFO]    [SERV]   (./serveur/serveur.c:114) Connexion acceptée (fd=5)
+[07:49:20] [INFO]    [CLIENT] (./serveur/serveur.c:141) [127.0.0.1:47456] Client connecté
+[07:49:20] [INFO]    [SERV]   (./bdd/bdd.c:20) Connecté a la BDD
+[07:49:20] [INFO]    [SERV]   (./bdd/bdd.c:21) SET search_path...
+[07:49:20] [INFO]    [SERV]   (./bdd/bdd.c:26) SET search_path success
+[07:49:20] [INFO]    [SERV]   (./bdd/bdd.c:31) Base de données actuelle : postgres
+[07:49:20] [INFO]    [SERV]   (./bdd/bdd.c:37) Schéma courant (search_path) : sae3_delivraptor
+[07:49:20] [DEBUG]   [SERV]   (./serveur/serveur.c:150) process commande
+[07:49:20] [DEBUG]   [SERV]   (./serveur/serveur.c:162) debut line CONN test 1234
+[07:49:20] [DEBUG]   [SERV]   (./serveur/serveur.c:164) ap chomp line CONN test 1234
+[07:49:20] [INFO]    [CLIENT] (./serveur/serveur.c:176) [127.0.0.1:47456] Commande reçue : CONN
+[07:49:20] [INFO]    [CLIENT] (./serveur/serveur.c:223) [127.0.0.1:47456] Tentative d'authentification pour 'test'
+[07:49:20] [INFO]    [CLIENT] (./serveur/serveur.c:228) [127.0.0.1:47456] Authentification réussie pour 'test'
+[07:49:20] [DEBUG]   [SERV]   (./serveur/serveur.c:206) fin line CONN test 1234
+[07:49:20] [DEBUG]   [SERV]   (./serveur/serveur.c:209) Sortie line
+[07:49:20] [DEBUG]   [SERV]   (./serveur/serveur.c:152) sorti process commande
+[07:49:20] [DEBUG]   [SERV]   (./serveur/serveur.c:150) process commande
+[07:49:20] [DEBUG]   [SERV]   (./serveur/serveur.c:162) debut line ETA ALI1768858793
+[07:49:20] [DEBUG]   [SERV]   (./serveur/serveur.c:164) ap chomp line ETA ALI1768858793
+[07:49:20] [INFO]    [CLIENT] (./serveur/serveur.c:176) [127.0.0.1:47456] Commande reçue : ETA
+[07:49:20] [INFO]    [CLIENT] (./controller/controller_etat.c:69) [127.0.0.1:47456] ETA: données extraites avec succès
+[07:49:20] [INFO]    [SERV]   (./model/model_etat.c:41) RAISON GET : ALI1768858793 etat 715603392
+[07:49:20] [DEBUG]   [SERV]   (./sender/sender_global.c:14)  >> CMD ETA
+SIZE 47
+
+[07:49:20] [DEBUG]   [SERV]   (./sender/sender_global.c:14)  >> REFU ALI1768858793 msg:Le colis est trop abimé
+[07:49:20] [DEBUG]   [SERV]   (./sender/sender_global.c:14)  >> 
+END
+
+[07:49:20] [DEBUG]   [SERV]   (./sender/sender_etat.c:29) PARAM d'envoi ETA : ALI1768858793
+[07:49:20] [DEBUG]   [SERV]   (./serveur/serveur.c:206) fin line ETA ALI1768858793
+[07:49:20] [DEBUG]   [SERV]   (./serveur/serveur.c:209) Sortie line
+[07:49:20] [DEBUG]   [SERV]   (./serveur/serveur.c:152) sorti process commande
+[07:49:20] [INFO]    [CLIENT] (./serveur/serveur.c:155) [127.0.0.1:47456] Client déconnecté
+[07:49:20] [DEBUG]   [SERV]   (./serveur/serveur.c:127) close connexion
+[07:49:20] [INFO]    [SERV]   (./serveur/serveur.c:114) Connexion acceptée (fd=5)
+[07:49:20] [INFO]    [CLIENT] (./serveur/serveur.c:141) [127.0.0.1:47458] Client connecté
+[07:49:20] [INFO]    [SERV]   (./bdd/bdd.c:20) Connecté a la BDD
+[07:49:20] [INFO]    [SERV]   (./bdd/bdd.c:21) SET search_path...
+[07:49:20] [INFO]    [SERV]   (./bdd/bdd.c:26) SET search_path success
+[07:49:20] [INFO]    [SERV]   (./bdd/bdd.c:31) Base de données actuelle : postgres
+[07:49:20] [INFO]    [SERV]   (./bdd/bdd.c:37) Schéma courant (search_path) : sae3_delivraptor
+[07:49:20] [DEBUG]   [SERV]   (./serveur/serveur.c:150) process commande
+[07:49:20] [DEBUG]   [SERV]   (./serveur/serveur.c:162) debut line CONN test 1234
+[07:49:20] [DEBUG]   [SERV]   (./serveur/serveur.c:164) ap chomp line CONN test 1234
+[07:49:20] [INFO]    [CLIENT] (./serveur/serveur.c:176) [127.0.0.1:47458] Commande reçue : CONN
+[07:49:20] [INFO]    [CLIENT] (./serveur/serveur.c:223) [127.0.0.1:47458] Tentative d'authentification pour 'test'
+[07:49:20] [INFO]    [CLIENT] (./serveur/serveur.c:228) [127.0.0.1:47458] Authentification réussie pour 'test'
+[07:49:20] [DEBUG]   [SERV]   (./serveur/serveur.c:206) fin line CONN test 1234
+[07:49:20] [DEBUG]   [SERV]   (./serveur/serveur.c:209) Sortie line
+[07:49:20] [DEBUG]   [SERV]   (./serveur/serveur.c:152) sorti process commande
+[07:49:20] [DEBUG]   [SERV]   (./serveur/serveur.c:150) process commande
+[07:49:20] [DEBUG]   [SERV]   (./serveur/serveur.c:162) debut line ETA ALI1768858762
+[07:49:20] [DEBUG]   [SERV]   (./serveur/serveur.c:164) ap chomp line ETA ALI1768858762
+[07:49:20] [INFO]    [CLIENT] (./serveur/serveur.c:176) [127.0.0.1:47458] Commande reçue : ETA
+[07:49:20] [INFO]    [CLIENT] (./controller/controller_etat.c:69) [127.0.0.1:47458] ETA: données extraites avec succès
+[07:49:20] [INFO]    [SERV]   (./model/model_etat.c:41) RAISON GET : ALI1768858762 etat 715603392
+[07:49:20] [DEBUG]   [SERV]   (./sender/sender_global.c:14)  >> CMD ETA
+SIZE 53
+
+[07:49:20] [DEBUG]   [SERV]   (./sender/sender_global.c:14)  >> REFU ALI1768858762 msg:Le colis est arrivé trop tard
+[07:49:20] [DEBUG]   [SERV]   (./sender/sender_global.c:14)  >> 
+END
+
+[07:49:20] [DEBUG]   [SERV]   (./sender/sender_etat.c:29) PARAM d'envoi ETA : ALI1768858762
+[07:49:20] [DEBUG]   [SERV]   (./serveur/serveur.c:206) fin line ETA ALI1768858762
+[07:49:20] [DEBUG]   [SERV]   (./serveur/serveur.c:209) Sortie line
+[07:49:20] [DEBUG]   [SERV]   (./serveur/serveur.c:152) sorti process commande
+[07:49:20] [INFO]    [CLIENT] (./serveur/serveur.c:155) [127.0.0.1:47458] Client déconnecté
+[07:49:20] [DEBUG]   [SERV]   (./serveur/serveur.c:127) close connexion
+[07:49:24] [INFO]    [SERV]   (./serveur/serveur.c:114) Connexion acceptée (fd=5)
+[07:49:24] [INFO]    [CLIENT] (./serveur/serveur.c:141) [127.0.0.1:47464] Client connecté
+[07:49:24] [INFO]    [SERV]   (./bdd/bdd.c:20) Connecté a la BDD
+[07:49:24] [INFO]    [SERV]   (./bdd/bdd.c:21) SET search_path...
+[07:49:24] [INFO]    [SERV]   (./bdd/bdd.c:26) SET search_path success
+[07:49:24] [INFO]    [SERV]   (./bdd/bdd.c:31) Base de données actuelle : postgres
+[07:49:24] [INFO]    [SERV]   (./bdd/bdd.c:37) Schéma courant (search_path) : sae3_delivraptor
+[07:49:24] [DEBUG]   [SERV]   (./serveur/serveur.c:150) process commande
+[07:49:24] [DEBUG]   [SERV]   (./serveur/serveur.c:162) debut line CONN test 1234
+[07:49:24] [DEBUG]   [SERV]   (./serveur/serveur.c:164) ap chomp line CONN test 1234
+[07:49:24] [INFO]    [CLIENT] (./serveur/serveur.c:176) [127.0.0.1:47464] Commande reçue : CONN
+[07:49:24] [INFO]    [CLIENT] (./serveur/serveur.c:223) [127.0.0.1:47464] Tentative d'authentification pour 'test'
+[07:49:24] [INFO]    [CLIENT] (./serveur/serveur.c:228) [127.0.0.1:47464] Authentification réussie pour 'test'
+[07:49:24] [DEBUG]   [SERV]   (./serveur/serveur.c:206) fin line CONN test 1234
+[07:49:24] [DEBUG]   [SERV]   (./serveur/serveur.c:209) Sortie line
+[07:49:24] [DEBUG]   [SERV]   (./serveur/serveur.c:152) sorti process commande
+[07:49:24] [DEBUG]   [SERV]   (./serveur/serveur.c:150) process commande
+[07:49:24] [DEBUG]   [SERV]   (./serveur/serveur.c:162) debut line ETA ALI1768859422
+[07:49:24] [DEBUG]   [SERV]   (./serveur/serveur.c:164) ap chomp line ETA ALI1768859422
+[07:49:24] [INFO]    [CLIENT] (./serveur/serveur.c:176) [127.0.0.1:47464] Commande reçue : ETA
+[07:49:24] [INFO]    [CLIENT] (./controller/controller_etat.c:69) [127.0.0.1:47464] ETA: données extraites avec succès
+[07:49:24] [DEBUG]   [SERV]   (./sender/sender_global.c:14)  >> CMD ETA
+SIZE 19
+
+[07:49:24] [DEBUG]   [SERV]   (./sender/sender_global.c:14)  >> LVRAB ALI1768859422
+[07:49:24] [DEBUG]   [SERV]   (./sender/sender_global.c:14)  >> 
+END
+
+[07:49:24] [DEBUG]   [SERV]   (./sender/sender_etat.c:14) PARAM d'envoi ETA : ALI1768859422
+[07:49:24] [DEBUG]   [SERV]   (./serveur/serveur.c:206) fin line ETA ALI1768859422
+[07:49:24] [DEBUG]   [SERV]   (./serveur/serveur.c:209) Sortie line
+[07:49:24] [DEBUG]   [SERV]   (./serveur/serveur.c:152) sorti process commande
+[07:49:24] [INFO]    [CLIENT] (./serveur/serveur.c:155) [127.0.0.1:47464] Client déconnecté
+[07:49:24] [DEBUG]   [SERV]   (./serveur/serveur.c:127) close connexion
+[07:49:24] [INFO]    [SERV]   (./serveur/serveur.c:114) Connexion acceptée (fd=5)
+[07:49:24] [INFO]    [CLIENT] (./serveur/serveur.c:141) [127.0.0.1:47472] Client connecté
+[07:49:24] [INFO]    [SERV]   (./bdd/bdd.c:20) Connecté a la BDD
+[07:49:24] [INFO]    [SERV]   (./bdd/bdd.c:21) SET search_path...
+[07:49:24] [INFO]    [SERV]   (./bdd/bdd.c:26) SET search_path success
+[07:49:24] [INFO]    [SERV]   (./bdd/bdd.c:31) Base de données actuelle : postgres
+[07:49:24] [INFO]    [SERV]   (./bdd/bdd.c:37) Schéma courant (search_path) : sae3_delivraptor
+[07:49:24] [DEBUG]   [SERV]   (./serveur/serveur.c:150) process commande
+[07:49:24] [DEBUG]   [SERV]   (./serveur/serveur.c:162) debut line CONN test 1234
+[07:49:24] [DEBUG]   [SERV]   (./serveur/serveur.c:164) ap chomp line CONN test 1234
+[07:49:24] [INFO]    [CLIENT] (./serveur/serveur.c:176) [127.0.0.1:47472] Commande reçue : CONN
+[07:49:24] [INFO]    [CLIENT] (./serveur/serveur.c:223) [127.0.0.1:47472] Tentative d'authentification pour 'test'
+[07:49:24] [INFO]    [CLIENT] (./serveur/serveur.c:228) [127.0.0.1:47472] Authentification réussie pour 'test'
+[07:49:24] [DEBUG]   [SERV]   (./serveur/serveur.c:206) fin line CONN test 1234
+[07:49:24] [DEBUG]   [SERV]   (./serveur/serveur.c:209) Sortie line
+[07:49:24] [DEBUG]   [SERV]   (./serveur/serveur.c:152) sorti process commande
+[07:49:24] [DEBUG]   [SERV]   (./serveur/serveur.c:150) process commande
+[07:49:24] [DEBUG]   [SERV]   (./serveur/serveur.c:162) debut line IMG ALI1768859422
+[07:49:24] [DEBUG]   [SERV]   (./serveur/serveur.c:164) ap chomp line IMG ALI1768859422
+[07:49:24] [INFO]    [CLIENT] (./serveur/serveur.c:176) [127.0.0.1:47472] Commande reçue : IMG
+[07:49:24] [INFO]    [CLIENT] (./controller/controller_img.c:17) [127.0.0.1:47472] ETA: données extraites avec succès
+[07:49:24] [INFO]    [SERV]   (./controller/controller_img.c:32) ETAT LVRAB id ALI1768859422 process...
+[07:49:24] [INFO]    [SERV]   (./model/model_img.c:33) IMAGE GET REQUEST : id ALI1768859422
+[07:49:24] [INFO]    [SERV]   (./model/model_img.c:54) IMAGE GET REQUEST SUCCESS : id ALI1768859422 adresse image/livraison.jpg
+[07:49:24] [INFO]    [SERV]   (./model/model_img.c:61) IMAGE OPEN : id ALI1768859422
+[07:49:24] [INFO]    [SERV]   (./controller/controller_img.c:38) ETAT LVRAB id ALI1768859422 size...
+[07:49:24] [INFO]    [SERV]   (./controller/controller_img.c:51) ETAT LVRAB id ALI1768859422 read...
+[07:49:24] [INFO]    [SERV]   (./controller/controller_img.c:60) IMG SIZE 486556 content 9D27C010
+[07:49:24] [INFO]    [SERV]   (./controller/controller_img.c:62) IMG id ALI1768859422 send...
+[07:49:24] [INFO]    [SERV]   (./sender/sender_img.c:4) SEND IMG start...
+[07:49:24] [DEBUG]   [SERV]   (./sender/sender_global.c:14)  >> CMD IMG
+SIZE 486556
+
+[07:49:24] [DEBUG]   [SERV]   (./sender/sender_global.c:14)  >> �����ICC_PROFILE
+[07:49:24] [DEBUG]   [SERV]   (./sender/sender_global.c:14)  >> 
+END
+
+[07:49:24] [DEBUG]   [SERV]   (./sender/sender_img.c:13) PARAM d'envoi img success
+[07:49:24] [INFO]    [SERV]   (./controller/controller_img.c:70) ETAT LVRAB id ALI1768859422 close...
+[07:49:24] [INFO]    [SERV]   (./controller/controller_img.c:73) ETAT LVRAB id ALI1768859422 close
+[07:49:24] [DEBUG]   [SERV]   (./serveur/serveur.c:206) fin line IMG ALI1768859422
+[07:49:24] [DEBUG]   [SERV]   (./serveur/serveur.c:209) Sortie line
+[07:49:24] [DEBUG]   [SERV]   (./serveur/serveur.c:152) sorti process commande
+[07:49:24] [INFO]    [CLIENT] (./serveur/serveur.c:155) [127.0.0.1:47472] Client déconnecté
+[07:49:24] [DEBUG]   [SERV]   (./serveur/serveur.c:127) close connexion
+[07:49:27] [INFO]    [SERV]   (./serveur/serveur.c:114) Connexion acceptée (fd=5)
+[07:49:27] [INFO]    [CLIENT] (./serveur/serveur.c:141) [127.0.0.1:54148] Client connecté
+[07:49:27] [INFO]    [SERV]   (./bdd/bdd.c:20) Connecté a la BDD
+[07:49:27] [INFO]    [SERV]   (./bdd/bdd.c:21) SET search_path...
+[07:49:27] [INFO]    [SERV]   (./bdd/bdd.c:26) SET search_path success
+[07:49:27] [INFO]    [SERV]   (./bdd/bdd.c:31) Base de données actuelle : postgres
+[07:49:27] [INFO]    [SERV]   (./bdd/bdd.c:37) Schéma courant (search_path) : sae3_delivraptor
+[07:49:27] [DEBUG]   [SERV]   (./serveur/serveur.c:150) process commande
+[07:49:27] [DEBUG]   [SERV]   (./serveur/serveur.c:162) debut line CONN test 1234
+[07:49:27] [DEBUG]   [SERV]   (./serveur/serveur.c:164) ap chomp line CONN test 1234
+[07:49:27] [INFO]    [CLIENT] (./serveur/serveur.c:176) [127.0.0.1:54148] Commande reçue : CONN
+[07:49:27] [INFO]    [CLIENT] (./serveur/serveur.c:223) [127.0.0.1:54148] Tentative d'authentification pour 'test'
+[07:49:27] [INFO]    [CLIENT] (./serveur/serveur.c:228) [127.0.0.1:54148] Authentification réussie pour 'test'
+[07:49:27] [DEBUG]   [SERV]   (./serveur/serveur.c:206) fin line CONN test 1234
+[07:49:27] [DEBUG]   [SERV]   (./serveur/serveur.c:209) Sortie line
+[07:49:27] [DEBUG]   [SERV]   (./serveur/serveur.c:152) sorti process commande
+[07:49:27] [DEBUG]   [SERV]   (./serveur/serveur.c:150) process commande
+[07:49:27] [DEBUG]   [SERV]   (./serveur/serveur.c:162) debut line ETA ALI1768859451
+[07:49:27] [DEBUG]   [SERV]   (./serveur/serveur.c:164) ap chomp line ETA ALI1768859451
+[07:49:27] [INFO]    [CLIENT] (./serveur/serveur.c:176) [127.0.0.1:54148] Commande reçue : ETA
+[07:49:27] [INFO]    [CLIENT] (./controller/controller_etat.c:69) [127.0.0.1:54148] ETA: données extraites avec succès
+[07:49:27] [DEBUG]   [SERV]   (./sender/sender_global.c:14)  >> CMD ETA
+SIZE 19
+
+[07:49:27] [DEBUG]   [SERV]   (./sender/sender_global.c:14)  >> LVRAB ALI1768859451
+[07:49:27] [DEBUG]   [SERV]   (./sender/sender_global.c:14)  >> 
+END
+
+[07:49:27] [DEBUG]   [SERV]   (./sender/sender_etat.c:14) PARAM d'envoi ETA : ALI1768859451
+[07:49:27] [DEBUG]   [SERV]   (./serveur/serveur.c:206) fin line ETA ALI1768859451
+[07:49:27] [DEBUG]   [SERV]   (./serveur/serveur.c:209) Sortie line
+[07:49:27] [DEBUG]   [SERV]   (./serveur/serveur.c:152) sorti process commande
+[07:49:27] [INFO]    [CLIENT] (./serveur/serveur.c:155) [127.0.0.1:54148] Client déconnecté
+[07:49:27] [DEBUG]   [SERV]   (./serveur/serveur.c:127) close connexion
+[07:49:27] [INFO]    [SERV]   (./serveur/serveur.c:114) Connexion acceptée (fd=5)
+[07:49:27] [INFO]    [CLIENT] (./serveur/serveur.c:141) [127.0.0.1:54152] Client connecté
+[07:49:27] [INFO]    [SERV]   (./bdd/bdd.c:20) Connecté a la BDD
+[07:49:27] [INFO]    [SERV]   (./bdd/bdd.c:21) SET search_path...
+[07:49:27] [INFO]    [SERV]   (./bdd/bdd.c:26) SET search_path success
+[07:49:27] [INFO]    [SERV]   (./bdd/bdd.c:31) Base de données actuelle : postgres
+[07:49:27] [INFO]    [SERV]   (./bdd/bdd.c:37) Schéma courant (search_path) : sae3_delivraptor
+[07:49:27] [DEBUG]   [SERV]   (./serveur/serveur.c:150) process commande
+[07:49:27] [DEBUG]   [SERV]   (./serveur/serveur.c:162) debut line CONN test 1234
+[07:49:27] [DEBUG]   [SERV]   (./serveur/serveur.c:164) ap chomp line CONN test 1234
+[07:49:27] [INFO]    [CLIENT] (./serveur/serveur.c:176) [127.0.0.1:54152] Commande reçue : CONN
+[07:49:27] [INFO]    [CLIENT] (./serveur/serveur.c:223) [127.0.0.1:54152] Tentative d'authentification pour 'test'
+[07:49:27] [INFO]    [CLIENT] (./serveur/serveur.c:228) [127.0.0.1:54152] Authentification réussie pour 'test'
+[07:49:27] [DEBUG]   [SERV]   (./serveur/serveur.c:206) fin line CONN test 1234
+[07:49:27] [DEBUG]   [SERV]   (./serveur/serveur.c:209) Sortie line
+[07:49:27] [DEBUG]   [SERV]   (./serveur/serveur.c:152) sorti process commande
+[07:49:27] [DEBUG]   [SERV]   (./serveur/serveur.c:150) process commande
+[07:49:27] [DEBUG]   [SERV]   (./serveur/serveur.c:162) debut line IMG ALI1768859451
+[07:49:27] [DEBUG]   [SERV]   (./serveur/serveur.c:164) ap chomp line IMG ALI1768859451
+[07:49:27] [INFO]    [CLIENT] (./serveur/serveur.c:176) [127.0.0.1:54152] Commande reçue : IMG
+[07:49:27] [INFO]    [CLIENT] (./controller/controller_img.c:17) [127.0.0.1:54152] ETA: données extraites avec succès
+[07:49:27] [INFO]    [SERV]   (./controller/controller_img.c:32) ETAT LVRAB id ALI1768859451 process...
+[07:49:27] [INFO]    [SERV]   (./model/model_img.c:33) IMAGE GET REQUEST : id ALI1768859451
+[07:49:27] [INFO]    [SERV]   (./model/model_img.c:54) IMAGE GET REQUEST SUCCESS : id ALI1768859451 adresse image/livraison.jpg
+[07:49:27] [INFO]    [SERV]   (./model/model_img.c:61) IMAGE OPEN : id ALI1768859451
+[07:49:27] [INFO]    [SERV]   (./controller/controller_img.c:38) ETAT LVRAB id ALI1768859451 size...
+[07:49:27] [INFO]    [SERV]   (./controller/controller_img.c:51) ETAT LVRAB id ALI1768859451 read...
+[07:49:27] [INFO]    [SERV]   (./controller/controller_img.c:60) IMG SIZE 486556 content 9D27C010
+[07:49:27] [INFO]    [SERV]   (./controller/controller_img.c:62) IMG id ALI1768859451 send...
+[07:49:27] [INFO]    [SERV]   (./sender/sender_img.c:4) SEND IMG start...
+[07:49:27] [DEBUG]   [SERV]   (./sender/sender_global.c:14)  >> CMD IMG
+SIZE 486556
+
+[07:49:27] [DEBUG]   [SERV]   (./sender/sender_global.c:14)  >> �����ICC_PROFILE
+[07:49:27] [DEBUG]   [SERV]   (./sender/sender_global.c:14)  >> 
+END
+
+[07:49:27] [DEBUG]   [SERV]   (./sender/sender_img.c:13) PARAM d'envoi img success
+[07:49:27] [INFO]    [SERV]   (./controller/controller_img.c:70) ETAT LVRAB id ALI1768859451 close...
+[07:49:27] [INFO]    [SERV]   (./controller/controller_img.c:73) ETAT LVRAB id ALI1768859451 close
+[07:49:27] [DEBUG]   [SERV]   (./serveur/serveur.c:206) fin line IMG ALI1768859451
+[07:49:27] [DEBUG]   [SERV]   (./serveur/serveur.c:209) Sortie line
+[07:49:27] [DEBUG]   [SERV]   (./serveur/serveur.c:152) sorti process commande
+[07:49:27] [INFO]    [CLIENT] (./serveur/serveur.c:155) [127.0.0.1:54152] Client déconnecté
+[07:49:27] [DEBUG]   [SERV]   (./serveur/serveur.c:127) close connexion
+[07:49:27] [INFO]    [SERV]   (./serveur/serveur.c:114) Connexion acceptée (fd=5)
+[07:49:27] [INFO]    [CLIENT] (./serveur/serveur.c:141) [127.0.0.1:54156] Client connecté
+[07:49:27] [INFO]    [SERV]   (./bdd/bdd.c:20) Connecté a la BDD
+[07:49:27] [INFO]    [SERV]   (./bdd/bdd.c:21) SET search_path...
+[07:49:27] [INFO]    [SERV]   (./bdd/bdd.c:26) SET search_path success
+[07:49:27] [INFO]    [SERV]   (./bdd/bdd.c:31) Base de données actuelle : postgres
+[07:49:27] [INFO]    [SERV]   (./bdd/bdd.c:37) Schéma courant (search_path) : sae3_delivraptor
+[07:49:27] [DEBUG]   [SERV]   (./serveur/serveur.c:150) process commande
+[07:49:27] [DEBUG]   [SERV]   (./serveur/serveur.c:162) debut line CONN test 1234
+[07:49:27] [DEBUG]   [SERV]   (./serveur/serveur.c:164) ap chomp line CONN test 1234
+[07:49:27] [INFO]    [CLIENT] (./serveur/serveur.c:176) [127.0.0.1:54156] Commande reçue : CONN
+[07:49:27] [INFO]    [CLIENT] (./serveur/serveur.c:223) [127.0.0.1:54156] Tentative d'authentification pour 'test'
+[07:49:27] [INFO]    [CLIENT] (./serveur/serveur.c:228) [127.0.0.1:54156] Authentification réussie pour 'test'
+[07:49:27] [DEBUG]   [SERV]   (./serveur/serveur.c:206) fin line CONN test 1234
+[07:49:27] [DEBUG]   [SERV]   (./serveur/serveur.c:209) Sortie line
+[07:49:27] [DEBUG]   [SERV]   (./serveur/serveur.c:152) sorti process commande
+[07:49:27] [DEBUG]   [SERV]   (./serveur/serveur.c:150) process commande
+[07:49:27] [DEBUG]   [SERV]   (./serveur/serveur.c:162) debut line ETA ALI1768859422
+[07:49:27] [DEBUG]   [SERV]   (./serveur/serveur.c:164) ap chomp line ETA ALI1768859422
+[07:49:27] [INFO]    [CLIENT] (./serveur/serveur.c:176) [127.0.0.1:54156] Commande reçue : ETA
+[07:49:27] [INFO]    [CLIENT] (./controller/controller_etat.c:69) [127.0.0.1:54156] ETA: données extraites avec succès
+[07:49:27] [DEBUG]   [SERV]   (./sender/sender_global.c:14)  >> CMD ETA
+SIZE 19
+
+[07:49:27] [DEBUG]   [SERV]   (./sender/sender_global.c:14)  >> LVRAB ALI1768859422
+[07:49:27] [DEBUG]   [SERV]   (./sender/sender_global.c:14)  >> 
+END
+
+[07:49:27] [DEBUG]   [SERV]   (./sender/sender_etat.c:14) PARAM d'envoi ETA : ALI1768859422
+[07:49:27] [DEBUG]   [SERV]   (./serveur/serveur.c:206) fin line ETA ALI1768859422
+[07:49:27] [DEBUG]   [SERV]   (./serveur/serveur.c:209) Sortie line
+[07:49:27] [DEBUG]   [SERV]   (./serveur/serveur.c:152) sorti process commande
+[07:49:27] [INFO]    [CLIENT] (./serveur/serveur.c:155) [127.0.0.1:54156] Client déconnecté
+[07:49:27] [DEBUG]   [SERV]   (./serveur/serveur.c:127) close connexion
+[07:49:27] [INFO]    [SERV]   (./serveur/serveur.c:114) Connexion acceptée (fd=5)
+[07:49:27] [INFO]    [CLIENT] (./serveur/serveur.c:141) [127.0.0.1:54170] Client connecté
+[07:49:27] [INFO]    [SERV]   (./bdd/bdd.c:20) Connecté a la BDD
+[07:49:27] [INFO]    [SERV]   (./bdd/bdd.c:21) SET search_path...
+[07:49:27] [INFO]    [SERV]   (./bdd/bdd.c:26) SET search_path success
+[07:49:27] [INFO]    [SERV]   (./bdd/bdd.c:31) Base de données actuelle : postgres
+[07:49:27] [INFO]    [SERV]   (./bdd/bdd.c:37) Schéma courant (search_path) : sae3_delivraptor
+[07:49:27] [DEBUG]   [SERV]   (./serveur/serveur.c:150) process commande
+[07:49:27] [DEBUG]   [SERV]   (./serveur/serveur.c:162) debut line CONN test 1234
+[07:49:27] [DEBUG]   [SERV]   (./serveur/serveur.c:164) ap chomp line CONN test 1234
+[07:49:27] [INFO]    [CLIENT] (./serveur/serveur.c:176) [127.0.0.1:54170] Commande reçue : CONN
+[07:49:27] [INFO]    [CLIENT] (./serveur/serveur.c:223) [127.0.0.1:54170] Tentative d'authentification pour 'test'
+[07:49:27] [INFO]    [CLIENT] (./serveur/serveur.c:228) [127.0.0.1:54170] Authentification réussie pour 'test'
+[07:49:27] [DEBUG]   [SERV]   (./serveur/serveur.c:206) fin line CONN test 1234
+[07:49:27] [DEBUG]   [SERV]   (./serveur/serveur.c:209) Sortie line
+[07:49:27] [DEBUG]   [SERV]   (./serveur/serveur.c:152) sorti process commande
+[07:49:27] [DEBUG]   [SERV]   (./serveur/serveur.c:150) process commande
+[07:49:27] [DEBUG]   [SERV]   (./serveur/serveur.c:162) debut line IMG ALI1768859422
+[07:49:27] [DEBUG]   [SERV]   (./serveur/serveur.c:164) ap chomp line IMG ALI1768859422
+[07:49:27] [INFO]    [CLIENT] (./serveur/serveur.c:176) [127.0.0.1:54170] Commande reçue : IMG
+[07:49:27] [INFO]    [CLIENT] (./controller/controller_img.c:17) [127.0.0.1:54170] ETA: données extraites avec succès
+[07:49:27] [INFO]    [SERV]   (./controller/controller_img.c:32) ETAT LVRAB id ALI1768859422 process...
+[07:49:27] [INFO]    [SERV]   (./model/model_img.c:33) IMAGE GET REQUEST : id ALI1768859422
+[07:49:27] [INFO]    [SERV]   (./model/model_img.c:54) IMAGE GET REQUEST SUCCESS : id ALI1768859422 adresse image/livraison.jpg
+[07:49:27] [INFO]    [SERV]   (./model/model_img.c:61) IMAGE OPEN : id ALI1768859422
+[07:49:27] [INFO]    [SERV]   (./controller/controller_img.c:38) ETAT LVRAB id ALI1768859422 size...
+[07:49:27] [INFO]    [SERV]   (./controller/controller_img.c:51) ETAT LVRAB id ALI1768859422 read...
+[07:49:27] [INFO]    [SERV]   (./controller/controller_img.c:60) IMG SIZE 486556 content 9D27C010
+[07:49:27] [INFO]    [SERV]   (./controller/controller_img.c:62) IMG id ALI1768859422 send...
+[07:49:27] [INFO]    [SERV]   (./sender/sender_img.c:4) SEND IMG start...
+[07:49:27] [DEBUG]   [SERV]   (./sender/sender_global.c:14)  >> CMD IMG
+SIZE 486556
+
+[07:49:27] [DEBUG]   [SERV]   (./sender/sender_global.c:14)  >> �����ICC_PROFILE
+[07:49:27] [DEBUG]   [SERV]   (./sender/sender_global.c:14)  >> 
+END
+
+[07:49:27] [DEBUG]   [SERV]   (./sender/sender_img.c:13) PARAM d'envoi img success
+[07:49:27] [INFO]    [SERV]   (./controller/controller_img.c:70) ETAT LVRAB id ALI1768859422 close...
+[07:49:27] [INFO]    [SERV]   (./controller/controller_img.c:73) ETAT LVRAB id ALI1768859422 close
+[07:49:27] [DEBUG]   [SERV]   (./serveur/serveur.c:206) fin line IMG ALI1768859422
+[07:49:27] [DEBUG]   [SERV]   (./serveur/serveur.c:209) Sortie line
+[07:49:27] [DEBUG]   [SERV]   (./serveur/serveur.c:152) sorti process commande
+[07:49:27] [INFO]    [CLIENT] (./serveur/serveur.c:155) [127.0.0.1:54170] Client déconnecté
+[07:49:27] [DEBUG]   [SERV]   (./serveur/serveur.c:127) close connexion
+[07:49:27] [INFO]    [SERV]   (./serveur/serveur.c:114) Connexion acceptée (fd=5)
+[07:49:27] [INFO]    [CLIENT] (./serveur/serveur.c:141) [127.0.0.1:54174] Client connecté
+[07:49:27] [INFO]    [SERV]   (./bdd/bdd.c:20) Connecté a la BDD
+[07:49:27] [INFO]    [SERV]   (./bdd/bdd.c:21) SET search_path...
+[07:49:27] [INFO]    [SERV]   (./bdd/bdd.c:26) SET search_path success
+[07:49:27] [INFO]    [SERV]   (./bdd/bdd.c:31) Base de données actuelle : postgres
+[07:49:27] [INFO]    [SERV]   (./bdd/bdd.c:37) Schéma courant (search_path) : sae3_delivraptor
+[07:49:27] [DEBUG]   [SERV]   (./serveur/serveur.c:150) process commande
+[07:49:27] [DEBUG]   [SERV]   (./serveur/serveur.c:162) debut line CONN test 1234
+[07:49:27] [DEBUG]   [SERV]   (./serveur/serveur.c:164) ap chomp line CONN test 1234
+[07:49:27] [INFO]    [CLIENT] (./serveur/serveur.c:176) [127.0.0.1:54174] Commande reçue : CONN
+[07:49:27] [INFO]    [CLIENT] (./serveur/serveur.c:223) [127.0.0.1:54174] Tentative d'authentification pour 'test'
+[07:49:27] [INFO]    [CLIENT] (./serveur/serveur.c:228) [127.0.0.1:54174] Authentification réussie pour 'test'
+[07:49:27] [DEBUG]   [SERV]   (./serveur/serveur.c:206) fin line CONN test 1234
+[07:49:27] [DEBUG]   [SERV]   (./serveur/serveur.c:209) Sortie line
+[07:49:27] [DEBUG]   [SERV]   (./serveur/serveur.c:152) sorti process commande
+[07:49:27] [DEBUG]   [SERV]   (./serveur/serveur.c:150) process commande
+[07:49:27] [DEBUG]   [SERV]   (./serveur/serveur.c:162) debut line ETA ALI1768859392
+[07:49:27] [DEBUG]   [SERV]   (./serveur/serveur.c:164) ap chomp line ETA ALI1768859392
+[07:49:27] [INFO]    [CLIENT] (./serveur/serveur.c:176) [127.0.0.1:54174] Commande reçue : ETA
+[07:49:27] [INFO]    [CLIENT] (./controller/controller_etat.c:69) [127.0.0.1:54174] ETA: données extraites avec succès
+[07:49:27] [DEBUG]   [SERV]   (./sender/sender_global.c:14)  >> CMD ETA
+SIZE 17
+
+[07:49:27] [DEBUG]   [SERV]   (./sender/sender_global.c:14)  >> LVR ALI1768859392
+[07:49:27] [DEBUG]   [SERV]   (./sender/sender_global.c:14)  >> 
+END
+
+[07:49:27] [DEBUG]   [SERV]   (./sender/sender_etat.c:14) PARAM d'envoi ETA : ALI1768859392
+[07:49:27] [DEBUG]   [SERV]   (./serveur/serveur.c:206) fin line ETA ALI1768859392
+[07:49:27] [DEBUG]   [SERV]   (./serveur/serveur.c:209) Sortie line
+[07:49:27] [DEBUG]   [SERV]   (./serveur/serveur.c:152) sorti process commande
+[07:49:27] [INFO]    [CLIENT] (./serveur/serveur.c:155) [127.0.0.1:54174] Client déconnecté
+[07:49:27] [DEBUG]   [SERV]   (./serveur/serveur.c:127) close connexion
+[07:49:27] [INFO]    [SERV]   (./serveur/serveur.c:114) Connexion acceptée (fd=5)
+[07:49:27] [INFO]    [CLIENT] (./serveur/serveur.c:141) [127.0.0.1:54182] Client connecté
+[07:49:27] [INFO]    [SERV]   (./bdd/bdd.c:20) Connecté a la BDD
+[07:49:27] [INFO]    [SERV]   (./bdd/bdd.c:21) SET search_path...
+[07:49:27] [INFO]    [SERV]   (./bdd/bdd.c:26) SET search_path success
+[07:49:27] [INFO]    [SERV]   (./bdd/bdd.c:31) Base de données actuelle : postgres
+[07:49:27] [INFO]    [SERV]   (./bdd/bdd.c:37) Schéma courant (search_path) : sae3_delivraptor
+[07:49:27] [DEBUG]   [SERV]   (./serveur/serveur.c:150) process commande
+[07:49:27] [DEBUG]   [SERV]   (./serveur/serveur.c:162) debut line CONN test 1234
+[07:49:27] [DEBUG]   [SERV]   (./serveur/serveur.c:164) ap chomp line CONN test 1234
+[07:49:27] [INFO]    [CLIENT] (./serveur/serveur.c:176) [127.0.0.1:54182] Commande reçue : CONN
+[07:49:27] [INFO]    [CLIENT] (./serveur/serveur.c:223) [127.0.0.1:54182] Tentative d'authentification pour 'test'
+[07:49:27] [INFO]    [CLIENT] (./serveur/serveur.c:228) [127.0.0.1:54182] Authentification réussie pour 'test'
+[07:49:27] [DEBUG]   [SERV]   (./serveur/serveur.c:206) fin line CONN test 1234
+[07:49:27] [DEBUG]   [SERV]   (./serveur/serveur.c:209) Sortie line
+[07:49:27] [DEBUG]   [SERV]   (./serveur/serveur.c:152) sorti process commande
+[07:49:27] [DEBUG]   [SERV]   (./serveur/serveur.c:150) process commande
+[07:49:27] [DEBUG]   [SERV]   (./serveur/serveur.c:162) debut line ETA ALI1768858851
+[07:49:27] [DEBUG]   [SERV]   (./serveur/serveur.c:164) ap chomp line ETA ALI1768858851
+[07:49:27] [INFO]    [CLIENT] (./serveur/serveur.c:176) [127.0.0.1:54182] Commande reçue : ETA
+[07:49:27] [INFO]    [CLIENT] (./controller/controller_etat.c:69) [127.0.0.1:54182] ETA: données extraites avec succès
+[07:49:27] [INFO]    [SERV]   (./model/model_etat.c:41) RAISON GET : ALI1768858851 etat 715603392
+[07:49:27] [DEBUG]   [SERV]   (./sender/sender_global.c:14)  >> CMD ETA
+SIZE 55
+
+[07:49:27] [DEBUG]   [SERV]   (./sender/sender_global.c:14)  >> REFU ALI1768858851 msg:Le colis n'a pas été commandé
+[07:49:27] [DEBUG]   [SERV]   (./sender/sender_global.c:14)  >> 
+END
+
+[07:49:27] [DEBUG]   [SERV]   (./sender/sender_etat.c:29) PARAM d'envoi ETA : ALI1768858851
+[07:49:27] [DEBUG]   [SERV]   (./serveur/serveur.c:206) fin line ETA ALI1768858851
+[07:49:27] [DEBUG]   [SERV]   (./serveur/serveur.c:209) Sortie line
+[07:49:27] [DEBUG]   [SERV]   (./serveur/serveur.c:152) sorti process commande
+[07:49:28] [INFO]    [CLIENT] (./serveur/serveur.c:155) [127.0.0.1:54182] Client déconnecté
+[07:49:28] [DEBUG]   [SERV]   (./serveur/serveur.c:127) close connexion
+[07:49:28] [INFO]    [SERV]   (./serveur/serveur.c:114) Connexion acceptée (fd=5)
+[07:49:28] [INFO]    [CLIENT] (./serveur/serveur.c:141) [127.0.0.1:54198] Client connecté
+[07:49:28] [INFO]    [SERV]   (./bdd/bdd.c:20) Connecté a la BDD
+[07:49:28] [INFO]    [SERV]   (./bdd/bdd.c:21) SET search_path...
+[07:49:28] [INFO]    [SERV]   (./bdd/bdd.c:26) SET search_path success
+[07:49:28] [INFO]    [SERV]   (./bdd/bdd.c:31) Base de données actuelle : postgres
+[07:49:28] [INFO]    [SERV]   (./bdd/bdd.c:37) Schéma courant (search_path) : sae3_delivraptor
+[07:49:28] [DEBUG]   [SERV]   (./serveur/serveur.c:150) process commande
+[07:49:28] [DEBUG]   [SERV]   (./serveur/serveur.c:162) debut line CONN test 1234
+[07:49:28] [DEBUG]   [SERV]   (./serveur/serveur.c:164) ap chomp line CONN test 1234
+[07:49:28] [INFO]    [CLIENT] (./serveur/serveur.c:176) [127.0.0.1:54198] Commande reçue : CONN
+[07:49:28] [INFO]    [CLIENT] (./serveur/serveur.c:223) [127.0.0.1:54198] Tentative d'authentification pour 'test'
+[07:49:28] [INFO]    [CLIENT] (./serveur/serveur.c:228) [127.0.0.1:54198] Authentification réussie pour 'test'
+[07:49:28] [DEBUG]   [SERV]   (./serveur/serveur.c:206) fin line CONN test 1234
+[07:49:28] [DEBUG]   [SERV]   (./serveur/serveur.c:209) Sortie line
+[07:49:28] [DEBUG]   [SERV]   (./serveur/serveur.c:152) sorti process commande
+[07:49:28] [DEBUG]   [SERV]   (./serveur/serveur.c:150) process commande
+[07:49:28] [DEBUG]   [SERV]   (./serveur/serveur.c:162) debut line ETA ALI1768858823
+[07:49:28] [DEBUG]   [SERV]   (./serveur/serveur.c:164) ap chomp line ETA ALI1768858823
+[07:49:28] [INFO]    [CLIENT] (./serveur/serveur.c:176) [127.0.0.1:54198] Commande reçue : ETA
+[07:49:28] [INFO]    [CLIENT] (./controller/controller_etat.c:69) [127.0.0.1:54198] ETA: données extraites avec succès
+[07:49:28] [INFO]    [SERV]   (./model/model_etat.c:41) RAISON GET : ALI1768858823 etat 715603392
+[07:49:28] [DEBUG]   [SERV]   (./sender/sender_global.c:14)  >> CMD ETA
+SIZE 37
+
+[07:49:28] [DEBUG]   [SERV]   (./sender/sender_global.c:14)  >> REFU ALI1768858823 msg:Le colis bouge
+[07:49:28] [DEBUG]   [SERV]   (./sender/sender_global.c:14)  >> 
+END
+
+[07:49:28] [DEBUG]   [SERV]   (./sender/sender_etat.c:29) PARAM d'envoi ETA : ALI1768858823
+[07:49:28] [DEBUG]   [SERV]   (./serveur/serveur.c:206) fin line ETA ALI1768858823
+[07:49:28] [DEBUG]   [SERV]   (./serveur/serveur.c:209) Sortie line
+[07:49:28] [DEBUG]   [SERV]   (./serveur/serveur.c:152) sorti process commande
+[07:49:28] [INFO]    [CLIENT] (./serveur/serveur.c:155) [127.0.0.1:54198] Client déconnecté
+[07:49:28] [DEBUG]   [SERV]   (./serveur/serveur.c:127) close connexion
+[07:49:28] [INFO]    [SERV]   (./serveur/serveur.c:114) Connexion acceptée (fd=5)
+[07:49:28] [INFO]    [CLIENT] (./serveur/serveur.c:141) [127.0.0.1:54202] Client connecté
+[07:49:28] [INFO]    [SERV]   (./bdd/bdd.c:20) Connecté a la BDD
+[07:49:28] [INFO]    [SERV]   (./bdd/bdd.c:21) SET search_path...
+[07:49:28] [INFO]    [SERV]   (./bdd/bdd.c:26) SET search_path success
+[07:49:28] [INFO]    [SERV]   (./bdd/bdd.c:31) Base de données actuelle : postgres
+[07:49:28] [INFO]    [SERV]   (./bdd/bdd.c:37) Schéma courant (search_path) : sae3_delivraptor
+[07:49:28] [DEBUG]   [SERV]   (./serveur/serveur.c:150) process commande
+[07:49:28] [DEBUG]   [SERV]   (./serveur/serveur.c:162) debut line CONN test 1234
+[07:49:28] [DEBUG]   [SERV]   (./serveur/serveur.c:164) ap chomp line CONN test 1234
+[07:49:28] [INFO]    [CLIENT] (./serveur/serveur.c:176) [127.0.0.1:54202] Commande reçue : CONN
+[07:49:28] [INFO]    [CLIENT] (./serveur/serveur.c:223) [127.0.0.1:54202] Tentative d'authentification pour 'test'
+[07:49:28] [INFO]    [CLIENT] (./serveur/serveur.c:228) [127.0.0.1:54202] Authentification réussie pour 'test'
+[07:49:28] [DEBUG]   [SERV]   (./serveur/serveur.c:206) fin line CONN test 1234
+[07:49:28] [DEBUG]   [SERV]   (./serveur/serveur.c:209) Sortie line
+[07:49:28] [DEBUG]   [SERV]   (./serveur/serveur.c:152) sorti process commande
+[07:49:28] [DEBUG]   [SERV]   (./serveur/serveur.c:150) process commande
+[07:49:28] [DEBUG]   [SERV]   (./serveur/serveur.c:162) debut line ETA ALI1768858793
+[07:49:28] [DEBUG]   [SERV]   (./serveur/serveur.c:164) ap chomp line ETA ALI1768858793
+[07:49:28] [INFO]    [CLIENT] (./serveur/serveur.c:176) [127.0.0.1:54202] Commande reçue : ETA
+[07:49:28] [INFO]    [CLIENT] (./controller/controller_etat.c:69) [127.0.0.1:54202] ETA: données extraites avec succès
+[07:49:28] [INFO]    [SERV]   (./model/model_etat.c:41) RAISON GET : ALI1768858793 etat 715603392
+[07:49:28] [DEBUG]   [SERV]   (./sender/sender_global.c:14)  >> CMD ETA
+SIZE 47
+
+[07:49:28] [DEBUG]   [SERV]   (./sender/sender_global.c:14)  >> REFU ALI1768858793 msg:Le colis est trop abimé
+[07:49:28] [DEBUG]   [SERV]   (./sender/sender_global.c:14)  >> 
+END
+
+[07:49:28] [DEBUG]   [SERV]   (./sender/sender_etat.c:29) PARAM d'envoi ETA : ALI1768858793
+[07:49:28] [DEBUG]   [SERV]   (./serveur/serveur.c:206) fin line ETA ALI1768858793
+[07:49:28] [DEBUG]   [SERV]   (./serveur/serveur.c:209) Sortie line
+[07:49:28] [DEBUG]   [SERV]   (./serveur/serveur.c:152) sorti process commande
+[07:49:28] [INFO]    [CLIENT] (./serveur/serveur.c:155) [127.0.0.1:54202] Client déconnecté
+[07:49:28] [DEBUG]   [SERV]   (./serveur/serveur.c:127) close connexion
+[07:49:28] [INFO]    [SERV]   (./serveur/serveur.c:114) Connexion acceptée (fd=5)
+[07:49:28] [INFO]    [CLIENT] (./serveur/serveur.c:141) [127.0.0.1:54214] Client connecté
+[07:49:28] [INFO]    [SERV]   (./bdd/bdd.c:20) Connecté a la BDD
+[07:49:28] [INFO]    [SERV]   (./bdd/bdd.c:21) SET search_path...
+[07:49:28] [INFO]    [SERV]   (./bdd/bdd.c:26) SET search_path success
+[07:49:28] [INFO]    [SERV]   (./bdd/bdd.c:31) Base de données actuelle : postgres
+[07:49:28] [INFO]    [SERV]   (./bdd/bdd.c:37) Schéma courant (search_path) : sae3_delivraptor
+[07:49:28] [DEBUG]   [SERV]   (./serveur/serveur.c:150) process commande
+[07:49:28] [DEBUG]   [SERV]   (./serveur/serveur.c:162) debut line CONN test 1234
+[07:49:28] [DEBUG]   [SERV]   (./serveur/serveur.c:164) ap chomp line CONN test 1234
+[07:49:28] [INFO]    [CLIENT] (./serveur/serveur.c:176) [127.0.0.1:54214] Commande reçue : CONN
+[07:49:28] [INFO]    [CLIENT] (./serveur/serveur.c:223) [127.0.0.1:54214] Tentative d'authentification pour 'test'
+[07:49:28] [INFO]    [CLIENT] (./serveur/serveur.c:228) [127.0.0.1:54214] Authentification réussie pour 'test'
+[07:49:28] [DEBUG]   [SERV]   (./serveur/serveur.c:206) fin line CONN test 1234
+[07:49:28] [DEBUG]   [SERV]   (./serveur/serveur.c:209) Sortie line
+[07:49:28] [DEBUG]   [SERV]   (./serveur/serveur.c:152) sorti process commande
+[07:49:28] [DEBUG]   [SERV]   (./serveur/serveur.c:150) process commande
+[07:49:28] [DEBUG]   [SERV]   (./serveur/serveur.c:162) debut line ETA ALI1768858762
+[07:49:28] [DEBUG]   [SERV]   (./serveur/serveur.c:164) ap chomp line ETA ALI1768858762
+[07:49:28] [INFO]    [CLIENT] (./serveur/serveur.c:176) [127.0.0.1:54214] Commande reçue : ETA
+[07:49:28] [INFO]    [CLIENT] (./controller/controller_etat.c:69) [127.0.0.1:54214] ETA: données extraites avec succès
+[07:49:28] [INFO]    [SERV]   (./model/model_etat.c:41) RAISON GET : ALI1768858762 etat 715603392
+[07:49:28] [DEBUG]   [SERV]   (./sender/sender_global.c:14)  >> CMD ETA
+SIZE 53
+
+[07:49:28] [DEBUG]   [SERV]   (./sender/sender_global.c:14)  >> REFU ALI1768858762 msg:Le colis est arrivé trop tard
+[07:49:28] [DEBUG]   [SERV]   (./sender/sender_global.c:14)  >> 
+END
+
+[07:49:28] [DEBUG]   [SERV]   (./sender/sender_etat.c:29) PARAM d'envoi ETA : ALI1768858762
+[07:49:28] [DEBUG]   [SERV]   (./serveur/serveur.c:206) fin line ETA ALI1768858762
+[07:49:28] [DEBUG]   [SERV]   (./serveur/serveur.c:209) Sortie line
+[07:49:28] [DEBUG]   [SERV]   (./serveur/serveur.c:152) sorti process commande
+[07:49:28] [INFO]    [CLIENT] (./serveur/serveur.c:155) [127.0.0.1:54214] Client déconnecté
+[07:49:28] [DEBUG]   [SERV]   (./serveur/serveur.c:127) close connexion
+[07:50:01] [INFO]    [SERV]   (./serveur/serveur.c:114) Connexion acceptée (fd=5)
+[07:50:01] [INFO]    [CLIENT] (./serveur/serveur.c:141) [127.0.0.1:49594] Client connecté
+[07:50:01] [INFO]    [SERV]   (./bdd/bdd.c:20) Connecté a la BDD
+[07:50:01] [INFO]    [SERV]   (./bdd/bdd.c:21) SET search_path...
+[07:50:01] [INFO]    [SERV]   (./bdd/bdd.c:26) SET search_path success
+[07:50:01] [INFO]    [SERV]   (./bdd/bdd.c:31) Base de données actuelle : postgres
+[07:50:01] [INFO]    [SERV]   (./bdd/bdd.c:37) Schéma courant (search_path) : sae3_delivraptor
+[07:50:01] [DEBUG]   [SERV]   (./serveur/serveur.c:150) process commande
+[07:50:01] [DEBUG]   [SERV]   (./serveur/serveur.c:162) debut line CONN test 1234
+[07:50:01] [DEBUG]   [SERV]   (./serveur/serveur.c:164) ap chomp line CONN test 1234
+[07:50:01] [INFO]    [CLIENT] (./serveur/serveur.c:176) [127.0.0.1:49594] Commande reçue : CONN
+[07:50:01] [INFO]    [CLIENT] (./serveur/serveur.c:223) [127.0.0.1:49594] Tentative d'authentification pour 'test'
+[07:50:01] [INFO]    [CLIENT] (./serveur/serveur.c:228) [127.0.0.1:49594] Authentification réussie pour 'test'
+[07:50:01] [DEBUG]   [SERV]   (./serveur/serveur.c:206) fin line CONN test 1234
+[07:50:01] [DEBUG]   [SERV]   (./serveur/serveur.c:209) Sortie line
+[07:50:01] [DEBUG]   [SERV]   (./serveur/serveur.c:152) sorti process commande
+[07:50:01] [DEBUG]   [SERV]   (./serveur/serveur.c:150) process commande
+[07:50:01] [DEBUG]   [SERV]   (./serveur/serveur.c:162) debut line NEXT
+[07:50:01] [DEBUG]   [SERV]   (./serveur/serveur.c:164) ap chomp line NEXT
+[07:50:01] [INFO]    [CLIENT] (./serveur/serveur.c:176) [127.0.0.1:49594] Commande reçue : NEXT
+[07:50:01] [DEBUG]   [SERV]   (./controller/controller_etat.c:115) AVANCE ARR
+[07:50:01] [DEBUG]   [SERV]   (./model/model_etat.c:48) GET ALL ETA ARR
+[07:50:01] [DEBUG]   [SERV]   (./model/model_etat.c:56) GET ALL ETA DB success
+[07:50:01] [DEBUG]   [SERV]   (./model/model_etat.c:63) GET ALL ETA DB create bord...
+[07:50:01] [DEBUG]   [SERV]   (./model/model_etat.c:68) GET ALL ETA DB create bord fin
+[07:50:01] [INFO]    [SERV]   (./controller/controller_etat.c:120) GET ALL ETAT success
+[07:50:01] [DEBUG]   [SERV]   (./controller/controller_etat.c:122) count value : 0
+[07:50:01] [INFO]    [SERV]   (./controller/controller_etat.c:144) AVANCE success
+[07:50:01] [DEBUG]   [SERV]   (./serveur/serveur.c:206) fin line NEXT
+[07:50:01] [DEBUG]   [SERV]   (./serveur/serveur.c:209) Sortie line
+[07:50:01] [DEBUG]   [SERV]   (./serveur/serveur.c:152) sorti process commande
+[07:50:01] [INFO]    [CLIENT] (./serveur/serveur.c:155) [127.0.0.1:49594] Client déconnecté
+[07:50:01] [DEBUG]   [SERV]   (./serveur/serveur.c:127) close connexion
+[07:50:07] [INFO]    [SERV]   (./serveur/serveur.c:114) Connexion acceptée (fd=5)
+[07:50:07] [INFO]    [CLIENT] (./serveur/serveur.c:141) [127.0.0.1:35734] Client connecté
+[07:50:07] [INFO]    [SERV]   (./bdd/bdd.c:20) Connecté a la BDD
+[07:50:07] [INFO]    [SERV]   (./bdd/bdd.c:21) SET search_path...
+[07:50:07] [INFO]    [SERV]   (./bdd/bdd.c:26) SET search_path success
+[07:50:07] [INFO]    [SERV]   (./bdd/bdd.c:31) Base de données actuelle : postgres
+[07:50:07] [INFO]    [SERV]   (./bdd/bdd.c:37) Schéma courant (search_path) : sae3_delivraptor
+[07:50:07] [DEBUG]   [SERV]   (./serveur/serveur.c:150) process commande
+[07:50:07] [DEBUG]   [SERV]   (./serveur/serveur.c:162) debut line CONN test 1234
+[07:50:07] [DEBUG]   [SERV]   (./serveur/serveur.c:164) ap chomp line CONN test 1234
+[07:50:07] [INFO]    [CLIENT] (./serveur/serveur.c:176) [127.0.0.1:35734] Commande reçue : CONN
+[07:50:07] [INFO]    [CLIENT] (./serveur/serveur.c:223) [127.0.0.1:35734] Tentative d'authentification pour 'test'
+[07:50:07] [INFO]    [CLIENT] (./serveur/serveur.c:228) [127.0.0.1:35734] Authentification réussie pour 'test'
+[07:50:07] [DEBUG]   [SERV]   (./serveur/serveur.c:206) fin line CONN test 1234
+[07:50:07] [DEBUG]   [SERV]   (./serveur/serveur.c:209) Sortie line
+[07:50:07] [DEBUG]   [SERV]   (./serveur/serveur.c:152) sorti process commande
+[07:50:07] [DEBUG]   [SERV]   (./serveur/serveur.c:150) process commande
+[07:50:07] [DEBUG]   [SERV]   (./serveur/serveur.c:162) debut line ETA ALI1768859451
+[07:50:07] [DEBUG]   [SERV]   (./serveur/serveur.c:164) ap chomp line ETA ALI1768859451
+[07:50:07] [INFO]    [CLIENT] (./serveur/serveur.c:176) [127.0.0.1:35734] Commande reçue : ETA
+[07:50:07] [INFO]    [CLIENT] (./controller/controller_etat.c:69) [127.0.0.1:35734] ETA: données extraites avec succès
+[07:50:07] [DEBUG]   [SERV]   (./sender/sender_global.c:14)  >> CMD ETA
+SIZE 19
+
+[07:50:07] [DEBUG]   [SERV]   (./sender/sender_global.c:14)  >> LVRAB ALI1768859451
+[07:50:07] [DEBUG]   [SERV]   (./sender/sender_global.c:14)  >> 
+END
+
+[07:50:07] [DEBUG]   [SERV]   (./sender/sender_etat.c:14) PARAM d'envoi ETA : ALI1768859451
+[07:50:07] [DEBUG]   [SERV]   (./serveur/serveur.c:206) fin line ETA ALI1768859451
+[07:50:07] [DEBUG]   [SERV]   (./serveur/serveur.c:209) Sortie line
+[07:50:07] [DEBUG]   [SERV]   (./serveur/serveur.c:152) sorti process commande
+[07:50:07] [INFO]    [CLIENT] (./serveur/serveur.c:155) [127.0.0.1:35734] Client déconnecté
+[07:50:07] [DEBUG]   [SERV]   (./serveur/serveur.c:127) close connexion
+[07:50:07] [INFO]    [SERV]   (./serveur/serveur.c:114) Connexion acceptée (fd=5)
+[07:50:07] [INFO]    [CLIENT] (./serveur/serveur.c:141) [127.0.0.1:35748] Client connecté
+[07:50:07] [INFO]    [SERV]   (./bdd/bdd.c:20) Connecté a la BDD
+[07:50:07] [INFO]    [SERV]   (./bdd/bdd.c:21) SET search_path...
+[07:50:07] [INFO]    [SERV]   (./bdd/bdd.c:26) SET search_path success
+[07:50:07] [INFO]    [SERV]   (./bdd/bdd.c:31) Base de données actuelle : postgres
+[07:50:07] [INFO]    [SERV]   (./bdd/bdd.c:37) Schéma courant (search_path) : sae3_delivraptor
+[07:50:07] [DEBUG]   [SERV]   (./serveur/serveur.c:150) process commande
+[07:50:07] [DEBUG]   [SERV]   (./serveur/serveur.c:162) debut line CONN test 1234
+[07:50:07] [DEBUG]   [SERV]   (./serveur/serveur.c:164) ap chomp line CONN test 1234
+[07:50:07] [INFO]    [CLIENT] (./serveur/serveur.c:176) [127.0.0.1:35748] Commande reçue : CONN
+[07:50:07] [INFO]    [CLIENT] (./serveur/serveur.c:223) [127.0.0.1:35748] Tentative d'authentification pour 'test'
+[07:50:07] [INFO]    [CLIENT] (./serveur/serveur.c:228) [127.0.0.1:35748] Authentification réussie pour 'test'
+[07:50:07] [DEBUG]   [SERV]   (./serveur/serveur.c:206) fin line CONN test 1234
+[07:50:07] [DEBUG]   [SERV]   (./serveur/serveur.c:209) Sortie line
+[07:50:07] [DEBUG]   [SERV]   (./serveur/serveur.c:152) sorti process commande
+[07:50:07] [DEBUG]   [SERV]   (./serveur/serveur.c:150) process commande
+[07:50:07] [DEBUG]   [SERV]   (./serveur/serveur.c:162) debut line IMG ALI1768859451
+[07:50:07] [DEBUG]   [SERV]   (./serveur/serveur.c:164) ap chomp line IMG ALI1768859451
+[07:50:07] [INFO]    [CLIENT] (./serveur/serveur.c:176) [127.0.0.1:35748] Commande reçue : IMG
+[07:50:07] [INFO]    [CLIENT] (./controller/controller_img.c:17) [127.0.0.1:35748] ETA: données extraites avec succès
+[07:50:07] [INFO]    [SERV]   (./controller/controller_img.c:32) ETAT LVRAB id ALI1768859451 process...
+[07:50:07] [INFO]    [SERV]   (./model/model_img.c:33) IMAGE GET REQUEST : id ALI1768859451
+[07:50:07] [INFO]    [SERV]   (./model/model_img.c:54) IMAGE GET REQUEST SUCCESS : id ALI1768859451 adresse image/livraison.jpg
+[07:50:07] [INFO]    [SERV]   (./model/model_img.c:61) IMAGE OPEN : id ALI1768859451
+[07:50:07] [INFO]    [SERV]   (./controller/controller_img.c:38) ETAT LVRAB id ALI1768859451 size...
+[07:50:07] [INFO]    [SERV]   (./controller/controller_img.c:51) ETAT LVRAB id ALI1768859451 read...
+[07:50:07] [INFO]    [SERV]   (./controller/controller_img.c:60) IMG SIZE 486556 content 9D27C010
+[07:50:07] [INFO]    [SERV]   (./controller/controller_img.c:62) IMG id ALI1768859451 send...
+[07:50:07] [INFO]    [SERV]   (./sender/sender_img.c:4) SEND IMG start...
+[07:50:07] [DEBUG]   [SERV]   (./sender/sender_global.c:14)  >> CMD IMG
+SIZE 486556
+
+[07:50:07] [DEBUG]   [SERV]   (./sender/sender_global.c:14)  >> �����ICC_PROFILE
+[07:50:07] [DEBUG]   [SERV]   (./sender/sender_global.c:14)  >> 
+END
+
+[07:50:07] [DEBUG]   [SERV]   (./sender/sender_img.c:13) PARAM d'envoi img success
+[07:50:07] [INFO]    [SERV]   (./controller/controller_img.c:70) ETAT LVRAB id ALI1768859451 close...
+[07:50:07] [INFO]    [SERV]   (./controller/controller_img.c:73) ETAT LVRAB id ALI1768859451 close
+[07:50:07] [DEBUG]   [SERV]   (./serveur/serveur.c:206) fin line IMG ALI1768859451
+[07:50:07] [DEBUG]   [SERV]   (./serveur/serveur.c:209) Sortie line
+[07:50:07] [DEBUG]   [SERV]   (./serveur/serveur.c:152) sorti process commande
+[07:50:07] [INFO]    [CLIENT] (./serveur/serveur.c:155) [127.0.0.1:35748] Client déconnecté
+[07:50:07] [DEBUG]   [SERV]   (./serveur/serveur.c:127) close connexion
