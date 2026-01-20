@@ -302,7 +302,7 @@
                                     {
                                         ?>
                                             <div class="flex justify-center valider-panier-div">
-                                                <button id="btnValiderPanier" class="bg-rouge rounded-2xl w-56 p-1 h-10 mt-2 md:p-0 md:w-40 md:h-14 md:mt-4 cursor-pointer border-black border shadow">
+                                                <button id="btnValiderPanier" class="bg-rouge text-gray-300 rounded-2xl w-56 p-1 h-10 mt-2 md:p-0 md:w-40 md:h-14 md:mt-4 cursor-pointer border-black border shadow">
                                                 Valider le panier
                                                 </button>
                                             </div>
@@ -353,7 +353,7 @@
                                     {
                                         ?>
                                             <div class="flex justify-center valider-panier-div">
-                                                <button id="btnValiderPanier" class="bg-rouge rounded-2xl w-56 p-1 h-10 mt-2 md:p-0 md:w-40 md:h-14 md:mt-4 cursor-pointer border-black border shadow">
+                                                <button id="btnValiderPanier" class="bg-rouge text-gray-300 rounded-2xl w-56 p-1 h-10 mt-2 md:p-0 md:w-40 md:h-14 md:mt-4 cursor-pointer border-black border shadow">
                                                 Valider le panier
                                                 </button>
                                             </div>

@@ -2,6 +2,9 @@ import * as Popup from "../popup.js";
 
 const conteneurProd = document.getElementById("conteneur-produit");
 
+// Affiche la popup
+Popup.showPopUp("popup-modif-panier", 3000, "panierModif");
+
 if (conteneurProd) { //Chech si un élément de la page panier  est présent ou non pour éviter d'exécuter le script JS pour rien si la page est vide (cas panier vide)
 
     // Variable utilisé dans la fonction ci-dessous pour vérifier si le panier a déjà été modifié ou pas encore
@@ -50,6 +53,7 @@ if (conteneurProd) { //Chech si un élément de la page panier  est présent ou 
                 let btnForm = divFormPanier.querySelector('button');
                 btnForm.textContent = "Valider les modifications";
                 btnForm.classList.remove("bg-rouge");
+                btnForm.classList.remove("text-gray-300")
                 btnForm.classList.add("bg-beige");
 
                 let formModifPanier = document.createElement('form');
@@ -119,9 +123,6 @@ if (conteneurProd) { //Chech si un élément de la page panier  est présent ou 
     btnClosePopUpErr.addEventListener("click", () => {
         Popup.closePopup("popup-erreur-valider-panier");
     })
-
-    // Affiche la popup
-    Popup.showPopUp("popup-modif-panier", 3000, "panierModif");
 
     // Sous total du panier
     let sousTotal = document.getElementById('conteneur-info_panier').querySelector('.sous-total').getElementsByTagName('p')[1];

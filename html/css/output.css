@@ -504,6 +504,9 @@ input.quantite-prod-input {
   .mr-16 {
     margin-right: calc(var(--spacing, 0.25rem) * 16);
   }
+  .mb-0 {
+    margin-bottom: calc(var(--spacing, 0.25rem) * 0);
+  }
   .mb-1 {
     margin-bottom: calc(var(--spacing, 0.25rem) * 1);
   }
@@ -996,6 +999,14 @@ input.quantite-prod-input {
   .rounded-xl {
     border-radius: var(--radius-xl, 0.75rem);
   }
+  .rounded-t-2xl {
+    border-top-left-radius: var(--radius-2xl, 1rem);
+    border-top-right-radius: var(--radius-2xl, 1rem);
+  }
+  .rounded-b-2xl {
+    border-bottom-right-radius: var(--radius-2xl, 1rem);
+    border-bottom-left-radius: var(--radius-2xl, 1rem);
+  }
   .border {
     border-style: var(--tw-border-style);
     border-width: 1px;
@@ -1232,6 +1243,12 @@ input.quantite-prod-input {
   }
   .text-bleu {
     color: var(--color-bleu);
+  }
+  .text-gray-300 {
+    color: var(--color-gray-300, oklch(87.2% 0.01 258.338));
+  }
+  .text-gray-400 {
+    color: var(--color-gray-400, oklch(70.7% 0.022 261.325));
   }
   .text-rouge {
     color: var(--color-rouge);

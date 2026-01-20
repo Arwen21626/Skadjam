@@ -117,7 +117,7 @@
                         $stmt->execute([$idAvis]);
                         $reponse = $stmt->fetch(PDO::FETCH_ASSOC);
                         
-                        $aReponse = ($reponse['id_avis']!==null)?true:false;
+                        $aReponse = (isset($reponse['id_avis'])) ? true : false;
                         ?>
                         <section class=" bg-bleu m-4 p-4 w-4xl <?php echo $aReponse?'mb-0 rounded-t-2xl':'rounded-2xl'?>">
                             <div class="grid grid-cols-4 md:grid-cols-5 justify-items-end w-auto">
@@ -136,7 +136,7 @@
 
                         <!-- Réponse -->
                         <?php 
-                        if($reponse["id_avis"] !== null){
+                        if(isset($reponse["id_avis"])){
                         ?>
                         <section class=" bg-beige m-4 mt-0 p-4 w-4xl rounded-b-2xl">
                             <div class="grid grid-cols-4 md:grid-cols-5 justify-items-end w-auto">
