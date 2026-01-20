@@ -283,9 +283,10 @@
                 </tfoot>
             </table>
         </div>
+
         <!---Indicateur d'etat de livraison--->
         <div>
-            <p>Etat de la livraison : <?= $etat ?></p>
+            <h3 class="ml-5 mt-10">Etat de la livraison : <?= $etat ?></h3>
 
         <?php
         if ($raison!=0){ ?>
