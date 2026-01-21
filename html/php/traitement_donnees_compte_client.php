@@ -7,39 +7,46 @@ require_once __DIR__ . "/../../connections_params.php";
 $_SESSION['erreurs'] = [];
 $_SESSION['old'] = $_POST;
 
-// Vérification présence champs obligatoires
+$isCreation = isset($_POST['mdp'], $_POST['verifMdp']);
+$isModification = !$isCreation;
+
+// Champs communs obligatoires
 $required = ['nom','prenom','pseudo','naissance','telephone','mail'];
 foreach ($required as $field) {
     if (empty($_POST[$field])) {
-        $_SESSION['erreurs'][$field] = "Champ obligatoire manquant";
+        $_SESSION['erreurs'][$field] = 'Champ obligatoire';
     }
 }
 
-// Vérifications format
-if (!verifNomPrenom($_POST['nom'] ?? '')) $_SESSION['erreurs']['nom'] = "Nom invalide";
-if (!verifNomPrenom($_POST['prenom'] ?? '')) $_SESSION['erreurs']['prenom'] = "Prénom invalide";
-if (!verifPseudo($_POST['pseudo'] ?? '')) $_SESSION['erreurs']['pseudo'] = "Pseudo invalide";
-if (!verifMail($_POST['mail'] ?? '')) $_SESSION['erreurs']['mail'] = "Email invalide";
-if (!verifTelephone($_POST['telephone'] ?? '')) $_SESSION['erreurs']['telephone'] = "Téléphone invalide";
-if (!verifDate($_POST['naissance'] ?? '')) $_SESSION['erreurs']['naissance'] = "Date invalide";
-if (!verifAge($_POST['naissance'] ?? '')) $_SESSION['erreurs']['age'] = "Vous devez être majeur";
+// Validations communes
+if (!verifNomPrenom($_POST['nom'] ?? '')) $_SESSION['erreurs']['nom'] = 'Nom invalide';
+if (!verifNomPrenom($_POST['prenom'] ?? '')) $_SESSION['erreurs']['prenom'] = 'Prénom invalide';
+if (!verifPseudo($_POST['pseudo'] ?? '')) $_SESSION['erreurs']['pseudo'] = 'Pseudo invalide';
+if (!verifMail($_POST['mail'] ?? '')) $_SESSION['erreurs']['mail'] = 'Email invalide';
+if (!verifTelephone($_POST['telephone'] ?? '')) $_SESSION['erreurs']['telephone'] = 'Téléphone invalide';
+if (!verifDate($_POST['naissance'] ?? '')) $_SESSION['erreurs']['naissance'] = 'Date invalide';
+if (!verifAge($_POST['naissance'] ?? '')) $_SESSION['erreurs']['age'] = 'Vous devez être majeur';
 
-// Création de compte : mot de passe
-$isCreation = isset($_POST['mdp'], $_POST['verifMdp']);
+// Validation mot de passe (création uniquement)
 if ($isCreation) {
-    if (!verifMotDePasse($_POST['mdp'])) $_SESSION['erreurs']['mdp'] = "Mot de passe invalide";
-    if (!confirmationMotDePasse($_POST['mdp'], $_POST['verifMdp'])) $_SESSION['erreurs']['verifMdp'] = "Les mots de passe ne correspondent pas";
+    if (!verifMotDePasse($_POST['mdp'])) $_SESSION['erreurs']['mdp'] = 'Mot de passe invalide';
+    if (!confirmationMotDePasse($_POST['mdp'], $_POST['verifMdp'])) $_SESSION['erreurs']['verifMdp'] = 'Les mots de passe ne correspondent pas';
 }
 
-// S'il y a des erreurs → retour formulaire
+// Erreurs -> retour formulaire
 if (!empty($_SESSION['erreurs'])) {
-    header("Location: ../html/fo/creation_compte_client.php");
+    if($_SESSION['role'] === 'visiteur'){ // Création d'un compte
+        header('Location: ../html/fo/creation_compte_client.php');
+    }else{ // Modification d'un compte
+        header('Location: ../html/fo/modifier_compte_client.php');
+    }
     exit;
 }
 
 try {
-    $dbh = new PDO("$driver:host=$server;port=$port;dbname=$dbname", $user, $pass);
-    $dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+    $dbh = new PDO("$driver:host=$server;port=$port;dbname=$dbname", $user, $pass, [
+        PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION
+    ]);
 
     $nom = formatPrenom($_POST['nom']);
     $prenom = formatPrenom($_POST['prenom']);
@@ -48,10 +55,11 @@ try {
     $pseudo = $_POST['pseudo'];
     $naissance = formatDate($_POST['naissance']);
 
+    // Pour créer un compte client
     if ($isCreation) {
         if (!mailUnique($mail)) {
-            $_SESSION['erreurs']['mail'] = "Email déjà utilisé";
-            header("Location: ../html/fo/creation_compte_client.php");
+            $_SESSION['erreurs']['mail'] = 'Email déjà utilisé';
+            header('Location: ../html/fo/creation_compte_client.php');
             exit;
         }
 
@@ -74,13 +82,72 @@ try {
         $_SESSION['role'] = 'client';
 
         unset($_SESSION['old']);
-        header("Location: /index.php");
+        header('Location: /index.php');
+        exit;
+    }
+
+    // Pour modifier un compte client
+    if ($isModification) {
+        $idCompte = $_SESSION['idCompte'];
+
+        // Vérification unicité mail (sauf ancien)
+        $stmt = $dbh->prepare("SELECT adresse_mail FROM sae3_skadjam._compte WHERE id_compte = ?");
+        $stmt->execute([$idCompte]);
+        $ancienMail = $stmt->fetchColumn();
+
+        if ($mail !== $ancienMail && !mailUnique($mail)) {
+            $_SESSION['erreurs']['mail'] = 'Email déjà utilisé';
+            header('Location: ../html/fo/modifier_compte_client.php');
+            exit;
+        }
+
+        // Update compte
+        $stmt = $dbh->prepare(
+            "UPDATE sae3_skadjam._compte
+             SET nom_compte = ?, prenom_compte = ?, adresse_mail = ?, numero_telephone = ?
+             WHERE id_compte = ?"
+        );
+        $stmt->execute([$nom, $prenom, $mail, $telephone, $idCompte]);
+
+        // Update client
+        $stmt = $dbh->prepare(
+            "UPDATE sae3_skadjam._client
+             SET pseudo = ?, date_naissance = ?
+             WHERE id_compte = ?"
+        );
+        $stmt->execute([$pseudo, $naissance, $idCompte]);
+
+        // Update adresses
+        if (isset($_POST['adresse'])) {
+            foreach ($_POST['adresse'] as $index => $adresse) {
+                $numRue = tabAdresse($adresse['adressePostal'])[0];
+                $complement = tabAdresse($adresse['adressePostal'])[1];
+                $nomRue = tabAdresse($adresse['adressePostal'])[2];
+
+                if (!verifAdresse($adresse['adressePostal'])) {
+                    $_SESSION['erreurs']['adresse_'.$index] = 'Adresse invalide';
+                }
+                if (!verifVille($adresse['ville'])) {
+                    $_SESSION['erreurs']['ville_'.$index] = 'Ville invalide';
+                }
+                if (!verifCp($adresse['codePostal'])) {
+                    $_SESSION['erreurs']['codePostal_'.$index] = 'Code postal invalide';
+                }
+            }
+        }
+
+        if (!empty($_SESSION['erreurs'])) {
+            header('Location: ../html/fo/modifier_compte_client.php');
+            exit;
+        }
+
+        unset($_SESSION['old']);
+        header('Location: ../html/fo/profil_client.php');
         exit;
     }
 
 } catch (PDOException $e) {
-    $_SESSION['erreurs']['bdd'] = "Erreur serveur";
-    header("Location: ../html/fo/creation_compte_client.php");
+    $_SESSION['erreurs']['bdd'] = 'Erreur serveur';
+    header('Location: ../html/fo/creation_compte_client.php');
     exit;
 }
-?>
