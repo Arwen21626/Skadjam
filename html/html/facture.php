@@ -85,7 +85,7 @@ foreach($dbh->query("SELECT v.raison_sociale, cvend.adresse_mail as mail_vendeur
         <section class=" max-w-1/3  mb-5"> 
             <p class="font-bold">n° de commande : <?php echo $idCommande?></p>
             <p>date : <?php echo $dateCommande?></p>
-            <p>payment immédiat</p>
+            <p>payement immédiat</p>
         </section>
 
         <div class="grid grid-cols-2 mb-8 w-1/1 justify-end">
