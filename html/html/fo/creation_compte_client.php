@@ -2,10 +2,6 @@
 session_start();
 require_once __DIR__ . "/../../php/verif_role_fo.php";
 
-if ($_SESSION['role'] !== 'visiteur'){
-    header("location: /404.php");
-}
-session_start();
 $erreurs = $_SESSION['erreurs'] ?? [];
 $old = $_SESSION['old'] ?? [];
 unset($_SESSION['erreurs'], $_SESSION['old']);
