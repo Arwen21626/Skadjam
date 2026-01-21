@@ -22,18 +22,17 @@
                             WHERE c.id_client = $idCompte
                             ORDER BY c.date_commande DESC, c.id_commande DESC;"
                             , PDO::FETCH_ASSOC) as $row){
-            $idSuivi = $row['id_suivi'];
+            
             $id_commande = $row['id_commande'];
             try{
+                $idSuivi = $row['id_suivi'];
                 $etat[$id_commande] = $rpr->get_etat($idSuivi);
                 $query = "UPDATE sae3_skadjam._commande SET etat = ? WHERE id_suivi = ?";
                 $stmt = $dbh->prepare($query);
                 $stmt->execute([$etat[$row['id_commande']], $idSuivi]);
             }catch (Exception $e){
-                echo "Recupraptor Erreur : " . $e->getMessage() . "<br>";
                 $etat[$id_commande] = 'err';
             }catch (TypeError $e){
-                echo "Recupraptor Erreur : " . $e->getMessage() . "<br>";
                 $etat[$id_commande] = 'err';
             }finally{
                 $tabInfoCommandes[] = $row;
