@@ -201,9 +201,9 @@ if (isset($_POST['categorie']) && isset($_POST['nom']) && isset($_POST['prix']) 
                 $dbh->beginTransaction();
                 // Création de la promotion
                 try {
-                    if(verifDate($dateDebutPromotion) && $dateDebutPromotion >= date('Y-m-d')){
+                    if(isset($dateDebutPromotion) && $dateDebutPromotion >= date('Y-m-d')){
                         // Une date de fin à été ajoutée
-                        if(verifDate($dateFinPromotion) && $dateFinPromotion >= $dateDebutPromotion){
+                        if(isset($dateFinPromotion) && $dateFinPromotion >= $dateDebutPromotion){
                             $stmtPromo = $dbh->prepare("INSERT INTO sae3_skadjam._promotion
                                                         (
                                                             date_debut_promotion,
