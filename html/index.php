@@ -96,7 +96,7 @@
                                 <img src="<?= $valeurs['url_photo'];?>" 
                                         alt="<?= $valeurs['alt'];?>"
                                         title="<?= $valeurs['titre'];?>"
-                                        class="w-auto h-40 md:h-80 justify-self-center">
+                                        class="w-auto h-40 md:h-80 block mx-auto">
 
                                 <!--affichage du nom du produit-->
                                 <p><?= $valeurs['libelle_produit'];?></p> 
@@ -130,7 +130,7 @@
                                     if($debutPromo <= date('Y-m-d') && ($finPromo == null || $finPromo >= date('Y-m-d')) && !empty($labelPromo)){
                                 ?>
                                 <div class="bg-rouge absolute w-36 md:w-74 underline text-beige pt-2 pb-1.5">
-                                    <h4 class="text-center text-beige overline m-0"><?php echo htmlspecialchars($labelPromo); ?></h4>
+                                    <h4 class="text-center text-beige overline m-0"><?= htmlspecialchars($labelPromo); ?></h4>
                                 </div>
                                 <?php }} ?>
                         </section>

@@ -102,7 +102,7 @@
                                 <img src="<?php echo $valeurs['url_photo'];?>" 
                                         alt="<?php echo $valeurs['alt'];?>"
                                         title="<?php echo $valeurs['titre'];?>"
-                                        class="w-auto h-40 md:h-80 justify-self-center">
+                                        class="w-auto h-40 md:h-80 mx-auto block">
 
                                 <!--affichage du nom du produit-->
                                 <p><?php echo $valeurs['libelle_produit'];?></p> 

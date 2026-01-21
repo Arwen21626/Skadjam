@@ -79,7 +79,7 @@
         <form class="flex flex-col justify-start items-start m-10" action="./ajouter_reponse.php?idProduit=<?php echo $produit['id_produit']?>&idAvis=<?php echo $_GET['idAvis']?>" method="post">
             <!-- La réponse -->
             <label class="mt-10" for="reponse">Réponse : </label>
-            <textarea class="border-4 border-beige rounded-2xl w-1/1 p-1 pl-3" name="reponse" rows="10" cols="100" required><?php if(isset($commentaire)){ echo isset($commentaire);}?></textarea>
+            <textarea class="border-4 border-beige rounded-2xl w-1/1 p-1 pl-3" name="reponse" rows="10" cols="100" required><?php if(isset($commentaire)){ echo $commentaire;}?></textarea>
 
             <div class="flex mt-10 justify-center md:justify-end w-1/1 ">
                 <button class="cursor-pointer  border-2 border-vertFonce rounded-2xl w-40 h-14 p-0 m-0 mr-10 " type="button"><a href="./details_produit.php?idProduit=<?php echo $idProd; ?>">Annuler</a></button>

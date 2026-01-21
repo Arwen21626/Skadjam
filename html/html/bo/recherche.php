@@ -52,6 +52,9 @@
     
     <main class="min-h-[800px]">
         <!-- Barre de recherche -->
+        <input type="text" id="recherche" maxlength="100" class="border-4 border-vertFonce rounded-xl placeholder-gray-500 md:w-267 w-95 p-2 md:ml-7 ml-6 mt-4 mb-4" placeholder="Rechercher un produit...">
+        <button id="filtresTris" class="md:hidden underline  m-2">Filtres & tris</button>
+        <!-- Aside -->
         <aside class="sidebar overflow-auto float-left bg-vertFonce text-bleu p-4 sticky w-79 h-225 top-20">
             <!-- Filtres -->
             <section>
@@ -175,7 +178,7 @@
                                 <label for="stockTriCroissant" class="labelDetails">Croissant</label>
                             </div>
                             <div>
-                                <input type="radio" name="prixTri" id="stockTriDecroissant" value="decroissant" class="triFiltre h-5 w-5">
+                                <input type="radio" name="stockTri" id="stockTriDecroissant" value="decroissant" class="triFiltre h-5 w-5">
                                 <label for="stockTriDecroissant" class="labelDetails">Décroissant</label>
                             </div>
                         </div>

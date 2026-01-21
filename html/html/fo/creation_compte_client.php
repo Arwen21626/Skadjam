@@ -2,9 +2,9 @@
 session_start();
 require_once __DIR__ . "/../../php/verif_role_fo.php";
 
-if ($_SESSION['role'] !== 'visiteur'){
-    header("location: /404.php");
-}
+$erreurs = $_SESSION['erreurs'] ?? [];
+$old = $_SESSION['old'] ?? [];
+unset($_SESSION['erreurs'], $_SESSION['old']);
 ?>
 
 <!DOCTYPE html>
@@ -39,54 +39,60 @@ if ($_SESSION['role'] !== 'visiteur'){
             <?php if (isset($_GET['veutAcheter'])) { ?>
                 <input type="hidden" name="veutAcheter" value="V">
             <?php } ?>
-        
             <!-- Nom -->
             <div class="flex flex-col basis-1/3 m-5 min-w-3xs">
                 <label for="nom">Nom* :</label>
-                <input class="border-4 border-beige rounded-2xl w-1/1 p-1 pl-3" type="text" name="nom" id="nom" required>
+                <input class="border-4 border-beige rounded-2xl w-1/1 p-1 pl-3" type="text" name="nom" id="nom" value="<?= htmlspecialchars($old['nom'] ?? '') ?>" required>
+                <?php if (isset($erreurs['nom'])) { echo "<p class='text-rouge' style='font-size: 0.90em'>Le nom ne peut contenir que des majuscules, des minuscules, des - ou des espaces.</p>"; } ?>
             </div>
 
-            <!-- Prenom -->
+            <!-- Prénom -->
             <div class="flex flex-col basis-1/3 m-5 min-w-3xs">
-                <label for="prenom">Prenom* :</label>
-                <input class="border-4 border-beige rounded-2xl w-1/1 p-1 pl-3" type="text" name="prenom" id="prenom" required>
+                <label for="prenom">Prénom* :</label>
+                <input class="border-4 border-beige rounded-2xl w-1/1 p-1 pl-3" type="text" name="prenom" id="prenom" value="<?= htmlspecialchars($old['prenom'] ?? '') ?>" required>
+                <?php if (isset($erreurs['prenom'])) { echo "<p class='text-rouge' style='font-size: 0.90em'>Le prénom ne peut contenir que des majuscules, des minuscules, des - ou des espaces.</p>"; } ?>
             </div>
 
             <!-- Pseudo -->
             <div class="flex flex-col basis-1/3 m-5 min-w-3xs">
                 <label for="pseudo">Pseudo* :</label>
-                <input class="border-4 border-beige rounded-2xl w-1/1 p-1 pl-3" type="text" name="pseudo" id="pseudo" required>
+                <input class="border-4 border-beige rounded-2xl w-1/1 p-1 pl-3" type="text" name="pseudo" id="pseudo"value="<?= htmlspecialchars($old['pseudo'] ?? '') ?>" required>
+                <?php if (isset($erreurs['pseudo'])) { echo "<p class='text-rouge' style='font-size: 0.90em'>Le pseudo ne peut que contenir des majuscules, des minuscules, des chiffres ou des - ou des espaces.</p>"; } ?>
             </div>
 
             <!-- Date de naissance -->
             <div class="flex flex-col basis-1/3 m-5 min-w-3xs">
                 <label for="naissance">Date de naissance* :</label>
-                <input class="border-4 border-beige rounded-2xl w-1/1 p-1 pl-3" type="date" name="naissance" id="naissance" required> 
+                <input class="border-4 border-beige rounded-2xl w-1/1 p-1 pl-3" type="date" name="naissance" id="naissance" value="<?= htmlspecialchars($old['naissance'] ?? '') ?>" required> 
+                <?php if (isset($erreurs['naissance'])) { echo "<p class='text-rouge' style='font-size: 0.90em'>La date de naissance doit être de la forme : aaaa-mm-jj.</p>"; } ?>
             </div>
 
             <!-- Téléphone -->
             <div class="flex flex-col basis-1/3 m-5 min-w-3xs">
                 <label for="telephone">Telephone* :</label>
-                <input class="border-4 border-beige rounded-2xl w-1/1 p-1 pl-3 placeholder-gray-500" type="tel" name="telephone" id="telephone" placeholder="0604030201" pattern="0[0-9]{9}" required>
+                <input class="border-4 border-beige rounded-2xl w-1/1 p-1 pl-3 placeholder-gray-500" type="tel" name="telephone" id="telephone" placeholder="0604030201" pattern="0[0-9]{9}" value="<?= htmlspecialchars($old['telephone'] ?? '') ?>" required>
+                <?php if (isset($erreurs['telephone'])) { echo "<p class='text-rouge' style='font-size: 0.90em'>Le numéro de téléphone doit commencer par 0 suivi de 9 chiffres.</p>"; } ?>
             </div>
 
             <!-- Adresse email -->
             <div class="flex flex-col basis-1/3 m-5 min-w-3xs">
                 <label for="mail">Adresse email* :</label>
-                <input class="border-4 border-beige rounded-2xl w-1/1 p-1 pl-3" type="mail" name="mail" id="mail" required>
+                <input class="border-4 border-beige rounded-2xl w-1/1 p-1 pl-3" type="mail" name="mail" id="mail" value="<?= htmlspecialchars($old['mail'] ?? '') ?>" required>
+                <?php if (isset($erreurs['mail'])) { echo "<p class='text-rouge' style='font-size: 0.90em'>L'adresse email n'est pas valide.</p>"; } ?>
             </div>
 
             <!-- Mot de passe -->
             <div class="flex flex-col basis-1/3 m-5 min-w-3xs">
                 <label for="mdp">Mot de passe* :</label>
-                <input class="border-4 border-beige rounded-2xl w-1/1 p-1 pl-3" type="password" name="mdp" id="mdp" required>
-                <p style="font-size: 0.90em"> 1 majuscule, 1 minuscule, 1 chiffre, 1 caractère spécial, 10 caractères minimum</p>
+                <input class="border-4 border-beige rounded-2xl w-1/1 p-1 pl-3" type="password" name="mdp" id="mdp" value="<?= htmlspecialchars($old['mdp'] ?? '') ?>" required>
+                <p style="font-size: 0.90em" class="<?php if (isset($erreurs['mdp'])) { echo "text-rouge"; } ?>"> 1 majuscule, 1 minuscule, 1 chiffre, 1 caractère spécial, 10 caractères minimum</p>
             </div>
 
             <!-- Vérification du mot de passe -->
             <div class="flex flex-col basis-1/3 m-5 min-w-3xs">
                 <label for="verifMdp">Vérification du mot de passe* :</label>
                 <input class="border-4 border-beige rounded-2xl w-1/1 p-1 pl-3" type="password" name="verifMdp" id="verifMdp" required>
+                <?php if (isset($verifMdp)) { echo "<p class='text-rouge' style='font-size: 0.90em'>La vérification doit être identique à votre mot de passe.</p>"; } ?>
             </div>
 
             <!-- Acceptation des CGU -->
