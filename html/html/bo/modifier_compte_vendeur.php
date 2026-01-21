@@ -133,15 +133,17 @@ if (isset($_POST["nom"]) && isset($_POST["prenom"]) && isset($_POST["mail"]) && 
 
             $urlPhoto = '/images/logo/bootstrap_icon/image.svg';
 
-            // Récupération de la photo existante (si elle existe)
-            $reqPhoto = $dbh->prepare("SELECT ph.id_photo, ph.url_photo
-                                        FROM sae3_skadjam._presente pr
-                                        INNER JOIN sae3_skadjam._photo ph
-                                            ON pr.id_photo = ph.id_photo
-                                        WHERE pr.id_vendeur = $idCompte");
-            $reqPhoto->execute();
+            if(isset($_FILES['photo'])){
+                // Récupération de la photo existante (si elle existe)
+                $reqPhoto = $dbh->prepare("SELECT ph.id_photo, ph.url_photo
+                                            FROM sae3_skadjam._presente pr
+                                            INNER JOIN sae3_skadjam._photo ph
+                                                ON pr.id_photo = ph.id_photo
+                                            WHERE pr.id_vendeur = $idCompte");
+                $reqPhoto->execute();
 
-            $photoExistante = $reqPhoto->fetch();
+                $photoExistante = $reqPhoto->fetch();
+            }
 
             // Traitement upload
             if (isset($_FILES['photo']) && $_FILES['photo']['error'] === UPLOAD_ERR_OK) {
