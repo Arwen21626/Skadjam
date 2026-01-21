@@ -9,6 +9,7 @@ int connexionBd(){
     char *user = getenv("DB_USER");
     char *password = getenv("DB_PASSWORD");
     char connInfo[512];
+    LOG_SERV(LOG_DEBUG, "variable env : DB_HOST %s DB_NAME %s DB_USER %s DB_PASS %s", host, dbname, user, password);
     snprintf(connInfo, sizeof(connInfo), "host=%s dbname=%s user=%s password=%s", host, dbname, user, password);
     conn = PQconnectdb(connInfo);
 
