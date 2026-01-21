@@ -387,7 +387,7 @@ if (isset($_POST['categorie']) && isset($_POST['nom']) && isset($_POST['prix']) 
                     <!-- Mettre en promotion -->
                     <div class="flex flex-row mr-4 ml-4">
                         <label class="mr-4" for="mettreEnPromotion">Mettre en promotion<?php if ($nbPromos >= 2 && !$caseCochee) { echo " (Limite atteinte)"; } ?></label>
-                        <input id="promoCheck" type="checkbox" name="mettreEnPromotion" class="<?php echo ($nbPromos >= 2 && !$caseCochee) ? 'cursor-not-allowed' : 'cursor-pointer'; ?> appearance-none w-10 h-10 border-4 border-beige rounded-md checked:bg-beige checked:border-vertFonce" <?php echo ($nbPromos >= 2 && !$caseCochee) ? 'disabled' : ''; ?>>
+                        <input id="promoCheck" type="checkbox" name="mettreEnPromotion" class="<?php echo ($nbPromos >= 2 && !$caseCochee) ? 'cursor-not-allowed' : 'cursor-pointer'; ?> appearance-none w-10 h-10 border-4 border-beige rounded-md checked:bg-beige checked:border-vertFonce" <?php echo $caseCochee ? 'checked' : ''; ?> <?php echo ($nbPromos >= 2 && !$caseCochee) ? 'disabled' : ''; ?>>
                     </div>
                 </div>
                 <!-- Inputs liés aux promotions -->
