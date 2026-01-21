@@ -844,9 +844,6 @@ input.quantite-prod-input {
   .w-full {
     width: 100%;
   }
-  .w-xs {
-    width: var(--container-xs, 20rem);
-  }
   .max-w-1\/1 {
     max-width: calc(1/1 * 100%);
   }
@@ -1910,11 +1907,6 @@ input.quantite-prod-input {
   .md\:justify-evenly {
     @media (width >= 48rem) {
       justify-content: space-evenly;
-    }
-  }
-  .md\:justify-start {
-    @media (width >= 48rem) {
-      justify-content: flex-start;
     }
   }
   .md\:gap-1 {
