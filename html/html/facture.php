@@ -25,7 +25,7 @@ foreach($dbh->query("SELECT v.raison_sociale, cvend.adresse_mail as mail_vendeur
                     INNER JOIN sae3_skadjam._habite h ON h.id_compte = v.id_compte
                     INNER JOIN sae3_skadjam._adresse a ON a.id_adresse = h.id_adresse
                     INNER JOIN sae3_skadjam._compte cvend ON cvend.id_compte = v.id_compte
-                    INNER JOIN sae3_skadjam._compte ccli ON ccli.id_compte = v.id_compte
+                    INNER JOIN sae3_skadjam._compte ccli ON ccli.id_compte = cli.id_compte
                     WHERE c.id_commande = $idCommande AND p.id_vendeur = f.emetteur ORDER BY numero_facture ASC", 
             PDO::FETCH_ASSOC) as $row){
 
