@@ -133,6 +133,7 @@
             <button class="imprimer border-vertClair border-4 rounded-lg md:rounded-2xl w-35 h-10 md:w-65 md:h-14 px-7 mr-5 cursor-pointer hidden md:block">Imprimer <div class="hidden md:inline-block">la facture</div></button>
         </div>
 
+        <!---état de la commande--->
         <div class="ml-5 flex flex-row md:items-center">
             <h3 class="mr-3">
                 <span class="block md:hidden">Etat :</span>
@@ -227,7 +228,7 @@
                         <th class="text-center py-3"><h4><?php echo str_replace('.',',',$total_ttc);?>€</h4></th>
                         <th></th>
                         <th class="text-center py-3"><h4><?php echo $quantite_totale;?></h4></th>
-                        <th class="text-center py-3"><h4><?php echo str_replace('.',',',$total_final);?>€</h4></th>
+                        <th class="text-center py-3 pr-3"><h4><?php echo str_replace('.',',',$total_final);?>€</h4></th>
                     </tr>
                 </tfoot>
             </table>
