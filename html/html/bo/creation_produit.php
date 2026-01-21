@@ -191,7 +191,7 @@ if (isset($_POST['categorie']) && isset($_POST['nom']) && isset($_POST['prix']) 
 
             // Gestion de la promotion
             if(isset($_POST['mettreEnPromotion'])){
-                $caseCochee = $_POST['mettreEnPromotion'];
+                $caseCochee = isset($_POST['mettreEnPromotion']);
             }else{
                 $caseCochee = false;
             }
@@ -201,9 +201,9 @@ if (isset($_POST['categorie']) && isset($_POST['nom']) && isset($_POST['prix']) 
                 $dbh->beginTransaction();
                 // Création de la promotion
                 try {
-                    if(verifDate($dateDebutPromotion) && $dateDebutPromotion >= date('Y-m-d')){
+                    if(isset($dateDebutPromotion) && $dateDebutPromotion >= date('Y-m-d')){
                         // Une date de fin à été ajoutée
-                        if(verifDate($dateFinPromotion) && $dateFinPromotion >= $dateDebutPromotion){
+                        if(isset($dateFinPromotion) && $dateFinPromotion >= $dateDebutPromotion){
                             $stmtPromo = $dbh->prepare("INSERT INTO sae3_skadjam._promotion
                                                         (
                                                             date_debut_promotion,
@@ -403,20 +403,20 @@ if (isset($_POST['categorie']) && isset($_POST['nom']) && isset($_POST['prix']) 
                         <div>
                             <div class="flex flex-row mr-4 ml-4">
                                 <label class="mr-4" for="dateDebutPromotion">Début de promotion* :</label>
-                                <input class="border-4 border-beige rounded-2xl w-45" type="date" name="dateDebutPromotion" id="dateDebutPromotion" value="<?php echo $dateDebutPromotion !== null ? $dateDebutPromotion : date('Y-m-d'); ?>" required>
+                                <input class="border-4 border-beige rounded-2xl w-45" type="date" name="dateDebutPromotion" id="dateDebutPromotion" value="<?php if(isset($dateDebutPromotion)){echo $dateDebutPromotion;}else{ echo date('Y-m-d');} ?>" required>
                             </div>
                         </div>
                         <div>
                             <div class="flex flex-row mr-4 ml-4">
                                 <label class="mr-4" for="dateFinPromotion">Fin de promotion :</label>
-                                <input class="border-4 border-beige rounded-2xl w-45" type="date" name="dateFinPromotion" id="dateFinPromotion" value="<?php echo $dateFinPromotion; ?>">
+                                <input class="border-4 border-beige rounded-2xl w-45" type="date" name="dateFinPromotion" id="dateFinPromotion" value="<?php if(isset($dateFinPromotion)){echo $dateFinPromotion;} ?>">
                             </div>
                         </div>
                     </div>
                     <div class="flex flex-row justify-around m-2 p-2">
                         <div class="flex flex-row mr-4 ml-4">
                             <label class="mr-4" for="labelPromo">Libellé de la promotion :</label>
-                            <input class="border-4 border-beige rounded-2xl w-45" maxlength="20" type="text" name="labelPromo" id="labelPromo" value="<?php if(isset($labelPromo)){echo $labelPromo;}?>">
+                            <input class="border-4 border-beige rounded-2xl w-45" maxlength="19" type="text" name="labelPromo" id="labelPromo" value="<?php if(isset($labelPromo)){echo $labelPromo;}?>">
                         </div>
                     </div>
                 </div>

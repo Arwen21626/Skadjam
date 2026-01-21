@@ -432,11 +432,11 @@ input.quantite-prod-input {
   .m-10 {
     margin: calc(var(--spacing, 0.25rem) * 10);
   }
-  .mx-auto {
-    margin-inline: auto;
-  }
   .mx-3 {
     margin-inline: calc(var(--spacing, 0.25rem) * 3);
+  }
+  .mx-auto {
+    margin-inline: auto;
   }
   .my-5 {
     margin-block: calc(var(--spacing, 0.25rem) * 5);
@@ -831,6 +831,9 @@ input.quantite-prod-input {
   }
   .w-180 {
     width: calc(var(--spacing, 0.25rem) * 180);
+  }
+  .w-200 {
+    width: calc(var(--spacing, 0.25rem) * 200);
   }
   .w-250 {
     width: calc(var(--spacing, 0.25rem) * 250);

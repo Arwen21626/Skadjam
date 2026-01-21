@@ -93,12 +93,6 @@
                     </tbody>
                 </table>
             </div>
-            <div class="flex justify-center">
-                <button class="border-2 border-vertFonce rounded-2xl w-45 h-14 cursor-pointer my-5">
-                    <a href="../bo/modifier_promotion.php?idCompte=<?php echo $idCompte ;?>" class="">Modifier stocks</a>
-                </button>
-            </div>
-
         <?php } ?>
     </main>
 

@@ -87,7 +87,7 @@
             </div>
         </form>
         <!-- Supression -->
-        <?php if ($dejaReponse){ // on peut supprimer une réponse que si on est entrain de la modifier ?>
+        <?php if (isset($dejaReponse)){ // on peut supprimer une réponse que si on est entrain de la modifier ?>
             <a class="ml-10 flex justify-center mb-5 md:inline-block" href="./ajouter_reponse.php?idProduit=<?php echo $produit['id_produit']?>&idAvis=<?php echo $idAvis;?>&supr=true">Supprimer mon avis</a>
         <?php }?>
     </main>

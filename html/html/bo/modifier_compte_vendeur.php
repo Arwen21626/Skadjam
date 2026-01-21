@@ -10,6 +10,21 @@ require_once __DIR__."/../../../connections_params.php"; // données de connexio
 $dbh = new PDO("$driver:host=$server;port=$port;dbname=$dbname", $user, $pass); 
 $dbh->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC);
 
+// définition variables d'erreurs
+$erreur = false;
+$erreurNom = false;
+$erreurPrenom = false;
+$erreurMail = false;
+$erreurTel = false;
+$erreurDenomination = false;
+$erreurRaisonSociale = false;
+$erreurIban = false;
+$erreurSiren = false;
+$erreurAdresse = false;
+$erreurCp = false;
+$erreurVille = false;
+
+
 $idCompte = $_SESSION["idCompte"]; ?>
 <!DOCTYPE html>
 <html lang="fr">
@@ -118,15 +133,17 @@ if (isset($_POST["nom"]) && isset($_POST["prenom"]) && isset($_POST["mail"]) && 
 
             $urlPhoto = '/images/logo/bootstrap_icon/image.svg';
 
-            // Récupération de la photo existante (si elle existe)
-            $reqPhoto = $dbh->prepare("SELECT ph.id_photo, ph.url_photo
-                                        FROM sae3_skadjam._presente pr
-                                        INNER JOIN sae3_skadjam._photo ph
-                                            ON pr.id_photo = ph.id_photo
-                                        WHERE pr.id_vendeur = $idCompte");
-            $reqPhoto->execute();
+            if(isset($_FILES['photo'])){
+                // Récupération de la photo existante (si elle existe)
+                $reqPhoto = $dbh->prepare("SELECT ph.id_photo, ph.url_photo
+                                            FROM sae3_skadjam._presente pr
+                                            INNER JOIN sae3_skadjam._photo ph
+                                                ON pr.id_photo = ph.id_photo
+                                            WHERE pr.id_vendeur = $idCompte");
+                $reqPhoto->execute();
 
-            $photoExistante = $reqPhoto->fetch();
+                $photoExistante = $reqPhoto->fetch();
+            }
 
             // Traitement upload
             if (isset($_FILES['photo']) && $_FILES['photo']['error'] === UPLOAD_ERR_OK) {
@@ -303,7 +320,7 @@ if(!$isset || $erreur){
                     <input type="file" id="photo" name="photo" class="hidden">
                     <!-- label qui agit comme bouton -->
                     <label id="labelImage" for="photo" class="bg-beige w-60 h-60 rounded-2xl image-produit cursor-pointer" style="background-image: url('../..<?= isset($url) ? $url : '/images/logo/bootstrap_icon/image.svg'; ?>'); background-repeat: no-repeat; background-position: center; background-size: 60%;"></label>
-                    <label class="cursor-pointer" for="photo"><h4><strong>Photo de profil *</strong></h4></label>
+                    <label class="cursor-pointer" for="photo"><h4><strong>Photo de profil</strong></h4></label>
                 </div>
 
                 <!-- Vendeur -->

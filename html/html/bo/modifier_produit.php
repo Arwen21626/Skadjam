@@ -204,9 +204,9 @@ if (isset($_POST['categorie']) && isset($_POST['nom']) && isset($_POST['prix']) 
                 $dbh->beginTransaction();
                 // Création de la promotion
                 try {
-                    if(verifDate($dateDebutPromotion) && $dateDebutPromotion >= date('Y-m-d')){
+                    if(isset($dateDebutPromotion) && $dateDebutPromotion >= date('Y-m-d')){
                         // Une date de fin à été ajoutée
-                        if(verifDate($dateFinPromotion) && $dateFinPromotion >= $dateDebutPromotion){
+                        if(isset($dateFinPromotion) && $dateFinPromotion >= $dateDebutPromotion){
                             $stmtPromo = $dbh->prepare("INSERT INTO sae3_skadjam._promotion
                                                         (
                                                             date_debut_promotion,
@@ -312,16 +312,18 @@ if (isset($_POST['categorie']) && isset($_POST['nom']) && isset($_POST['prix']) 
                 $idPromotion = $promotion['id_promotion'];
                 // Mise à jour des dates de la promotion existante
                 if(verifDate($dateDebutPromotion) && $dateDebutPromotion >= date('Y-m-d')){
-                    if(verifDate($dateFinPromotion) && $dateFinPromotion >= $dateDebutPromotion){
-                        $stmtUpdatePromo = $dbh->prepare("UPDATE sae3_skadjam._promotion
-                                                        SET date_debut_promotion = :date_debut,
-                                                            date_fin_promotion = :date_fin
-                                                        WHERE id_promotion = :id_promotion");
-                        $stmtUpdatePromo->execute([
-                            ':date_debut'   => formatDate($dateDebutPromotion),
-                            ':date_fin'     => formatDate($dateFinPromotion),
-                            ':id_promotion' => $idPromotion
-                        ]);
+                    if(isset($dateFinPromotion) && $dateFinPromotion !== ''){
+                        if(verifDate($dateFinPromotion) && $dateFinPromotion >= $dateDebutPromotion){
+                            $stmtUpdatePromo = $dbh->prepare("UPDATE sae3_skadjam._promotion
+                                                            SET date_debut_promotion = :date_debut,
+                                                                date_fin_promotion = :date_fin
+                                                            WHERE id_promotion = :id_promotion");
+                            $stmtUpdatePromo->execute([
+                                ':date_debut'   => formatDate($dateDebutPromotion),
+                                ':date_fin'     => formatDate($dateFinPromotion),
+                                ':id_promotion' => $idPromotion
+                            ]);
+                        }
                     // Suppression de la date de fin de promotion + Mise à jour de la date de début
                     }else if($dateFinPromotion === null){
                         $stmtUpdatePromo = $dbh->prepare("UPDATE sae3_skadjam._promotion
