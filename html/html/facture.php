@@ -126,7 +126,7 @@ foreach($dbh->query("SELECT v.raison_sociale, cvend.adresse_mail as mail_vendeur
                 <?php }?>
             </tbody>
         </table>
-        <p class="border-t-2 font-bold w-1/1">SOUS TOTAL = <?php echo $row['montantFacture']?></p>
+        <p class="border-t-2 font-bold w-1/1">SOUS TOTAL = <?php echo $row['montantFacture']?> €</p>
         </div>
     <?php }?>
 </body>
