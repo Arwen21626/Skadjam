@@ -197,7 +197,7 @@ if (isset($_POST['categorie']) && isset($_POST['nom']) && isset($_POST['prix']) 
             }
             
             // La case "Mettre en promotion" est cochée
-            if ($caseCochee) {
+            if ($caseCochee == 'on') {
                 $dbh->beginTransaction();
                 // Création de la promotion
                 try {
