@@ -13,7 +13,7 @@ $dbh->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC);
 $idCompte = $_SESSION["idCompte"]; ?>
 <!DOCTYPE html>
 <html lang="fr">
-<?php include (__DIR__ . "/../../php/structure/head_back.php");?>
+<?php include __DIR__ . "/../../php/structure/head_back.php";?>
 <head>
     <title>Modification du compte vendeur</title>
     <style>
@@ -23,10 +23,22 @@ $idCompte = $_SESSION["idCompte"]; ?>
     </style>
 </head>
 <?php
+$isset = false;
 // Traitement du formulaire seulement si toutes les données sont saisie
 if (isset($_POST["nom"]) && isset($_POST["prenom"]) && isset($_POST["mail"]) && isset($_POST["tel"]) && isset($_POST["denomination"]) && isset($_POST["raisonSociale"]) && isset($_POST["iban"]) && isset($_POST["adresse"]) && isset($_POST["ville"]) && isset($_POST["cp"]) && isset($_POST["siren"])){
+    $isset = true;
     // Récupération des données du formulaire
     try{
+        // S'il y a eu une erreur lors de l'execution
+        $erreur = false;
+
+        // Récupération de l'ancien email
+        foreach($dbh->query("SELECT c.adresse_mail 
+                                FROM sae3_skadjam._compte c 
+                                WHERE id_compte = $idCompte", PDO::FETCH_ASSOC) as $ligne){
+            $ancienMail = $ligne['adresse_mail'];
+        }
+
         // Vérification que toutes les données commune à la création et à la modification d'un compte client sont correcte
         if (verifNomPrenom($_POST['nom']) && verifNomPrenom($_POST['prenom']) && verifTelephone($_POST['tel']) && verifDenomination($_POST['denomination']) && verifDenomination($_POST['raisonSociale']) && verifIban($_POST['iban']) && verifSiren($_POST['siren']) && verifCp($_POST['cp']) && verifVille($_POST['ville']) && verifAdresse($_POST['adresse'])){
             //récuperer les attributs du post
@@ -47,15 +59,6 @@ if (isset($_POST["nom"]) && isset($_POST["prenom"]) && isset($_POST["mail"]) && 
             $compNum = $temp[1];
             $adresse = $temp[2];
 
-            // S'il y a eu une erreur lors de l'execution
-            $erreur = false;
-
-            // Récupération de l'ancien email
-            foreach($dbh->query("SELECT c.adresse_mail 
-                                    FROM sae3_skadjam._compte c 
-                                    WHERE id_compte = $idCompte", PDO::FETCH_ASSOC) as $ligne){
-                $ancienMail = $ligne['adresse_mail'];
-            }
             // Vérification de l'email et de l'adresse
             if(mailUnique($mail) || $ancienMail === $mail){
                 // Modification du compte
@@ -74,47 +77,43 @@ if (isset($_POST["nom"]) && isset($_POST["prenom"]) && isset($_POST["mail"]) && 
                                         FROM sae3_skadjam._habite h
                                         WHERE id_compte = $idCompte
                                         ORDER BY id_adresse ASC", PDO::FETCH_ASSOC) as $ligne){
-                    if(isset($_POST['adressePostal']) && isset($_POST['ville']) && isset($_POST['codePostal'])){
+                    if(isset($_POST['adresse']) && isset($_POST['ville']) && isset($_POST['cp'])){
 
-                        $numRue = htmlentities(tabAdresse($_POST['adressePostal'])[0]);
-                        $nomRue = htmlentities(tabAdresse($_POST['adressePostal'])[2]);
-                        $complement = htmlentities(tabAdresse($_POST['adressePostal'])[1]);
+                        $adresse = htmlentities($_POST['adresse']);
+                        $numRue = htmlentities(tabAdresse($_POST['adresse'])[0]);
+                        $nomRue = htmlentities(tabAdresse($_POST['adresse'])[2]);
+                        $complement = htmlentities(tabAdresse($_POST['adresse'])[1]);
                         $numBat = htmlentities($_POST['batiment']);
                         $numApart = htmlentities($_POST['apart']);
                         $interphone = htmlentities($_POST['interphone']);
-                        $codePostal = htmlentities($_POST['codePostal']);
+                        $codePostal = htmlentities($_POST['cp']);
                         $ville = htmlentities($_POST['ville']);
 
-                        if (verifAdresse($numRue.' '.$complement.' '.$nomRue) && verifVille($ville) && verifCp($codePostal)){
+                        if (verifAdresse($adresse) && verifVille($ville) && verifCp($codePostal)){
                             $idAdresse = $ligne['id_adresse'];
                             $modifAdresse = $dbh->prepare("UPDATE sae3_skadjam._adresse
                                                             SET numero_rue = $numRue, numero_bat = '$numBat', numero_appart = '$numApart', code_interphone = '$interphone', code_postal = $codePostal, complement_adresse = '$complement', ville = '$ville', adresse_postale = '$nomRue'
                                                             WHERE id_adresse = $idAdresse");
                             $modifAdresse->execute();
                         // Erreurs concernant le format de l'adresse
-                        }else if(!verifAdresse($numRue.' '.$complement.' '.$nomRue)){
+                        }else if(!verifAdresse($adresse)){
                             $erreur = true;
-                            echo "Erreur : sur l'adresse, le format de l'adresse postale n'est pas correcte. ";
-                            echo "Exemple : 3 bis rue des camélia";
+                            $erreurAdresse = true;
                         }else if(!verifVille($ville)){
                             $erreur = true;
-                            echo "Erreur : sur l'adresse, le format de la ville n'est pas correcte. ";
-                            echo "Elle ne peut contenir que des lettres, des espaces et des -";
+                            $erreurVille = true;
                         }else if(!verifCp($codePostal)){
                             $erreur = true;
-                            echo "Erreur : sur l'adresse, le format du code postale n'est pas correcte. ";
-                            echo "Il doit contenir exactement 5 chiffres.";
+                            $erreurCp = true;
                         }
                     // erreur si l'un des champs obligatoire des adresses n'est pas rempli
                     }else{
                         $erreur = true;
-                        echo "vous n'avez pas rempli tous les champs obligatoires de l'adresse, elle n'a donc pas été modifier.";
+                        $erreurAdresse = true;
+                        $erreurVille = true;
+                        $erreurCp = true;
                     }
                 }
-            // Erreur concernant l'unicité du mail
-            }else if(!mailUnique($mail) && $ancienMail !== $mail){
-                $erreur = true;
-                echo "Erreur : le mail saisie existe déjà. ";
             }
 
             $urlPhoto = '/images/logo/bootstrap_icon/image.svg';
@@ -185,65 +184,70 @@ if (isset($_POST["nom"]) && isset($_POST["prenom"]) && isset($_POST["mail"]) && 
                 }
             }
 
-
-            // Fermer la connexion à la base de données
-            $dbh = null;
-
-            // Redirection vers la page d'accueil
-            header("location: profil_vendeur.php");
-
+            if(!$erreur){
+                // Fermer la connexion à la base de données
+                $dbh = null;
+                // Redirection vers la page d'accueil
+                header("location: profil_vendeur.php");
+            }
         // Messages d'erreurs si l'un des champs est mal rempli
         }else{ 
-            echo "Erreur : ";
             if(!verifNomPrenom($_POST['nom'])){
-                echo "le format de votre nom n'est pas correct. ";
-                echo "il ne peut contenir que des majuscules, des minuscules, des - ou des espaces.";
-            }else if(!verifNomPrenom($_POST['prenom'])){
-                echo "le format de votre prénom n'est pas correct. ";
-                echo "il ne peut contenir que des majuscules, des minuscules, des - et des espaces.";
-            }else if(!verifMail($_POST['mail'])){
-                echo "le format de votre mail n'est pas correct. ";
-                echo "exemple : Charlotte@gmail.com";
-            }else if(!mailUnique($_POST['mail'])){
-                echo "le mail saisie existe déjà. ";
-            }else if(!verifTelephone($_POST['tel'])){
-                echo "le format de votre numéro de téléphone n'est pas correct. ";
-                echo "il doit commencer par 0 suivi de 9 chiffres.";
-            }else if(!verifAdresse($_POST['adresse'])){
-                echo "le format de votre adresse n'est pas correct. ";
-                echo "exemple : 3 bis rue des camélias";
-            }else if(!verifDenomination($_POST['denomination'])){
-                echo "le format de votre dénomination n'est pas correct. ";
-                echo "il ne peut contenir que des lettres, des chiffres, des - et des espaces.";
-            }else if(!verifDenomination($_POST['raisonSociale'])){
-                echo "le format de votre raison sociale n'est pas correct. ";
-                echo "il ne peut contenir que des lettres, des chiffres, des - et des espaces.";
-            }else if(!verifIban($_POST['iban'])){
-                echo "le format de votre IBAN n'est pas correct. ";
-                echo "il doit commencer par FR suivi de 12 chiffres et de 11 caractères alphanumériques.";
-            }else if(!verifSiren($_POST['siren'])){
-                echo "le format de votre SIREN n'est pas correct. ";
-                echo "il doit contenir exactement 9 chiffres.";
-            }else if(!verifCp($_POST['cp'])){
-                echo "le format de votre code postal n'est pas correct. ";
-                echo "il doit contenir exactement 5 chiffres.";
-            }else if(!verifVille($_POST['ville'])){
-                echo "le format de votre ville n'est pas correct. ";
-                echo "il ne peut contenir que des lettres, des - et des espaces.";
-            }else{
-                echo "inconnu.";
-            } ?>
-            <a href="modifier_compte_vendeur.php">Retour</a>
-        <?php 
+                $erreur = true;
+                $erreurNom = true;
+            }
+            if(!verifNomPrenom($_POST['prenom'])){
+                $erreur = true;
+                $erreurPrenom = true;
+            }
+            if(!verifMail($_POST['mail'])){
+                $erreur = true;
+                $erreurMail = true;
+            }
+            if(!mailUnique($_POST['mail']) && $_POST['mail'] !== $ancienMail){
+                $erreur = true;
+                $erreurMail = true;
+            }
+            if(!verifTelephone($_POST['tel'])){
+                $erreur = true;
+                $erreurTel = true;
+            }
+            if(!verifAdresse($_POST['adresse'])){
+                $erreur = true;
+                $erreurAdresse = true;
+            }
+            if(!verifDenomination($_POST['denomination'])){
+                $erreur = true;
+                $erreurDenomination = true;
+            }
+            if(!verifDenomination($_POST['raisonSociale'])){
+                $erreur = true;
+                $erreurRaisonSociale = true;
+            }
+            if(!verifIban($_POST['iban'])){
+                $erreur = true;
+                $erreurIban = true;
+            }
+            if(!verifSiren($_POST['siren'])){
+                $erreur = true;
+                $erreurSiren = true;
+            }
+            if(!verifCp($_POST['cp'])){
+                $erreur = true;
+                $erreurCp = true;
+            }
+            if(!verifVille($_POST['ville'])){
+                $erreur = true;
+                $erreurVille = true;
+            }
         }
     }catch(PDOException $e){
         echo "Erreur dans l'envoie des données dans la base de données.";
         echo $e->getMessage();
         die();
     }
-    
-}else{
-
+}
+if(!$isset || $erreur){
     // Préparation des données qui vont remplir les champs du formulaire
     // Récupération du comptes clients
     foreach($dbh->query("SELECT * FROM sae3_skadjam._compte c
@@ -308,18 +312,22 @@ if (isset($_POST["nom"]) && isset($_POST["prenom"]) && isset($_POST["mail"]) && 
                     <div class="flex flex-col items-start mt-6 w-fit @max-[768px]:mt-2">
                         <label for="nom">Nom * :</label>
                         <input class="ml-5 border-4 border-solid rounded-2xl border-beige p-1 pl-3 mb-4 w-1/1" type="text" id="nom" name="nom" value="<?= $nom; ?>" size="30" required >
+                        <?= $erreurNom ? "<p style=\"font-size: 0.90em\" class=\"text-rouge\">Le nom ne peut contenir que</p><br><p style=\"font-size: 0.90em\" class=\"text-rouge\">des majuscules, des minuscules, des - ou des espaces.</p>" : ""; ?>
                     </div>
                     <div class="flex flex-col items-start mt-6 w-fit @max-[768px]:mt-2">
                         <label for="prenom">Prénom * :</label>
                         <input class="ml-5 border-4 border-solid rounded-2xl border-beige p-1 pl-3 mb-4 w-1/1" type="text" id="prenom" name="prenom" value="<?= $prenom; ?>" size="30" required>
+                        <?= $erreurPrenom ? "<p style=\"font-size: 0.90em\" class=\"text-rouge\">Le prénom ne peut contenir que</p><br><p style=\"font-size: 0.90em\" class=\"text-rouge\">des majuscules, des minuscules, des - ou des espaces.</p>" : ""; ?>
                     </div>
                     <div class="flex flex-col items-start mt-6 w-fit @max-[768px]:mt-2">
                         <label for="mail">Mail * :</label>
                         <input class="ml-5 border-4 border-solid rounded-2xl border-beige p-1 pl-3 mb-4 w-1/1" type="email" id="mail" name="mail" value="<?= $mail; ?>" size="30" required>
+                        <?= $erreurMail ? "<p style=\"font-size: 0.90em\" class=\"text-rouge\">Le mail saisi existe déjà ou son format n'est pas correct.</p>" : ""; ?>
                     </div>
                     <div class="flex flex-col items-start mt-6 w-fit @max-[768px]:mt-2">
                         <label for="tel">Numéro de téléphone * :</label>
                         <input class="ml-5 border-4 border-solid rounded-2xl border-beige p-1 pl-3 mb-4 w-1/1" type="tel" id="tel" name="tel" value="<?= $tel; ?>" size="10" required>
+                        <?= $erreurTel ? "<p style=\"font-size: 0.90em\" class=\"text-rouge\">Le numéro de téléphone doit</p><br><p style=\"font-size: 0.90em\" class=\"text-rouge\">commencer par 0 suivi de 9 chiffres.</p>" : ""; ?>
                     </div>
                 </div>
 
@@ -330,20 +338,24 @@ if (isset($_POST["nom"]) && isset($_POST["prenom"]) && isset($_POST["mail"]) && 
                         <div class="flex flex-col items-start mt-6 w-fit @max-[768px]:mt-2">
                             <label for="raisonSociale">Raison sociale de l'entreprise * :</label>
                             <input class="ml-5 border-4 border-solid rounded-2xl border-beige p-1 pl-3 mb-4 w-1/1" type="text" id="raisonSociale" name="raisonSociale" value="<?= $raisonSociale; ?>" size="30" required>
+                            <?= $erreurRaisonSociale ? "<p style=\"font-size: 0.90em\" class=\"text-rouge\">La raison sociale est invalide.</p>" : ""; ?>
                         </div>
                         <div class="flex flex-col items-start mt-6 w-fit @max-[768px]:mt-2">
                             <label for="denomination">Nom de l'entreprise * :</label>
                             <input class="ml-5 border-4 border-solid rounded-2xl border-beige p-1 pl-3 mb-4 w-1/1" type="text" id="denomination" name="denomination" value="<?= $denom; ?>" size="30" required>
-                        </div> 
+                            <?= $erreurDenomination ? "<p style=\"font-size: 0.90em\" class=\"text-rouge\">Le nom de l'entreprise est invalide.</p>" : ""; ?>
+                        </div>
                     </div>
                     <div class="flex flex-row no-wrap justify-between ml-10 mb-7 mr-10 @max-[768px]:ml-5 @max-[768px]:mr-5">
                         <div class="flex flex-col items-start mt-6 w-fit @max-[768px]:mt-2">
                             <label for="siren">Numéro de SIREN * :</label>
                             <input class="ml-5 border-4 border-solid rounded-2xl border-beige p-1 pl-3 mb-4 w-1/1" type="text" id="siren" name="siren" value="<?= $siren; ?>" size="10" required>
+                            <?= $erreurSiren ? "<p style=\"font-size: 0.90em\" class=\"text-rouge\">Le numéro de SIREN doit contenir exactement 9 chiffres.</p>" : ""; ?>
                         </div>
                         <div class="flex flex-col items-start mt-6 w-fit @max-[768px]:mt-2">
                             <label for="iban">Numéro de IBAN * :</label>
                             <input class="ml-5 border-4 border-solid rounded-2xl border-beige p-1 pl-3 mb-4 w-1/1" type="text" id="iban" name="iban" value="<?= $iban; ?>" placeholder="FR" size="30" required>
+                            <?= $erreurIban ? "<p style=\"font-size: 0.90em\" class=\"text-rouge\">Le numéro de IBAN doit commencer par</p><br><p style=\"font-size: 0.90em\" class=\"text-rouge\">FR suivi de 12 chiffres et de 11 caractères alphanumériques.</p>" : ""; ?>
                         </div>
                     </div>
                 </div>
@@ -355,16 +367,19 @@ if (isset($_POST["nom"]) && isset($_POST["prenom"]) && isset($_POST["mail"]) && 
                         <div class="flex flex-col no-wrap items-start mt-6 w-fit @max-[768px]:mt-2">
                             <label for="adresse">Adresse * :</label>
                             <input class="ml-5 border-4 border-solid rounded-2xl border-beige p-1 pl-3 mb-4 @max-[768px]:ml-2 max-w-3/4 @max-[768px]:pl-2 " type="text" id="adresse" name="adresse" value="<?= $num . (isset($numBis) ? " $numBis" : " ") . $adresse; ?>" size="50" placeholder="ex : 3 rue des camélias" required>
+                            <?= $erreurAdresse ? "<p style=\"font-size: 0.90em\" class=\"text-rouge\">L'adresse est invalide.</p>" : ""; ?>
                         </div>
                     </div>
                     <div class="flex flex-row no-wrap justify-between">
                         <div class="flex flex-col items-start mt-6 w-fit @max-[768px]:mt-2">
                             <label for="ville">Ville * :</label>
                             <input class="ml-5 border-4 border-solid rounded-2xl border-beige p-1 pl-3 mb-4 @max-[768px]:ml-2 max-w-3/4 @max-[768px]:pl-2 " type="text" id="ville" name="ville" value="<?= $ville; ?>" size="50" required>
+                            <?= $erreurVille ? "<p style=\"font-size: 0.90em\" class=\"text-rouge\">Le nom de la ville ne peut contenir que des lettres, des espaces et des -.</p>" : ""; ?>
                         </div>
                         <div class="flex flex-col items-start mt-6 w-fit @max-[768px]:mt-2">
                             <label for="cp">Code Postal * :</label>
                             <input class="ml-5 border-4 border-solid rounded-2xl border-beige p-1 pl-3 mb-4 @max-[768px]:ml-2 max-w-3/4 @max-[768px]:pl-2 " type="text" id="cp" name="cp" value="<?= $cp; ?>" size="10" required>
+                            <?= $erreurCp ? "<p style=\"font-size: 0.90em\" class=\"text-rouge\">Le code postal doit contenir</p><br><p style=\"font-size: 0.90em\" class=\"text-rouge\">exactement 5 chiffres.</p>" : ""; ?>
                         </div>
                     </div>
                 </div>
@@ -392,5 +407,5 @@ if (isset($_POST["nom"]) && isset($_POST["prenom"]) && isset($_POST["mail"]) && 
         ?>
         <script src="../../js/bo/changement_image_produits.js"></script>
     </body>
-    </html>
 <?php } ?>
+</html>

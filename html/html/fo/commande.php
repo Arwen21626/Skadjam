@@ -107,6 +107,9 @@
     <?php include __DIR__ . "/../../php/structure/header_front.php"; ?>
     <?php include __DIR__ . "/../../php/structure/navbar_front.php"; ?>
 
+    <div id="div_lvr" class="hidden fixed bg-black/50 inset-0 z-10 items-center justify-center">
+        <img id="img_lvr" src="../../images<?= $img_url ?>" alt="image livraison" class=" w-2xs md:w-2xl rounded-2xl shadow-lg">
+    </div>
     <main class="min-h-[600px]">
         
         <h2 class="mt-10">Récapitulatif de la commande</h2>
@@ -123,12 +126,37 @@
             <h3 id="numeroCommande"><?php echo $idCommande;?></h3>
         </div>
         
-        <div class="md:flex md:justify-between">
+        <div class="md:flex md:justify-between items-center">
             <!---date--->
             <h3 class="ml-5 mr-3">Date : <?php echo $date;?></h3>
             <!---bouton imprimer page--->
             <button class="imprimer border-vertClair border-4 rounded-lg md:rounded-2xl w-35 h-10 md:w-65 md:h-14 px-7 mr-5 cursor-pointer hidden md:block">Imprimer <div class="hidden md:inline-block">la facture</div></button>
         </div>
+
+        <div class="ml-5 flex flex-row md:items-center">
+            <h3 class="mr-3">
+                <span class="block md:hidden">Etat :</span>
+                <span class="hidden md:block"> Etat de la livraison :</span>
+            </h3> 
+            <h3 id="numeroCommande"><?= $etat ?></h3>
+        </div>
+        
+        <?php
+        if ($raison != 0){ ?>
+        <div class="ml-5 flex flex-row items-center mt-5">
+            <h3 class="mr-3">Raison : </h3> 
+            <h3 id="numeroCommande"><?= $raison ?></h3>
+        </div>
+        <?php
+        } else if ($image != 0){ ?>
+        <button id="btn_img" class="border-vertClair border-4 rounded-lg mt-2 ml-5 md:rounded-2xl w-35 h-10 md:w-50 md:h-14 px-1 md:px-7 cursor-pointer">
+            Pièce jointe
+        </button>
+
+
+        <?php
+        }
+        ?>
 
         <div class="flex justify-center md:mt-10">
         <!--TABLEAU DE LA COMMANDE VERSION TABLETTE-->
@@ -157,8 +185,8 @@
                                 <!---affichage des informations de chaque produit de la commande--->
                                 <tr class="py-4 <?= ligneCouleur($ligneIndex)?>">
                                     <td class="text-left py-3 pl-3"><p><?php echo $ligne['id_produit'];?> - <?php echo $ligne['libelle_produit'];?></p></td>
-                                    <td class="text-center py-3"><p><?php echo $ligne['prix_ht'];?></p></td>
-                                    <td class="text-center py-3"><p><?php echo $ligne['prix_ttc'];?></p></td>
+                                    <td class="text-center py-3"><p><?php echo str_replace('.',',',$ligne['prix_ht']);?></p></td>
+                                    <td class="text-center py-3"><p><?php echo str_replace('.',',',$ligne['prix_ttc']);?></p></td>
                                     <td class="text-center py-3"><p><?php echo $ligne['pourcentage_remise']*100;?>%</p></td>
                                     <td class="text-center py-3"><p><?php echo $ligne['quantite'];?></p></td>
                                     <!---affichage du total de ligne (quantite et remise comprise)--->
@@ -168,7 +196,7 @@
                                     else{
                                         $total_ligne = $ligne['prix_ttc'] * $ligne['quantite'] ;
                                     }?>
-                                    <td class="text-center py-3"><p><?php echo $total_ligne;?></p></td>
+                                    <td class="text-center py-3"><p><?php echo str_replace('.',',',$total_ligne);?></p></td>
                                     <?php 
                                         //calcul du total ht de la commande
                                         $total_ht += $ligne['sous_total_ht'];
@@ -183,7 +211,7 @@
                         <!---sous-total par vendeur--->
                         <tr class="py-4 <?= ligneCouleur($ligneIndex)?>">
                             <th colspan="5" class="text-left w-90 pl-3"><p>Sous-total :</p></th>
-                            <th class="text-center py-3"><p><?php echo $sous_total_final;?></p></th>
+                            <th class="text-center py-3"><p><?php echo str_replace('.',',',$sous_total_final);?></p></th>
                         </tr>
                         <?php 
                             //calcul du total final de la commande remise(s) comprise(s)
@@ -195,11 +223,11 @@
                     <!---affichage des totaux de la commande--->
                     <tr class="py-4 <?= ligneCouleur($ligneIndex)?>">
                         <th class="text-left w-90 pl-3"><h4>Total :</h4></th>
-                        <th class="text-center py-3"><h4><?php echo $total_ht;?></h4></th>
-                        <th class="text-center py-3"><h4><?php echo $total_ttc;?></h4></th>
+                        <th class="text-center py-3"><h4><?php echo str_replace('.',',',$total_ht);?></h4></th>
+                        <th class="text-center py-3"><h4><?php echo str_replace('.',',',$total_ttc);?></h4></th>
                         <th></th>
                         <th class="text-center py-3"><h4><?php echo $quantite_totale;?></h4></th>
-                        <th class="text-center py-3"><h4><?php echo $total_final;?></h4></th>
+                        <th class="text-center py-3"><h4><?php echo str_replace('.',',',$total_final);?></h4></th>
                     </tr>
                 </tfoot>
             </table>
@@ -222,11 +250,11 @@
                                 </tr>
                                 <tr class="py-4 <?= ligneCouleur($ligneIndex) ?>">
                                     <th class="text-left py-2 pl-3"><h4>Prix HT</h4></th>
-                                    <td class="text-left"><p><?php echo $ligne['prix_ht'];?></p></td>
+                                    <td class="text-left"><p><?php echo str_replace('.',',',$ligne['prix_ht']);?></p></td>
                                 </tr>
                                 <tr class="py-4 <?= ligneCouleur($ligneIndex) ?>">
                                     <th class="text-left py-2 pl-3"><h4>Prix TTC</h4></th>
-                                        <td class="text-left"><p><?php echo $ligne['prix_ttc'];?></p></td>
+                                        <td class="text-left"><p><?php echo str_replace('.',',',$ligne['prix_ttc']);?></p></td>
                                 </tr>
                                 <tr class="py-4 <?= ligneCouleur($ligneIndex) ?>">
                                     <th class="text-left py-2 pl-3"><h4>% remise</h4></th>
@@ -240,12 +268,12 @@
                                 <tr class="py-4 <?= ligneCouleur($ligneIndex) ?> border-b-2 border-solid border-black">
                                     <th class="text-left py-2 pl-3"><h4>Total produit</h4></th>
                                     <?php if($ligne['prix_remise'] != $ligne['prix_ttc']){ 
-                                        $total_ligne = $ligne['remise'] * $ligne['quantite'] ;    
+                                        $total_ligne = $ligne['prix_remise'] * $ligne['quantite'] ;    
                                     } 
                                     else{
                                         $total_ligne = $ligne['prix_ttc'] * $ligne['quantite'] ;
                                     } ?>
-                                    <td class="text-left"><p><?php echo $total_ligne;?></p></td>
+                                    <td class="text-left"><p><?php echo str_replace('.',',',$total_ligne);?></p></td>
                                 </tr>
 
                                 <?php 
@@ -256,7 +284,7 @@
                         <!---sous-total par vendeur--->
                         <tr class="py-4 <?= ligneCouleur($ligneIndex) ?>">
                             <th class="text-left py-2 pl-3"><h4>Sous-total vendeur</h4></th>
-                            <th class="text-left"><p><?php echo $sous_total_final;?></p></th>
+                            <th class="text-left"><p><?php echo str_replace('.',',',$sous_total_final);?></p></th>
                         </tr>
                         <?php
                             $sous_total_final = 0;
@@ -266,11 +294,11 @@
                     <!---affichage des totaux de la commande--->
                     <tr class="py-4 <?= ligneCouleur($ligneIndex) ?> border-t-2 border-solid border-black">
                         <th class="text-left py-2 pl-3"><h4>Total HT : </h4></th>
-                        <th class="text-left"><h4><?php echo $total_ht;?></h4></th>
+                        <th class="text-left"><h4><?php echo str_replace('.',',',$total_ht);?></h4></th>
                     </tr>
                     <tr class="py-4 <?= ligneCouleur($ligneIndex) ?>">
                         <th class="text-left py-2 pl-3"><h4>Total TTC : </h4></th>
-                        <th class="text-left"><h4><?php echo $total_ttc;?></h4></th>
+                        <th class="text-left"><h4><?php echo str_replace('.',',',$total_ttc);?></h4></th>
                     </tr>
                     <tr class="py-4 <?= ligneCouleur($ligneIndex) ?>">
                         <th class="text-left py-2 pl-3"><h4>Quantité totale : </h4></th>
@@ -278,25 +306,11 @@
                     </tr>
                     <tr class="py-4 <?= ligneCouleur($ligneIndex) ?>">
                         <th class="text-left py-2 pl-3"><h4>Total Final : </h4></th>
-                        <th class="text-left"><h4><?php echo $total_final;?></h4></th>
+                        <th class="text-left"><h4><?php echo str_replace('.',',',$total_final);?></h4></th>
                     </tr>
                 </tfoot>
             </table>
         </div>
-
-        <!---Indicateur d'etat de livraison--->
-        <div>
-            <h3 class="ml-5 mt-10 mb-10">Etat de la livraison : <?= $etat ?></h3>
-        <?php
-        if ($raison!=0){ ?>
-            <p>Raison : <?= $raison ?></p>
-            </div>
-        <?php
-        } else if ($image != 0){?>
-            <div class="flex md:justify-start md:ml-5 justify-center">
-                <img src="<?= "../../images".$img_url ?>" alt="<?= $img_url ?>" class="w-xs">
-            </div>
-        <?php } ?>
 
         <!---bouton retour version tablette--->
         <a href="liste_commandes.php" class="hidden md:flex justify-center mt-15 mb-15"><button class="border-vertClair border-4 rounded-lg md:rounded-2xl w-35 h-10 md:w-50 md:h-14 px-7 cursor-pointer">Retour</button></a>
@@ -340,6 +354,24 @@
         btnImprimmer[0].addEventListener("click", () => {affichagePageImpression()});
         btnImprimmer[1].addEventListener("click", () => {affichagePageImpression()});
         btnImprimmer[2].addEventListener("click", () => {affichagePageImpression()});
+
+        const divImage = document.getElementById("div_lvr");
+        const btnImage = document.getElementById("btn_img");
+        const imageLvr = document.getElementById("img_lvr")
+        btnImage.addEventListener("click" , (e) => {
+            e.stopPropagation();
+            divImage.classList.remove("hidden");
+            divImage.classList.add("flex");
+            document.body.style.overflow = "hidden"
+        });
+
+        document.addEventListener("click" , (e) => {
+            if (!imageLvr.contains(e.target)){
+                divImage.classList.remove("flex");
+                divImage.classList.add("hidden");
+                document.body.style.overflow = ""
+            }
+        })
 
     </script>
 </body>

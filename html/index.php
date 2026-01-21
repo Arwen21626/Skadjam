@@ -143,7 +143,7 @@
             }
         ?>
         <!--fin du catalogue-->
-        <div class="flex flex-row space-x-4 justify-center">
+        <div class="flex flex-row space-x-4 justify-center m-4">
             <?php if($pageNumber>1){?>
             <a class= "lienPage hover:text-rouge" href="<?= "./index.php?page=". $pageNumber-1 ."#nosProduits";?>">|<</a>
             <?php }?>
