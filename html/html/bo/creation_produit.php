@@ -38,6 +38,8 @@ foreach($dbh->query('SELECT * from sae3_skadjam._tva', PDO::FETCH_ASSOC) as $row
     $tab_tva[] = $row;
 }
 
+$nbPromos = 0;
+
 if (isset($_POST['categorie']) && isset($_POST['nom']) && isset($_POST['prix']) && isset($_POST['qteStock']) && isset($_POST['description']) && isset($_POST['unite'])) {
     //Récupération des champs pour l'insertion
     $idCategorie = $_POST['categorie'];
