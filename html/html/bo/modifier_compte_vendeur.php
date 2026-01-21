@@ -10,6 +10,21 @@ require_once __DIR__."/../../../connections_params.php"; // données de connexio
 $dbh = new PDO("$driver:host=$server;port=$port;dbname=$dbname", $user, $pass); 
 $dbh->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC);
 
+// définition variables d'erreurs
+$erreur = false;
+$erreurNom = false;
+$erreurPrenom = false;
+$erreurMail = false;
+$erreurTel = false;
+$erreurDenomination = false;
+$erreurRaisonSociale = false;
+$erreurIban = false;
+$erreurSiren = false;
+$erreurAdresse = false;
+$erreurCp = false;
+$erreurVille = false;
+
+
 $idCompte = $_SESSION["idCompte"]; ?>
 <!DOCTYPE html>
 <html lang="fr">
