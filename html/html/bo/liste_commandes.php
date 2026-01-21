@@ -82,7 +82,7 @@
                                     <th scope="row" class="text-center py-3 pl-3" ><p><?php echo $idCommande; ?></p></th>
                                     <td class="text-center py-3"><p><?php echo htmlentities($commande['date_commande']);?></p></td>
                                     <td class="text-center py-3"><p><?php echo htmlentities($commande['etat']);?></p></td>
-                                    <td class="text-center py-3"><p><?php echo htmlentities($commande['total_commande_vendeur']); ?></p></td>
+                                    <td class="text-center py-3"><p><?php echo htmlentities(str_replace('.',',',$commande['total_commande_vendeur'])); ?>€</p></td>
                                     <td><a href="<?php echo htmlentities("commande.php?idCommande=".$idCommande);?>">
                                         <img src="../../images/logo/bootstrap_icon/plus-square.svg" alt="voir plus d'informations" class="w-10 h-auto">
                                     </a></td>
