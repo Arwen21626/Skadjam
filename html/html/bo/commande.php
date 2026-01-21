@@ -119,7 +119,7 @@
                                 else{
                                     $total_ligne = $ligne['sous_total_ttc'];
                                 }?>
-                                <td class="text-center py-3"><p><?php echo str_replace('.',',',$total_ligne);?>€</p></td>
+                                <td class="text-center py-3 pr-3"><p><?php echo str_replace('.',',',$total_ligne);?>€</p></td>
                                 <?php 
                                     //calcul des totaux
                                     $v_quantite_totale += $ligne['quantite'];
@@ -138,7 +138,7 @@
                         <th class="text-center py-3"><h4><?php echo str_replace('.',',',$v_total_ttc);?>€</h4></th>
                         <th></th>
                         <th class="text-center py-3"><h4><?php echo $v_quantite_totale;?></h4></th>
-                        <th class="text-center py-3"><h4><?php echo str_replace('.',',',$v_total_final);?>€</h4></th>
+                        <th class="text-center py-3 pr-3"><h4><?php echo str_replace('.',',',$v_total_final);?>€</h4></th>
                     </tr>
                 </tfoot>
             </table>
