@@ -191,13 +191,13 @@ if (isset($_POST['categorie']) && isset($_POST['nom']) && isset($_POST['prix']) 
 
             // Gestion de la promotion
             if(isset($_POST['mettreEnPromotion'])){
-                $caseCochee = $_POST['mettreEnPromotion'];
+                $caseCochee = isset($_POST['mettreEnPromotion']);
             }else{
                 $caseCochee = false;
             }
             
             // La case "Mettre en promotion" est cochée
-            if ($caseCochee == 'on') {
+            if ($caseCochee) {
                 $dbh->beginTransaction();
                 // Création de la promotion
                 try {
@@ -416,7 +416,7 @@ if (isset($_POST['categorie']) && isset($_POST['nom']) && isset($_POST['prix']) 
                     <div class="flex flex-row justify-around m-2 p-2">
                         <div class="flex flex-row mr-4 ml-4">
                             <label class="mr-4" for="labelPromo">Libellé de la promotion :</label>
-                            <input class="border-4 border-beige rounded-2xl w-45" maxlength="20" type="text" name="labelPromo" id="labelPromo" value="<?php if(isset($labelPromo)){echo $labelPromo;}?>">
+                            <input class="border-4 border-beige rounded-2xl w-45" maxlength="19" type="text" name="labelPromo" id="labelPromo" value="<?php if(isset($labelPromo)){echo $labelPromo;}?>">
                         </div>
                     </div>
                 </div>
