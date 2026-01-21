@@ -60,6 +60,7 @@ if (conteneurProd) { //Chech si un élément de la page panier  est présent ou 
             if (!hasChanged) {
                 let btnForm = divFormPanier.querySelector('button');
                 btnForm.textContent = "Valider les modifications";
+                btnForm.removeAttribute("id");
                 btnForm.classList.remove("bg-rouge");
                 btnForm.classList.remove("text-gray-300")
                 btnForm.classList.add("bg-beige");
