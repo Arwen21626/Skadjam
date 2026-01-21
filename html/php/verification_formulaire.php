@@ -176,7 +176,7 @@ function verifAdresse($adresse){
 
 
 function verifNumCarte($num){
-    if(preg_match('/[0-9]{16}/',$num) == $num){
+    if(preg_match('/[0-9]{16}/',$num)){
         return true;
     }else{
         $exp = explode(" ", $num);
