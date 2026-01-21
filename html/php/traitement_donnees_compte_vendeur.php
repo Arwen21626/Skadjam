@@ -1,4 +1,9 @@
 <?php
+
+/**************************************
+ * FICHIER TRÈS PROBLABLEMENT INUTILE *
+ **************************************/
+
 session_start(); // Création de la session
 $idCompte = $_SESSION["idCompte"];
 

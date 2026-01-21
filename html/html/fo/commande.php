@@ -133,6 +133,7 @@
             <button class="imprimer border-vertClair border-4 rounded-lg md:rounded-2xl w-35 h-10 md:w-65 md:h-14 px-7 mr-5 cursor-pointer hidden md:block">Imprimer <div class="hidden md:inline-block">la facture</div></button>
         </div>
 
+        <!---état de la commande--->
         <div class="ml-5 flex flex-row md:items-center">
             <h3 class="mr-3">
                 <span class="block md:hidden">Etat :</span>
@@ -185,8 +186,8 @@
                                 <!---affichage des informations de chaque produit de la commande--->
                                 <tr class="py-4 <?= ligneCouleur($ligneIndex)?>">
                                     <td class="text-left py-3 pl-3"><p><?php echo $ligne['id_produit'];?> - <?php echo $ligne['libelle_produit'];?></p></td>
-                                    <td class="text-center py-3"><p><?php echo str_replace('.',',',$ligne['prix_ht']);?></p></td>
-                                    <td class="text-center py-3"><p><?php echo str_replace('.',',',$ligne['prix_ttc']);?></p></td>
+                                    <td class="text-center py-3"><p><?php echo str_replace('.',',',$ligne['prix_ht']);?>€</p></td>
+                                    <td class="text-center py-3"><p><?php echo str_replace('.',',',$ligne['prix_ttc']);?>€</p></td>
                                     <td class="text-center py-3"><p><?php echo $ligne['pourcentage_remise']*100;?>%</p></td>
                                     <td class="text-center py-3"><p><?php echo $ligne['quantite'];?></p></td>
                                     <!---affichage du total de ligne (quantite et remise comprise)--->
@@ -196,7 +197,7 @@
                                     else{
                                         $total_ligne = $ligne['prix_ttc'] * $ligne['quantite'] ;
                                     }?>
-                                    <td class="text-center py-3"><p><?php echo str_replace('.',',',$total_ligne);?></p></td>
+                                    <td class="text-center py-3 pr-3"><p><?php echo str_replace('.',',',$total_ligne);?>€</p></td>
                                     <?php 
                                         //calcul du total ht de la commande
                                         $total_ht += $ligne['sous_total_ht'];
@@ -211,7 +212,7 @@
                         <!---sous-total par vendeur--->
                         <tr class="py-4 <?= ligneCouleur($ligneIndex)?>">
                             <th colspan="5" class="text-left w-90 pl-3"><p>Sous-total :</p></th>
-                            <th class="text-center py-3"><p><?php echo str_replace('.',',',$sous_total_final);?></p></th>
+                            <th class="text-center py-3 pr-3"><p><?php echo str_replace('.',',',$sous_total_final);?>€</p></th>
                         </tr>
                         <?php 
                             //calcul du total final de la commande remise(s) comprise(s)
@@ -223,11 +224,11 @@
                     <!---affichage des totaux de la commande--->
                     <tr class="py-4 <?= ligneCouleur($ligneIndex)?>">
                         <th class="text-left w-90 pl-3"><h4>Total :</h4></th>
-                        <th class="text-center py-3"><h4><?php echo str_replace('.',',',$total_ht);?></h4></th>
-                        <th class="text-center py-3"><h4><?php echo str_replace('.',',',$total_ttc);?></h4></th>
+                        <th class="text-center py-3"><h4><?php echo str_replace('.',',',$total_ht);?>€</h4></th>
+                        <th class="text-center py-3"><h4><?php echo str_replace('.',',',$total_ttc);?>€</h4></th>
                         <th></th>
                         <th class="text-center py-3"><h4><?php echo $quantite_totale;?></h4></th>
-                        <th class="text-center py-3"><h4><?php echo str_replace('.',',',$total_final);?></h4></th>
+                        <th class="text-center py-3 pr-3"><h4><?php echo str_replace('.',',',$total_final);?>€</h4></th>
                     </tr>
                 </tfoot>
             </table>
@@ -250,11 +251,11 @@
                                 </tr>
                                 <tr class="py-4 <?= ligneCouleur($ligneIndex) ?>">
                                     <th class="text-left py-2 pl-3"><h4>Prix HT</h4></th>
-                                    <td class="text-left"><p><?php echo str_replace('.',',',$ligne['prix_ht']);?></p></td>
+                                    <td class="text-left"><p><?php echo str_replace('.',',',$ligne['prix_ht']);?>€</p></td>
                                 </tr>
                                 <tr class="py-4 <?= ligneCouleur($ligneIndex) ?>">
                                     <th class="text-left py-2 pl-3"><h4>Prix TTC</h4></th>
-                                        <td class="text-left"><p><?php echo str_replace('.',',',$ligne['prix_ttc']);?></p></td>
+                                        <td class="text-left"><p><?php echo str_replace('.',',',$ligne['prix_ttc']);?>€</p></td>
                                 </tr>
                                 <tr class="py-4 <?= ligneCouleur($ligneIndex) ?>">
                                     <th class="text-left py-2 pl-3"><h4>% remise</h4></th>
@@ -273,7 +274,7 @@
                                     else{
                                         $total_ligne = $ligne['prix_ttc'] * $ligne['quantite'] ;
                                     } ?>
-                                    <td class="text-left"><p><?php echo str_replace('.',',',$total_ligne);?></p></td>
+                                    <td class="text-left"><p><?php echo str_replace('.',',',$total_ligne);?>€</p></td>
                                 </tr>
 
                                 <?php 
@@ -284,7 +285,7 @@
                         <!---sous-total par vendeur--->
                         <tr class="py-4 <?= ligneCouleur($ligneIndex) ?>">
                             <th class="text-left py-2 pl-3"><h4>Sous-total vendeur</h4></th>
-                            <th class="text-left"><p><?php echo str_replace('.',',',$sous_total_final);?></p></th>
+                            <th class="text-left"><p><?php echo str_replace('.',',',$sous_total_final);?>€</p></th>
                         </tr>
                         <?php
                             $sous_total_final = 0;
@@ -294,11 +295,11 @@
                     <!---affichage des totaux de la commande--->
                     <tr class="py-4 <?= ligneCouleur($ligneIndex) ?> border-t-2 border-solid border-black">
                         <th class="text-left py-2 pl-3"><h4>Total HT : </h4></th>
-                        <th class="text-left"><h4><?php echo str_replace('.',',',$total_ht);?></h4></th>
+                        <th class="text-left"><h4><?php echo str_replace('.',',',$total_ht);?>€</h4></th>
                     </tr>
                     <tr class="py-4 <?= ligneCouleur($ligneIndex) ?>">
                         <th class="text-left py-2 pl-3"><h4>Total TTC : </h4></th>
-                        <th class="text-left"><h4><?php echo str_replace('.',',',$total_ttc);?></h4></th>
+                        <th class="text-left"><h4><?php echo str_replace('.',',',$total_ttc);?>€</h4></th>
                     </tr>
                     <tr class="py-4 <?= ligneCouleur($ligneIndex) ?>">
                         <th class="text-left py-2 pl-3"><h4>Quantité totale : </h4></th>
@@ -306,7 +307,7 @@
                     </tr>
                     <tr class="py-4 <?= ligneCouleur($ligneIndex) ?>">
                         <th class="text-left py-2 pl-3"><h4>Total Final : </h4></th>
-                        <th class="text-left"><h4><?php echo str_replace('.',',',$total_final);?></h4></th>
+                        <th class="text-left"><h4><?php echo str_replace('.',',',$total_final);?>€</h4></th>
                     </tr>
                 </tfoot>
             </table>
