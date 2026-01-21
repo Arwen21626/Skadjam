@@ -90,7 +90,7 @@ foreach($dbh->query("SELECT v.raison_sociale, cvend.adresse_mail as mail_vendeur
 
         <div class="grid grid-cols-2 mb-8 w-1/1 justify-end">
             <section class=" max-w-1/2 justify-self-start">
-                <h2>Emmeteur</h2>
+                <h2>Émmetteur</h2>
                 <p><?php echo $row['vendeur']['raisonSocial']?></p>
                 <p><?php echo $row['vendeur']['mailVendeur']?></p>
                 <p><?php echo $row['vendeur']['adresseVendeur']?></p>
