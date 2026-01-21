@@ -1,0 +1,26 @@
+
+
+services:
+  recupraptor:
+    build: ./src
+    container_name: recupraptor
+    restart: unless-stopped
+    environment:
+      DB_USER: ${DB_USER}
+      DB_NAME: ${DB_NAME}
+      DB_SERVER: postgresdb
+      DB_PASSWORD: ${DB_PASSWORD}
+    volumes:
+      - ./recupraptor/images:/app/images
+      - ./recupraptor/logs:/app/logs
+      - ./recupraptor/lst_client.data:/app/lst_client.data
+    ports:
+      - "6969:6969"
+    networks:
+      - sae
+    depends_on:
+     - postgres
+
+networks:
+  sae:
+    external: true
