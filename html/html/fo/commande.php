@@ -88,7 +88,6 @@
             $image = 1;
         }
     } catch (Exception $e){
-        echo "Erreur : " . $e->getMessage();
         $etat = "err";
     }
 
