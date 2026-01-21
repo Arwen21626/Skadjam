@@ -20,7 +20,7 @@ services:
       - sae
     depends_on:
      - postgres
-
+ 
 networks:
   sae:
     external: true

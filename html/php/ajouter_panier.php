@@ -16,6 +16,8 @@ if ($_SESSION['role'] === 'client')
                             WHERE pan.id_client = $idClient"
                             , PDO::FETCH_ASSOC) as $row){
             $infoPanier = $row;
+            print_r($infopanier);
+            print_r("<br>");
     }
 
     $idPanier = $infoPanier["id_panier"]; //Récupère l'id du panier
