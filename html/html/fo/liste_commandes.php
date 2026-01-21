@@ -75,7 +75,7 @@
 
         else{?>
             <!---bouton retour en haut de page version téléphone--->
-            <a href="../../index.php" class="flex justify-start ml-5 mt-5 md:hidden cursor-pointer">< Retour</a>
+            <a href="../../index.php" class="flex justify-start ml-5 mt-5 md:hidden cursor-pointer hover:text-rouge">< Retour</a>
             <h2 class = "md:pt-15 pt-5">Liste de mes commandes</h2>
             <div class="flex justify-center md:mt-15 mt-10">
                 <?php //tableau liste des commandes ?>
@@ -100,7 +100,7 @@
                                     <th scope="row" class="text-left pl-5 md:text-center py-3 md:pl-3" ><p><?php echo $idCommande; ?></p></th>
                                     <td class="text-center py-3"><p><?php echo htmlentities($commande['date_commande']);?></p></td>
                                     <td class="text-center py-3"><p><?= $etat[$idCommande] ?></p></td>
-                                    <td class="text-center py-3"><p><?php echo htmlentities($commande['montant_total_ttc']); ?></p></td>
+                                    <td class="text-center py-3"><p><?php echo htmlentities(str_replace('.', ',',$commande['montant_total_ttc'])); ?>€</p></td>
                                     <td><a href="<?php echo htmlentities("commande.php?idCommande=".$idCommande);?>">
                                         <img src="../../images/logo/bootstrap_icon/plus-square.svg" alt="voir plus d'informations" class="w-8 md:w-10 h-auto">
                                     </a></td>
