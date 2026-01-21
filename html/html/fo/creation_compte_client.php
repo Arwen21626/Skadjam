@@ -70,7 +70,7 @@ unset($_SESSION['erreurs'], $_SESSION['old']);
             <!-- Téléphone -->
             <div class="flex flex-col basis-1/3 m-5 min-w-3xs">
                 <label for="telephone">Telephone* :</label>
-                <input class="border-4 border-beige rounded-2xl w-1/1 p-1 pl-3 placeholder-gray-500" type="tel" name="telephone" id="telephone" placeholder="0604030201" pattern="0[0-9]{9}" value="<?= htmlspecialchars($old['telephone'] ?? '') ?>" required>
+                <input class="border-4 border-beige rounded-2xl w-1/1 p-1 pl-3 placeholder-gray-500" maxlength="10" type="tel" name="telephone" id="telephone" placeholder="0604030201" pattern="0[0-9]{9}" value="<?= htmlspecialchars($old['telephone'] ?? '') ?>" required>
                 <?php if (isset($erreurs['telephone'])) { echo "<p class='text-rouge' style='font-size: 0.90em'>Le numéro de téléphone doit commencer par 0 suivi de 9 chiffres.</p>"; } ?>
             </div>
 
