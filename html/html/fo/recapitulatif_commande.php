@@ -151,7 +151,7 @@ if (isset($_POST['valider'])) {
                                         else{
                                             $total_ligne = $ligne['prix_ttc'] * $ligne['quantite_par_produit'] ;
                                         } ?>
-                                        <td class="text-center py-3"><p><?php echo str_replace('.',',',$total_ligne);?>€</p></td>
+                                        <td class="text-center py-3 pr-3"><p><?php echo str_replace('.',',',$total_ligne);?>€</p></td>
                                         <?php 
                                             //calcul du total ht de la commande
                                             $total_ht = $total_ht + $ligne['sous_total_ht'];
@@ -164,7 +164,7 @@ if (isset($_POST['valider'])) {
                             <!---sous-total par vendeur--->
                             <tr class="py-4 <?= ligneCouleur($ligneIndex)?>">
                                 <th colspan="5" class="text-left w-90 pl-3"><p>Sous-total :</p></th>
-                                <th class="text-center py-3"><p><?php echo str_replace('.',',',$sous_total_final);?>€</p></th>
+                                <th class="text-center py-3 pr-3"><p><?php echo str_replace('.',',',$sous_total_final);?>€</p></th>
                             </tr>
                             <?php
                                 //calcul du total final de la commande remise(s) comprise(s)
@@ -180,7 +180,7 @@ if (isset($_POST['valider'])) {
                             <th class="text-center py-3"><h4><?php echo str_replace('.',',',$total_ttc);?>€</h4></th>
                             <th></th>
                             <th class="text-center py-3"><h4><?php echo $quantite_totale;?></h4></th>
-                            <th class="text-center py-3"><h4><?php echo str_replace('.',',',$total_final);?>€</h4></th>
+                            <th class="text-center py-3 pr-3"><h4><?php echo str_replace('.',',',$total_final);?>€</h4></th>
                         </tr>
                     </tfoot>
                 </table>
