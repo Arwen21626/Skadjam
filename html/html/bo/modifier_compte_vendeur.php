@@ -320,7 +320,7 @@ if(!$isset || $erreur){
                     <input type="file" id="photo" name="photo" class="hidden">
                     <!-- label qui agit comme bouton -->
                     <label id="labelImage" for="photo" class="bg-beige w-60 h-60 rounded-2xl image-produit cursor-pointer" style="background-image: url('../..<?= isset($url) ? $url : '/images/logo/bootstrap_icon/image.svg'; ?>'); background-repeat: no-repeat; background-position: center; background-size: 60%;"></label>
-                    <label class="cursor-pointer" for="photo"><h4><strong>Photo de profil *</strong></h4></label>
+                    <label class="cursor-pointer" for="photo"><h4><strong>Photo de profil</strong></h4></label>
                 </div>
 
                 <!-- Vendeur -->
