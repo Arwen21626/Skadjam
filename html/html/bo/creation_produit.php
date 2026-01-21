@@ -38,6 +38,9 @@ foreach($dbh->query('SELECT * from sae3_skadjam._tva', PDO::FETCH_ASSOC) as $row
     $tab_tva[] = $row;
 }
 
+$nbPromos = 0;
+$caseCochee = false;
+
 if (isset($_POST['categorie']) && isset($_POST['nom']) && isset($_POST['prix']) && isset($_POST['qteStock']) && isset($_POST['description']) && isset($_POST['unite'])) {
     //Récupération des champs pour l'insertion
     $idCategorie = $_POST['categorie'];
@@ -187,8 +190,12 @@ if (isset($_POST['categorie']) && isset($_POST['nom']) && isset($_POST['prix']) 
             }
 
             // Gestion de la promotion
-            $caseCochee = isset($_POST['mettreEnPromotion']);
-
+            if(isset($_POST['mettreEnPromotion'])){
+                $caseCochee = $_POST['mettreEnPromotion'];
+            }else{
+                $caseCochee = false;
+            }
+            
             // La case "Mettre en promotion" est cochée
             if ($caseCochee) {
                 $dbh->beginTransaction();
@@ -387,7 +394,7 @@ if (isset($_POST['categorie']) && isset($_POST['nom']) && isset($_POST['prix']) 
                     <!-- Mettre en promotion -->
                     <div class="flex flex-row mr-4 ml-4">
                         <label class="mr-4" for="mettreEnPromotion">Mettre en promotion<?php if ($nbPromos >= 2 && !$caseCochee) { echo " (Limite atteinte)"; } ?></label>
-                        <input id="promoCheck" type="checkbox" name="mettreEnPromotion" class="<?php echo ($nbPromos >= 2 && !$caseCochee) ? 'cursor-not-allowed' : 'cursor-pointer'; ?> appearance-none w-10 h-10 border-4 border-beige rounded-md checked:bg-beige checked:border-vertFonce" <?php echo ($nbPromos >= 2 && !$caseCochee) ? 'disabled' : ''; ?>>
+                        <input id="promoCheck" type="checkbox" name="mettreEnPromotion" class="<?php echo ($nbPromos >= 2 && !$caseCochee) ? 'cursor-not-allowed' : 'cursor-pointer'; ?> appearance-none w-10 h-10 border-4 border-beige rounded-md checked:bg-beige checked:border-vertFonce" <?php echo $caseCochee ? 'checked' : ''; ?> <?php echo ($nbPromos >= 2 && !$caseCochee) ? 'disabled' : ''; ?>>
                     </div>
                 </div>
                 <!-- Inputs liés aux promotions -->
@@ -409,7 +416,7 @@ if (isset($_POST['categorie']) && isset($_POST['nom']) && isset($_POST['prix']) 
                     <div class="flex flex-row justify-around m-2 p-2">
                         <div class="flex flex-row mr-4 ml-4">
                             <label class="mr-4" for="labelPromo">Libellé de la promotion :</label>
-                            <input class="border-4 border-beige rounded-2xl w-45" maxlength="20" type="text" name="labelPromo" id="labelPromo" value="<?php echo $labelPromo;?>">
+                            <input class="border-4 border-beige rounded-2xl w-45" maxlength="20" type="text" name="labelPromo" id="labelPromo" value="<?php if(isset($labelPromo)){echo $labelPromo;}?>">
                         </div>
                     </div>
                 </div>
