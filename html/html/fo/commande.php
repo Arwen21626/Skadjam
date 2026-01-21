@@ -130,7 +130,7 @@
             <!---date--->
             <h3 class="ml-5 mr-3">Date : <?php echo $date;?></h3>
             <!---bouton imprimer page--->
-            <button class="imprimer border-vertClair border-4 rounded-lg md:rounded-2xl w-35 h-10 md:w-65 md:h-14 px-7 mr-5 cursor-pointer hidden md:block">Imprimer <div class="hidden md:inline-block">la facture</div></button>
+            <button class="imprimer border-vertClair border-4 rounded-lg md:rounded-2xl w-35 h-10 md:w-65 md:h-14 px-7 mr-5 cursor-pointer hidden md:block">Imprimer la facture</button>
         </div>
 
         <!---état de la commande--->

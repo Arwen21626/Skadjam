@@ -105,7 +105,7 @@ if (isset($_POST['valider'])) {
         <div class="flex items-center justify-between mt-10 px-5">
             <!---date de la commande--->
             <h3>Date : <?php echo date("d/m/Y"); ?></h3>
-            <!-- bouton annuler (mobile) -->
+            <!-- bouton annuler version téléphone-->
             <a href="../fo/panier.php?idPanier=<?php echo $idPanier; ?>"
                 class="md:hidden flex items-center justify-center border-2 border-vertClair rounded-xl
                 w-25 h-10 cursor-pointer">Annuler
