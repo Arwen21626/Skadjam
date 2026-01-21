@@ -178,7 +178,7 @@
                                 <label for="stockTriCroissant" class="labelDetails">Croissant</label>
                             </div>
                             <div>
-                                <input type="radio" name="prixTri" id="stockTriDecroissant" value="decroissant" class="triFiltre h-5 w-5">
+                                <input type="radio" name="stockTri" id="stockTriDecroissant" value="decroissant" class="triFiltre h-5 w-5">
                                 <label for="stockTriDecroissant" class="labelDetails">Décroissant</label>
                             </div>
                         </div>
