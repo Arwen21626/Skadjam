@@ -61,11 +61,11 @@ Email : erell.pengam@gwenherb.bzh
 Mot de passe : Herb_Er33
  
 --------------------------------------------------------------------------------------------------------------------------------------------------
- 
+
 Client
 
 Email : celine76@baron.fr
-Mot de passe : Mot_de_passe1 (le mot de passe a été changé pendant la review donc à vérifier (peut-être exemple_2_MDP))
+Mot de passe : Mot_de_passe1
  
 Email : suzannepires@club-internet.fr
 Mot de passe : Mot_de_passe2
