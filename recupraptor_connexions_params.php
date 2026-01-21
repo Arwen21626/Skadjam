@@ -1,6 +1,6 @@
 <?php
-$rip = "127.0.0.1";
-$rport = "6969";
+$rip = getenv("RPR_HOST");
+$rport = getenv("RPR_PORT");
 $ruser = "test";
 $rpass = "1234";
 

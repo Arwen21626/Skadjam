@@ -24,12 +24,9 @@ class Recupraptor{
     }
 
     private function init_conn(): bool {
-        print_r($this->ip);
-        print_r($this->port);
+
         $this->conn = fsockopen($this->ip, $this->port, $errno, $errstr);
-        print_r("conn : ");
-        print_r($this->conn);
-        print_r("fin connexion");
+
         if (!$this->conn){
             throw new Exception("Connexion failed : $errstr ($errno)");
         }

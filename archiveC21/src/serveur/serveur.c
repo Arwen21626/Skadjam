@@ -96,7 +96,7 @@ int init_server() {
         exit(EXIT_FAILURE);
     }
 
-    LOG_SERV(LOG_INFO, "Serveur prêt sur 127.0.0.1:%d", sPort);
+    LOG_SERV(LOG_INFO, "Serveur prêt sur 0.0.0.0:%d", sPort);
     return sock;
 }
 
