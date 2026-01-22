@@ -1,25 +1,39 @@
-FROM debian:stable
+FROM gcc:15 AS build
 
-# Dépendances pour compiler + libpq5
+
 RUN apt-get update && apt-get install -y \
-    build-essential \
-    libpq5 \
     libpq-dev \
     && rm -rf /var/lib/apt/lists/*
 
 WORKDIR /app
 
 # Copier les sources
-COPY . /app
+COPY . .
 
 # Compiler via ton script
 RUN chmod +x build.sh && ./build.sh
 
-# Créer les dossiers nécessaires
-RUN mkdir -p /app/images /app/logs
+
+FROM debian:bookworm-slim
+
+RUN apt-get update && apt-get install -y \
+    libpq5 \
+    && rm -rf /var/lib/apt/lists/*
+
+WORKDIR /app
+
+COPY --from=build /app/delivraptor /app/delivraptor
+
+COPY lst_client.data /app/lst_client.data
+COPY image /app/image
+COPY logs /app/logs
 
 # Exposer le port
 EXPOSE 6969
 
 # Lancer ton serveur
-CMD ["./recupraptor", "-p", "6969", "-f", "lst_client.data"]
+CMD ["./delivraptor", "-p", "6969", "-f", "lst_client.data"]
+
+
+
+
