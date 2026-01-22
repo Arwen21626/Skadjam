@@ -31,9 +31,9 @@
                 $stmt = $dbh->prepare($query);
                 $stmt->execute([$etat[$row['id_commande']], $idSuivi]);
             }catch (Exception $e){
-                $etat[$id_commande] = 'err';
+                $etat[$id_commande] = 'En attente';
             }catch (TypeError $e){
-                $etat[$id_commande] = 'err';
+                $etat[$id_commande] = 'En attente';
             }finally{
                 $tabInfoCommandes[] = $row;
                 
