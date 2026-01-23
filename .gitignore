@@ -8,4 +8,5 @@ html/images/photo_importees/bloc1768464456.png
 archiveC21/docker-compose.yml
 archiveC21/src/delivraptor
 archiveC21/src/logs/
+!archiveC21/src/logs/.gitkeep
 archiveC21/src/Dockerfile
