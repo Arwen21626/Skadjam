@@ -20,7 +20,9 @@ void print_help() {
     );
 }
 
-void manage_opt(int argc, char *argv[]){
+void manage_opt(int argc, char *argv[]) {
+    LOG_SERV(LOG_DEBUG, "manage_opt: début du parsing des options");
+
     int opt;
     static struct option long_options[] = {
         {"port", required_argument, 0, 'p'},
@@ -29,51 +31,65 @@ void manage_opt(int argc, char *argv[]){
         {0,0,0,0}
     };
 
-    while ((opt = getopt_long(argc, argv, "p:hf:", long_options, NULL)) != -1){
+    while ((opt = getopt_long(argc, argv, "p:hf:", long_options, NULL)) != -1) {
         switch (opt) {
             case 'h':
                 print_help();
                 exit(0);
+
             case 'f':
                 opt_f = 1;
                 arg_f = optarg;
+                LOG_SERV(LOG_INFO, "manage_opt: fichier log défini (%s)", arg_f);
                 break;
-            case 'p':
+
+            case 'p': {
                 char *endptr;
                 opt_p = 1;
                 errno = 0;
                 sPort = strtol(optarg, &endptr, 10);
 
-                if (errno != 0 || *endptr != '\0' || sPort <= 0 || sPort > 65535){
-                    fprintf(stdout, "Port invalide : %s\n", optarg);
+                if (errno != 0 || *endptr != '\0' || sPort <= 0 || sPort > 65535) {
+                    LOG_SERV(LOG_ERROR, "manage_opt: port invalide (%s)", optarg);
                     exit(EXIT_FAILURE);
                 }
+
+                LOG_SERV(LOG_INFO, "manage_opt: port défini (%d)", sPort);
                 break;
+            }
+
             case '?':
                 print_help();
                 exit(0);
-        }  
+        }
     }
-    if (opt_p == 0){
-        fprintf(stdout, "Erreur : le port est obligatoir\n");
+
+    if (!opt_p) {
+        LOG_SERV(LOG_ERROR, "manage_opt: port obligatoire manquant");
         exit(EXIT_FAILURE);
     }
 
-    if (opt_f == 0){
-        fprintf(stdout, "Erreur : le fichier est obligatoir\n");
+    if (!opt_f) {
+        LOG_SERV(LOG_ERROR, "manage_opt: fichier obligatoire manquant");
         exit(EXIT_FAILURE);
     }
+
+    LOG_SERV(LOG_DEBUG, "manage_opt: parsing terminé");
 }
 
 int init_server() {
-    if (sPort == -1){
+    LOG_SERV(LOG_DEBUG, "init_server: initialisation du serveur");
+
+    if (sPort == -1) {
+        LOG_SERV(LOG_ERROR, "init_server: port non initialisé");
         exit(EXIT_FAILURE);
     }
-    LOG_SERV(LOG_INFO, "Démarrage du service Delivraptor");
+
+    LOG_SERV(LOG_INFO, "init_server: démarrage du service Delivraptor");
 
     sock = socket(AF_INET, SOCK_STREAM, 0);
     if (sock < 0) {
-        LOG_SERV(LOG_ERROR, "Erreur socket(): %s", strerror(errno));
+        LOG_SERV(LOG_ERROR, "init_server: erreur socket() (%s)", strerror(errno));
         exit(EXIT_FAILURE);
     }
 
@@ -87,49 +103,49 @@ int init_server() {
     };
 
     if (bind(sock, (struct sockaddr *)&addr, sizeof(addr)) < 0) {
-        LOG_SERV(LOG_ERROR, "Erreur bind(): %s", strerror(errno));
+        LOG_SERV(LOG_ERROR, "init_server: erreur bind() (%s)", strerror(errno));
         exit(EXIT_FAILURE);
     }
 
     if (listen(sock, 10) < 0) {
-        LOG_SERV(LOG_ERROR, "Erreur listen(): %s", strerror(errno));
+        LOG_SERV(LOG_ERROR, "init_server: erreur listen() (%s)", strerror(errno));
         exit(EXIT_FAILURE);
     }
 
-    LOG_SERV(LOG_INFO, "Serveur prêt sur 127.0.0.1:%d", sPort);
+    LOG_SERV(LOG_INFO, "init_server: serveur prêt sur 127.0.0.1:%d", sPort);
     return sock;
 }
 
 void run_server_loop() {
+    LOG_SERV(LOG_INFO, "run_server_loop: boucle serveur démarrée");
+
     struct sockaddr_in conn_addr;
     socklen_t size = sizeof(conn_addr);
 
     while (1) {
         int cnx = accept(sock, (struct sockaddr *)&conn_addr, &size);
         if (cnx < 0) {
-            LOG_SERV(LOG_ERROR, "Erreur accept(): %s", strerror(errno));
+            LOG_SERV(LOG_ERROR, "run_server_loop: erreur accept() (%s)", strerror(errno));
             continue;
         }
 
-        LOG_SERV(LOG_INFO, "Connexion acceptée (fd=%d)", cnx);
+        LOG_SERV(LOG_INFO, "run_server_loop: connexion acceptée (fd=%d)", cnx);
 
         pid_t pid = fork();
         if (pid < 0) {
-            LOG_SERV(LOG_ERROR, "Erreur fork(): %s", strerror(errno));
+            LOG_SERV(LOG_ERROR, "run_server_loop: erreur fork() (%s)", strerror(errno));
             close(cnx);
             continue;
         }
 
         if (pid == 0) {
-            // Processus enfant
             close(sock);
             handle_client(cnx, conn_addr);
-            LOG_SERV(LOG_DEBUG, "close connexion");
+            LOG_SERV(LOG_DEBUG, "run_server_loop: fin processus enfant");
             close(cnx);
             _exit(0);
         }
 
-        // Processus parent
         close(cnx);
     }
 }
@@ -147,21 +163,24 @@ void handle_client(int fd, struct sockaddr_in conn_addr) {
 
     while ((size = read(fd, buffer, TAILLEB - 1)) > 0) {
         buffer[size] = '\0';
-        LOG_SERV(LOG_DEBUG, "process commande");
+        LOG_SERV(LOG_DEBUG, "handle_client: commande reçue");
         process_commands(fd, buffer);
-        LOG_SERV(LOG_DEBUG, "sorti process commande");
+        LOG_SERV(LOG_DEBUG, "handle_client: fin traitement commande");
     }
 
     LOG_CLIENT(LOG_INFO, cIp, cPort, "Client déconnecté");
 }
 
 void process_commands(int fd, char *buffer) {
+    LOG_SERV(LOG_DEBUG, "process_commands: début traitement");
+
     char *line = strtok(buffer, "\n");
 
     while (line) {
-        LOG_SERV(LOG_DEBUG, "debut line %s", line);
+        LOG_SERV(LOG_DEBUG, "process_commands: ligne brute='%s'", line);
+
         chomp(line);
-        LOG_SERV(LOG_DEBUG, "ap chomp line %s", line);
+        LOG_SERV(LOG_DEBUG, "process_commands: ligne nettoyée='%s'", line);
 
         char cmdstr[16];
         if (sscanf(line, "%15s", cmdstr) != 1) {
@@ -173,16 +192,16 @@ void process_commands(int fd, char *buffer) {
         cmd_t cmd = get_commande(cmdstr);
         horo = time(NULL);
 
-        LOG_CLIENT(LOG_INFO, cIp, cPort, "Commande reçue : %s", cmdstr);
+        LOG_CLIENT(LOG_INFO, cIp, cPort, "Commande reçue: %s", cmdstr);
 
         switch (cmd) {
             case CMD_CONN:
                 handle_conn(fd, line);
                 break;
 
-            case CMD_ADD: 
+            case CMD_ADD:
                 add_bord(conn, fd, line);
-                LOG_SERV(LOG_DEBUG, "sortie add bord");
+                LOG_SERV(LOG_DEBUG, "process_commands: fin ADD");
                 break;
 
             case CMD_ETA:
@@ -193,27 +212,30 @@ void process_commands(int fd, char *buffer) {
                 avance(conn);
                 send(fd, "next success\n", 14, 0);
                 break;
-            
+
             case CMD_IMG:
                 get_img(conn, fd, line);
                 break;
 
             default:
-                LOG_CLIENT(LOG_WARN, cIp, cPort, "Commande inconnue : %s", cmdstr);
+                LOG_CLIENT(LOG_WARN, cIp, cPort, "Commande inconnue: %s", cmdstr);
                 send(fd, "CMD ERR NOT_EXIST\n", 19, 0);
                 break;
         }
-        LOG_SERV(LOG_DEBUG, "fin line %s", line);
+
+        LOG_SERV(LOG_DEBUG, "process_commands: fin ligne");
         line = strtok(NULL, "\n");
     }
-    LOG_SERV(LOG_DEBUG, "Sortie line");
+
+    LOG_SERV(LOG_DEBUG, "process_commands: fin traitement");
 }
 
 void handle_conn(int fd, const char *line) {
+    LOG_SERV(LOG_DEBUG, "handle_conn: début");
+
     char cmd[16], user[128], pwd[128];
     char response[256];
 
-    // Extraction des paramètres
     if (sscanf(line, "%15s %127s %127s", cmd, user, pwd) != 3) {
         LOG_CLIENT(LOG_WARN, cIp, cPort, "CONN: format invalide");
         send(fd, "CONNEXION DENIED\n", 18, 0);
@@ -232,47 +254,51 @@ void handle_conn(int fd, const char *line) {
     }
 
     if (status == 1) {
-        LOG_CLIENT(LOG_WARN, cIp, cPort, "Authentification échouée : mauvais identifiants");
+        LOG_CLIENT(LOG_WARN, cIp, cPort, "Authentification échouée: mauvais identifiants");
         snprintf(response, sizeof(response), "CONNEXION DENIED\n");
         send(fd, response, strlen(response), 0);
         return;
     }
 
-    // status == -1 → erreur serveur
-    LOG_SERV(LOG_ERROR, "Erreur interne lors de l'authentification");
+    LOG_SERV(LOG_ERROR, "handle_conn: erreur interne auth_user()");
     send(fd, "ERR SERVER\n", 11, 0);
 }
 
 int auth_user(const char *user, const char *pwd) {
+    LOG_SERV(LOG_DEBUG, "auth_user: début (user=%s)", user);
+
     char line[256];
     char us[128], pswd[128];
 
     FILE *f = fopen(arg_f, "r");
     if (!f) {
-        LOG_SERV(LOG_ERROR, "Impossible d'ouvrir lst_client.data : %s", strerror(errno));
-        return -1; // erreur serveur
+        LOG_SERV(LOG_ERROR, "auth_user: impossible d'ouvrir fichier client (%s)", strerror(errno));
+        return -1;
     }
-    char password[MD5_DIGEST_LENGTH*2+1];
+
+    char password[MD5_DIGEST_LENGTH * 2 + 1];
     md5_hash(pwd, password);
+
     while (fgets(line, sizeof(line), f)) {
         if (sscanf(line, "%127s %127s", us, pswd) == 2) {
-            
-
             if (strcmp(us, user) == 0 && strcmp(pswd, password) == 0) {
                 fclose(f);
-                return 0; // OK
+                LOG_SERV(LOG_INFO, "auth_user: authentification OK pour %s", user);
+                return 0;
             }
         }
     }
 
     fclose(f);
-    return 1; // identifiants incorrects
+    LOG_SERV(LOG_INFO, "auth_user: identifiants incorrects pour %s", user);
+    return 1;
 }
 
-void md5_hash(const char *password, char *output){
+void md5_hash(const char *password, char *output) {
     unsigned char digest[MD5_DIGEST_LENGTH];
     MD5((unsigned char*)password, strlen(password), digest);
-    for (int i = 0; i< MD5_DIGEST_LENGTH; i++){
-        sprintf(&output[i*2], "%02x", digest[i]);
+
+    for (int i = 0; i < MD5_DIGEST_LENGTH; i++) {
+        sprintf(&output[i * 2], "%02x", digest[i]);
     }
 }

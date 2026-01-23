@@ -1,1 +1,0 @@
-* * * * * php /home/mewen/Documents/Github/Skadjam/archiveC21/php/chronos.php

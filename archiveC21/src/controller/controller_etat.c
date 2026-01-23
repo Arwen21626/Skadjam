@@ -1,30 +1,38 @@
 #include "controller_etat.h"
 
+etat_t next_etat(etat_t etat) {
+    LOG_SERV(LOG_DEBUG, "next_etat: calcul du prochain état (etat=%d)", etat);
 
-etat_t next_etat(etat_t etat){
     srand(time(NULL));
+
     switch (etat) {
-        case ETAT1 : return ETAT2;
-        case ETAT2 : return ETAT3;
-        case ETAT3 : return ETAT4;
-        case ETAT4 : return ETAT5;
-        case ETAT5 : return ETAT6;
-        case ETAT6 : return ETAT7;
-        case ETAT7 : return ETAT8;
-        case ETAT8 : 
+        case ETAT1: return ETAT2;
+        case ETAT2: return ETAT3;
+        case ETAT3: return ETAT4;
+        case ETAT4: return ETAT5;
+        case ETAT5: return ETAT6;
+        case ETAT6: return ETAT7;
+        case ETAT7: return ETAT8;
+
+        case ETAT8: {
             int ale = rand() % 3;
+            LOG_SERV(LOG_DEBUG, "next_etat: ETAT8 -> tirage aléatoire=%d", ale);
+
             if (ale == 0) return LVR;
             if (ale == 1) return LVRAB;
-            if (ale == 2) return REFU;
-        case LVR : return LVR;
-        case LVRAB : return LVRAB;
-        case REFU : return REFU;
-        default    : return INCONNU;
-        
+            return REFU;
+        }
+
+        case LVR:   return LVR;
+        case LVRAB: return LVRAB;
+        case REFU:  return REFU;
+
+        default:
+            LOG_SERV(LOG_WARN, "next_etat: état inconnu (%d)", etat);
+            return INCONNU;
     }
 }
 
-// Refus possible
 char raisonRefus[5][128] = {
     "Le colis est trop abimé",
     "Le colis a été ouvert",
@@ -33,125 +41,148 @@ char raisonRefus[5][128] = {
     "Le colis bouge"
 };
 
-
-
-static const char *etat_to_str(etat_t etat){
+static const char *etat_to_str(etat_t etat) {
     switch (etat) {
-        case ETAT1 : return "TRTC";  // TRaitemenT de la Commande
-        case ETAT2 : return "ACHTR"; // ACHeminement vers TRansporteur
-        case ETAT3 : return "ARRTR"; // ARRivé chez le TRansporteur
-        case ETAT4 : return "ACHPR"; // ACHeminement vers Plateforme Régionale
-        case ETAT5 : return "ARRPR"; // Arrivé à la Plateforme Régionale
-        case ETAT6 : return "ACHCL"; // ACHeminement vers Centre Local
-        case ETAT7 : return "ARRCL"; // ARRivé au Centre Local
-        case ETAT8 : return "LVRSN"; // En cours de LiVRaiSoN
-        case LVR   : return "LVR";   // LiVRé
-        case LVRAB : return "LVRAB"; // LiVRé ABscent
-        case REFU  : return "REFU";  // REFUdé
-        default    : return "INCO";  // INCOnnu
+        case ETAT1: return "TRTC";
+        case ETAT2: return "ACHTR";
+        case ETAT3: return "ARRTR";
+        case ETAT4: return "ACHPR";
+        case ETAT5: return "ARRPR";
+        case ETAT6: return "ACHCL";
+        case ETAT7: return "ARRCL";
+        case ETAT8: return "LVRSN";
+        case LVR:   return "LVR";
+        case LVRAB: return "LVRAB";
+        case REFU:  return "REFU";
+        default:    return "INCO";
     }
 }
 
 static int parse_eta_request(const char *buffer, char *id_suivi) {
-    char temp[16];
+    LOG_SERV(LOG_DEBUG, "parse_eta_request: début du parsing");
 
-    int matched = sscanf(buffer,
-        "%15s %254s",
-        temp,
-        id_suivi
-    );
+    char temp[16];
+    int matched = sscanf(buffer, "%15s %254s", temp, id_suivi);
 
     if (matched != 2) {
-        LOG_SERV(LOG_WARN, "ETA: format invalide (%d champs lus)", matched);
+        LOG_SERV(LOG_WARN, "parse_eta_request: format invalide (%d champs lus)", matched);
         return 0;
     }
 
-    LOG_CLIENT(LOG_INFO, cIp, cPort, "ETA: données extraites avec succès");
+    LOG_SERV(LOG_INFO, "parse_eta_request: extraction OK (id_suivi=%s)", id_suivi);
+    LOG_CLIENT(LOG_INFO, cIp, cPort, "Requête ETA analysée avec succès");
     return 1;
 }
 
-void get_etat(PGconn *conn, int fd, char buffer[TAILLEB]){
+void get_etat(PGconn *conn, int fd, char buffer[TAILLEB]) {
+    LOG_SERV(LOG_DEBUG, "get_etat: début traitement");
+
     int etat;
     char str_etat[6];
     char id_suivi[16];
     char message[255];
 
     if (!parse_eta_request(buffer, id_suivi)) {
-        LOG_SERV(LOG_ERROR, "ETA ERR FORMAT");
+        LOG_SERV(LOG_ERROR, "get_etat: erreur parsing requête");
         return;
     }
 
-    if (!db_get_etat(conn, id_suivi, &etat)){
-        LOG_SERV(LOG_ERROR, "ETA ERR SELECT");
+    LOG_SERV(LOG_DEBUG, "get_etat: récupération état pour %s", id_suivi);
+
+    if (!db_get_etat(conn, id_suivi, &etat)) {
+        LOG_SERV(LOG_ERROR, "get_etat: erreur DB SELECT état");
         return;
     }
 
     snprintf(str_etat, sizeof(str_etat), "%s", etat_to_str(etat));
+    LOG_SERV(LOG_INFO, "get_etat: état actuel=%s", str_etat);
 
-    if (etat == REFU){
-        if (!db_get_raison(conn, id_suivi, message)){
-            LOG_SERV(LOG_ERROR, "ETA ERR SELECT RAISON");
+    if (etat == REFU) {
+        LOG_SERV(LOG_DEBUG, "get_etat: récupération raison refus");
+
+        if (!db_get_raison(conn, id_suivi, message)) {
+            LOG_SERV(LOG_ERROR, "get_etat: erreur DB SELECT raison");
             return;
         }
 
-        if (!send_etat_msg(fd, str_etat, id_suivi, message)){
-            LOG_SERV(LOG_ERROR, "ETA ERR SEND");
-            return;
-        }
-    }else{
-        if (!send_etat(fd, str_etat, id_suivi)){
-            LOG_SERV(LOG_ERROR, "ETA ERR SEND");
+        if (!send_etat_msg(fd, str_etat, id_suivi, message)) {
+            LOG_SERV(LOG_ERROR, "get_etat: erreur envoi message refus");
             return;
         }
 
-    } 
+        LOG_SERV(LOG_INFO, "get_etat: message refus envoyé");
+    } else {
+        if (!send_etat(fd, str_etat, id_suivi)) {
+            LOG_SERV(LOG_ERROR, "get_etat: erreur envoi état");
+            return;
+        }
+
+        LOG_SERV(LOG_INFO, "get_etat: état envoyé");
+    }
 }
 
 void avance(PGconn *conn) {
+    LOG_SERV(LOG_DEBUG, "avance: début traitement");
+
     srand(time(NULL));
+
     Bordereaux *list = NULL;
     int count = 0;
     int cap_max = 3;
-    char message[255];
-    LOG_SERV(LOG_DEBUG, "AVANCE ARR");
     int cap = 0;
+    char message[255];
 
-    for (int etat = ETAT8; etat>=ETAT1; etat--){
+    for (int etat = ETAT8; etat >= ETAT1; etat--) {
+        LOG_SERV(LOG_DEBUG, "avance: traitement état=%d", etat);
+
         int nb_modif = 0;
 
         if (!db_get_all_etat(conn, &list, &count, etat)) {
-            LOG_SERV(LOG_ERROR, "AVANCE SELECT");
+            LOG_SERV(LOG_ERROR, "avance: erreur DB SELECT all état=%d", etat);
             return;
         }
-        LOG_SERV(LOG_INFO, "GET ALL ETAT success");
 
-        LOG_SERV(LOG_DEBUG, "count value : %d", count);
+        LOG_SERV(LOG_INFO, "avance: %d bordereaux trouvés pour état=%d", count, etat);
+
         for (int i = 0; i < count; i++) {
-            if ((etat>ETAT4 || etat==ETAT1) || cap > nb_modif ){
+            if ((etat > ETAT4 || etat == ETAT1) || cap > nb_modif) {
+
                 int next = next_etat(list[i].etat);
-                LOG_SERV(LOG_DEBUG, "id=%s, etat=%d -> next=%d",list[i].id_suivi, list[i].etat, next);
-                    
+                LOG_SERV(LOG_DEBUG, "avance: %s passe de %d à %d",
+                         list[i].id_suivi, list[i].etat, next);
+
                 if (!db_update_etat(conn, list[i].id_suivi, next)) {
-                    LOG_SERV(LOG_ERROR, "AVANCE UPDATE pour %s", list[i].id_suivi);
+                    LOG_SERV(LOG_ERROR, "avance: erreur UPDATE état pour %s", list[i].id_suivi);
                 }
-                if (next == REFU){
+
+                if (next == REFU) {
                     int ale = rand() % 5;
                     snprintf(message, sizeof(message), "%s", raisonRefus[ale]);
-                    if (!db_update_raison(conn, list[i].id_suivi, message)){
-                        LOG_SERV(LOG_ERROR, "AVANCE UPDATE pour %s", list[i].id_suivi);
+
+                    LOG_SERV(LOG_DEBUG, "avance: refus pour %s (raison=%s)",
+                             list[i].id_suivi, message);
+
+                    if (!db_update_raison(conn, list[i].id_suivi, message)) {
+                        LOG_SERV(LOG_ERROR, "avance: erreur UPDATE raison pour %s", list[i].id_suivi);
                     }
                 }
-                if (next == LVRAB){
-                    if (!db_add_image(conn, list[i].id_suivi)){
-                        LOG_SERV(LOG_ERROR, "AVANCE UPDATE image %s", list[i].id_suivi);
+
+                if (next == LVRAB) {
+                    LOG_SERV(LOG_DEBUG, "avance: ajout image pour %s", list[i].id_suivi);
+
+                    if (!db_add_image(conn, list[i].id_suivi)) {
+                        LOG_SERV(LOG_ERROR, "avance: erreur ajout image pour %s", list[i].id_suivi);
                     }
                 }
+
                 nb_modif++;
             }
-            
         }
+
         cap = cap_max - count + nb_modif;
-    }  
-    LOG_SERV(LOG_INFO, "AVANCE success");
+        LOG_SERV(LOG_DEBUG, "avance: cap recalculé=%d", cap);
+    }
+
+    LOG_SERV(LOG_INFO, "avance: traitement terminé");
     free(list);
 }
