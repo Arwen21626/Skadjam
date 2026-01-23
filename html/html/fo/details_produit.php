@@ -210,7 +210,7 @@
                             
                             $aReponse = (isset($reponse['id_avis']))?true:false;
                             ?>
-                            <section class=" bg-bleu m-4 p-4 md:w-4xl w-200 <?php echo $aReponse?'mb-0 rounded-t-2xl':'rounded-2xl'?>">
+                            <section class=" bg-bleu m-4 p-4 md:w-4xl w-100 <?php echo $aReponse?'mb-0 rounded-t-2xl':'rounded-2xl'?>">
 
                                 <div class="grid grid-cols-4 md:grid-cols-5 justify-items-end">
                                     <h4 class=" col-span-2 md:col-span-3 justify-self-start">
@@ -248,7 +248,7 @@
                                 <p><?php echo $row['contenu_commentaire'];?></p>     
                             </section>
                             <?php if(isset($reponse["id_avis"])){?>
-                            <section class=" bg-beige m-4 mt-0 p-4 md:w-4xl w-200 rounded-b-2xl">
+                            <section class=" bg-beige m-4 mt-0 p-4 md:w-4xl w-100 rounded-b-2xl">
                                 <div class="grid grid-cols-4 md:grid-cols-5 justify-items-end w-auto">
                                     <h4 class="mr-4 col-span-2 md:col-span-3 justify-self-start">
                                         <?php echo $reponse['raison_sociale']; ?>
