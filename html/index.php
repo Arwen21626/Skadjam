@@ -5,7 +5,7 @@
     require_once __DIR__ . "/php/fonctions.php";
     require_once __DIR__ . "/php/modification_variable.php";
     session_start();
-
+    
     if (!isset($_SESSION['role'])) {
         $_SESSION['role'] = "visiteur";
         $_SESSION['panier'] = ["nb_produit_total" => 0, // Utilisation des noms de colonne utilisées dans la BDD

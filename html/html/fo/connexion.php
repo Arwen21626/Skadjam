@@ -5,8 +5,6 @@
         $_SESSION['role'] = 'visiteur';
     }
 
-    
-
     $erreur = false;
     include __DIR__ . '/../../01_premiere_connexion.php';
     if(isset($_POST['mdp']) && isset($_POST['mail'])){

@@ -8,7 +8,7 @@
 
     if ($_SESSION["role"] === "client") 
     {
-
+        
         $idClient = $_SESSION["idCompte"];
 
         $rqt = $dbh->query("SELECT * FROM sae3_skadjam._panier WHERE id_client = $idClient", PDO::FETCH_ASSOC);
