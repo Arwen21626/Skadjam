@@ -111,36 +111,47 @@ void avance(PGconn *conn) {
     srand(time(NULL));
     Bordereaux *list = NULL;
     int count = 0;
+    int cap_max = 3;
     char message[255];
     LOG_SERV(LOG_DEBUG, "AVANCE ARR");
-    if (!db_get_all_etat(conn, &list, &count)) {
-        LOG_SERV(LOG_ERROR, "AVANCE SELECT");
-        return;
-    }
-    LOG_SERV(LOG_INFO, "GET ALL ETAT success");
+    int cap = 0;
 
-    LOG_SERV(LOG_DEBUG, "count value : %d", count);
-    for (int i = 0; i < count; i++) {
-        int next = next_etat(list[i].etat);
-        LOG_SERV(LOG_DEBUG, "id=%s, etat=%d -> next=%d",
-            list[i].id_suivi, list[i].etat, next);
-            
-            if (!db_update_etat(conn, list[i].id_suivi, next)) {
-                LOG_SERV(LOG_ERROR, "AVANCE UPDATE pour %s", list[i].id_suivi);
-            }
-            if (next == REFU){
-                int ale = rand() % 5;
-                snprintf(message, sizeof(message), "%s", raisonRefus[ale]);
-                if (!db_update_raison(conn, list[i].id_suivi, message)){
+    for (int etat = ETAT8; etat>=ETAT1; etat--){
+        int nb_modif = 0;
+
+        if (!db_get_all_etat(conn, &list, &count, etat)) {
+            LOG_SERV(LOG_ERROR, "AVANCE SELECT");
+            return;
+        }
+        LOG_SERV(LOG_INFO, "GET ALL ETAT success");
+
+        LOG_SERV(LOG_DEBUG, "count value : %d", count);
+        for (int i = 0; i < count; i++) {
+            if ((etat>ETAT4 || etat==ETAT1) || cap > nb_modif ){
+                int next = next_etat(list[i].etat);
+                LOG_SERV(LOG_DEBUG, "id=%s, etat=%d -> next=%d",list[i].id_suivi, list[i].etat, next);
+                    
+                if (!db_update_etat(conn, list[i].id_suivi, next)) {
                     LOG_SERV(LOG_ERROR, "AVANCE UPDATE pour %s", list[i].id_suivi);
                 }
-            }
-            if (next == LVRAB){
-                if (!db_add_image(conn, list[i].id_suivi)){
-                    LOG_SERV(LOG_ERROR, "AVANCE UPDATE image %s", list[i].id_suivi);
+                if (next == REFU){
+                    int ale = rand() % 5;
+                    snprintf(message, sizeof(message), "%s", raisonRefus[ale]);
+                    if (!db_update_raison(conn, list[i].id_suivi, message)){
+                        LOG_SERV(LOG_ERROR, "AVANCE UPDATE pour %s", list[i].id_suivi);
+                    }
                 }
+                if (next == LVRAB){
+                    if (!db_add_image(conn, list[i].id_suivi)){
+                        LOG_SERV(LOG_ERROR, "AVANCE UPDATE image %s", list[i].id_suivi);
+                    }
+                }
+                nb_modif++;
             }
-    }
+            
+        }
+        cap = cap_max - count + nb_modif;
+    }  
     LOG_SERV(LOG_INFO, "AVANCE success");
     free(list);
 }

@@ -12,7 +12,7 @@
 #include "../serveur/utils.h"
 
 int db_get_etat(PGconn *conn, const char *id_suivi, int *etat);
-int db_get_all_etat(PGconn *conn, Bordereaux **list, int *count);
+int db_get_all_etat(PGconn *conn, Bordereaux **list, int *count, int etat);
 int db_update_etat(PGconn *conn, const char *id_suivi, int nouvel_etat);
 int db_update_raison(PGconn *conn, const char *id_suivi, char *message);
 int db_get_raison(PGconn *conn, const char *id_suivi, char *raison);

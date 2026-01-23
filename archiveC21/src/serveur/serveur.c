@@ -96,7 +96,7 @@ int init_server() {
         exit(EXIT_FAILURE);
     }
 
-    LOG_SERV(LOG_INFO, "Serveur prêt sur 0.0.0.0:%d", sPort);
+    LOG_SERV(LOG_INFO, "Serveur prêt sur 127.0.0.1:%d", sPort);
     return sock;
 }
 
@@ -252,10 +252,13 @@ int auth_user(const char *user, const char *pwd) {
         LOG_SERV(LOG_ERROR, "Impossible d'ouvrir lst_client.data : %s", strerror(errno));
         return -1; // erreur serveur
     }
-
+    char password[MD5_DIGEST_LENGTH*2+1];
+    md5_hash(pwd, password);
     while (fgets(line, sizeof(line), f)) {
         if (sscanf(line, "%127s %127s", us, pswd) == 2) {
-            if (strcmp(us, user) == 0 && strcmp(pswd, pwd) == 0) {
+            
+
+            if (strcmp(us, user) == 0 && strcmp(pswd, password) == 0) {
                 fclose(f);
                 return 0; // OK
             }
@@ -264,4 +267,12 @@ int auth_user(const char *user, const char *pwd) {
 
     fclose(f);
     return 1; // identifiants incorrects
+}
+
+void md5_hash(const char *password, char *output){
+    unsigned char digest[MD5_DIGEST_LENGTH];
+    MD5((unsigned char*)password, strlen(password), digest);
+    for (int i = 0; i< MD5_DIGEST_LENGTH; i++){
+        sprintf(&output[i*2], "%02x", digest[i]);
+    }
 }

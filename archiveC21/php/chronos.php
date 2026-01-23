@@ -17,8 +17,8 @@ if (!$conn) {
 echo "[CHRONOS] Connexion établie\n";
 
 // --- ENVOI CONN ---
-echo "[CHRONOS] Envoi : CONN mewen 1234\n";
-fwrite($conn, "CONN test 1234\n");
+echo "[CHRONOS] Envoi : CONN chronos 5678\n";
+fwrite($conn, "CONN chronos 5678\n");
 
 echo "[CHRONOS] Attente réponse...\n";
 $message = fread($conn, $size);

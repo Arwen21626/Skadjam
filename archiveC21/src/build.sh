@@ -14,8 +14,8 @@ fi
 
 # Compilation
 echo "Compilation en cours..."
-echo "gcc $C_FILES -o "$OUTPUT" -Wall -lpq"
-gcc $C_FILES -o "$OUTPUT" -Wall -lpq
+echo "gcc $C_FILES -o "$OUTPUT" -Wall -lpq -lcrypto"
+gcc $C_FILES -o "$OUTPUT" -Wall -lpq -lcrypto
 
 # Résultat
 if [ $? -eq 0 ]; then

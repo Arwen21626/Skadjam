@@ -44,10 +44,16 @@ int db_get_raison(PGconn *conn, const char *id_suivi, char *raison){
     return 1;
 }
 
-int db_get_all_etat(PGconn *conn, Bordereaux **list, int *count) {
+int db_get_all_etat(PGconn *conn, Bordereaux **list, int *count, int etat) {
     LOG_SERV(LOG_DEBUG, "GET ALL ETA ARR");
-    PGresult *res = PQexec(conn,
-        "SELECT id_suivi, etat FROM _delivraptor WHERE etat < 9");
+    char etat_str[8];
+    snprintf(etat_str, sizeof(etat_str), "%d", etat);
+    const char *params[1];
+    params[0] = etat_str;
+
+    PGresult *res = PQexecParams(conn,
+        "SELECT id_suivi, etat FROM _delivraptor WHERE etat = $1",
+        1, NULL, params, NULL, NULL, 0);
     
     if (PQresultStatus(res) != PGRES_TUPLES_OK) {
         PQclear(res);

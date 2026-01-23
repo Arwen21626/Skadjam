@@ -11,6 +11,7 @@
 #include <fcntl.h>
 #include <errno.h>
 #include <getopt.h>
+#include <openssl/md5.h>
 #include "utils.h"
 #include "../logger/logger.h"
 #include "../bdd/bdd.h"
@@ -36,6 +37,6 @@ void handle_client(int fd, struct sockaddr_in conn_addr);
 void process_commands(int fd, char *buffer);
 void handle_conn(int fd, const char *line);
 int auth_user(const char *user, const char *pwd);
-
+void md5_hash(const char *password, char *output);
 
 #endif
