@@ -1,21 +1,21 @@
 # Protocole de communication client / serveur
 
 ## Vue d’ensemble
-Le serveur **Delivraptor** communique avec ses clients via un protocole texte applicatif, au-dessus d’une connexion TCP.
-Chaque message est structuré de manière déterministe afin de permettre un parsing simple et robuste côté client et serveur.
+Le serveur **Delivraptor** communique avec ses clients via un protocole texte, au-dessus d’une connexion TCP.
+Chaque message est structuré d'une manière précise afin de permettre un traitement côté client et serveur plus facilement.
 
 ---
 
 ## Transport
 - **Protocole réseau** : TCP
-- **Encodage** : texte (ASCII / UTF-8)
-- **Mode** : synchrone, orienté requête / réponse
+- **Encodage** : texte 
+- **Mode** : requête / réponse
 
 ---
 
 ## Structure générale d’un message
 
-Chaque message envoyé par le serveur (et attendu dans le même format côté client) respecte la structure suivante :
+Chaque message envoyé entre le serveur et le client respecte la structure suivante :
 
 ```
 CMD <COMMANDE>
@@ -37,7 +37,7 @@ END
 
 ## Commandes supportées
 
-Les commandes sont échangées sous forme de chaînes ASCII. Elles sont envoyées **sur une seule ligne**, sans saut de ligne final côté client PHP.
+Les commandes sont échangées sous forme de chaînes de caractères. Elles sont envoyées **sur une seule ligne**, sans saut de ligne final côté client PHP.
 
 | Commande | Paramètres | Description |
 |---------|------------|-------------|
