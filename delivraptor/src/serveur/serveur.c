@@ -323,7 +323,7 @@ void handle_conn(int fd, const char *line) {
 
     if (sscanf(line, "%15s %127s %127s", cmd, user, pwd) != 3) {
         LOG_CLIENT(LOG_WARN, cIp, cPort, "CONN: format invalide");
-        send(fd, "CONNEXION DENIED\n", 18, 0);
+        send(fd, "ERR SERVER\n", 18, 0);
         return;
     }
 
@@ -333,14 +333,14 @@ void handle_conn(int fd, const char *line) {
 
     if (status == 0) {
         LOG_CLIENT(LOG_INFO, cIp, cPort, "Authentification réussie pour '%s'", user);
-        snprintf(response, sizeof(response), "CONNEXION SUCCESS\n");
+        snprintf(response, sizeof(response), "CONNECTION SUCCESS\n");
         send(fd, response, strlen(response), 0);
         return;
     }
 
     if (status == 1) {
         LOG_CLIENT(LOG_WARN, cIp, cPort, "Authentification échouée: mauvais identifiants");
-        snprintf(response, sizeof(response), "CONNEXION DENIED\n");
+        snprintf(response, sizeof(response), "CONNECTION DENIED\n");
         send(fd, response, strlen(response), 0);
         return;
     }

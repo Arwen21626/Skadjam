@@ -28,7 +28,7 @@ class Recupraptor{
         $this->conn = fsockopen($this->ip, $this->port, $errno, $errstr);
 
         if (!$this->conn){
-            throw new Exception("Connexion failed : $errstr ($errno)");
+            throw new Exception("Connection failed : $errstr ($errno)");
         }
 
         $send = "CONN {$this->user} {$this->password}";
@@ -43,10 +43,10 @@ class Recupraptor{
         $reponse = trim(fgets($this->conn));
         
         switch ($reponse) {
-            case 'CONNEXION SUCCESS':
+            case 'CONNECTION SUCCESS':
                 return true;
 
-            case 'CONNEXION DENIED':
+            case 'CONNECTION DENIED':
                 fclose($this->conn);
                 $this->conn = NULL;
                 throw new Exception("Connection denied : wrong username or password");
