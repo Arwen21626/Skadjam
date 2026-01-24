@@ -1,5 +1,5 @@
 <?php
-include __DIR__ . "/../archiveC21/php/recupraptor.php";
+include __DIR__ . "/recupraptor.php";
 include __DIR__ . "/../recupraptor_connexions_params.php";
 try{
     $rpr = new Recupraptor($rip, $rport, $ruser, $rpass);

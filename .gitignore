@@ -5,9 +5,10 @@ html/structure_site_test
 .sql_korentin
 .env
 html/images/photo_importees/bloc1768464456.png
-archiveC21/docker-compose.yml
-archiveC21/src/delivraptor
-archiveC21/src/logs/*
-!archiveC21/src/logs/.gitkeep
-archiveC21/src/Dockerfile
-archiveC21/src/commande.txt
+delivraptor/docker-compose.yml
+delivraptor/src/delivraptor
+delivraptor/src/logs/*
+!delivraptor/src/logs/.gitkeep
+delivraptor/src/Dockerfile
+delivraptor/src/commande.txt
+delivraptor/src/test.txt
