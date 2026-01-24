@@ -12,3 +12,5 @@ delivraptor/src/logs/*
 delivraptor/src/Dockerfile
 delivraptor/src/commande.txt
 delivraptor/src/test.txt
+archiveC21/*
+!archiveC21/fichier*
