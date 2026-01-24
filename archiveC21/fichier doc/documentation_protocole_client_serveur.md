@@ -43,18 +43,10 @@ Les commandes sont échangées sous forme de chaînes de caractères. Elles sont
 |---------|------------|-------------|
 | `CONN` | `<user> <password>` | Authentification du client |
 | `ADD` | `<nom_expéditeur> <num_commande>` | Création d’un bordereau, retourne un numéro de suivi |
+| `BORD` | Transmission d’un bordereau |
 | `ETA` | `<num_suivi>` | Retourne l’état actuel de la livraison |
 | `IMG` | `<num_suivi>` | Retourne une image (preuve) si disponible |
-
-Toute commande inconnue est considérée comme invalide (`CMD_UNKNOWN`).
-
----------|-------------|
-| `ADD` | Ajout d’une commande / livraison |
-| `ETA` | Demande ou réponse d’estimation de livraison |
 | `NEXT` | Récupération de la prochaine livraison |
-| `BORD` | Transmission d’un bordereau |
-| `CONN` | Connexion / authentification client |
-| `IMG` | Transmission ou requête d’image |
 
 Toute commande inconnue est considérée comme invalide (`CMD_UNKNOWN`).
 
@@ -129,7 +121,7 @@ ADD <nom_expéditeur> <num_commande>
 ```
 
 **Réponse**
-- Corps du message : numéro de suivi généré (texte)
+- Corps du message : numéro de suivi généré 
 
 ---
 
@@ -150,7 +142,7 @@ ETA <num_suivi>
 - `LVRSN` : En cours de livraison
 - `LVR` : Livré
 - `LVRAB` : Livré absent (déclenche un appel IMG côté client)
-- `REFU` : Refusé (avec message)
+- `REFU` : Refusé avec la raison du refus
 
 ---
 
