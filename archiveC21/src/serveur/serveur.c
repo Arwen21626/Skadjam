@@ -1,8 +1,11 @@
 #include "serveur.h"
 
+/* Affiche l’aide en ligne du programme.
+   Utilisé lorsque l’utilisateur passe -h ou --help.
+   Aucun effet de bord autre que l’affichage. */
 void print_help() {
     printf(
-        "Usage: delivraptor [OPTIONS]\n"
+        "Usage: ./delivraptor [OPTIONS]\n"
         "\n"
         "Options:\n"
         "  -h, --help                   Affiche cette aide et quitte\n"
@@ -10,16 +13,32 @@ void print_help() {
         "  -f, --file <filename.log>    Active le mode debug (logs détaillés)\n"
         "\n"
         "Description:\n"
-        "  Delivraptor est un serveur TCP permettant la gestion des\n"
+        "  Delivraptor est un serveur permettant la gestion des\n"
         "  commandes, bordereaux et états de livraison.\n"
         "\n"
         "Exemples:\n"
         "  delivraptor -p 8080\n"
         "  delivraptor --port 9090\n"
+        "  delivraptor -f list_id.txt\n"
         "\n"
     );
 }
 
+/* Analyse les options de la ligne de commande.
+   Paramètres :
+     - argc / argv : arguments du programme
+   Variables globales modifiées :
+     - opt_p : indique si un port a été fourni
+     - opt_f : indique si un fichier de log a été fourni
+     - sPort : port d’écoute du serveur
+     - arg_f : chemin du fichier contenant les identifiants utilisateurs
+   Logique :
+     - utilise getopt_long pour gérer -p, -f, -h
+     - valide le port
+     - exige que -p et -f soient fournis
+   Effets :
+     - écrit dans les logs
+     - peut appeler exit() en cas d’erreur */
 void manage_opt(int argc, char *argv[]) {
     LOG_SERV(LOG_DEBUG, "manage_opt: début du parsing des options");
 
@@ -49,6 +68,7 @@ void manage_opt(int argc, char *argv[]) {
                 errno = 0;
                 sPort = strtol(optarg, &endptr, 10);
 
+                /* Validation du port */
                 if (errno != 0 || *endptr != '\0' || sPort <= 0 || sPort > 65535) {
                     LOG_SERV(LOG_ERROR, "manage_opt: port invalide (%s)", optarg);
                     exit(EXIT_FAILURE);
@@ -64,6 +84,7 @@ void manage_opt(int argc, char *argv[]) {
         }
     }
 
+    /* Vérification des options obligatoires */
     if (!opt_p) {
         LOG_SERV(LOG_ERROR, "manage_opt: port obligatoire manquant");
         exit(EXIT_FAILURE);
@@ -77,6 +98,20 @@ void manage_opt(int argc, char *argv[]) {
     LOG_SERV(LOG_DEBUG, "manage_opt: parsing terminé");
 }
 
+/* Initialise le socket serveur.
+   Variables globales utilisées :
+     - sPort : port d’écoute
+     - sock : socket serveur créé
+   Logique :
+     - crée un socket
+     - active SO_REUSEADDR
+     - bind sur 127.0.0.1:sPort
+     - listen()
+   Retour :
+     - fd du socket serveur
+   Effets :
+     - écrit dans les logs
+     - exit() en cas d’erreur critique */
 int init_server() {
     LOG_SERV(LOG_DEBUG, "init_server: initialisation du serveur");
 
@@ -116,6 +151,16 @@ int init_server() {
     return sock;
 }
 
+/* Boucle principale du serveur.
+   Logique :
+     - attend des connexions via accept()
+     - fork() un processus enfant pour chaque client
+     - le parent continue d’écouter
+   Variables globales :
+     - sock : socket serveur
+   Effets :
+     - écrit dans les logs
+     - crée des processus enfants */
 void run_server_loop() {
     LOG_SERV(LOG_INFO, "run_server_loop: boucle serveur démarrée");
 
@@ -139,6 +184,7 @@ void run_server_loop() {
         }
 
         if (pid == 0) {
+            /* Processus enfant */
             close(sock);
             handle_client(cnx, conn_addr);
             LOG_SERV(LOG_DEBUG, "run_server_loop: fin processus enfant");
@@ -146,10 +192,25 @@ void run_server_loop() {
             _exit(0);
         }
 
+        /* Processus parent */
         close(cnx);
     }
 }
 
+/* Gère un client dans un processus enfant.
+   Paramètres :
+     - fd : socket client
+     - conn_addr : adresse du client
+   Variables globales modifiées :
+     - cIp, cPort : IP et port du client
+     - conn : connexion PostgreSQL (via connexionBd())
+   Logique :
+     - initialise la connexion BDD
+     - lit les commandes du client
+     - délègue à process_commands()
+   Effets :
+     - écrit dans les logs
+     - boucle jusqu’à déconnexion */
 void handle_client(int fd, struct sockaddr_in conn_addr) {
     inet_ntop(AF_INET, &conn_addr.sin_addr, cIp, sizeof(cIp));
     cPort = ntohs(conn_addr.sin_port);
@@ -171,6 +232,19 @@ void handle_client(int fd, struct sockaddr_in conn_addr) {
     LOG_CLIENT(LOG_INFO, cIp, cPort, "Client déconnecté");
 }
 
+/* Traite un buffer contenant potentiellement plusieurs commandes.
+   Paramètres :
+     - fd : socket client
+     - buffer : texte brut reçu
+   Variables globales :
+     - horo : timestamp utilisé pour générer id_suivi
+   Logique :
+     - découpe par lignes
+     - identifie la commande (CMD_ADD, CMD_ETA, etc.)
+     - appelle la fonction correspondante
+   Effets :
+     - écrit dans les logs
+     - peut envoyer des réponses au client */
 void process_commands(int fd, char *buffer) {
     LOG_SERV(LOG_DEBUG, "process_commands: début traitement");
 
@@ -230,6 +304,17 @@ void process_commands(int fd, char *buffer) {
     LOG_SERV(LOG_DEBUG, "process_commands: fin traitement");
 }
 
+/* Gère la commande CONN (authentification).
+   Paramètres :
+     - fd : socket client
+     - line : ligne complète "CONN user pwd"
+   Logique :
+     - parse user + pwd
+     - hash le mot de passe en MD5
+     - compare avec le fichier arg_f
+   Effets :
+     - écrit dans les logs
+     - envoie SUCCESS ou DENIED */
 void handle_conn(int fd, const char *line) {
     LOG_SERV(LOG_DEBUG, "handle_conn: début");
 
@@ -264,6 +349,20 @@ void handle_conn(int fd, const char *line) {
     send(fd, "ERR SERVER\n", 11, 0);
 }
 
+/* Vérifie les identifiants utilisateur.
+   Paramètres :
+     - user : nom d’utilisateur
+     - pwd : mot de passe en clair
+   Variables globales :
+     - arg_f : fichier contenant "user md5(password)"
+   Logique :
+     - hash pwd en MD5
+     - lit le fichier ligne par ligne
+     - compare user + hash
+   Retour :
+     - 0 = OK
+     - 1 = mauvais identifiants
+     - -1 = erreur interne */
 int auth_user(const char *user, const char *pwd) {
     LOG_SERV(LOG_DEBUG, "auth_user: début (user=%s)", user);
 
@@ -272,7 +371,9 @@ int auth_user(const char *user, const char *pwd) {
 
     FILE *f = fopen(arg_f, "r");
     if (!f) {
-        LOG_SERV(LOG_ERROR, "auth_user: impossible d'ouvrir fichier client (%s)", strerror(errno));
+        LOG_SERV(LOG_ERROR,
+                 "auth_user: impossible d'ouvrir fichier client (%s)",
+                 strerror(errno));
         return -1;
     }
 
@@ -283,17 +384,30 @@ int auth_user(const char *user, const char *pwd) {
         if (sscanf(line, "%127s %127s", us, pswd) == 2) {
             if (strcmp(us, user) == 0 && strcmp(pswd, password) == 0) {
                 fclose(f);
-                LOG_SERV(LOG_INFO, "auth_user: authentification OK pour %s", user);
+                LOG_SERV(LOG_INFO,
+                         "auth_user: authentification OK pour %s",
+                         user);
                 return 0;
             }
         }
     }
 
     fclose(f);
-    LOG_SERV(LOG_INFO, "auth_user: identifiants incorrects pour %s", user);
+    LOG_SERV(LOG_INFO,
+             "auth_user: identifiants incorrects pour %s",
+             user);
     return 1;
 }
 
+/* Calcule le hash MD5 d’un mot de passe.
+   Paramètres :
+     - password : mot de passe en clair
+     - output : buffer de sortie (32 hex chars + '\0')
+   Logique :
+     - MD5() remplit digest (16 octets)
+     - conversion en hexadécimal
+   Effets :
+     - remplit output */
 void md5_hash(const char *password, char *output) {
     unsigned char digest[MD5_DIGEST_LENGTH];
     MD5((unsigned char*)password, strlen(password), digest);

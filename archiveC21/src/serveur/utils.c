@@ -1,5 +1,13 @@
 #include "utils.h"
 
+/* Variables globales utilisées dans tout le serveur :
+   - cIp / cPort : IP et port du client actuellement traité
+   - sPort : port d’écoute du serveur (défini via options)
+   - sock : socket serveur
+   - opt_f / arg_f : activation et chemin du fichier d’authentification
+   - opt_p : indique si un port a été fourni
+   - horo : timestamp utilisé pour générer des identifiants uniques
+*/
 char cIp[INET_ADDRSTRLEN];
 int cPort;
 int sPort = -1;
@@ -9,6 +17,15 @@ char *arg_f;
 int opt_p = 0;
 time_t horo;
 
+/* Convertit une commande interne (enum cmd_t)
+   en chaîne protocolaire envoyée au client.
+   Paramètres :
+     - cmd : valeur de l’énumération CMD_*
+   Retour :
+     - chaîne constante ("ADD", "ETA", etc.)
+   Effets :
+     - écrit dans les logs
+*/
 const char *cmd_to_str(cmd_t cmd) {
     LOG_SERV(LOG_DEBUG, "cmd_to_str: conversion commande (%d)", cmd);
 
@@ -25,6 +42,15 @@ const char *cmd_to_str(cmd_t cmd) {
     }
 }
 
+/* Convertit une chaîne reçue du client en commande interne (enum cmd_t).
+   Paramètres :
+     - cmd : chaîne brute ("ADD", "ETA", etc.)
+   Retour :
+     - valeur de l’énumération correspondante
+     - CMD_UNKNOWN si non reconnu
+   Effets :
+     - écrit dans les logs
+*/
 cmd_t str_to_cmd(const char *cmd) {
     LOG_SERV(LOG_DEBUG, "str_to_cmd: analyse chaîne (%s)", cmd);
 
@@ -38,6 +64,17 @@ cmd_t str_to_cmd(const char *cmd) {
     return CMD_UNKNOWN;
 }
 
+/* Extrait la commande depuis une ligne brute reçue du client.
+   Paramètres :
+     - buffer : ligne complète (ex : "ADD AMAZON 123")
+   Logique :
+     - lit le premier mot
+     - le convertit via str_to_cmd()
+   Retour :
+     - valeur enum cmd_t
+   Effets :
+     - écrit dans les logs
+*/
 cmd_t get_commande(const char *buffer) {
     LOG_SERV(LOG_DEBUG, "get_commande: extraction depuis buffer");
 
@@ -53,6 +90,15 @@ cmd_t get_commande(const char *buffer) {
     return cmd;
 }
 
+/* Supprime les caractères de fin de ligne (\n, \r) d’une chaîne.
+   Paramètres :
+     - s : chaîne modifiable
+   Logique :
+     - recule depuis la fin tant que le dernier caractère est \n ou \r
+   Effets :
+     - modifie la chaîne en place
+     - écrit dans les logs si des caractères ont été retirés
+*/
 void chomp(char *s) {
     LOG_SERV(LOG_DEBUG, "chomp: nettoyage fin de ligne");
 
@@ -64,6 +110,8 @@ void chomp(char *s) {
     }
 
     if (len != original_len) {
-        LOG_SERV(LOG_DEBUG, "chomp: caractères supprimés (%zu -> %zu)", original_len, len);
+        LOG_SERV(LOG_DEBUG,
+                 "chomp: caractères supprimés (%zu -> %zu)",
+                 original_len, len);
     }
 }
