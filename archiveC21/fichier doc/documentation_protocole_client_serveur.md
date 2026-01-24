@@ -43,7 +43,7 @@ Les commandes sont échangées sous forme de chaînes de caractères. Elles sont
 |---------|------------|-------------|
 | `CONN` | `<user> <password>` | Authentification du client |
 | `ADD` | `<nom_expéditeur> <num_commande>` | Création d’un bordereau, retourne un numéro de suivi |
-| `BORD` |               | | Transmission d’un bordereau |
+| `BORD` |               | Transmission d’un bordereau |
 | `ETA` | `<num_suivi>` | Retourne l’état actuel de la livraison |
 | `IMG` | `<num_suivi>` | Retourne une image (preuve) si disponible |
 | `NEXT` |             | Récupération de la prochaine livraison |
