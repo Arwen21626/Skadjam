@@ -43,10 +43,10 @@ Les commandes sont échangées sous forme de chaînes de caractères. Elles sont
 |---------|------------|-------------|
 | `CONN` | `<user> <password>` | Authentification du client |
 | `ADD` | `<nom_expéditeur> <num_commande>` | Création d’un bordereau, retourne un numéro de suivi |
-| `BORD` |               | Transmission d’un bordereau |
+| `BORD` | `<num_suivi>` | Transmission d’un bordereau |
 | `ETA` | `<num_suivi>` | Retourne l’état actuel de la livraison |
 | `IMG` | `<num_suivi>` | Retourne une image (preuve) si disponible |
-| `NEXT` |             | Récupération de la prochaine livraison |
+| `NEXT` | Aucun | Récupération de la prochaine livraison |
 
 Toute commande inconnue est considérée comme invalide (`CMD_UNKNOWN`).
 
@@ -77,18 +77,18 @@ END
 
 ---
 
-## Parsing côté réception
+## Lecture du message côté réception
 
-Le client PHP (`Recupraptor`) applique strictement le parsing suivant :
+Le client PHP (`Recupraptor`) applique la méthode de lecture suivante :
 
 1. Lecture d’une ligne `CMD <CODE>`
 2. Lecture d’une ligne `SIZE <N>`
 3. Lecture du corps du message jusqu’au marqueur `END`
-   - Si `SIZE < 255` : lecture ligne par ligne (trimée)
-   - Sinon : lecture brute (binaire possible)
-4. Fermeture immédiate de la connexion TCP
+   - Si `SIZE < 255` : lecture ligne par ligne
+   - Sinon : lecture brute
+4. Fermeture de la connexion TCP
 
-⚠️ **La taille (`SIZE`) n’est pas utilisée pour borner la lecture**, seul `END` fait foi.
+⚠️ **La taille (`SIZE`) indique juste la méthode de lecture, elle s'arrête uniquement lors de la lecture du marqeur `END`**.
 
 ---
 
@@ -153,35 +153,8 @@ IMG <num_suivi>
 ```
 
 **Réponse**
-- Corps du message : données binaires JPEG
+- Corps du message : données binaires JPG
 - Le client écrit directement le contenu dans un fichier `.jpg`
 
----
 
-## Particularités du client PHP
-
-- Connexion TCP **ouverte et fermée à chaque commande**
-- Protocole strictement synchrone
-- Absence de `
-` explicite à l’envoi des commandes
-- Le parsing dépend exclusivement du marqueur `END`
-
----
-
-## Points d’attention / dette technique
-
-- `SIZE` n’est pas utilisé comme garde-fou réel
-- Mélange texte / binaire sur le même protocole
-- Pas de checksum ni validation d’intégrité
-- Pas de gestion de timeout côté client
-
----
-
-## Évolutions possibles
-
-- Forcer les fins de ligne (`
-`) côté client
-- Utiliser `SIZE` pour borner la lecture
-- Séparer IMG sur un canal dédié
-- Ajouter des codes d’erreur normalisés
 
