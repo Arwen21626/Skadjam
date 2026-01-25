@@ -10,7 +10,7 @@ void print_help() {
         "Options:\n"
         "  -h, --help                   Affiche cette aide et quitte\n"
         "  -p, --port <port>            Définit le port d'écoute du serveur\n"
-        "  -f, --file <filename.log>    Active le mode debug (logs détaillés)\n"
+        "  -f, --file <filename>        Définit le fichier contenant les utilisateurs\n"
         "\n"
         "Description:\n"
         "  Delivraptor est un serveur permettant la gestion des\n"
