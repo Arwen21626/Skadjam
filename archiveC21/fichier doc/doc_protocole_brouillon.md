@@ -156,7 +156,5 @@ IMG <num_suivi>
 - Corps du message : données binaires JPG
 - Le client écrit directement le contenu dans un fichier `.jpg`
 
----
-
 
 
