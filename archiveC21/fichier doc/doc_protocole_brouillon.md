@@ -46,7 +46,7 @@ Les commandes sont échangées sous forme de chaînes de caractères. Elles sont
 | `BORD` |               | Transmission d’un bordereau |
 | `ETA` | `<num_suivi>` | Retourne l’état actuel de la livraison |
 | `IMG` | `<num_suivi>` | Retourne une image (preuve) si disponible |
-| `NEXT` |             | Récupération de la prochaine livraison |
+| `NEXT` | Aucun | Récupération de la prochaine livraison |
 
 Toute commande inconnue est considérée comme invalide (`CMD_UNKNOWN`).
 
