@@ -3,7 +3,29 @@
     require_once(__DIR__ . "/../../php/verif_role_bo.php");
     include(__DIR__ .'/../../01_premiere_connexion.php');
     require_once(__DIR__ . "/../../php/fonctions.php");
+    require_once(__DIR__ . '/../../php/verification_formulaire.php');
     $idCompte = $_SESSION['idCompte'];
+
+    try {     
+        $tabProduit = null;           
+        //récupère toutes les infos des tables produits
+        foreach($dbh->query("SELECT pr.id_produit, pr.libelle_produit, pr.prix_ttc, pr.note_moyenne, pr.quantite_stock
+                            FROM sae3_skadjam._produit pr
+                            INNER JOIN sae3_skadjam._vendeur v
+                                ON pr.id_vendeur = v.id_compte
+                            WHERE v.id_compte = $idCompte AND pr.est_supprime = false
+                            ORDER BY libelle_produit ASC"
+                            , PDO::FETCH_ASSOC) as $row){
+            $tabProduit[] = $row;
+        } 
+
+    }
+
+    catch (PDOException $e) {
+        print "Erreur !: " . $e->getMessage() . "<br/>";
+        die();
+    }
+
 ?>
 
 <!DOCTYPE html>
@@ -20,115 +42,57 @@
     <?php include(__DIR__ . "/../../php/structure/navbar_back.php"); ?>
 
     <main class="min-h-[545px]">
-        <?php try {     
-                $tabProduit = null;           
-                //récupère toutes les infos des tables produits et photos
-                foreach($dbh->query("SELECT *
-                                    FROM sae3_skadjam._produit pr
-                                    INNER join sae3_skadjam._montre m
-                                        ON pr.id_produit=m.id_produit
-                                    INNER JOIN sae3_skadjam._photo ph  
-                                        ON ph.id_photo = m.id_photo 
-                                    INNER JOIN sae3_skadjam._vendeur v
-                                        ON pr.id_vendeur = v.id_compte
-                                    WHERE v.id_compte = $idCompte AND pr.est_supprime = false
-                                    ORDER BY libelle_produit ASC"
-                                    , PDO::FETCH_ASSOC) as $row){
-                    $tabProduit[] = $row;
-                } ?>
-
-                <h2>Stock</h2>
-                
-                <?php if($tabProduit == null){ ?>
-                    <p>Votre catalogue de produit est vide, vous n'avez donc pas de stock.</p>
-                <?php } 
-                
-                else{?>
-                    <div class="flex justify-center">
-                        <table class="table-auto w-250">
-                            <thead>
-                                <tr>
-                                    <th scope="col" class="text-left w-125 pl-3"><h3>Nom du produit</h3></th>
-                                    <th scope="col"><h3>Prix</h3></th>
-                                    <th scope="col"><h3>Note</h3></th>
-                                    <th scope="col"><h3>Stock</h3></th>
-                                    <th scope="col"></th>
-                                    <th scope="col"></th>
-                                    <th scope="col"></th>
+        <h2>Stock</h2>
+        
+        <!---affichage si catalogue vide--->
+        <?php if($tabProduit == null){ ?>
+            <p>Votre catalogue de produit est vide, vous n'avez donc pas de stock.</p>
+            <a href="index_vendeur.php" class="flex justify-center md:mt-15 md:mb-15 mt-5 mb-5"><button class="border-vertFonce border-2 rounded-lg md:rounded-2xl w-35 h-10 md:w-50 md:h-14 px-7 cursor-pointer">Retour</button></a>
+        <?php } 
+        
+        else{?>
+            <div class="flex justify-center">
+                <!---tableau liste des stocks--->
+                <table class="table-auto w-250">
+                    <thead>
+                        <tr>
+                            <th scope="col" class="text-left w-125 pl-3"><h3>Nom du produit</h3></th>
+                            <th scope="col"><h3>Prix</h3></th>
+                            <th scope="col"><h3>Note</h3></th>
+                            <th scope="col"><h3>Stock</h3></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php $ligneIndex = 1;
+                            foreach($tabProduit as $id => $valeurs){
+                                $idProduit = $valeurs['id_produit'];?>
+                                <tr class="py-4 <?= ligneCouleur($ligneIndex)?>">
+                                    <!---informations des stocks--->
+                                    <td scope="row" class="text-left py-3 pl-3" ><a href="<?php echo htmlentities("details_produit.php?idProduit=".$idProduit);?>"><?php echo $valeurs['libelle_produit']; ?></a></td>
+                                    <td class="text-center py-3"><p><?php echo htmlentities($valeurs['prix_ttc']);?> €</p></td>
+                                    <td class="text-center py-3">
+                                        <div class="flex justify-center items-center">
+                                            <?php 
+                                                $note = $valeurs['note_moyenne'];
+                                                affichageNote($note); 
+                                            ?>
+                                        </div>
+                                    </td>
+                                    <td class="text-center py-3"><p><?php echo htmlentities($valeurs['quantite_stock']); ?></p></td>
                                 </tr>
-                            </thead>
-                            <tbody>
-                                <?php 
-                                    $impair = 0;
-                                    $classe;
-                                    $classe1 = "py-4";
-                                    $classe2 = "py-4 bg-bleu";
-                                    foreach($tabProduit as $id => $valeurs){
-                                        $idProduit = $valeurs['id_produit']; 
-                                        $impair ++;
-                                        if(fmod($impair, 2) == 0){
-                                            $classe = $classe1;
-                                        }
-                                        else{
-                                            $classe = $classe2;
-                                        }?>
-                                        <tr class="<?php echo $classe; ?>">
-                                            <th scope="row" class="text-left py-3 pl-3" ><a href="<?php echo htmlentities("details_produit.php?idProduit=".$idProduit);?>"><?php echo $valeurs['libelle_produit']; ?></a></th>
-                                            <td class="text-center py-3"><p><?php echo htmlentities($valeurs['prix_ttc']);?> €</p></td>
-                                            <td class="text-center py-3">
-                                                <div class="flex justify-center items-center">
-                                                    <?php 
-                                                        $note = $valeurs['note_moyenne'];
-                                                        affichageNote($note); 
-                                                    ?>
-                                                </div>
-                                            </td>
-
-                                            <td class="text-center py-3">
-                                                <?php if($valeurs['quantite_stock'] > 10){ ?>
-                                                    <p><?php echo htmlentities($valeurs['quantite_stock']);?></p>
-                                                <?php } 
-                                                
-                                                else{ ?>
-                                                    <p class="text-rouge font-bold"><?php echo htmlentities($valeurs['quantite_stock']);?></p>
-                                                <?php } ?>
-
-                                            </td>
-                                            <td class="text-center py-3">
-                                                <form action="../../php/executer_ajouter_stock.php" method="POST">
-                                                    <input type="hidden" name="id" value="<?php echo htmlentities($idProduit);?>">
-                                                    <button class="cursor-pointer" type="submit"><img src="../../images/logo/bootstrap_icon/plus-square.svg" alt="bouton ajouter 1 au stock" class="w-10 h-auto"></button>
-                                                </form>
-                                            </td>
-                                            <td>
-                                                <form action="../../php/executer_enlever_stock.php" method="POST">
-                                                    <input type="hidden" name="id" value="<?php echo htmlentities($idProduit);?>">
-                                                    <input type="hidden" name="quantite" value="1">
-                                                    <input type="hidden" name="stockActuel" value="<?php echo htmlentities($valeurs['quantite_stock']);?>">
-                                                    <button class="cursor-pointer" type="submit"><img src="../../images/logo/bootstrap_icon/dash-square.svg" alt="bouton enlever 1 au stock" class="w-10 h-auto"></button>
-                                                </form>
-                                            </td>
-                                            <td>
-                                                <form action="../../php/executer_vider_stock.php" method="POST">
-                                                    <input type="hidden" name="id" value="<?php echo htmlentities($idProduit);?>">
-                                                    <button class="cursor-pointer" type="submit"><img src="../../images/logo/bootstrap_icon/trash.svg" alt="bouton vider stock" class="w-10 h-auto"></button>
-                                                </form>
-                                            </td>
-                                        </tr>
-                                <?php }?>
-                            </tbody>
-                        </table>
-                    </div>
-      
-                <?php }
-                $dbh = null;
-            } 
-
-            catch (PDOException $e) {
-                print "Erreur !: " . $e->getMessage() . "<br/>";
-                die();
-            }
-        ?>
+                        <?php }?>
+                    </tbody>
+                </table>
+            </div>
+            <div class="flex justify-around mt-10">
+                <!---bouton retour--->
+                <a href="index_vendeur.php" class="flex justify-center items-center border-2 border-vertFonce rounded-2xl w-45 h-14 cursor-pointer my-5">Retour</a>
+                <!---bouton modifier stock--->
+                <button class="border-2 border-vertFonce rounded-2xl w-45 h-14 cursor-pointer my-5">
+                    <a href="../bo/modifier_stock.php?idCompte=<?php echo $idCompte ;?>" class="">Modifier le stock</a>
+                </button>
+            </div>
+        <?php } ?>
     </main>
 
     <!--footer-->

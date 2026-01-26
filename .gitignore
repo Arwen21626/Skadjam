@@ -3,3 +3,14 @@ connections_params.php
 connections_param.php
 html/structure_site_test
 .sql_korentin
+.env
+html/images/photo_importees/bloc1768464456.png
+delivraptor/docker-compose.yml
+delivraptor/src/delivraptor
+delivraptor/src/logs/*
+!delivraptor/src/logs/.gitkeep
+delivraptor/src/Dockerfile
+delivraptor/src/commande.txt
+delivraptor/src/test.txt
+archiveC21/*
+!archiveC21/fichier*

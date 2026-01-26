@@ -5,6 +5,7 @@ require_once __DIR__ . "/../../php/verif_role_fo.php";
 if($_SESSION['role'] != 'client'){
     header('Location: /index.php');
 }else{
+    include __DIR__ . "/../../connexion_recupraptor.php";
     include(__DIR__ . '/../../php/verification_formulaire.php');
     include __DIR__ . '/../../01_premiere_connexion.php';
     
@@ -17,65 +18,160 @@ if($_SESSION['role'] != 'client'){
     $erreurCarteCadeau = false;
     $erreurCodePromo = false;
     $enregistrerCarte = false;
+    $idCompte = $_SESSION['idCompte'];
 
     // Chope l'attribut Get du script vider panier
     if (isset($_GET["achatValide"])) {
         $achatValide = $_GET["achatValide"];
-    }
+    }else{
 
-    if(isset($_POST['numero']) && $achatValide === false){
-    // Initialisation des variables
-        
-
-        $numero = htmlentities($_POST['numero']);
-        $mois = htmlentities($_POST['mois']);
-        $annee = htmlentities($_POST['annee']);
-        $expiration = $mois . '/' . $annee;
-        $cryptogramme = htmlentities($_POST['cryptogramme']);
-        $nom = htmlentities($_POST['nom']);
-
-        
-
-        if(isset($_POST['enregistrerCarte'])){
-            $enregistrerCarte = htmlentities($_POST['enregistrerCarte']);
+        //Récupération du panier
+        $commande = "SELECT id_panier FROM sae3_skadjam._panier WHERE id_client = ?";
+        $stmt = $dbh->prepare($commande);
+        $stmt->execute([$idCompte]);
+        $idPanier = $stmt->fetch(PDO::FETCH_ASSOC)['id_panier'];
+        $sql = "SELECT 
+                pr.libelle_produit,
+                pr.id_produit,
+                pr.id_vendeur,
+                v.raison_sociale,
+                c.quantite_par_produit,
+                pr.prix_ht,
+                pr.prix_ttc,
+                pr.prix_remise,
+                pr.prix_ttc * c.quantite_par_produit as sous_total_ttc,
+                pr.prix_ht * c.quantite_par_produit as sous_total_ht,
+                p.montant_total_ttc,
+                p.nb_produit_total
+            FROM sae3_skadjam._panier p
+            INNER JOIN sae3_skadjam._contient c
+                ON c.id_panier = p.id_panier
+            INNER JOIN sae3_skadjam._produit pr
+                ON pr.id_produit = c.id_produit
+            INNER JOIN sae3_skadjam._vendeur v
+                ON v.id_compte = pr.id_vendeur
+            WHERE p.id_panier = :id_panier
+        ";
+    
+        $stmt = $dbh->prepare($sql);
+        $stmt->execute([':id_panier' => $idPanier]);
+        $tabInfosPanier = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    
+        if (empty($tabInfosPanier)) {
+            die("Erreur : panier vide : " . $idPanier);
         }
-
-        if(isset($_POST['codePromo'])){
-            $codePromo = htmlentities($_POST['codePromo']);
-        }
-        
-        if(isset($_POST['carteCadeau'])){
-            $carteCadeau = htmlentities($_POST['carteCadeau']);
-        }
-
-        //echo $_POST['expiration']; // 22/25
-        if(!verifExpiration($expiration)){
-            $erreurExpiration = true;
-        }
-        if(!verifNomPrenom($nom)){
-            $erreurNom = true;
-        }
-        if(!verifNumCarte($numero)){
-            $erreurNumero = true;
-        }
-
-        if(isset($enregistrerCarte)){
-            if($enregistrerCarte == 'on'){
-                $numeroHasher = password_hash($numero, PASSWORD_DEFAULT);
-                $cryptogrammeHasher = password_hash($cryptogramme, PASSWORD_DEFAULT);
-
-                $idCompte = $_SESSION['idCompte'];
-                $nouvCarte = $dbh->prepare("INSERT INTO sae3_skadjam._carte_bancaire(numero_carte, cryptogramme, nom, expiration, id_client) VALUES('$numeroHasher', '$cryptogrammeHasher', '$nom', $expiration, $idCompte)");
-                $nouvCarte->execute();
+    
+        if(isset($_POST['numero']) && $achatValide === false){
+        // Initialisation des variables
+            
+    
+            $numero = htmlentities($_POST['numero']);
+            $mois = htmlentities($_POST['mois']);
+            $annee = htmlentities($_POST['annee']);
+            $expiration = $mois . '/' . $annee;
+            $cryptogramme = htmlentities($_POST['cryptogramme']);
+            $nom = htmlentities($_POST['nom']);
+            $idAdr = $_GET['idAdresse'];
+    
+            
+    
+            if(isset($_POST['enregistrerCarte'])){
+                $enregistrerCarte = htmlentities($_POST['enregistrerCarte']);
             }
-        }
+    
+            if(isset($_POST['codePromo'])){
+                $codePromo = htmlentities($_POST['codePromo']);
+            }
+            
+            if(isset($_POST['carteCadeau'])){
+                $carteCadeau = htmlentities($_POST['carteCadeau']);
+            }
+    
+            //echo $_POST['expiration']; // 22/25
+            if(!verifExpiration($expiration)){
+                $erreurExpiration = true;
+            }
+            if(!verifNomPrenom($nom)){
+                $erreurNom = true;
+            }
+            if(!verifNumCarte($numero)){
+                $erreurNumero = true;
+            }
 
-        if(($erreurCryptogramme == false && $erreurExpiration == false && $erreurNom == false && $erreurNumero == false) || $achatValide == true){
-            $achatValide = true;
-            header("location:/php/vider_panier.php?typeVider=achat&achatValide=" . $achatValide);
-        }
+            if(isset($enregistrerCarte)){
+                if($enregistrerCarte == 'on'){
+                    $numeroHasher = password_hash($numero, PASSWORD_DEFAULT);
+                    $cryptogrammeHasher = password_hash($cryptogramme, PASSWORD_DEFAULT);
+
+                    $nouvCarte = $dbh->prepare("INSERT INTO sae3_skadjam._carte_bancaire(numero_carte, cryptogramme, nom, expiration, id_client) VALUES(?, ?, ?, ?, ?)");
+                    $nouvCarte->execute([$numeroHasher, $cryptogrammeHasher, $nom, $expiration, $idCompte]);
+                }
+            }
+    
+            if(($erreurCryptogramme == false && $erreurExpiration == false && $erreurNom == false && $erreurNumero == false) || $achatValide == true){
+                $achatValide = true;
+    
+                //Insertion de la commande
+                $date_char = date("d/m/Y");
+                $sqlCommande = "INSERT INTO sae3_skadjam._commande (etat, date_commande, montant_total_ttc, id_client, id_adresse)
+                                VALUES (:etat, :date_commande, :montant_total_ttc, :id_client, :id_adresse)
+                                RETURNING id_commande";
+    
+                $stmtCommande = $dbh->prepare($sqlCommande);
+
+                if (!$stmtCommande->execute([
+                    ':etat' => 'En attente',
+                    ':date_commande' => $date_char,
+                    ':montant_total_ttc' => $tabInfosPanier[0]['montant_total_ttc'],
+                    ':id_client' => $idCompte,
+                    ':id_adresse' => $idAdr
+                ])){
+                    throw new Exception("id_client : " . $idCompte);
+                }
+                $idCommande = $stmtCommande->fetchColumn();
+
+                //creation numéro de suivi
+                try{
+                    $id_suivi = $rpr->create_bord($idCommande, "alizon");
+                    if ($etat = $rpr->get_etat($id_suivi)){
+
+                        $commande = "UPDATE sae3_skadjam._commande SET id_suivi = ?, etat = ? WHERE id_commande = ?";
+                        
+                        //recuperation de l'etat de la commande
+                        $stmt = $dbh->prepare($commande);
+                        if (!$stmt->execute([$id_suivi, $etat, $idCommande])){
+                            throw new Exception("insertion numero de suivi et etat");
+                        }
+                    }
+                } catch (Exception $e){
+                    echo ($e->getMessage() . "<br>");
+                }finally{
+                    if (!$idCommande) {
+                        throw new Exception("id_commande non récupéré");
+                    }
+
+                    //Insertion dans la table donne (lien entre panier et commande)
+                    $sqlDonne = "INSERT INTO sae3_skadjam._donne (id_panier, id_commande)
+                                VALUES (:id_panier, :id_commande)";
         
+        
+                    $stmtDonne = $dbh->prepare($sqlDonne);
+
+                    $stmtDonne->execute([
+                        ':id_panier' => $idPanier,
+                        ':id_commande' => $idCommande
+                    ]);
+                    
+                    header("location:/php/vider_panier.php?typeVider=achat&achatValide=" . $achatValide);
+
+                }
+    
+    
+            }
+            
+        }
     }
+
 }
 ?>
 
@@ -102,7 +198,7 @@ if($_SESSION['role'] != 'client'){
                 <div class="flex flex-col md:items-center items-start ml-5 md:ml-0">
                     <div class="flex flex-col mb-5 mt-5">
                         <label for="numero">Numéro de carte* :</label>
-                        <input placeholder="0000 1111 2222 3333" maxlength="16" pattern="[0-9]{16}" value="<?= isset($_POST['numero'])? $numero : "" ?>" class="pl-2 border-4 border-vertClair rounded-2xl placeholder-gray-500 md:w-100 w-75" type="text" name="numero" id="numero" required>
+                        <input placeholder="0000 1111 2222 3333" maxlength="19" value="<?= isset($_POST['numero'])? $numero : "" ?>" class="pl-2 border-4 border-vertClair rounded-xl placeholder-gray-500 md:w-100 w-75" type="text" name="numero" id="numero" required>
                         <?php
                             if($erreurNumero){ ?>
                                 <p class="text-rouge"><?php echo "Le numéro n'est pas bon";?></p>
@@ -113,9 +209,9 @@ if($_SESSION['role'] != 'client'){
                         <div class="flex flex-col w-100">
                             <label for="expiration">Date d'expiration* :</label>
                             <p class="flex flex-row">
-                                <input placeholder="MM" value="<?= isset($_POST['mois'])? $mois : "" ?>" maxlength="2" pattern="0[1-9]|1[0-2]" class="pl-2 border-4 border-vertClair rounded-2xl placeholder-gray-500 w-15" type="text" name="mois" id="mois" required>
+                                <input placeholder="MM" value="<?= isset($_POST['mois'])? $mois : "" ?>" maxlength="2" pattern="0[1-9]|1[0-2]" class="pl-2 border-4 border-vertClair rounded-xl placeholder-gray-500 w-15" type="text" name="mois" id="mois" required>
                                 /
-                                <input placeholder="AA" value="<?= isset($_POST['annee'])? $annee : "" ?>" maxlength="2" class="pl-2 border-4 border-vertClair rounded-2xl placeholder-gray-500 w-15" type="text" name="annee" id="annee" required>
+                                <input placeholder="AA" value="<?= isset($_POST['annee'])? $annee : "" ?>" maxlength="2" class="pl-2 border-4 border-vertClair rounded-xl placeholder-gray-500 w-15" type="text" name="annee" id="annee" required>
                             </p>
                             <?php if($erreurExpiration){ ?>
                                 <p class="text-rouge"><?php echo "La date n'est pas bonne";?></p>
@@ -125,7 +221,7 @@ if($_SESSION['role'] != 'client'){
         
                         <div class="flex flex-col mt-5">
                             <label for="cryptogramme">Cryptogramme* :</label>
-                            <input placeholder="000" pattern="[0-9]{3}" value="<?= isset($_POST['cryptogramme'])? $cryptogramme : "" ?>" class="pl-2 border-4 border-vertClair rounded-2xl placeholder-gray-500 w-50" type="text" name="cryptogramme" id="cryptogramme" required>
+                            <input placeholder="000" pattern="[0-9]{3}" value="<?= isset($_POST['cryptogramme'])? $cryptogramme : "" ?>" class="pl-2 border-4 border-vertClair rounded-xl placeholder-gray-500 w-50" type="text" name="cryptogramme" id="cryptogramme" required>
                             
                             <?php if($erreurCryptogramme){ ?>
                                 <p class="text-rouge"><?php echo "Le cryptogramme n'est pas bon";?></p>
@@ -134,7 +230,7 @@ if($_SESSION['role'] != 'client'){
                     </div>
                     <div class="flex flex-col mb-5">
                         <label for="nom">Nom du titulaire* :</label>
-                        <input placeholder="M Alizon" value="<?= isset($_POST['nom'])? $nom : "" ?>" class="pl-2 border-4 border-vertClair rounded-2xl placeholder-gray-500 md:w-100 w-75 ml-0" type="text" name="nom" id="nom" required>
+                        <input placeholder="M Alizon" value="<?= isset($_POST['nom'])? $nom : "" ?>" class="pl-2 border-4 border-vertClair rounded-xl placeholder-gray-500 md:w-100 w-75 ml-0" type="text" name="nom" id="nom" required>
                         
                         <?php if($erreurNom){ ?>
                                 <p class="text-rouge"><?php echo "Le nom n'est pas bon";?></p>
@@ -166,8 +262,8 @@ if($_SESSION['role'] != 'client'){
                     </div> -->
                 </div>
                 <div class="flex flex-row justify-center">
-                    <button class="border-vertClair border-2 rounded-2xl w-40 h-14 cursor-pointer m-5"><a href="../fo/adresse.php">Retour</a></button>
-                    <input class="border-vertClair border-2 rounded-2xl w-40 h-14 cursor-pointer m-5" type="submit" value="Suivant">
+                    <button class="border-vertClair border-2 rounded-xl w-40 h-14 cursor-pointer m-5"><a href="../fo/adresse.php">Retour</a></button>
+                    <input class="border-vertClair border-2 rounded-xl w-40 h-14 cursor-pointer m-5" type="submit" value="Suivant">
                 </div>
             </form>
         </main>

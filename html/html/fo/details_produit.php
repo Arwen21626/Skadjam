@@ -12,9 +12,18 @@
 
     // Requête pour récupérer les infos du produit
     $produit = "vide";
-    foreach($dbh->query("SELECT *
+    
+    foreach($dbh->query("SELECT id_categorie, id_vendeur, libelle_produit, prix_ttc,prix_remise, 
+                            quantite_stock, description_produit, 
+                            note_moyenne, pourcentage_remise
                          FROM sae3_skadjam._produit pr
-                         WHERE pr.id_produit = $idProd AND pr.est_supprime = false AND pr.est_masque = false"
+                            left join sae3_skadjam._reduit rd
+                                on rd.id_produit = pr.id_produit
+                            left join sae3_skadjam._remise r
+                                on r.id_remise = rd.id_remise
+                         WHERE pr.id_produit = $idProd 
+                            AND pr.est_supprime = false 
+                            AND pr.est_masque = false"
                         , PDO::FETCH_ASSOC) as $row){
         $produit = $row;
     }
@@ -54,23 +63,37 @@
         // Définition des variables PHP pour récupérer chaque donnée nécessaire
         $libelleProd = $produit["libelle_produit"]; // Nom du produit
         $libelleCat = $categorie["libelle_categorie"]; //Libellé de la catégorie
-        $prixTTC = $produit["prix_ttc"]; // Prix du produit
+        $prixTTC = str_replace(".", ",", $produit["prix_ttc"]); // Prix du produit
+        $prixRemise = str_replace(".",",", $produit["prix_remise"]); // Prix du produit remiser
         $produitStock = $produit["quantite_stock"]; // Récupère le stock du produit pour savoir si il est disponible ou non
         $nomVendeur = $vendeur["raison_sociale"];
         $produitDesc = $produit["description_produit"];
         $noteMoy = $produit["note_moyenne"];
+        $pourcentage = $produit['pourcentage_remise'];
 
         // Définition du lien vers lequel est renvoyé le client en cliquant sur le bouton ajouter au panier
         // Si il est connecté : le produit est ajouté à son panier
         //Si il n'est pas connecté : le visiteur est renvoyé sur la page de connexion
 
-        if ($_SESSION["role"] === "visiteur") 
-        {
-            $lienBtnAjouterPanier = "/html/fo/connexion.php?idProduit=" . $idProd;
-        }
-        else if ($_SESSION["role"] === "client")
-        {
-            $lienBtnAjouterPanier = "/php/ajouter_panier.php";
+        $lienBtnAjouterPanier = "/php/ajouter_panier.php";
+
+        // signalement d'un avis
+        if (isset($_GET['signal']) && $_GET['signal'] === "true"){
+            $idAvis = $_GET['idAvis'];
+            $idCompte = $_SESSION['idCompte'];
+            
+            $updateAvis = $dbh->prepare("UPDATE sae3_skadjam._avis SET signaler = 'true' WHERE id_avis = ?");
+            $updateAvis->execute([$idAvis]);
+
+            // si un client ou un vendeur signale un commentaire
+            if (!($_SESSION['role'] === 'visiteur')){
+                $insertAsignaler = $dbh->prepare("INSERT INTO sae3_skadjam._a_signaler VALUES (?, ?)");
+                $insertAsignaler->execute([$idAvis, $idCompte]);
+            }
+            //si un visiteur signale un commentaire
+            else{
+                $_SESSION['avis'][$idAvis] = "signaler";
+            }
         }
     }
 ?>
@@ -85,6 +108,17 @@
 <body>
     <?php require(__DIR__ . "/../../php/structure/header_front.php"); ?>
     <?php require(__DIR__ . "/../../php/structure/navbar_front.php"); ?>
+
+    <div id="popup-overlay" class="right-12 md:right-40">
+        <div id="popup-ajouter-panier" class="popup p-4 border-vertFonce shadow-xl">
+            <p>Le produit a bien été ajouté à votre panier !</p>
+            <div class="flex justify-around mt-2">
+                <button class="pl-2 pr-2 border-2 border-vertClair rounded-sm cursor-pointer">OK</button>
+                <a href="/html/fo/panier.php" class="a-button pl-2 pr-2 border-2 border-vertClair rounded-sm cursor-pointer">Voir le panier</a>
+            </div>
+        </div>
+    </div>
+    
 
     <main class="p-4 md:pl-8 pr-8">
         <!-- Section Description -->
@@ -102,7 +136,9 @@
 
                 <div class="p-2 flex flex-col items-start md:items-center">
                     <div class="flex md:flex-col md:mb-4">
-                        <h3 class="text-center pr-2 self-center"> <?php echo $prixTTC ?>€</h3>
+                        <h3 class="text-center pr-2 self-center <?php echo ($pourcentage !== NULL)?'line-through':'';?>"> <?php echo $prixTTC ?>€</h3>
+                        <h3 class="text-center pr-2 self-center <?php echo ($pourcentage !== NULL)?'':'hidden';?>"> <?php echo $prixRemise ?>€</h3>
+                
                         <p class="text-center pl-2 mt-1 self-center">
                             <?php 
                                 if ($produitStock > 0) { // Le stock est supérieur à 0, le produit est disponible
@@ -160,18 +196,67 @@
                 else{?>
 
                 <!-- Commentaire -->
+                
                 <section class=" md:ml-32">
                     <?php foreach($avis as $row){
-                        if ($row['contenu_commentaire'] != ''){?>
-                            <section class=" bg-bleu rounded-2xl m-4 p-4 md:w-4xl">
-                                <div class="flex flex-nowrap justify-start items-center w-auto">
-                                    <h4 class="mr-4">
+                        if ($row['contenu_commentaire'] != ''){
+                            $idAvis = $row['id_avis'];
+                            $stmt = $dbh->prepare("SELECT id_avis, raison_sociale, contenu_reponse FROM sae3_skadjam._reponse r
+                                                    INNER JOIN sae3_skadjam._vendeur v
+                                                        ON r.id_compte = v.id_compte 
+                                                    WHERE id_avis = ?");
+                            $stmt->execute([$idAvis]);
+                            $reponse = $stmt->fetch(PDO::FETCH_ASSOC);
+                            
+                            $aReponse = (isset($reponse['id_avis']))?true:false;
+                            ?>
+                            <section class=" bg-bleu m-4 p-4 md:w-4xl w-100 <?php echo $aReponse?'mb-0 rounded-t-2xl':'rounded-2xl'?>">
+
+                                <div class="grid grid-cols-4 md:grid-cols-5 justify-items-end">
+                                    <h4 class=" col-span-2 md:col-span-3 justify-self-start">
                                         <?php echo $row['pseudo'];?>
                                     </h4>
-                                    <?php echo affichageNote($row['nb_etoile']);?>
+                                    <?php echo affichageNote($row['nb_etoile']);
+
+                                    // savoir si l'utilisateur à déjà signaler l'avis il ne faut pas qu'il puisse le resignaler
+                                    $aSignaler = false;
+                                    //pour le visiteur
+                                    if ($_SESSION['role'] === 'visiteur'){
+                                        if (isset($_SESSION['avis'][$row['id_avis']])){
+                                            $aSignaler = true;
+                                        }
+                                    }
+                                    // pour les personne connecter à un compte client ou vendeur
+                                    elseif($_SESSION['role'] === 'client' || $_SESSION['role'] === 'vendeur'){
+                                        $idAvis = $row['id_avis'];
+                                        $idCompte = $_SESSION['idCompte'];
+                                        foreach($dbh->query("SELECT id_avis, id_compte 
+                                                                FROM sae3_skadjam._a_signaler s 
+                                                                WHERE id_compte = $idCompte AND id_avis = $idAvis
+                                                            UNION
+                                                            SELECT id_avis, id_compte 
+                                                                FROM sae3_skadjam._avis a 
+                                                                WHERE id_compte = $idCompte  AND id_avis = $idAvis;", PDO::FETCH_ASSOC) as $avisSignalable){
+                                            $aSignaler = true;
+                                        }
+                                    }
+                                    // affichage ou pas du boutton signaler
+                                    if (!$aSignaler){?>
+                                        <a class="text-black" href="./details_produit.php?idProduit=<?php echo $idProd;?>&signal=true&idAvis=<?php echo $row['id_avis']?>">Signaler</a>
+                                    <?php }?>
                                 </div>
                                 <p><?php echo $row['contenu_commentaire'];?></p>     
                             </section>
+                            <?php if(isset($reponse["id_avis"])){?>
+                            <section class=" bg-beige m-4 mt-0 p-4 md:w-4xl w-100 rounded-b-2xl">
+                                <div class="grid grid-cols-4 md:grid-cols-5 justify-items-end w-auto">
+                                    <h4 class="mr-4 col-span-2 md:col-span-3 justify-self-start">
+                                        <?php echo $reponse['raison_sociale']; ?>
+                                    </h4>
+                                </div>
+                                <p><?php echo $reponse['contenu_reponse'];?></p>     
+                            </section>
+                            <?php }?>
                         <?php }
                     }?>
                 </section>
@@ -196,14 +281,19 @@
                                 <a href="ajouter_avis.php?idProduit=<?php echo $idProd;?>">Ajouter un avis</a>
                             <?php }
                             else{?>
-                                <a href="details_produit.php?idProduit=<?php echo $idProd;?>">Modifier mon avis</a>
-                                <p>A venir</p>
+                                <a href="ajouter_avis.php?idProduit=<?php echo $idProd;?>">Modifier mon avis</a>
                             <?php }
                         } else{
                             // si le client n'est pas connecter?>
                             <a href="connexion.php?idProduit=<?php echo $idProd;?>">Ajouter un avis</a>
                         <?php }?>
                     </button>
+
+                    <!-- Supression d'un avis -->
+                    <?php if ($_SESSION['role'] === 'client' && $dejaAvis){ // on peut supprimer un avis que si on a déjà mit un ?>
+                        <a href="./<?php echo "ajouter_avis.php?idProduit=".$idProd."&supr=true"; ?>"><button class="bg-beige rounded-2xl w-48 h-14 mb-4 md:mr-16 hover:text-rouge">Supprimer mon avis</button></a>
+                    <?php }?>
+
                     <?php if($avis != null){?>
                     <!-- Notes -->
                     <section class="md:mr-16 p-5 bg-beige rounded-2xl h-80 w-48 flex flex-col justify-center">
@@ -232,9 +322,22 @@
                     <?php }?>
                 </div>
             </div>
-        </sectiob>
+        </section>
     </main>
 
     <?php require(__DIR__ . "/../../php/structure/footer_front.php") ?>
 </body>
+
+<script type="module">
+    import * as Popup from "../../js/popup.js";
+
+    const btnClosePopUp = document.getElementById("popup-ajouter-panier").querySelector("button");
+
+    btnClosePopUp.addEventListener("click", () => {
+        Popup.closePopup("popup-ajouter-panier");
+    });
+
+    Popup.showPopUp("popup-ajouter-panier", 5000, "panierAjouter");
+</script>
+
 </html>

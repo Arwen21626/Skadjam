@@ -176,8 +176,14 @@ function verifAdresse($adresse){
 
 
 function verifNumCarte($num){
-    //Vérfie que le numéro à bien 16 chiffres
-    return (preg_match('/[0-9]{16}/',$num));
+    if(preg_match('/[0-9]{16}/',$num)){
+        return true;
+    }else{
+        $exp = explode(" ", $num);
+        $numero = $exp[0].$exp[1].$exp[2].$exp[3];
+        //Vérfie que le numéro à bien 16 chiffres
+        return (preg_match('/[0-9]{16}/',$numero));
+    }
 }
 
 function verifExpiration($date){
@@ -209,4 +215,13 @@ function verifExpiration($date){
 function verifCryptogramme($cryptogramme){
     // Vérifie que le cryptogramme à bien 3 chiffres
     return (preg_match('[0-9]{3}',$cryptogramme));
+}
+
+function verifPourcentage($pourcentage){
+    if ($pourcentage <= 1 && $pourcentage >= 0){
+        return true;
+    }
+    else{
+        return false;
+    }
 }

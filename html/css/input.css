@@ -9,7 +9,7 @@
     src: url("/font/Amiko/Amiko-Regular.ttf");
 }
 
-h1, h2, h3, h4 {
+h1, h2, h3, h4, summary {
     font-family: 'MavenPro';
 }
 
@@ -17,25 +17,25 @@ h1, h2, h3 {
     font-weight: bold;
 }
 
-p, a, input, label,button {
+p, a, input, label, button, details{
     font-family: 'Amiko';
 }
 
 @media (max-width: 768px) {
 
-    h1 {
+    h1{
         font-size: 48px;
     }
 
-    h2 {
+    h2, #pageInfo, #pagePrec, #pageSuiv, #premierePage, #dernierePage {
         font-size: 30px;
     }
 
-    h3 {
+    h3, summary {
         font-size: 25px;
     }
 
-    h4 {
+    h4, #filtresTris, .labelDetails {
         font-size: 20px;
     }
 
@@ -58,7 +58,7 @@ p, a, input, label,button {
         font-size: 30px;
     }
 
-    h4 {
+    h4, summary{
         font-size: 25px;
     }
 
@@ -72,6 +72,87 @@ main>h2{
     align-self: center;
     margin: 0.5em;
 }
+
+input.quantite-prod-input::-webkit-inner-spin-button,
+input.quantite-prod-input::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+}
+
+input.quantite-prod-input {
+    -moz-appearance: textfield;
+}
+
+/* Popup - Animation */
+
+#popup-overlay {
+    display: none;
+    position: fixed;
+    bottom: 0;
+    align-items: center;
+    justify-content: center;
+    z-index: 9999;
+    width: 320px;
+    height: 160px;
+}
+
+#popup-overlay.active {
+    display: flex;
+}
+
+#popup-overlay.desactive {
+    display: none;
+}
+
+.popup.active {
+    display: block;
+    animation: popupIn 1s forwards;
+}
+
+.popup.desactive {
+    animation: popupOut 1s forwards;
+}
+
+.popup {
+    display: none;
+    background-color: white;
+    padding: 20px, 30px;
+    border-radius: 12px;
+    width: 320px;
+    border-width: 3px;
+    text-align: center;
+}
+
+.popup div > button, .popup > button, .a-button {
+
+    box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px;
+}
+
+.popup div > button:hover, .popup > button:hover, .a-button:hover {
+    box-shadow: none;
+}
+
+@keyframes popupOut {
+
+    from {
+        transform: translateY(-50px);
+    }
+    to {
+        transform: translateY(260px);
+        display: none;
+    }
+}
+
+@keyframes popupIn {
+
+    from {
+        transform: translateY(260px);
+    }
+    to {
+        transform: translateY(-50px);
+    }
+}
+
+
 
 @import "tailwindcss";
 @tailwind utilities;

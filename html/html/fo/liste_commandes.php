@@ -1,0 +1,119 @@
+<?php
+    session_start();
+    require_once __DIR__ . "/../../php/verif_role_fo.php";
+    require_once __DIR__ . "/../../php/fonctions.php";
+    require(__DIR__ . '/../../01_premiere_connexion.php');
+    include __DIR__ . '/../../connexion_recupraptor.php';
+    
+
+    if(isset($_SESSION['idCompte'])){
+        $idCompte = $_SESSION['idCompte'];
+    }else{
+        header('Location: ./connexion.php');
+    }
+
+    try {     
+
+        $tabInfoCommandes = null; 
+        $etat;          
+        //récupère toutes les infos de la table commande
+        foreach($dbh->query("SELECT c.id_suivi, c.id_commande, c.date_commande, c.etat, c.montant_total_ttc
+                            FROM sae3_skadjam._commande c
+                            WHERE c.id_client = $idCompte
+                            ORDER BY c.date_commande DESC, c.id_commande DESC;"
+                            , PDO::FETCH_ASSOC) as $row){
+            
+            $id_commande = $row['id_commande'];
+            try{
+                $idSuivi = $row['id_suivi'];
+                $etat[$id_commande] = $rpr->get_etat($idSuivi);
+                $query = "UPDATE sae3_skadjam._commande SET etat = ? WHERE id_suivi = ?";
+                $stmt = $dbh->prepare($query);
+                $stmt->execute([$etat[$row['id_commande']], $idSuivi]);
+            }catch (Exception $e){
+                $etat[$id_commande] = 'En attente';
+            }catch (TypeError $e){
+                $etat[$id_commande] = 'En attente';
+            }finally{
+                $tabInfoCommandes[] = $row;
+                
+                
+            }
+            
+        } 
+
+    }
+
+    catch (PDOException $e) {
+        print "Erreur !: " . $e->getMessage() . "<br/>";
+        die();
+    }
+?>
+
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Liste de mes commandes</title>
+</head>
+<?php include __DIR__ . '/../../php/structure/head_front.php'?>
+<body>
+    <!--header-->
+    <?php include __DIR__ . "/../../php/structure/header_front.php"; ?>
+    <?php include __DIR__ . "/../../php/structure/navbar_front.php"; ?>
+
+    <main class="min-h-[600px]">
+
+        <!---affichage si aucune commande de passée--->
+        <?php if($tabInfoCommandes == null){ ?>
+            <h2 class = "md:pt-15 pt-5">Liste de mes commandes</h2>
+            <p class="md:pt-15 pt-5 text-center">Vous n'avez pas encore effectué de commande.</p>
+            <a href="../../index.php" class="flex justify-center md:mt-15 md:mb-15 mt-5 mb-5"><button class="border-vertClair border-4 rounded-lg md:rounded-2xl w-35 h-10 md:w-50 md:h-14 px-7 cursor-pointer">Retour</button></a>
+        <?php }
+
+        else{?>
+            <!---bouton retour en haut de page version téléphone--->
+            <a href="../../index.php" class="flex justify-start ml-5 mt-5 md:hidden cursor-pointer hover:text-rouge">< Retour</a>
+            <h2 class = "md:pt-15 pt-5">Liste de mes commandes</h2>
+            <div class="flex justify-center md:mt-15 mt-10">
+                <?php //tableau liste des commandes ?>
+                <table class="table-auto md:w-250 w-95">
+                    <thead>
+                        <tr>
+                            <!---noms des colonnes--->
+                            <th scope="col" class="md:w-80 pl-3"><h3 class="md:hidden">N°</h3><h3 class="hidden md:inline-flex">Numéro de commande</h3></th>
+                            <th scope="col"><h3>Date</h3></th>
+                            <th scope="col"><h3>Etat</h3></th>
+                            <th scope="col"><h3>Total</h3></th>
+                            <th scope="col"></th>
+                        </tr>
+                    </thead>
+                    
+                    <tbody>
+                        <?php $ligneIndex = 1;
+                            foreach($tabInfoCommandes as $id => $commande){
+                                $idCommande = $commande['id_commande']; ?>
+                                <tr class="py-4 <?= ligneCouleur($ligneIndex)?>">
+                                    <!---informtaions de chacune des commandes--->
+                                    <th scope="row" class="text-left pl-5 md:text-center py-3 md:pl-3" ><p><?php echo $idCommande; ?></p></th>
+                                    <td class="text-center py-3"><p><?php echo htmlentities($commande['date_commande']);?></p></td>
+                                    <td class="text-center py-3"><p><?= $etat[$idCommande] ?></p></td>
+                                    <td class="text-center py-3"><p><?php echo htmlentities(str_replace('.', ',',$commande['montant_total_ttc'])); ?>€</p></td>
+                                    <td><a href="<?php echo htmlentities("commande.php?idCommande=".$idCommande);?>">
+                                        <img src="../../images/logo/bootstrap_icon/plus-square.svg" alt="voir plus d'informations" class="w-8 md:w-10 h-auto">
+                                    </a></td>
+                                </tr>
+                        <?php }?>
+                    </tbody>
+                </table>
+            </div>
+            <!---bouton retour--->
+            <a href="../../index.php" class="flex justify-center mt-15 mb-15"><button class="border-vertClair border-4 rounded-lg md:rounded-2xl w-35 h-10 md:w-50 md:h-14 px-7 cursor-pointer">Retour</button></a>
+        <?php } ?>
+    </main>
+
+    <!--footer-->
+    <?php include (__DIR__ . "/../../php/structure/footer_front.php"); ?>
+</body>
+</html>

@@ -61,6 +61,7 @@ if (isset($_POST['logout'])) {
                                         WHERE c.id_compte = $id", PDO::FETCH_ASSOC) as $adresse){
                     $numRue[$nbAdresse] = $adresse['numero_rue'];
                     $adressePostale[$nbAdresse] = $adresse['adresse_postale'];
+                    $complement[$nbAdresse] = $adresse['complement_adresse'];
                     $batiment[$nbAdresse] = " " . $adresse['numero_bat'];
                     $appartement[$nbAdresse] = " " . $adresse['numero_appart'];
                     $codePostal[$nbAdresse] = $adresse['code_postal'];
@@ -74,37 +75,37 @@ if (isset($_POST['logout'])) {
             ?>
             <h2 class="text-center mt-4 mb-4">Mon profil</h2>
             <div class="flex justify-center">
-                <table class="mx-3 table-auto w-175">
+                <table class="mx-3 table-auto w-180">
                     <tbody>
                         <tr class="py-4">
-                            <th class="py-3 w-37 md:w-auto"><p class="text-left">Pseudo :</p></th>
-                            <td class="py-3"><h3><?php echo htmlentities($pseudo); ?></h2></td>
+                            <th class="py-3 w-45 md:w-90"><h3 class="text-left">Pseudo :</h3></th>
+                            <td class="py-3"><h3><?php echo htmlentities($pseudo); ?></h3></td>
                         </tr>
                         <tr class="py-4">
-                            <th class="py-3"><p class="text-left">Prénom et nom :</p></th>
+                            <th class="py-3"><h3 class="text-left">Prénom et nom :</h3></th>
                             <td class="py-3"><h4><?php echo htmlentities($prenom); ?> <?php echo $nom; ?></h4></td>
                         </tr>
                         <tr class="py-4">
-                            <th class="py-3"><p class="text-left">Date de naissance :</p></th>
+                            <th class="py-3"><h3 class="text-left">Date de naissance :</h3></th>
                             <td class="py-3"><p><?php echo htmlentities($naissance); ?></p></td>
                         </tr>
                         <?php if($nbAdresse != 0){ ?>
                             <tr class="py-4">
-                                <th class="py-3"><p class="text-left">Adresse(s) :</p></th>
+                                <th class="py-3"><h3 class="text-left">Adresse(s) :</h3></th>
                                 <td class="py-3">
                                     <?php for ($i=0; $i < $nbAdresse; $i++) { // Affiche toutes les adresses du client 
                                         $j=$i+1;?>
-                                    <p> n°<?php echo "$j : $numRue[$i] $adressePostale[$i]$batiment[$i]$appartement[$i], $codePostal[$i] $ville[$i]"; ?></p>
+                                    <p> n°<?php echo "$j : $numRue[$i] $complement[$i] $adressePostale[$i]$batiment[$i]$appartement[$i], $codePostal[$i] $ville[$i]"; ?></p>
                                     <?php } ?>
                                 </td>
                             </tr>
                         <?php } ?>
                         <tr class="py-4">
-                            <th class="py-3"><p class="text-left">N° de téléphone :</p></th>
+                            <th class="py-3"><h3 class="text-left">N° de téléphone :</h3></th>
                             <td class="py-3"><p><?php echo htmlentities($telephone); ?></p></td>
                         </tr>
                         <tr class="py-4">
-                            <th class="py-3"><p class="text-left">Adresse mail :</p></th>
+                            <th class="py-3"><h3 class="text-left">Adresse mail :</h3></th>
                             <td class="py-3"><p><?php echo htmlentities($mail); ?></p></td>
                         </tr>
                     </tbody>

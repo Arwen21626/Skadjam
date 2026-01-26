@@ -37,15 +37,70 @@
                     $stmt = $dbh->prepare("SELECT id_compte FROM sae3_skadjam._client WHERE id_compte = ?");
                     $stmt->execute([$_SESSION['idCompte']]);
                     $role = $stmt->fetch(PDO::FETCH_ASSOC);
-                    $_SESSION['role'] = 'client';
+
+                    // Début modif korentin
+                    // Permet d'ajouter tout les éléments du panier du visiteur au panier du compte auquel il se connecte
+                    if ($role !== null)
+                    {
+                        if ($_SESSION['panier']['nb_produit_total'] > 0) 
+                        {
+                            // Récupère l'id du panier du client
+                            $stmt = $dbh->prepare("SELECT id_panier FROM sae3_skadjam._client WHERE id_compte = ?");
+                            $stmt->execute([$tab['id_compte']]);
+                            $idPanier = $stmt->fetch(PDO::FETCH_ASSOC)['id_panier'];
+
+                            // Met à jour le nb de produit total contenu dans le panier
+                            $stmt = $dbh->prepare("UPDATE sae3_skadjam._panier SET nb_produit_total = nb_produit_total + ? WHERE id_panier = ?");
+                            $stmt->execute([$_SESSION['panier']['nb_produit_total'], $idPanier]);
+
+                            // Met à jour le montant total TTC du panier
+                            $stmt = $dbh->prepare("UPDATE sae3_skadjam._panier SET montant_total_ttc = montant_total_ttc + ? WHERE id_panier = ?");
+                            $stmt->execute([$_SESSION['panier']['montant_total_ttc'], $idPanier]);
+
+                            // Récupère tout les id des produits contenu dans le panier
+                            $stmt = $dbh->prepare("SELECT id_produit FROM sae3_skadjam._contient WHERE id_panier = ?");
+                            $stmt->execute([$idPanier]);
+                            $listeIdProduits = $stmt->fetchAll(PDO::FETCH_COLUMN);
+                            
+                            foreach ($_SESSION['panier']['contient'] as $i => $produit) 
+                            {
+                                // Si le produit est présent dans le panier du compte client, on ajoute la quantité du panier visiteur
+                                if (in_array($produit['id'], $listeIdProduits)) // Faire attention dans le panier du visiteur dans le $_SESSION, le nom de la clé de l'id du produit est 'id' simple
+                                {
+                                    $stmt = $dbh->prepare("UPDATE sae3_skadjam._contient SET quantite_par_produit = quantite_par_produit + ? WHERE id_produit = ? AND id_panier = ?");
+                                    $stmt->execute([$produit['quantite_par_produit'], $produit['id'], $idPanier]);
+                                }
+                                else // Si le produit n'est pas présent, on insert le produit dans la table contient avec la quantité
+                                {
+                                    $stmt = $dbh->prepare("INSERT INTO sae3_skadjam._contient (id_produit, id_panier, quantite_par_produit) VALUES (?, ?, ?)");
+                                    $stmt->execute([$produit['id'], $idPanier, $produit['quantite_par_produit']]);
+                                }
+                            }
+
+                            // Supprimer le panier du visiteur 
+                            unset($_SESSION['panier']);
+
+
+                        }
+                        
+
+                        $_SESSION['role'] = 'client';
+                    }
+                    // Fin modif
                 }
     
+                // Initialisation pour une redirection sur le panier si le visiteur voulait acheter son panier et qu'il devait se connecter
+                if (isset($_POST['veutAcheter']))
+                {
+                    $_SESSION['veutAcheter'] = "V";
+                }
+                
                 // Initialisation pour une redirection sur le produit si on écrivais un avis par exemple et qu'on devait se connecter
                 $idProduit = 0;
                 if(isset($_POST['idProduit'])){
                     $idProduit = $_POST['idProduit'];
                 }
-                
+
                 // Redirection suivant le role
                 if($_SESSION['role'] == 'vendeur'){
                     header('Location: ../bo/index_vendeur.php');
@@ -53,7 +108,11 @@
                 }
                 else{
                     // Si on était sur un produit alors redirection dessus
-                    if($_SESSION['role'] == 'client' && $idProduit != 0){
+                    if (isset($_SESSION['veutAcheter'])) {
+                        header('Location: ../fo/panier.php');
+                        exit;
+                    }
+                    else if($_SESSION['role'] == 'client' && $idProduit != 0){
                         header('Location: ../fo/details_produit.php?idProduit='.$idProduit);
                         exit;
                     }
@@ -81,7 +140,7 @@
 <html lang="fr">
 <head>
     <?php require_once __DIR__ . "/../../php/structure/head_front.php"?>
-    <title>connexion</title>
+    <title>Connexion</title>
 </head>
 <body>
     <?php require_once __DIR__ . "/../../php/structure/header_front.php"; ?>
@@ -90,7 +149,11 @@
         <form method="post">
         <?php if(isset($_GET['idProduit'])){ ?>
             <input name="idProduit" id="idProduit" value="<?php echo $_GET['idProduit'];?>" class="hidden w-1">
+        
         <?php }?>
+        <?php if (isset($_POST['veutAcheter'])) {?> 
+            <input type="hidden" name="veutAcheter" value="V">
+        <?php } ?>
 
             <div class="flex flex-col items-center md:ml-10 md:mb-7 md:mr-10">
 
@@ -140,7 +203,7 @@
                 <div class="flex flex-col md:flex-row">
                     <div class=" justify-self-center mb-8 mt-4 order-2 md:order-1 md:mb-0 md:mt-0 md:mr-4">
                         <!-- Boutton de retour à l'index.php -->
-                        <button class="cursor-pointer w-64 border-5 border-solid rounded-2xl border-vertClair pl-3" type="button"><a href="/index.php">Annuler</a></button>
+                        <a href="/index.php"><button class="cursor-pointer w-64 border-5 border-solid rounded-2xl border-vertClair pl-3" type="button">Annuler</button></a>
                     </div>
 
                     <div class=" justify-self-center mt-8 mb-4 order-1 md:order-2 md:mb-0 md:mt-0 md:ml-4">
@@ -154,10 +217,17 @@
             </div>
         </form>
         <!-- Renvoie sur la page de création d'un compte client -->
-        <div class="flex flex-row flex-wrap justify-center m-2">
-            <p class=" mr-2">Pas encore client ? </p>
-            <a href="./creation_compte_client.php" class="underline! hover:text-rouge">Créer un compte client</a>
-        </div>
+        <?php if (isset($_POST['veutAcheter'])) { //Modification pour rediriger vers le panier si le visiteur se crée un compte pour valider son panier?>
+            <div class="flex flex-row flex-wrap justify-center m-2">
+                <p class=" mr-2">Pas encore client ? </p>
+                <a href="./creation_compte_client.php?veutAcheter=V" class="underline! hover:text-rouge">Créer un compte client</a>
+            </div>
+        <?php } else { ?>
+            <div class="flex flex-row flex-wrap justify-center m-2">
+                <p class=" mr-2">Pas encore client ? </p>
+                <a href="./creation_compte_client.php" class="underline! hover:text-rouge">Créer un compte client</a>
+            </div>
+        <?php } ?>
         <!-- Renvoie sur la page de création d'un compte vendeur -->
         <div class="flex flex-row flex-wrap justify-center m-2">
             <p class=" mr-2">Pas encore vendeur ? </p>

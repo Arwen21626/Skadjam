@@ -20,10 +20,11 @@
     }
 ?>
 
-<nav class="bg-beige fixed bottom-0 w-full z-10 md:sticky md:top-0">
+<nav class="bg-beige fixed left-0 right-0 bottom-0 w-full z-10 md:sticky md:top-0">
 
     <section class="flex justify-around items-center p-1">
 
+        <!-- Accueil -->
         <div class="md:flex md:flex-col md:justify-center md:items-center">
 
             <a class="items-center" href="/index.php">
@@ -36,18 +37,20 @@
             <a class="text-vertFonce hover:text-rouge hidden md:inline-block" href="/index.php">Accueil</a>
         </div>
             
+        <!-- Commandes -->
         <div class="md:flex md:flex-col md:justify-center md:items-center">
 
-            <a  href="/html/fo/commandes.php">
+            <a  href="/html/fo/liste_commandes.php">
                 <div class="size-12 bg-no-repeat bg-size-[auto_48px] 
                 bg-[url(/images/logo/bootstrap_icon/truck.svg)] 
                 hover:bg-[url(/images/logo/bootstrap_icon/truck-fill.svg)]">
                 </div>
             </a>
 
-            <a class="text-vertFonce hover:text-rouge hidden md:inline-block" href="/html/fo/commandes.php">Commandes</a>
+            <a class="text-vertFonce hover:text-rouge hidden md:inline-block" href="/html/fo/liste_commandes.php">Commandes</a>
         </div>
-            
+        
+        <!-- Recherche -->
         <div class="md:flex md:flex-col md:justify-center md:items-center">
 
             <a href="/html/fo/recherche.php">
@@ -60,6 +63,7 @@
             <a class="text-vertFonce hover:text-rouge hidden md:inline-block" href="/html/fo/recherche.php">Recherche</a>
         </div>
 
+        <!-- Panier -->
         <div class="md:flex md:flex-col md:justify-center md:items-center">
 
             <a href="/html/fo/panier.php">
@@ -71,7 +75,8 @@
 
             <a class="text-vertFonce hover:text-rouge hidden md:inline-block" href="/html/fo/panier.php">Panier</a>
         </div>
-            
+        
+        <!-- Profil -->
         <div class="md:flex md:flex-col md:justify-center md:items-center">
 
             <a href=<?php echo $urlProfil ?>>

@@ -9,16 +9,16 @@
             <a class="m-1 text-bleu hover:text-beige" href="/html/bo/cgu_bo.php">
                 Conditions générales d'utilisation
             </a>
-            
+
             <a class="m-1 text-bleu hover:text-beige" href="/html/bo/ml_bo.php">
-                Mentions Légales
+                Mentions légales
             </a>
         </article>
 
         <article class="flex flex-col p-1">
             <h3 class="m-2">À propos</h3>
-            <a class="m-1 text-bleu hover:text-beige" href="Insérer lien page info sur la COBREC">Qui sommes-nous ?</a>
-            <a class="m-1 text-bleu hover:text-beige" href="Insérer lien vers le Site de la COBREC">Site de la COBREC</a>
+            <a class="m-1 text-bleu hover:text-beige" href="https://www.cobrec.co.uk/">Qui sommes-nous ?</a>
+            <a class="m-1 text-bleu hover:text-beige" href="https://www.cobrec.co.uk/">Site de la COBREC</a>
         </article>
 
         <article class="flex flex-col p-1">
@@ -28,7 +28,7 @@
         </article>
     </section>
 
-    <section class="grid grid-cols-2 gap-1">
+    <section class="grid grid-cols-2 gap-1 p-1">
         <a class="m-1 text-bleu hover:text-beige" href="https://www.facebook.com">
             <img src="/images/logo/reseaux/facebook_back.webp" alt="Facebook" title="Facebook" class="size-12">
         </a>
