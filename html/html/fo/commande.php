@@ -12,30 +12,37 @@
         $sql = "SELECT 
                 c.id_commande, 
                 c.date_commande, 
-                p.libelle_produit, 
-                p.id_produit, 
-                p.id_vendeur,
+                pr.libelle_produit, 
+                pr.id_produit, 
+                pr.id_vendeur,
                 v.raison_sociale,
                 d.quantite, 
-                p.prix_ht, 
-                p.prix_ttc, 
-                p.prix_remise,
+                pr.prix_ht, 
+                pr.prix_ttc, 
+                pr.prix_remise,
                 r.pourcentage_remise,
-                p.prix_ttc * d.quantite as sous_total_ttc,
+                pr.prix_ttc * d.quantite as sous_total_ttc,
                 c.montant_total_ttc,
-                p.prix_ht * d.quantite as sous_total_ht,
-                p.prix_remise * d.quantite as sous_total_remise
+                pr.prix_ht * d.quantite as sous_total_ht,
+                pr.prix_remise * d.quantite as sous_total_remise,
+                p.url_photo, 
+                p.alt, 
+                p.titre
                 FROM sae3_skadjam._commande c
                 INNER JOIN sae3_skadjam._details d
                     ON d.id_commande = c.id_commande
-                INNER JOIN sae3_skadjam._produit p
-                    ON p.id_produit = d.id_produit
+                INNER JOIN sae3_skadjam._produit pr
+                    ON pr.id_produit = d.id_produit
                 INNER JOIN sae3_skadjam._vendeur v
-                    ON v.id_compte = p.id_vendeur
+                    ON v.id_compte = pr.id_vendeur
                 LEFT JOIN sae3_skadjam._reduit rd
-                    ON rd.id_produit = p.id_produit 
+                    ON rd.id_produit = pr.id_produit 
                 LEFT JOIN sae3_skadjam._remise r
                     ON r.id_remise = rd.id_remise
+                INNER JOIN sae3_skadjam._montre m
+                    ON m.id_produit = pr.id_produit
+                INNER JOIN sae3_skadjam._photo p
+                    ON p.id_photo = m.id_photo
                 WHERE c.id_commande = :id_commande";
 
         $stmt = $dbh->prepare($sql);
@@ -165,7 +172,8 @@
                 <thead>
                     <tr>
                         <!---noms des colonnes--->
-                        <th class="text-left w-90 pl-3"><h4>Article</h4></th>
+                        <th class="pr-3 w-24"></th>
+                        <th><h4 class="text-left">Article</h4></th>
                         <th class="pr-3"><h4>Prix unitaire HT</h4></th>
                         <th class="pr-3"><h4>Prix unitaire TTC</h4></th>
                         <th class="pr-3"><h4>Pourcentage remise</h4></th>
@@ -179,12 +187,18 @@
                     foreach($tabVendeur as $vendeur){?>
                         <!---affichage du vendeur--->
                         <tr class="py-4 <?= ligneCouleur($ligneIndex)?> border-t-2 border-solid border-black">
-                            <th colspan="6" class="text-left py-3 pl-3"><h4>Vendeur : <?php echo $vendeur ;?></h4></th>
+                            <th colspan="7" class="text-left py-3 pl-3"><h4>Vendeur : <?php echo $vendeur ;?></h4></th>
                         </tr>
                         <?php foreach($tabInfosCommande as $ligne){ 
                             if($ligne['raison_sociale'] == $vendeur){?>
                                 <!---affichage des informations de chaque produit de la commande--->
                                 <tr class="py-4 <?= ligneCouleur($ligneIndex)?>">
+                                    <td class="py-3 w-24 text-center">
+                                        <img class="w-16 h-16 object-contain inline-block" 
+                                            src="<?php echo $ligne['url_photo'];?>" 
+                                            alt="<?php echo $ligne['alt'];?>" 
+                                            title="<?php echo $ligne['titre'];?>">
+                                    </td>
                                     <td class="text-left py-3 pl-3"><p><?php echo $ligne['id_produit'];?> - <?php echo $ligne['libelle_produit'];?></p></td>
                                     <td class="text-center py-3"><p><?php echo str_replace('.',',',$ligne['prix_ht']);?>€</p></td>
                                     <td class="text-center py-3"><p><?php echo str_replace('.',',',$ligne['prix_ttc']);?>€</p></td>
@@ -214,7 +228,7 @@
                         }?>
                         <!---sous-total par vendeur--->
                         <tr class="py-4 <?= ligneCouleur($ligneIndex)?>">
-                            <th colspan="5" class="text-left w-90 pl-3"><p>Sous-total :</p></th>
+                            <th colspan="6" class="text-left w-90 pl-3"><p>Sous-total :</p></th>
                             <?php $prix = explode(".", "$sous_total_final");?>
                             <th class="text-center py-3 pr-3"><p>
                                 <?php echo htmlentities($prix[0].",".((preg_match("/^[1-9]$/", $prix[1]))?$prix[1]."0":$prix[1]));?>€
@@ -229,7 +243,7 @@
                 <tfoot>
                     <!---affichage des totaux de la commande--->
                     <tr class="py-4 <?= ligneCouleur($ligneIndex)?>">
-                        <th class="text-left w-90 pl-3"><h4>Total :</h4></th>
+                        <th class="text-left w-90 pl-3" colspan="2"><h4>Total :</h4></th>
                         <!---total ht--->
                         <?php $prix = explode(".", "$total_ht");?>
                         <th class="text-center py-3"><h4><?php echo htmlentities($prix[0].",".((preg_match("/^[1-9]$/", $prix[1]))?$prix[1]."0":$prix[1]));?>€</h4></th>
