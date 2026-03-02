@@ -520,8 +520,8 @@ else { ?>
                         $nbPromos = $stmtNbPromos->fetch(PDO::FETCH_ASSOC)['nb_promotions'];
                     ?>
                     <div class="flex flex-row mr-4 ml-4">
-                        <label class="mr-4" for="mettreEnPromotion">Mettre en promotion<?php if ($nbPromos >= 2 && !$caseCochee) { echo " (Limite atteinte)"; } ?></label>
-                        <input id="promoCheck" type="checkbox" name="mettreEnPromotion" class="<?php echo ($nbPromos >= 2 && !$caseCochee) ? 'cursor-not-allowed' : 'cursor-pointer'; ?> appearance-none w-10 h-10 border-4 border-beige rounded-md checked:bg-beige checked:border-vertFonce" <?php echo $caseCochee ? 'checked' : ''; ?> <?php echo ($nbPromos >= 2 && !$caseCochee) ? 'disabled' : ''; ?>>
+                        <label class="mr-4 <?php echo ($nbPromos >= 2 && !$caseCochee) ? "text-rouge" : ""; ?>" for="mettreEnPromotion"><?php echo ($nbPromos >= 2 && !$caseCochee) ? "Limite de promotion atteinte" : "Mettre en promotion"; ?></label>
+                        <input id="promoCheck" type="checkbox" name="mettreEnPromotion" class="cursor-pointer border-beige appearance-none w-10 h-10 border-4 rounded-md checked:bg-beige checked:border-vertFonce" <?php echo $caseCochee ? 'checked' : ''; ?> <?php echo ($nbPromos >= 2 && !$caseCochee) ? 'hidden' : ''; ?>>
                     </div>
                 </div>
                 <!-- Inputs liés aux promotions -->
