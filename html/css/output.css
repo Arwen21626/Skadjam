@@ -17,7 +17,7 @@ h1, h2, h3 {
 p, a, input, label, button, details {
   font-family: 'Amiko';
 }
-@media (max-width: 768px) {
+@media (max-width: 428px) {
   h1 {
     font-size: 48px;
   }
@@ -34,7 +34,7 @@ p, a, input, label, button, details {
     font-size: 16px;
   }
 }
-@media (min-width: 768px) {
+@media (min-width: 1440px) {
   h1 {
     font-size: 64px;
   }
