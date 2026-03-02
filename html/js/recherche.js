@@ -2,53 +2,53 @@ let copieProd = JSON.parse(JSON.stringify(tabProd))
 
 let triActuel = {
     type: null
-};
+} 
 
 function mettreAJourListe() {
 
-    let copieProd = [...tabProd];
+    let copieProd = [...tabProd] 
 
     // FILTRES
-    copieProd = filtre(copieProd);
+    copieProd = filtre(copieProd) 
 
     // RECHERCHE
-    const barreRecherche = document.getElementById("recherche").value;
-    copieProd = barreDeRecherche(copieProd, barreRecherche);
+    const barreRecherche = document.getElementById("recherche").value 
+    copieProd = barreDeRecherche(copieProd, barreRecherche) 
 
     // TRI
-    copieProd = appliquerTri(copieProd);
+    copieProd = appliquerTri(copieProd) 
 
-    afficherListe(copieProd);
+    afficherListe(copieProd) 
 }
 
 
 function barreDeRecherche(original, mot) {
-    first = 0;
-    actualPage = 1;
+    first = 0 
+    actualPage = 1 
 
     if (!mot || mot.trim() === "") {
-        return original;
+        return original 
     }
 
-    const recherche = mot.toLowerCase().trim();
+    const recherche = mot.toLowerCase().trim() 
 
     return original.filter(({ libelle_produit }) =>
         libelle_produit.toLowerCase().includes(recherche)
-    );
+    ) 
 }
 
 function appliquerTri(tableau) {
     switch(triActuel.type) {
-        case "prixAsc": return triPrixCroissant(tableau);
-        case "prixDesc": return triPrixDecroissant(tableau);
-        case "az": return triAz(tableau);
-        case "za": return triZa(tableau);
-        case "noteAsc": return triEtoileCroissant(tableau);
-        case "noteDesc": return triEtoileDecroissant(tableau);
-        case "stockAsc": return triStockCroissant(tableau);
-        case "stockDesc": return triStockDecroissant(tableau);
+        case "prixAsc": return triPrixCroissant(tableau) 
+        case "prixDesc": return triPrixDecroissant(tableau) 
+        case "az": return triAz(tableau) 
+        case "za": return triZa(tableau) 
+        case "noteAsc": return triEtoileCroissant(tableau) 
+        case "noteDesc": return triEtoileDecroissant(tableau) 
+        case "stockAsc": return triStockCroissant(tableau) 
+        case "stockDesc": return triStockDecroissant(tableau) 
     }
-    return tableau;
+    return tableau 
 }
 
 function afficheNbProd(tab){
@@ -105,52 +105,52 @@ function ajoutEventListener(){
     // Fonctions de tri
         // Prix
     prixTriCroissant.addEventListener("change",function () {
-        triActuel.type = "prixAsc";
+        triActuel.type = "prixAsc" 
         copieProd = triPrixCroissant(copieProd)
         mettreAJourListe(copieProd)
     })            
 
     prixTriDecroissant.addEventListener("change",function () {
-        triActuel.type = "prixDesc";
+        triActuel.type = "prixDesc" 
         copieProd = triPrixDecroissant(copieProd)
         mettreAJourListe(copieProd)
     })
 
         // Ordre alphabétique
     alphaTriAZ.addEventListener("change",function () {
-        triActuel.type = "az";
+        triActuel.type = "az" 
         copieProd = triAz(copieProd)
         mettreAJourListe(copieProd)
     })
 
     alphaTriZA.addEventListener("change",function () {
-        triActuel.type = "za";
+        triActuel.type = "za" 
         copieProd = triZa(copieProd)
         mettreAJourListe(copieProd)
     })
     
         // Note
     noteTri51.addEventListener("change",function () {
-        triActuel.type = "noteDesc";
+        triActuel.type = "noteDesc" 
         copieProd = triEtoileDecroissant(copieProd)
         mettreAJourListe(copieProd)
     })
     
     noteTri15.addEventListener("change", function () {
-        triActuel.type = "noteAsc";
+        triActuel.type = "noteAsc" 
         copieProd = triEtoileCroissant(copieProd)
         mettreAJourListe(copieProd)
     })
 
     if(stockTriCroissant != null && stockTriDecroissant != null){
         stockTriCroissant.addEventListener("change",function () {
-            triActuel.type = "stockAsc";
+            triActuel.type = "stockAsc" 
             copieProd = triStockCroissant(copieProd)
             mettreAJourListe(copieProd)
         })
 
         stockTriDecroissant.addEventListener("change",function () {
-            triActuel.type = "stockDesc";
+            triActuel.type = "stockDesc" 
             copieProd = triStockDecroissant(copieProd)
             mettreAJourListe(copieProd)
         })
@@ -182,88 +182,88 @@ function ajoutEventListener(){
     // Fonctions de filtres
         //Catégories
     categorieAlimentaire.addEventListener("change", function () {
-        copieProd = toggleFiltre(checkedCategories, "alimentaire", this);
+        copieProd = toggleFiltre(checkedCategories, "alimentaire", this) 
         mettreAJourListe(copieProd)
-    });
+    }) 
 
     categorieVetement.addEventListener("change", function () {
-        copieProd = toggleFiltre(checkedCategories, "vetement", this);
+        copieProd = toggleFiltre(checkedCategories, "vetement", this) 
         mettreAJourListe(copieProd)
-    });
+    }) 
 
     categorieArtisanat.addEventListener("change", function () {
-        copieProd = toggleFiltre(checkedCategories, "artisanat", this);
+        copieProd = toggleFiltre(checkedCategories, "artisanat", this) 
         mettreAJourListe(copieProd)
-    });
+    }) 
 
     categorieGoodies.addEventListener("change", function () {
-        copieProd = toggleFiltre(checkedCategories, "goodies", this);
+        copieProd = toggleFiltre(checkedCategories, "goodies", this) 
         mettreAJourListe(copieProd)
-    });
+    }) 
 
     categorieSoin.addEventListener("change", function () {
-        copieProd = toggleFiltre(checkedCategories, "soin", this);
+        copieProd = toggleFiltre(checkedCategories, "soin", this) 
         mettreAJourListe(copieProd)
-    });
+    }) 
 
     
         // Note
     noteNonNote.addEventListener("change", function () {
-        copieProd = toggleFiltre(checkedNotes, "0", this);
+        copieProd = toggleFiltre(checkedNotes, "0", this) 
         mettreAJourListe(copieProd)
-    });
+    }) 
 
     noteUneE.addEventListener("change", function () {
-        copieProd = toggleFiltre(checkedNotes, "1", this);
+        copieProd = toggleFiltre(checkedNotes, "1", this) 
         mettreAJourListe(copieProd)
-    });
+    }) 
 
     noteDeuxE.addEventListener("change", function () {
-        copieProd = toggleFiltre(checkedNotes, "2", this);
+        copieProd = toggleFiltre(checkedNotes, "2", this) 
         mettreAJourListe(copieProd)
-    });
+    }) 
 
     noteTroisE.addEventListener("change", function () {
-        copieProd = toggleFiltre(checkedNotes, "3", this);
+        copieProd = toggleFiltre(checkedNotes, "3", this) 
         mettreAJourListe(copieProd)
-    });
+    }) 
 
     noteQuatreE.addEventListener("change", function () {
-        copieProd = toggleFiltre(checkedNotes, "4", this);
+        copieProd = toggleFiltre(checkedNotes, "4", this) 
         mettreAJourListe(copieProd)
-    });
+    }) 
 
     noteCinqE.addEventListener("change", function () {
-        copieProd = toggleFiltre(checkedNotes, "5", this);
+        copieProd = toggleFiltre(checkedNotes, "5", this) 
         mettreAJourListe(copieProd)
-    });
+    }) 
 
 
         // Tranche de prix
     tranchePrix1.addEventListener("change", function () {
-        copieProd = toggleFiltre(checkedTranches, "prix1", this);
+        copieProd = toggleFiltre(checkedTranches, "prix1", this) 
         mettreAJourListe(copieProd)
-    });
+    }) 
 
     tranchePrix2.addEventListener("change", function () {
-        copieProd = toggleFiltre(checkedTranches, "prix2", this);
+        copieProd = toggleFiltre(checkedTranches, "prix2", this) 
         mettreAJourListe(copieProd)
-    });
+    }) 
 
     tranchePrix3.addEventListener("change", function () {
-        copieProd = toggleFiltre(checkedTranches, "prix3", this);
+        copieProd = toggleFiltre(checkedTranches, "prix3", this) 
         mettreAJourListe(copieProd)
-    });
+    }) 
 
     tranchePrix4.addEventListener("change", function () {
-        copieProd = toggleFiltre(checkedTranches, "prix4", this);
+        copieProd = toggleFiltre(checkedTranches, "prix4", this) 
         mettreAJourListe(copieProd)
-    });
+    }) 
 
     tranchePrix5.addEventListener("change", function () {
-        copieProd = toggleFiltre(checkedTranches, "prix5", this);
+        copieProd = toggleFiltre(checkedTranches, "prix5", this) 
         mettreAJourListe(copieProd)
-    });
+    }) 
 
 
     if(document.getElementById("filtresTris")){
