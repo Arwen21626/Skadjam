@@ -273,8 +273,18 @@
                             if($ligne['raison_sociale'] == $vendeur){ ?>  
                                 <!---affichage des informations de chaque produit de la commande--->
                                 <tr class="py-4 <?= ligneCouleur($ligneIndex) ?>">
-                                    <th class="text-left py-2 pl-3"><h4 class="w-40">Article</h4></th>
-                                    <td class="text-left"><p><?php echo $ligne['id_produit'];?> - <?php echo $ligne['libelle_produit'];?></p></td>
+                                    <th class="text-left py-2 pl-3"><h4 class="w-30">Article</h4></th>
+                                    <td class="text-left">
+                                        <div class="flex">
+                                            <img class="w-16 h-16 object-contain inline-block" 
+                                                src="<?php echo $ligne['url_photo'];?>" 
+                                                alt="<?php echo $ligne['alt'];?>" 
+                                                title="<?php echo $ligne['titre'];?>"
+                                            >
+                                            <p class="ml-3"><?php echo $ligne['id_produit'];?> - <?php echo $ligne['libelle_produit'];?></p>
+                                        </div>
+                                        
+                                    </td>
                                 </tr>
                                 <tr class="py-4 <?= ligneCouleur($ligneIndex) ?>">
                                     <th class="text-left py-2 pl-3"><h4>Prix HT</h4></th>
