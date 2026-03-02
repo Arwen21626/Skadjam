@@ -194,10 +194,10 @@
                                 {
                                     ?>
                                         <!-- Balise représentant une card produit -->
-                                        <div id="<?php echo $infoProduitsPanier[$i]["infoProduit"]["id_produit"]; ?>" class="bg-bleu p-2 md:p-4 m-4 shadow md:grid md:grid-cols-2 produit">
+                                        <div id="<?php echo $infoProduitsPanier[$i]["infoProduit"]["id_produit"]; ?>" class="bg-bleu pt-4 pb-4 md:p-4 m-4 shadow md:grid md:grid-cols-2 produit">
 
                                             <!-- l'Image -->
-                                            <div class="flex justify-center mb-3 md:mb-0">
+                                            <div class="flex justify-center mb-3 md:mb-0 relative image">
                                                 <a class="flex justify-center" href="/html/fo/details_produit.php?idProduit=<?php echo $infoProduitsPanier[$i]["infoProduit"]["id_produit"]; ?>">
                                                     <img src="<?php echo $infoProduitsPanier[$i]["infoPhoto"]["url_photo"]; ?>" 
                                                     alt="<?php echo $infoProduitsPanier[$i]["infoPhoto"]["alt"]; ?>" 
