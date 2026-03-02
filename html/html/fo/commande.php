@@ -173,7 +173,7 @@
                     <tr>
                         <!---noms des colonnes--->
                         <th class="pr-3 w-24"></th>
-                        <th><h4 class="text-left">Article</h4></th>
+                        <th class="pr-3"><h4 class="text-left">Article</h4></th>
                         <th class="pr-3"><h4>Prix unitaire HT</h4></th>
                         <th class="pr-3"><h4>Prix unitaire TTC</h4></th>
                         <th class="pr-3"><h4>Pourcentage remise</h4></th>
