@@ -174,11 +174,11 @@
                         <summary class="cursor-pointer mt-1 mb-1">Par stock</summary>
                         <div>
                             <div>
-                                <input type="radio" name="stockTri" id="stockTriCroissant" value="croissant" class="triFiltre h-5 w-5">
+                                <input type="radio" name="tri" id="stockTriCroissant" value="croissant" class="triFiltre h-5 w-5">
                                 <label for="stockTriCroissant" class="labelDetails">Croissant</label>
                             </div>
                             <div>
-                                <input type="radio" name="stockTri" id="stockTriDecroissant" value="decroissant" class="triFiltre h-5 w-5">
+                                <input type="radio" name="tri" id="stockTriDecroissant" value="decroissant" class="triFiltre h-5 w-5">
                                 <label for="stockTriDecroissant" class="labelDetails">Décroissant</label>
                             </div>
                         </div>
@@ -191,11 +191,11 @@
                         <summary class="cursor-pointer mt-1 mb-1">Par prix</summary>
                         <div>
                             <div>
-                                <input type="radio" name="prixTri" id="prixTriCroissant" value="croissant" class="triFiltre h-5 w-5">
+                                <input type="radio" name="tri" id="prixTriCroissant" value="croissant" class="triFiltre h-5 w-5">
                                 <label for="prixTriCroissant" class="labelDetails">Croissant</label>
                             </div>
                             <div>
-                                <input type="radio" name="prixTri" id="prixTriDecroissant" value="decroissant" class="triFiltre h-5 w-5">
+                                <input type="radio" name="tri" id="prixTriDecroissant" value="decroissant" class="triFiltre h-5 w-5">
                                 <label for="prixTriDecroissant" class="labelDetails">Décroissant</label>
                             </div>
                         </div>
@@ -209,11 +209,11 @@
                         <summary class="cursor-pointer mt-1 mb-1">Par ordre alphabétique</summary>
                         <div>
                             <div>
-                                <input type="radio" name="alphaTri" id="alphaTriAZ" value="az" class="triFiltre h-5 w-5">
+                                <input type="radio" name="tri" id="alphaTriAZ" value="az" class="triFiltre h-5 w-5">
                                 <label for="alphaTriAZ" class="labelDetails">A-Z</label>
                             </div>
                             <div>
-                                <input type="radio" name="alphaTri" id="alphaTriZA" value="za" class="triFiltre h-5 w-5">
+                                <input type="radio" name="tri" id="alphaTriZA" value="za" class="triFiltre h-5 w-5">
                                 <label for="alphaTriZA" class="labelDetails">Z-A</label>
                             </div>
                         </div>
@@ -227,11 +227,11 @@
                         <summary class="cursor-pointer mt-1 mb-1">Par note</summary>
                         <div>
                             <div>
-                                <input type="radio" name="noteTri" id="noteTri51" value="51" class="triFiltre h-5 w-5">
+                                <input type="radio" name="tri" id="noteTri51" value="51" class="triFiltre h-5 w-5">
                                 <label for="noteTri51" class="labelDetails">5-1</label>
                             </div>
                             <div>
-                                <input type="radio" name="noteTri" id="noteTri15" value="15" class="triFiltre h-5 w-5">
+                                <input type="radio" name="tri" id="noteTri15" value="15" class="triFiltre h-5 w-5">
                                 <label for="noteTri15" class="labelDetails">1-5</label>
                             </div>
                         </div>
