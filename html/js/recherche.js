@@ -265,23 +265,27 @@ function ajoutEventListener(){
         mettreAJourListe(copieProd)
     });
 
-    // EventListeners pour l'animation sidebar filtre et tri
-    // Récupératiion des elements
-    let boutonSidebar = document.getElementById("filtresTris")
-    let sidebar = document.getElementsByTagName("aside")[0]
-    let fermerSidebar = document.getElementById("fermerSidebar")
 
-    if(boutonSidebar != null){
+    if(document.getElementById("filtresTris")){
+        // EventListeners pour l'animation sidebar filtre et tri
+        // Récupératiion des elements
+        let boutonSidebar = document.getElementById("filtresTris")
+        let sidebar = document.getElementsByTagName("aside")[0]
+        
         // Fonction ouverture
         boutonSidebar.addEventListener("click", function(){
             boutonSidebar.classList.add("hidden")
             sidebar.classList.remove("hidden")
         })
 
-        //Fonction fermeture
-        fermerSidebar.addEventListener("click", function(){
-            sidebar.classList.add("hidden")
-            boutonSidebar.classList.remove("hidden")
-        })
+        if (document.getElementById("fermerSidebar")) {
+            // Fonction fermeture
+            let fermerSidebar = document.getElementById("fermerSidebar")
+            fermerSidebar.addEventListener("click", function(){
+                sidebar.classList.add("hidden")
+                boutonSidebar.classList.remove("hidden")
+            })
+        }
+        
     }
 }
