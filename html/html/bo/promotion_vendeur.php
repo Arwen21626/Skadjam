@@ -89,7 +89,7 @@
                                     </td>
                                     <td class="text-center py-3"><p><?php echo htmlentities($valeurs['quantite_stock']); ?></p></td>
                                     <td class="text-center py-3">
-                                        <form method="post" action="supprimer_promotion.php">
+                                        <form method="get" action="supprimer_promotion.php">
                                             <input type="hidden" name="idProduit" value="<?php echo $idProduit; ?>">
                                             <button type="submit" class="hover:text-rouge cursor-pointer">Enlever</button>
                                         </form>
