@@ -9,10 +9,14 @@
     try {     
         $tabProduit = null;           
         //récupère toutes les infos des tables produits et photos
-        foreach($dbh->query("SELECT pr.id_produit, pr.libelle_produit, pr.prix_ttc, pr.note_moyenne, pr.quantite_stock
+        foreach($dbh->query("SELECT pr.id_produit, pr.libelle_produit, pr.prix_ttc, pr.note_moyenne, pr.quantite_stock, p.url_photo, p.alt, p.titre
                             FROM sae3_skadjam._produit pr 
                             INNER JOIN sae3_skadjam._vendeur v
                                 ON pr.id_vendeur = v.id_compte
+                            INNER JOIN sae3_skadjam._montre m
+                                ON m.id_produit = pr.id_produit
+                            INNER JOIN sae3_skadjam._photo p
+                                ON p.id_photo = m.id_photo
                             WHERE v.id_compte = $idCompte AND pr.est_supprime = false
                             ORDER BY libelle_produit ASC"
                             , PDO::FETCH_ASSOC) as $row){
@@ -77,7 +81,8 @@
                         <thead>
                             <tr>
                                 <!---noms des colonnes--->
-                                <th scope="col" class="text-left w-125 pl-3"><h3>Nom du produit</h3></th>
+                                <th scope="col"></th>
+                                <th scope="col"><h3 class="text-left">Produit</h3></th>
                                 <th scope="col"><h3>Prix</h3></th>
                                 <th scope="col"><h3>Note</h3></th>
                                 <th scope="col"><h3>Stock</h3></th>
@@ -90,6 +95,12 @@
                                     $qteStock = $valeurs['quantite_stock'];?>
                                     <!---informations des stocks--->
                                     <tr class="py-4 <?= ligneCouleur($ligneIndex)?>">
+                                        <td class="py-3 w-24 text-center">
+                                            <img class="w-16 h-16 object-contain inline-block" 
+                                                src="<?php echo $valeurs['url_photo'];?>" 
+                                                alt="<?php echo $valeurs['alt'];?>" 
+                                                title="<?php echo $valeurs['titre'];?>">
+                                        </td>
                                         <td scope="row" class="text-left py-3 pl-3" ><a href="<?php echo htmlentities("details_produit.php?idProduit=".$idProduit);?>"><?php echo $valeurs['libelle_produit']; ?></a></td>
                                         <td class="text-center py-3"><p><?php echo str_replace('.',',',$valeurs['prix_ttc']);?> €</p></td>
                                         <td class="text-center py-3">
