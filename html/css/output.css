@@ -312,6 +312,9 @@ input.quantite-prod-input {
   .top-0 {
     top: calc(var(--spacing, 0.25rem) * 0);
   }
+  .top-2\/8 {
+    top: calc(2/8 * 100%);
+  }
   .top-20 {
     top: calc(var(--spacing, 0.25rem) * 20);
   }
@@ -652,6 +655,9 @@ input.quantite-prod-input {
   .h-40 {
     height: calc(var(--spacing, 0.25rem) * 40);
   }
+  .h-50 {
+    height: calc(var(--spacing, 0.25rem) * 50);
+  }
   .h-60 {
     height: calc(var(--spacing, 0.25rem) * 60);
   }
@@ -753,6 +759,9 @@ input.quantite-prod-input {
   }
   .w-16 {
     width: calc(var(--spacing, 0.25rem) * 16);
+  }
+  .w-24 {
+    width: calc(var(--spacing, 0.25rem) * 24);
   }
   .w-25 {
     width: calc(var(--spacing, 0.25rem) * 25);
@@ -918,6 +927,9 @@ input.quantite-prod-input {
   }
   .flex-row {
     flex-direction: row;
+  }
+  .flex-row-reverse {
+    flex-direction: row-reverse;
   }
   .flex-nowrap {
     flex-wrap: nowrap;
@@ -1129,6 +1141,9 @@ input.quantite-prod-input {
   }
   .bg-no-repeat {
     background-repeat: no-repeat;
+  }
+  .object-contain {
+    object-fit: contain;
   }
   .p-0 {
     padding: calc(var(--spacing, 0.25rem) * 0);

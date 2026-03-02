@@ -267,46 +267,18 @@ if (isset($_POST["nom"]) && isset($_POST["prenom"]) && isset($_POST["mail"]) && 
 if(!$isset || $erreur){
     // Préparation des données qui vont remplir les champs du formulaire
     // Récupération du comptes clients
-    foreach($dbh->query("SELECT * FROM sae3_skadjam._compte c
-                                    INNER JOIN sae3_skadjam._vendeur v
-                                        ON c.id_compte = v.id_compte
-                                    WHERE c.id_compte = $idCompte", PDO::FETCH_ASSOC) as $ligne){
-        // Infos compte
-        $nom = $ligne['nom_compte'];
-        $prenom = $ligne['prenom_compte'];
-        $mail = $ligne['adresse_mail'];
-        $tel = $ligne['numero_telephone'];
-        $tel = "0" . substr($tel, 3);
-
-        // Infos vendeur
-        $denom = $ligne["raison_sociale"];
-        $siren = $ligne["siren"];
-        $iban = $ligne["iban"];
-        $raisonSociale = $ligne["raison_sociale"];
-        $description = $ligne["description_vendeur"] != '' ? $ligne["description_vendeur"] : "Aucune description.";
-    }
-    // Infos photo
-    foreach($dbh->query("SELECT * FROM sae3_skadjam._presente pr
-                        INNER JOIN sae3_skadjam._photo ph
-                            ON pr.id_photo = ph.id_photo
-                        WHERE pr.id_vendeur = $idCompte", PDO::FETCH_ASSOC) as $photo){
-        $url = $photo['url_photo'];
-        $alt = $photo['alt'];
-        $title = $photo['titre'];
-    }
-    // Infos adresse
-    foreach($dbh->query("SELECT * FROM sae3_skadjam._compte c
-                        INNER JOIN sae3_skadjam._habite h
-                            ON c.id_compte = h.id_compte
-                        INNER JOIN sae3_skadjam._adresse a
-                            ON h.id_adresse = a.id_adresse
-                        WHERE c.id_compte = $idCompte", PDO::FETCH_ASSOC) as $adresseData){
-        $adresse = $adresseData["adresse_postale"];
-        $num = $adresseData["numero_rue"];
-        $numBis = $adresseData["complement_adresse"];
-        $cp = $adresseData["code_postal"];
-        $ville = $adresseData["ville"];
-    } ?>
+    $nom = $_POST['nom'];
+    $prenom = $_POST['prenom'];
+    $mail = $_POST['mail'];
+    $tel = $_POST['tel'];
+    $denom = $_POST['denomination'];
+    $raisonSociale = $_POST['raisonSociale'];
+    $siren = $_POST['siren'];
+    $iban = $_POST['iban'];
+    $adresse = $_POST['adresse'];
+    $cp = $_POST['cp'];
+    $ville = $_POST['ville'];
+    $description = $_POST['description']; ?>
     <body>
         <?php include __DIR__."/../../php/structure/header_back.php"; ?>
         <main style="margin: 0" class="flex flex-col justify-center">
