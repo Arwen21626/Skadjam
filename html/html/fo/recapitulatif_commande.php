@@ -30,11 +30,14 @@ try{ $sql = "SELECT
             r.pourcentage_remise,
             pr.prix_ttc * c.quantite_par_produit as sous_total_ttc,
             pr.prix_ht * c.quantite_par_produit as sous_total_ht,
-            p.montant_total_ttc,
-            p.nb_produit_total
-        FROM sae3_skadjam._panier p
+            pa.montant_total_ttc,
+            pa.nb_produit_total,
+            p.url_photo, 
+            p.alt, 
+            p.titre
+        FROM sae3_skadjam._panier pa
         INNER JOIN sae3_skadjam._contient c
-            ON c.id_panier = p.id_panier
+            ON c.id_panier = pa.id_panier
         INNER JOIN sae3_skadjam._produit pr
             ON pr.id_produit = c.id_produit
         INNER JOIN sae3_skadjam._vendeur v
@@ -43,7 +46,11 @@ try{ $sql = "SELECT
             ON rd.id_produit = pr.id_produit
         LEFT JOIN sae3_skadjam._remise r
             ON r.id_remise = rd.id_remise
-        WHERE p.id_panier = :id_panier
+        INNER JOIN sae3_skadjam._montre m
+            ON m.id_produit = pr.id_produit
+        INNER JOIN sae3_skadjam._photo p
+            ON p.id_photo = m.id_photo
+        WHERE pa.id_panier = :id_panier
     ";
 
     $stmt = $dbh->prepare($sql);
@@ -120,7 +127,8 @@ if (isset($_POST['valider'])) {
                     <thead>
                         <tr>
                             <!---noms des colonnes--->
-                            <th class="text-left w-90 pl-3"><h4>Article</h4></th>
+                            <th class="pr-3 w-24"></th>
+                            <th class="pr-3"><h4 class="text-left">Article</h4></th>
                             <th class="pr-3"><h4>Prix unitaire HT</h4></th>
                             <th class="pr-3"><h4>Prix unitaire TTC</h4></th>
                             <th class="pr-3"><h4>Pourcentage remise</h4></th>
@@ -139,6 +147,12 @@ if (isset($_POST['valider'])) {
                                 if($ligne['raison_sociale'] == $vendeur){?>
                                     <!---affichage des informations de chaque produit de la commande--->
                                     <tr class="py-4 <?= ligneCouleur($ligneIndex)?>">
+                                        <td class="py-3 w-24 text-center">
+                                            <img class="w-16 h-16 object-contain inline-block" 
+                                                src="<?php echo $ligne['url_photo'];?>" 
+                                                alt="<?php echo $ligne['alt'];?>" 
+                                                title="<?php echo $ligne['titre'];?>">
+                                        </td>
                                         <td class="text-left py-3 pl-3"><p><?php echo $ligne['id_produit'];?> - <?php echo $ligne['libelle_produit'];?></p></td>
                                         <td class="text-center py-3"><p><?php echo str_replace('.',',',$ligne['prix_ht']);?>€</p></td>
                                         <td class="text-center py-3"><p><?php echo str_replace('.',',',$ligne['prix_ttc']);?>€</p></td>
@@ -166,7 +180,7 @@ if (isset($_POST['valider'])) {
                             }?>
                             <!---sous-total par vendeur--->
                             <tr class="py-4 <?= ligneCouleur($ligneIndex)?>">
-                                <th colspan="5" class="text-left w-90 pl-3"><p>Sous-total :</p></th>
+                                <th colspan="6" class="text-left w-90 pl-3"><p>Sous-total :</p></th>
                                 <?php $prix = explode(".", "$sous_total_final");?>
                                 <th class="text-center py-3 pr-3"><p>
                                     <?php echo htmlentities($prix[0].",".((preg_match("/^[1-9]$/", $prix[1]))?$prix[1]."0":$prix[1]));?>€
@@ -181,7 +195,7 @@ if (isset($_POST['valider'])) {
                     <tfoot>
                         <!---affichage des totaux de la commande--->
                         <tr class="py-4 <?= ligneCouleur($ligneIndex)?> border-t-2 border-solid border-black">
-                            <th class="text-left w-90 pl-3"><h4>Total :</h4></th>
+                            <th class="text-left w-90 pl-3" colspan="2"><h4>Total :</h4></th>
                             <!---total ht--->
                             <?php $prix = explode(".", "$total_ht");?>
                             <th class="text-center py-3"><h4><?php echo htmlentities($prix[0].",".((preg_match("/^[1-9]$/", $prix[1]))?$prix[1]."0":$prix[1]));?>€</h4></th>
