@@ -42,7 +42,6 @@
     <script src="../../js/tris.js"></script>
     <script src="../../js/filtres.js"></script>
     <script src="../../js/affichageNote.js"></script>
-    
 </head>
 
 <body>
@@ -64,7 +63,8 @@
             <section>
                 <div class="flex flex-row justify-between">
                     <h3>Filtres</h3>
-                    <img id="fermerSidebar"src="../../images/logo/bootstrap_icon/x-large.svg" alt="Fermer" class="flex self-center w-8 md:hidden">
+                    <p id="nbProd" class="flex self-center md:hidden">Nbre produit(s): <?php echo count($tabProduit);?></p>
+                    <img id="fermerSidebar" src="../../images/logo/bootstrap_icon/x-large.svg" alt="Fermer" class="flex self-center w-8 md:hidden">
                 </div>
                 <!-- Categorie -->
                     <article>
@@ -75,7 +75,6 @@
                             <input type="checkbox" name="alimentaire" id="alimentaire" value="alimentaire" class="triFiltre h-5 w-5">
                             <label for="alimentaire" class="labelDetails">Alimentaire</label>
                         </div>
-                        
 
                         <!-- Vetements -->
                         <div>
@@ -181,11 +180,11 @@
                         <summary class="cursor-pointer mt-1 mb-1">Par prix</summary>
                         <div>
                             <div>
-                                <input type="radio" name="prixTri" id="prixTriCroissant" value="croissant" class="triFiltre h-5 w-5">
+                                <input type="radio" name="tri" id="prixTriCroissant" value="croissant" class="triFiltre h-5 w-5">
                                 <label for="prixTriCroissant" class="labelDetails">Croissant</label>
                             </div>
                             <div>
-                                <input type="radio" name="prixTri" id="prixTriDecroissant" value="decroissant" class="triFiltre h-5 w-5">
+                                <input type="radio" name="tri" id="prixTriDecroissant" value="decroissant" class="triFiltre h-5 w-5">
                                 <label for="prixTriDecroissant" class="labelDetails">Décroissant</label>
                             </div>
                         </div>
@@ -198,11 +197,11 @@
                         <summary class="cursor-pointer mt-1 mb-1">Par ordre alphabétique</summary>
                         <div>
                             <div>
-                                <input type="radio" name="alphaTri" id="alphaTriAZ" value="az" class="triFiltre h-5 w-5">
+                                <input type="radio" name="tri" id="alphaTriAZ" value="az" class="triFiltre h-5 w-5">
                                 <label for="alphaTriAZ" class="labelDetails">A-Z</label>
                             </div>
                             <div>
-                                <input type="radio" name="alphaTri" id="alphaTriZA" value="za" class="triFiltre h-5 w-5">
+                                <input type="radio" name="tri" id="alphaTriZA" value="za" class="triFiltre h-5 w-5">
                                 <label for="alphaTriZA" class="labelDetails">Z-A</label>
                             </div>
                         </div>
@@ -216,11 +215,11 @@
                         <summary class="cursor-pointer mt-1 mb-1">Par note</summary>
                         <div>
                             <div>
-                                <input type="radio" name="noteTri" id="noteTri51" value="51" class="triFiltre h-5 w-5">
+                                <input type="radio" name="tri" id="noteTri51" value="51" class="triFiltre h-5 w-5">
                                 <label for="noteTri51" class="labelDetails">5-1</label>
                             </div>
                             <div>
-                                <input type="radio" name="noteTri" id="noteTri15" value="15" class="triFiltre h-5 w-5">
+                                <input type="radio" name="tri" id="noteTri15" value="15" class="triFiltre h-5 w-5">
                                 <label for="noteTri15" class="labelDetails">1-5</label>
                             </div>
                         </div>
