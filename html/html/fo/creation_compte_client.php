@@ -84,14 +84,20 @@ unset($_SESSION['erreurs'], $_SESSION['old']);
             <!-- Mot de passe -->
             <div class="flex flex-col basis-1/3 m-5 min-w-3xs">
                 <label for="mdp">Mot de passe* :</label>
-                <input class="border-4 border-beige rounded-2xl w-1/1 p-1 pl-3" type="password" name="mdp" id="mdp" value="<?= htmlspecialchars($old['mdp'] ?? '') ?>" required>
+                <div class="zone-mdp flex flex-row ">
+                    <input class="champ-mdp border-4 border-beige rounded-2xl w-1/1 p-1 pl-3" type="password" name="mdp" id="mdp" value="<?= htmlspecialchars($old['mdp'] ?? '') ?>" required>
+                    <?php include __DIR__ . "/../../php/structure/bouton_mdp.php" ?>
+                </div>
                 <p style="font-size: 0.90em" class="<?php if (isset($erreurs['mdp'])) { echo "text-rouge"; } ?>"> 1 majuscule, 1 minuscule, 1 chiffre, 1 caractère spécial, 10 caractères minimum</p>
             </div>
 
             <!-- Vérification du mot de passe -->
             <div class="flex flex-col basis-1/3 m-5 min-w-3xs">
                 <label for="verifMdp">Vérification du mot de passe* :</label>
-                <input class="border-4 border-beige rounded-2xl w-1/1 p-1 pl-3" type="password" name="verifMdp" id="verifMdp" required>
+                <div class="zone-mdp flex flex-row ">
+                    <input class="champ-mdp border-4 border-beige rounded-2xl w-1/1 p-1 pl-3" type="password" name="verifMdp" id="verifMdp" required>
+                    <?php include __DIR__ . "/../../php/structure/bouton_mdp.php" ?>
+                </div>
                 <?php if (isset($verifMdp)) { echo "<p class='text-rouge' style='font-size: 0.90em'>La vérification doit être identique à votre mot de passe.</p>"; } ?>
             </div>
 
@@ -128,4 +134,5 @@ unset($_SESSION['erreurs'], $_SESSION['old']);
     ?>
 
 </body>
+<script src="../../js/bo/visibilite_mdp.js"></script>
 </html>

@@ -144,7 +144,7 @@
 </head>
 <body>
     <?php require_once __DIR__ . "/../../php/structure/header_front.php"; ?>
-    <main class="min-h-[650px]">
+    <main >
         <h2 class="flex flex-col items-center">Connexion</h2>
         <form method="post">
         <?php if(isset($_GET['idProduit'])){ ?>
@@ -172,20 +172,9 @@
 
                     <label for="mdp">Mot de passe :</label>
 
-                    <div class="flex w-fit flex-wrap relative items-center"> <!-- div pour rassembler l'input et le bouton -->
-                        <input id="mdp" class="ml-5 border-5 border-solid rounded-2xl border-vertClair pl-3 md:w-150 h-15 w-70" name="mdp" id="mdp"  value="<?= isset($_POST['mdp'])? $_POST['mdp'] : "" ?>" required>
-                    
-                        <!-- oeil pour afficher/cacher le mdp -->
-                         <div class="flex modif-attribut float-rigth">  <!-- div pour changer les boutons  -->
-                            <button type="button" class="bouton-modifier group/eye cursor-pointer ">
-                                <img src="/../../../images/logo/bootstrap_icon/eye.svg" alt="modifier" title="modifier" class="w-9! h-9! ml-4 block group-hover/eye:hidden relative md:w-12! md:h-12!">
-                                <img src="/../../../images/logo/bootstrap_icon/eye-fill.svg" alt="modifier" title="modifier" class=" w-9! h-9! ml-4 hidden group-hover/eye:block relative md:w-12! md:h-12!">
-                            </button>
-                            <button type="button" class="group/valider cursor-pointer bouton-valider hidden">
-                                <img src="/../../../images/logo/bootstrap_icon/eye-slash.svg" alt="valider" title="valider" class=" w-9! h-9! ml-4 block group-hover/valider:hidden relative md:w-12! md:h-12!">
-                                <img src="/../../../images/logo/bootstrap_icon/eye-slash-fill.svg" alt="valider" title="valider" class=" w-9! h-9! ml-4 hidden group-hover/valider:block relative md:w-12! md:h-12!">
-                            </button>
-                        </div>
+                    <div class="zone-mdp flex w-fit flex-wrap relative items-center"> <!-- div pour rassembler l'input et le bouton -->
+                        <input id="mdp" type="password" class="champ-mdp ml-5 border-5 border-solid rounded-2xl border-vertClair pl-3 md:w-150 h-15 w-70" name="mdp" id="mdp"  value="<?= isset($_POST['mdp'])? $_POST['mdp'] : "" ?>" required>
+                        <?php include __DIR__ . "/../../php/structure/bouton_mdp.php" ?>
                     </div>
 
                     <br>
@@ -233,7 +222,7 @@
             <p class=" mr-2">Pas encore vendeur ? </p>
             <a href="../bo/crea_compte_vendeur.php" class="underline! hover:text-rouge">Créer un compte vendeur</a>
         </div>
-
+<!--
         <script>
             var passwordInput = document.getElementById("mdp");
             passwordInput.type = 'password';
@@ -266,8 +255,9 @@
                     
                 });
             });
-        </script>
+        </script> -->
     </main>
     <?php require_once __DIR__ . "/../../php/structure/footer_front.php"; ?>
 </body>
+<script src="../../js/bo/visibilite_mdp.js"></script>
 </html>

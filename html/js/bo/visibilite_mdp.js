@@ -8,10 +8,15 @@ document.querySelectorAll(".bouton-afficher-mdp").forEach(bouton => {
 
         if(cache){
             inputMdp.type = "text";
+            imageNoHover.src = "/../../../images/logo/bootstrap_icon/eye-slash.svg"
+            imageHover.src = "/../../../images/logo/bootstrap_icon/eye-slash-fill.svg"
             
         }else{
             inputMdp.type = "password";
+            imageNoHover.src = "/../../../images/logo/bootstrap_icon/eye.svg"
+            imageHover.src = "/../../../images/logo/bootstrap_icon/eye-fill.svg"
         }
         cache = !cache;
+        
     })
 })

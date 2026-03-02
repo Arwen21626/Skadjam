@@ -192,7 +192,7 @@ if($_SESSION['role'] != 'client'){
     <?php include(__DIR__ . '/../../php/structure/header_front.php');?>
     <?php include(__DIR__ . '/../../php/structure/navbar_front.php');?>
     <?php if(!$achatValide){?>
-        <main class="md:min-h-[800px] min-h-[600px]">
+        <main class="">
             <form method="post">
 
                 <div class="flex flex-col md:items-center items-start ml-5 md:ml-0">

@@ -46,19 +46,27 @@ try{
     <?php require __DIR__ . "/../../php/structure/head_front.php"; ?>
     <title>Nouveau mot de passe</title>
 </head>
-<body>
+<body class="h-1/1">
     <?php require __DIR__ . "/../../php/structure/header_front.php"; ?>
-    <main class="md:min-h-[800px] min-h-[600px]">
-        <h2 class="flex justify-center text-center">Nouveau mot de passe</h2>
-        <form class="flex md:flex-row flex-col flex-wrap p-15 pt-0 justify-around" action="nouveau_mdp.php" method="post"> 
+    <main class="flex flex-col items-center">
+        
+        <h2>Nouveau mot de passe</h2>
+        
+        <form class="md:w-1/2 p-15 pt-0" action="nouveau_mdp.php" method="post"> 
             <div class="flex flex-col basis-1/3 m-5 min-w-3xs">
                 <label for="mdp">Mot de passe* :</label>
-                <input class="border-4 border-vertClair rounded-2xl w-1/1 p-1 pl-3" type="password" name="mdp" id="mdp" required>
+                <div class="zone-mdp flex flex-row">
+                    <input class="champ-mdp border-4 border-vertClair rounded-2xl w-1/1 p-1 pl-3" type="password" name="mdp" id="mdp" required>
+                    <?php include __DIR__ . "/../../php/structure/bouton_mdp.php" ?>
+                </div>
                 <p style="font-size: 0.90em"> 1 majuscule, 1 minuscule, 1 chiffre, 1 caractère spécial, 10 caractères minimum</p>
             </div>
             <div class="flex flex-col basis-1/3 m-5 min-w-3xs">
                 <label for="verifMdp">Vérification du mot de passe* :</label>
-                <input class="border-4 border-vertClair rounded-2xl w-1/1 p-1 pl-3" type="password" name="verifMdp" id="verifMdp" required>
+                <div class="zone-mdp flex flex-row">
+                    <input class="champ-mdp border-4 border-vertClair rounded-2xl w-1/1 p-1 pl-3" type="password" name="verifMdp" id="verifMdp" required>
+                    <?php include __DIR__ . "/../../php/structure/bouton_mdp.php" ?>
+                </div>
             </div>
 
             <!-- Ne s'affiche que si le mot de passe entré ne respecte pas la structure ordonnée ou qu'il est différent de la vérification du mot de passe -->
@@ -67,9 +75,10 @@ try{
                     <p class="text-rouge">Votre mot de passe ne respecte pas la structure ordinaire ou ne correspond pas à sa vérification.</p>
                 <?php } ?>
             </div>
-            <div class="flex mt-10 justify-between md:justify-end w-1/1">
+
+            <div class="flex justify-around">
                 <a href="profil_client.php" class="text-center block border-4 border-solid border-vertClair rounded-2xl w-40 py-2.5 mr-6 cursor-pointer">Annuler</a>
-                <input class="border-4 border-vertClair rounded-2xl w-40 h-14 p-0 m-0 md:mr-10 cursor-pointer" type="submit" value="Confirmer">
+                <input class="border-4 border-vertClair rounded-2xl w-40 h-14 p-0 m-0 cursor-pointer" type="submit" value="Confirmer">
             </div>
         </form>
     </main>
@@ -80,4 +89,6 @@ try{
     require __DIR__ . "/../../php/structure/footer_front.php";
     ?>
 </body>
+<script src="../../js/bo/visibilite_mdp.js"></script>
+
 </html>

@@ -631,9 +631,6 @@ input.quantite-prod-input {
   .h-6\! {
     height: calc(var(--spacing, 0.25rem) * 6) !important;
   }
-  .h-9\! {
-    height: calc(var(--spacing, 0.25rem) * 9) !important;
-  }
   .h-10 {
     height: calc(var(--spacing, 0.25rem) * 10);
   }
@@ -681,9 +678,6 @@ input.quantite-prod-input {
   }
   .min-h-\[600px\] {
     min-height: 600px;
-  }
-  .min-h-\[650px\] {
-    min-height: 650px;
   }
   .min-h-\[650x\] {
     min-height: 650x;
@@ -735,9 +729,6 @@ input.quantite-prod-input {
   }
   .w-8 {
     width: calc(var(--spacing, 0.25rem) * 8);
-  }
-  .w-9\! {
-    width: calc(var(--spacing, 0.25rem) * 9) !important;
   }
   .w-10 {
     width: calc(var(--spacing, 0.25rem) * 10);
@@ -1338,20 +1329,6 @@ input.quantite-prod-input {
       }
     }
   }
-  .group-hover\/eye\:block {
-    &:is(:where(.group\/eye):hover *) {
-      @media (hover: hover) {
-        display: block;
-      }
-    }
-  }
-  .group-hover\/eye\:hidden {
-    &:is(:where(.group\/eye):hover *) {
-      @media (hover: hover) {
-        display: none;
-      }
-    }
-  }
   .group-hover\/eyes\:block {
     &:is(:where(.group\/eyes):hover *) {
       @media (hover: hover) {
@@ -1690,11 +1667,6 @@ input.quantite-prod-input {
       height: calc(var(--spacing, 0.25rem) * 28);
     }
   }
-  .md\:h-12\! {
-    @media (width >= 48rem) {
-      height: calc(var(--spacing, 0.25rem) * 12) !important;
-    }
-  }
   .md\:h-14 {
     @media (width >= 48rem) {
       height: calc(var(--spacing, 0.25rem) * 14);
@@ -1735,6 +1707,11 @@ input.quantite-prod-input {
       min-height: 900px;
     }
   }
+  .md\:w-1\/2 {
+    @media (width >= 48rem) {
+      width: calc(1/2 * 100%);
+    }
+  }
   .md\:w-2xl {
     @media (width >= 48rem) {
       width: var(--container-2xl, 42rem);
@@ -1748,11 +1725,6 @@ input.quantite-prod-input {
   .md\:w-10 {
     @media (width >= 48rem) {
       width: calc(var(--spacing, 0.25rem) * 10);
-    }
-  }
-  .md\:w-12\! {
-    @media (width >= 48rem) {
-      width: calc(var(--spacing, 0.25rem) * 12) !important;
     }
   }
   .md\:w-40 {
