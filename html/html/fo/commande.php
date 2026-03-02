@@ -282,8 +282,7 @@
                                                 title="<?php echo $ligne['titre'];?>"
                                             >
                                             <p class="ml-3"><?php echo $ligne['id_produit'];?> - <?php echo $ligne['libelle_produit'];?></p>
-                                        </div>
-                                        
+                                        </div>   
                                     </td>
                                 </tr>
                                 <tr class="py-4 <?= ligneCouleur($ligneIndex) ?>">
