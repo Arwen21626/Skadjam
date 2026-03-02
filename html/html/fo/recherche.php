@@ -42,7 +42,6 @@
     <script src="../../js/tris.js"></script>
     <script src="../../js/filtres.js"></script>
     <script src="../../js/affichageNote.js"></script>
-    
 </head>
 
 <body>
@@ -64,7 +63,8 @@
             <section>
                 <div class="flex flex-row justify-between">
                     <h3>Filtres</h3>
-                    <img id="fermerSidebar"src="../../images/logo/bootstrap_icon/x-large.svg" alt="Fermer" class="flex self-center w-8 md:hidden">
+                    <p id="nbProd" class="flex self-center md:hidden">Nbre produit(s): <?php echo count($tabProduit);?></p>
+                    <img id="fermerSidebar" src="../../images/logo/bootstrap_icon/x-large.svg" alt="Fermer" class="flex self-center w-8 md:hidden">
                 </div>
                 <!-- Categorie -->
                     <article>
@@ -75,7 +75,6 @@
                             <input type="checkbox" name="alimentaire" id="alimentaire" value="alimentaire" class="triFiltre h-5 w-5">
                             <label for="alimentaire" class="labelDetails">Alimentaire</label>
                         </div>
-                        
 
                         <!-- Vetements -->
                         <div>

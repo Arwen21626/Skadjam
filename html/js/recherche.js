@@ -16,6 +16,10 @@ function barreDeRecherche(original, mot) {
     );
 }
 
+function afficheNbProd(tab){
+    let nbProduit = document.getElementById("nbProd")
+    nbProduit.textContent = "Nbre produit(s): "+tab.length
+}
 
 
 // Ajout des eventListeners
@@ -237,5 +241,4 @@ function ajoutEventListener(){
             boutonSidebar.classList.remove("hidden")
         })
     }
-    
 }
