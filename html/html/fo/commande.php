@@ -251,6 +251,7 @@
                         <?php $prix = explode(".", "$total_ttc");?>
                         <th class="text-center py-3"><h4><?php echo htmlentities($prix[0].",".((preg_match("/^[1-9]$/", $prix[1]))?$prix[1]."0":$prix[1]));?>€</h4></th>
                         <th></th>
+                        <!---quantité totale--->
                         <th class="text-center py-3"><h4><?php echo $quantite_totale;?></h4></th>
                         <!---total final--->
                         <?php $prix = explode(".", "$total_final");?>
