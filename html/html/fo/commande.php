@@ -196,8 +196,11 @@
                                     } 
                                     else{
                                         $total_ligne = $ligne['prix_ttc'] * $ligne['quantite'] ;
-                                    }?>
-                                    <td class="text-center py-3 pr-3"><p><?php echo str_replace('.',',',$total_ligne);?>€</p></td>
+                                    }
+                                    $prix = explode(".", "$total_ligne");?>
+                                    <td class="text-center py-3 pr-3"><p>
+                                        <?php echo htmlentities($prix[0].",".((preg_match("/^[1-9]$/", $prix[1]))?$prix[1]."0":$prix[1]));?>€
+                                    </p></td>
                                     <?php 
                                         //calcul du total ht de la commande
                                         $total_ht += $ligne['sous_total_ht'];
@@ -212,7 +215,10 @@
                         <!---sous-total par vendeur--->
                         <tr class="py-4 <?= ligneCouleur($ligneIndex)?>">
                             <th colspan="5" class="text-left w-90 pl-3"><p>Sous-total :</p></th>
-                            <th class="text-center py-3 pr-3"><p><?php echo str_replace('.',',',$sous_total_final);?>€</p></th>
+                            <?php $prix = explode(".", "$sous_total_final");?>
+                            <th class="text-center py-3 pr-3"><p>
+                                <?php echo htmlentities($prix[0].",".((preg_match("/^[1-9]$/", $prix[1]))?$prix[1]."0":$prix[1]));?>€
+                            </p></th>
                         </tr>
                         <?php 
                             //calcul du total final de la commande remise(s) comprise(s)
@@ -224,11 +230,17 @@
                     <!---affichage des totaux de la commande--->
                     <tr class="py-4 <?= ligneCouleur($ligneIndex)?>">
                         <th class="text-left w-90 pl-3"><h4>Total :</h4></th>
-                        <th class="text-center py-3"><h4><?php echo str_replace('.',',',$total_ht);?>€</h4></th>
-                        <th class="text-center py-3"><h4><?php echo str_replace('.',',',$total_ttc);?>€</h4></th>
+                        <!---total ht--->
+                        <?php $prix = explode(".", "$total_ht");?>
+                        <th class="text-center py-3"><h4><?php echo htmlentities($prix[0].",".((preg_match("/^[1-9]$/", $prix[1]))?$prix[1]."0":$prix[1]));?>€</h4></th>
+                        <!---total ttc--->
+                        <?php $prix = explode(".", "$total_ttc");?>
+                        <th class="text-center py-3"><h4><?php echo htmlentities($prix[0].",".((preg_match("/^[1-9]$/", $prix[1]))?$prix[1]."0":$prix[1]));?>€</h4></th>
                         <th></th>
                         <th class="text-center py-3"><h4><?php echo $quantite_totale;?></h4></th>
-                        <th class="text-center py-3 pr-3"><h4><?php echo str_replace('.',',',$total_final);?>€</h4></th>
+                        <!---total final--->
+                        <?php $prix = explode(".", "$total_final");?>
+                        <th class="text-center py-3 pr-3"><h4><?php echo htmlentities($prix[0].",".((preg_match("/^[1-9]$/", $prix[1]))?$prix[1]."0":$prix[1]));?>€</h4></th>
                     </tr>
                 </tfoot>
             </table>
@@ -273,8 +285,11 @@
                                     } 
                                     else{
                                         $total_ligne = $ligne['prix_ttc'] * $ligne['quantite'] ;
-                                    } ?>
-                                    <td class="text-left"><p><?php echo str_replace('.',',',$total_ligne);?>€</p></td>
+                                    } 
+                                    $prix = explode(".", "$total_ligne");?>
+                                    <td class="text-left"><p>
+                                        <?php echo htmlentities($prix[0].",".((preg_match("/^[1-9]$/", $prix[1]))?$prix[1]."0":$prix[1]));?>€
+                                    </p></td>
                                 </tr>
 
                                 <?php 
@@ -285,7 +300,10 @@
                         <!---sous-total par vendeur--->
                         <tr class="py-4 <?= ligneCouleur($ligneIndex) ?>">
                             <th class="text-left py-2 pl-3"><h4>Sous-total vendeur</h4></th>
-                            <th class="text-left"><p><?php echo str_replace('.',',',$sous_total_final);?>€</p></th>
+                            <?php $prix = explode(".", "$sous_total_final");?>
+                            <th class="text-left"><p>
+                                <?php echo htmlentities($prix[0].",".((preg_match("/^[1-9]$/", $prix[1]))?$prix[1]."0":$prix[1]));?>€
+                            </p></th>
                         </tr>
                         <?php
                             $sous_total_final = 0;
@@ -293,21 +311,28 @@
                 </tbody>
                 <tfoot>
                     <!---affichage des totaux de la commande--->
+                    <!---total ht--->
                     <tr class="py-4 <?= ligneCouleur($ligneIndex) ?> border-t-2 border-solid border-black">
                         <th class="text-left py-2 pl-3"><h4>Total HT : </h4></th>
-                        <th class="text-left"><h4><?php echo str_replace('.',',',$total_ht);?>€</h4></th>
+                        <?php $prix = explode(".", "$total_ht");?>
+                        <th class="text-left"><h4><?php echo htmlentities($prix[0].",".((preg_match("/^[1-9]$/", $prix[1]))?$prix[1]."0":$prix[1]));?>€</h4></th>
                     </tr>
+                    <!---total ttc--->
                     <tr class="py-4 <?= ligneCouleur($ligneIndex) ?>">
                         <th class="text-left py-2 pl-3"><h4>Total TTC : </h4></th>
-                        <th class="text-left"><h4><?php echo str_replace('.',',',$total_ttc);?>€</h4></th>
+                        <?php $prix = explode(".", "$total_ttc");?>
+                        <th class="text-left"><h4><?php echo htmlentities($prix[0].",".((preg_match("/^[1-9]$/", $prix[1]))?$prix[1]."0":$prix[1]));?>€</h4></th>
                     </tr>
+                    <!---quantité totale--->
                     <tr class="py-4 <?= ligneCouleur($ligneIndex) ?>">
                         <th class="text-left py-2 pl-3"><h4>Quantité totale : </h4></th>
                         <th class="text-left"><h4><?php echo $quantite_totale;?></h4></th>
                     </tr>
+                    <!---total final--->
                     <tr class="py-4 <?= ligneCouleur($ligneIndex) ?>">
                         <th class="text-left py-2 pl-3"><h4>Total Final : </h4></th>
-                        <th class="text-left"><h4><?php echo str_replace('.',',',$total_final);?>€</h4></th>
+                        <?php $prix = explode(".", "$total_final");?>
+                        <th class="text-left"><h4><?php echo htmlentities($prix[0].",".((preg_match("/^[1-9]$/", $prix[1]))?$prix[1]."0":$prix[1]));?>€</h4></th>
                     </tr>
                 </tfoot>
             </table>
