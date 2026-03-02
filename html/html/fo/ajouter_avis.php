@@ -98,14 +98,17 @@
             <textarea class="border-4 border-beige rounded-2xl w-1/1 p-1 pl-3" name="commentaire" rows="10" cols="100"><?php if(isset($commentaire)){echo $commentaire;}?></textarea>
 
             <div class="flex mt-10 justify-center md:justify-end w-1/1 ">
-                <button class="cursor-pointer  border-2 border-vertFonce rounded-2xl w-40 h-14 p-0 m-0 mr-10 " type="button"><a href="./details_produit.php?idProduit=<?php echo $idProd; ?>">Annuler</a></button>
+                <button class="cursor-pointer border-2 border-vertFonce rounded-2xl w-40 h-14 p-0 m-0 mr-10 " type="button"><a href="./details_produit.php?idProduit=<?php echo $idProd; ?>">Annuler</a></button>
+                
+                <!-- Supression -->
+                <?php if (isset($note) && $note !== null){ // on peut supprimer un avis que si on est entrain de la modifier ?>
+                    <a class="cursor-pointer border-2 border-vertFonce rounded-2xl w-40 h-14 p-4 m-0 mr-10" href="./ajouter_avis.php?idProduit=<?php echo $produit['id_produit']?>&supr=true">Supprimer</a>
+                <?php }?>
+
                 <input class="cursor-pointer border-2 border-vertFonce rounded-2xl w-40 h-14 p-0 m-0 md:mr-10" type="submit" name="submit" id="submit" value="Valider" >
             </div>
         </form>
-        <!-- Supression -->
-        <?php if (isset($note) && $note != null){ // on peut supprimer un avis que si on est entrain de la modifier ?>
-            <a class="ml-10 flex justify-center mb-5 md:inline-block" href="./ajouter_avis.php?idProduit=<?php echo $produit['id_produit']?>&supr=true">Supprimer mon avis</a>
-        <?php }?>
+        
     </main>
 
     <?php require(__DIR__ . "/../../php/structure/footer_front.php") ?>

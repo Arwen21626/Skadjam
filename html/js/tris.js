@@ -23,7 +23,6 @@ function triEtoileDecroissant(tableau){
 }
 
 function triStockCroissant(tableau){
-    console.log(tableau)
     return tableau.sort((a,b) => a['quantite_stock'] - b['quantite_stock'])
 }
 

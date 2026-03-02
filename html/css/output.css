@@ -1067,9 +1067,6 @@ input.quantite-prod-input {
   .border-red-500 {
     border-color: var(--color-red-500, oklch(63.7% 0.237 25.331));
   }
-  .border-rouge {
-    border-color: var(--color-rouge);
-  }
   .border-vertClair {
     border-color: var(--color-vertClair);
   }
@@ -1169,6 +1166,9 @@ input.quantite-prod-input {
   .px-5 {
     padding-inline: calc(var(--spacing, 0.25rem) * 5);
   }
+  .px-6 {
+    padding-inline: calc(var(--spacing, 0.25rem) * 6);
+  }
   .px-7 {
     padding-inline: calc(var(--spacing, 0.25rem) * 7);
   }
@@ -1192,6 +1192,9 @@ input.quantite-prod-input {
   }
   .pt-2 {
     padding-top: calc(var(--spacing, 0.25rem) * 2);
+  }
+  .pt-4 {
+    padding-top: calc(var(--spacing, 0.25rem) * 4);
   }
   .pt-5 {
     padding-top: calc(var(--spacing, 0.25rem) * 5);
@@ -1279,6 +1282,9 @@ input.quantite-prod-input {
   }
   .text-vertFonce {
     color: var(--color-vertFonce);
+  }
+  .text-white {
+    color: var(--color-white, #fff);
   }
   .line-through {
     text-decoration-line: line-through;

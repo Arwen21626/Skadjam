@@ -50,9 +50,16 @@
         <?php } 
         
         else{?>
-            <div class="flex justify-center">
-                <table class="table-auto w-250">
-                    <!-- en tête du tableau-->
+            <div class="flex justify-center flex-row-reverse">
+
+                <!-- modifier les remises remises et retour -->
+                <div class="flex flex-col m-10 sticky top-2/8 h-50">
+                    <a href="index_vendeur.php" class="flex justify-center items-center border-2 border-vertFonce rounded-2xl w-45 h-14 cursor-pointer my-5">Retour</a>
+                    <a href="../bo/modifier_remises.php" class="flex justify-center items-center border-2 border-vertFonce rounded-2xl w-45 h-14 cursor-pointer my-5">Modifier remises</a>
+                </div>
+
+                <table class="table-auto w-2/3">
+                    <!-- en tête du tableau -->
                     <thead>
                         <tr>
                             <th scope="col" class="text-left w-125 pl-3"><h3>Nom du produit</h3></th>
@@ -62,6 +69,7 @@
                             <th scope="col"><h3>Remise</h3></th>
                         </tr>
                     </thead>
+
                     <!-- corps du tableau -->
                     <tbody>
                         <?php $ligneIndex = 1;
@@ -69,8 +77,18 @@
                                 $idProduit = $valeurs['id_produit'];?>
                                 <tr class="py-4 <?= ligneCouleur($ligneIndex) ?>">
                                     <td scope="row" class="text-left py-3 pl-3" ><a href="<?php echo htmlentities("details_produit.php?idProduit=".$idProduit);?>"><?php echo $valeurs['libelle_produit']; ?></a></td>
-                                    <td class="text-center py-3"><p><?php echo htmlentities($valeurs['prix_ttc']);?> €</p></td>
-                                    <td class="text-center py-3"><p><?php echo htmlentities($valeurs['prix_remise']);?> €</p></td>
+                                    <td class="text-center py-3"><p>
+                                        <?php 
+                                            $prix = explode(".", $valeurs['prix_ttc']); 
+                                            echo htmlentities($prix[0].",".$prix[1]);
+                                        ?> €</p>
+                                    </td>
+                                    <td class="text-center py-3"><p>
+                                        <?php 
+                                            $prix = explode(".", $valeurs['prix_remise']); 
+                                            echo htmlentities($prix[0].",".$prix[1]);
+                                        ?> €</p>
+                                    </td>
                                     <td class="text-center py-3">
                                         <div class="flex justify-center items-center">
                                             <?php 
@@ -80,21 +98,15 @@
                                         </div>
                                     </td>
 
-                                    <td class="text-center py-3"><p><?php echo htmlentities(($valeurs['pourcentage_remise'] === null)?"0 %":($valeurs['pourcentage_remise']*100).' %'); ?></p></td>
+                                    <td class="text-center py-3">
+                                        <p><?php echo htmlentities(($valeurs['pourcentage_remise'] === null)?"0 %":($valeurs['pourcentage_remise']*100).' %'); ?></p>
+                                    </td>
                                 </tr>
                         <?php }?>
                     </tbody>
                 </table>
+
             </div>
-            <!-- modifier les remises remises -->
-            <div class="flex justify-around mt-10">
-                <!---bouton retour--->
-                <a href="index_vendeur.php" class="flex justify-center items-center border-2 border-vertFonce rounded-2xl w-45 h-14 cursor-pointer my-5">Retour</a>
-                <button class="border-2 border-vertFonce rounded-2xl w-45 h-14 cursor-pointer">
-                    <a href="../bo/modifier_remises.php" class="">Modifier remises</a>
-                </button>
-            </div>
-            
 
         <?php } ?>
     </main>
