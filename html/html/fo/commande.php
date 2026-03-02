@@ -279,8 +279,7 @@
                                             <img class="w-16 h-16 object-contain inline-block" 
                                                 src="<?php echo $ligne['url_photo'];?>" 
                                                 alt="<?php echo $ligne['alt'];?>" 
-                                                title="<?php echo $ligne['titre'];?>"
-                                            >
+                                                title="<?php echo $ligne['titre'];?>">
                                             <p class="ml-3"><?php echo $ligne['id_produit'];?> - <?php echo $ligne['libelle_produit'];?></p>
                                         </div>   
                                     </td>
