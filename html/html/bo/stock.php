@@ -69,7 +69,8 @@
                                 <tr class="py-4 <?= ligneCouleur($ligneIndex)?>">
                                     <!---informations des stocks--->
                                     <td scope="row" class="text-left py-3 pl-3" ><a href="<?php echo htmlentities("details_produit.php?idProduit=".$idProduit);?>"><?php echo $valeurs['libelle_produit']; ?></a></td>
-                                    <td class="text-center py-3"><p><?php echo htmlentities($valeurs['prix_ttc']);?> €</p></td>
+                                    <td class="text-center py-3"><p><?php echo str_replace('.',',',$valeurs['prix_ttc']);?> €</p></td>
+                                    
                                     <td class="text-center py-3">
                                         <div class="flex justify-center items-center">
                                             <?php 
