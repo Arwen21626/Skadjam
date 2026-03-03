@@ -25,6 +25,8 @@
             <li>Tester si l'authentifiacation fonctionne correctement en copiant le code à 6 chiffres généré</li>
             <li>Valider l'activation de l'Authentification a deux facteurs</li>
         </ol>
+
+        <button></button>
         
     </main>
     
