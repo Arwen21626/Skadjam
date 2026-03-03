@@ -81,10 +81,12 @@
     <title>Profil</title>
 </head>
 <body>
+
     <?php 
-    require_once __DIR__ . "/../../php/structure/header_back.php";
-    require_once __DIR__ . "/../../php/structure/navbar_back.php";
+        require_once __DIR__ . "/../../php/structure/header_back.php";
+        require_once __DIR__ . "/../../php/structure/navbar_back.php";
     ?>
+
     <main class="relative flex flex-col items-center">
         <h2 class="m-8">Mon Profil</h2>
         <div class="flex flex-row items-center justify-between">
@@ -148,6 +150,13 @@
             <h3 class="mb-2">Description :</h3>
             <p class="attribut-text mt-4"><?= $description != '' ? $description : 'Aucune description.'; ?></p>
         </div>
+
+        <div class="flex flex-row justify-center items-center mt-4 mb-4">
+            <form action="statistiques.php" method="post">
+                <input class="cursor-pointer border-4 rounded-xl p-2 m-1 border-beige w-75" type="submit" value="Mes statistiques">
+            </form>
+        </div>
+
         <div class="flex flex-row justify-around items-center mt-7 mb-15">
                 <!-- Modifier les informations du vendeur (sauf le mot de passe) -->
                 <form action="modifier_compte_vendeur.php" method="post">
@@ -165,7 +174,9 @@
                     <input type="hidden" id="logout" name="logout" value="true">
                     <input class="cursor-pointer border-4 rounded-xl p-2 m-1 border-beige w-75" type="submit" value="Se déconnecter">
                 </form>
-            </div>
+        </div>
+
+        
     </main>
     <?php require_once __DIR__ . "/../../php/structure/footer_back.php" ?>
 </body>
