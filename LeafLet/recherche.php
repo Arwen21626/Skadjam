@@ -50,7 +50,6 @@
     
     <script>
         const tabProd = <?php echo json_encode($tabProduit);?>;
-        const tabVendeur = <?php echo json_encode($tabVendeur);?>;
     </script>
 
     <!-- Chemins quand on est dans le dossier html -->
@@ -77,9 +76,8 @@
 
     
 </head>
-<style>
-    #map {resize:both;}
-</style>
+
+
 <body>
     <!--header-->
     <?php //include __DIR__ . "/../../php/structure/header_front.php"; ?>
@@ -291,14 +289,54 @@
                     });
                 </script>
             </article>
+
             <!--fin du catalogue-->
-            <article id="changePage" class="flex flex-row justify-around w-96 md:w-275 m-3">
-                <button id="premierePage"><<</button>
-                <button id="pagePrec">|<</button>
-                <p id="pageInfo"></p>
-                <button id="pageSuiv" class="">>|</button>
-                <button id="dernierePage">>></button>
-            </article>
+
+            <!-- Pagination en fonction du nb de produits ou affichage s'il n'y en a aucun -->
+            <script>
+                let parent = document.getElementById("listeProduit")
+
+                if (tabProd.length > 0) {
+                    console.log("if")
+                    let changePage = document.createElement("div")
+                    let premPage = document.createElement("button")
+                    let pagePrec = document.createElement("button")
+                    let pageSuiv = document.createElement("button")
+                    let dernPage = document.createElement("button")
+                    let pageInfo = document.createElement("p")
+                    
+                    changePage.classList.add("flex", "flex-row", "justify-around", "w-96", "md:w-275", "m-3")
+                    parent.appendChild(changePage)
+                    parent = changePage
+
+                    // Ajout du contenu 
+                    premPage.textContent = "<<"
+                    premPage.id = 'premierePage'
+
+                    pagePrec.textContent = "|<"
+                    pagePrec.id = 'pagePrec'
+
+                    pageSuiv.textContent = ">|"
+                    pageSuiv.id = 'pageSuiv'
+
+                    dernPage.textContent = ">>"
+                    dernPage.id = 'dernierePage'
+
+                    // Ajout dans le document
+                    parent.appendChild(premPage)
+                    parent.appendChild(pagePrec)
+                    parent.appendChild(pageInfo)
+                    parent.appendChild(pageSuiv)
+                    parent.appendChild(dernPage)
+
+                }
+                else{
+                    console.log("else")
+                    let aucunProd = document.createElement("h2")
+                    aucunProd.textContent = "Aucun produit ne correspond à la recherche."
+                    parent.appendChild(aucunProd)
+                }
+            </script>
         </section>
 
         <?php $dbh = null;?>
