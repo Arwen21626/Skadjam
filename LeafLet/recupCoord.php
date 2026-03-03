@@ -13,5 +13,7 @@ foreach ($dbh->query("SELECT latitude, longitude FROM sae3_skadjam._adresse a
         'longitude' => $row['longitude']
     ];
 } 
-
 ?>
+<script>
+    const coord = <?php echo json_encode($coord);?>;
+</script>

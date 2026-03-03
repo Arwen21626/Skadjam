@@ -12,7 +12,7 @@
     <title>Map</title>
 </head>
 <style>
-    #map {width: 500px; height: 700px; }
+    #map {width: 700px; height: 500px; }
 </style>
 <body>
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
@@ -21,11 +21,22 @@
 
     <div id="map">
         <script>
-            var map = L.map('map').setView([51.505, -0.09], 13);
+            var map = L.map('map').setView([47.905, -3.09], 10);
+            
             L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
                 maxZoom: 19,
                 attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
             }).addTo(map);
+
+            var marker = L.marker([47.905, -3.09]).addTo(map);
+
+            var circle = L.circle([47.905, -3.09], {
+                color: '#365452',
+                fillColor: '#365452',
+                fillOpacity: 0.5,
+                radius: 5000
+            }).addTo(map);
+
         </script>
         
     </div>
