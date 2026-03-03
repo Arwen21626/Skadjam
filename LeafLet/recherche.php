@@ -1,9 +1,12 @@
 <?php
     session_start();
-    require_once __DIR__ . '/../../php/verif_role_fo.php';
-    require_once __DIR__ . '/../../01_premiere_connexion.php';
-    require_once __DIR__ . "/../../../connections_params.php";
+    // Chemins quand on est dans le dossier html
+    // require_once __DIR__ . '/../../php/verif_role_fo.php';
+    // require_once __DIR__ . '/../../01_premiere_connexion.php';
+    // require_once __DIR__ . "/../../../connections_params.php"; // Plus utile
 
+    //Chemins temporaires
+    include (__DIR__."/../html/01_premiere_connexion.php");
     //récupère toutes les infos des tables produits et photos
     $tabProduit = [];
     foreach($dbh->query("SELECT pr.id_produit, libelle_produit, description_produit, prix_ttc, prix_remise, quantite_stock, id_categorie, pr.id_vendeur, note_moyenne, ph.id_photo, url_photo, alt, titre, id_compte, pu.id_promotion, label
@@ -29,28 +32,46 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" type="text/css" href="../../css/output.css" >
+    <!-- <link rel="stylesheet" type="text/css" href="../../css/output.css" > -->
+    <link rel="stylesheet" href="../html/css/output.css">
     <title>Recherche</title>
-    <?php include __DIR__ . "/../../php/structure/head_front.php"; ?>
+    <?php //include __DIR__ . "/../../php/structure/head_front.php"; ?>
+    <?php include __DIR__ . "/../html/php/structure/head_front.php"; ?>
+    
     <script>
         const tabProd = <?php echo json_encode($tabProduit);?>;
     </script>
+
+    <!-- Chemins quand on est dans le dossier html -->
+    <!-- 
     <script src="../../js/recherche.js"></script>
     <script src="../../js/affichageListeProduits.js"></script>
     <script src="../../js/fo/affichageProduit.js"></script>
     <script src="../../js/pagination.js"></script>
     <script src="../../js/tris.js"></script>
     <script src="../../js/filtres.js"></script>
-    <script src="../../js/affichageNote.js"></script>
-    
+    <script src="../../js/affichageNote.js"></script> 
+    -->
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+    integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
+    crossorigin=""></script>
+
+    <!-- Chemins temporaires -->
+    <script src="../html/js/recherche.js"></script>
+    <script src="../html/js/affichageListeProduits.js"></script>
+    <script src="../html/js/fo/affichageProduit.js"></script>
+    <script src="../html/js/pagination.js"></script>
+    <script src="../html/js/tris.js"></script>
+    <script src="../html/js/filtres.js"></script>
+    <script src="../html/js/affichageNote.js"></script>
 </head>
 
 <body>
-    
-
     <!--header-->
-    <?php include __DIR__ . "/../../php/structure/header_front.php"; ?>
-    <?php include __DIR__ . "/../../php/structure/navbar_front.php"; ?>
+    <?php //include __DIR__ . "/../../php/structure/header_front.php"; ?>
+    <?php //include __DIR__ . "/../../php/structure/navbar_front.php"; ?>
+    <?php include __DIR__ . "/../html/php/structure/header_front.php"; ?>
+    <?php include __DIR__ . "/../html/php/structure/navbar_front.php"; ?>
 
     
     <main class="md:min-h-[900px] min-h-[600px]" id="produits">
@@ -251,10 +272,37 @@
         <script>
             ajoutEventListener()
         </script>
+        
     </main>
-    <script src="../../js/fo/animSidebar.js"></script>
+    <div id="map" class="w-[400px] h-[300px] fixed bottom-0 right-0 z-0">
+            <script>
+                var map = L.map('map').setView([47.905, -3.09], 10);
+                
+                L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                    maxZoom: 19,
+                    attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+                }).addTo(map);
 
+                
+                var pointer = L.icon({
+                    iconUrl: 'pointeurVertFonce.png',
+                    iconSize: [45, 70], // taille du pointeur
+                })
+
+                coord.forEach(element => {
+                    L.marker([element['latitude'], element['longitude']], {icon: pointer}).addTo(map);
+                });
+
+                var markers = new L.MarkerClusterGroup();
+                markers.addLayer(L.marker([175.3107, -37.7784]));
+                // add more markers here...
+                map.addLayer(markers);
+                markers.on('clusterclick', function (a) { alert('Cluster Clicked'); });
+                markers.on('click', function (a) { alert('Marker Clicked'); });
+            </script>
+        </div>
     <!--footer-->
-    <?php include __DIR__ . "/../../php/structure/footer_front.php"; ?>
+    <?php //include __DIR__ . "/../../php/structure/footer_front.php"; ?>
+    <?php //include __DIR__ . "/../html/php/structure/footer_front.php"; ?>
 </body>
 </html>

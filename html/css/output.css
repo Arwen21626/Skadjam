@@ -342,6 +342,9 @@ input.quantite-prod-input {
   .left-0 {
     left: calc(var(--spacing, 0.25rem) * 0);
   }
+  .z-0 {
+    z-index: 0;
+  }
   .z-10 {
     z-index: 10;
   }
@@ -658,6 +661,9 @@ input.quantite-prod-input {
   .h-225 {
     height: calc(var(--spacing, 0.25rem) * 225);
   }
+  .h-\[300px\] {
+    height: 300px;
+  }
   .h-\[871px\] {
     height: 871px;
   }
@@ -831,6 +837,9 @@ input.quantite-prod-input {
   }
   .w-290 {
     width: calc(var(--spacing, 0.25rem) * 290);
+  }
+  .w-\[400px\] {
+    width: 400px;
   }
   .w-auto {
     width: auto;
