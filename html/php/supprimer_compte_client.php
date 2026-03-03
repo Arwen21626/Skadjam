@@ -23,14 +23,24 @@ try {
     $avis = $stmt->fetchAll();
 
     foreach ($avis as $a) {
-        $stmt = $dbh->prepare("INSERT INTO sae3_skadjam._avis (id_compte, id_produit, note, commentaire) VALUES (41, :id_produit, :note, :commentaire)");
+        $stmt = $dbh->prepare("INSERT INTO sae3_skadjam._avis (nb_etoile,nb_pouce_haut,nb_pouce_bas,contenu_commentaire,id_produit,id_compte) VALUES (:nb_etoile,:nb_pouce_haut,:nb_pouce_bas,:contenu_commentaire,:id_produit, 41)");
         $stmt->bindParam(':id_produit', $a['id_produit'], PDO::PARAM_INT);
-        $stmt->bindParam(':note', $a['note'], PDO::PARAM_INT);
-        $stmt->bindParam(':commentaire', $a['commentaire'], PDO::PARAM_STR);
+        $stmt->bindParam(':nb_etoile', $a['nb_etoile'], PDO::PARAM_INT);
+        $stmt->bindParam(':nb_pouce_haut', $a['nb_pouce_haut'], PDO::PARAM_INT);
+        $stmt->bindParam(':nb_pouce_bas', $a['nb_pouce_bas'], PDO::PARAM_INT);
+        $stmt->bindParam(':contenu_commentaire', $a['contenu_commentaire'], PDO::PARAM_STR);
         $stmt->execute();
     }
 
     // Supprime le compte du client
+    $stmt = $dbh->prepare("DELETE FROM sae3_skadjam._avis WHERE id_compte = :id");
+    $stmt->bindParam(':id', $id, PDO::PARAM_INT);
+    $stmt->execute();
+
+    $stmt = $dbh->prepare("DELETE FROM sae3_skadjam._habite WHERE id_compte = :id");
+    $stmt->bindParam(':id', $id, PDO::PARAM_INT);
+    $stmt->execute();
+
     $stmt = $dbh->prepare("DELETE FROM sae3_skadjam._futur_achat WHERE id_client = :id");
     $stmt->bindParam(':id', $id, PDO::PARAM_INT);
     $stmt->execute();
