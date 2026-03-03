@@ -163,7 +163,7 @@ VALUES
   ('rue de Charpentier',NULL,4,NULL,NULL,NULL,98306,'Pons-la-Forêt'),
   ('boulevard de Hamon',NULL,49,NULL,NULL,NULL,40361,'Guillotdan'),
   ('chemin Sylvie Meunier',NULL,5,NULL,NULL,NULL,32336,'Daniel'),
-  ('rue Louise Labbé',NULL,536,NULL,NULL,NULL,76820,'Sainte Alexnec');
+  ('rue Louise Labbé',NULL,536,NULL,NULL,NULL,76820,'Sainte Alexnec'),
   ('rue Anonymisé',NULL,1,NULL,NULL,NULL,00001,'Anonyme');
 
 --Insertion Habite
