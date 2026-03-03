@@ -5,6 +5,9 @@
     require(__DIR__ . "/../../php/fonctions.php");
 
     $idProd = $_GET["idProduit"];
+    $avisAjoute = (isset($_GET['avisAjouter']) && $_GET['avisAjouter'] === "1");
+    $avisSupprime = (isset($_GET['avisSupprimer']) && $_GET['avisSupprimer'] === "1");
+    $panierAjoute = (isset($_GET['panierAjouter']) && $_GET['panierAjouter'] === "1");
 
     if (!isset($_GET["idProduit"])) {
         header("location:/404.php");
@@ -110,15 +113,37 @@
     <?php require(__DIR__ . "/../../php/structure/navbar_front.php"); ?>
 
     <div id="popup-overlay" class="right-12 md:right-40">
-        <div id="popup-ajouter-panier" class="popup p-4 border-vertFonce shadow-xl">
-            <p>Le produit a bien été ajouté à votre panier !</p>
-            <div class="flex justify-around mt-2">
-                <button class="pl-2 pr-2 border-2 border-vertClair rounded-sm cursor-pointer">OK</button>
-                <a href="/html/fo/panier.php" class="a-button pl-2 pr-2 border-2 border-vertClair rounded-sm cursor-pointer">Voir le panier</a>
+        <!---popup ajout d'un produit dans le panier--->
+        <?php if ($panierAjoute): ?>
+            <div id="popup-ajouter-panier" class="popup p-4 border-vertFonce shadow-xl">
+                <p>Le produit a bien été ajouté à votre panier !</p>
+                <div class="flex justify-around mt-2">
+                    <button class="pl-2 pr-2 border-2 border-vertClair rounded-sm cursor-pointer">OK</button>
+                    <a href="/html/fo/panier.php" class="a-button pl-2 pr-2 border-2 border-vertClair rounded-sm cursor-pointer">Voir le panier</a>
+                </div>
             </div>
-        </div>
+        <?php endif; ?>
+
+        <!---popup ajout d'un avis--->
+        <?php if ($avisAjoute): ?>
+            <div id="popup-ajouter-avis" class="popup p-4 border-vertFonce shadow-xl">
+                <p>Votre avis a bien été ajouté !</p>
+                <div class="flex justify-center mt-2">
+                    <button class="pl-2 pr-2 border-2 border-vertClair rounded-sm cursor-pointer">OK</button>
+                </div>
+            </div>
+        <?php endif; ?>
+
+        <!---popup suppression avis--->
+        <?php if ($avisSupprime): ?>
+            <div id="popup-supprimer-avis" class="popup p-4 border-vertFonce shadow-xl">
+                <p>Votre avis a bien été supprimé !</p>
+                <div class="flex justify-center mt-2">
+                    <button class="pl-2 pr-2 border-2 border-vertClair rounded-sm cursor-pointer">OK</button>
+                </div>
+            </div>
+        <?php endif; ?>
     </div>
-    
 
     <main class="p-4 md:pl-8 pr-8">
         <!-- Section Description -->
@@ -331,13 +356,41 @@
 <script type="module">
     import * as Popup from "../../js/popup.js";
 
-    const btnClosePopUp = document.getElementById("popup-ajouter-panier").querySelector("button");
+    const popupElement1 = document.getElementById("popup-ajouter-panier");
+    const popupElement2 = document.getElementById("popup-ajouter-avis");
+    const popupElement3 = document.getElementById("popup-supprimer-avis");
 
-    btnClosePopUp.addEventListener("click", () => {
-        Popup.closePopup("popup-ajouter-panier");
-    });
+    if (popupElement1) {
+        const btnClosePopUp1 = popupElement1.querySelector("button");
 
-    Popup.showPopUp("popup-ajouter-panier", 5000, "panierAjouter");
+        btnClosePopUp1?.addEventListener("click", () => {
+            Popup.closePopup("popup-ajouter-panier");
+        });
+
+        Popup.showPopUp("popup-ajouter-panier", 5000, "panierAjouter");
+    }
+
+    if (popupElement2) {
+        const btnClosePopUp2 = popupElement2.querySelector("button");
+
+        btnClosePopUp2?.addEventListener("click", () => {
+            Popup.closePopup("popup-ajouter-avis");
+        });
+
+        Popup.showPopUp("popup-ajouter-avis", 5000, "avisAjouter");
+    }
+
+    if (popupElement3) {
+        const btnClosePopUp3 = popupElement3.querySelector("button");
+
+        btnClosePopUp3?.addEventListener("click", () => {
+            Popup.closePopup("popup-supprimer-avis");
+        });
+
+        Popup.showPopUp("popup-supprimer-avis", 5000, "avisSupprimer");
+    }
+
+
 </script>
 
 </html>
