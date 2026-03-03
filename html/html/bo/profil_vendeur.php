@@ -1,78 +1,79 @@
 <?php
-session_start();
-include __DIR__ . "/../../php/verif_role_bo.php";
-include __DIR__ . "/../../01_premiere_connexion.php";
-include __DIR__ . '/../../php/modification_variable.php';
-include __DIR__ . '/../../php/verification_formulaire.php';
+    session_start();
+    include __DIR__ . "/../../php/verif_role_bo.php";
+    include __DIR__ . "/../../01_premiere_connexion.php";
+    include __DIR__ . '/../../php/modification_variable.php';
+    include __DIR__ . '/../../php/verification_formulaire.php';
 
-// Vérifie si le bouton 'Se déconnecter à été appuyé'
-if (isset($_POST['logout'])) {
-    // Supprime toutes les variables de session
-    session_unset();
+    // Vérifie si le bouton 'Se déconnecter à été appuyé'
+    if (isset($_POST['logout'])) {
+        // Supprime toutes les variables de session
+        session_unset();
 
-    // Détruit la session
-    session_destroy();
+        // Détruit la session
+        session_destroy();
 
-    // Redirection vers la page principale
-    header("Location: ../../index.php");
-    exit();
-}
+        // Redirection vers la page principale
+        header("Location: ../../index.php");
+        exit();
+    }
 
-// Vérifier si le client est connecter
-if(isset($_SESSION["idCompte"])) {
-    // Connexion à la session
-    $idVendeur = $_SESSION["idCompte"];
+    // Vérifier si le client est connecter
+    if(isset($_SESSION["idCompte"])) {
+        // Connexion à la session
+        $idVendeur = $_SESSION["idCompte"];
 
-    try{
-        $dbh = new PDO("$driver:host=$server;port=$port;dbname=$dbname",$user,$pass);
-        $dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-        $dbh->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC);
+        try{
+            $dbh = new PDO("$driver:host=$server;port=$port;dbname=$dbname",$user,$pass);
+            $dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+            $dbh->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC);
 
-        // Récupérer toutes les infos du client
-        foreach($dbh->query("SELECT * FROM sae3_skadjam._compte c
-                                INNER JOIN sae3_skadjam._vendeur v
-                                    ON c.id_compte = v.id_compte
-                                WHERE c.id_compte = $idVendeur", PDO::FETCH_ASSOC) as $vendeur){
-            // Infos compte
-            $nom = $vendeur['nom_compte'];
-            $prenom = $vendeur['prenom_compte'];
-            $mail = $vendeur['adresse_mail'];
-            $tel = $vendeur['numero_telephone'];
-            $tel = "0" . substr($tel, 3);
+            // Récupérer toutes les infos du client
+            foreach($dbh->query("SELECT * FROM sae3_skadjam._compte c
+                                    INNER JOIN sae3_skadjam._vendeur v
+                                        ON c.id_compte = v.id_compte
+                                    WHERE c.id_compte = $idVendeur", PDO::FETCH_ASSOC) as $vendeur){
+                // Infos compte
+                $nom = $vendeur['nom_compte'];
+                $prenom = $vendeur['prenom_compte'];
+                $mail = $vendeur['adresse_mail'];
+                $tel = $vendeur['numero_telephone'];
+                $tel = "0" . substr($tel, 3);
 
-            // Infos vendeur
-            $denom = $vendeur["raison_sociale"];
-            $siren = $vendeur["siren"];
-            $description = $vendeur["description_vendeur"];
-        }
-        // Infos photo
-        $tabPhoto = null;
+                // Infos vendeur
+                $denom = $vendeur["raison_sociale"];
+                $siren = $vendeur["siren"];
+                $description = $vendeur["description_vendeur"];
+            }
+            // Infos photo
+            $tabPhoto = null;
 
-        $reqPhoto = $dbh->prepare("SELECT ph.url_photo, ph.alt, ph.titre
-                                    FROM sae3_skadjam._presente pr
-                                    INNER JOIN sae3_skadjam._photo ph
-                                        ON pr.id_photo = ph.id_photo
-                                    WHERE pr.id_vendeur = $idVendeur");
-        $reqPhoto->execute();
-        $tabPhoto = $reqPhoto->fetch();
+            $reqPhoto = $dbh->prepare("SELECT ph.url_photo, ph.alt, ph.titre
+                                        FROM sae3_skadjam._presente pr
+                                        INNER JOIN sae3_skadjam._photo ph
+                                            ON pr.id_photo = ph.id_photo
+                                        WHERE pr.id_vendeur = $idVendeur");
+            $reqPhoto->execute();
+            $tabPhoto = $reqPhoto->fetch();
 
-        // Infos adresse
-        foreach($dbh->query("SELECT * FROM sae3_skadjam._compte c
-                            INNER JOIN sae3_skadjam._habite h
-                                ON c.id_compte = h.id_compte
-                            INNER JOIN sae3_skadjam._adresse a
-                                ON h.id_adresse = a.id_adresse
-                            WHERE c.id_compte = $idVendeur", PDO::FETCH_ASSOC) as $adresseData){
-            $adresse = $adresseData["adresse_postale"];
-            $num = $adresseData["numero_rue"];
-            $numBis = $adresseData["complement_adresse"];
-            $cp = $adresseData["code_postal"];
-            $ville = $adresseData["ville"];
-        }
-}catch(PDOException $e){
-    echo "Erreur : " . $e->getMessage();
-    exit;
-} ?>
+            // Infos adresse
+            foreach($dbh->query("SELECT * FROM sae3_skadjam._compte c
+                                INNER JOIN sae3_skadjam._habite h
+                                    ON c.id_compte = h.id_compte
+                                INNER JOIN sae3_skadjam._adresse a
+                                    ON h.id_adresse = a.id_adresse
+                                WHERE c.id_compte = $idVendeur", PDO::FETCH_ASSOC) as $adresseData){
+                $adresse = $adresseData["adresse_postale"];
+                $num = $adresseData["numero_rue"];
+                $numBis = $adresseData["complement_adresse"];
+                $cp = $adresseData["code_postal"];
+                $ville = $adresseData["ville"];
+            }
+    }catch(PDOException $e){
+        echo "Erreur : " . $e->getMessage();
+        exit;
+    } 
+?>
 <!DOCTYPE html>
 <html lang="fr">
 <?php require_once __DIR__ . "/../../php/structure/head_back.php" ?>
