@@ -667,6 +667,9 @@ input.quantite-prod-input {
   .h-225 {
     height: calc(var(--spacing, 0.25rem) * 225);
   }
+  .h-\[40vh\] {
+    height: 40vh;
+  }
   .h-\[871px\] {
     height: 871px;
   }
@@ -849,6 +852,9 @@ input.quantite-prod-input {
   }
   .w-290 {
     width: calc(var(--spacing, 0.25rem) * 290);
+  }
+  .w-\[80vw\] {
+    width: 80vw;
   }
   .w-auto {
     width: auto;
@@ -1114,6 +1120,9 @@ input.quantite-prod-input {
   }
   .bg-gray-400 {
     background-color: var(--color-gray-400, oklch(70.7% 0.022 261.325));
+  }
+  .bg-pink-950 {
+    background-color: var(--color-pink-950, oklch(28.4% 0.109 3.907));
   }
   .bg-rouge {
     background-color: var(--color-rouge);
