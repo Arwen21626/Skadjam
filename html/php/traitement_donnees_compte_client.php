@@ -81,6 +81,18 @@ try {
         $_SESSION['idCompte'] = $idCompte;
         $_SESSION['role'] = 'client';
 
+        $stmt = $dbh->prepare(
+            "SELECT id_panier FROM sae3_skadjam._client WHERE id_client = ?"
+        );
+        $stmt->execute([$idCompte]);
+        $idPanier = $stmt->fetchAll(PDO::FETCH_COLUMN);
+
+        $stmt = $dbh->prepare(
+            "INSERT INTO sae3_skadjam._panier (id_panier, nb_produit_total, montant_total_ttc, date_derniere_modif, id_client)
+             VALUES (?, ?, ?, ?, ?) RETURNING id_panier"
+        );
+        $stmt->execute([$idPanier, 0, 0, formatDate(date('Y-m-d')), $idCompte]);
+
         unset($_SESSION['old']);
         header('Location: /index.php');
         exit;
