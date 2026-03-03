@@ -898,6 +898,9 @@ input.quantite-prod-input {
   .cursor-pointer {
     cursor: pointer;
   }
+  .resize {
+    resize: both;
+  }
   .appearance-none {
     appearance: none;
   }
@@ -975,6 +978,9 @@ input.quantite-prod-input {
   }
   .gap-1 {
     gap: calc(var(--spacing, 0.25rem) * 1);
+  }
+  .gap-3 {
+    gap: calc(var(--spacing, 0.25rem) * 3);
   }
   .gap-4 {
     gap: calc(var(--spacing, 0.25rem) * 4);

@@ -162,10 +162,10 @@ if($_SESSION['role'] != 'client'){
                         ':id_commande' => $idCommande
                     ]);
                     
-                    header("location:/php/vider_panier.php?typeVider=achat&achatValide=" . $achatValide);
-
+                    
                 }
-    
+                
+                header("location:/php/vider_panier.php?typeVider=achat&achatValide=" . $achatValide);
     
             }
             
