@@ -28,7 +28,11 @@
                 attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
             }).addTo(map);
 
-            var marker = L.marker([47.905, -3.09]).addTo(map);
+            var marker = L.marker([47.905, -3.19]).addTo(map);
+            var marker = L.marker([47.915, -3.29]).addTo(map);
+            var marker = L.marker([47.935, -3.11]).addTo(map);
+            var marker = L.marker([47.955, -3.89]).addTo(map);
+            var marker = L.marker([47.975, -3.49]).addTo(map);
 
             var circle = L.circle([47.905, -3.09], {
                 color: '#365452',
@@ -37,6 +41,14 @@
                 radius: 5000
             }).addTo(map);
 
+
+
+            var markers = new L.MarkerClusterGroup();
+            markers.addLayer(L.marker([175.3107, -37.7784]));
+            // add more markers here...
+            map.addLayer(markers);
+            markers.on('clusterclick', function (a) { alert('Cluster Clicked'); });
+            markers.on('click', function (a) { alert('Marker Clicked'); });
         </script>
         
     </div>
