@@ -42,92 +42,70 @@ function numPageInfo(tab){
 }
 
 function affichagePagination(tab){
-    console.log(tab.length)
+
     let parent = document.getElementById("listeProduit")
 
-    // Si le tableau n'est pas vide
-    if (tab.length > 0) {
-        // Si les éléments n'existe pas encore on les créer
-        if (!document.getElementById("premierePage") 
-        && !document.getElementById("pagePrec") 
-        && !document.getElementById("pageSuiv")
-        && !document.getElementById("dernierePage")
-        && !document.getElementById("pageInfo")){
-            // Création des elts
-            let changePage = document.createElement("div")
-            let premPage = document.createElement("button")
-            let pagePrec = document.createElement("button")
-            let pageSuiv = document.createElement("button")
-            let dernPage = document.createElement("button")
-            let pageInfo = document.createElement("p")
-            
-            changePage.classList.add("flex", "flex-row", "justify-around", "w-96", "md:w-275", "m-3")
-            parent.appendChild(changePage)
-            parent = changePage
+    // On récupère les éléments s'ils existent
+    let aucunProd = document.getElementById("aucunProd")
+    let changePage = document.getElementById("changePage")
 
-            // Ajout du contenu 
-            premPage.textContent = "<<"
-            premPage.id = 'premierePage'
+    let premPage = document.getElementById("premierePage")
+    let pagePrec = document.getElementById("pagePrec")
+    let pageSuiv = document.getElementById("pageSuiv")
+    let dernPage = document.getElementById("dernierePage")
+    let pageInfo = document.getElementById("pageInfo")
 
-            pagePrec.textContent = "|<"
-            pagePrec.id = 'pagePrec'
+    // Création des éléments si nécessaire
 
-            pageSuiv.textContent = ">|"
-            pageSuiv.id = 'pageSuiv'
-
-            dernPage.textContent = ">>"
-            dernPage.id = 'dernierePage'
-
-            pageInfo.id = 'pageInfo'
-
-            // Ajout dans le document
-            parent.appendChild(premPage)
-            parent.appendChild(pagePrec)
-            parent.appendChild(pageInfo)
-            parent.appendChild(pageSuiv)
-            parent.appendChild(dernPage)
-        }
-        // Sinon ils existent
-        else{
-            // S'ils sont cachés ont les réaffiches
-            if (
-            premPage.classList.contains("hidden") 
-            && pagePrec.classList.contains("hidden")
-            && pageSuiv.classList.contains("hidden")
-            && dernPage.classList.contains("hidden")
-            && pageInfo.classList.contains("hidden")
-            ){
-                premPage.classList.remove("hidden")
-                pagePrec.classList.remove("hidden")
-                pageSuiv.classList.remove("hidden")
-                dernPage.classList.remove("hidden")
-                pageInfo.classList.remove("hidden")
-            } 
-        }
+    if (!aucunProd){
+        aucunProd = document.createElement("h2")
+        aucunProd.id = "aucunProd"
+        aucunProd.textContent = "Aucun produit ne correspond à la recherche."
+        parent.appendChild(aucunProd)
     }
-    // Sinon on affiche qu'il n'y a pas de produit
-    else{
-        // Si on trouve l'elt on enleve la classe hidden
-        if (document.getElementById("aucunProd")) {
-            aucunProd.classList.remove("hidden")
-        }
-        // Sinon on le créer
-        else{
-            // Création de l'affichage pour le cas ou il n'y a pas de produit
-            let aucunProd = document.createElement("h2")
-            aucunProd.id = 'aucunProd'
-            aucunProd.textContent = "Aucun produit ne correspond à la recherche."
-            parent.appendChild(aucunProd)
-        }
-        // Si la pagination est là on la cache
-        console.log(premPage)
-        if (premPage && pagePrec && pageSuiv && dernPage && pageInfo){
-            premPage.classList.add("hidden")
-            pagePrec.classList.add("hidden")
-            pageSuiv.classList.add("hidden")
-            dernPage.classList.add("hidden")
-            pageInfo.classList.add("hidden")
-        }
+
+    if (!changePage){
+
+        changePage = document.createElement("div")
+        changePage.id = "changePage"
+        changePage.classList.add("flex", "flex-row", "justify-around", "w-96", "md:w-275", "m-3")
+        parent.appendChild(changePage)
+
+        premPage = document.createElement("button")
+        premPage.id = "premierePage"
+        premPage.textContent = "<<"
+
+        pagePrec = document.createElement("button")
+        pagePrec.id = "pagePrec"
+        pagePrec.textContent = "|<"
+
+        pageInfo = document.createElement("p")
+        pageInfo.id = "pageInfo"
+
+        pageSuiv = document.createElement("button")
+        pageSuiv.id = "pageSuiv"
+        pageSuiv.textContent = ">|"
+
+        dernPage = document.createElement("button")
+        dernPage.id = "dernierePage"
+        dernPage.textContent = ">>"
+
+        changePage.appendChild(premPage)
+        changePage.appendChild(pagePrec)
+        changePage.appendChild(pageInfo)
+        changePage.appendChild(pageSuiv)
+        changePage.appendChild(dernPage)
+    }
+
+    // S'il y a des produits on affiche la pagination et on cache le message
+    if (tab.length > 0){
+        aucunProd.classList.add("hidden")
+        changePage.classList.remove("hidden")
+    } 
+    // Sinon on fait l'inverse
+    else {
+        aucunProd.classList.remove("hidden")
+        changePage.classList.add("hidden")
     }
 }
-
+ 
