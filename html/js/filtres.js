@@ -1,6 +1,7 @@
 var checkedCategories = []
 var checkedNotes = []
 var checkedTranches = []
+var checkedVendeurs = []
 
 function toggleFiltre(tab, valeur) {
     if (tab.includes(valeur)) {
@@ -11,6 +12,12 @@ function toggleFiltre(tab, valeur) {
     first = 0
     actualPage = 1
     tab = filtre()
+
+    // Gestion nombre produit avec filtre
+    if (document.getElementById("nbProd")) {
+        let nbProduit = document.getElementById("nbProd")
+        nbProduit.textContent = "Nb produit(s): "+tab.length
+    }
     return tab
 }
 
@@ -27,7 +34,7 @@ function filtre(){
             if (checkedCategories.includes("goodies") && prod.id_categorie === 4) return true
             if (checkedCategories.includes("soin") && prod.id_categorie === 5) return true
             return false
-        });
+        })
     }
 
     // FILTRE NOTES
@@ -46,7 +53,7 @@ function filtre(){
             if (checkedNotes.includes("5") && note == "5") return true
 
             return false
-        });
+        })
     }
 
     // FILTRE TRANCHE DE PRIX
@@ -60,7 +67,16 @@ function filtre(){
             if (checkedTranches.includes("prix4") && prix >= "19.20" && prix <= "31.19") return true
             if (checkedTranches.includes("prix5") && prix >= "31.20" && prix <= "71.99") return true
             return false
-        });
+        })
     }
+
+    // FILTRE VENDEURS
+    if (checkedVendeurs.length > 0) {
+        tab = tab.filter(vendeur => {
+            if (vendeur.id_compte == checkedVendeurs) return true
+            return false
+        })
+    }
+
     return tab
 }

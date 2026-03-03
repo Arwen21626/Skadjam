@@ -1,0 +1,41 @@
+id_adresse;adresse_postale;complement_adresse;numero_rue;numero_bat;numero_appart;code_interphone;code_postal;ville;latitude;longitude
+1;Chemin de Penn Ar Creac’H;;5;;;;29100;Douarnenez;48.08;-4.34
+2;Allée des Paludiers;;5;;;;56000;Vannes;47.635242;-2.769817
+3;Rue Général Gallieni;;18;;;;29200;Brest;48.390423;-4.506883
+4;Boulevard Léon Blum;;7;;;;56100;Lorient;47.747311;-3.376303
+5;Rue Neuve;;24;;;;29900;Concarneau;47.894264;-3.905555
+6;Impasse des fleurs;;3;;;;29930;Pont-Aven;47.857201;-3.753631
+7;Avenue de Truro;;11;;;;29600;Morlaix;48.588528;-3.826069
+8;Rue Edouard Branly;;5;;;;22300;Lannion;48.757955;-3.450603
+9;Rue Rosa Parks;;8;;;;29300;Quimperle;47.865814;-3.565254
+10;Rue Claude Bernard;;15;;;;22000;Saint-Brieuc;48.502052;-2.751637
+11;Rue Victor Hugo;;2;;;;56100;Lorient;47.740238;-3.365323
+12;Rue Lesage;;9;;;;29200;Brest;48.399035;-4.464342
+13;Route du Ris;;6;;;;29100;Douarnenez;48.089901;-4.301849
+14;Rue du Henan;;14;;;;29930;Pont-Aven;47.852928;-3.759209
+15;Rue des Mimosas;;12;;;;22000;Plérin;48.543238;-2.769657
+16;Rue Chevreul;;3;;;;29200;Brest;48.407139;-4.494268
+17;Rue Marcel Sembat;;19;;;;35000;Rennes;48.094536;-1.675359
+18;Rue du Pleneno;;22;;;;56100;Lorient;47.760415;-3.387674
+19;Rue du Valais;;10;;;;22000;Saint-Brieuc;48.521893;-2.726952
+20;Rue Beg-Avel;;4;;;;29200;Brest;48.399416;-4.458753
+21;chemin de Alexandre;;3;;;;72069;Evrard-sur-Muller;0;0
+22;boulevard Klein;;53;;;;23411;Martin-les-Bains;0;0
+23;avenue Alix Gauthier;;36;;;;11282;Sainte LorraineBourg;0;0
+24;chemin Lefort;;7;;;;27504;Rousseau-les-Bains;0;0
+25;rue Lucie David;;44;;;;39426;Saint Adèledan;0;0
+26;rue de Jacques;;65;;;;94399;Dumasboeuf;0;0
+27;boulevard de Morel;;13;;;;80814;Schmitt;0;0
+28;rue de Huet;;8;;;;90595;Tanguy;0;0
+29;rue Tristan Gay;;312;;;;42037;Riouboeuf;0;0
+30;rue Lucas Vincent;;10;;;;60673;Saint JosephVille;0;0
+31;avenue de Rodrigues;;69;;;;76186;Guilbert-les-Bains;0;0
+32;rue Martine Clément;;15;;;;50719;Chrétiendan;0;0
+33;rue Barre;;37;;;;41449;Maillot;0;0
+34;rue Pages;;96;;;;77624;CharrierVille;0;0
+35;boulevard de Dumont;;73;;;;95455;Bertin;0;0
+36;rue Marie;;2;;;;50089;Jacob-sur-Pineau;0;0
+37;rue de Charpentier;;4;;;;98306;Pons-la-Forêt;0;0
+38;boulevard de Hamon;;49;;;;40361;Guillotdan;0;0
+39;chemin Sylvie Meunier;;5;;;;32336;Daniel;0;0
+40;rue Louise Labbé;;536;;;;76820;Sainte Alexnec;0;0

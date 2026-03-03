@@ -4,11 +4,14 @@
     // require_once __DIR__ . '/../../php/verif_role_fo.php';
     // require_once __DIR__ . '/../../01_premiere_connexion.php';
     // require_once __DIR__ . "/../../../connections_params.php"; // Plus utile
+    include (__DIR__."/recupCoord.php");
 
     //Chemins temporaires
     include (__DIR__."/../html/01_premiere_connexion.php");
     //récupère toutes les infos des tables produits et photos
     $tabProduit = [];
+    $tabVendeur = [];
+
     foreach($dbh->query("SELECT pr.id_produit, libelle_produit, description_produit, prix_ttc, prix_remise, quantite_stock, id_categorie, pr.id_vendeur, note_moyenne, ph.id_photo, url_photo, alt, titre, id_compte, pu.id_promotion, label
                                     FROM sae3_skadjam._produit pr
                                     INNER JOIN sae3_skadjam._montre m
@@ -25,6 +28,10 @@
                         , PDO::FETCH_ASSOC) as $row){
         $tabProduit[] = $row;
     }
+
+    foreach ($dbh->query("SELECT id_compte, raison_sociale FROM sae3_skadjam._vendeur", PDO::FETCH_ASSOC) as $vendeur) {
+        $tabVendeur[] = $vendeur;
+    }
 ?>
 
 <!DOCTYPE html>
@@ -34,6 +41,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- <link rel="stylesheet" type="text/css" href="../../css/output.css" > -->
     <link rel="stylesheet" href="../html/css/output.css">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin=""/>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.4.1/dist/MarkerCluster.css" />
+    <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.4.1/dist/MarkerCluster.Default.css" />
     <title>Recherche</title>
     <?php //include __DIR__ . "/../../php/structure/head_front.php"; ?>
     <?php include __DIR__ . "/../html/php/structure/head_front.php"; ?>
@@ -52,9 +62,8 @@
     <script src="../../js/filtres.js"></script>
     <script src="../../js/affichageNote.js"></script> 
     -->
-    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
-    integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
-    crossorigin=""></script>
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script src="https://unpkg.com/leaflet.markercluster@1.4.1/dist/leaflet.markercluster.js"></script>
 
     <!-- Chemins temporaires -->
     <script src="../html/js/recherche.js"></script>
@@ -64,7 +73,10 @@
     <script src="../html/js/tris.js"></script>
     <script src="../html/js/filtres.js"></script>
     <script src="../html/js/affichageNote.js"></script>
+
+    
 </head>
+
 
 <body>
     <!--header-->
@@ -77,7 +89,11 @@
     <main class="md:min-h-[900px] min-h-[600px]" id="produits">
         <!-- Barre de recherche -->
         <input type="text" id="recherche" maxlength="100" class="border-4 border-vertClair rounded-xl placeholder-gray-500 md:w-267 w-95 p-2 md:ml-7 ml-6 mt-4 mb-4" placeholder="Rechercher un produit...">
-        <button id="filtresTris" class="md:hidden underline  m-2">Filtres & tris</button>
+        
+        <div class="flex justify-between">
+            <button id="filtresTris" class="md:hidden underline  m-2">Filtres & tris</button>
+            <button id="carte" class="md:hidden underline m-2">Accéder à la carte</button>
+        </div>
         <!-- Aside -->
         <aside class="sidebar hidden overflow-auto bg-beige/90 w-110 h-[871px] fixed top-0 bottom-10 md:bg-beige p-4 md:sticky md:block md:w-79 md:h-225 md:top-16 md:float-left z-10">
             
@@ -87,9 +103,25 @@
                     <h3>Filtres</h3>
                     <img id="fermerSidebar"src="../../images/logo/bootstrap_icon/x-large.svg" alt="Fermer" class="flex self-center w-8 md:hidden">
                 </div>
+                <!-- Vendeurs -->
+                <div>
+                    <details>
+                        <summary class="cursor-pointer mt-1 mb-1">Par vendeur</summary>
+                        <?php 
+                        foreach ($tabVendeur as $v) { 
+                            $raisonSociale = $v['raison_sociale'];
+                            $idVendeur = $v['id_compte'];
+                            ?>
+                            <div>
+                                <input class="vendeur h-5 w-5" type="checkbox" name="<?php echo $raisonSociale; ?>" id="<?php echo $idVendeur; ?>" value="<?php echo $idVendeur; ?>" class="triFiltre h-5 w-5">
+                                <label for="<?php echo $raisonSociale; ?>" class="labelDetails"><?php echo htmlspecialchars($raisonSociale, ENT_QUOTES, 'UTF-8'); ?></label>
+                            </div>
+                        <?php } ?>
+                    </details>
+                </div>
                 <!-- Categorie -->
                     <article>
-                    <details open>
+                    <details>
                         <summary class="cursor-pointer mt-1 mb-1">Par catégorie</summary>
                         <!-- Alimentaire -->
                         <div>
@@ -126,7 +158,7 @@
                 
                 <!-- Notes -->
                 <article>
-                    <details open>
+                    <details >
                         <summary class="cursor-pointer mt-1 mb-1">Par note</summary>
                         <!-- non noté -->
                         <div>
@@ -168,7 +200,7 @@
                 
                 <!-- Tranche de prix -->
                 <article>
-                    <details open>
+                    <details >
                         <summary class="cursor-pointer mt-1 mb-1">Par tranche de prix</summary>
                         <div>
                             <input type="checkbox" name="prix1" id="prix1" value="prix1" class="triFiltre h-5 w-5">
@@ -198,7 +230,7 @@
                 <h3>Tris</h3>
                 <!-- prix -->
                 <article>
-                    <details open>
+                    <details>
                         <summary class="cursor-pointer mt-1 mb-1">Par prix</summary>
                         <div>
                             <div>
@@ -215,7 +247,7 @@
 
                 <!-- ordre alpha -->
                 <article>
-                    <details open>
+                    <details>
                         <summary class="cursor-pointer mt-1 mb-1">Par ordre alphabétique</summary>
                         <div>
                             <div>
@@ -233,7 +265,7 @@
 
                 <!-- note -->
                 <article>
-                    <details open>
+                    <details>
                         <summary class="cursor-pointer mt-1 mb-1">Par note</summary>
                         <div>
                             <div>
@@ -257,50 +289,102 @@
                     });
                 </script>
             </article>
+
             <!--fin du catalogue-->
-            <article id="changePage" class="flex flex-row justify-around w-96 md:w-275 m-3">
-                <button id="premierePage"><<</button>
-                <button id="pagePrec">|<</button>
-                <p id="pageInfo"></p>
-                <button id="pageSuiv" class="">>|</button>
-                <button id="dernierePage">>></button>
-            </article>
+
+            <!-- Pagination en fonction du nb de produits ou affichage s'il n'y en a aucun -->
+            <script>
+                let parent = document.getElementById("listeProduit")
+
+                if (tabProd.length > 0) {
+                    console.log("if")
+                    let changePage = document.createElement("div")
+                    let premPage = document.createElement("button")
+                    let pagePrec = document.createElement("button")
+                    let pageSuiv = document.createElement("button")
+                    let dernPage = document.createElement("button")
+                    let pageInfo = document.createElement("p")
+                    
+                    changePage.classList.add("flex", "flex-row", "justify-around", "w-96", "md:w-275", "m-3")
+                    parent.appendChild(changePage)
+                    parent = changePage
+
+                    // Ajout du contenu 
+                    premPage.textContent = "<<"
+                    premPage.id = 'premierePage'
+
+                    pagePrec.textContent = "|<"
+                    pagePrec.id = 'pagePrec'
+
+                    pageSuiv.textContent = ">|"
+                    pageSuiv.id = 'pageSuiv'
+
+                    dernPage.textContent = ">>"
+                    dernPage.id = 'dernierePage'
+
+                    // Ajout dans le document
+                    parent.appendChild(premPage)
+                    parent.appendChild(pagePrec)
+                    parent.appendChild(pageInfo)
+                    parent.appendChild(pageSuiv)
+                    parent.appendChild(dernPage)
+
+                }
+                else{
+                    console.log("else")
+                    let aucunProd = document.createElement("h2")
+                    aucunProd.textContent = "Aucun produit ne correspond à la recherche."
+                    parent.appendChild(aucunProd)
+                }
+            </script>
         </section>
 
         <?php $dbh = null;?>
 
+        <div id="map" class="w-[300px] h-[200px] solid border-vertFonce md:w-1/3 md:h-80 md:fixed md:bottom-0 md:right-0"></div>
         <script>
             ajoutEventListener()
         </script>
+        <script>
+            var nub;
+            var map = L.map('map').setView([48, -3], 7);
+
+            L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                maxZoom: 19,
+                attribution: '&copy; OpenStreetMap'
+            }).addTo(map);
+
+            var markers = L.markerClusterGroup({
+                iconCreateFunction: function(cluster) {
+                    var count = cluster.getChildCount();
+                    var color = count < 5 ? '#86D0CC' : count < 10 ? '#588A87' : '#365452';
+                    var textColor = count < 5 ? '#000000' : count < 10 ? '#FFFFFF' : '#FFFFFF';
+                    return L.divIcon({
+                        html: '<div style="background:' + color + '; display:flex; align-items:center; justify-content:center; border-radius: 20px; width: 40px; height: 40px; border:solid #365452 0.5px; color: ' + textColor + '"><b>' + count + '</b></div>',
+                        className: 'custom-cluster',
+                        iconSize: L.point(40, 40),  
+                    });
+                }
+            });
+
+            
+            var pointer = L.icon({
+                iconUrl: 'pointeurVertFonce.png',
+                iconSize: [45, 70],
+            });
+
+            coord.forEach(function(element) {
+                markers.addLayer(
+                    L.marker([element.latitude, element.longitude], { icon: pointer }).bindPopup(element.raison_sociale),
+                    nub = element.id_compte
+                );
+            });
+
+            map.addLayer(markers);
+        </script>
         
     </main>
-    <div id="map" class="w-[400px] h-[300px] fixed bottom-0 right-0 z-0">
-            <script>
-                var map = L.map('map').setView([47.905, -3.09], 10);
-                
-                L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
-                    maxZoom: 19,
-                    attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
-                }).addTo(map);
 
-                
-                var pointer = L.icon({
-                    iconUrl: 'pointeurVertFonce.png',
-                    iconSize: [45, 70], // taille du pointeur
-                })
-
-                coord.forEach(element => {
-                    L.marker([element['latitude'], element['longitude']], {icon: pointer}).addTo(map);
-                });
-
-                var markers = new L.MarkerClusterGroup();
-                markers.addLayer(L.marker([175.3107, -37.7784]));
-                // add more markers here...
-                map.addLayer(markers);
-                markers.on('clusterclick', function (a) { alert('Cluster Clicked'); });
-                markers.on('click', function (a) { alert('Marker Clicked'); });
-            </script>
-        </div>
     <!--footer-->
     <?php //include __DIR__ . "/../../php/structure/footer_front.php"; ?>
     <?php //include __DIR__ . "/../html/php/structure/footer_front.php"; ?>

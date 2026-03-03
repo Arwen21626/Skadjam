@@ -9,10 +9,14 @@
     try {     
         $tabProduit = null;           
         //récupère toutes les infos des tables produits
-        foreach($dbh->query("SELECT pr.id_produit, pr.libelle_produit, pr.prix_ttc, pr.note_moyenne, pr.quantite_stock
+        foreach($dbh->query("SELECT pr.id_produit, pr.libelle_produit, pr.prix_ttc, pr.note_moyenne, pr.quantite_stock, p.url_photo, p.alt, p.titre
                             FROM sae3_skadjam._produit pr
                             INNER JOIN sae3_skadjam._vendeur v
                                 ON pr.id_vendeur = v.id_compte
+                            INNER JOIN sae3_skadjam._montre m
+                                ON m.id_produit = pr.id_produit
+                            INNER JOIN sae3_skadjam._photo p
+                                ON p.id_photo = m.id_photo
                             WHERE v.id_compte = $idCompte AND pr.est_supprime = false
                             ORDER BY libelle_produit ASC"
                             , PDO::FETCH_ASSOC) as $row){
@@ -51,12 +55,23 @@
         <?php } 
         
         else{?>
-            <div class="flex justify-center">
+            <div class="flex justify-center flex-row-reverse">
+                
+                <div class="flex justify-around flex-col m-10  sticky top-2/8 h-50">
+                    <!---bouton retour--->
+                    <a href="index_vendeur.php" class="flex justify-center items-center border-2 border-vertFonce rounded-2xl w-45 h-14 cursor-pointer my-5">Retour</a>
+                    <!---bouton modifier stock--->
+                    <button class="border-2 border-vertFonce rounded-2xl w-45 h-14 cursor-pointer my-5">
+                        <a href="../bo/modifier_stock.php?idCompte=<?php echo $idCompte ;?>" class="">Modifier le stock</a>
+                    </button>
+                </div>
+
                 <!---tableau liste des stocks--->
-                <table class="table-auto w-250">
+                <table class="table-auto w-2/3">
                     <thead>
                         <tr>
-                            <th scope="col" class="text-left w-125 pl-3"><h3>Nom du produit</h3></th>
+                            <th scope="col"></th>
+                            <th scope="col"><h3 class="text-left">Produit</h3></th>
                             <th scope="col"><h3>Prix</h3></th>
                             <th scope="col"><h3>Note</h3></th>
                             <th scope="col"><h3>Stock</h3></th>
@@ -68,8 +83,15 @@
                                 $idProduit = $valeurs['id_produit'];?>
                                 <tr class="py-4 <?= ligneCouleur($ligneIndex)?>">
                                     <!---informations des stocks--->
-                                    <td scope="row" class="text-left py-3 pl-3" ><a href="<?php echo htmlentities("details_produit.php?idProduit=".$idProduit);?>"><?php echo $valeurs['libelle_produit']; ?></a></td>
-                                    <td class="text-center py-3"><p><?php echo htmlentities($valeurs['prix_ttc']);?> €</p></td>
+                                    <td class="py-3 w-24 text-center">
+                                        <img class="w-16 h-16 object-contain inline-block" 
+                                            src="<?php echo $valeurs['url_photo'];?>" 
+                                            alt="<?php echo $valeurs['alt'];?>" 
+                                            title="<?php echo $valeurs['titre'];?>">
+                                    </td>
+                                    <td scope="row" class="text-left py-3" ><a href="<?php echo htmlentities("details_produit.php?idProduit=".$idProduit);?>"><?php echo $valeurs['libelle_produit']; ?></a></td>
+                                    <td class="text-center py-3"><p><?php echo str_replace('.',',',$valeurs['prix_ttc']);?> €</p></td>
+                                    
                                     <td class="text-center py-3">
                                         <div class="flex justify-center items-center">
                                             <?php 
@@ -83,14 +105,6 @@
                         <?php }?>
                     </tbody>
                 </table>
-            </div>
-            <div class="flex justify-around mt-10">
-                <!---bouton retour--->
-                <a href="index_vendeur.php" class="flex justify-center items-center border-2 border-vertFonce rounded-2xl w-45 h-14 cursor-pointer my-5">Retour</a>
-                <!---bouton modifier stock--->
-                <button class="border-2 border-vertFonce rounded-2xl w-45 h-14 cursor-pointer my-5">
-                    <a href="../bo/modifier_stock.php?idCompte=<?php echo $idCompte ;?>" class="">Modifier le stock</a>
-                </button>
             </div>
         <?php } ?>
     </main>
