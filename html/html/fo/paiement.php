@@ -129,7 +129,7 @@ if($_SESSION['role'] != 'client'){
                     throw new Exception("id_client : " . $idCompte);
                 }
                 $idCommande = $stmtCommande->fetchColumn();
-
+                /*
                 //creation numéro de suivi
                 try{
                     $id_suivi = $rpr->create_bord($idCommande, "alizon");
@@ -146,7 +146,7 @@ if($_SESSION['role'] != 'client'){
                 } catch (Exception $e){
                     
                 }
-
+                */
                 if (!$idCommande) {
                     throw new Exception("id_commande non récupéré");
                 }
