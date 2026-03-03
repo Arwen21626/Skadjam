@@ -285,8 +285,7 @@
         <div id="map" class="w-[300px] h-[200px] solid border-vertFonce md:w-1/3 md:h-80 md:fixed md:bottom-0 md:right-0"></div>
         <script>
             ajoutEventListener()
-        </script>
-        <script>
+
             var nub;
             var map = L.map('map').setView([48, -3], 7);
 
