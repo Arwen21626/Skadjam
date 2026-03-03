@@ -1,22 +1,26 @@
 let testChart = document.getElementById("testChart");
 
+
+let periodes = ['Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Août', 'Septembre', 'Octobre', 'Novembre', 'Décembre'];
+
 let testChartCfg = {
-    type: 'bar',
+    type: 'line',
     data: {
-        labels: ['Janvier', 'Février', 'Mars', 'Avril'],
+        labels: periodes,
         datasets: [{
-            label: "Ventes totaux",
-            data: [110, 52, 63, 90],
+            label: "Ventes totales durant le mois",
+            data: [110, 52, 63, 90, 30, 230, 400, 142, 60, 12, 147, 85],
             borderWidth: 2,
-            barThickness: 100,
+            barThickness: "flex",
         }]
     },
     options: {
         responsive: true,
+        maintainAspectRatio: false,
         plugins: {
             title: {
                 display: true,
-                text: 'Mon graphique',
+                text: 'Total des ventes pour l\'année actuelle',
             }
         }
     }
