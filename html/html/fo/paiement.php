@@ -129,7 +129,7 @@ if($_SESSION['role'] != 'client'){
                     throw new Exception("id_client : " . $idCompte);
                 }
                 $idCommande = $stmtCommande->fetchColumn();
-
+                /*
                 //creation numéro de suivi
                 try{
                     $id_suivi = $rpr->create_bord($idCommande, "alizon");
@@ -144,26 +144,24 @@ if($_SESSION['role'] != 'client'){
                         }
                     }
                 } catch (Exception $e){
-                    echo ($e->getMessage() . "<br>");
-                }finally{
-                    if (!$idCommande) {
-                        throw new Exception("id_commande non récupéré");
-                    }
-
-                    //Insertion dans la table donne (lien entre panier et commande)
-                    $sqlDonne = "INSERT INTO sae3_skadjam._donne (id_panier, id_commande)
-                                VALUES (:id_panier, :id_commande)";
-        
-        
-                    $stmtDonne = $dbh->prepare($sqlDonne);
-
-                    $stmtDonne->execute([
-                        ':id_panier' => $idPanier,
-                        ':id_commande' => $idCommande
-                    ]);
-                    
                     
                 }
+                */
+                if (!$idCommande) {
+                    throw new Exception("id_commande non récupéré");
+                }
+
+                //Insertion dans la table donne (lien entre panier et commande)
+                $sqlDonne = "INSERT INTO sae3_skadjam._donne (id_panier, id_commande)
+                            VALUES (:id_panier, :id_commande)";
+    
+    
+                $stmtDonne = $dbh->prepare($sqlDonne);
+
+                $stmtDonne->execute([
+                    ':id_panier' => $idPanier,
+                    ':id_commande' => $idCommande
+                ]);
                 
                 header("location:/php/vider_panier.php?typeVider=achat&achatValide=" . $achatValide);
     

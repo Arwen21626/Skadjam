@@ -36,7 +36,8 @@
                                                     WHERE id_produit = ? AND id_compte = ?");
                 }
                 $insertionAvis->execute([$nouvNote, $nouvCommentaire, $idProd, $idCompte]);
-                header("location: ./details_produit.php?idProduit=$idProd");
+                header("location: ./details_produit.php?idProduit=$idProd&avisAjouter=1");
+                exit();
             }
             else{
                 echo "Erreur : la note entrée n'est pas correcte.";
@@ -55,7 +56,8 @@
         $suprAsignaler->execute([$idAvis]);
         $suprAvis->execute([$idProd, $idCompte]);
         
-        header("location: ./details_produit.php?idProduit=$idProd");
+        header("location: ./details_produit.php?idProduit=$idProd&avisSupprimer=1");
+        exit();
     }
     else{
         // Récupération des données du produit
@@ -82,6 +84,17 @@
 <body>
     <?php require(__DIR__ . "/../../php/structure/header_front.php"); ?>
     <?php require(__DIR__ . "/../../php/structure/navbar_front.php"); ?>
+
+    <!---popup avis ajouté--->
+    <div id="popup-overlay" class="right-12 md:right-40">
+        <div id="popup-ajouter-avis" class="popup p-4 border-vertFonce shadow-xl">
+            <p>Votre avis a bien été ajouté !</p>
+            <div class="flex justify-around mt-2">
+                <button class="pl-2 pr-2 border-2 border-vertClair rounded-sm cursor-pointer">OK</button>
+                <a href="/html/fo/panier.php" class="a-button pl-2 pr-2 border-2 border-vertClair rounded-sm cursor-pointer">Voir le panier</a>
+            </div>
+        </div>
+    </div>
 
     <main class="p-4 md:pl-8 pr-8 ">
         <h2 class="text-center"><?php echo $produit['libelle_produit'];?></h2>
@@ -113,5 +126,18 @@
 
     <?php require(__DIR__ . "/../../php/structure/footer_front.php") ?>
 </body>
+
+<script type="module">
+    import * as Popup from "../../js/popup.js";
+
+    const btnClosePopUp = document.getElementById("popup-ajouter-avis").querySelector("button");
+
+    btnClosePopUp.addEventListener("click", () => {
+        Popup.closePopup("popup-ajouter-avis");
+    });
+
+    Popup.showPopUp("popup-ajouter-avis", 5000, "avisAjouter");
+</script>
+
 </html>
 <?php }?>
