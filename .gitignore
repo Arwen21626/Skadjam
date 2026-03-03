@@ -15,3 +15,5 @@ delivraptor/src/test.txt
 archiveC21/*
 !archiveC21/fichier*
 html/images/tmp_images/*
+vendor/
+/composer*
