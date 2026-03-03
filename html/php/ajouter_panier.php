@@ -11,9 +11,9 @@ if ($_SESSION['role'] === 'client')
 
 
     // Récupère les infos du panier du client
-    foreach($dbh->query("   SELECT *        
-                            FROM sae3_skadjam._panier pan
-                            WHERE pan.id_client = $idClient"
+    foreach($dbh->query("SELECT *        
+                            FROM sae3_skadjam._panier
+                            WHERE id_client = $idClient"
                             , PDO::FETCH_ASSOC) as $row){
             $infoPanier = $row;
     }
