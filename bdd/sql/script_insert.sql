@@ -49,7 +49,7 @@ VALUES
 --Insertion Vendeur
 INSERT INTO sae3_skadjam._vendeur (id_compte,raison_sociale,siren,description_vendeur,iban,denomination) 
 VALUES
-  (0,'Anonyme',000000000,NULL,'FR0000000000000000000000000','Anonyme'),
+  (42,'Anonyme',000000001,NULL,'FR0000000000000000000000000','Anonyme'),
   (1,'Creperie du Menhir',495729568,NULL,'FR7614204587991023556700188','Creperie du Menhir'),
   (2,'Boulangerie Breizh Douceur',423176973,NULL,'FR1154892201765490001220811','BreizhD'),
   (3,'Atelier du Goémon',457954311,NULL,'FR3310042223908765441122766','GoemLab'),
