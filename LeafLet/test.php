@@ -23,12 +23,12 @@ include (__DIR__."/recupCoord.php");
 
     <script>
         var nub;
-        var map = L.map('map').setView([48.105, -3.09], 8);
+        var map = L.map('map').setView([48.1, -3], 7.5);
 
         L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
             maxZoom: 19,
             attribution: '&copy; OpenStreetMap'
-        }).addTo(map);
+        }).addTo(map)
 
         var markers = L.markerClusterGroup({
             iconCreateFunction: function(cluster) {
@@ -39,25 +39,25 @@ include (__DIR__."/recupCoord.php");
                     html: '<div style="background:' + color + '; display:flex; align-items:center; justify-content:center; border-radius: 20px; width: 40px; height: 40px; border:solid #365452 0.5px; color: ' + textColor + '"><b>' + count + '</b></div>',
                     className: 'custom-cluster',
                     iconSize: L.point(40, 40),  
-                });
+                })
             }
-        });
+        })
 
         
         var pointer = L.icon({
             iconUrl: 'pointeurVertFonce.png',
-            iconSize: [45, 70],
+            iconSize: [45, 70]
         });
 
         coord.forEach(function(element) {
             markers.addLayer(
                 L.marker([element.latitude, element.longitude], { icon: pointer }).bindPopup(element.raison_sociale),
-                nub = element.id_compte
-            );
-        });
+                num = element.id_compte
+            )
+        })
 
-        map.addLayer(markers);
-        console.log(nub)
+        map.addLayer(markers)
+        
     </script>
 
 </body>

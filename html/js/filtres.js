@@ -62,5 +62,15 @@ function filtre(){
             return false
         });
     }
+
+    // FILTRE VENDEURS
+    if (checkedVendeur.length > 0) {
+        tab = tab.filter(prod => {
+            for (let i = 0; i < MAX_VENDEUR; i++) {
+                if (prod.id_compte == checkedVendeur[i]) return true
+            }
+        });
+    }
+
     return tab
 }
