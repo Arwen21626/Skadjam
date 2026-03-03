@@ -16,12 +16,38 @@ try {
     $dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     $dbh->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC);
 
+    // Copier les avis dans le compte anonyme
+    $stmt = $dbh->prepare("SELECT * FROM sae3_skadjam._avis WHERE id_compte = :id");
+    $stmt->bindParam(':id', $id, PDO::PARAM_INT);
+    $stmt->execute();
+    $avis = $stmt->fetchAll();
+
+    foreach ($avis as $a) {
+        $stmt = $dbh->prepare("INSERT INTO sae3_skadjam._avis (id_compte, id_produit, note, commentaire) VALUES (41, :id_produit, :note, :commentaire)");
+        $stmt->bindParam(':id_produit', $a['id_produit'], PDO::PARAM_INT);
+        $stmt->bindParam(':note', $a['note'], PDO::PARAM_INT);
+        $stmt->bindParam(':commentaire', $a['commentaire'], PDO::PARAM_STR);
+        $stmt->execute();
+    }
+
     // Supprime le compte du client
-    $stmt = $dbh->prepare("UPDATE sae3_skadjam._client SET pseudo = '[SUPPRIME]',date_naissance = '01/01/1970' WHERE id_compte = :id");
+    $stmt = $dbh->prepare("DELETE FROM sae3_skadjam._futur_achat WHERE id_client = :id");
     $stmt->bindParam(':id', $id, PDO::PARAM_INT);
     $stmt->execute();
 
-    $stmt = $dbh->prepare("UPDATE sae3_skadjam._compte SET nom_compte = '[SUPPRIME]',prenom_compte = '[SUPPRIME]',numero_telephone = '+33101010101' WHERE id_compte = :id");
+    $stmt = $dbh->prepare("DELETE FROM sae3_skadjam._carte_bancaire WHERE id_client = :id");
+    $stmt->bindParam(':id', $id, PDO::PARAM_INT);
+    $stmt->execute();
+
+    $stmt = $dbh->prepare("DELETE FROM sae3_skadjam._panier WHERE id_client = :id");
+    $stmt->bindParam(':id', $id, PDO::PARAM_INT);
+    $stmt->execute();
+
+    $stmt = $dbh->prepare("DELETE FROM sae3_skadjam._client WHERE id_compte = :id");
+    $stmt->bindParam(':id', $id, PDO::PARAM_INT);
+    $stmt->execute();
+
+    $stmt = $dbh->prepare("DELETE FROM sae3_skadjam._compte WHERE id_compte = :id");
     $stmt->bindParam(':id', $id, PDO::PARAM_INT);
     $stmt->execute();
 
