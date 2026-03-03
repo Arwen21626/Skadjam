@@ -113,6 +113,11 @@ if (isset($_POST['logout'])) {
             </div>
 
             <div class="flex flex-col md:flex-row justify-around items-center mt-7 mb-15">
+                <!-- Supprimer le compte du client -->
+                <form action="../../php/supprimer_compte_client.php" method="post">
+                    <input class="border-4 border-rouge rounded-xl p-2 m-1 md:w-auto w-75 cursor-pointer" type="submit" value="Supprimer mon compte">
+                </form>
+
                 <!-- Modifier les informations du client (sauf le mot de passe) -->
                 <form action="modifier_compte_client.php" method="post">
                     <input class="border-4 border-vertClair rounded-xl p-2 m-1 md:w-auto w-75 cursor-pointer" type="submit" value="Modifier mes informations">

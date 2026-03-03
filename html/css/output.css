@@ -1085,6 +1085,9 @@ input.quantite-prod-input {
   .border-red-500 {
     border-color: var(--color-red-500, oklch(63.7% 0.237 25.331));
   }
+  .border-rouge {
+    border-color: var(--color-rouge);
+  }
   .border-vertClair {
     border-color: var(--color-vertClair);
   }
