@@ -1,10 +1,7 @@
-
-
 <!-- Make sure you put this AFTER Leaflet's CSS -->
 
-
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -28,14 +25,14 @@
                 attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
             }).addTo(map);
 
-            var marker = L.marker([47.905, -3.09]).addTo(map);
+            
+            var pointer = L.icon({
+                iconUrl: 'pointeurVertFonce.png',
+                iconSize: [45, 70], // taille du pointeur
+            })
 
-            var circle = L.circle([47.905, -3.09], {
-                color: '#365452',
-                fillColor: '#365452',
-                fillOpacity: 0.5,
-                radius: 5000
-            }).addTo(map);
+            L.marker([47.905, -3.19], {icon: pointer}).addTo(map);
+
 
         </script>
         
