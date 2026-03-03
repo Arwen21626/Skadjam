@@ -115,7 +115,7 @@
                             $idVendeur = $v['id_compte'];
                             ?>
                             <div>
-                                <input type="checkbox" name="<?php echo $raisonSociale; ?>" id="<?php echo $idVendeur; ?>" value="<?php echo $idVendeur; ?>" class="triFiltre h-5 w-5">
+                                <input class="vendeur" type="checkbox" name="<?php echo $raisonSociale; ?>" id="<?php echo $idVendeur; ?>" value="<?php echo $idVendeur; ?>" class="triFiltre h-5 w-5">
                                 <label for="<?php echo $raisonSociale; ?>" class="labelDetails"><?php echo $raisonSociale; ?></label>
                             </div>
                         <?php } ?>

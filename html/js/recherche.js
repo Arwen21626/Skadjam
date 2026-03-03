@@ -131,8 +131,18 @@ function ajoutEventListener(){
     const  tranchePrix3 = document.getElementById("prix3")
     const  tranchePrix4 = document.getElementById("prix4")
     const  tranchePrix5 = document.getElementById("prix5")
+        // filtre vendeur
+    const  filtreVendeur = document.getElementsByClassName("vendeur")
 
     // Fonctions de filtres
+
+        // Filtre vendeur
+    for(let i = 0; i < filtreVendeur.length; i++){
+        filtreVendeur[i].addEventListener("change", function () {
+            copieProd = toggleFiltre(checkedVendeurs, this.value, this);
+            afficherListe(copieProd)
+        })
+    }
         //Catégories
     categorieAlimentaire.addEventListener("change", function () {
         copieProd = toggleFiltre(checkedCategories, "alimentaire", this);
