@@ -10,48 +10,26 @@ if (!isset($_SESSION["idCompte"])) {
 
 // Récupère l'ID du compte à supprimer
 $id = (int) $_SESSION["idCompte"];
+$id_vendeur_anonyme = 42;
 
 try {
     $dbh = new PDO("$driver:host=$server;port=$port;dbname=$dbname", $user, $pass);
     $dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     $dbh->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC);
 
-    // Copier les réponses du vendeur dans le compte anonyme
-    $stmt = $dbh->prepare("SELECT * FROM sae3_skadjam._avis WHERE id_compte = :id");
-    $stmt->bindParam(':id', $id, PDO::PARAM_INT);
-    $stmt->execute();
-    $avis = $stmt->fetchAll();
+    //Modifier id_compte de la réponse vendeur pour celui du compte anonyme
+    $stmt = $dbh->prepare("UPDATE sae3_skadjam._reponse SET id_compte = :id_anonyme WHERE id_compte = :id");
 
-       
-    foreach ($avis as $a) {
-        // Insérer l'avis du compte en train d'être supprimé dans le compte anonyme
-        $stmt = $dbh->prepare("INSERT INTO sae3_skadjam._avis (nb_etoile, nb_pouce_haut, nb_pouce_bas, contenu_commentaire, id_produit, id_compte) 
-                                VALUES (:nb_etoile, :nb_pouce_haut, :nb_pouce_bas, :contenu_commentaire, :id_produit, 41)
-                                RETURNING id_avis");
+    $stmt->execute([':id_anonyme' => $id_vendeur_anonyme,
+                    ':id' => $id]);
 
-        $stmt->execute([':nb_etoile' => $a['nb_etoile'],
-                        ':nb_pouce_haut' => $a['nb_pouce_haut'],
-                        ':nb_pouce_bas' => $a['nb_pouce_bas'],
-                        ':contenu_commentaire' => $a['contenu_commentaire'],
-                        ':id_produit' => $a['id_produit']]);
+    // Modifier id_vendeur du produit pour celui du compte anonyme 
+    $stmt = $dbh->prepare("UPDATE sae3_skadjam._habite SET id_vendeur = :id_anonyme WHERE id_vendeur = :id");
+    $stmt->execute([':id_anonyme' => $id_vendeur_anonyme,
+                    ':id' => $id]);
 
-        $nouvelIdAvis = $stmt->fetchColumn();
+    //Supprimer la table habite
 
-        // Copier les réponses
-        $stmtRep = $dbh->prepare("SELECT * FROM sae3_skadjam._reponse WHERE id_avis = :ancien_id");
-        $stmtRep->execute([':ancien_id' => $a['id_avis']]);
-        $reponses = $stmtRep->fetchAll();
-
-        // Pour chaque réponse trouvée, on l'insère dans les avis du compte anonyme
-        foreach ($reponses as $r) {
-            $stmtInsertRep = $dbh->prepare("INSERT INTO sae3_skadjam._reponse (contenu_reponse, id_avis, id_compte)
-                                            VALUES (:contenu, :nouvel_id, :id_vendeur)");
-
-            $stmtInsertRep->execute([':contenu' => $r['contenu_reponse'], ':nouvel_id' => $nouvelIdAvis, ':id_vendeur' => $r['id_compte']]);
-        }
-    }
-
-    // Supprime le compte du client
     $stmt = $dbh->prepare("DELETE FROM sae3_skadjam._reponse r
                             USING sae3_skadjam._avis a
                             WHERE r.id_avis = a.id_avis

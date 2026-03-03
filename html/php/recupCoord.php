@@ -1,5 +1,5 @@
 <?php
-include (__DIR__."/../html/01_premiere_connexion.php");
+include (__DIR__."/../../01_premiere_connexion.php");
 
 $coord = [];
 foreach ($dbh->query("SELECT v.id_compte as id_compte, raison_sociale, latitude, longitude FROM sae3_skadjam._adresse a

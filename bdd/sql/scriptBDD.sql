@@ -1,3 +1,4 @@
+-- Active: 1772554420945@@127.0.0.1@8888@postgres@sae3_skadjam
 DROP SCHEMA IF EXISTS sae3_skadjam CASCADE;
 CREATE SCHEMA sae3_skadjam;
 SET SCHEMA 'sae3_skadjam';
@@ -31,6 +32,8 @@ CREATE TABLE sae3_skadjam._notification (
 
 CREATE TABLE sae3_skadjam._adresse_livraison (
     id_adresse SERIAL NOT NULL,
+    nom CHARACTER VARYING(100) NOT NULL,
+    prenom CHARACTER VARYING(100) NOT NULL,
     adresse_postale CHARACTER VARYING(100) NOT NULL,
     complement_adresse CHARACTER VARYING(200),
     numero_rue NUMERIC(5) NOT NULL,
@@ -38,7 +41,8 @@ CREATE TABLE sae3_skadjam._adresse_livraison (
     numero_appart CHARACTER VARYING(10),
     code_interphone CHARACTER VARYING(10),
     code_postal NUMERIC(5) NOT NULL,
-    ville CHARACTER VARYING(100) NOT NULL
+    ville CHARACTER VARYING(100) NOT NULL,
+    sauvegarde BOOLEAN NOT NULL DEFAULT FALSE
 );
 
 CREATE TABLE sae3_skadjam._adresse (
@@ -50,7 +54,9 @@ CREATE TABLE sae3_skadjam._adresse (
     numero_appart CHARACTER VARYING(10),
     code_interphone CHARACTER VARYING(10),
     code_postal NUMERIC(5) NOT NULL,
-    ville CHARACTER VARYING(100) NOT NULL
+    ville CHARACTER VARYING(100) NOT NULL,
+    latitude CHARACTER VARYING(15) DEFAULT NULL,
+    longitude CHARACTER VARYING(15) DEFAULT NULL
 );
 
 
