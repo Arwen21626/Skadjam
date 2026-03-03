@@ -1,3 +1,4 @@
+-- Active: 1772554420945@@127.0.0.1@8888@postgres@sae3_skadjam
 DROP SCHEMA IF EXISTS sae3_skadjam CASCADE;
 CREATE SCHEMA sae3_skadjam;
 SET SCHEMA 'sae3_skadjam';
