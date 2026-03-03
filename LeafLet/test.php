@@ -33,8 +33,6 @@ include (__DIR__."/recupCoord.php");
                 iconSize: [45, 70], // taille du pointeur
             })
 
-            L.marker([47.905, -3.19], {icon: pointer}).addTo(map);
-
             coord.forEach(element => {
                 L.marker([element['latitude'], element['longitude']], {icon: pointer}).addTo(map);
             });
