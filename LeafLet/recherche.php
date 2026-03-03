@@ -101,7 +101,8 @@
             <section>
                 <div class="flex flex-row justify-between">
                     <h3>Filtres</h3>
-                    <img id="fermerSidebar"src="../../images/logo/bootstrap_icon/x-large.svg" alt="Fermer" class="flex self-center w-8 md:hidden">
+                    <p id="nbProd" class="flex self-center md:hidden">Nbre produit(s): <?php echo count($tabProduit);?></p>
+                    <img id="fermerSidebar" src="../../images/logo/bootstrap_icon/x-large.svg" alt="Fermer" class="flex self-center w-8 md:hidden">
                 </div>
                 <!-- Vendeurs -->
                 <div>
@@ -341,7 +342,7 @@
 
         <?php $dbh = null;?>
 
-        <div id="map" class="w-[300px] h-[200px] solid border-vertFonce md:w-1/3 md:h-80 md:fixed md:bottom-0 md:right-0"></div>
+        <!-- <div id="map" class="w-[300px] h-[200px] solid border-vertFonce md:w-1/3 md:h-80 md:fixed md:bottom-0 md:right-0"></div> -->
         <script>
             ajoutEventListener()
         </script>
