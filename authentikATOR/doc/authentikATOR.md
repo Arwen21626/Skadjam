@@ -39,5 +39,15 @@
 ## Outils
 
 -librairie PHP/OTP : [https://github.com/Spomky-Labs/otphp/releases/tag/11.4.2](https://github.com/Spomky-Labs/otphp/releases/tag/11.4.2)
+   
+```bash
+composer require spomky-labs/otphp
+```
+
+-librairie QRcode : [https://github.com/chillerlan/php-qrcode/releases/tag/5.0.5](https://github.com/chillerlan/php-qrcode/releases/tag/5.0.5)
+    
+```bash
+composer require chillerlan/php-qrcode
+```
 
 -bibliotheque js : AJAX

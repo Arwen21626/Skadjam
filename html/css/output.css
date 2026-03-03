@@ -889,6 +889,9 @@ input.quantite-prod-input {
   .cursor-pointer {
     cursor: pointer;
   }
+  .list-decimal\! {
+    list-style-type: decimal !important;
+  }
   .appearance-none {
     appearance: none;
   }
