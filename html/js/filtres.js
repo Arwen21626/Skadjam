@@ -73,7 +73,9 @@ function filtre(){
     // FILTRE VENDEURS
     if (checkedVendeurs.length > 0) {
         tab = tab.filter(vendeur => {
-            if (vendeur.id_compte == checkedVendeurs) return true
+            for (let i = 0; i < checkedVendeurs.length; i++) {
+                if (vendeur.id_compte == checkedVendeurs[i]) return true
+            }
             return false
         })
     }
