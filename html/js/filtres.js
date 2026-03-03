@@ -2,6 +2,7 @@ var checkedCategories = []
 var checkedNotes = []
 var checkedTranches = []
 var checkedVendeurs = []
+var checkedVendeursMap = []
 
 function toggleFiltre(tab, valeur) {
     if (tab.includes(valeur)) {
@@ -73,7 +74,17 @@ function filtre(){
     // FILTRE VENDEURS
     if (checkedVendeurs.length > 0) {
         tab = tab.filter(vendeur => {
-            if (vendeur.id_compte == checkedVendeurs) return true
+            for (let i = 0; i < checkedVendeurs.length; i++) {
+                if (vendeur.id_compte == checkedVendeurs[i]) return true
+            }
+            return false
+        })
+    }
+
+    // FILTRE MAP
+    if (checkedVendeursMap.length > 0) {
+        tab = tab.filter(vendeur => {
+            if (vendeur.id_compte == checkedVendeursMap[i]) return true
             return false
         })
     }

@@ -114,8 +114,8 @@
                             $idVendeur = $v['id_compte'];
                             ?>
                             <div>
-                                <input class="vendeur h-5 w-5" type="checkbox" name="<?php echo $raisonSociale; ?>" id="<?php echo $idVendeur; ?>" value="<?php echo $idVendeur; ?>" class="triFiltre h-5 w-5">
-                                <label for="<?php echo $raisonSociale; ?>" class="labelDetails"><?php echo htmlspecialchars($raisonSociale, ENT_QUOTES, 'UTF-8'); ?></label>
+                                <input class="vendeur h-5 w-5" type="checkbox" name="<?php echo $idVendeur; ?>" id="<?php echo $idVendeur; ?>" value="<?php echo $idVendeur; ?>" class="triFiltre h-5 w-5">
+                                <label for="<?php echo $idVendeur; ?>" class="labelDetails"><?php echo htmlspecialchars($raisonSociale, ENT_QUOTES, 'UTF-8'); ?></label>
                             </div>
                         <?php } ?>
                     </details>
@@ -332,12 +332,20 @@
 
             coord.forEach(function(element) {
                 markers.addLayer(
-                    L.marker([element.latitude, element.longitude], { icon: pointer }).bindPopup(element.raison_sociale),
-                    nub = element.id_compte
-                );
-            });
+                    L.marker([element.latitude, element.longitude], { icon: pointer, id_compte: element.id_compte }).bindPopup(element.raison_sociale),
+                )
+            })
 
-            map.addLayer(markers);
+            map.addLayer(markers)
+            
+            markers.on("click", function(e) {
+                console.log("ID du point :", e.layer.options.id_compte);
+                
+                // filtre vendeur à mettre ici
+                checkedVendeurs.push(e.layer.options.id_compte)
+                tab = filtre()
+                mettreAJourListe(tab)
+            });
         </script>
         
     </main>
