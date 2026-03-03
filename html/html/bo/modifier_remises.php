@@ -109,8 +109,16 @@
         
         else{?>
             <div class="flex justify-center">
-                <form action="modifier_remises.php" method="POST" enctype="multipart/form-data">
-                    <table class="table-auto w-250">
+
+                <form action="modifier_remises.php" method="POST" enctype="multipart/form-data" class="flex justify-center flex-row-reverse w-1/1">
+                    
+                    <!-- valider les remises remises et retour -->
+                    <div class="flex flex-col m-10 sticky top-2/8 h-50">
+                        <a href="../bo/details_remises.php" class="p-4 flex justify-center items-center border-2 border-vertFonce rounded-2xl w-40 h-14 cursor-pointer mt-15">Retour</a>
+                        <input class=" p-4 border-2 border-vertFonce rounded-2xl w-40 h-14 cursor-pointer mt-15" type="submit" value="Valider">
+                    </div>
+
+                    <table class="table-auto w-2/3">
                         <!-- entete du tableau -->
                         <thead>
                             <tr>
@@ -152,10 +160,6 @@
                             <?php }?>
                         </tbody>
                     </table>
-                    <div class="flex justify-around mb-5">
-                        <a href="../bo/details_remises.php" class="flex justify-center items-center border-2 border-vertFonce rounded-2xl w-40 h-14 cursor-pointer mt-15">Retour</a>
-                        <input class="border-2 border-vertFonce rounded-2xl w-40 h-14 cursor-pointer mt-15" type="submit" value="Valider">
-                    </div>
                 </form>
             </div>
             

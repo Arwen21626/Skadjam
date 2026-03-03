@@ -45,7 +45,7 @@
         <h2>Vos produits promus</h2>
 
         <?php if($tabProduit == null){ ?>
-            <p class="text-center">Votre catalogue de promotions est vide, vous n'avez donc pas de produits en promotion.</p>
+            <p class="text-center">Vous n'avez pas de produits en promotion.</p>
         <?php }
 
         else{?>
@@ -57,6 +57,7 @@
                             <th scope="col"><h3>Prix</h3></th>
                             <th scope="col"><h3>Note</h3></th>
                             <th scope="col"><h3>Stock</h3></th>
+                            <th scope="col"><h3>En promotion</h3></th>
                         </tr>
                     </thead>
                     <tbody>
@@ -86,8 +87,13 @@
                                             ?>
                                         </div>
                                     </td>
-
                                     <td class="text-center py-3"><p><?php echo htmlentities($valeurs['quantite_stock']); ?></p></td>
+                                    <td class="text-center py-3">
+                                        <form method="get" action="supprimer_promotion.php">
+                                            <input type="hidden" name="idProduit" value="<?php echo $idProduit; ?>">
+                                            <button type="submit" class="hover:text-rouge cursor-pointer">Enlever</button>
+                                        </form>
+                                    </td>
                                 </tr>
                         <?php }?>
                     </tbody>

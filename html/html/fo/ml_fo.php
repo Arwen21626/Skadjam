@@ -86,4 +86,7 @@
     </main>
     <?php require __DIR__ . "/../../php/structure/footer_front.php"; ?>
 </body>
+<<<<<<< HEAD
+</html>
+=======
 </html>

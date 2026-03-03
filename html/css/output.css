@@ -17,7 +17,7 @@ h1, h2, h3 {
 p, a, input, label, button, details {
   font-family: 'Amiko';
 }
-@media (max-width: 768px) {
+@media (max-width: 428px) {
   h1 {
     font-size: 48px;
   }
@@ -34,7 +34,7 @@ p, a, input, label, button, details {
     font-size: 16px;
   }
 }
-@media (min-width: 768px) {
+@media (min-width: 1440px) {
   h1 {
     font-size: 64px;
   }
@@ -311,6 +311,9 @@ input.quantite-prod-input {
   }
   .top-0 {
     top: calc(var(--spacing, 0.25rem) * 0);
+  }
+  .top-2\/8 {
+    top: calc(2/8 * 100%);
   }
   .top-20 {
     top: calc(var(--spacing, 0.25rem) * 20);
@@ -649,6 +652,9 @@ input.quantite-prod-input {
   .h-40 {
     height: calc(var(--spacing, 0.25rem) * 40);
   }
+  .h-50 {
+    height: calc(var(--spacing, 0.25rem) * 50);
+  }
   .h-60 {
     height: calc(var(--spacing, 0.25rem) * 60);
   }
@@ -747,6 +753,9 @@ input.quantite-prod-input {
   }
   .w-16 {
     width: calc(var(--spacing, 0.25rem) * 16);
+  }
+  .w-24 {
+    width: calc(var(--spacing, 0.25rem) * 24);
   }
   .w-25 {
     width: calc(var(--spacing, 0.25rem) * 25);
@@ -886,6 +895,9 @@ input.quantite-prod-input {
   .cursor-pointer {
     cursor: pointer;
   }
+  .resize {
+    resize: both;
+  }
   .appearance-none {
     appearance: none;
   }
@@ -915,6 +927,9 @@ input.quantite-prod-input {
   }
   .flex-row {
     flex-direction: row;
+  }
+  .flex-row-reverse {
+    flex-direction: row-reverse;
   }
   .flex-nowrap {
     flex-wrap: nowrap;
@@ -960,6 +975,9 @@ input.quantite-prod-input {
   }
   .gap-1 {
     gap: calc(var(--spacing, 0.25rem) * 1);
+  }
+  .gap-3 {
+    gap: calc(var(--spacing, 0.25rem) * 3);
   }
   .gap-4 {
     gap: calc(var(--spacing, 0.25rem) * 4);
@@ -1130,6 +1148,9 @@ input.quantite-prod-input {
   .bg-no-repeat {
     background-repeat: no-repeat;
   }
+  .object-contain {
+    object-fit: contain;
+  }
   .p-0 {
     padding: calc(var(--spacing, 0.25rem) * 0);
   }
@@ -1166,6 +1187,9 @@ input.quantite-prod-input {
   .px-5 {
     padding-inline: calc(var(--spacing, 0.25rem) * 5);
   }
+  .px-6 {
+    padding-inline: calc(var(--spacing, 0.25rem) * 6);
+  }
   .px-7 {
     padding-inline: calc(var(--spacing, 0.25rem) * 7);
   }
@@ -1189,6 +1213,9 @@ input.quantite-prod-input {
   }
   .pt-2 {
     padding-top: calc(var(--spacing, 0.25rem) * 2);
+  }
+  .pt-4 {
+    padding-top: calc(var(--spacing, 0.25rem) * 4);
   }
   .pt-5 {
     padding-top: calc(var(--spacing, 0.25rem) * 5);
@@ -1276,6 +1303,9 @@ input.quantite-prod-input {
   }
   .text-vertFonce {
     color: var(--color-vertFonce);
+  }
+  .text-white {
+    color: var(--color-white, #fff);
   }
   .line-through {
     text-decoration-line: line-through;

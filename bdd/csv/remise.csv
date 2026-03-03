@@ -1,0 +1,4 @@
+id_remise;pourcentage_remise;date_debut_remise;date_fin_remise
+1;0.1;12/01/2025;null
+2;0.5;25/06/2025;null
+3;0.75;01/01/2026;null
