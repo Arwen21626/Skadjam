@@ -294,50 +294,7 @@
             <!--fin du catalogue-->
 
             <!-- Pagination en fonction du nb de produits ou affichage s'il n'y en a aucun -->
-            <script>
-                let parent = document.getElementById("listeProduit")
-
-                if (tabProd.length > 0) {
-                    console.log("if")
-                    let changePage = document.createElement("div")
-                    let premPage = document.createElement("button")
-                    let pagePrec = document.createElement("button")
-                    let pageSuiv = document.createElement("button")
-                    let dernPage = document.createElement("button")
-                    let pageInfo = document.createElement("p")
-                    
-                    changePage.classList.add("flex", "flex-row", "justify-around", "w-96", "md:w-275", "m-3")
-                    parent.appendChild(changePage)
-                    parent = changePage
-
-                    // Ajout du contenu 
-                    premPage.textContent = "<<"
-                    premPage.id = 'premierePage'
-
-                    pagePrec.textContent = "|<"
-                    pagePrec.id = 'pagePrec'
-
-                    pageSuiv.textContent = ">|"
-                    pageSuiv.id = 'pageSuiv'
-
-                    dernPage.textContent = ">>"
-                    dernPage.id = 'dernierePage'
-
-                    // Ajout dans le document
-                    parent.appendChild(premPage)
-                    parent.appendChild(pagePrec)
-                    parent.appendChild(pageInfo)
-                    parent.appendChild(pageSuiv)
-                    parent.appendChild(dernPage)
-
-                }
-                else{
-                    console.log("else")
-                    let aucunProd = document.createElement("h2")
-                    aucunProd.textContent = "Aucun produit ne correspond à la recherche."
-                    parent.appendChild(aucunProd)
-                }
-            </script>
+            <script>affichagePagination(tabProd)</script>
         </section>
 
         <?php $dbh = null;?>
@@ -367,7 +324,6 @@
                     });
                 }
             });
-
             
             var pointer = L.icon({
                 iconUrl: 'pointeurVertFonce.png',

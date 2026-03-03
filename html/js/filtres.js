@@ -16,7 +16,7 @@ function toggleFiltre(tab, valeur) {
     // Gestion nombre produit avec filtre
     if (document.getElementById("nbProd")) {
         let nbProduit = document.getElementById("nbProd")
-        nbProduit.textContent = "Nb produit(s): "+tab.length
+        nbProduit.textContent = "Nbre produit(s): "+tab.length
     }
     return tab
 }

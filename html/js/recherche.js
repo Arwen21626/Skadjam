@@ -16,9 +16,9 @@ function mettreAJourListe() {
     copieProd = barreDeRecherche(copieProd, barreRecherche) 
 
     // TRI
-    copieProd = appliquerTri(copieProd) 
-
-    afficherListe(copieProd) 
+    copieProd = appliquerTri(copieProd)
+    afficherListe(copieProd)
+    affichagePagination(copieProd)
 }
 
 
@@ -50,12 +50,6 @@ function appliquerTri(tableau) {
     }
     return tableau 
 }
-
-function afficheNbProd(tab){
-    let nbProduit = document.getElementById("nbProd")
-    nbProduit.textContent = "Nbre produit(s): "+tab.length
-}
-
 
 // Ajout des eventListeners
 function ajoutEventListener(){
