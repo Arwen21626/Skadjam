@@ -1,6 +1,6 @@
 <?php
 $rip = "127.0.0.1";
-$rport = 6969;
+$rport = 5555;
 $ruser = "alizon";
 $rpass = "1234";
 

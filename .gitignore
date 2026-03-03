@@ -14,3 +14,5 @@ delivraptor/src/commande.txt
 delivraptor/src/test.txt
 archiveC21/*
 !archiveC21/fichier*
+html/images/tmp_images/*
+.test_chartjs/

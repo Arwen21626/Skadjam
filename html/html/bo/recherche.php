@@ -58,7 +58,7 @@
         <aside class="sidebar overflow-auto float-left bg-vertFonce text-bleu p-4 sticky w-79 h-225 top-20">
             <!-- Filtres -->
             <section>
-                 <h3>Filtres</h3>
+                <h3>Filtres</h3>
                 <!-- Categorie -->
                     <article>
                     <details open>
