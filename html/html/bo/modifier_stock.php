@@ -64,7 +64,6 @@
                 $updateStock->bindParam(':id', $idProduit, PDO::PARAM_INT);
                 $updateStock->execute();
             }
-                echo '<br>';
         }
         header("Location: ./stock.php?idCompte=$idCompte");
     } 
