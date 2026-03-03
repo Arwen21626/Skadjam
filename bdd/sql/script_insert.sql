@@ -164,6 +164,7 @@ VALUES
   ('boulevard de Hamon',NULL,49,NULL,NULL,NULL,40361,'Guillotdan'),
   ('chemin Sylvie Meunier',NULL,5,NULL,NULL,NULL,32336,'Daniel'),
   ('rue Louise Labbé',NULL,536,NULL,NULL,NULL,76820,'Sainte Alexnec');
+  ('rue Anonymisé',NULL,1,NULL,NULL,NULL,00001,'Anonyme');
 
 --Insertion Habite
 INSERT INTO sae3_skadjam._habite (id_adresse,id_compte) 
@@ -207,7 +208,8 @@ VALUES
   (37,37),
   (38,38),
   (39,39),
-  (40,40);
+  (40,40),
+  (41,42);
 
 --Insertion TVA
 INSERT INTO sae3_skadjam._tva (nom_tva,pourcentage_tva) 
