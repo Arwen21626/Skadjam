@@ -73,9 +73,9 @@
         <!-- Barre de recherche -->
         <input type="text" id="recherche" maxlength="100" class="border-4 border-vertClair rounded-xl placeholder-gray-500 md:w-267 w-95 p-2 md:ml-7 ml-6 mt-4 mb-4" placeholder="Rechercher un produit...">
         
-        <div class="flex justify-between">
-            <button id="filtresTris" class="md:hidden underline  m-2">Filtres & tris</button>
-            <button id="carte" class="md:hidden underline m-2">Accéder à la carte</button>
+        <div class="flex justify-between md:hidden">
+            <button id="filtresTris" class="underline  m-2">Filtres & tris</button>
+            <button id="carte" class="underline m-2">Accéder à la carte</button>
         </div>
         <!-- Aside -->
         <aside class="sidebar hidden overflow-auto bg-beige/90 w-110 h-[871px] fixed top-0 bottom-10 md:bg-beige p-4 md:sticky md:block md:w-79 md:h-225 md:top-16 md:float-left z-10">
@@ -285,8 +285,7 @@
         <div id="map" class="w-[300px] h-[200px] solid border-vertFonce md:w-1/3 md:h-80 md:fixed md:bottom-0 md:right-0"></div>
         <script>
             ajoutEventListener()
-        </script>
-        <script>
+
             var nub;
             var map = L.map('map').setView([48, -3], 7);
 
