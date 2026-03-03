@@ -1,3 +1,9 @@
+<?php 
+    session_start();
+    include __DIR__ . "/../../php/verif_role_bo.php";
+    include __DIR__ . "/../../01_premiere_connexion.php";
+?>
+
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -6,12 +12,13 @@
     <title>Test Chart.js</title>
 </head>
 
-<?php include __DIR__ . "/../php/structure/head_front.php"; ?>
+<?php include __DIR__ . "/../php/structure/head_back.php"; ?>
 
 <body>
-    <header class="flex justify-center items-center">
-        <h1 class="text-center">Test</h1>
-    </header>
+    <?php 
+        require_once __DIR__ . "/../../php/structure/header_back.php";
+        require_once __DIR__ . "/../../php/structure/navbar_back.php";
+    ?>
 
     <div class="charts-containers flex justify-center items-center flex-col p-2">
         <div class="chart-container flex justify-center items-center relative m-4 w-[90vw] h-[40vh] md:w-[60vw] md:h-[50vh]">
