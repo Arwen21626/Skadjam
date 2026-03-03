@@ -233,7 +233,9 @@
                 <script>
                     document.addEventListener("DOMContentLoaded", () => {
                         afficherListe(tabProd)
+                        
                     });
+                    console.log(tabProd)
                 </script>
             </article>
             <!--fin du catalogue-->
