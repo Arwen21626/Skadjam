@@ -94,8 +94,16 @@
         else{?>
             <div class="flex justify-center">
                 <!---tableau liste des stocks--->
-                <form action="modifier_stock.php?idCompte=<?php echo $idCompte;?>" method="POST" enctype="multipart/form-data">
-                    <table class="table-auto w-250">
+                <form action="modifier_stock.php?idCompte=<?php echo $idCompte;?>" method="POST" enctype="multipart/form-data" class="flex justify-center flex-row-reverse w-1/1">
+                    
+                    <div class="flex justify-around flex-col m-10 sticky top-2/8 h-50">
+                        <!---bouton annuler--->
+                        <a href="../bo/stock.php?idCompte=<?php echo $idCompte ;?>" class="flex justify-center items-center border-2 border-vertFonce rounded-2xl w-40 h-14 cursor-pointer my-5">Annuler</a>
+                        <!---bouton valider--->
+                        <input class="border-2 border-vertFonce rounded-2xl w-40 h-14 cursor-pointer my-5" type="submit" value="Valider">
+                    </div>
+
+                    <table class="table-auto w-2/3">
                         <thead>
                             <tr>
                                 <!---noms des colonnes--->
@@ -145,12 +153,6 @@
                             <?php }?>
                         </tbody>
                     </table>
-                    <div class="flex justify-around mt-10">
-                        <!---bouton annuler--->
-                        <a href="../bo/stock.php?idCompte=<?php echo $idCompte ;?>" class="flex justify-center items-center border-2 border-vertFonce rounded-2xl w-40 h-14 cursor-pointer my-5">Annuler</a>
-                        <!---bouton valider--->
-                        <input class="border-2 border-vertFonce rounded-2xl w-40 h-14 cursor-pointer my-5" type="submit" value="Valider">
-                    </div>
                 </form>
             </div>
             
