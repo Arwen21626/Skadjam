@@ -13,6 +13,19 @@
     $idClient = $_SESSION['idCompte'];
     $idPanier = $_REQUEST['idPanier'];
 
+    // Chercher dans la BDD si l'adresse à été sauvegardé
+    $adresseExistante = $dbh->prepare("SELECT al.* FROM sae3_skadjam._adresse_livraison al
+                                        INNER JOIN sae3_skadjam._commande c
+                                            ON al.id_adresse = c.id_adresse
+                                        WHERE c.id_client = ?
+                                        ORDER BY c.id_commande DESC LIMIT 1");
+    $adresseExistante->execute([$idClient]);
+    $adresseE = $adresseExistante->fetch(PDO::FETCH_ASSOC);
+
+    if(!$adresseE["sauvegarde"]) {
+        $adresseE = [];
+    }
+
     if(isset($_POST['nom'])){
         include __DIR__ . '/../../php/verification_formulaire.php';
 
@@ -22,13 +35,9 @@
         $ville = htmlentities($_POST['ville']);
         $codePostal = htmlentities($_POST['codePostal']);
 
-        if(isset($_POST['numBat'])){
-            $numBat = $_POST['numBat'];
-        }
+        $numBat = !empty($_POST['numBat']) ? $_POST['numBat'] : null;
 
-        if(isset($_POST['numAppart'])){
-            $numAppart = $_POST['numAppart'];
-        }
+        $numAppart = !empty($_POST['numAppart']) ? $_POST['numAppart'] : null;
 
         // Vérifiation des erreurs
         if(!verifAdresse($adresse)){
@@ -53,29 +62,22 @@
 
         $adresseExplode = tabAdresse($adresse);
 
-        if(isset($_POST['enregistrerAdr'])){
-            // mettre dans habite
-            if($_POST['enregistrerAdr'] == 'on' && ($erreurAdresse == false && $erreurVille == false && $erreurCodePostal == false)){
-                $nouvAdr = $dbh->prepare("WITH id_nouv_adr AS (INSERT INTO sae3_skadjam._adresse(
-                                                adresse_postale, complement_adresse, numero_rue, 
-                                                numero_bat, numero_appart, code_postal, ville
-                                            ) 
-                                            VALUES(?, ?, ?, ?, ?, ?, ?) RETURNING id_adresse)
-                                          INSERT INTO sae3_skadjam._habite(id_adresse, id_compte) SELECT id_adresse, $idClient FROM id_nouv_adr");
-                $nouvAdr->execute([$adresseExplode[2], $adresseExplode[1], $adresseExplode[0],
-                                    $numBat, $numAppart, $codePostal, $ville]);
-            }
-        }
-        // Si tout est bon alors redirection vers la page paiement
+        // Si tout est bon -> redirection vers la page paiement
         if($erreurNom == false && $erreurPrenom == false && $erreurAdresse == false && $erreurVille == false && $erreurCodePostal == false){
-            $nouvAdrLivraison = $dbh->prepare("INSERT INTO sae3_skadjam._adresse_livraison(
-                                                adresse_postale, complement_adresse, numero_rue, 
-                                                numero_bat, numero_appart, code_postal, ville
-                                            ) 
-                                            VALUES(?, ?, ?, ?, ?, ?, ?) RETURNING id_adresse");
-                $nouvAdrLivraison->execute([$adresseExplode[2], $adresseExplode[1], $adresseExplode[0],
+            $nouvAdrLivraison = $dbh->prepare("INSERT INTO sae3_skadjam._adresse_livraison(nom, prenom, adresse_postale, complement_adresse, numero_rue, numero_bat, numero_appart, code_postal, ville) 
+                                                VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?) RETURNING id_adresse");
+                $nouvAdrLivraison->execute([$nom, $prenom, $adresseExplode[2], $adresseExplode[1], $adresseExplode[0],
                                     $numBat, $numAppart, $codePostal, $ville]);
-            $idAdresse = $nouvAdrLivraison->fetchColumn();;
+            $idAdresse = $nouvAdrLivraison->fetchColumn();
+            
+            // Si case cochée -> enregistrement adresse
+            if(isset($_POST['enregistrerAdr']) && $_POST['enregistrerAdr'] == 'on'){
+                $nouvAdr = $dbh->prepare("UPDATE sae3_skadjam._adresse_livraison
+                                        SET sauvegarde = true
+                                        WHERE id_adresse = ?");
+
+                $nouvAdr->execute([$idAdresse]);
+            }
             header('Location: /html/fo/paiement.php?idPanier=' . $idPanier.'&idAdresse='.$idAdresse);
         }
 
@@ -89,7 +91,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Adresse</title>
 </head>
-<?php include(__DIR__ . '/../../php/structure/head_front.php');?>
+<?php include __DIR__ . '/../../php/structure/head_front.php'; ?>
 <body>
     <?php include __DIR__ . '/../../php/structure/header_front.php'; ?>        
     <?php include __DIR__ . '/../../php/structure/navbar_front.php'; ?>
@@ -100,7 +102,15 @@
             <div class="flex flex-col md:flex-row justify-between">
                 <div class="flex flex-col max-w-70">
                     <label for="nom">Nom* :</label>
-                    <input placeholder="Cobrec" value="<?= isset($_POST['nom'])? $nom : "" ?>" class="pl-2 border-4 border-vertClair rounded-xl placeholder-gray-500 max-w-70" type="text" name="nom" id="nom" required>
+                    <input placeholder="Cobrec" value="<?php 
+                        if(isset($_POST['nom'])){
+                            echo $_POST['nom'];
+                        }else if(!empty($adresseE['nom'])){
+                            echo $adresseE['nom'];
+                        }else{
+                            echo "";
+                        }
+                    ?>" class="pl-2 border-4 border-vertClair rounded-xl placeholder-gray-500 max-w-70" type="text" name="nom" id="nom" required>
                     <?php 
                     if($erreurNom){ ?>
                         <p class="text-rouge">Une erreur est survenue au niveau de votre nom</p>
@@ -109,7 +119,15 @@
 
                 <div class="flex flex-col max-w-70">
                     <label for="prenom">Prénom* :</label>
-                    <input placeholder="Alizon" value="<?= isset($_POST['prenom'])? $prenom : "" ?>" class="pl-2 border-4 border-vertClair rounded-xl placeholder-gray-500 max-w-70" type="text" name="prenom" id="prenom" required>
+                    <input placeholder="Alizon" value="<?php
+                        if(isset($_POST['prenom'])){
+                            echo $_POST['prenom'];
+                        }else if(!empty($adresseE['prenom'])){
+                            echo $adresseE['prenom'];
+                        }else{
+                            echo "";
+                        }
+                    ?>" class="pl-2 border-4 border-vertClair rounded-xl placeholder-gray-500 max-w-70" type="text" name="prenom" id="prenom" required>
                     <?php 
                     if($erreurPrenom){ ?>
                         <p class="text-rouge">Une erreur est survenue au niveau de votre prénom</p>
@@ -119,7 +137,15 @@
             
             <div class="flex flex-col mt-5">
                 <label for="adresse">Adresse postale* :</label>
-                <input placeholder="1 rue des fleurs" value="<?= isset($_POST['adresse'])? $adresse : "" ?>" class="pl-2 border-4 border-vertClair rounded-xl placeholder-gray-500 w-100 md:w-200" type="text" name="adresse" id="adresse" required>
+                <input placeholder="1 rue des fleurs" value="<?php
+                    if(isset($_POST['adresse'])){
+                        echo $_POST['adresse'];
+                    }else if(!empty($adresseE['adresse_postale'])){
+                        echo $adresseE['numero_rue'] . " " . $adresseE['adresse_postale'] . " " . $adresseE['complement_adresse'];
+                    }else{
+                        echo "";
+                    }
+                ?>" class="pl-2 border-4 border-vertClair rounded-xl placeholder-gray-500 w-100 md:w-200" type="text" name="adresse" id="adresse" required>
                 <?php 
                 if($erreurAdresse){ ?>
                     <p class="text-rouge">Une erreur est survenue au niveau de votre adresse</p>
@@ -130,13 +156,29 @@
                 <div class="flex flex-col md:flex-row md:justify-between">
                     <div class="flex md:self-center flex-col">
                         <label for="numBat">Numéro de bâtiment :</label>
-                        <input placeholder="3C" value="<?= isset($_POST['numBat'])? $numBat : "" ?>" class="pl-2 border-4 border-vertClair rounded-xl placeholder-gray-500 md:w-70 w-50" type="text" name="numBat" id="numBat">
+                        <input placeholder="3C" value="<?php
+                            if(isset($_POST['numBat'])){
+                                echo $_POST['numBat'];
+                            }else if(!empty($adresseE['numero_bat'])){
+                                echo $adresseE['numero_bat'];
+                            }else{
+                                echo "";
+                            }
+                        ?>" class="pl-2 border-4 border-vertClair rounded-xl placeholder-gray-500 md:w-70 w-50" type="text" name="numBat" id="numBat">
                     </div>
                     
     
                     <div class="flex flex-col">
                         <label for="numAppart">Numéro d'appartement :</label>
-                        <input placeholder="22C" value="<?= isset($_POST['numAppart'])? $numAppart : "" ?>" class="pl-2 border-4 border-vertClair rounded-xl placeholder-gray-500 md:w-70 w-50" type="text" name="numAppart" id="numAppart">
+                        <input placeholder="22C" value="<?php
+                            if(isset($_POST['numAppart'])){
+                                echo $_POST['numAppart'];
+                            }else if(!empty($adresseE['numero_appart'])){
+                                echo $adresseE['numero_appart'];
+                            }else{
+                                echo "";
+                            }
+                        ?>" class="pl-2 border-4 border-vertClair rounded-xl placeholder-gray-500 md:w-70 w-50" type="text" name="numAppart" id="numAppart">
                     </div>
                     
                 </div>
@@ -145,7 +187,15 @@
             <div class="flex flex-col">
                 <div class="flex flex-col mt-5">
                     <label for="ville">Ville* :</label>
-                    <input placeholder="Lannion" value="<?= isset($_POST['ville'])? $ville : "" ?>" class="pl-2 border-4 border-vertClair rounded-xl placeholder-gray-500 md:w-200 w-40" type="text" name="ville" id="ville" required>
+                    <input placeholder="Lannion" value="<?php
+                        if(isset($_POST['ville'])){
+                            echo $_POST['ville'];
+                        }else if(!empty($adresseE['ville'])){
+                            echo $adresseE['ville'];
+                        }else{
+                            echo "";
+                        }
+                    ?>" class="pl-2 border-4 border-vertClair rounded-xl placeholder-gray-500 md:w-200 w-40" type="text" name="ville" id="ville" required>
                     <?php 
                     if($erreurVille){ ?>
                         <p class="text-rouge">Une erreur est survenue au niveau de votre ville</p>
@@ -154,7 +204,15 @@
                 
                 <div class="flex flex-col mt-5">
                     <label for="codePostal">Code postal* :</label>
-                    <input placeholder="22300" value="<?= isset($_POST['codePostal'])? $codePostal : "" ?>" class="pl-2 border-4 border-vertClair rounded-xl placeholder-gray-500 md:w-200 w-40" type="text" name="codePostal" id="codePostal" required>
+                    <input placeholder="22300" value="<?php
+                        if(isset($_POST['codePostal'])){
+                            echo $_POST['codePostal'];
+                        }else if(!empty($adresseE['code_postal'])){
+                            echo $adresseE['code_postal'];
+                        }else{
+                            echo "";
+                        }
+                    ?>" class="pl-2 border-4 border-vertClair rounded-xl placeholder-gray-500 md:w-200 w-40" type="text" name="codePostal" id="codePostal" required>
                     <?php 
                     if($erreurCodePostal){ ?>
                         <p class="text-rouge">Une erreur est survenue au niveau de votre code postal</p>
@@ -164,7 +222,7 @@
 
             <div class="flex flex-row mt-5">
                 <label for="enregistrerAdr" class="mr-5">Enregistrer cette adresse ?</label>
-                <input type="checkbox" name="enregistrerAdr" id="enregistrerAdr" class="w-5 h-5 mt-1">
+                <input type="checkbox" name="enregistrerAdr" id="enregistrerAdr" class="w-5 h-5 mt-1" <?php if($adresseE["sauvegarde"]) echo 'value="on" checked'; ?>>
             </div>
 
             <div class="flex flex-row mt-5 mb-10 justify-between">

@@ -1,3 +1,4 @@
+-- Active: 1772554420945@@127.0.0.1@8888@postgres@sae3_skadjam
 SET SCHEMA 'sae3_skadjam';
 
 --Insertion Compte
@@ -43,12 +44,12 @@ VALUES
   ('Bouvet','Bertrand','pmallet@bouygtel.fr','$2y$10$17I6E4cbfquAL0PElM98a.Dez7My6EdvNnKbQvwu.fkOnM4wL5rEm','+33430320910',false),
   ('Carpentier','Clémence','lalbert@live.com','$2y$10$XkHC12lYBQ6X58G6T9n/i.TDg1Mh47.zzURqYQstZaiElU.7fYYUi','+33428865033',false),
   ('Couturier','Laure','rolandgrenier@blanchet.com','$2y$10$SxzBbx9XdTKlcWv1wZbn3ul8K49YnnXlMCMwIEYYHqybfhAQR1v/2','+33551471854',false),
-  ('Anonyme','Anonyme','anonyme@anonyme.ano','0','+33101010101',false);
+  ('Anonyme','Anonyme','anonyme@anonyme.ano','0','+33101010101',false),
   ('Anonyme','Anonyme','anonyme_vendeur@anonyme.ano','0','+33101010101',false);
 --Insertion Vendeur
 INSERT INTO sae3_skadjam._vendeur (id_compte,raison_sociale,siren,description_vendeur,iban,denomination) 
 VALUES
-  (0,'Anonyme',000000000,NULL,'FR0000000000000000000000000','Anonyme'),
+  (42,'Anonyme',000000001,NULL,'FR0000000000000000000000000','Anonyme'),
   (1,'Creperie du Menhir',495729568,NULL,'FR7614204587991023556700188','Creperie du Menhir'),
   (2,'Boulangerie Breizh Douceur',423176973,NULL,'FR1154892201765490001220811','BreizhD'),
   (3,'Atelier du Goémon',457954311,NULL,'FR3310042223908765441122766','GoemLab'),
