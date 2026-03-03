@@ -36,7 +36,8 @@
                                                     WHERE id_produit = ? AND id_compte = ?");
                 }
                 $insertionAvis->execute([$nouvNote, $nouvCommentaire, $idProd, $idCompte]);
-                header("location: ./details_produit.php?idProduit=$idProd");
+                header("location: ./details_produit.php?idProduit=$idProd&avisAjouter=1");
+                exit();
             }
             else{
                 echo "Erreur : la note entrée n'est pas correcte.";
@@ -55,7 +56,8 @@
         $suprAsignaler->execute([$idAvis]);
         $suprAvis->execute([$idProd, $idCompte]);
         
-        header("location: ./details_produit.php?idProduit=$idProd");
+        header("location: ./details_produit.php?idProduit=$idProd&avisSupprimer=1");
+        exit();
     }
     else{
         // Récupération des données du produit
@@ -83,6 +85,17 @@
     <?php require(__DIR__ . "/../../php/structure/header_front.php"); ?>
     <?php require(__DIR__ . "/../../php/structure/navbar_front.php"); ?>
 
+    <!---popup avis ajouté--->
+    <div id="popup-overlay" class="right-12 md:right-40">
+        <div id="popup-ajouter-avis" class="popup p-4 border-vertFonce shadow-xl">
+            <p>Votre avis a bien été ajouté !</p>
+            <div class="flex justify-around mt-2">
+                <button class="pl-2 pr-2 border-2 border-vertClair rounded-sm cursor-pointer">OK</button>
+                <a href="/html/fo/panier.php" class="a-button pl-2 pr-2 border-2 border-vertClair rounded-sm cursor-pointer">Voir le panier</a>
+            </div>
+        </div>
+    </div>
+
     <main class="p-4 md:pl-8 pr-8 ">
         <h2 class="text-center"><?php echo $produit['libelle_produit'];?></h2>
         <form class="flex flex-col justify-start items-start m-10" action="./ajouter_avis.php?idProduit=<?php echo $produit['id_produit']?>" method="post">
@@ -98,17 +111,33 @@
             <textarea class="border-4 border-beige rounded-2xl w-1/1 p-1 pl-3" name="commentaire" rows="10" cols="100"><?php if(isset($commentaire)){echo $commentaire;}?></textarea>
 
             <div class="flex mt-10 justify-center md:justify-end w-1/1 ">
-                <button class="cursor-pointer  border-2 border-vertFonce rounded-2xl w-40 h-14 p-0 m-0 mr-10 " type="button"><a href="./details_produit.php?idProduit=<?php echo $idProd; ?>">Annuler</a></button>
+                <button class="cursor-pointer border-2 border-vertFonce rounded-2xl w-40 h-14 p-0 m-0 mr-10 " type="button"><a href="./details_produit.php?idProduit=<?php echo $idProd; ?>">Annuler</a></button>
+                
+                <!-- Supression -->
+                <?php if (isset($note) && $note !== null){ // on peut supprimer un avis que si on est entrain de la modifier ?>
+                    <a class="cursor-pointer border-2 border-vertFonce rounded-2xl w-40 h-14 p-4 m-0 mr-10" href="./ajouter_avis.php?idProduit=<?php echo $produit['id_produit']?>&supr=true">Supprimer</a>
+                <?php }?>
+
                 <input class="cursor-pointer border-2 border-vertFonce rounded-2xl w-40 h-14 p-0 m-0 md:mr-10" type="submit" name="submit" id="submit" value="Valider" >
             </div>
         </form>
-        <!-- Supression -->
-        <?php if (isset($note) && $note != null){ // on peut supprimer un avis que si on est entrain de la modifier ?>
-            <a class="ml-10 flex justify-center mb-5 md:inline-block" href="./ajouter_avis.php?idProduit=<?php echo $produit['id_produit']?>&supr=true">Supprimer mon avis</a>
-        <?php }?>
+        
     </main>
 
     <?php require(__DIR__ . "/../../php/structure/footer_front.php") ?>
 </body>
+
+<script type="module">
+    import * as Popup from "../../js/popup.js";
+
+    const btnClosePopUp = document.getElementById("popup-ajouter-avis").querySelector("button");
+
+    btnClosePopUp.addEventListener("click", () => {
+        Popup.closePopup("popup-ajouter-avis");
+    });
+
+    Popup.showPopUp("popup-ajouter-avis", 5000, "avisAjouter");
+</script>
+
 </html>
 <?php }?>

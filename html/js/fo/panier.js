@@ -13,7 +13,7 @@ btnClosePopUpInfo.addEventListener("click", () => {
     Popup.closePopup("popup-modif-panier");
 });
 
-if (conteneurProd) { //Chech si un élément de la page panier  est présent ou non pour éviter d'exécuter le script JS pour rien si la page est vide (cas panier vide)
+if (conteneurProd) { //Check si un élément de la page panier  est présent ou non pour éviter d'exécuter le script JS pour rien si la page est vide (cas panier vide)
 
     // Variable utilisé dans la fonction ci-dessous pour vérifier si le panier a déjà été modifié ou pas encore
     let hasChanged = false;
@@ -152,8 +152,18 @@ if (conteneurProd) { //Chech si un élément de la page panier  est présent ou 
         let quantiteStock = Number(container.querySelector('.prod-info').classList[lenClassList - 1].split(':', 2)[1]);
 
         if (quantiteStock === 0) {
-            container.classList.add("border-4");
-            container.classList.add("border-rouge");
+
+            let divImage = container.querySelector(".image").querySelector("a");
+
+            let divBandeau = document.createElement("div");
+            let texteBandeau = document.createElement("p");
+            texteBandeau.textContent = "Hors-stock";
+
+            divBandeau.classList.add("absolute", "inset-0", "flex", "items-center", "justify-center", "z-10");
+            texteBandeau.classList.add("bg-rouge", "shadow-lg","text-white", "px-6", "py-2", "w-full", "text-center")
+
+            divBandeau.appendChild(texteBandeau);
+            divImage.appendChild(divBandeau);
         }
 
         let oldValue = input.value;

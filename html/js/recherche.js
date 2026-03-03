@@ -1,21 +1,60 @@
 let copieProd = JSON.parse(JSON.stringify(tabProd))
 
+let triActuel = {
+    type: null
+} 
+
+function mettreAJourListe() {
+
+    let copieProd = [...tabProd] 
+
+    // FILTRES
+    copieProd = filtre(copieProd) 
+
+    // RECHERCHE
+    const barreRecherche = document.getElementById("recherche").value 
+    copieProd = barreDeRecherche(copieProd, barreRecherche) 
+
+    // TRI
+    copieProd = appliquerTri(copieProd) 
+
+    afficherListe(copieProd) 
+}
+
 
 function barreDeRecherche(original, mot) {
-    first = 0;
-    actualPage = 1;
+    first = 0 
+    actualPage = 1 
 
     if (!mot || mot.trim() === "") {
-        return original;
+        return original 
     }
 
-    const recherche = mot.toLowerCase().trim();
+    const recherche = mot.toLowerCase().trim() 
 
     return original.filter(({ libelle_produit }) =>
         libelle_produit.toLowerCase().includes(recherche)
-    );
+    ) 
 }
 
+function appliquerTri(tableau) {
+    switch(triActuel.type) {
+        case "prixAsc": return triPrixCroissant(tableau) 
+        case "prixDesc": return triPrixDecroissant(tableau) 
+        case "az": return triAz(tableau) 
+        case "za": return triZa(tableau) 
+        case "noteAsc": return triEtoileCroissant(tableau) 
+        case "noteDesc": return triEtoileDecroissant(tableau) 
+        case "stockAsc": return triStockCroissant(tableau) 
+        case "stockDesc": return triStockDecroissant(tableau) 
+    }
+    return tableau 
+}
+
+function afficheNbProd(tab){
+    let nbProduit = document.getElementById("nbProd")
+    nbProduit.textContent = "Nbre produit(s): "+tab.length
+}
 
 
 // Ajout des eventListeners
@@ -27,7 +66,7 @@ function ajoutEventListener(){
     barreRecherche.addEventListener("input",function(){
         copieBarre = barreDeRecherche(copieProd, barreRecherche.value)
         console.log(copieBarre)
-        afficherListe(copieBarre)
+        mettreAJourListe(copieBarre)
     })
 
     // Récupérations des elements
@@ -66,46 +105,54 @@ function ajoutEventListener(){
     // Fonctions de tri
         // Prix
     prixTriCroissant.addEventListener("change",function () {
+        triActuel.type = "prixAsc" 
         copieProd = triPrixCroissant(copieProd)
-        afficherListe(copieProd)
+        mettreAJourListe(copieProd)
     })            
 
     prixTriDecroissant.addEventListener("change",function () {
+        triActuel.type = "prixDesc" 
         copieProd = triPrixDecroissant(copieProd)
-        afficherListe(copieProd)
+        mettreAJourListe(copieProd)
     })
 
         // Ordre alphabétique
     alphaTriAZ.addEventListener("change",function () {
+        triActuel.type = "az" 
         copieProd = triAz(copieProd)
-        afficherListe(copieProd)
+        mettreAJourListe(copieProd)
     })
 
     alphaTriZA.addEventListener("change",function () {
+        triActuel.type = "za" 
         copieProd = triZa(copieProd)
-        afficherListe(copieProd)
+        mettreAJourListe(copieProd)
     })
     
         // Note
     noteTri51.addEventListener("change",function () {
+        triActuel.type = "noteDesc" 
         copieProd = triEtoileDecroissant(copieProd)
-        afficherListe(copieProd)
+        mettreAJourListe(copieProd)
     })
     
     noteTri15.addEventListener("change", function () {
+        triActuel.type = "noteAsc" 
         copieProd = triEtoileCroissant(copieProd)
-        afficherListe(copieProd)
+        mettreAJourListe(copieProd)
     })
 
     if(stockTriCroissant != null && stockTriDecroissant != null){
         stockTriCroissant.addEventListener("change",function () {
+            triActuel.type = "stockAsc" 
             copieProd = triStockCroissant(copieProd)
-            afficherListe(copieProd)
+            mettreAJourListe(copieProd)
         })
 
         stockTriDecroissant.addEventListener("change",function () {
+            triActuel.type = "stockDesc" 
             copieProd = triStockDecroissant(copieProd)
-            afficherListe(copieProd)
+            mettreAJourListe(copieProd)
         })
     }
      
@@ -135,107 +182,110 @@ function ajoutEventListener(){
     // Fonctions de filtres
         //Catégories
     categorieAlimentaire.addEventListener("change", function () {
-        copieProd = toggleFiltre(checkedCategories, "alimentaire", this);
-        afficherListe(copieProd)
-    });
+        copieProd = toggleFiltre(checkedCategories, "alimentaire", this) 
+        mettreAJourListe(copieProd)
+    }) 
 
     categorieVetement.addEventListener("change", function () {
-        copieProd = toggleFiltre(checkedCategories, "vetement", this);
-        afficherListe(copieProd)
-    });
+        copieProd = toggleFiltre(checkedCategories, "vetement", this) 
+        mettreAJourListe(copieProd)
+    }) 
 
     categorieArtisanat.addEventListener("change", function () {
-        copieProd = toggleFiltre(checkedCategories, "artisanat", this);
-        afficherListe(copieProd)
-    });
+        copieProd = toggleFiltre(checkedCategories, "artisanat", this) 
+        mettreAJourListe(copieProd)
+    }) 
 
     categorieGoodies.addEventListener("change", function () {
-        copieProd = toggleFiltre(checkedCategories, "goodies", this);
-        afficherListe(copieProd)
-    });
+        copieProd = toggleFiltre(checkedCategories, "goodies", this) 
+        mettreAJourListe(copieProd)
+    }) 
 
     categorieSoin.addEventListener("change", function () {
-        copieProd = toggleFiltre(checkedCategories, "soin", this);
-        afficherListe(copieProd)
-    });
+        copieProd = toggleFiltre(checkedCategories, "soin", this) 
+        mettreAJourListe(copieProd)
+    }) 
 
     
         // Note
     noteNonNote.addEventListener("change", function () {
-        copieProd = toggleFiltre(checkedNotes, "0", this);
-        afficherListe(copieProd)
-    });
+        copieProd = toggleFiltre(checkedNotes, "0", this) 
+        mettreAJourListe(copieProd)
+    }) 
 
     noteUneE.addEventListener("change", function () {
-        copieProd = toggleFiltre(checkedNotes, "1", this);
-        afficherListe(copieProd)
-    });
+        copieProd = toggleFiltre(checkedNotes, "1", this) 
+        mettreAJourListe(copieProd)
+    }) 
 
     noteDeuxE.addEventListener("change", function () {
-        copieProd = toggleFiltre(checkedNotes, "2", this);
-        afficherListe(copieProd)
-    });
+        copieProd = toggleFiltre(checkedNotes, "2", this) 
+        mettreAJourListe(copieProd)
+    }) 
 
     noteTroisE.addEventListener("change", function () {
-        copieProd = toggleFiltre(checkedNotes, "3", this);
-        afficherListe(copieProd)
-    });
+        copieProd = toggleFiltre(checkedNotes, "3", this) 
+        mettreAJourListe(copieProd)
+    }) 
 
     noteQuatreE.addEventListener("change", function () {
-        copieProd = toggleFiltre(checkedNotes, "4", this);
-        afficherListe(copieProd)
-    });
+        copieProd = toggleFiltre(checkedNotes, "4", this) 
+        mettreAJourListe(copieProd)
+    }) 
 
     noteCinqE.addEventListener("change", function () {
-        copieProd = toggleFiltre(checkedNotes, "5", this);
-        afficherListe(copieProd)
-    });
+        copieProd = toggleFiltre(checkedNotes, "5", this) 
+        mettreAJourListe(copieProd)
+    }) 
 
 
         // Tranche de prix
     tranchePrix1.addEventListener("change", function () {
-        copieProd = toggleFiltre(checkedTranches, "prix1", this);
-        afficherListe(copieProd)
-    });
+        copieProd = toggleFiltre(checkedTranches, "prix1", this) 
+        mettreAJourListe(copieProd)
+    }) 
 
     tranchePrix2.addEventListener("change", function () {
-        copieProd = toggleFiltre(checkedTranches, "prix2", this);
-        afficherListe(copieProd)
-    });
+        copieProd = toggleFiltre(checkedTranches, "prix2", this) 
+        mettreAJourListe(copieProd)
+    }) 
 
     tranchePrix3.addEventListener("change", function () {
-        copieProd = toggleFiltre(checkedTranches, "prix3", this);
-        afficherListe(copieProd)
-    });
+        copieProd = toggleFiltre(checkedTranches, "prix3", this) 
+        mettreAJourListe(copieProd)
+    }) 
 
     tranchePrix4.addEventListener("change", function () {
-        copieProd = toggleFiltre(checkedTranches, "prix4", this);
-        afficherListe(copieProd)
-    });
+        copieProd = toggleFiltre(checkedTranches, "prix4", this) 
+        mettreAJourListe(copieProd)
+    }) 
 
     tranchePrix5.addEventListener("change", function () {
-        copieProd = toggleFiltre(checkedTranches, "prix5", this);
-        afficherListe(copieProd)
-    });
+        copieProd = toggleFiltre(checkedTranches, "prix5", this) 
+        mettreAJourListe(copieProd)
+    }) 
 
-    // EventListeners pour l'animation sidebar filtre et tri
-    // Récupératiion des elements
-    let boutonSidebar = document.getElementById("filtresTris")
-    let sidebar = document.getElementsByTagName("aside")[0]
-    let fermerSidebar = document.getElementById("fermerSidebar")
 
-    if(boutonSidebar != null){
+    if(document.getElementById("filtresTris")){
+        // EventListeners pour l'animation sidebar filtre et tri
+        // Récupératiion des elements
+        let boutonSidebar = document.getElementById("filtresTris")
+        let sidebar = document.getElementsByTagName("aside")[0]
+        
         // Fonction ouverture
         boutonSidebar.addEventListener("click", function(){
             boutonSidebar.classList.add("hidden")
             sidebar.classList.remove("hidden")
         })
 
-        //Fonction fermeture
-        fermerSidebar.addEventListener("click", function(){
-            sidebar.classList.add("hidden")
-            boutonSidebar.classList.remove("hidden")
-        })
+        if (document.getElementById("fermerSidebar")) {
+            // Fonction fermeture
+            let fermerSidebar = document.getElementById("fermerSidebar")
+            fermerSidebar.addEventListener("click", function(){
+                sidebar.classList.add("hidden")
+                boutonSidebar.classList.remove("hidden")
+            })
+        }
+        
     }
-    
 }

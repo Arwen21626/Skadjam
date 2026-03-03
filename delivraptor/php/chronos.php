@@ -8,7 +8,7 @@ echo "[CHRONOS] Nouvelle itération : $i\n";
 echo "==============================\n";
 
 echo "[CHRONOS] Connexion au serveur...\n";
-$conn = fsockopen("127.0.0.1", 6969, $errno, $errstr, 5);
+$conn = fsockopen("127.0.0.1", 5555, $errno, $errstr, 5);
 
 if (!$conn) {
     echo "[ERREUR] Impossible de se connecter : $errstr ($errno)\n";
@@ -25,7 +25,7 @@ $message = fread($conn, $size);
 echo "[CHRONOS] Réponse reçue : '$message'\n";
 
 // --- SI OK, ENVOI NEXT ---
-if (trim($message) === "CONNEXION SUCCESS") {
+if (trim($message) === "CONNECTION SUCCESS") {
 
     echo "[CHRONOS] Authentification OK\n";
 
