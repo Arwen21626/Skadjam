@@ -2,6 +2,12 @@
     session_start();
     include __DIR__ . "/../../php/verif_role_bo.php";
     include __DIR__ . "/../../01_premiere_connexion.php";
+
+    print_r($_SESSION);
+
+    $idVendeur = $_SESSION["idCompte"];
+
+    echo $idVendeur;
 ?>
 
 <!DOCTYPE html>
@@ -9,10 +15,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Test Chart.js</title>
+    <title>Stats</title>
 </head>
 
-<?php include __DIR__ . "/../php/structure/head_back.php"; ?>
+<?php include __DIR__ . "/../../php/structure/head_back.php"; ?>
 
 <body>
     <?php 
@@ -20,15 +26,23 @@
         require_once __DIR__ . "/../../php/structure/navbar_back.php";
     ?>
 
-    <div class="charts-containers flex justify-center items-center flex-col p-2">
-        <div class="chart-container flex justify-center items-center relative m-4 w-[90vw] h-[40vh] md:w-[60vw] md:h-[50vh]">
-            <canvas class="" id="testChart"></canvas>
+    <main class="m-4">
+
+        <h2>Mes Statistiques</h2>
+
+        <div class="charts-containers flex justify-center items-center flex-col p-2">
+            <div class="chart-container flex justify-center items-center relative m-4 w-[60vw] h-[50vh]">
+                <canvas class="" id="testChart"></canvas>
+            </div>
         </div>
-    </div>
+    </main>
     
+    <?php 
+        require_once __DIR__ . "/../../php/structure/footer_back.php";
+    ?>
 </body>
 
 <script src="/js/chart.umd.js"></script>
-<script type="module" src="test.js"></script>
+<script type="module" src="/js/bo/stats.js"></script>
 
 </html>
