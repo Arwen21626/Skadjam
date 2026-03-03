@@ -50,6 +50,7 @@
     
     <script>
         const tabProd = <?php echo json_encode($tabProduit);?>;
+        const tabVendeur = <?php echo json_encode($tabVendeur);?>;
     </script>
 
     <!-- Chemins quand on est dans le dossier html -->
