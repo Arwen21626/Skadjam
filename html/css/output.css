@@ -100,6 +100,9 @@ input.quantite-prod-input {
 .popup div > button:hover, .popup > button:hover, .a-button:hover {
   box-shadow: none;
 }
+#map {
+  resize: both;
+}
 @keyframes popupOut {
   from {
     transform: translateY(-50px);
@@ -664,6 +667,9 @@ input.quantite-prod-input {
   .h-225 {
     height: calc(var(--spacing, 0.25rem) * 225);
   }
+  .h-\[50vh\] {
+    height: 50vh;
+  }
   .h-\[200px\] {
     height: 200px;
   }
@@ -844,6 +850,9 @@ input.quantite-prod-input {
   .w-290 {
     width: calc(var(--spacing, 0.25rem) * 290);
   }
+  .w-\[60vw\] {
+    width: 60vw;
+  }
   .w-\[300px\] {
     width: 300px;
   }
@@ -895,10 +904,11 @@ input.quantite-prod-input {
   .cursor-pointer {
     cursor: pointer;
   }
-  .list-decimal\! {
-    list-style-type: decimal !important;
   .resize {
     resize: both;
+  }
+  .list-decimal\! {
+    list-style-type: decimal !important;
   }
   .appearance-none {
     appearance: none;
