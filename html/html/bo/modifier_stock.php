@@ -60,14 +60,6 @@
                 
                 $nouvQte = $qteStock + $variationQte;
 
-                echo '<br> stock : ';
-                echo $qteStock;
-                echo '<br> vari : ';
-                echo $variationQte;
-                echo '<br> nouv qte : ';
-                echo $nouvQte;
-                echo '<br>';
-
                 $updateStock->bindParam(':stock', $nouvQte, PDO::PARAM_INT);
                 $updateStock->bindParam(':id', $idProduit, PDO::PARAM_INT);
                 $updateStock->execute();
