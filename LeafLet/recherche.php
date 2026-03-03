@@ -345,7 +345,7 @@
                 checkedVendeurs.push(e.layer.options.id_compte)
                 tab = filtre()
                 mettreAJourListe(tab)
-            });
+            })
         </script>
         
     </main>
