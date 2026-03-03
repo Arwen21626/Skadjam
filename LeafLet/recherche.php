@@ -113,8 +113,8 @@
                             $idVendeur = $v['id_compte'];
                             ?>
                             <div>
-                                <input class="vendeur h-5 w-5" type="checkbox" name="<?php echo $raisonSociale; ?>" id="<?php echo $idVendeur; ?>" value="<?php echo $idVendeur; ?>" class="triFiltre h-5 w-5">
-                                <label for="<?php echo $raisonSociale; ?>" class="labelDetails"><?php echo htmlspecialchars($raisonSociale, ENT_QUOTES, 'UTF-8'); ?></label>
+                                <input class="vendeur h-5 w-5" type="checkbox" name="<?php echo $idVendeur; ?>" id="<?php echo $idVendeur; ?>" value="<?php echo $idVendeur; ?>" class="triFiltre h-5 w-5">
+                                <label for="<?php echo $idVendeur; ?>" class="labelDetails"><?php echo htmlspecialchars($raisonSociale, ENT_QUOTES, 'UTF-8'); ?></label>
                             </div>
                         <?php } ?>
                     </details>
