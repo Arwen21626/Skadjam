@@ -11,6 +11,7 @@ if (!isset($_SESSION["idCompte"])) {
 // Récupère l'ID du compte à supprimer
 $id = (int) $_SESSION["idCompte"];
 $id_vendeur_anonyme = 42;
+$id_adresse_anonyme = 41;
 
 try {
     $dbh = new PDO("$driver:host=$server;port=$port;dbname=$dbname", $user, $pass);
@@ -24,11 +25,32 @@ try {
                     ':id' => $id]);
 
     // Modifier id_vendeur du produit pour celui du compte anonyme 
-    $stmt = $dbh->prepare("UPDATE sae3_skadjam._habite SET id_vendeur = :id_anonyme WHERE id_vendeur = :id");
+    $stmt = $dbh->prepare("UPDATE sae3_skadjam._produit SET id_vendeur = :id_anonyme WHERE id_vendeur = :id");
     $stmt->execute([':id_anonyme' => $id_vendeur_anonyme,
                     ':id' => $id]);
 
-    //Supprimer la table habite
+    //Récupérer l'id_adresse à supprimer
+    $stmt = $dbh->prepare("SELECT id_adressse 
+                            FROM sae3_skadjam._adresse a
+                            INNER JOIN sae3_skadjam._habite h
+                                ON h.id_adresse = a.id_adresse
+                            WHERE id_compte = :id");
+    $stmt->execute([':id' => $id]);
+    $idAdresse = $stmt->fetchAll();
+
+    //Suppresion du n-uplet dans _habite
+    $stmt = $dbh->prepare("DELETE FROM sae3_skadjam._habite
+                            WHERE id_compte = :id");
+    $stmt->execute([':id' => $id]);
+
+    //Suppression de l'adresse
+    $stmt = $dbh->prepare("DELETE FROM sae3_skadjam._adresse
+                            WHERE is_adresse = :id_adresse");
+    $stmt->execute([':id_adresse' => $id_adresse_anonyme]);
+
+    
+    
+
 
     $stmt = $dbh->prepare("DELETE FROM sae3_skadjam._reponse r
                             USING sae3_skadjam._avis a

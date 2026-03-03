@@ -6,6 +6,7 @@
     require_once(__DIR__ . '/../../php/verification_formulaire.php');
     $idCompte = $_SESSION['idCompte'];
 
+
     try {     
         $tabProduit = null;           
         //récupère toutes les infos des tables produits et photos
@@ -40,25 +41,11 @@
             WHERE id_produit = :id");
 
         foreach ($_POST['qteStock'] as $idProduit => $qteStock) {
-            $variationQte = 0;
-
-            //si le vendeur ajouter ou retire une certaine quantite du stock
-            if ((isset($_POST["qteAajouter"][$idProduit]) || isset($_POST["qteAretirer"][$idProduit])) 
-                && ($_POST["qteAajouter"][$idProduit] > 0 || $_POST["qteAretirer"][$idProduit] > 0)){
-
-                $aAjouter = 0;
-                $aRetirer = 0;
-
-                $aAjouter = isset($_POST["qteAajouter"][$idProduit])?intval($_POST["qteAajouter"][$idProduit]):0;
-                $aRetirer = isset($_POST["qteAretirer"][$idProduit])?intval($_POST["qteAretirer"][$idProduit]):0;
-
-                $variationQte = $aAjouter - $aRetirer;
-            }
 
             // mise à jour de la base de donnée
             if (preg_match("/^-{0,1}[0-9]*$/", $qteStock)) {
                 
-                $nouvQte = $qteStock + $variationQte;
+                $nouvQte = $qteStock;
 
                 $updateStock->bindParam(':stock', $nouvQte, PDO::PARAM_INT);
                 $updateStock->bindParam(':id', $idProduit, PDO::PARAM_INT);
@@ -140,7 +127,7 @@
                                             </div>
                                         </td>
 
-                                        <td class="text-center py-3">          
+                                        <td class="text-center py-3">
                                             <input type="number"
                                                    name="qteStock[<?php echo $valeurs['id_produit']; ?>]"
                                                    value="<?php echo $valeurs['quantite_stock']; ?>"
