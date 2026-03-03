@@ -16,3 +16,5 @@ archiveC21/*
 !archiveC21/fichier*
 html/images/tmp_images/*
 .test_chartjs/
+vendor/
+/composer*
