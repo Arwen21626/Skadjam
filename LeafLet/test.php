@@ -1,5 +1,7 @@
 <!-- Make sure you put this AFTER Leaflet's CSS -->
-
+<?php 
+include (__DIR__."/recupCoord.php");
+?>
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -33,8 +35,9 @@
 
             L.marker([47.905, -3.19], {icon: pointer}).addTo(map);
 
-
-
+            coord.forEach(element => {
+                L.marker([element['latitude'], element['longitude']], {icon: pointer}).addTo(map);
+            });
 
             var markers = new L.MarkerClusterGroup();
             markers.addLayer(L.marker([175.3107, -37.7784]));
