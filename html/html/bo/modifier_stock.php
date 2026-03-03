@@ -24,7 +24,6 @@
         } 
         
         $qteStock = $row['quantite_stock'];
-
     }
 
     catch (PDOException $e) {
@@ -41,11 +40,39 @@
             WHERE id_produit = :id");
 
         foreach ($_POST['qteStock'] as $idProduit => $qteStock) {
-            if (verifQteStock($qteStock)) {
-                $updateStock->bindParam(':stock', $qteStock, PDO::PARAM_INT);
+            $variationQte = 0;
+
+            //si le vendeur ajouter ou retire une certaine quantite du stock
+            if ((isset($_POST["qteAajouter"][$idProduit]) || isset($_POST["qteAretirer"][$idProduit])) 
+                && ($_POST["qteAajouter"][$idProduit] > 0 || $_POST["qteAretirer"][$idProduit] > 0)){
+
+                $aAjouter = 0;
+                $aRetirer = 0;
+
+                $aAjouter = isset($_POST["qteAajouter"][$idProduit])?intval($_POST["qteAajouter"][$idProduit]):0;
+                $aRetirer = isset($_POST["qteAretirer"][$idProduit])?intval($_POST["qteAretirer"][$idProduit]):0;
+
+                $variationQte = $aAjouter - $aRetirer;
+            }
+
+            // mise à jour de la base de donnée
+            if (preg_match("/^-{0,1}[0-9]*$/", $qteStock)) {
+                
+                $nouvQte = $qteStock + $variationQte;
+
+                echo '<br> stock : ';
+                echo $qteStock;
+                echo '<br> vari : ';
+                echo $variationQte;
+                echo '<br> nouv qte : ';
+                echo $nouvQte;
+                echo '<br>';
+
+                $updateStock->bindParam(':stock', $nouvQte, PDO::PARAM_INT);
                 $updateStock->bindParam(':id', $idProduit, PDO::PARAM_INT);
                 $updateStock->execute();
             }
+                echo '<br>';
         }
         header("Location: ./stock.php?idCompte=$idCompte");
     } 
@@ -86,6 +113,8 @@
                                 <th scope="col"><h3>Prix</h3></th>
                                 <th scope="col"><h3>Note</h3></th>
                                 <th scope="col"><h3>Stock</h3></th>
+                                <th scope="col"><h3>Ajouter</h3></th>
+                                <th scope="col"><h3>Retirer</h3></th>
                             </tr>
                         </thead>
                         <tbody>
@@ -114,12 +143,13 @@
 
                                         <td class="text-center py-3">          
                                             <input type="number"
-                                                <?php //création d'un tableau associatif pour récupérer tous les id produits associés à leur stock?>
                                                    name="qteStock[<?php echo $valeurs['id_produit']; ?>]"
                                                    value="<?php echo $valeurs['quantite_stock']; ?>"
-                                                   min="0" class="border-2 border-black rounded-lg w-30 h-10 p-2" required
+                                                   class="border-2 border-black rounded-lg w-30 h-10 p-2" required
                                             >
                                         </td>
+                                        <td><input type="number" name="qteAajouter[<?php echo $valeurs['id_produit']; ?>]" value="0" min="0" class="border-2 border-black rounded-lg w-30 h-10 p-2"></td>
+                                        <td><input type="number" name="qteAretirer[<?php echo $valeurs['id_produit']; ?>]" value="0" min="0" class="border-2 border-black rounded-lg w-30 h-10 p-2"></td>
                                     </tr>
                             <?php }?>
                         </tbody>
