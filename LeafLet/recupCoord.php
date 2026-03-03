@@ -2,7 +2,7 @@
 include (__DIR__."/../html/01_premiere_connexion.php");
 
 $coord = [];
-foreach ($dbh->query("SELECT raison_sociale, latitude, longitude FROM sae3_skadjam._adresse a
+foreach ($dbh->query("SELECT v.id_compte as id_compte, raison_sociale, latitude, longitude FROM sae3_skadjam._adresse a
                         INNER JOIN sae3_skadjam._habite h
                             ON a.id_adresse = h.id_adresse
                         INNER JOIN sae3_skadjam._vendeur v
@@ -11,7 +11,8 @@ foreach ($dbh->query("SELECT raison_sociale, latitude, longitude FROM sae3_skadj
     $coord[] = [
         'latitude' => $row['latitude'],
         'longitude' => $row['longitude'],
-        'raison_sociale' => $row['raison_sociale']
+        'raison_sociale' => $row['raison_sociale'],
+        'id_compte' => $row['id_compte']
     ];
 } 
 ?>

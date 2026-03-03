@@ -16,16 +16,13 @@ include (__DIR__."/recupCoord.php");
     #map {width: 700px; height: 500px; resize:both;}
 </style>
 <body>
-    <script>
-    var coord = <?= json_encode($coord); ?>;
-    </script>
-
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
     <script src="https://unpkg.com/leaflet.markercluster@1.4.1/dist/leaflet.markercluster.js"></script>
 
     <div id="map"></div>
 
     <script>
+        var nub;
         var map = L.map('map').setView([48.105, -3.09], 8);
 
         L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
@@ -39,13 +36,14 @@ include (__DIR__."/recupCoord.php");
                 var color = count < 5 ? '#86D0CC' : count < 10 ? '#588A87' : '#365452';
                 var textColor = count < 5 ? '#000000' : count < 10 ? '#FFFFFF' : '#FFFFFF';
                 return L.divIcon({
-                    html: '<div style="background:' + color + ';display:flex; align-items:center; justify-content:center; border-radius: 20px; width: 40px; height: 40px; border:solid #365452 0.5px; color: ' + textColor + '"><b>' + count + '</b></div>',
+                    html: '<div style="background:' + color + '; display:flex; align-items:center; justify-content:center; border-radius: 20px; width: 40px; height: 40px; border:solid #365452 0.5px; color: ' + textColor + '"><b>' + count + '</b></div>',
                     className: 'custom-cluster',
-                    iconSize: L.point(40, 40)
+                    iconSize: L.point(40, 40),  
                 });
             }
-        });   
+        });
 
+        
         var pointer = L.icon({
             iconUrl: 'pointeurVertFonce.png',
             iconSize: [45, 70],
@@ -53,11 +51,13 @@ include (__DIR__."/recupCoord.php");
 
         coord.forEach(function(element) {
             markers.addLayer(
-                L.marker([element.latitude, element.longitude], { icon: pointer }).bindPopup(element.raison_sociale)
+                L.marker([element.latitude, element.longitude], { icon: pointer }).bindPopup(element.raison_sociale),
+                nub = element.id_compte
             );
         });
 
         map.addLayer(markers);
+        console.log(nub)
     </script>
 
 </body>
