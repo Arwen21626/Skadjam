@@ -131,6 +131,8 @@ input.quantite-prod-input {
     box-shadow: none;
 }
 
+#map {resize:both;}
+
 @keyframes popupOut {
 
     from {
