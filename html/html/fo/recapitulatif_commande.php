@@ -228,9 +228,9 @@ if (isset($_POST['valider'])) {
                                     <tr class="py-4 <?= ligneCouleur($ligneIndex) ?>">
                                         <th class="text-left py-2 pl-3"><h4 class="w-30">Article</h4></th>
                                         <td class="text-left">
-                                            <div class="flex">
-                                                <p class="mr-3"><?php echo $ligne['id_produit'];?> - <?php echo $ligne['libelle_produit'];?></p>
-                                                <img class="w-16 h-16 object-contain inline-block" 
+                                            <div class="flex items-center gap-3">
+                                                <p class="m-0"><?php echo $ligne['id_produit'];?> - <?php echo $ligne['libelle_produit'];?></p>
+                                                <img class="w-16 h-16 object-contain" 
                                                     src="<?php echo $ligne['url_photo'];?>" 
                                                     alt="<?php echo $ligne['alt'];?>" 
                                                     title="<?php echo $ligne['titre'];?>">
