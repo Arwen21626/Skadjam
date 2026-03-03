@@ -65,7 +65,6 @@ function ajoutEventListener(){
 
     barreRecherche.addEventListener("input",function(){
         copieBarre = barreDeRecherche(copieProd, barreRecherche.value)
-        console.log(copieBarre)
         mettreAJourListe(copieBarre)
     })
 
@@ -180,7 +179,7 @@ function ajoutEventListener(){
     const  tranchePrix5 = document.getElementById("prix5")
         // filtre vendeur
     const  filtreVendeur = document.getElementsByClassName("vendeur")
-
+    const  filtreVendeurMap = document.getElementsByClassName("vendeurMap")
     // Fonctions de filtres
 
         // Filtre vendeur
@@ -190,6 +189,15 @@ function ajoutEventListener(){
             afficherListe(copieProd)
         })
     }
+
+        // Filtre vendeur map
+    for(let i = 0; i < filtreVendeurMap.length; i++){
+        filtreVendeurMap[i].addEventListener("change", function () {
+            copieProd = toggleFiltre(checkedVendeursMap, this.value, this);
+            afficherListe(copieProd)
+        })
+    }
+
         //Catégories
     categorieAlimentaire.addEventListener("change", function () {
         copieProd = toggleFiltre(checkedCategories, "alimentaire", this) 

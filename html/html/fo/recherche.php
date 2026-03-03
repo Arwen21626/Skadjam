@@ -234,7 +234,6 @@
                         afficherListe(tabProd)
                         
                     });
-                    console.log(tabProd)
                 </script>
             </article>
             <!--fin du catalogue-->

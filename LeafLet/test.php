@@ -51,12 +51,18 @@ include (__DIR__."/recupCoord.php");
 
         coord.forEach(function(element) {
             markers.addLayer(
-                L.marker([element.latitude, element.longitude], { icon: pointer }).bindPopup(element.raison_sociale),
-                num = element.id_compte
+                L.marker([element.latitude, element.longitude], { icon: pointer, id_compte: element.id_compte }).bindPopup(element.raison_sociale)
             )
         })
 
         map.addLayer(markers)
+        
+        markers.on("click", function(e) {
+            tab.splice(tab.indexOf(e.layer.options.id_compte), 1)
+            console.log("ID du point :", e.layer.options.id_compte);
+            
+            // filtre vendeur à mettre ici
+        });
         
     </script>
 
