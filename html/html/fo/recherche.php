@@ -3,7 +3,7 @@
     // Chemins quand on est dans le dossier html
     require_once __DIR__ . '/../../php/verif_role_fo.php';
     require_once __DIR__ . '/../../01_premiere_connexion.php';
-    include (__DIR__."/recupCoord.php");
+    include (__DIR__."/../../php/recupCoord.php");
 
     //récupère toutes les infos des tables produits et photos
     $tabProduit = [];
@@ -40,6 +40,7 @@
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin=""/>
     <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.4.1/dist/MarkerCluster.css" />
     <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.4.1/dist/MarkerCluster.Default.css" />
+    
     <title>Recherche</title>
     <?php include __DIR__ . "/../../php/structure/head_front.php"; ?>
     
@@ -281,7 +282,7 @@
 
         <?php $dbh = null;?>
 
-        <!-- <div id="map" class="w-[300px] h-[200px] solid border-vertFonce md:w-1/3 md:h-80 md:fixed md:bottom-0 md:right-0"></div> -->
+        <div id="map" class="w-[300px] h-[200px] solid border-vertFonce md:w-1/3 md:h-80 md:fixed md:bottom-0 md:right-0"></div>
         <script>
             ajoutEventListener()
         </script>
@@ -308,7 +309,7 @@
             });
             
             var pointer = L.icon({
-                iconUrl: 'pointeurVertFonce.png',
+                iconUrl: '../../images/logo/pointeurVertFonce.png',
                 iconSize: [45, 70],
             });
 
@@ -321,10 +322,12 @@
             map.addLayer(markers)
             
             markers.on("click", function(e) {
+                checkedVendeurs.splice(checkedVendeurs.indexOf(e.layer.options.id_compte), 1)
                 console.log("ID du point :", e.layer.options.id_compte);
                 
                 // filtre vendeur à mettre ici
                 checkedVendeurs.push(e.layer.options.id_compte)
+                console.log(checkedVendeurs)
                 tab = filtre()
                 mettreAJourListe(tab)
             })
