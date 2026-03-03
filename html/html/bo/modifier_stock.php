@@ -162,5 +162,6 @@
 
     <!--footer-->
     <?php include(__DIR__ . "/../../php/structure/footer_back.php"); ?>
+    <script src="../../js/bo/modifier_stock.js" defer></script>
 </body>
 </html>
