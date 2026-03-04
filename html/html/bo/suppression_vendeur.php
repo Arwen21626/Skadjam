@@ -12,7 +12,7 @@ if (isset($_POST['logout'])) {
     session_destroy();
 
     // Redirection vers la page principale
-    header("Location: ../../index_vendeur.php");
+    header("Location: ../../index.php");
     exit();
 }
 ?>
