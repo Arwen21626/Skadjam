@@ -302,6 +302,7 @@
             }).addTo(map)
 
             var markers = L.markerClusterGroup({
+                showCoverageOnHover: false,
                 iconCreateFunction: function(cluster) {
                     var count = cluster.getChildCount()
                     var color = count < 5 ? '#86D0CC' : count < 10 ? '#588A87' : '#365452'
