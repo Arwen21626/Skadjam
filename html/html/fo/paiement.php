@@ -6,7 +6,7 @@ if($_SESSION['role'] != 'client'){
     header('Location: /index.php');
 }else{
     include __DIR__ . "/../../connexion_recupraptor.php";
-    include(__DIR__ . '/../../php/verification_formulaire.php');
+    include __DIR__ . '/../../php/verification_formulaire.php';
     include __DIR__ . '/../../01_premiere_connexion.php';
     
     // Initialisation des variables
@@ -24,6 +24,13 @@ if($_SESSION['role'] != 'client'){
     if (isset($_GET["achatValide"])) {
         $achatValide = $_GET["achatValide"];
     }else{
+        /*// Récupérer la carte bancaire si enregistrée
+        $commande = "SELECT * FROM sae3_skadjam._carte_bancaire WHERE id_client = ?";
+        $stmt = $dbh->prepare($commande);
+        $stmt->execute([$idCompte]);
+        $carteBancaire = $stmt->fetch(PDO::FETCH_ASSOC);
+        // Récupérer la date d'expiration
+        $dateExpiration = explode('/', $carteBancaire['expiration']);*/
 
         //Récupération du panier
         $commande = "SELECT id_panier FROM sae3_skadjam._panier WHERE id_client = ?";
@@ -61,7 +68,7 @@ if($_SESSION['role'] != 'client'){
             die("Erreur : panier vide : " . $idPanier);
         }
     
-        if(isset($_POST['numero']) && $achatValide === false){
+        if(isset($_POST['numero']) && !$achatValide){
         // Initialisation des variables
             
     
@@ -98,17 +105,18 @@ if($_SESSION['role'] != 'client'){
                 $erreurNumero = true;
             }
 
-            if(isset($enregistrerCarte)){
-                if($enregistrerCarte == 'on'){
-                    $numeroHasher = password_hash($numero, PASSWORD_DEFAULT);
-                    $cryptogrammeHasher = password_hash($cryptogramme, PASSWORD_DEFAULT);
+            // Si case cochée -> enregistrement de la carte bancaire
+            /*if(isset($enregistrerCarte) && $enregistrerCarte == 'on'){
+                $numeroHasher = password_hash($numero, PASSWORD_DEFAULT);
+                $cryptogrammeHasher = password_hash($cryptogramme, PASSWORD_DEFAULT);
 
-                    $nouvCarte = $dbh->prepare("INSERT INTO sae3_skadjam._carte_bancaire(numero_carte, cryptogramme, nom, expiration, id_client) VALUES(?, ?, ?, ?, ?)");
-                    $nouvCarte->execute([$numeroHasher, $cryptogrammeHasher, $nom, $expiration, $idCompte]);
-                }
-            }
-    
-            if(($erreurCryptogramme == false && $erreurExpiration == false && $erreurNom == false && $erreurNumero == false) || $achatValide == true){
+                $nouvCarte = $dbh->prepare("INSERT INTO sae3_skadjam._carte_bancaire(numero_carte, cryptogramme, nom, expiration, id_client) 
+                                            VALUES(?, ?, ?, ?, ?)");
+                $nouvCarte->execute([$numeroHasher, $cryptogrammeHasher, $nom, $expiration, $idCompte]);
+            }*/
+
+            // S'il n'y a pas d'erreurs -> procéder à la commande
+            if(!$erreurCryptogramme && !$erreurExpiration && !$erreurNom && !$erreurNumero || $achatValide){
                 $achatValide = true;
     
                 //Insertion de la commande
@@ -178,7 +186,7 @@ if($_SESSION['role'] != 'client'){
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <?php include(__DIR__ . '/../../php/structure/head_front.php');?>
+    <?php include __DIR__ . '/../../php/structure/head_front.php';?>
     <title>Paiement</title>
     <style>
         button a:hover{
@@ -187,8 +195,8 @@ if($_SESSION['role'] != 'client'){
     </style>
 </head>
 <body>
-    <?php include(__DIR__ . '/../../php/structure/header_front.php');?>
-    <?php include(__DIR__ . '/../../php/structure/navbar_front.php');?>
+    <?php include __DIR__ . '/../../php/structure/header_front.php';?>
+    <?php include __DIR__ . '/../../php/structure/navbar_front.php';?>
     <?php if(!$achatValide){?>
         <main class="">
             <form method="post">
@@ -196,7 +204,12 @@ if($_SESSION['role'] != 'client'){
                 <div class="flex flex-col md:items-center items-start ml-5 md:ml-0">
                     <div class="flex flex-col mb-5 mt-5">
                         <label for="numero">Numéro de carte* :</label>
-                        <input placeholder="0000 1111 2222 3333" maxlength="19" value="<?= isset($_POST['numero'])? $numero : "" ?>" class="pl-2 border-4 border-vertClair rounded-xl placeholder-gray-500 md:w-100 w-75" type="text" name="numero" id="numero" required>
+                        <input placeholder="0000 1111 2222 3333" maxlength="19" value="<?php
+                        if(isset($_POST['numero'])){ 
+                            echo $numero; 
+                        }/*else if(!empty($carteBancaire['numero_carte'])) {
+                            echo $carteBancaire['numero_carte'];
+                        }*/ ?>" class="pl-2 border-4 border-vertClair rounded-xl placeholder-gray-500 md:w-100 w-75" type="text" name="numero" id="numero" required>
                         <?php
                             if($erreurNumero){ ?>
                                 <p class="text-rouge"><?php echo "Le numéro n'est pas bon";?></p>
@@ -207,9 +220,19 @@ if($_SESSION['role'] != 'client'){
                         <div class="flex flex-col w-100">
                             <label for="expiration">Date d'expiration* :</label>
                             <p class="flex flex-row">
-                                <input placeholder="MM" value="<?= isset($_POST['mois'])? $mois : "" ?>" maxlength="2" pattern="0[1-9]|1[0-2]" class="pl-2 border-4 border-vertClair rounded-xl placeholder-gray-500 w-15" type="text" name="mois" id="mois" required>
+                                <input placeholder="MM" value="<?php 
+                                    if(isset($_POST['mois'])){
+                                        echo $mois; 
+                                    }/*else if(!empty($dateExpiration[0])) {
+                                        echo $dateExpiration[0];
+                                    }*/ ?>" maxlength="2" pattern="0[1-9]|1[0-2]" class="pl-2 border-4 border-vertClair rounded-xl placeholder-gray-500 w-15" type="text" name="mois" id="mois" required>
                                 /
-                                <input placeholder="AA" value="<?= isset($_POST['annee'])? $annee : "" ?>" maxlength="2" class="pl-2 border-4 border-vertClair rounded-xl placeholder-gray-500 w-15" type="text" name="annee" id="annee" required>
+                                <input placeholder="AA" value="<?php 
+                                    if(isset($_POST['annee'])){ 
+                                        echo $annee; 
+                                    }/*else if(!empty($dateExpiration[1])) {
+                                        echo $dateExpiration[1];
+                                    }*/ ?>" maxlength="2" class="pl-2 border-4 border-vertClair rounded-xl placeholder-gray-500 w-15" type="text" name="annee" id="annee" required>
                             </p>
                             <?php if($erreurExpiration){ ?>
                                 <p class="text-rouge"><?php echo "La date n'est pas bonne";?></p>
@@ -219,8 +242,13 @@ if($_SESSION['role'] != 'client'){
         
                         <div class="flex flex-col mt-5">
                             <label for="cryptogramme">Cryptogramme* :</label>
-                            <input placeholder="000" pattern="[0-9]{3}" value="<?= isset($_POST['cryptogramme'])? $cryptogramme : "" ?>" class="pl-2 border-4 border-vertClair rounded-xl placeholder-gray-500 w-50" type="text" name="cryptogramme" id="cryptogramme" required>
-                            
+                            <input placeholder="000" pattern="[0-9]{3}" value="<?php 
+                            if(isset($_POST['cryptogramme'])){ 
+                                echo $cryptogramme; 
+                            }/*else if(!empty($carteBancaire['cryptogramme'])) {
+                                echo $carteBancaire['cryptogramme'];
+                            }*/ ?>" class="pl-2 border-4 border-vertClair rounded-xl placeholder-gray-500 w-50" type="text" name="cryptogramme" id="cryptogramme" required>
+
                             <?php if($erreurCryptogramme){ ?>
                                 <p class="text-rouge"><?php echo "Le cryptogramme n'est pas bon";?></p>
                             <?php } ?>
@@ -228,16 +256,21 @@ if($_SESSION['role'] != 'client'){
                     </div>
                     <div class="flex flex-col mb-5">
                         <label for="nom">Nom du titulaire* :</label>
-                        <input placeholder="M Alizon" value="<?= isset($_POST['nom'])? $nom : "" ?>" class="pl-2 border-4 border-vertClair rounded-xl placeholder-gray-500 md:w-100 w-75 ml-0" type="text" name="nom" id="nom" required>
-                        
+                        <input placeholder="M Alizon" value="<?php
+                        if(isset($_POST['nom'])){ 
+                            echo $nom; 
+                        }/*else if(!empty($carteBancaire['nom'])) {
+                            echo $carteBancaire['nom'];
+                        }*/ ?>" class="pl-2 border-4 border-vertClair rounded-xl placeholder-gray-500 md:w-100 w-75 ml-0" type="text" name="nom" id="nom" required>
+
                         <?php if($erreurNom){ ?>
                                 <p class="text-rouge"><?php echo "Le nom n'est pas bon";?></p>
                         <?php } ?>
                     </div>
-                    <div class="md:w-100 md:ml-5 ml-0">
+                    <!--<div class="md:w-100 md:ml-5 ml-0">
                         <label for="enregistrerCarte">Enregistrer cette carte pour les prochains paiements?</label>
-                        <input type="checkbox" name="enregistrerCarte" id="enregistrerCarte" class="w-5 h-5 mt-1">
-                    </div>
+                        <input type="checkbox" name="enregistrerCarte" id="enregistrerCarte" class="w-5 h-5 mt-1" <?php if(isset($_POST['enregistrerCarte'])) echo 'checked'; ?>>
+                    </div> -->
         
                     <!-- <div class="flex flex-row mb-5">
                         <div class="flex flex-col">

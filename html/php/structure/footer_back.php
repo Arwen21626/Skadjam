@@ -18,7 +18,7 @@
         <article class="flex flex-col p-1">
             <h3 class="m-2">À propos</h3>
             <a class="m-1 text-bleu hover:text-beige" href="https://www.cobrec.co.uk/">Qui sommes-nous ?</a>
-            <a class="m-1 text-bleu hover:text-beige" href="https://www.cobrec.co.uk/">Site de la COBREC</a>
+            <a class="m-1 text-bleu hover:text-beige" href="https://www.cobrec.co.uk/">Site de la <abbr title="Coopérative Bretonne de E-Commerce">COBREC</abbr></a>
         </article>
 
         <article class="flex flex-col p-1">

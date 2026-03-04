@@ -18,11 +18,11 @@
         <h2>Conditions générales d'utilisation</h2>
         <h3 class="self-center mt-0 mb-2">En vigueur au 07/11/2025</h3>
         <article>
-            <p>Les présentes conditions générales d'utilisation (dites « CGU ») ont pour objet l'encadrement juridique des modalités de mise à disposition du site et des services par SKADJAM et de définir les conditions d’accès et d’utilisation des services par « l'Utilisateur ». Les présentes CGU sont accessibles sur le site à la rubrique « CGU ».</p>
+            <p>Les présentes conditions générales d'utilisation (dites « <abbr title="Conditions Générales d'Utilisations">CGU</abbr> ») ont pour objet l'encadrement juridique des modalités de mise à disposition du site et des services par SKADJAM et de définir les conditions d’accès et d’utilisation des services par « l'Utilisateur ». Les présentes <abbr title="Conditions Générales d'Utilisations">CGU</abbr> sont accessibles sur le site à la rubrique « <abbr title="Conditions Générales d'Utilisations">CGU</abbr> ».</p>
             <br>
-            <p>Toute inscription ou utilisation du site implique l'acceptation sans aucune réserve ni restriction des présentes CGU par l’Utilisateur. Lors de l'inscription sur le site via le formulaire d’inscription, chaque Utilisateur accepte expressément les présentes CGU en cochant la case précédant le texte suivant : « Je reconnais avoir lu et compris les CGU et je les accepte ». En cas de non-acceptation des CGU stipulées dans le présent contrat, l'Utilisateur se doit de renoncer à l'accès des services proposés par le site.</p>
+            <p>Toute inscription ou utilisation du site implique l'acceptation sans aucune réserve ni restriction des présentes <abbr title="Conditions Générales d'Utilisations">CGU</abbr> par l’Utilisateur. Lors de l'inscription sur le site via le formulaire d’inscription, chaque Utilisateur accepte expressément les présentes <abbr title="Conditions Générales d'Utilisations">CGU</abbr> en cochant la case précédant le texte suivant : « Je reconnais avoir lu et compris les <abbr title="Conditions Générales d'Utilisations">CGU</abbr> et je les accepte ». En cas de non-acceptation des <abbr title="Conditions Générales d'Utilisations">CGU</abbr> stipulées dans le présent contrat, l'Utilisateur se doit de renoncer à l'accès des services proposés par le site.</p>
             <br>
-            <p>Alizon.bzh se réserve le droit de modifier unilatéralement et à tout moment le contenu des présentes CGU.</p>
+            <p>Alizon.bzh se réserve le droit de modifier unilatéralement et à tout moment le contenu des présentes <abbr title="Conditions Générales d'Utilisations">CGU</abbr>.</p>
         </article>
         <article>
             <h3 class="ml-5">Article 1 : Accès au site</h3>
