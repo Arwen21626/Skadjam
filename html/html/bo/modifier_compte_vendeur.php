@@ -25,19 +25,8 @@ $erreurCp = false;
 $erreurVille = false;
 
 
-$idCompte = $_SESSION["idCompte"]; ?>
-<!DOCTYPE html>
-<html lang="fr">
-<?php include __DIR__ . "/../../php/structure/head_back.php";?>
-<head>
-    <title>Modification du compte vendeur</title>
-    <style>
-        button a:hover {
-            color: #000; 
-        }
-    </style>
-</head>
-<?php
+$idCompte = $_SESSION["idCompte"];
+
 $isset = false;
 // Traitement du formulaire seulement si toutes les données sont saisie
 if (isset($_POST["nom"]) && isset($_POST["prenom"]) && isset($_POST["mail"]) && isset($_POST["tel"]) && isset($_POST["denomination"]) && isset($_POST["raisonSociale"]) && isset($_POST["iban"]) && isset($_POST["adresse"]) && isset($_POST["ville"]) && isset($_POST["cp"]) && isset($_POST["siren"])){
@@ -288,6 +277,17 @@ if(!$isset || $erreur){
         $num = $ligne['numero_rue'];
     }  
     ?>
+<!DOCTYPE html>
+<html lang="fr">
+<?php include __DIR__ . "/../../php/structure/head_back.php";?>
+    <head>
+        <title>Modification du compte vendeur</title>
+        <style>
+            button a:hover {
+                color: #000; 
+            }
+        </style>
+    </head>
     <body>
         <?php include __DIR__."/../../php/structure/header_back.php"; ?>
         <main style="margin: 0" class="flex flex-col justify-center">
