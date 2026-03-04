@@ -31,7 +31,7 @@
         <a class="hover:text-rouge hover:bg-vertClair m-1 text-center md:text-left bg-vertFonce rounded-xl text-vertClair md:bg-vertClair md:text-vertFonce" href="tel:0295264512">02 95 26 45 12</a>
     </article>
 
-    <article class="grid grid-cols-2 gap-0.5 md:max-w-fit md:pt-0.5 md:pr-1 md:pb-1 md:pl-1 md:gap-1">
+    <article class="grid grid-cols-2 gap-0.5 ml-10 md:ml-0 md:max-w-fit md:pt-0.5 md:pr-1 md:pb-1 md:pl-1 md:gap-1">
 
         <a class="hover:text-rouge m-1" href="https://www.facebook.com" class="self-center">
 
