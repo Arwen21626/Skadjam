@@ -64,6 +64,7 @@ try {
     $stmt = $dbh->prepare("UPDATE sae3_skadjam._facture SET emetteur = :emetteur WHERE emetteur = :id");
     $stmt->execute([':emetteur' => $id_vendeur_anonyme,
                     ':id' => $id]);
+    echo "modif facture";
             
     // Modification id_vendeur du produit pour celui du compte anonyme 
     $stmt = $dbh->prepare("UPDATE sae3_skadjam._produit SET id_vendeur = :id_anonyme WHERE id_vendeur = :id");
