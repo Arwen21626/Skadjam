@@ -282,9 +282,6 @@ input.quantite-prod-input {
   }
 }
 @layer utilities {
-  .\@container {
-    container-type: inline-size;
-  }
   .pointer-events-auto {
     pointer-events: auto;
   }
@@ -736,6 +733,9 @@ input.quantite-prod-input {
   .w-6\! {
     width: calc(var(--spacing, 0.25rem) * 6) !important;
   }
+  .w-6\/7 {
+    width: calc(6/7 * 100%);
+  }
   .w-7 {
     width: calc(var(--spacing, 0.25rem) * 7);
   }
@@ -801,6 +801,9 @@ input.quantite-prod-input {
   }
   .w-70 {
     width: calc(var(--spacing, 0.25rem) * 70);
+  }
+  .w-72 {
+    width: calc(var(--spacing, 0.25rem) * 72);
   }
   .w-75 {
     width: calc(var(--spacing, 0.25rem) * 75);
@@ -1637,6 +1640,11 @@ input.quantite-prod-input {
       margin-bottom: calc(var(--spacing, 0.25rem) * 7);
     }
   }
+  .md\:mb-10 {
+    @media (width >= 48rem) {
+      margin-bottom: calc(var(--spacing, 0.25rem) * 10);
+    }
+  }
   .md\:mb-15 {
     @media (width >= 48rem) {
       margin-bottom: calc(var(--spacing, 0.25rem) * 15);
@@ -1920,6 +1928,11 @@ input.quantite-prod-input {
       flex-wrap: nowrap;
     }
   }
+  .md\:flex-wrap {
+    @media (width >= 48rem) {
+      flex-wrap: wrap;
+    }
+  }
   .md\:items-center {
     @media (width >= 48rem) {
       align-items: center;
@@ -2089,21 +2102,6 @@ input.quantite-prod-input {
   .\@max-\[768px\]\:ml-5 {
     @container (width < 768px) {
       margin-left: calc(var(--spacing, 0.25rem) * 5);
-    }
-  }
-  .\@max-\[768px\]\:w-7\/8 {
-    @container (width < 768px) {
-      width: calc(7/8 * 100%);
-    }
-  }
-  .\@max-\[768px\]\:flex-col {
-    @container (width < 768px) {
-      flex-direction: column;
-    }
-  }
-  .\@max-\[768px\]\:items-center {
-    @container (width < 768px) {
-      align-items: center;
     }
   }
   .\@max-\[768px\]\:pl-2 {
