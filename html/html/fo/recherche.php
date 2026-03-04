@@ -92,15 +92,18 @@
                     <details>
                         <summary class="cursor-pointer mt-1 mb-1">Par vendeur</summary>
                         <?php 
-                        foreach ($tabVendeur as $v) { 
-                            $raisonSociale = $v['raison_sociale'];
-                            $idVendeur = $v['id_compte'];
-                            ?>
-                            <div>
-                                <input class="vendeur h-5 w-5" type="checkbox" name="<?php echo $raisonSociale; ?>" id="<?php echo $idVendeur; ?>" value="<?php echo $idVendeur; ?>" class="triFiltre h-5 w-5">
-                                <label for="<?php echo $raisonSociale; ?>" class="labelDetails"><?php echo htmlspecialchars($raisonSociale, ENT_QUOTES, 'UTF-8'); ?></label>
-                            </div>
-                        <?php } ?>
+                        foreach ($tabVendeur as $v) {
+                            if($v['raison_sociale'] != 'Anonyme'){
+                                $raisonSociale = $v['raison_sociale'];
+                                $idVendeur = $v['id_compte'];
+                                ?>
+                                <div>
+                                    <input class="vendeur h-5 w-5" type="checkbox" name="<?php echo $raisonSociale; ?>" id="<?php echo $idVendeur; ?>" value="<?php echo $idVendeur; ?>" class="triFiltre h-5 w-5">
+                                    <label for="<?php echo $raisonSociale; ?>" class="labelDetails"><?php echo htmlspecialchars($raisonSociale, ENT_QUOTES, 'UTF-8'); ?></label>
+                                </div><?php 
+                            }
+                        } 
+                        ?>
                     </details>
                 </div>
                 <!-- Categorie -->
@@ -286,50 +289,71 @@
         <script>
             ajoutEventListener()
 
-            var nub;
+            var pointer = false;
             var map = L.map('map').setView([48, -3], 7);
 
             L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
                 maxZoom: 19,
                 attribution: '&copy; OpenStreetMap'
-            }).addTo(map);
+            }).addTo(map)
 
             var markers = L.markerClusterGroup({
                 iconCreateFunction: function(cluster) {
-                    var count = cluster.getChildCount();
-                    var color = count < 5 ? '#86D0CC' : count < 10 ? '#588A87' : '#365452';
-                    var textColor = count < 5 ? '#000000' : count < 10 ? '#FFFFFF' : '#FFFFFF';
+                    var count = cluster.getChildCount()
+                    var color = count < 5 ? '#86D0CC' : count < 10 ? '#588A87' : '#365452'
+                    var textColor = count < 5 ? '#000000' : count < 10 ? '#FFFFFF' : '#FFFFFF'
                     return L.divIcon({
                         html: '<div style="background:' + color + '; display:flex; align-items:center; justify-content:center; border-radius: 20px; width: 40px; height: 40px; border:solid #365452 0.5px; color: ' + textColor + '"><b>' + count + '</b></div>',
                         className: 'custom-cluster',
-                        iconSize: L.point(40, 40),  
-                    });
+                    })
                 }
-            });
+            })
             
-            var pointer = L.icon({
+            marker.on('click', function() {
+                if(this.options.icon === iconVertClair){
+                    pointer = pointerFonce
+                } else {
+                    pointer = pointerClair
+                }
+            })
+
+            var pointerFonce = L.icon({
                 iconUrl: '../../images/logo/pointeurVertFonce.png',
                 iconSize: [45, 70],
             });
 
+            var pointerClair = L.icon({
+                iconUrl: '../../images/logo/pointeurVertClair.png',
+                iconSize: [45, 70],
+            });
+
+            if(pointer == false){
+                pointer = pointerFonce
+            }
+
             coord.forEach(function(element) {
                 markers.addLayer(
-                    L.marker([element.latitude, element.longitude], { icon: pointer, id_compte: element.id_compte }).bindPopup(element.raison_sociale),
+                    L.marker([element.latitude, element.longitude], {
+                        icon: pointer,
+                        id_compte: element.id_compte 
+                    }).bindPopup(element.raison_sociale),
                 )
             })
 
             map.addLayer(markers)
             
             markers.on("click", function(e) {
-                checkedVendeurs.splice(checkedVendeurs.indexOf(e.layer.options.id_compte), 1)
-                console.log("ID du point :", e.layer.options.id_compte);
-                
-                // filtre vendeur à mettre ici
-                checkedVendeurs.push(e.layer.options.id_compte)
-                console.log(checkedVendeurs)
+                if(e.layer.options.id_compte == checkedVendeurs[0]){
+                    checkedVendeurs.splice(checkedVendeurs.indexOf(e.layer.options.id_compte), 1)
+                }else{
+                    checkedVendeurs.splice(checkedVendeurs.indexOf(e.layer.options.id_compte), 1)                
+                    // filtre vendeur à mettre ici
+                    checkedVendeurs.push(e.layer.options.id_compte)
+                }
                 tab = filtre()
                 mettreAJourListe(tab)
             })
+
         </script>
         
     </main>
