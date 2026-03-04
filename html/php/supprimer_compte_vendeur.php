@@ -11,7 +11,6 @@ if (!isset($_SESSION["idCompte"])) {
 // Récupère l'ID du compte à supprimer
 $id = (int) $_SESSION["idCompte"];
 $id_vendeur_anonyme = 42;
-$id_adresse_anonyme = 41;
 
 try {
     $dbh = new PDO("$driver:host=$server;port=$port;dbname=$dbname", $user, $pass);
@@ -20,7 +19,6 @@ try {
 
     //Modifier id_compte de la réponse vendeur pour celui du compte anonyme
     $stmt = $dbh->prepare("UPDATE sae3_skadjam._reponse SET id_compte = :id_anonyme WHERE id_compte = :id");
-
     $stmt->execute([':id_anonyme' => $id_vendeur_anonyme,
                     ':id' => $id]);
 
@@ -29,7 +27,7 @@ try {
     $stmt->execute([':id_anonyme' => $id_vendeur_anonyme,
                     ':id' => $id]);
 
-    //Récupérer l'id_adresse à supprimer
+    //Récupérer l'id_adresse pour supprimer l'adresse du compte vendeur
     $stmt = $dbh->prepare("SELECT id_adressse 
                             FROM sae3_skadjam._adresse a
                             INNER JOIN sae3_skadjam._habite h
@@ -46,46 +44,18 @@ try {
     //Suppression de l'adresse
     $stmt = $dbh->prepare("DELETE FROM sae3_skadjam._adresse
                             WHERE is_adresse = :id_adresse");
-    $stmt->execute([':id_adresse' => $id_adresse_anonyme]);
+    $stmt->execute([':id_adresse' => $idAdresse]);
 
-    
-    
+    //Suppression du vendeur (table vendeur)
+    $stmt = $dbh->prepare("DELETE FROM sae3_skadjam._vendeur
+                            WHERE id_compte = :id");
+    $stmt->execute([':id' => $id]);
 
 
-    $stmt = $dbh->prepare("DELETE FROM sae3_skadjam._reponse r
-                            USING sae3_skadjam._avis a
-                            WHERE r.id_avis = a.id_avis
-                            AND a.id_compte = :id");
-    $stmt->bindParam(':id', $id, PDO::PARAM_INT);
-    $stmt->execute();
-
-    $stmt = $dbh->prepare("DELETE FROM sae3_skadjam._avis WHERE id_compte = :id");
-    $stmt->bindParam(':id', $id, PDO::PARAM_INT);
-    $stmt->execute();
-
-    $stmt = $dbh->prepare("DELETE FROM sae3_skadjam._habite WHERE id_compte = :id");
-    $stmt->bindParam(':id', $id, PDO::PARAM_INT);
-    $stmt->execute();
-
-    $stmt = $dbh->prepare("DELETE FROM sae3_skadjam._futur_achat WHERE id_client = :id");
-    $stmt->bindParam(':id', $id, PDO::PARAM_INT);
-    $stmt->execute();
-
-    $stmt = $dbh->prepare("DELETE FROM sae3_skadjam._carte_bancaire WHERE id_client = :id");
-    $stmt->bindParam(':id', $id, PDO::PARAM_INT);
-    $stmt->execute();
-
-    $stmt = $dbh->prepare("DELETE FROM sae3_skadjam._panier WHERE id_client = :id");
-    $stmt->bindParam(':id', $id, PDO::PARAM_INT);
-    $stmt->execute();
-
-    $stmt = $dbh->prepare("DELETE FROM sae3_skadjam._client WHERE id_compte = :id");
-    $stmt->bindParam(':id', $id, PDO::PARAM_INT);
-    $stmt->execute();
-
-    $stmt = $dbh->prepare("DELETE FROM sae3_skadjam._compte WHERE id_compte = :id");
-    $stmt->bindParam(':id', $id, PDO::PARAM_INT);
-    $stmt->execute();
+    //Suppresion du compte (table compte)
+    $stmt = $dbh->prepare("DELETE FROM sae3_skadjam._compte
+                            WHERE id_compte = :id");
+    $stmt->execute([':id' => $id]);
 
     // Supprime les informations de session
     session_unset();
@@ -94,7 +64,8 @@ try {
     // Redirection vers la page d'accueil
     header("Location: ../../index_vendeur.php");
     exit();
-} catch (PDOException $e) {
+} 
+catch (PDOException $e) {
     echo "Erreur : " . $e->getMessage();
 }
 ?>
