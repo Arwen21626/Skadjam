@@ -79,8 +79,7 @@ try {
                                 ON h.id_adresse = a.id_adresse
                             WHERE id_compte = :id");
     $stmt->execute([':id' => $id]);
-    $idAdresse = $stmt->fetchAll();
-    $idAdresse = (int)$idAdresse;
+    $idAdresse = (int)$stmt->fetchColumn();
     echo "recup adresse";
     echo $idAdresse;
 
@@ -89,6 +88,12 @@ try {
                             WHERE id_adresse = :id_adresse");
     $stmt->execute([':id_adresse' => $idAdresse]);
     echo "suppr habite";
+
+    //Suppression de l'adresse
+    $stmt = $dbh->prepare("DELETE FROM sae3_skadjam._adresse
+                            WHERE id_adresse = :id_adresse");
+    $stmt->execute([':id_adresse' => $idAdresse]);
+    echo "suppr adresse";
 
     //Suppression du vendeur (table vendeur)
     $stmt = $dbh->prepare("DELETE FROM sae3_skadjam._vendeur
@@ -102,19 +107,13 @@ try {
     $stmt->execute([':id' => $id]);
     echo "suppr compte";
 
-    //Suppression de l'adresse
-    $stmt = $dbh->prepare("DELETE FROM sae3_skadjam._adresse
-                            WHERE id_adresse = :id_adresse");
-    $stmt->execute([':id_adresse' => $idAdresse]);
-    echo "suppr adresse";
-
     // Supprime les informations de session
     session_unset();
     session_destroy();
 
     // Redirection vers la page d'accueil
-    header("Location: ../../index.php");
-    exit();
+    /*header("Location: ../../index.php");
+    exit();*/
 } 
 catch (PDOException $e) {
     echo "Erreur : " . $e->getMessage();
