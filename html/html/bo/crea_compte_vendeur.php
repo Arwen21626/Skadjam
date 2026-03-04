@@ -135,6 +135,7 @@ if (isset($_POST["nom"])){
 <?php require_once __DIR__ . "/../../php/structure/head_front.php"?>
 <head>
     <title>Créer un compte vendeur</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin=""/>
 </head>
 <body class="">
     <?php 
@@ -216,27 +217,31 @@ if (isset($_POST["nom"])){
 
             <!-- ########## ADRESSE ########## -->
             <h3>Siège social :</h3>
-            <div class="flex flex-col md:flex-row md:flex-wrap md:w-3/4">
-                <!-- Adresse -->
-                <div class="flex flex-col mt-2 mb-2 md:m-2">
-                    <label for="adresse">Adresse * :</label>
-                    <input class="border-4 border-solid rounded-2xl border-beige md:w-90 p-1 pl-3 placeholder-gray-500 " type="text" id="adresse" name="adresse" value="<?= $_POST["adresse"] ?? ''?>" size="60" placeholder="ex : 3 rue des camélias" required>
-                    <?php echo isset($erreurs["adresse"]) ? "<p class=\"text-rouge\">" . $erreurs["adresse"] . " </p>" : '' ?>
-                </div>
+            <div class="flex flex-col md:flex-row">
+                <div class="flex flex-col md:flex-row md:flex-wrap md:w-1/3">
+                    <!-- Adresse -->
+                    <div class="flex flex-col mt-2 mb-2 md:m-2">
+                        <label for="adresse">Adresse * :</label>
+                        <input class="border-4 border-solid rounded-2xl border-beige md:w-90 p-1 pl-3 placeholder-gray-500 " type="text" id="adresse" name="adresse" value="<?= $_POST["adresse"] ?? ''?>" size="60" placeholder="ex : 3 rue des camélias" required>
+                        <?php echo isset($erreurs["adresse"]) ? "<p class=\"text-rouge\">" . $erreurs["adresse"] . " </p>" : '' ?>
+                    </div>
 
-                <!-- Ville -->
-                <div class="flex flex-col mt-2 mb-2 md:ml-10">
-                    <label for="ville">Ville * :</label>
-                    <input class="border-4 border-solid rounded-2xl border-beige p-1 pl-3 w-60" type="text" id="ville" name="ville" value="<?= $_POST["ville"] ?? ''?>" size="30" required>
-                    <?php echo isset($erreurs["ville"]) ? "<p class=\"text-rouge\">" . $erreurs["ville"] . " </p>" : '' ?>
-                </div>
+                    <!-- Ville -->
+                    <div class="flex flex-col mt-2 mb-2 md:m-2">
+                        <label for="ville">Ville * :</label>
+                        <input class="border-4 border-solid rounded-2xl border-beige p-1 pl-3 w-60" type="text" id="ville" name="ville" value="<?= $_POST["ville"] ?? ''?>" size="30" required>
+                        <?php echo isset($erreurs["ville"]) ? "<p class=\"text-rouge\">" . $erreurs["ville"] . " </p>" : '' ?>
+                    </div>
 
-                <!-- Code postal -->
-                <div class="flex flex-col mt-2 mb-2 md:m-2 md:ml-10">
-                    <label for="cp">Code Postal * :</label>
-                    <input class="border-4 border-solid rounded-2xl border-beige p-1 pl-3 w-40" type="text" id="cp" name="cp" value="<?= $_POST["cp"] ?? ''?>" size="10" required>
-                    <?php echo isset($erreurs["cp"]) ? "<p class=\"text-rouge\">" . $erreurs["cp"] . " </p>" : '' ?>
+                    <!-- Code postal -->
+                    <div class="flex flex-col mt-2 mb-2 md:m-2">
+                        <label for="cp">Code Postal * :</label>
+                        <input class="border-4 border-solid rounded-2xl border-beige p-1 pl-3 w-40" type="text" id="cp" name="cp" value="<?= $_POST["cp"] ?? ''?>" size="10" required>
+                        <?php echo isset($erreurs["cp"]) ? "<p class=\"text-rouge\">" . $erreurs["cp"] . " </p>" : '' ?>
+                    </div>
                 </div>
+                <!-- Carte -->
+                <div id="map" class="md:w-2/3 md:h-80"></div>
             </div>
 
             <h3>Mot de passe :</h3>
@@ -293,6 +298,20 @@ if (isset($_POST["nom"])){
     <?php require_once __DIR__ . "/../../php/structure/footer_front.php" ?>
 </body>
 <script src="../../js/bo/visibilite_mdp.js"></script>
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script>
+    var map = L.map('map').setView([48, -3], 7);
+
+    L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        maxZoom: 19,
+        attribution: '&copy; OpenStreetMap'
+    }).addTo(map);
+
+    var pointer = L.icon({
+        iconUrl: '../../images/logo/pointeurVertFonce.png',
+        iconSize: [45, 70],
+    });
+</script>
 </html>
 <?php
 } else {
