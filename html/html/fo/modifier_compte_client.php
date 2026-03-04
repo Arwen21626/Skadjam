@@ -156,6 +156,7 @@ foreach($dbh->query("SELECT * FROM sae3_skadjam._compte c
                 $compteur++;
             }
             ?>
+            <button class="cursor-pointer border-4 border-beige rounded-2xl w-80 h-14 p-0 m-0 mt-5" type="button"><a href="./ajouter_adresse.php">Ajouter une adresse</a></button>
 
             <!-- Valider le formulaire -->
             <div class="flex mt-10 justify-center md:justify-end w-1/1">
