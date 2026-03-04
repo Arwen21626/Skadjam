@@ -165,7 +165,7 @@ if (isset($_POST['categorie']) && isset($_POST['nom']) && isset($_POST['prix']) 
                                                 SELECT ?, id_remise FROM id_remise");
 
             //mise à jour de la base de données
-            $pourcentage = $remise;
+            $pourcentage = intval($remise);
             $pourcentage = $pourcentage/100;
             $existe = false;  //si le produit a déjà une remise
             foreach($dbh->query("SELECT * FROM sae3_skadjam._reduit WHERE id_produit = $idProd", PDO::FETCH_ASSOC) as $row){
@@ -378,7 +378,7 @@ if (isset($_POST['categorie']) && isset($_POST['nom']) && isset($_POST['prix']) 
                     </div>
                     <!-- Quantité par unité -->
                     <div class="flex flex-col">
-                        <label for="qteUnite">Quantité par unité :</label>
+                        <label for="qteUnite">Quantité par unité* :</label>
                         <input placeholder="200" class="border-4 border-beige rounded-2xl w-40 m-2 placeholder-gray-500" type="number" name="qteUnite" id="qteUnite" min="0" max="999999999"required>
                     </div>
                 </div>

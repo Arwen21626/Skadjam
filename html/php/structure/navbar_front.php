@@ -25,7 +25,7 @@
     <section class="flex justify-around items-center p-1">
 
         <!-- Accueil -->
-        <div class="md:flex md:flex-col md:justify-center md:items-center">
+        <div class="flex flex-col justify-center items-center">
 
             <a class="items-center" href="/index.php">
                 <div class="size-12 bg-no-repeat bg-size-[auto_48px] 
@@ -34,11 +34,11 @@
                 </div>
             </a>
 
-            <a class="text-vertFonce hover:text-rouge hidden md:inline-block" href="/index.php">Accueil</a>
+            <a class="text-vertFonce hover:text-rouge inline-block" href="/index.php">Accueil</a>
         </div>
             
         <!-- Commandes -->
-        <div class="md:flex md:flex-col md:justify-center md:items-center">
+        <div class="flex flex-col justify-center items-center">
 
             <a  href="/html/fo/liste_commandes.php">
                 <div class="size-12 bg-no-repeat bg-size-[auto_48px] 
@@ -47,11 +47,11 @@
                 </div>
             </a>
 
-            <a class="text-vertFonce hover:text-rouge hidden md:inline-block" href="/html/fo/liste_commandes.php">Commandes</a>
+            <a class="text-vertFonce hover:text-rouge inline-block" href="/html/fo/liste_commandes.php">Commandes</a>
         </div>
         
         <!-- Recherche -->
-        <div class="md:flex md:flex-col md:justify-center md:items-center">
+        <div class="flex flex-col justify-center items-center">
 
             <a href="/html/fo/recherche.php">
                 <div class="size-12 bg-no-repeat bg-size-[auto_48px] 
@@ -60,11 +60,11 @@
                 </div>
             </a>
 
-            <a class="text-vertFonce hover:text-rouge hidden md:inline-block" href="/html/fo/recherche.php">Recherche</a>
+            <a class="text-vertFonce hover:text-rouge inline-block" href="/html/fo/recherche.php">Recherche</a>
         </div>
 
         <!-- Panier -->
-        <div class="md:flex md:flex-col md:justify-center md:items-center">
+        <div class="flex flex-col justify-center items-center">
 
             <a href="/html/fo/panier.php">
                 <div class="size-12 bg-no-repeat bg-size-[auto_48px] 
@@ -73,11 +73,11 @@
                 </div>
             </a>
 
-            <a class="text-vertFonce hover:text-rouge hidden md:inline-block" href="/html/fo/panier.php">Panier</a>
+            <a class="text-vertFonce hover:text-rouge inline-block" href="/html/fo/panier.php">Panier</a>
         </div>
         
         <!-- Profil -->
-        <div class="md:flex md:flex-col md:justify-center md:items-center">
+        <div class="flex flex-col justify-center items-center">
 
             <a href=<?php echo $urlProfil ?>>
                 <div class="size-12 bg-no-repeat bg-size-[auto_48px] 
@@ -86,7 +86,7 @@
                 </div>
             </a>
 
-            <a class="text-vertFonce hover:text-rouge hidden md:inline-block" href=<?php echo $urlProfil ?>>Profil</a>
+            <a class="text-vertFonce hover:text-rouge inline-block" href=<?php echo $urlProfil ?>>Profil</a>
         </div>
             
     </section>

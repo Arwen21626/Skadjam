@@ -10,52 +10,102 @@ if (!isset($_SESSION["idCompte"])) {
 
 // Récupère l'ID du compte à supprimer
 $id = (int) $_SESSION["idCompte"];
+
 $id_vendeur_anonyme = 42;
+$tabProduits = null;
 
 try {
     $dbh = new PDO("$driver:host=$server;port=$port;dbname=$dbname", $user, $pass);
     $dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     $dbh->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC);
+    
 
     //Modifier id_compte de la réponse vendeur pour celui du compte anonyme
     $stmt = $dbh->prepare("UPDATE sae3_skadjam._reponse SET id_compte = :id_anonyme WHERE id_compte = :id");
     $stmt->execute([':id_anonyme' => $id_vendeur_anonyme,
                     ':id' => $id]);
+    echo "modif reponse";
 
-    // Modifier id_vendeur du produit pour celui du compte anonyme 
+    //Récupération des produits du vendeur
+    foreach($dbh->query("SELECT p.id_produit 
+                        FROM sae3_skadjam._produit p 
+                        WHERE p.id_vendeur = $id;"
+                        , PDO::FETCH_ASSOC) as $row){
+        $tabProduits[] = $row;
+    }
+    echo "recup produit";
+    print_r($tabProduits);
+
+    if($tabProduits != null){
+        //Suppression des promotions en cours
+            //table _promu
+        foreach($tabProduits as $prod){
+            $idProduit = $prod['id_produit'];
+            $stmt = $dbh->prepare("DELETE FROM sae3_skadjam._promu
+                                    WHERE id_produit = :id_produit");
+            $stmt->execute([':id_produit' => $idProduit]);
+        }
+        echo "suppression promu";
+
+            //table _promotion
+        $stmt = $dbh->prepare("DELETE FROM sae3_skadjam._promotion
+                            WHERE id_vendeur = :id");
+        $stmt->execute([':id' => $id]);   
+        echo "suppression promotion";
+    }
+    
+    //Modification produit est_supprime à true
+    $stmt = $dbh->prepare("UPDATE sae3_skadjam._produit SET est_supprime = :est_supprime WHERE id_vendeur = :id");
+    $stmt->execute([':est_supprime' => true,
+                    ':id' => $id]);
+    echo "produit est_supprime";
+
+    //Modification facture
+    $stmt = $dbh->prepare("UPDATE sae3_skadjam._facture SET emetteur = :emetteur WHERE emetteur = :id");
+    $stmt->execute([':emetteur' => $id_vendeur_anonyme,
+                    ':id' => $id]);
+    echo "modif facture";
+            
+    // Modification id_vendeur du produit pour celui du compte anonyme 
     $stmt = $dbh->prepare("UPDATE sae3_skadjam._produit SET id_vendeur = :id_anonyme WHERE id_vendeur = :id");
     $stmt->execute([':id_anonyme' => $id_vendeur_anonyme,
                     ':id' => $id]);
+    echo "produit avec id_vendeur anonyme";
 
-    //Récupérer l'id_adresse pour supprimer l'adresse du compte vendeur
-    $stmt = $dbh->prepare("SELECT id_adressse 
+    //Récupération l'id_adresse pour supprimer l'adresse du compte vendeur
+    $stmt = $dbh->prepare("SELECT a.id_adresse 
                             FROM sae3_skadjam._adresse a
                             INNER JOIN sae3_skadjam._habite h
                                 ON h.id_adresse = a.id_adresse
                             WHERE id_compte = :id");
     $stmt->execute([':id' => $id]);
     $idAdresse = $stmt->fetchAll();
+    $idAdresse = (int)$idAdresse;
+    echo "recup adresse";
 
     //Suppresion du n-uplet dans _habite
     $stmt = $dbh->prepare("DELETE FROM sae3_skadjam._habite
                             WHERE id_compte = :id");
     $stmt->execute([':id' => $id]);
+    echo "suppr habite";
 
     //Suppression de l'adresse
     $stmt = $dbh->prepare("DELETE FROM sae3_skadjam._adresse
-                            WHERE is_adresse = :id_adresse");
+                            WHERE id_adresse = :id_adresse");
     $stmt->execute([':id_adresse' => $idAdresse]);
+    echo "suppr adresse";
 
     //Suppression du vendeur (table vendeur)
     $stmt = $dbh->prepare("DELETE FROM sae3_skadjam._vendeur
                             WHERE id_compte = :id");
     $stmt->execute([':id' => $id]);
+    echo "suppr vendeur";
 
-
-    //Suppresion du compte (table compte)
+    //Suppresion du compte vendeur (table compte)
     $stmt = $dbh->prepare("DELETE FROM sae3_skadjam._compte
                             WHERE id_compte = :id");
     $stmt->execute([':id' => $id]);
+    echo "suppr compte";
 
     // Supprime les informations de session
     session_unset();
