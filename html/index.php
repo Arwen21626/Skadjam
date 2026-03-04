@@ -30,17 +30,17 @@
 
     <main class="mt-10">
         <div class="grid grid-cols-2 gap-4 justify-items-center">
-            <a href="html/fo/promotion.php" title="lien vers page promotion">
-                <img src="images/images_accueil/promotion.webp" alt="promotion" class="w-90 md:w-150 h-auto justify-self-end">
+            <a href="html/fo/promotion.php" title="lien vers page promotion" alt="promotion">
+                <img src="images/images_accueil/promotion.webp" title="lien vers page promotion" alt="promotion" class="w-90 md:w-150 h-auto justify-self-end">
             </a>
-            <a href="#nosProduits" title="lien vers page nouveaux produits">
-                <img src="images/images_accueil/nouveaux_produits.webp" alt="nouveaux produits" class="w-90 md:w-150 h-auto justify-self-start">
+            <a href="#nosProduits" title="lien vers page nouveaux produits" alt="nouveaux produits">
+                <img src="images/images_accueil/nouveaux_produits.webp" title="lien vers page nouveaux produits" alt="nouveaux produits" class="w-90 md:w-150 h-auto justify-self-start">
             </a>           
-            <a href="#nosProduits" title="lien vers page les plus vendus">
-                <img src="images/images_accueil/les_plus_vendus.webp" alt="les plus vendus" class="w-90 md:w-150 h-auto justify-self-end">
+            <a href="#nosProduits" title="lien vers page les plus vendus" alt="les plus vendus">
+                <img src="images/images_accueil/les_plus_vendus.webp" title="lien vers page les plus vendus" alt="les plus vendus" class="w-90 md:w-150 h-auto justify-self-end">
             </a>
-            <a href="html/fo/liste_commandes.php" title="lien vers page commandes">
-                <img src="images/images_accueil/commandes.webp" alt="commandes" class="w-90 md:w-150 h-auto justify-self-start">
+            <a href="html/fo/liste_commandes.php" title="lien vers page commandes" alt="commandes">
+                <img src="images/images_accueil/commandes.webp" title="lien vers page commandes" alt="commandes" class="w-90 md:w-150 h-auto justify-self-start">
             </a>        
         </div>
 
@@ -103,8 +103,8 @@
 
                                 <!--affichage du prix du produit-->   
                                 <div class="flex flex-row justify-between items-center">
-                                    <p class="inline-block <?= ($valeurs['pourcentage_remise'] !== NULL)?'line-through':'';?>"> <?= htmlentities(str_replace(".", ",",$valeurs['prix_ttc'])); ?>€ (TTC)</p>
-                                    <p class=" pl-3 <?= ($valeurs['pourcentage_remise'] !== NULL)?'':'hidden';?>"> <?= htmlentities(str_replace(".", ",",$valeurs['prix_remise'])); ?>€ (TTC)</p>
+                                    <p class="inline-block <?= ($valeurs['pourcentage_remise'] !== NULL)?'line-through':'';?>"> <?= htmlentities(str_replace(".", ",",$valeurs['prix_ttc'])); ?>€ (<abbr title="Toutes Taxes Confondues">TTC</abbr>)</p>
+                                    <p class=" pl-3 <?= ($valeurs['pourcentage_remise'] !== NULL)?'':'hidden';?>"> <?= htmlentities(str_replace(".", ",",$valeurs['prix_remise'])); ?>€ (<abbr title="Toutes Taxes Confondues">TTC</abbr>)</p>
                                 </div>
                                 <!--récupération de la note-->
                                 <div class="flex">

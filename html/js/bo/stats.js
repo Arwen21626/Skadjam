@@ -1,6 +1,19 @@
-let testChart = document.getElementById("testChart");
+let dataStats = dataJson;
 
 let periodes = ['Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Août', 'Septembre', 'Octobre', 'Novembre', 'Décembre'];
+let dataVentes = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+
+let currentAnnee = '2026';
+
+console.log(Object.keys(dataStats[currentAnnee]))
+
+Object.keys(dataStats).forEach(mois => {
+    let i = Number(mois);
+
+    dataVentes[i - 1] = Number(dataStats[mois]["nb_ventes_totales"]);
+});
+
+let testChart = document.getElementById("testChart");
 
 let testChartCfg = {
     type: 'line',
@@ -8,9 +21,9 @@ let testChartCfg = {
         labels: periodes,
         datasets: [{
             label: "Ventes totales durant le mois",
-            data: [110, 52, 63, 90, 30, 230, 400, 142, 60, 12, 147, 85],
-            borderWidth: 2,
-            barThickness: "flex",
+            data: dataVentes,
+            borderWidth: 3,
+            pointBorderWidth: 8,
         }]
     },
     options: {
@@ -26,3 +39,4 @@ let testChartCfg = {
 }
 
 new Chart(testChart, testChartCfg);
+

@@ -25,19 +25,8 @@ $erreurCp = false;
 $erreurVille = false;
 
 
-$idCompte = $_SESSION["idCompte"]; ?>
-<!DOCTYPE html>
-<html lang="fr">
-<?php include __DIR__ . "/../../php/structure/head_back.php";?>
-<head>
-    <title>Modification du compte vendeur</title>
-    <style>
-        button a:hover {
-            color: #000; 
-        }
-    </style>
-</head>
-<?php
+$idCompte = $_SESSION["idCompte"];
+
 $isset = false;
 // Traitement du formulaire seulement si toutes les données sont saisie
 if (isset($_POST["nom"]) && isset($_POST["prenom"]) && isset($_POST["mail"]) && isset($_POST["tel"]) && isset($_POST["denomination"]) && isset($_POST["raisonSociale"]) && isset($_POST["iban"]) && isset($_POST["adresse"]) && isset($_POST["ville"]) && isset($_POST["cp"]) && isset($_POST["siren"])){
@@ -55,7 +44,7 @@ if (isset($_POST["nom"]) && isset($_POST["prenom"]) && isset($_POST["mail"]) && 
         }
 
         // Vérification que toutes les données commune à la création et à la modification d'un compte client sont correcte
-        if (verifNomPrenom($_POST['nom']) && verifNomPrenom($_POST['prenom']) && verifTelephone($_POST['tel']) && verifDenomination($_POST['denomination']) && verifDenomination($_POST['raisonSociale']) && verifIban($_POST['iban']) && verifSiren($_POST['siren']) && verifCp($_POST['cp']) && verifVille($_POST['ville']) && verifAdresse($_POST['adresse'])){
+        if (strlen($_POST['description']) <= 500 && verifNomPrenom($_POST['nom']) && verifNomPrenom($_POST['prenom']) && verifTelephone($_POST['tel']) && verifDenomination($_POST['denomination']) && verifDenomination($_POST['raisonSociale']) && verifIban($_POST['iban']) && verifSiren($_POST['siren']) && verifCp($_POST['cp']) && verifVille($_POST['ville']) && verifAdresse($_POST['adresse'])){
             //récuperer les attributs du post
             $nom = htmlentities(formatPrenom($_POST["nom"]));
             $prenom = htmlentities(formatPrenom($_POST["prenom"]));
@@ -98,16 +87,13 @@ if (isset($_POST["nom"]) && isset($_POST["prenom"]) && isset($_POST["mail"]) && 
                         $numRue = htmlentities(tabAdresse($_POST['adresse'])[0]);
                         $nomRue = htmlentities(tabAdresse($_POST['adresse'])[2]);
                         $complement = htmlentities(tabAdresse($_POST['adresse'])[1]);
-                        $numBat = htmlentities($_POST['batiment']);
-                        $numApart = htmlentities($_POST['apart']);
-                        $interphone = htmlentities($_POST['interphone']);
                         $codePostal = htmlentities($_POST['cp']);
                         $ville = htmlentities($_POST['ville']);
 
                         if (verifAdresse($adresse) && verifVille($ville) && verifCp($codePostal)){
                             $idAdresse = $ligne['id_adresse'];
                             $modifAdresse = $dbh->prepare("UPDATE sae3_skadjam._adresse
-                                                            SET numero_rue = $numRue, numero_bat = '$numBat', numero_appart = '$numApart', code_interphone = '$interphone', code_postal = $codePostal, complement_adresse = '$complement', ville = '$ville', adresse_postale = '$nomRue'
+                                                            SET numero_rue = $numRue, code_postal = $codePostal, complement_adresse = '$complement', ville = '$ville', adresse_postale = '$nomRue'
                                                             WHERE id_adresse = $idAdresse");
                             $modifAdresse->execute();
                         // Erreurs concernant le format de l'adresse
@@ -205,7 +191,8 @@ if (isset($_POST["nom"]) && isset($_POST["prenom"]) && isset($_POST["mail"]) && 
                 // Fermer la connexion à la base de données
                 $dbh = null;
                 // Redirection vers la page d'accueil
-                header("location: profil_vendeur.php");
+                header("location: ./profil_vendeur.php");
+                exit();
             }
         // Messages d'erreurs si l'un des champs est mal rempli
         }else{ 
@@ -257,6 +244,10 @@ if (isset($_POST["nom"]) && isset($_POST["prenom"]) && isset($_POST["mail"]) && 
                 $erreur = true;
                 $erreurVille = true;
             }
+            if(strlen($_POST['description']) > 500){
+                $erreur = true;
+                $erreurDescription = true;
+            }
         }
     }catch(PDOException $e){
         echo "Erreur dans l'envoie des données dans la base de données.";
@@ -266,19 +257,41 @@ if (isset($_POST["nom"]) && isset($_POST["prenom"]) && isset($_POST["mail"]) && 
 }
 if(!$isset || $erreur){
     // Préparation des données qui vont remplir les champs du formulaire
-    // Récupération du comptes clients
-    $nom = $_POST['nom'];
-    $prenom = $_POST['prenom'];
-    $mail = $_POST['mail'];
-    $tel = $_POST['tel'];
-    $denom = $_POST['denomination'];
-    $raisonSociale = $_POST['raisonSociale'];
-    $siren = $_POST['siren'];
-    $iban = $_POST['iban'];
-    $adresse = $_POST['adresse'];
-    $cp = $_POST['cp'];
-    $ville = $_POST['ville'];
-    $description = $_POST['description']; ?>
+    // Récupération des infos du compte vendeur
+    foreach($dbh->query("SELECT * FROM sae3_skadjam._compte c
+                                INNER JOIN sae3_skadjam._vendeur v
+                                    ON c.id_compte = v.id_compte
+                                INNER JOIN sae3_skadjam._habite h
+                                    ON h.id_compte = c.id_compte
+                                INNER JOIN sae3_skadjam._adresse a
+                                    ON a.id_adresse = h.id_adresse
+                                WHERE c.id_compte = $idCompte", PDO::FETCH_ASSOC) as $ligne){
+        $nom = $ligne['nom_compte'];
+        $prenom = $ligne['prenom_compte'];
+        $mail = $ligne['adresse_mail'];
+        $tel = formatTel($ligne['numero_telephone']);
+        $denom = $ligne['denomination'];
+        $raisonSociale = $ligne['raison_sociale'];
+        $siren = $ligne['siren'];
+        $iban = $ligne['iban'];
+        $adresse = $ligne['adresse_postale'];
+        $cp = $ligne['code_postal'];
+        $ville = $ligne['ville'];
+        $description = $ligne['description_vendeur'];
+        $num = $ligne['numero_rue'];
+    }  
+    ?>
+<!DOCTYPE html>
+<html lang="fr">
+<?php include __DIR__ . "/../../php/structure/head_back.php";?>
+    <head>
+        <title>Modification du compte vendeur</title>
+        <style>
+            button a:hover {
+                color: #000; 
+            }
+        </style>
+    </head>
     <body>
         <?php include __DIR__."/../../php/structure/header_back.php"; ?>
         <main style="margin: 0" class="flex flex-col justify-center">
@@ -294,6 +307,7 @@ if(!$isset || $erreur){
                     <label id="labelImage" for="photo" class="bg-beige w-60 h-60 rounded-2xl image-produit cursor-pointer" style="background-image: url('../..<?= isset($url) ? $url : '/images/logo/bootstrap_icon/image.svg'; ?>'); background-repeat: no-repeat; background-position: center; background-size: 60%;"></label>
                     <label class="cursor-pointer" for="photo"><h4><strong>Photo de profil</strong></h4></label>
                 </div>
+
 
                 <!-- Vendeur -->
                 <h3>Informations vendeur :</h3>
@@ -377,6 +391,7 @@ if(!$isset || $erreur){
                 <h3>Description :</h3>
                 <div class="flex flex-col no-wrap justify-between ml-10 mb-7 mr-10">
                     <textarea class="ml-5 border-4 border-solid rounded-2xl border-beige p-1 pl-3 mb-4 w-1/1" id="description" name="description" rows="5"><?= isset($description) ? $description : ''; ?></textarea>
+                    <?= $erreurDescription ? "<p style=\"font-size: 0.90em\" class=\"text-rouge\">La description ne peut pas dépasser 500 caractères.</p>" : ""; ?>
                 </div>
 
                 <!-- Valider le formulaire -->

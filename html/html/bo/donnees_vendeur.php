@@ -137,8 +137,8 @@ require_once __DIR__ . "/../../01_premiere_connexion.php";
                 echo "id : $idProduit[$i]<br>";
                 echo "libelle : $libelleProduit[$i]<br>";
                 echo "description : $descriptionProduit[$i]<br>";
-                echo "prix HT : $prixHT[$i]<br>";
-                echo "prix TTC : $prixTTC[$i]<br>";
+                echo "prix <abbr title=\"Hors Taxe\">HT</abbr> : $prixHT[$i]<br>";
+                echo "prix <abbr title=\"Toutes Taxes Confondues\">TTC</abbr> : $prixTTC[$i]<br>";
                 echo "ce produit est masqué : ";
                 if($estMasque){
                     echo "oui<br>";

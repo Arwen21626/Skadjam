@@ -23,17 +23,17 @@
 
     <main class="p-8">
         <div class="grid grid-cols-2 gap-4 justify-items-center">
-            <a href="../bo/promotion_vendeur.php" title="lien vers page promotion">
-                <img src="../../images/images_accueil/promotion.webp" alt="promotion" class="w-150 h-auto justify-self-end">
+            <a href="../bo/promotion_vendeur.php" title="lien vers page promotion" alt="promotion">
+                <img src="../../images/images_accueil/promotion.webp" title="lien vers page promotion" alt="promotion" class="w-150 h-auto justify-self-end">
             </a>
-            <a href="#vosProduits" title="lien vers page derniers ajouts">
-                <img src="../../images/images_accueil/derniers_ajouts.webp" alt="derniers ajouts" class="w-150 h-auto justify-self-start">
+            <a href="#vosProduits" title="lien vers page derniers ajouts" alt="derniers ajouts">
+                <img src="../../images/images_accueil/derniers_ajouts.webp" title="lien vers page derniers ajouts" alt="derniers ajouts" class="w-150 h-auto justify-self-start">
             </a>           
-            <a href="../bo/stock.php" title="lien vers page stock">
-                <img src="../../images/images_accueil/stock.webp" alt="stock" class="w-150 h-auto justify-self-end">
+            <a href="../bo/stock.php" title="lien vers page stock" alt="stock">
+                <img src="../../images/images_accueil/stock.webp" title="lien vers page stock" alt="stock" class="w-150 h-auto justify-self-end">
             </a>
-            <a href="../bo/liste_commandes.php" title="lien vers page commandes">
-                <img src="../../images/images_accueil/commandes.webp" alt="commandes" class="w-150 h-auto justify-self-start">
+            <a href="../bo/liste_commandes.php" title="lien vers page commandes" alt="commandes">
+                <img src="../../images/images_accueil/commandes.webp" title="lien vers page commandes" alt="commandes" class="w-150 h-auto justify-self-start">
             </a>        
         </div>
 
@@ -109,8 +109,8 @@
 
                                 <!--affichage du prix du produit-->   
                                 <div class="flex flex-row justify-between items-center">
-                                    <p class="<?php echo ($valeurs['pourcentage_remise'] !== NULL)?'line-through':'';?>"> <?php echo htmlentities(str_replace(".", ",",$valeurs['prix_ttc'])); ?>€ (TTC)</p>
-                                    <p class="<?php echo ($valeurs['pourcentage_remise'] !== NULL)?'':'hidden';?>"> <?php echo htmlentities(str_replace(".", ",",$valeurs['prix_remise'])); ?>€ (TTC)</p>
+                                    <p class="<?php echo ($valeurs['pourcentage_remise'] !== NULL)?'line-through':'';?>"> <?php echo htmlentities(str_replace(".", ",",$valeurs['prix_ttc'])); ?>€ (<abbr title="Toutes Taxes Confondues">TTC</abbr>)</p>
+                                    <p class="<?php echo ($valeurs['pourcentage_remise'] !== NULL)?'':'hidden';?>"> <?php echo htmlentities(str_replace(".", ",",$valeurs['prix_remise'])); ?>€ (<abbr title="Toutes Taxes Confondues">TTC</abbr>)</p>
 
                                 </div>
                                 <!--récupération de la note-->

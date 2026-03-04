@@ -941,3 +941,17 @@ VALUES
   (2,34),
   (3,1);
 
+-- Insertion commandes (pour les tests)
+INSERT INTO sae3_skadjam._adresse_livraison (nom, prenom, adresse_postale, numero_rue, code_postal, ville, sauvegarde)
+VALUES
+  ('De Fontaine', 'Furina', 'C Place de Liyue', 1, 50500, 'Fontaine', false);
+
+INSERT INTO sae3_skadjam._commande (id_adresse, etat, date_commande, montant_total_ttc, id_client)
+VALUES
+  (1, 'En attente', '01/02/2026', 82.74, 21);
+
+INSERT INTO sae3_skadjam._details (montant_ht, quantite, sous_total, id_commande, id_produit)
+VALUES
+  (25.99, 1, 31.19, 1, 73),
+  (4.99, 2, 11.98, 1, 98),
+  (10.99, 3, 39.57, 1, 104);
