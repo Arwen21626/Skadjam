@@ -101,7 +101,7 @@ if (isset($_POST['logout'])) {
                             </tr>
                         <?php } ?>
                         <tr class="py-4">
-                            <th class="py-3"><h3 class="text-left">N° de téléphone :</h3></th>
+                            <th class="py-3"><h3 class="text-left"><abbr title="Numéro">N°</abbr> de téléphone :</h3></th>
                             <td class="py-3"><p><?php echo htmlentities($telephone); ?></p></td>
                         </tr>
                         <tr class="py-4">
