@@ -62,7 +62,7 @@ try {
     session_destroy();
 
     // Redirection vers la page d'accueil
-    header("Location: ../../index_vendeur.php");
+    header("Location: ../../index.php");
     exit();
 } 
 catch (PDOException $e) {
