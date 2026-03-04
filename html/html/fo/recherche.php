@@ -289,8 +289,12 @@
         <script>
             ajoutEventListener()
 
-            var pointer = false;
-            var map = L.map('map').setView([48, -3], 7);
+            var marqueur = false
+            var lastClickedMarker = null
+            var lat = 48
+            var long = -3
+
+            var map = L.map('map').setView([lat, long], 7)
 
             L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
                 maxZoom: 19,
@@ -308,51 +312,66 @@
                     })
                 }
             })
-            
-            marker.on('click', function() {
-                if(this.options.icon === iconVertClair){
-                    pointer = pointerFonce
-                } else {
-                    pointer = pointerClair
-                }
-            })
 
-            var pointerFonce = L.icon({
+            var marqueurFonce = L.icon({
                 iconUrl: '../../images/logo/pointeurVertFonce.png',
                 iconSize: [45, 70],
             });
 
-            var pointerClair = L.icon({
+            var marqueurClair = L.icon({
                 iconUrl: '../../images/logo/pointeurVertClair.png',
                 iconSize: [45, 70],
             });
 
-            if(pointer == false){
-                pointer = pointerFonce
-            }
+            marqueur = marqueurClair;
 
             coord.forEach(function(element) {
                 markers.addLayer(
                     L.marker([element.latitude, element.longitude], {
-                        icon: pointer,
+                        icon: marqueur,
                         id_compte: element.id_compte 
                     }).bindPopup(element.raison_sociale),
                 )
+                lat = element.latitude
+                long = element.longitude
             })
 
-            map.addLayer(markers)
-            
             markers.on("click", function(e) {
+
+                let urlActuelle = e.layer.options.icon.options.iconUrl;
+
+                // Remettre l'ancien marqueur en clair si on clique sur un autre
+                if (lastClickedMarker && lastClickedMarker !== e.layer) {
+                    lastClickedMarker.setIcon(marqueurClair);
+                }
+
+
+                // changement de la couleur
+                if (urlActuelle.includes("pointeurVertClair.png")) {
+                    e.layer.setIcon(marqueurFonce)
+                    lastClickedMarker = e.layer
+                } else {
+                    e.layer.setIcon(marqueurClair)
+                    lastClickedMarker = null
+                }
+
+                map.flyTo(e.layer.getLatLng(), map.getZoom());
+
+                // Filtre vendeur
+                // Si le vendeur est déjà coché, on le décoche
                 if(e.layer.options.id_compte == checkedVendeurs[0]){
                     checkedVendeurs.splice(checkedVendeurs.indexOf(e.layer.options.id_compte), 1)
-                }else{
-                    checkedVendeurs.splice(checkedVendeurs.indexOf(e.layer.options.id_compte), 1)                
-                    // filtre vendeur à mettre ici
+
+                // Sinon, on le coche
+                } else {
+                    checkedVendeurs.splice(checkedVendeurs.indexOf(e.layer.options.id_compte), 1)
                     checkedVendeurs.push(e.layer.options.id_compte)
                 }
                 tab = filtre()
                 mettreAJourListe(tab)
-            })
+            });
+
+            map.addLayer(markers)
 
         </script>
         
