@@ -90,12 +90,6 @@ try {
     $stmt->execute([':id' => $id]);
     echo "suppr habite";
 
-    //Suppression de l'adresse
-    $stmt = $dbh->prepare("DELETE FROM sae3_skadjam._adresse
-                            WHERE id_adresse = :id_adresse");
-    $stmt->execute([':id_adresse' => $idAdresse]);
-    echo "suppr adresse";
-
     //Suppression du vendeur (table vendeur)
     $stmt = $dbh->prepare("DELETE FROM sae3_skadjam._vendeur
                             WHERE id_compte = :id");
@@ -107,6 +101,12 @@ try {
                             WHERE id_compte = :id");
     $stmt->execute([':id' => $id]);
     echo "suppr compte";
+
+    //Suppression de l'adresse
+    $stmt = $dbh->prepare("DELETE FROM sae3_skadjam._adresse
+                            WHERE id_adresse = :id_adresse");
+    $stmt->execute([':id_adresse' => $idAdresse]);
+    echo "suppr adresse";
 
     // Supprime les informations de session
     session_unset();
