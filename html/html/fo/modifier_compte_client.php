@@ -108,49 +108,54 @@ foreach($dbh->query("SELECT * FROM sae3_skadjam._compte c
                                                 ON a.id_adresse = h.id_adresse
                                         WHERE h.id_compte = $idCompte
                                         ORDER BY a.id_adresse ASC", PDO::FETCH_ASSOC) as $ligne){?>
-                    <div class="flex flex-wrap mt-20">
-                        <h3 class="basis-1/1  min-w-3xs">Adresse numéro <?php echo $compteur;?></h3>
-                        
-                        <!-- Adresse postal -->
-                        <div class="flex flex-col m-5 basis-1/3  min-w-3xs">
-                            <label for="adressePostal">Adresse :</label>
-                            <input class="border-4 border-beige rounded-2xl w-1/1 p-1 pl-3" type="text" id="adresse" name="adresse[<?php echo $compteur?>][adressePostal]" placeholder="ex : 3 rue des camélia" value="<?php echo ($ligne['numero_rue'] === '') ? '' : ($ligne['numero_rue'].' '.$ligne['complement_adresse'].' '.$ligne['adresse_postale']);?>" required>
-                            <?php if (isset($erreurs['adresse_'.$compteur])){ echo "<p class=\"text-rouge\" style=\"font-size: 0.90em\">L'adresse est invalide.</p>"; } ?>
-                        </div>
+                    <div class="flex flex-row mt-20">
+                        <div class="basis-2/3 flex flex-wrap">
+                            <h3 class="basis-1/1  min-w-3xs">Adresse numéro <?php echo $compteur;?></h3>
+                            
+                            <!-- Adresse postal -->
+                            <div class="flex flex-col m-5 basis-1/3  min-w-3xs">
+                                <label for="adressePostal">Adresse :</label>
+                                <input class="border-4 border-beige rounded-2xl w-1/1 p-1 pl-3" type="text" id="adresse" name="adresse[<?php echo $compteur?>][adressePostal]" placeholder="ex : 3 rue des camélia" value="<?php echo ($ligne['numero_rue'] === '') ? '' : ($ligne['numero_rue'].' '.$ligne['complement_adresse'].' '.$ligne['adresse_postale']);?>" required>
+                                <?php if (isset($erreurs['adresse_'.$compteur])){ echo "<p class=\"text-rouge\" style=\"font-size: 0.90em\">L'adresse est invalide.</p>"; } ?>
+                            </div>
 
-                        <!-- Ville -->
-                        <div class="flex flex-col m-5 basis-1/3  min-w-3xs">
-                            <label for="ville">Ville :</label>
-                            <input class="border-4 border-beige rounded-2xl w-1/1 p-1 pl-3" type="text" id="ville" name="adresse[<?php echo $compteur?>][ville]" value="<?php echo $ligne['ville'];?>" required>
-                            <?php if (isset($erreurs['ville_'.$compteur])){ echo "<p class=\"text-rouge\" style=\"font-size: 0.90em\">La ville ne peut contenir que des majuscules, des minuscules, des - ou des espaces.</p>"; } ?>
-                        </div>
+                            <!-- Ville -->
+                            <div class="flex flex-col m-5 basis-1/3  min-w-3xs">
+                                <label for="ville">Ville :</label>
+                                <input class="border-4 border-beige rounded-2xl w-1/1 p-1 pl-3" type="text" id="ville" name="adresse[<?php echo $compteur?>][ville]" value="<?php echo $ligne['ville'];?>" required>
+                                <?php if (isset($erreurs['ville_'.$compteur])){ echo "<p class=\"text-rouge\" style=\"font-size: 0.90em\">La ville ne peut contenir que des majuscules, des minuscules, des - ou des espaces.</p>"; } ?>
+                            </div>
 
-                        <!-- Code postal -->
-                        <div class="flex flex-col m-5 basis-1/3  min-w-3xs">
-                            <label for="cp">Code Postal :</label>
-                            <input class="border-4 border-beige rounded-2xl w-1/1 p-1 pl-3" type="text" id="codePostal" name="adresse[<?php echo $compteur?>][codePostal]" value="<?php echo $ligne['code_postal'];?>" required>
-                            <?php if (isset($erreurs['codePostal_'.$compteur])){ echo "<p class=\"text-rouge\" style=\"font-size: 0.90em\">Le code postal doit être composé de 5 chiffres.</p>"; } ?>
-                        </div>
+                            <!-- Code postal -->
+                            <div class="flex flex-col m-5 basis-1/3  min-w-3xs">
+                                <label for="cp">Code Postal :</label>
+                                <input class="border-4 border-beige rounded-2xl w-1/1 p-1 pl-3" type="text" id="codePostal" name="adresse[<?php echo $compteur?>][codePostal]" value="<?php echo $ligne['code_postal'];?>" required>
+                                <?php if (isset($erreurs['codePostal_'.$compteur])){ echo "<p class=\"text-rouge\" style=\"font-size: 0.90em\">Le code postal doit être composé de 5 chiffres.</p>"; } ?>
+                            </div>
 
-                        <!-- Batiment -->
-                        <div class="flex flex-col m-5 basis-1/3 min-w-3xs">
-                            <label for="batiment">Batiment :</label>
-                            <input class="border-4 border-beige rounded-2xl w-1/1 p-1 pl-3" type="text" id="batiment" name="adresse[<?php echo $compteur?>][batiment]" value="<?php echo $ligne['numero_bat'];?>">
-                            <?php if (isset($erreurs['batiment_'.$compteur])){ echo "<p class=\"text-rouge\" style=\"font-size: 0.90em\">Le bâtiment est invalide.</p>"; } ?>
-                        </div>
+                            <!-- Batiment -->
+                            <div class="flex flex-col m-5 basis-1/3 min-w-3xs">
+                                <label for="batiment">Batiment :</label>
+                                <input class="border-4 border-beige rounded-2xl w-1/1 p-1 pl-3" type="text" id="batiment" name="adresse[<?php echo $compteur?>][batiment]" value="<?php echo $ligne['numero_bat'];?>">
+                                <?php if (isset($erreurs['batiment_'.$compteur])){ echo "<p class=\"text-rouge\" style=\"font-size: 0.90em\">Le bâtiment est invalide.</p>"; } ?>
+                            </div>
 
-                        <!-- Apartement -->
-                        <div class="flex flex-col m-5 basis-1/3  min-w-3xs">
-                            <label for="apart">Apartement :</label>
-                            <input class="border-4 border-beige rounded-2xl w-1/1 p-1 pl-3" type="text" id="apart" name="adresse[<?php echo $compteur?>][apart]" value="<?php echo $ligne['numero_appart'];?>">
-                            <?php if (isset($erreurs['apart_'.$compteur])){ echo "<p class=\"text-rouge\" style=\"font-size: 0.90em\">L'appartement est invalide.</p>"; } ?>
-                        </div>
+                            <!-- Apartement -->
+                            <div class="flex flex-col m-5 basis-1/3  min-w-3xs">
+                                <label for="apart">Apartement :</label>
+                                <input class="border-4 border-beige rounded-2xl w-1/1 p-1 pl-3" type="text" id="apart" name="adresse[<?php echo $compteur?>][apart]" value="<?php echo $ligne['numero_appart'];?>">
+                                <?php if (isset($erreurs['apart_'.$compteur])){ echo "<p class=\"text-rouge\" style=\"font-size: 0.90em\">L'appartement est invalide.</p>"; } ?>
+                            </div>
 
-                        <!-- Interphone -->
-                        <div class="flex flex-col m-5 basis-1/3 min-w-3xs">
-                            <label for="interphone">Interphone :</label>
-                            <input class="border-4 border-beige rounded-2xl w-1/1 p-1 pl-3" type="text" id="interphone" name="adresse[<?php echo $compteur?>][interphone]" value="<?php echo $ligne['code_interphone'];?>">
-                            <?php if (isset($erreurs['interphone_'.$compteur])){ echo "<p class=\"text-rouge\" style=\"font-size: 0.90em\">L'interphone est invalide.</p>"; } ?>
+                            <!-- Interphone -->
+                            <div class="flex flex-col m-5 basis-1/3 min-w-3xs">
+                                <label for="interphone">Interphone :</label>
+                                <input class="border-4 border-beige rounded-2xl w-1/1 p-1 pl-3" type="text" id="interphone" name="adresse[<?php echo $compteur?>][interphone]" value="<?php echo $ligne['code_interphone'];?>">
+                                <?php if (isset($erreurs['interphone_'.$compteur])){ echo "<p class=\"text-rouge\" style=\"font-size: 0.90em\">L'interphone est invalide.</p>"; } ?>
+                            </div>
+                        </div>
+                        <div class="flex items-center justify-end">
+                            <button class="cursor-pointer border-4 border-beige rounded-2xl w-80 h-14 p-0 m-0 mt-5" type="button"><a href="../../php/supprimer_adresse.php?idAdresse=<?php echo $ligne['id_adresse'];?>">Supprimer cette adresse</a></button>
                         </div>
                     </div>
                 <?php 
