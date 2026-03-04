@@ -2,10 +2,11 @@ let lignesTab = document.getElementsByTagName("tr");
 let champsStock, champsAjouter, champsRetirer;
 let stocks = [];
 
-let rouge = "red";
-let orange = "#f8ac3e";
+let rouge = "#A70101";
+let orange = "#F8AC3E";
 let gris = "#999";
 let blanc = "white";
+let orangeClaire = "#FFD085";
 
 
 for(let i = 1; i < lignesTab.length; i++){
@@ -55,17 +56,16 @@ function actionSurAjouterRetirer(ligne, idxLigne){
 
     // met le fond en rouge s'il y a une erreur de saisie
     if(!(ligne.children[5].children[0].validity.valid)){
-        ligne.children[5].children[0].style.backgroundColor = rouge;
+        erreurSaisie(ligne.children[5]);
     }
     if(!(ligne.children[6].children[0].validity.valid)){
-        ligne.children[6].children[0].style.backgroundColor = rouge;
+        erreurSaisie(ligne.children[6]);
     }
 
     // grise le champs du stock si l'utilisateur ajout ou retire du stock par les champ dédier
     if ((!(ligne.children[5].children[0].validity.valid) || (/[1-9]/).test(ligne.children[5].children[0].value))
         || (!(ligne.children[6].children[0].validity.valid) || (/[1-9]/).test(ligne.children[6].children[0].value))){
 
-        console.log("salut");
         champActif(ligne.children[4].children[0], true);
     }
     else{
@@ -79,7 +79,7 @@ function actionSurStock(ligne, idxLigne){
 
     // met le fond en rouge s'il y a une erreur de saisie
     if(!ligne.children[4].children[0].value.match(/[0-9]/)){
-        ligne.children[4].children[0].style.backgroundColor = rouge;
+        erreurSaisie(ligne.children[4]);
     }
 
     // grise les autres champ si le stock à été modifier
@@ -93,19 +93,55 @@ function actionSurStock(ligne, idxLigne){
     }
 }
 
+function erreurSaisie(cible){
+    if(!(cible.children[0].validity.valid)){
+        cible.children[0].style.backgroundColor = rouge;
+        cible.children[0].style.color = "white";
+
+        cible.parentNode.children[7].style.backgroundImage = "url(/images/logo/bootstrap_icon/x-large.svg)"; 
+        cible.parentNode.children[7].style.backgroundSize = "1.5em auto"; 
+        cible.parentNode.children[7].style.backgroundRepeat = "no-repeat"; 
+        cible.parentNode.children[7].style.backgroundPosition = "center center";
+    }
+    else{
+        cible.children[0].style.backgroundColor = "";
+        cible.children[0].style.color = "black";
+
+        cible.parentNode.children[7].style.backgroundImage = ""; 
+        cible.parentNode.children[7].style.backgroundSize = ""; 
+        cible.parentNode.children[7].style.backgroundRepeat = ""; 
+        cible.parentNode.children[7].style.backgroundPosition = "";
+    }
+}
+
 function stockModifier(ligne, idxLigne){
     // modifi la couleur du fond de la ligne qui à été modifier
 
     // si la modification change la valeur du champ
     if (stocks[idxLigne-1] !== ligne.children[4].children[0].value){
-        ligne.style.backgroundColor = orange;
-        
+        if (idxLigne%2 === 0){
+            ligne.style.backgroundColor = orangeClaire;            
+        }
+        else{
+            ligne.style.backgroundColor = orange;
+        }
+
+        ligne.children[7].style.backgroundImage = "url(/images/logo/bootstrap_icon/pencil.svg)"; 
+        ligne.children[7].style.backgroundSize = "1.5em auto"; 
+        ligne.children[7].style.backgroundRepeat = "no-repeat"; 
+        ligne.children[7].style.backgroundPosition = "center center";
+
         ligne.children[4].children[0].style.backgroundColor = blanc;
         ligne.children[5].children[0].style.backgroundColor = blanc;
         ligne.children[6].children[0].style.backgroundColor = blanc;
     }
     else{
         ligne.style.backgroundColor = "";
+
+        ligne.children[7].style.backgroundImage = ""; 
+        ligne.children[7].style.backgroundSize = ""; 
+        ligne.children[7].style.backgroundRepeat = ""; 
+        ligne.children[7].style.backgroundPosition = "";
 
         ligne.children[4].children[0].style.backgroundColor = "";
         ligne.children[5].children[0].style.backgroundColor = "";
