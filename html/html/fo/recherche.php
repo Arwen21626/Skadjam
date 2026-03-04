@@ -78,7 +78,7 @@
             <button id="carte" class="underline m-2">Accéder à la carte</button>
         </div>
         <!-- Aside -->
-        <aside class="sidebar hidden overflow-auto bg-beige/90 w-110 h-[871px] fixed top-0 bottom-10 md:bg-beige p-4 md:sticky md:block md:w-79 md:h-225 md:top-16 md:float-left z-10">
+        <aside class="sidebar hidden overflow-auto bg-beige/90 w-110 min-h-[500px] fixed top-0 bottom-10 md:bg-beige p-4 md:sticky md:block md:w-79 md:h-225 md:top-16 md:float-left z-10">
             
             <!-- Filtres -->
             <section>

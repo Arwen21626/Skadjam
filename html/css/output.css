@@ -673,9 +673,6 @@ input.quantite-prod-input {
   .h-\[200px\] {
     height: 200px;
   }
-  .h-\[871px\] {
-    height: 871px;
-  }
   .h-auto {
     height: auto;
   }
@@ -1090,6 +1087,9 @@ input.quantite-prod-input {
   }
   .border-black {
     border-color: var(--color-black, #000);
+  }
+  .border-gray-500 {
+    border-color: var(--color-gray-500, oklch(55.1% 0.027 264.364));
   }
   .border-red-500 {
     border-color: var(--color-red-500, oklch(63.7% 0.237 25.331));
