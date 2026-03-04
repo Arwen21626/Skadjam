@@ -63,13 +63,13 @@
         $adresseExplode = tabAdresse($adresse);
 
         // Si tout est bon -> redirection vers la page paiement
-        if($erreurNom == false && $erreurPrenom == false && $erreurAdresse == false && $erreurVille == false && $erreurCodePostal == false){
+        if(!$erreurNom && !$erreurPrenom && !$erreurAdresse && !$erreurVille && !$erreurCodePostal){
             $nouvAdrLivraison = $dbh->prepare("INSERT INTO sae3_skadjam._adresse_livraison(nom, prenom, adresse_postale, complement_adresse, numero_rue, numero_bat, numero_appart, code_postal, ville) 
                                                 VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?) RETURNING id_adresse");
                 $nouvAdrLivraison->execute([$nom, $prenom, $adresseExplode[2], $adresseExplode[1], $adresseExplode[0],
                                     $numBat, $numAppart, $codePostal, $ville]);
             $idAdresse = $nouvAdrLivraison->fetchColumn();
-            
+
             // Si case cochée -> enregistrement adresse
             if(isset($_POST['enregistrerAdr']) && $_POST['enregistrerAdr'] == 'on'){
                 $nouvAdr = $dbh->prepare("UPDATE sae3_skadjam._adresse_livraison
