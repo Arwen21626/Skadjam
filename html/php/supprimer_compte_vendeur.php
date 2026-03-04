@@ -86,8 +86,8 @@ try {
 
     //Suppresion du n-uplet dans _habite
     $stmt = $dbh->prepare("DELETE FROM sae3_skadjam._habite
-                            WHERE id_compte = :id");
-    $stmt->execute([':id' => $id]);
+                            WHERE id_adresse = :id_adresse");
+    $stmt->execute([':id_adresse' => $idAdresse]);
     echo "suppr habite";
 
     //Suppression du vendeur (table vendeur)
