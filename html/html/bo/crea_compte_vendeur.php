@@ -123,7 +123,7 @@ if (isset($_POST["nom"])){
             die();
         }
     }else{
-        //header("Location: crea_compte_vendeur.php");
+        header("Location: crea_compte_vendeur.php");
     }
     
     
@@ -143,33 +143,41 @@ if (isset($_POST["nom"])){
     ?>
     <main class=" flex flex-col items-center">
         <h2 class="m-8">Inscription Vendeur</h2>
-        <form method="POST" class=" w-2/3 @max-[768px]:w-7/8">
-
+        <form method="POST" class=" w-2/3">
+            <!-- ########## INFORMATIONS ########## -->
             <h3>Informations vendeur :</h3>
-            <div class="flex flex-row flex-wrap justify-between ml-10 mb-7 mr-10 @max-[768px]:ml-5 @max-[768px]:mr-5">
+            <div class="flex flex-row flex-wrap justify-between ml-10 mb-7 mr-10">
                 <!-- à la validation du formulaire, s'il y a des erreurs, les informations valides resteront saisies -->
-                <div class="flex flex-col items-start mt-6 w-fit @max-[768px]:mt-2">
+
+                <!-- Nom -->
+                <div class="flex flex-col items-start mt-6 w-fit">
                     <label for="nom">Nom * :</label>
-                    <input class="ml-5 border-4 border-solid rounded-2xl border-beige p-1 pl-3 mb-4 @max-[768px]:ml-2 max-w-3/4 @max-[768px]:pl-2" type="text" id="nom" name="nom" value="<?= (!isset($erreurs["nom"])) ? $nom : '' ?>" size="25" required >
+                    <input class="ml-5 border-4 border-solid rounded-2xl border-beige p-1 pl-3 mb-4" type="text" id="nom" name="nom" value="<?= (!isset($erreurs["nom"])) ? $nom : '' ?>" size="25" required >
                     <!-- s'il y a une erreur elle sera affiché sous la cellule -->
                     <?php echo isset($erreurs["nom"]) ? "<p class=\"text-rouge\">" . $erreurs["nom"] . " </p>" : '' ?>
                 </div>
-                <div class="flex flex-col items-start mt-6 w-fit @max-[768px]:mt-2">
+
+                <!-- Prénom -->
+                <div class="flex flex-col items-start mt-6 w-fit ">
                     <label for="prenom">Prénom * :</label>
-                    <input class="ml-5 border-4 border-solid rounded-2xl border-beige p-1 pl-3 mb-4 @max-[768px]:ml-2 max-w-3/4 @max-[768px]:pl-2" type="text" id="prenom" name="prenom" value="<?= (!isset($erreurs["prenom"])) ? $prenom : '' ?>" size="25" required>
+                    <input class="ml-5 border-4 border-solid rounded-2xl border-beige p-1 pl-3 mb-4 " type="text" id="prenom" name="prenom" value="<?= (!isset($erreurs["prenom"])) ? $prenom : '' ?>" size="25" required>
                     <!-- s'il y a une erreur elle sera affiché sous la cellule -->
                     <?php echo isset($erreurs["prenom"]) ? "<p class=\"text-rouge\">" . $erreurs["prenom"] . " </p>" : '' ?>
                 </div>
-                <div class="flex flex-col items-start mt-6 w-fit @max-[768px]:mt-2">
+
+                <!-- Mail -->
+                <div class="flex flex-col items-start mt-6 w-fit">
                     <label for="mail">Mail * :</label>
-                    <input class="ml-5 border-4 border-solid rounded-2xl border-beige p-1 pl-3 mb-4 @max-[768px]:ml-2 max-w-3/4 @max-[768px]:pl-2" type="email" id="mail" name="mail" <?= (!(isset($erreurs["mail"]) || isset($erreurs["unique"]))) ? "value=\"$mail\"" : ''  ?> size="40" required>
+                    <input class="ml-5 border-4 border-solid rounded-2xl border-beige p-1 pl-3 mb-4" type="email" id="mail" name="mail" <?= (!(isset($erreurs["mail"]) || isset($erreurs["unique"]))) ? "value=\"$mail\"" : ''  ?> size="40" required>
                     <!-- s'il y a une erreur elle sera affiché sous la cellule -->
                     <?php echo (isset($erreurs["mail"])) ? "<p class=\"text-rouge\">" . $erreurs["mail"] . " </p>" : '' ?>
                     <?php echo isset($erreurs["unique"]) ? "<p class=\"text-rouge\">" . $erreurs["unique"] . " </p>" : '' ?>
                 </div>
-                <div class="flex flex-col items-start mt-6 w-fit @max-[768px]:mt-2">
+
+                <!-- Téléphone -->
+                <div class="flex flex-col items-start mt-6 w-fit">
                     <label for="tel">Numéro de téléphone * :</label>
-                    <input class="ml-5 border-4 border-solid rounded-2xl border-beige p-1 pl-3 mb-4 @max-[768px]:ml-2 max-w-3/4 @max-[768px]:pl-2" type="tel" id="tel" name="tel" value="<?= (!isset($erreurs["tel"]))?$tel:''?>" size="16" required>
+                    <input class="ml-5 border-4 border-solid rounded-2xl border-beige p-1 pl-3 mb-4" type="tel" id="tel" name="tel" value="<?= (!isset($erreurs["tel"]))?$tel:''?>" size="16" required>
                     <!-- s'il y a une erreur elle sera affiché sous la cellule -->
                     <?php echo isset($erreurs["tel"]) ? "<p class=\"text-rouge\">" . $erreurs["tel"] . " </p>" : '' ?>
                 </div>
@@ -177,24 +185,32 @@ if (isset($_POST["nom"])){
 
             <h3>Informations entreprise :</h3>
             <div class="flex flex-row flex-wrap justify-between ml-10 mb-7 mr-10">
-                <div class="flex flex-col items-start mt-6 w-fit @max-[768px]:mt-2">
+
+                <!-- Raison sociale -->
+                <div class="flex flex-col items-start mt-6 w-fit">
                     <label for="raisonSociale">Raison sociale de l'entreprise * :</label>
-                    <input class="ml-5 border-4 border-solid rounded-2xl border-beige p-1 pl-3 mb-4 @max-[768px]:ml-2 max-w-3/4 @max-[768px]:pl-2" type="text" id="raisonSociale" name="raisonSociale" value="<?= (!isset($erreurs["raisonSociale"]))? $raisonSociale: ''?>" size="40" required>
+                    <input class="ml-5 border-4 border-solid rounded-2xl border-beige p-1 pl-3 mb-4" type="text" id="raisonSociale" name="raisonSociale" value="<?= (!isset($erreurs["raisonSociale"]))? $raisonSociale: ''?>" size="40" required>
                     <?php echo isset($erreurs["raisonSociale"]) ? "<p class=\"text-rouge\">" . $erreurs["raisonSociale"] . " </p>" : '' ?>
                 </div>
-                <div class="flex flex-col items-start mt-6 w-fit @max-[768px]:mt-2">
+
+                <!-- Nom entreprise -->
+                <div class="flex flex-col items-start mt-6 w-fit">
                     <label for="denomination">Nom de l'entreprise * :</label>
-                    <input class="ml-5 border-4 border-solid rounded-2xl border-beige p-1 pl-3 mb-4 @max-[768px]:ml-2 max-w-3/4 @max-[768px]:pl-2" type="text" id="denomination" name="denomination" value="<?= (!isset($erreurs["denomination"]))? $denomination: ''?>" size="40" required>
+                    <input class="ml-5 border-4 border-solid rounded-2xl border-beige p-1 pl-3 mb-4" type="text" id="denomination" name="denomination" value="<?= (!isset($erreurs["denomination"]))? $denomination: ''?>" size="40" required>
                     <?php echo isset($erreurs["denomination"]) ? "<p class=\"text-rouge\">" . $erreurs["denomination"] . " </p>" : '' ?>
-                </div> 
-                <div class="flex flex-col items-start mt-6 w-fit @max-[768px]:mt-2">
+                </div>
+
+                <!-- SIREN -->
+                <div class="flex flex-col items-start mt-6 w-fit">
                     <label for="siren">Numéro de SIREN * :</label>
-                    <input class="ml-5 border-4 border-solid rounded-2xl border-beige p-1 pl-3 mb-4 @max-[768px]:ml-2 max-w-3/4 @max-[768px]:pl-2" type="text" id="siren" name="siren" value="<?= (!isset($erreurs["siren"]))?$siren: ''?>" size="11" required>
+                    <input class="ml-5 border-4 border-solid rounded-2xl border-beige p-1 pl-3 mb-4" type="text" id="siren" name="siren" value="<?= (!isset($erreurs["siren"]))?$siren: ''?>" size="11" required>
                     <?php echo isset($erreurs["siren"]) ? "<p class=\"text-rouge\">" . $erreurs["siren"] . " </p>" : '' ?>
                 </div>
-                <div class="flex flex-col items-start mt-6 w-fit @max-[768px]:mt-2">
+
+                <!-- IBAN -->
+                <div class="flex flex-col items-start mt-6 w-fit">
                     <label for="iban">Numéro de IBAN * :</label>
-                    <input class="ml-5 border-4 border-solid rounded-2xl border-beige p-1 pl-3 mb-4 @max-[768px]:ml-2 max-w-3/4 @max-[768px]:pl-2" type="text" id="iban" name="iban" value="<?= (!isset($erreurs["iban"]))?$iban: 'FR'?>" placeholder="FR" size="40" required>
+                    <input class="ml-5 border-4 border-solid rounded-2xl border-beige p-1 pl-3 mb-4" type="text" id="iban" name="iban" value="<?= (!isset($erreurs["iban"]))?$iban: 'FR'?>" placeholder="FR" size="40" required>
                     <?php echo isset($erreurs["iban"]) ? "<p class=\"text-rouge\">" . $erreurs["iban"] . " </p>" : '' ?>
                 </div>
             </div>
@@ -202,40 +218,45 @@ if (isset($_POST["nom"])){
             <!-- ########## ADRESSE ########## -->
             <h3>Siège social :</h3>
             <div class="flex flex-row flex-wrap justify-between ml-10 mb-7 mr-10">
-                <div class="flex flex-col items-start mt-6 w-fit @max-[768px]:mt-2">
+                <!-- Adresse -->
+                <div class="flex flex-col items-start mt-6 w-fit">
                     <label for="adresse">Adresse * :</label>
-                    <input class="ml-5 border-4 border-solid rounded-2xl border-beige p-1 pl-3 mb-4 @max-[768px]:ml-2 max-w-3/4 @max-[768px]:pl-2 placeholder-gray-500" type="text" id="adresse" name="adresse" value="<?= $_POST["adresse"] ?? ''?>" size="60" placeholder="ex : 3 rue des camélias" required>
+                    <input class="ml-5 border-4 border-solid rounded-2xl border-beige p-1 pl-3 mb-4 max-w-3/4  placeholder-gray-500" type="text" id="adresse" name="adresse" value="<?= $_POST["adresse"] ?? ''?>" size="60" placeholder="ex : 3 rue des camélias" required>
                     <?php echo isset($erreurs["adresse"]) ? "<p class=\"text-rouge\">" . $erreurs["adresse"] . " </p>" : '' ?>
                 </div>
-                <div class="flex flex-col items-start mt-6 w-fit @max-[768px]:mt-2">
+
+                <!-- Ville -->
+                <div class="flex flex-col items-start mt-6 w-fit">
                     <label for="ville">Ville * :</label>
-                    <input class="ml-5 border-4 border-solid rounded-2xl border-beige p-1 pl-3 mb-4 @max-[768px]:ml-2 max-w-3/4 @max-[768px]:pl-2" type="text" id="ville" name="ville" value="<?= $_POST["ville"] ?? ''?>" size="30" required>
+                    <input class="ml-5 border-4 border-solid rounded-2xl border-beige p-1 pl-3 mb-4 max-w-3/4 " type="text" id="ville" name="ville" value="<?= $_POST["ville"] ?? ''?>" size="30" required>
                     <?php echo isset($erreurs["ville"]) ? "<p class=\"text-rouge\">" . $erreurs["ville"] . " </p>" : '' ?>
                 </div>
-                <div class="flex flex-col items-start mt-6 w-fit @max-[768px]:mt-2">
+
+                <!-- Code postal -->
+                <div class="flex flex-col items-start mt-6 w-fit ">
                     <label for="cp">Code Postal * :</label>
-                    <input class="ml-5 border-4 border-solid rounded-2xl border-beige p-1 pl-3 mb-4 @max-[768px]:ml-2 max-w-3/4 @max-[768px]:pl-2" type="text" id="cp" name="cp" value="<?= $_POST["cp"] ?? ''?>" size="10" required>
+                    <input class="ml-5 border-4 border-solid rounded-2xl border-beige p-1 pl-3 mb-4 max-w-3/4 " type="text" id="cp" name="cp" value="<?= $_POST["cp"] ?? ''?>" size="10" required>
                     <?php echo isset($erreurs["cp"]) ? "<p class=\"text-rouge\">" . $erreurs["cp"] . " </p>" : '' ?>
                 </div>
-                
             </div>
 
             <h3>Mot de passe :</h3>
             <div class="flex flex-row flex-wrap justify-between ml-10 mb-7 mr-10">
-                <div class="flex flex-col items-start mt-6 w-fit @max-[768px]:mt-2">
+                <!-- MDP -->
+                <div class="flex flex-col items-start mt-6 w-fit">
                     <label for="mdp">Mot de passe * :</label>
                     <div class="zone-mdp flex flex-row items-center mb-4">
-                        <input class="champ-mdp ml-5 border-4 border-solid rounded-2xl border-beige p-1 pl-3 @max-[768px]:ml-2 max-w-3/4 @max-[768px]:pl-2 " type="password" id="mdp" name="mdp" value="<?= (!isset($erreurs["mdp"]) && isset($_POST["mdp"])) ? $_POST["mdp"] : ''?>" size="50" required>
+                        <input class="champ-mdp ml-5 border-4 border-solid rounded-2xl border-beige p-1 pl-3 max-w-3/4" type="password" id="mdp" name="mdp" value="<?= (!isset($erreurs["mdp"]) && isset($_POST["mdp"])) ? $_POST["mdp"] : ''?>" size="50" required>
                         <?php include __DIR__ . "/../../php/structure/bouton_mdp.php" ?>
                     </div>
                     <?php echo isset($erreurs["mdp"]) ? "<p class=\"text-rouge\">" . $erreurs["mdp"] . " </p>" : '' ?>
                     <!-- s'il y a une erreur elle sera affiché sous la cellule -->
                     <p>1 majuscule, 1 minuscule, 1 chiffre, 1 caractère spécial, 10 caractères minimum</p>
                 </div>
-                <div class="flex flex-col items-start mt-6 w-fit @max-[768px]:mt-2">
+                <div class="flex flex-col items-start mt-6 w-fit">
                     <label for="verif">Vérification du mot de passe * :</label>
                     <div class="zone-mdp flex flex-row items-center mb-4">
-                        <input class="champ-mdp ml-5 border-4 border-solid rounded-2xl border-beige p-1 pl-3 @max-[768px]:ml-2 max-w-3/4 @max-[768px]:pl-2 " type="password" id="verif" name="verif" value="<?= (!(isset($erreurs["conf"]) || isset($erreurs["mdp"])) && isset($_POST["verif"])) ? $_POST["verif"] : ''?>" size="50" required>
+                        <input class="champ-mdp ml-5 border-4 border-solid rounded-2xl border-beige p-1 pl-3 max-w-3/4" type="password" id="verif" name="verif" value="<?= (!(isset($erreurs["conf"]) || isset($erreurs["mdp"])) && isset($_POST["verif"])) ? $_POST["verif"] : ''?>" size="50" required>
                         <?php include __DIR__ . "/../../php/structure/bouton_mdp.php" ?>
                     </div>
                     <!-- s'il y a une erreur elle sera affiché sous la cellule -->
@@ -248,9 +269,9 @@ if (isset($_POST["nom"])){
                 <input type="checkbox" id="cgu" name="cgu" required class="cursor-pointer ml-5 w-5 h-5">
             </div>
 
-            <div class="flex flex-row justify-around mt-8 mb-8 @max-[768px]:flex-col @max-[768px]:items-center">
+            <div class="flex flex-row justify-around mt-8 mb-8">
                 <button class="cursor-pointer w-64 border-4 border-solid rounded-2xl border-beige p-1 pl-3" type="button"><a href="/index.php">Annuler</a></button>
-                <input type="submit" value="Valider" class="cursor-pointer w-64 border-4 border-solid rounded-2xl border-beige p-1 pl-3 @max-[768px]:mt-2">
+                <input type="submit" value="Valider" class="cursor-pointer w-64 border-4 border-solid rounded-2xl border-beige p-1 pl-3">
             </div>
         </form>
         <div class="flex flex-row flex-wrap justify-center">

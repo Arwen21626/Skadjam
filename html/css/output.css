@@ -2091,21 +2091,6 @@ input.quantite-prod-input {
       margin-left: calc(var(--spacing, 0.25rem) * 5);
     }
   }
-  .\@max-\[768px\]\:w-7\/8 {
-    @container (width < 768px) {
-      width: calc(7/8 * 100%);
-    }
-  }
-  .\@max-\[768px\]\:flex-col {
-    @container (width < 768px) {
-      flex-direction: column;
-    }
-  }
-  .\@max-\[768px\]\:items-center {
-    @container (width < 768px) {
-      align-items: center;
-    }
-  }
   .\@max-\[768px\]\:pl-2 {
     @container (width < 768px) {
       padding-left: calc(var(--spacing, 0.25rem) * 2);
