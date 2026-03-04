@@ -44,7 +44,7 @@ if (isset($_POST["nom"]) && isset($_POST["prenom"]) && isset($_POST["mail"]) && 
         }
 
         // Vérification que toutes les données commune à la création et à la modification d'un compte client sont correcte
-        if (verifNomPrenom($_POST['nom']) && verifNomPrenom($_POST['prenom']) && verifTelephone($_POST['tel']) && verifDenomination($_POST['denomination']) && verifDenomination($_POST['raisonSociale']) && verifIban($_POST['iban']) && verifSiren($_POST['siren']) && verifCp($_POST['cp']) && verifVille($_POST['ville']) && verifAdresse($_POST['adresse'])){
+        if (strlen($_POST['description']) <= 500 && verifNomPrenom($_POST['nom']) && verifNomPrenom($_POST['prenom']) && verifTelephone($_POST['tel']) && verifDenomination($_POST['denomination']) && verifDenomination($_POST['raisonSociale']) && verifIban($_POST['iban']) && verifSiren($_POST['siren']) && verifCp($_POST['cp']) && verifVille($_POST['ville']) && verifAdresse($_POST['adresse'])){
             //récuperer les attributs du post
             $nom = htmlentities(formatPrenom($_POST["nom"]));
             $prenom = htmlentities(formatPrenom($_POST["prenom"]));
@@ -244,6 +244,10 @@ if (isset($_POST["nom"]) && isset($_POST["prenom"]) && isset($_POST["mail"]) && 
                 $erreur = true;
                 $erreurVille = true;
             }
+            if(strlen($_POST['description']) > 500){
+                $erreur = true;
+                $erreurDescription = true;
+            }
         }
     }catch(PDOException $e){
         echo "Erreur dans l'envoie des données dans la base de données.";
@@ -387,6 +391,7 @@ if(!$isset || $erreur){
                 <h3>Description :</h3>
                 <div class="flex flex-col no-wrap justify-between ml-10 mb-7 mr-10">
                     <textarea class="ml-5 border-4 border-solid rounded-2xl border-beige p-1 pl-3 mb-4 w-1/1" id="description" name="description" rows="5"><?= isset($description) ? $description : ''; ?></textarea>
+                    <?= $erreurDescription ? "<p style=\"font-size: 0.90em\" class=\"text-rouge\">La description ne peut pas dépasser 500 caractères.</p>" : ""; ?>
                 </div>
 
                 <!-- Valider le formulaire -->
