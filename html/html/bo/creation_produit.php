@@ -165,7 +165,7 @@ if (isset($_POST['categorie']) && isset($_POST['nom']) && isset($_POST['prix']) 
                                                 SELECT ?, id_remise FROM id_remise");
 
             //mise à jour de la base de données
-            $pourcentage = $remise;
+            $pourcentage = intval($remise);
             $pourcentage = $pourcentage/100;
             $existe = false;  //si le produit a déjà une remise
             foreach($dbh->query("SELECT * FROM sae3_skadjam._reduit WHERE id_produit = $idProd", PDO::FETCH_ASSOC) as $row){
