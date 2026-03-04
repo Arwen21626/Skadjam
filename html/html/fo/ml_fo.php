@@ -19,11 +19,11 @@
         <h3 class="self-center mt-0 mb-2">En vigueur au 07/11/2025</h3>
         <article>
             <h3 class="ml-5">Article 1 : Informations légales</h3>
-            <p>L'édition du site Alizon.bzh est assurée par l’entreprise SKADJAM au capital de 150000€, immatriculée au RCS de Lannion sous le numéro 508977303, dont le siège social est situé au 7 rue Édouard Branly, avec le numéro de téléphone 02 96 46 93 00 et l’adresse e-mail : skadjam@mail.bzh.</p>
+            <p>L'édition du site Alizon.bzh est assurée par l’entreprise SKADJAM au capital de 150000€, immatriculée au <abbr title="Registre du Commerce et des Sociétés">RCS</abbr> de Lannion sous le numéro 508977303, dont le siège social est situé au 7 rue Édouard Branly, avec le numéro de téléphone 02 96 46 93 00 et l’adresse e-mail : skadjam@mail.bzh.</p>
             <br>
             <p>Le Directeur de la publication est : Camille DUPONT</p>
             <br>
-            <p>L'hébergeur du site Alizon.bzh est la coopérative COBREC (SARL), dont le siège social est situé au 8 rue Édouard Branly, avec le numéro de téléphone : 02 95 46 93 01.</p>
+            <p>L'hébergeur du site Alizon.bzh est la coopérative <abbr title="Coopérative Bretonne de E-Commerce">COBREC</abbr> (<abbr title="Société à Responsabilité Limitée">SARL</abbr>), dont le siège social est situé au 8 rue Édouard Branly, avec le numéro de téléphone : 02 95 46 93 01.</p>
         </article>
         <article>
             <h3 class="ml-5">Article 2 : Données à caractère personnel</h3>
@@ -47,7 +47,7 @@
             <p>Les données sont conservées uniquement pendant la durée nécessaire aux finalités poursuivies : données techniques et statistiques : 13 mois, conformément à la réglementation applicable aux cookies et traceurs, données clients : 3 ans après le dernier échange commercial.</p>
             <br><br>
             <h4>Droits des personnes</h4>
-            <p>Conformément au RGPD et à la loi Informatique et Libertés, l’Utilisateur dispose des droits suivants concernant ses données : le droit d’accès, le droit de rectification, le droit d’opposition, le droit à la limitation du traitement, le droit à l’effacement, le droit à la portabilité des données.</p>
+            <p>Conformément au <abbr title="Règlement Général sur la Protection des Données">RGPD</abbr> et à la loi Informatique et Libertés, l’Utilisateur dispose des droits suivants concernant ses données : le droit d’accès, le droit de rectification, le droit d’opposition, le droit à la limitation du traitement, le droit à l’effacement, le droit à la portabilité des données.</p>
             <br><br>
             <p>Ces droits peuvent être exercés en écrivant à l’adresse suivante : cobrec@mail.bzh.</p>
             <br>
