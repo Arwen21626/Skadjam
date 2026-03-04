@@ -2,6 +2,11 @@ let lignesTab = document.getElementsByTagName("tr");
 let champsStock, champsAjouter, champsRetirer;
 let stocks = [];
 
+let rouge = "red";
+let orange = "#f8ac3e";
+let gris = "#999";
+let blanc = "white";
+
 
 for(let i = 1; i < lignesTab.length; i++){
 
@@ -12,96 +17,109 @@ for(let i = 1; i < lignesTab.length; i++){
     // sauvegarde les toutes les valeurs de stocks
     stocks.push(champsStock.children[0].value);
 
-    // ajout des event litener pour savoir quand la valeur d'un stock à été modifier
-    champsStock.addEventListener("keyup", (e) => {
-        // si on change le stock
-        stockModifier(i, e);
+    // ajout des eventListener pour savoir quand la valeur d'un stock à été modifier
+    champsStock.addEventListener("keyup", () => {
+        // si l'utilisateur ajoute du stock au clavier
+        actionSurStock(document.getElementsByTagName("tr")[i], i);
+    });
+    
+    champsStock.addEventListener("click", () => {
+        // si l'utilisateur ajoute du stock avec les flèches de l'input
+        actionSurStock(document.getElementsByTagName("tr")[i], i);
+    });
+    
+    champsAjouter.addEventListener("keyup", () => {
+        actionSurAjouterRetirer(document.getElementsByTagName("tr")[i], i);
+    });
 
-        if (stocks[i-1] !== document.getElementsByTagName("tr")[i].children[4].children[0].value){
-            champActif(document.getElementsByTagName("tr")[i].children[5].children[0], true);
-            champActif(document.getElementsByTagName("tr")[i].children[6].children[0], true);
-        }
-        else{
-            champActif(document.getElementsByTagName("tr")[i].children[5].children[0], false)
-            champActif(document.getElementsByTagName("tr")[i].children[6].children[0], false)
-        }
-    })
+    champsAjouter.addEventListener("click", () => {
+        actionSurAjouterRetirer(document.getElementsByTagName("tr")[i], i);
+    });
 
-    champsAjouter.addEventListener("keyup", (e) => {
-        // si on ajout une certaine quantite en stock
-        calculeNouvStock(i, e);
+    champsRetirer.addEventListener("keyup", () => {
+        actionSurAjouterRetirer(document.getElementsByTagName("tr")[i], i);
+    });
 
-        if (document.getElementsByTagName("tr")[i].children[5].children[0].value !== "0"){
-            champActif(document.getElementsByTagName("tr")[i].children[4].children[0], true);
-        }
-        else{
-            champActif(document.getElementsByTagName("tr")[i].children[4].children[0], false);
-        }
-        
-    })
-
-    champsRetirer.addEventListener("keyup", (e) => {
-        // si on retire une certaine quantite en stock
-        calculeNouvStock(i, e);
-
-        if (document.getElementsByTagName("tr")[i].children[6].children[0].value !== "0"){
-            champActif(document.getElementsByTagName("tr")[i].children[4].children[0], true);
-        }
-        else{
-            champActif(document.getElementsByTagName("tr")[i].children[4].children[0], false);
-        }
-    })
-
+    champsRetirer.addEventListener("click", () => {
+        actionSurAjouterRetirer(document.getElementsByTagName("tr")[i], i);
+    });
 }
 
+function actionSurAjouterRetirer(ligne, idxLigne){
 
+    // change la quantite en stock
+    calculeNouvStock(ligne, idxLigne);
 
+    // met le fond de la ligne en orange
+    stockModifier(ligne, idxLigne);
 
+    // met le fond en rouge s'il y a une erreur de saisie
+    if(!(ligne.children[5].children[0].validity.valid)){
+        ligne.children[5].children[0].style.backgroundColor = rouge;
+    }
+    if(!(ligne.children[6].children[0].validity.valid)){
+        ligne.children[6].children[0].style.backgroundColor = rouge;
+    }
 
+    // grise le champs du stock si l'utilisateur ajout ou retire du stock par les champ dédier
+    if ((!(ligne.children[5].children[0].validity.valid) || (/[1-9]/).test(ligne.children[5].children[0].value))
+        || (!(ligne.children[6].children[0].validity.valid) || (/[1-9]/).test(ligne.children[6].children[0].value))){
 
-function stockModifier(ligne, event){
+        console.log("salut");
+        champActif(ligne.children[4].children[0], true);
+    }
+    else{
+        champActif(ligne.children[4].children[0], false);
+    }
+}
+
+function actionSurStock(ligne, idxLigne){
+    // met le fond de la ligne en orange
+    stockModifier(ligne, idxLigne);
+
+    // met le fond en rouge s'il y a une erreur de saisie
+    if(!ligne.children[4].children[0].value.match(/[0-9]/)){
+        ligne.children[4].children[0].style.backgroundColor = rouge;
+    }
+
+    // grise les autres champ si le stock à été modifier
+    if (stocks[idxLigne-1] !== ligne.children[4].children[0].value){
+        champActif(ligne.children[5].children[0], true);
+        champActif(ligne.children[6].children[0], true);
+    }
+    else{
+        champActif(ligne.children[5].children[0], false);
+        champActif(ligne.children[6].children[0], false);
+    }
+}
+
+function stockModifier(ligne, idxLigne){
     // modifi la couleur du fond de la ligne qui à été modifier
 
     // si la modification change la valeur du champ
-    if (stocks[ligne-1] !== document.getElementsByTagName("tr")[ligne].children[4].children[0].value){
-        lignesTab[ligne].style.backgroundColor = "#f8ac3e";
+    if (stocks[idxLigne-1] !== ligne.children[4].children[0].value){
+        ligne.style.backgroundColor = orange;
         
-        lignesTab[ligne].children[4].children[0].style.backgroundColor = "white";
-        lignesTab[ligne].children[5].children[0].style.backgroundColor = "white";
-        lignesTab[ligne].children[6].children[0].style.backgroundColor = "white";
+        ligne.children[4].children[0].style.backgroundColor = blanc;
+        ligne.children[5].children[0].style.backgroundColor = blanc;
+        ligne.children[6].children[0].style.backgroundColor = blanc;
     }
     else{
-        lignesTab[ligne].style.backgroundColor = "";
+        ligne.style.backgroundColor = "";
+
+        ligne.children[4].children[0].style.backgroundColor = "";
+        ligne.children[5].children[0].style.backgroundColor = "";
+        ligne.children[6].children[0].style.backgroundColor = "";
     }
 }
 
-function calculeNouvStock(ligne, event){
-    // calcule et modifie la quantite en stock d'une ligne en fonction de ce qui y est ajouter ou retirer
-    let ajout = parseInt(document.getElementsByTagName("tr")[ligne].children[5].children[0].value);
-    let retrait = parseInt(document.getElementsByTagName("tr")[ligne].children[6].children[0].value);
-
-    if(isNaN(ajout)){
-        ajout = 0;
-    }
-    if(isNaN(retrait)){
-        retrait = 0
-    }
-
-    let aAjouter = ajout - retrait;
-
-    document.getElementsByTagName("tr")[ligne].children[4].children[0].value = parseInt(stocks[ligne-1]) + aAjouter;
-
-
-    // indication visuel que la quantite en stock à changer
-    stockModifier(ligne, event);
-}
 
 function champActif(cible, deactiver){
     // active ou désactive un champ et change sa couleur
     cible.disabled = deactiver;
 
     if (deactiver){
-        cible.style.backgroundColor = "#999";
+        cible.style.backgroundColor = gris;
 
         if (cible.name.match(/^qteStock/)){
             nouvInput = document.createElement("input");
@@ -117,7 +135,28 @@ function champActif(cible, deactiver){
         cible.style.backgroundColor = "";
 
         if (cible.name.match(/^qteStock/)){
-            cible.parentNode.removeChild(cible.nextSibling);
+
+            if (cible.nextSibling !== null){
+                cible.parentNode.removeChild(cible.nextSibling);
+
+            }
         }
     }
 }
+
+function calculeNouvStock(ligne, idxLigne){
+    // calcule et modifie la quantite en stock d'une ligne en fonction de ce qui y est ajouter ou retirer
+    
+    let ajout = parseInt(ligne.children[5].children[0].value);
+    let retrait = parseInt(ligne.children[6].children[0].value);
+
+    if(isNaN(ajout)){
+        ajout = 0;
+    }
+    if(isNaN(retrait)){
+        retrait = 0
+    }
+
+    ligne.children[4].children[0].value = parseInt(stocks[idxLigne-1]) + (ajout - retrait);
+}
+
