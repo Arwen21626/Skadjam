@@ -104,7 +104,7 @@ if (isset($_POST["nom"]) && isset($_POST["prenom"]) && isset($_POST["mail"]) && 
                         if (verifAdresse($adresse) && verifVille($ville) && verifCp($codePostal)){
                             $idAdresse = $ligne['id_adresse'];
                             $modifAdresse = $dbh->prepare("UPDATE sae3_skadjam._adresse
-                                                            SET numero_rue = $numRue, numero_bat = '$numBat', numero_appart = '$numApart', code_interphone = '$interphone', code_postal = $codePostal, complement_adresse = '$complement', ville = '$ville', adresse_postale = '$nomRue'
+                                                            SET numero_rue = $numRue, code_postal = $codePostal, complement_adresse = '$complement', ville = '$ville', adresse_postale = '$nomRue'
                                                             WHERE id_adresse = $idAdresse");
                             $modifAdresse->execute();
                         // Erreurs concernant le format de l'adresse
