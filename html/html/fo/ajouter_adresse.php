@@ -113,55 +113,121 @@ unset($_SESSION['erreurs'], $_SESSION['old']);
 
         <h2 class="flex justify-center text-center">Nouvelle adresse</h2>
         <!-- Formulaire -->
-        <form class="flex flex-wrap p-15 pt-0 justify-around"  action="./ajouter_adresse.php" method="post"> 
+        <?php
+            // Sécurisation des valeurs
+            $numero_rue         = htmlspecialchars($ligne['numero_rue'] ?? '');
+            $complement_adresse = htmlspecialchars($ligne['complement_adresse'] ?? '');
+            $adresse_postale    = htmlspecialchars($ligne['adresse_postale'] ?? '');
+            $ville              = htmlspecialchars($ligne['ville'] ?? '');
+            $code_postal        = htmlspecialchars($ligne['code_postal'] ?? '');
+            $numero_bat         = htmlspecialchars($ligne['numero_bat'] ?? '');
+            $numero_appart      = htmlspecialchars($ligne['numero_appart'] ?? '');
+            $code_interphone    = htmlspecialchars($ligne['code_interphone'] ?? '');
+
+            $adresse_complete = trim($numero_rue . ' ' . $complement_adresse . ' ' . $adresse_postale);
+        ?>
+
+        <form class="flex flex-wrap p-15 pt-0 justify-around" action="./ajouter_adresse.php" method="post"> 
             <div class="flex flex-wrap mt-20">
                 
                 <!-- Adresse postal -->
-                <div class="flex flex-col m-5 basis-1/3  min-w-3xs">
-                    <label for="adressePostal">Adresse* :</label>
-                    <input class="border-4 border-beige rounded-2xl w-1/1 p-1 pl-3" type="text" id="adresse" name="adresse" placeholder="ex : 3 rue des camélia" value="<?php echo ($ligne['numero_rue'] === '') ? '' : ($ligne['numero_rue'].' '.$ligne['complement_adresse'].' '.$ligne['adresse_postale']);?>" required/>
-                    <?php if (!empty($erreurs['adresse'])){ echo "<p class=\"text-rouge\" style=\"font-size: 0.90em\">L'adresse est invalide.</p>"; } ?>
+                <div class="flex flex-col m-5 basis-1/3 min-w-3xs">
+                    <label for="adresse">Adresse* :</label>
+                    <input class="border-4 border-beige rounded-2xl w-1/1 p-1 pl-3"
+                        type="text"
+                        id="adresse"
+                        name="adresse"
+                        placeholder="ex : 3 rue des camélia"
+                        value="<?= $adresse_complete ?>"
+                        required/>
+                    <?php if (!empty($erreurs['adresse'])): ?>
+                        <p class="text-rouge" style="font-size: 0.90em">L'adresse est invalide.</p>
+                    <?php endif; ?>
                 </div>
 
                 <!-- Ville -->
-                <div class="flex flex-col m-5 basis-1/3  min-w-3xs">
+                <div class="flex flex-col m-5 basis-1/3 min-w-3xs">
                     <label for="ville">Ville* :</label>
-                    <input class="border-4 border-beige rounded-2xl w-1/1 p-1 pl-3" type="text" id="ville" name="ville" value="<?php echo $ligne['ville'];?>" required/>
-                    <?php if (!empty($erreurs['ville'])){ echo "<p class=\"text-rouge\" style=\"font-size: 0.90em\">La ville ne peut contenir que des majuscules, des minuscules, des - ou des espaces.</p>"; } ?>
+                    <input class="border-4 border-beige rounded-2xl w-1/1 p-1 pl-3"
+                        type="text"
+                        id="ville"
+                        name="ville"
+                        value="<?= $ville ?>"
+                        required/>
+                    <?php if (!empty($erreurs['ville'])): ?>
+                        <p class="text-rouge" style="font-size: 0.90em">
+                            La ville ne peut contenir que des majuscules, des minuscules, des - ou des espaces.
+                        </p>
+                    <?php endif; ?>
                 </div>
 
                 <!-- Code postal -->
-                <div class="flex flex-col m-5 basis-1/3  min-w-3xs">
-                    <label for="cp">Code Postal* :</label>
-                    <input class="border-4 border-beige rounded-2xl w-1/1 p-1 pl-3" type="text" id="codePostal" name="codePostal" value="<?php echo $ligne['code_postal'];?>" required/>
-                    <?php if (!empty($erreurs['codePostal'])){ echo "<p class=\"text-rouge\" style=\"font-size: 0.90em\">Le code postal doit être composé de 5 chiffres.</p>"; } ?>
+                <div class="flex flex-col m-5 basis-1/3 min-w-3xs">
+                    <label for="codePostal">Code Postal* :</label>
+                    <input class="border-4 border-beige rounded-2xl w-1/1 p-1 pl-3"
+                        type="text"
+                        id="codePostal"
+                        name="codePostal"
+                        value="<?= $code_postal ?>"
+                        required/>
+                    <?php if (!empty($erreurs['codePostal'])): ?>
+                        <p class="text-rouge" style="font-size: 0.90em">
+                            Le code postal doit être composé de 5 chiffres.
+                        </p>
+                    <?php endif; ?>
                 </div>
 
                 <!-- Batiment -->
                 <div class="flex flex-col m-5 basis-1/3 min-w-3xs">
-                    <label for="batiment">Batiment :</label>
-                    <input class="border-4 border-beige rounded-2xl w-1/1 p-1 pl-3" type="text" id="batiment" name="batiment" value="<?php echo $ligne['numero_bat'];?>"/>
-                    <?php if (!empty($erreurs['batiment'])){ echo "<p class=\"text-rouge\" style=\"font-size: 0.90em\">Le bâtiment est invalide.</p>"; } ?>
+                    <label for="batiment">Bâtiment :</label>
+                    <input class="border-4 border-beige rounded-2xl w-1/1 p-1 pl-3"
+                        type="text"
+                        id="batiment"
+                        name="batiment"
+                        value="<?= $numero_bat ?>"/>
+                    <?php if (!empty($erreurs['batiment'])): ?>
+                        <p class="text-rouge" style="font-size: 0.90em">Le bâtiment est invalide.</p>
+                    <?php endif; ?>
                 </div>
 
-                <!-- Apartement -->
-                <div class="flex flex-col m-5 basis-1/3  min-w-3xs">
-                    <label for="apart">Apartement :</label>
-                    <input class="border-4 border-beige rounded-2xl w-1/1 p-1 pl-3" type="text" id="apart" name="apart" value="<?php echo $ligne['numero_appart'];?>"/>
-                    <?php if (!empty($erreurs['apart'])){ echo "<p class=\"text-rouge\" style=\"font-size: 0.90em\">L'appartement est invalide.</p>"; } ?>
+                <!-- Appartement -->
+                <div class="flex flex-col m-5 basis-1/3 min-w-3xs">
+                    <label for="apart">Appartement :</label>
+                    <input class="border-4 border-beige rounded-2xl w-1/1 p-1 pl-3"
+                        type="text"
+                        id="apart"
+                        name="apart"
+                        value="<?= $numero_appart ?>"/>
+                    <?php if (!empty($erreurs['apart'])): ?>
+                        <p class="text-rouge" style="font-size: 0.90em">L'appartement est invalide.</p>
+                    <?php endif; ?>
                 </div>
 
                 <!-- Interphone -->
                 <div class="flex flex-col m-5 basis-1/3 min-w-3xs">
                     <label for="interphone">Interphone :</label>
-                    <input class="border-4 border-beige rounded-2xl w-1/1 p-1 pl-3" type="text" id="interphone" name="interphone" value="<?php echo $ligne['code_interphone'];?>"/>
-                    <?php if (!empty($erreurs['interphone'])){ echo "<p class=\"text-rouge\" style=\"font-size: 0.90em\">L'interphone est invalide.</p>"; } ?>
+                    <input class="border-4 border-beige rounded-2xl w-1/1 p-1 pl-3"
+                        type="text"
+                        id="interphone"
+                        name="interphone"
+                        value="<?= $code_interphone ?>"/>
+                    <?php if (!empty($erreurs['interphone'])): ?>
+                        <p class="text-rouge" style="font-size: 0.90em">L'interphone est invalide.</p>
+                    <?php endif; ?>
                 </div>
             </div>
-            <!-- Valider le formulaire -->
+
+            <!-- Boutons -->
             <div class="flex mt-10 justify-center md:justify-end w-1/1">
-                <button class="cursor-pointer border-2 border-vertFonce rounded-2xl w-40 h-14 p-0 m-0 mr-10" type="button"><a href="./modifier_compte_client.php">Annuler</a></button>
-                <input class="cursor-pointer border-2 border-vertFonce rounded-2xl w-40  h-14 p-0 m-0 md:mr-10" type="Submit" name="submit" id="submit" value="Valider">
+                <a href="./modifier_compte_client.php"
+                class="flex items-center justify-center cursor-pointer border-2 border-vertFonce rounded-2xl w-40 h-14 mr-10">
+                Annuler
+                </a>
+
+                <input class="cursor-pointer border-2 border-vertFonce rounded-2xl w-40 h-14 md:mr-10"
+                    type="submit"
+                    name="submit"
+                    value="Valider">
             </div>
         </form>
     </main>

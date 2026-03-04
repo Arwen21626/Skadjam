@@ -22,7 +22,9 @@
     $adresseExistante->execute([$idClient]);
     $adresseE = $adresseExistante->fetch(PDO::FETCH_ASSOC);
 
-    if(!$adresseE["sauvegarde"]) {
+    $save = $adresseE['sauvegarde'] ?? '';
+
+    if(!$save) {
         $adresseE = [];
     }
 
@@ -222,7 +224,7 @@
 
             <div class="flex flex-row mt-5">
                 <label for="enregistrerAdr" class="mr-5">Enregistrer cette adresse ?</label>
-                <input type="checkbox" name="enregistrerAdr" id="enregistrerAdr" class="w-5 h-5 mt-1" <?php if($adresseE["sauvegarde"]) echo 'value="on" checked'; ?>>
+                <input type="checkbox" name="enregistrerAdr" id="enregistrerAdr" class="w-5 h-5 mt-1" <?php if($save) echo 'value="on" checked'; ?>>
             </div>
 
             <div class="flex flex-row mt-5 mb-10 justify-between">
