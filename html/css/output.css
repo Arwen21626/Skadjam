@@ -441,6 +441,9 @@ input.quantite-prod-input {
   .mx-auto {
     margin-inline: auto;
   }
+  .my-2 {
+    margin-block: calc(var(--spacing, 0.25rem) * 2);
+  }
   .my-5 {
     margin-block: calc(var(--spacing, 0.25rem) * 5);
   }
@@ -2071,6 +2074,11 @@ input.quantite-prod-input {
   .md\:px-7 {
     @media (width >= 48rem) {
       padding-inline: calc(var(--spacing, 0.25rem) * 7);
+    }
+  }
+  .md\:py-0 {
+    @media (width >= 48rem) {
+      padding-block: calc(var(--spacing, 0.25rem) * 0);
     }
   }
   .md\:pt-0\.5 {

@@ -101,6 +101,7 @@
                                 <th scope="col"><h3>Stock</h3></th>
                                 <th scope="col"><h3>Ajouter</h3></th>
                                 <th scope="col"><h3>Retirer</h3></th>
+                                <th scope="col"></th>
                             </tr>
                         </thead>
                         <tbody>
@@ -136,6 +137,7 @@
                                         </td>
                                         <td><input type="number" name="qteAajouter[<?php echo $valeurs['id_produit']; ?>]" value="0" min="0" class="border-2 border-black rounded-lg w-30 h-10 p-2"></td>
                                         <td><input type="number" name="qteAretirer[<?php echo $valeurs['id_produit']; ?>]" value="0" min="0" class="border-2 border-black rounded-lg w-30 h-10 p-2"></td>
+                                        <td class=" min-w-15 bg-white"> </td>
                                     </tr>
                             <?php }?>
                         </tbody>

@@ -266,19 +266,30 @@ if (isset($_POST["nom"]) && isset($_POST["prenom"]) && isset($_POST["mail"]) && 
 }
 if(!$isset || $erreur){
     // Préparation des données qui vont remplir les champs du formulaire
-    // Récupération du comptes clients
-    $nom = $_POST['nom'];
-    $prenom = $_POST['prenom'];
-    $mail = $_POST['mail'];
-    $tel = $_POST['tel'];
-    $denom = $_POST['denomination'];
-    $raisonSociale = $_POST['raisonSociale'];
-    $siren = $_POST['siren'];
-    $iban = $_POST['iban'];
-    $adresse = $_POST['adresse'];
-    $cp = $_POST['cp'];
-    $ville = $_POST['ville'];
-    $description = $_POST['description']; ?>
+    // Récupération des infos du compte vendeur
+    foreach($dbh->query("SELECT * FROM sae3_skadjam._compte c
+                                INNER JOIN sae3_skadjam._vendeur v
+                                    ON c.id_compte = v.id_compte
+                                INNER JOIN sae3_skadjam._habite h
+                                    ON h.id_compte = c.id_compte
+                                INNER JOIN sae3_skadjam._adresse a
+                                    ON a.id_adresse = h.id_adresse
+                                WHERE c.id_compte = $idCompte", PDO::FETCH_ASSOC) as $ligne){
+        $nom = $ligne['nom_compte'];
+        $prenom = $ligne['prenom_compte'];
+        $mail = $ligne['adresse_mail'];
+        $tel = formatTel($ligne['numero_telephone']);
+        $denom = $ligne['denomination'];
+        $raisonSociale = $ligne['raison_sociale'];
+        $siren = $ligne['siren'];
+        $iban = $ligne['iban'];
+        $adresse = $ligne['adresse_postale'];
+        $cp = $ligne['code_postal'];
+        $ville = $ligne['ville'];
+        $description = $ligne['description_vendeur'];
+        $num = $ligne['numero_rue'];
+    }  
+    ?>
     <body>
         <?php include __DIR__."/../../php/structure/header_back.php"; ?>
         <main style="margin: 0" class="flex flex-col justify-center">
@@ -294,6 +305,7 @@ if(!$isset || $erreur){
                     <label id="labelImage" for="photo" class="bg-beige w-60 h-60 rounded-2xl image-produit cursor-pointer" style="background-image: url('../..<?= isset($url) ? $url : '/images/logo/bootstrap_icon/image.svg'; ?>'); background-repeat: no-repeat; background-position: center; background-size: 60%;"></label>
                     <label class="cursor-pointer" for="photo"><h4><strong>Photo de profil</strong></h4></label>
                 </div>
+
 
                 <!-- Vendeur -->
                 <h3>Informations vendeur :</h3>
