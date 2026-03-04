@@ -98,9 +98,6 @@ if (isset($_POST["nom"]) && isset($_POST["prenom"]) && isset($_POST["mail"]) && 
                         $numRue = htmlentities(tabAdresse($_POST['adresse'])[0]);
                         $nomRue = htmlentities(tabAdresse($_POST['adresse'])[2]);
                         $complement = htmlentities(tabAdresse($_POST['adresse'])[1]);
-                        $numBat = htmlentities($_POST['batiment']);
-                        $numApart = htmlentities($_POST['apart']);
-                        $interphone = htmlentities($_POST['interphone']);
                         $codePostal = htmlentities($_POST['cp']);
                         $ville = htmlentities($_POST['ville']);
 
