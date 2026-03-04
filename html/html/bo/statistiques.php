@@ -5,6 +5,8 @@
 
     $idVendeur = $_SESSION["idCompte"];
 
+    echo $_SESSION["idCompte"];
+
     $dataStats = [
         "01" => [
             "nb_ventes_totales" => 0
@@ -68,6 +70,8 @@
                 $rqt = $dbh->query("SELECT id_vendeur FROM sae3_skadjam._produit WHERE id_produit = $idProd", PDO::FETCH_ASSOC);
                 $idVendeurProd = $rqt->fetch()["id_vendeur"];
 
+                echo $idVendeur . " " . $idVendeurProd . "<br>";
+
                 if ($idVendeurProd == $idVendeur){
 
                     echo $idProd . " " . $quantite . " " . $date . "<br>";
@@ -89,6 +93,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Stats</title>
+
+    <script> 
+        const dataJson = <?php echo json_encode($dataStats); ?>;
+    </script>
+
 </head>
 
 <?php include __DIR__ . "/../../php/structure/head_back.php"; ?>
