@@ -441,9 +441,6 @@ input.quantite-prod-input {
   .mx-auto {
     margin-inline: auto;
   }
-  .my-2 {
-    margin-block: calc(var(--spacing, 0.25rem) * 2);
-  }
   .my-5 {
     margin-block: calc(var(--spacing, 0.25rem) * 5);
   }
@@ -889,6 +886,9 @@ input.quantite-prod-input {
   .min-w-3xs {
     min-width: var(--container-3xs, 16rem);
   }
+  .min-w-15 {
+    min-width: calc(var(--spacing, 0.25rem) * 15);
+  }
   .flex-1 {
     flex: 1;
   }
@@ -1145,6 +1145,9 @@ input.quantite-prod-input {
   .bg-vertMoyen {
     background-color: var(--color-vertMoyen);
   }
+  .bg-white {
+    background-color: var(--color-white, #fff);
+  }
   .bg-\[url\(\/images\/logo\/bootstrap_icon\/cart\.svg\)\] {
     background-image: url(/images/logo/bootstrap_icon/cart.svg);
   }
@@ -1265,9 +1268,6 @@ input.quantite-prod-input {
   .pb-4 {
     padding-bottom: calc(var(--spacing, 0.25rem) * 4);
   }
-  .pb-12 {
-    padding-bottom: calc(var(--spacing, 0.25rem) * 12);
-  }
   .pb-20 {
     padding-bottom: calc(var(--spacing, 0.25rem) * 20);
   }
@@ -1325,11 +1325,11 @@ input.quantite-prod-input {
   .text-rouge {
     color: var(--color-rouge);
   }
-  .text-vertFonce {
-    color: var(--color-vertFonce);
-  }
   .text-vertClair {
     color: var(--color-vertClair);
+  }
+  .text-vertFonce {
+    color: var(--color-vertFonce);
   }
   .text-white {
     color: var(--color-white, #fff);
@@ -1446,7 +1446,9 @@ input.quantite-prod-input {
   }
   .hover\:bg-vertClair {
     &:hover {
-      background-color: var(--color-vertClair);
+      @media (hover: hover) {
+        background-color: var(--color-vertClair);
+      }
     }
   }
   .hover\:bg-\[url\(\/images\/logo\/bootstrap_icon\/cart-fill\.svg\)\] {

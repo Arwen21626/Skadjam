@@ -148,7 +148,7 @@
         </div>
         <div class="description mt-8 mb-20 modif-attribut flex flex-col items-center">
             <h3 class="mb-2">Description :</h3>
-            <p class="attribut-text mt-4"><?= $description != '' ? $description : 'Aucune description.'; ?></p>
+            <p class="attribut-text mt-4 self-left ml-10 mr-10"><?= $description != '' ? $description : 'Aucune description.'; ?></p>
         </div>
 
         <div class="flex flex-row justify-center items-center mt-4 mb-4">

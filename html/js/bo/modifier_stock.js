@@ -105,7 +105,7 @@ function erreurSaisie(cible){
     }
     else{
         cible.children[0].style.backgroundColor = "";
-        cible.children[0].style.color = "black";
+        cible.children[0].style.color = "#fff";
 
         cible.parentNode.children[7].style.backgroundImage = ""; 
         cible.parentNode.children[7].style.backgroundSize = ""; 
