@@ -111,11 +111,11 @@
                                 <div class="flex flex-row justify-between items-center">
                                     <p class="inline-block <?php if ($valeurs['prix_ttc'] !== $valeurs['prix_remise']) {echo ("line-through");}?>">
                                     <?php echo (htmlentities(str_replace(".", ",",$valeurs['prix_ttc'])));?>
-                                    € (TTC)</p>
+                                    € (<abbr title="Toutes Taxes Confondues">TTC</abbr>)</p>
 
                                     <p class="pl-3 <?php if ($valeurs['prix_ttc'] !== $valeurs['prix_remise']) { echo ("");} else{echo ("hidden");}?>">
                                     <?php echo (htmlentities(str_replace(".", ",",$valeurs['prix_remise'])));?>
-                                    € (TTC)</p>
+                                    € (<abbr title="Toutes Taxes Confondues">TTC</abbr>)</p>
                                 </div>
                                 <!--récupération de la note-->
                                 <div class="flex">
