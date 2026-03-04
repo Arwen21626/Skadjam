@@ -163,8 +163,8 @@ VALUES
   ('rue de Charpentier',NULL,4,NULL,NULL,NULL,98306,'Pons-la-Forêt','0','0'),
   ('boulevard de Hamon',NULL,49,NULL,NULL,NULL,40361,'Guillotdan','0','0'),
   ('chemin Sylvie Meunier',NULL,5,NULL,NULL,NULL,32336,'Daniel','0','0'),
-  ('rue Louise Labbé',NULL,536,NULL,NULL,NULL,76820,'Sainte Alexnec','0','0');
-
+  ('rue Louise Labbé',NULL,536,NULL,NULL,NULL,76820,'Sainte Alexnec','0','0'),
+  ('rue Anonymisé',NULL,1,NULL,NULL,NULL,01001,'Anonyme', '0', '0');
 
 --Insertion Habite
 INSERT INTO sae3_skadjam._habite (id_adresse,id_compte) 
