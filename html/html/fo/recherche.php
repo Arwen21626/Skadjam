@@ -290,7 +290,7 @@
             ajoutEventListener()
 
             var marqueur = false
-            var lastClickedMarker = null
+            var dernierMarqueur = null
             var lat = 48
             var long = -3
 
@@ -342,18 +342,18 @@
                 let urlActuelle = e.layer.options.icon.options.iconUrl;
 
                 // Remettre l'ancien marqueur en clair si on clique sur un autre
-                if (lastClickedMarker && lastClickedMarker !== e.layer) {
-                    lastClickedMarker.setIcon(marqueurClair);
+                if (dernierMarqueur && dernierMarqueur !== e.layer) {
+                    dernierMarqueur.setIcon(marqueurClair);
+                    document.getElementById(dernierMarqueur.options.id_compte).checked = false
                 }
-
 
                 // changement de la couleur
                 if (urlActuelle.includes("pointeurVertClair.png")) {
                     e.layer.setIcon(marqueurFonce)
-                    lastClickedMarker = e.layer
+                    dernierMarqueur = e.layer
                 } else {
                     e.layer.setIcon(marqueurClair)
-                    lastClickedMarker = null
+                    dernierMarqueur = null
                 }
 
                 map.flyTo(e.layer.getLatLng(), map.getZoom());
@@ -362,9 +362,11 @@
                 // Si le vendeur est déjà coché, on le décoche
                 if(e.layer.options.id_compte == checkedVendeurs[0]){
                     checkedVendeurs.splice(checkedVendeurs.indexOf(e.layer.options.id_compte), 1)
+                    document.getElementById(e.layer.options.id_compte).checked = false
 
                 // Sinon, on le coche
                 } else {
+                    document.getElementById(e.layer.options.id_compte).checked = true
                     checkedVendeurs.splice(checkedVendeurs.indexOf(e.layer.options.id_compte), 1)
                     checkedVendeurs.push(e.layer.options.id_compte)
                 }
