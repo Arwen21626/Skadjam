@@ -202,7 +202,8 @@ if (isset($_POST["nom"]) && isset($_POST["prenom"]) && isset($_POST["mail"]) && 
                 // Fermer la connexion à la base de données
                 $dbh = null;
                 // Redirection vers la page d'accueil
-                header("location: profil_vendeur.php");
+                header("location: ./profil_vendeur.php");
+                exit();
             }
         // Messages d'erreurs si l'un des champs est mal rempli
         }else{ 
