@@ -1265,6 +1265,9 @@ input.quantite-prod-input {
   .pb-12 {
     padding-bottom: calc(var(--spacing, 0.25rem) * 12);
   }
+  .pb-20 {
+    padding-bottom: calc(var(--spacing, 0.25rem) * 20);
+  }
   .pb-28 {
     padding-bottom: calc(var(--spacing, 0.25rem) * 28);
   }
@@ -1321,6 +1324,9 @@ input.quantite-prod-input {
   }
   .text-vertFonce {
     color: var(--color-vertFonce);
+  }
+  .text-vertClair {
+    color: var(--color-vertClair);
   }
   .text-white {
     color: var(--color-white, #fff);
@@ -1433,6 +1439,11 @@ input.quantite-prod-input {
   .checked\:bg-beige {
     &:checked {
       background-color: var(--color-beige);
+    }
+  }
+  .hover\:bg-vertClair {
+    &:hover {
+      background-color: var(--color-vertClair);
     }
   }
   .hover\:bg-\[url\(\/images\/logo\/bootstrap_icon\/cart-fill\.svg\)\] {
@@ -2037,6 +2048,11 @@ input.quantite-prod-input {
       background-color: var(--color-beige);
     }
   }
+  .md\:bg-vertClair {
+    @media (width >= 48rem) {
+      background-color: var(--color-vertClair);
+    }
+  }
   .md\:p-0 {
     @media (width >= 48rem) {
       padding: calc(var(--spacing, 0.25rem) * 0);
@@ -2120,6 +2136,16 @@ input.quantite-prod-input {
   .md\:text-center {
     @media (width >= 48rem) {
       text-align: center;
+    }
+  }
+  .md\:text-left {
+    @media (width >= 48rem) {
+      text-align: left;
+    }
+  }
+  .md\:text-vertFonce {
+    @media (width >= 48rem) {
+      color: var(--color-vertFonce);
     }
   }
   .lg\:grid-cols-3 {
