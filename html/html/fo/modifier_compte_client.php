@@ -56,8 +56,8 @@ foreach($dbh->query("SELECT * FROM sae3_skadjam._compte c
 
         <h2 class="flex justify-center text-center">Modification du compte client</h2>
         <!-- Formulaire -->
-        <form class="flex flex-wrap p-15 pt-0 justify-around"  action="../../php/traitement_donnees_compte_client.php" method="post"> 
-            <div class="flex flex-wrap mt-20">
+        <form class="md:flex md:flex-wrap p-15 pt-0 justify-around"  action="../../php/traitement_donnees_compte_client.php" method="post"> 
+            <div class="md:flex md:flex-wrap mt-20">
                 <!-- Nom -->
                 <div class="flex flex-col basis-1/3 m-5 min-w-3xs">
                     <label for="nom">Nom* :</label>
@@ -108,7 +108,7 @@ foreach($dbh->query("SELECT * FROM sae3_skadjam._compte c
                                                 ON a.id_adresse = h.id_adresse
                                         WHERE h.id_compte = $idCompte
                                         ORDER BY a.id_adresse ASC", PDO::FETCH_ASSOC) as $ligne){?>
-                    <div class="flex flex-row mt-20">
+                    <div class="flex flex-col md:flex-row mt-20">
                         <div class="basis-2/3 flex flex-wrap">
                             <h3 class="basis-1/1  min-w-3xs">Adresse numéro <?php echo $compteur;?></h3>
                             
@@ -155,7 +155,7 @@ foreach($dbh->query("SELECT * FROM sae3_skadjam._compte c
                             </div>
                         </div>
                         <div class="flex items-center justify-end">
-                            <button class="cursor-pointer border-4 border-beige rounded-2xl w-80 h-14 p-0 m-0 mt-5" type="button"><a href="../../php/supprimer_adresse.php?idAdresse=<?php echo $ligne['id_adresse'];?>">Supprimer cette adresse</a></button>
+                            <button class="cursor-pointer border-4 border-rouge rounded-2xl w-80 h-14 p-0 m-0 mt-5" type="button"><a href="../../php/supprimer_adresse.php?idAdresse=<?php echo $ligne['id_adresse'];?>">Supprimer cette adresse</a></button>
                         </div>
                     </div>
                 <?php 
