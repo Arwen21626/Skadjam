@@ -94,6 +94,11 @@ if (isset($_POST['categorie']) && isset($_POST['nom']) && isset($_POST['prix']) 
     $nom_photo_finale = $nom_explode.$currentTime.'.'.$ext;
     move_uploaded_file($nom_serv_photo,$destination.'/'.$nom_photo_finale);
 
+    $erreurImageObligatoire = false;
+    if($typePhoto == null){
+        $erreurImageObligatoire = true;
+    }
+
     if($idCategorie == 0){
         $erreurIdCategorie = true;
     }
@@ -327,6 +332,10 @@ if (isset($_POST['categorie']) && isset($_POST['nom']) && isset($_POST['prix']) 
                     <!-- label qui agit comme bouton -->
                     <label for="photo" class="bg-beige w-60 h-60 rounded-2xl image-produit cursor-pointer" style="background-image: url('../../images/logo/bootstrap_icon/image.svg'); background-repeat: no-repeat; background-position: center; background-size: 60%;"></label>
                     <label class="cursor-pointer" for="photo">Ajouter une image*</label>
+                    <?php if ($erreurImageObligatoire){ ?>
+                        <p class="text-rouge">L'image est obligatoire</p>
+                    <?php };?>
+                    
                 </div>
 
                 <!-- Nom produit -->
