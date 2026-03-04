@@ -112,8 +112,8 @@ try {
     session_destroy();
 
     // Redirection vers la page d'accueil
-    /*header("Location: ../../index.php");
-    exit();*/
+    header("Location: ../../index.php");
+    exit();
 } 
 catch (PDOException $e) {
     echo "Erreur : " . $e->getMessage();
