@@ -1,3 +1,4 @@
+-- Active: 1772554420945@@127.0.0.1@8888@postgres@sae3_skadjam
 DROP SCHEMA IF EXISTS sae3_skadjam CASCADE;
 CREATE SCHEMA sae3_skadjam;
 SET SCHEMA 'sae3_skadjam';
@@ -29,6 +30,21 @@ CREATE TABLE sae3_skadjam._notification (
 );
 
 
+CREATE TABLE sae3_skadjam._adresse_livraison (
+    id_adresse SERIAL NOT NULL,
+    nom CHARACTER VARYING(100) NOT NULL,
+    prenom CHARACTER VARYING(100) NOT NULL,
+    adresse_postale CHARACTER VARYING(100) NOT NULL,
+    complement_adresse CHARACTER VARYING(200),
+    numero_rue NUMERIC(5) NOT NULL,
+    numero_bat CHARACTER VARYING(10),
+    numero_appart CHARACTER VARYING(10),
+    code_interphone CHARACTER VARYING(10),
+    code_postal NUMERIC(5) NOT NULL,
+    ville CHARACTER VARYING(100) NOT NULL,
+    sauvegarde BOOLEAN NOT NULL DEFAULT FALSE
+);
+
 CREATE TABLE sae3_skadjam._adresse (
     id_adresse SERIAL NOT NULL,
     adresse_postale CHARACTER VARYING(100) NOT NULL,
@@ -41,7 +57,6 @@ CREATE TABLE sae3_skadjam._adresse (
     ville CHARACTER VARYING(100) NOT NULL,
     latitude CHARACTER VARYING(15) DEFAULT NULL,
     longitude CHARACTER VARYING(15) DEFAULT NULL
-    
 );
 
 
@@ -187,20 +202,18 @@ CREATE TABLE sae3_skadjam._donne (
 
 CREATE TABLE sae3_skadjam._facture ( 
     numero_facture SERIAL NOT NULL,
-    montant_ht NUMERIC(10,2) NOT NULL,
-    emetteur CHARACTER(6) DEFAULT 'Alizon', 
-    destinataire INT NOT NULL,
-    date_commande CHARACTER VARYING(12) NOT NULL,
+    emetteur INT NOT NULL,
     id_commande INT NOT NULL
 );
 
 CREATE TABLE sae3_skadjam._commande (
     id_commande SERIAL NOT NULL,
+    id_suivi CHARACTER VARYING(16),
+    id_adresse INTEGER NOT NULL,
     etat CHARACTER VARYING(30) NOT NULL,
     date_commande CHARACTER (12) NOT NULL,
     montant_total_ttc NUMERIC(10,2) NOT NULL,
-    id_client INT NOT NULL,
-    id_facture INT
+    id_client INT NOT NULL
 );
 
 
@@ -229,6 +242,12 @@ CREATE TABLE sae3_skadjam._avis (
     signaler BOOLEAN NOT NULL DEFAULT FALSE
 );
 
+CREATE TABLE sae3_skadjam._reponse (
+    contenu_reponse VARCHAR(500) NOT NULL,
+    id_compte INT NOT NULL,
+    id_avis INT NOT NULL
+);
+
 CREATE TABLE sae3_skadjam._a_signaler (
     id_avis INT NOT NULL,
     id_compte INT NOT NULL
@@ -247,6 +266,10 @@ ALTER TABLE sae3_skadjam._notification
 
 ALTER TABLE sae3_skadjam._adresse
     ADD CONSTRAINT pk_adresse
+        PRIMARY KEY (id_adresse);
+
+ALTER TABLE sae3_skadjam._adresse_livraison
+    ADD CONSTRAINT pk_adresse_livraison
         PRIMARY KEY (id_adresse);
 
 ALTER TABLE sae3_skadjam._carte_bancaire
@@ -329,6 +352,10 @@ ALTER TABLE sae3_skadjam._avis
     ADD CONSTRAINT pk_avis
         PRIMARY KEY (id_avis);
 
+ALTER TABLE sae3_skadjam._reponse
+    ADD CONSTRAINT pk_reponse
+        PRIMARY KEY (id_avis);
+        
 ALTER TABLE sae3_skadjam._appuie
     ADD CONSTRAINT pk_appuie
         PRIMARY KEY (id_photo, id_avis);
@@ -459,10 +486,15 @@ ALTER TABLE sae3_skadjam._commande
         FOREIGN KEY (id_client)
             REFERENCES sae3_skadjam._client(id_compte);
 
+--ALTER TABLE sae3_skadjam._commande
+--    ADD CONSTRAINT fk_commande_facture
+--        FOREIGN KEY (id_facture)
+--            REFERENCES sae3_skadjam._facture(numero_facture);
+
 ALTER TABLE sae3_skadjam._commande
-    ADD CONSTRAINT fk_commande_facture
-        FOREIGN KEY (id_facture)
-            REFERENCES sae3_skadjam._facture(numero_facture);
+    ADD CONSTRAINT fk_commande_adresse
+        FOREIGN KEY (id_adresse)
+            REFERENCES sae3_skadjam._adresse_livraison(id_adresse);
 
 ALTER TABLE sae3_skadjam._donne
     ADD CONSTRAINT fk_donne_panier
@@ -490,9 +522,9 @@ ALTER TABLE sae3_skadjam._facture
             REFERENCES sae3_skadjam._commande(id_commande);
 
 ALTER TABLE sae3_skadjam._facture
-    ADD CONSTRAINT fk_facture_client
-        FOREIGN KEY (destinataire)
-            REFERENCES sae3_skadjam._client(id_compte);
+    ADD CONSTRAINT fk_facture_vendeur
+        FOREIGN KEY (emetteur)
+            REFERENCES sae3_skadjam._vendeur(id_compte);
             
 ALTER TABLE sae3_skadjam._appuie
     ADD CONSTRAINT fk_appuie_avis
@@ -513,6 +545,16 @@ ALTER TABLE sae3_skadjam._avis
     ADD CONSTRAINT fk_avis_client
         FOREIGN KEY (id_compte)
             REFERENCES sae3_skadjam._client(id_compte);
+            
+ALTER TABLE sae3_skadjam._reponse
+    ADD CONSTRAINT fk_reponse_vendeur
+        FOREIGN KEY (id_compte)
+            REFERENCES sae3_skadjam._vendeur(id_compte);
+
+ALTER TABLE sae3_skadjam._reponse
+    ADD CONSTRAINT fk_reponse_avis
+        FOREIGN KEY (id_avis)
+            REFERENCES sae3_skadjam._avis(id_avis);
             
 ALTER TABLE sae3_skadjam._a_signaler
     ADD CONSTRAINT fk_a_signaler_avis
@@ -557,6 +599,14 @@ ALTER TABLE sae3_skadjam._adresse
     ADD CONSTRAINT ch_adresse_ville
         CHECK (ville ~ '[a-zA-Z -]{1,}');
 
+ALTER TABLE sae3_skadjam._adresse_livraison
+    ADD CONSTRAINT ch_adresse_livraison_code_postal
+        CHECK (01000<code_postal AND code_postal<99999);
+
+ALTER TABLE sae3_skadjam._adresse_livraison
+    ADD CONSTRAINT ch_adresse_livraison_ville
+        CHECK (ville ~ '[a-zA-Z -]{1,}');
+        
 ALTER TABLE sae3_skadjam._client
     ADD CONSTRAINT ch_client_date_naissance
         CHECK (date_naissance ~ '([0-2][0-9]|3[01])/(0[0-9]|1[0-2])/[0-9]{4}');
@@ -571,7 +621,7 @@ ALTER TABLE sae3_skadjam._commande
 
 ALTER TABLE sae3_skadjam._commande
     ADD CONSTRAINT ch_commande_etat
-        CHECK (etat IN ('En attente', 'Préparé', 'Expédié', 'En cours de livraison', 'Livré'));
+        CHECK (etat IN ('En attente', 'Expédié', 'En cours de livraison', 'Livré', 'Inconnu'));
 
 ALTER TABLE sae3_skadjam._panier
     ADD CONSTRAINT ch_panier_date_derniere_modif
@@ -605,10 +655,11 @@ ALTER TABLE sae3_skadjam._remise
     ADD CONSTRAINT ch_remise_date_debut
         CHECK (date_debut_remise ~ '([0-2][0-9]|3[01])/(0[0-9]|1[0-2])/[0-9]{4}');
 
+/*
 ALTER TABLE sae3_skadjam._remise
     ADD CONSTRAINT ch_remise_date_fin
         CHECK (date_fin_remise ~ '([0-2][0-9]|3[01])/(0[0-9]|1[0-2])/[0-9]{4}');
-
+*/
 ALTER TABLE sae3_skadjam._promotion
     ADD CONSTRAINT ch_promotion_date_debut
         CHECK (date_debut_promotion ~ '([0-2][0-9]|3[01])/(0[0-9]|1[0-2])/[0-9]{4}');
@@ -850,30 +901,26 @@ CREATE OR REPLACE TRIGGER tg_calculer_prix_remiser
 --après création de la commande
 CREATE OR REPLACE FUNCTION creer_commande_et_facture()
 RETURNS TRIGGER AS $$
-DECLARE
-  v_id_facture INTEGER;
 BEGIN
   WITH tab_commande AS
-    (SELECT c.id_panier, c.quantite_par_produit, p.id_produit, p.prix_ht, p.prix_ttc, p.id_vendeur
-    FROM sae3_skadjam._produit P
+    (SELECT c.id_panier, c.quantite_par_produit, p.id_produit, p.prix_ht, p.prix_remise, p.prix_ttc, p.id_vendeur
+    FROM sae3_skadjam._produit p
       INNER JOIN sae3_skadjam._contient c
       ON p.id_produit = c.id_produit
       WHERE c.id_panier = NEW.id_panier)
         
   INSERT INTO sae3_skadjam._details (montant_ht, quantite, sous_total, id_commande, id_produit)
-    (SELECT prix_ht, quantite_par_produit, prix_ht * quantite_par_produit as sous_total , new.id_commande, id_produit
+    (SELECT prix_ht, quantite_par_produit, prix_remise * quantite_par_produit as sous_total , new.id_commande, id_produit
     FROM tab_commande);
   
-  INSERT INTO sae3_skadjam._facture (montant_ht, destinataire, date_commande, id_commande)
-    (SELECT sum(sous_total), c.id_client, c.date_commande, new.id_commande
-    FROM sae3_skadjam._details d
-      INNER JOIN sae3_skadjam._commande c
-      ON c.id_commande = d.id_commande
-    WHERE d.id_commande = new.id_commande
-    GROUP BY c.id_client, c.date_commande)
-    RETURNING numero_facture INTO v_id_facture;
+  INSERT INTO sae3_skadjam._facture (emetteur, id_commande)
+    (SELECT DISTINCT p.id_vendeur, new.id_commande
+    FROM sae3_skadjam._commande c
+      INNER JOIN sae3_skadjam._details d ON c.id_commande = d.id_commande
+      INNER JOIN sae3_skadjam._produit p ON p.id_produit = d.id_produit
+    WHERE d.id_commande = new.id_commande);
     
-    UPDATE sae3_skadjam._commande SET id_facture = v_id_facture WHERE id_commande = new.id_commande;
+    UPDATE sae3_skadjam._commande SET montant_total_ttc = (SELECT sum(sous_total) FROM sae3_skadjam._details WHERE id_commande = new.id_commande) WHERE id_commande = new.id_commande;
     
   RETURN new;
 END;

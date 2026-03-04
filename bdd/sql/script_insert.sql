@@ -1,3 +1,4 @@
+-- Active: 1772554420945@@127.0.0.1@8888@postgres@sae3_skadjam
 SET SCHEMA 'sae3_skadjam';
 
 --Insertion Compte
@@ -42,11 +43,13 @@ VALUES
   ('Gilles','Matthieu','bernardchevallier@chevallier.org','$2y$10$2Mv9zxGIYl4wpGv/rCBrO.rRDdu84.gu9VbfRDIruepdPYGg3R3fW','+33150077407',false),
   ('Bouvet','Bertrand','pmallet@bouygtel.fr','$2y$10$17I6E4cbfquAL0PElM98a.Dez7My6EdvNnKbQvwu.fkOnM4wL5rEm','+33430320910',false),
   ('Carpentier','Clémence','lalbert@live.com','$2y$10$XkHC12lYBQ6X58G6T9n/i.TDg1Mh47.zzURqYQstZaiElU.7fYYUi','+33428865033',false),
-  ('Couturier','Laure','rolandgrenier@blanchet.com','$2y$10$SxzBbx9XdTKlcWv1wZbn3ul8K49YnnXlMCMwIEYYHqybfhAQR1v/2','+33551471854',false);
-
+  ('Couturier','Laure','rolandgrenier@blanchet.com','$2y$10$SxzBbx9XdTKlcWv1wZbn3ul8K49YnnXlMCMwIEYYHqybfhAQR1v/2','+33551471854',false),
+  ('Anonyme','Anonyme','anonyme@anonyme.ano','0','+33101010101',false),
+  ('Anonyme','Anonyme','anonyme_vendeur@anonyme.ano','0','+33101010101',false);
 --Insertion Vendeur
 INSERT INTO sae3_skadjam._vendeur (id_compte,raison_sociale,siren,description_vendeur,iban,denomination) 
 VALUES
+  (42,'Anonyme',000000001,NULL,'FR0000000000000000000000000','Anonyme'),
   (1,'Creperie du Menhir',495729568,NULL,'FR7614204587991023556700188','Creperie du Menhir'),
   (2,'Boulangerie Breizh Douceur',423176973,NULL,'FR1154892201765490001220811','BreizhD'),
   (3,'Atelier du Goémon',457954311,NULL,'FR3310042223908765441122766','GoemLab'),
@@ -90,7 +93,8 @@ VALUES
   (37,'anais37','03/01/1989'),
   (38,'camille65','28/05/1966'),
   (39,'susanne96','05/12/1990'),
-  (40,'anneguichard','18/02/1970');
+  (40,'anneguichard','18/02/1970'),
+  (41,'[SUPPRIME]','01/01/1970');
 
 --Insertion Panier
 INSERT INTO sae3_skadjam._panier (id_panier, nb_produit_total, montant_total_ttc, date_derniere_modif, id_client)
@@ -114,51 +118,53 @@ VALUES
   (17, 0, 0.00, '22/11/2025', 37),
   (18, 0, 0.00, '22/11/2025', 38),
   (19, 0, 0.00, '22/11/2025', 39),
-  (20, 0, 0.00, '22/11/2025', 40);
+  (20, 0, 0.00, '22/11/2025', 40),
+  (21, 0, 0.00, '22/11/2025', 41);
 
 --Insertion Adresse
-INSERT INTO sae3_skadjam._adresse (adresse_postale,complement_adresse,numero_rue,numero_bat,numero_appart,code_interphone,code_postal,ville,longitude,latitude) 
+INSERT INTO sae3_skadjam._adresse (adresse_postale,complement_adresse,numero_rue,numero_bat,numero_appart,code_interphone,code_postal,ville) 
 VALUES
-  ('Chemin de Penn Ar Creac’H',NULL,5,NULL,NULL,NULL,29100,'Douarnenez','-4.34','48.08'),
-  ('Allée des Paludiers',NULL,5,NULL,NULL,NULL,56000,'Vannes','-2.769817','47.635242'),
-  ('Rue Général Gallieni',NULL,18,NULL,NULL,NULL,29200,'Brest','-4.506883','48.390423'),
-  ('Boulevard Léon Blum',NULL,7,NULL,NULL,NULL,56100,'Lorient','-3.376303','47.747311'),
-  ('Rue Neuve',NULL,24,NULL,NULL,NULL,29900,'Concarneau','-3.905555','47.894264'),
-  ('Impasse des fleurs',NULL,3,NULL,NULL,NULL,29930,'Pont-Aven','-3.753631','47.857201'),
-  ('Avenue de Truro',NULL,11,NULL,NULL,NULL,29600,'Morlaix','-3.826069','48.588528'),
-  ('Rue Edouard Branly',NULL,5,NULL,NULL,NULL,22300,'Lannion','-3.450603','48.757955'),
-  ('Rue Rosa Parks',NULL,8,NULL,NULL,NULL,29300,'Quimperle','-3.565254','47.865814'),
-  ('Rue Claude Bernard',NULL,15,NULL,NULL,NULL,22000,'Saint-Brieuc','-2.751637','48.502052'),
-  ('Rue Victor Hugo',NULL,2,NULL,NULL,NULL,56100,'Lorient','-3.365323','47.740238'),
-  ('Rue Lesage',NULL,9,NULL,NULL,NULL,29200,'Brest','-4.464342','48.399035'),
-  ('Route du Ris',NULL,6,NULL,NULL,NULL,29100,'Douarnenez','-4.301849','48.089901'),
-  ('Rue du Henan',NULL,14,NULL,NULL,NULL,29930,'Pont-Aven','-3.759209','47.852928'),
-  ('Rue des Mimosas',NULL,12,NULL,NULL,NULL,22000,'Plérin','-2.769657','48.543238'),
-  ('Rue Chevreul',NULL,3,NULL,NULL,NULL,29200,'Brest','-4.494268','48.407139'),
-  ('Rue Marcel Sembat',NULL,19,NULL,NULL,NULL,35000,'Rennes','-1.675359','48.094536'),
-  ('Rue du Pleneno',NULL,22,NULL,NULL,NULL,56100,'Lorient','-3.387674','47.760415'),
-  ('Rue du Valais',NULL,10,NULL,NULL,NULL,22000,'Saint-Brieuc','-2.726952','48.521893'),
-  ('Rue Beg-Avel',NULL,4,NULL,NULL,NULL,29200,'Brest','-4.458753','48.399416'),
-  ('chemin de Alexandre',NULL,3,NULL,NULL,NULL,72069,'Evrard-sur-Muller','0','0'),
-  ('boulevard Klein',NULL,53,NULL,NULL,NULL,23411,'Martin-les-Bains','0','0'),
-  ('avenue Alix Gauthier',NULL,36,NULL,NULL,NULL,11282,'Sainte LorraineBourg','0','0'),
-  ('chemin Lefort',NULL,7,NULL,NULL,NULL,27504,'Rousseau-les-Bains','0','0'),
-  ('rue Lucie David',NULL,44,NULL,NULL,NULL,39426,'Saint Adèledan','0','0'),
-  ('rue de Jacques',NULL,65,NULL,NULL,NULL,94399,'Dumasboeuf','0','0'),
-  ('boulevard de Morel',NULL,13,NULL,NULL,NULL,80814,'Schmitt','0','0'),
-  ('rue de Huet',NULL,8,NULL,NULL,NULL,90595,'Tanguy','0','0'),
-  ('rue Tristan Gay',NULL,312,NULL,NULL,NULL,42037,'Riouboeuf','0','0'),
-  ('rue Lucas Vincent',NULL,10,NULL,NULL,NULL,60673,'Saint JosephVille','0','0'),
-  ('avenue de Rodrigues',NULL,69,NULL,NULL,NULL,76186,'Guilbert-les-Bains','0','0'),
-  ('rue Martine Clément',NULL,15,NULL,NULL,NULL,50719,'Chrétiendan','0','0'),
-  ('rue Barre',NULL,37,NULL,NULL,NULL,41449,'Maillot','0','0'),
-  ('rue Pages',NULL,96,NULL,NULL,NULL,77624,'CharrierVille','0','0'),
-  ('boulevard de Dumont',NULL,73,NULL,NULL,NULL,95455,'Bertin','0','0'),
-  ('rue Marie',NULL,2,NULL,NULL,NULL,50089,'Jacob-sur-Pineau','0','0'),
-  ('rue de Charpentier',NULL,4,NULL,NULL,NULL,98306,'Pons-la-Forêt','0','0'),
-  ('boulevard de Hamon',NULL,49,NULL,NULL,NULL,40361,'Guillotdan','0','0'),
-  ('chemin Sylvie Meunier',NULL,5,NULL,NULL,NULL,32336,'Daniel','0','0'),
-  ('rue Louise Labbé',NULL,536,NULL,NULL,NULL,76820,'Sainte Alexnec','0','0');
+  ('rue du Menhir',NULL,12,NULL,NULL,NULL,29000,'Quimper'),
+  ('rue des Paludiers',NULL,5,NULL,NULL,NULL,56000,'Vannes'),
+  ('avenue des Goemoniers',NULL,18,NULL,NULL,NULL,29200,'Brest'),
+  ('impasse des Embruns',NULL,7,NULL,NULL,NULL,56100,'Lorient'),
+  ('quai d’Ar Mor',NULL,24,NULL,NULL,NULL,29900,'Concarneau'),
+  ('allee Ker Sucre',NULL,3,NULL,NULL,NULL,29930,'Pont-Aven'),
+  ('rue du Triskell',NULL,11,NULL,NULL,NULL,29600,'Morlaix'),
+  ('rue des Lavandieres',NULL,37,NULL,NULL,NULL,22300,'Lannion'),
+  ('rue de la Distillerie',NULL,8,NULL,NULL,NULL,29300,'Quimperle'),
+  ('rue des Delices',NULL,15,NULL,NULL,NULL,22000,'Saint-Brieuc'),
+  ('rue des Tanneurs',NULL,42,NULL,NULL,NULL,29270,'Carhaix-Plouguer'),
+  ('rue du Kouign-Amann',NULL,9,NULL,NULL,NULL,29100,'Douarnenez'),
+  ('rue de la Brasserie',NULL,6,NULL,NULL,NULL,35600,'Redon'),
+  ('rue Arz',NULL,14,NULL,NULL,NULL,56400,'Auray'),
+  ('rue de l’Argoat',NULL,27,NULL,NULL,NULL,22110,'Rostrenen'),
+  ('rue de la Mode Bretonne',NULL,3,NULL,NULL,NULL,56270,'Ploemeur'),
+  ('route Penn Ar Bed',NULL,19,NULL,NULL,NULL,29280,'Plouzane'),
+  ('rue Flora',NULL,22,NULL,NULL,NULL,56700,'Hennebont'),
+  ('rue du Lait Breton',NULL,10,NULL,NULL,NULL,29400,'Landivisiau'),
+  ('rue Gwened',NULL,4,NULL,NULL,NULL,56000,'Vannes'),
+  ('chemin de Alexandre',NULL,3,NULL,NULL,NULL,72069,'Evrard-sur-Muller'),
+  ('boulevard Klein',NULL,53,NULL,NULL,NULL,23411,'Martin-les-Bains'),
+  ('avenue Alix Gauthier',NULL,36,NULL,NULL,NULL,11282,'Sainte LorraineBourg'),
+  ('chemin Lefort',NULL,7,NULL,NULL,NULL,27504,'Rousseau-les-Bains'),
+  ('rue Lucie David',NULL,44,NULL,NULL,NULL,39426,'Saint Adèledan'),
+  ('rue de Jacques',NULL,65,NULL,NULL,NULL,94399,'Dumasboeuf'),
+  ('boulevard de Morel',NULL,13,NULL,NULL,NULL,80814,'Schmitt'),
+  ('rue de Huet',NULL,8,NULL,NULL,NULL,90595,'Tanguy'),
+  ('rue Tristan Gay',NULL,312,NULL,NULL,NULL,42037,'Riouboeuf'),
+  ('rue Lucas Vincent',NULL,10,NULL,NULL,NULL,60673,'Saint JosephVille'),
+  ('avenue de Rodrigues',NULL,69,NULL,NULL,NULL,76186,'Guilbert-les-Bains'),
+  ('rue Martine Clément',NULL,15,NULL,NULL,NULL,50719,'Chrétiendan'),
+  ('rue Barre',NULL,37,NULL,NULL,NULL,41449,'Maillot'),
+  ('rue Pages',NULL,96,NULL,NULL,NULL,77624,'CharrierVille'),
+  ('boulevard de Dumont',NULL,73,NULL,NULL,NULL,95455,'Bertin'),
+  ('rue Marie',NULL,2,NULL,NULL,NULL,50089,'Jacob-sur-Pineau'),
+  ('rue de Charpentier',NULL,4,NULL,NULL,NULL,98306,'Pons-la-Forêt'),
+  ('boulevard de Hamon',NULL,49,NULL,NULL,NULL,40361,'Guillotdan'),
+  ('chemin Sylvie Meunier',NULL,5,NULL,NULL,NULL,32336,'Daniel'),
+  ('rue Louise Labbé',NULL,536,NULL,NULL,NULL,76820,'Sainte Alexnec'),
+  ('rue Anonymisé',NULL,1,NULL,NULL,NULL,01001,'Anonyme');
 
 --Insertion Habite
 INSERT INTO sae3_skadjam._habite (id_adresse,id_compte) 
@@ -202,7 +208,8 @@ VALUES
   (37,37),
   (38,38),
   (39,39),
-  (40,40);
+  (40,40),
+  (41,42);
 
 --Insertion TVA
 INSERT INTO sae3_skadjam._tva (nom_tva,pourcentage_tva) 

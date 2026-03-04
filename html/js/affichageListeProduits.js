@@ -8,7 +8,6 @@ function afficherListe(tab) {
         afficherProduit(tab,i)
     }
 
-    window.scrollTo(0, 0);
+    window.scrollTo(0, 0)
     numPageInfo(tab)
-    
 }

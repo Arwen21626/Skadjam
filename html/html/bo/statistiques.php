@@ -3,12 +3,85 @@
     include __DIR__ . "/../../php/verif_role_bo.php";
     include __DIR__ . "/../../01_premiere_connexion.php";
 
-    print_r($_SESSION);
-
     $idVendeur = $_SESSION["idCompte"];
 
-    echo $idVendeur;
+    $dataStats = [
+        "01" => [
+            "nb_ventes_totales" => 0
+        ],
+        "02" => [
+            "nb_ventes_totales" => 0
+        ],
+        "03" => [
+            "nb_ventes_totales" => 0
+        ],
+        "04" => [
+            "nb_ventes_totales" => 0
+        ],
+        "05" => [
+            "nb_ventes_totales" => 0
+        ],
+        "06" => [
+            "nb_ventes_totales" => 0
+        ],
+        "07" => [
+            "nb_ventes_totales" => 0
+        ],
+        "08" => [
+            "nb_ventes_totales" => 0
+        ],
+        "09" => [
+            "nb_ventes_totales" => 0
+        ],
+        "10" => [
+            "nb_ventes_totales" => 0
+        ],
+        "11" => [
+            "nb_ventes_totales" => 0
+        ],
+        "12" => [
+            "nb_ventes_totales" => 0
+        ]
+    ];
+
+    $rqt = $dbh->query("SELECT id_commande, date_commande FROM sae3_skadjam._commande", PDO::FETCH_ASSOC);
+    $commandes = $rqt->fetchAll();
+
+    print_r($commandes);
+
+    if ($commandes) {
+        
+        foreach ($commandes as $commande) {
+            
+            $date = $commande["date_commande"];
+            $date = explode("/", $date)[1];
+            $idCommande = $commande["id_commande"];
+
+            $rqt = $dbh->query("SELECT id_produit, quantite FROM sae3_skadjam._details WHERE id_commande = $idCommande", PDO::FETCH_ASSOC);
+            $prodsInCommande = $rqt->fetchAll();
+
+            foreach ($prodsInCommande as $produit) {
+                
+                $quantite = $produit["quantite"];
+                $idProd = $produit["id_produit"];
+
+                $rqt = $dbh->query("SELECT id_vendeur FROM sae3_skadjam._produit WHERE id_produit = $idProd", PDO::FETCH_ASSOC);
+                $idVendeurProd = $rqt->fetch()["id_vendeur"];
+
+                if ($idVendeurProd == $idVendeur){
+
+                    echo $idProd . " " . $quantite . " " . $date . "<br>";
+
+                    $dataStats[$date]["nb_ventes_totales"] += $quantite;
+                }
+            }
+        }
+    }
 ?>
+
+<pre>
+    <?php print_r($dataStats); ?>
+</pre>
 
 <!DOCTYPE html>
 <html lang="fr">
