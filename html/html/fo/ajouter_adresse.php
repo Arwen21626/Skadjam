@@ -73,9 +73,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $adresseSepare = tabAdresse($_POST['adresse'] ?? '');
 
     $ligne = [
-        'numero_rue' => $adresseSepare['num'] ?? '',
-        'complement_adresse' => $adresseSepare['complementNum'] ?? '',
-        'adresse_postale' => $adresseSepare['adresse'] ?? '',
+        'numero_rue' => $adresseSepare[0] ?? '',
+        'complement_adresse' => $adresseSepare[1] ?? '',
+        'adresse_postale' => $adresseSepare[2] ?? '',
         'ville' => $_POST['ville'] ?? '',
         'code_postal' => $_POST['codePostal'] ?? '',
         'numero_bat' => $_POST['batiment'] ?? '',
