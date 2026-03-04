@@ -82,6 +82,7 @@ try {
     $idAdresse = $stmt->fetchAll();
     $idAdresse = (int)$idAdresse;
     echo "recup adresse";
+    echo $idAdresse;
 
     //Suppresion du n-uplet dans _habite
     $stmt = $dbh->prepare("DELETE FROM sae3_skadjam._habite
