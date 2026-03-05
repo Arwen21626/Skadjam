@@ -55,8 +55,8 @@ CREATE TABLE sae3_skadjam._adresse (
     code_interphone CHARACTER VARYING(10),
     code_postal NUMERIC(5) NOT NULL,
     ville CHARACTER VARYING(100) NOT NULL,
-    latitude CHARACTER VARYING(15) DEFAULT NULL,
-    longitude CHARACTER VARYING(15) DEFAULT NULL
+    latitude CHARACTER VARYING(25) DEFAULT NULL,
+    longitude CHARACTER VARYING(25) DEFAULT NULL
 );
 
 
