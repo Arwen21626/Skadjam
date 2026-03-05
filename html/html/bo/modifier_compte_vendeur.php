@@ -23,6 +23,7 @@ $erreurSiren = false;
 $erreurAdresse = false;
 $erreurCp = false;
 $erreurVille = false;
+$erreurDescription = false;
 
 
 $idCompte = $_SESSION["idCompte"];
