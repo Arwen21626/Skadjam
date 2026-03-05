@@ -98,8 +98,8 @@
                                 $idVendeur = $v['id_compte'];
                                 ?>
                                 <div>
-                                    <input class="vendeur h-5 w-5" type="checkbox" name="<?php echo $raisonSociale; ?>" id="<?php echo $idVendeur; ?>" value="<?php echo $idVendeur; ?>" class="triFiltre h-5 w-5">
-                                    <label for="<?php echo $raisonSociale; ?>" class="labelDetails"><?php echo htmlspecialchars($raisonSociale, ENT_QUOTES, 'UTF-8'); ?></label>
+                                    <input class="vendeur h-5 w-5" type="checkbox" name="<?php echo $idVendeur; ?>" id="<?php echo $idVendeur; ?>" value="<?php echo $idVendeur; ?>" class="triFiltre h-5 w-5">
+                                    <label for="<?php echo $idVendeur; ?>" class="labelDetails"><?php echo $raisonSociale; ?></label>
                                 </div><?php 
                             }
                         } 
@@ -356,9 +356,17 @@
                     dernierMarqueur = null
                 }
 
+                if(document.getElementById(e.layer.options.id_compte).checked == true){
+                    e.layer.setIcon(marqueurClair)
+                }else{
+                    e.layer.setIcon(marqueurFonce)
+                }
+
                 map.flyTo(e.layer.getLatLng(), map.getZoom());
 
+
                 // Filtre vendeur
+
                 // Si le vendeur est déjà coché, on le décoche
                 if(e.layer.options.id_compte == checkedVendeurs[0]){
                     checkedVendeurs.splice(checkedVendeurs.indexOf(e.layer.options.id_compte), 1)
@@ -370,8 +378,13 @@
                     checkedVendeurs.splice(checkedVendeurs.indexOf(e.layer.options.id_compte), 1)
                     checkedVendeurs.push(e.layer.options.id_compte)
                 }
+
+                if(document.getElementById(e.layer.options.id_compte).checked == false){
+                    checkedVendeurs.splice(checkedVendeurs.indexOf(e.layer.options.id_compte), 1)
+                }
+
                 tab = filtre()
-                mettreAJourListe(tab)
+                mettreAJourListe()
             });
 
             map.addLayer(markers)
