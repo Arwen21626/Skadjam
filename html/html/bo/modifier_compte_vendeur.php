@@ -44,26 +44,26 @@ if (isset($_POST["nom"]) && isset($_POST["prenom"]) && isset($_POST["mail"]) && 
             $ancienMail = $ligne['adresse_mail'];
         }
 
+        //récuperer les attributs du post
+        $nom = htmlentities(formatPrenom($_POST["nom"]));
+        $prenom = htmlentities(formatPrenom($_POST["prenom"]));
+        $mail = htmlentities($_POST["mail"]);
+        $tel = htmlentities(formatTel($_POST["tel"]));
+        $denomination = htmlentities($_POST["denomination"]);
+        $raisonSociale = htmlentities($_POST["raisonSociale"]);
+        $iban = htmlentities($_POST["iban"]);
+        $adresse = htmlentities($_POST["adresse"]);
+        $ville = htmlentities($_POST["ville"]);
+        $cp = htmlentities($_POST["cp"]);
+        $siren = htmlentities($_POST["siren"]);
+        $description = isset($_POST["description"]) ? $_POST["description"] : "";
+        $temp = tabAdresse($adresse);
+        $numero = $temp[0];
+        $compNum = $temp[1];
+        $adresse = $temp[2];
+
         // Vérification que toutes les données commune à la création et à la modification d'un compte client sont correcte
         if (strlen($_POST['description']) <= 500 && verifNomPrenom($_POST['nom']) && verifNomPrenom($_POST['prenom']) && verifTelephone($_POST['tel']) && verifDenomination($_POST['denomination']) && verifDenomination($_POST['raisonSociale']) && verifIban($_POST['iban']) && verifSiren($_POST['siren']) && verifCp($_POST['cp']) && verifVille($_POST['ville']) && verifAdresse($_POST['adresse'])){
-            //récuperer les attributs du post
-            $nom = htmlentities(formatPrenom($_POST["nom"]));
-            $prenom = htmlentities(formatPrenom($_POST["prenom"]));
-            $mail = htmlentities($_POST["mail"]);
-            $tel = htmlentities(formatTel($_POST["tel"]));
-            $denomination = htmlentities($_POST["denomination"]);
-            $raisonSociale = htmlentities($_POST["raisonSociale"]);
-            $iban = htmlentities($_POST["iban"]);
-            $adresse = htmlentities($_POST["adresse"]);
-            $ville = htmlentities($_POST["ville"]);
-            $cp = htmlentities($_POST["cp"]);
-            $siren = htmlentities($_POST["siren"]);
-            $description = isset($_POST["description"]) ? $_POST["description"] : "";
-            $temp = tabAdresse($adresse);
-            $numero = $temp[0];
-            $compNum = $temp[1];
-            $adresse = $temp[2];
-
             // Vérification de l'email et de l'adresse
             if(mailUnique($mail) || $ancienMail === $mail){
                 // Modification du compte
@@ -259,28 +259,30 @@ if (isset($_POST["nom"]) && isset($_POST["prenom"]) && isset($_POST["mail"]) && 
 if(!$isset || $erreur){
     // Préparation des données qui vont remplir les champs du formulaire
     // Récupération des infos du compte vendeur
-    foreach($dbh->query("SELECT * FROM sae3_skadjam._compte c
-                                INNER JOIN sae3_skadjam._vendeur v
-                                    ON c.id_compte = v.id_compte
-                                INNER JOIN sae3_skadjam._habite h
-                                    ON h.id_compte = c.id_compte
-                                INNER JOIN sae3_skadjam._adresse a
-                                    ON a.id_adresse = h.id_adresse
-                                WHERE c.id_compte = $idCompte", PDO::FETCH_ASSOC) as $ligne){
-        $nom = $ligne['nom_compte'];
-        $prenom = $ligne['prenom_compte'];
-        $mail = $ligne['adresse_mail'];
-        $tel = formatTel($ligne['numero_telephone']);
-        $denom = $ligne['denomination'];
-        $raisonSociale = $ligne['raison_sociale'];
-        $siren = $ligne['siren'];
-        $iban = $ligne['iban'];
-        $adresse = $ligne['adresse_postale'];
-        $cp = $ligne['code_postal'];
-        $ville = $ligne['ville'];
-        $description = $ligne['description_vendeur'];
-        $num = $ligne['numero_rue'];
-    }  
+    if(!$isset){
+        foreach($dbh->query("SELECT * FROM sae3_skadjam._compte c
+                                    INNER JOIN sae3_skadjam._vendeur v
+                                        ON c.id_compte = v.id_compte
+                                    INNER JOIN sae3_skadjam._habite h
+                                        ON h.id_compte = c.id_compte
+                                    INNER JOIN sae3_skadjam._adresse a
+                                        ON a.id_adresse = h.id_adresse
+                                    WHERE c.id_compte = $idCompte", PDO::FETCH_ASSOC) as $ligne){
+            $nom = $ligne['nom_compte'];
+            $prenom = $ligne['prenom_compte'];
+            $mail = $ligne['adresse_mail'];
+            $tel = formatTel($ligne['numero_telephone']);
+            $denom = $ligne['denomination'];
+            $raisonSociale = $ligne['raison_sociale'];
+            $siren = $ligne['siren'];
+            $iban = $ligne['iban'];
+            $adresse = $ligne['adresse_postale'];
+            $cp = $ligne['code_postal'];
+            $ville = $ligne['ville'];
+            $description = $ligne['description_vendeur'];
+            $num = $ligne['numero_rue'];
+        }  
+    }
     ?>
 <!DOCTYPE html>
 <html lang="fr">
