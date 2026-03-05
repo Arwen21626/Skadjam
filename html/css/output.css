@@ -748,17 +748,14 @@ input.quantite-prod-input {
   .w-10 {
     width: calc(var(--spacing, 0.25rem) * 10);
   }
+  .w-10\! {
+    width: calc(var(--spacing, 0.25rem) * 10) !important;
+  }
   .w-11\/12 {
     width: calc(11/12 * 100%);
   }
   .w-15 {
     width: calc(var(--spacing, 0.25rem) * 15);
-  }
-  .w-10\! {
-    width: calc(var(--spacing, 0.25rem) * 10) !important;
-  }
-  .w-15\! {
-    width: calc(var(--spacing, 0.25rem) * 15) !important;
   }
   .w-16 {
     width: calc(var(--spacing, 0.25rem) * 16);
