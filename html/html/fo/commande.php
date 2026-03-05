@@ -175,7 +175,7 @@
                         <th class="pr-3 w-24"></th>
                         <th class="pr-3"><h4 class="text-left">Article</h4></th>
                         <th class="pr-3"><h4>Prix unitaire <abbr title="Hors Taxe">HT</abbr></h4></th>
-                        <th class="pr-3"><h4>Prix unitaire <abbr title="Toutes Taxes Confondues">TTC</abbr></h4></th>
+                        <th class="pr-3"><h4>Prix unitaire <abbr title="Toutes Taxes Comprises">TTC</abbr></h4></th>
                         <th class="pr-3"><h4>Pourcentage remise</h4></th>
                         <th class="pr-3"><h4>Quantité</h4></th>
                         <th class="pr-3"><h4>Total</h4></th>
@@ -289,7 +289,7 @@
                                     <td class="text-left"><p><?php echo str_replace('.',',',$ligne['prix_ht']);?>€</p></td>
                                 </tr>
                                 <tr class="py-4 <?= ligneCouleur($ligneIndex) ?>">
-                                    <th class="text-left py-2 pl-3"><h4>Prix <abbr title="Toutes Taxes Confondues">TTC</abbr></h4></th>
+                                    <th class="text-left py-2 pl-3"><h4>Prix <abbr title="Toutes Taxes Comprises">TTC</abbr></h4></th>
                                         <td class="text-left"><p><?php echo str_replace('.',',',$ligne['prix_ttc']);?>€</p></td>
                                 </tr>
                                 <tr class="py-4 <?= ligneCouleur($ligneIndex) ?>">
@@ -342,7 +342,7 @@
                     </tr>
                     <!---total ttc--->
                     <tr class="py-4 <?= ligneCouleur($ligneIndex) ?>">
-                        <th class="text-left py-2 pl-3"><h4>Total <abbr title="Toutes Taxes Confondues">TTC</abbr> : </h4></th>
+                        <th class="text-left py-2 pl-3"><h4>Total <abbr title="Toutes Taxes Comprises">TTC</abbr> : </h4></th>
                         <?php $prix = explode(".", "$total_ttc");?>
                         <th class="text-left"><h4><?php echo htmlentities($prix[0].",".((preg_match("/^[1-9]$/", $prix[1]))?$prix[1]."0":$prix[1]));?>€</h4></th>
                     </tr>

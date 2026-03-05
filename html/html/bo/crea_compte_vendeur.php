@@ -222,26 +222,39 @@ if (isset($_POST["nom"])){
                     <!-- Adresse -->
                     <div class="flex flex-col mt-2 mb-2 md:m-2">
                         <label for="adresse">Adresse * :</label>
-                        <input class="border-4 border-solid rounded-2xl border-beige md:w-90 p-1 pl-3 placeholder-gray-500 " type="text" id="adresse" name="adresse" value="<?= $_POST["adresse"] ?? ''?>" size="60" placeholder="ex : 3 rue des camélias" required>
+                        <input id="adresse" class="border-4 border-solid rounded-2xl border-beige md:w-90 p-1 pl-3 placeholder-gray-500 " type="text" id="adresse" name="adresse" value="<?= $_POST["adresse"] ?? ''?>" size="60" placeholder="ex : 3 rue des camélias" required>
                         <?php echo isset($erreurs["adresse"]) ? "<p class=\"text-rouge\">" . $erreurs["adresse"] . " </p>" : '' ?>
                     </div>
 
                     <!-- Ville -->
                     <div class="flex flex-col mt-2 mb-2 md:m-2">
                         <label for="ville">Ville * :</label>
-                        <input class="border-4 border-solid rounded-2xl border-beige p-1 pl-3 w-60" type="text" id="ville" name="ville" value="<?= $_POST["ville"] ?? ''?>" size="30" required>
+                        <input id="ville" class="border-4 border-solid rounded-2xl border-beige p-1 pl-3 w-60" type="text" id="ville" name="ville" value="<?= $_POST["ville"] ?? ''?>" size="30" required>
                         <?php echo isset($erreurs["ville"]) ? "<p class=\"text-rouge\">" . $erreurs["ville"] . " </p>" : '' ?>
                     </div>
 
                     <!-- Code postal -->
                     <div class="flex flex-col mt-2 mb-2 md:m-2">
                         <label for="cp">Code Postal * :</label>
-                        <input class="border-4 border-solid rounded-2xl border-beige p-1 pl-3 w-40" type="text" id="cp" name="cp" value="<?= $_POST["cp"] ?? ''?>" size="10" required>
+                        <input id="cP" class="border-4 border-solid rounded-2xl border-beige p-1 pl-3 w-40" type="text" id="cp" name="cp" value="<?= $_POST["cp"] ?? ''?>" size="10" required>
                         <?php echo isset($erreurs["cp"]) ? "<p class=\"text-rouge\">" . $erreurs["cp"] . " </p>" : '' ?>
                     </div>
                 </div>
                 <!-- Carte -->
-                <div id="map" class="md:w-2/3 md:h-80"></div>
+                <div class="flex flex-col md:w-2/3">
+                    <div id="map" class="md:h-80 z-0"></div>
+                    <div class="flex flex-row m-2">
+                        <div class="m-2">
+                            <label for="latitude">Latitude</label>
+                            <input type="text" name="latitude" id="latitude" class="border-4 border-solid rounded-2xl border-beige p-1 pl-3">
+                        </div>
+                        <div class="m-2">
+                            <label for="longitude">Longitude</label>
+                            <input type="text" name="longitude" id="longitude" class="border-4 border-solid rounded-2xl border-beige p-1 pl-3">
+                        </div>
+                    </div>
+                </div>
+
             </div>
 
             <h3>Mot de passe :</h3>
@@ -312,6 +325,7 @@ if (isset($_POST["nom"])){
         iconSize: [45, 70],
     });
 </script>
+<script src="../../js/fo/geolocalVendeur.js"></script>
 </html>
 <?php
 } else {
