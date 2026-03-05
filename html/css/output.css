@@ -1220,6 +1220,9 @@ input.quantite-prod-input {
   .px-7 {
     padding-inline: calc(var(--spacing, 0.25rem) * 7);
   }
+  .py-1 {
+    padding-block: calc(var(--spacing, 0.25rem) * 1);
+  }
   .py-2 {
     padding-block: calc(var(--spacing, 0.25rem) * 2);
   }
