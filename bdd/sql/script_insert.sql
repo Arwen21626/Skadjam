@@ -948,10 +948,15 @@ VALUES
 
 INSERT INTO sae3_skadjam._commande (id_adresse, etat, date_commande, montant_total_ttc, id_client)
 VALUES
-  (1, 'En attente', '01/02/2026', 82.74, 21);
+  (1, 'En attente', '01/02/2026', 82.74, 21),
+  (1, 'En attente', '18/07/2025', 113.93, 21);
+
 
 INSERT INTO sae3_skadjam._details (montant_ht, quantite, sous_total, id_commande, id_produit)
 VALUES
   (25.99, 1, 31.19, 1, 73),
   (4.99, 2, 11.98, 1, 98),
-  (10.99, 3, 39.57, 1, 104);
+  (10.99, 3, 39.57, 1, 104),
+  (25.99, 2, 62.38, 2, 73),
+  (4.99, 2, 11.98, 2, 98),
+  (10.99, 3, 39.57, 2, 104);
