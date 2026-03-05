@@ -28,10 +28,18 @@ var pointerFonce = L.icon({
 }); 
 
 // Créer le marqueur
-var marker = L.marker([0, 0], {
+if (lat.value != 0 && longi.value != 0) {
+    var marker = L.marker([lat.value, longi.value], {
                 icon: pointerFonce,
                 draggable:true
-            })
+    })
+}else{
+    var marker = L.marker([0, 0], {
+                icon: pointerFonce,
+                draggable:true
+    })
+}
+
 
 map.addLayer(marker)
 
