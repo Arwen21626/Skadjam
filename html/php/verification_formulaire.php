@@ -166,7 +166,7 @@ function verifCp($cp){
 
 function verifVille($ville){
     //verifie le format de la ville
-    return (preg_match("/^[a-zA-Z -]{1,}$/", $ville));
+    return preg_match("/^[\p{L} -]+$/u", $ville);
 }
 
 function verifAdresse($adresse){

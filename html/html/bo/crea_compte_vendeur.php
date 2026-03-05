@@ -22,6 +22,8 @@ if (!isset($_SESSION["role"]) || $_SESSION["role"]!=="vendeur"){
     $siren = '';
     $mdp = '';
     $verif = '';
+    $latitude = '';
+    $longitude = '';
     
 
     $erreurs = [];
@@ -40,7 +42,9 @@ if (isset($_POST["nom"])){
     $cp = $_POST["cp"];
     $siren = $_POST["siren"];                   
     $mdp = $_POST["mdp"];                       
-    $verif = $_POST["verif"];                   
+    $verif = $_POST["verif"];
+    $latitude = $_POST["latitude"];
+    $longitude = $_POST["longitude"];
 
     /* enregistrer toutes les erreurs */
 
@@ -88,6 +92,7 @@ if (isset($_POST["nom"])){
     /* s'il n'y a pas d'erreur faire la requete */
     if (empty($erreurs)){
         try{
+            echo ("c'est ok poto");
             $dbh->beginTransaction();
 
             $idCompte = null;
@@ -104,8 +109,8 @@ if (isset($_POST["nom"])){
             $stmt->execute([$idCompte,$raisonSociale, (int)$siren, $iban, $denomination]);
 
             //preparer la requete pour inserer dans adresse et recuperer l'id
-            $stmt = $dbh->prepare("INSERT INTO sae3_skadjam._adresse (adresse_postale, complement_adresse, numero_rue, code_postal, ville) VALUES (?,?,?,?,?) RETURNING id_adresse");
-            $stmt->execute([$adresse, $compNum, $numero, $cp, $ville]);
+            $stmt = $dbh->prepare("INSERT INTO sae3_skadjam._adresse (adresse_postale, complement_adresse, numero_rue, code_postal, ville, latitude, longitude) VALUES (?,?,?,?,?,?,?) RETURNING id_adresse");
+            $stmt->execute([$adresse, $compNum, $numero, $cp, $ville, $latitude, $longitude]);
             $idAdresse = $stmt->fetchColumn();
 
             //inserer dans habite pour lier le compte a l'adresse
@@ -123,7 +128,7 @@ if (isset($_POST["nom"])){
             die();
         }
     }else{
-        header("Location: crea_compte_vendeur.php");
+        // header("Location: crea_compte_vendeur.php");
     }
     
     
@@ -144,7 +149,7 @@ if (isset($_POST["nom"])){
     ?>
     <main class="flex flex-col items-center">
         <h2>Inscription Vendeur</h2>
-        <form method="POST" class="w-6/7">
+        <form method="POST" class="w-6/7" action="crea_compte_vendeur.php">
             <!-- ########## INFORMATIONS ########## -->
             <h3>Informations vendeur :</h3>
             <div class="flex flex-col md:flex-row md:flex-wrap md:justify-start md:w-3/4">
@@ -241,18 +246,20 @@ if (isset($_POST["nom"])){
                     </div>
                 </div>
                 <!-- Carte -->
-                <div class="flex flex-col md:w-2/3">
-                    <div id="map" class="md:h-80 z-0"></div>
-                    <div class="flex flex-row m-2">
+                <div class="flex flex-col  md:w-2/3">
+                    <div id="map" class="h-60 md:h-80 z-0"></div>
+                    <!-- Coordonnées -->
+                    <div class="grid grid-cols-2 grid-rows-2 h-20 md:flex md:flex-row m-2">
                         <div class="m-2">
-                            <label for="latitude">Latitude</label>
-                            <input type="text" name="latitude" id="latitude" class="border-4 border-solid rounded-2xl border-beige p-1 pl-3">
+                            <label for="latitude">Latitude : </label>
+                            <input required type="text" name="latitude" id="latitude" class="border-2 border-solid rounded-2xl border-beige p-1 pl-3  w-30 md:w-60 [appearance:textfield]">
                         </div>
                         <div class="m-2">
-                            <label for="longitude">Longitude</label>
-                            <input type="text" name="longitude" id="longitude" class="border-4 border-solid rounded-2xl border-beige p-1 pl-3">
+                            <label for="longitude">Longitude : </label>
+                            <input required type="text" name="longitude" id="longitude" class="border-2 border-solid rounded-2xl border-beige p-1 pl-3  w-30 md:w-60 [appearance:textfield]">
                         </div>
                     </div>
+                    <p id="errorMap" class="text-rouge"></p>
                 </div>
 
             </div>
