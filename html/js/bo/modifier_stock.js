@@ -103,15 +103,6 @@ function erreurSaisie(cible){
         cible.parentNode.children[7].style.backgroundRepeat = "no-repeat"; 
         cible.parentNode.children[7].style.backgroundPosition = "center center";
     }
-    else{
-        cible.children[0].style.backgroundColor = "";
-        cible.children[0].style.color = "";
-
-        cible.parentNode.children[7].style.backgroundImage = ""; 
-        cible.parentNode.children[7].style.backgroundSize = ""; 
-        cible.parentNode.children[7].style.backgroundRepeat = ""; 
-        cible.parentNode.children[7].style.backgroundPosition = "";
-    }
 }
 
 function stockModifier(ligne, idxLigne){
@@ -146,6 +137,10 @@ function stockModifier(ligne, idxLigne){
         ligne.children[4].children[0].style.backgroundColor = "";
         ligne.children[5].children[0].style.backgroundColor = "";
         ligne.children[6].children[0].style.backgroundColor = "";
+
+        ligne.children[4].children[0].style.color = "";
+        ligne.children[5].children[0].style.color = "";
+        ligne.children[6].children[0].style.color = "";
     }
 }
 
