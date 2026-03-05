@@ -163,7 +163,7 @@
                     <div class="flex modif-attribut float-rigth">
                         <input class="ml-5 border-5 border-solid rounded-2xl border-vertClair pl-3 mb-5 md:w-150 h-15 w-70" type="text" name="mail" id="mail" value="<?= isset($_POST['mail'])? $_POST['mail'] : "" ?>" required>
                         <div>
-                            <div class="w-15! h-15! cursor:default"></div>
+                            <div class="w-10! h-15! cursor:default"></div>
                         </div>
                     </div>
                 </div>

@@ -104,7 +104,7 @@
                         <th class="pr-3 w-24"></th>
                         <th class="pr-3"><h4 class="text-left">Article</h4></th>
                         <th class="pr-3"><h4>Prix unitaire <abbr title="Hors Taxe">HT</abbr></h4></th>
-                        <th class="pr-3"><h4>Prix unitaire <abbr title="Toutes Taxes Confondues">TTC</abbr></h4></th>
+                        <th class="pr-3"><h4>Prix unitaire <abbr title="Toutes Taxes Comprises">TTC</abbr></h4></th>
                         <th class="pr-3"><h4>Pourcentage remise</h4></th>
                         <th class="pr-3"><h4>Quantité</h4></th>
                         <th class="pr-3"><h4>Total</h4></th>

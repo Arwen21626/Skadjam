@@ -576,6 +576,7 @@ else { ?>
             promoInputs.style.height = 'auto';
         }else{
             promoInputs.style.visibility = 'hidden';
+            promoInputs.required = false;
             promoInputs.style.height = '0';
         }
     }

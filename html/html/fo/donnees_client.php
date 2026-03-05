@@ -167,7 +167,7 @@ require_once __DIR__ . "/../../01_premiere_connexion.php";
                 echo "id : $idCo[$i]<br>";
                 echo "etat : $etat[$i]<br>";
                 echo "date de la commande : $dateCo[$i]<br>";
-                echo "montant total <abbr title=\"Toutes Taxes Confondues\">TTC</abbr> : $montantCoTTC[$i]<br>";
+                echo "montant total <abbr title=\"Toutes Taxes Comprises\">TTC</abbr> : $montantCoTTC[$i]<br>";
                 echo "id de la facture : $idFacture[$i]<br>";
                 echo "quantité : $quantite[$i]<br>";
                 echo "sous total : $sousTotal<br>";

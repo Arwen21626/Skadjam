@@ -779,6 +779,9 @@ input.quantite-prod-input {
   .w-10 {
     width: calc(var(--spacing, 0.25rem) * 10);
   }
+  .w-10\! {
+    width: calc(var(--spacing, 0.25rem) * 10) !important;
+  }
   .w-11 {
     width: calc(var(--spacing, 0.25rem) * 11);
   }
@@ -1292,6 +1295,9 @@ input.quantite-prod-input {
   }
   .px-7 {
     padding-inline: calc(var(--spacing, 0.25rem) * 7);
+  }
+  .py-1 {
+    padding-block: calc(var(--spacing, 0.25rem) * 1);
   }
   .py-2 {
     padding-block: calc(var(--spacing, 0.25rem) * 2);
