@@ -3,7 +3,9 @@ let dataStats = dataJson;
 let periodes = ['Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Août', 'Septembre', 'Octobre', 'Novembre', 'Décembre'];
 let dataVentes = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
 
-console.log(dataStats);
+let currentAnnee = '2026';
+
+console.log(Object.keys(dataStats[currentAnnee]))
 
 Object.keys(dataStats).forEach(mois => {
     let i = Number(mois);
