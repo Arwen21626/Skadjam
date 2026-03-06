@@ -452,10 +452,6 @@ if(!$isset || $erreur){
             attribution: '&copy; OpenStreetMap'
         }).addTo(map);
 
-        var pointer = L.icon({
-            iconUrl: '../../images/logo/pointeurVertFonce.png',
-            iconSize: [45, 70],
-        });
     </script>
 <script src="../../js/fo/geolocalVendeur.js"></script>
 <?php } ?>
