@@ -92,7 +92,6 @@ if (isset($_POST["nom"])){
     /* s'il n'y a pas d'erreur faire la requete */
     if (empty($erreurs)){
         try{
-            echo ("c'est ok poto");
             $dbh->beginTransaction();
 
             $idCompte = null;
