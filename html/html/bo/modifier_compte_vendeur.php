@@ -52,14 +52,13 @@ if (isset($_POST["nom"]) && isset($_POST["prenom"]) && isset($_POST["mail"]) && 
         $denomination = htmlentities($_POST["denomination"]);
         $raisonSociale = htmlentities($_POST["raisonSociale"]);
         $iban = htmlentities($_POST["iban"]);
-        $adresse = htmlentities($_POST["adresse"]);
         $ville = htmlentities($_POST["ville"]);
         $cp = htmlentities($_POST["cp"]);
         $siren = htmlentities($_POST["siren"]);
         $description = isset($_POST["description"]) ? $_POST["description"] : "";
         $temp = tabAdresse($adresse);
-        $numero = $temp[0];
-        $compNum = $temp[1];
+        $num = $temp[0];
+        $numBis = $temp[1];
         $adresse = $temp[2];
 
         // Vérification que toutes les données commune à la création et à la modification d'un compte client sont correcte
@@ -272,16 +271,19 @@ if(!$isset || $erreur){
             $prenom = $ligne['prenom_compte'];
             $mail = $ligne['adresse_mail'];
             $tel = formatTel($ligne['numero_telephone']);
-            $denom = $ligne['denomination'];
+            $denomination = $ligne['denomination'];
             $raisonSociale = $ligne['raison_sociale'];
             $siren = $ligne['siren'];
             $iban = $ligne['iban'];
-            $adresse = $ligne['adresse_postale'];
             $cp = $ligne['code_postal'];
             $ville = $ligne['ville'];
             $description = $ligne['description_vendeur'];
             $num = $ligne['numero_rue'];
-        }  
+            $temp = tabAdresse($adresse);
+            $num = $temp[0];
+            $numBis = $temp[1];
+            $adresse = $temp[2];
+        }
     }
     ?>
 <!DOCTYPE html>
@@ -348,7 +350,7 @@ if(!$isset || $erreur){
                         </div>
                         <div class="flex flex-col items-start mt-6 w-fit @max-[768px]:mt-2">
                             <label for="denomination">Nom de l'entreprise * :</label>
-                            <input class="ml-5 border-4 border-solid rounded-2xl border-beige p-1 pl-3 mb-4 w-1/1" type="text" id="denomination" name="denomination" value="<?= $denom; ?>" size="30" required>
+                            <input class="ml-5 border-4 border-solid rounded-2xl border-beige p-1 pl-3 mb-4 w-1/1" type="text" id="denomination" name="denomination" value="<?= $denomination; ?>" size="30" required>
                             <?= $erreurDenomination ? "<p style=\"font-size: 0.90em\" class=\"text-rouge\">Le nom de l'entreprise est invalide.</p>" : ""; ?>
                         </div>
                     </div>
