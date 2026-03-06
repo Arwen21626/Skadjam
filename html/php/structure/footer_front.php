@@ -56,13 +56,13 @@
     </article>  
 </footer>
 <script>
-    let tailleScroll = document.documentElement.scrollHeight;
-    let tailleFenetre = document.documentElement.clientHeight;
-    let footer = document.querySelector("footer");
+    // let tailleScroll = document.documentElement.scrollHeight;
+    // let tailleFenetre = document.documentElement.clientHeight;
+    // let footer = document.querySelector("footer");
 
-    if (tailleFenetre >= tailleScroll){
-        footer.style.position = "absolute";
-        footer.style.bottom = "0";
-    }
+    // if (tailleFenetre >= tailleScroll){
+    //     footer.style.position = "absolute";
+    //     footer.style.bottom = "0";
+    // }
     // console.log("taille fenetre = "+tailleFenetre+"taille scroll = "+tailleScroll)
 </script>

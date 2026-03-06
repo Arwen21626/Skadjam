@@ -144,7 +144,7 @@
 </head>
 <body>
     <?php require_once __DIR__ . "/../../php/structure/header_front.php"; ?>
-    <main class="flex flex-col self-center">
+    <main class="flex flex-col self-center md:min-h-[615px]">
         <h2>Connexion</h2>
         <form method="post">
         <?php if(isset($_GET['idProduit'])){ ?>
