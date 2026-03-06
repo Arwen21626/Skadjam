@@ -130,7 +130,7 @@ if (isset($_POST['categorie']) && isset($_POST['nom']) && isset($_POST['prix']) 
     $unite = htmlentities($_POST['unite']);
     $qteUnite = htmlentities($_POST['qteUnite']);
     // Champs spécifiques à la promotion
-    $dateDebutPromotion = isset($_POST['dateDebutPromotion']) ? htmlentities($_POST['dateDebutPromotion']) : date('Y-m-d');
+    $dateDebutPromotion = $_POST['dateDebutPromotion'] !== null ? $_POST['dateDebutPromotion'] : date('Y-m-d');
     $dateFinPromotion = htmlentities($_POST['dateFinPromotion']);
     $dateFinPromotion = trim($dateFinPromotion);
     $dateFinPromotion = ($dateFinPromotion === '') ? null : $dateFinPromotion;
@@ -530,7 +530,7 @@ else { ?>
                         <div>
                             <div class="flex flex-row mr-4 ml-4">
                                 <label class="mr-4" for="dateDebutPromotion">Début de promotion* :</label>
-                                <input class="border-4 border-beige rounded-2xl w-45" type="date" name="dateDebutPromotion" id="dateDebutPromotion" value="<?php echo $dateDebutPromotion; ?>">
+                                <input class="border-4 border-beige rounded-2xl w-45" type="date" name="dateDebutPromotion" id="dateDebutPromotion" value="<?php echo $dateDebutPromotion !== null ? $dateDebutPromotion : date('Y-m-d'); ?>" required>
                             </div>
                         </div>
                         <div>
