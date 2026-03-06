@@ -31,8 +31,7 @@
         <title>Accueil</title>
 
         <script>
-            const tabProd = <?php echo json_encode($tabProduit);?>;
-            const tabVendeur = <?php echo json_encode($tabVendeur);?>;        
+            const tabProd = <?php echo json_encode($tabProduit);?>;    
         </script>
         
         <script src="js/index.js"></script>
