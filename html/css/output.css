@@ -336,6 +336,9 @@ input.quantite-prod-input {
   .bottom-0 {
     bottom: calc(var(--spacing, 0.25rem) * 0);
   }
+  .bottom-5 {
+    bottom: calc(var(--spacing, 0.25rem) * 5);
+  }
   .bottom-10 {
     bottom: calc(var(--spacing, 0.25rem) * 10);
   }

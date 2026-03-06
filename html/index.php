@@ -62,7 +62,7 @@
             <a href="html/fo/promotion.php" title="lien vers page promotion" alt="promotion">
                 <img src="images/images_accueil/promotion.webp" title="lien vers page promotion" alt="promotion" class="w-90 md:w-150 h-auto justify-self-end">
             </a>
-            <a href="#nosProduits" title="lien vers page nouveaux produits" alt="nouveaux produits">
+            <a href="html/fo/nouveaux_produits.php" title="lien vers page nouveaux produits" alt="nouveaux produits">
                 <img src="images/images_accueil/nouveaux_produits.webp" title="lien vers page nouveaux produits" alt="nouveaux produits" class="w-90 md:w-150 h-auto justify-self-start">
             </a>           
             <a href="#nosProduits" title="lien vers page les plus vendus" alt="les plus vendus">

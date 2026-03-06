@@ -339,7 +339,7 @@ if (isset($_POST['categorie']) && isset($_POST['nom']) && isset($_POST['prix']) 
             if($caseCochee && $estPromu){
                 $idPromotion = $promotion['id_promotion'];
                 // Mise à jour des dates de la promotion existante
-                if(verifDate($dateDebutPromotion) && $dateDebutPromotion >= date('Y-m-d')){
+                if(verifDate($dateDebutPromotion)){
                     if(isset($dateFinPromotion) && $dateFinPromotion !== ''){
                         if(verifDate($dateFinPromotion) && $dateFinPromotion >= $dateDebutPromotion){
                             $stmtUpdatePromo = $dbh->prepare("UPDATE sae3_skadjam._promotion
@@ -366,8 +366,6 @@ if (isset($_POST['categorie']) && isset($_POST['nom']) && isset($_POST['prix']) 
                     }else{  
                         echo "La date de fin de promotion est invalide.";
                     }
-                }else{
-                    echo "La date de début de promotion est invalide.";
                 }
 
                 // Mise à jour du libellé de la promotion
