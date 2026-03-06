@@ -10,7 +10,7 @@
     try {     
         $tabProduit = null;           
         //récupère toutes les infos des tables produits et photos
-        foreach($dbh->query("SELECT pr.id_produit, pr.libelle_produit, pr.prix_ttc, pr.note_moyenne, pr.quantite_stock, p.url_photo, p.alt, p.titre
+        foreach($dbh->query("SELECT pr.id_produit, pr.libelle_produit, pr.prix_ttc, pr.note_moyenne, pr.quantite_stock, p.url_photo, p.alt, p.titre, pr.seuil_alerte
                             FROM sae3_skadjam._produit pr 
                             INNER JOIN sae3_skadjam._vendeur v
                                 ON pr.id_vendeur = v.id_compte
@@ -134,6 +134,7 @@
                                                    value="<?php echo $valeurs['quantite_stock']; ?>"
                                                    class="border-2 border-black rounded-lg w-30 h-10 p-2" required
                                             >
+                                            <p class="hidden"><?php echo ($valeurs['seuil_alerte']!== null)?$valeurs['seuil_alerte']:0; ?></p>
                                         </td>
                                         <td><input type="number" name="qteAajouter[<?php echo $valeurs['id_produit']; ?>]" value="0" min="0" class="border-2 border-black rounded-lg w-30 h-10 p-2"></td>
                                         <td><input type="number" name="qteAretirer[<?php echo $valeurs['id_produit']; ?>]" value="0" min="0" class="border-2 border-black rounded-lg w-30 h-10 p-2"></td>
