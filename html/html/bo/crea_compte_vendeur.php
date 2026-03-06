@@ -221,7 +221,7 @@ if (isset($_POST["nom"])){
             <!-- ########## ADRESSE ########## -->
             <h3>Siège social :</h3>
             <div class="flex flex-col md:flex-row">
-                <div class="flex flex-col md:flex-row md:flex-wrap md:w-1/3">
+                <div class="flex flex-col md:w-1/3">
                     <!-- Adresse -->
                     <div class="flex flex-col mt-2 mb-2 md:m-2">
                         <label for="adresse">Adresse * :</label>
@@ -244,7 +244,7 @@ if (isset($_POST["nom"])){
                     </div>
                 </div>
                 <!-- Carte -->
-                <div class="flex flex-col  md:w-2/3">
+                <div class="flex flex-col md:w-2/3">
                     <div id="map" class="h-60 md:h-80 z-0"></div>
                     <!-- Coordonnées -->
                     <div class="grid grid-cols-2 grid-rows-2 h-20 md:flex md:flex-row m-2">
