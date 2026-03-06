@@ -286,12 +286,17 @@
 
         <?php $dbh = null;?>
 
-        <div id="map" class="w-[300px] h-[200px] solid border-vertFonce md:w-1/3 md:h-80 md:fixed md:bottom-0 md:right-0"></div>
+        <div id="contMap" class="p-2 rounded-2xl w-80 h-54 md:w-1/3 md:h-92 md:fixed md:bottom-5 md:right-5 bg-vertFonce/90">
+            <p id="mouvMap" class="underline text-bleu">Fermer ></p>
+            <div id="map" class="w-full h-52 md:h-80"></div>
+        </div>
+        
         <script>
             ajoutEventListener()
+            var map =  L.map('map').setView([48, -3], 7)
         </script>
         <script src="../../js/pointeur.js"></script>
-        
+        <script src="../../js/fo/map.js"></script>
     </main>
 
     <!--footer-->

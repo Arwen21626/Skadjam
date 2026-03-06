@@ -76,7 +76,7 @@
                 else{?>
                     <p>Produit indsponible</p>
                 <?php }?>
-                <p>Seuil d'alerte : <?php echo $produit['seuil_alerte'];?></p>
+                <p>Seuil d'alerte : <?php if($produit['seuil_alerte'] != 0){echo $produit['seuil_alerte'];} else{ echo 0;}?></p>
 
                 <div class="flex flex-col space-y-4">
                     <a href="../bo/modifier_produit.php?idProduit=<?php echo $idProd?>"><button class=" bg-beige rounded-2xl w-40 h-14 cursor-pointer" type="button">Modifier</button></a>

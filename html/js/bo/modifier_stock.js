@@ -83,7 +83,7 @@ function actionSurStock(ligne, idxLigne){
     stockModifier(ligne, idxLigne);
 
     // met le fond en rouge s'il y a une erreur de saisie
-    if(!ligne.children[4].children[0].value.match(/[0-9]/)){
+    if(!ligne.children[4].children[0].value.match(/-{0,1}[0-9]/)){
         erreurSaisie(ligne.children[4]);
     }
 
@@ -107,6 +107,9 @@ function erreurSaisie(cible){
         cible.parentNode.children[7].style.backgroundSize = "1.5em auto"; 
         cible.parentNode.children[7].style.backgroundRepeat = "no-repeat"; 
         cible.parentNode.children[7].style.backgroundPosition = "center center";
+    }
+    else{
+        cible.children[0].style.color = "";
     }
 }
 
@@ -169,7 +172,7 @@ function stockModifier(ligne, idxLigne){
 function seuilAlertAtteint(champStock){
     let seuil = champStock.children[1].textContent;
 
-    if (champStock.children[0].value >= seuil){
+    if (champStock.children[0].value <= seuil){
         return true;
     }
     return false;
