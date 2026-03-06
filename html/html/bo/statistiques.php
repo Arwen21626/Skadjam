@@ -27,11 +27,14 @@
                 $quantite = $produit["quantite"];
                 $idProd = $produit["id_produit"];
 
-                $rqt = $dbh->query("SELECT libelle_produit, id_vendeur FROM sae3_skadjam._produit WHERE id_produit = $idProd", PDO::FETCH_ASSOC);
+                $rqt = $dbh->query("SELECT libelle_produit, id_vendeur, id_categorie  
+                                    FROM sae3_skadjam._produit 
+                                    WHERE id_produit = $idProd", PDO::FETCH_ASSOC);
                 
                 $infosProduits = $rqt->fetch();
                 $idVendeurProd = $infosProduits["id_vendeur"];
                 $libelleProd = $infosProduits["libelle_produit"];
+                $idCategorie = $infosProduits["id_categorie"];
                 
                 if ($idVendeurProd == $idVendeur){
 
@@ -47,6 +50,7 @@
                     if (!isset($dataStats[$annee][$mois]["produits"][$idProd])){
                         $dataStats[$annee][$mois]["produits"][$idProd]["libelle_prod"] = $libelleProd;
                         $dataStats[$annee][$mois]["produits"][$idProd]["nb_ventes_totales"] = $quantite;
+                        $dataStats[$annee][$mois]["produits"][$idProd]["id_categorie"] = $idCategorie;
                     }
                     else {
                         $dataStats[$annee][$mois]["produits"][$idProd]["nb_ventes_totales"] += $quantite;
@@ -58,7 +62,7 @@
 ?>
 
 <pre>
-    <?php print_r($dataStats); ?>
+    <!-- <?php print_r($dataStats); ?> -->
 </pre>
 
 <!DOCTYPE html>
@@ -86,37 +90,56 @@
 
         <h2>Mes Statistiques</h2>
 
-        <div id="graphique-all" class="mb-4">
-            <div class="ml-4">
-                <div class="flex flex-row mb-2">
-                    <p class="pr-2">Choisissez une année :</p>
-                    <select name="" id="select-annee" class="pl-2 cursor-pointer">
-                        <?php 
-                            $cles = array_keys($dataStats);
-                            foreach ($cles as $annee) {
-                                ?>
-
-                                <option class="cursor-pointer" value=<?php echo $annee; ?>><?php echo $annee; ?></option>
-
-                                <?php
-                            }
+        <div class="flex flex-row mb-2">
+            <p class="pr-2">Choisissez une année :</p>
+            <select name="" id="select-annee" class="pl-2 cursor-pointer">
+                <?php 
+                    $cles = array_keys($dataStats);
+                    foreach ($cles as $annee) {
                         ?>
-                    </select>
+
+                        <option class="cursor-pointer" value=<?php echo $annee; ?>><?php echo $annee; ?></option>
+
+                        <?php
+                    }
+                ?>
+            </select>
+        </div>
+
+        <div class="flex flex-row justify-around">
+            <div id="graphique-all" class="mb-4 border-r">
+                <div>
+                    <div class="mt-2">
+                        <h3 class="text-center">Total des ventes pour l'année sélectionnée</h3>
+                    </div>
                 </div>
 
-                <div class="mt-2">
-                    <h3>Total des ventes pour l'année sélectionnée :</h3>
+
+                <div class="chart-container flex justify-center items-center flex-col p-2">
+                    <div class="chart flex justify-center items-center relative m-4 w-[45vw] h-[50vh]">
+                        <canvas id="all-chart"></canvas>
+                    </div>
                 </div>
             </div>
 
+            <div id="graphique-all" class="mb-4 border-l">
+                <div>
+                    <div class="mt-2">
+                        <h3 class="text-center">Total des ventes par catégorie pour l'année sélectionnée</h3>
+                    </div>
+                </div>
 
-            <div class="chart-container flex justify-center items-center flex-col p-2">
-                <div class="chart flex justify-center items-center relative m-4 w-[60vw] h-[50vh]">
-                    <canvas id="all-chart"></canvas>
+                <div class="chart-container flex justify-center items-center flex-col p-2">
+                    <div class="chart flex justify-center items-center relative m-4 w-[55vw] h-[50vh]">
+                        <canvas id="categorie-chart"></canvas>
+                    </div>
                 </div>
             </div>
         </div>
+
+
         
+
         <div id="graphique-produit" class="mt-4">
             <div class="ml-4">
                 <div class="mb-2">

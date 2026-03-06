@@ -14,14 +14,23 @@ let dataVentes = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
 
 let dataProdVentes = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
 
+let categories = ["Alimentaire", "Vêtement", "Artisanat", "Goodies", "Soin"]
+let dataCatVentes = [0, 0, 0, 0, 0]
+
 Object.keys(dataStats[currentAnnee]).forEach(mois => { // Récupères les données des ventes totales pour l'année en cours
     let i = Number(mois);
 
     dataVentes[i - 1] = Number(dataStats[currentAnnee][mois]["nb_ventes_totales"]); // Insert les données dans le champ data du diagramme
+
+    Object.keys(dataStats[currentAnnee][mois]["produits"]).forEach(produit => {
+        let iCat = Number(dataStats[currentAnnee][mois]["produits"][produit]["id_categorie"]);
+        console.log(iCat);
+    });
 });
 
 Object.keys(dataStats[currentAnnee]).forEach(mois => {
     let i = Number(mois);
+    
 
     if (dataStats[currentAnnee][mois]["produits"][currentIdProd]) {
         dataProdVentes[i - 1] = Number(dataStats[currentAnnee][mois]["produits"][currentIdProd]["nb_ventes_totales"]);
