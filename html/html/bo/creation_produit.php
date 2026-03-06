@@ -448,12 +448,14 @@ if (isset($_POST['categorie']) && isset($_POST['nom']) && isset($_POST['prix']) 
                                 <label class="mr-4" for="dateDebutPromotion">Début de promotion* :</label>
                                 <input class="border-4 border-beige rounded-2xl w-45" type="date" name="dateDebutPromotion" id="dateDebutPromotion" value="<?php echo $dateDebutPromotion; ?>" required>
                             </div>
+                            <p id="erreurDebPromo" class="text-rouge hidden"></p>
                         </div>
                         <div>
                             <div class="flex flex-row mr-4 ml-4">
                                 <label class="mr-4" for="dateFinPromotion">Fin de promotion :</label>
                                 <input class="border-4 border-beige rounded-2xl w-45" type="date" name="dateFinPromotion" id="dateFinPromotion" value="<?php echo $dateFinPromotion ?? ''; ?>">
                             </div>
+                             <p id="erreurFinPromo" class="text-rouge hidden"></p>
                         </div>
                     </div>
                     <div class="flex flex-row justify-around m-2 p-2">
@@ -480,60 +482,5 @@ if (isset($_POST['categorie']) && isset($_POST['nom']) && isset($_POST['prix']) 
         <?php include __DIR__ . '/../../php/structure/footer_back.php';?>
         <script src="../../js/bo/changement_image_produits.js"></script>
     </body>
-    <script>
-        // Fonction pour afficher/cacher les inputs de promotion
-        function togglePromotionInputs(){
-            var promoCheck = document.getElementById('promoCheck');
-            var promoInputs = document.getElementById('promoInputs');
-            if(promoCheck.checked && !promoCheck.disabled){
-                promoInputs.style.display='flex';
-                promoInputs.style.visibility = 'visible';
-                promoInputs.style.height = 'auto';
-            }else{
-                promoInputs.style.visibility = 'hidden';
-                promoInputs.style.height = '0';
-            }
-        }
-
-        // Fonction pour afficher/cacher input de seuil d'alerte
-        function toggleSeuilInput(){
-            var seuilCheck = document.getElementById('seuilCheck');
-            var seuilInput = document.getElementById('seuilInput');
-            var seuilAlerte = document.getElementById('seuilAlerte');
-            if(seuilCheck.checked){
-                seuilInput.style.display = 'flex';
-                seuilAlerte.required = true;
-            }else{
-                seuilInput.style.display = 'none';
-                seuilAlerte.required = false;
-            }
-        }
-        
-    
-        document.addEventListener('DOMContentLoaded', function() {
-            // Quand "Mettre en promotion" est coché, afficher les inputs de promotion
-            var promoCheck = document.getElementById('promoCheck');
-            promoCheck.addEventListener('change', togglePromotionInputs);
-            togglePromotionInputs();
-
-            // Quand "Ajouter seuil alerte" est coché, afficher les inputs de seuil d'alerte
-            var seuilCheck = document.getElementById('seuilCheck');
-            seuilCheck.addEventListener('change', toggleSeuilInput);
-            toggleSeuilInput();
-
-            // validation image
-            const form = document.getElementById("formProduit");
-            const inputPhoto = document.getElementById("photo");
-            const erreur = document.getElementById("erreurImage");
-
-            form.addEventListener("submit", function(e) {
-
-                if(inputPhoto.files.length === 0){
-                    e.preventDefault();
-                    erreur.classList.remove("hidden");
-                }
-
-            });
-        });
-    </script>
+    <script src="/js/bo/produit.js"></script>
 </html>
