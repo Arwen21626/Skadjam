@@ -60,12 +60,12 @@ if (isset($_POST['logout'])) {
                                             ON h.id_adresse = a.id_adresse
                                         WHERE c.id_compte = $id", PDO::FETCH_ASSOC) as $adresse){
                     $numRue[$nbAdresse] = htmlentities($adresse['numero_rue']);
-                    $adressePostale[$nbAdresse] = htmlentities($adresse['adresse_postale']);
-                    $complement[$nbAdresse] = htmlentities($adresse['complement_adresse']);
-                    $batiment[$nbAdresse] = " " . htmlentities($adresse['numero_bat']);
-                    $appartement[$nbAdresse] = " " . htmlentities($adresse['numero_appart']);
-                    $codePostal[$nbAdresse] = htmlentities($adresse['code_postal']);
-                    $ville[$nbAdresse] = htmlentities($adresse['ville']);
+                    $adressePostale[$nbAdresse] = !empty($adresse['adresse_postale']) ? htmlentities($adresse['adresse_postale']) : '';
+                    $complement[$nbAdresse] = !empty($adresse['complement_adresse']) ? htmlentities($adresse['complement_adresse']) : '';
+                    $batiment[$nbAdresse] = !empty($adresse['numero_bat']) ? " " . htmlentities($adresse['numero_bat']) : '';
+                    $appartement[$nbAdresse] = !empty($adresse['numero_appart']) ? " " . htmlentities($adresse['numero_appart']) : '';
+                    $codePostal[$nbAdresse] = !empty($adresse['code_postal']) ? htmlentities($adresse['code_postal']) : '';
+                    $ville[$nbAdresse] = !empty($adresse['ville']) ? htmlentities($adresse['ville']) : '';
                     $nbAdresse++;
                 }
                 $dbh = null;
