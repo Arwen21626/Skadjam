@@ -673,20 +673,23 @@ else { ?>
             let valid = true;
             erreurDebPromo.classList.add("hidden");
             erreurFinPromo.classList.add("hidden");
+            const promoCheck = document.getElementById("promoCheck");
+
 
             // Vérifier date de début
-            if(inputDateDebut && inputDateDebut.value === '') {
+            if(inputDateDebut.value === '') {
                 erreurDebPromo.textContent = "La date de début est obligatoire.";
                 erreurDebPromo.classList.remove("hidden");
                 valid = false;
-            } else if(estDateDansLePasse(inputDateDebut.value)) {
+            } 
+            else if(estDateDansLePasse(inputDateDebut.value)) {
                 erreurDebPromo.textContent = "La date de début ne peut pas être dans le passé.";
                 erreurDebPromo.classList.remove("hidden");
                 valid = false;
             }
 
             // Vérifier date de fin si renseignée
-            if(inputDateFin && inputDateFin.value !== '') {
+            if(inputDateFin.value !== '') {
                 if(estDateDansLePasse(inputDateFin.value)) {
                     erreurFinPromo.textContent = "La date de fin ne peut pas être dans le passé.";
                     erreurFinPromo.classList.remove("hidden");
@@ -694,18 +697,20 @@ else { ?>
                 }
 
                 // Date fin >= date début
-                if(inputDateDebut.value !== '') {
-                    const debut = new Date(inputDateDebut.value);
-                    const fin = new Date(inputDateFin.value);
-                    if(fin < debut){
-                        erreurFinPromo.textContent = "La date de fin doit être après la date de début.";
-                        erreurFinPromo.classList.remove("hidden");
-                        valid = false;
-                    }
+                const debut = new Date(inputDateDebut.value);
+                const fin = new Date(inputDateFin.value);
+                if(fin < debut){
+                    erreurFinPromo.textContent = "La date de fin doit être après la date de début.";
+                    erreurFinPromo.classList.remove("hidden");
+                    valid = false;
                 }
+                
             }
 
-            if(!valid) e.preventDefault();
+            if(!valid){
+                e.preventDefault();
+            }
+
         });
     });
 </script>
