@@ -28,6 +28,11 @@ $erreurDescription = false;
 $erreurUnite = false;
 $erreurQteUnite = false;
 
+//Initialisation des dates de promo
+$dateDebutPromotion = date('Y-m-d');
+$dateFinPromotion = null;
+$labelPromo = '';
+
 //Requete récupération categories
 foreach($dbh->query('SELECT * from sae3_skadjam._categorie', PDO::FETCH_ASSOC) as $row) {
     $tab_categories[] = $row;
@@ -55,13 +60,22 @@ if (isset($_POST['categorie']) && isset($_POST['nom']) && isset($_POST['prix']) 
     if(isset($_POST['seuilAlerte']) && $_POST['seuilAlerte'] !== ''){
         $seuilAlerte = $_POST['seuilAlerte'];
     }
-    
-    // Champs spécifiques à la promotion
-    $dateDebutPromotion = isset($_POST['dateDebutPromotion']) ? htmlentities($_POST['dateDebutPromotion']) : date('Y-m-d');
-    $dateFinPromotion = htmlentities($_POST['dateFinPromotion']);
-    $dateFinPromotion = trim($dateFinPromotion);
-    $dateFinPromotion = ($dateFinPromotion === '') ? null : $dateFinPromotion;
-    $labelPromo = isset($_POST['labelPromo']) ? $_POST['labelPromo'] : null;
+
+    //Si le formulaire est soumis
+    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+        //Date de début
+        if (isset($_POST['dateDebutPromotion']) && $_POST['dateDebutPromotion'] !== '') {
+            $dateDebutPromotion = htmlentities($_POST['dateDebutPromotion']);
+        }
+        //Date de fin
+        if (isset($_POST['dateFinPromotion']) && $_POST['dateFinPromotion'] !== '') {
+            $dateFinPromotion = htmlentities($_POST['dateFinPromotion']);
+        }
+        //Libellé de la promotion
+        if (isset($_POST['labelPromo'])) {
+            $labelPromo = htmlentities($_POST['labelPromo']);
+        }
+    }
 
     if(isset($_POST['mettreEnLigne'])){
         $enLigne = $_POST['mettreEnLigne'];
@@ -432,20 +446,20 @@ if (isset($_POST['categorie']) && isset($_POST['nom']) && isset($_POST['prix']) 
                         <div>
                             <div class="flex flex-row mr-4 ml-4">
                                 <label class="mr-4" for="dateDebutPromotion">Début de promotion* :</label>
-                                <input class="border-4 border-beige rounded-2xl w-45" type="date" name="dateDebutPromotion" id="dateDebutPromotion" value="<?php if(isset($dateDebutPromotion)){echo $dateDebutPromotion;}else{ echo date('Y-m-d');} ?>" required>
+                                <input class="border-4 border-beige rounded-2xl w-45" type="date" name="dateDebutPromotion" id="dateDebutPromotion" value="<?php echo $dateDebutPromotion; ?>" required>
                             </div>
                         </div>
                         <div>
                             <div class="flex flex-row mr-4 ml-4">
                                 <label class="mr-4" for="dateFinPromotion">Fin de promotion :</label>
-                                <input class="border-4 border-beige rounded-2xl w-45" type="date" name="dateFinPromotion" id="dateFinPromotion" value="<?php if(isset($dateFinPromotion)){echo $dateFinPromotion;} ?>">
+                                <input class="border-4 border-beige rounded-2xl w-45" type="date" name="dateFinPromotion" id="dateFinPromotion" value="<?php echo $dateFinPromotion ?? ''; ?>">
                             </div>
                         </div>
                     </div>
                     <div class="flex flex-row justify-around m-2 p-2">
                         <div class="flex flex-row mr-4 ml-4">
                             <label class="mr-4" for="labelPromo">Libellé de la promotion :</label>
-                            <input class="border-4 border-beige rounded-2xl w-45" maxlength="19" type="text" name="labelPromo" id="labelPromo" value="<?php if(isset($labelPromo)){echo $labelPromo;}?>">
+                            <input class="border-4 border-beige rounded-2xl w-45" maxlength="19" type="text" name="labelPromo" id="labelPromo" value="<?php echo $labelPromo;?>">
                         </div>
                     </div>
                 </div>

@@ -81,13 +81,5 @@ function filtre(){
         })
     }
 
-    // FILTRE MAP
-    if (checkedVendeursMap.length > 0) {
-        tab = tab.filter(vendeur => {
-            if (vendeur.id_compte == checkedVendeursMap[i]) return true
-            return false
-        })
-    }
-
     return tab
 }
