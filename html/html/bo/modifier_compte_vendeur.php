@@ -48,7 +48,7 @@ if (isset($_POST["nom"]) && isset($_POST["prenom"]) && isset($_POST["mail"]) && 
         $nom = htmlentities(formatPrenom($_POST["nom"]));
         $prenom = htmlentities(formatPrenom($_POST["prenom"]));
         $mail = htmlentities($_POST["mail"]);
-        $tel = htmlentities(formatTel($_POST["tel"]));
+        $tel = htmlentities($_POST["tel"]);
         $denomination = htmlentities($_POST["denomination"]);
         $raisonSociale = htmlentities($_POST["raisonSociale"]);
         $iban = htmlentities($_POST["iban"]);
