@@ -72,7 +72,7 @@ foreach($dbh->query("SELECT *,est_masque::CHAR as est_masque_php
     if( isset($promotion['id_promotion']) && $promotion['id_promotion'] != null){
         $caseCochee = true;
         // Récupération des infos de promotion
-        $dateDebutPromotion = formatDate($promotion['date_debut_promotion']);
+        $dateDebutPromotion = $promotion['date_debut_promotion'];
         $dateFinPromotion = $promotion['date_fin_promotion'] !== null ? formatDate($promotion['date_fin_promotion']) : null;
         $labelPromo = $promotion['label'];
     }else{
