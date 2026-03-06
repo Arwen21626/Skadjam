@@ -8,6 +8,7 @@
 </head>
 <body>
     <?php include __DIR__.'/../../php/structure/header_front.php' ?>
+    <?php include __DIR__.'/../../php/structure/navbar_front.php' ?>
     
     <main class=" w-3/4">
         <h2>Authentification à deux facteurs</h2>
@@ -29,20 +30,23 @@
         <button id="gen-key">Générer</button>
         <pre id="txt-key"></pre>
         <img src="" alt="QR code" id="img-qr-code" class=" hidden" width="180px" height="180px">
-        <label id="lbl-code" for="code" class="hidden">Entrez le code : </label>
-        <input id="input-code" name="code" type="text" class=" border-2 border-gray-500 hidden" maxlength="6" size="6">
+        <?php include __DIR__.'/../../php/structure/authentikATOR/input_code.php' ?>
         <p id="result" class="hidden"></p>
+        <button id="valide-code" onclick="print()" disabled>Terminer</button>
     </main>
     
     <?php include __DIR__.'/../../php/structure/footer_front.php' ?>
 </body>
 <script>
+    function print(){
+        console.log("click")
+    }
+
     const btn_gen = document.getElementById("gen-key");
     const input = document.getElementById("input-code");
     const txt_key = document.getElementById("txt-key");
     const img_qr = document.getElementById("img-qr-code");
     const res = document.getElementById("result");
-    const label = document.getElementById("lbl-code");
 
     btn_gen.addEventListener('click', () => 
     {
@@ -56,30 +60,18 @@
             
         });
     })
-    
-    input.addEventListener('keyup', () => {
-        text = input.value;
-        reg = /^[0-9]{6}$/
-        let donnees = new FormData();
 
-        if (reg.test(text)){
-            console.log("nice");
-            donnees.append('secret', txt_key.textContent);
-            donnees.append('code', text);
-            fetch('../../php/structure/authentikATOR/verify_otp.php', {
-                method: 'post',
-                body: donnees
-            })
-            .then(r => r.json())
-            .then(data => {
-                res.textContent = data.verify;
-                res.style.display = "block"
-                label.style.display = "block"
-            })
+    function submit(){
+        verifie(recup_code())
+    }
+
+    function verifie(val){
+        if (val = 0){
+            res.textContent = "l'authentification à réussi"
         }else{
-            console.log("nul")
+            res.textContent = "l'authentification à échoué"
         }
-    })
-
+        res.style.display = "block"
+    }
 </script>
 </html>

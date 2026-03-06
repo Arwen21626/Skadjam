@@ -11,9 +11,9 @@ $input = $_POST['code'];
 
 $otp = TOTP::createFromSecret($secret); // create TOTP object from the secret.
 if ($otp->verify($input,leeway:2)){
-    $ret = 'l\'authentification fonctionne';
+    $ret = '0';
 }else{
-    $ret = 'l\'authentification n\'a pas fonctionné';
+    $ret = '1';
 } // Returns true if the input is verified, otherwise false.
 ob_clean();
 echo json_encode(['verify' => $ret,'data' => 'reg']);
