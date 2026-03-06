@@ -21,6 +21,11 @@ $tab_unite = ["Piece", "Litre","cl","g","kg","S","M","L","XL","XXL","m","cm"];
 $erreurDebPromo = null;
 $erreurFinPromo = null;
 
+//Initialisation des dates de promo
+$dateDebutPromotion = date('Y-m-d');
+$dateFinPromotion = null;
+$labelPromo = '';
+
 //Requete récupération categories
 foreach($dbh->query('SELECT * from sae3_skadjam._categorie', PDO::FETCH_ASSOC) as $row) {
     $tab_categories[] = $row;
@@ -576,14 +581,14 @@ else { ?>
                         <div>
                             <div class="flex flex-row mr-4 ml-4">
                                 <label class="mr-4" for="dateDebutPromotion">Début de promotion* :</label>
-                                <input class="border-4 border-beige rounded-2xl w-45" type="date" name="dateDebutPromotion" id="dateDebutPromotion" value="<?php echo $dateDebutPromotion !== null ? $dateDebutPromotion : date('Y-m-d'); ?>" required>
+                                <input class="border-4 border-beige rounded-2xl w-45" type="date" name="dateDebutPromotion" id="dateDebutPromotion" value="<?php echo $dateDebutPromotion; ?>" required>
                             </div>
                             <p id="erreurDebPromo" class="text-rouge hidden"><?php echo $erreurDebPromo; ?></p>
                         </div>
                         <div>
                             <div class="flex flex-row mr-4 ml-4">
                                 <label class="mr-4" for="dateFinPromotion">Fin de promotion :</label>
-                                <input class="border-4 border-beige rounded-2xl w-45" type="date" name="dateFinPromotion" id="dateFinPromotion" value="<?php if(isset($dateFinPromotion)){echo $dateFinPromotion;} ?>">
+                                <input class="border-4 border-beige rounded-2xl w-45" type="date" name="dateFinPromotion" id="dateFinPromotion" value="<?php echo $dateFinPromotion; ?>">
                             </div>
                             <p id="erreurFinPromo" class="text-rouge hidden"><?php echo $erreurFinPromo; ?></p>
                         </div>
@@ -591,7 +596,7 @@ else { ?>
                     <div class="flex flex-row justify-around m-2 p-2">
                         <div class="flex flex-row mr-4 ml-4">
                             <label class="mr-4" for="labelPromo">Libellé de la promotion :</label>
-                            <input class="border-4 border-beige rounded-2xl w-45" maxlength="20" type="text" name="labelPromo" id="labelPromo" value="<?php if(isset($labelPromo)){echo $labelPromo;}?>">
+                            <input class="border-4 border-beige rounded-2xl w-45" maxlength="20" type="text" name="labelPromo" id="labelPromo" value="<?php echo $labelPromo;?>">
                         </div>
                     </div>
                 </div>
