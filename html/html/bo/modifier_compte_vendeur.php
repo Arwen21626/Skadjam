@@ -281,6 +281,8 @@ if(!$isset || $erreur){
             $ville = $ligne['ville'];
             $description = $ligne['description_vendeur'];
             $num = $ligne['numero_rue'];
+            $latitude = $ligne['latitude'];
+            $longitude = $ligne['longitude'];
         }  
     }
     ?>
@@ -289,11 +291,7 @@ if(!$isset || $erreur){
 <?php include __DIR__ . "/../../php/structure/head_back.php";?>
     <head>
         <title>Modification du compte vendeur</title>
-        <style>
-            button a:hover {
-                color: #000; 
-            }
-        </style>
+        <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin=""/>
     </head>
     <body>
         <?php include __DIR__."/../../php/structure/header_back.php"; ?>
@@ -302,103 +300,127 @@ if(!$isset || $erreur){
 
             <h2 class="flex justify-center text-center">Modification du compte vendeur</h2>
             <!-- Formulaire -->
-            <form class="flex flex-col flex-wrap p-15 pt-0 justify-around" action="modifier_compte_vendeur.php" method="post" enctype="multipart/form-data">
+            <form class="flex flex-col self-center w-9/10 p-15 pt-0" action="modifier_compte_vendeur.php" method="post" enctype="multipart/form-data">
                 <!-- Photo de profil -->
-                <div class="row-start-1 row-span-3 m-2 p-4 grid grid-rows-[2/3-1/3] justify-items-center">
-                    <input type="file" id="photo" name="photo" class="hidden">
-                    <!-- label qui agit comme bouton -->
-                    <label id="labelImage" for="photo" class="bg-beige w-60 h-60 rounded-2xl image-produit cursor-pointer" style="background-image: url('../..<?= isset($url) ? $url : '/images/logo/bootstrap_icon/image.svg'; ?>'); background-repeat: no-repeat; background-position: center; background-size: 60%;"></label>
-                    <label class="cursor-pointer" for="photo"><h4><strong>Photo de profil</strong></h4></label>
+                <div class="flex flex-row justify-around">
+                    <div class="grid grid-rows-1 w-70 m-2 p-4 justify-items-center">
+                        <input type="file" id="photo" name="photo" class="hidden">
+                        <!-- label qui agit comme bouton -->
+                        <label id="labelImage" for="photo" class="bg-beige w-60 h-60 rounded-2xl image-produit cursor-pointer" style="background-image: url('../..<?= isset($url) ? $url : '/images/logo/bootstrap_icon/image.svg'; ?>'); background-repeat: no-repeat; background-position: center; background-size: 60%;"></label>
+                        <label class="cursor-pointer" for="photo"><h4><strong>Photo de profil</strong></h4></label>
+                    </div>
+
+                    <!-- Vendeur -->
+                    <div class="flex flex-col flex-wrap">
+                        <h3>Informations vendeur :</h3>
+                        <div class="flex flex-row space-x-40 space-y-6">
+                            <div class="flex flex-col space-y-2">
+                                <label for="nom">Nom * :</label>
+                                <input class="ml-5 border-4 border-solid rounded-2xl border-beige p-1 pl-3" type="text" id="nom" name="nom" value="<?= $nom; ?>" size="30" required >
+                                <?= $erreurNom ? "<p style=\"font-size: 0.90em\" class=\"text-rouge\">Le nom ne peut contenir que</p><br><p style=\"font-size: 0.90em\" class=\"text-rouge\">des majuscules, des minuscules, des - ou des espaces.</p>" : ""; ?>
+                            </div>
+                            <div class="flex flex-col space-y-2">
+                                <label for="mail">Mail * :</label>
+                                <input class="ml-5 border-4 border-solid rounded-2xl border-beige p-1 pl-3" type="email" id="mail" name="mail" value="<?= $mail; ?>" size="30" required>
+                                <?= $erreurMail ? "<p style=\"font-size: 0.90em\" class=\"text-rouge\">Le mail saisi existe déjà ou son format n'est pas correct.</p>" : ""; ?>
+                            </div>
+                        </div>
+                        <div class="flex flex-row space-x-40 space-y-6">
+                            <div class="flex flex-col space-y-2">
+                                <label for="prenom">Prénom * :</label>
+                                <input class="ml-5 border-4 border-solid rounded-2xl border-beige p-1 pl-3" type="text" id="prenom" name="prenom" value="<?= $prenom; ?>" size="30" required>
+                                <?= $erreurPrenom ? "<p style=\"font-size: 0.90em\" class=\"text-rouge\">Le prénom ne peut contenir que</p><br><p style=\"font-size: 0.90em\" class=\"text-rouge\">des majuscules, des minuscules, des - ou des espaces.</p>" : ""; ?>
+                            </div>
+                            <div class="flex flex-col space-y-2">
+                                <label for="tel">Numéro de téléphone * :</label>
+                                <input class="ml-5 border-4 border-solid rounded-2xl border-beige p-1 pl-3" type="tel" id="tel" name="tel" value="<?= $tel; ?>" size="10" required>
+                                <?= $erreurTel ? "<p style=\"font-size: 0.90em\" class=\"text-rouge\">Le numéro de téléphone doit</p><br><p style=\"font-size: 0.90em\" class=\"text-rouge\">commencer par 0 suivi de 9 chiffres.</p>" : ""; ?>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-
-
-                <!-- Vendeur -->
-                <h3>Informations vendeur :</h3>
-                <div class="flex flex-row flex-wrap justify-between ml-10 mb-7 mr-10 @max-[768px]:ml-5 @max-[768px]:mr-5">
-                    <div class="flex flex-col items-start mt-6 w-fit @max-[768px]:mt-2">
-                        <label for="nom">Nom * :</label>
-                        <input class="ml-5 border-4 border-solid rounded-2xl border-beige p-1 pl-3 mb-4 w-1/1" type="text" id="nom" name="nom" value="<?= $nom; ?>" size="30" required >
-                        <?= $erreurNom ? "<p style=\"font-size: 0.90em\" class=\"text-rouge\">Le nom ne peut contenir que</p><br><p style=\"font-size: 0.90em\" class=\"text-rouge\">des majuscules, des minuscules, des - ou des espaces.</p>" : ""; ?>
-                    </div>
-                    <div class="flex flex-col items-start mt-6 w-fit @max-[768px]:mt-2">
-                        <label for="prenom">Prénom * :</label>
-                        <input class="ml-5 border-4 border-solid rounded-2xl border-beige p-1 pl-3 mb-4 w-1/1" type="text" id="prenom" name="prenom" value="<?= $prenom; ?>" size="30" required>
-                        <?= $erreurPrenom ? "<p style=\"font-size: 0.90em\" class=\"text-rouge\">Le prénom ne peut contenir que</p><br><p style=\"font-size: 0.90em\" class=\"text-rouge\">des majuscules, des minuscules, des - ou des espaces.</p>" : ""; ?>
-                    </div>
-                    <div class="flex flex-col items-start mt-6 w-fit @max-[768px]:mt-2">
-                        <label for="mail">Mail * :</label>
-                        <input class="ml-5 border-4 border-solid rounded-2xl border-beige p-1 pl-3 mb-4 w-1/1" type="email" id="mail" name="mail" value="<?= $mail; ?>" size="30" required>
-                        <?= $erreurMail ? "<p style=\"font-size: 0.90em\" class=\"text-rouge\">Le mail saisi existe déjà ou son format n'est pas correct.</p>" : ""; ?>
-                    </div>
-                    <div class="flex flex-col items-start mt-6 w-fit @max-[768px]:mt-2">
-                        <label for="tel">Numéro de téléphone * :</label>
-                        <input class="ml-5 border-4 border-solid rounded-2xl border-beige p-1 pl-3 mb-4 w-1/1" type="tel" id="tel" name="tel" value="<?= $tel; ?>" size="10" required>
-                        <?= $erreurTel ? "<p style=\"font-size: 0.90em\" class=\"text-rouge\">Le numéro de téléphone doit</p><br><p style=\"font-size: 0.90em\" class=\"text-rouge\">commencer par 0 suivi de 9 chiffres.</p>" : ""; ?>
-                    </div>
-                </div>
-
                 <!-- Entreprise -->
                 <h3>Informations entreprise :</h3>
-                <div class="flex flex-col flex-wrap">
-                    <div class="flex flex-row no-wrap justify-between ml-10 mr-10 @max-[768px]:ml-5 @max-[768px]:mr-5">
-                        <div class="flex flex-col items-start mt-6 w-fit @max-[768px]:mt-2">
+                <div class="flex flex-col">
+                    <div class="flex flex-row space-x-40 space-y-6">
+                        <div class="flex flex-col space-y-2">
                             <label for="raisonSociale">Raison sociale de l'entreprise * :</label>
-                            <input class="ml-5 border-4 border-solid rounded-2xl border-beige p-1 pl-3 mb-4 w-1/1" type="text" id="raisonSociale" name="raisonSociale" value="<?= $raisonSociale; ?>" size="30" required>
+                            <input class="ml-5 border-4 border-solid rounded-2xl border-beige p-1 pl-3" type="text" id="raisonSociale" name="raisonSociale" value="<?= $raisonSociale; ?>" size="30" required>
                             <?= $erreurRaisonSociale ? "<p style=\"font-size: 0.90em\" class=\"text-rouge\">La raison sociale est invalide.</p>" : ""; ?>
                         </div>
-                        <div class="flex flex-col items-start mt-6 w-fit @max-[768px]:mt-2">
+                        <div class="flex flex-col space-y-2">
                             <label for="denomination">Nom de l'entreprise * :</label>
-                            <input class="ml-5 border-4 border-solid rounded-2xl border-beige p-1 pl-3 mb-4 w-1/1" type="text" id="denomination" name="denomination" value="<?= $denom; ?>" size="30" required>
+                            <input class="ml-5 border-4 border-solid rounded-2xl border-beige p-1 pl-3" type="text" id="denomination" name="denomination" value="<?= $denom; ?>" size="30" required>
                             <?= $erreurDenomination ? "<p style=\"font-size: 0.90em\" class=\"text-rouge\">Le nom de l'entreprise est invalide.</p>" : ""; ?>
                         </div>
                     </div>
-                    <div class="flex flex-row no-wrap justify-between ml-10 mb-7 mr-10 @max-[768px]:ml-5 @max-[768px]:mr-5">
-                        <div class="flex flex-col items-start mt-6 w-fit @max-[768px]:mt-2">
-                            <label for="siren">Numéro de SIREN * :</label>
-                            <input class="ml-5 border-4 border-solid rounded-2xl border-beige p-1 pl-3 mb-4 w-1/1" type="text" id="siren" name="siren" value="<?= $siren; ?>" size="10" required>
-                            <?= $erreurSiren ? "<p style=\"font-size: 0.90em\" class=\"text-rouge\">Le numéro de SIREN doit contenir exactement 9 chiffres.</p>" : ""; ?>
-                        </div>
-                        <div class="flex flex-col items-start mt-6 w-fit @max-[768px]:mt-2">
+                    <div class="flex flex-row space-x-40 space-y-6">
+                        <div class="flex flex-col space-y-2">
                             <label for="iban">Numéro de IBAN * :</label>
-                            <input class="ml-5 border-4 border-solid rounded-2xl border-beige p-1 pl-3 mb-4 w-1/1" type="text" id="iban" name="iban" value="<?= $iban; ?>" placeholder="FR" size="30" required>
+                            <input class="ml-5 border-4 border-solid rounded-2xl border-beige p-1 pl-3" type="text" id="iban" name="iban" value="<?= $iban; ?>" placeholder="FR" size="30" required>
                             <?= $erreurIban ? "<p style=\"font-size: 0.90em\" class=\"text-rouge\">Le numéro de IBAN doit commencer par</p><br><p style=\"font-size: 0.90em\" class=\"text-rouge\">FR suivi de 12 chiffres et de 11 caractères alphanumériques.</p>" : ""; ?>
                         </div>
-                    </div>
+                        <div class="flex flex-col space-y-2">
+                            <label for="siren">Numéro de SIREN * :</label>
+                            <input class="ml-5 border-4 border-solid rounded-2xl border-beige p-1 pl-3" type="text" id="siren" name="siren" value="<?= $siren; ?>" size="10" required>
+                            <?= $erreurSiren ? "<p style=\"font-size: 0.90em\" class=\"text-rouge\">Le numéro de SIREN doit contenir exactement 9 chiffres.</p>" : ""; ?>
+                        </div>
+                    </div>                    
                 </div>
 
                 <!-- Adresse -->
                 <h3>Siège social :</h3>
-                <div class="flex flex-col no-wrap justify-between ml-10 mb-7 mr-10">
-                    <div class="flex flex-row no-wrap justify-between">
-                        <div class="flex flex-col no-wrap items-start mt-6 w-fit @max-[768px]:mt-2">
+                <div class="flex flex-row">
+                    <!-- Champs de l'adresse -->
+                    <div class="flex flex-col">
+                        <!-- Adresse postale -->
+                        <div class="flex flex-col">
                             <label for="adresse">Adresse * :</label>
                             <input class="ml-5 border-4 border-solid rounded-2xl border-beige p-1 pl-3 mb-4 @max-[768px]:ml-2 max-w-3/4 @max-[768px]:pl-2 " type="text" id="adresse" name="adresse" value="<?= $num . (isset($numBis) ? " $numBis" : " ") . $adresse; ?>" size="50" placeholder="ex : 3 rue des camélias" required>
                             <?= $erreurAdresse ? "<p style=\"font-size: 0.90em\" class=\"text-rouge\">L'adresse est invalide.</p>" : ""; ?>
                         </div>
-                    </div>
-                    <div class="flex flex-row no-wrap justify-between">
-                        <div class="flex flex-col items-start mt-6 w-fit @max-[768px]:mt-2">
+
+                        <!-- Ville -->
+                        <div class="flex flex-col">
                             <label for="ville">Ville * :</label>
                             <input class="ml-5 border-4 border-solid rounded-2xl border-beige p-1 pl-3 mb-4 @max-[768px]:ml-2 max-w-3/4 @max-[768px]:pl-2 " type="text" id="ville" name="ville" value="<?= $ville; ?>" size="50" required>
                             <?= $erreurVille ? "<p style=\"font-size: 0.90em\" class=\"text-rouge\">Le nom de la ville ne peut contenir que des lettres, des espaces et des -.</p>" : ""; ?>
                         </div>
-                        <div class="flex flex-col items-start mt-6 w-fit @max-[768px]:mt-2">
+
+                        <!-- Code postal -->
+                        <div class="flex flex-col">
                             <label for="cp">Code Postal * :</label>
-                            <input class="ml-5 border-4 border-solid rounded-2xl border-beige p-1 pl-3 mb-4 @max-[768px]:ml-2 max-w-3/4 @max-[768px]:pl-2 " type="text" id="cp" name="cp" value="<?= $cp; ?>" size="10" required>
+                            <input class="ml-5 border-4 border-solid rounded-2xl border-beige p-1 pl-3 mb-4 @max-[768px]:ml-2 max-w-3/4 @max-[768px]:pl-2 " type="text" id="cP" name="cp" value="<?= $cp; ?>" size="10" required>
                             <?= $erreurCp ? "<p style=\"font-size: 0.90em\" class=\"text-rouge\">Le code postal doit contenir</p><br><p style=\"font-size: 0.90em\" class=\"text-rouge\">exactement 5 chiffres.</p>" : ""; ?>
                         </div>
+                    </div>
+                    <!-- Carte -->
+                     <div class="flex flex-col">
+                        <div id="map" class="h-60 z-0"></div>
+                        <!-- Coordonnées -->
+                        <div class="h-20 flex flex-row m-2">
+                            <div class="m-2">
+                                <label for="latitude">Latitude : </label>
+                                <input required type="text" name="latitude" id="latitude" class="border-2 border-solid rounded-2xl border-beige p-1 pl-3 w-60" value="<?= $latitude; ?>">
+                            </div>
+                            <div class="m-2">
+                                <label for="longitude">Longitude : </label>
+                                <input required type="text" name="longitude" id="longitude" class="border-2 border-solid rounded-2xl border-beige p-1 pl-3 w-60" value="<?= $longitude; ?>">
+                            </div>
+                        </div>
+                        <p id="errorMap" class="text-rouge"></p>
                     </div>
                 </div>
 
                 <!-- Description -->
                 <h3>Description :</h3>
-                <div class="flex flex-col no-wrap justify-between ml-10 mb-7 mr-10">
-                    <textarea class="ml-5 border-4 border-solid rounded-2xl border-beige p-1 pl-3 mb-4 w-1/1" id="description" name="description" rows="5"><?= isset($description) ? $description : ''; ?></textarea>
+                <div class="flex flex-col justify-around">
+                    <textarea class="ml-5 border-4 border-solid rounded-2xl border-beige p-1 pl-3 mb-4" id="description" name="description" rows="5"><?= isset($description) ? $description : ''; ?></textarea>
                     <?= $erreurDescription ? "<p style=\"font-size: 0.90em\" class=\"text-rouge\">La description ne peut pas dépasser 500 caractères.</p>" : ""; ?>
                 </div>
 
                 <!-- Valider le formulaire -->
-                <div class="flex mt-10 justify-center md:justify-end w-1/1">
+                <div class="flex mt-10 justify-center md:justify-end">
                     <button class="cursor-pointer border-2 border-vertFonce rounded-2xl w-40 h-14 p-0 m-0 mr-10" type="button"><a href="./profil_vendeur.php">Annuler</a></button>
                     <input class="cursor-pointer border-2 border-vertFonce rounded-2xl w-40  h-14 p-0 m-0 md:mr-10" type="Submit" name="submit" id="submit" value="Valider">
                 </div>
@@ -414,5 +436,25 @@ if(!$isset || $erreur){
         ?>
         <script src="../../js/bo/changement_image_produits.js"></script>
     </body>
+    <?php $coord = [
+        'latitude' => $latitude,
+        'longitude' => $longitude
+    ]?>
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script>
+        const coord = <?php echo json_encode($coord);?>;
+        var map = L.map('map').setView([coord.latitude, coord.longitude], 15);
+
+        L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            maxZoom: 19,
+            attribution: '&copy; OpenStreetMap'
+        }).addTo(map);
+
+        var pointer = L.icon({
+            iconUrl: '../../images/logo/pointeurVertFonce.png',
+            iconSize: [45, 70],
+        });
+    </script>
+<script src="../../js/fo/geolocalVendeur.js"></script>
 <?php } ?>
 </html>
