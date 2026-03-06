@@ -53,6 +53,7 @@ foreach($dbh->query("SELECT *,est_masque::CHAR as est_masque_php
     $unite = $produit['unite'];
     $nomCategorie = $produit['libelle_categorie'];
     $idCategorie = $produit['id_categorie'];
+    $seuilAlerte = $produit['seuil_alerte'];
 
     // Si dans la BDD est_masque est a false, il faut mettre enLigne à true ou l'inverse
     if($enLigne == 'f'){
@@ -135,6 +136,12 @@ if (isset($_POST['categorie']) && isset($_POST['nom']) && isset($_POST['prix']) 
     $dateFinPromotion = trim($dateFinPromotion);
     $dateFinPromotion = ($dateFinPromotion === '') ? null : $dateFinPromotion;
     $labelPromo = isset($_POST['labelPromo']) ? $_POST['labelPromo'] : null;
+    if(isset($_POST['seuilAlerte']) && $_POST['seuilAlerte'] !== ''){
+        $seuilAlerte = $_POST['seuilAlerte'];
+    }
+    else{
+        $seuilAlerte = null;
+    }
 
     // Récupération du nom de la catégorie pour la gestion de la tva
     foreach ($tab_categories as $c) {
@@ -181,6 +188,7 @@ if (isset($_POST['categorie']) && isset($_POST['nom']) && isset($_POST['prix']) 
                                                         prix_ttc = $prixTTC,
                                                         est_masque = $enLigne,
                                                         quantite_stock = $qteStock,
+                                                        seuil_alerte = $seuilAlerte,
                                                         quantite_unite = $qteUnite,
                                                         unite = '$unite',
                                                         id_categorie = $idCategorie,
@@ -505,10 +513,15 @@ else { ?>
 
                 
                 <div class="col-start-1 row-start-4 col-span-2 flex flex-row justify-around m-2 p-2">
+                    <!-- Ajouter un seuil d'alerte -->
+                    <div class="flex flex-row mr-4 ml-4">
+                        <label class="mr-4" for="ajouterSeuil">Ajouter un seuil d'alerte</label>
+                        <input id="seuilCheck" type="checkbox" name="ajouterSeuil" class="appearance-none w-10 h-10 border-4 border-beige rounded-md checked:bg-beige checked:border-vertFonce cursor-pointer">
+                    </div>
                     <!-- Mettre en ligne -->
                     <div class="flex flex-row mr-4 ml-4">
                         <label class="mr-4" for="mettreEnLigne">Mettre en ligne</label>
-                        <input class="cursor-pointer appearance-none w-10 h-10 border-4 border-beige rounded-md checked:bg-beige checked:border-vertFonce" type="checkbox" name="mettreEnLigne" id="mettreEnLigne" <?php echo ($enLigne == 'true') ? 'checked' : ''; ?>>
+                        <input type="checkbox" name="mettreEnLigne" id="mettreEnLigne" <?php echo ($enLigne == 'true') ? 'checked' : ''; ?> class="cursor-pointer appearance-none w-10 h-10 border-4 border-beige rounded-md checked:bg-beige checked:border-vertFonce">
                     </div>
                     <?php 
                         $stmtNbPromos = $dbh->prepare("SELECT COUNT(*) AS nb_promotions
@@ -519,11 +532,21 @@ else { ?>
                         $stmtNbPromos->execute([':id_vendeur' => $_SESSION['idCompte']]);
                         $nbPromos = $stmtNbPromos->fetch(PDO::FETCH_ASSOC)['nb_promotions'];
                     ?>
+                    <!-- Mettre en promotion -->
                     <div class="flex flex-row mr-4 ml-4">
                         <label class="mr-4 <?php echo ($nbPromos >= 2 && !$caseCochee) ? "text-rouge" : ""; ?>" for="mettreEnPromotion"><?php echo ($nbPromos >= 2 && !$caseCochee) ? "Limite de promotion atteinte" : "Mettre en promotion"; ?></label>
                         <input id="promoCheck" type="checkbox" name="mettreEnPromotion" class="cursor-pointer border-beige appearance-none w-10 h-10 border-4 rounded-md checked:bg-beige checked:border-vertFonce" <?php echo $caseCochee ? 'checked' : ''; ?> <?php echo ($nbPromos >= 2 && !$caseCochee) ? 'hidden' : ''; ?>>
                     </div>
                 </div>
+
+                <!---Input lié au seuil d'alerte--->
+                <div class="col-start-1 row-start-5 flex flex-col">
+                    <div id="seuilInput" class="flex flex-row mr-4 ml-4">
+                        <label class="mr-4" for="seuilAlerte">Seuil d'alerte* :</label>
+                        <input class="border-4 border-beige rounded-2xl w-45" type="number" name="seuilAlerte" id="seuilAlerte" value="<?php if(isset($seuilAlerte)){echo $seuilAlerte;} ?>">
+                    </div>
+                </div>
+
                 <!-- Inputs liés aux promotions -->
                 <div id="promoInputs" class="col-start-1 row-start-5 col-span-2 flex flex-col">
                     <div class="flex flex-row justify-around m-2 p-2">
@@ -596,13 +619,35 @@ else { ?>
         promoInputs.style.display = 'none';
         dateDebut.required = false;
     }
+
+    // Fonction pour afficher/cacher input de seuil d'alerte
+    function toggleSeuilInput(){
+        var seuilCheck = document.getElementById('seuilCheck');
+        var seuilInput = document.getElementById('seuilInput');
+        var seuilAlerte = document.getElementById('seuilAlerte');
+        if(seuilCheck.checked){
+            seuilInput.style.display = 'flex';
+            seuilAlerte.required = true;
+        }else{
+            seuilInput.style.display = 'none';
+            seuilAlerte.required = false;
+        }
+    }
 }
-    // Quand "Mettre en promotion" est coché, afficher les inputs de promotion
+    
     document.addEventListener('DOMContentLoaded', function() {
+        // Quand "Mettre en promotion" est coché, afficher les inputs de promotion
         var promoCheck = document.getElementById('promoCheck');
         promoCheck.addEventListener('change', togglePromotionInputs);
         togglePromotionInputs();
+
+        // Quand "Ajouter seuil alerte" est coché, afficher les inputs de seuil d'alerte
+        var seuilCheck = document.getElementById('seuilCheck');
+        seuilCheck.addEventListener('change', toggleSeuilInput);
+        toggleSeuilInput();
     });
+
+    
 </script>
 <?php } ?>
 
