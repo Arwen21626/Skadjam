@@ -1,12 +1,13 @@
 var marqueur = false
 var dernierMarqueur = null
+checkedVendeurs = []
 
 
 function marqueurId(id){
     let marqueurTrouve = null
 
     markers.eachLayer(function(layer){
-        if(layer.options.id_compte == id){
+        if(layer.options.id_compte === id){
             marqueurTrouve = layer  
         }
     })
@@ -34,6 +35,7 @@ function selectionnerVendeur(id){
 }
 
 function deselectionnerVendeur(id){
+    console.log(id)
 
     let marker = marqueurId(id)
 
@@ -41,7 +43,17 @@ function deselectionnerVendeur(id){
 
     marker.setIcon(marqueurClair)
     document.getElementById(id).checked = false
+    checkedVendeurs.slice(checkedVendeurs.indexOf(id), 1)
     dernierMarqueur = null
+}
+
+function deselectionAll(){
+    console.log(checkedVendeurs)
+    checkedVendeurs.forEach(id => {
+        deselectionnerVendeur(id)
+    })
+    console.log(checkedVendeurs)
+    checkedVendeurs = []
 }
 
 
@@ -88,19 +100,22 @@ tabVendeur.forEach(vendeur => {
 
     if(vendeur.raison_sociale != 'Anonyme'){
 
-        document.getElementById(vendeur.id_compte).addEventListener("change", function (){
+        let id = Number(vendeur.id_compte)
+
+        document.getElementById(id).addEventListener("change", function (){
             
-            if(document.getElementById(vendeur.id_compte).checked){
+            if(document.getElementById(id).checked){
 
                 if(dernierMarqueur){
-                    deselectionnerVendeur(dernierMarqueur.options.id_compte)
+                    deselectionnerVendeur(Number(id))
                 }
-                selectionnerVendeur(vendeur.id_compte)
+                selectionnerVendeur(Number(id))
             }else{
-                deselectionnerVendeur(vendeur.id_compte)
+                deselectionnerVendeur(Number(id))
             }
-            
+
             console.log(checkedVendeurs)
+            
             tab = filtre()
             mettreAJourListe()
         })
@@ -110,30 +125,20 @@ tabVendeur.forEach(vendeur => {
 
 markers.on("click", function(e){
 
-    let id = e.layer.options.id_compte
+    let id = Number(e.layer.options.id_compte)
 
-    if(dernierMarqueur && dernierMarqueur != e.layer){
+    if(dernierMarqueur && dernierMarqueur !== e.layer){
         deselectionnerVendeur(dernierMarqueur.options.id_compte)
     }
 
-    if(dernierMarqueur == e.layer){
-        deselectionnerVendeur(id)
+    if(dernierMarqueur === e.layer){
+        deselectionAll()
+        checkedVendeurs = []
+
     }else{
+        deselectionAll()
         selectionnerVendeur(id)
-    }
-
-
-    // Filtre vendeur
-    // Si le vendeur est déjà coché, on le décoche
-    if(id == checkedVendeurs[0]){
-        checkedVendeurs.splice(checkedVendeurs.indexOf(id), 1)
-        document.getElementById(id).checked = false
-
-    // Sinon, on le coche
-    } else {
-        document.getElementById(id).checked = true
-        checkedVendeurs.splice(checkedVendeurs.indexOf(id), 1)
-        checkedVendeurs.push(id)
+        checkedVendeurs = [id]
     }
 
     tab = filtre()

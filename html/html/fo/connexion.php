@@ -144,8 +144,8 @@
 </head>
 <body>
     <?php require_once __DIR__ . "/../../php/structure/header_front.php"; ?>
-    <main >
-        <h2 class="flex flex-col items-center">Connexion</h2>
+    <main class="flex flex-col self-center md:min-h-[615px]">
+        <h2>Connexion</h2>
         <form method="post">
         <?php if(isset($_GET['idProduit'])){ ?>
             <input name="idProduit" id="idProduit" value="<?php echo $_GET['idProduit'];?>" class="hidden w-1">
@@ -155,33 +155,28 @@
             <input type="hidden" name="veutAcheter" value="V">
         <?php } ?>
 
-            <div class="flex flex-col items-center md:ml-10 md:mb-7 md:mr-10">
+            <div class="flex flex-col items-center ">
+                <div class="flex flex-col items-start space-y-4">
+                    <!--Champ mail  -->
+                    <div class="flex flex-col md:w-[550px]">
+                        <label for="mail">Adresse mail :</label>
+                        <input class="cursor:default border-4 border-solid rounded-2xl border-vertClair pl-3 w-70 md:w-[500px] h-15 " type="text" name="mail" id="mail" value="<?= isset($_POST['mail'])? $_POST['mail'] : "" ?>" required>
+                    </div>
 
-                <div class="flex w-fit flex-col items-start">
-                    <label for="mail">Adresse mail :</label>
-                    
-                    <div class="flex modif-attribut float-rigth">
-                        <input class="ml-5 border-5 border-solid rounded-2xl border-vertClair pl-3 mb-5 md:w-150 h-15 w-70" type="text" name="mail" id="mail" value="<?= isset($_POST['mail'])? $_POST['mail'] : "" ?>" required>
-                        <div>
-                            <div class="w-10! h-15! cursor:default"></div>
+                    <!-- Champ MDP -->
+                    <div class="flex flex-col md:w-[550px]">
+                        <label for="mdp">Mot de passe :</label>
+                        <div class="zone-mdp flex flex-row">
+                            <!--le flex row sert a alinger l'oeil me demander pas pourquoi (signé Arwen et svp touchez plus) -->
+                            <input id="mdp" type="password" class="champ-mdp border-4 border-solid rounded-2xl border-vertClair pl-3 w-70 md:w-[500px] h-15 " name="mdp" id="mdp"  value="<?= isset($_POST['mdp'])? $_POST['mdp'] : "" ?>" required>
+                            <?php include __DIR__ . "/../../php/structure/bouton_mdp.php" ?>
                         </div>
+
+                        <!-- Renvoie sur la page de réinitialisation de mot de passe -->
+                        <a href="reinitialiser_mdp.php" class="underline self-end cursor-pointer hover:text-rouge">Mot de passe oublié ?</a>
                     </div>
                 </div>
-
-                <div class="flex w-fit flex-col mt-6 items-start">
-
-                    <label for="mdp">Mot de passe :</label>
-
-                    <div class="zone-mdp flex w-fit flex-wrap relative items-center"> <!-- div pour rassembler l'input et le bouton -->
-                        <input id="mdp" type="password" class="champ-mdp ml-5 border-5 border-solid rounded-2xl border-vertClair pl-3 md:w-150 h-15 w-70" name="mdp" id="mdp"  value="<?= isset($_POST['mdp'])? $_POST['mdp'] : "" ?>" required>
-                        <?php include __DIR__ . "/../../php/structure/bouton_mdp.php" ?>
-                    </div>
-
-                    <br>
-                    <!-- Renvoie sur la page de réinitialisation de mot de passe -->
-                    <a href="reinitialiser_mdp.php" class="underline! self-end cursor-pointer hover:text-rouge">mot de passe oublié ?</a>
-                </div>
-
+                
                 <div class=" flex w-fit flex-col mt-6 items-center ">
                     <!-- Si erreur détecté -->
                     <?php if($erreur){ ?>
@@ -189,31 +184,28 @@
                     <?php }?>
                 </div>
 
-                <div class="flex flex-col md:flex-row">
-                    <div class=" justify-self-center mb-8 mt-4 order-2 md:order-1 md:mb-0 md:mt-0 md:mr-4">
+                <!-- Boutons -->
+                <div class="flex flex-row space-x-10">
+                    <div class=" justify-self-center">
                         <!-- Boutton de retour à l'index.php -->
-                        <a href="/index.php"><button class="cursor-pointer w-64 border-5 border-solid rounded-2xl border-vertClair pl-3" type="button">Annuler</button></a>
+                        <a href="/index.php"><button class="cursor-pointer w-35 md:w-60 h-10 md:h-12 border-5 border-solid rounded-xl md:rounded-2xl border-vertClair pl-3" type="button">Annuler</button></a>
                     </div>
-
-                    <div class=" justify-self-center mt-8 mb-4 order-1 md:order-2 md:mb-0 md:mt-0 md:ml-4">
+                    <div class=" justify-self-center">
                         <!-- Envoie des données en méthode POST pour se connecter -->
-                        <input type="submit" value="Se connecter" class="cursor-pointer w-64 border-5 border-solid rounded-2xl border-vertClair pl-3">
+                        <input type="submit" value="Se connecter" class="cursor-pointer w-35 md:w-60 h-10 md:h-12 border-5 border-solid rounded-xl md:rounded-2xl border-vertClair pl-3 mb-4">
                     </div>
                 </div>
-
-                
-                
             </div>
         </form>
         <!-- Renvoie sur la page de création d'un compte client -->
         <?php if (isset($_POST['veutAcheter'])) { //Modification pour rediriger vers le panier si le visiteur se crée un compte pour valider son panier?>
             <div class="flex flex-row flex-wrap justify-center m-2">
-                <p class=" mr-2">Pas encore client ? </p>
+                <p class="mr-2">Pas encore client ? </p>
                 <a href="./creation_compte_client.php?veutAcheter=V" class="underline! hover:text-rouge">Créer un compte client</a>
             </div>
         <?php } else { ?>
             <div class="flex flex-row flex-wrap justify-center m-2">
-                <p class=" mr-2">Pas encore client ? </p>
+                <p class="mr-2">Pas encore client ? </p>
                 <a href="./creation_compte_client.php" class="underline! hover:text-rouge">Créer un compte client</a>
             </div>
         <?php } ?>
@@ -222,40 +214,6 @@
             <p class=" mr-2">Pas encore vendeur ? </p>
             <a href="../bo/crea_compte_vendeur.php" class="underline! hover:text-rouge">Créer un compte vendeur</a>
         </div>
-<!--
-        <script>
-            var passwordInput = document.getElementById("mdp");
-            passwordInput.type = 'password';
-
-            document.querySelectorAll(".modif-attribut .bouton-modifier, .modif-attribut .bouton-valider").forEach(button => {
-                button.addEventListener("click", () => {
-                    const container = button.closest(".modif-attribut"); // parent
-                    const boutonEye = container.querySelector(".bouton-modifier"); // oeil
-                    const boutonSlash = container.querySelector(".bouton-valider"); // oeil slash
-
-                    boutonSlash.classList.toggle("hidden");
-                    boutonSlash.classList.toggle("block");  
-                    
-                    boutonEye.classList.toggle("hidden");
-                    boutonEye.classList.toggle("block");
-                });
-            });
-            document.querySelectorAll(".modif-attribut .bouton-valider").forEach(button => {
-                button.addEventListener("click", () => {
-                    const container = button.closest(".modif-attribut"); // parent
-                    passwordInput.type = 'password';
-
-                });
-            });
-            document.querySelectorAll(".modif-attribut .bouton-modifier").forEach(button => {
-                button.addEventListener("click", () => {
-                    const container = button.closest(".modif-attribut"); // parent
-
-                    passwordInput.type = 'text';
-                    
-                });
-            });
-        </script> -->
     </main>
     <?php require_once __DIR__ . "/../../php/structure/footer_front.php"; ?>
 </body>
