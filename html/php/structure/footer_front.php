@@ -55,7 +55,7 @@
         </a>
     </article>  
 </footer>
-<script>/*
+<script>
     let tailleScroll = document.documentElement.scrollHeight;
     let tailleFenetre = document.documentElement.clientHeight;
     let footer = document.querySelector("footer");
@@ -64,6 +64,5 @@
         footer.style.position = "absolute";
         footer.style.bottom = "0";
     }
-    console.log("taille fenetre = "+tailleFenetre+"taille scroll = "+tailleScroll)
-*/
+    // console.log("taille fenetre = "+tailleFenetre+"taille scroll = "+tailleScroll)
 </script>
