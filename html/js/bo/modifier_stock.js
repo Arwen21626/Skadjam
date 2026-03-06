@@ -169,7 +169,6 @@ function seuilAlertAtteint(stock){
 }
 
 function changementSeuilAtteint(ligne, idxLigne){
-    console.log(idxLigne);
     if(idxLigne%2 === 0){
         ligne.style.backgroundColor = rougeClaire;
     }
