@@ -61,7 +61,7 @@
                 <h3>Filtres</h3>
                 <!-- Categorie -->
                     <article>
-                    <details open>
+                    <details >
                         <summary class="cursor-pointer mt-1 mb-1">Par catégorie</summary>
                         <!-- Alimentaire -->
                         <div>
@@ -98,7 +98,7 @@
                 
                 <!-- Notes -->
                 <article>
-                    <details open>
+                    <details >
                         <summary class="cursor-pointer mt-1 mb-1">Par note</summary>
                         <!-- non noté -->
                         <div>
@@ -140,7 +140,7 @@
                 
                 <!-- Tranche de prix -->
                 <article>
-                    <details open>
+                    <details >
                         <summary class="cursor-pointer mt-1 mb-1">Par tranche de prix</summary>
                         <div>
                             <input type="checkbox" name="prix1" id="prix1" value="prix1" class="triFiltre h-5 w-5">
@@ -170,7 +170,7 @@
                 <h3>Tris</h3>
                 <!-- Stock -->
                 <article>
-                    <details open>
+                    <details >
                         <summary class="cursor-pointer mt-1 mb-1">Par stock</summary>
                         <div>
                             <div>
@@ -187,7 +187,7 @@
                 </article>
                 <!-- Prix -->
                 <article>
-                    <details open>
+                    <details >
                         <summary class="cursor-pointer mt-1 mb-1">Par prix</summary>
                         <div>
                             <div>
@@ -205,7 +205,7 @@
 
                 <!-- ordre alpha -->
                 <article>
-                    <details open>
+                    <details >
                         <summary class="cursor-pointer mt-1 mb-1">Par ordre alphabétique</summary>
                         <div>
                             <div>
@@ -223,7 +223,7 @@
 
                 <!-- note -->
                 <article>
-                    <details open>
+                    <details>
                         <summary class="cursor-pointer mt-1 mb-1">Par note</summary>
                         <div>
                             <div>
