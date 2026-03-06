@@ -27,9 +27,12 @@
                 $quantite = $produit["quantite"];
                 $idProd = $produit["id_produit"];
 
-                $rqt = $dbh->query("SELECT id_vendeur FROM sae3_skadjam._produit WHERE id_produit = $idProd", PDO::FETCH_ASSOC);
-                $idVendeurProd = $rqt->fetch()["id_vendeur"];
-
+                $rqt = $dbh->query("SELECT libelle_produit, id_vendeur FROM sae3_skadjam._produit WHERE id_produit = $idProd", PDO::FETCH_ASSOC);
+                
+                $infosProduits = $rqt->fetch();
+                $idVendeurProd = $infosProduits["id_vendeur"];
+                $libelleProd = $infosProduits["libelle_produit"];
+                
                 if ($idVendeurProd == $idVendeur){
 
                     echo $idProd . " " . $quantite . " " . $mois . " " . $annee . "<br>";
@@ -40,7 +43,14 @@
                     else {
                         $dataStats[$annee][$mois]["nb_ventes_totales"] += $quantite;
                     }
-                    // $dataStats[$date]["nb_ventes_totales"] += $quantite;
+
+                    if (!isset($dataStats[$annee][$mois]["produits"][$idProd])){
+                        $dataStats[$annee][$mois]["produits"][$idProd]["libelle_prod"] = $libelleProd;
+                        $dataStats[$annee][$mois]["produits"][$idProd]["nb_ventes_totales"] = $quantite;
+                    }
+                    else {
+                        $dataStats[$annee][$mois]["produits"][$idProd]["nb_ventes_totales"] += $quantite;
+                    }
                 }
             }
         }
@@ -76,10 +86,43 @@
 
         <h2>Mes Statistiques</h2>
 
+        <div class="flex flex-row">
+            <p class="pr-2">Choisissez une année :</p>
+            <select name="" id="select-annee" class="pl-2">
+                <?php 
+                    $cles = array_keys($dataStats);
+                    foreach ($cles as $annee) {
+                        ?>
+
+                        <option value=<?php echo $annee; ?>><?php echo $annee; ?></option>
+
+                        <?php
+                    }
+                ?>
+            </select>
+        </div>
+
+        <div>
+            <h3>Total des ventes pour l'année sélectionnée</h3>
+        </div>
+
         <div class="charts-containers flex justify-center items-center flex-col p-2">
             <div class="chart-container flex justify-center items-center relative m-4 w-[60vw] h-[50vh]">
-                <canvas class="" id="testChart"></canvas>
+                <canvas id="all-chart"></canvas>
             </div>
+        </div>
+
+        <div>
+            <h3>Total des ventes du produit sélectionné</h3>
+        </div>
+
+        <div>
+            <p class="pr-2">Choisissez un produit :</p>
+            <select name="" id="select-produit" class="pl-2">
+                <?php 
+                    
+                ?>
+            </select>
         </div>
     </main>
     

@@ -10,7 +10,7 @@
     $produit = "vide";
     foreach($dbh->query("SELECT pr.id_produit, pr.libelle_produit, pr.note_moyenne, c.libelle_categorie,
                                 ph.url_photo, ph.alt, ph.titre, r.pourcentage_remise, pr.quantite_stock, 
-                                pr.description_produit, pr.prix_ttc, pr.prix_remise
+                                pr.description_produit, pr.prix_ttc, pr.prix_remise, pr.seuil_alerte
                         from sae3_skadjam._produit pr
                         inner join sae3_skadjam._montre m
                             on pr.id_produit=m.id_produit
@@ -76,6 +76,7 @@
                 else{?>
                     <p>Produit indsponible</p>
                 <?php }?>
+                <p>Seuil d'alerte : <?php echo $produit['seuil_alerte'];?></p>
 
                 <div class="flex flex-col space-y-4">
                     <a href="../bo/modifier_produit.php?idProduit=<?php echo $idProd?>"><button class=" bg-beige rounded-2xl w-40 h-14 cursor-pointer" type="button">Modifier</button></a>

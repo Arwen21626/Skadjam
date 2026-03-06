@@ -130,7 +130,7 @@ if (isset($_POST['categorie']) && isset($_POST['nom']) && isset($_POST['prix']) 
     $unite = htmlentities($_POST['unite']);
     $qteUnite = htmlentities($_POST['qteUnite']);
     // Champs spécifiques à la promotion
-    $dateDebutPromotion = isset($_POST['dateDebutPromotion']) ? htmlentities($_POST['dateDebutPromotion']) : date('Y-m-d');
+    $dateDebutPromotion = $_POST['dateDebutPromotion'] !== null ? $_POST['dateDebutPromotion'] : date('Y-m-d');
     $dateFinPromotion = htmlentities($_POST['dateFinPromotion']);
     $dateFinPromotion = trim($dateFinPromotion);
     $dateFinPromotion = ($dateFinPromotion === '') ? null : $dateFinPromotion;
@@ -567,18 +567,36 @@ else { ?>
 </html>
 <script>
     // Fonction pour afficher/cacher les inputs de promotion
-    function togglePromotionInputs(){
+    /*function togglePromotionInputs(){
         var promoCheck = document.getElementById('promoCheck');
         var promoInputs = document.getElementById('promoInputs');
+        var debPromo = document.getElementById('debPromo');
+
         if(promoCheck.checked && !promoCheck.disabled){
             promoInputs.style.display='flex';
             promoInputs.style.visibility = 'visible';
             promoInputs.style.height = 'auto';
+            //promoInputs.children[0].children[0].children[0].children[1].required = true;
+            debPromo.required = true;
         }else{
             promoInputs.style.visibility = 'hidden';
             promoInputs.style.height = '0';
         }
+    }*/
+
+    function togglePromotionInputs(){
+    var promoCheck = document.getElementById('promoCheck');
+    var promoInputs = document.getElementById('promoInputs');
+    var dateDebut = document.getElementById('dateDebutPromotion');
+
+    if(promoCheck.checked && !promoCheck.disabled){
+        promoInputs.style.display = 'flex';
+        dateDebut.required = true;
+    }else{
+        promoInputs.style.display = 'none';
+        dateDebut.required = false;
     }
+}
     // Quand "Mettre en promotion" est coché, afficher les inputs de promotion
     document.addEventListener('DOMContentLoaded', function() {
         var promoCheck = document.getElementById('promoCheck');
