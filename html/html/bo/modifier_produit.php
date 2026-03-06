@@ -17,10 +17,6 @@ $tab_tva = [];
 //Tableau pour les unites
 $tab_unite = ["Piece", "Litre","cl","g","kg","S","M","L","XL","XXL","m","cm"];
 
-//Erreur date de promotion invalide
-$erreurDebPromo = null;
-$erreurFinPromo = null;
-
 //Initialisation des dates de promo
 $dateDebutPromotion = date('Y-m-d');
 $dateFinPromotion = null;
@@ -235,7 +231,7 @@ if (isset($_POST['categorie']) && isset($_POST['nom']) && isset($_POST['prix']) 
                 $dbh->beginTransaction();
                 // Création de la promotion
                 try {
-                    if(isset($dateDebutPromotion) && $dateDebutPromotion >= date('Y-m-d')){
+                    if(isset($dateDebutPromotion)){
                         // Une date de fin à été ajoutée
                         if(isset($dateFinPromotion) && $dateFinPromotion >= $dateDebutPromotion){
                             $stmtPromo = $dbh->prepare("INSERT INTO sae3_skadjam._promotion
@@ -282,11 +278,7 @@ if (isset($_POST['categorie']) && isset($_POST['nom']) && isset($_POST['prix']) 
                                 ':id_vendeur' => $idCompte,
                                 ':id_photo'   => $idPhoto
                             ]);
-                        }else{
-                            $erreurDebPromo = "La date de fin de promotion est invalide.";
                         }
-                    }else{
-                        $erreurFinPromo = "La date de début de promotion est invalide.";
                     }
                     
                     $idPromotion = $stmtPromo->fetchColumn();
@@ -581,16 +573,16 @@ else { ?>
                         <div>
                             <div class="flex flex-row mr-4 ml-4">
                                 <label class="mr-4" for="dateDebutPromotion">Début de promotion* :</label>
-                                <input class="border-4 border-beige rounded-2xl w-45" type="date" name="dateDebutPromotion" id="dateDebutPromotion" value="<?php echo $dateDebutPromotion; ?>" required>
+                                <input class="border-4 border-beige rounded-2xl w-45" type="date" name="dateDebutPromotion" id="dateDebutPromotion" value="<?php echo $dateDebutPromotion; ?>">
                             </div>
-                            <p id="erreurDebPromo" class="text-rouge hidden"><?php echo $erreurDebPromo; ?></p>
+                            <p id="erreurDebPromo" class="text-rouge hidden"></p>
                         </div>
                         <div>
                             <div class="flex flex-row mr-4 ml-4">
                                 <label class="mr-4" for="dateFinPromotion">Fin de promotion :</label>
                                 <input class="border-4 border-beige rounded-2xl w-45" type="date" name="dateFinPromotion" id="dateFinPromotion" value="<?php echo $dateFinPromotion; ?>">
                             </div>
-                            <p id="erreurFinPromo" class="text-rouge hidden"><?php echo $erreurFinPromo; ?></p>
+                            <p id="erreurFinPromo" class="text-rouge hidden"></p>
                         </div>
                     </div>
                     <div class="flex flex-row justify-around m-2 p-2">
@@ -616,108 +608,9 @@ else { ?>
         </main>
         <?php include __DIR__ . '/../../php/structure/footer_back.php';?> 
         <script src="../../js/bo/changement_image_produits.js"></script>
+        <script src="/js/bo/produit.js"></script>
     </body>
 </html>
-<script>
-    // Fonction pour afficher/cacher les inputs de promotion
-    function togglePromotionInputs(){
-        var promoCheck = document.getElementById('promoCheck');
-        var promoInputs = document.getElementById('promoInputs');
-        var dateDebut = document.getElementById('dateDebutPromotion');
 
-        if(promoCheck.checked && !promoCheck.disabled){
-            promoInputs.style.display = 'flex';
-            dateDebut.required = true;
-        } else {
-            promoInputs.style.display = 'none';
-            dateDebut.required = false;
-        }
-    }
-
-    // Fonction pour afficher/cacher input de seuil d'alerte
-    function toggleSeuilInput(){
-        var seuilCheck = document.getElementById('seuilCheck');
-        var seuilInput = document.getElementById('seuilInput');
-        var seuilAlerte = document.getElementById('seuilAlerte');
-
-        if(seuilCheck.checked){
-            seuilInput.style.display = 'flex';
-            seuilAlerte.required = true;
-        } else {
-            seuilInput.style.display = 'none';
-            seuilAlerte.required = false;
-        }
-    }
-
-    // Fonction pour vérifier si une date est passée
-    function estDateDansLePasse(dateStr) {
-        const today = new Date();
-        today.setHours(0,0,0,0); // ignore l'heure
-        const date = new Date(dateStr);
-        return date < today;
-    }
-
-    document.addEventListener('DOMContentLoaded', function() {
-        // Affichage des inputs selon les cases cochées
-        var promoCheck = document.getElementById('promoCheck');
-        promoCheck.addEventListener('change', togglePromotionInputs);
-        togglePromotionInputs();
-
-        var seuilCheck = document.getElementById('seuilCheck');
-        seuilCheck.addEventListener('change', toggleSeuilInput);
-        toggleSeuilInput();
-
-        // Validation du formulaire
-        const form = document.getElementById("formModif");
-        const inputDateDebut = document.getElementById("dateDebutPromotion");
-        const inputDateFin = document.getElementById("dateFinPromotion");
-        const erreurDebPromo = document.getElementById("erreurDebPromo");
-        const erreurFinPromo = document.getElementById("erreurFinPromo");
-
-        form.addEventListener("submit", function(e) {
-            let valid = true;
-            erreurDebPromo.classList.add("hidden");
-            erreurFinPromo.classList.add("hidden");
-            const promoCheck = document.getElementById("promoCheck");
-
-
-            // Vérifier date de début
-            if(inputDateDebut.value === '') {
-                erreurDebPromo.textContent = "La date de début est obligatoire.";
-                erreurDebPromo.classList.remove("hidden");
-                valid = false;
-            } 
-            else if(estDateDansLePasse(inputDateDebut.value)) {
-                erreurDebPromo.textContent = "La date de début ne peut pas être dans le passé.";
-                erreurDebPromo.classList.remove("hidden");
-                valid = false;
-            }
-
-            // Vérifier date de fin si renseignée
-            if(inputDateFin.value !== '') {
-                if(estDateDansLePasse(inputDateFin.value)) {
-                    erreurFinPromo.textContent = "La date de fin ne peut pas être dans le passé.";
-                    erreurFinPromo.classList.remove("hidden");
-                    valid = false;
-                }
-
-                // Date fin >= date début
-                const debut = new Date(inputDateDebut.value);
-                const fin = new Date(inputDateFin.value);
-                if(fin < debut){
-                    erreurFinPromo.textContent = "La date de fin doit être après la date de début.";
-                    erreurFinPromo.classList.remove("hidden");
-                    valid = false;
-                }
-                
-            }
-
-            if(!valid){
-                e.preventDefault();
-            }
-
-        });
-    });
-</script>
 <?php } ?>
 
