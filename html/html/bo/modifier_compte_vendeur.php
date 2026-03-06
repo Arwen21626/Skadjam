@@ -352,7 +352,7 @@ if(!$isset || $erreur){
                         </div>
                         <div class="flex flex-col space-y-2">
                             <label for="denomination">Nom de l'entreprise * :</label>
-                            <input class="ml-5 border-4 border-solid rounded-2xl border-beige p-1 pl-3" type="text" id="denomination" name="denomination" value="<?= $denom; ?>" size="30" required>
+                            <input class="ml-5 border-4 border-solid rounded-2xl border-beige p-1 pl-3" type="text" id="denomination" name="denomination" value="<?= $denomination; ?>" size="30" required>
                             <?= $erreurDenomination ? "<p style=\"font-size: 0.90em\" class=\"text-rouge\">Le nom de l'entreprise est invalide.</p>" : ""; ?>
                         </div>
                     </div>
@@ -372,33 +372,33 @@ if(!$isset || $erreur){
 
                 <!-- Adresse -->
                 <h3>Siège social :</h3>
-                <div class="flex flex-row">
+                <div class="flex flex-row space-x-20">
                     <!-- Champs de l'adresse -->
-                    <div class="flex flex-col">
+                    <div class="flex flex-col w-1/3">
                         <!-- Adresse postale -->
-                        <div class="flex flex-col">
+                        <div class="flex flex-col space-y-2 ">
                             <label for="adresse">Adresse * :</label>
-                            <input class="ml-5 border-4 border-solid rounded-2xl border-beige p-1 pl-3 mb-4 @max-[768px]:ml-2 max-w-3/4 @max-[768px]:pl-2 " type="text" id="adresse" name="adresse" value="<?= $num . (!empty($numBis) ? " $numBis" : " ") . $adresse; ?>" size="50" placeholder="ex : 3 rue des camélias" required>
+                            <input class="ml-5 border-4 border-solid rounded-2xl border-beige p-1 pl-3 w-90" type="text" id="adresse" name="adresse" value="<?= $num . (!empty($numBis) ? " $numBis" : " ") . $adresse; ?>" size="50" placeholder="ex : 3 rue des camélias" required>
                             <?= $erreurAdresse ? "<p style=\"font-size: 0.90em\" class=\"text-rouge\">L'adresse est invalide.</p>" : ""; ?>
                         </div>
 
                         <!-- Ville -->
-                        <div class="flex flex-col">
+                        <div class="flex flex-col space-y-2">
                             <label for="ville">Ville * :</label>
-                            <input class="ml-5 border-4 border-solid rounded-2xl border-beige p-1 pl-3 mb-4 @max-[768px]:ml-2 max-w-3/4 @max-[768px]:pl-2 " type="text" id="ville" name="ville" value="<?= $ville; ?>" size="50" required>
+                            <input class="ml-5 border-4 border-solid rounded-2xl border-beige p-1 pl-3 w-60" type="text" id="ville" name="ville" value="<?= $ville; ?>" size="50" required>
                             <?= $erreurVille ? "<p style=\"font-size: 0.90em\" class=\"text-rouge\">Le nom de la ville ne peut contenir que des lettres, des espaces et des -.</p>" : ""; ?>
                         </div>
 
                         <!-- Code postal -->
-                        <div class="flex flex-col">
+                        <div class="flex flex-col space-y-2">
                             <label for="cp">Code Postal * :</label>
-                            <input class="ml-5 border-4 border-solid rounded-2xl border-beige p-1 pl-3 mb-4 @max-[768px]:ml-2 max-w-3/4 @max-[768px]:pl-2 " type="text" id="cP" name="cp" value="<?= $cp; ?>" size="10" required>
+                            <input class="ml-5 border-4 border-solid rounded-2xl border-beige p-1 pl-3 w-40" type="text" id="cP" name="cp" value="<?= $cp; ?>" size="10" required>
                             <?= $erreurCp ? "<p style=\"font-size: 0.90em\" class=\"text-rouge\">Le code postal doit contenir</p><br><p style=\"font-size: 0.90em\" class=\"text-rouge\">exactement 5 chiffres.</p>" : ""; ?>
                         </div>
                     </div>
                     <!-- Carte -->
-                     <div class="flex flex-col">
-                        <div id="map" class="h-60 z-0"></div>
+                     <div class="flex flex-col w-2/3">
+                        <div id="map" class="h-80 z-0"></div>
                         <!-- Coordonnées -->
                         <div class="h-20 flex flex-row m-2">
                             <div class="m-2">
@@ -452,10 +452,6 @@ if(!$isset || $erreur){
             attribution: '&copy; OpenStreetMap'
         }).addTo(map);
 
-        var pointer = L.icon({
-            iconUrl: '../../images/logo/pointeurVertFonce.png',
-            iconSize: [45, 70],
-        });
     </script>
 <script src="../../js/fo/geolocalVendeur.js"></script>
 <?php } ?>

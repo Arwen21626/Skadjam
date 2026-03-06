@@ -82,70 +82,81 @@
         require_once __DIR__ . "/../../php/structure/navbar_back.php";
     ?>
 
-    <main class="m-4">
+    <main class="m-4 pt-8">
 
         <h2>Mes Statistiques</h2>
 
-        <div class="flex flex-row">
-            <p class="pr-2">Choisissez une année :</p>
-            <select name="" id="select-annee" class="pl-2">
-                <?php 
-                    $cles = array_keys($dataStats);
-                    foreach ($cles as $annee) {
-                        ?>
+        <div id="graphique-all" class="mb-4">
+            <div class="ml-4">
+                <div class="flex flex-row mb-2">
+                    <p class="pr-2">Choisissez une année :</p>
+                    <select name="" id="select-annee" class="pl-2 cursor-pointer">
+                        <?php 
+                            $cles = array_keys($dataStats);
+                            foreach ($cles as $annee) {
+                                ?>
 
-                        <option value=<?php echo $annee; ?>><?php echo $annee; ?></option>
+                                <option class="cursor-pointer" value=<?php echo $annee; ?>><?php echo $annee; ?></option>
 
-                        <?php
-                    }
-                ?>
-            </select>
-        </div>
-
-        <div>
-            <h3>Total des ventes pour l'année sélectionnée</h3>
-        </div>
-
-        <div class="charts-containers flex justify-center items-center flex-col p-2">
-            <div class="chart-container flex justify-center items-center relative m-4 w-[60vw] h-[50vh]">
-                <canvas id="all-chart"></canvas>
-            </div>
-        </div>
-
-        <div>
-            <h3>Total des ventes du produit sélectionné</h3>
-        </div>
-
-        <div>
-            <p class="pr-2">Choisissez un produit :</p>
-            <select name="" id="select-produit" class="pl-2">
-                <?php 
-                    $cles = [];
-
-                    foreach ($dataStats as $annee) { // Parcours toutes les années
-                        foreach ($annee as $mois) { // Parcours tous les mois
-                            $clesTemp = array_keys($mois["produits"]);
-
-                            foreach ($clesTemp as $key) { // Parcours tous les id des produits vendus lors d'un mois d'une année
-                                $cles[$key] = $mois["produits"][$key]["libelle_prod"];
+                                <?php
                             }
-                        }
-                    }
-
-                    foreach ($cles as $idProd => $libelle) {
                         ?>
-                            <option value=<?php echo $idProd; ?>><?php echo $libelle; ?></option>
-                        <?php
-                    }
-                ?>
-            </select>
-        </div>
+                    </select>
+                </div>
 
-        <div class="charts-containers flex justify-center items-center flex-col p-2">
-            <div class="chart-container flex justify-center items-center relative m-4 w-[60vw] h-[50vh]">
-                <canvas id="prod-chart"></canvas>
+                <div class="mt-2">
+                    <h3>Total des ventes pour l'année sélectionnée :</h3>
+                </div>
+            </div>
+
+
+            <div class="chart-container flex justify-center items-center flex-col p-2">
+                <div class="chart flex justify-center items-center relative m-4 w-[60vw] h-[50vh]">
+                    <canvas id="all-chart"></canvas>
+                </div>
             </div>
         </div>
+        
+        <div id="graphique-produit" class="mt-4">
+            <div class="ml-4">
+                <div class="mb-2">
+                    <h3>Total des ventes du produit sélectionné :</h3>
+                </div>
+
+                <div class="flex flex-row mt-2">
+                    <p class="pr-2">Choisissez un produit :</p>
+                    <select name="" id="select-produit" class="pl-2 cursor-pointer">
+                        <?php 
+                            $cles = [];
+
+                            foreach ($dataStats as $annee) { // Parcours toutes les années
+                                foreach ($annee as $mois) { // Parcours tous les mois
+                                    $clesTemp = array_keys($mois["produits"]);
+
+                                    foreach ($clesTemp as $key) { // Parcours tous les id des produits vendus lors d'un mois d'une année
+                                        $cles[$key] = $mois["produits"][$key]["libelle_prod"];
+                                    }
+                                }
+                            }
+
+                            foreach ($cles as $idProd => $libelle) {
+                                ?>
+                                    <option class="cursor-pointer" value=<?php echo $idProd; ?>><?php echo $libelle; ?></option>
+                                <?php
+                            }
+                        ?>
+                    </select>
+                </div>
+            </div>
+
+
+            <div class="chart-container flex justify-center items-center flex-col p-2">
+                <div class="chart flex justify-center items-center relative m-4 w-[60vw] h-[50vh]">
+                    <canvas id="prod-chart"></canvas>
+                </div>
+            </div>
+        </div>
+
     </main>
     
     <?php 

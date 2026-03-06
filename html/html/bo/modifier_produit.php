@@ -17,6 +17,10 @@ $tab_tva = [];
 //Tableau pour les unites
 $tab_unite = ["Piece", "Litre","cl","g","kg","S","M","L","XL","XXL","m","cm"];
 
+//Erreur date de promotion invalide
+$erreurDebPromo = null;
+$erreurFinPromo = null;
+
 //Requete récupération categories
 foreach($dbh->query('SELECT * from sae3_skadjam._categorie', PDO::FETCH_ASSOC) as $row) {
     $tab_categories[] = $row;
@@ -136,11 +140,9 @@ if (isset($_POST['categorie']) && isset($_POST['nom']) && isset($_POST['prix']) 
     $dateFinPromotion = trim($dateFinPromotion);
     $dateFinPromotion = ($dateFinPromotion === '') ? null : $dateFinPromotion;
     $labelPromo = isset($_POST['labelPromo']) ? $_POST['labelPromo'] : null;
-    if(isset($_POST['seuilAlerte']) && $_POST['seuilAlerte'] !== ''){
-        $seuilAlerte = $_POST['seuilAlerte'];
-    }
-    else{
-        $seuilAlerte = null;
+    $seuilAlerte = null;
+    if(isset($_POST['ajouterSeuil']) && $_POST['ajouterSeuil'] == 'on' && isset($_POST['seuilAlerte']) && $_POST['seuilAlerte'] !== ''){
+        $seuilAlerte = (int) $_POST['seuilAlerte']; // conversion explicite
     }
 
     // Récupération du nom de la catégorie pour la gestion de la tva
@@ -181,20 +183,36 @@ if (isset($_POST['categorie']) && isset($_POST['nom']) && isset($_POST['prix']) 
             $prixTTC = $prixHT*(1+$pourcentageTVA);
 
             //Update du produit
-            $updateProduit = $dbh -> query("UPDATE sae3_skadjam._produit SET
-                                                        libelle_produit = '$nom',
-                                                        description_produit = '$description',
-                                                        prix_ht = $prixHT,
-                                                        prix_ttc = $prixTTC,
-                                                        est_masque = $enLigne,
-                                                        quantite_stock = $qteStock,
-                                                        seuil_alerte = $seuilAlerte,
-                                                        quantite_unite = $qteUnite,
-                                                        unite = '$unite',
-                                                        id_categorie = $idCategorie,
-                                                        id_vendeur = $idCompte,
-                                                        id_tva = $tva
-                                                    WHERE id_produit = $idProduit;");
+            $updateProduit = $dbh->prepare("UPDATE sae3_skadjam._produit SET
+                                            libelle_produit = :nom,
+                                            description_produit = :description,
+                                            prix_ht = :prixHT,
+                                            prix_ttc = :prixTTC,
+                                            est_masque = :enLigne,
+                                            quantite_stock = :qteStock,
+                                            seuil_alerte = :seuilAlerte,
+                                            quantite_unite = :qteUnite,
+                                            unite = :unite,
+                                            id_categorie = :idCategorie,
+                                            id_vendeur = :idCompte,
+                                            id_tva = :tva
+                                            WHERE id_produit = :idProduit");
+
+            $updateProduit->execute([
+                ':nom' => $nom,
+                ':description' => $description,
+                ':prixHT' => $prixHT,
+                ':prixTTC' => $prixTTC,
+                ':enLigne' => $enLigne,
+                ':qteStock' => $qteStock,
+                ':seuilAlerte' => $seuilAlerte,
+                ':qteUnite' => $qteUnite,
+                ':unite' => $unite,
+                ':idCategorie' => $idCategorie,
+                ':idCompte' => $idCompte,
+                ':tva' => $tva,
+                ':idProduit' => $idProduit
+            ]);
 
             // Gestion de la promotion
             // Vérifier si le produit est promu ou non
@@ -228,7 +246,8 @@ if (isset($_POST['categorie']) && isset($_POST['nom']) && isset($_POST['prix']) 
                                                             '00:00',
                                                             :id_vendeur,
                                                             :id_photo
-                                                        )");
+                                                        )
+                                                        RETURNING id_promotion");
                             $stmtPromo->execute([
                                 ':date_debut' => formatDate($dateDebutPromotion),
                                 ':date_fin'   => formatDate($dateFinPromotion),
@@ -250,7 +269,8 @@ if (isset($_POST['categorie']) && isset($_POST['nom']) && isset($_POST['prix']) 
                                                             '00:00',
                                                             :id_vendeur,
                                                             :id_photo
-                                                        )");
+                                                        )
+                                                        RETURNING id_promotion");
                             $stmtPromo->execute([
                                 ':date_debut' => formatDate($dateDebutPromotion),
                                 ':date_fin'   => null,
@@ -258,13 +278,16 @@ if (isset($_POST['categorie']) && isset($_POST['nom']) && isset($_POST['prix']) 
                                 ':id_photo'   => $idPhoto
                             ]);
                         }else{
-                            echo "La date de fin de promotion est invalide.";
+                            $erreurDebPromo = "La date de fin de promotion est invalide.";
                         }
                     }else{
-                        echo "La date de début de promotion est invalide.";
+                        $erreurFinPromo = "La date de début de promotion est invalide.";
                     }
                     
-                    $idPromotion = $dbh->lastInsertId();
+                    $idPromotion = $stmtPromo->fetchColumn();
+                    if(!$idPromotion){
+                        throw new Exception("Impossible de récupérer l'ID de la promotion créée.");
+                    }
 
                     if(strlen($labelPromo) < 20){
                         $stmtLibelle = $dbh->prepare("UPDATE sae3_skadjam._promotion
@@ -448,7 +471,7 @@ else { ?>
         <?php include __DIR__ . '/../../php/structure/navbar_back.php';?>
         <main class="flex flex-col items-center">
             <h2>Modifier <?php echo $nom; ?></h2>
-            <form class="grid grid-cols-[40%_60%] w-11/12 self-center" action="modifier_produit.php?idProduit=<?php echo $idProduit;?>" method="post" enctype="multipart/form-data">
+            <form id="formModif" class="grid grid-cols-[40%_60%] w-11/12 self-center" action="modifier_produit.php?idProduit=<?php echo $idProduit;?>" method="post" enctype="multipart/form-data">
                 <!-- Image -->
                 <div class="row-start-1 row-span-3 m-2 p-4 grid grid-rows-[2/3-1/3] justify-items-center">
                     <input type="file" id="photo" name="photo" class="hidden">
@@ -516,7 +539,7 @@ else { ?>
                     <!-- Ajouter un seuil d'alerte -->
                     <div class="flex flex-row mr-4 ml-4">
                         <label class="mr-4" for="ajouterSeuil">Ajouter un seuil d'alerte</label>
-                        <input id="seuilCheck" type="checkbox" name="ajouterSeuil" class="appearance-none w-10 h-10 border-4 border-beige rounded-md checked:bg-beige checked:border-vertFonce cursor-pointer">
+                        <input id="seuilCheck" type="checkbox" name="ajouterSeuil" <?php echo ($seuilAlerte !== null) ? 'checked' : ''; ?> class="appearance-none w-10 h-10 border-4 border-beige rounded-md checked:bg-beige checked:border-vertFonce cursor-pointer">
                     </div>
                     <!-- Mettre en ligne -->
                     <div class="flex flex-row mr-4 ml-4">
@@ -548,19 +571,21 @@ else { ?>
                 </div>
 
                 <!-- Inputs liés aux promotions -->
-                <div id="promoInputs" class="col-start-1 row-start-5 col-span-2 flex flex-col">
+                <div id="promoInputs" class="col-start-1 row-start-6 col-span-2 flex flex-col">
                     <div class="flex flex-row justify-around m-2 p-2">
                         <div>
                             <div class="flex flex-row mr-4 ml-4">
                                 <label class="mr-4" for="dateDebutPromotion">Début de promotion* :</label>
                                 <input class="border-4 border-beige rounded-2xl w-45" type="date" name="dateDebutPromotion" id="dateDebutPromotion" value="<?php echo $dateDebutPromotion !== null ? $dateDebutPromotion : date('Y-m-d'); ?>" required>
                             </div>
+                            <p id="erreurDebPromo" class="text-rouge hidden"><?php echo $erreurDebPromo; ?></p>
                         </div>
                         <div>
                             <div class="flex flex-row mr-4 ml-4">
                                 <label class="mr-4" for="dateFinPromotion">Fin de promotion :</label>
                                 <input class="border-4 border-beige rounded-2xl w-45" type="date" name="dateFinPromotion" id="dateFinPromotion" value="<?php if(isset($dateFinPromotion)){echo $dateFinPromotion;} ?>">
                             </div>
+                            <p id="erreurFinPromo" class="text-rouge hidden"><?php echo $erreurFinPromo; ?></p>
                         </div>
                     </div>
                     <div class="flex flex-row justify-around m-2 p-2">
@@ -572,13 +597,13 @@ else { ?>
                 </div>
 
                 <!-- Description -->
-                <div class="col-start-1 col-span-2 row-start-6 flex flex-col m-2 p-2 ">
+                <div class="col-start-1 col-span-2 row-start-7 flex flex-col m-2 p-2 ">
                     <label for="description">Description *:</label>
                     <textarea placeholder="Pot de confiture de fraises des bois" class="border-4 border-beige rounded-2xl w-3/4 self-center placeholder-gray-500" name="description" id="description" cols="100" rows="10" required><?php echo $description ;?></textarea>
                 </div>
                 
                 <!-- Validation -->
-                <div class="col-start-1 col-span-2 row-start-7 flex flex-row justify-around m-4">
+                <div class="col-start-1 col-span-2 row-start-8 flex flex-row justify-around m-4">
                     <a href="../bo/details_produit.php?idProduit=<?php echo $idProduit ;?>" class="flex justify-center items-center border-2 border-vertFonce rounded-2xl w-40 h-14 cursor-pointer">Retour</a>
                     <input class="border-2 border-vertFonce rounded-2xl w-40 h-14 cursor-pointer" type="submit" value="Valider">
                 </div>
@@ -590,34 +615,18 @@ else { ?>
 </html>
 <script>
     // Fonction pour afficher/cacher les inputs de promotion
-    /*function togglePromotionInputs(){
+    function togglePromotionInputs(){
         var promoCheck = document.getElementById('promoCheck');
         var promoInputs = document.getElementById('promoInputs');
-        var debPromo = document.getElementById('debPromo');
+        var dateDebut = document.getElementById('dateDebutPromotion');
 
         if(promoCheck.checked && !promoCheck.disabled){
-            promoInputs.style.display='flex';
-            promoInputs.style.visibility = 'visible';
-            promoInputs.style.height = 'auto';
-            //promoInputs.children[0].children[0].children[0].children[1].required = true;
-            debPromo.required = true;
-        }else{
-            promoInputs.style.visibility = 'hidden';
-            promoInputs.style.height = '0';
+            promoInputs.style.display = 'flex';
+            dateDebut.required = true;
+        } else {
+            promoInputs.style.display = 'none';
+            dateDebut.required = false;
         }
-    }*/
-
-    function togglePromotionInputs(){
-    var promoCheck = document.getElementById('promoCheck');
-    var promoInputs = document.getElementById('promoInputs');
-    var dateDebut = document.getElementById('dateDebutPromotion');
-
-    if(promoCheck.checked && !promoCheck.disabled){
-        promoInputs.style.display = 'flex';
-        dateDebut.required = true;
-    }else{
-        promoInputs.style.display = 'none';
-        dateDebut.required = false;
     }
 
     // Fonction pour afficher/cacher input de seuil d'alerte
@@ -625,29 +634,80 @@ else { ?>
         var seuilCheck = document.getElementById('seuilCheck');
         var seuilInput = document.getElementById('seuilInput');
         var seuilAlerte = document.getElementById('seuilAlerte');
+
         if(seuilCheck.checked){
             seuilInput.style.display = 'flex';
             seuilAlerte.required = true;
-        }else{
+        } else {
             seuilInput.style.display = 'none';
             seuilAlerte.required = false;
         }
     }
-}
-    
+
+    // Fonction pour vérifier si une date est passée
+    function estDateDansLePasse(dateStr) {
+        const today = new Date();
+        today.setHours(0,0,0,0); // ignore l'heure
+        const date = new Date(dateStr);
+        return date < today;
+    }
+
     document.addEventListener('DOMContentLoaded', function() {
-        // Quand "Mettre en promotion" est coché, afficher les inputs de promotion
+        // Affichage des inputs selon les cases cochées
         var promoCheck = document.getElementById('promoCheck');
         promoCheck.addEventListener('change', togglePromotionInputs);
         togglePromotionInputs();
 
-        // Quand "Ajouter seuil alerte" est coché, afficher les inputs de seuil d'alerte
         var seuilCheck = document.getElementById('seuilCheck');
         seuilCheck.addEventListener('change', toggleSeuilInput);
         toggleSeuilInput();
-    });
 
-    
+        // Validation du formulaire
+        const form = document.getElementById("formModif");
+        const inputDateDebut = document.getElementById("dateDebutPromotion");
+        const inputDateFin = document.getElementById("dateFinPromotion");
+        const erreurDebPromo = document.getElementById("erreurDebPromo");
+        const erreurFinPromo = document.getElementById("erreurFinPromo");
+
+        form.addEventListener("submit", function(e) {
+            let valid = true;
+            erreurDebPromo.classList.add("hidden");
+            erreurFinPromo.classList.add("hidden");
+
+            // Vérifier date de début
+            if(inputDateDebut && inputDateDebut.value === '') {
+                erreurDebPromo.textContent = "La date de début est obligatoire.";
+                erreurDebPromo.classList.remove("hidden");
+                valid = false;
+            } else if(estDateDansLePasse(inputDateDebut.value)) {
+                erreurDebPromo.textContent = "La date de début ne peut pas être dans le passé.";
+                erreurDebPromo.classList.remove("hidden");
+                valid = false;
+            }
+
+            // Vérifier date de fin si renseignée
+            if(inputDateFin && inputDateFin.value !== '') {
+                if(estDateDansLePasse(inputDateFin.value)) {
+                    erreurFinPromo.textContent = "La date de fin ne peut pas être dans le passé.";
+                    erreurFinPromo.classList.remove("hidden");
+                    valid = false;
+                }
+
+                // Date fin >= date début
+                if(inputDateDebut.value !== '') {
+                    const debut = new Date(inputDateDebut.value);
+                    const fin = new Date(inputDateFin.value);
+                    if(fin < debut){
+                        erreurFinPromo.textContent = "La date de fin doit être après la date de début.";
+                        erreurFinPromo.classList.remove("hidden");
+                        valid = false;
+                    }
+                }
+            }
+
+            if(!valid) e.preventDefault();
+        });
+    });
 </script>
 <?php } ?>
 

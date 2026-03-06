@@ -40,9 +40,7 @@ if (lat.value != 0 && longi.value != 0) {
     })
 }
 
-
 map.addLayer(marker)
-
 
 // Mettre les cordonnées à jour quand on déplace le marqueur
 marker.on('dragend', function(){ // ou drag
@@ -85,7 +83,6 @@ eltsCoord.forEach(elt => {
         elt[1] = Number(elt[0].value)
         if (elt[0].value.match(/[0-9\.\,]/)){
             insert = elt[0].value
-            console.log("insert if: "+insert)
             if (!isNaN(eltsCoord[0][1]) && !isNaN(eltsCoord[1][1])) {
                 marker.setLatLng([eltsCoord[0][1],eltsCoord[1][1]])
             }
@@ -162,5 +159,3 @@ eltsAdr.forEach(elt => {
     })
     
 });
-
-// 11 clos des cerisiers
