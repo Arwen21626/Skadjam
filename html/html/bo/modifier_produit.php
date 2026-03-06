@@ -366,8 +366,6 @@ if (isset($_POST['categorie']) && isset($_POST['nom']) && isset($_POST['prix']) 
                     }else{  
                         echo "La date de fin de promotion est invalide.";
                     }
-                }else{
-                    echo "La date de début de promotion est invalide.";
                 }
 
                 // Mise à jour du libellé de la promotion
