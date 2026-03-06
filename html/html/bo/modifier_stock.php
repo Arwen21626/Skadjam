@@ -138,7 +138,7 @@
                                         </td>
                                         <td><input type="number" name="qteAajouter[<?php echo $valeurs['id_produit']; ?>]" value="0" min="0" class="border-2 border-black rounded-lg w-30 h-10 p-2"></td>
                                         <td><input type="number" name="qteAretirer[<?php echo $valeurs['id_produit']; ?>]" value="0" min="0" class="border-2 border-black rounded-lg w-30 h-10 p-2"></td>
-                                        <td class=" min-w-15 bg-white"> </td>
+                                        <td class=" min-w-15 bg-white border-0"> </td>
                                     </tr>
                             <?php }?>
                         </tbody>
