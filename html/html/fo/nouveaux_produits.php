@@ -38,7 +38,7 @@
     <main class="min-h-[600px] p-8">
         <!--Début du catalogue-->
         <h2 class="m-0">Nos nouveaux produits</h2>
-        <h3 class="text-center m-0 relative bottom-5">Produits ajoutées il y a moins de 30 jours</h3>
+        <h3 class="text-center m-0 relative bottom-5">Produits ajoutés il y a moins de 30 jours</h3>
 
         <?php
             //initialisation du numéro de page
