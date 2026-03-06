@@ -1,5 +1,4 @@
 var marqueur = false
-var map = L.map('map').setView([48, -3], 7)
 var dernierMarqueur = null
 
 
