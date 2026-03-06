@@ -159,7 +159,7 @@ if (conteneurProd) { //Check si un élément de la page panier  est présent ou 
             let texteBandeau = document.createElement("p");
             texteBandeau.textContent = "Hors-stock";
 
-            divBandeau.classList.add("absolute", "inset-0", "flex", "items-center", "justify-center", "z-10");
+            divBandeau.classList.add("absolute", "inset-0", "flex", "items-center", "justify-center", "z-1");
             texteBandeau.classList.add("bg-rouge", "shadow-lg","text-white", "px-6", "py-2", "w-full", "text-center")
 
             divBandeau.appendChild(texteBandeau);

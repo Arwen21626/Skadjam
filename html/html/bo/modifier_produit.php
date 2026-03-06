@@ -516,7 +516,7 @@ else { ?>
                     <!-- Ajouter un seuil d'alerte -->
                     <div class="flex flex-row mr-4 ml-4">
                         <label class="mr-4" for="ajouterSeuil">Ajouter un seuil d'alerte</label>
-                        <input id="seuilCheck" type="checkbox" name="ajouterSeuil" class="appearance-none w-10 h-10 border-4 border-beige rounded-md checked:bg-beige checked:border-vertFonce cursor-pointer">
+                        <input id="seuilCheck" type="checkbox" name="ajouterSeuil" <?php echo ($seuilAlerte !== null) ? 'checked' : ''; ?> class="appearance-none w-10 h-10 border-4 border-beige rounded-md checked:bg-beige checked:border-vertFonce cursor-pointer">
                     </div>
                     <!-- Mettre en ligne -->
                     <div class="flex flex-row mr-4 ml-4">

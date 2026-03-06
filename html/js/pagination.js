@@ -74,10 +74,12 @@ function affichagePagination(tab){
         premPage = document.createElement("button")
         premPage.id = "premierePage"
         premPage.textContent = "<<"
+        premPage.setAttribute("style","cursor: pointer;")
 
         pagePrec = document.createElement("button")
         pagePrec.id = "pagePrec"
         pagePrec.textContent = "|<"
+        pagePrec.setAttribute("style","cursor: pointer;")
 
         pageInfo = document.createElement("p")
         pageInfo.id = "pageInfo"
@@ -85,10 +87,12 @@ function affichagePagination(tab){
         pageSuiv = document.createElement("button")
         pageSuiv.id = "pageSuiv"
         pageSuiv.textContent = ">|"
+        pageSuiv.setAttribute("style","cursor: pointer;")
 
         dernPage = document.createElement("button")
         dernPage.id = "dernierePage"
         dernPage.textContent = ">>"
+        dernPage.setAttribute("style","cursor: pointer;")
 
         changePage.appendChild(premPage)
         changePage.appendChild(pagePrec)
