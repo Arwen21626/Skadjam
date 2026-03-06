@@ -65,8 +65,8 @@
 
             <div class="m-4 p-4 space-y-4 content-between">
                 <!--affichage du prix-->
-                <p class=" <?php echo ($produit['pourcentage_remise'] !== NULL)?'line-through':'';?>"> <?php echo htmlentities(str_replace(".", ",",$produit['prix_ttc'])); ?>€ (TTC)</p>
-                <p class=" <?php echo ($produit['pourcentage_remise'] !== NULL)?'':'hidden';?>"> <?php echo htmlentities(str_replace(".", ",",$produit['prix_remise'])); ?>€ (TTC)</p>
+                <p class=" <?php echo ($produit['pourcentage_remise'] !== NULL)?'line-through':'';?>"> <?php echo htmlentities(str_replace(".", ",",$produit['prix_ttc'])); ?>€ (<abbr title="Toutes Taxes Comprises">TTC</abbr>)</p>
+                <p class=" <?php echo ($produit['pourcentage_remise'] !== NULL)?'':'hidden';?>"> <?php echo htmlentities(str_replace(".", ",",$produit['prix_remise'])); ?>€ (<abbr title="Toutes Taxes Comprises">TTC</abbr>)</p>
                 <!--affichage de la quantite-->
                 <?php 
                 $stock = $produit['quantite_stock'];

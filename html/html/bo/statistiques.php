@@ -5,56 +5,18 @@
 
     $idVendeur = $_SESSION["idCompte"];
 
-    $dataStats = [
-        "01" => [
-            "nb_ventes_totales" => 0
-        ],
-        "02" => [
-            "nb_ventes_totales" => 0
-        ],
-        "03" => [
-            "nb_ventes_totales" => 0
-        ],
-        "04" => [
-            "nb_ventes_totales" => 0
-        ],
-        "05" => [
-            "nb_ventes_totales" => 0
-        ],
-        "06" => [
-            "nb_ventes_totales" => 0
-        ],
-        "07" => [
-            "nb_ventes_totales" => 0
-        ],
-        "08" => [
-            "nb_ventes_totales" => 0
-        ],
-        "09" => [
-            "nb_ventes_totales" => 0
-        ],
-        "10" => [
-            "nb_ventes_totales" => 0
-        ],
-        "11" => [
-            "nb_ventes_totales" => 0
-        ],
-        "12" => [
-            "nb_ventes_totales" => 0
-        ]
-    ];
+    $dataStats = [];
 
     $rqt = $dbh->query("SELECT id_commande, date_commande FROM sae3_skadjam._commande", PDO::FETCH_ASSOC);
     $commandes = $rqt->fetchAll();
-
-    print_r($commandes);
 
     if ($commandes) {
         
         foreach ($commandes as $commande) {
             
             $date = $commande["date_commande"];
-            $date = explode("/", $date)[1];
+            $mois = explode("/", $date)[1];
+            $annee = trim(explode("/", $date)[2]);
             $idCommande = $commande["id_commande"];
 
             $rqt = $dbh->query("SELECT id_produit, quantite FROM sae3_skadjam._details WHERE id_commande = $idCommande", PDO::FETCH_ASSOC);
@@ -65,14 +27,30 @@
                 $quantite = $produit["quantite"];
                 $idProd = $produit["id_produit"];
 
-                $rqt = $dbh->query("SELECT id_vendeur FROM sae3_skadjam._produit WHERE id_produit = $idProd", PDO::FETCH_ASSOC);
-                $idVendeurProd = $rqt->fetch()["id_vendeur"];
-
+                $rqt = $dbh->query("SELECT libelle_produit, id_vendeur FROM sae3_skadjam._produit WHERE id_produit = $idProd", PDO::FETCH_ASSOC);
+                
+                $infosProduits = $rqt->fetch();
+                $idVendeurProd = $infosProduits["id_vendeur"];
+                $libelleProd = $infosProduits["libelle_produit"];
+                
                 if ($idVendeurProd == $idVendeur){
 
-                    echo $idProd . " " . $quantite . " " . $date . "<br>";
+                    echo $idProd . " " . $quantite . " " . $mois . " " . $annee . "<br>";
 
-                    $dataStats[$date]["nb_ventes_totales"] += $quantite;
+                    if (!isset($dataStats[$annee][$mois])){
+                        $dataStats[$annee][$mois]["nb_ventes_totales"] = $quantite;
+                    }
+                    else {
+                        $dataStats[$annee][$mois]["nb_ventes_totales"] += $quantite;
+                    }
+
+                    if (!isset($dataStats[$annee][$mois]["produits"][$idProd])){
+                        $dataStats[$annee][$mois]["produits"][$idProd]["libelle_prod"] = $libelleProd;
+                        $dataStats[$annee][$mois]["produits"][$idProd]["nb_ventes_totales"] = $quantite;
+                    }
+                    else {
+                        $dataStats[$annee][$mois]["produits"][$idProd]["nb_ventes_totales"] += $quantite;
+                    }
                 }
             }
         }
@@ -89,6 +67,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Stats</title>
+
+    <script> 
+        const dataJson = <?php echo json_encode($dataStats); ?>;
+    </script>
+
 </head>
 
 <?php include __DIR__ . "/../../php/structure/head_back.php"; ?>
@@ -102,6 +85,25 @@
     <main class="m-4">
 
         <h2>Mes Statistiques</h2>
+
+        <div>
+            <select name="" id="select-annee">
+                <?php 
+                    $cles = array_keys($dataStats);
+                    foreach ($cles as $annee) {
+                        ?>
+
+                        <option value=<?php echo $annee; ?>><?php echo $annee; ?></option>
+
+                        <?php
+                    }
+                ?>
+            </select>
+        </div>
+
+        <div>
+            <h3>Total des ventes pour l'année sélectionnée</h3>
+        </div>
 
         <div class="charts-containers flex justify-center items-center flex-col p-2">
             <div class="chart-container flex justify-center items-center relative m-4 w-[60vw] h-[50vh]">

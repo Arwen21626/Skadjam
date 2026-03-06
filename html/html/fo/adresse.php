@@ -22,7 +22,9 @@
     $adresseExistante->execute([$idClient]);
     $adresseE = $adresseExistante->fetch(PDO::FETCH_ASSOC);
 
-    if(!$adresseE["sauvegarde"]) {
+    $save = $adresseE['sauvegarde'] ?? '';
+
+    if(!$save) {
         $adresseE = [];
     }
 
@@ -63,13 +65,13 @@
         $adresseExplode = tabAdresse($adresse);
 
         // Si tout est bon -> redirection vers la page paiement
-        if($erreurNom == false && $erreurPrenom == false && $erreurAdresse == false && $erreurVille == false && $erreurCodePostal == false){
+        if(!$erreurNom && !$erreurPrenom && !$erreurAdresse && !$erreurVille && !$erreurCodePostal){
             $nouvAdrLivraison = $dbh->prepare("INSERT INTO sae3_skadjam._adresse_livraison(nom, prenom, adresse_postale, complement_adresse, numero_rue, numero_bat, numero_appart, code_postal, ville) 
                                                 VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?) RETURNING id_adresse");
                 $nouvAdrLivraison->execute([$nom, $prenom, $adresseExplode[2], $adresseExplode[1], $adresseExplode[0],
                                     $numBat, $numAppart, $codePostal, $ville]);
             $idAdresse = $nouvAdrLivraison->fetchColumn();
-            
+
             // Si case cochée -> enregistrement adresse
             if(isset($_POST['enregistrerAdr']) && $_POST['enregistrerAdr'] == 'on'){
                 $nouvAdr = $dbh->prepare("UPDATE sae3_skadjam._adresse_livraison
@@ -222,7 +224,7 @@
 
             <div class="flex flex-row mt-5">
                 <label for="enregistrerAdr" class="mr-5">Enregistrer cette adresse ?</label>
-                <input type="checkbox" name="enregistrerAdr" id="enregistrerAdr" class="w-5 h-5 mt-1" <?php if($adresseE["sauvegarde"]) echo 'value="on" checked'; ?>>
+                <input type="checkbox" name="enregistrerAdr" id="enregistrerAdr" class="w-5 h-5 mt-1" <?php if($save) echo 'value="on" checked'; ?>>
             </div>
 
             <div class="flex flex-row mt-5 mb-10 justify-between">

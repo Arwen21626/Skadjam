@@ -528,9 +528,9 @@ else { ?>
                 <div id="promoInputs" class="col-start-1 row-start-5 col-span-2 flex flex-col">
                     <div class="flex flex-row justify-around m-2 p-2">
                         <div>
-                            <div class="flex flex-row mr-4 ml-4">
+                            <div id="debPromo" class="flex flex-row mr-4 ml-4">
                                 <label class="mr-4" for="dateDebutPromotion">Début de promotion* :</label>
-                                <input class="border-4 border-beige rounded-2xl w-45" type="date" name="dateDebutPromotion" id="dateDebutPromotion" value="<?php echo $dateDebutPromotion !== null ? $dateDebutPromotion : date('Y-m-d'); ?>" required>
+                                <input class="border-4 border-beige rounded-2xl w-45" type="date" name="dateDebutPromotion" id="dateDebutPromotion" value="<?php echo $dateDebutPromotion; ?>" required>
                             </div>
                         </div>
                         <div>
@@ -570,10 +570,14 @@ else { ?>
     function togglePromotionInputs(){
         var promoCheck = document.getElementById('promoCheck');
         var promoInputs = document.getElementById('promoInputs');
+        var debPromo = document.getElementById('debPromo');
+
         if(promoCheck.checked && !promoCheck.disabled){
             promoInputs.style.display='flex';
             promoInputs.style.visibility = 'visible';
             promoInputs.style.height = 'auto';
+            //promoInputs.children[0].children[0].children[0].children[1].required = true;
+            debPromo.required = true;
         }else{
             promoInputs.style.visibility = 'hidden';
             promoInputs.style.height = '0';

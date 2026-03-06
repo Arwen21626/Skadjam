@@ -174,8 +174,8 @@
                         <!---noms des colonnes--->
                         <th class="pr-3 w-24"></th>
                         <th class="pr-3"><h4 class="text-left">Article</h4></th>
-                        <th class="pr-3"><h4>Prix unitaire HT</h4></th>
-                        <th class="pr-3"><h4>Prix unitaire TTC</h4></th>
+                        <th class="pr-3"><h4>Prix unitaire <abbr title="Hors Taxe">HT</abbr></h4></th>
+                        <th class="pr-3"><h4>Prix unitaire <abbr title="Toutes Taxes Comprises">TTC</abbr></h4></th>
                         <th class="pr-3"><h4>Pourcentage remise</h4></th>
                         <th class="pr-3"><h4>Quantité</h4></th>
                         <th class="pr-3"><h4>Total</h4></th>
@@ -285,15 +285,15 @@
                                     </td>
                                 </tr>
                                 <tr class="py-4 <?= ligneCouleur($ligneIndex) ?>">
-                                    <th class="text-left py-2 pl-3"><h4>Prix HT</h4></th>
+                                    <th class="text-left py-2 pl-3"><h4>Prix <abbr title="Hors Taxe">HT</abbr></h4></th>
                                     <td class="text-left"><p><?php echo str_replace('.',',',$ligne['prix_ht']);?>€</p></td>
                                 </tr>
                                 <tr class="py-4 <?= ligneCouleur($ligneIndex) ?>">
-                                    <th class="text-left py-2 pl-3"><h4>Prix TTC</h4></th>
+                                    <th class="text-left py-2 pl-3"><h4>Prix <abbr title="Toutes Taxes Comprises">TTC</abbr></h4></th>
                                         <td class="text-left"><p><?php echo str_replace('.',',',$ligne['prix_ttc']);?>€</p></td>
                                 </tr>
                                 <tr class="py-4 <?= ligneCouleur($ligneIndex) ?>">
-                                    <th class="text-left py-2 pl-3"><h4>% remise</h4></th>
+                                    <th class="text-left py-2 pl-3"><h4><abbr title="Pourcentage">%</abbr> remise</h4></th>
                                     <td class="text-left"><p><?php echo $ligne['pourcentage_remise']*100;?></p></td>
                                 </tr>
                                 <tr class="py-4 <?= ligneCouleur($ligneIndex) ?>">
@@ -336,13 +336,13 @@
                     <!---affichage des totaux de la commande--->
                     <!---total ht--->
                     <tr class="py-4 <?= ligneCouleur($ligneIndex) ?> border-t-2 border-solid border-black">
-                        <th class="text-left py-2 pl-3"><h4>Total HT : </h4></th>
+                        <th class="text-left py-2 pl-3"><h4>Total <abbr title="Hors Taxe">HT</abbr> : </h4></th>
                         <?php $prix = explode(".", "$total_ht");?>
                         <th class="text-left"><h4><?php echo htmlentities($prix[0].",".((preg_match("/^[1-9]$/", $prix[1]))?$prix[1]."0":$prix[1]));?>€</h4></th>
                     </tr>
                     <!---total ttc--->
                     <tr class="py-4 <?= ligneCouleur($ligneIndex) ?>">
-                        <th class="text-left py-2 pl-3"><h4>Total TTC : </h4></th>
+                        <th class="text-left py-2 pl-3"><h4>Total <abbr title="Toutes Taxes Comprises">TTC</abbr> : </h4></th>
                         <?php $prix = explode(".", "$total_ttc");?>
                         <th class="text-left"><h4><?php echo htmlentities($prix[0].",".((preg_match("/^[1-9]$/", $prix[1]))?$prix[1]."0":$prix[1]));?>€</h4></th>
                     </tr>

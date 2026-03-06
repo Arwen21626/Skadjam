@@ -218,7 +218,7 @@
                                                     <p class="inline-block">Prix unitaire :</p>
                                                     <p class="<?php echo ($infoProduitsPanier[$i]['infoRemise']['id_remise'] !== NULL)?'line-through':'';?> inline-block"> <?php echo htmlentities(str_replace(".", ",",$infoProduitsPanier[$i]['infoProduit']['prix_ttc'])); ?>€</p> 
                                                     <p class="<?php echo ($infoProduitsPanier[$i]['infoRemise']['id_remise'] !== NULL)?'inline-block':' hidden';?> prix-u pl-3"><?php echo htmlentities(str_replace(".", ",",$infoProduitsPanier[$i]['infoRemise']['prix_remise'])); ?>€ </p>
-                                                    <p class="inline-block">(TTC)</p>
+                                                    <p class="inline-block">(<abbr title="Toutes Taxes Comprises">TTC</abbr>)</p>
                                                     
                                                     <p class="mt-0.5 md:mt-0 prix-tot"> 
                                                         <?php

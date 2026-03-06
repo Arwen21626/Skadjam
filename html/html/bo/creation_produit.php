@@ -82,17 +82,23 @@ if (isset($_POST['categorie']) && isset($_POST['nom']) && isset($_POST['prix']) 
         $enLigne = 'true';
     }
 
-    //Gestion de la photo
-    $typePhoto = $_FILES['photo']['type'];
-    $ext = explode('/',$typePhoto)[1];
-    $nom_serv_photo = $_FILES['photo']['tmp_name'];
+    if($_FILES['photo']['error'] === UPLOAD_ERR_NO_FILE){
+        echo "Image obligatoire";
+        exit;
+    }
+    else{
+        $typePhoto = $_FILES['photo']['type'];
+        $ext = explode('/', $typePhoto)[1];
+        $nom_serv_photo = $_FILES['photo']['tmp_name'];
 
-    //Déplacement et renommage du fichier photo
-    $nom_explode = explode(' ',$nom)[0];
-    $currentTime = time();
-    $destination = __DIR__ . '/../../images/photo_importees';
-    $nom_photo_finale = $nom_explode.$currentTime.'.'.$ext;
-    move_uploaded_file($nom_serv_photo,$destination.'/'.$nom_photo_finale);
+        $nom_explode = explode(' ',$nom)[0];
+        $currentTime = time();
+        $destination = __DIR__ . '/../../images/photo_importees';
+        $nom_photo_finale = $nom_explode.$currentTime.'.'.$ext;
+
+        move_uploaded_file($nom_serv_photo,$destination.'/'.$nom_photo_finale);
+    }
+    
 
     if($idCategorie == 0){
         $erreurIdCategorie = true;
@@ -165,7 +171,7 @@ if (isset($_POST['categorie']) && isset($_POST['nom']) && isset($_POST['prix']) 
                                                 SELECT ?, id_remise FROM id_remise");
 
             //mise à jour de la base de données
-            $pourcentage = $remise;
+            $pourcentage = intval($remise);
             $pourcentage = $pourcentage/100;
             $existe = false;  //si le produit a déjà une remise
             foreach($dbh->query("SELECT * FROM sae3_skadjam._reduit WHERE id_produit = $idProd", PDO::FETCH_ASSOC) as $row){
@@ -319,14 +325,16 @@ if (isset($_POST['categorie']) && isset($_POST['nom']) && isset($_POST['prix']) 
         <?php include __DIR__ . '/../../php/structure/navbar_back.php';?>
         <main class="flex flex-col items-center">
             <h2>Création d'un produit</h2>
-            <form class="grid grid-cols-[40%_60%] w-4/5 self-center" action="creation_produit.php" method="post" enctype="multipart/form-data">
+            <form id="formProduit" class="grid grid-cols-[40%_60%] w-4/5 self-center" action="creation_produit.php" method="post" enctype="multipart/form-data">
 
                 <!-- Image -->
                 <div class="row-start-1 row-span-3 m-2 p-4 grid grid-rows-[2/3-1/3] justify-items-center">
-                    <input type="file" id="photo" name="photo" class="hidden" required>
+                    <input type="file" id="photo" name="photo" class="hidden">
                     <!-- label qui agit comme bouton -->
                     <label for="photo" class="bg-beige w-60 h-60 rounded-2xl image-produit cursor-pointer" style="background-image: url('../../images/logo/bootstrap_icon/image.svg'); background-repeat: no-repeat; background-position: center; background-size: 60%;"></label>
                     <label class="cursor-pointer" for="photo">Ajouter une image*</label>
+                    <p id="erreurImage" class="text-rouge hidden">L'image est obligatoire</p>
+                    
                 </div>
 
                 <!-- Nom produit -->
@@ -378,7 +386,7 @@ if (isset($_POST['categorie']) && isset($_POST['nom']) && isset($_POST['prix']) 
                     </div>
                     <!-- Quantité par unité -->
                     <div class="flex flex-col">
-                        <label for="qteUnite">Quantité par unité :</label>
+                        <label for="qteUnite">Quantité par unité* :</label>
                         <input placeholder="200" class="border-4 border-beige rounded-2xl w-40 m-2 placeholder-gray-500" type="number" name="qteUnite" id="qteUnite" min="0" max="999999999"required>
                     </div>
                 </div>
@@ -451,11 +459,27 @@ if (isset($_POST['categorie']) && isset($_POST['nom']) && isset($_POST['prix']) 
                 promoInputs.style.height = '0';
             }
         }
-        // Quand "Mettre en promotion" est coché, afficher les inputs de promotion
+        
+    
         document.addEventListener('DOMContentLoaded', function() {
+            // Quand "Mettre en promotion" est coché, afficher les inputs de promotion
             var promoCheck = document.getElementById('promoCheck');
             promoCheck.addEventListener('change', togglePromotionInputs);
             togglePromotionInputs();
+
+            // validation image
+            const form = document.getElementById("formProduit");
+            const inputPhoto = document.getElementById("photo");
+            const erreur = document.getElementById("erreurImage");
+
+            form.addEventListener("submit", function(e) {
+
+                if(inputPhoto.files.length === 0){
+                    e.preventDefault();
+                    erreur.classList.remove("hidden");
+                }
+
+            });
         });
     </script>
 </html>

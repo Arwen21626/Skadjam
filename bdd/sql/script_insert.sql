@@ -122,49 +122,49 @@ VALUES
   (21, 0, 0.00, '22/11/2025', 41);
 
 --Insertion Adresse
-INSERT INTO sae3_skadjam._adresse (adresse_postale,complement_adresse,numero_rue,numero_bat,numero_appart,code_interphone,code_postal,ville) 
+INSERT INTO sae3_skadjam._adresse (adresse_postale,complement_adresse,numero_rue,numero_bat,numero_appart,code_interphone,code_postal,ville,latitude,longitude) 
 VALUES
-  ('rue du Menhir',NULL,12,NULL,NULL,NULL,29000,'Quimper'),
-  ('rue des Paludiers',NULL,5,NULL,NULL,NULL,56000,'Vannes'),
-  ('avenue des Goemoniers',NULL,18,NULL,NULL,NULL,29200,'Brest'),
-  ('impasse des Embruns',NULL,7,NULL,NULL,NULL,56100,'Lorient'),
-  ('quai d’Ar Mor',NULL,24,NULL,NULL,NULL,29900,'Concarneau'),
-  ('allee Ker Sucre',NULL,3,NULL,NULL,NULL,29930,'Pont-Aven'),
-  ('rue du Triskell',NULL,11,NULL,NULL,NULL,29600,'Morlaix'),
-  ('rue des Lavandieres',NULL,37,NULL,NULL,NULL,22300,'Lannion'),
-  ('rue de la Distillerie',NULL,8,NULL,NULL,NULL,29300,'Quimperle'),
-  ('rue des Delices',NULL,15,NULL,NULL,NULL,22000,'Saint-Brieuc'),
-  ('rue des Tanneurs',NULL,42,NULL,NULL,NULL,29270,'Carhaix-Plouguer'),
-  ('rue du Kouign-Amann',NULL,9,NULL,NULL,NULL,29100,'Douarnenez'),
-  ('rue de la Brasserie',NULL,6,NULL,NULL,NULL,35600,'Redon'),
-  ('rue Arz',NULL,14,NULL,NULL,NULL,56400,'Auray'),
-  ('rue de l’Argoat',NULL,27,NULL,NULL,NULL,22110,'Rostrenen'),
-  ('rue de la Mode Bretonne',NULL,3,NULL,NULL,NULL,56270,'Ploemeur'),
-  ('route Penn Ar Bed',NULL,19,NULL,NULL,NULL,29280,'Plouzane'),
-  ('rue Flora',NULL,22,NULL,NULL,NULL,56700,'Hennebont'),
-  ('rue du Lait Breton',NULL,10,NULL,NULL,NULL,29400,'Landivisiau'),
-  ('rue Gwened',NULL,4,NULL,NULL,NULL,56000,'Vannes'),
-  ('chemin de Alexandre',NULL,3,NULL,NULL,NULL,72069,'Evrard-sur-Muller'),
-  ('boulevard Klein',NULL,53,NULL,NULL,NULL,23411,'Martin-les-Bains'),
-  ('avenue Alix Gauthier',NULL,36,NULL,NULL,NULL,11282,'Sainte LorraineBourg'),
-  ('chemin Lefort',NULL,7,NULL,NULL,NULL,27504,'Rousseau-les-Bains'),
-  ('rue Lucie David',NULL,44,NULL,NULL,NULL,39426,'Saint Adèledan'),
-  ('rue de Jacques',NULL,65,NULL,NULL,NULL,94399,'Dumasboeuf'),
-  ('boulevard de Morel',NULL,13,NULL,NULL,NULL,80814,'Schmitt'),
-  ('rue de Huet',NULL,8,NULL,NULL,NULL,90595,'Tanguy'),
-  ('rue Tristan Gay',NULL,312,NULL,NULL,NULL,42037,'Riouboeuf'),
-  ('rue Lucas Vincent',NULL,10,NULL,NULL,NULL,60673,'Saint JosephVille'),
-  ('avenue de Rodrigues',NULL,69,NULL,NULL,NULL,76186,'Guilbert-les-Bains'),
-  ('rue Martine Clément',NULL,15,NULL,NULL,NULL,50719,'Chrétiendan'),
-  ('rue Barre',NULL,37,NULL,NULL,NULL,41449,'Maillot'),
-  ('rue Pages',NULL,96,NULL,NULL,NULL,77624,'CharrierVille'),
-  ('boulevard de Dumont',NULL,73,NULL,NULL,NULL,95455,'Bertin'),
-  ('rue Marie',NULL,2,NULL,NULL,NULL,50089,'Jacob-sur-Pineau'),
-  ('rue de Charpentier',NULL,4,NULL,NULL,NULL,98306,'Pons-la-Forêt'),
-  ('boulevard de Hamon',NULL,49,NULL,NULL,NULL,40361,'Guillotdan'),
-  ('chemin Sylvie Meunier',NULL,5,NULL,NULL,NULL,32336,'Daniel'),
-  ('rue Louise Labbé',NULL,536,NULL,NULL,NULL,76820,'Sainte Alexnec'),
-  ('rue Anonymisé',NULL,1,NULL,NULL,NULL,01001,'Anonyme');
+  ('Chemin de Penn Ar Creac’H',NULL,5,NULL,NULL,NULL,29100,'Douarnenez','48.08','-4.34'),
+  ('Allée des Paludiers',NULL,5,NULL,NULL,NULL,56000,'Vannes','47.635242','-2.769817'),
+  ('Rue Général Gallieni',NULL,18,NULL,NULL,NULL,29200,'Brest','48.390423','-4.506883'),
+  ('Boulevard Léon Blum',NULL,7,NULL,NULL,NULL,56100,'Lorient','47.747311','-3.376303'),
+  ('Rue Neuve',NULL,24,NULL,NULL,NULL,29900,'Concarneau','47.894264','-3.905555'),
+  ('Impasse des fleurs',NULL,3,NULL,NULL,NULL,29930,'Pont-Aven','47.857201','-3.753631'),
+  ('Avenue de Truro',NULL,11,NULL,NULL,NULL,29600,'Morlaix','48.588528','-3.826069'),
+  ('Rue Edouard Branly',NULL,5,NULL,NULL,NULL,22300,'Lannion','48.757955','-3.450603'),
+  ('Rue Rosa Parks',NULL,8,NULL,NULL,NULL,29300,'Quimperle','47.865814','-3.565254'),
+  ('Rue Claude Bernard',NULL,15,NULL,NULL,NULL,22000,'Saint-Brieuc','48.502052','-2.751637'),
+  ('Rue Victor Hugo',NULL,2,NULL,NULL,NULL,56100,'Lorient','47.740238','-3.365323'),
+  ('Rue Lesage',NULL,9,NULL,NULL,NULL,29200,'Brest','48.399035','-4.464342'),
+  ('Route du Ris',NULL,6,NULL,NULL,NULL,29100,'Douarnenez','48.089901','-4.301849'),
+  ('Rue du Henan',NULL,14,NULL,NULL,NULL,29930,'Pont-Aven','47.852928','-3.759209'),
+  ('Rue des Mimosas',NULL,12,NULL,NULL,NULL,22000,'Plérin','48.543238','-2.769657'),
+  ('Rue Chevreul',NULL,3,NULL,NULL,NULL,29200,'Brest','48.407139','-4.494268'),
+  ('Rue Marcel Sembat',NULL,19,NULL,NULL,NULL,35000,'Rennes','48.094536','-1.675359'),
+  ('Rue du Pleneno',NULL,22,NULL,NULL,NULL,56100,'Lorient','47.760415','-3.387674'),
+  ('Rue du Valais',NULL,10,NULL,NULL,NULL,22000,'Saint-Brieuc','48.521893','-2.726952'),
+  ('Rue Beg-Avel',NULL,4,NULL,NULL,NULL,29200,'Brest','48.399416','-4.458753'),
+  ('chemin de Alexandre',NULL,3,NULL,NULL,NULL,72069,'Evrard-sur-Muller','0','0'),
+  ('boulevard Klein',NULL,53,NULL,NULL,NULL,23411,'Martin-les-Bains','0','0'),
+  ('avenue Alix Gauthier',NULL,36,NULL,NULL,NULL,11282,'Sainte LorraineBourg','0','0'),
+  ('chemin Lefort',NULL,7,NULL,NULL,NULL,27504,'Rousseau-les-Bains','0','0'),
+  ('rue Lucie David',NULL,44,NULL,NULL,NULL,39426,'Saint Adèledan','0','0'),
+  ('rue de Jacques',NULL,65,NULL,NULL,NULL,94399,'Dumasboeuf','0','0'),
+  ('boulevard de Morel',NULL,13,NULL,NULL,NULL,80814,'Schmitt','0','0'),
+  ('rue de Huet',NULL,8,NULL,NULL,NULL,90595,'Tanguy','0','0'),
+  ('rue Tristan Gay',NULL,312,NULL,NULL,NULL,42037,'Riouboeuf','0','0'),
+  ('rue Lucas Vincent',NULL,10,NULL,NULL,NULL,60673,'Saint JosephVille','0','0'),
+  ('avenue de Rodrigues',NULL,69,NULL,NULL,NULL,76186,'Guilbert-les-Bains','0','0'),
+  ('rue Martine Clément',NULL,15,NULL,NULL,NULL,50719,'Chrétiendan','0','0'),
+  ('rue Barre',NULL,37,NULL,NULL,NULL,41449,'Maillot','0','0'),
+  ('rue Pages',NULL,96,NULL,NULL,NULL,77624,'CharrierVille','0','0'),
+  ('boulevard de Dumont',NULL,73,NULL,NULL,NULL,95455,'Bertin','0','0'),
+  ('rue Marie',NULL,2,NULL,NULL,NULL,50089,'Jacob-sur-Pineau','0','0'),
+  ('rue de Charpentier',NULL,4,NULL,NULL,NULL,98306,'Pons-la-Forêt','0','0'),
+  ('boulevard de Hamon',NULL,49,NULL,NULL,NULL,40361,'Guillotdan','0','0'),
+  ('chemin Sylvie Meunier',NULL,5,NULL,NULL,NULL,32336,'Daniel','0','0'),
+  ('rue Louise Labbé',NULL,536,NULL,NULL,NULL,76820,'Sainte Alexnec','0','0'),
+  ('rue Anonymisé',NULL,1,NULL,NULL,NULL,01001,'Anonyme', '0', '0');
 
 --Insertion Habite
 INSERT INTO sae3_skadjam._habite (id_adresse,id_compte) 
@@ -941,3 +941,22 @@ VALUES
   (2,34),
   (3,1);
 
+-- Insertion commandes (pour les tests)
+INSERT INTO sae3_skadjam._adresse_livraison (nom, prenom, adresse_postale, numero_rue, code_postal, ville, sauvegarde)
+VALUES
+  ('De Fontaine', 'Furina', 'C Place de Liyue', 1, 50500, 'Fontaine', false);
+
+INSERT INTO sae3_skadjam._commande (id_adresse, etat, date_commande, montant_total_ttc, id_client)
+VALUES
+  (1, 'En attente', '01/02/2026', 82.74, 21),
+  (1, 'En attente', '18/07/2025', 113.93, 21);
+
+
+INSERT INTO sae3_skadjam._details (montant_ht, quantite, sous_total, id_commande, id_produit)
+VALUES
+  (25.99, 1, 31.19, 1, 73),
+  (4.99, 2, 11.98, 1, 98),
+  (10.99, 3, 39.57, 1, 104),
+  (25.99, 2, 62.38, 2, 73),
+  (4.99, 2, 11.98, 2, 98),
+  (10.99, 3, 39.57, 2, 104);
