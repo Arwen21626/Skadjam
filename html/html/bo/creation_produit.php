@@ -52,7 +52,7 @@ if (isset($_POST['categorie']) && isset($_POST['nom']) && isset($_POST['prix']) 
     $qteUnite = $_POST['qteUnite'];
     $remise = $_POST['remise'];
     $seuilAlerte = null;
-    if(isset($_POST['seuilAlerte'])){
+    if(isset($_POST['seuilAlerte']) && $_POST['seuilAlerte'] !== ''){
         $seuilAlerte = $_POST['seuilAlerte'];
     }
     
@@ -418,13 +418,16 @@ if (isset($_POST['categorie']) && isset($_POST['nom']) && isset($_POST['prix']) 
                 </div>
 
                 <!---Input lié au seuil d'alerte--->
-                <div id="seuilInput" class="flex flex-row mr-4 ml-4">
-                    <label class="mr-4" for="seuilAlerte">Seuil d'alerte :</label>
-                    <input class="border-4 border-beige rounded-2xl w-45" type="date" name="seuilAlerte" id="seuilAlerte" value="<?php if(isset($seuilAlerte)){echo $seuilAlerte;} ?>">
+                <div class="col-start-1 row-start-5 flex flex-col">
+                    <div id="seuilInput" class="flex flex-row mr-4 ml-4">
+                        <label class="mr-4" for="seuilAlerte">Seuil d'alerte* :</label>
+                        <input class="border-4 border-beige rounded-2xl w-45" type="number" name="seuilAlerte" id="seuilAlerte" value="<?php if(isset($seuilAlerte)){echo $seuilAlerte;} ?>">
+                    </div>
                 </div>
+                
 
                 <!-- Inputs liés aux promotions -->
-                <div id="promoInputs" class="col-start-1 row-start-5 col-span-2 flex flex-col">
+                <div id="promoInputs" class="col-start-1 row-start-6 col-span-2 flex flex-col">
                     <div class="flex flex-row justify-around m-2 p-2">
                         <div>
                             <div class="flex flex-row mr-4 ml-4">
@@ -448,13 +451,13 @@ if (isset($_POST['categorie']) && isset($_POST['nom']) && isset($_POST['prix']) 
                 </div>
                 
                 <!-- Description -->
-                <div class="col-start-1 col-span-2 row-start-6 flex flex-col m-2 p-2 ">
+                <div class="col-start-1 col-span-2 row-start-7 flex flex-col m-2 p-2 ">
                     <label for="description">Description *:</label>
                     <textarea placeholder="Pot de confiture de fraises des bois" class="border-4 border-beige rounded-2xl w-3/4 self-center placeholder-gray-500" name="description" id="description" cols="100" rows="10" required></textarea>
                 </div>
                 
                 <!-- Validation -->
-                <div class="col-start-1 col-span-2 row-start-7 flex flex-row justify-around m-4">
+                <div class="col-start-1 col-span-2 row-start-8 flex flex-row justify-around m-4">
                     <button class="border-2 border-vertFonce rounded-2xl w-40 h-14 cursor-pointer"><a href="../bo/index_vendeur.php">Retour</a></button>                    
                     <input class="border-2 border-vertFonce rounded-2xl w-40 h-14 cursor-pointer" type="submit" value="Valider">
                 </div>
@@ -482,13 +485,13 @@ if (isset($_POST['categorie']) && isset($_POST['nom']) && isset($_POST['prix']) 
         function toggleSeuilInput(){
             var seuilCheck = document.getElementById('seuilCheck');
             var seuilInput = document.getElementById('seuilInput');
+            var seuilAlerte = document.getElementById('seuilAlerte');
             if(seuilCheck.checked){
-                seuilInput.style.display='flex';
-                seuilInput.style.visibility = 'visible';
-                seuilInput.style.height = 'auto';
+                seuilInput.style.display = 'flex';
+                seuilAlerte.required = true;
             }else{
-                seuilInput.style.visibility = 'hidden';
-                seuilInput.style.height = '0';
+                seuilInput.style.display = 'none';
+                seuilAlerte.required = false;
             }
         }
         
