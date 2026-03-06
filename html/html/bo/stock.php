@@ -75,6 +75,7 @@
                             <th scope="col"><h3>Prix</h3></th>
                             <th scope="col"><h3>Note</h3></th>
                             <th scope="col"><h3>Stock</h3></th>
+                            <th scope="col"></th>
                         </tr>
                     </thead>
                     <tbody>
@@ -101,6 +102,7 @@
                                         </div>
                                     </td>
                                     <td class="text-center py-3"><p><?php echo htmlentities($valeurs['quantite_stock']); ?></p></td>
+                                    <td class=" min-w-15 bg-white"></td>
                                 </tr>
                         <?php }?>
                     </tbody>
@@ -111,5 +113,31 @@
 
     <!--footer-->
     <?php include(__DIR__ . "/../../php/structure/footer_back.php"); ?>
+    <script>
+        let lignesTab = document.getElementsByTagName("tr");
+
+        let rougeClaire = "#A70101";
+        let rouge = "#730D0D";
+
+        let seuil;
+
+        for(let i = 1; i < lignesTab.length; i++){
+            seuil = 0;
+            if (lignesTab[i].children[4].textContent <= seuil){
+                if(i%2 !== 0){
+                    lignesTab[i].style.backgroundColor = rouge;
+                }
+                else{
+                    lignesTab[i].style.backgroundColor = rougeClaire;
+                }
+                lignesTab[i].style.color = "white";
+
+                lignesTab[i].children[5].style.backgroundImage = "url(/images/logo/bootstrap_icon/exclamation-triangle.svg)"; 
+                lignesTab[i].children[5].style.backgroundSize = "1.5em auto"; 
+                lignesTab[i].children[5].style.backgroundRepeat = "no-repeat"; 
+                lignesTab[i].children[5].style.backgroundPosition = "center center";
+            }
+        }
+    </script>
 </body>
 </html>
