@@ -144,8 +144,8 @@
 </head>
 <body>
     <?php require_once __DIR__ . "/../../php/structure/header_front.php"; ?>
-    <main >
-        <h2 class="flex flex-col items-center">Connexion</h2>
+    <main class="flex flex-col self-center">
+        <h2>Connexion</h2>
         <form method="post">
         <?php if(isset($_GET['idProduit'])){ ?>
             <input name="idProduit" id="idProduit" value="<?php echo $_GET['idProduit'];?>" class="hidden w-1">
@@ -200,9 +200,6 @@
                         <input type="submit" value="Se connecter" class="cursor-pointer w-64 border-5 border-solid rounded-2xl border-vertClair pl-3">
                     </div>
                 </div>
-
-                
-                
             </div>
         </form>
         <!-- Renvoie sur la page de création d'un compte client -->
@@ -222,40 +219,6 @@
             <p class=" mr-2">Pas encore vendeur ? </p>
             <a href="../bo/crea_compte_vendeur.php" class="underline! hover:text-rouge">Créer un compte vendeur</a>
         </div>
-<!--
-        <script>
-            var passwordInput = document.getElementById("mdp");
-            passwordInput.type = 'password';
-
-            document.querySelectorAll(".modif-attribut .bouton-modifier, .modif-attribut .bouton-valider").forEach(button => {
-                button.addEventListener("click", () => {
-                    const container = button.closest(".modif-attribut"); // parent
-                    const boutonEye = container.querySelector(".bouton-modifier"); // oeil
-                    const boutonSlash = container.querySelector(".bouton-valider"); // oeil slash
-
-                    boutonSlash.classList.toggle("hidden");
-                    boutonSlash.classList.toggle("block");  
-                    
-                    boutonEye.classList.toggle("hidden");
-                    boutonEye.classList.toggle("block");
-                });
-            });
-            document.querySelectorAll(".modif-attribut .bouton-valider").forEach(button => {
-                button.addEventListener("click", () => {
-                    const container = button.closest(".modif-attribut"); // parent
-                    passwordInput.type = 'password';
-
-                });
-            });
-            document.querySelectorAll(".modif-attribut .bouton-modifier").forEach(button => {
-                button.addEventListener("click", () => {
-                    const container = button.closest(".modif-attribut"); // parent
-
-                    passwordInput.type = 'text';
-                    
-                });
-            });
-        </script> -->
     </main>
     <?php require_once __DIR__ . "/../../php/structure/footer_front.php"; ?>
 </body>
