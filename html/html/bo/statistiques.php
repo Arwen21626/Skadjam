@@ -35,7 +35,7 @@
                 
                 if ($idVendeurProd == $idVendeur){
 
-                    echo $idProd . " " . $quantite . " " . $mois . " " . $annee . "<br>";
+                    // echo $idProd . " " . $quantite . " " . $mois . " " . $annee . "<br>";
 
                     if (!isset($dataStats[$annee][$mois])){
                         $dataStats[$annee][$mois]["nb_ventes_totales"] = $quantite;
@@ -120,9 +120,31 @@
             <p class="pr-2">Choisissez un produit :</p>
             <select name="" id="select-produit" class="pl-2">
                 <?php 
-                    
+                    $cles = [];
+
+                    foreach ($dataStats as $annee) { // Parcours toutes les années
+                        foreach ($annee as $mois) { // Parcours tous les mois
+                            $clesTemp = array_keys($mois["produits"]);
+
+                            foreach ($clesTemp as $key) { // Parcours tous les id des produits vendus lors d'un mois d'une année
+                                $cles[$key] = $mois["produits"][$key]["libelle_prod"];
+                            }
+                        }
+                    }
+
+                    foreach ($cles as $idProd => $libelle) {
+                        ?>
+                            <option value=<?php echo $idProd; ?>><?php echo $libelle; ?></option>
+                        <?php
+                    }
                 ?>
             </select>
+        </div>
+
+        <div class="charts-containers flex justify-center items-center flex-col p-2">
+            <div class="chart-container flex justify-center items-center relative m-4 w-[60vw] h-[50vh]">
+                <canvas id="prod-chart"></canvas>
+            </div>
         </div>
     </main>
     
