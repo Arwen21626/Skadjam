@@ -279,11 +279,9 @@ if(!$isset || $erreur){
             $cp = $ligne['code_postal'];
             $ville = $ligne['ville'];
             $description = $ligne['description_vendeur'];
-            $adresse = htmlentities($_POST["adresse"]);
-            $temp = tabAdresse($adresse);
-            $num = $temp[0];
-            $numBis = $temp[1];
-            $adresse = $temp[2];
+            $num = $ligne['numero_rue'];
+            $numBis = $ligne['complement_adresse'];
+            $adresse = $ligne['adresse_postale'];
         }
     }
     ?>
@@ -375,7 +373,7 @@ if(!$isset || $erreur){
                     <div class="flex flex-row no-wrap justify-between">
                         <div class="flex flex-col no-wrap items-start mt-6 w-fit @max-[768px]:mt-2">
                             <label for="adresse">Adresse * :</label>
-                            <input class="ml-5 border-4 border-solid rounded-2xl border-beige p-1 pl-3 mb-4 @max-[768px]:ml-2 max-w-3/4 @max-[768px]:pl-2 " type="text" id="adresse" name="adresse" value="<?= $num . (isset($numBis) ? " $numBis" : " ") . $adresse; ?>" size="50" placeholder="ex : 3 rue des camélias" required>
+                            <input class="ml-5 border-4 border-solid rounded-2xl border-beige p-1 pl-3 mb-4 @max-[768px]:ml-2 max-w-3/4 @max-[768px]:pl-2 " type="text" id="adresse" name="adresse" value="<?= $num . (!empty($numBis) ? " $numBis" : " ") . $adresse; ?>" size="50" placeholder="ex : 3 rue des camélias" required>
                             <?= $erreurAdresse ? "<p style=\"font-size: 0.90em\" class=\"text-rouge\">L'adresse est invalide.</p>" : ""; ?>
                         </div>
                     </div>
