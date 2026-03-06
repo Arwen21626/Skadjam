@@ -101,7 +101,10 @@
                                             ?>
                                         </div>
                                     </td>
-                                    <td class="text-center py-3"><p><?php echo htmlentities($valeurs['quantite_stock']); ?></p></td>
+                                    <td class="text-center py-3">
+                                        <p><?php echo htmlentities($valeurs['quantite_stock']); ?></p>
+                                        <p class="hidden"><?php echo ($valeurs['seuil_alerte']!== null)?$valeurs['seuil_alerte']:0; ?></p>
+                                    </td>
                                     <td class=" min-w-15 bg-white"></td>
                                 </tr>
                         <?php }?>
@@ -122,8 +125,9 @@
         let seuil;
 
         for(let i = 1; i < lignesTab.length; i++){
-            seuil = 0;
-            if (lignesTab[i].children[4].textContent <= seuil){
+            seuil = lignesTab[i].children[4].children[1].textContent;
+            
+            if (lignesTab[i].children[4].children[0].textContent <= seuil){
                 if(i%2 !== 0){
                     lignesTab[i].style.backgroundColor = rouge;
                 }

@@ -502,7 +502,7 @@ if (isset($_POST['categorie']) && isset($_POST['nom']) && isset($_POST['prix']) 
             promoCheck.addEventListener('change', togglePromotionInputs);
             togglePromotionInputs();
 
-            // Quand "Ajouter seuil alerte" est coché, afficher les inputs de promotion
+            // Quand "Ajouter seuil alerte" est coché, afficher les inputs de seuil d'alerte
             var seuilCheck = document.getElementById('seuilCheck');
             seuilCheck.addEventListener('change', toggleSeuilInput);
             toggleSeuilInput();
