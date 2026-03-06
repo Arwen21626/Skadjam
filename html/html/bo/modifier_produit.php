@@ -548,7 +548,7 @@ else { ?>
                 </div>
 
                 <!-- Inputs liés aux promotions -->
-                <div id="promoInputs" class="col-start-1 row-start-5 col-span-2 flex flex-col">
+                <div id="promoInputs" class="col-start-1 row-start-6 col-span-2 flex flex-col">
                     <div class="flex flex-row justify-around m-2 p-2">
                         <div>
                             <div class="flex flex-row mr-4 ml-4">
@@ -572,13 +572,13 @@ else { ?>
                 </div>
 
                 <!-- Description -->
-                <div class="col-start-1 col-span-2 row-start-6 flex flex-col m-2 p-2 ">
+                <div class="col-start-1 col-span-2 row-start-7 flex flex-col m-2 p-2 ">
                     <label for="description">Description *:</label>
                     <textarea placeholder="Pot de confiture de fraises des bois" class="border-4 border-beige rounded-2xl w-3/4 self-center placeholder-gray-500" name="description" id="description" cols="100" rows="10" required><?php echo $description ;?></textarea>
                 </div>
                 
                 <!-- Validation -->
-                <div class="col-start-1 col-span-2 row-start-7 flex flex-row justify-around m-4">
+                <div class="col-start-1 col-span-2 row-start-8 flex flex-row justify-around m-4">
                     <a href="../bo/details_produit.php?idProduit=<?php echo $idProduit ;?>" class="flex justify-center items-center border-2 border-vertFonce rounded-2xl w-40 h-14 cursor-pointer">Retour</a>
                     <input class="border-2 border-vertFonce rounded-2xl w-40 h-14 cursor-pointer" type="submit" value="Valider">
                 </div>
@@ -608,16 +608,17 @@ else { ?>
     }*/
 
     function togglePromotionInputs(){
-    var promoCheck = document.getElementById('promoCheck');
-    var promoInputs = document.getElementById('promoInputs');
-    var dateDebut = document.getElementById('dateDebutPromotion');
+        var promoCheck = document.getElementById('promoCheck');
+        var promoInputs = document.getElementById('promoInputs');
+        var dateDebut = document.getElementById('dateDebutPromotion');
 
-    if(promoCheck.checked && !promoCheck.disabled){
-        promoInputs.style.display = 'flex';
-        dateDebut.required = true;
-    }else{
-        promoInputs.style.display = 'none';
-        dateDebut.required = false;
+        if(promoCheck.checked && !promoCheck.disabled){
+            promoInputs.style.display = 'flex';
+            dateDebut.required = true;
+        }else{
+            promoInputs.style.display = 'none';
+            dateDebut.required = false;
+        }
     }
 
     // Fonction pour afficher/cacher input de seuil d'alerte
@@ -633,7 +634,6 @@ else { ?>
             seuilAlerte.required = false;
         }
     }
-}
     
     document.addEventListener('DOMContentLoaded', function() {
         // Quand "Mettre en promotion" est coché, afficher les inputs de promotion
