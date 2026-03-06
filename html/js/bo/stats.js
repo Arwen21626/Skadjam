@@ -1,16 +1,16 @@
 let dataStats = dataJson;
 
+let anneeSelection = document.getElementById("select-annee");
+
 let periodes = ['Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Août', 'Septembre', 'Octobre', 'Novembre', 'Décembre'];
 let dataVentes = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
 
-let currentAnnee = '2026';
+let currentAnnee = anneeSelection.value;
 
-console.log(Object.keys(dataStats[currentAnnee]))
-
-Object.keys(dataStats).forEach(mois => {
+Object.keys(dataStats[currentAnnee]).forEach(mois => {
     let i = Number(mois);
 
-    dataVentes[i - 1] = Number(dataStats[mois]["nb_ventes_totales"]);
+    dataVentes[i - 1] = Number(dataStats[currentAnnee][mois]["nb_ventes_totales"]);
 });
 
 let testChart = document.getElementById("testChart");
@@ -32,11 +32,29 @@ let testChartCfg = {
         plugins: {
             title: {
                 display: true,
-                text: 'Total des ventes pour l\'année actuelle',
+                text: 'Total des ventes pour l\'année' + " " + currentAnnee,
             }
         }
     }
 }
 
-new Chart(testChart, testChartCfg);
+let chart = new Chart(testChart, testChartCfg);
+
+anneeSelection.addEventListener("change", function () {
+    currentAnnee = anneeSelection.value;
+    dataVentes = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+
+    Object.keys(dataStats[currentAnnee]).forEach(mois => {
+        let i = Number(mois);
+
+        dataVentes[i - 1] = Number(dataStats[currentAnnee][mois]["nb_ventes_totales"]);
+    });
+
+    testChartCfg.options.plugins.title.text = 'Total des ventes pour l\'année' + " " + currentAnnee;
+    testChartCfg.data.datasets[0].data = dataVentes;
+
+    chart.destroy();
+    chart = new Chart(testChart, testChartCfg);
+});
+
 
