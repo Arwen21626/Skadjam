@@ -122,7 +122,8 @@ CREATE TABLE sae3_skadjam._produit (
     id_vendeur INT NOT NULL,
     id_tva INT NOT NULL,
     note_moyenne NUMERIC(2,1),
-    est_supprime BOOLEAN NOT NULL DEFAULT FALSE
+    est_supprime BOOLEAN NOT NULL DEFAULT FALSE,
+    date_creation TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
 );
 
 CREATE TABLE sae3_skadjam._tva(
