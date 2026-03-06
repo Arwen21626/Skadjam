@@ -16,7 +16,7 @@ for(let i = 1; i < lignesTab.length; i++){
     champsRetirer = lignesTab[i].children[6];
 
     //seuil d'alert atteint
-    if (seuilAlertAtteint(champsStock.children[0].value, i)){
+    if (seuilAlertAtteint(champsStock, i)){
         changementSeuilAtteint(lignesTab[i], i);
     };
 
@@ -147,7 +147,7 @@ function stockModifier(ligne, idxLigne){
         ligne.children[5].children[0].style.color = "";
         ligne.children[6].children[0].style.color = "";
 
-        if(seuilAlertAtteint(ligne.children[4].children[0].value)){
+        if(seuilAlertAtteint(ligne.children[4])){
             changementSeuilAtteint(ligne, idxLigne);
         }
 
@@ -159,17 +159,16 @@ function stockModifier(ligne, idxLigne){
 
 }
 
-function seuilAlertAtteint(stock){
-    let seuil = 0;
+function seuilAlertAtteint(champStock){
+    let seuil = champStock.children[1].textContent;
 
-    if (stock <= seuil){
+    if (champStock.children[0].value <= seuil){
         return true;
     }
     return false;
 }
 
 function changementSeuilAtteint(ligne, idxLigne){
-    console.log(idxLigne);
     if(idxLigne%2 === 0){
         ligne.style.backgroundColor = rougeClaire;
     }
