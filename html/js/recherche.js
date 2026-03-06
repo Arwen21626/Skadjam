@@ -9,7 +9,7 @@ function mettreAJourListe() {
     let copieProd = [...tabProd] 
 
     // FILTRES
-    copieProd = filtre(copieProd)
+    copieProd = filtre()
 
     // RECHERCHE
     const barreRecherche = document.getElementById("recherche").value 

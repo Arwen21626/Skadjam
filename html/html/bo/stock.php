@@ -9,7 +9,7 @@
     try {     
         $tabProduit = null;           
         //récupère toutes les infos des tables produits
-        foreach($dbh->query("SELECT pr.id_produit, pr.libelle_produit, pr.prix_ttc, pr.note_moyenne, pr.quantite_stock, p.url_photo, p.alt, p.titre
+        foreach($dbh->query("SELECT pr.id_produit, pr.libelle_produit, pr.prix_ttc, pr.note_moyenne, pr.quantite_stock, p.url_photo, p.alt, p.titre, pr.seuil_alerte
                             FROM sae3_skadjam._produit pr
                             INNER JOIN sae3_skadjam._vendeur v
                                 ON pr.id_vendeur = v.id_compte
@@ -119,23 +119,31 @@
     <script>
         let lignesTab = document.getElementsByTagName("tr");
 
-        let rougeClaire = "#A70101";
-        let rouge = "#730D0D";
+        let rouge = "#A70101";
+        let rougeClaire = "#E04C4C";
 
         let seuil;
 
         for(let i = 1; i < lignesTab.length; i++){
             seuil = lignesTab[i].children[4].children[1].textContent;
+
+            console.log(seuil);
+            console.log(lignesTab[i].children[4].children[0].textContent);
             
-            if (lignesTab[i].children[4].children[0].textContent <= seuil){
+            // ajout d'une bordure qui indique que le stock est inférieur au seuil
+            if (lignesTab[i].children[4].children[0].textContent >= seuil){
+                
+                lignesTab[i].children[lignesTab[i].childElementCount-2].style.borderRightWidth = "0.5em";
+
+                // couleur des lignes alterner
                 if(i%2 !== 0){
-                    lignesTab[i].style.backgroundColor = rouge;
+                    lignesTab[i].children[lignesTab[i].childElementCount-2].style.borderColor = rouge;
                 }
                 else{
-                    lignesTab[i].style.backgroundColor = rougeClaire;
+                    lignesTab[i].children[lignesTab[i].childElementCount-2].style.borderColor = rougeClaire;
                 }
-                lignesTab[i].style.color = "white";
 
+                // met un logo en complément de la couleur
                 lignesTab[i].children[5].style.backgroundImage = "url(/images/logo/bootstrap_icon/exclamation-triangle.svg)"; 
                 lignesTab[i].children[5].style.backgroundSize = "1.5em auto"; 
                 lignesTab[i].children[5].style.backgroundRepeat = "no-repeat"; 
