@@ -558,9 +558,6 @@ input.quantite-prod-input {
   .mb-15 {
     margin-bottom: calc(var(--spacing, 0.25rem) * 15);
   }
-  .mb-20 {
-    margin-bottom: calc(var(--spacing, 0.25rem) * 20);
-  }
   .ml-0 {
     margin-left: calc(var(--spacing, 0.25rem) * 0);
   }
@@ -581,9 +578,6 @@ input.quantite-prod-input {
   }
   .ml-6 {
     margin-left: calc(var(--spacing, 0.25rem) * 6);
-  }
-  .ml-7 {
-    margin-left: calc(var(--spacing, 0.25rem) * 7);
   }
   .ml-10 {
     margin-left: calc(var(--spacing, 0.25rem) * 10);
@@ -656,12 +650,6 @@ input.quantite-prod-input {
   .h-6\! {
     height: calc(var(--spacing, 0.25rem) * 6) !important;
   }
-  .h-8 {
-    height: calc(var(--spacing, 0.25rem) * 8);
-  }
-  .h-8\/10 {
-    height: calc(8/10 * 100%);
-  }
   .h-10 {
     height: calc(var(--spacing, 0.25rem) * 10);
   }
@@ -689,14 +677,17 @@ input.quantite-prod-input {
   .h-50 {
     height: calc(var(--spacing, 0.25rem) * 50);
   }
+  .h-52 {
+    height: calc(var(--spacing, 0.25rem) * 52);
+  }
+  .h-54 {
+    height: calc(var(--spacing, 0.25rem) * 54);
+  }
   .h-60 {
     height: calc(var(--spacing, 0.25rem) * 60);
   }
   .h-80 {
     height: calc(var(--spacing, 0.25rem) * 80);
-  }
-  .h-100 {
-    height: calc(var(--spacing, 0.25rem) * 100);
   }
   .h-225 {
     height: calc(var(--spacing, 0.25rem) * 225);
@@ -730,9 +721,6 @@ input.quantite-prod-input {
   }
   .min-h-\[800px\] {
     min-height: 800px;
-  }
-  .w-0 {
-    width: calc(var(--spacing, 0.25rem) * 0);
   }
   .w-1 {
     width: calc(var(--spacing, 0.25rem) * 1);
@@ -794,14 +782,8 @@ input.quantite-prod-input {
   .w-7 {
     width: calc(var(--spacing, 0.25rem) * 7);
   }
-  .w-7\/10 {
-    width: calc(7/10 * 100%);
-  }
   .w-8 {
     width: calc(var(--spacing, 0.25rem) * 8);
-  }
-  .w-8\/10 {
-    width: calc(8/10 * 100%);
   }
   .w-9 {
     width: calc(var(--spacing, 0.25rem) * 9);
@@ -829,9 +811,6 @@ input.quantite-prod-input {
   }
   .w-16 {
     width: calc(var(--spacing, 0.25rem) * 16);
-  }
-  .w-20 {
-    width: calc(var(--spacing, 0.25rem) * 20);
   }
   .w-24 {
     width: calc(var(--spacing, 0.25rem) * 24);
@@ -1149,13 +1128,6 @@ input.quantite-prod-input {
       margin-inline-end: calc(calc(var(--spacing, 0.25rem) * 5) * calc(1 - var(--tw-space-x-reverse)));
     }
   }
-  .space-x-10 {
-    :where(& > :not(:last-child)) {
-      --tw-space-x-reverse: 0;
-      margin-inline-start: calc(calc(var(--spacing, 0.25rem) * 10) * var(--tw-space-x-reverse));
-      margin-inline-end: calc(calc(var(--spacing, 0.25rem) * 10) * calc(1 - var(--tw-space-x-reverse)));
-    }
-  }
   .space-x-20 {
     :where(& > :not(:last-child)) {
       --tw-space-x-reverse: 0;
@@ -1169,9 +1141,6 @@ input.quantite-prod-input {
       margin-inline-start: calc(calc(var(--spacing, 0.25rem) * 40) * var(--tw-space-x-reverse));
       margin-inline-end: calc(calc(var(--spacing, 0.25rem) * 40) * calc(1 - var(--tw-space-x-reverse)));
     }
-  }
-  .self-auto {
-    align-self: auto;
   }
   .self-center {
     align-self: center;
@@ -1217,6 +1186,10 @@ input.quantite-prod-input {
   .border {
     border-style: var(--tw-border-style);
     border-width: 1px;
+  }
+  .border-0 {
+    border-style: var(--tw-border-style);
+    border-width: 0px;
   }
   .border-2 {
     border-style: var(--tw-border-style);
@@ -1300,6 +1273,12 @@ input.quantite-prod-input {
   }
   .bg-vertFonce {
     background-color: var(--color-vertFonce);
+  }
+  .bg-vertFonce\/90 {
+    background-color: color-mix(in srgb, #365452 90%, transparent);
+    @supports (color: color-mix(in lab, red, red)) {
+      background-color: color-mix(in oklab, var(--color-vertFonce) 90%, transparent);
+    }
   }
   .bg-vertMoyen {
     background-color: var(--color-vertMoyen);
@@ -1716,6 +1695,16 @@ input.quantite-prod-input {
       right: calc(var(--spacing, 0.25rem) * 0);
     }
   }
+  .md\:right-5 {
+    @media (width >= 48rem) {
+      right: calc(var(--spacing, 0.25rem) * 5);
+    }
+  }
+  .md\:right-10 {
+    @media (width >= 48rem) {
+      right: calc(var(--spacing, 0.25rem) * 10);
+    }
+  }
   .md\:right-40 {
     @media (width >= 48rem) {
       right: calc(var(--spacing, 0.25rem) * 40);
@@ -1724,6 +1713,16 @@ input.quantite-prod-input {
   .md\:bottom-0 {
     @media (width >= 48rem) {
       bottom: calc(var(--spacing, 0.25rem) * 0);
+    }
+  }
+  .md\:bottom-5 {
+    @media (width >= 48rem) {
+      bottom: calc(var(--spacing, 0.25rem) * 5);
+    }
+  }
+  .md\:bottom-10 {
+    @media (width >= 48rem) {
+      bottom: calc(var(--spacing, 0.25rem) * 10);
     }
   }
   .md\:bottom-14 {
@@ -1929,6 +1928,11 @@ input.quantite-prod-input {
       height: calc(var(--spacing, 0.25rem) * 28);
     }
   }
+  .md\:h-4 {
+    @media (width >= 48rem) {
+      height: calc(var(--spacing, 0.25rem) * 4);
+    }
+  }
   .md\:h-14 {
     @media (width >= 48rem) {
       height: calc(var(--spacing, 0.25rem) * 14);
@@ -1942,6 +1946,31 @@ input.quantite-prod-input {
   .md\:h-80 {
     @media (width >= 48rem) {
       height: calc(var(--spacing, 0.25rem) * 80);
+    }
+  }
+  .md\:h-82 {
+    @media (width >= 48rem) {
+      height: calc(var(--spacing, 0.25rem) * 82);
+    }
+  }
+  .md\:h-84 {
+    @media (width >= 48rem) {
+      height: calc(var(--spacing, 0.25rem) * 84);
+    }
+  }
+  .md\:h-90 {
+    @media (width >= 48rem) {
+      height: calc(var(--spacing, 0.25rem) * 90);
+    }
+  }
+  .md\:h-92 {
+    @media (width >= 48rem) {
+      height: calc(var(--spacing, 0.25rem) * 92);
+    }
+  }
+  .md\:h-95 {
+    @media (width >= 48rem) {
+      height: calc(var(--spacing, 0.25rem) * 95);
     }
   }
   .md\:h-225 {
