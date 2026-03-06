@@ -23,7 +23,12 @@ Object.keys(dataStats[currentAnnee]).forEach(mois => { // Récupères les donné
 Object.keys(dataStats[currentAnnee]).forEach(mois => {
     let i = Number(mois);
 
-    dataProdVentes[i - 1] = Number(dataStats[currentAnnee][mois]["produits"][currentIdProd]["nb_ventes_totales"]);
+    if (dataStats[currentAnnee][mois]["produits"][currentIdProd]) {
+        dataProdVentes[i - 1] = Number(dataStats[currentAnnee][mois]["produits"][currentIdProd]["nb_ventes_totales"]);
+    }
+    else {
+        dataProdVentes[i - 1] = 0;
+    }
 });
 
 // Définitions du graphique des ventes totales générales et de sa config
@@ -112,7 +117,10 @@ let chart2 = new Chart(prodChart, prodChartCfg);
 
 anneeSelection.addEventListener("change", function () {
     currentAnnee = anneeSelection.value;
+
     dataVentes = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+    dataProdVentes = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+
 
     Object.keys(dataStats[currentAnnee]).forEach(mois => {
         let i = Number(mois);
@@ -120,8 +128,25 @@ anneeSelection.addEventListener("change", function () {
         dataVentes[i - 1] = Number(dataStats[currentAnnee][mois]["nb_ventes_totales"]);
     });
 
+    Object.keys(dataStats[currentAnnee]).forEach(mois => {
+        let i = Number(mois);
+
+        if (dataStats[currentAnnee][mois]["produits"][currentIdProd]) {
+            dataProdVentes[i - 1] = Number(dataStats[currentAnnee][mois]["produits"][currentIdProd]["nb_ventes_totales"]);
+        }
+        else {
+            dataProdVentes[i - 1] = 0;
+        }
+    });
+
     allChartCfg.options.plugins.title.text = 'Année' + " " + currentAnnee;
     allChartCfg.data.datasets[0].data = dataVentes;
+
+    prodChartCfg.options.plugins.title.text = currentLibelleProd + ' - ' + 'Année' + ' ' + currentAnnee;
+    prodChartCfg.data.datasets[0].data = dataProdVentes;
+
+    chart2.destroy();
+    chart2 = new Chart(prodChart, prodChartCfg);
 
     chart.destroy();
     chart = new Chart(allChart, allChartCfg);
@@ -132,6 +157,8 @@ anneeSelection.addEventListener("change", function () {
 produitSelection.addEventListener("change", function () {
     currentIdProd = produitSelection.value;
     currentLibelleProd = produitSelection.options[produitSelection.selectedIndex].textContent;
+
+    dataProdVentes = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
 
     Object.keys(dataStats[currentAnnee]).forEach(mois => {
         let i = Number(mois);

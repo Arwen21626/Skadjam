@@ -1406,6 +1406,9 @@ input.quantite-prod-input {
   .pt-5 {
     padding-top: calc(var(--spacing, 0.25rem) * 5);
   }
+  .pt-8 {
+    padding-top: calc(var(--spacing, 0.25rem) * 8);
+  }
   .pt-15 {
     padding-top: calc(var(--spacing, 0.25rem) * 15);
   }
