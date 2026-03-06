@@ -650,6 +650,9 @@ input.quantite-prod-input {
   .h-6\! {
     height: calc(var(--spacing, 0.25rem) * 6) !important;
   }
+  .h-8 {
+    height: calc(var(--spacing, 0.25rem) * 8);
+  }
   .h-10 {
     height: calc(var(--spacing, 0.25rem) * 10);
   }
@@ -809,6 +812,9 @@ input.quantite-prod-input {
   .w-16 {
     width: calc(var(--spacing, 0.25rem) * 16);
   }
+  .w-20 {
+    width: calc(var(--spacing, 0.25rem) * 20);
+  }
   .w-24 {
     width: calc(var(--spacing, 0.25rem) * 24);
   }
@@ -910,6 +916,9 @@ input.quantite-prod-input {
   }
   .w-\[60vw\] {
     width: 60vw;
+  }
+  .w-\[175px\] {
+    width: 175px;
   }
   .w-auto {
     width: auto;
@@ -1107,11 +1116,32 @@ input.quantite-prod-input {
       margin-block-end: calc(calc(var(--spacing, 0.25rem) * 6) * calc(1 - var(--tw-space-y-reverse)));
     }
   }
+  .space-y-8 {
+    :where(& > :not(:last-child)) {
+      --tw-space-y-reverse: 0;
+      margin-block-start: calc(calc(var(--spacing, 0.25rem) * 8) * var(--tw-space-y-reverse));
+      margin-block-end: calc(calc(var(--spacing, 0.25rem) * 8) * calc(1 - var(--tw-space-y-reverse)));
+    }
+  }
   .space-y-10 {
     :where(& > :not(:last-child)) {
       --tw-space-y-reverse: 0;
       margin-block-start: calc(calc(var(--spacing, 0.25rem) * 10) * var(--tw-space-y-reverse));
       margin-block-end: calc(calc(var(--spacing, 0.25rem) * 10) * calc(1 - var(--tw-space-y-reverse)));
+    }
+  }
+  .space-y-20 {
+    :where(& > :not(:last-child)) {
+      --tw-space-y-reverse: 0;
+      margin-block-start: calc(calc(var(--spacing, 0.25rem) * 20) * var(--tw-space-y-reverse));
+      margin-block-end: calc(calc(var(--spacing, 0.25rem) * 20) * calc(1 - var(--tw-space-y-reverse)));
+    }
+  }
+  .space-y-40 {
+    :where(& > :not(:last-child)) {
+      --tw-space-y-reverse: 0;
+      margin-block-start: calc(calc(var(--spacing, 0.25rem) * 40) * var(--tw-space-y-reverse));
+      margin-block-end: calc(calc(var(--spacing, 0.25rem) * 40) * calc(1 - var(--tw-space-y-reverse)));
     }
   }
   .space-x-4 {
@@ -1126,6 +1156,13 @@ input.quantite-prod-input {
       --tw-space-x-reverse: 0;
       margin-inline-start: calc(calc(var(--spacing, 0.25rem) * 5) * var(--tw-space-x-reverse));
       margin-inline-end: calc(calc(var(--spacing, 0.25rem) * 5) * calc(1 - var(--tw-space-x-reverse)));
+    }
+  }
+  .space-x-10 {
+    :where(& > :not(:last-child)) {
+      --tw-space-x-reverse: 0;
+      margin-inline-start: calc(calc(var(--spacing, 0.25rem) * 10) * var(--tw-space-x-reverse));
+      margin-inline-end: calc(calc(var(--spacing, 0.25rem) * 10) * calc(1 - var(--tw-space-x-reverse)));
     }
   }
   .space-x-20 {
@@ -1916,6 +1953,11 @@ input.quantite-prod-input {
       height: calc(var(--spacing, 0.25rem) * 28);
     }
   }
+  .md\:h-12 {
+    @media (width >= 48rem) {
+      height: calc(var(--spacing, 0.25rem) * 12);
+    }
+  }
   .md\:h-14 {
     @media (width >= 48rem) {
       height: calc(var(--spacing, 0.25rem) * 14);
@@ -1924,6 +1966,11 @@ input.quantite-prod-input {
   .md\:h-16 {
     @media (width >= 48rem) {
       height: calc(var(--spacing, 0.25rem) * 16);
+    }
+  }
+  .md\:h-20 {
+    @media (width >= 48rem) {
+      height: calc(var(--spacing, 0.25rem) * 20);
     }
   }
   .md\:h-80 {
@@ -2066,6 +2113,11 @@ input.quantite-prod-input {
       width: calc(var(--spacing, 0.25rem) * 60);
     }
   }
+  .md\:w-64 {
+    @media (width >= 48rem) {
+      width: calc(var(--spacing, 0.25rem) * 64);
+    }
+  }
   .md\:w-65 {
     @media (width >= 48rem) {
       width: calc(var(--spacing, 0.25rem) * 65);
@@ -2129,6 +2181,46 @@ input.quantite-prod-input {
   .md\:w-275 {
     @media (width >= 48rem) {
       width: calc(var(--spacing, 0.25rem) * 275);
+    }
+  }
+  .md\:w-\[050px\] {
+    @media (width >= 48rem) {
+      width: 050px;
+    }
+  }
+  .md\:w-\[150\] {
+    @media (width >= 48rem) {
+      width: 150;
+    }
+  }
+  .md\:w-\[175px\] {
+    @media (width >= 48rem) {
+      width: 175px;
+    }
+  }
+  .md\:w-\[200px\] {
+    @media (width >= 48rem) {
+      width: 200px;
+    }
+  }
+  .md\:w-\[400px\] {
+    @media (width >= 48rem) {
+      width: 400px;
+    }
+  }
+  .md\:w-\[500px\] {
+    @media (width >= 48rem) {
+      width: 500px;
+    }
+  }
+  .md\:w-\[550px\] {
+    @media (width >= 48rem) {
+      width: 550px;
+    }
+  }
+  .md\:w-\[600px\] {
+    @media (width >= 48rem) {
+      width: 600px;
     }
   }
   .md\:w-auto {
@@ -2236,6 +2328,15 @@ input.quantite-prod-input {
       gap: calc(var(--spacing, 0.25rem) * 1);
     }
   }
+  .md\:space-x-20 {
+    @media (width >= 48rem) {
+      :where(& > :not(:last-child)) {
+        --tw-space-x-reverse: 0;
+        margin-inline-start: calc(calc(var(--spacing, 0.25rem) * 20) * var(--tw-space-x-reverse));
+        margin-inline-end: calc(calc(var(--spacing, 0.25rem) * 20) * calc(1 - var(--tw-space-x-reverse)));
+      }
+    }
+  }
   .md\:self-center {
     @media (width >= 48rem) {
       align-self: center;
@@ -2244,6 +2345,11 @@ input.quantite-prod-input {
   .md\:rounded-2xl {
     @media (width >= 48rem) {
       border-radius: var(--radius-2xl, 1rem);
+    }
+  }
+  .md\:rounded-xl {
+    @media (width >= 48rem) {
+      border-radius: var(--radius-xl, 0.75rem);
     }
   }
   .md\:border-none {
