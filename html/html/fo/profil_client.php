@@ -44,12 +44,12 @@ if (isset($_POST['logout'])) {
                                         INNER JOIN sae3_skadjam._client cli 
                                             ON c.id_compte = cli.id_compte
                                         WHERE c.id_compte = $id", PDO::FETCH_ASSOC) as $client){
-                    $nom = $client['nom_compte'];
-                    $prenom = $client['prenom_compte'];
-                    $pseudo = $client['pseudo'];
-                    $mail = $client['adresse_mail'];
-                    $naissance = $client['date_naissance'];
-                    $telephone = $client['numero_telephone'];
+                    $nom = htmlentities($client['nom_compte']);
+                    $prenom = htmlentities($client['prenom_compte']);
+                    $pseudo = htmlentities($client['pseudo']);
+                    $mail = htmlentities($client['adresse_mail']);
+                    $naissance = htmlentities($client['date_naissance']);
+                    $telephone = htmlentities($client['numero_telephone']);
                 }
                 // Récupérer les adresses du client
                 $nbAdresse = 0;
@@ -59,13 +59,13 @@ if (isset($_POST['logout'])) {
                                         INNER JOIN sae3_skadjam._adresse a
                                             ON h.id_adresse = a.id_adresse
                                         WHERE c.id_compte = $id", PDO::FETCH_ASSOC) as $adresse){
-                    $numRue[$nbAdresse] = $adresse['numero_rue'];
-                    $adressePostale[$nbAdresse] = $adresse['adresse_postale'];
-                    $complement[$nbAdresse] = $adresse['complement_adresse'];
-                    $batiment[$nbAdresse] = " " . $adresse['numero_bat'];
-                    $appartement[$nbAdresse] = " " . $adresse['numero_appart'];
-                    $codePostal[$nbAdresse] = $adresse['code_postal'];
-                    $ville[$nbAdresse] = $adresse['ville'];
+                    $numRue[$nbAdresse] = htmlentities($adresse['numero_rue']);
+                    $adressePostale[$nbAdresse] = htmlentities($adresse['adresse_postale']);
+                    $complement[$nbAdresse] = htmlentities($adresse['complement_adresse']);
+                    $batiment[$nbAdresse] = " " . htmlentities($adresse['numero_bat']);
+                    $appartement[$nbAdresse] = " " . htmlentities($adresse['numero_appart']);
+                    $codePostal[$nbAdresse] = htmlentities($adresse['code_postal']);
+                    $ville[$nbAdresse] = htmlentities($adresse['ville']);
                     $nbAdresse++;
                 }
                 $dbh = null;
@@ -79,15 +79,15 @@ if (isset($_POST['logout'])) {
                     <tbody>
                         <tr class="py-4">
                             <th class="py-3 w-45 md:w-90"><h3 class="text-left">Pseudo :</h3></th>
-                            <td class="py-3"><h3><?php echo htmlentities($pseudo); ?></h3></td>
+                            <td class="py-3"><h3><?php echo $pseudo; ?></h3></td>
                         </tr>
                         <tr class="py-4">
                             <th class="py-3"><h3 class="text-left">Prénom et nom :</h3></th>
-                            <td class="py-3"><h4><?php echo htmlentities($prenom); ?> <?php echo $nom; ?></h4></td>
+                            <td class="py-3"><h4><?php echo $prenom; ?> <?php echo $nom; ?></h4></td>
                         </tr>
                         <tr class="py-4">
                             <th class="py-3"><h3 class="text-left">Date de naissance :</h3></th>
-                            <td class="py-3"><p><?php echo htmlentities($naissance); ?></p></td>
+                            <td class="py-3"><p><?php echo $naissance; ?></p></td>
                         </tr>
                         <?php if($nbAdresse != 0){ ?>
                             <tr class="py-4">
@@ -102,11 +102,11 @@ if (isset($_POST['logout'])) {
                         <?php } ?>
                         <tr class="py-4">
                             <th class="py-3"><h3 class="text-left"><abbr title="Numéro">N°</abbr> de téléphone :</h3></th>
-                            <td class="py-3"><p><?php echo htmlentities($telephone); ?></p></td>
+                            <td class="py-3"><p><?php echo $telephone; ?></p></td>
                         </tr>
                         <tr class="py-4">
                             <th class="py-3"><h3 class="text-left">Adresse mail :</h3></th>
-                            <td class="py-3"><p><?php echo htmlentities($mail); ?></p></td>
+                            <td class="py-3"><p><?php echo $mail; ?></p></td>
                         </tr>
                     </tbody>
                 </table>
