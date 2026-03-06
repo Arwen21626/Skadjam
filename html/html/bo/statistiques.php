@@ -86,8 +86,9 @@
 
         <h2>Mes Statistiques</h2>
 
-        <div>
-            <select name="" id="select-annee">
+        <div class="flex flex-row">
+            <p class="pr-2">Choisissez une année :</p>
+            <select name="" id="select-annee" class="pl-2">
                 <?php 
                     $cles = array_keys($dataStats);
                     foreach ($cles as $annee) {
@@ -107,8 +108,21 @@
 
         <div class="charts-containers flex justify-center items-center flex-col p-2">
             <div class="chart-container flex justify-center items-center relative m-4 w-[60vw] h-[50vh]">
-                <canvas class="" id="testChart"></canvas>
+                <canvas id="all-chart"></canvas>
             </div>
+        </div>
+
+        <div>
+            <h3>Total des ventes du produit sélectionné</h3>
+        </div>
+
+        <div>
+            <p class="pr-2">Choisissez un produit :</p>
+            <select name="" id="select-produit" class="pl-2">
+                <?php 
+                    
+                ?>
+            </select>
         </div>
     </main>
     
