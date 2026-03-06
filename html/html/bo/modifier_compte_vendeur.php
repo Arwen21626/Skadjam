@@ -48,18 +48,18 @@ if (isset($_POST["nom"]) && isset($_POST["prenom"]) && isset($_POST["mail"]) && 
         $nom = htmlentities(formatPrenom($_POST["nom"]));
         $prenom = htmlentities(formatPrenom($_POST["prenom"]));
         $mail = htmlentities($_POST["mail"]);
-        $tel = htmlentities(formatTel($_POST["tel"]));
+        $tel = htmlentities($_POST["tel"]);
         $denomination = htmlentities($_POST["denomination"]);
         $raisonSociale = htmlentities($_POST["raisonSociale"]);
         $iban = htmlentities($_POST["iban"]);
-        $adresse = htmlentities($_POST["adresse"]);
         $ville = htmlentities($_POST["ville"]);
         $cp = htmlentities($_POST["cp"]);
         $siren = htmlentities($_POST["siren"]);
         $description = isset($_POST["description"]) ? $_POST["description"] : "";
+        $adresse = htmlentities($_POST["adresse"]);
         $temp = tabAdresse($adresse);
-        $numero = $temp[0];
-        $compNum = $temp[1];
+        $num = $temp[0];
+        $numBis = $temp[1];
         $adresse = $temp[2];
 
         // Vérification que toutes les données commune à la création et à la modification d'un compte client sont correcte
@@ -67,6 +67,7 @@ if (isset($_POST["nom"]) && isset($_POST["prenom"]) && isset($_POST["mail"]) && 
             // Vérification de l'email et de l'adresse
             if(mailUnique($mail) || $ancienMail === $mail){
                 // Modification du compte
+                $tel = formatTel($tel);
                 $modifCompte = $dbh->prepare("UPDATE sae3_skadjam._compte
                                             SET nom_compte = '$nom', prenom_compte = '$prenom', adresse_mail = '$mail', numero_telephone = '$tel'
                                             WHERE id_compte = $idCompte");
@@ -272,18 +273,19 @@ if(!$isset || $erreur){
             $prenom = $ligne['prenom_compte'];
             $mail = $ligne['adresse_mail'];
             $tel = formatTel($ligne['numero_telephone']);
-            $denom = $ligne['denomination'];
+            $denomination = $ligne['denomination'];
             $raisonSociale = $ligne['raison_sociale'];
             $siren = $ligne['siren'];
             $iban = $ligne['iban'];
-            $adresse = $ligne['adresse_postale'];
             $cp = $ligne['code_postal'];
             $ville = $ligne['ville'];
             $description = $ligne['description_vendeur'];
             $num = $ligne['numero_rue'];
             $latitude = $ligne['latitude'];
             $longitude = $ligne['longitude'];
-        }  
+            $numBis = $ligne['complement_adresse'];
+            $adresse = $ligne['adresse_postale'];
+        }
     }
     ?>
 <!DOCTYPE html>
@@ -376,7 +378,7 @@ if(!$isset || $erreur){
                         <!-- Adresse postale -->
                         <div class="flex flex-col">
                             <label for="adresse">Adresse * :</label>
-                            <input class="ml-5 border-4 border-solid rounded-2xl border-beige p-1 pl-3 mb-4 @max-[768px]:ml-2 max-w-3/4 @max-[768px]:pl-2 " type="text" id="adresse" name="adresse" value="<?= $num . (isset($numBis) ? " $numBis" : " ") . $adresse; ?>" size="50" placeholder="ex : 3 rue des camélias" required>
+                            <input class="ml-5 border-4 border-solid rounded-2xl border-beige p-1 pl-3 mb-4 @max-[768px]:ml-2 max-w-3/4 @max-[768px]:pl-2 " type="text" id="adresse" name="adresse" value="<?= $num . (!empty($numBis) ? " $numBis" : " ") . $adresse; ?>" size="50" placeholder="ex : 3 rue des camélias" required>
                             <?= $erreurAdresse ? "<p style=\"font-size: 0.90em\" class=\"text-rouge\">L'adresse est invalide.</p>" : ""; ?>
                         </div>
 

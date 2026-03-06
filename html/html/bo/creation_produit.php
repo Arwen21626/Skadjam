@@ -51,6 +51,11 @@ if (isset($_POST['categorie']) && isset($_POST['nom']) && isset($_POST['prix']) 
     $unite = $_POST['unite'];
     $qteUnite = $_POST['qteUnite'];
     $remise = $_POST['remise'];
+    $seuilAlerte = null;
+    if(isset($_POST['seuilAlerte']) && $_POST['seuilAlerte'] !== ''){
+        $seuilAlerte = $_POST['seuilAlerte'];
+    }
+    
     // Champs spécifiques à la promotion
     $dateDebutPromotion = isset($_POST['dateDebutPromotion']) ? htmlentities($_POST['dateDebutPromotion']) : date('Y-m-d');
     $dateFinPromotion = htmlentities($_POST['dateFinPromotion']);
@@ -134,13 +139,13 @@ if (isset($_POST['categorie']) && isset($_POST['nom']) && isset($_POST['prix']) 
             //Insertion du produit
             $insertionProduit = $dbh -> prepare("WITH id AS (
                 INSERT INTO sae3_skadjam._produit 
-                (libelle_produit, description_produit, prix_ht, prix_ttc, est_masque, quantite_stock, quantite_unite, unite, id_categorie, id_vendeur, id_tva)
+                (libelle_produit, description_produit, prix_ht, prix_ttc, est_masque, quantite_stock, seuil_alerte, quantite_unite, unite, id_categorie, id_vendeur, id_tva)
                 VALUES 
-                (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+                (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
                 RETURNING id_produit)
                 SELECT * FROM id;
                 ");
-            $insertionProduit->execute([$nom,$description,$prixHT,$prixTTC,$enLigne,$qteStock,$qteUnite,$unite,$idCategorie,$idVendeur,$tva]);
+            $insertionProduit->execute([$nom,$description,$prixHT,$prixTTC,$enLigne,$qteStock,$seuilAlerte,$qteUnite,$unite,$idCategorie,$idVendeur,$tva]);
             
             foreach ($insertionProduit as $t) {
                 $idProd = $t['id_produit'];
@@ -392,11 +397,17 @@ if (isset($_POST['categorie']) && isset($_POST['nom']) && isset($_POST['prix']) 
                 </div>
 
                 
-                <div class="col-start-1 row-start-4 col-span-2 flex flex-row justify-around m-2 p-2">
+                <div class="col-start-1 row-start-4 col-span-3 flex flex-row justify-around m-2 p-2">
+                    <!-- Ajouter un seuil d'alerte -->
+                    <div class="flex flex-row mr-4 ml-4">
+                        <label class="mr-4" for="ajouterSeuil">Ajouter un seuil d'alerte</label>
+                        <input id="seuilCheck" type="checkbox" name="ajouterSeuil" class="appearance-none w-10 h-10 border-4 border-beige rounded-md checked:bg-beige checked:border-vertFonce cursor-pointer">
+                    </div>
+
                     <!-- Mettre en ligne -->
                     <div class="flex flex-row mr-4 ml-4">
                         <label class="mr-4" for="mettreEnLigne">Mettre en ligne</label>
-                        <input class="appearance-none w-10 h-10 border-4 border-beige rounded-md checked:bg-beige checked:border-vertFonce cursor-pointer" type="checkbox" name="mettreEnLigne" id="mettreEnLigne">
+                        <input type="checkbox" name="mettreEnLigne" id="mettreEnLigne" class="appearance-none w-10 h-10 border-4 border-beige rounded-md checked:bg-beige checked:border-vertFonce cursor-pointer">
                     </div>
                 
                     <!-- Mettre en promotion -->
@@ -405,8 +416,18 @@ if (isset($_POST['categorie']) && isset($_POST['nom']) && isset($_POST['prix']) 
                         <input id="promoCheck" type="checkbox" name="mettreEnPromotion" class="<?php echo ($nbPromos >= 2 && !$caseCochee) ? 'cursor-not-allowed' : 'cursor-pointer'; ?> appearance-none w-10 h-10 border-4 border-beige rounded-md checked:bg-beige checked:border-vertFonce" <?php echo $caseCochee ? 'checked' : ''; ?> <?php echo ($nbPromos >= 2 && !$caseCochee) ? 'disabled' : ''; ?>>
                     </div>
                 </div>
+
+                <!---Input lié au seuil d'alerte--->
+                <div class="col-start-1 row-start-5 flex flex-col">
+                    <div id="seuilInput" class="flex flex-row mr-4 ml-4">
+                        <label class="mr-4" for="seuilAlerte">Seuil d'alerte* :</label>
+                        <input class="border-4 border-beige rounded-2xl w-45" type="number" name="seuilAlerte" id="seuilAlerte" value="<?php if(isset($seuilAlerte)){echo $seuilAlerte;} ?>">
+                    </div>
+                </div>
+                
+
                 <!-- Inputs liés aux promotions -->
-                <div id="promoInputs" class="col-start-1 row-start-5 col-span-2 flex flex-col">
+                <div id="promoInputs" class="col-start-1 row-start-6 col-span-2 flex flex-col">
                     <div class="flex flex-row justify-around m-2 p-2">
                         <div>
                             <div class="flex flex-row mr-4 ml-4">
@@ -430,13 +451,13 @@ if (isset($_POST['categorie']) && isset($_POST['nom']) && isset($_POST['prix']) 
                 </div>
                 
                 <!-- Description -->
-                <div class="col-start-1 col-span-2 row-start-6 flex flex-col m-2 p-2 ">
+                <div class="col-start-1 col-span-2 row-start-7 flex flex-col m-2 p-2 ">
                     <label for="description">Description *:</label>
                     <textarea placeholder="Pot de confiture de fraises des bois" class="border-4 border-beige rounded-2xl w-3/4 self-center placeholder-gray-500" name="description" id="description" cols="100" rows="10" required></textarea>
                 </div>
                 
                 <!-- Validation -->
-                <div class="col-start-1 col-span-2 row-start-7 flex flex-row justify-around m-4">
+                <div class="col-start-1 col-span-2 row-start-8 flex flex-row justify-around m-4">
                     <button class="border-2 border-vertFonce rounded-2xl w-40 h-14 cursor-pointer"><a href="../bo/index_vendeur.php">Retour</a></button>                    
                     <input class="border-2 border-vertFonce rounded-2xl w-40 h-14 cursor-pointer" type="submit" value="Valider">
                 </div>
@@ -459,6 +480,20 @@ if (isset($_POST['categorie']) && isset($_POST['nom']) && isset($_POST['prix']) 
                 promoInputs.style.height = '0';
             }
         }
+
+        // Fonction pour afficher/cacher input de seuil d'alerte
+        function toggleSeuilInput(){
+            var seuilCheck = document.getElementById('seuilCheck');
+            var seuilInput = document.getElementById('seuilInput');
+            var seuilAlerte = document.getElementById('seuilAlerte');
+            if(seuilCheck.checked){
+                seuilInput.style.display = 'flex';
+                seuilAlerte.required = true;
+            }else{
+                seuilInput.style.display = 'none';
+                seuilAlerte.required = false;
+            }
+        }
         
     
         document.addEventListener('DOMContentLoaded', function() {
@@ -466,6 +501,11 @@ if (isset($_POST['categorie']) && isset($_POST['nom']) && isset($_POST['prix']) 
             var promoCheck = document.getElementById('promoCheck');
             promoCheck.addEventListener('change', togglePromotionInputs);
             togglePromotionInputs();
+
+            // Quand "Ajouter seuil alerte" est coché, afficher les inputs de promotion
+            var seuilCheck = document.getElementById('seuilCheck');
+            seuilCheck.addEventListener('change', toggleSeuilInput);
+            toggleSeuilInput();
 
             // validation image
             const form = document.getElementById("formProduit");
