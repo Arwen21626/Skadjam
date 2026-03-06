@@ -20,6 +20,12 @@ Object.keys(dataStats[currentAnnee]).forEach(mois => { // Récupères les donné
     dataVentes[i - 1] = Number(dataStats[currentAnnee][mois]["nb_ventes_totales"]); // Insert les données dans le champ data du diagramme
 });
 
+Object.keys(dataStats[currentAnnee]).forEach(mois => {
+    let i = Number(mois);
+
+    dataProdVentes[i - 1] = Number(dataStats[currentAnnee][mois]["produits"][currentIdProd]["nb_ventes_totales"]);
+});
+
 // Définitions du graphique des ventes totales générales et de sa config
 let allChart = document.getElementById("all-chart");
 
@@ -37,6 +43,15 @@ let allChartCfg = {
     options: {
         responsive: true,
         maintainAspectRatio: false,
+        scales: {
+            y: {
+                beginAtZero: true,
+                grace: 1,
+                ticks: {
+                    stepSize: 1
+                }
+            }
+        },
         plugins: {
             title: {
                 display: true,
@@ -69,6 +84,15 @@ let prodChartCfg = {
     options: {
         responsive: true,
         maintainAspectRatio: false,
+        scales: {
+            y: {
+                beginAtZero: true,
+                grace: 1,
+                ticks: {
+                    stepSize: 1
+                }
+            }
+        },
         plugins: {
             title: {
                 display: true,
@@ -108,6 +132,23 @@ anneeSelection.addEventListener("change", function () {
 produitSelection.addEventListener("change", function () {
     currentIdProd = produitSelection.value;
     currentLibelleProd = produitSelection.options[produitSelection.selectedIndex].textContent;
+
+    Object.keys(dataStats[currentAnnee]).forEach(mois => {
+        let i = Number(mois);
+
+        if (dataStats[currentAnnee][mois]["produits"][currentIdProd]) {
+            dataProdVentes[i - 1] = Number(dataStats[currentAnnee][mois]["produits"][currentIdProd]["nb_ventes_totales"]);
+        }
+        else {
+            dataProdVentes[i - 1] = 0;
+        }
+    });
+
+    prodChartCfg.options.plugins.title.text = currentLibelleProd + ' - ' + 'Année' + ' ' + currentAnnee;
+    prodChartCfg.data.datasets[0].data = dataProdVentes;
+
+    chart2.destroy();
+    chart2 = new Chart(prodChart, prodChartCfg);
 });
 
 
