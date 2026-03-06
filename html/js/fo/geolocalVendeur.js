@@ -45,7 +45,7 @@ map.addLayer(marker)
 
 
 // Mettre les cordonnées à jour quand on déplace le marqueur
-marker.on('drag', function(){
+marker.on('dragend', function(){ // ou drag
     coordonnes.latitude = marker.getLatLng().lat
     coordonnes.longitude = marker.getLatLng().lng
     api = 'https://data.geopf.fr/geocodage/reverse?lat='+coordonnes.latitude+'&lon='+coordonnes.longitude
@@ -86,7 +86,7 @@ eltsCoord.forEach(elt => {
         if (elt[0].value.match(/[0-9\.\,]/)){
             insert = elt[0].value
             console.log("insert if: "+insert)
-            if (eltsCoord[0][1] != '' && eltsCoord[1][1] != '') {
+            if (!isNaN(eltsCoord[0][1]) && !isNaN(eltsCoord[1][1])) {
                 marker.setLatLng([eltsCoord[0][1],eltsCoord[1][1]])
             }
         }

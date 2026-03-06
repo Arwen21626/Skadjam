@@ -130,8 +130,6 @@ if (isset($_POST["nom"])){
     }else{
         // header("Location: crea_compte_vendeur.php");
     }
-    
-    
 }
 ?>
 
@@ -252,16 +250,15 @@ if (isset($_POST["nom"])){
                     <div class="grid grid-cols-2 grid-rows-2 h-20 md:flex md:flex-row m-2">
                         <div class="m-2">
                             <label for="latitude">Latitude : </label>
-                            <input required type="text" name="latitude" id="latitude" class="border-2 border-solid rounded-2xl border-beige p-1 pl-3  w-30 md:w-60 [appearance:textfield]" value="<?= (!isset($erreurs["latitude"])) ? $latitude : '' ?>">
+                            <input required type="text" name="latitude" id="latitude" class="border-2 border-solid rounded-2xl border-beige p-1 pl-3  w-30 md:w-60" value="<?= (!isset($erreurs["latitude"])) ? $latitude : '' ?>">
                         </div>
                         <div class="m-2">
                             <label for="longitude">Longitude : </label>
-                            <input required type="text" name="longitude" id="longitude" class="border-2 border-solid rounded-2xl border-beige p-1 pl-3  w-30 md:w-60 [appearance:textfield]" value="<?= (!isset($erreurs["longitude"])) ? $longitude : '' ?>">
+                            <input required type="text" name="longitude" id="longitude" class="border-2 border-solid rounded-2xl border-beige p-1 pl-3  w-30 md:w-60" value="<?= (!isset($erreurs["longitude"])) ? $longitude : '' ?>">
                         </div>
                     </div>
                     <p id="errorMap" class="text-rouge"></p>
                 </div>
-
             </div>
 
             <h3>Mot de passe :</h3>
