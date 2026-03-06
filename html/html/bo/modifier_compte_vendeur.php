@@ -56,6 +56,7 @@ if (isset($_POST["nom"]) && isset($_POST["prenom"]) && isset($_POST["mail"]) && 
         $cp = htmlentities($_POST["cp"]);
         $siren = htmlentities($_POST["siren"]);
         $description = isset($_POST["description"]) ? $_POST["description"] : "";
+        $adresse = htmlentities($_POST["adresse"]);
         $temp = tabAdresse($adresse);
         $num = $temp[0];
         $numBis = $temp[1];
@@ -278,7 +279,7 @@ if(!$isset || $erreur){
             $cp = $ligne['code_postal'];
             $ville = $ligne['ville'];
             $description = $ligne['description_vendeur'];
-            $num = $ligne['numero_rue'];
+            $adresse = htmlentities($_POST["adresse"]);
             $temp = tabAdresse($adresse);
             $num = $temp[0];
             $numBis = $temp[1];
