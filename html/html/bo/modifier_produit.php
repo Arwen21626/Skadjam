@@ -246,7 +246,8 @@ if (isset($_POST['categorie']) && isset($_POST['nom']) && isset($_POST['prix']) 
                                                             '00:00',
                                                             :id_vendeur,
                                                             :id_photo
-                                                        )");
+                                                        )
+                                                        RETURNING id_promotion");
                             $stmtPromo->execute([
                                 ':date_debut' => formatDate($dateDebutPromotion),
                                 ':date_fin'   => formatDate($dateFinPromotion),
@@ -284,6 +285,9 @@ if (isset($_POST['categorie']) && isset($_POST['nom']) && isset($_POST['prix']) 
                     }
                     
                     $idPromotion = $stmtPromo->fetchColumn();
+                    if(!$idPromotion){
+                        throw new Exception("Impossible de récupérer l'ID de la promotion créée.");
+                    }
 
                     if(strlen($labelPromo) < 20){
                         $stmtLibelle = $dbh->prepare("UPDATE sae3_skadjam._promotion
