@@ -1,25 +1,23 @@
 var marqueur = false
-var dernierMarqueur = null
 var coche = []
-
 var map = L.map('map').setView([48, -3], 7)
+var couleur = marqueurFonce
+var dernierMarqueur = null
 
 // Fonction qui permet de changer la couleur
-function changeCouleur(){
-    var dernierMarqueur = null
-    let urlActuelle = e.layer.options.icon.options.iconUrl
-    let couleur
+function changeCouleur(CoucheIcon, dernierMarqueur) {
+    let urlActuelle = CoucheIcon.options.icon.options.iconUrl
 
     // changement de la couleur
     if (urlActuelle.includes("pointeurVertClair.png")) {
-        couleur = e.layer.setIcon(marqueurFonce)
-        dernierMarqueur = e.layer
+        couleur = marqueurFonce
+        dernierMarqueur = CoucheIcon
     } else {
-        couleur = e.layer.setIcon(marqueurClair)
+        couleur = marqueurClair
         dernierMarqueur = null
     }
 
-    return couleur
+    return couleur, dernierMarqueur
 }
 
 
@@ -75,7 +73,7 @@ tabVendeur.forEach(vendeur => {
     }
 
     for (let i = 0; i < coche.length; i++) {
-        console.log(coche[i][0])
+        // console.log(coche[i][0])
         if(coche[i][1] == true){
             e.layer.setIcon(marqueurFonce)
         }else{
@@ -87,29 +85,20 @@ tabVendeur.forEach(vendeur => {
 
 markers.on("click", function(e) {
 
-    let urlActuelle = e.layer.options.icon.options.iconUrl;
-    let idCompte = e.layer.options.id_compte;
+    let idCompte = e.layer.options.id_compte
+    
 
     // Remettre l'ancien marqueur en clair si on clique sur un autre
-    if (dernierMarqueur && dernierMarqueur !== e.layer) {
-        dernierMarqueur.setIcon(marqueurClair);
+    if (dernierMarqueur && dernierMarqueur != e.layer) {
+        dernierMarqueur.setIcon(marqueurClair)
         document.getElementById(dernierMarqueur.options.id_compte).checked = false
     }
 
-    // changement de la couleur
-    if (urlActuelle.includes("pointeurVertClair.png")) {
-        e.layer.setIcon(marqueurFonce)
-        dernierMarqueur = e.layer
-    } else {
-        e.layer.setIcon(marqueurClair)
-        dernierMarqueur = null
-    }
-
-    if(document.getElementById(idCompte).checked == false){
-        e.layer.setIcon(marqueurFonce)
-    }else{
-        e.layer.setIcon(marqueurClair)
-    }
+    // changer la couleur du marqueur en cliquant sur la map
+    couleur, dernierMarqueur = changeCouleur(e.layer, dernierMarqueur)
+    console.log(couleur)
+    console.log(dernierMarqueur)
+    e.layer.setIcon(couleur)
 
     map.flyTo(e.layer.getLatLng(), map.getZoom());
 
@@ -126,10 +115,6 @@ markers.on("click", function(e) {
         document.getElementById(idCompte).checked = true
         checkedVendeurs.splice(checkedVendeurs.indexOf(idCompte), 1)
         checkedVendeurs.push(idCompte)
-    }
-
-    if(document.getElementById(idCompte).checked == false){
-        checkedVendeurs.splice(checkedVendeurs.indexOf(idCompte), 1)
     }
 
     tab = filtre()
