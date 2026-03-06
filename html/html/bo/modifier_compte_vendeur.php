@@ -352,7 +352,7 @@ if(!$isset || $erreur){
                         </div>
                         <div class="flex flex-col space-y-2">
                             <label for="denomination">Nom de l'entreprise * :</label>
-                            <input class="ml-5 border-4 border-solid rounded-2xl border-beige p-1 pl-3" type="text" id="denomination" name="denomination" value="<?= $denom; ?>" size="30" required>
+                            <input class="ml-5 border-4 border-solid rounded-2xl border-beige p-1 pl-3" type="text" id="denomination" name="denomination" value="<?= $denomination; ?>" size="30" required>
                             <?= $erreurDenomination ? "<p style=\"font-size: 0.90em\" class=\"text-rouge\">Le nom de l'entreprise est invalide.</p>" : ""; ?>
                         </div>
                     </div>
