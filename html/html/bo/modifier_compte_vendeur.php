@@ -67,6 +67,7 @@ if (isset($_POST["nom"]) && isset($_POST["prenom"]) && isset($_POST["mail"]) && 
             // Vérification de l'email et de l'adresse
             if(mailUnique($mail) || $ancienMail === $mail){
                 // Modification du compte
+                $tel = formatTel($tel);
                 $modifCompte = $dbh->prepare("UPDATE sae3_skadjam._compte
                                             SET nom_compte = '$nom', prenom_compte = '$prenom', adresse_mail = '$mail', numero_telephone = '$tel'
                                             WHERE id_compte = $idCompte");
