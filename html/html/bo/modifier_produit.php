@@ -528,9 +528,9 @@ else { ?>
                 <div id="promoInputs" class="col-start-1 row-start-5 col-span-2 flex flex-col">
                     <div class="flex flex-row justify-around m-2 p-2">
                         <div>
-                            <div id="debPromo" class="flex flex-row mr-4 ml-4">
+                            <div class="flex flex-row mr-4 ml-4">
                                 <label class="mr-4" for="dateDebutPromotion">Début de promotion* :</label>
-                                <input class="border-4 border-beige rounded-2xl w-45" type="date" name="dateDebutPromotion" id="dateDebutPromotion" value="<?php echo $dateDebutPromotion; ?>" required>
+                                <input class="border-4 border-beige rounded-2xl w-45" type="date" name="dateDebutPromotion" id="dateDebutPromotion" value="<?php echo $dateDebutPromotion; ?>">
                             </div>
                         </div>
                         <div>
@@ -567,7 +567,7 @@ else { ?>
 </html>
 <script>
     // Fonction pour afficher/cacher les inputs de promotion
-    function togglePromotionInputs(){
+    /*function togglePromotionInputs(){
         var promoCheck = document.getElementById('promoCheck');
         var promoInputs = document.getElementById('promoInputs');
         var debPromo = document.getElementById('debPromo');
@@ -582,7 +582,21 @@ else { ?>
             promoInputs.style.visibility = 'hidden';
             promoInputs.style.height = '0';
         }
+    }*/
+
+    function togglePromotionInputs(){
+    var promoCheck = document.getElementById('promoCheck');
+    var promoInputs = document.getElementById('promoInputs');
+    var dateDebut = document.getElementById('dateDebutPromotion');
+
+    if(promoCheck.checked && !promoCheck.disabled){
+        promoInputs.style.display = 'flex';
+        dateDebut.required = true;
+    }else{
+        promoInputs.style.display = 'none';
+        dateDebut.required = false;
     }
+}
     // Quand "Mettre en promotion" est coché, afficher les inputs de promotion
     document.addEventListener('DOMContentLoaded', function() {
         var promoCheck = document.getElementById('promoCheck');
