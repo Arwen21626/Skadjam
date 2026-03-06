@@ -1,23 +1,48 @@
 var marqueur = false
-var coche = []
 var map = L.map('map').setView([48, -3], 7)
-var couleur = marqueurFonce
 var dernierMarqueur = null
 
-// Fonction qui permet de changer la couleur
-function changeCouleur(CoucheIcon, dernierMarqueur) {
-    let urlActuelle = CoucheIcon.options.icon.options.iconUrl
 
-    // changement de la couleur
-    if (urlActuelle.includes("pointeurVertClair.png")) {
-        couleur = marqueurFonce
-        dernierMarqueur = CoucheIcon
-    } else {
-        couleur = marqueurClair
-        dernierMarqueur = null
-    }
+function marqueurId(id){
+    let marqueurTrouve = null
 
-    return couleur, dernierMarqueur
+    markers.eachLayer(function(layer){
+        if(layer.options.id_compte == id){
+            marqueurTrouve = layer  
+        }
+    })
+
+    return marqueurTrouve
+}
+
+function selectionnerVendeur(id){
+
+    let marker = marqueurId(id)
+
+    if(!marker) return
+
+    // changer icone
+    marker.setIcon(marqueurFonce)
+
+    // cocher checkbox
+    document.getElementById(id).checked = true
+
+    // mémoriser le dernier marqueur
+    dernierMarqueur = marker
+
+    // recentrer la carte sur le marqueur
+    map.setView(marker.getLatLng(), 13)
+}
+
+function deselectionnerVendeur(id){
+
+    let marker = marqueurId(id)
+
+    if(!marker) return
+
+    marker.setIcon(marqueurClair)
+    document.getElementById(id).checked = false
+    dernierMarqueur = null
 }
 
 
@@ -60,68 +85,61 @@ coord.forEach(function(element) {
     )
 })
 
-// console.log(tabVendeur)
-// console.log(tabVendeur[0].raison_sociale)
-
 tabVendeur.forEach(vendeur => {
-    
+
     if(vendeur.raison_sociale != 'Anonyme'){
+
         document.getElementById(vendeur.id_compte).addEventListener("change", function (){
-            // console.log(document.getElementById(vendeur.id_compte))
-            coche.push([vendeur.id_compte, document.getElementById(vendeur.id_compte).checked])
+            
+            if(document.getElementById(vendeur.id_compte).checked){
+
+                if(dernierMarqueur){
+                    deselectionnerVendeur(dernierMarqueur.options.id_compte)
+                }
+                selectionnerVendeur(vendeur.id_compte)
+            }else{
+                deselectionnerVendeur(vendeur.id_compte)
+            }
+            
+            console.log(checkedVendeurs)
+            tab = filtre()
+            mettreAJourListe()
         })
     }
-
-    for (let i = 0; i < coche.length; i++) {
-        // console.log(coche[i][0])
-        if(coche[i][1] == true){
-            e.layer.setIcon(marqueurFonce)
-        }else{
-            e.layer.setIcon(marqueurClair)
-        }
-    }
-});
+})
 
 
-markers.on("click", function(e) {
+markers.on("click", function(e){
 
-    let idCompte = e.layer.options.id_compte
-    
+    let id = e.layer.options.id_compte
 
-    // Remettre l'ancien marqueur en clair si on clique sur un autre
-    if (dernierMarqueur && dernierMarqueur != e.layer) {
-        dernierMarqueur.setIcon(marqueurClair)
-        document.getElementById(dernierMarqueur.options.id_compte).checked = false
+    if(dernierMarqueur && dernierMarqueur != e.layer){
+        deselectionnerVendeur(dernierMarqueur.options.id_compte)
     }
 
-    // changer la couleur du marqueur en cliquant sur la map
-    couleur, dernierMarqueur = changeCouleur(e.layer, dernierMarqueur)
-    console.log(couleur)
-    console.log(dernierMarqueur)
-    e.layer.setIcon(couleur)
-
-    map.flyTo(e.layer.getLatLng(), map.getZoom());
+    if(dernierMarqueur == e.layer){
+        deselectionnerVendeur(id)
+    }else{
+        selectionnerVendeur(id)
+    }
 
 
     // Filtre vendeur
-
     // Si le vendeur est déjà coché, on le décoche
-    if(idCompte == checkedVendeurs[0]){
-        checkedVendeurs.splice(checkedVendeurs.indexOf(idCompte), 1)
-        document.getElementById(idCompte).checked = false
+    if(id == checkedVendeurs[0]){
+        checkedVendeurs.splice(checkedVendeurs.indexOf(id), 1)
+        document.getElementById(id).checked = false
 
     // Sinon, on le coche
     } else {
-        document.getElementById(idCompte).checked = true
-        checkedVendeurs.splice(checkedVendeurs.indexOf(idCompte), 1)
-        checkedVendeurs.push(idCompte)
+        document.getElementById(id).checked = true
+        checkedVendeurs.splice(checkedVendeurs.indexOf(id), 1)
+        checkedVendeurs.push(id)
     }
 
     tab = filtre()
     mettreAJourListe()
-});
 
-
+})
 
 map.addLayer(markers)
-
