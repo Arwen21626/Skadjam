@@ -61,6 +61,61 @@
     main>article>h3{
         margin-left: 2em;
     }
+
+    /*Fil d'ariane pour processus d'achat*/
+    .etapes-processus-achat{
+    display:flex;
+    list-style:none;
+    padding:0;
+    margin:0;
+    }
+
+    .etapes-processus-achat li{
+        position:relative;
+        flex:1;
+        text-align:center;
+        padding:10px 0;
+    }
+
+    .etapes-processus-achat li::before{
+        content:attr(etape);
+        display:block;
+        width:30px;
+        height:30px;
+        margin:0 auto 8px;
+        line-height:30px;
+        border-radius:50%;
+        background:#ccc;
+        color:white;
+        font-weight:bold;
+    }
+
+    .etapes-processus-achat li::after{
+        content:"";
+        position:absolute;
+        top:15px;
+        right:-50%;
+        width:100%;
+        height:4px;
+        background:#ccc;
+        z-index:-1;
+    }
+
+    .etapes-processus-achat li:last-child::after{
+        display:none;
+    }
+
+    .etapes-processus-achat li.fait::before{
+        background:#28a745;
+    }
+
+    .etapes-processus-achat li.fait::after{
+        background:#28a745;
+    }
+
+    .etapes-processus-achat li.actuel::before{
+        background:#007bff;
+    }
 }
 
 

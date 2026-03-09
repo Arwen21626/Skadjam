@@ -107,6 +107,13 @@ if (isset($_POST['valider'])) {
     <?php include __DIR__ . "/../../php/structure/navbar_front.php"; ?>
 
     <main class="min-h-[600px]">
+        <ul class="etapes-processus-achat">
+            <li class="actuel" etape="1">Récapitulatif commande</span></li>
+            <li etape="2">Adresse de livraison</li>
+            <li etape="3">Paiement</li>
+            <li etape="4">Retour à la page d'accueil</li>
+        </ul>
+        
         <h2 class="mt-10">Récapitulatif de votre commande</h2>
                 
         <div class="flex items-center justify-between mt-10 px-5">
