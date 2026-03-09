@@ -23,7 +23,7 @@ function afficherProduit(tableau, indice){
     let image = document.createElement("img")
     image.src = tableau[i]['url_photo']
     image.alt = tableau[i]['alt']
-    image.title = tableau[i]['title']
+    image.title = tableau[i]['titre']
     image.classList.add("w-auto", "h-40", "md:h-80", "mx-auto", "block")
     parent.appendChild(image)
 

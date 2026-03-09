@@ -68,18 +68,10 @@
     <?php include __DIR__ . "/../../php/structure/header_front.php"; ?>
     <?php include __DIR__ . "/../../php/structure/navbar_front.php"; ?>
 
-
-    
     <main class="md:min-h-[900px] min-h-[600px]" id="produits">
-        <!-- Barre de recherche -->
-        <input type="text" id="recherche" maxlength="100" class="border-4 border-vertClair rounded-xl placeholder-gray-500 md:w-267 w-95 p-2 md:ml-7 ml-6 mt-4 mb-4" placeholder="Rechercher un produit...">
-        
-        <div class="flex justify-between md:hidden">
-            <button id="filtresTris" class="underline  m-2">Filtres & tris</button>
-            <button id="carte" class="underline m-2">Accéder à la carte</button>
-        </div>
+
         <!-- Aside -->
-        <aside class="sidebar hidden overflow-auto bg-beige/90 w-110 min-h-[500px] fixed top-0 bottom-10 md:bg-beige p-4 md:sticky md:block md:w-79 md:h-225 md:top-20 md:float-left z-10">
+        <aside class="sidebar hidden overflow-auto bg-beige/90 w-110 min-h-[500px] fixed top-0 bottom-10 md:bg-beige p-4 md:sticky md:block md:w-79 md:h-225 md:top-20 md:float-left ">
             
             <!-- Filtres -->
             <section>
@@ -269,6 +261,18 @@
                 </article>
             </section>
         </aside>
+
+        <!-- Barre de recherche -->
+        <div class="bg-white sticky z-1 p-2 top-0 md:top-21 md:flex md:flex-row md:justify-center">
+            <input type="text" id="recherche" maxlength="100" class="border-4 bg-white border-vertClair rounded-xl placeholder-gray-500 md:w-267 w-95 p-2" placeholder="Rechercher un produit...">
+        </div>
+
+        <div class="sticky top-20 bg-white border-b-2 border-b-vertFonce z-1 md:border-0 flex justify-between md:hidden">
+            <button id="filtresTris" class="underline  m-2">Filtres & tris</button>
+            <button id="mouvMapTel" class="underline m-2">Ouvrir la carte</button>
+        </div>
+
+
         <section id="listeProduit" class="flex flex-col items-center">
             <article id="prod" class="flex flex-row flex-wrap justify-around w-auto">
                 <script>
@@ -286,10 +290,9 @@
 
         <?php $dbh = null;?>
 
-        <div id="contMap" class="p-2 rounded-2xl w-80 h-54 md:w-1/3 md:h-92 md:fixed md:bottom-5 md:right-5 bg-vertFonce/90">
-            <p id="mouvMap" class="underline text-bleu">Fermer ></p>
-            <div id="map" class="w-full h-52 md:h-80"></div>
-        </div>
+        <div id="contMap" class="hidden p-2  w-9/10 h-54 fixed right-5 bottom-22 md:flex md:flex-row md:w-1/3 md:h-85 md:bottom-5">
+            <p id="mouvMap" class="hidden md:block text-bleu text-center rounded-l-md bg-vertFonce/90 w-6 h-6">></p>
+            <div id="map" class="w-full h-50 border-vertFonce border-2 rounded-2xl md:rounded-l-none md:rounded-b-2xl md:rounded-tr-2xl  bg-vertFonce/90 md:h-80 md:p-2 "></div>
         
         <script>
             ajoutEventListener()
