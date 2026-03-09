@@ -108,13 +108,13 @@ if (isset($_POST['valider'])) {
     <?php include __DIR__ . "/../../php/structure/navbar_front.php"; ?>
 
     <main class="min-h-[600px]">
-        
+
         <!---fil d'ariane processus d'achat--->
         <ul class="etapes-processus-achat">
             <li class="actuel" etape="1">Récapitulatif commande</li>
             <li etape="2">Adresse de livraison</li>
             <li etape="3">Paiement</li>
-            <li etape="4">Retour à la page d'accueil</li>
+            <li etape="4">Commande validée</li>
         </ul>
         
         <h2 class="mt-10">Récapitulatif de votre commande</h2>
