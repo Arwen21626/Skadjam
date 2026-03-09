@@ -497,7 +497,7 @@ else { ?>
                     <!-- Quantite en stock -->
                     <div class="flex flex-col">
                         <label for="qteStock">Quantité en stock* :</label>
-                        <input value="<?php echo $qteStock;?>" placeholder="50" class="border-4 border-beige rounded-2xl w-40 m-2 placeholder-gray-500" type="number" name="qteStock" id="qteStock" min="0" required>
+                        <input value="<?php echo $qteStock;?>" placeholder="50" class="border-4 border-beige rounded-2xl w-40 m-2 placeholder-gray-500" type="number" name="qteStock" id="qteStock" required>
                     </div>
                 </div>
                     
