@@ -132,7 +132,8 @@
                                             <input type="number"
                                                    name="qteStock[<?php echo $valeurs['id_produit']; ?>]"
                                                    value="<?php echo $valeurs['quantite_stock']; ?>"
-                                                   class="border-2 border-black rounded-lg w-30 h-10 p-2" required
+                                                   class="border-2 border-black rounded-lg w-30 h-10 p-2" 
+                                                   required
                                             >
                                             <p class="hidden"><?php echo ($valeurs['seuil_alerte']!== null)?$valeurs['seuil_alerte']:0; ?></p>
                                         </td>

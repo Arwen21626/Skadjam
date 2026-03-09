@@ -60,12 +60,9 @@ function actionSurAjouterRetirer(ligne, idxLigne){
     stockModifier(ligne, idxLigne);
 
     // met le fond en rouge s'il y a une erreur de saisie
-    if(!(ligne.children[5].children[0].validity.valid)){
-        erreurSaisie(ligne.children[5]);
-    }
-    if(!(ligne.children[6].children[0].validity.valid)){
-        erreurSaisie(ligne.children[6]);
-    }
+    erreurSaisie(ligne.children[5]);
+    erreurSaisie(ligne.children[6]);
+
 
     // grise le champs du stock si l'utilisateur ajout ou retire du stock par les champ dédier
     if ((!(ligne.children[5].children[0].validity.valid) || (/[1-9]/).test(ligne.children[5].children[0].value))
@@ -83,9 +80,7 @@ function actionSurStock(ligne, idxLigne){
     stockModifier(ligne, idxLigne);
 
     // met le fond en rouge s'il y a une erreur de saisie
-    if(!ligne.children[4].children[0].value.match(/-{0,1}[0-9]/)){
-        erreurSaisie(ligne.children[4]);
-    }
+    erreurSaisie(ligne.children[4]);
 
     // grise les autres champ si le stock à été modifier
     if (stocks[idxLigne-1] !== ligne.children[4].children[0].value){
@@ -151,11 +146,6 @@ function stockModifier(ligne, idxLigne){
         ligne.children[4].children[0].style.backgroundColor = "";
         ligne.children[5].children[0].style.backgroundColor = "";
         ligne.children[6].children[0].style.backgroundColor = "";
-
-        console.log(seuilAlertAtteint(ligne.children[4]));
-        console.log(ligne.children[4].children[0]);
-        console.log(ligne.children[4].children[1]);
-        console.log(ligne.children[4].children[2]);
         
         if(seuilAlertAtteint(ligne.children[4])){
             changementSeuilAtteint(ligne, idxLigne);

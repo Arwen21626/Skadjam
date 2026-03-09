@@ -127,9 +127,6 @@
         for(let i = 1; i < lignesTab.length; i++){
             seuil = lignesTab[i].children[4].children[1].textContent;
 
-            console.log(seuil);
-            console.log(lignesTab[i].children[4].children[0].textContent);
-            
             // ajout d'une bordure qui indique que le stock est inférieur au seuil
             if (lignesTab[i].children[4].children[0].textContent <= seuil){
                 
