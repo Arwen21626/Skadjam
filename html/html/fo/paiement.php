@@ -319,10 +319,10 @@ if($_SESSION['role'] != 'client'){
                     <li class="actuel" etape="4">Commande validée</li>
                 </ul>
 
-                <h1 class="">Votre achat a bien été validé</h1>
+                <h1 class="pl-2 pr-2">Votre achat a bien été validé</h1>
                 <div class="flex flex-rox justify-center mt-3">
                     <a href="../../index.php"><button class="border-vertClair border-2 rounded-2xl w-40 h-15 cursor-pointer m-7">Retour à l'accueil</button></a>
-                    <a href="liste_commandes.php"><button class="border-vertClair border-2 rounded-2xl w-50 h-15 cursor-pointer m-7">Voir la liste de mes commandes</button></a>
+                    <a href="liste_commandes.php"><button class="border-vertClair border-2 rounded-2xl w-40 h-15 cursor-pointer m-7">Liste de mes commandes</button></a>
                 </div>
                 
             </div>
