@@ -131,10 +131,17 @@ if (isset($_POST['categorie']) && isset($_POST['nom']) && isset($_POST['prix']) 
     $prixHT = htmlentities($_POST['prix']);
     $qteStock = htmlentities($_POST['qteStock']);
     $remise = htmlentities($_POST['remise']);
-    $enLigne = htmlentities($_POST['mettreEnLigne']);
     $description = htmlentities($_POST['description']);
     $unite = htmlentities($_POST['unite']);
     $qteUnite = htmlentities($_POST['qteUnite']);
+    if (isset($_POST['mettreEnLigne'])){
+        $enLigne = htmlentities($_POST['mettreEnLigne']);
+    }
+    else{
+        $enLigne = false;
+    }
+
+
     // Champs spécifiques à la promotion
     $dateDebutPromotion = $_POST['dateDebutPromotion'] !== null ? $_POST['dateDebutPromotion'] : date('Y-m-d');
     $dateFinPromotion = htmlentities($_POST['dateFinPromotion']);
