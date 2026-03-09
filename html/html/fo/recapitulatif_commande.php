@@ -111,11 +111,16 @@ if (isset($_POST['valider'])) {
 
         <!---fil d'ariane processus d'achat--->
         <ul class="etapes-processus-achat">
-            <li class="actuel" etape="1">Récapitulatif commande</li>
-            <li etape="2">Adresse de livraison</li>
+            <li class="actuel" etape="1">Récapitulatif <span class="hidden md:block">commande</span></li>
+            <li etape="2">Adresse <span class="hidden md:block">de livraison</span></li>
             <li etape="3">Paiement</li>
-            <li etape="4">Commande validée</li>
+            <li class="hidden md:block"etape="4">Commande validée</li>
+            <li class="block md:hidden"etape="4">Validation</li>
+
         </ul>
+
+       <!--- <span class="block md:hidden">Etat :</span>
+        <span class="hidden md:block"> Etat de la livraison :</span>--->
         
         <h2 class="mt-10">Récapitulatif de votre commande</h2>
                 
