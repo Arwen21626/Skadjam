@@ -164,12 +164,12 @@
     
         
         <!-- Description -->
-        <div class="w-9/10">
-            <h3 class="font-bold">Description :</h3>
-            <p class=""><?= $description != '' ? $description : 'Aucune description.'; ?></p>
+        <div>
+            <h3 class="font-bold text-center">Description :</h3>
+            <p><?= $description != '' ? $description : 'Aucune description.'; ?></p>
         </div>
 
-        <div class="">
+        <div class="self-center">
             <form action="statistiques.php" method="post">
                 <input class="cursor-pointer border-4 rounded-xl p-2 m-1 border-beige w-75" type="submit" value="Mes statistiques">
             </form>
@@ -178,7 +178,7 @@
         <div class="flex flex-row justify-around items-center mt-7 mb-15">
             <!-- Supprimer le compte du vendeur -->
             <form action="suppression_vendeur.php" method="post">
-                <input class="border-4 border-beige rounded-xl p-2 m-1 md:w-auto w-75 cursor-pointer" type="submit" value="Supprimer mon compte">
+                <input class="border-4 border-rouge rounded-xl p-2 m-1 md:w-auto w-75 cursor-pointer" type="submit" value="Supprimer mon compte">
             </form>
 
             <!-- Modifier les informations du vendeur (sauf le mot de passe) -->

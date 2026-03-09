@@ -28,7 +28,7 @@
         </article>
     </section>
 
-    <section class="grid grid-cols-2 gap-1 p-1">
+    <aside class="grid grid-cols-2 gap-1 p-1">
         <a class="m-1 mt-7 text-bleu hover:text-beige" href="https://www.facebook.com">
             <img src="/images/logo/reseaux/facebook_back.webp" alt="Facebook" title="Facebook" class="size-12">
         </a>
@@ -41,5 +41,5 @@
         <a class="m-1 mb-2 text-bleu hover:text-beige" href="https://x.com/">
             <img src="/images/logo/reseaux/twitter_x_back.webp" alt="Twitter - X" title="Twitter - X" class="size-12">
         </a>
-    </section>  
+    </aside>  
 </footer>

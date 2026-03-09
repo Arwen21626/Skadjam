@@ -147,7 +147,7 @@ if (isset($_POST["nom"])){
         <form method="POST" class="w-6/7" action="crea_compte_vendeur.php">
             <!-- ########## INFORMATIONS ########## -->
             <h3>Informations vendeur :</h3>
-            <div class="flex flex-col md:flex-row md:flex-wrap md:justify-start md:w-3/4">
+            <section class="flex flex-col md:flex-row md:flex-wrap md:justify-start md:w-3/4">
                 <!-- à la validation du formulaire, s'il y a des erreurs, les informations valides resteront saisies -->
 
                 <!-- Nom -->
@@ -182,10 +182,10 @@ if (isset($_POST["nom"])){
                     <!-- s'il y a une erreur elle sera affiché sous la cellule -->
                     <?php echo isset($erreurs["tel"]) ? "<p class=\"text-rouge\">" . $erreurs["tel"] . " </p>" : '' ?>
                 </div>
-            </div>
+            </section>
 
             <h3>Informations entreprise :</h3>
-            <div class="flex flex-col md:flex-row md:flex-wrap md:w-1/2">
+            <section class="flex flex-col md:flex-row md:flex-wrap md:w-1/2">
                 <!-- Raison sociale -->
                 <div class="flex flex-col mt-2 mb-2 md:m-2">
                     <label for="raisonSociale">Raison sociale de l'entreprise * :</label>
@@ -213,11 +213,11 @@ if (isset($_POST["nom"])){
                     <input class="border-4 border-solid rounded-2xl border-beige p-1 pl-3 w-60" type="text" id="siren" name="siren" value="<?= (!isset($erreurs["siren"]))?$siren: ''?>" size="11" required>
                     <?php echo isset($erreurs["siren"]) ? "<p class=\"text-rouge\">" . $erreurs["siren"] . " </p>" : '' ?>
                 </div>
-            </div>
+            </section>
 
             <!-- ########## ADRESSE ########## -->
             <h3>Siège social :</h3>
-            <div class="flex flex-col md:flex-row">
+            <section class="flex flex-col md:flex-row">
                 <div class="flex flex-col md:w-1/3">
                     <!-- Adresse -->
                     <div class="flex flex-col space-y-2">
@@ -241,7 +241,7 @@ if (isset($_POST["nom"])){
                     </div>
                 </div>
                 <!-- Carte -->
-                <div class="flex flex-col md:w-2/3">
+                <article class="flex flex-col md:w-2/3">
                     <div id="map" class="h-60 md:h-80 z-0"></div>
                     <!-- Coordonnées -->
                     <div class="grid grid-cols-2 grid-rows-2 h-20 md:flex md:flex-row m-2">
@@ -255,11 +255,11 @@ if (isset($_POST["nom"])){
                         </div>
                     </div>
                     <p id="errorMap" class="text-rouge"></p>
-                </div>
-            </div>
+                </article>
+            </section>
 
             <h3>Mot de passe :</h3>
-            <div class="flex flex-col md:flex-row md:flex-wrap md:w-3/4">
+            <section class="flex flex-col md:flex-row md:flex-wrap md:w-3/4">
                 <!-- MDP -->
                 <div class="flex flex-col mt-2 mb-2 md:m-2">
                     <label for="mdp">Mot de passe * :</label>
@@ -280,7 +280,7 @@ if (isset($_POST["nom"])){
                     <!-- s'il y a une erreur elle sera affiché sous la cellule -->
                     <?php echo isset($erreurs["conf"]) ? "<p class=\"text-rouge\">" . $erreurs["conf"] . " </p>" : '' ?>
                 </div>
-            </div>
+            </section>
 
             <!-- CGU -->
             <div class="md:flex md:flex-row md:flex-wrap md:w-3/4 m-4">
@@ -297,16 +297,10 @@ if (isset($_POST["nom"])){
 
         <div class="flex flex-row flex-wrap">
             <!-- Lien vers la page de connexion -->
-            <div class="flex flex-row flex-wrap justify-center mb-4 ml-4 mr-4">
-                <p>Vous avez déjà un compte ? </p>
-                <a class="hover:text-rouge" style="text-decoration-line: underline" href="../fo/connexion.php">Connectez vous</a> 
-            </div>
-
+            <a class="flex flex-row flex-wrap justify-center mb-4 ml-4 mr-4 hover:text-rouge" href="../fo/connexion.php">Vous avez déjà un compte ?<span class="underline">Connectez vous</span></a> 
+            
             <!-- Lien vers la création d'un compte vendeur -->
-            <div class="flex flex-row flex-wrap justify-center mb-4 ml-4 mr-4">
-                <p>Vous êtes un client ? </p>
-                <a class="hover:text-rouge" style="text-decoration-line: underline" href="../fo/creation_compte_client.php">Créer un compte client</a> 
-            </div>
+            <a class="flex flex-row flex-wrap justify-center mb-4 ml-4 mr-4 hover:text-rouge" href="../fo/creation_compte_client.php">Vous êtes un client ?<span class="underline">Créer un compte client</span></a> 
         </div>
     </main>
     <?php require_once __DIR__ . "/../../php/structure/footer_front.php" ?>
