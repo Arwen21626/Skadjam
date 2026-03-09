@@ -33,7 +33,7 @@ foreach($dbh->query('SELECT * from sae3_skadjam._tva', PDO::FETCH_ASSOC) as $row
 }
 
 //Recuperation de toutes les informations du produit
-foreach($dbh->query("SELECT *,est_masque::CHAR as est_masque_php 
+foreach($dbh->query("SELECT *
                             FROM sae3_skadjam._produit pr
                             INNER JOIN sae3_skadjam._categorie c
                                 ON pr.id_categorie = c.id_categorie
@@ -52,7 +52,7 @@ foreach($dbh->query("SELECT *,est_masque::CHAR as est_masque_php
     $description = $produit['description_produit'];
     $prixHT = $produit['prix_ht'];
     $remise = $produit['pourcentage_remise'];
-    $enLigne = $produit['est_masque_php']; 
+    $enLigne = $produit['est_masque']; 
     $qteStock = $produit['quantite_stock'];
     $qteUnite = $produit['quantite_unite'];
     $unite = $produit['unite'];
@@ -136,11 +136,11 @@ if (isset($_POST['categorie']) && isset($_POST['nom']) && isset($_POST['prix']) 
     $qteUnite = htmlentities($_POST['qteUnite']);
 
     // S'il n'est pas coché il faut mettre est_masque dans la BDD à true en chaine pour eviter les problèmes
-    if (isset($_POST['mettreEnLigne']) && $_POST['mettreEnLigne'] != false){
-        $enLigne = true;
+    if (isset($_POST['mettreEnLigne']) && $_POST['mettreEnLigne'] === "on"){
+        $enLigne = "true";
     }
     else{
-        $enLigne = false;
+        $enLigne = "false";
     }
     
 
