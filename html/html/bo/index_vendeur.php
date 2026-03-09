@@ -44,14 +44,15 @@
     <!--header-->
     <?php include(__DIR__ . "/../../php/structure/header_back.php"); ?>
     <?php include(__DIR__ . "/../../php/structure/navbar_back.php"); ?>
-
+    <!-- Récupérer l'id du dernier produit créé -->
+    <?php $dernierAjout = $dbh->query("SELECT id_produit FROM sae3_skadjam._produit WHERE id_vendeur = $idCompte AND est_supprime = false ORDER BY date_creation DESC LIMIT 1")->fetch(PDO::FETCH_ASSOC); ?>
     <main class="p-8">
         <div class="grid grid-cols-2 gap-4 justify-items-center">
             <a href="../bo/promotion_vendeur.php" title="lien vers page promotion" alt="promotion">
                 <img src="../../images/images_accueil/promotion.webp" title="lien vers page promotion" alt="promotion" class="w-150 h-auto justify-self-end">
             </a>
-            <a href="#vosProduits" title="lien vers page derniers ajouts" alt="derniers ajouts">
-                <img src="../../images/images_accueil/derniers_ajouts.webp" title="lien vers page derniers ajouts" alt="derniers ajouts" class="w-150 h-auto justify-self-start">
+            <a href="./details_produit.php?idProduit=<?php echo $dernierAjout['id_produit']; ?>" title="lien vers page derniers ajouts" alt="derniers ajouts">
+                <img src="../../images/images_accueil/derniers_ajouts.webp" title="lien vers le dernier produit ajoutés" alt="derniers ajouts" class="w-150 h-auto justify-self-start">
             </a>           
             <a href="../bo/stock.php" title="lien vers page stock" alt="stock">
                 <img src="../../images/images_accueil/stock.webp" title="lien vers page stock" alt="stock" class="w-150 h-auto justify-self-end">
