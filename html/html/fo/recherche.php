@@ -68,16 +68,17 @@
     <?php include __DIR__ . "/../../php/structure/header_front.php"; ?>
     <?php include __DIR__ . "/../../php/structure/navbar_front.php"; ?>
 
-
-    
     <main class="md:min-h-[900px] min-h-[600px]" id="produits">
-        <!-- Barre de recherche -->
-        <input type="text" id="recherche" maxlength="100" class="border-4 border-vertClair rounded-xl placeholder-gray-500 md:w-267 w-95 p-2 md:ml-7 ml-6 mt-4 mb-4" placeholder="Rechercher un produit...">
-        
-        <div class="flex justify-between md:hidden">
-            <button id="filtresTris" class="underline  m-2">Filtres & tris</button>
-            <button id="carte" class="underline m-2">Accéder à la carte</button>
+        <div class="sticky">
+            <!-- Barre de recherche -->
+            <input type="text" id="recherche" maxlength="100" class="border-4 border-vertClair rounded-xl placeholder-gray-500 md:w-267 w-95 p-2 md:ml-7 ml-6 mt-4 mb-4" placeholder="Rechercher un produit...">
+            
+            <div class="flex justify-between md:hidden">
+                <button id="filtresTris" class="underline  m-2">Filtres & tris</button>
+                <button id="mouvMapTel" class="underline m-2">Ouvrir la carte</button>
+            </div>
         </div>
+        
         <!-- Aside -->
         <aside class="sidebar hidden overflow-auto bg-beige/90 w-110 min-h-[500px] fixed top-0 bottom-10 md:bg-beige p-4 md:sticky md:block md:w-79 md:h-225 md:top-20 md:float-left z-10">
             
@@ -286,8 +287,8 @@
 
         <?php $dbh = null;?>
 
-        <div id="contMap" class="p-2 rounded-2xl w-80 h-54 md:w-1/3 md:h-92 md:fixed md:bottom-5 md:right-5 bg-vertFonce/90">
-            <p id="mouvMap" class="underline text-bleu">Fermer ></p>
+        <div id="contMap" class="hidden md:flex md:flex-row p-2 rounded-2xl w-9/10 h-54 md:w-1/3 md:h-92 fixed bottom-20 md:bottom-5 md:right-5 bg-vertFonce/90">
+            <p id="mouvMap" class="hidden md:block underline text-bleu">></p>
             <div id="map" class="w-full h-52 md:h-80"></div>
         </div>
         
