@@ -2,7 +2,6 @@
     session_start();
 
     include __DIR__ . '/01_premiere_connexion.php';
-    require_once __DIR__ . "/../connections_params.php";
 
     const PAGE_SIZE = 24;
 
@@ -171,7 +170,8 @@
                 die();
             }
 
-            ?>
+        ?>
+        
         <!--fin du catalogue-->
         <div class="flex flex-row space-x-4 justify-center">
             <?php if($pageNumber>1){?>
