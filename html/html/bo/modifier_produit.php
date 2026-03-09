@@ -134,12 +134,15 @@ if (isset($_POST['categorie']) && isset($_POST['nom']) && isset($_POST['prix']) 
     $description = htmlentities($_POST['description']);
     $unite = htmlentities($_POST['unite']);
     $qteUnite = htmlentities($_POST['qteUnite']);
-    if (isset($_POST['mettreEnLigne'])){
+
+    // S'il n'est pas coché il faut mettre est_masque dans la BDD à true en chaine pour eviter les problèmes
+    if (isset($_POST['mettreEnLigne']) && $_POST['mettreEnLigne'] != false){
         $enLigne = htmlentities($_POST['mettreEnLigne']);
     }
     else{
         $enLigne = false;
     }
+    
 
 
     // Champs spécifiques à la promotion
@@ -158,13 +161,6 @@ if (isset($_POST['categorie']) && isset($_POST['nom']) && isset($_POST['prix']) 
         if ($c['id_categorie'] == $idCategorie) {
             $nomCategorie = $c['libelle_categorie'];
         }
-    }
-    
-    // S'il n'est pas coché il faut mettre est_masque dans la BDD à true en chaine pour eviter les problèmes
-    if($_POST['mettreEnLigne'] == false){
-        $enLigne = 'true';
-    }else{
-        $enLigne = 'false';
     }
 
 
