@@ -137,7 +137,7 @@ if (isset($_POST['categorie']) && isset($_POST['nom']) && isset($_POST['prix']) 
 
     // S'il n'est pas coché il faut mettre est_masque dans la BDD à true en chaine pour eviter les problèmes
     if (isset($_POST['mettreEnLigne']) && $_POST['mettreEnLigne'] != false){
-        $enLigne = htmlentities($_POST['mettreEnLigne']);
+        $enLigne = true;
     }
     else{
         $enLigne = false;
