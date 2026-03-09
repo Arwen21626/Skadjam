@@ -561,7 +561,7 @@ else { ?>
                 <div class="col-start-1 row-start-5 flex flex-col">
                     <div id="seuilInput" class="flex flex-row mr-4 ml-4">
                         <label class="mr-4" for="seuilAlerte">Seuil d'alerte* :</label>
-                        <input class="border-4 border-beige rounded-2xl w-45" type="number" name="seuilAlerte" id="seuilAlerte" value="<?php if(isset($seuilAlerte)){echo $seuilAlerte;} ?>">
+                        <input class="border-4 border-beige rounded-2xl w-45" type="number" name="seuilAlerte" id="seuilAlerte" min="0" value="<?php if(isset($seuilAlerte)){echo $seuilAlerte;} ?>">
                     </div>
                 </div>
 

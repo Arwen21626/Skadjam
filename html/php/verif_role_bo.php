@@ -4,6 +4,6 @@
             header("location:/404.php");
         }
     }else{
-        header("Location: /index.php");
+        header("Location:/index.php");
     }
 ?>

@@ -2,7 +2,6 @@
 session_start();
 require_once __DIR__ . "/../../php/verif_role_fo.php";
 require_once __DIR__ . "/../../php/fonctions.php";
-require_once __DIR__ . "/../../css/fo/fil_d_ariane.css";
 require(__DIR__ . '/../../01_premiere_connexion.php');
 
 // === Vérification utilisateur et panier ===
@@ -100,6 +99,7 @@ if (isset($_POST['valider'])) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Récapitulatif de votre commande</title>
+    <link rel="stylesheet" href="../../css/fo/fil_d_ariane.css">
 </head>
 <?php include __DIR__ . '/../../php/structure/head_front.php'?>
 <body>
@@ -108,9 +108,10 @@ if (isset($_POST['valider'])) {
     <?php include __DIR__ . "/../../php/structure/navbar_front.php"; ?>
 
     <main class="min-h-[600px]">
-        <style></style>
+        
+        <!---fil d'ariane processus d'achat--->
         <ul class="etapes-processus-achat">
-            <li class="actuel" etape="1">Récapitulatif commande</span></li>
+            <li class="actuel" etape="1">Récapitulatif commande</li>
             <li etape="2">Adresse de livraison</li>
             <li etape="3">Paiement</li>
             <li etape="4">Retour à la page d'accueil</li>

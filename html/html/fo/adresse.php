@@ -92,13 +92,24 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Adresse</title>
+    <link rel="stylesheet" href="../../css/fo/fil_d_ariane.css">
 </head>
 <?php include __DIR__ . '/../../php/structure/head_front.php'; ?>
 <body>
     <?php include __DIR__ . '/../../php/structure/header_front.php'; ?>        
     <?php include __DIR__ . '/../../php/structure/navbar_front.php'; ?>
     <main class="flex flex-col justify-center">
+        
+        <!---fil d'ariane processus d'achat--->
+        <ul class="etapes-processus-achat">
+            <li class="fait" etape="1">Récapitulatif commande</li>
+            <li class="actuel" etape="2">Adresse de livraison</li>
+            <li etape="3">Paiement</li>
+            <li etape="4">Retour à la page d'accueil</li>
+        </ul>
+
         <h2>Adresse de livraison</h2>
+
         <form class="flex flex-col self-center" method="post">
             
             <div class="flex flex-col md:flex-row justify-between">
