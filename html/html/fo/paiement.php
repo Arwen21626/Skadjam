@@ -188,6 +188,7 @@ if($_SESSION['role'] != 'client'){
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <?php include __DIR__ . '/../../php/structure/head_front.php';?>
     <title>Paiement</title>
+    <link rel="stylesheet" href="../../css/fo/fil_d_ariane.css">
     <style>
         button a:hover{
             color : black;
@@ -199,8 +200,17 @@ if($_SESSION['role'] != 'client'){
     <?php include __DIR__ . '/../../php/structure/navbar_front.php';?>
     <?php if(!$achatValide){?>
         <main class="">
-            <form method="post">
+            <!---fil d'ariane processus d'achat--->
+            <ul class="etapes-processus-achat">
+                <li class="fait" etape="1">Récapitulatif commande</li>
+                <li class="actuel" etape="2">Adresse de livraison</li>
+                <li etape="3">Paiement</li>
+                <li etape="4">Retour à la page d'accueil</li>
+            </ul>
 
+            <h2>Paiement</h2>
+
+            <form method="post">
                 <div class="flex flex-col md:items-center items-start ml-5 md:ml-0">
                     <div class="flex flex-col mb-5 mt-5">
                         <label for="numero">Numéro de carte* :</label>
