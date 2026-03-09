@@ -24,7 +24,8 @@ Object.keys(dataStats[currentAnnee]).forEach(mois => { // Récupères les donné
 
     Object.keys(dataStats[currentAnnee][mois]["produits"]).forEach(produit => {
         let iCat = Number(dataStats[currentAnnee][mois]["produits"][produit]["id_categorie"]);
-        console.log(iCat);
+        
+        dataCatVentes[iCat - 1] = Number(dataStats[currentAnnee][mois]["produits"][produit]["nb_ventes_totales"])
     });
 });
 
@@ -122,19 +123,58 @@ let prodChartCfg = {
 
 let chart2 = new Chart(prodChart, prodChartCfg);
 
+// Définitions du graphique et sa config pour les ventes totales par catégorie
+let cateChart = document.getElementById("categorie-chart");
+
+let cateChartCfg = {
+    type: 'pie',
+    data: {
+        labels: categories,
+        datasets: [{
+            label: "Nombre de ventes",
+            data: dataCatVentes,
+            borderWidth: 3,
+            pointBorderWidth: 8,
+        }]
+    },
+    options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+            title: {
+                display: true,
+                text: 'Année' + ' ' + currentAnnee,
+                color: '#000',
+                font: {
+                    size: 24
+                }
+            }
+        }
+    }
+}
+
+let chart3 = new Chart(cateChart, cateChartCfg);
+
 // Modification du graphique selon l'année sélectionné
 
 anneeSelection.addEventListener("change", function () {
     currentAnnee = anneeSelection.value;
 
-    dataVentes = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
-    dataProdVentes = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+    dataVentes = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+    dataProdVentes = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+    dataCatVentes = [0, 0, 0, 0, 0];
 
 
-    Object.keys(dataStats[currentAnnee]).forEach(mois => {
+    Object.keys(dataStats[currentAnnee]).forEach(mois => { // Récupères les données des ventes totales pour l'année en cours
         let i = Number(mois);
 
-        dataVentes[i - 1] = Number(dataStats[currentAnnee][mois]["nb_ventes_totales"]);
+        dataVentes[i - 1] = Number(dataStats[currentAnnee][mois]["nb_ventes_totales"]); // Insert les données dans le champ data du diagramme
+
+        Object.keys(dataStats[currentAnnee][mois]["produits"]).forEach(produit => {
+            let iCat = Number(dataStats[currentAnnee][mois]["produits"][produit]["id_categorie"]);
+            
+            dataCatVentes[iCat - 1] = Number(dataStats[currentAnnee][mois]["produits"][produit]["nb_ventes_totales"])
+        });
     });
 
     Object.keys(dataStats[currentAnnee]).forEach(mois => {
@@ -153,6 +193,12 @@ anneeSelection.addEventListener("change", function () {
 
     prodChartCfg.options.plugins.title.text = currentLibelleProd + ' - ' + 'Année' + ' ' + currentAnnee;
     prodChartCfg.data.datasets[0].data = dataProdVentes;
+
+    cateChartCfg.options.plugins.title.text = 'Année' + " " + currentAnnee;
+    cateChartCfg.data.datasets[0].data = dataCatVentes;
+
+    chart3.destroy();
+    chart3 = new Chart(cateChart, cateChartCfg);
 
     chart2.destroy();
     chart2 = new Chart(prodChart, prodChartCfg);

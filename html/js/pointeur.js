@@ -35,27 +35,34 @@ function selectionnerVendeur(id){
 }
 
 function deselectionnerVendeur(id){
-    console.log(id)
 
     let marker = marqueurId(id)
 
     if(!marker) return
 
     marker.setIcon(marqueurClair)
-    document.getElementById(id).checked = false
-    checkedVendeurs.slice(checkedVendeurs.indexOf(id), 1)
+
+    let checkbox = document.getElementById(id)
+    if(checkbox){
+        checkbox.checked = false
+    }
+
+    let index = checkedVendeurs.indexOf(id)
+    if(index !== -1){
+        checkedVendeurs.splice(index,1)
+    }
+
     dernierMarqueur = null
 }
 
 function deselectionAll(){
-    console.log(checkedVendeurs)
+
     checkedVendeurs.forEach(id => {
-        deselectionnerVendeur(id)
+        deselectionnerVendeur(Number(id))
     })
-    console.log(checkedVendeurs)
+
     checkedVendeurs = []
 }
-
 
 L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
     maxZoom: 19,
@@ -103,25 +110,27 @@ tabVendeur.forEach(vendeur => {
         let id = Number(vendeur.id_compte)
 
         document.getElementById(id).addEventListener("change", function (){
-            
-            if(document.getElementById(id).checked){
 
-                if(dernierMarqueur){
-                    deselectionnerVendeur(Number(id))
-                }
-                selectionnerVendeur(Number(id))
+            if(this.checked){
+
+                deselectionAll()
+                selectionnerVendeur(id)
+                checkedVendeurs = [id]
+
             }else{
-                deselectionnerVendeur(Number(id))
+
+                deselectionAll()
+                checkedVendeurs = []
+
             }
 
             console.log(checkedVendeurs)
-            
+
             tab = filtre()
             mettreAJourListe()
         })
     }
 })
-
 
 markers.on("click", function(e){
 
