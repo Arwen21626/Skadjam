@@ -1,5 +1,5 @@
 let lignesTab = document.getElementsByTagName("tr");
-let champsStock, champsAjouter, champsRetirer;
+let champsStock, champsAjouter, champsRetirer, btnReset;
 let stocks = [];
 
 let rouge = "#A70101";
@@ -14,6 +14,8 @@ for(let i = 1; i < lignesTab.length; i++){
     champsStock = lignesTab[i].children[4];
     champsAjouter = lignesTab[i].children[5];
     champsRetirer = lignesTab[i].children[6];
+    btnReset = lignesTab[i].children[7];
+    btnReset.children[0].style.display = "none";
 
     //seuil d'alert atteint
     if (seuilAlertAtteint(champsStock, i)){
@@ -49,6 +51,26 @@ for(let i = 1; i < lignesTab.length; i++){
     champsRetirer.addEventListener("click", () => {
         actionSurAjouterRetirer(document.getElementsByTagName("tr")[i], i);
     });
+
+    btnReset.addEventListener("click", () => {
+        actionReset(document.getElementsByTagName("tr")[i], i);
+    });
+}
+
+function actionReset(ligne, idxLigne){
+    console.log("salut");
+    // remet tous les champs à leur valeur de base
+    ligne.children[4].children[0].value = stocks[idxLigne-1];
+    ligne.children[5].children[0].value = 0;
+    ligne.children[6].children[0].value = 0;
+
+    // change le style de la ligne en focntion des changements
+    stockModifier(ligne, idxLigne);
+
+    // dégrise tous les champs
+    champActif(ligne.children[4].children[0], false);
+    champActif(ligne.children[5].children[0], false);
+    champActif(ligne.children[6].children[0], false);
 }
 
 function actionSurAjouterRetirer(ligne, idxLigne){
@@ -98,10 +120,10 @@ function erreurSaisie(cible){
         cible.children[0].style.backgroundColor = rouge;
         cible.children[0].style.color = "white";
 
-        cible.parentNode.children[7].style.backgroundImage = "url(/images/logo/bootstrap_icon/x-large.svg)"; 
-        cible.parentNode.children[7].style.backgroundSize = "1.5em auto"; 
-        cible.parentNode.children[7].style.backgroundRepeat = "no-repeat"; 
-        cible.parentNode.children[7].style.backgroundPosition = "center center";
+        cible.parentNode.children[8].style.backgroundImage = "url(/images/logo/bootstrap_icon/x-large.svg)"; 
+        cible.parentNode.children[8].style.backgroundSize = "1.5em auto"; 
+        cible.parentNode.children[8].style.backgroundRepeat = "no-repeat"; 
+        cible.parentNode.children[8].style.backgroundPosition = "center center";
     }
     else{
         cible.children[0].style.color = "";
@@ -121,23 +143,25 @@ function stockModifier(ligne, idxLigne){
             changerCouleurBorderLigne(orange, ligne);
         }
 
-        ligne.children[7].style.backgroundImage = "url(/images/logo/bootstrap_icon/pencil.svg)"; 
-        ligne.children[7].style.backgroundSize = "1.5em auto"; 
-        ligne.children[7].style.backgroundRepeat = "no-repeat"; 
-        ligne.children[7].style.backgroundPosition = "center center";
+        ligne.children[8].style.backgroundImage = "url(/images/logo/bootstrap_icon/pencil.svg)"; 
+        ligne.children[8].style.backgroundSize = "1.5em auto"; 
+        ligne.children[8].style.backgroundRepeat = "no-repeat"; 
+        ligne.children[8].style.backgroundPosition = "center center";
 
         ligne.children[4].children[0].style.backgroundColor = "white";
         ligne.children[5].children[0].style.backgroundColor = "white";
         ligne.children[6].children[0].style.backgroundColor = "white";
 
+        // affichage du bouton de reset
+        ligne.children[7].children[0].style.display = "";
     }
     // si la modification ne change pas la quantite en stock
     else{
 
-        ligne.children[7].style.backgroundImage = ""; 
-        ligne.children[7].style.backgroundSize = ""; 
-        ligne.children[7].style.backgroundRepeat = ""; 
-        ligne.children[7].style.backgroundPosition = "";
+        ligne.children[8].style.backgroundImage = ""; 
+        ligne.children[8].style.backgroundSize = ""; 
+        ligne.children[8].style.backgroundRepeat = ""; 
+        ligne.children[8].style.backgroundPosition = "";
 
         ligne.children[4].children[0].style.color = "";
         ligne.children[5].children[0].style.color = "";
@@ -154,9 +178,10 @@ function stockModifier(ligne, idxLigne){
             changerCouleurBorderLigne("", ligne);
 
         }
-    }
-    
 
+        // désaffichage du bouton de reset
+        ligne.children[7].children[0].style.display = "none";
+    }
 }
 
 function seuilAlertAtteint(champStock){
@@ -177,10 +202,10 @@ function changementSeuilAtteint(ligne, idxLigne){
 
     }
 
-    ligne.children[7].style.backgroundImage = "url(/images/logo/bootstrap_icon/exclamation-triangle.svg)"; 
-    ligne.children[7].style.backgroundSize = "1.5em auto"; 
-    ligne.children[7].style.backgroundRepeat = "no-repeat"; 
-    ligne.children[7].style.backgroundPosition = "center center";
+    ligne.children[8].style.backgroundImage = "url(/images/logo/bootstrap_icon/exclamation-triangle.svg)"; 
+    ligne.children[8].style.backgroundSize = "1.5em auto"; 
+    ligne.children[8].style.backgroundRepeat = "no-repeat"; 
+    ligne.children[8].style.backgroundPosition = "center center";
 }
 
 
@@ -238,7 +263,7 @@ function changerCouleurBorderLigne(couleur, ligne){
         tailleBorder = "0";
     }
 
-    ligne.children[ligne.children.length-2].style.borderRightWidth = tailleBorder;
-    ligne.children[ligne.children.length-2].style.borderColor = couleur;
+    ligne.children[ligne.children.length-3].style.borderRightWidth = tailleBorder;
+    ligne.children[ligne.children.length-3].style.borderColor = couleur;
 
 }
