@@ -486,6 +486,9 @@ input.quantite-prod-input {
   .mt-7 {
     margin-top: calc(var(--spacing, 0.25rem) * 7);
   }
+  .mt-8 {
+    margin-top: calc(var(--spacing, 0.25rem) * 8);
+  }
   .mt-10 {
     margin-top: calc(var(--spacing, 0.25rem) * 10);
   }
@@ -678,6 +681,9 @@ input.quantite-prod-input {
   }
   .h-225 {
     height: calc(var(--spacing, 0.25rem) * 225);
+  }
+  .h-\[45vh\] {
+    height: 45vh;
   }
   .h-\[50vh\] {
     height: 50vh;
@@ -873,9 +879,6 @@ input.quantite-prod-input {
   }
   .w-\[45vw\] {
     width: 45vw;
-  }
-  .w-\[55vw\] {
-    width: 55vw;
   }
   .w-\[60vw\] {
     width: 60vw;
@@ -1420,6 +1423,9 @@ input.quantite-prod-input {
   .font-medium {
     --tw-font-weight: var(--font-weight-medium, 500);
     font-weight: var(--font-weight-medium, 500);
+  }
+  .text-wrap {
+    text-wrap: wrap;
   }
   .text-beige {
     color: var(--color-beige);
