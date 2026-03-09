@@ -123,9 +123,7 @@ tabVendeur.forEach(vendeur => {
                 checkedVendeurs = []
 
             }
-
-            console.log(checkedVendeurs)
-
+            
             tab = filtre()
             mettreAJourListe()
         })
