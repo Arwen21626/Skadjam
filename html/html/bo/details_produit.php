@@ -58,12 +58,12 @@
         <!--affichage de la photo-->
 
         <!--carrousel à faire-->
-        <div class="flex flex-row justify-around  m-4 p-4">
+        <article class="flex flex-row justify-around  m-4 p-4">
             <img class=" w-1/4" src="<?php echo $produit['url_photo'];?>" 
             alt="<?php echo $produit['alt'];?>"
             title="<?php echo $produit['titre'];?>">
 
-            <div class="m-4 p-4 space-y-4 content-between">
+            <section class="m-4 p-4 space-y-4 content-between">
                 <!--affichage du prix-->
                 <p class=" <?php echo ($produit['pourcentage_remise'] !== NULL)?'line-through':'';?>"> <?php echo htmlentities(str_replace(".", ",",$produit['prix_ttc'])); ?>€ (<abbr title="Toutes Taxes Comprises">TTC</abbr>)</p>
                 <p class=" <?php echo ($produit['pourcentage_remise'] !== NULL)?'':'hidden';?>"> <?php echo htmlentities(str_replace(".", ",",$produit['prix_remise'])); ?>€ (<abbr title="Toutes Taxes Comprises">TTC</abbr>)</p>
@@ -83,15 +83,15 @@
                     <!-- <button class=" bg-beige rounded-2xl w-40 h-14" type="button">Masquer</button> -->
                     <a href="../bo/supprimer_produit.php?idProduit=<?php echo $idProd?>"><button class=" bg-beige rounded-2xl w-40 h-14 cursor-pointer" type="button">Supprimer</button></a>
                 </div>
-            </div>
-        </div>
+            </section>
+        </article>
 
         <h3>Description détaillée</h3>
         <p><?php echo $produit['description_produit'];?></p>
 
         <!-- Avis -->
         <h3>Avis</h3>
-        <div class="flex flex-row justify-between mt-10">
+        <article class="flex flex-row justify-between mt-10">
             <?php 
             // Recupération des avis
             $avis = [];
@@ -152,7 +152,7 @@
             </section>
 
             <!-- Notes -->
-            <section class="mr-16 p-5 bg-beige rounded-2xl sticky top-48 h-80 w-45 flex flex-col justify-center">
+            <aside class="mr-16 p-5 bg-beige rounded-2xl sticky top-48 h-80 w-45 flex flex-col justify-center">
                 <h4>Notes - <?php echo count($avis);?></h4>
                 <table>
                     <tbody>
@@ -174,10 +174,10 @@
                         <?php }?>
                     </tbody>
                 </table>
-            </section>
+            </aside>
 
             <?php }?>
-        </div>
+        </article>
     </main>
     <?php include(__DIR__ . '/../../php/structure/footer_back.php');?>
 </body>

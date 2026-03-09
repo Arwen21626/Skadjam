@@ -20,9 +20,7 @@
     }
 ?>
 
-<nav class="bg-beige fixed left-0 right-0 bottom-0 w-full z-10 md:sticky md:top-0">
-
-    <section class="flex justify-around items-center p-1">
+<nav class="flex justify-around items-center p-1 bg-beige fixed left-0 right-0 bottom-0 w-full z-10 md:sticky md:top-0">
 
         <!-- Accueil -->
         <div class="flex flex-col justify-center items-center">
@@ -89,5 +87,4 @@
             <a class="text-vertFonce hover:text-rouge inline-block" href=<?php echo $urlProfil ?>>Profil</a>
         </div>
             
-    </section>
 </nav>

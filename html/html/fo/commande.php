@@ -142,10 +142,8 @@
 
         <!---état de la commande--->
         <div class="ml-5 flex flex-row md:items-center">
-            <h3 class="mr-3">
-                <span class="block md:hidden">Etat :</span>
-                <span class="hidden md:block"> Etat de la livraison :</span>
-            </h3> 
+            <h3 class="mr-3 block md:hidden">Etat :</h3>
+            <h3 class="mr-3 hidden md:block"> Etat de la livraison :</h3>
             <h3 id="numeroCommande"><?= $etat ?></h3>
         </div>
         

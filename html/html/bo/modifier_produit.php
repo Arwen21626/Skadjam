@@ -131,10 +131,20 @@ if (isset($_POST['categorie']) && isset($_POST['nom']) && isset($_POST['prix']) 
     $prixHT = htmlentities($_POST['prix']);
     $qteStock = htmlentities($_POST['qteStock']);
     $remise = htmlentities($_POST['remise']);
-    $enLigne = htmlentities($_POST['mettreEnLigne']);
     $description = htmlentities($_POST['description']);
     $unite = htmlentities($_POST['unite']);
     $qteUnite = htmlentities($_POST['qteUnite']);
+
+    // S'il n'est pas coché il faut mettre est_masque dans la BDD à true en chaine pour eviter les problèmes
+    if (isset($_POST['mettreEnLigne']) && $_POST['mettreEnLigne'] != false){
+        $enLigne = true;
+    }
+    else{
+        $enLigne = false;
+    }
+    
+
+
     // Champs spécifiques à la promotion
     $dateDebutPromotion = $_POST['dateDebutPromotion'] !== null ? $_POST['dateDebutPromotion'] : date('Y-m-d');
     $dateFinPromotion = htmlentities($_POST['dateFinPromotion']);
@@ -151,13 +161,6 @@ if (isset($_POST['categorie']) && isset($_POST['nom']) && isset($_POST['prix']) 
         if ($c['id_categorie'] == $idCategorie) {
             $nomCategorie = $c['libelle_categorie'];
         }
-    }
-    
-    // S'il n'est pas coché il faut mettre est_masque dans la BDD à true en chaine pour eviter les problèmes
-    if($_POST['mettreEnLigne'] == false){
-        $enLigne = 'true';
-    }else{
-        $enLigne = 'false';
     }
 
 

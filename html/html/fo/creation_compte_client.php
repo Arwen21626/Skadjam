@@ -116,14 +116,12 @@ unset($_SESSION['erreurs'], $_SESSION['old']);
         <div class="flex flex-row flex-wrap justify-center">
             <!-- Lien vers la page de connexion -->
             <div class="hover:text-rouge flex flex-row flex-wrap justify-center ml-10 mr-10 mb-10">
-                <a href="connexion.php">Vous avez déjà un compte ? </a>
-                <a style="text-decoration-line: underline" href="connexion.php">Connectez vous</a> 
+                <a href="connexion.php">Vous avez déjà un compte ?<span class="underline">Connectez vous</span></a>
             </div>
 
             <!-- Lien vers la création d'un compte vendeur -->
             <div class="hover:text-rouge flex flex-row flex-wrap justify-center ml-10 mr-10 mb-10">
-                <a href="../bo/crea_compte_vendeur.php">Vous êtes un vendeur ? </a>
-                <a style="text-decoration-line: underline" href="../bo/crea_compte_vendeur.php">Créer un compte vendeur</a> 
+                <a href="../bo/crea_compte_vendeur.php">Vous êtes un vendeur ?<span class="underline">Créer un compte vendeur</span></a>
             </div>
         </div>
     </main>
