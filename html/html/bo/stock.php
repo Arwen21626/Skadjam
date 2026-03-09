@@ -128,7 +128,7 @@
             seuil = lignesTab[i].children[4].children[1].textContent;
 
             // ajout d'une bordure qui indique que le stock est inférieur au seuil
-            if (lignesTab[i].children[4].children[0].textContent <= seuil){
+            if (Number(lignesTab[i].children[4].children[0].textContent) <= Number(seuil)){
                 
                 lignesTab[i].children[lignesTab[i].childElementCount-2].style.borderRightWidth = "0.5em";
 
