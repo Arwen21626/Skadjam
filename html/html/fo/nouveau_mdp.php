@@ -3,7 +3,7 @@ session_start();
 require_once __DIR__ . "/../../php/verif_role_fo.php";
 require_once __DIR__ . "/../../php/verification_formulaire.php";
 require_once __DIR__ . "/../../01_premiere_connexion.php";
-    
+
 $erreur = false;
 try{
     $dbh = new PDO("$driver:host=$server;port=$port;dbname=$dbname",$user,$pass);
@@ -77,7 +77,7 @@ try{
             </div>
 
             <div class="flex justify-around">
-                <a href="profil_client.php" class="text-center block border-4 border-solid border-vertClair rounded-2xl w-40 py-2.5 mr-6 cursor-pointer">Annuler</a>
+                <a href="<?= $_SESSION['role'] === 'client' ? 'profil_client.php' : 'connexion.php'; ?>" class="text-center block border-4 border-solid border-vertClair rounded-2xl w-40 py-2.5 mr-6 cursor-pointer">Annuler</a>
                 <input class="border-4 border-vertClair rounded-2xl w-40 h-14 p-0 m-0 cursor-pointer" type="submit" value="Confirmer">
             </div>
         </form>
