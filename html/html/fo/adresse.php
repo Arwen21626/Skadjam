@@ -105,7 +105,7 @@
             <li class="fait" etape="1">Récapitulatif commande</li>
             <li class="actuel" etape="2">Adresse de livraison</li>
             <li etape="3">Paiement</li>
-            <li etape="4">Retour à la page d'accueil</li>
+            <li etape="4">Commande validée</li>
         </ul>
 
         <h2>Adresse de livraison</h2>

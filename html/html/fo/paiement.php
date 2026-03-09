@@ -205,7 +205,7 @@ if($_SESSION['role'] != 'client'){
                 <li class="fait" etape="1">Récapitulatif commande</li>
                 <li class="fait" etape="2">Adresse de livraison</li>
                 <li class="actuel" etape="3">Paiement</li>
-                <li etape="4">Retour à la page d'accueil</li>
+                <li etape="4">Commande validée</li>
             </ul>
 
             <h2>Paiement</h2>
@@ -310,9 +310,21 @@ if($_SESSION['role'] != 'client'){
         </main>
     <?php }else{ ?>
         <main class="text-center min-h-[500px]">
-            <div class="mt-30">
+            <div class="mt-10">
+                <!---fil d'ariane processus d'achat--->
+                <ul class="etapes-processus-achat">
+                    <li class="fait" etape="1">Récapitulatif commande</li>
+                    <li class="fait" etape="2">Adresse de livraison</li>
+                    <li class="fait" etape="3">Paiement</li>
+                    <li class="actuel" etape="4">Commande validée</li>
+                </ul>
+
                 <h1 class="">Votre achat a bien été validé</h1>
-                <a href="../../index.php"><button class="border-vertClair border-2 rounded-2xl w-40 h-14 cursor-pointer m-7">Retour à l'accueil</button></a>
+                <div class="flex flex-rox justify-center mt-3">
+                    <a href="../../index.php"><button class="border-vertClair border-2 rounded-2xl w-40 h-15 cursor-pointer m-7">Retour à l'accueil</button></a>
+                    <a href="liste_commandes.php"><button class="border-vertClair border-2 rounded-2xl w-50 h-15 cursor-pointer m-7">Voir la liste de mes commandes</button></a>
+                </div>
+                
             </div>
         </main>
     <?php }?>
