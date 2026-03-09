@@ -12,6 +12,10 @@ use PHPMailer\PHPMailer\SMTP;
 
 // permet à $mailer d'envoyer des e-mails
 $mailer = new PHPMailer(true);
+try{
+    $dbh = new PDO("$driver:host=$server;port=$port;dbname=$dbname",$user,$pass);
+    $dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+    $dbh->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC);
 ?>
 <!DOCTYPE html>
 <html lang="fr">
@@ -24,11 +28,6 @@ $mailer = new PHPMailer(true);
     <h2 class="flex justify-center text-center">Mot de passe oublié</h2>
     <!-- Affichage d'un champ input pour insérer une adresse mail -->
     <?php
-    try{
-        $dbh = new PDO("$driver:host=$server;port=$port;dbname=$dbname",$user,$pass);
-        $dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-        $dbh->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC);
-
         // Si l'e-mail est présent, essaie d'envoyer un message à cette adresse
         if(isset($_POST['mail'])){
             ?><p><?php
