@@ -60,16 +60,16 @@
     <main class="mt-10">
         <div class="grid grid-cols-2 gap-4 justify-items-center">
             <a href="html/fo/promotion.php" title="lien vers page promotion" alt="promotion">
-                <img src="images/images_accueil/promotion.webp" title="lien vers page promotion" alt="promotion" class="w-90 md:w-150 h-auto justify-self-end">
+                <img src="images/images_accueil/promotion.webp" title="lien vers page promotion" alt="Produits en promotion" class="w-90 md:w-150 h-auto justify-self-end">
             </a>
             <a href="html/fo/nouveaux_produits.php" title="lien vers page nouveaux produits" alt="nouveaux produits">
-                <img src="images/images_accueil/nouveaux_produits.webp" title="lien vers page nouveaux produits" alt="nouveaux produits" class="w-90 md:w-150 h-auto justify-self-start">
+                <img src="images/images_accueil/nouveaux_produits.webp" title="lien vers page nouveaux produits" alt="Produits ajoutés ces 30 derniers jours" class="w-90 md:w-150 h-auto justify-self-start">
             </a>           
             <a href="#nosProduits" title="lien vers page les plus vendus" alt="les plus vendus">
-                <img src="images/images_accueil/les_plus_vendus.webp" title="lien vers page les plus vendus" alt="les plus vendus" class="w-90 md:w-150 h-auto justify-self-end">
+                <img src="images/images_accueil/les_plus_vendus.webp" title="lien vers page les plus vendus" alt="Produits les plus vendus (Pas encore disponible)" class="w-90 md:w-150 h-auto justify-self-end">
             </a>
             <a href="html/fo/liste_commandes.php" title="lien vers page commandes" alt="commandes">
-                <img src="images/images_accueil/commandes.webp" title="lien vers page commandes" alt="commandes" class="w-90 md:w-150 h-auto justify-self-start">
+                <img src="images/images_accueil/commandes.webp" title="lien vers page commandes" alt="Mes commandes en cours" class="w-90 md:w-150 h-auto justify-self-start">
             </a>        
         </div>
 

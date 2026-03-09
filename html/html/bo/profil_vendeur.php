@@ -97,7 +97,7 @@
             <div class=" flex flex-col">
                 <?php if ($tabPhoto && !empty($tabPhoto['url_photo'])) { ?>
                     <div class="container-image flex items-center justify-center w-80 border-4 border-solid rounded-2xl border-beige mb-3">
-                        <img class="image-vendeur w-80 rounded-xl" src="<?= '../..' . htmlspecialchars($tabPhoto['url_photo']) ?>" alt="<?= htmlspecialchars($tabPhoto['alt']) ?>" title="<?= htmlspecialchars($tabPhoto['alt']) ?>">
+                        <img class="image-vendeur w-80 rounded-xl" src="<?= '../..' . htmlspecialchars($tabPhoto['url_photo']) ?>" alt="Photo de profil" title="<?= htmlspecialchars($tabPhoto['alt']) ?>">
                     </div>
                 <?php } else { ?>
                     <div class="container-image vide flex items-center justify-center w-80 h-80 mb-3 bg-beige rounded-2xl">
