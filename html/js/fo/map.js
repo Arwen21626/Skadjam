@@ -9,7 +9,7 @@ mouvMap.addEventListener('click', function(){
     if (mouvMap.textContent == ">") {
         mouvMap.textContent = "< Ouvrir la carte"
         mapy.classList.add("md:hidden")
-        contMap.classList.remove("w-80", "h-54", "md:w-1/3", "md:h-92")
+        contMap.classList.remove("w-80", "h-54", "md:w-1/3", "md:h-92", "hidden")
     }
     else{
         mouvMap.textContent = ">"
@@ -22,9 +22,11 @@ mouvMapTel.addEventListener('click', function(){
     if (mouvMapTel.textContent == "Ouvrir la carte") {
         mouvMapTel.textContent = "Fermer la carte"
         contMap.classList.remove("hidden")
+        contMap.classList.add("left-5")
     }
     else if (mouvMapTel.textContent == "Fermer la carte") {
         mouvMapTel.textContent = "Ouvrir la carte"
+        contMap.classList.remove("left-5")
         contMap.classList.add("hidden")
     }
 })
