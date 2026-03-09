@@ -31,7 +31,7 @@
         <a class="hover:text-rouge m-1 py-1 md:py-0 text-center md:text-left rounded-xl text-vertFonce" href="tel:0295264512">02 95 26 45 12</a>
     </article>
 
-    <article class="grid grid-cols-2 gap-0.5 ml-10 md:ml-0 md:max-w-fit md:pt-0.5 md:pr-1 md:pb-1 md:pl-1 md:gap-1">
+    <aside class="grid grid-cols-2 gap-0.5 ml-10 md:ml-0 md:max-w-fit md:pt-0.5 md:pr-1 md:pb-1 md:pl-1 md:gap-1">
 
         <a class="hover:text-rouge m-1" href="https://www.facebook.com" class="self-center">
 
@@ -53,7 +53,7 @@
             <img src="/images/logo/reseaux/twitter_x_front.webp" alt="Twitter - X" title="Twitter - X" 
             class="size-12 md:size-14">
         </a>
-    </article>  
+</aside>  
 </footer>
 <script>
     // let tailleScroll = document.documentElement.scrollHeight;

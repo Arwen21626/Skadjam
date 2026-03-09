@@ -112,7 +112,7 @@
                 $lignes = array_slice($tabProduit, $pageNumber*PAGE_SIZE-PAGE_SIZE, PAGE_SIZE); 
 
                 //affiche la photo du produit, son nom, son prix et sa note, son stock ?>
-                <div class="flex flex-row flex-wrap justify-around">
+                <article class="flex flex-row flex-wrap justify-around">
                     <?php 
                         foreach($tabProduit as $id => $valeurs){
                             $idProduit = $valeurs['id_produit'];
@@ -172,7 +172,7 @@
                                 <?php }} ?> 
                             </section>
                     <?php } ?>
-                </div>         
+                </article>         
                 <?php $dbh = null;
             } 
 

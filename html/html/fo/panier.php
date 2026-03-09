@@ -188,26 +188,26 @@
                 ?>
                     <main class="min-h-[420px] md:min-h-[620px] md:p-4 md:grid md:grid-cols-2 md:relative">
 
-                        <div id="conteneur-produit" class="flex flex-col">
+                        <section id="conteneur-produit" class="flex flex-col">
                             <?php
                                 foreach ($infoProduitsPanier as $i => $value) 
                                 {
                                     ?>
                                         <!-- Balise représentant une card produit -->
-                                        <div id="<?php echo $infoProduitsPanier[$i]["infoProduit"]["id_produit"]; ?>" class="bg-bleu pt-4 pb-4 md:p-4 m-4 shadow md:grid md:grid-cols-2 produit">
+                                        <article id="<?php echo $infoProduitsPanier[$i]["infoProduit"]["id_produit"]; ?>" class="bg-bleu pt-4 pb-4 md:p-4 m-4 shadow md:grid md:grid-cols-2 produit">
 
                                             <!-- l'Image -->
-                                            <div class="flex justify-center mb-3 md:mb-0 relative image">
+                                            <section class="flex justify-center mb-3 md:mb-0 relative image">
                                                 <a class="flex justify-center" href="/html/fo/details_produit.php?idProduit=<?php echo $infoProduitsPanier[$i]["infoProduit"]["id_produit"]; ?>">
                                                     <img src="<?php echo $infoProduitsPanier[$i]["infoPhoto"]["url_photo"]; ?>" 
                                                     alt="<?php echo $infoProduitsPanier[$i]["infoPhoto"]["alt"]; ?>" 
                                                     title="<?php echo $infoProduitsPanier[$i]["infoPhoto"]["titre"]; ?>"
                                                     class="border self-center w-3/4 h-auto md:w-full md:h-auto">
                                                 </a> 
-                                            </div>
+                                            </section>
                                                 
                                             <!-- Le conteneur des éléments liés au produit -->
-                                            <div class="text-center gap-4 md:flex md:flex-col md:justify-evenly prod-info stock:<?php echo $infoProduitsPanier[$i]["infoProduit"]["quantite_stock"];?>">
+                                            <section class="text-center gap-4 md:flex md:flex-col md:justify-evenly prod-info stock:<?php echo $infoProduitsPanier[$i]["infoProduit"]["quantite_stock"];?>">
 
                                                 <div class="flex flex-col justify-center items-center mb-3 md:mb-0">
                                                     <h4> <?php echo $infoProduitsPanier[$i]["infoProduit"]["libelle_produit"]; ?></h4>
@@ -255,20 +255,20 @@
                                                     Supprimer du panier
                                                 </button>
 
-                                            </div>
+                                            </section>
 
-                                        </div>
+                                        </article>
                                     <?php
                                 }
                                 ?>     
-                        </div>   
+                        </section>   
                     <?php
                 
                 if ($_SESSION['role'] === 'client') { 
                     ?>
-                        <div class="flex bottom-14 border-b md:border-none md:w-full md:grid md:grid-cols-1 lg:grid-cols-3 fixed md:sticky md:bottom-64 pointer-events-none md:h-16 md:top-1/3">
+                        <section class="flex bottom-14 border-b md:border-none md:w-full md:grid md:grid-cols-1 lg:grid-cols-3 fixed md:sticky md:bottom-64 pointer-events-none md:h-16 md:top-1/3">
                             <div></div>
-                            <div id="conteneur-info_panier" class="flex w-full flex-wrap justify-evenly md:flex-nowrap bg-beige pb-4 pointer-events-auto md:grid md:grid-rows-4 md:justify-center md:items-center md:rounded-2xl" >
+                            <aside id="conteneur-info_panier" class="flex w-full flex-wrap justify-evenly md:flex-nowrap bg-beige pb-4 pointer-events-auto md:grid md:grid-rows-4 md:justify-center md:items-center md:rounded-2xl" >
                                 <div class="inline-flex mt-2 mb-2 md:mb-0 md:mt-4 nb-prod-total">
                                     <p class="mr-2">Nombre d'article : </p>
                                     <p class="ml-2"><?php echo $nbProduitsTotal; ?></p>
@@ -310,16 +310,16 @@
                                     }
                                 ?>
                                 
-                            </div>
-                        </div>
+                            </aside>
+                        </section>
 
                     <?php
                 }
                 else if ($_SESSION['role'] === 'visiteur') {
                     ?>
-                        <div class="flex bottom-14 border-b md:border-none md:w-full md:grid md:grid-cols-1 lg:grid-cols-3 fixed md:sticky md:bottom-64 pointer-events-none md:h-16 md:top-1/3">
+                        <section class="flex bottom-14 border-b md:border-none md:w-full md:grid md:grid-cols-1 lg:grid-cols-3 fixed md:sticky md:bottom-64 pointer-events-none md:h-16 md:top-1/3">
                             <div></div>
-                            <div id="conteneur-info_panier" class="flex w-full flex-wrap justify-evenly md:flex-nowrap bg-beige pb-4 pointer-events-auto md:grid md:grid-rows-4 md:justify-center md:items-center md:rounded-2xl" >
+                            <aside id="conteneur-info_panier" class="flex w-full flex-wrap justify-evenly md:flex-nowrap bg-beige pb-4 pointer-events-auto md:grid md:grid-rows-4 md:justify-center md:items-center md:rounded-2xl" >
                                 <div class="inline-flex mt-2 mb-2 md:mb-0 md:mt-4 nb-prod-total">
                                     <p class="mr-2">Nombre d'article : </p>
                                     <p class="ml-2"><?php echo $_SESSION['panier']['nb_produit_total']; ?></p>
@@ -361,9 +361,9 @@
                                     }
                                 ?>
                                 
-                            </div>
+                                </aside>
                             <div></div>
-                        </div>
+                        </section>
                     <?php
                 }
             }

@@ -20,7 +20,7 @@
         foreach($dbh->query("SELECT c.id_suivi, c.id_commande, c.date_commande, c.etat, c.montant_total_ttc
                             FROM sae3_skadjam._commande c
                             WHERE c.id_client = $idCompte
-                            ORDER BY c.date_commande DESC, c.id_commande DESC;"
+                            ORDER BY c.id_commande DESC;"
                             , PDO::FETCH_ASSOC) as $row){
             
             $id_commande = $row['id_commande'];

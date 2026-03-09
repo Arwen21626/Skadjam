@@ -74,7 +74,7 @@
                 $lignes = array_slice($tabProduit, $pageNumber*PAGE_SIZE-PAGE_SIZE, PAGE_SIZE);
                 
                 //affiche la photo du produit, son nom, son prix et sa note ?>
-                <div class="flex flex-row flex-wrap justify-around">
+                <article class="flex flex-row flex-wrap justify-around">
                     <?php foreach($lignes as $id => $valeurs){
                         $idProduit = $valeurs['id_produit'];
                         // Le produit est-il en promotion ?
@@ -126,9 +126,9 @@
                                     <h4 class="text-center text-beige overline m-0"><?= htmlspecialchars($labelPromo); ?></h4>
                                 </div>
                                 <?php }} ?>
-                        </section>
+                            </section>
                     <?php } ?>
-                </div>
+                </article>
                 <?php $dbh = null;
             }catch(PDOException $e){
                 print "Erreur !: " . $e->getMessage() . "<br/>";
