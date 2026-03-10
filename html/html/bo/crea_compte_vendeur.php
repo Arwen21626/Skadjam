@@ -49,40 +49,40 @@ if (isset($_POST["nom"])){
     /* enregistrer toutes les erreurs */
 
     /* NOM */
-    if (!verifNomPrenom($nom)) $erreurs["nom"] = "Lettre majuscule ou minuscule seulement";
+    if (!verifNomPrenom($nom)) $erreurs["nom"] = "Le nom peut contenir seulement des lettres majuscules ou minuscules, des tirets, des espaces et les accents : é, ç, è, ë, ê, à, ï, î, ä, â, ù, ü, û, ö, ô";
 
     /* PRENOM */
-    if (!verifNomPrenom($prenom)) $erreurs["prenom"] = "Lettre majuscule ou minuscule seulement";
+    if (!verifNomPrenom($prenom)) $erreurs["prenom"] = "Le prénom peut contenir seulement des lettres majuscules ou minuscules, des tirets, des espaces et les accents : é, ç, è, ë, ê, à, ï, î, ä, â, ù, ü, û, ö, ô";
 
     /* MAIL */
-    if (!verifMail($mail)) $erreurs["mail"] = "Format incorrecte";
-    if (!mailUnique($mail)) $erreurs["unique"] = "Un utilisateur avec cette e-mail existe deja : $mail";
+    if (!verifMail($mail)) $erreurs["mail"] = "L'adresse email doit être du format : adresse@e.mail";
+    if (!mailUnique($mail)) $erreurs["unique"] = "L'adresse email doit être du format : adresse@e.mail";
 
     /* TEL */
-    if (!verifTelephone($tel)) $erreurs["tel"] = "Numéro à 10 chiffres";
+    if (!verifTelephone($tel)) $erreurs["tel"] = "Le numéro de téléphone doit commencer par 0 suivi de 9 chiffres";
 
     /* DENOMINATION */
-    if (!verifDenomination($denomination)) $erreurs["denomination"] = "Autorisé majuscules, minuscules et chiffres";
+    if (!verifDenomination($denomination)) $erreurs["denomination"] = "La dénomination de l'entreprise peut contenir uniquement des lettres majuscules ou minuscules, des chiffres, des tirets et des tirets";
 
     /* RS */
-    if (!verifDenomination($raisonSociale)) $erreurs["raisonSociale"] = "Autorisé majuscules, minuscules et chiffres";
+    if (!verifDenomination($raisonSociale)) $erreurs["raisonSociale"] = "La raison sociale de l'entreprise peut contenir uniquement des lettres majuscules ou minuscules, des chiffres, des tirets et des tirets";
 
     /* IBAN */
-    if (!verifIban($iban)) $erreurs["iban"] = "Numéro IBAN invalide";
+    if (!verifIban($iban)) $erreurs["iban"] = "L'iban doit commencer par FR suivi de 25 chiffres";
 
     /* MDP */
     if (!verifMotDePasse($mdp)) $erreurs["mdp"] = "Doit inclure tous les éléments si dessous";
     if (!confirmationMotDePasse($verif, $mdp)) $erreurs["conf"] = "Le mot de passe est différent";
 
     /* SIREN */
-    if (!verifSiren($siren)) $erreurs["siren"] = "Numéro SIREN invalide, taille 9";
+    if (!verifSiren($siren)) $erreurs["siren"] = "Le numéro de SIREN doit contenir 9 chiffres";
 
     /* ##### ADRESSE ##### */
-    if (!verifCp($cp)) $erreurs["cp"] = "Code postale invalide";
+    if (!verifCp($cp)) $erreurs["cp"] = "Code postale doit contenir 5 chiffres";
 
-    if (!verifVille($ville)) $erreurs["ville"] = "Format ville incorrect";
+    if (!verifVille($ville)) $erreurs["ville"] = "La ville peut contenir seulement des lettres majuscules ou minuscules, des tirets, des espaces et les accents : é, ç, è, ë, ê, à, ï, î, ä, â, ù, ü, û, ö, ô";
 
-    if (!verifAdresse($adresse)) $erreurs["adresse"] = "Format de l'adresse invalide";
+    if (!verifAdresse($adresse)) $erreurs["adresse"] = "Votre adresse postal ne peut contenir que des chiffres, lettres majuscules ou minuscules, virgules et espaces.";
     
     $temp = tabAdresse($adresse);
     $numero = $temp[0];

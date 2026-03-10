@@ -43,28 +43,28 @@ unset($_SESSION['erreurs'], $_SESSION['old']);
             <div class="flex flex-col basis-1/3 m-5 min-w-3xs">
                 <label for="nom">Nom* :</label>
                 <input class="border-4 border-beige rounded-2xl w-1/1 p-1 pl-3" type="text" name="nom" id="nom" value="<?= htmlspecialchars($old['nom'] ?? '') ?>" required>
-                <?php if (isset($erreurs['nom'])) { echo "<p class='text-rouge' style='font-size: 0.90em'>Le nom ne peut contenir que des majuscules, des minuscules, des - ou des espaces.</p>"; } ?>
+                <?php if (isset($erreurs['nom'])) { echo "<p class='text-rouge' style='font-size: 0.90em'>Le nom ne peut contenir que des majuscules, des minuscules, des tirets, des espaces ou les accents : é, ç, è, ë, ê, à, ï, î, ä, â, ù, ü, û, ö, ô.</p>"; } ?>
             </div>
 
             <!-- Prénom -->
             <div class="flex flex-col basis-1/3 m-5 min-w-3xs">
                 <label for="prenom">Prénom* :</label>
                 <input class="border-4 border-beige rounded-2xl w-1/1 p-1 pl-3" type="text" name="prenom" id="prenom" value="<?= htmlspecialchars($old['prenom'] ?? '') ?>" required>
-                <?php if (isset($erreurs['prenom'])) { echo "<p class='text-rouge' style='font-size: 0.90em'>Le prénom ne peut contenir que des majuscules, des minuscules, des - ou des espaces.</p>"; } ?>
+                <?php if (isset($erreurs['prenom'])) { echo "<p class='text-rouge' style='font-size: 0.90em'>Le prénom ne peut contenir que des majuscules, des minuscules, des tirets, des espaces les accents : é, ç, è, ë, ê, à, ï, î, ä, â, ù, ü, û, ö, ô.</p>"; } ?>
             </div>
 
             <!-- Pseudo -->
             <div class="flex flex-col basis-1/3 m-5 min-w-3xs">
                 <label for="pseudo">Pseudo* :</label>
                 <input class="border-4 border-beige rounded-2xl w-1/1 p-1 pl-3" type="text" name="pseudo" id="pseudo"value="<?= htmlspecialchars($old['pseudo'] ?? '') ?>" required>
-                <?php if (isset($erreurs['pseudo'])) { echo "<p class='text-rouge' style='font-size: 0.90em'>Le pseudo ne peut que contenir des majuscules, des minuscules, des chiffres ou des - ou des espaces.</p>"; } ?>
+                <?php if (isset($erreurs['pseudo'])) { echo "<p class='text-rouge' style='font-size: 0.90em'>Le pseudo ne peut que contenir des majuscules, des minuscules, des chiffres, des tirets, tirets du bas ou des espaces.</p>"; } ?>
             </div>
 
             <!-- Date de naissance -->
             <div class="flex flex-col basis-1/3 m-5 min-w-3xs">
                 <label for="naissance">Date de naissance* :</label>
                 <input class="border-4 border-beige rounded-2xl w-1/1 p-1 pl-3" type="date" name="naissance" id="naissance" value="<?= htmlspecialchars($old['naissance'] ?? '') ?>" required> 
-                <?php if (isset($erreurs['naissance'])) { echo "<p class='text-rouge' style='font-size: 0.90em'>La date de naissance doit être de la forme : aaaa-mm-jj.</p>"; } ?>
+                <?php if (isset($erreurs['naissance'])) { echo "<p class='text-rouge' style='font-size: 0.90em'>La date de naissance doit être de la forme : jj/mm/aaaa.</p>"; } ?>
             </div>
 
             <!-- Téléphone -->
@@ -78,7 +78,7 @@ unset($_SESSION['erreurs'], $_SESSION['old']);
             <div class="flex flex-col basis-1/3 m-5 min-w-3xs">
                 <label for="mail">Adresse email* :</label>
                 <input class="border-4 border-beige rounded-2xl w-1/1 p-1 pl-3" type="mail" name="mail" id="mail" value="<?= htmlspecialchars($old['mail'] ?? '') ?>" required>
-                <?php if (isset($erreurs['mail'])) { echo "<p class='text-rouge' style='font-size: 0.90em'>L'adresse email n'est pas valide.</p>"; } ?>
+                <?php if (isset($erreurs['mail'])) { echo "<p class='text-rouge' style='font-size: 0.90em'>L'adresse doit être au format : adresse@e.mail.</p>"; } ?>
             </div>
 
             <!-- Mot de passe -->
