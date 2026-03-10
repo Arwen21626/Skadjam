@@ -109,7 +109,9 @@
                 </table>
             </div>
             <!---bouton retour--->
-            <a href="../../index.php" class="flex justify-center mt-15 mb-15"><button class="border-vertClair border-4 rounded-lg md:rounded-2xl w-35 h-10 md:w-50 md:h-14 px-7 cursor-pointer">Retour</button></a>
+            <a href="../../index.php" class="flex justify-center mt-7 mb-7">
+                <button class="border-vertClair border-2 md:rounded-2xl rounded-xl md:w-60 w-35 md:h-14 h-10 p-2 m-1 cursor-pointer">Retour</button>
+            </a>
         <?php } ?>
     </main>
 
