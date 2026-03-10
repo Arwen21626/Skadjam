@@ -453,9 +453,6 @@ input.quantite-prod-input {
   .m-10 {
     margin: calc(var(--spacing, 0.25rem) * 10);
   }
-  .m-12 {
-    margin: calc(var(--spacing, 0.25rem) * 12);
-  }
   .mx-3 {
     margin-inline: calc(var(--spacing, 0.25rem) * 3);
   }
@@ -1870,9 +1867,9 @@ input.quantite-prod-input {
       height: calc(var(--spacing, 0.25rem) * 28);
     }
   }
-  .md\:h-6 {
+  .md\:h-7 {
     @media (width >= 48rem) {
-      height: calc(var(--spacing, 0.25rem) * 6);
+      height: calc(var(--spacing, 0.25rem) * 7);
     }
   }
   .md\:h-14 {
@@ -1993,6 +1990,11 @@ input.quantite-prod-input {
   .md\:w-70 {
     @media (width >= 48rem) {
       width: calc(var(--spacing, 0.25rem) * 70);
+    }
+  }
+  .md\:w-72 {
+    @media (width >= 48rem) {
+      width: calc(var(--spacing, 0.25rem) * 72);
     }
   }
   .md\:w-74 {
