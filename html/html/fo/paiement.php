@@ -303,8 +303,8 @@ if($_SESSION['role'] != 'client'){
                     </div> -->
                 </div>
                 <div class="flex flex-row justify-center">
-                    <button class="border-vertClair border-2 rounded-xl w-40 h-14 cursor-pointer m-5"><a href="../fo/adresse.php">Retour</a></button>
-                    <input class="border-vertClair border-2 rounded-xl w-40 h-14 cursor-pointer m-5" type="submit" value="Suivant">
+                    <button class="border-vertClair border-2 rounded-2xl w-40 h-14 cursor-pointer m-5"><a href="../fo/adresse.php">Retour</a></button>
+                    <input class="border-vertClair border-2 rounded-2xl w-40 h-14 cursor-pointer m-5" type="submit" value="Suivant">
                 </div>
             </form>
         </main>
@@ -321,8 +321,8 @@ if($_SESSION['role'] != 'client'){
 
                 <h1 class="pl-2 pr-2">Votre achat a bien été validé</h1>
                 <div class="flex flex-rox justify-center mt-3">
-                    <a href="../../index.php"><button class="border-vertClair border-2 rounded-2xl w-40 h-15 cursor-pointer m-7">Retour à l'accueil</button></a>
-                    <a href="liste_commandes.php"><button class="border-vertClair border-2 rounded-2xl w-40 h-15 cursor-pointer m-7">Liste de mes commandes</button></a>
+                    <a href="../../index.php"><button class="border-vertClair border-2 rounded-2xl md:w-75 w-40 h-14 cursor-pointer m-7">Retour à l'accueil</button></a>
+                    <a href="liste_commandes.php"><button class="border-vertClair border-2 rounded-2xl md:w-75 w-40 h-14 cursor-pointer m-7">Liste de mes commandes</button></a>
                 </div>
                 
             </div>
