@@ -1,134 +1,72 @@
 <?php
-    session_start();
+    session_start(); // Démarrage de la session
 
+    // Initialisation du rôle visiteur si aucun rôle n'est défini en session
     if (!isset($_SESSION['role'])){
         $_SESSION['role'] = 'visiteur';
     }
 
     $erreur = false;
-    include __DIR__ . '/../../01_premiere_connexion.php';
+    include __DIR__ . '/../../01_premiere_connexion.php'; // Connexion à la base de données
+
+    // Traitement du formulaire de connexion
     if(isset($_POST['mdp']) && isset($_POST['mail'])){
-        // Initialisation des données
         $erreur = false;
+
+        // Récupération et sécurisation des données du formulaire
         $mail = htmlentities($_POST["mail"]);
         $mdp = htmlentities($_POST["mdp"]);
 
-        // Récupération des données de la bdd pour tester la connexion
-        $stmt = $dbh->prepare("SELECT id_compte, mot_de_passe FROM sae3_skadjam._compte WHERE adresse_mail = ?");
+        // Récupération des données du compte correspondant à l'adresse mail saisie
+        $stmt = $dbh->prepare("SELECT id_compte, mot_de_passe, code_secret FROM sae3_skadjam._compte WHERE adresse_mail = ?");
         $stmt->execute([$mail]);
         $tab = $stmt->fetch(PDO::FETCH_ASSOC);
+        $dataConnexion = [];
 
         if($tab){
-            // Vérification mot de passe    
+            // Vérification du mot de passe avec le hash stocké en base
             $passCorrect = password_verify($mdp, $tab['mot_de_passe']);
     
             if ($passCorrect){
                 // Initialisation de la session après confirmation du mot de passe
-                $_SESSION['idCompte'] = $tab['id_compte'];
+                $dataConnexion['idCompte'] = $tab['id_compte'];
     
-                // Récupération des données de la bdd pour voir si c'est un vendeur ou un client
+                // Vérifie si le compte est un vendeur ou un client
                 $stmt = $dbh->prepare("SELECT id_compte FROM sae3_skadjam._vendeur WHERE id_compte = ?");
-                $stmt->execute([$_SESSION['idCompte']]);
+                $stmt->execute([$dataConnexion['idCompte']]);
                 $role = $stmt->fetch(PDO::FETCH_ASSOC);
-                $_SESSION['role'] = 'vendeur';
-                
-                // si l'id du compte n'est pas dans vendeur
-                if($role == null){
-                    $stmt = $dbh->prepare("SELECT id_compte FROM sae3_skadjam._client WHERE id_compte = ?");
-                    $stmt->execute([$_SESSION['idCompte']]);
-                    $role = $stmt->fetch(PDO::FETCH_ASSOC);
+                $dataConnexion['role'] = ($stmt->rowCount() > 0) ? 'vendeur' : 'client';
 
-                    // Début modif korentin
-                    // Permet d'ajouter tout les éléments du panier du visiteur au panier du compte auquel il se connecte
-                    if ($role !== null)
-                    {
-                        if ($_SESSION['panier']['nb_produit_total'] > 0) 
-                        {
-                            // Récupère l'id du panier du client
-                            $stmt = $dbh->prepare("SELECT id_panier FROM sae3_skadjam._client WHERE id_compte = ?");
-                            $stmt->execute([$tab['id_compte']]);
-                            $idPanier = $stmt->fetch(PDO::FETCH_ASSOC)['id_panier'];
-
-                            // Met à jour le nb de produit total contenu dans le panier
-                            $stmt = $dbh->prepare("UPDATE sae3_skadjam._panier SET nb_produit_total = nb_produit_total + ? WHERE id_panier = ?");
-                            $stmt->execute([$_SESSION['panier']['nb_produit_total'], $idPanier]);
-
-                            // Met à jour le montant total TTC du panier
-                            $stmt = $dbh->prepare("UPDATE sae3_skadjam._panier SET montant_total_ttc = montant_total_ttc + ? WHERE id_panier = ?");
-                            $stmt->execute([$_SESSION['panier']['montant_total_ttc'], $idPanier]);
-
-                            // Récupère tout les id des produits contenu dans le panier
-                            $stmt = $dbh->prepare("SELECT id_produit FROM sae3_skadjam._contient WHERE id_panier = ?");
-                            $stmt->execute([$idPanier]);
-                            $listeIdProduits = $stmt->fetchAll(PDO::FETCH_COLUMN);
-                            
-                            foreach ($_SESSION['panier']['contient'] as $i => $produit) 
-                            {
-                                // Si le produit est présent dans le panier du compte client, on ajoute la quantité du panier visiteur
-                                if (in_array($produit['id'], $listeIdProduits)) // Faire attention dans le panier du visiteur dans le $_SESSION, le nom de la clé de l'id du produit est 'id' simple
-                                {
-                                    $stmt = $dbh->prepare("UPDATE sae3_skadjam._contient SET quantite_par_produit = quantite_par_produit + ? WHERE id_produit = ? AND id_panier = ?");
-                                    $stmt->execute([$produit['quantite_par_produit'], $produit['id'], $idPanier]);
-                                }
-                                else // Si le produit n'est pas présent, on insert le produit dans la table contient avec la quantité
-                                {
-                                    $stmt = $dbh->prepare("INSERT INTO sae3_skadjam._contient (id_produit, id_panier, quantite_par_produit) VALUES (?, ?, ?)");
-                                    $stmt->execute([$produit['id'], $idPanier, $produit['quantite_par_produit']]);
-                                }
-                            }
-
-                            // Supprimer le panier du visiteur 
-                            unset($_SESSION['panier']);
-
-
-                        }
-                        
-
-                        $_SESSION['role'] = 'client';
-                    }
-                    // Fin modif
-                }
-    
-                // Initialisation pour une redirection sur le panier si le visiteur voulait acheter son panier et qu'il devait se connecter
-                if (isset($_POST['veutAcheter']))
-                {
-                    $_SESSION['veutAcheter'] = "V";
+                // Si le compte n'a pas de code secret A2F, on le considère directement connecté
+                if (!$tab['code_secret']){
+                    $dataConnexion['connecte'] = true;
                 }
                 
-                // Initialisation pour une redirection sur le produit si on écrivais un avis par exemple et qu'on devait se connecter
-                $idProduit = 0;
-                if(isset($_POST['idProduit'])){
-                    $idProduit = $_POST['idProduit'];
+                // Sauvegarde du contexte d'achat pour rediriger vers le panier après connexion
+                if (isset($_POST['veutAcheter'])){
+                    $dataConnexion['veutAcheter'] = $_POST['veutAcheter'];
+                } else {
+                    $dataConnexion['veutAcheter'] = null;
                 }
 
-                // Redirection suivant le role
-                if($_SESSION['role'] == 'vendeur'){
-                    header('Location: ../bo/index_vendeur.php');
-                    exit;
+                // Sauvegarde de l'id produit pour rediriger vers la fiche produit après connexion
+                if (isset($_POST['idProduit'])){
+                    $dataConnexion['idProduit'] = $_POST['idProduit'];
+                } else {
+                    $dataConnexion['idProduit'] = null;
                 }
-                else{
-                    // Si on était sur un produit alors redirection dessus
-                    if (isset($_SESSION['veutAcheter'])) {
-                        header('Location: ../fo/panier.php');
-                        exit;
-                    }
-                    else if($_SESSION['role'] == 'client' && $idProduit != 0){
-                        header('Location: ../fo/details_produit.php?idProduit='.$idProduit);
-                        exit;
-                    }
-                    else{
-                        header('Location: ../../../index.php');
-                        exit;
-                    }
-                }
+
+                // Stockage des données de connexion en session avant redirection vers l'A2F
+                $_SESSION['dataConnexion'] = $dataConnexion;
+
+                header('Location: ./authentification.php');
+                exit();
                 
+            } else {
+                // Erreur détecté dans l'adresse mail ou le mot de passe
+                $erreur = true;
             }
-            else{
-            // Erreur détecté dans l'adresse mail ou le mot de passe
-            $erreur = true;
-            }
-        }
-        else{
+        } else {
             // Erreur détecté dans l'adresse mail ou le mot de passe
             $erreur = true;
         }
@@ -148,10 +86,12 @@
         <h2 class="flex flex-col items-center">Connexion</h2>
         <form method="post">
         <?php if(isset($_GET['idProduit'])){ ?>
+            <!-- Transmet l'id du produit en champ caché pour rediriger après connexion -->
             <input name="idProduit" id="idProduit" value="<?php echo $_GET['idProduit'];?>" class="hidden w-1">
         
         <?php }?>
         <?php if (isset($_POST['veutAcheter'])) {?> 
+            <!-- Transmet l'intention d'achat en champ caché pour rediriger vers le panier après connexion -->
             <input type="hidden" name="veutAcheter" value="V">
         <?php } ?>
 
@@ -200,11 +140,9 @@
                         <input type="submit" value="Se connecter" class="cursor-pointer w-64 border-5 border-solid rounded-2xl border-vertClair pl-3">
                     </div>
                 </div>
-
-                
-                
             </div>
         </form>
+
         <!-- Renvoie sur la page de création d'un compte client -->
         <?php if (isset($_POST['veutAcheter'])) { //Modification pour rediriger vers le panier si le visiteur se crée un compte pour valider son panier?>
             <div class="flex flex-row flex-wrap justify-center m-2">
@@ -217,45 +155,12 @@
                 <a href="./creation_compte_client.php" class="underline! hover:text-rouge">Créer un compte client</a>
             </div>
         <?php } ?>
+
         <!-- Renvoie sur la page de création d'un compte vendeur -->
         <div class="flex flex-row flex-wrap justify-center m-2">
             <p class=" mr-2">Pas encore vendeur ? </p>
             <a href="../bo/crea_compte_vendeur.php" class="underline! hover:text-rouge">Créer un compte vendeur</a>
         </div>
-<!--
-        <script>
-            var passwordInput = document.getElementById("mdp");
-            passwordInput.type = 'password';
-
-            document.querySelectorAll(".modif-attribut .bouton-modifier, .modif-attribut .bouton-valider").forEach(button => {
-                button.addEventListener("click", () => {
-                    const container = button.closest(".modif-attribut"); // parent
-                    const boutonEye = container.querySelector(".bouton-modifier"); // oeil
-                    const boutonSlash = container.querySelector(".bouton-valider"); // oeil slash
-
-                    boutonSlash.classList.toggle("hidden");
-                    boutonSlash.classList.toggle("block");  
-                    
-                    boutonEye.classList.toggle("hidden");
-                    boutonEye.classList.toggle("block");
-                });
-            });
-            document.querySelectorAll(".modif-attribut .bouton-valider").forEach(button => {
-                button.addEventListener("click", () => {
-                    const container = button.closest(".modif-attribut"); // parent
-                    passwordInput.type = 'password';
-
-                });
-            });
-            document.querySelectorAll(".modif-attribut .bouton-modifier").forEach(button => {
-                button.addEventListener("click", () => {
-                    const container = button.closest(".modif-attribut"); // parent
-
-                    passwordInput.type = 'text';
-                    
-                });
-            });
-        </script> -->
     </main>
     <?php require_once __DIR__ . "/../../php/structure/footer_front.php"; ?>
 </body>
