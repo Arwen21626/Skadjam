@@ -20,7 +20,7 @@ if (isset($_POST['logout'])) {
 <html lang="fr">
 <?php require __DIR__ . "/../../php/structure/head_front.php"; ?>
 <head>
-    <title>Mon profil</title>
+    <title>Modification de mon compte</title>
 </head>
 <body>
     <?php
