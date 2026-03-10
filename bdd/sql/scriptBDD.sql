@@ -12,7 +12,8 @@ CREATE TABLE sae3_skadjam._compte (
     adresse_mail CHARACTER VARYING(150) NOT NULL UNIQUE,
     mot_de_passe CHARACTER VARYING(100) NOT NULL,
     numero_telephone CHARACTER(12) NOT NULL,
-    bloque BOOLEAN NOT NULL
+    bloque BOOLEAN NOT NULL,
+    code_secret VARCHAR(255)
     
 );
 

@@ -71,11 +71,7 @@ function affichagePagination(tab){
         changePage.classList.add("flex", "flex-row", "justify-around", "w-96", "md:w-275", "m-3")
         parent.appendChild(changePage)
 
-        // premPage = document.createElement("button")
-        // premPage.id = "premierePage"
-        // premPage.textContent = "<<"
-        // premPage.setAttribute("style","cursor: pointer")
-
+        // <<
         premPagebouton = document.createElement("button")
         premPage = document.createElement("img")
         premPage.id = "premierePage"
@@ -86,11 +82,7 @@ function affichagePagination(tab){
         premPage.classList.add("w-5", "h-5")
         premPagebouton.appendChild(premPage)
 
-        // pagePrec = document.createElement("button")
-        // pagePrec.id = "pagePrec"
-        // pagePrec.textContent = "|<"
-        // pagePrec.setAttribute("style","cursor: pointer")
-
+        // |<
         pagePrecbouton = document.createElement("button")
         pagePrec = document.createElement("img")
         pagePrec.id = "pagePrec"
@@ -101,14 +93,11 @@ function affichagePagination(tab){
         pagePrec.classList.add("w-5", "h-5")
         pagePrecbouton.appendChild(pagePrec)
 
+        // x/x numéro de page
         pageInfo = document.createElement("p")
         pageInfo.id = "pageInfo"
 
-        // pageSuiv = document.createElement("button")
-        // pageSuiv.id = "pageSuiv"
-        // pageSuiv.textContent = ">|"
-        // pageSuiv.setAttribute("style","cursor: pointer")
-
+        // >|
         pageSuivbouton = document.createElement("button")
         pageSuiv = document.createElement("img")
         pageSuiv.id = "pageSuiv"
@@ -119,11 +108,7 @@ function affichagePagination(tab){
         pageSuiv.classList.add("w-5", "h-5")
         pageSuivbouton.appendChild(pageSuiv)
 
-        // dernPage = document.createElement("button")
-        // dernPage.id = "dernierePage"
-        // dernPage.textContent = ">>"
-        // dernPage.setAttribute("style","cursor: pointer")
-
+        // >>
         dernPagebouton = document.createElement("button")
         dernPage = document.createElement("img")
         dernPage.id = "dernierePage"
@@ -134,6 +119,7 @@ function affichagePagination(tab){
         dernPage.classList.add("w-5", "h-5")
         dernPagebouton.appendChild(dernPage)
 
+        // ajout à la page
         changePage.appendChild(premPage)
         changePage.appendChild(pagePrec)
         changePage.appendChild(pageInfo)
