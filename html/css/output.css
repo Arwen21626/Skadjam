@@ -1435,6 +1435,9 @@ input.quantite-prod-input {
   .text-wrap {
     text-wrap: wrap;
   }
+  .break-words {
+    overflow-wrap: break-word;
+  }
   .text-beige {
     color: var(--color-beige);
   }

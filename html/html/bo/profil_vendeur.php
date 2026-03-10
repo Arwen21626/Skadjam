@@ -166,7 +166,7 @@
         <!-- Description -->
         <div>
             <h3 class="font-bold text-center">Description :</h3>
-            <p><?= $description != '' ? $description : 'Aucune description.'; ?></p>
+            <p class="break-words"><?= $description != '' ? $description : 'Aucune description.'; ?></p>
         </div>
 
 
