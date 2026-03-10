@@ -115,24 +115,24 @@ if (isset($_POST['logout'])) {
             <div class="flex flex-col md:flex-row justify-around items-center mt-7 mb-15">
                 <!-- Supprimer le compte du client -->
                 <form action="suppression_client.php" method="post">
-                    <input class="border-4 border-rouge rounded-xl p-2 m-1 md:w-auto w-75 cursor-pointer" type="submit" value="Supprimer mon compte">
+                    <input class="border-rouge border-2 md:rounded-2xl rounded-xl md:w-75 w-60 md:h-14 h-10 p-2 m-1 cursor-pointer" type="submit" value="Supprimer mon compte">
                 </form>
-
+                
                 <!-- Modifier les informations du client (sauf le mot de passe) -->
                 <form action="modifier_compte_client.php" method="post">
-                    <input class="border-4 border-vertClair rounded-xl p-2 m-1 md:w-auto w-75 cursor-pointer" type="submit" value="Modifier mes informations">
+                    <input class="border-vertClair border-2 md:rounded-2xl rounded-xl md:w-75 w-60 md:h-14 h-10 p-2 m-1 cursor-pointer" type="submit" value="Modifier mes informations">
                 </form>
 
                 <!-- Modifier le mot de passe du client -->
                 <form action="nouveau_mdp.php">
                     <?php $_SESSION['adresse_mail'] = $mail; ?>
-                    <input class="border-4 border-vertClair rounded-xl p-2 m-1 md:w-auto w-75 cursor-pointer" type="submit" value="Modifier mon mot de passe">    
+                    <input class="border-vertClair border-2 md:rounded-2xl rounded-xl md:w-75 w-60 md:h-14 h-10 p-2 m-1 cursor-pointer" type="submit" value="Modifier mon mot de passe">    
                 </form>
 
                 <!-- Déconnexion -->
                 <form action="profil_client.php" method="post">
                     <input type="hidden" id="logout" name="logout" value="true">
-                    <input class="border-4 border-vertClair rounded-xl p-2 m-1 md:w-auto w-75 cursor-pointer" type="submit" value="Se déconnecter">
+                    <input class="border-vertClair border-2 md:rounded-2xl rounded-xl md:w-75 w-60 md:h-14 h-10 p-2 m-1 cursor-pointer" type="submit" value="Se déconnecter">
                 </form>
             </div>
             <!--    Récupérer mes données

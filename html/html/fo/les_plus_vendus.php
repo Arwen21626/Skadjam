@@ -37,35 +37,44 @@
 
     <main class="min-h-[600px] p-8">
         <!--Début du catalogue-->
-        <h2 class="m-0">Nos nouveaux produits</h2>
-        <h3 class="text-center m-0 relative bottom-5">Produits ajoutés il y a moins de 30 jours</h3>
+        <h2 class="m-0">Nos produits les plus vendus</h2>
 
         <?php
-            //initialisation du numéro de page
-            if(isset($_GET['page'])&& $_GET['page']!==""){
-                $pageNumber = $_GET['page'];
-            }else{
-                $pageNumber = 1;
-            }
+            $pageNumber = 1;
 
             $tabProduit = [];
 
             try {                
                 //récupère toutes les infos des tables produits et photos
-                foreach($dbh->query("SELECT pr.libelle_produit, pr.id_produit, url_photo, alt, titre, prix_ttc, quantite_stock, note_moyenne, prix_remise, pourcentage_remise
-                                    FROM sae3_skadjam._produit pr
-                                    INNER JOIN sae3_skadjam._montre m
-                                        ON pr.id_produit=m.id_produit
-                                    INNER JOIN sae3_skadjam._photo ph  
-                                        ON ph.id_photo = m.id_photo 
-                                    INNER JOIN sae3_skadjam._vendeur v
-                                        ON pr.id_vendeur = v.id_compte
-                                    left join sae3_skadjam._reduit rd
-                                        on rd.id_produit = pr.id_produit
-                                    left join sae3_skadjam._remise r
-                                        on r.id_remise = rd.id_remise
-                                    WHERE pr.est_supprime = false AND pr.est_masque = false AND pr.date_creation >= CURRENT_DATE - INTERVAL '30 days'"
-                                    , PDO::FETCH_ASSOC) as $row){
+                foreach($dbh->query("SELECT pr.libelle_produit,
+                                    pr.id_produit,
+                                    ph.url_photo,
+                                    ph.alt,
+                                    ph.titre,
+                                    pr.prix_ttc,
+                                    pr.quantite_stock,
+                                    pr.note_moyenne,
+                                    pr.prix_remise,
+                                    r.pourcentage_remise,
+                                    ventes.total_vendus
+                                FROM (
+                                        SELECT id_produit, SUM(quantite) AS total_vendus
+                                        FROM sae3_skadjam._details
+                                        GROUP BY id_produit
+                                    ) ventes
+                                JOIN sae3_skadjam._produit pr
+                                    ON pr.id_produit = ventes.id_produit
+                                INNER JOIN sae3_skadjam._montre m
+                                    ON pr.id_produit = m.id_produit
+                                INNER JOIN sae3_skadjam._photo ph  
+                                    ON ph.id_photo = m.id_photo
+                                LEFT JOIN sae3_skadjam._reduit rd
+                                    ON rd.id_produit = pr.id_produit
+                                LEFT JOIN sae3_skadjam._remise r
+                                    ON r.id_remise = rd.id_remise
+                                WHERE pr.est_supprime = false AND pr.est_masque = false
+                                ORDER BY ventes.total_vendus DESC
+                                LIMIT 16;", PDO::FETCH_ASSOC) as $row){
                     $tabProduit[] = $row;
                 }
 
@@ -136,22 +145,6 @@
             }
 
             ?>
-        <!--fin du catalogue-->
-        <div class="flex flex-row space-x-4 justify-center">
-            <?php if($pageNumber>1){?>
-            <a class= "lienPage hover:text-rouge" href="<?= "./nouveaux_produits.php?page=". $pageNumber-1;?>">Page précédente</a>
-            <?php }?>
-        
-            <?php if($pageNumber<$maxPage){?>
-            <a class= "lienPage hover:text-rouge" href="<?= "./nouveaux_produits.php?page=". $pageNumber+1;?>">Page suivante</a>
-            <?php }?>
-        </div>
-
-        <!---bouton retour--->
-        <a href="../../index.php" class="flex justify-center mt-7 mb-7">
-            <button class="border-vertClair border-2 md:rounded-2xl rounded-xl md:w-60 w-35 md:h-14 h-10 p-2 m-1 cursor-pointer">Retour</button>
-        </a>
-
     </main>
     
 

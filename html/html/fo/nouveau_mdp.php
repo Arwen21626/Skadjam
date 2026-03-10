@@ -77,8 +77,8 @@ try{
             </div>
 
             <div class="flex justify-around">
-                <a href="<?= $_SESSION['role'] === 'client' ? 'profil_client.php' : 'connexion.php'; ?>" class="text-center block border-4 border-solid border-vertClair rounded-2xl w-40 py-2.5 mr-6 cursor-pointer">Annuler</a>
-                <input class="border-4 border-vertClair rounded-2xl w-40 h-14 p-0 m-0 cursor-pointer" type="submit" value="Confirmer">
+                <a href="<?= $_SESSION['role'] === 'client' ? 'profil_client.php' : 'connexion.php'; ?>" class="text-center block border-2 border-solid border-vertClair rounded-2xl w-40 py-2.5 mr-6 cursor-pointer">Annuler</a>
+                <input class="border-2 border-vertClair rounded-2xl w-40 h-14 p-0 m-0 cursor-pointer" type="submit" value="Confirmer">
             </div>
         </form>
     </main>
