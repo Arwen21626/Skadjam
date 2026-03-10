@@ -41,12 +41,31 @@ function afficherProduit(tableau, indice){
 
     // Prix TTC
     let prixTTC = document.createElement("p")
-    prixTTC.textContent = tableau[i]['prix_ttc'].replace(".", ",")+" € (TTC)"
+
+    prixTTC.append(tableau[i]['prix_ttc'].replace(".", ",") + " € (")
+
+    let abbr = document.createElement("abbr")
+    abbr.textContent = "TTC"
+    abbr.title = "Toutes Taxes Comprises"
+
+    prixTTC.append(abbr)
+    prixTTC.append(")")
+
     prixTTC.classList.add("line-through")
     parent.appendChild(prixTTC)
 
+
     let prixRemise = document.createElement("p")
-    prixRemise.textContent = tableau[i]['prix_remise'].replace(".", ",")+" € (TTC)"
+
+    prixRemise.append(tableau[i]['prix_remise'].replace(".", ",") + " € (")
+
+    let abbr2 = document.createElement("abbr")
+    abbr2.textContent = "TTC"
+    abbr2.title = "Toutes Taxes Comprises"
+
+    prixRemise.append(abbr2)
+    prixRemise.append(")")
+
     parent.appendChild(prixRemise)
 
     if (tableau[i]['prix_remise'] == tableau[i]['prix_ttc']) {
