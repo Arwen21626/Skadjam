@@ -1831,12 +1831,6 @@ input.quantite-prod-input {
       background-color: var(--color-vertClair);
     }
   }
-  .before\:bg-vertFonce {
-    &::before {
-      content: var(--tw-content);
-      background-color: var(--color-vertFonce);
-    }
-  }
   .before\:bg-vertMoyen {
     &::before {
       content: var(--tw-content);

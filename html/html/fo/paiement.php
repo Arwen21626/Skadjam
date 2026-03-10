@@ -210,7 +210,7 @@ if($_SESSION['role'] != 'client'){
                     before:rounded-full before:bg-vertClair before:text-white before:font-bold
                     after:content-[''] after:absolute after:top-[22px] after:-right-1/2
                     after:w-full after:h-[4px] after:bg-vertClair after:-z-10">
-                    Récapitulatif commande
+                    Récapitulatif <span class="hidden md:block">commande</span>
                 </li>
                 <li etape="2"
                     class="relative flex-1 text-center py-2
@@ -219,7 +219,7 @@ if($_SESSION['role'] != 'client'){
                     before:rounded-full before:bg-vertClair before:text-white before:font-bold
                     after:content-[''] after:absolute after:top-[22px] after:-right-1/2
                     after:w-full after:h-[4px] after:bg-vertClair after:-z-10">
-                    Adresse de livraison
+                    Adresse <span class="hidden md:block">de livraison</span>
                 </li>
 
                 <!-- étape actuelle -->
@@ -227,7 +227,7 @@ if($_SESSION['role'] != 'client'){
                     class="relative flex-1 text-center py-2
                     before:content-[attr(etape)] before:block before:w-[50px] before:h-[50px]
                     before:mx-auto before:mb-2 before:-mt-[10px] before:leading-[50px]
-                    before:rounded-full before:bg-vertFonce before:text-white before:font-bold
+                    before:rounded-full before:bg-vertMoyen before:text-white before:font-bold
                     after:content-[''] after:absolute after:top-[22px] after:-right-1/2
                     after:w-full after:h-[4px] after:bg-[#ccc] after:-z-10">
                     Paiement
@@ -357,7 +357,7 @@ if($_SESSION['role'] != 'client'){
                         before:rounded-full before:bg-vertClair before:text-white before:font-bold
                         after:content-[''] after:absolute after:top-[22px] after:-right-1/2
                         after:w-full after:h-[4px] after:bg-vertClair after:-z-10">
-                        Récapitulatif commande
+                        Récapitulatif <span class="hidden md:block">commande</span>
                     </li>
                     <li etape="2"
                         class="relative flex-1 text-center py-2
@@ -366,7 +366,7 @@ if($_SESSION['role'] != 'client'){
                         before:rounded-full before:bg-vertClair before:text-white before:font-bold
                         after:content-[''] after:absolute after:top-[22px] after:-right-1/2
                         after:w-full after:h-[4px] after:bg-vertClair after:-z-10">
-                        Adresse de livraison
+                        Adresse <span class="hidden md:block">de livraison</span>
                     </li>
 
                     <!-- étape actuelle -->
@@ -385,7 +385,7 @@ if($_SESSION['role'] != 'client'){
                         class="relative flex-1 text-center py-2
                         before:content-[attr(etape)] before:block before:w-[50px] before:h-[50px]
                         before:mx-auto before:mb-2 before:-mt-[10px] before:leading-[50px]
-                        before:rounded-full before:bg-vertFonce before:text-white before:font-bold
+                        before:rounded-full before:bg-vertMoyen before:text-white before:font-bold
                         after:hidden">
                         Commande validée
                     </li>
