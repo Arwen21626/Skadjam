@@ -1,236 +1,236 @@
 // Définitions des variables utilisées
 let dataStats = dataJson; // tableau des données sur les ventes tirés des commandes par requête PHP
 
-let anneeSelection = document.getElementById("select-annee"); // Input select pour l'année
-let currentAnnee = anneeSelection.value;
+if (Object.keys(dataStats).length > 0) {
 
-let produitSelection = document.getElementById("select-produit");
-let currentIdProd = produitSelection.value;
-let currentLibelleProd = produitSelection.options[produitSelection.selectedIndex].textContent;
+    let anneeSelection = document.getElementById("select-annee"); // Input select pour l'année
+    let currentAnnee = anneeSelection.value;
 
-// Champs de données pour les diagrammes
-let periodes = ['Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Août', 'Septembre', 'Octobre', 'Novembre', 'Décembre'];
-let dataVentes = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+    let produitSelection = document.getElementById("select-produit");
+    let currentIdProd = produitSelection.value;
+    let currentLibelleProd = produitSelection.options[produitSelection.selectedIndex].textContent;
 
-let dataProdVentes = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+    // Champs de données pour les diagrammes
+    let periodes = ['Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Août', 'Septembre', 'Octobre', 'Novembre', 'Décembre'];
+    let dataVentes = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
 
-let categories = ["Alimentaire", "Vêtement", "Artisanat", "Goodies", "Soin"]
-let dataCatVentes = [0, 0, 0, 0, 0]
+    let dataProdVentes = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
 
-Object.keys(dataStats[currentAnnee]).forEach(mois => { // Récupères les données des ventes totales pour l'année en cours
-    let i = Number(mois);
+    let categories = ["Alimentaire", "Vêtement", "Artisanat", "Goodies", "Soin"]
+    let dataCatVentes = [0, 0, 0, 0, 0]
 
-    dataVentes[i - 1] = Number(dataStats[currentAnnee][mois]["nb_ventes_totales"]); // Insert les données dans le champ data du diagramme
+    function arrangeYearAndCategDatas() {
 
-    Object.keys(dataStats[currentAnnee][mois]["produits"]).forEach(produit => {
-        let iCat = Number(dataStats[currentAnnee][mois]["produits"][produit]["id_categorie"]);
-        
-        dataCatVentes[iCat - 1] = Number(dataStats[currentAnnee][mois]["produits"][produit]["nb_ventes_totales"])
-    });
-});
+        Object.keys(dataStats[currentAnnee]).forEach(mois => { // Récupères les données des ventes totales pour l'année en cours
+            let i = Number(mois);
 
-Object.keys(dataStats[currentAnnee]).forEach(mois => {
-    let i = Number(mois);
-    
+            dataVentes[i - 1] = Number(dataStats[currentAnnee][mois]["nb_ventes_totales"]); // Insert les données dans le champ data du diagramme
 
-    if (dataStats[currentAnnee][mois]["produits"][currentIdProd]) {
-        dataProdVentes[i - 1] = Number(dataStats[currentAnnee][mois]["produits"][currentIdProd]["nb_ventes_totales"]);
-    }
-    else {
-        dataProdVentes[i - 1] = 0;
-    }
-});
-
-// Définitions du graphique des ventes totales générales et de sa config
-let allChart = document.getElementById("all-chart");
-
-let allChartCfg = {
-    type: 'line',
-    data: {
-        labels: periodes,
-        datasets: [{
-            label: "Ventes totales durant le mois",
-            data: dataVentes,
-            borderWidth: 3,
-            pointBorderWidth: 8,
-        }]
-    },
-    options: {
-        responsive: true,
-        maintainAspectRatio: false,
-        scales: {
-            y: {
-                beginAtZero: true,
-                grace: 1,
-                ticks: {
-                    stepSize: 1
-                }
-            }
-        },
-        plugins: {
-            title: {
-                display: true,
-                text: 'Année' + " " + currentAnnee,
-                color: '#000',
-                font: {
-                    size: 24
-                }
-            }
-        }
-    }
-}
-
-let chart = new Chart(allChart, allChartCfg);
-
-// Définitions du graphique et sa config pour les ventes totales d'un produit pour une année
-let prodChart = document.getElementById("prod-chart");
-
-let prodChartCfg = {
-    type: 'line',
-    data: {
-        labels: periodes,
-        datasets: [{
-            label: "Ventes totales durant le mois",
-            data: dataProdVentes,
-            borderWidth: 3,
-            pointBorderWidth: 8,
-        }]
-    },
-    options: {
-        responsive: true,
-        maintainAspectRatio: false,
-        scales: {
-            y: {
-                beginAtZero: true,
-                grace: 1,
-                ticks: {
-                    stepSize: 1
-                }
-            }
-        },
-        plugins: {
-            title: {
-                display: true,
-                text: currentLibelleProd + ' - ' + 'Année' + ' ' + currentAnnee,
-                color: '#000',
-                font: {
-                    size: 24
-                }
-            }
-        }
-    }
-}
-
-let chart2 = new Chart(prodChart, prodChartCfg);
-
-// Définitions du graphique et sa config pour les ventes totales par catégorie
-let cateChart = document.getElementById("categorie-chart");
-
-let cateChartCfg = {
-    type: 'pie',
-    data: {
-        labels: categories,
-        datasets: [{
-            label: "Nombre de ventes",
-            data: dataCatVentes,
-            borderWidth: 3,
-            pointBorderWidth: 8,
-        }]
-    },
-    options: {
-        responsive: true,
-        maintainAspectRatio: false,
-        plugins: {
-            title: {
-                display: true,
-                text: 'Année' + ' ' + currentAnnee,
-                color: '#000',
-                font: {
-                    size: 24
-                }
-            }
-        }
-    }
-}
-
-let chart3 = new Chart(cateChart, cateChartCfg);
-
-// Modification du graphique selon l'année sélectionné
-
-anneeSelection.addEventListener("change", function () {
-    currentAnnee = anneeSelection.value;
-
-    dataVentes = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
-    dataProdVentes = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
-    dataCatVentes = [0, 0, 0, 0, 0];
-
-
-    Object.keys(dataStats[currentAnnee]).forEach(mois => { // Récupères les données des ventes totales pour l'année en cours
-        let i = Number(mois);
-
-        dataVentes[i - 1] = Number(dataStats[currentAnnee][mois]["nb_ventes_totales"]); // Insert les données dans le champ data du diagramme
-
-        Object.keys(dataStats[currentAnnee][mois]["produits"]).forEach(produit => {
-            let iCat = Number(dataStats[currentAnnee][mois]["produits"][produit]["id_categorie"]);
-            
-            dataCatVentes[iCat - 1] = Number(dataStats[currentAnnee][mois]["produits"][produit]["nb_ventes_totales"])
+            Object.keys(dataStats[currentAnnee][mois]["produits"]).forEach(produit => { // Insert les données des catégories dans le champ data du diagramme
+                let iCat = Number(dataStats[currentAnnee][mois]["produits"][produit]["id_categorie"]);
+                
+                dataCatVentes[iCat - 1] += Number(dataStats[currentAnnee][mois]["produits"][produit]["nb_ventes_totales"])
+            });
         });
+
+    }
+
+    function arrangeProdDatas() {
+        Object.keys(dataStats[currentAnnee]).forEach(mois => {
+            let i = Number(mois);
+            
+            if (dataStats[currentAnnee][mois]["produits"][currentIdProd]) {
+                dataProdVentes[i - 1] = Number(dataStats[currentAnnee][mois]["produits"][currentIdProd]["nb_ventes_totales"]);
+            }
+            else {
+                dataProdVentes[i - 1] = 0;
+            }
+        });
+    }
+
+    arrangeYearAndCategDatas();
+    arrangeProdDatas();
+
+    // Définitions du graphique des ventes totales générales et de sa config
+    let allChart = document.getElementById("all-chart");
+
+    let allChartCfg = {
+        type: 'line',
+        data: {
+            labels: periodes,
+            datasets: [{
+                label: "Ventes totales durant le mois",
+                data: dataVentes,
+                borderWidth: 3,
+                pointBorderWidth: 8,
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            scales: {
+                y: {
+                    beginAtZero: true,
+                    grace: 1,
+                    ticks: {
+                        stepSize: 1
+                    }
+                }
+            },
+            plugins: {
+                title: {
+                    display: true,
+                    text: 'Année' + " " + currentAnnee,
+                    color: '#000',
+                    font: {
+                        size: 24
+                    }
+                },
+                legend: {
+                    labels: {
+                        color: '#000'
+                    }
+                }
+            }
+        }
+    }
+
+    let chart = new Chart(allChart, allChartCfg);
+
+    // Définitions du graphique et sa config pour les ventes totales par catégorie
+    let cateChart = document.getElementById("categorie-chart");
+
+    let cateChartCfg = {
+        type: 'pie',
+        data: {
+            labels: categories,
+            datasets: [{
+                label: "Nombre de ventes",
+                data: dataCatVentes,
+                borderWidth: 3,
+                pointBorderWidth: 8,
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+                title: {
+                    display: true,
+                    text: 'Année' + ' ' + currentAnnee,
+                    color: '#000',
+                    font: {
+                        size: 24
+                    }
+                },
+                legend: {
+                    labels: {
+                        color: '#000'
+                    }
+                }
+            }
+        }
+    }
+
+    let chart3 = new Chart(cateChart, cateChartCfg);
+
+    // Définitions du graphique et sa config pour les ventes totales d'un produit pour une année
+    let prodChart = document.getElementById("prod-chart");
+
+    let prodChartCfg = {
+        type: 'line',
+        data: {
+            labels: periodes,
+            datasets: [{
+                label: "Ventes totales durant le mois",
+                data: dataProdVentes,
+                borderWidth: 3,
+                pointBorderWidth: 8,
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            scales: {
+                y: {
+                    beginAtZero: true,
+                    grace: 1,
+                    ticks: {
+                        stepSize: 1
+                    }
+                }
+            },
+            plugins: {
+                title: {
+                    display: true,
+                    text: currentLibelleProd + ' - ' + 'Année' + ' ' + currentAnnee,
+                    color: '#000',
+                    font: {
+                        size: 24
+                    }
+                },
+                legend: {
+                    labels: {
+                        color: '#000'
+                    }
+                }
+            }
+        }
+    }
+
+    let chart2 = new Chart(prodChart, prodChartCfg);
+
+
+
+    // Modification du graphique selon l'année sélectionné
+
+    anneeSelection.addEventListener("change", function () {
+        currentAnnee = anneeSelection.value;
+
+        dataVentes = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+        dataProdVentes = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+        dataCatVentes = [0, 0, 0, 0, 0];
+
+        arrangeYearAndCategDatas();
+        arrangeProdDatas();
+
+        allChartCfg.options.plugins.title.text = 'Année' + " " + currentAnnee;
+        allChartCfg.data.datasets[0].data = dataVentes;
+
+        prodChartCfg.options.plugins.title.text = currentLibelleProd + ' - ' + 'Année' + ' ' + currentAnnee;
+        prodChartCfg.data.datasets[0].data = dataProdVentes;
+
+        cateChartCfg.options.plugins.title.text = 'Année' + " " + currentAnnee;
+        cateChartCfg.data.datasets[0].data = dataCatVentes;
+
+        chart3.destroy();
+        chart3 = new Chart(cateChart, cateChartCfg);
+
+        chart2.destroy();
+        chart2 = new Chart(prodChart, prodChartCfg);
+
+        chart.destroy();
+        chart = new Chart(allChart, allChartCfg);
     });
 
-    Object.keys(dataStats[currentAnnee]).forEach(mois => {
-        let i = Number(mois);
+    // Modifications selon le produit sélectionné
 
-        if (dataStats[currentAnnee][mois]["produits"][currentIdProd]) {
-            dataProdVentes[i - 1] = Number(dataStats[currentAnnee][mois]["produits"][currentIdProd]["nb_ventes_totales"]);
-        }
-        else {
-            dataProdVentes[i - 1] = 0;
-        }
+    produitSelection.addEventListener("change", function () {
+        currentIdProd = produitSelection.value;
+        currentLibelleProd = produitSelection.options[produitSelection.selectedIndex].textContent;
+
+        dataProdVentes = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+
+        arrangeProdDatas();
+
+        prodChartCfg.options.plugins.title.text = currentLibelleProd + ' - ' + 'Année' + ' ' + currentAnnee;
+        prodChartCfg.data.datasets[0].data = dataProdVentes;
+
+        chart2.destroy();
+        chart2 = new Chart(prodChart, prodChartCfg);
     });
+}
 
-    allChartCfg.options.plugins.title.text = 'Année' + " " + currentAnnee;
-    allChartCfg.data.datasets[0].data = dataVentes;
 
-    prodChartCfg.options.plugins.title.text = currentLibelleProd + ' - ' + 'Année' + ' ' + currentAnnee;
-    prodChartCfg.data.datasets[0].data = dataProdVentes;
-
-    cateChartCfg.options.plugins.title.text = 'Année' + " " + currentAnnee;
-    cateChartCfg.data.datasets[0].data = dataCatVentes;
-
-    chart3.destroy();
-    chart3 = new Chart(cateChart, cateChartCfg);
-
-    chart2.destroy();
-    chart2 = new Chart(prodChart, prodChartCfg);
-
-    chart.destroy();
-    chart = new Chart(allChart, allChartCfg);
-});
-
-// Modifications selon le produit sélectionné
-
-produitSelection.addEventListener("change", function () {
-    currentIdProd = produitSelection.value;
-    currentLibelleProd = produitSelection.options[produitSelection.selectedIndex].textContent;
-
-    dataProdVentes = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
-
-    Object.keys(dataStats[currentAnnee]).forEach(mois => {
-        let i = Number(mois);
-
-        if (dataStats[currentAnnee][mois]["produits"][currentIdProd]) {
-            dataProdVentes[i - 1] = Number(dataStats[currentAnnee][mois]["produits"][currentIdProd]["nb_ventes_totales"]);
-        }
-        else {
-            dataProdVentes[i - 1] = 0;
-        }
-    });
-
-    prodChartCfg.options.plugins.title.text = currentLibelleProd + ' - ' + 'Année' + ' ' + currentAnnee;
-    prodChartCfg.data.datasets[0].data = dataProdVentes;
-
-    chart2.destroy();
-    chart2 = new Chart(prodChart, prodChartCfg);
-});
 
 
