@@ -64,7 +64,7 @@
             <a href="html/fo/nouveaux_produits.php" title="lien vers page nouveaux produits" alt="nouveaux produits">
                 <img src="images/images_accueil/nouveaux_produits.webp" title="lien vers page nouveaux produits" alt="Produits ajoutés ces 30 derniers jours" class="w-90 md:w-150 h-auto justify-self-start">
             </a>           
-            <a href="#nosProduits" title="lien vers page les plus vendus" alt="les plus vendus">
+            <a href="html/fo/les_plus_vendus.php" title="lien vers page les plus vendus" alt="les 16 produits les plus vendus sur le site">
                 <img src="images/images_accueil/les_plus_vendus.webp" title="lien vers page les plus vendus" alt="Produits les plus vendus (Pas encore disponible)" class="w-90 md:w-150 h-auto justify-self-end">
             </a>
             <a href="html/fo/liste_commandes.php" title="lien vers page commandes" alt="commandes">
