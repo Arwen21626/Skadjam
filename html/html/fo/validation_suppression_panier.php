@@ -20,7 +20,7 @@ if (isset($_POST['logout'])) {
 <html lang="fr">
 <?php require __DIR__ . "/../../php/structure/head_front.php"; ?>
 <head>
-    <title>Modification de mon compte</title>
+    <title>Panier</title>
 </head>
 <body>
     <?php
@@ -28,10 +28,15 @@ if (isset($_POST['logout'])) {
     require __DIR__ . "/../../php/structure/navbar_front.php";
     ?>
     <main class="min-h-[600px]">
-            <h2>Voulez-vous vraiment supprimer cette adresse ?</h2>
+            <h2>Voulez-vous vraiment vider votre panier ?</h2>
             <div class="mt-100 md:mt-15 flex flex-row justify-around">
-                <a href="modifier_compte_client.php"><button class="border-2 border-vertClair rounded-xl w-auto h-14 px-7 cursor-pointer">Retour</button></a>
-                <a href="../../php/supprimer_adresse.php?idAdresse=<?php echo $_GET['idAdresse']; ?>"><button class="border-2 border-rouge rounded-xl w-auto h-14 px-7 cursor-pointer">Supprimer</button></a>
+                <a href="panier.php"><button class="border-2 border-vertClair rounded-xl w-auto h-14 px-7 cursor-pointer">Retour</button></a>
+                <form class="flex justify-center" method="get" action="/php/vider_panier.php">
+                    <input type="hidden" name="typeVider" value="normal">
+                    <button class="border-2 border-rouge rounded-xl w-auto h-14 px-7 cursor-pointer" type="submit">
+                        Vider le panier
+                    </button>
+                </form>
             </div>
         </main>
     <?php require __DIR__ . "/../../php/structure/footer_front.php"; ?>
