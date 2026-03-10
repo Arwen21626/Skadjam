@@ -185,14 +185,14 @@
                 </div>
 
                 <!-- Boutons -->
-                <div class="flex flex-row space-x-10">
+                <div class="flex flex-row space-x-10 mb-7">
                     <div class=" justify-self-center">
                         <!-- Boutton de retour à l'index.php -->
-                        <a href="/index.php"><button class="cursor-pointer w-35 md:w-60 h-10 md:h-12 border-5 border-solid rounded-xl md:rounded-2xl border-vertClair pl-3" type="button">Annuler</button></a>
+                        <a href="/index.php"><button class="border-vertClair border-2 md:rounded-2xl rounded-xl md:w-60 w-35 md:h-14 h-10 p-2 m-1 cursor-pointer" type="button">Annuler</button></a>
                     </div>
                     <div class=" justify-self-center">
                         <!-- Envoie des données en méthode POST pour se connecter -->
-                        <input type="submit" value="Se connecter" class="cursor-pointer w-35 md:w-60 h-10 md:h-12 border-5 border-solid rounded-xl md:rounded-2xl border-vertClair pl-3 mb-4">
+                        <input type="submit" value="Se connecter" class="border-vertClair border-2 md:rounded-2xl rounded-xl md:w-60 w-35 md:h-14 h-10 p-2 m-1 cursor-pointer">
                     </div>
                 </div>
             </div>
