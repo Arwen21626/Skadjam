@@ -108,17 +108,25 @@
             
             <!-- Le commantaire -->
             <label class="mt-10" for="commentaire">Commentaire : </label>
-            <textarea class="border-4 border-beige rounded-2xl w-1/1 p-1 pl-3" name="commentaire" rows="10" cols="100"><?php if(isset($commentaire)){echo $commentaire;}?></textarea>
+            <textarea class="border-4 border-beige rounded-2xl w-full p-1 pl-3" name="commentaire" rows="10" cols="100"><?php if(isset($commentaire)){echo $commentaire;}?></textarea>
 
-            <div class="flex mt-10 justify-center md:justify-end w-1/1 ">
-                <button class="cursor-pointer border-2 border-vertFonce rounded-2xl w-40 h-14 p-0 m-0 mr-10 " type="button"><a href="./details_produit.php?idProduit=<?php echo $idProd; ?>">Annuler</a></button>
-                
-                <!-- Supression -->
+                           
+            <!---ligne de boutons--->
+            <div class="flex flex-col items-center md:flex-row md:mt-10 mt-5 md:justify-end w-full">
+                <!-- Supression-->
                 <?php if (isset($note) && $note !== null){ // on peut supprimer un avis que si on est entrain de la modifier ?>
-                    <a class="cursor-pointer border-2 border-vertFonce rounded-2xl w-40 h-14 p-4 m-0 mr-10" href="./ajouter_avis.php?idProduit=<?php echo $produit['id_produit']?>&supr=true">Supprimer</a>
+                <button class="cursor-pointer border-2 border-rouge md:rounded-2xl rounded-xl md:w-40 w-36 md:h-14 h-10 p-2 m-1 md:mr-10 mb-3">
+                    <a href="./ajouter_avis.php?idProduit=<?php echo $produit['id_produit']?>&supr=true">Supprimer</a>
+                </button>        
                 <?php }?>
 
-                <input class="cursor-pointer border-2 border-vertFonce rounded-2xl w-40 h-14 p-0 m-0 md:mr-10" type="submit" name="submit" id="submit" value="Valider" >
+                <!---Annuler--->
+                <button class="cursor-pointer border-2 border-vertClair md:rounded-2xl rounded-xl md:w-40 w-36 md:h-14 h-10 p-2 m-1 md:mr-10 mb-3" type="button">
+                    <a href="./details_produit.php?idProduit=<?php echo $idProd; ?>">Annuler</a>
+                </button>
+                
+                <!---Valider--->
+                <input class="cursor-pointer border-2 border-vertClair md:rounded-2xl rounded-xl md:w-40 w-36 md:h-14 h-10 p-2 m-1 md:mr-10" type="submit" name="submit" id="submit" value="Valider" >
             </div>
         </form>
         
