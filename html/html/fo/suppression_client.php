@@ -31,8 +31,8 @@ if (isset($_POST['logout'])) {
             <h2>Voulez-vous vraiment supprimer votre compte ?</h2>
             <h3 class="text-center">Cette action est irréversible.</h3>
             <div class="mt-15 flex flex-row justify-around mb-15">
-                <a href="profil_client.php"><button class="mt-80 md:mt-0 border-2 border-vertClair rounded-xl w-auto h-14 px-7 cursor-pointer">Retour</button></a>
-                <a href="../../php/supprimer_compte_client.php"><button class="mt-80 md:mt-0 border-2 border-rouge rounded-xl w-auto h-14 px-7 cursor-pointer">Supprimer</button></a>
+                <a href="profil_client.php"><button class="mt-80 md:mt-0 border-2 border-vertClair rounded-xl w-40 h-14 px-7 cursor-pointer">Retour</button></a>
+                <a href="../../php/supprimer_compte_client.php"><button class="mt-80 md:mt-0 border-2 border-rouge rounded-xl w-40 h-14 px-7 cursor-pointer">Supprimer</button></a>
             </div>
         </main>
     <?php require __DIR__ . "/../../php/structure/footer_front.php"; ?>

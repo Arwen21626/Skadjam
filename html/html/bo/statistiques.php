@@ -148,21 +148,24 @@
                         <p class="pr-2">Choisissez un produit :</p>
                         <select name="" id="select-produit" class="pl-2 cursor-pointer">
                             <?php 
-                                $cles = [];
+                                // $cles = [];
 
-                                foreach ($dataStats as $annee) { // Parcours toutes les années
-                                    foreach ($annee as $mois) { // Parcours tous les mois
-                                        $clesTemp = array_keys($mois["produits"]);
+                                // foreach ($dataStats as $annee) { // Parcours toutes les années
+                                //     foreach ($annee as $mois) { // Parcours tous les mois
+                                //         $clesTemp = array_keys($mois["produits"]);
 
-                                        foreach ($clesTemp as $key) { // Parcours tous les id des produits vendus lors d'un mois d'une année
-                                            $cles[$key] = $mois["produits"][$key]["libelle_prod"];
-                                        }
-                                    }
-                                }
+                                //         foreach ($clesTemp as $key) { // Parcours tous les id des produits vendus lors d'un mois d'une année
+                                //             $cles[$key] = $mois["produits"][$key]["libelle_prod"];
+                                //         }
+                                //     }
+                                // }
 
-                                foreach ($cles as $idProd => $libelle) {
+                                $rqt = $dbh->query("SELECT id_produit, libelle_produit FROM sae3_skadjam._produit WHERE id_vendeur = $idVendeur", PDO::FETCH_ASSOC);
+                                $cles = $rqt->fetchAll();
+
+                                foreach ($cles as $prod) {
                                     ?>
-                                        <option class="cursor-pointer" value=<?php echo $idProd; ?>><?php echo $libelle; ?></option>
+                                        <option class="cursor-pointer" value=<?php echo $prod["id_produit"]; ?>><?php echo $prod["libelle_produit"]; ?></option>
                                     <?php
                                 }
                             ?>
@@ -171,8 +174,8 @@
                 </div>
 
 
-                <div class="chart-container flex justify-center items-center flex-col p-2">
-                    <div class="chart flex justify-center items-center relative m-4 w-[60vw] h-[50vh]">
+                <div id="container-prod-chart" class="chart-container flex justify-center items-center flex-col p-2">
+                    <div id="div-prod-chart" class="chart flex justify-center items-center relative m-4 w-[60vw] h-[50vh]">
                         <canvas id="prod-chart"></canvas>
                     </div>
                 </div>
@@ -186,7 +189,6 @@
 
         <?php } ?>
         
-
     </main>
     
     <?php 

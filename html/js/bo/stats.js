@@ -1,3 +1,11 @@
+Chart.Tooltip.positioners.cursor = function(items, eventPosition) {
+    // Permet de définir la position du curseur pour tout les graphiques, pour permettre à la tooltip d'être placé sur ce dernier
+    return {
+        x: eventPosition.x,
+        y: eventPosition.y
+    };
+};
+
 // Définitions des variables utilisées
 let dataStats = dataJson; // tableau des données sur les ventes tirés des commandes par requête PHP
 
@@ -9,6 +17,11 @@ if (Object.keys(dataStats).length > 0) {
     let produitSelection = document.getElementById("select-produit");
     let currentIdProd = produitSelection.value;
     let currentLibelleProd = produitSelection.options[produitSelection.selectedIndex].textContent;
+
+    let divProdChart = document.getElementById("div-prod-chart");
+    let containerProdChart = document.getElementById("container-prod-chart");
+    let divTextChart = document.createElement("h4");
+
 
     // Champs de données pour les diagrammes
     let periodes = ['Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Août', 'Septembre', 'Octobre', 'Novembre', 'Décembre'];
@@ -36,16 +49,32 @@ if (Object.keys(dataStats).length > 0) {
     }
 
     function arrangeProdDatas() {
+
+        let nbProd = 0;
+
         Object.keys(dataStats[currentAnnee]).forEach(mois => {
             let i = Number(mois);
             
             if (dataStats[currentAnnee][mois]["produits"][currentIdProd]) {
                 dataProdVentes[i - 1] = Number(dataStats[currentAnnee][mois]["produits"][currentIdProd]["nb_ventes_totales"]);
+                nbProd += Number(dataStats[currentAnnee][mois]["produits"][currentIdProd]["nb_ventes_totales"]);
             }
             else {
                 dataProdVentes[i - 1] = 0;
             }
         });
+
+        if (nbProd == 0){
+            divProdChart.classList.add("hidden");
+            divTextChart.classList.remove("hidden");
+            divTextChart.textContent = "Aucune statistique enregistrée pour ce produit en " + currentAnnee;
+
+            containerProdChart.appendChild(divTextChart);
+        }
+        else {
+            divProdChart.classList.remove("hidden");
+            divTextChart.classList.add("hidden");
+        }
     }
 
     arrangeYearAndCategDatas();
@@ -83,14 +112,21 @@ if (Object.keys(dataStats).length > 0) {
                     text: 'Année' + " " + currentAnnee,
                     color: '#000',
                     font: {
-                        size: 24
+                        size: 21
                     }
                 },
                 legend: {
                     labels: {
                         color: '#000'
                     }
+                },
+                tooltip: {
+                    position: 'cursor'
                 }
+            },
+            interaction: {
+                mode: 'index',
+                intersect: false
             }
         }
     }
@@ -120,7 +156,7 @@ if (Object.keys(dataStats).length > 0) {
                     text: 'Année' + ' ' + currentAnnee,
                     color: '#000',
                     font: {
-                        size: 24
+                        size: 21
                     }
                 },
                 legend: {
@@ -166,14 +202,21 @@ if (Object.keys(dataStats).length > 0) {
                     text: currentLibelleProd + ' - ' + 'Année' + ' ' + currentAnnee,
                     color: '#000',
                     font: {
-                        size: 24
+                        size: 21
                     }
                 },
                 legend: {
                     labels: {
                         color: '#000'
                     }
+                },
+                tooltip: {
+                    position: 'cursor'
                 }
+            },
+            interaction: {
+                mode: 'index',
+                intersect: false
             }
         }
     }

@@ -101,11 +101,49 @@
     <main class="flex flex-col justify-center">
         
         <!---fil d'ariane processus d'achat--->
-        <ul class="etapes-processus-achat">
-            <li class="fait" etape="1">Récapitulatif commande</li>
-            <li class="actuel" etape="2">Adresse de livraison</li>
-            <li etape="3">Paiement</li>
-            <li etape="4">Commande validée</li>
+        <ul class="flex list-none p-0 m-8">
+            <!-- étape faite -->
+            <li etape="1"
+                class="relative flex-1 text-center py-2
+                before:content-[attr(etape)] before:block before:w-[30px] before:h-[30px]
+                before:mx-auto before:mb-2 before:leading-[30px]
+                before:rounded-full before:bg-vertClair before:text-white before:font-bold
+                after:content-[''] after:absolute after:top-[22px] after:-right-1/2
+                after:w-full after:h-[4px] after:bg-vertClair after:-z-10">
+                Récapitulatif <span class="hidden md:block">commande</span>
+            </li>
+
+            <!-- étape actuelle -->
+            <li etape="2"
+                class="relative flex-1 text-center py-2
+                before:content-[attr(etape)] before:block before:w-[50px] before:h-[50px]
+                before:mx-auto before:mb-2 before:-mt-[10px] before:leading-[50px]
+                before:rounded-full before:bg-vertMoyen before:text-white before:font-bold
+                after:content-[''] after:absolute after:top-[22px] after:-right-1/2
+                after:w-full after:h-[4px] after:bg-[#ccc] after:-z-10">
+                Adresse <span class="hidden md:block">de livraison</span>
+            </li>
+
+            <!-- étape à faire -->
+            <li etape="3"
+                class="relative flex-1 text-center py-2
+                before:content-[attr(etape)] before:block before:w-[30px] before:h-[30px]
+                before:mx-auto before:mb-2 before:leading-[30px]
+                before:rounded-full before:bg-[#ccc] before:text-white before:font-bold
+                after:content-[''] after:absolute after:top-[22px] after:-right-1/2
+                after:w-full after:h-[4px] after:bg-[#ccc] after:-z-10">
+                Paiement
+            </li>
+
+            <!-- dernière étape -->
+            <li etape="4"
+                class="relative flex-1 text-center py-2
+                before:content-[attr(etape)] before:block before:w-[30px] before:h-[30px]
+                before:mx-auto before:mb-2 before:leading-[30px]
+                before:rounded-full before:bg-[#ccc] before:text-white before:font-bold
+                after:hidden">
+                Commande validée
+            </li>
         </ul>
 
         <h2>Adresse de livraison</h2>

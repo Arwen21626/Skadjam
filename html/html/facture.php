@@ -65,8 +65,6 @@ foreach($dbh->query("SELECT v.raison_sociale, cvend.adresse_mail as mail_vendeur
     }
     
 }
-
-
 ?>
 
 <!DOCTYPE html>
@@ -80,74 +78,74 @@ foreach($dbh->query("SELECT v.raison_sociale, cvend.adresse_mail as mail_vendeur
 <body class=" max-w-1/1">
     <?php foreach ($info as $id => $row){?>
         <div class="h-full break-after-page">
-        <h1 class=" mb-3"> Facture n°<?php echo $id?></h1>
-        
-        <section class=" max-w-1/3  mb-5"> 
-            <p class="font-bold">n° de commande : <?php echo $idCommande?></p>
-            <p>date : <?php echo $dateCommande?></p>
-            <p>payement immédiat</p>
-        </section>
+            <h1 class=" mb-3"> Facture n°<?php echo $id?></h1>
+            
+            <section class=" max-w-1/3  mb-5"> 
+                <p class="font-bold">n° de commande : <?php echo $idCommande?></p>
+                <p>date : <?php echo $dateCommande?></p>
+                <p>payement immédiat</p>
+            </section>
 
-        <div class="grid grid-cols-2 mb-8 w-1/1 justify-end">
-            <section class=" max-w-1/2 justify-self-start">
-                <h2>Émetteur</h2>
-                <p><?php echo $row['vendeur']['raisonSocial']?></p>
-                <p><?php echo $row['vendeur']['mailVendeur']?></p>
-                <p><?php echo $row['vendeur']['adresseVendeur']?></p>
-            </section>
-            <section class=" max-w-1/2">
-                <h2>Destinataire</h2>
-                <p><?php echo $nomClient.' '.$prenomClient?></p>
-                <p><?php echo $mailClient?></p>
-                <p><?php echo $adrClient?></p>
-            </section>
-        </div>
-        
-        <table class="w-1/1">
-            <thead>
-                <th class="border-r-2 p-1 w-3/8">article</th>
-                <th class="border-r-2 p-1 w-1/8">prix unitaire HT</th>
-                <th class="border-r-2 p-1 w-1/8">prix unitaire TTC</th>
-                <th class="border-r-2 p-1 w-1/8">pourcentage de remise</th>
-                <th class="border-r-2 p-1 w-1/8">quantite</th>
-                <th class="border-r-2 p-1 w-1/8">total</th>
-            </thead>
-            <tbody>
-                
-                <?php foreach($row['produits'] as $idProd => $prod){?>
-                    <tr class="text-center border-t-2">
-                        <td class="text-left border-r-2 p-1"><?php echo $idProd.' - '.$prod['libelle']?></td>
-                        <td class="border-r-2 p-1">
-                            <?php 
-                                $prix = explode(".", $prod['prixHT']); 
-                                echo htmlentities($prix[0].",".$prix[1]);
-                            ?>
-                        </td>
-                        <td class="border-r-2 p-1">
-                            <?php 
-                                $prix = explode(".", $prod['prixTTC']); 
-                                echo htmlentities($prix[0].",".$prix[1]);
-                            ?>
-                        </td>
-                        <td class="border-r-2 p-1"><?php echo htmlentities(($prod['pourcentageRemise'] === null)?'0%': ($prod['pourcentageRemise']*100).'%' )?></td>
-                        <td class="border-r-2 p-1"><?php echo htmlentities($prod['quantite'])?></td>
-                        <td class="border-r-2 p-1">
-                            <?php 
-                                $prix = explode(".", $prod['sousTotal']); 
-                                echo htmlentities($prix[0].",".$prix[1]);
-                            ?>
-                        </td>
-                    </tr>
-                <?php }?>
-            </tbody>
-        </table>
-        <p class="border-t-2 font-bold w-1/1">
-            SOUS TOTAL TTC = 
-            <?php 
-                $prix = explode(".", $row['montantFacture']); 
-                echo htmlentities($prix[0].",".((preg_match("/^[1-9]$/", $prix[1]))?$prix[1]."0":$prix[1]));
-            ?>
-        </p>
+            <div class="grid grid-cols-2 mb-8 w-1/1 justify-end">
+                <section class=" max-w-1/2 justify-self-start">
+                    <h2>Émetteur</h2>
+                    <p><?php echo $row['vendeur']['raisonSocial']?></p>
+                    <p><?php echo $row['vendeur']['mailVendeur']?></p>
+                    <p><?php echo $row['vendeur']['adresseVendeur']?></p>
+                </section>
+                <section class=" max-w-1/2">
+                    <h2>Destinataire</h2>
+                    <p><?php echo $nomClient.' '.$prenomClient?></p>
+                    <p><?php echo $mailClient?></p>
+                    <p><?php echo $adrClient?></p>
+                </section>
+            </div>
+            
+            <table class="w-1/1">
+                <thead>
+                    <th class="border-r-2 p-1 w-3/8">article</th>
+                    <th class="border-r-2 p-1 w-1/8">prix unitaire HT</th>
+                    <th class="border-r-2 p-1 w-1/8">prix unitaire TTC</th>
+                    <th class="border-r-2 p-1 w-1/8">pourcentage de remise</th>
+                    <th class="border-r-2 p-1 w-1/8">quantite</th>
+                    <th class="border-r-2 p-1 w-1/8">total</th>
+                </thead>
+                <tbody>
+                    
+                    <?php foreach($row['produits'] as $idProd => $prod){?>
+                        <tr class="text-center border-t-2">
+                            <td class="text-left border-r-2 p-1"><?php echo $idProd.' - '.$prod['libelle']?></td>
+                            <td class="border-r-2 p-1">
+                                <?php 
+                                    $prix = explode(".", $prod['prixHT']); 
+                                    echo htmlentities($prix[0].",".$prix[1]);
+                                ?>
+                            </td>
+                            <td class="border-r-2 p-1">
+                                <?php 
+                                    $prix = explode(".", $prod['prixTTC']); 
+                                    echo htmlentities($prix[0].",".$prix[1]);
+                                ?>
+                            </td>
+                            <td class="border-r-2 p-1"><?php echo htmlentities(($prod['pourcentageRemise'] === null)?'0%': ($prod['pourcentageRemise']*100).'%' )?></td>
+                            <td class="border-r-2 p-1"><?php echo htmlentities($prod['quantite'])?></td>
+                            <td class="border-r-2 p-1">
+                                <?php 
+                                    $prix = explode(".", $prod['sousTotal']); 
+                                    echo htmlentities($prix[0].",".$prix[1]);
+                                ?>
+                            </td>
+                        </tr>
+                    <?php }?>
+                </tbody>
+            </table>
+            <p class="border-t-2 font-bold w-1/1">
+                SOUS TOTAL TTC = 
+                <?php 
+                    $prix = explode(".", $row['montantFacture']); 
+                    echo htmlentities($prix[0].",".((preg_match("/^[1-9]$/", $prix[1]))?$prix[1]."0":$prix[1]));
+                ?>
+            </p>
         </div>
     <?php }?>
 </body>

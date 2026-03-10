@@ -110,13 +110,42 @@ if (isset($_POST['valider'])) {
     <main class="min-h-[600px]">
 
         <!---fil d'ariane processus d'achat--->
-        <ul class="etapes-processus-achat">
-            <li class="actuel" etape="1">Récapitulatif <span class="hidden md:block">commande</span></li>
-            <li etape="2">Adresse <span class="hidden md:block">de livraison</span></li>
-            <li etape="3">Paiement</li>
-            <li class="hidden md:block"etape="4">Commande validée</li>
-            <li class="block md:hidden"etape="4">Validation</li>
+        <ul class="flex list-none p-0 m-8">
+            <li etape="1"
+                class="relative flex-1 text-center py-2
+                before:content-[attr(etape)] before:block before:mx-auto before:mb-2
+                before:rounded-full before:bg-vertMoyen before:text-white before:font-bold
+                before:w-[50px] before:h-[50px] before:leading-[50px] before:-mt-[10px]
+                after:content-[''] after:absolute after:top-[22px] after:-right-1/2 after:w-full after:h-[4px]
+                after:bg-[#ccc] after:-z-10">
+                Récapitulatif <span class="hidden md:block">commande</span>
+            </li>
 
+            <li etape="2"
+                class="relative flex-1 text-center py-2
+                before:content-[attr(etape)] before:block before:w-[30px] before:h-[30px] before:mx-auto before:mb-2
+                before:leading-[30px] before:rounded-full before:bg-[#ccc] before:text-white before:font-bold
+                after:content-[''] after:absolute after:top-[22px] after:-right-1/2 after:w-full after:h-[4px]
+                after:bg-[#ccc] after:-z-10">
+                Adresse <span class="hidden md:block">de livraison</span>
+            </li>
+
+            <li etape="3"
+                class="relative flex-1 text-center py-2
+                before:content-[attr(etape)] before:block before:w-[30px] before:h-[30px] before:mx-auto before:mb-2
+                before:leading-[30px] before:rounded-full before:bg-[#ccc] before:text-white before:font-bold
+                after:content-[''] after:absolute after:top-[22px] after:-right-1/2 after:w-full after:h-[4px]
+                after:bg-[#ccc] after:-z-10">
+                Paiement
+            </li>
+
+            <li etape="4"
+                class="relative flex-1 text-center py-2
+                before:content-[attr(etape)] before:block before:w-[30px] before:h-[30px] before:mx-auto before:mb-2
+                before:leading-[30px] before:rounded-full before:bg-[#ccc] before:text-white before:font-bold
+                after:hidden">
+                Commande validée
+            </li>
         </ul>
 
        <!--- <span class="block md:hidden">Etat :</span>
