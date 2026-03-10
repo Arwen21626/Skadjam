@@ -20,7 +20,7 @@
 <html lang="fr">
 <?php include __DIR__."/../../php/structure/head_front.php";?>
 <head> 
-    <title>Promotions</title>
+    <title>Les plus vendus</title>
     <style>
         button a:hover{
             color: black;

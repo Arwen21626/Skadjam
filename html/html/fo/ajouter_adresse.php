@@ -92,7 +92,7 @@ unset($_SESSION['erreurs'], $_SESSION['old']);
 <html lang="fr">
 <?php include __DIR__ . "/../../php/structure/head_front.php";?>
 <head>
-    <title>Modification du compte client</title>
+    <title>Modification de mon compte</title>
     <style>
         button a:hover {
             color: #000; 

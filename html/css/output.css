@@ -510,6 +510,9 @@ input.quantite-prod-input {
   .mt-30 {
     margin-top: calc(var(--spacing, 0.25rem) * 30);
   }
+  .mt-80 {
+    margin-top: calc(var(--spacing, 0.25rem) * 80);
+  }
   .mr-1 {
     margin-right: calc(var(--spacing, 0.25rem) * 1);
   }
