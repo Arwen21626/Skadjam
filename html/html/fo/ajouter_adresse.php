@@ -92,7 +92,7 @@ unset($_SESSION['erreurs'], $_SESSION['old']);
 <html lang="fr">
 <?php include __DIR__ . "/../../php/structure/head_front.php";?>
 <head>
-    <title>Modification du compte client</title>
+    <title>Modification de mon compte</title>
     <style>
         button a:hover {
             color: #000; 
@@ -141,7 +141,10 @@ unset($_SESSION['erreurs'], $_SESSION['old']);
                         value="<?= $adresse_complete ?>"
                         required/>
                     <?php if (!empty($erreurs['adresse'])): ?>
-                        <p class="text-rouge" style="font-size: 0.90em">L'adresse est invalide.</p>
+                        <p class="text-rouge" style="font-size: 0.90em">
+                            L'adresse ne peut contenir que des chiffres, lettres majuscules ou minuscules, 
+                            virgules et espaces.
+                        </p>
                     <?php endif; ?>
                 </div>
 
@@ -156,7 +159,7 @@ unset($_SESSION['erreurs'], $_SESSION['old']);
                         required/>
                     <?php if (!empty($erreurs['ville'])): ?>
                         <p class="text-rouge" style="font-size: 0.90em">
-                            La ville ne peut contenir que des majuscules, des minuscules, des - ou des espaces.
+                            La ville ne peut contenir que des majuscules, des minuscules, des tirets ou des espaces.
                         </p>
                     <?php endif; ?>
                 </div>

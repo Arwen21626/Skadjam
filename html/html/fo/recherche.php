@@ -290,8 +290,8 @@
 
         <?php $dbh = null;?>
 
-        <div id="contMap" class="hidden p-2  w-9/10 h-54 fixed right-5 bottom-22 md:flex md:flex-row md:w-1/3 md:h-85 md:bottom-5">
-            <p id="mouvMap" class="hidden md:block text-bleu text-center rounded-l-md bg-vertFonce/90 w-6 h-6">></p>
+        <div id="contMap" class="hidden p-2 w-9/10 h-54 fixed right-5 bottom-22 md:flex md:flex-row md:w-1/3 md:h-85 md:bottom-5">
+            <p id="mouvMap" class=" cursor-pointer hidden md:block text-bleu text-center rounded-l-md bg-vertFonce/90 w-6 h-6">></p>
             <div id="map" class="w-full h-50 border-vertFonce border-2 rounded-2xl md:rounded-l-none md:rounded-b-2xl md:rounded-tr-2xl  bg-vertFonce/90 md:h-80 md:p-2 "></div>
         
         <script>

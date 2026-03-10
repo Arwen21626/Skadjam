@@ -87,7 +87,7 @@
                 $lignes = array_slice($tabProduit, $pageNumber*PAGE_SIZE-PAGE_SIZE, PAGE_SIZE);
                 
                 //affiche la photo du produit, son nom, son prix et sa note, son stock ?>
-                <div class="flex flex-row flex-wrap justify-around">
+                <article class="flex flex-row flex-wrap justify-around">
                     <?php foreach($tabProduit as $id => $valeurs){
                         $idProduit = $valeurs['id_produit'];
                         // Le produit est-il en promotion ?
@@ -132,7 +132,7 @@
                             <?php } ?>
                         </section>
                     <?php } ?>
-                </div>         
+                </article>         
                 <?php $dbh = null;
             }catch(PDOException $e){
                 print "Erreur !: " . $e->getMessage() . "<br/>";
@@ -149,6 +149,11 @@
             <a class= "lienPage hover:text-rouge" href="<?php echo "./index.php?page=".($pageNumber+1)."#nosProduits";?>">Page suivante</a>
             <?php }?>
         </div>
+
+        <!---bouton retour--->
+        <a href="../../index.php" class="flex justify-center mt-7 mb-7">
+            <button class="border-vertClair border-2 md:rounded-2xl rounded-xl md:w-60 w-35 md:h-14 h-10 p-2 m-1 cursor-pointer">Retour</button>
+        </a>
     </main>
     
     <!--footer-->

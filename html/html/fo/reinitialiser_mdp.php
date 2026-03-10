@@ -12,6 +12,14 @@ use PHPMailer\PHPMailer\SMTP;
 
 // permet à $mailer d'envoyer des e-mails
 $mailer = new PHPMailer(true);
+try{
+    $dbh = new PDO("$driver:host=$server;port=$port;dbname=$dbname",$user,$pass);
+    $dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+    $dbh->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC);
+    if(isset($_POST['mail'])){
+       header("Location: ./nouveau_mdp.php");
+       exit();
+    }else{
 ?>
 <!DOCTYPE html>
 <html lang="fr">
@@ -24,13 +32,8 @@ $mailer = new PHPMailer(true);
     <h2 class="flex justify-center text-center">Mot de passe oublié</h2>
     <!-- Affichage d'un champ input pour insérer une adresse mail -->
     <?php
-    try{
-        $dbh = new PDO("$driver:host=$server;port=$port;dbname=$dbname",$user,$pass);
-        $dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-        $dbh->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC);
-
         // Si l'e-mail est présent, essaie d'envoyer un message à cette adresse
-        if(isset($_POST['mail'])){
+        
             ?><p><?php
             try {/*
                 // Configuration SMTP
@@ -55,18 +58,15 @@ $mailer = new PHPMailer(true);
 
                 // Envoi
                 $mailer->send();
-*/
+
                 // Permet de savoir quel compte doit changer de mot de passe
                 $_SESSION["adresse_mail"] = $_POST["mail"];
                     
-                echo "Vérifiez votre boîte de réception ainsi que vos spams."; ?></p><?php
+                echo "Vérifiez votre boîte de réception ainsi que vos spams."; ?></p><?php*/
             }catch(Exception $e){
                 echo "Erreur : le mail n'a pas été envoyé."; ?></p><?php
             }
-            // Redirection vers la page nouveau_mdp
-            header("Location: http://localhost:8888/html/fo/nouveau_mdp.php");
-            exit();
-        }else{
+            
     ?>
     <main class="md:min-h-[800px] min-h-[600px]">
         <form class="flex flex-col p-15 pt-0 justify-around align-center" action="reinitialiser_mdp.php" method="post">

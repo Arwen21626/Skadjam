@@ -33,7 +33,7 @@ foreach($dbh->query('SELECT * from sae3_skadjam._tva', PDO::FETCH_ASSOC) as $row
 }
 
 //Recuperation de toutes les informations du produit
-foreach($dbh->query("SELECT *,est_masque::CHAR as est_masque_php 
+foreach($dbh->query("SELECT *
                             FROM sae3_skadjam._produit pr
                             INNER JOIN sae3_skadjam._categorie c
                                 ON pr.id_categorie = c.id_categorie
@@ -52,7 +52,7 @@ foreach($dbh->query("SELECT *,est_masque::CHAR as est_masque_php
     $description = $produit['description_produit'];
     $prixHT = $produit['prix_ht'];
     $remise = $produit['pourcentage_remise'];
-    $enLigne = $produit['est_masque_php']; 
+    $enLigne = $produit['est_masque']; 
     $qteStock = $produit['quantite_stock'];
     $qteUnite = $produit['quantite_unite'];
     $unite = $produit['unite'];
@@ -131,10 +131,20 @@ if (isset($_POST['categorie']) && isset($_POST['nom']) && isset($_POST['prix']) 
     $prixHT = htmlentities($_POST['prix']);
     $qteStock = htmlentities($_POST['qteStock']);
     $remise = htmlentities($_POST['remise']);
-    $enLigne = htmlentities($_POST['mettreEnLigne']);
     $description = htmlentities($_POST['description']);
     $unite = htmlentities($_POST['unite']);
     $qteUnite = htmlentities($_POST['qteUnite']);
+
+    // S'il n'est pas coché il faut mettre est_masque dans la BDD à true en chaine pour eviter les problèmes
+    if (isset($_POST['mettreEnLigne']) && $_POST['mettreEnLigne'] === "on"){
+        $enLigne = "true";
+    }
+    else{
+        $enLigne = "false";
+    }
+    
+
+
     // Champs spécifiques à la promotion
     $dateDebutPromotion = $_POST['dateDebutPromotion'] !== null ? $_POST['dateDebutPromotion'] : date('Y-m-d');
     $dateFinPromotion = htmlentities($_POST['dateFinPromotion']);
@@ -151,13 +161,6 @@ if (isset($_POST['categorie']) && isset($_POST['nom']) && isset($_POST['prix']) 
         if ($c['id_categorie'] == $idCategorie) {
             $nomCategorie = $c['libelle_categorie'];
         }
-    }
-    
-    // S'il n'est pas coché il faut mettre est_masque dans la BDD à true en chaine pour eviter les problèmes
-    if($_POST['mettreEnLigne'] == false){
-        $enLigne = 'true';
-    }else{
-        $enLigne = 'false';
     }
 
 
@@ -497,7 +500,7 @@ else { ?>
                     <!-- Quantite en stock -->
                     <div class="flex flex-col">
                         <label for="qteStock">Quantité en stock* :</label>
-                        <input value="<?php echo $qteStock;?>" placeholder="50" class="border-4 border-beige rounded-2xl w-40 m-2 placeholder-gray-500" type="number" name="qteStock" id="qteStock" min="0" required>
+                        <input value="<?php echo $qteStock;?>" placeholder="50" class="border-4 border-beige rounded-2xl w-40 m-2 placeholder-gray-500" type="number" name="qteStock" id="qteStock" required>
                     </div>
                 </div>
                     

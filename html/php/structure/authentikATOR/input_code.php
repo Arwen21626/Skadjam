@@ -8,8 +8,9 @@
         <input type="text" name="nb5" id="in5" size="1" tabindex="5" maxlength="1" pattern="[1-9]" placeholder="X" class="input-code- border-4 rounded-2xl border-vertClair w-12 h-18 text-4xl text-center">
         <input type="text" name="nb6" id="in6" size="1" tabindex="6" maxlength="1" pattern="[1-9]" placeholder="X" class="input-code- border-4 rounded-2xl border-vertClair w-12 h-18 text-4xl text-center">
     </section>
-    <button id="valider" onclick="submit()" class="border-vertClair border-2 rounded-xl w-40 h-14 cursor-pointer m-5" disabled>Vérifier</button>
+    <button id="valider" onclick="submit(<?= $idClient ?>)" class="border-vertClair border-2 rounded-xl w-40 h-14 cursor-pointer m-5" disabled>Vérifier</button>
 </div>
+
 <script>
 const parent = document.getElementById("input-code")
 const valider = document.getElementById("valider")
@@ -103,24 +104,6 @@ function recup_code(){
 
 function test_code(code){
     return code.length == 6
-}
-
-function code_valide(code){
-    let ret
-    let donnees = new FormData();
-    donnees.append('secret', txt_key.textContent);
-    donnees.append('code', code);
-    fetch('../../php/structure/authentikATOR/verify_otp.php', {
-        method: 'post',
-        body: donnees
-    })
-    .then(r => r.json())
-    .then(data => {
-        ret = data.verify;
-        console.log("retour = "+ret)
-        return ret == 0
-    })
-
 }
 
 </script>

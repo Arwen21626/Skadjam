@@ -101,16 +101,54 @@
     <main class="flex flex-col justify-center">
         
         <!---fil d'ariane processus d'achat--->
-        <ul class="etapes-processus-achat">
-            <li class="fait" etape="1">Récapitulatif commande</li>
-            <li class="actuel" etape="2">Adresse de livraison</li>
-            <li etape="3">Paiement</li>
-            <li etape="4">Retour à la page d'accueil</li>
+        <ul class="flex list-none p-0 m-8">
+            <!-- étape faite -->
+            <li etape="1"
+                class="relative flex-1 text-center py-2
+                before:content-[attr(etape)] before:block before:w-[30px] before:h-[30px]
+                before:mx-auto before:mb-2 before:leading-[30px]
+                before:rounded-full before:bg-vertClair before:text-white before:font-bold
+                after:content-[''] after:absolute after:top-[22px] after:-right-1/2
+                after:w-full after:h-[4px] after:bg-vertClair after:-z-10">
+                Récapitulatif <span class="hidden md:block">commande</span>
+            </li>
+
+            <!-- étape actuelle -->
+            <li etape="2"
+                class="relative flex-1 text-center py-2
+                before:content-[attr(etape)] before:block before:w-[50px] before:h-[50px]
+                before:mx-auto before:mb-2 before:-mt-[10px] before:leading-[50px]
+                before:rounded-full before:bg-vertMoyen before:text-white before:font-bold
+                after:content-[''] after:absolute after:top-[22px] after:-right-1/2
+                after:w-full after:h-[4px] after:bg-[#ccc] after:-z-10">
+                Adresse <span class="hidden md:block">de livraison</span>
+            </li>
+
+            <!-- étape à faire -->
+            <li etape="3"
+                class="relative flex-1 text-center py-2
+                before:content-[attr(etape)] before:block before:w-[30px] before:h-[30px]
+                before:mx-auto before:mb-2 before:leading-[30px]
+                before:rounded-full before:bg-[#ccc] before:text-white before:font-bold
+                after:content-[''] after:absolute after:top-[22px] after:-right-1/2
+                after:w-full after:h-[4px] after:bg-[#ccc] after:-z-10">
+                Paiement
+            </li>
+
+            <!-- dernière étape -->
+            <li etape="4"
+                class="relative flex-1 text-center py-2
+                before:content-[attr(etape)] before:block before:w-[30px] before:h-[30px]
+                before:mx-auto before:mb-2 before:leading-[30px]
+                before:rounded-full before:bg-[#ccc] before:text-white before:font-bold
+                after:hidden">
+                Commande validée
+            </li>
         </ul>
 
         <h2>Adresse de livraison</h2>
 
-        <form class="flex flex-col self-center" method="post">
+        <form class="flex flex-col self-center p-10" method="post">
             
             <div class="flex flex-col md:flex-row justify-between">
                 <div class="flex flex-col max-w-70">
@@ -126,7 +164,9 @@
                     ?>" class="pl-2 border-4 border-vertClair rounded-xl placeholder-gray-500 max-w-70" type="text" name="nom" id="nom" required>
                     <?php 
                     if($erreurNom){ ?>
-                        <p class="text-rouge">Une erreur est survenue au niveau de votre nom</p>
+                        <p class="text-rouge">
+                            Votre nom ne peut contenir que des lettres majuscules, minuscules, tirets, espaces et les accents : éçèëêàïîäâùüûöô
+                        </p>
                     <?php } ?>
                 </div>
 
@@ -143,7 +183,9 @@
                     ?>" class="pl-2 border-4 border-vertClair rounded-xl placeholder-gray-500 max-w-70" type="text" name="prenom" id="prenom" required>
                     <?php 
                     if($erreurPrenom){ ?>
-                        <p class="text-rouge">Une erreur est survenue au niveau de votre prénom</p>
+                        <p class="text-rouge">
+                            Votre prenom ne peut contenir que des lettres majuscules, minuscules, tirets, espaces et les accents : é, ç, è, ë, ê, à, ï, î, ä, â, ù, ü, û, ö, ô
+                        </p>
                     <?php } ?>
                 </div>
             </div>
@@ -161,7 +203,10 @@
                 ?>" class="pl-2 border-4 border-vertClair rounded-xl placeholder-gray-500 w-100 md:w-200" type="text" name="adresse" id="adresse" required>
                 <?php 
                 if($erreurAdresse){ ?>
-                    <p class="text-rouge">Une erreur est survenue au niveau de votre adresse</p>
+                    <p class="text-rouge">
+                        Votre adresse postal ne peut contenir que des chiffres, lettres majuscules ou minuscules, 
+                        virgules et espaces.
+                    </p>
                 <?php } ?>
             </div>
             
@@ -228,7 +273,7 @@
                     ?>" class="pl-2 border-4 border-vertClair rounded-xl placeholder-gray-500 md:w-200 w-40" type="text" name="codePostal" id="codePostal" required>
                     <?php 
                     if($erreurCodePostal){ ?>
-                        <p class="text-rouge">Une erreur est survenue au niveau de votre code postal</p>
+                        <p class="text-rouge">Votre code posal doit se composer de 5 chiffres</p>
                     <?php } ?>
                 </div>
             </div>
@@ -243,6 +288,27 @@
                 <input class="border-vertClair border-2 rounded-2xl w-40 h-14 cursor-pointer" type="submit" value="Suivant">
             </div>
         </form>
+
+
+
+        <script>
+            
+            // initialisation
+            let nom = document.getElementById("nom")
+            let prenom = document.getElementById("prenom")
+            let adresse = document.getElementById("adresse")
+            let numBat = document.getElementById("numBat")
+            let numAppart = document.getElementById("numAppart")
+            let ville = document.getElementById("ville")
+            let codePostal = document.getElementById("codePostal")
+            
+            // Verif nom
+            nom.addEventListener("blur", function(){
+                
+            })
+
+
+        </script>
     </main>
     <?php include(__DIR__ . '/../../php/structure/footer_front.php');?>
 </body>

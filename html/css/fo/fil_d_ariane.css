@@ -1,4 +1,5 @@
 /*Fil d'ariane pour processus d'achat*/
+
     .etapes-processus-achat{
     display:flex;
     list-style:none;
@@ -13,6 +14,7 @@
         padding:10px 0;
     }
 
+    /*étapes à faire*/
     .etapes-processus-achat li::before{
         content:attr(etape);
         display:block;
@@ -26,6 +28,7 @@
         font-weight:bold;
     }
 
+    /*fil d'étapes à faire*/
     .etapes-processus-achat li::after{
         content:"";
         position:absolute;
@@ -41,14 +44,30 @@
         display:none;
     }
 
+    /*étapes déjà faites*/
     .etapes-processus-achat li.fait::before{
-        background:#28a745;
+        background:#86D0CC;
     }
 
+    /*fil d'étapes déjà faites*/
     .etapes-processus-achat li.fait::after{
-        background:#28a745;
+        background:#86D0CC;
     }
 
+    /*étape actuelle*/
     .etapes-processus-achat li.actuel::before{
-        background:#007bff;
+        background:#588A87;
+        width:50px;
+        height:50px;
+        line-height:50px;
+        margin: -10px auto 8px;
     }
+
+/*
+  --color-vertFonce: #365452;
+  --color-vertMoyen: #588A87;
+  --color-vertClair: #86D0CC;
+  --color-beige: #E3D7CC;
+  --color-rouge: #A70101;
+  --color-bleu: #E2F9FF;
+*/

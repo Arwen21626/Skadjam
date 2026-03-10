@@ -164,38 +164,46 @@
     
         
         <!-- Description -->
-        <div class="w-9/10">
-            <h3 class="font-bold">Description :</h3>
-            <p class=""><?= $description != '' ? $description : 'Aucune description.'; ?></p>
+        <div>
+            <h3 class="font-bold text-center">Description :</h3>
+            <p class="break-words"><?= $description != '' ? $description : 'Aucune description.'; ?></p>
         </div>
 
-        <div class="">
-            <form action="statistiques.php" method="post">
-                <input class="cursor-pointer border-4 rounded-xl p-2 m-1 border-beige w-75" type="submit" value="Mes statistiques">
-            </form>
-        </div>
 
-        <div class="flex flex-row justify-around items-center mt-7 mb-15">
-            <!-- Supprimer le compte du vendeur -->
-            <form action="suppression_vendeur.php" method="post">
-                <input class="border-4 border-beige rounded-xl p-2 m-1 md:w-auto w-75 cursor-pointer" type="submit" value="Supprimer mon compte">
+              
+        <div class="grid grid-cols-3 gap-4 mb-15">
+            <!---1ère ligne de boutons---> 
+            <!-- Modifier le mot de passe du vendeur -->
+            <form action="nouveau_mdp.php">
+                <?php $_SESSION['adresse_mail'] = $mail; ?>
+                <input class="border-vertFonce border-2 rounded-2xl w-75 h-14 p-2 m-1 cursor-pointer" type="submit" value="Modifier mon mot de passe">    
             </form>
 
             <!-- Modifier les informations du vendeur (sauf le mot de passe) -->
             <form action="modifier_compte_vendeur.php" method="post">
-                <input class="cursor-pointer border-4 rounded-xl p-2 m-1 border-beige w-75" type="submit" value="Modifier mes informations">
+                <input class="border-vertFonce border-2 rounded-2xl w-75 h-14 p-2 m-1 cursor-pointer" type="submit" value="Modifier mes informations">
             </form>
 
-            <!-- Modifier le mot de passe du vendeur -->
-            <form action="nouveau_mdp.php">
-                <?php $_SESSION['adresse_mail'] = $mail; ?>
-                <input class="cursor-pointer border-4 rounded-xl p-2 m-1 border-beige w-75" type="submit" value="Modifier mon mot de passe">    
+            <!---Statistiques--->
+            <form action="statistiques.php" method="post">
+                <input class="border-vertFonce border-2 rounded-2xl w-75 h-14 p-2 m-1 cursor-pointer" type="submit" value="Mes statistiques">
+            </form> 
+            
+            <!---2ème ligne de boutons---> 
+            <!-- Supprimer le compte du vendeur -->
+            <form action="suppression_vendeur.php" method="post">
+                <input class="border-rouge border-2 rounded-2xl w-75 h-14 p-2 m-1 cursor-pointer" type="submit" value="Supprimer mon compte">
             </form>
+
+            <!---Retour--->
+            <a href="index_vendeur.php">
+                <button class="border-vertFonce border-2 rounded-2xl w-75 h-14 p-2 m-1 cursor-pointer">Retour</button>
+            </a>
 
             <!-- Déconnexion -->
             <form action="profil_vendeur.php" method="post">
                 <input type="hidden" id="logout" name="logout" value="true">
-                <input class="cursor-pointer border-4 rounded-xl p-2 m-1 border-beige w-75" type="submit" value="Se déconnecter">
+                <input class="border-vertFonce border-2 rounded-2xl w-75 h-14 p-2 m-1 cursor-pointer" type="submit" value="Se déconnecter">
             </form>
         </div>
 

@@ -58,7 +58,6 @@ for(let i = 1; i < lignesTab.length; i++){
 }
 
 function actionReset(ligne, idxLigne){
-    console.log("salut");
     // remet tous les champs à leur valeur de base
     ligne.children[4].children[0].value = stocks[idxLigne-1];
     ligne.children[5].children[0].value = 0;
@@ -171,6 +170,7 @@ function stockModifier(ligne, idxLigne){
         ligne.children[5].children[0].style.backgroundColor = "";
         ligne.children[6].children[0].style.backgroundColor = "";
         
+        // gestion du seuil d'alerte
         if(seuilAlertAtteint(ligne.children[4])){
             changementSeuilAtteint(ligne, idxLigne);
         }
@@ -185,15 +185,17 @@ function stockModifier(ligne, idxLigne){
 }
 
 function seuilAlertAtteint(champStock){
+    // vérifie si le seuil d'alerte est atteint
     let seuil = champStock.children[1].textContent;
 
-    if (champStock.children[0].value <= seuil){
+    if (Number(champStock.children[0].value) <= Number(seuil)){
         return true;
     }
     return false;
 }
 
 function changementSeuilAtteint(ligne, idxLigne){
+    // fait les chagements nécésaire si le seuil d'alerte est atteint
     if(idxLigne%2 === 0){
         changerCouleurBorderLigne(rougeClaire, ligne);
     }
