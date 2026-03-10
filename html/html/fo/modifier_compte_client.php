@@ -155,7 +155,7 @@ foreach($dbh->query("SELECT * FROM sae3_skadjam._compte c
                             </div>
                         </div>
                         <div class="flex items-center justify-end">
-                            <button class="cursor-pointer border-4 border-rouge rounded-2xl w-80 h-14 p-0 m-0 mt-5" type="button"><a href="../../php/supprimer_adresse.php?idAdresse=<?php echo $ligne['id_adresse'];?>">Supprimer cette adresse</a></button>
+                            <button class="cursor-pointer border-4 border-rouge rounded-2xl w-80 h-14 p-0 m-0 mt-5" type="button"><a href="validation_suppression_adresse.php?idAdresse=<?php echo $ligne['id_adresse'];?>">Supprimer cette adresse</a></button>
                         </div>
                     </div>
                 <?php 
