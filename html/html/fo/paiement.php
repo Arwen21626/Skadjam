@@ -207,18 +207,18 @@ if($_SESSION['role'] != 'client'){
                     class="relative flex-1 text-center py-2
                     before:content-[attr(etape)] before:block before:w-[30px] before:h-[30px]
                     before:mx-auto before:mb-2 before:leading-[30px]
-                    before:rounded-full before:bg-[#86D0CC] before:text-white before:font-bold
+                    before:rounded-full before:bg-vertClair before:text-white before:font-bold
                     after:content-[''] after:absolute after:top-[22px] after:-right-1/2
-                    after:w-full after:h-[4px] after:bg-[#86D0CC] after:-z-10">
+                    after:w-full after:h-[4px] after:bg-vertClair after:-z-10">
                     Récapitulatif commande
                 </li>
                 <li etape="2"
                     class="relative flex-1 text-center py-2
                     before:content-[attr(etape)] before:block before:w-[30px] before:h-[30px]
                     before:mx-auto before:mb-2 before:leading-[30px]
-                    before:rounded-full before:bg-[#86D0CC] before:text-white before:font-bold
+                    before:rounded-full before:bg-vertClair before:text-white before:font-bold
                     after:content-[''] after:absolute after:top-[22px] after:-right-1/2
-                    after:w-full after:h-[4px] after:bg-[#86D0CC] after:-z-10">
+                    after:w-full after:h-[4px] after:bg-vertClair after:-z-10">
                     Adresse de livraison
                 </li>
 
@@ -227,7 +227,7 @@ if($_SESSION['role'] != 'client'){
                     class="relative flex-1 text-center py-2
                     before:content-[attr(etape)] before:block before:w-[50px] before:h-[50px]
                     before:mx-auto before:mb-2 before:-mt-[10px] before:leading-[50px]
-                    before:rounded-full before:bg-[#588A87] before:text-white before:font-bold
+                    before:rounded-full before:bg-vertFonce before:text-white before:font-bold
                     after:content-[''] after:absolute after:top-[22px] after:-right-1/2
                     after:w-full after:h-[4px] after:bg-[#ccc] after:-z-10">
                     Paiement
@@ -338,7 +338,7 @@ if($_SESSION['role'] != 'client'){
                         </div>
                     </div> -->
                 </div>
-                <div class="flex flex-row justify-center">
+                <div class="flex flex-row justify-center mb-7">
                     <button class="border-vertClair border-2 rounded-2xl w-40 h-14 cursor-pointer m-5"><a href="../fo/adresse.php">Retour</a></button>
                     <input class="border-vertClair border-2 rounded-2xl w-40 h-14 cursor-pointer m-5" type="submit" value="Suivant">
                 </div>
@@ -354,18 +354,18 @@ if($_SESSION['role'] != 'client'){
                         class="relative flex-1 text-center py-2
                         before:content-[attr(etape)] before:block before:w-[30px] before:h-[30px]
                         before:mx-auto before:mb-2 before:leading-[30px]
-                        before:rounded-full before:bg-[#86D0CC] before:text-white before:font-bold
+                        before:rounded-full before:bg-vertClair before:text-white before:font-bold
                         after:content-[''] after:absolute after:top-[22px] after:-right-1/2
-                        after:w-full after:h-[4px] after:bg-[#86D0CC] after:-z-10">
+                        after:w-full after:h-[4px] after:bg-vertClair after:-z-10">
                         Récapitulatif commande
                     </li>
                     <li etape="2"
                         class="relative flex-1 text-center py-2
                         before:content-[attr(etape)] before:block before:w-[30px] before:h-[30px]
                         before:mx-auto before:mb-2 before:leading-[30px]
-                        before:rounded-full before:bg-[#86D0CC] before:text-white before:font-bold
+                        before:rounded-full before:bg-vertClair before:text-white before:font-bold
                         after:content-[''] after:absolute after:top-[22px] after:-right-1/2
-                        after:w-full after:h-[4px] after:bg-[#86D0CC] after:-z-10">
+                        after:w-full after:h-[4px] after:bg-vertClair after:-z-10">
                         Adresse de livraison
                     </li>
 
@@ -374,9 +374,9 @@ if($_SESSION['role'] != 'client'){
                         class="relative flex-1 text-center py-2
                         before:content-[attr(etape)] before:block before:w-[30px] before:h-[30px]
                         before:mx-auto before:mb-2 before:leading-[30px]
-                        before:rounded-full before:bg-[#86D0CC] before:text-white before:font-bold
+                        before:rounded-full before:bg-vertClair before:text-white before:font-bold
                         after:content-[''] after:absolute after:top-[22px] after:-right-1/2
-                        after:w-full after:h-[4px] after:bg-[#86D0CC] after:-z-10">
+                        after:w-full after:h-[4px] after:bg-vertClair after:-z-10">
                         Paiement
                     </li>
 
@@ -385,7 +385,7 @@ if($_SESSION['role'] != 'client'){
                         class="relative flex-1 text-center py-2
                         before:content-[attr(etape)] before:block before:w-[50px] before:h-[50px]
                         before:mx-auto before:mb-2 before:-mt-[10px] before:leading-[50px]
-                        before:rounded-full before:bg-[#588A87] before:text-white before:font-bold
+                        before:rounded-full before:bg-vertFonce before:text-white before:font-bold
                         after:hidden">
                         Commande validée
                     </li>
