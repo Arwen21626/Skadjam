@@ -951,15 +951,7 @@ VALUES
   (1, 'En attente', '01/02/2026', 82.74, 21),
   (1, 'En attente', '18/07/2025', 113.93, 21),
   (1, 'En attente', '09/10/2024', 57.57, 21);
-
--- Insertion dans donne
-INSERT INTO sae3_skadjam._donne (id_panier, id_commande)
-  VALUES (1, 1);
-INSERT INTO sae3_skadjam._donne (id_panier, id_commande)
-  VALUES (1, 2);
-INSERT INTO sae3_skadjam._donne (id_panier, id_commande)
-  VALUES (1, 3);
-                            
+        
 INSERT INTO sae3_skadjam._details (montant_ht, quantite, sous_total, id_commande, id_produit)
 VALUES
   (25.99, 1, 31.19, 1, 73),
@@ -969,3 +961,12 @@ VALUES
   (4.99, 2, 11.98, 2, 98),
   (10.99, 3, 39.57, 2, 104),
   (15.99, 3, 57.57, 3, 68);
+
+-- Insertion dans donne
+INSERT INTO sae3_skadjam._donne (id_panier, id_commande)
+  VALUES (1, 1);
+INSERT INTO sae3_skadjam._donne (id_panier, id_commande)
+  VALUES (1, 2);
+INSERT INTO sae3_skadjam._donne (id_panier, id_commande)
+  VALUES (1, 3);
+                    

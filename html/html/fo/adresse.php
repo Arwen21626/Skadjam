@@ -288,6 +288,27 @@
                 <input class="border-vertClair border-2 rounded-2xl w-40 h-14 cursor-pointer" type="submit" value="Suivant">
             </div>
         </form>
+
+
+
+        <script>
+            
+            // initialisation
+            let nom = document.getElementById("nom")
+            let prenom = document.getElementById("prenom")
+            let adresse = document.getElementById("adresse")
+            let numBat = document.getElementById("numBat")
+            let numAppart = document.getElementById("numAppart")
+            let ville = document.getElementById("ville")
+            let codePostal = document.getElementById("codePostal")
+            
+            // Verif nom
+            nom.addEventListener("blur", function(){
+                
+            })
+
+
+        </script>
     </main>
     <?php include(__DIR__ . '/../../php/structure/footer_front.php');?>
 </body>

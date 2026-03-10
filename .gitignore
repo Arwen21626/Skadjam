@@ -16,3 +16,4 @@ archiveC21/*
 html/images/tmp_images/*
 vendor/
 /composer*
+logs*
