@@ -1616,18 +1616,6 @@ input.quantite-prod-input {
       border-radius: calc(infinity * 1px);
     }
   }
-  .before\:bg-\[\#86D0CC\] {
-    &::before {
-      content: var(--tw-content);
-      background-color: #86D0CC;
-    }
-  }
-  .before\:bg-\[\#588A87\] {
-    &::before {
-      content: var(--tw-content);
-      background-color: #588A87;
-    }
-  }
   .before\:bg-\[\#ccc\] {
     &::before {
       content: var(--tw-content);
@@ -1638,12 +1626,6 @@ input.quantite-prod-input {
     &::before {
       content: var(--tw-content);
       background-color: var(--color-vertClair);
-    }
-  }
-  .before\:bg-vertFonce {
-    &::before {
-      content: var(--tw-content);
-      background-color: var(--color-vertFonce);
     }
   }
   .before\:bg-vertMoyen {
@@ -1725,12 +1707,6 @@ input.quantite-prod-input {
     &::after {
       content: var(--tw-content);
       width: 100%;
-    }
-  }
-  .after\:bg-\[\#86D0CC\] {
-    &::after {
-      content: var(--tw-content);
-      background-color: #86D0CC;
     }
   }
   .after\:bg-\[\#ccc\] {
