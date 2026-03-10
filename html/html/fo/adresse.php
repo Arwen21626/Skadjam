@@ -110,7 +110,7 @@
 
         <h2>Adresse de livraison</h2>
 
-        <form class="flex flex-col self-center" method="post">
+        <form class="flex flex-col self-center p-10" method="post">
             
             <div class="flex flex-col md:flex-row justify-between">
                 <div class="flex flex-col max-w-70">
@@ -126,7 +126,9 @@
                     ?>" class="pl-2 border-4 border-vertClair rounded-xl placeholder-gray-500 max-w-70" type="text" name="nom" id="nom" required>
                     <?php 
                     if($erreurNom){ ?>
-                        <p class="text-rouge">Une erreur est survenue au niveau de votre nom</p>
+                        <p class="text-rouge">
+                            Votre nom ne peut contenir que des lettres majuscules, minuscules, tirets, espaces et les accents : éçèëêàïîäâùüûöô
+                        </p>
                     <?php } ?>
                 </div>
 
@@ -143,7 +145,9 @@
                     ?>" class="pl-2 border-4 border-vertClair rounded-xl placeholder-gray-500 max-w-70" type="text" name="prenom" id="prenom" required>
                     <?php 
                     if($erreurPrenom){ ?>
-                        <p class="text-rouge">Une erreur est survenue au niveau de votre prénom</p>
+                        <p class="text-rouge">
+                            Votre prenom ne peut contenir que des lettres majuscules, minuscules, tirets, espaces et les accents : é, ç, è, ë, ê, à, ï, î, ä, â, ù, ü, û, ö, ô
+                        </p>
                     <?php } ?>
                 </div>
             </div>
@@ -161,7 +165,10 @@
                 ?>" class="pl-2 border-4 border-vertClair rounded-xl placeholder-gray-500 w-100 md:w-200" type="text" name="adresse" id="adresse" required>
                 <?php 
                 if($erreurAdresse){ ?>
-                    <p class="text-rouge">Une erreur est survenue au niveau de votre adresse</p>
+                    <p class="text-rouge">
+                        Votre adresse postal ne peut contenir que des chiffres, lettres majuscules ou minuscules, 
+                        virgules et espaces.
+                    </p>
                 <?php } ?>
             </div>
             
@@ -228,7 +235,7 @@
                     ?>" class="pl-2 border-4 border-vertClair rounded-xl placeholder-gray-500 md:w-200 w-40" type="text" name="codePostal" id="codePostal" required>
                     <?php 
                     if($erreurCodePostal){ ?>
-                        <p class="text-rouge">Une erreur est survenue au niveau de votre code postal</p>
+                        <p class="text-rouge">Votre code posal doit se composer de 5 chiffres</p>
                     <?php } ?>
                 </div>
             </div>

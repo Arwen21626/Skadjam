@@ -222,7 +222,7 @@ if($_SESSION['role'] != 'client'){
                         }*/ ?>" class="pl-2 border-4 border-vertClair rounded-xl placeholder-gray-500 md:w-100 w-75" type="text" name="numero" id="numero" required>
                         <?php
                             if($erreurNumero){ ?>
-                                <p class="text-rouge"><?php echo "Le numéro n'est pas bon";?></p>
+                                <p class="text-rouge"><?php echo "Votre numéro de carte doit contenir 16 chiffres";?></p>
                         <?php } ?>
                     </div>
                     
@@ -245,7 +245,7 @@ if($_SESSION['role'] != 'client'){
                                     }*/ ?>" maxlength="2" class="pl-2 border-4 border-vertClair rounded-xl placeholder-gray-500 w-15" type="text" name="annee" id="annee" required>
                             </p>
                             <?php if($erreurExpiration){ ?>
-                                <p class="text-rouge"><?php echo "La date n'est pas bonne";?></p>
+                                <p class="text-rouge"><?php echo "La date ne doit pas être dans le passée";?></p>
                             <?php } ?>
                         </div>
                         
@@ -260,7 +260,7 @@ if($_SESSION['role'] != 'client'){
                             }*/ ?>" class="pl-2 border-4 border-vertClair rounded-xl placeholder-gray-500 w-50" type="text" name="cryptogramme" id="cryptogramme" required>
 
                             <?php if($erreurCryptogramme){ ?>
-                                <p class="text-rouge"><?php echo "Le cryptogramme n'est pas bon";?></p>
+                                <p class="text-rouge"><?php echo "Le cryptogramme doit contenir exactement 3 chiffres";?></p>
                             <?php } ?>
                         </div>
                     </div>
@@ -274,7 +274,7 @@ if($_SESSION['role'] != 'client'){
                         }*/ ?>" class="pl-2 border-4 border-vertClair rounded-xl placeholder-gray-500 md:w-100 w-75 ml-0" type="text" name="nom" id="nom" required>
 
                         <?php if($erreurNom){ ?>
-                                <p class="text-rouge"><?php echo "Le nom n'est pas bon";?></p>
+                                <p class="text-rouge"><?php echo "Votre prenom ne peut contenir que des lettres majuscules, minuscules, tirets, espaces et les accents : é, ç, è, ë, ê, à, ï, î, ä, â, ù, ü, û, ö, ô";?></p>
                         <?php } ?>
                     </div>
                     <!--<div class="md:w-100 md:ml-5 ml-0">

@@ -35,7 +35,7 @@ foreach($dbh->query("SELECT * FROM sae3_skadjam._compte c
 <html lang="fr">
 <?php include __DIR__ . "/../../php/structure/head_front.php";?>
 <head>
-    <title>Modification du compte client</title>
+    <title>Modification de mon compte</title>
     <style>
         button a:hover {
             color: #000; 
@@ -155,7 +155,7 @@ foreach($dbh->query("SELECT * FROM sae3_skadjam._compte c
                             </div>
                         </div>
                         <div class="flex items-center justify-end">
-                            <button class="cursor-pointer border-4 border-rouge rounded-2xl w-80 h-14 p-0 m-0 mt-5" type="button"><a href="../../php/supprimer_adresse.php?idAdresse=<?php echo $ligne['id_adresse'];?>">Supprimer cette adresse</a></button>
+                            <button class="cursor-pointer border-4 border-rouge rounded-2xl w-80 h-14 p-0 m-0 mt-5" type="button"><a href="validation_suppression_adresse.php?idAdresse=<?php echo $ligne['id_adresse'];?>">Supprimer cette adresse</a></button>
                         </div>
                     </div>
                 <?php 
@@ -163,12 +163,12 @@ foreach($dbh->query("SELECT * FROM sae3_skadjam._compte c
                 }
             ?>
             </div>
-            <button class="cursor-pointer border-4 border-beige rounded-2xl w-80 h-14 p-0 m-0 mt-5" type="button"><a href="./ajouter_adresse.php">Ajouter une adresse</a></button>
+            <button class="cursor-pointer border-2 border-beige rounded-2xl w-75 h-14 p-0 m-0 mt-5" type="button"><a href="./ajouter_adresse.php">Ajouter une adresse</a></button>
 
             <!-- Valider le formulaire -->
-            <div class="flex mt-10 justify-center md:justify-end w-1/1">
-                <button class="cursor-pointer border-2 border-vertFonce rounded-2xl w-40 h-14 p-0 m-0 mr-10" type="button"><a href="./profil_client.php">Annuler</a></button>
-                <input class="cursor-pointer border-2 border-vertFonce rounded-2xl w-40  h-14 p-0 m-0 md:mr-10" type="Submit" name="submit" id="submit" value="Valider">
+            <div class="flex mt-10 justify-center w-1/1">
+                <button class="cursor-pointer border-2 border-vertClair rounded-2xl w-40 h-14 p-0 m-0 mr-10" type="button"><a href="./profil_client.php">Annuler</a></button>
+                <input class="cursor-pointer border-2 border-vertClair rounded-2xl w-40  h-14 p-0 m-0 md:mr-10" type="Submit" name="submit" id="submit" value="Valider">
             </div>
         </form>
     </main>

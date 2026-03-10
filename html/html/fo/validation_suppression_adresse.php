@@ -20,7 +20,7 @@ if (isset($_POST['logout'])) {
 <html lang="fr">
 <?php require __DIR__ . "/../../php/structure/head_front.php"; ?>
 <head>
-    <title>Mon profil</title>
+    <title>Modification de mon compte</title>
 </head>
 <body>
     <?php
@@ -28,11 +28,10 @@ if (isset($_POST['logout'])) {
     require __DIR__ . "/../../php/structure/navbar_front.php";
     ?>
     <main class="min-h-[600px]">
-            <h2>Voulez-vous vraiment supprimer votre compte ?</h2>
-            <h3 class="text-center">Cette action est irréversible.</h3>
-            <div class="mt-15 flex flex-row justify-around mb-15">
-                <a href="profil_client.php"><button class="mt-80 md:mt-0 border-2 border-vertClair rounded-xl w-auto h-14 px-7 cursor-pointer">Retour</button></a>
-                <a href="../../php/supprimer_compte_client.php"><button class="mt-80 md:mt-0 border-2 border-rouge rounded-xl w-auto h-14 px-7 cursor-pointer">Supprimer</button></a>
+            <h2>Voulez-vous vraiment supprimer cette adresse ?</h2>
+            <div class="mt-100 md:mt-15 flex flex-row justify-around">
+                <a href="modifier_compte_client.php"><button class="border-2 border-vertClair rounded-xl w-auto h-14 px-7 cursor-pointer">Retour</button></a>
+                <a href="../../php/supprimer_adresse.php?idAdresse=<?php echo $_GET['idAdresse']; ?>"><button class="border-2 border-rouge rounded-xl w-auto h-14 px-7 cursor-pointer">Supprimer</button></a>
             </div>
         </main>
     <?php require __DIR__ . "/../../php/structure/footer_front.php"; ?>
