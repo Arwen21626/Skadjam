@@ -61,9 +61,9 @@
     }
 ?>
 
-<pre>
-    <!-- <?php print_r($dataStats); ?> -->
-</pre>
+<!-- <pre>
+    <?php print_r($dataStats); ?>
+</pre> -->
 
 <!DOCTYPE html>
 <html lang="fr">
@@ -92,19 +92,27 @@
 
         <?php if($dataStats){?> 
             <div class="flex flex-row mb-2">
-                <p class="pr-2">Choisissez une année :</p>
-                <select name="" id="select-annee" class="pl-2 cursor-pointer">
-                    <?php 
-                        $cles = array_keys($dataStats);
-                        foreach ($cles as $annee) {
-                            ?>
+                <div>
+                    <p class="pr-2">Choisissez une année :</p>
+                    <select name="" id="select-annee" class="pl-2 cursor-pointer">
+                        <?php 
+                            $cles = array_keys($dataStats);
+                            foreach ($cles as $annee) {
+                                ?>
 
-                            <option class="cursor-pointer" value=<?php echo $annee; ?>><?php echo $annee; ?></option>
+                                <option class="cursor-pointer" value=<?php echo $annee; ?>><?php echo $annee; ?></option>
 
-                            <?php
-                        }
-                    ?>
-                </select>
+                                <?php
+                            }
+                        ?>
+                    </select>
+                </div>
+                
+
+                <div>
+                    <p>Format des statistiques de vente :</p>
+                    <select name="" id=""></select>
+                </div>
             </div>
 
             <div class="flex flex-row justify-start">
@@ -165,7 +173,7 @@
 
                                 foreach ($cles as $prod) {
                                     ?>
-                                        <option class="cursor-pointer" value=<?php echo $prod["id_produit"]; ?>><?php echo $prod["libelle_produit"]; ?></option>
+                                        <option value=<?php echo $prod["id_produit"]; ?>><?php echo $prod["libelle_produit"]; ?></option>
                                     <?php
                                 }
                             ?>
@@ -174,7 +182,7 @@
                 </div>
 
 
-                <div id="container-prod-chart" class="chart-container flex justify-center items-center flex-col p-2">
+                <div id="container-prod-chart" class="chart-container flex justify-center items-center flex-col p-2 m-12">
                     <div id="div-prod-chart" class="chart flex justify-center items-center relative m-4 w-[60vw] h-[50vh]">
                         <canvas id="prod-chart"></canvas>
                     </div>
