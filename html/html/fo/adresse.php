@@ -107,10 +107,10 @@
                 class="relative flex-1 text-center py-2
                 before:content-[attr(etape)] before:block before:w-[30px] before:h-[30px]
                 before:mx-auto before:mb-2 before:leading-[30px]
-                before:rounded-full before:bg-[#86D0CC] before:text-white before:font-bold
+                before:rounded-full before:bg-vertClair before:text-white before:font-bold
                 after:content-[''] after:absolute after:top-[22px] after:-right-1/2
-                after:w-full after:h-[4px] after:bg-[#86D0CC] after:-z-10">
-                Récapitulatif commande
+                after:w-full after:h-[4px] after:bg-vertClair after:-z-10">
+                Récapitulatif <span class="hidden md:block">commande</span>
             </li>
 
             <!-- étape actuelle -->
@@ -118,10 +118,10 @@
                 class="relative flex-1 text-center py-2
                 before:content-[attr(etape)] before:block before:w-[50px] before:h-[50px]
                 before:mx-auto before:mb-2 before:-mt-[10px] before:leading-[50px]
-                before:rounded-full before:bg-[#588A87] before:text-white before:font-bold
+                before:rounded-full before:bg-vertMoyen before:text-white before:font-bold
                 after:content-[''] after:absolute after:top-[22px] after:-right-1/2
                 after:w-full after:h-[4px] after:bg-[#ccc] after:-z-10">
-                Adresse de livraison
+                Adresse <span class="hidden md:block">de livraison</span>
             </li>
 
             <!-- étape à faire -->
