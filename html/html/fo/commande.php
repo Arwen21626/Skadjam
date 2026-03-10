@@ -123,8 +123,8 @@
 
         <!---boutons retour et imprimer en haut de la page format téléphone--->
         <div class="flex justify-between md:hidden m-10">
-            <a href="liste_commandes.php" class="flex justify-center"><button class="border-vertClair border-4 rounded-lg w-35 h-10 px-7 cursor-pointer">Retour</button></a>
-            <button class="imprimer border-vertClair border-4 rounded-lg w-35 h-10 px-7 cursor-pointer">Imprimer</button>
+            <a href="liste_commandes.php" class="flex justify-center"><button class="border-vertClair border-2 rounded-xl w-35 h-10 px-7 cursor-pointer">Retour</button></a>
+            <button class="imprimer border-vertClair border-2 rounded-xl w-35 h-10 px-7 cursor-pointer">Imprimer</button>
         </div>
 
         <!---numéro de commande--->
@@ -137,15 +137,13 @@
             <!---date--->
             <h3 class="ml-5 mr-3">Date : <?php echo $date;?></h3>
             <!---bouton imprimer page--->
-            <button class="imprimer border-vertClair border-4 rounded-lg md:rounded-2xl w-35 h-10 md:w-65 md:h-14 px-7 mr-5 cursor-pointer hidden md:block">Imprimer la facture</button>
+            <button class="imprimer border-vertClair border-2 rounded-xl md:rounded-2xl w-35 h-10 md:w-65 md:h-14 px-7 mr-5 cursor-pointer hidden md:block">Imprimer la facture</button>
         </div>
 
         <!---état de la commande--->
         <div class="ml-5 flex flex-row md:items-center">
-            <h3 class="mr-3">
-                <span class="block md:hidden">Etat :</span>
-                <span class="hidden md:block"> Etat de la livraison :</span>
-            </h3> 
+            <h3 class="mr-3 block md:hidden">Etat :</h3>
+            <h3 class="mr-3 hidden md:block"> Etat de la livraison :</h3>
             <h3 id="numeroCommande"><?= $etat ?></h3>
         </div>
         
@@ -157,7 +155,7 @@
         </div>
         <?php
         } else if ($image != 0){ ?>
-        <button id="btn_img" class="border-vertClair border-4 rounded-lg mt-2 ml-5 md:rounded-2xl w-35 h-10 md:w-50 md:h-14 px-1 md:px-7 cursor-pointer">
+        <button id="btn_img" class="border-vertClair border-2 rounded-xl mt-2 ml-5 md:rounded-2xl w-35 h-10 md:w-50 md:h-14 px-1 md:px-7 cursor-pointer">
             Pièce jointe
         </button>
 
@@ -362,12 +360,12 @@
         </div>
 
         <!---bouton retour version tablette--->
-        <a href="liste_commandes.php" class="hidden md:flex justify-center mt-15 mb-15"><button class="border-vertClair border-4 rounded-lg md:rounded-2xl w-35 h-10 md:w-50 md:h-14 px-7 cursor-pointer">Retour</button></a>
+        <a href="liste_commandes.php" class="hidden md:flex justify-center mt-15 mb-15"><button class="border-vertClair border-2 rounded-xl md:rounded-2xl w-35 h-10 md:w-50 md:h-14 px-7 cursor-pointer">Retour</button></a>
         
         <!---boutons retour et imprimer version téléphone--->
         <div class="flex justify-between md:hidden m-10">
-            <a href="liste_commandes.php" class="flex justify-center"><button class="border-vertClair border-4 rounded-lg w-35 h-10 px-7 cursor-pointer">Retour</button></a>
-            <button class="imprimer border-vertClair border-4 rounded-lg w-35 h-10 px-7 cursor-pointer">Imprimer</button>
+            <a href="liste_commandes.php" class="flex justify-center"><button class="border-vertClair border-2 rounded-xl w-35 h-10 px-7 cursor-pointer">Retour</button></a>
+            <button class="imprimer border-vertClair border-2 rounded-xl w-35 h-10 px-7 cursor-pointer">Imprimer</button>
         </div>
     </main>
 

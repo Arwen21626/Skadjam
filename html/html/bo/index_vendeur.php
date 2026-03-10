@@ -1,11 +1,27 @@
 <?php 
     session_start();
-    include __DIR__ . '/../../php/verif_role_bo.php';
-    include __DIR__ .'/../../01_premiere_connexion.php';
+    require_once(__DIR__ . '/../../php/verif_role_bo.php');
+    require_once(__DIR__ . '/../../01_premiere_connexion.php');
+    require_once(__DIR__ . "/../../../connections_params.php");
     require_once __DIR__ . "/../../php/fonctions.php";
     require_once __DIR__ . "/../../php/modification_variable.php";
     const PAGE_SIZE = 24;
     $idCompte = $_SESSION['idCompte'];
+    $tabProduit = [];
+    foreach($dbh->query("SELECT *
+        FROM sae3_skadjam._produit pr
+        INNER join sae3_skadjam._montre m
+            ON pr.id_produit=m.id_produit
+        INNER JOIN sae3_skadjam._photo ph  
+            ON ph.id_photo = m.id_photo
+        INNER JOIN sae3_skadjam._vendeur v
+            ON pr.id_vendeur = v.id_compte
+        WHERE v.id_compte = $idCompte
+            AND pr.est_supprime = false"
+        , PDO::FETCH_ASSOC) as $row){
+
+        $tabProduit[] = $row;
+    }
 ?>
 
 <!DOCTYPE html>
@@ -13,6 +29,14 @@
 <?php include(__DIR__."/../../php/structure/head_back.php");?>
 <head> 
     <title>Accueil</title>
+    <script>
+        const tabProd = <?php echo json_encode($tabProduit);?>;
+    </script>
+    <script src="../../js/affichageListeProduits.js"></script>
+    <script src="../../js/bo/affichageProduit.js"></script>
+    <script src="../../js/tris.js"></script>
+    <script src="../../js/filtres.js"></script>
+    <script src="../../js/affichageNote.js"></script>
 </head>
 
 
@@ -20,27 +44,29 @@
     <!--header-->
     <?php include(__DIR__ . "/../../php/structure/header_back.php"); ?>
     <?php include(__DIR__ . "/../../php/structure/navbar_back.php"); ?>
-
+    <!-- Récupérer l'id du dernier produit créé -->
+    <?php $dernierAjout = $dbh->query("SELECT id_produit FROM sae3_skadjam._produit WHERE id_vendeur = $idCompte AND est_supprime = false ORDER BY date_creation DESC LIMIT 1")->fetch(PDO::FETCH_ASSOC); ?>
     <main class="p-8">
         <div class="grid grid-cols-2 gap-4 justify-items-center">
             <a href="../bo/promotion_vendeur.php" title="lien vers page promotion" alt="promotion">
-                <img src="../../images/images_accueil/promotion.webp" title="lien vers page promotion" alt="promotion" class="w-150 h-auto justify-self-end">
+                <img src="../../images/images_accueil/promotion.webp" title="lien vers page promotion" alt="Vos produits en promotion" class="w-150 h-auto justify-self-end">
             </a>
-            <a href="#vosProduits" title="lien vers page derniers ajouts" alt="derniers ajouts">
-                <img src="../../images/images_accueil/derniers_ajouts.webp" title="lien vers page derniers ajouts" alt="derniers ajouts" class="w-150 h-auto justify-self-start">
+            <a href="./details_produit.php?idProduit=<?php echo $dernierAjout['id_produit']; ?>" title="lien vers page derniers ajouts" alt="derniers ajouts">
+                <img src="../../images/images_accueil/derniers_ajouts.webp" title="lien vers le dernier produit ajoutés" alt="Page du dernier produit que vous avez ajouté" class="w-150 h-auto justify-self-start">
             </a>           
             <a href="../bo/stock.php" title="lien vers page stock" alt="stock">
-                <img src="../../images/images_accueil/stock.webp" title="lien vers page stock" alt="stock" class="w-150 h-auto justify-self-end">
+                <img src="../../images/images_accueil/stock.webp" title="lien vers page stock" alt="Les Stocks de vos produits" class="w-150 h-auto justify-self-end">
             </a>
             <a href="../bo/liste_commandes.php" title="lien vers page commandes" alt="commandes">
-                <img src="../../images/images_accueil/commandes.webp" title="lien vers page commandes" alt="commandes" class="w-150 h-auto justify-self-start">
+                <img src="../../images/images_accueil/commandes.webp" title="lien vers page commandes" alt="Vos produits commandés par des clients" class="w-150 h-auto justify-self-start">
             </a>        
         </div>
 
         <div class="mt-15 flex flex-row justify-around">
-            <a href="../bo/creation_produit.php"><button class="border-2 border-vertFonce rounded-2xl w-auto h-14 px-7 cursor-pointer">Créer un produit</button></a>
-            <a href="../bo/details_remises.php"><button class="border-2 border-vertFonce rounded-2xl w-auto h-14 px-7 cursor-pointer">Consulter les remises</button></a>
-            <a href="../bo/vider_catalogue.php"><button class="border-2 border-vertFonce rounded-2xl w-auto h-14 px-7 cursor-pointer">Vider le catalogue</button></a>
+            <a href="creation_produit.php"><button class="border-2 border-vertFonce rounded-2xl w-auto h-14 px-7 cursor-pointer">Créer un produit</button></a>
+            <a href="details_remises.php"><button class="border-2 border-vertFonce rounded-2xl w-auto h-14 px-7 cursor-pointer">Consulter les remises</button></a>
+            <a href="statistiques.php"><button class="border-2 border-vertFonce rounded-2xl w-auto h-14 px-7 cursor-pointer">Mes statistiques</button></a>
+            <a href="vider_catalogue.php"><button class="border-2 border-vertFonce rounded-2xl w-auto h-14 px-7 cursor-pointer">Vider le catalogue</button></a>
         </div>
 
         <!--Début du catalogue-->
@@ -79,14 +105,14 @@
 
                 if($tabProduit == null){ ?>
                     <p>Votre catalogue est vide.</p>
-                <?php }
+        <?php }
 
                 $maxPage = sizeof($tabProduit)/PAGE_SIZE;
                 //découpe le catalogue en page de 15 produits
                 $lignes = array_slice($tabProduit, $pageNumber*PAGE_SIZE-PAGE_SIZE, PAGE_SIZE); 
 
                 //affiche la photo du produit, son nom, son prix et sa note, son stock ?>
-                <div class="flex flex-row flex-wrap justify-around">
+                <article class="flex flex-row flex-wrap justify-around">
                     <?php 
                         foreach($tabProduit as $id => $valeurs){
                             $idProduit = $valeurs['id_produit'];
@@ -146,7 +172,7 @@
                                 <?php }} ?> 
                             </section>
                     <?php } ?>
-                </div>         
+                </article>         
                 <?php $dbh = null;
             } 
 
@@ -167,7 +193,7 @@
             <?php }?>
         </div>
     </main>
-    
+
     <!--footer-->
     <?php include(__DIR__ . "/../../php/structure/footer_back.php"); ?>
 

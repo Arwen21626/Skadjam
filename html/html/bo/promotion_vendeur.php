@@ -46,6 +46,10 @@
 
         <?php if($tabProduit == null){ ?>
             <p class="text-center">Vous n'avez pas de produits en promotion.</p>
+            <!---bouton retour--->
+            <a href="index_vendeur.php" class="flex justify-center mt-15 mb-15">
+                <button class="border-vertFonce border-2 rounded-sm md:rounded-2xl w-35 h-10 md:w-50 md:h-14 px-7 cursor-pointer">Retour</button>
+            </a>
         <?php }
 
         else{?>
@@ -99,6 +103,10 @@
                     </tbody>
                 </table>
             </div>
+            <!---bouton retour--->
+            <a href="index_vendeur.php" class="flex justify-center mt-15 mb-15">
+                <button class="border-vertFonce border-2 rounded-sm md:rounded-2xl w-35 h-10 md:w-50 md:h-14 px-7 cursor-pointer">Retour</button>
+            </a>
         <?php } ?>
     </main>
 

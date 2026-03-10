@@ -68,6 +68,8 @@
                 $numBis = $adresseData["complement_adresse"];
                 $cp = $adresseData["code_postal"];
                 $ville = $adresseData["ville"];
+                $latitude = $adresseData["latitude"];
+                $longitude = $adresseData["longitude"];
             }
     }catch(PDOException $e){
         echo "Erreur : " . $e->getMessage();
@@ -79,6 +81,7 @@
 <?php require_once __DIR__ . "/../../php/structure/head_back.php" ?>
 <head>
     <title>Profil</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin=""/>
 </head>
 <body>
 
@@ -87,97 +90,120 @@
         require_once __DIR__ . "/../../php/structure/navbar_back.php";
     ?>
 
-    <main class="relative flex flex-col items-center">
+    <main class="flex flex-col self-center w-9/10 mx-auto space-y-10">
         <h2 class="m-8">Mon Profil</h2>
-        <div class="flex flex-row items-center justify-between">
-            <div class=" flex flex-col w-fit">
+        <div class="flex flex-row justify-around space-x-40">
+            <!-- Photo de profil -->
+            <div class=" flex flex-col">
                 <?php if ($tabPhoto && !empty($tabPhoto['url_photo'])) { ?>
-                    <div class="container-image relative flex items-center justify-center w-80 border-4 border-solid rounded-2xl border-beige mb-3">
-                        <img class="image-vendeur w-80 rounded-xl" src="<?= '../..' . htmlspecialchars($tabPhoto['url_photo']) ?>" alt="<?= htmlspecialchars($tabPhoto['alt']) ?>" title="<?= htmlspecialchars($tabPhoto['alt']) ?>">
+                    <div class="container-image flex items-center justify-center w-80 border-4 border-solid rounded-2xl border-beige mb-3">
+                        <img class="image-vendeur w-80 rounded-xl" src="<?= '../..' . htmlspecialchars($tabPhoto['url_photo']) ?>" alt="Photo de profil" title="<?= htmlspecialchars($tabPhoto['alt']) ?>">
                     </div>
                 <?php } else { ?>
-                    <div class="container-image vide relative flex items-center justify-center w-80 h-80 mb-3 bg-beige rounded-2xl">
-                        <img class="image-vendeur w-80 rounded-2xl" src="../../images/logo/bootstrap_icon/image.svg" alt="aucune image" title="aucune image">
+                    <div class="container-image vide flex items-center justify-center w-80 h-80 mb-3 bg-beige rounded-2xl">
+                        <img class="image-vendeur w-60 rounded-2xl" src="../../images/logo/bootstrap_icon/image.svg" alt="aucune image" title="aucune image">
                     </div>
                 <?php } ?>
                 <input type="file" id="image" name="image" accept="image/png, image/jpeg, image/webp" hidden>
             </div>
-
-            <div class="mt-5 w-1/3">
-                <div class="py-4">
-                    <p class="w-80"><p class="text-left">Entreprise :</p>
-                    <h4 class="attribut-text ml-7"><?php echo htmlentities($denom); ?></h4>
+            <!-- Carte -->
+            <div id="map" class=" w-5/10 h-80 z-0"></div>
+        </div>
+        <div class="flex flex-row self-center space-x-40 justify-between w-9/10">
+            <!-- Infos proprio -->
+            <div class="flex flex-col space-y-5 ">
+                <h3>Propriétaire</h3>
+                <div class="flex flex-col space-y-5">
+                    <!-- Nom -->
+                    <div class="flex flex-row space-x-5">
+                        <p class="font-bold">Nom :</p>
+                        <p><?= $nom ?></p>
+                    </div>
+                    <!-- Prénom -->
+                    <div class="flex flex-row space-x-5">
+                        <p class="font-bold">Prénom :</p>
+                        <p><?= $prenom ?></p>
+                    </div>
                 </div>
+            </div>
 
-                <div class="py-4">
-                    <p class="w-80">Adresse du siège social :</p>
-                    <h4 class="attribut-text ml-7"><?= "$num $numBis $adresse, $ville, $cp" ?></h4>
+            <!-- Infos entreprise -->
+            <div class="flex flex-col space-y-5">
+                <h3>Entreprise</h3>
+                <div class="flex flex-col space-y-5">
+                    <!-- Nom -->
+                    <div class="flex flex-row space-x-5">
+                        <p class="font-bold">Nom :</p>
+                        <p><?php echo htmlentities($denom); ?></p>
+                    </div>
+                    <!-- Adresse -->
+                    <div class="flex flex-col space-x-5">
+                        <p class="font-bold">Adresse du siège social :</p>
+                        <p><?= "$num $numBis $adresse, $ville, $cp" ?></p>
+                    </div>
                 </div>
+            </div>
 
-                <div class="py-4">
-                    <p class="w-80">Numéro SIREN :</p>
-                    <h4 class="attribut-text ml-7"><?= $siren ?></h4>
+            <!-- Infos contact -->
+            <div class="flex flex-col space-y-5">
+                <h3>Contact</h3>
+                <div class="flex flex-col space-y-5">
+                    <!-- Téléphone -->
+                    <div class="flex flex-col space-x-5">
+                        <p class="font-bold">Numéro de téléphone :</p>
+                        <p><?= $tel ?></p>
+                    </div>
+                    <!-- Mail -->
+                    <div class="flex flex-col space-x-5">
+                        <p class="font-bold">E-Mail :</p>
+                        <p><?= $mail ?></p>
+                    </div>
                 </div>
             </div>
         </div>
-        <div class="flex flex-row items-center justify-between mt-8">
-            <div class="w-1/3">
-                <h3 class="mb-2">Propriétaire</h3>
-                <div class="mb-3 modif-attribut">
-                    <p class="w-80">Nom :</p>
-                    <h4 class="attribut-text ml-7"><?= $nom ?></h4>
-                </div>
-
-                <div class="mb-3 modif-attribut">
-                    <p class="w-80">Prénom :</p>
-                    <h4 class="attribut-text ml-7"><?= $prenom ?></h4>
-                </div>
-            </div>
-            <div class="w-1/3">
-                <h3 class="mb-2">Contact</h3>
-                <div class="mb-3 modif-attribut">
-                    <p class="w-80">Numéro de téléphone :</p>
-                    <h4 class="attribut-text ml-7"><?= $tel ?></h4>
-                </div>
-
-                <div class="mb-3 modif-attribut">
-                    <p class="w-80">E-Mail :</p>
-                    <h4 class="attribut-text ml-7"><?= $mail ?></h4>
-                </div>
-            </div>
-        </div>
-        <div class="description mt-8 mb-20 modif-attribut flex flex-col items-center">
-            <h3 class="mb-2">Description :</h3>
-            <p class="attribut-text mt-4 self-left ml-10 mr-10"><?= $description != '' ? $description : 'Aucune description.'; ?></p>
+    
+        
+        <!-- Description -->
+        <div>
+            <h3 class="font-bold text-center">Description :</h3>
+            <p class="break-words"><?= $description != '' ? $description : 'Aucune description.'; ?></p>
         </div>
 
-        <div class="flex flex-row justify-center items-center mt-4 mb-4">
-            <form action="statistiques.php" method="post">
-                <input class="cursor-pointer border-4 rounded-xl p-2 m-1 border-beige w-75" type="submit" value="Mes statistiques">
-            </form>
-        </div>
 
-        <div class="flex flex-row justify-around items-center mt-7 mb-15">
-            <!-- Supprimer le compte du vendeur -->
-            <form action="suppression_vendeur.php" method="post">
-                <input class="border-4 border-rouge rounded-xl p-2 m-1 md:w-auto w-75 cursor-pointer" type="submit" value="Supprimer mon compte">
+              
+        <div class="grid grid-cols-3 gap-4 mb-15">
+            <!---1ère ligne de boutons---> 
+            <!-- Modifier le mot de passe du vendeur -->
+            <form action="nouveau_mdp.php">
+                <?php $_SESSION['adresse_mail'] = $mail; ?>
+                <input class="border-vertFonce border-2 rounded-2xl w-75 h-14 p-2 m-1 cursor-pointer" type="submit" value="Modifier mon mot de passe">    
             </form>
 
             <!-- Modifier les informations du vendeur (sauf le mot de passe) -->
             <form action="modifier_compte_vendeur.php" method="post">
-                <input class="cursor-pointer border-4 rounded-xl p-2 m-1 border-beige w-75" type="submit" value="Modifier mes informations">
+                <input class="border-vertFonce border-2 rounded-2xl w-75 h-14 p-2 m-1 cursor-pointer" type="submit" value="Modifier mes informations">
             </form>
 
-            <!-- Modifier le mot de passe du vendeur -->
-            <form action="nouveau_mdp.php">
-                <?php $_SESSION['adresse_mail'] = $mail; ?>
-                <input class="cursor-pointer border-4 rounded-xl p-2 m-1 border-beige w-75" type="submit" value="Modifier mon mot de passe">    
+            <!---Statistiques--->
+            <form action="statistiques.php" method="post">
+                <input class="border-vertFonce border-2 rounded-2xl w-75 h-14 p-2 m-1 cursor-pointer" type="submit" value="Mes statistiques">
+            </form> 
+            
+            <!---2ème ligne de boutons---> 
+            <!-- Supprimer le compte du vendeur -->
+            <form action="suppression_vendeur.php" method="post">
+                <input class="border-rouge border-2 rounded-2xl w-75 h-14 p-2 m-1 cursor-pointer" type="submit" value="Supprimer mon compte">
             </form>
+
+            <!---Retour--->
+            <a href="index_vendeur.php">
+                <button class="border-vertFonce border-2 rounded-2xl w-75 h-14 p-2 m-1 cursor-pointer">Retour</button>
+            </a>
 
             <!-- Déconnexion -->
             <form action="profil_vendeur.php" method="post">
                 <input type="hidden" id="logout" name="logout" value="true">
-                <input class="cursor-pointer border-4 rounded-xl p-2 m-1 border-beige w-75" type="submit" value="Se déconnecter">
+                <input class="border-vertFonce border-2 rounded-2xl w-75 h-14 p-2 m-1 cursor-pointer" type="submit" value="Se déconnecter">
             </form>
         </div>
 
@@ -185,7 +211,32 @@
     </main>
     <?php require_once __DIR__ . "/../../php/structure/footer_back.php" ?>
 </body>
+<?php $coord = [
+    'latitude' => $latitude,
+    'longitude' => $longitude
+]?>
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script>
+    const coord = <?php echo json_encode($coord);?>;
 
+    var map = L.map('map').setView([coord.latitude, coord.longitude], 15);
+
+    L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        maxZoom: 19,
+        attribution: '&copy; OpenStreetMap'
+    }).addTo(map);
+
+    var pointerFonce = L.icon({
+        iconUrl: '../../images/logo/pointeurVertFonce.png',
+        iconSize: [45, 70],
+    });
+
+    var marker = L.marker([coord.latitude, coord.longitude], {
+        icon: pointerFonce,
+    })
+
+    map.addLayer(marker)
+</script>
 <script src="../../js/bo/profil_vendeur.js" defer></script>
 
 </html>

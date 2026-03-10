@@ -28,18 +28,18 @@
         </article>
     </section>
 
-    <section class="grid grid-cols-2 gap-1 p-1">
-        <a class="m-1 text-bleu hover:text-beige" href="https://www.facebook.com">
+    <aside class="grid grid-cols-2 gap-1 p-1">
+        <a class="m-1 mt-7 text-bleu hover:text-beige" href="https://www.facebook.com">
             <img src="/images/logo/reseaux/facebook_back.webp" alt="Facebook" title="Facebook" class="size-12">
         </a>
-        <a class="m-1 text-bleu hover:text-beige" href="https://www.instagram.com">
+        <a class="m-1 mt-7 text-bleu hover:text-beige" href="https://www.instagram.com">
             <img src="/images/logo/reseaux/instagram_back.webp" alt="Instagram" title="Instagram" class="size-12">
         </a>
-        <a class="m-1 text-bleu hover:text-beige" href="https://www.linkedin.com">
+        <a class="m-1 mb-2 text-bleu hover:text-beige" href="https://www.linkedin.com">
             <img src="/images/logo/reseaux/linkedin_back.webp" alt="Linkedin" title="Linkedin" class="size-12">
         </a>
-        <a class="m-1 text-bleu hover:text-beige" href="https://x.com/">
+        <a class="m-1 mb-2 text-bleu hover:text-beige" href="https://x.com/">
             <img src="/images/logo/reseaux/twitter_x_back.webp" alt="Twitter - X" title="Twitter - X" class="size-12">
         </a>
-    </section>  
+    </aside>  
 </footer>

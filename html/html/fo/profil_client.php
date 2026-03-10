@@ -44,12 +44,12 @@ if (isset($_POST['logout'])) {
                                         INNER JOIN sae3_skadjam._client cli 
                                             ON c.id_compte = cli.id_compte
                                         WHERE c.id_compte = $id", PDO::FETCH_ASSOC) as $client){
-                    $nom = $client['nom_compte'];
-                    $prenom = $client['prenom_compte'];
-                    $pseudo = $client['pseudo'];
-                    $mail = $client['adresse_mail'];
-                    $naissance = $client['date_naissance'];
-                    $telephone = $client['numero_telephone'];
+                    $nom = htmlentities($client['nom_compte']);
+                    $prenom = htmlentities($client['prenom_compte']);
+                    $pseudo = htmlentities($client['pseudo']);
+                    $mail = htmlentities($client['adresse_mail']);
+                    $naissance = htmlentities($client['date_naissance']);
+                    $telephone = htmlentities($client['numero_telephone']);
                 }
                 // Récupérer les adresses du client
                 $nbAdresse = 0;
@@ -59,13 +59,13 @@ if (isset($_POST['logout'])) {
                                         INNER JOIN sae3_skadjam._adresse a
                                             ON h.id_adresse = a.id_adresse
                                         WHERE c.id_compte = $id", PDO::FETCH_ASSOC) as $adresse){
-                    $numRue[$nbAdresse] = $adresse['numero_rue'];
-                    $adressePostale[$nbAdresse] = $adresse['adresse_postale'];
-                    $complement[$nbAdresse] = $adresse['complement_adresse'];
-                    $batiment[$nbAdresse] = " " . $adresse['numero_bat'];
-                    $appartement[$nbAdresse] = " " . $adresse['numero_appart'];
-                    $codePostal[$nbAdresse] = $adresse['code_postal'];
-                    $ville[$nbAdresse] = $adresse['ville'];
+                    $numRue[$nbAdresse] = htmlentities($adresse['numero_rue']);
+                    $adressePostale[$nbAdresse] = !empty($adresse['adresse_postale']) ? htmlentities($adresse['adresse_postale']) : '';
+                    $complement[$nbAdresse] = !empty($adresse['complement_adresse']) ? htmlentities($adresse['complement_adresse']) : '';
+                    $batiment[$nbAdresse] = !empty($adresse['numero_bat']) ? " " . htmlentities($adresse['numero_bat']) : '';
+                    $appartement[$nbAdresse] = !empty($adresse['numero_appart']) ? " " . htmlentities($adresse['numero_appart']) : '';
+                    $codePostal[$nbAdresse] = !empty($adresse['code_postal']) ? htmlentities($adresse['code_postal']) : '';
+                    $ville[$nbAdresse] = !empty($adresse['ville']) ? htmlentities($adresse['ville']) : '';
                     $nbAdresse++;
                 }
                 $dbh = null;
@@ -79,15 +79,15 @@ if (isset($_POST['logout'])) {
                     <tbody>
                         <tr class="py-4">
                             <th class="py-3 w-45 md:w-90"><h3 class="text-left">Pseudo :</h3></th>
-                            <td class="py-3"><h3><?php echo htmlentities($pseudo); ?></h3></td>
+                            <td class="py-3"><h3><?php echo $pseudo; ?></h3></td>
                         </tr>
                         <tr class="py-4">
                             <th class="py-3"><h3 class="text-left">Prénom et nom :</h3></th>
-                            <td class="py-3"><h4><?php echo htmlentities($prenom); ?> <?php echo $nom; ?></h4></td>
+                            <td class="py-3"><h4><?php echo $prenom; ?> <?php echo $nom; ?></h4></td>
                         </tr>
                         <tr class="py-4">
                             <th class="py-3"><h3 class="text-left">Date de naissance :</h3></th>
-                            <td class="py-3"><p><?php echo htmlentities($naissance); ?></p></td>
+                            <td class="py-3"><p><?php echo $naissance; ?></p></td>
                         </tr>
                         <?php if($nbAdresse != 0){ ?>
                             <tr class="py-4">
@@ -102,11 +102,11 @@ if (isset($_POST['logout'])) {
                         <?php } ?>
                         <tr class="py-4">
                             <th class="py-3"><h3 class="text-left"><abbr title="Numéro">N°</abbr> de téléphone :</h3></th>
-                            <td class="py-3"><p><?php echo htmlentities($telephone); ?></p></td>
+                            <td class="py-3"><p><?php echo $telephone; ?></p></td>
                         </tr>
                         <tr class="py-4">
                             <th class="py-3"><h3 class="text-left">Adresse mail :</h3></th>
-                            <td class="py-3"><p><?php echo htmlentities($mail); ?></p></td>
+                            <td class="py-3"><p><?php echo $mail; ?></p></td>
                         </tr>
                     </tbody>
                 </table>
@@ -115,24 +115,24 @@ if (isset($_POST['logout'])) {
             <div class="flex flex-col md:flex-row justify-around items-center mt-7 mb-15">
                 <!-- Supprimer le compte du client -->
                 <form action="suppression_client.php" method="post">
-                    <input class="border-4 border-rouge rounded-xl p-2 m-1 md:w-auto w-75 cursor-pointer" type="submit" value="Supprimer mon compte">
+                    <input class="border-rouge border-2 md:rounded-2xl rounded-xl md:w-72 w-60 md:h-14 h-10 p-2 m-1 cursor-pointer" type="submit" value="Supprimer mon compte">
                 </form>
-
+                
                 <!-- Modifier les informations du client (sauf le mot de passe) -->
                 <form action="modifier_compte_client.php" method="post">
-                    <input class="border-4 border-vertClair rounded-xl p-2 m-1 md:w-auto w-75 cursor-pointer" type="submit" value="Modifier mes informations">
+                    <input class="border-vertClair border-2 md:rounded-2xl rounded-xl md:w-72 w-60 md:h-14 h-10 p-2 m-1 cursor-pointer" type="submit" value="Modifier mes informations">
                 </form>
 
                 <!-- Modifier le mot de passe du client -->
                 <form action="nouveau_mdp.php">
                     <?php $_SESSION['adresse_mail'] = $mail; ?>
-                    <input class="border-4 border-vertClair rounded-xl p-2 m-1 md:w-auto w-75 cursor-pointer" type="submit" value="Modifier mon mot de passe">    
+                    <input class="border-vertClair border-2 md:rounded-2xl rounded-xl md:w-72 w-60 md:h-14 h-10 p-2 m-1 cursor-pointer" type="submit" value="Modifier mon mot de passe">    
                 </form>
 
                 <!-- Déconnexion -->
                 <form action="profil_client.php" method="post">
                     <input type="hidden" id="logout" name="logout" value="true">
-                    <input class="border-4 border-vertClair rounded-xl p-2 m-1 md:w-auto w-75 cursor-pointer" type="submit" value="Se déconnecter">
+                    <input class="border-vertClair border-2 md:rounded-2xl rounded-xl md:w-72 w-60 md:h-14 h-10 p-2 m-1 cursor-pointer" type="submit" value="Se déconnecter">
                 </form>
             </div>
             <!--    Récupérer mes données

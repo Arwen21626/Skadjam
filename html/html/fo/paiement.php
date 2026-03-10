@@ -188,6 +188,7 @@ if($_SESSION['role'] != 'client'){
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <?php include __DIR__ . '/../../php/structure/head_front.php';?>
     <title>Paiement</title>
+    <link rel="stylesheet" href="../../css/fo/fil_d_ariane.css">
     <style>
         button a:hover{
             color : black;
@@ -199,8 +200,53 @@ if($_SESSION['role'] != 'client'){
     <?php include __DIR__ . '/../../php/structure/navbar_front.php';?>
     <?php if(!$achatValide){?>
         <main class="">
-            <form method="post">
+            <!---fil d'ariane processus d'achat--->
+            <ul class="flex list-none p-0 m-8">
+                <!-- étape faite -->
+                <li etape="1"
+                    class="relative flex-1 text-center py-2
+                    before:content-[attr(etape)] before:block before:w-[30px] before:h-[30px]
+                    before:mx-auto before:mb-2 before:leading-[30px]
+                    before:rounded-full before:bg-vertClair before:text-white before:font-bold
+                    after:content-[''] after:absolute after:top-[22px] after:-right-1/2
+                    after:w-full after:h-[4px] after:bg-vertClair after:-z-10">
+                    Récapitulatif commande
+                </li>
+                <li etape="2"
+                    class="relative flex-1 text-center py-2
+                    before:content-[attr(etape)] before:block before:w-[30px] before:h-[30px]
+                    before:mx-auto before:mb-2 before:leading-[30px]
+                    before:rounded-full before:bg-vertClair before:text-white before:font-bold
+                    after:content-[''] after:absolute after:top-[22px] after:-right-1/2
+                    after:w-full after:h-[4px] after:bg-vertClair after:-z-10">
+                    Adresse de livraison
+                </li>
 
+                <!-- étape actuelle -->
+                <li etape="3"
+                    class="relative flex-1 text-center py-2
+                    before:content-[attr(etape)] before:block before:w-[50px] before:h-[50px]
+                    before:mx-auto before:mb-2 before:-mt-[10px] before:leading-[50px]
+                    before:rounded-full before:bg-vertFonce before:text-white before:font-bold
+                    after:content-[''] after:absolute after:top-[22px] after:-right-1/2
+                    after:w-full after:h-[4px] after:bg-[#ccc] after:-z-10">
+                    Paiement
+                </li>
+
+                <!-- dernière étape -->
+                <li etape="4"
+                    class="relative flex-1 text-center py-2
+                    before:content-[attr(etape)] before:block before:w-[30px] before:h-[30px]
+                    before:mx-auto before:mb-2 before:leading-[30px]
+                    before:rounded-full before:bg-[#ccc] before:text-white before:font-bold
+                    after:hidden">
+                    Commande validée
+                </li>
+            </ul>
+
+            <h2>Paiement</h2>
+
+            <form method="post">
                 <div class="flex flex-col md:items-center items-start ml-5 md:ml-0">
                     <div class="flex flex-col mb-5 mt-5">
                         <label for="numero">Numéro de carte* :</label>
@@ -212,7 +258,7 @@ if($_SESSION['role'] != 'client'){
                         }*/ ?>" class="pl-2 border-4 border-vertClair rounded-xl placeholder-gray-500 md:w-100 w-75" type="text" name="numero" id="numero" required>
                         <?php
                             if($erreurNumero){ ?>
-                                <p class="text-rouge"><?php echo "Le numéro n'est pas bon";?></p>
+                                <p class="text-rouge"><?php echo "Votre numéro de carte doit contenir 16 chiffres";?></p>
                         <?php } ?>
                     </div>
                     
@@ -235,7 +281,7 @@ if($_SESSION['role'] != 'client'){
                                     }*/ ?>" maxlength="2" class="pl-2 border-4 border-vertClair rounded-xl placeholder-gray-500 w-15" type="text" name="annee" id="annee" required>
                             </p>
                             <?php if($erreurExpiration){ ?>
-                                <p class="text-rouge"><?php echo "La date n'est pas bonne";?></p>
+                                <p class="text-rouge"><?php echo "La date ne doit pas être dans le passée";?></p>
                             <?php } ?>
                         </div>
                         
@@ -250,7 +296,7 @@ if($_SESSION['role'] != 'client'){
                             }*/ ?>" class="pl-2 border-4 border-vertClair rounded-xl placeholder-gray-500 w-50" type="text" name="cryptogramme" id="cryptogramme" required>
 
                             <?php if($erreurCryptogramme){ ?>
-                                <p class="text-rouge"><?php echo "Le cryptogramme n'est pas bon";?></p>
+                                <p class="text-rouge"><?php echo "Le cryptogramme doit contenir exactement 3 chiffres";?></p>
                             <?php } ?>
                         </div>
                     </div>
@@ -264,7 +310,7 @@ if($_SESSION['role'] != 'client'){
                         }*/ ?>" class="pl-2 border-4 border-vertClair rounded-xl placeholder-gray-500 md:w-100 w-75 ml-0" type="text" name="nom" id="nom" required>
 
                         <?php if($erreurNom){ ?>
-                                <p class="text-rouge"><?php echo "Le nom n'est pas bon";?></p>
+                                <p class="text-rouge"><?php echo "Votre prenom ne peut contenir que des lettres majuscules, minuscules, tirets, espaces et les accents : é, ç, è, ë, ê, à, ï, î, ä, â, ù, ü, û, ö, ô";?></p>
                         <?php } ?>
                     </div>
                     <!--<div class="md:w-100 md:ml-5 ml-0">
@@ -292,17 +338,65 @@ if($_SESSION['role'] != 'client'){
                         </div>
                     </div> -->
                 </div>
-                <div class="flex flex-row justify-center">
-                    <button class="border-vertClair border-2 rounded-xl w-40 h-14 cursor-pointer m-5"><a href="../fo/adresse.php">Retour</a></button>
-                    <input class="border-vertClair border-2 rounded-xl w-40 h-14 cursor-pointer m-5" type="submit" value="Suivant">
+                <div class="flex flex-row justify-center mb-7">
+                    <button class="border-vertClair border-2 rounded-2xl w-40 h-14 cursor-pointer m-5"><a href="../fo/adresse.php">Retour</a></button>
+                    <input class="border-vertClair border-2 rounded-2xl w-40 h-14 cursor-pointer m-5" type="submit" value="Suivant">
                 </div>
             </form>
         </main>
     <?php }else{ ?>
         <main class="text-center min-h-[500px]">
-            <div class="mt-30">
-                <h1 class="">Votre achat a bien été validé</h1>
-                <a href="../../index.php"><button class="border-vertClair border-2 rounded-2xl w-40 h-14 cursor-pointer m-7">Retour à l'accueil</button></a>
+            <div class="mt-10">
+                <!---fil d'ariane processus d'achat--->
+                <ul class="flex list-none p-0 m-8">
+                    <!-- étape faite -->
+                    <li etape="1"
+                        class="relative flex-1 text-center py-2
+                        before:content-[attr(etape)] before:block before:w-[30px] before:h-[30px]
+                        before:mx-auto before:mb-2 before:leading-[30px]
+                        before:rounded-full before:bg-vertClair before:text-white before:font-bold
+                        after:content-[''] after:absolute after:top-[22px] after:-right-1/2
+                        after:w-full after:h-[4px] after:bg-vertClair after:-z-10">
+                        Récapitulatif commande
+                    </li>
+                    <li etape="2"
+                        class="relative flex-1 text-center py-2
+                        before:content-[attr(etape)] before:block before:w-[30px] before:h-[30px]
+                        before:mx-auto before:mb-2 before:leading-[30px]
+                        before:rounded-full before:bg-vertClair before:text-white before:font-bold
+                        after:content-[''] after:absolute after:top-[22px] after:-right-1/2
+                        after:w-full after:h-[4px] after:bg-vertClair after:-z-10">
+                        Adresse de livraison
+                    </li>
+
+                    <!-- étape actuelle -->
+                    <li etape="3"
+                        class="relative flex-1 text-center py-2
+                        before:content-[attr(etape)] before:block before:w-[30px] before:h-[30px]
+                        before:mx-auto before:mb-2 before:leading-[30px]
+                        before:rounded-full before:bg-vertClair before:text-white before:font-bold
+                        after:content-[''] after:absolute after:top-[22px] after:-right-1/2
+                        after:w-full after:h-[4px] after:bg-vertClair after:-z-10">
+                        Paiement
+                    </li>
+
+                    <!-- dernière étape -->
+                    <li etape="4"
+                        class="relative flex-1 text-center py-2
+                        before:content-[attr(etape)] before:block before:w-[50px] before:h-[50px]
+                        before:mx-auto before:mb-2 before:-mt-[10px] before:leading-[50px]
+                        before:rounded-full before:bg-vertFonce before:text-white before:font-bold
+                        after:hidden">
+                        Commande validée
+                    </li>
+                </ul>
+
+                <h1 class="pl-2 pr-2">Votre achat a bien été validé</h1>
+                <div class="flex flex-rox justify-center mt-3">
+                    <a href="../../index.php"><button class="border-vertClair border-2 rounded-2xl md:w-75 w-40 h-14 cursor-pointer m-7">Retour à l'accueil</button></a>
+                    <a href="liste_commandes.php"><button class="border-vertClair border-2 rounded-2xl md:w-75 w-40 h-14 cursor-pointer m-7">Liste de mes commandes</button></a>
+                </div>
+                
             </div>
         </main>
     <?php }?>

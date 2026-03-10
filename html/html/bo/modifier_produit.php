@@ -17,6 +17,11 @@ $tab_tva = [];
 //Tableau pour les unites
 $tab_unite = ["Piece", "Litre","cl","g","kg","S","M","L","XL","XXL","m","cm"];
 
+//Initialisation des dates de promo
+$dateDebutPromotion = date('Y-m-d');
+$dateFinPromotion = null;
+$labelPromo = '';
+
 //Requete récupération categories
 foreach($dbh->query('SELECT * from sae3_skadjam._categorie', PDO::FETCH_ASSOC) as $row) {
     $tab_categories[] = $row;
@@ -28,7 +33,7 @@ foreach($dbh->query('SELECT * from sae3_skadjam._tva', PDO::FETCH_ASSOC) as $row
 }
 
 //Recuperation de toutes les informations du produit
-foreach($dbh->query("SELECT *,est_masque::CHAR as est_masque_php 
+foreach($dbh->query("SELECT *
                             FROM sae3_skadjam._produit pr
                             INNER JOIN sae3_skadjam._categorie c
                                 ON pr.id_categorie = c.id_categorie
@@ -47,12 +52,13 @@ foreach($dbh->query("SELECT *,est_masque::CHAR as est_masque_php
     $description = $produit['description_produit'];
     $prixHT = $produit['prix_ht'];
     $remise = $produit['pourcentage_remise'];
-    $enLigne = $produit['est_masque_php']; 
+    $enLigne = $produit['est_masque']; 
     $qteStock = $produit['quantite_stock'];
     $qteUnite = $produit['quantite_unite'];
     $unite = $produit['unite'];
     $nomCategorie = $produit['libelle_categorie'];
     $idCategorie = $produit['id_categorie'];
+    $seuilAlerte = $produit['seuil_alerte'];
 
     // Si dans la BDD est_masque est a false, il faut mettre enLigne à true ou l'inverse
     if($enLigne == 'f'){
@@ -69,10 +75,10 @@ foreach($dbh->query("SELECT *,est_masque::CHAR as est_masque_php
     $promotion = $stmtPromo->fetch(PDO::FETCH_ASSOC);
 
     // id_promotion != null veut dire que le produit est en promotion
-    if( isset($promotion['id_promotion']) && $promotion['id_promotion'] != null){
+    if(isset($promotion['id_promotion']) && $promotion['id_promotion'] != null){
         $caseCochee = true;
         // Récupération des infos de promotion
-        $dateDebutPromotion = formatDate($promotion['date_debut_promotion']);
+        $dateDebutPromotion = $promotion['date_debut_promotion'] !== null ? formatDate($promotion['date_debut_promotion']) : date('Y-m-d');
         $dateFinPromotion = $promotion['date_fin_promotion'] !== null ? formatDate($promotion['date_fin_promotion']) : null;
         $labelPromo = $promotion['label'];
     }else{
@@ -125,29 +131,36 @@ if (isset($_POST['categorie']) && isset($_POST['nom']) && isset($_POST['prix']) 
     $prixHT = htmlentities($_POST['prix']);
     $qteStock = htmlentities($_POST['qteStock']);
     $remise = htmlentities($_POST['remise']);
-    $enLigne = htmlentities($_POST['mettreEnLigne']);
     $description = htmlentities($_POST['description']);
     $unite = htmlentities($_POST['unite']);
     $qteUnite = htmlentities($_POST['qteUnite']);
+
+    // S'il n'est pas coché il faut mettre est_masque dans la BDD à true en chaine pour eviter les problèmes
+    if (isset($_POST['mettreEnLigne']) && $_POST['mettreEnLigne'] === "on"){
+        $enLigne = "true";
+    }
+    else{
+        $enLigne = "false";
+    }
+    
+
+
     // Champs spécifiques à la promotion
-    $dateDebutPromotion = isset($_POST['dateDebutPromotion']) ? htmlentities($_POST['dateDebutPromotion']) : date('Y-m-d');
+    $dateDebutPromotion = $_POST['dateDebutPromotion'] !== null ? $_POST['dateDebutPromotion'] : date('Y-m-d');
     $dateFinPromotion = htmlentities($_POST['dateFinPromotion']);
     $dateFinPromotion = trim($dateFinPromotion);
     $dateFinPromotion = ($dateFinPromotion === '') ? null : $dateFinPromotion;
     $labelPromo = isset($_POST['labelPromo']) ? $_POST['labelPromo'] : null;
+    $seuilAlerte = null;
+    if(isset($_POST['ajouterSeuil']) && $_POST['ajouterSeuil'] == 'on' && isset($_POST['seuilAlerte']) && $_POST['seuilAlerte'] !== ''){
+        $seuilAlerte = (int) $_POST['seuilAlerte']; // conversion explicite
+    }
 
     // Récupération du nom de la catégorie pour la gestion de la tva
     foreach ($tab_categories as $c) {
         if ($c['id_categorie'] == $idCategorie) {
             $nomCategorie = $c['libelle_categorie'];
         }
-    }
-    
-    // S'il n'est pas coché il faut mettre est_masque dans la BDD à true en chaine pour eviter les problèmes
-    if($_POST['mettreEnLigne'] == false){
-        $enLigne = 'true';
-    }else{
-        $enLigne = 'false';
     }
 
 
@@ -174,19 +187,36 @@ if (isset($_POST['categorie']) && isset($_POST['nom']) && isset($_POST['prix']) 
             $prixTTC = $prixHT*(1+$pourcentageTVA);
 
             //Update du produit
-            $updateProduit = $dbh -> query("UPDATE sae3_skadjam._produit SET
-                                                        libelle_produit = '$nom',
-                                                        description_produit = '$description',
-                                                        prix_ht = $prixHT,
-                                                        prix_ttc = $prixTTC,
-                                                        est_masque = $enLigne,
-                                                        quantite_stock = $qteStock,
-                                                        quantite_unite = $qteUnite,
-                                                        unite = '$unite',
-                                                        id_categorie = $idCategorie,
-                                                        id_vendeur = $idCompte,
-                                                        id_tva = $tva
-                                                    WHERE id_produit = $idProduit;");
+            $updateProduit = $dbh->prepare("UPDATE sae3_skadjam._produit SET
+                                            libelle_produit = :nom,
+                                            description_produit = :description,
+                                            prix_ht = :prixHT,
+                                            prix_ttc = :prixTTC,
+                                            est_masque = :enLigne,
+                                            quantite_stock = :qteStock,
+                                            seuil_alerte = :seuilAlerte,
+                                            quantite_unite = :qteUnite,
+                                            unite = :unite,
+                                            id_categorie = :idCategorie,
+                                            id_vendeur = :idCompte,
+                                            id_tva = :tva
+                                            WHERE id_produit = :idProduit");
+
+            $updateProduit->execute([
+                ':nom' => $nom,
+                ':description' => $description,
+                ':prixHT' => $prixHT,
+                ':prixTTC' => $prixTTC,
+                ':enLigne' => $enLigne,
+                ':qteStock' => $qteStock,
+                ':seuilAlerte' => $seuilAlerte,
+                ':qteUnite' => $qteUnite,
+                ':unite' => $unite,
+                ':idCategorie' => $idCategorie,
+                ':idCompte' => $idCompte,
+                ':tva' => $tva,
+                ':idProduit' => $idProduit
+            ]);
 
             // Gestion de la promotion
             // Vérifier si le produit est promu ou non
@@ -204,7 +234,7 @@ if (isset($_POST['categorie']) && isset($_POST['nom']) && isset($_POST['prix']) 
                 $dbh->beginTransaction();
                 // Création de la promotion
                 try {
-                    if(isset($dateDebutPromotion) && $dateDebutPromotion >= date('Y-m-d')){
+                    if(isset($dateDebutPromotion)){
                         // Une date de fin à été ajoutée
                         if(isset($dateFinPromotion) && $dateFinPromotion >= $dateDebutPromotion){
                             $stmtPromo = $dbh->prepare("INSERT INTO sae3_skadjam._promotion
@@ -220,7 +250,8 @@ if (isset($_POST['categorie']) && isset($_POST['nom']) && isset($_POST['prix']) 
                                                             '00:00',
                                                             :id_vendeur,
                                                             :id_photo
-                                                        )");
+                                                        )
+                                                        RETURNING id_promotion");
                             $stmtPromo->execute([
                                 ':date_debut' => formatDate($dateDebutPromotion),
                                 ':date_fin'   => formatDate($dateFinPromotion),
@@ -242,21 +273,21 @@ if (isset($_POST['categorie']) && isset($_POST['nom']) && isset($_POST['prix']) 
                                                             '00:00',
                                                             :id_vendeur,
                                                             :id_photo
-                                                        )");
+                                                        )
+                                                        RETURNING id_promotion");
                             $stmtPromo->execute([
                                 ':date_debut' => formatDate($dateDebutPromotion),
                                 ':date_fin'   => null,
                                 ':id_vendeur' => $idCompte,
                                 ':id_photo'   => $idPhoto
                             ]);
-                        }else{
-                            echo "La date de fin de promotion est invalide.";
                         }
-                    }else{
-                        echo "La date de début de promotion est invalide.";
                     }
                     
-                    $idPromotion = $dbh->lastInsertId();
+                    $idPromotion = $stmtPromo->fetchColumn();
+                    if(!$idPromotion){
+                        throw new Exception("Impossible de récupérer l'ID de la promotion créée.");
+                    }
 
                     if(strlen($labelPromo) < 20){
                         $stmtLibelle = $dbh->prepare("UPDATE sae3_skadjam._promotion
@@ -311,7 +342,7 @@ if (isset($_POST['categorie']) && isset($_POST['nom']) && isset($_POST['prix']) 
             if($caseCochee && $estPromu){
                 $idPromotion = $promotion['id_promotion'];
                 // Mise à jour des dates de la promotion existante
-                if(verifDate($dateDebutPromotion) && $dateDebutPromotion >= date('Y-m-d')){
+                if(verifDate($dateDebutPromotion)){
                     if(isset($dateFinPromotion) && $dateFinPromotion !== ''){
                         if(verifDate($dateFinPromotion) && $dateFinPromotion >= $dateDebutPromotion){
                             $stmtUpdatePromo = $dbh->prepare("UPDATE sae3_skadjam._promotion
@@ -338,8 +369,6 @@ if (isset($_POST['categorie']) && isset($_POST['nom']) && isset($_POST['prix']) 
                     }else{  
                         echo "La date de fin de promotion est invalide.";
                     }
-                }else{
-                    echo "La date de début de promotion est invalide.";
                 }
 
                 // Mise à jour du libellé de la promotion
@@ -440,7 +469,7 @@ else { ?>
         <?php include __DIR__ . '/../../php/structure/navbar_back.php';?>
         <main class="flex flex-col items-center">
             <h2>Modifier <?php echo $nom; ?></h2>
-            <form class="grid grid-cols-[40%_60%] w-11/12 self-center" action="modifier_produit.php?idProduit=<?php echo $idProduit;?>" method="post" enctype="multipart/form-data">
+            <form id="formModif" class="grid grid-cols-[40%_60%] w-11/12 self-center" action="modifier_produit.php?idProduit=<?php echo $idProduit;?>" method="post" enctype="multipart/form-data">
                 <!-- Image -->
                 <div class="row-start-1 row-span-3 m-2 p-4 grid grid-rows-[2/3-1/3] justify-items-center">
                     <input type="file" id="photo" name="photo" class="hidden">
@@ -471,7 +500,7 @@ else { ?>
                     <!-- Quantite en stock -->
                     <div class="flex flex-col">
                         <label for="qteStock">Quantité en stock* :</label>
-                        <input value="<?php echo $qteStock;?>" placeholder="50" class="border-4 border-beige rounded-2xl w-40 m-2 placeholder-gray-500" type="number" name="qteStock" id="qteStock" min="0" required>
+                        <input value="<?php echo $qteStock;?>" placeholder="50" class="border-4 border-beige rounded-2xl w-40 m-2 placeholder-gray-500" type="number" name="qteStock" id="qteStock" required>
                     </div>
                 </div>
                     
@@ -505,10 +534,15 @@ else { ?>
 
                 
                 <div class="col-start-1 row-start-4 col-span-2 flex flex-row justify-around m-2 p-2">
+                    <!-- Ajouter un seuil d'alerte -->
+                    <div class="flex flex-row mr-4 ml-4">
+                        <label class="mr-4" for="ajouterSeuil">Ajouter un seuil d'alerte</label>
+                        <input id="seuilCheck" type="checkbox" name="ajouterSeuil" <?php echo ($seuilAlerte !== null) ? 'checked' : ''; ?> class="appearance-none w-10 h-10 border-4 border-beige rounded-md checked:bg-beige checked:border-vertFonce cursor-pointer">
+                    </div>
                     <!-- Mettre en ligne -->
                     <div class="flex flex-row mr-4 ml-4">
                         <label class="mr-4" for="mettreEnLigne">Mettre en ligne</label>
-                        <input class="cursor-pointer appearance-none w-10 h-10 border-4 border-beige rounded-md checked:bg-beige checked:border-vertFonce" type="checkbox" name="mettreEnLigne" id="mettreEnLigne" <?php echo ($enLigne == 'true') ? 'checked' : ''; ?>>
+                        <input type="checkbox" name="mettreEnLigne" id="mettreEnLigne" <?php echo ($enLigne == 'true') ? 'checked' : ''; ?> class="cursor-pointer appearance-none w-10 h-10 border-4 border-beige rounded-md checked:bg-beige checked:border-vertFonce">
                     </div>
                     <?php 
                         $stmtNbPromos = $dbh->prepare("SELECT COUNT(*) AS nb_promotions
@@ -519,43 +553,55 @@ else { ?>
                         $stmtNbPromos->execute([':id_vendeur' => $_SESSION['idCompte']]);
                         $nbPromos = $stmtNbPromos->fetch(PDO::FETCH_ASSOC)['nb_promotions'];
                     ?>
+                    <!-- Mettre en promotion -->
                     <div class="flex flex-row mr-4 ml-4">
                         <label class="mr-4 <?php echo ($nbPromos >= 2 && !$caseCochee) ? "text-rouge" : ""; ?>" for="mettreEnPromotion"><?php echo ($nbPromos >= 2 && !$caseCochee) ? "Limite de promotion atteinte" : "Mettre en promotion"; ?></label>
                         <input id="promoCheck" type="checkbox" name="mettreEnPromotion" class="cursor-pointer border-beige appearance-none w-10 h-10 border-4 rounded-md checked:bg-beige checked:border-vertFonce" <?php echo $caseCochee ? 'checked' : ''; ?> <?php echo ($nbPromos >= 2 && !$caseCochee) ? 'hidden' : ''; ?>>
                     </div>
                 </div>
+
+                <!---Input lié au seuil d'alerte--->
+                <div class="col-start-1 row-start-5 flex flex-col">
+                    <div id="seuilInput" class="flex flex-row mr-4 ml-4">
+                        <label class="mr-4" for="seuilAlerte">Seuil d'alerte* :</label>
+                        <input class="border-4 border-beige rounded-2xl w-45" type="number" name="seuilAlerte" id="seuilAlerte" min="0" value="<?php if(isset($seuilAlerte)){echo $seuilAlerte;} ?>">
+                    </div>
+                </div>
+
                 <!-- Inputs liés aux promotions -->
-                <div id="promoInputs" class="col-start-1 row-start-5 col-span-2 flex flex-col">
+                <div id="promoInputs" class="col-start-1 row-start-6 col-span-2 flex flex-col">
                     <div class="flex flex-row justify-around m-2 p-2">
                         <div>
-                            <div id="debPromo" class="flex flex-row mr-4 ml-4">
+                            <div class="flex flex-row mr-4 ml-4">
                                 <label class="mr-4" for="dateDebutPromotion">Début de promotion* :</label>
-                                <input class="border-4 border-beige rounded-2xl w-45" type="date" name="dateDebutPromotion" id="dateDebutPromotion" value="<?php echo $dateDebutPromotion; ?>" required>
+                                <input class="border-4 border-beige rounded-2xl w-45" type="date" name="dateDebutPromotion" id="dateDebutPromotion" value="<?php echo $dateDebutPromotion; ?>">
                             </div>
+                            <p id="erreurDebPromo" class="text-rouge hidden"></p>
                         </div>
                         <div>
                             <div class="flex flex-row mr-4 ml-4">
                                 <label class="mr-4" for="dateFinPromotion">Fin de promotion :</label>
-                                <input class="border-4 border-beige rounded-2xl w-45" type="date" name="dateFinPromotion" id="dateFinPromotion" value="<?php if(isset($dateFinPromotion)){echo $dateFinPromotion;} ?>">
+                                <input class="border-4 border-beige rounded-2xl w-45" type="date" name="dateFinPromotion" id="dateFinPromotion" value="<?php echo $dateFinPromotion; ?>">
                             </div>
+                            <p id="erreurFinPromo" class="text-rouge hidden"></p>
                         </div>
                     </div>
                     <div class="flex flex-row justify-around m-2 p-2">
                         <div class="flex flex-row mr-4 ml-4">
                             <label class="mr-4" for="labelPromo">Libellé de la promotion :</label>
-                            <input class="border-4 border-beige rounded-2xl w-45" maxlength="20" type="text" name="labelPromo" id="labelPromo" value="<?php if(isset($labelPromo)){echo $labelPromo;}?>">
+                            <input class="border-4 border-beige rounded-2xl w-45" maxlength="20" type="text" name="labelPromo" id="labelPromo" value="<?php echo $labelPromo;?>">
                         </div>
                     </div>
                 </div>
 
                 <!-- Description -->
-                <div class="col-start-1 col-span-2 row-start-6 flex flex-col m-2 p-2 ">
+                <div class="col-start-1 col-span-2 row-start-7 flex flex-col m-2 p-2 ">
                     <label for="description">Description *:</label>
                     <textarea placeholder="Pot de confiture de fraises des bois" class="border-4 border-beige rounded-2xl w-3/4 self-center placeholder-gray-500" name="description" id="description" cols="100" rows="10" required><?php echo $description ;?></textarea>
                 </div>
                 
                 <!-- Validation -->
-                <div class="col-start-1 col-span-2 row-start-7 flex flex-row justify-around m-4">
+                <div class="col-start-1 col-span-2 row-start-8 flex flex-row justify-around m-4">
                     <a href="../bo/details_produit.php?idProduit=<?php echo $idProduit ;?>" class="flex justify-center items-center border-2 border-vertFonce rounded-2xl w-40 h-14 cursor-pointer">Retour</a>
                     <input class="border-2 border-vertFonce rounded-2xl w-40 h-14 cursor-pointer" type="submit" value="Valider">
                 </div>
@@ -563,32 +609,9 @@ else { ?>
         </main>
         <?php include __DIR__ . '/../../php/structure/footer_back.php';?> 
         <script src="../../js/bo/changement_image_produits.js"></script>
+        <script src="/js/bo/produit.js"></script>
     </body>
 </html>
-<script>
-    // Fonction pour afficher/cacher les inputs de promotion
-    function togglePromotionInputs(){
-        var promoCheck = document.getElementById('promoCheck');
-        var promoInputs = document.getElementById('promoInputs');
-        var debPromo = document.getElementById('debPromo');
 
-        if(promoCheck.checked && !promoCheck.disabled){
-            promoInputs.style.display='flex';
-            promoInputs.style.visibility = 'visible';
-            promoInputs.style.height = 'auto';
-            //promoInputs.children[0].children[0].children[0].children[1].required = true;
-            debPromo.required = true;
-        }else{
-            promoInputs.style.visibility = 'hidden';
-            promoInputs.style.height = '0';
-        }
-    }
-    // Quand "Mettre en promotion" est coché, afficher les inputs de promotion
-    document.addEventListener('DOMContentLoaded', function() {
-        var promoCheck = document.getElementById('promoCheck');
-        promoCheck.addEventListener('change', togglePromotionInputs);
-        togglePromotionInputs();
-    });
-</script>
 <?php } ?>
 

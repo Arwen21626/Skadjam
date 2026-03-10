@@ -1,10 +1,14 @@
 <?php
+    session_start();
+
     include __DIR__ . '/01_premiere_connexion.php';
+
     const PAGE_SIZE = 24;
-    require_once __DIR__ . "/../connections_params.php";
+
     require_once __DIR__ . "/php/fonctions.php";
     require_once __DIR__ . "/php/modification_variable.php";
-    session_start();
+    
+    require_once __DIR__ . "/php/verif_role_fo.php";
     
     if (!isset($_SESSION['role'])) {
         $_SESSION['role'] = "visiteur";
@@ -12,14 +16,38 @@
                                "montant_total_ttc" => 0,
                                "contient" => []]; //format du tableau représentant un produit : ['id' => 25, 'quantite_par_produit' => 2]
     }
+    
 
-    require_once __DIR__ . "/php/verif_role_fo.php";
+    foreach($dbh->query("SELECT pr.id_produit, pr.date_creation, libelle_produit, description_produit, prix_ttc, prix_remise, quantite_stock, id_categorie, pr.id_vendeur, note_moyenne, ph.id_photo, url_photo, alt, titre, id_compte, pu.id_promotion, label
+                                    FROM sae3_skadjam._produit pr
+                                    INNER JOIN sae3_skadjam._montre m
+                                        ON pr.id_produit=m.id_produit
+                                    INNER JOIN sae3_skadjam._photo ph  
+                                        ON ph.id_photo = m.id_photo 
+                                    INNER JOIN sae3_skadjam._vendeur v
+                                        ON pr.id_vendeur = v.id_compte
+                                    LEFT JOIN sae3_skadjam._promu pu
+                                        ON pu.id_produit = pr.id_produit
+                                    LEFT JOIN sae3_skadjam._promotion pm
+                                        ON pu.id_promotion = pm.id_promotion
+                                    WHERE pr.est_supprime = false AND pr.est_masque = false"
+                        , PDO::FETCH_ASSOC) as $row){
+        $tabProduit[] = $row;
+    }
 ?>
 
 <!DOCTYPE html>
 <html lang="fr">
     <head>
         <title>Accueil</title>
+
+        <script>
+            const tabProd = <?php echo json_encode($tabProduit);?>;    
+        </script>
+        
+        <script src="js/affichageListeProduits.js"></script>
+        <script src="js/tris.js"></script>
+        <script src="js/affichageNote.js"></script> 
     </head>    
 <?php include __DIR__ . "/php/structure/head_front.php"; ?>
 <body>
@@ -31,16 +59,16 @@
     <main class="mt-10">
         <div class="grid grid-cols-2 gap-4 justify-items-center">
             <a href="html/fo/promotion.php" title="lien vers page promotion" alt="promotion">
-                <img src="images/images_accueil/promotion.webp" title="lien vers page promotion" alt="promotion" class="w-90 md:w-150 h-auto justify-self-end">
+                <img src="images/images_accueil/promotion.webp" title="lien vers page promotion" alt="Produits en promotion" class="w-90 md:w-150 h-auto justify-self-end">
             </a>
-            <a href="#nosProduits" title="lien vers page nouveaux produits" alt="nouveaux produits">
-                <img src="images/images_accueil/nouveaux_produits.webp" title="lien vers page nouveaux produits" alt="nouveaux produits" class="w-90 md:w-150 h-auto justify-self-start">
+            <a href="html/fo/nouveaux_produits.php" title="lien vers page nouveaux produits" alt="nouveaux produits">
+                <img src="images/images_accueil/nouveaux_produits.webp" title="lien vers page nouveaux produits" alt="Produits ajoutés ces 30 derniers jours" class="w-90 md:w-150 h-auto justify-self-start">
             </a>           
-            <a href="#nosProduits" title="lien vers page les plus vendus" alt="les plus vendus">
-                <img src="images/images_accueil/les_plus_vendus.webp" title="lien vers page les plus vendus" alt="les plus vendus" class="w-90 md:w-150 h-auto justify-self-end">
+            <a href="html/fo/les_plus_vendus.php" title="lien vers page les plus vendus" alt="les 16 produits les plus vendus sur le site">
+                <img src="images/images_accueil/les_plus_vendus.webp" title="lien vers page les plus vendus" alt="Produits les plus vendus (Pas encore disponible)" class="w-90 md:w-150 h-auto justify-self-end">
             </a>
             <a href="html/fo/liste_commandes.php" title="lien vers page commandes" alt="commandes">
-                <img src="images/images_accueil/commandes.webp" title="lien vers page commandes" alt="commandes" class="w-90 md:w-150 h-auto justify-self-start">
+                <img src="images/images_accueil/commandes.webp" title="lien vers page commandes" alt="Mes commandes en cours" class="w-90 md:w-150 h-auto justify-self-start">
             </a>        
         </div>
 
@@ -81,7 +109,7 @@
                 $lignes = array_slice($tabProduit, $pageNumber*PAGE_SIZE-PAGE_SIZE, PAGE_SIZE);
                 
                 //affiche la photo du produit, son nom, son prix et sa note ?>
-                <div class="flex flex-row flex-wrap justify-around">
+                <article class="flex flex-row flex-wrap justify-around">
                     <?php foreach($lignes as $id => $valeurs){
                         $idProduit = $valeurs['id_produit'];
                         // Le produit est-il en promotion ?
@@ -135,13 +163,15 @@
                                 <?php }} ?>
                         </section>
                     <?php } ?>
-                </div>
+                </article>
                 <?php $dbh = null;
             }catch(PDOException $e){
                 print "Erreur !: " . $e->getMessage() . "<br/>";
                 die();
             }
+
         ?>
+        
         <!--fin du catalogue-->
         <div class="flex flex-row space-x-4 justify-center">
             <?php if($pageNumber>1){?>
@@ -154,6 +184,7 @@
         </div>
     </main>
     
+
     <!--footer-->
     <?php require __DIR__ . "/php/structure/footer_front.php"; ?>
 

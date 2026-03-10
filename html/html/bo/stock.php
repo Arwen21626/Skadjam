@@ -9,7 +9,7 @@
     try {     
         $tabProduit = null;           
         //récupère toutes les infos des tables produits
-        foreach($dbh->query("SELECT pr.id_produit, pr.libelle_produit, pr.prix_ttc, pr.note_moyenne, pr.quantite_stock, p.url_photo, p.alt, p.titre
+        foreach($dbh->query("SELECT pr.id_produit, pr.libelle_produit, pr.prix_ttc, pr.note_moyenne, pr.quantite_stock, p.url_photo, p.alt, p.titre, pr.seuil_alerte
                             FROM sae3_skadjam._produit pr
                             INNER JOIN sae3_skadjam._vendeur v
                                 ON pr.id_vendeur = v.id_compte
@@ -75,6 +75,7 @@
                             <th scope="col"><h3>Prix</h3></th>
                             <th scope="col"><h3>Note</h3></th>
                             <th scope="col"><h3>Stock</h3></th>
+                            <th scope="col"></th>
                         </tr>
                     </thead>
                     <tbody>
@@ -100,7 +101,11 @@
                                             ?>
                                         </div>
                                     </td>
-                                    <td class="text-center py-3"><p><?php echo htmlentities($valeurs['quantite_stock']); ?></p></td>
+                                    <td class="text-center py-3">
+                                        <p><?php echo htmlentities($valeurs['quantite_stock']); ?></p>
+                                        <p class="hidden"><?php echo ($valeurs['seuil_alerte']!== null)?$valeurs['seuil_alerte']:0; ?></p>
+                                    </td>
+                                    <td class=" min-w-15 bg-white"></td>
                                 </tr>
                         <?php }?>
                     </tbody>
@@ -111,5 +116,37 @@
 
     <!--footer-->
     <?php include(__DIR__ . "/../../php/structure/footer_back.php"); ?>
+    <script>
+        let lignesTab = document.getElementsByTagName("tr");
+
+        let rouge = "#A70101";
+        let rougeClaire = "#E04C4C";
+
+        let seuil;
+
+        for(let i = 1; i < lignesTab.length; i++){
+            seuil = lignesTab[i].children[4].children[1].textContent;
+
+            // ajout d'une bordure qui indique que le stock est inférieur au seuil
+            if (Number(lignesTab[i].children[4].children[0].textContent) <= Number(seuil)){
+                
+                lignesTab[i].children[lignesTab[i].childElementCount-2].style.borderRightWidth = "0.5em";
+
+                // couleur des lignes alterner
+                if(i%2 !== 0){
+                    lignesTab[i].children[lignesTab[i].childElementCount-2].style.borderColor = rouge;
+                }
+                else{
+                    lignesTab[i].children[lignesTab[i].childElementCount-2].style.borderColor = rougeClaire;
+                }
+
+                // met un logo en complément de la couleur
+                lignesTab[i].children[5].style.backgroundImage = "url(/images/logo/bootstrap_icon/exclamation-triangle.svg)"; 
+                lignesTab[i].children[5].style.backgroundSize = "1.5em auto"; 
+                lignesTab[i].children[5].style.backgroundRepeat = "no-repeat"; 
+                lignesTab[i].children[5].style.backgroundPosition = "center center";
+            }
+        }
+    </script>
 </body>
 </html>
