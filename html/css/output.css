@@ -1634,6 +1634,24 @@ input.quantite-prod-input {
       background-color: #ccc;
     }
   }
+  .before\:bg-vertClair {
+    &::before {
+      content: var(--tw-content);
+      background-color: var(--color-vertClair);
+    }
+  }
+  .before\:bg-vertFonce {
+    &::before {
+      content: var(--tw-content);
+      background-color: var(--color-vertFonce);
+    }
+  }
+  .before\:bg-vertMoyen {
+    &::before {
+      content: var(--tw-content);
+      background-color: var(--color-vertMoyen);
+    }
+  }
   .before\:leading-\[30px\] {
     &::before {
       content: var(--tw-content);
@@ -1719,6 +1737,12 @@ input.quantite-prod-input {
     &::after {
       content: var(--tw-content);
       background-color: #ccc;
+    }
+  }
+  .after\:bg-vertClair {
+    &::after {
+      content: var(--tw-content);
+      background-color: var(--color-vertClair);
     }
   }
   .after\:content-\[\'\'\] {
