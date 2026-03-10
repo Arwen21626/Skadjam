@@ -1438,6 +1438,9 @@ input.quantite-prod-input {
   .text-wrap {
     text-wrap: wrap;
   }
+  .break-words {
+    overflow-wrap: break-word;
+  }
   .text-beige {
     color: var(--color-beige);
   }
@@ -1870,9 +1873,9 @@ input.quantite-prod-input {
       height: calc(var(--spacing, 0.25rem) * 28);
     }
   }
-  .md\:h-6 {
+  .md\:h-7 {
     @media (width >= 48rem) {
-      height: calc(var(--spacing, 0.25rem) * 6);
+      height: calc(var(--spacing, 0.25rem) * 7);
     }
   }
   .md\:h-14 {
