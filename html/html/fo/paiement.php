@@ -201,11 +201,47 @@ if($_SESSION['role'] != 'client'){
     <?php if(!$achatValide){?>
         <main class="">
             <!---fil d'ariane processus d'achat--->
-            <ul class="etapes-processus-achat">
-                <li class="fait" etape="1">Récapitulatif commande</li>
-                <li class="fait" etape="2">Adresse de livraison</li>
-                <li class="actuel" etape="3">Paiement</li>
-                <li etape="4">Commande validée</li>
+            <ul class="flex list-none p-0 m-8">
+                <!-- étape faite -->
+                <li etape="1"
+                    class="relative flex-1 text-center py-2
+                    before:content-[attr(etape)] before:block before:w-[30px] before:h-[30px]
+                    before:mx-auto before:mb-2 before:leading-[30px]
+                    before:rounded-full before:bg-[#86D0CC] before:text-white before:font-bold
+                    after:content-[''] after:absolute after:top-[22px] after:-right-1/2
+                    after:w-full after:h-[4px] after:bg-[#86D0CC] after:-z-10">
+                    Récapitulatif commande
+                </li>
+                <li etape="2"
+                    class="relative flex-1 text-center py-2
+                    before:content-[attr(etape)] before:block before:w-[30px] before:h-[30px]
+                    before:mx-auto before:mb-2 before:leading-[30px]
+                    before:rounded-full before:bg-[#86D0CC] before:text-white before:font-bold
+                    after:content-[''] after:absolute after:top-[22px] after:-right-1/2
+                    after:w-full after:h-[4px] after:bg-[#86D0CC] after:-z-10">
+                    Adresse de livraison
+                </li>
+
+                <!-- étape actuelle -->
+                <li etape="3"
+                    class="relative flex-1 text-center py-2
+                    before:content-[attr(etape)] before:block before:w-[50px] before:h-[50px]
+                    before:mx-auto before:mb-2 before:-mt-[10px] before:leading-[50px]
+                    before:rounded-full before:bg-[#588A87] before:text-white before:font-bold
+                    after:content-[''] after:absolute after:top-[22px] after:-right-1/2
+                    after:w-full after:h-[4px] after:bg-[#ccc] after:-z-10">
+                    Paiement
+                </li>
+
+                <!-- dernière étape -->
+                <li etape="4"
+                    class="relative flex-1 text-center py-2
+                    before:content-[attr(etape)] before:block before:w-[30px] before:h-[30px]
+                    before:mx-auto before:mb-2 before:leading-[30px]
+                    before:rounded-full before:bg-[#ccc] before:text-white before:font-bold
+                    after:hidden">
+                    Commande validée
+                </li>
             </ul>
 
             <h2>Paiement</h2>
@@ -312,11 +348,47 @@ if($_SESSION['role'] != 'client'){
         <main class="text-center min-h-[500px]">
             <div class="mt-10">
                 <!---fil d'ariane processus d'achat--->
-                <ul class="etapes-processus-achat">
-                    <li class="fait" etape="1">Récapitulatif commande</li>
-                    <li class="fait" etape="2">Adresse de livraison</li>
-                    <li class="fait" etape="3">Paiement</li>
-                    <li class="actuel" etape="4">Commande validée</li>
+                <ul class="flex list-none p-0 m-8">
+                    <!-- étape faite -->
+                    <li etape="1"
+                        class="relative flex-1 text-center py-2
+                        before:content-[attr(etape)] before:block before:w-[30px] before:h-[30px]
+                        before:mx-auto before:mb-2 before:leading-[30px]
+                        before:rounded-full before:bg-[#86D0CC] before:text-white before:font-bold
+                        after:content-[''] after:absolute after:top-[22px] after:-right-1/2
+                        after:w-full after:h-[4px] after:bg-[#86D0CC] after:-z-10">
+                        Récapitulatif commande
+                    </li>
+                    <li etape="2"
+                        class="relative flex-1 text-center py-2
+                        before:content-[attr(etape)] before:block before:w-[30px] before:h-[30px]
+                        before:mx-auto before:mb-2 before:leading-[30px]
+                        before:rounded-full before:bg-[#86D0CC] before:text-white before:font-bold
+                        after:content-[''] after:absolute after:top-[22px] after:-right-1/2
+                        after:w-full after:h-[4px] after:bg-[#86D0CC] after:-z-10">
+                        Adresse de livraison
+                    </li>
+
+                    <!-- étape actuelle -->
+                    <li etape="3"
+                        class="relative flex-1 text-center py-2
+                        before:content-[attr(etape)] before:block before:w-[30px] before:h-[30px]
+                        before:mx-auto before:mb-2 before:leading-[30px]
+                        before:rounded-full before:bg-[#86D0CC] before:text-white before:font-bold
+                        after:content-[''] after:absolute after:top-[22px] after:-right-1/2
+                        after:w-full after:h-[4px] after:bg-[#86D0CC] after:-z-10">
+                        Paiement
+                    </li>
+
+                    <!-- dernière étape -->
+                    <li etape="4"
+                        class="relative flex-1 text-center py-2
+                        before:content-[attr(etape)] before:block before:w-[50px] before:h-[50px]
+                        before:mx-auto before:mb-2 before:-mt-[10px] before:leading-[50px]
+                        before:rounded-full before:bg-[#588A87] before:text-white before:font-bold
+                        after:hidden">
+                        Commande validée
+                    </li>
                 </ul>
 
                 <h1 class="pl-2 pr-2">Votre achat a bien été validé</h1>
