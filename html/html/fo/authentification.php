@@ -167,9 +167,12 @@ if (($_SERVER['REQUEST_METHOD'] == 'POST' && $_POST['auth'] === 'valide') || $co
 </head>
 <body class="show">
     <?php include __DIR__.'/../../php/structure/header_front.php' ?>
-    <h2>Authentification à deux facteurs</h2>
-    <?php include __DIR__.'/../../php/structure/authentikATOR/input_code.php' ?>
-    <p id="result" class="hidden"></p>
+    <main class="flex flex-col">
+        
+        <h2>Authentification à deux facteurs</h2>
+        <?php include __DIR__.'/../../php/structure/authentikATOR/input_code.php' ?>
+        <p id="result" class="hidden"></p>
+    </main>
     <?php include __DIR__.'/../../php/structure/footer_front.php' ?>
 </body>
 <script src="./../../php/structure/authentikATOR/appelAJAX.js"></script>

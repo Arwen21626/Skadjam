@@ -26,12 +26,14 @@
     <?php include(__DIR__ . "/../../php/structure/navbar_back.php"); ?>
 
     <main class="min-h-[545px]">
-        <div class="mt-30">
+        <div class="mt-15">
             <h2 class="text-center">Voulez-vous vraiment vider le catalogue ?</h2>
+            <h3 class="text-center">Cette action est irréversible.</h3>
         </div>
-        <div class="mt-30 flex flex-row justify-around mb-15">
-            <a href="../bo/index_vendeur.php"><button class="border-2 border-vertFonce rounded-2xl w-auto h-14 px-7 cursor-pointer">Annuler</button></a>
-            <button id="executerViderCatalogue" class="border-2 border-rouge rounded-2xl w-auto h-14 px-7 cursor-pointer">Confirmer</button>
+
+        <div class="mt-15 flex flex-row justify-around mb-15">
+            <a href="../bo/index_vendeur.php"><button class="border-2 border-vertFonce rounded-2xl w-40 h-14 px-7 cursor-pointer">Annuler</button></a>
+            <button id="executerViderCatalogue" class="border-2 border-rouge rounded-2xl w-40 h-14 px-7 cursor-pointer">Confirmer</button>
         </div>
 
         <script>

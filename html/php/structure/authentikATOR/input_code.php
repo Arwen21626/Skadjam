@@ -1,12 +1,12 @@
-<div id="input-code" class="hidden">
-    <section class="flex flex-row">
-        <input type="text" name="nb1" id="in1" size="1" tabindex="1" maxlength="1" pattern="[1-9]" placeholder="X" class="input-code- border-4 rounded-2xl border-vertClair w-12 h-18 text-4xl text-center">
-        <input type="text" name="nb2" id="in2" size="1" tabindex="2" maxlength="1" pattern="[1-9]" placeholder="X" class="input-code- border-4 rounded-2xl border-vertClair w-12 h-18 text-4xl text-center">
-        <input type="text" name="nb3" id="in3" size="1" tabindex="3" maxlength="1" pattern="[1-9]" placeholder="X" class="input-code- border-4 rounded-2xl border-vertClair w-12 h-18 text-4xl text-center">
-        <p>-</p>
-        <input type="text" name="nb4" id="in4" size="1" tabindex="4" maxlength="1" pattern="[1-9]" placeholder="X" class="input-code- border-4 rounded-2xl border-vertClair w-12 h-18 text-4xl text-center">
-        <input type="text" name="nb5" id="in5" size="1" tabindex="5" maxlength="1" pattern="[1-9]" placeholder="X" class="input-code- border-4 rounded-2xl border-vertClair w-12 h-18 text-4xl text-center">
-        <input type="text" name="nb6" id="in6" size="1" tabindex="6" maxlength="1" pattern="[1-9]" placeholder="X" class="input-code- border-4 rounded-2xl border-vertClair w-12 h-18 text-4xl text-center">
+<div id="input-code" class="hidden flex-col items-center w-full">
+    <section class="flex flex-row  justify-between w-fit">
+        <input type="text" name="nb1" id="in1" size="1" tabindex="1" maxlength="1" pattern="[1-9]" placeholder="X" class="input-code- m-1 border-4 rounded-2xl border-vertClair w-12 h-18 text-4xl text-center">
+        <input type="text" name="nb2" id="in2" size="1" tabindex="2" maxlength="1" pattern="[1-9]" placeholder="X" class="input-code- m-1 border-4 rounded-2xl border-vertClair w-12 h-18 text-4xl text-center">
+        <input type="text" name="nb3" id="in3" size="1" tabindex="3" maxlength="1" pattern="[1-9]" placeholder="X" class="input-code- m-1 border-4 rounded-2xl border-vertClair w-12 h-18 text-4xl text-center">
+        <img src="../../../images/logo/bootstrap_icon/dash.svg" alt="tiret" width="40" height="40">
+        <input type="text" name="nb4" id="in4" size="1" tabindex="4" maxlength="1" pattern="[1-9]" placeholder="X" class="input-code- m-1 border-4 rounded-2xl border-vertClair w-12 h-18 text-4xl text-center">
+        <input type="text" name="nb5" id="in5" size="1" tabindex="5" maxlength="1" pattern="[1-9]" placeholder="X" class="input-code- m-1 border-4 rounded-2xl border-vertClair w-12 h-18 text-4xl text-center">
+        <input type="text" name="nb6" id="in6" size="1" tabindex="6" maxlength="1" pattern="[1-9]" placeholder="X" class="input-code- m-1 border-4 rounded-2xl border-vertClair w-12 h-18 text-4xl text-center">
     </section>
     <button id="valider" onclick="submit(<?= $idClient ?>)" class="border-vertClair border-2 rounded-xl w-40 h-14 cursor-pointer m-5" disabled>Vérifier</button>
 </div>
@@ -15,7 +15,7 @@
 const parent = document.getElementById("input-code")
 const valider = document.getElementById("valider")
 if (document.querySelector("body").classList.contains("show")){
-    parent.style.display = "block"
+    parent.style.display = "flex"
 }
 //const txt_key = document.getElementById("txt-key");
 document.querySelectorAll(".input-code-").forEach((input, idx, inputs) => {
