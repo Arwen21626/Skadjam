@@ -62,28 +62,28 @@ foreach($dbh->query("SELECT * FROM sae3_skadjam._compte c
                 <div class="flex flex-col basis-1/3 m-5 min-w-3xs">
                     <label for="nom">Nom* :</label>
                     <input class="border-4 border-beige rounded-2xl w-1/1 p-1 pl-3" type="text" name="nom" id="nom" value="<?php echo $nom;?>" required>
-                    <?php if (isset($erreurs['nom'])){ echo "<p class=\"text-rouge\" style=\"font-size: 0.90em\">Le nom ne peut contenir que des majuscules, des minuscules, des - ou des espaces.</p>"; } ?>
+                    <?php if (isset($erreurs['nom'])){ echo "<p class=\"text-rouge\" style=\"font-size: 0.90em\">Le nom ne peut contenir que des majuscules, des minuscules, des tirets, des espaces ou les accents : é, ç, è, ë, ê, à, ï, î, ä, â, ù, ü, û, ö, ô.</p>"; } ?>
                 </div>
 
                 <!-- Prenom -->
                 <div class="flex flex-col basis-1/3 m-5 min-w-3xs">
                     <label for="prenom">Prenom* :</label>
                     <input class="border-4 border-beige rounded-2xl w-1/1 p-1 pl-3" type="text" name="prenom" id="prenom" value="<?php echo $prenom;?>" required>
-                    <?php if (isset($erreurs['prenom'])){ echo "<p class=\"text-rouge\" style=\"font-size: 0.90em\">Le prénom ne peut contenir que des majuscules, des minuscules, des - ou des espaces.</p>"; } ?>
+                    <?php if (isset($erreurs['prenom'])){ echo "<p class=\"text-rouge\" style=\"font-size: 0.90em\">Le prénom ne peut contenir que des majuscules, des minuscules, des tirets, des espaces ou les accents : é, ç, è, ë, ê, à, ï, î, ä, â, ù, ü, û, ö, ô.</p>"; } ?>
                 </div>
 
                 <!-- Pseudo -->
                 <div class="flex flex-col basis-1/3 m-5 min-w-3xs">
                     <label for="pseudo">Pseudo* :</label>
                     <input class="border-4 border-beige rounded-2xl w-1/1 p-1 pl-3" type="text" name="pseudo" id="pseudo" value="<?php echo $pseudo;?>" required>
-                    <?php if (isset($erreurs['pseudo'])){ echo "<p class=\"text-rouge\" style=\"font-size: 0.90em\">Le pseudo ne peut contenir que des majuscules, des minuscules, des - ou des espaces.</p>"; } ?>
+                    <?php if (isset($erreurs['pseudo'])){ echo "<p class=\"text-rouge\" style=\"font-size: 0.90em\">Le pseudo ne peut contenir que des chiffres, des majuscules, des minuscules, des tirets, des tirets du bas ou des espaces.</p>"; } ?>
                 </div>
                 
                 <!-- Date de naissance -->
                 <div class="flex flex-col basis-1/3 m-5 min-w-3xs">
                     <label for="naissance">Date de naissance* :</label>
                     <input class="border-4 border-beige rounded-2xl w-1/1 p-1 pl-3" type="date" name="naissance" id="naissance" value="<?php echo formatDate($naissance);?>" required>
-                    <?php if (isset($erreurs['naissance'])){ echo "<p class=\"text-rouge\" style=\"font-size: 0.90em\">La date de naissance doit être de la forme : aaaa-mm-jj.</p>"; } ?>
+                    <?php if (isset($erreurs['naissance'])){ echo "<p class=\"text-rouge\" style=\"font-size: 0.90em\">La date de naissance doit être de la forme : jj/mm/aaaa.</p>"; } ?>
                 </div>
 
                 <!-- Téléphone -->
@@ -97,7 +97,7 @@ foreach($dbh->query("SELECT * FROM sae3_skadjam._compte c
                 <div class="flex flex-col basis-1/3 m-5 min-w-3xs">
                     <label for="mail">Adresse email* :</label>
                     <input class="border-4 border-beige rounded-2xl w-1/1 p-1 pl-3" type="mail" name="mail" id="mail" value="<?php echo $mail;?>" required>
-                    <?php if (isset($erreurs['mail'])){ echo "<p class=\"text-rouge\" style=\"font-size: 0.90em\">L'adresse email est invalide.</p>"; } ?>
+                    <?php if (isset($erreurs['mail'])){ echo "<p class=\"text-rouge\" style=\"font-size: 0.90em\">L'adresse email doit être au format : adresse@e.mail</p>"; } ?>
                 </div>
 
                 <!-- Gestion des adresses -->
@@ -116,14 +116,14 @@ foreach($dbh->query("SELECT * FROM sae3_skadjam._compte c
                             <div class="flex flex-col m-5 basis-1/3  min-w-3xs">
                                 <label for="adressePostal">Adresse :</label>
                                 <input class="border-4 border-beige rounded-2xl w-1/1 p-1 pl-3" type="text" id="adresse" name="adresse[<?php echo $compteur?>][adressePostal]" placeholder="ex : 3 rue des camélia" value="<?php echo ($ligne['numero_rue'] === '') ? '' : ($ligne['numero_rue'].' '.$ligne['complement_adresse'].' '.$ligne['adresse_postale']);?>" required>
-                                <?php if (isset($erreurs['adresse_'.$compteur])){ echo "<p class=\"text-rouge\" style=\"font-size: 0.90em\">L'adresse est invalide.</p>"; } ?>
+                                <?php if (isset($erreurs['adresse_'.$compteur])){ echo "<p class=\"text-rouge\" style=\"font-size: 0.90em\">L'adresse postal doit être du même format que : 1 rue des fleurs</p>"; } ?>
                             </div>
 
                             <!-- Ville -->
                             <div class="flex flex-col m-5 basis-1/3  min-w-3xs">
                                 <label for="ville">Ville :</label>
                                 <input class="border-4 border-beige rounded-2xl w-1/1 p-1 pl-3" type="text" id="ville" name="adresse[<?php echo $compteur?>][ville]" value="<?php echo $ligne['ville'];?>" required>
-                                <?php if (isset($erreurs['ville_'.$compteur])){ echo "<p class=\"text-rouge\" style=\"font-size: 0.90em\">La ville ne peut contenir que des majuscules, des minuscules, des - ou des espaces.</p>"; } ?>
+                                <?php if (isset($erreurs['ville_'.$compteur])){ echo "<p class=\"text-rouge\" style=\"font-size: 0.90em\">La ville ne peut contenir que des majuscules, des minuscules, des tirets, des espaces ou les accents : é, ç, è, ë, ê, à, ï, î, ä, â, ù, ü, û, ö, ô.</p>"; } ?>
                             </div>
 
                             <!-- Code postal -->
@@ -161,7 +161,7 @@ foreach($dbh->query("SELECT * FROM sae3_skadjam._compte c
                 <?php 
                     $compteur++;
                 }
-            ?>
+                ?>
             </div>
             
             <!---Ligne de boutons--->
