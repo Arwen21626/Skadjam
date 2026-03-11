@@ -61,7 +61,7 @@
         </div>
         <button id="filtresTris" class="md:hidden underline  m-2">Filtres & tris</button>
         <!-- Aside -->
-        <aside class="sidebar overflow-auto float-left bg-vertFonce text-bleu p-4 sticky w-79 h-225 top-20">
+        <aside class="sidebar overflow-auto float-left bg-vertFonce text-bleu p-4 sticky w-79 h-200 top-20">
             <!-- Filtres -->
             <section>
                 <h3>Filtres</h3>
