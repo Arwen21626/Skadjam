@@ -79,18 +79,18 @@
         <?php } 
         
         else{?>
-            <div class="flex justify-center">
+            <div class="flex justify-around items-center pl-20 pr-10 mb-14">
                 <!---tableau liste des stocks--->
                 <form action="modifier_stock.php?idCompte=<?php echo $idCompte;?>" method="POST" enctype="multipart/form-data" class="flex justify-center flex-row-reverse w-1/1">
                     
-                    <div class="flex justify-around flex-col m-10 sticky top-2/8 h-50">
+                    <div class="flex flex-col sticky top-1/4 h-50">
                         <!---bouton annuler--->
-                        <a href="../bo/stock.php?idCompte=<?php echo $idCompte ;?>" class="flex justify-center items-center border-2 border-vertFonce rounded-2xl w-40 h-14 cursor-pointer my-5">Annuler</a>
+                        <a href="../bo/stock.php?idCompte=<?php echo $idCompte ;?>" class="flex justify-center items-center border-2 border-vertFonce rounded-2xl w-40 h-14 cursor-pointer">Annuler</a>
                         <!---bouton valider--->
-                        <input class="border-2 border-vertFonce rounded-2xl w-40 h-14 cursor-pointer my-5" type="submit" value="Valider">
+                        <input class="border-2 border-vertFonce rounded-2xl w-40 h-14 cursor-pointer mt-3" type="submit" value="Valider">
                     </div>
 
-                    <table class="table-auto w-2/3">
+                    <table class="table-auto w-7xl">
                         <thead>
                             <tr>
                                 <!---noms des colonnes--->
@@ -117,7 +117,7 @@
                                                 alt="<?php echo $valeurs['alt'];?>" 
                                                 title="<?php echo $valeurs['titre'];?>">
                                         </td>
-                                        <td scope="row" class="text-left py-3 pl-3" ><a href="<?php echo htmlentities("details_produit.php?idProduit=".$idProduit);?>"><?php echo $valeurs['libelle_produit']; ?></a></td>
+                                        <td scope="row" class="w-100 text-left py-3 pl-3" ><a href="<?php echo htmlentities("details_produit.php?idProduit=".$idProduit);?>"><?php echo $valeurs['libelle_produit']; ?></a></td>
                                         <td class="text-center py-3"><p><?php echo str_replace('.',',',$valeurs['prix_ttc']);?> €</p></td>
                                         <td class="text-center py-3">
                                             <div class="flex justify-center items-center">
