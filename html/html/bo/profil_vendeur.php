@@ -176,17 +176,17 @@
             <!-- Modifier le mot de passe du vendeur -->
             <form action="nouveau_mdp.php">
                 <?php $_SESSION['adresse_mail'] = $mail; ?>
-                <input class="border-vertFonce border-2 rounded-2xl w-75 h-14 p-2 m-1 cursor-pointer" type="submit" value="Modifier mon mot de passe">    
+                <input class="border-vertFonce border-2 rounded-2xl w-72 h-14 p-2 m-1 cursor-pointer" type="submit" value="Modifier mon mot de passe">    
             </form>
 
             <!-- Modifier les informations du vendeur (sauf le mot de passe) -->
             <form action="modifier_compte_vendeur.php" method="post">
-                <input class="border-vertFonce border-2 rounded-2xl w-75 h-14 p-2 m-1 cursor-pointer" type="submit" value="Modifier mes informations">
+                <input class="border-vertFonce border-2 rounded-2xl w-72 h-14 p-2 m-1 cursor-pointer" type="submit" value="Modifier mes informations">
             </form>
 
             <!---Statistiques--->
             <form action="statistiques.php" method="post">
-                <input class="border-vertFonce border-2 rounded-2xl w-75 h-14 p-2 m-1 cursor-pointer" type="submit" value="Mes statistiques">
+                <input class="border-vertFonce border-2 rounded-2xl w-72 h-14 p-2 m-1 cursor-pointer" type="submit" value="Mes statistiques">
             </form> 
         </div>
 
@@ -194,7 +194,7 @@
             <!---2ème ligne de boutons---> 
             <!-- Supprimer le compte du vendeur -->
             <form action="suppression_vendeur.php" method="post">
-                <input class="border-rouge border-2 rounded-2xl w-75 h-14 p-2 m-1 cursor-pointer" type="submit" value="Supprimer mon compte">
+                <input class="border-rouge border-2 rounded-2xl w-72 h-14 p-2 m-1 cursor-pointer" type="submit" value="Supprimer mon compte">
             </form>
 
             <!-- Déconnexion -->
