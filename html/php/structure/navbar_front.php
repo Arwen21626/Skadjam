@@ -58,11 +58,11 @@
         <ul class="space-y-3 md:space-y-3">
                 <li><a href=<?php echo $urlProfil ?>>Profil</a></li>
                 <hr>
-                <li><a href="">Futurs achats</a></li>
+                <li><a href="/html/fo/futurs_achats.php">Futurs achats</a></li>
                 <hr>
-                <li><a href="">Commandes</a></li>
+                <li><a href="/html/fo/liste_commandes.php">Commandes</a></li>
                 <hr>
-                <li><a href="../deconnexion.php">Se déconnecter</a></li>
+                <li><a href="/php/deconnexion.php">Se déconnecter</a></li>
         </ul>
     </div>
     <?php }
@@ -71,23 +71,10 @@
         <ul class="space-y-3 md:space-y-2">
             <li><a href="">Futurs achats</a></li>
             <hr>
-            <li><a href="../../html/fo/connexion.php">Se connecter</a></li>
+            <li><a href="/html/fo/connexion.php">Se connecter</a></li>
         </ul>
     </div>
     <?php } ?>
 </nav>
 
-<script>
-    let btnAutre = document.getElementById("btnAutre")
-    let menuBurger = document.getElementById("menuBurger")
-
-    // Action lors du click sur le profil
-    btnAutre.addEventListener("click", function(){
-        if (menuBurger.classList.contains("hidden")) {
-            menuBurger.classList.remove("hidden")
-        }
-        else{
-            menuBurger.classList.add("hidden")
-        }
-    })
-</script>
+<script src="/js/menuBurger.js"></script>
