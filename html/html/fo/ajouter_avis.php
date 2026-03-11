@@ -16,6 +16,18 @@
         $note = $row['nb_etoile'];
         $commentaire = $row['contenu_commentaire'];
         $idAvis = $row['id_avis'];
+
+
+        // Infos photo
+        $tabPhoto = null;
+
+        $reqPhoto = $dbh->prepare("SELECT ph.url_photo, ph.alt, ph.titre
+                                FROM sae3_skadjam._appuie a
+                                INNER JOIN sae3_skadjam._photo ph
+                                    ON a.id_photo = ph.id_photo
+                                WHERE a.id_avis = $idAvis");
+        $reqPhoto->execute();
+        $tabPhoto = $reqPhoto->fetch();
     }
 
     if(isset($_POST['note'])){
@@ -105,8 +117,7 @@
                 <input class="border-4 border-beige rounded-2xl p-1 pl-3 w-16" name="note" id="note" type="number" min="0" max="5" value="<?php if(isset($note)){echo $note;}?>" required>
                 <img class=" w-7 ml-3" src="../../images/logo/bootstrap_icon/star-fill.svg">
             </div>
-            
-            <!-- Le commantaire -->
+            <!-- Le commentaire -->
             <label class="mt-10" for="commentaire">Commentaire : </label>
             <textarea class="border-4 border-beige rounded-2xl w-full p-1 pl-3" name="commentaire" rows="10" cols="100"><?php if(isset($commentaire)){echo $commentaire;}?></textarea>
 
