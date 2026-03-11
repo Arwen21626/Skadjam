@@ -153,7 +153,7 @@ if (isset($_POST["nom"])){
                 <!-- Nom -->
                 <div class="flex flex-col mt-2 mb-2 md:m-2 ">
                     <label for="nom">Nom * :</label>
-                    <input class="border-4 border-solid rounded-2xl border-beige p-1 pl-3 w-60 md:w-96" type="text" id="nom" name="nom" value="<?= (!isset($erreurs["nom"])) ? $nom : '' ?>" size="25" required >
+                    <input placeholder="Dupond" class="border-4 border-solid rounded-2xl border-beige p-1 pl-3 w-60 md:w-96" type="text" id="nom" name="nom" value="<?= (!isset($erreurs["nom"])) ? $nom : '' ?>" size="25" required >
                     <!-- s'il y a une erreur elle sera affiché sous la cellule -->
                     <?php echo isset($erreurs["nom"]) ? "<p class=\"text-rouge\">" . $erreurs["nom"] . " </p>" : '' ?>
                 </div>
@@ -161,7 +161,7 @@ if (isset($_POST["nom"])){
                 <!-- Prénom -->
                 <div class="flex flex-col mt-2 mb-2 md:m-2 md:ml-20">
                     <label for="prenom">Prénom * :</label>
-                    <input class="border-4 border-solid rounded-2xl border-beige p-1 pl-3 w-60 md:w-96" type="text" id="prenom" name="prenom" value="<?= (!isset($erreurs["prenom"])) ? $prenom : '' ?>" size="25" required>
+                    <input placeholder="Jean" class="border-4 border-solid rounded-2xl border-beige p-1 pl-3 w-60 md:w-96" type="text" id="prenom" name="prenom" value="<?= (!isset($erreurs["prenom"])) ? $prenom : '' ?>" size="25" required>
                     <!-- s'il y a une erreur elle sera affiché sous la cellule -->
                     <?php echo isset($erreurs["prenom"]) ? "<p class=\"text-rouge\">" . $erreurs["prenom"] . " </p>" : '' ?>
                 </div>
@@ -169,7 +169,7 @@ if (isset($_POST["nom"])){
                 <!-- Mail -->
                 <div class="flex flex-col mt-2 mb-2 md:m-2">
                     <label for="mail">Mail * :</label>
-                    <input class="border-4 border-solid rounded-2xl border-beige p-1 pl-3 w-72 md:w-96" type="email" id="mail" name="mail" <?= (!(isset($erreurs["mail"]) || isset($erreurs["unique"]))) ? "value=\"$mail\"" : ''  ?> size="40" required>
+                    <input placeholder="jean.dupont@test.com" class="border-4 border-solid rounded-2xl border-beige p-1 pl-3 w-72 md:w-96" type="email" id="mail" name="mail" <?= (!(isset($erreurs["mail"]) || isset($erreurs["unique"]))) ? "value=\"$mail\"" : ''  ?> size="40" required>
                     <!-- s'il y a une erreur elle sera affiché sous la cellule -->
                     <?php echo (isset($erreurs["mail"])) ? "<p class=\"text-rouge\">" . $erreurs["mail"] . " </p>" : '' ?>
                     <?php echo isset($erreurs["unique"]) ? "<p class=\"text-rouge\">" . $erreurs["unique"] . " </p>" : '' ?>
@@ -178,7 +178,7 @@ if (isset($_POST["nom"])){
                 <!-- Téléphone -->
                 <div class="flex flex-col mt-2 mb-2 md:m-2 md:ml-20">
                     <label for="tel">Numéro de téléphone * :</label>
-                    <input class="border-4 border-solid rounded-2xl border-beige p-1 pl-3 w-40 md:w-60" type="tel" id="tel" name="tel" value="<?= (!isset($erreurs["tel"]))?$tel:''?>" size="16" required>
+                    <input placeholder="0600000000" class="border-4 border-solid rounded-2xl border-beige p-1 pl-3 w-40 md:w-60" type="tel" id="tel" name="tel" value="<?= (!isset($erreurs["tel"]))?$tel:''?>" size="16" required>
                     <!-- s'il y a une erreur elle sera affiché sous la cellule -->
                     <?php echo isset($erreurs["tel"]) ? "<p class=\"text-rouge\">" . $erreurs["tel"] . " </p>" : '' ?>
                 </div>
@@ -189,14 +189,14 @@ if (isset($_POST["nom"])){
                 <!-- Raison sociale -->
                 <div class="flex flex-col mt-2 mb-2 md:m-2">
                     <label for="raisonSociale">Raison sociale de l'entreprise * :</label>
-                    <input class="border-4 border-solid rounded-2xl border-beige p-1 pl-3 md:w-5/6" type="text" id="raisonSociale" name="raisonSociale" value="<?= (!isset($erreurs["raisonSociale"]))? $raisonSociale: ''?>" size="40" required>
+                    <input placeholder="" class="border-4 border-solid rounded-2xl border-beige p-1 pl-3 md:w-5/6" type="text" id="raisonSociale" name="raisonSociale" value="<?= (!isset($erreurs["raisonSociale"]))? $raisonSociale: ''?>" size="40" required>
                     <?php echo isset($erreurs["raisonSociale"]) ? "<p class=\"text-rouge\">" . $erreurs["raisonSociale"] . " </p>" : '' ?>
                 </div>
 
                 <!-- Nom entreprise -->
                 <div class="flex flex-col mt-2 mb-2 md:m-2 ">
                     <label for="denomination">Nom de l'entreprise * :</label>
-                    <input class="border-4 border-solid rounded-2xl border-beige p-1 pl-3 md:w-5/6" type="text" id="denomination" name="denomination" value="<?= (!isset($erreurs["denomination"]))? $denomination: ''?>" size="40" required>
+                    <input placeholder="" class="border-4 border-solid rounded-2xl border-beige p-1 pl-3 md:w-5/6" type="text" id="denomination" name="denomination" value="<?= (!isset($erreurs["denomination"]))? $denomination: ''?>" size="40" required>
                     <?php echo isset($erreurs["denomination"]) ? "<p class=\"text-rouge\">" . $erreurs["denomination"] . " </p>" : '' ?>
                 </div>
 
@@ -220,23 +220,23 @@ if (isset($_POST["nom"])){
             <section class="flex flex-col md:flex-row">
                 <div class="flex flex-col md:w-1/3">
                     <!-- Adresse -->
-                    <div class="flex flex-col space-y-2">
+                    <div class="flex flex-col mt-2 mb-2 md:m-2">
                         <label for="adresse">Adresse * :</label>
                         <input id="adresse" class="border-4 border-solid rounded-2xl border-beige md:w-90 p-1 pl-3 placeholder-gray-500 " type="text" id="adresse" name="adresse" value="<?= $_POST["adresse"] ?? ''?>" size="60" placeholder="ex : 3 rue des camélias" required>
                         <?php echo isset($erreurs["adresse"]) ? "<p class=\"text-rouge\">" . $erreurs["adresse"] . " </p>" : '' ?>
                     </div>
 
                     <!-- Ville -->
-                    <div class="flex flex-col space-y-2">
+                    <div class="flex flex-col mt-2 mb-2 md:m-2">
                         <label for="ville">Ville * :</label>
-                        <input id="ville" class="border-4 border-solid rounded-2xl border-beige p-1 pl-3 w-60" type="text" id="ville" name="ville" value="<?= $_POST["ville"] ?? ''?>" size="30" required>
+                        <input placeholder="Lannion" id="ville" class="border-4 border-solid rounded-2xl border-beige p-1 pl-3 w-60" type="text" id="ville" name="ville" value="<?= $_POST["ville"] ?? ''?>" size="30" required>
                         <?php echo isset($erreurs["ville"]) ? "<p class=\"text-rouge\">" . $erreurs["ville"] . " </p>" : '' ?>
                     </div>
 
                     <!-- Code postal -->
-                    <div class="flex flex-col space-y-2">
+                    <div class="flex flex-col mt-2 mb-2 md:m-2">
                         <label for="cp">Code Postal * :</label>
-                        <input id="cP" class="border-4 border-solid rounded-2xl border-beige p-1 pl-3 w-40" type="text" id="cp" name="cp" value="<?= $_POST["cp"] ?? ''?>" size="10" required>
+                        <input placeholder="22300" id="cP" class="border-4 border-solid rounded-2xl border-beige p-1 pl-3 w-40" type="text" id="cp" name="cp" value="<?= $_POST["cp"] ?? ''?>" size="10" required>
                         <?php echo isset($erreurs["cp"]) ? "<p class=\"text-rouge\">" . $erreurs["cp"] . " </p>" : '' ?>
                     </div>
                 </div>
@@ -290,10 +290,10 @@ if (isset($_POST["nom"])){
 
             <!-- Boutons formulaire -->
             <div class="flex flex-row m-4 justify-around">
-                <a href="/index.php" class="flex justify-center cursor-pointer w-40 md:w-60 md:h-14 h-10 md:m-4 border-2 border-solid rounded-2xl border-vertFonce p-1 pl-3">
+                <a href="/index.php" class="flex justify-center cursor-pointer w-40 md:w-60 md:h-14 h-10 md:m-4 border-2 border-solid rounded-2xl border-vertClair p-1 pl-3">
                     <button type="button">Annuler</button>
                 </a>
-                <input type="submit" value="Valider" class="cursor-pointer w-40 md:w-60 md:h-14 h-10 md:m-4 border-2 border-solid rounded-2xl border-vertFonce">
+                <input type="submit" value="Valider" class="cursor-pointer w-40 md:w-60 md:h-14 h-10 md:m-4 border-2 border-solid rounded-2xl border-vertClair">
             </div>
         </form>
 
