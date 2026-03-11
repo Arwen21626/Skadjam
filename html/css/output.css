@@ -321,6 +321,12 @@ input.quantite-prod-input {
   .top-20 {
     top: calc(var(--spacing, 0.25rem) * 20);
   }
+  .top-21 {
+    top: calc(var(--spacing, 0.25rem) * 21);
+  }
+  .top-22 {
+    top: calc(var(--spacing, 0.25rem) * 22);
+  }
   .top-24 {
     top: calc(var(--spacing, 0.25rem) * 24);
   }
@@ -332,6 +338,9 @@ input.quantite-prod-input {
   }
   .top-48 {
     top: calc(var(--spacing, 0.25rem) * 48);
+  }
+  .top-250 {
+    top: calc(var(--spacing, 0.25rem) * 250);
   }
   .right-0 {
     right: calc(var(--spacing, 0.25rem) * 0);
