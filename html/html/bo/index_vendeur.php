@@ -119,7 +119,7 @@
                 //affiche la photo du produit, son nom, son prix et sa note, son stock ?>
                 <article class="flex flex-row flex-wrap justify-around">
                     <?php 
-                        foreach($tabProduit as $id => $valeurs){
+                        foreach($lignes as $id => $valeurs){
                             $idProduit = $valeurs['id_produit'];
                             // Le produit est-il en promotion ?
                             $stmt = $dbh->prepare("SELECT *
@@ -190,15 +190,15 @@
         <div class="flex flex-row space-x-4 justify-center m-4">
             <?php if ($pageNumber>1){?>
             <a class= "lienPage underline" href="<?php echo "./index_vendeur.php?page=".($pageNumber-1)."#vosProduits";?>">
-                <img class="w-7" src="images/logo/bootstrap_icon/chevron-right.svg" alt="page précédente">
+                <img class="w-7" src="../../images/logo/bootstrap_icon/chevron-left.svg" alt="page précédente">
             </a>           
             <?php }?>
 
             <p>page <?php echo $pageNumber;?></p>
-            
+
             <?php if ($pageNumber<$maxPage){?>
             <a class= "lienPage underline" href="<?php echo "./index_vendeur.php?page=".($pageNumber+1)."#vosProduits";?>">
-                <img class="w-7" src="images/logo/bootstrap_icon/chevron-right.svg" alt="page suivante">
+                <img class="w-7" src="../../images/logo/bootstrap_icon/chevron-right.svg" alt="page suivante">
             </a>
             <?php }?>
         </div>
