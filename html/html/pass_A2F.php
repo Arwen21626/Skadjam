@@ -69,20 +69,6 @@ if (isset($_SESSION['role']) && $_SESSION['role'] !== 'visiteur'){
         
     }
 
-    /*
-    btn_gen.addEventListener('click', () => 
-    {
-        fetch('../../php/structure/authentikATOR/create_secret.php')
-        .then(r => r.json())
-        .then(data => {
-            txt_key.textContent = data.secret
-            img_qr.src = data.qrcode
-            img_qr.style.display = "block"
-            input.style.display = "block"
-            
-        });
-    })*/
-
     async function generer(idCompte){
         initParam(idCompte,secret)
         data = await getSecret()
