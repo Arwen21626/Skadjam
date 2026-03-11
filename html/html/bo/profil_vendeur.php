@@ -171,7 +171,7 @@
 
 
               
-        <div class="grid grid-cols-3 gap-4 mb-15 justify-items-center">
+        <div class="flex justify-around">
             <!---1ère ligne de boutons---> 
             <!-- Modifier le mot de passe du vendeur -->
             <form action="nouveau_mdp.php">
@@ -188,17 +188,14 @@
             <form action="statistiques.php" method="post">
                 <input class="border-vertFonce border-2 rounded-2xl w-75 h-14 p-2 m-1 cursor-pointer" type="submit" value="Mes statistiques">
             </form> 
-            
+        </div>
+
+        <div class="flex justify-around mb-15">
             <!---2ème ligne de boutons---> 
             <!-- Supprimer le compte du vendeur -->
             <form action="suppression_vendeur.php" method="post">
                 <input class="border-rouge border-2 rounded-2xl w-75 h-14 p-2 m-1 cursor-pointer" type="submit" value="Supprimer mon compte">
             </form>
-
-            <!---Retour--->
-            <a href="index_vendeur.php" class="flex justify-center items-center border-vertFonce border-2 rounded-2xl w-75 h-14 p-2 m-1 cursor-pointer">
-                Retour
-            </a>
 
             <!-- Déconnexion -->
             <form action="profil_vendeur.php" method="post">
