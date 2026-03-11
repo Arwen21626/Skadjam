@@ -41,3 +41,27 @@ async function saveSecret(){
     return isSave
 }
 
+async function getTentative(){
+    nbTentative = await callApi('getTentative')
+    console.log("nbTentative = "+nbTentative)
+    return nbTentative
+}
+
+async function getTempsRestant(){
+    tempsRest = await callApi('getTempsRestant')
+    console.log('temps = '+tempsRest)
+    return tempsRest
+}
+
+async function addTempsRestant(){
+    ret = await callApi('addTempsRestant')
+    console.log("addtempsRestant "+ret)
+    return ret
+}
+
+async function addTentative(){
+    ret = await callApi('addTentative')
+    console.log('addTentative ' + ret)
+    return ret
+}
+
