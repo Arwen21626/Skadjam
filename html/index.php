@@ -152,9 +152,10 @@
                                         affichageNote($note); ?>
                                 </div>
                             </a>
+                            <!-- boutons futurs achats & panier -->
                             <div class="flex justify-end">
-                                <a id="btnFA" href="./php/ajoutFAPanier.php?idProduit=<?php echo $idProduit;?>&ajout=<?php echo $fa;?>"><button class="cursor-pointer size-10 bg-no-repeat bg-size-[auto_40px] bg-[url(/images/logo/bootstrap_icon/bookmark-fa-plus.svg)] hover:bg-[url(/images/logo/bootstrap_icon/bookmark-fa-plus-fill.svg)]"></button></a>
-                                <a id="btnPanier" href=""><button class="cursor-pointer size-10 bg-no-repeat bg-size-[auto_40px] bg-[url(/images/logo/bootstrap_icon/cart-vert-fonce.svg)] hover:bg-[url(/images/logo/bootstrap_icon/cart-fill-vert-fonce.svg)]"></button></a>
+                                <a id="btnFA" href="./php/ajoutFAPanier.php?idProduit=<?php echo $idProduit;?>&ajout=<?php echo $fa;?>"><button class="cursor-pointer size-10 bg-no-repeat bg-size-[auto_40px] bg-[url(/images/logo/bootstrap_icon/bookmark-fa-plus.svg)] hover:bg-[url(/images/logo/bootstrap_icon/bookmark-fa-plus-fill.svg)]" alt="Ajouter aux futurs achats" title="Ajouter aux futurs achats"></button></a>
+                                <a id="btnPanier" href=""><button class="cursor-pointer size-10 bg-no-repeat bg-size-[auto_40px] bg-[url(/images/logo/bootstrap_icon/cart-vert-fonce.svg)] hover:bg-[url(/images/logo/bootstrap_icon/cart-fill-vert-fonce.svg)]" alt="Ajouter au panier" title="Ajouter au panier"></button></a>
                             </div>  
                             <!--affichage de la promotion-->
                                 <?php if($estPromu){ 
