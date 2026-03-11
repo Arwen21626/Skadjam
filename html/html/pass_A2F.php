@@ -23,29 +23,31 @@ if (isset($_SESSION['role']) && $_SESSION['role'] !== 'visiteur'){
     <?php ($role === 'vendeur') ? include __DIR__.'/../php/structure/header_back.php' : include __DIR__.'/../php/structure/header_front.php' ?>
     <?php ($role === 'vendeur') ? include __DIR__.'/../php/structure/navbar_back.php' : include __DIR__.'/../php/structure/navbar_front.php' ?>
     
-    <main class=" w-3/4">
+    <main class=" p-8 flex flex-col items-center">
         <h2>Authentification à deux facteurs</h2>
-
-        <p>
-            Pour sécuriser au mieux votre compte vous pouvez ici activer l'Authentification a deux facteurs.
-            Vous aurez besoin de stocker une clé secret dans une application mobile d'Authentification comme Google Authenticator, Proton Authenticator ou d'autre qui génèrerons grace a cette clé un code à 6 chiffres.
+        <p class="w-3/4 m-4">
+            Pour sécuriser au mieux votre compte, vous pouvez ici activer l'Authentification à deux facteurs. Vous aurez besoin de stocker une clé secrète dans une application mobile d'authentification comme Google Authenticator, Proton Authenticator ou d'autres qui généreront grâce à cette clé un code à 6 chiffres.
         </p>
 
-        Etape pour activer l'authentifiacation a deux facteurs
-        <ol class=" list-decimal!">
-            <li>Télécharger une des application d'authentifiacation</li>
-            <li>Générer la clé secrete en appuyant sur générer</li>
-            <li>Copier la clé en appuyant sur copier ou scanner le QR code pour enregistrer la clé</li>
-            <li>Tester si l'authentifiacation fonctionne correctement en copiant le code à 6 chiffres généré</li>
-            <li>Valider l'activation de l'Authentification a deux facteurs</li>
-        </ol>
+        <section class=" w-3/4">
+            <h3>Étape pour activer l'authentification à deux facteurs :</h3>
+            <ol class=" list-decimal! list-inside mt-4 ml-5">
+                <li>Télécharger une des applications d'authentification</li>
+                <li>Générer la clé secrète en appuyant sur générer</li>
+                <li>Copier la clé en appuyant sur copier ou scanner le QR code pour enregistrer la clé</li>
+                <li>Tester si l'authentification fonctionne correctement en copiant le code à 6 chiffres généré</li>
+                <li>Valider l'activation de l'Authentification à deux facteurs</li>
+            </ol>
+        </section>
 
-        <button id="gen-key" onclick="generer(<?= $idClient ?>)">Générer</button>
-        <pre id="txt-key"></pre>
-        <img src="" alt="QR code" id="img-qr-code" class=" hidden" width="180px" height="180px">
-        <?php include __DIR__.'/../php/structure/authentikATOR/input_code.php' ?>
-        <p id="result" class="hidden"></p>
-        <button id="terminer" onclick="terminer(<?= $idClient ?>)" disabled class="border-vertClair border-2 rounded-xl w-40 h-14 cursor-pointer m-5">Terminer</button>
+        <button id="gen-key" onclick="generer(<?= $idClient ?>)" class="border-vertClair border-2 rounded-xl w-40 h-14 cursor-pointer m-5S">Générer</button>
+        <section id="veiw-pass" class=" hidden flex-col items-center m-5">
+            <pre id="txt-key"></pre>
+            <img src="" alt="QR code" id="img-qr-code"  class="w-1/3 border-vertClair border-2 rounded-xl m-4">
+            <?php include __DIR__.'/../php/structure/authentikATOR/input_code.php' ?>
+            <p id="result" class="hidden"></p>
+            <button id="terminer" onclick="terminer(<?= $idClient ?>)" disabled class=" hidden border-vertClair border-2 rounded-xl w-40 h-14 cursor-pointer m-5">Terminer</button>
+        </section>
     </main>
     
     <?php ($role === 'vendeur') ? include __DIR__.'/../php/structure/footer_back.php' : include __DIR__.'/../php/structure/footer_front.php' ?>
@@ -54,6 +56,8 @@ if (isset($_SESSION['role']) && $_SESSION['role'] !== 'visiteur'){
 <script>
     let ret = 1
     let secret
+    
+    const view = document.getElementById("veiw-pass")
     const btn_gen = document.getElementById("gen-key");
     const input = document.getElementById("input-code");
     const txt_key = document.getElementById("txt-key");
@@ -76,10 +80,16 @@ if (isset($_SESSION['role']) && $_SESSION['role'] !== 'visiteur'){
         qrcode = data['qrcode']
         console.log("secret : "+secret)
         console.log("qrcode : "+qrcode)
-        txt_key.textContent = secret
+        txt = "Secret : "+secret
+        txt_key.textContent = txt
         img_qr.src = qrcode
-        img_qr.style.display = "block"
-        input.style.display = "block"
+        view.style.display = "flex"
+        input.style.display = "flex"
+        btn_gen.style.display = "none"
+        input.scrollIntoView({
+            behavior: 'smooth', // animation fluide
+            block: 'center'     // centrer verticalement
+        })
     }
 
     async function submit(idCompte){
@@ -92,6 +102,7 @@ if (isset($_SESSION['role']) && $_SESSION['role'] !== 'visiteur'){
             res.textContent = "Code bon."
             res.classList.remove("hidden")
             btnTerminer.removeAttribute("disabled")
+            btnTerminer.style.display = "block"
         }else{
             res.textContent = "Code incorrect, réessayez."
             res.classList.remove("hidden")
