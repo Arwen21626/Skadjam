@@ -34,6 +34,14 @@
                         , PDO::FETCH_ASSOC) as $row){
         $tabProduit[] = $row;
     }
+    if ($_SESSION['role'] == "client") {
+        $idCompte = $_SESSION['idCompte'];
+        $stmt = $dbh->query("SELECT pseudo FROM sae3_skadjam._client WHERE id_compte = $idCompte");
+        $row = $stmt->fetch(PDO::FETCH_ASSOC);
+        $pseudo = $row['pseudo'];
+        $_SESSION['pseudo'] = $pseudo;
+        
+    }
 ?>
 
 <!DOCTYPE html>
@@ -173,7 +181,7 @@
         ?>
         
         <!--fin du catalogue-->
-        <div class="flex flex-row space-x-4 justify-center">
+        <div class="flex flex-row space-x-4 justify-center py-3">
             <?php if($pageNumber>1){?>
             <a class= "lienPage hover:text-rouge" href="<?= "./index.php?page=". $pageNumber-1 ."#nosProduits";?>">Page précédente</a>
             <?php }?>

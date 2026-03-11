@@ -94,7 +94,7 @@
         <h2 class="m-8">Mon Profil</h2>
         <div class="flex flex-row justify-around space-x-40">
             <!-- Photo de profil -->
-            <div class=" flex flex-col">
+            <div class="flex flex-col">
                 <?php if ($tabPhoto && !empty($tabPhoto['url_photo'])) { ?>
                     <div class="container-image flex items-center justify-center w-80 border-4 border-solid rounded-2xl border-beige mb-3">
                         <img class="image-vendeur w-80 rounded-xl" src="<?= '../..' . htmlspecialchars($tabPhoto['url_photo']) ?>" alt="Photo de profil" title="<?= htmlspecialchars($tabPhoto['alt']) ?>">
@@ -171,7 +171,7 @@
 
 
               
-        <div class="grid grid-cols-3 gap-4 mb-15">
+        <div class="grid grid-cols-3 gap-4 mb-15 justify-items-center">
             <!---1ère ligne de boutons---> 
             <!-- Modifier le mot de passe du vendeur -->
             <form action="nouveau_mdp.php">
@@ -196,8 +196,8 @@
             </form>
 
             <!---Retour--->
-            <a href="index_vendeur.php">
-                <button class="border-vertFonce border-2 rounded-2xl w-75 h-14 p-2 m-1 cursor-pointer">Retour</button>
+            <a href="index_vendeur.php" class="flex justify-center items-center border-vertFonce border-2 rounded-2xl w-75 h-14 p-2 m-1 cursor-pointer">
+                Retour
             </a>
 
             <!-- Déconnexion -->

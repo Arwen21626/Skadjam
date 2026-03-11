@@ -26,6 +26,7 @@
     $stmt = $dbh->query("SELECT raison_sociale FROM sae3_skadjam._vendeur WHERE id_compte = $idCompte");
     $row = $stmt->fetch(PDO::FETCH_ASSOC);
     $raisonSociale = $row['raison_sociale'];
+    $_SESSION['raisonSociale'] = $raisonSociale;
 ?>
 
 <!DOCTYPE html>

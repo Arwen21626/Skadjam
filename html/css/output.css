@@ -318,6 +318,9 @@ input.quantite-prod-input {
   .top-20 {
     top: calc(var(--spacing, 0.25rem) * 20);
   }
+  .top-25 {
+    top: calc(var(--spacing, 0.25rem) * 25);
+  }
   .top-48 {
     top: calc(var(--spacing, 0.25rem) * 48);
   }
@@ -513,9 +516,6 @@ input.quantite-prod-input {
   .mt-20 {
     margin-top: calc(var(--spacing, 0.25rem) * 20);
   }
-  .mt-30 {
-    margin-top: calc(var(--spacing, 0.25rem) * 30);
-  }
   .mt-80 {
     margin-top: calc(var(--spacing, 0.25rem) * 80);
   }
@@ -642,6 +642,10 @@ input.quantite-prod-input {
   .size-1\/2 {
     width: calc(1/2 * 100%);
     height: calc(1/2 * 100%);
+  }
+  .size-10 {
+    width: calc(var(--spacing, 0.25rem) * 10);
+    height: calc(var(--spacing, 0.25rem) * 10);
   }
   .size-12 {
     width: calc(var(--spacing, 0.25rem) * 12);
@@ -1054,6 +1058,9 @@ input.quantite-prod-input {
   .gap-1 {
     gap: calc(var(--spacing, 0.25rem) * 1);
   }
+  .gap-2 {
+    gap: calc(var(--spacing, 0.25rem) * 2);
+  }
   .gap-3 {
     gap: calc(var(--spacing, 0.25rem) * 3);
   }
@@ -1100,6 +1107,13 @@ input.quantite-prod-input {
       --tw-space-y-reverse: 0;
       margin-block-start: calc(calc(var(--spacing, 0.25rem) * 10) * var(--tw-space-y-reverse));
       margin-block-end: calc(calc(var(--spacing, 0.25rem) * 10) * calc(1 - var(--tw-space-y-reverse)));
+    }
+  }
+  .space-x-2 {
+    :where(& > :not(:last-child)) {
+      --tw-space-x-reverse: 0;
+      margin-inline-start: calc(calc(var(--spacing, 0.25rem) * 2) * var(--tw-space-x-reverse));
+      margin-inline-end: calc(calc(var(--spacing, 0.25rem) * 2) * calc(1 - var(--tw-space-x-reverse)));
     }
   }
   .space-x-4 {
@@ -1177,6 +1191,10 @@ input.quantite-prod-input {
     border-top-left-radius: var(--radius-2xl, 1rem);
     border-top-right-radius: var(--radius-2xl, 1rem);
   }
+  .rounded-t-none {
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+  }
   .rounded-l-md {
     border-top-left-radius: var(--radius-md, 0.375rem);
     border-bottom-left-radius: var(--radius-md, 0.375rem);
@@ -1200,6 +1218,10 @@ input.quantite-prod-input {
   .border-4 {
     border-style: var(--tw-border-style);
     border-width: 4px;
+  }
+  .border-t-0 {
+    border-top-style: var(--tw-border-style);
+    border-top-width: 0px;
   }
   .border-t-2 {
     border-top-style: var(--tw-border-style);
@@ -1234,6 +1256,9 @@ input.quantite-prod-input {
   }
   .border-black {
     border-color: var(--color-black, #000);
+  }
+  .border-bleu {
+    border-color: var(--color-bleu);
   }
   .border-red-500 {
     border-color: var(--color-red-500, oklch(63.7% 0.237 25.331));
@@ -1796,13 +1821,6 @@ input.quantite-prod-input {
       }
     }
   }
-  .hover\:bg-\[url\(\/images\/logo\/bootstrap_icon\/search-fill\.svg\)\] {
-    &:hover {
-      @media (hover: hover) {
-        background-image: url(/images/logo/bootstrap_icon/search-fill.svg);
-      }
-    }
-  }
   .hover\:bg-\[url\(\/images\/logo\/bootstrap_icon\/search-selected\.svg\)\] {
     &:hover {
       @media (hover: hover) {
@@ -1941,6 +1959,11 @@ input.quantite-prod-input {
   .md\:col-span-3 {
     @media (width >= 48rem) {
       grid-column: span 3 / span 3;
+    }
+  }
+  .md\:col-start-2 {
+    @media (width >= 48rem) {
+      grid-column-start: 2;
     }
   }
   .md\:float-left {
@@ -2413,6 +2436,15 @@ input.quantite-prod-input {
       }
     }
   }
+  .md\:space-x-6 {
+    @media (width >= 48rem) {
+      :where(& > :not(:last-child)) {
+        --tw-space-x-reverse: 0;
+        margin-inline-start: calc(calc(var(--spacing, 0.25rem) * 6) * var(--tw-space-x-reverse));
+        margin-inline-end: calc(calc(var(--spacing, 0.25rem) * 6) * calc(1 - var(--tw-space-x-reverse)));
+      }
+    }
+  }
   .md\:self-center {
     @media (width >= 48rem) {
       align-self: center;
@@ -2462,10 +2494,27 @@ input.quantite-prod-input {
       border-width: 0px;
     }
   }
+  .md\:border-2 {
+    @media (width >= 48rem) {
+      border-style: var(--tw-border-style);
+      border-width: 2px;
+    }
+  }
+  .md\:border-t-0 {
+    @media (width >= 48rem) {
+      border-top-style: var(--tw-border-style);
+      border-top-width: 0px;
+    }
+  }
   .md\:border-none {
     @media (width >= 48rem) {
       --tw-border-style: none;
       border-style: none;
+    }
+  }
+  .md\:border-black {
+    @media (width >= 48rem) {
+      border-color: var(--color-black, #000);
     }
   }
   .md\:bg-beige {
