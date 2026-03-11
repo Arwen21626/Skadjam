@@ -180,6 +180,7 @@ if (($_SERVER['REQUEST_METHOD'] == 'POST' && $_POST['auth'] === 'valide') || $co
     const res = document.getElementById("result");
     let ret 
     let reponse
+    goFirst()
 
     async function submit(idClient){
         res.classList.add("hidden")
