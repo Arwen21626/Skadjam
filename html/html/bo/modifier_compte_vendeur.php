@@ -61,8 +61,6 @@ if (isset($_POST["nom"]) && isset($_POST["prenom"]) && isset($_POST["mail"]) && 
         $num = $temp[0];
         $numBis = $temp[1];
         $adresse = $temp[2];
-        $latitude = htmlentities($_POST["latitude"]);
-        $longitude = htmlentities($_POST["longitude"]);
 
         // Vérification que toutes les données commune à la création et à la modification d'un compte client sont correcte
         if (strlen($_POST['description']) <= 500 && verifNomPrenom($_POST['nom']) && verifNomPrenom($_POST['prenom']) && verifTelephone($_POST['tel']) && verifDenomination($_POST['denomination']) && verifDenomination($_POST['raisonSociale']) && verifIban($_POST['iban']) && verifSiren($_POST['siren']) && verifCp($_POST['cp']) && verifVille($_POST['ville']) && verifAdresse($_POST['adresse'])){

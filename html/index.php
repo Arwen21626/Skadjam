@@ -15,7 +15,6 @@
         $_SESSION['panier'] = ["nb_produit_total" => 0, // Utilisation des noms de colonne utilisées dans la BDD
                                "montant_total_ttc" => 0,
                                "contient" => []]; //format du tableau représentant un produit : ['id' => 25, 'quantite_par_produit' => 2]
-        $_SESSION['futurAchat'] = [];
     }
     
 
@@ -35,17 +34,6 @@
                         , PDO::FETCH_ASSOC) as $row){
         $tabProduit[] = $row;
     }
-
-    // Récupération du pseudo
-    if ($_SESSION['role'] == "client") {
-        $idCompte = $_SESSION['idCompte'];
-        $stmt = $dbh->query("SELECT pseudo FROM sae3_skadjam._client WHERE id_compte = $idCompte");
-        $row = $stmt->fetch(PDO::FETCH_ASSOC);
-        $pseudo = $row['pseudo'];
-    }
-    
-    $fa = "FA";
-    $p = "Panier";
 ?>
 
 <!DOCTYPE html>
@@ -130,7 +118,7 @@
                                             WHERE id_produit = :id_produit");
                         $stmt->execute([':id_produit' => $idProduit]);
                         $estPromu = ($stmt->fetch() !== false); ?>
-                        <div id="<?php echo $idProduit; ?>" class="bg-bleu flex flex-col w-40 h-auto p-2 m-2 md:w-80 md:p-3 justify-between">
+                        <section class="bg-bleu flex flex-col w-40 h-auto p-2 m-2 md:w-80 md:p-3">
                             <!--affichage de la photo-->
                             <a href= "<?= 'html/fo/details_produit.php?idProduit='.$idProduit;?>" class="mb-3">
                                 <img src="<?= $valeurs['url_photo'];?>" 
@@ -152,10 +140,6 @@
                                         affichageNote($note); ?>
                                 </div>
                             </a>
-                            <div class="flex justify-end">
-                                <a id="btnFA" href="./php/ajoutFAPanier.php?idProduit=<?php echo $idProduit;?>&ajout=<?php echo $fa;?>"><button class="cursor-pointer size-10 bg-no-repeat bg-size-[auto_40px] bg-[url(/images/logo/bootstrap_icon/bookmark-fa-plus.svg)] hover:bg-[url(/images/logo/bootstrap_icon/bookmark-fa-plus-fill.svg)]"></button></a>
-                                <a id="btnPanier" href=""><button class="cursor-pointer size-10 bg-no-repeat bg-size-[auto_40px] bg-[url(/images/logo/bootstrap_icon/cart-vert-fonce.svg)] hover:bg-[url(/images/logo/bootstrap_icon/cart-fill-vert-fonce.svg)]"></button></a>
-                            </div>  
                             <!--affichage de la promotion-->
                                 <?php if($estPromu){ 
                                     $stmt = $dbh->prepare("SELECT *
@@ -177,7 +161,7 @@
                                     <h4 class="text-center text-beige overline m-0"><?= htmlspecialchars($labelPromo); ?></h4>
                                 </div>
                                 <?php }} ?>
-                        </div>
+                        </section>
                     <?php } ?>
                 </article>
                 <?php $dbh = null;
