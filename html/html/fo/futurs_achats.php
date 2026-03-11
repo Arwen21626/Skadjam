@@ -3,6 +3,7 @@ session_start();
 
 include __DIR__ . '/../../01_premiere_connexion.php';
 require_once __DIR__ . "/../../php/fonctions.php";
+include __DIR__. '/../../php/requetesBDD/recupFA.php';
 
 const PAGE_SIZE = 24;
 $tabFA = [];
@@ -21,13 +22,7 @@ if ($_SESSION['role'] == "visiteur") {
 }
 
 // Récupération des futurs achats du client
-if ($_SESSION['role'] == "client") {
-    $idCompte = $_SESSION['idCompte'];
-    // Parcours des produits lié au client
-    foreach ($dbh->query("SELECT id_produit FROM sae3_skadjam._futur_achat WHERE id_client = $idCompte", PDO::FETCH_ASSOC) as $row) {
-        $tabFA[] = $row;
-    }    
-}
+
 
 // Récupération des infos produits en fontion du tabFA
 $tabProd = [];
@@ -54,10 +49,6 @@ foreach($dbh->query("SELECT pr.id_produit, pr.date_creation, libelle_produit, de
 $maxPage = sizeof($tabProd)/PAGE_SIZE;
 $lignes = array_slice($tabProd, $pageNumber*PAGE_SIZE-PAGE_SIZE, PAGE_SIZE);
 
-echo "<pre>";
-print_r($lignes);
-echo "</pre>";
-
 ?>
 <!DOCTYPE html>
 <html lang="fr">
@@ -80,7 +71,6 @@ echo "</pre>";
         <div class="flex flex-row flex-wrap justify-around">
             <?php foreach($lignes as $id => $valeurs){
                 $idProduit = $valeurs['id_produit'];
-                echo $idProduit;
                 // Le produit est-il en promotion ?
                 $stmt = $dbh->prepare("SELECT *
                                     FROM sae3_skadjam._promu
@@ -111,8 +101,8 @@ echo "</pre>";
                         </div>
                     </a>
                     <div class="flex justify-end">
-                        <a id="btnFA" href="./php/traitementFAPanier.php?idProduit=<?php echo $idProduit;?>&ajout=<?php echo $fa;?>&vientDe=index"><button class="cursor-pointer size-10 bg-no-repeat bg-size-[auto_40px] bg-[url(/images/logo/bootstrap_icon/bookmark-fa-plus.svg)] hover:bg-[url(/images/logo/bootstrap_icon/bookmark-fa-plus-fill.svg)]"></button></a>
-                        <a id="btnPanier" href=""><button class="cursor-pointer size-10 bg-no-repeat bg-size-[auto_40px] bg-[url(/images/logo/bootstrap_icon/cart-vert-fonce.svg)] hover:bg-[url(/images/logo/bootstrap_icon/cart-fill-vert-fonce.svg)]"></button></a>
+                        <a id="btnFA" href="./php/traitementFAPanier.php?idProduit=<?php echo $idProduit;?>&ajout=<?php echo $fa;?>&vientDe=fa"><button class="cursor-pointer size-10 bg-no-repeat bg-size-[auto_40px] bg-[url(/images/logo/bootstrap_icon/bookmark-fa-plus-fill.svg)]"></button></a>
+                        <a id="btnPanier" href=""><button class="cursor-pointer size-10 bg-no-repeat bg-size-[auto_40px] bg-[url(/images/logo/bootstrap_icon/cart-vert-fonce.svg)]"></button></a>
                     </div>  
                     <!--affichage de la promotion-->
                         <?php if($estPromu){ 
