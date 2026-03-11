@@ -34,6 +34,14 @@
                         , PDO::FETCH_ASSOC) as $row){
         $tabProduit[] = $row;
     }
+    if ($_SESSION['role'] == "client") {
+        $idCompte = $_SESSION['idCompte'];
+        $stmt = $dbh->query("SELECT pseudo FROM sae3_skadjam._client WHERE id_compte = $idCompte");
+        $row = $stmt->fetch(PDO::FETCH_ASSOC);
+        $pseudo = $row['pseudo'];
+        $_SESSION['pseudo'] = $pseudo;
+        
+    }
 ?>
 
 <!DOCTYPE html>
