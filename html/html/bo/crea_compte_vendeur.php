@@ -153,7 +153,7 @@ if (isset($_POST["nom"])){
                     <!-- Nom -->
                     <div class="flex flex-col mt-2 mb-2 md:m-2 ">
                         <label for="nom">Nom * :</label>
-                        <input placeholder="Dupond" class="border-4 border-solid rounded-2xl border-beige p-1 pl-3 w-60 md:w-96" type="text" id="nom" name="nom" value="<?= $nom ?>" size="25" required >
+                        <input placeholder="Dupond" class="border-4 border-solid rounded-2xl border-beige p-1 pl-3 w-60 md:w-96 placeholder-gray-500" type="text" id="nom" name="nom" value="<?= $nom ?>" size="25" required >
                         <!-- s'il y a une erreur elle sera affiché sous la cellule -->
                         <?php echo isset($erreurs["nom"]) ? "<span class=\"text-rouge font-xs\">" . nl2br(wordwrap($erreurs["nom"], 56, "\n")) . " </span>" : '' ?>
                     </div>
@@ -161,7 +161,7 @@ if (isset($_POST["nom"])){
                     <!-- Prénom -->
                     <div class="flex flex-col mt-2 mb-2 md:m-2 md:ml-20">
                         <label for="prenom">Prénom * :</label>
-                        <input placeholder="Jean" class="border-4 border-solid rounded-2xl border-beige p-1 pl-3 w-60 md:w-96" type="text" id="prenom" name="prenom" value="<?= $prenom ?>" size="25" required>
+                        <input placeholder="Jean" class="border-4 border-solid rounded-2xl border-beige p-1 pl-3 w-60 md:w-96 placeholder-gray-500" type="text" id="prenom" name="prenom" value="<?= $prenom ?>" size="25" required>
                         <!-- s'il y a une erreur elle sera affiché sous la cellule -->
                         <?php echo isset($erreurs["prenom"]) ? "<span class=\"text-rouge\">" . nl2br(wordwrap($erreurs["prenom"], 56, "\n")) . " </span>" : '' ?>
                     </div>
@@ -170,7 +170,7 @@ if (isset($_POST["nom"])){
                     <!-- Mail -->
                     <div class="flex flex-col mt-2 mb-2 md:m-2">
                         <label for="mail">Mail * :</label>
-                        <input placeholder="jean.dupond@mail.com" class="border-4 border-solid rounded-2xl border-beige p-1 pl-3 w-72 md:w-96" type="email" id="mail" name="mail" value="<?= $mail ?>" size="40" required>
+                        <input placeholder="jean.dupond@mail.com" class="border-4 border-solid rounded-2xl border-beige p-1 pl-3 w-72 md:w-96 placeholder-gray-500" type="email" id="mail" name="mail" value="<?= $mail ?>" size="40" required>
                         <!-- s'il y a une erreur elle sera affiché sous la cellule -->
                         <?php echo (isset($erreurs["mail"])) ? "<span class=\"text-rouge\">" . $erreurs["mail"] . " </span>" : '' ?>
                         <?php echo isset($erreurs["unique"]) ? "<span class=\"text-rouge\">" . $erreurs["unique"] . " </span>" : '' ?>
@@ -179,7 +179,7 @@ if (isset($_POST["nom"])){
                     <!-- Téléphone -->
                     <div class="flex flex-col mt-2 mb-2 md:m-2 md:ml-20">
                         <label for="tel">Numéro de téléphone * :</label>
-                        <input placeholder="06 12 34 56 78" class="border-4 border-solid rounded-2xl border-beige p-1 pl-3 w-40 md:w-60" type="tel" id="tel" name="tel" value="<?= $tel ?>" size="16" required>
+                        <input placeholder="06 12 34 56 78" class="border-4 border-solid rounded-2xl border-beige p-1 pl-3 w-40 md:w-60 placeholder-gray-500" type="tel" id="tel" name="tel" value="<?= $tel ?>" size="16" required>
                         <!-- s'il y a une erreur elle sera affiché sous la cellule -->
                         <?php echo isset($erreurs["tel"]) ? "<span class=\"text-rouge\">" . $erreurs["tel"] . " </span>" : '' ?>
                     </div>
@@ -191,28 +191,28 @@ if (isset($_POST["nom"])){
                 <!-- Raison sociale -->
                 <div class="flex flex-col mt-2 mb-2 md:m-2">
                     <label for="raisonSociale">Raison sociale de l'entreprise * :</label>
-                    <input placeholder="Nom de l'entreprise" class="border-4 border-solid rounded-2xl border-beige p-1 pl-3 md:w-5/6" type="text" id="raisonSociale" name="raisonSociale" value="<?= $raisonSociale ?>" size="40" required>
+                    <input placeholder="Nom de l'entreprise" class="border-4 border-solid rounded-2xl border-beige p-1 pl-3 md:w-5/6 placeholder-gray-500" type="text" id="raisonSociale" name="raisonSociale" value="<?= $raisonSociale ?>" size="40" required>
                     <?php echo isset($erreurs["raisonSociale"]) ? "<span class=\"text-rouge\">" . $erreurs["raisonSociale"] . " </span>" : '' ?>
                 </div>
 
                 <!-- Nom entreprise -->
                 <div class="flex flex-col mt-2 mb-2 md:m-2 ">
                     <label for="denomination">Nom de l'entreprise * :</label>
-                    <input placeholder="Nom de l'entreprise" class="border-4 border-solid rounded-2xl border-beige p-1 pl-3 md:w-5/6" type="text" id="denomination" name="denomination" value="<?= $denomination ?>" size="40" required>
+                    <input placeholder="Nom de l'entreprise" class="border-4 border-solid rounded-2xl border-beige p-1 pl-3 md:w-5/6 placeholder-gray-500" type="text" id="denomination" name="denomination" value="<?= $denomination ?>" size="40" required>
                     <?php echo isset($erreurs["denomination"]) ? "<span class=\"text-rouge\">" . $erreurs["denomination"] . " </span>" : '' ?>
                 </div>
 
                 <!-- IBAN -->
                 <div class="flex flex-col mt-2 mb-2 md:m-2">
                     <label for="iban">Numéro de IBAN * :</label>
-                    <input placeholder="FR 76 12345 67890 12345678901 45" class="border-4 border-solid rounded-2xl border-beige p-1 pl-3 md:w-5/6" type="text" id="iban" name="iban" value="<?= $iban ?>" size="40" required>
+                    <input placeholder="FR 76 12345 67890 12345678901 45" class="border-4 border-solid rounded-2xl border-beige p-1 pl-3 md:w-5/6 placeholder-gray-500" type="text" id="iban" name="iban" value="<?= $iban ?>" size="40" required>
                     <?php echo isset($erreurs["iban"]) ? "<span class=\"text-rouge\">" . $erreurs["iban"] . " </span>" : '' ?>
                 </div>
 
                 <!-- SIREN -->
                 <div class="flex flex-col mt-2 mb-2 md:m-2">
                     <label for="siren">Numéro de SIREN * :</label>
-                    <input placeholder="123 456 789" class="border-4 border-solid rounded-2xl border-beige p-1 pl-3 w-60" type="text" id="siren" name="siren" value="<?= $siren ?>" size="11" required>
+                    <input placeholder="123 456 789" class="border-4 border-solid rounded-2xl border-beige p-1 pl-3 w-60 placeholder-gray-500" type="text" id="siren" name="siren" value="<?= $siren ?>" size="11" required>
                     <?php echo isset($erreurs["siren"]) ? "<span class=\"text-rouge\">" . $erreurs["siren"] . " </span>" : '' ?>
                 </div>
             </section>
@@ -231,14 +231,14 @@ if (isset($_POST["nom"])){
                     <!-- Ville -->
                     <div class="flex flex-col mt-2 mb-2 md:m-2">
                         <label for="ville">Ville * :</label>
-                        <input placeholder="Lannion" id="ville" class="border-4 border-solid rounded-2xl border-beige p-1 pl-3 w-60" type="text" id="ville" name="ville" value="<?= $ville?>" size="30" required>
+                        <input placeholder="Lannion" id="ville" class="border-4 border-solid rounded-2xl border-beige p-1 pl-3 w-60 placeholder-gray-500" type="text" id="ville" name="ville" value="<?= $ville?>" size="30" required>
                         <?php echo isset($erreurs["ville"]) ? "<p class=\"text-rouge\">" . $erreurs["ville"] . " </p>" : '' ?>
                     </div>
 
                     <!-- Code postal -->
                     <div class="flex flex-col mt-2 mb-2 md:m-2">
                         <label for="cp">Code Postal * :</label>
-                        <input placeholder="22300" id="cP" class="border-4 border-solid rounded-2xl border-beige p-1 pl-3 w-40" type="text" id="cp" name="cp" value="<?= $cp?>" size="10" required>
+                        <input id="cP" class="border-4 border-solid rounded-2xl border-beige p-1 pl-3 w-40 placeholder-gray-500" type="text" id="cp" name="cp" value="<?= $cp?>" size="10" placeholder="22300" required>
                         <?php echo isset($erreurs["cp"]) ? "<span class=\"text-rouge\">" . $erreurs["cp"] . " </span>" : '' ?>
                     </div>
                 </div>
@@ -249,11 +249,11 @@ if (isset($_POST["nom"])){
                     <div class="grid grid-cols-2 grid-rows-2 h-20 md:flex md:flex-row m-2">
                         <div class="m-2">
                             <label for="latitude">Latitude : </label>
-                            <input placeholder="49.12" required type="text" name="latitude" id="latitude" class="border-2 border-solid rounded-2xl border-beige p-1 pl-3  w-30 md:w-60" value="<?= $latitude ?>">
+                            <input placeholder="49.12" required type="text" name="latitude" id="latitude" class="border-2 border-solid rounded-2xl border-beige p-1 pl-3  w-30 md:w-60 placeholder-gray-500" value="<?= $latitude ?>">
                         </div>
                         <div class="m-2">
                             <label for="longitude">Longitude : </label>
-                            <input placeholder="-0.12" required type="text" name="longitude" id="longitude" class="border-2 border-solid rounded-2xl border-beige p-1 pl-3  w-30 md:w-60" value="<?= $longitude ?>">
+                            <input placeholder="-0.12" required type="text" name="longitude" id="longitude" class="border-2 border-solid rounded-2xl border-beige p-1 pl-3  w-30 md:w-60 placeholder-gray-500" value="<?= $longitude ?>">
                         </div>
                     </div>
                     <p id="errorMap" class="text-rouge"></p>
