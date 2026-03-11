@@ -263,11 +263,11 @@
         </aside>
 
         <!-- Barre de recherche -->
-        <div class="bg-white sticky z-1 p-2 top-0 md:top-14 md:flex md:flex-row md:justify-center">
+        <div class="bg-white sticky z-8 p-2 top-0 md:top-14 md:flex md:flex-row md:justify-center">
             <input type="text" id="recherche" maxlength="100" class="border-4 bg-white border-vertClair rounded-xl placeholder-gray-500 md:w-267 w-95 p-2" placeholder="Rechercher un produit...">
         </div>
 
-        <div class="sticky top-20 bg-white border-b-2 border-b-vertFonce z-1 md:border-0 flex justify-between md:hidden">
+        <div class="sticky top-15 bg-white border-b-2 border-b-vertFonce z-1 md:border-0 flex justify-between md:hidden">
             <button id="filtresTris" class="underline  m-2">Filtres & tris</button>
             <button id="mouvMapTel" class="underline m-2">Ouvrir la carte</button>
         </div>
