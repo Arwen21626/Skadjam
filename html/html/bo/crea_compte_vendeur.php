@@ -266,7 +266,7 @@ if (isset($_POST["nom"])){
                 <div class="flex flex-col mt-2 mb-2 md:m-2">
                     <label for="mdp">Mot de passe * :</label>
                     <div class="zone-mdp flex flex-row">
-                        <input class="champ-mdp border-4 border-solid rounded-2xl border-beige p-1 pl-3 w-60 md:w-96" type="password" id="mdp" name="mdp" value="<?= $_POST["mdp"] ?>" size="50" required>
+                        <input class="champ-mdp border-4 border-solid rounded-2xl border-beige p-1 pl-3 w-60 md:w-96" type="password" id="mdp" name="mdp" value="<?= $mdp ?>" size="50" required>
                         <?php include __DIR__ . "/../../php/structure/bouton_mdp.php" ?>
                     </div>
                     <?php echo isset($erreurs["mdp"]) ? "<p class=\"text-rouge\">" . $erreurs["mdp"] . " </p>" : '' ?>
