@@ -34,18 +34,20 @@ if (isset($_SESSION['connecte']) && $_SESSION['connecte']){
 $idClient = $dataConnexion['idCompte'];
 $idCompte = $dataConnexion['idCompte'];
 
-$auth = new AuthATOR($dbh, "Alizon", $idCompte, "");
-$restant = $auth->getTempsRestant();
+
+
 
 
 // Traitement si le formulaire A2F est validé ou si le compte est déjà connecté (pas de code secret)
 if (($_SERVER['REQUEST_METHOD'] == 'POST' && $_POST['auth'] === 'valide') || $connecte){
 
-    $auth->resetTentative();
+    
 
     // Détecte si la requête vient d'un appel AJAX (fetch) pour adapter la réponse
     if ($_SERVER['REQUEST_METHOD'] == 'POST' && $_POST['auth'] === 'valide'){
         $ajax = true;
+        $auth = new AuthATOR($dbh, "Alizon", $idCompte, "");
+        $auth->resetTentative();
     }
 
     // Traitement spécifique aux clients : fusion du panier visiteur avec le panier du compte
@@ -163,6 +165,9 @@ if (($_SERVER['REQUEST_METHOD'] == 'POST' && $_POST['auth'] === 'valide') || $co
         }
     }
 } else {
+
+$auth = new AuthATOR($dbh, "Alizon", $idCompte, "");
+$restant = $auth->getTempsRestant();
     // Affichage du formulaire A2F si le code n'a pas encore été validé
 ?>
 
