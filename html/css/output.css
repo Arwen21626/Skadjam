@@ -582,6 +582,9 @@ input.quantite-prod-input {
   .mb-15 {
     margin-bottom: calc(var(--spacing, 0.25rem) * 15);
   }
+  .mb-16 {
+    margin-bottom: calc(var(--spacing, 0.25rem) * 16);
+  }
   .ml-0 {
     margin-left: calc(var(--spacing, 0.25rem) * 0);
   }
