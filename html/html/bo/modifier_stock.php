@@ -87,7 +87,7 @@
                         <!---bouton annuler--->
                         <a href="../bo/stock.php?idCompte=<?php echo $idCompte ;?>" class="flex justify-center items-center border-2 border-vertFonce rounded-2xl w-40 h-14 cursor-pointer">Annuler</a>
                         <!---bouton valider--->
-                        <input class="border-2 border-vertFonce rounded-2xl w-40 h-14 cursor-pointer mt-3" type="submit" value="Valider">
+                        <input class="border-2 border-vertFonce rounded-2xl w-40 h-14 cursor-pointer mt-7" type="submit" value="Valider">
                     </div>
 
                     <table class="table-auto w-7xl">
