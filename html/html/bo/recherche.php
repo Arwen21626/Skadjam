@@ -15,6 +15,10 @@
             ON ph.id_photo = m.id_photo
         INNER JOIN sae3_skadjam._vendeur v
             ON pr.id_vendeur = v.id_compte
+        LEFT JOIN sae3_skadjam._promu pu
+            ON pu.id_produit = pr.id_produit
+        LEFT JOIN sae3_skadjam._promotion pm
+            ON pu.id_promotion = pm.id_promotion
         WHERE v.id_compte = $idVendeur
             AND pr.est_supprime = false"
         , PDO::FETCH_ASSOC) as $row){
