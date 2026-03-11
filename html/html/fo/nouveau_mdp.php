@@ -54,7 +54,7 @@ try{
         
         <form class="md:w-1/2 p-15 pt-0" action="nouveau_mdp.php" method="post"> 
             <div class="flex flex-col basis-1/3 m-5 min-w-3xs">
-                <label for="mdp">Mot de passe* :</label>
+                <label for="mdp">Entrer le nouveau mot de passe* :</label>
                 <div class="zone-mdp flex flex-row">
                     <input class="champ-mdp border-4 border-vertClair rounded-2xl w-1/1 p-1 pl-3" type="password" name="mdp" id="mdp" required>
                     <?php include __DIR__ . "/../../php/structure/bouton_mdp.php" ?>
@@ -62,7 +62,7 @@ try{
                 <p style="font-size: 0.90em"> 1 majuscule, 1 minuscule, 1 chiffre, 1 caractère spécial, 10 caractères minimum</p>
             </div>
             <div class="flex flex-col basis-1/3 m-5 min-w-3xs">
-                <label for="verifMdp">Vérification du mot de passe* :</label>
+                <label for="verifMdp">Confirmer le mot de passe* :</label>
                 <div class="zone-mdp flex flex-row">
                     <input class="champ-mdp border-4 border-vertClair rounded-2xl w-1/1 p-1 pl-3" type="password" name="verifMdp" id="verifMdp" required>
                     <?php include __DIR__ . "/../../php/structure/bouton_mdp.php" ?>
@@ -77,7 +77,7 @@ try{
             </div>
 
             <div class="flex justify-around">
-                <a href="<?= $_SESSION['role'] === 'client' ? 'profil_client.php' : 'connexion.php'; ?>" class="text-center block border-2 border-solid border-vertClair rounded-2xl w-40 py-2.5 mr-6 cursor-pointer">Annuler</a>
+                <a href="<?= $_SESSION['role'] === 'client' ? 'profil_client.php' : 'connexion.php'; ?>" class="flex items-center justify-center border-2 border-solid border-vertClair rounded-2xl w-40 py-2.5 mr-6 cursor-pointer">Annuler</a>
                 <input class="border-2 border-vertClair rounded-2xl w-40 h-14 p-0 m-0 cursor-pointer" type="submit" value="Confirmer">
             </div>
         </form>

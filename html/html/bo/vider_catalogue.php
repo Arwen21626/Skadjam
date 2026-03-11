@@ -30,8 +30,8 @@
             <h2 class="text-center">Voulez-vous vraiment vider le catalogue ?</h2>
         </div>
         <div class="mt-30 flex flex-row justify-around mb-15">
-            <button id="executerViderCatalogue" class="border-2 border-vertFonce rounded-2xl w-auto h-14 px-7 cursor-pointer">Oui</button>
-            <a href="../bo/index_vendeur.php"><button class="border-2 border-vertFonce rounded-2xl w-auto h-14 px-7 cursor-pointer">Non</button></a>
+            <a href="../bo/index_vendeur.php"><button class="border-2 border-vertFonce rounded-2xl w-auto h-14 px-7 cursor-pointer">Annuler</button></a>
+            <button id="executerViderCatalogue" class="border-2 border-rouge rounded-2xl w-auto h-14 px-7 cursor-pointer">Confirmer</button>
         </div>
 
         <script>

@@ -844,9 +844,6 @@ input.quantite-prod-input {
   .w-60 {
     width: calc(var(--spacing, 0.25rem) * 60);
   }
-  .w-64 {
-    width: calc(var(--spacing, 0.25rem) * 64);
-  }
   .w-65 {
     width: calc(var(--spacing, 0.25rem) * 65);
   }
@@ -1142,6 +1139,9 @@ input.quantite-prod-input {
   }
   .self-end {
     align-self: flex-end;
+  }
+  .self-start {
+    align-self: flex-start;
   }
   .justify-self-center {
     justify-self: center;
@@ -1466,7 +1466,7 @@ input.quantite-prod-input {
   .text-wrap {
     text-wrap: wrap;
   }
-  .break-words {
+  .wrap-break-word {
     overflow-wrap: break-word;
   }
   .text-beige {
@@ -1790,6 +1790,13 @@ input.quantite-prod-input {
     &:hover {
       @media (hover: hover) {
         background-image: url(/images/logo/bootstrap_icon/plus-square-fill.svg);
+      }
+    }
+  }
+  .hover\:bg-\[url\(\/images\/logo\/bootstrap_icon\/search-fill\.svg\)\] {
+    &:hover {
+      @media (hover: hover) {
+        background-image: url(/images/logo/bootstrap_icon/search-fill.svg);
       }
     }
   }
