@@ -153,7 +153,7 @@
                                 </div>
                             </a>
                             <div class="flex justify-end">
-                                <a id="btnFA" href="./php/ajoutFAPanier.php?idProduit=<?php echo $idProduit;?>&ajout=<?php echo $fa;?>"><button class="cursor-pointer size-10 bg-no-repeat bg-size-[auto_40px] bg-[url(/images/logo/bootstrap_icon/bookmark-fa-plus.svg)] hover:bg-[url(/images/logo/bootstrap_icon/bookmark-fa-plus-fill.svg)]"></button></a>
+                                <a id="btnFA" href="./php/traitementFAPanier.php?idProduit=<?php echo $idProduit;?>&ajout=<?php echo $fa;?>&vientDe=index"><button class="cursor-pointer size-10 bg-no-repeat bg-size-[auto_40px] bg-[url(/images/logo/bootstrap_icon/bookmark-fa-plus.svg)] hover:bg-[url(/images/logo/bootstrap_icon/bookmark-fa-plus-fill.svg)]"></button></a>
                                 <a id="btnPanier" href=""><button class="cursor-pointer size-10 bg-no-repeat bg-size-[auto_40px] bg-[url(/images/logo/bootstrap_icon/cart-vert-fonce.svg)] hover:bg-[url(/images/logo/bootstrap_icon/cart-fill-vert-fonce.svg)]"></button></a>
                             </div>  
                             <!--affichage de la promotion-->

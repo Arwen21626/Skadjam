@@ -3,11 +3,26 @@
 session_start();
 
 include __DIR__ . '/../01_premiere_connexion.php';
+
 // Déclaration des variables
 $idProd = $_GET['idProduit'];
 $ajout = $_GET['ajout'];
 $tabFABDD = [];
 $idCompte = -1;
+$vientDe = '';
+
+// Si le user vient de l'index
+if ($_GET['vientDe'] == "index") {
+    $vientDe = "/index.php";
+}
+// Si le user vient de nouveaux produits
+elseif ($_GET['vientDe'] == "nP") {
+    $vientDe = "/fo/nouveaux_produits.php";
+}
+elseif ($_GET['vientDe'] == "recherche") {
+    $vientDe = "/fo/recherche.php";
+}
+
 
 
 
@@ -26,11 +41,12 @@ if ($ajout == "FA") {
         if (!in_array($idProd, $tabFABDD)) {
             $insertFA = $dbh->prepare("INSERT INTO sae3_skadjam._futur_achat(id_produit, id_client) VALUES (?,?)");
             $insertFA->execute([$idProd, $idCompte]);
-            echo "c'est dans la bdd";
         }
         // Sinon on le retire
         // A faire plus tard
     }
+    // header("location:".$vientDe);
+    
 }
 elseif ($ajout == "Panier") {
     echo "Alède";
