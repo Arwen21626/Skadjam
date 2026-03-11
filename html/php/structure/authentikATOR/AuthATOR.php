@@ -5,7 +5,6 @@ use OTPHP\TOTP;
 require_once __DIR__.'/../../../../vendor/autoload.php';
 require_once __DIR__.'/bddAuthATOR.php';
 require_once __DIR__.'/../../../01_premiere_connexion.php';
-require_once __DIR__.'/PSR20.php';
 
 class AuthATOR{
     private $conn;
@@ -23,7 +22,7 @@ class AuthATOR{
             $this->entName = $nomSociete;
             $this->userId = $idClient;
 
-            if ($secret==""){
+            if (empty($secret)){
                 AuthATOR::initSecret();
             }else{
                 $this->secret = $secret;

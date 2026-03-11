@@ -42,7 +42,7 @@ class  BddAuthATOR{
 
     function addTentative($conn, $idClient){
         try{
-            $stmt = $conn->prepare("UPDATE sae3_skadjam._compte SET tentative = tentatuve+1 WHERE id_compte = ?");
+            $stmt = $conn->prepare("UPDATE sae3_skadjam._compte SET tentative = tentative+1 WHERE id_compte = ?");
             $stmt->execute([$idClient]);
         }catch (PDOException $e){
             throw $e;
@@ -71,7 +71,7 @@ class  BddAuthATOR{
 
     function addTempsRestant($conn, $idClient){
         try{
-            $stmt = $conn->prepare("UPDATE sae3_skadjam._compte SET restant = DATE_ADD(NOW(), INTERVAL 15 MINUTE) WHERE id_compte = ?");
+            $stmt = $conn->prepare("UPDATE sae3_skadjam._compte SET restant = NOW() + INTERVAL '15 minutes' WHERE id_compte = ?");
             $stmt->execute([$idClient]);
         }catch (PDOException $e){
             throw $e;

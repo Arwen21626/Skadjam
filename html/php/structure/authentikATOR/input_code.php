@@ -112,6 +112,8 @@ async function validation(){
         console.log("valide "+valide)
         valider.textContent = "Vérifier"
         nbValidRest--
+        clearCode()
+        goFirst()
     }
 
 }
@@ -120,8 +122,8 @@ function toggleValider(){
     console.log(recup_code())
     if (test_code(recup_code()) == true){
         valider.removeAttribute("disabled")
-        
-
+        valider.focus()
+        validation()
     }else{
         valider.setAttribute("disabled", "true")
     }
@@ -134,6 +136,12 @@ function recup_code(){
         code += char
     }
     return code
+}
+
+function clearCode(){
+    for (i=1;i<7;i++){
+        document.getElementById("in"+i).value = " "
+    }
 }
 
 function test_code(code){

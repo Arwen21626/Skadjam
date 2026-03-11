@@ -5,8 +5,12 @@ include __DIR__.'/../../php/structure/authentikATOR/AuthATOR.php';
 include __DIR__.'/../../01_premiere_connexion.php';
 session_start(); // Démarrage de la session
 
+// $dt = new DateTime('now', new DateTimeZone('Europe/Paris'));
+// $ts_local = $dt->getTimestamp();
+date_default_timezone_set('Europe/Paris');
+$ts_local = time();
+
 $role = null;
-$clock = time();
 
 // Vérifie que les données de connexion sont bien présentes en session
 if (!isset($_SESSION['dataConnexion'])){
@@ -167,7 +171,9 @@ if (($_SERVER['REQUEST_METHOD'] == 'POST' && $_POST['auth'] === 'valide') || $co
 } else {
 
 $auth = new AuthATOR($dbh, "Alizon", $idCompte, "");
-$restant = $auth->getTempsRestant();
+$finBloquage = $auth->getTempsRestant();
+$tempsRestant = ($finBloquage['restant']!==null)?strtotime($finBloquage['restant'])-$ts_local:0;
+
     // Affichage du formulaire A2F si le code n'a pas encore été validé
 ?>
 
@@ -185,14 +191,18 @@ $restant = $auth->getTempsRestant();
         
         <h2>Authentification à deux facteurs</h2>
         <?php
-        if ($restant>$clock){ 
+        if ($tempsRestant>0){
+            $tempsLisible = gmdate("i\ms\s", $tempsRestant);
             ?>
         
-        <p>Compte bloqué, réessayez dans <?= $restant ?>.</p>
-        <?php } ?>
+        <p>Compte bloqué, réessayez dans <?php print_r($tempsLisible) ?>.</p>
+        <?php } else { ?>
 
         <?php include __DIR__.'/../../php/structure/authentikATOR/input_code.php' ?>
         <p id="result" class="hidden"></p>
+
+        <?php
+        } ?>
     </main>
     <?php include __DIR__.'/../../php/structure/footer_front.php' ?>
 </body>
@@ -227,12 +237,12 @@ $restant = $auth->getTempsRestant();
                 window.location.href = r.url // Redirige le navigateur vers l'URL reçue
             })
         } else { // Code incorrect
-            res.textContent = "Code incorrect, réessayez."
             res.classList.remove("hidden")
             nbTentative++
+            res.textContent = "Code incorrect, réessayez. "+(3-nbTentative)+" essais restants."
             if (nbTentative==3){
                 ret = await addTempsRestant()
-                window.location.href = "./authentification"
+                window.location.href = "./authentification.php"
             }
         }
     }

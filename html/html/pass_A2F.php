@@ -65,10 +65,10 @@ if (isset($_SESSION['role']) && $_SESSION['role'] !== 'visiteur'){
     const btnTerminer = document.getElementById("terminer")
     
 
-    function terminer(idCompte){
+    async function terminer(idCompte){
         initParam(idCompte,secret)
         console.log("termine")
-        let ret = saveSecret()
+        let ret = await saveSecret()
         history.back();
     }
 
