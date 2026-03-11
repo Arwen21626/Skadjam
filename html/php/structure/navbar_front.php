@@ -67,7 +67,7 @@
     else{ ?>
     <div id="menuBurger" class="bg-beige hidden md:absolute md:top-14 flex flex-col items-center m-2 p-2 mb-0 w-40  rounded-t-2xl md:mt-0 md:w-60 md:rounded-b-2xl md:rounded-t-none order-1 md:order-2 border-2 border-b-0 md:border-t-0 md:border-b-2 border-black">
         <ul class="space-y-3 md:space-y-2">
-            <li><a href="">Futurs achats</a></li>
+            <li><a href="/html/fo/futurs_achats.php">Futurs achats</a></li>
             <hr>
             <li><a href="/html/fo/connexion.php">Se connecter</a></li>
         </ul>
