@@ -290,8 +290,10 @@ if (isset($_POST["nom"])){
 
             <!-- Boutons formulaire -->
             <div class="flex flex-row m-4 justify-around">
-                <a href="/index.php" class="cursor-pointer w-40 md:w-60 md:m-4 border-4 border-solid rounded-2xl border-beige p-1 pl-3 text-center"><button type="button">Annuler</button></a>
-                <input type="submit" value="Valider" class="cursor-pointer w-40 md:w-60 md:m-4 border-4 border-solid rounded-2xl border-beige">
+                <a href="/index.php" class="flex justify-center cursor-pointer w-40 md:w-60 md:h-14 h-10 md:m-4 border-2 border-solid rounded-2xl border-vertFonce p-1 pl-3">
+                    <button type="button">Annuler</button>
+                </a>
+                <input type="submit" value="Valider" class="cursor-pointer w-40 md:w-60 md:h-14 h-10 md:m-4 border-2 border-solid rounded-2xl border-vertFonce">
             </div>
         </form>
 
