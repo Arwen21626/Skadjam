@@ -15,6 +15,10 @@
             ON ph.id_photo = m.id_photo
         INNER JOIN sae3_skadjam._vendeur v
             ON pr.id_vendeur = v.id_compte
+        LEFT JOIN sae3_skadjam._promu pu
+            ON pu.id_produit = pr.id_produit
+        LEFT JOIN sae3_skadjam._promotion pm
+            ON pu.id_promotion = pm.id_promotion
         WHERE v.id_compte = $idVendeur
             AND pr.est_supprime = false"
         , PDO::FETCH_ASSOC) as $row){
@@ -52,10 +56,12 @@
     
     <main class="min-h-[800px]">
         <!-- Barre de recherche -->
-        <input type="text" id="recherche" maxlength="100" class="border-4 border-vertFonce rounded-xl placeholder-gray-500 md:w-267 w-95 p-2 md:ml-7 ml-6 mt-4 mb-4" placeholder="Rechercher un produit...">
+        <div class="bg-white sticky z-1 p-2 top-20 flex-row justify-center inline-block">
+            <input type="text" id="recherche" maxlength="100" class="border-4 border-vertFonce rounded-xl placeholder-gray-500 w-267 p-2 ml-7 mt-4 mb-4" placeholder="Rechercher un produit...">
+        </div>
         <button id="filtresTris" class="md:hidden underline  m-2">Filtres & tris</button>
         <!-- Aside -->
-        <aside class="sidebar overflow-auto float-left bg-vertFonce text-bleu p-4 sticky w-79 h-225 top-20">
+        <aside class="sidebar overflow-auto float-left bg-vertFonce text-bleu p-4 sticky w-79 h-200 top-20">
             <!-- Filtres -->
             <section>
                 <h3>Filtres</h3>

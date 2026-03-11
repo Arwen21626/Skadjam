@@ -15,6 +15,7 @@
         $_SESSION['panier'] = ["nb_produit_total" => 0, // Utilisation des noms de colonne utilisées dans la BDD
                                "montant_total_ttc" => 0,
                                "contient" => []]; //format du tableau représentant un produit : ['id' => 25, 'quantite_par_produit' => 2]
+        $_SESSION['futurAchat'] = [];
     }
     
 
@@ -42,6 +43,9 @@
         $_SESSION['pseudo'] = $pseudo;
         
     }
+
+    $fa = "FA";
+    $p = "Panier";
 ?>
 
 <!DOCTYPE html>
@@ -117,7 +121,7 @@
                 $lignes = array_slice($tabProduit, $pageNumber*PAGE_SIZE-PAGE_SIZE, PAGE_SIZE);
                 
                 //affiche la photo du produit, son nom, son prix et sa note ?>
-                <article class="flex flex-row flex-wrap justify-around">
+                <div class="flex flex-row flex-wrap justify-around">
                     <?php foreach($lignes as $id => $valeurs){
                         $idProduit = $valeurs['id_produit'];
                         // Le produit est-il en promotion ?
@@ -126,7 +130,7 @@
                                             WHERE id_produit = :id_produit");
                         $stmt->execute([':id_produit' => $idProduit]);
                         $estPromu = ($stmt->fetch() !== false); ?>
-                        <section class="bg-bleu flex flex-col w-40 h-auto p-2 m-2 md:w-80 md:p-3">
+                        <div id="<?php echo $idProduit; ?>" class="bg-bleu flex flex-col w-40 h-auto p-2 m-2 md:w-80 md:p-3 justify-between">
                             <!--affichage de la photo-->
                             <a href= "<?= 'html/fo/details_produit.php?idProduit='.$idProduit;?>" class="mb-3">
                                 <img src="<?= $valeurs['url_photo'];?>" 
@@ -148,6 +152,11 @@
                                         affichageNote($note); ?>
                                 </div>
                             </a>
+                            <!-- boutons futurs achats & panier -->
+                            <div class="flex justify-end">
+                                <a id="btnFA" href="./php/ajoutFAPanier.php?idProduit=<?php echo $idProduit;?>&ajout=<?php echo $fa;?>"><button class="cursor-pointer size-10 bg-no-repeat bg-size-[auto_40px] bg-[url(/images/logo/bootstrap_icon/bookmark-fa-plus.svg)] hover:bg-[url(/images/logo/bootstrap_icon/bookmark-fa-plus-fill.svg)]" alt="Ajouter aux futurs achats" title="Ajouter aux futurs achats"></button></a>
+                                <a id="btnPanier" href=""><button class="cursor-pointer size-10 bg-no-repeat bg-size-[auto_40px] bg-[url(/images/logo/bootstrap_icon/cart-vert-fonce.svg)] hover:bg-[url(/images/logo/bootstrap_icon/cart-fill-vert-fonce.svg)]" alt="Ajouter au panier" title="Ajouter au panier"></button></a>
+                            </div>  
                             <!--affichage de la promotion-->
                                 <?php if($estPromu){ 
                                     $stmt = $dbh->prepare("SELECT *
@@ -169,9 +178,9 @@
                                     <h4 class="text-center text-beige overline m-0"><?= htmlspecialchars($labelPromo); ?></h4>
                                 </div>
                                 <?php }} ?>
-                        </section>
+                        </div>
                     <?php } ?>
-                </article>
+                </div>
                 <?php $dbh = null;
             }catch(PDOException $e){
                 print "Erreur !: " . $e->getMessage() . "<br/>";
@@ -183,11 +192,15 @@
         <!--fin du catalogue-->
         <div class="flex flex-row space-x-4 justify-center py-3">
             <?php if($pageNumber>1){?>
-            <a class= "lienPage hover:text-rouge" href="<?= "./index.php?page=". $pageNumber-1 ."#nosProduits";?>">Page précédente</a>
+            <a class= "lienPage hover:text-rouge" href="<?= "./index.php?page=". $pageNumber-1 ."#nosProduits";?>">
+                <img class="w-7" src="images/logo/bootstrap_icon/chevron-left.svg" alt="page précédente">
+            </a>
             <?php }?>
-        
+            <p>page <?php echo $pageNumber;?></p>
             <?php if($pageNumber<$maxPage){?>
-            <a class= "lienPage hover:text-rouge" href="<?= "./index.php?page=". $pageNumber+1 ."#nosProduits";?>">Page suivante</a>
+            <a class= "lienPage hover:text-rouge" href="<?= "./index.php?page=". $pageNumber+1 ."#nosProduits";?>">
+                <img class="w-7" src="images/logo/bootstrap_icon/chevron-right.svg" alt="page suivante">
+            </a>
             <?php }?>
         </div>
     </main>

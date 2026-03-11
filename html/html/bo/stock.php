@@ -55,13 +55,13 @@
         <?php } 
         
         else{?>
-            <div class="flex justify-center flex-row-reverse">
+            <div class="flex justify-center flex-row-reverse mb-14">
                 
-                <div class="flex justify-around flex-col m-10  sticky top-2/8 h-50">
+                <div class="flex justify-around flex-col sticky top-1/4 h-50">
                     <!---bouton retour--->
-                    <a href="index_vendeur.php" class="flex justify-center items-center border-2 border-vertFonce rounded-2xl w-45 h-14 cursor-pointer my-5">Retour</a>
+                    <a href="index_vendeur.php" class="flex justify-center items-center border-2 border-vertFonce rounded-2xl w-45 h-14 cursor-pointer">Retour</a>
                     <!---bouton modifier stock--->
-                    <button class="border-2 border-vertFonce rounded-2xl w-45 h-14 cursor-pointer my-5">
+                    <button class="border-2 border-vertFonce rounded-2xl w-45 h-14 cursor-pointer mt-5">
                         <a href="../bo/modifier_stock.php?idCompte=<?php echo $idCompte ;?>" class="">Modifier le stock</a>
                     </button>
                 </div>

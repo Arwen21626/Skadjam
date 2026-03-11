@@ -42,21 +42,21 @@ unset($_SESSION['erreurs'], $_SESSION['old']);
             <!-- Nom -->
             <div class="flex flex-col basis-1/3 m-5 min-w-3xs">
                 <label for="nom">Nom* :</label>
-                <input class="border-4 border-beige rounded-2xl w-1/1 p-1 pl-3" type="text" name="nom" id="nom" value="<?= htmlspecialchars($old['nom'] ?? '') ?>" required>
+                <input placeholder="Dupond" class="border-4 border-beige rounded-2xl w-1/1 p-1 pl-3" type="text" name="nom" id="nom" value="<?= htmlspecialchars($old['nom'] ?? '') ?>" required>
                 <?php if (isset($erreurs['nom'])) { echo "<p class='text-rouge' style='font-size: 0.90em'>Le nom ne peut contenir que des majuscules, des minuscules, des tirets, des espaces ou les accents : é, ç, è, ë, ê, à, ï, î, ä, â, ù, ü, û, ö, ô.</p>"; } ?>
             </div>
 
             <!-- Prénom -->
             <div class="flex flex-col basis-1/3 m-5 min-w-3xs">
                 <label for="prenom">Prénom* :</label>
-                <input class="border-4 border-beige rounded-2xl w-1/1 p-1 pl-3" type="text" name="prenom" id="prenom" value="<?= htmlspecialchars($old['prenom'] ?? '') ?>" required>
+                <input placeholder="Jean" class="border-4 border-beige rounded-2xl w-1/1 p-1 pl-3" type="text" name="prenom" id="prenom" value="<?= htmlspecialchars($old['prenom'] ?? '') ?>" required>
                 <?php if (isset($erreurs['prenom'])) { echo "<p class='text-rouge' style='font-size: 0.90em'>Le prénom ne peut contenir que des majuscules, des minuscules, des tirets, des espaces les accents : é, ç, è, ë, ê, à, ï, î, ä, â, ù, ü, û, ö, ô.</p>"; } ?>
             </div>
 
             <!-- Pseudo -->
             <div class="flex flex-col basis-1/3 m-5 min-w-3xs">
                 <label for="pseudo">Pseudo* :</label>
-                <input class="border-4 border-beige rounded-2xl w-1/1 p-1 pl-3" type="text" name="pseudo" id="pseudo"value="<?= htmlspecialchars($old['pseudo'] ?? '') ?>" required>
+                <input placeholder="Breizh22" class="border-4 border-beige rounded-2xl w-1/1 p-1 pl-3" type="text" name="pseudo" id="pseudo"value="<?= htmlspecialchars($old['pseudo'] ?? '') ?>" required>
                 <?php if (isset($erreurs['pseudo'])) { echo "<p class='text-rouge' style='font-size: 0.90em'>Le pseudo ne peut que contenir des majuscules, des minuscules, des chiffres, des tirets, tirets du bas ou des espaces.</p>"; } ?>
             </div>
 
@@ -77,7 +77,7 @@ unset($_SESSION['erreurs'], $_SESSION['old']);
             <!-- Adresse email -->
             <div class="flex flex-col basis-1/3 m-5 min-w-3xs">
                 <label for="mail">Adresse email* :</label>
-                <input class="border-4 border-beige rounded-2xl w-1/1 p-1 pl-3" type="mail" name="mail" id="mail" value="<?= htmlspecialchars($old['mail'] ?? '') ?>" required>
+                <input placeholder="jean.dupond@test.com" class="border-4 border-beige rounded-2xl w-1/1 p-1 pl-3" type="mail" name="mail" id="mail" value="<?= htmlspecialchars($old['mail'] ?? '') ?>" required>
                 <?php if (isset($erreurs['mail'])) { echo "<p class='text-rouge' style='font-size: 0.90em'>L'adresse doit être au format : adresse@e.mail.</p>"; } ?>
             </div>
 
@@ -109,8 +109,8 @@ unset($_SESSION['erreurs'], $_SESSION['old']);
 
             <!-- Validation ou pas du formulaire -->
             <div class="flex mt-10 justify-center md:justify-end w-1/1 ">
-                <button class="cursor-pointer border-2 border-vertFonce rounded-2xl w-40 h-14 p-0 m-0 mr-10" type="button"><a href="/index.php">Annuler</a></button>
-                <input class="cursor-pointer border-2 border-vertFonce rounded-2xl w-40 h-14 p-0 m-0 md:mr-10" type="Submit" name="submit" id="submit" value="S'inscrire">
+                <button class="cursor-pointer border-2 border-vertClair md:rounded-2xl w-40 md:h-14 rounded-xl h-10 p-0 m-0 mr-10" type="button"><a href="/index.php">Annuler</a></button>
+                <input class="cursor-pointer border-2 border-vertClair md:rounded-2xl w-40 md:h-14 rounded-xl h-10 p-0 m-0 md:mr-10" type="Submit" name="submit" id="submit" value="S'inscrire">
             </div>
         </form>
         <div class="flex flex-row flex-wrap justify-center">
