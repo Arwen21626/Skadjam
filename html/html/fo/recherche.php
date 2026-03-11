@@ -71,7 +71,7 @@
     <main class="md:min-h-[900px] min-h-[600px]" id="produits">
 
         <!-- Aside -->
-        <aside class="sidebar hidden overflow-auto bg-beige/90 w-110 min-h-[500px] fixed top-0 bottom-10 md:bg-beige p-4 md:sticky md:block md:w-79 md:h-225 md:top-20 md:float-left ">
+        <aside class="sidebar hidden overflow-auto bg-beige/90 w-110 min-h-[500px] fixed top-0 bottom-10 md:bg-beige p-4 md:sticky md:block md:w-79 md:h-225 md:top-14 md:float-left ">
             
             <!-- Filtres -->
             <section>
@@ -263,7 +263,7 @@
         </aside>
 
         <!-- Barre de recherche -->
-        <div class="bg-white sticky z-1 p-2 top-0 md:top-21 md:flex md:flex-row md:justify-center">
+        <div class="bg-white sticky z-1 p-2 top-0 md:top-14 md:flex md:flex-row md:justify-center">
             <input type="text" id="recherche" maxlength="100" class="border-4 bg-white border-vertClair rounded-xl placeholder-gray-500 md:w-267 w-95 p-2" placeholder="Rechercher un produit...">
         </div>
 
