@@ -8,11 +8,14 @@ Chart.Tooltip.positioners.cursor = function(items, eventPosition) {
 
 // Définitions des variables utilisées
 let dataStats = dataJson; // tableau des données sur les ventes tirés des commandes par requête PHP
-
+console.log(dataStats);
 if (Object.keys(dataStats).length > 0) {
 
     let anneeSelection = document.getElementById("select-annee"); // Input select pour l'année
     let currentAnnee = anneeSelection.value;
+
+    let formatSelection = document.getElementById("select-format");
+    let currentFormat = formatSelection.value;
 
     let produitSelection = document.getElementById("select-produit");
     let currentIdProd = produitSelection.value;
@@ -25,27 +28,35 @@ if (Object.keys(dataStats).length > 0) {
 
     // Champs de données pour les diagrammes
     let periodes = ['Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Août', 'Septembre', 'Octobre', 'Novembre', 'Décembre'];
-    let dataVentes = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+    let dataVentesVolume = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+    let dataVentesMontant = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
 
-    let dataProdVentes = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+    let dataProdVentesVolume = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+    let dataProdVentesMontant = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
 
-    let categories = ["Alimentaire", "Vêtement", "Artisanat", "Goodies", "Soin"]
-    let dataCatVentes = [0, 0, 0, 0, 0]
+    let categories = ["Alimentaire", "Vêtement", "Artisanat", "Goodies", "Soin"];
+    let dataCatVentesVolume = [0, 0, 0, 0, 0];
+    let dataCatVentesMontant = [0, 0, 0, 0, 0];
+
 
     function arrangeYearAndCategDatas() {
 
         Object.keys(dataStats[currentAnnee]).forEach(mois => { // Récupères les données des ventes totales pour l'année en cours
             let i = Number(mois);
 
-            dataVentes[i - 1] = Number(dataStats[currentAnnee][mois]["nb_ventes_totales"]); // Insert les données dans le champ data du diagramme
+            dataVentesVolume[i - 1] = Number(dataStats[currentAnnee][mois]["nb_ventes_totales"]); // Insert les données dans le champ data du diagramme
+            dataVentesMontant[i - 1] = Number((dataStats[currentAnnee][mois]["montant_total_ttc"])).toFixed(2) // Insert les données en version montant
 
             Object.keys(dataStats[currentAnnee][mois]["produits"]).forEach(produit => { // Insert les données des catégories dans le champ data du diagramme
                 let iCat = Number(dataStats[currentAnnee][mois]["produits"][produit]["id_categorie"]);
                 
-                dataCatVentes[iCat - 1] += Number(dataStats[currentAnnee][mois]["produits"][produit]["nb_ventes_totales"])
+                dataCatVentesVolume[iCat - 1] += Number(dataStats[currentAnnee][mois]["produits"][produit]["nb_ventes_totales"])
+                dataCatVentesMontant[iCat - 1] += Number((dataStats[currentAnnee][mois]["produits"][produit]["montant_total_ttc"]))
             });
         });
 
+        console.log(dataCatVentesMontant)
+        console.log(dataVentesMontant)
     }
 
     function arrangeProdDatas() {
@@ -56,11 +67,11 @@ if (Object.keys(dataStats).length > 0) {
             let i = Number(mois);
             
             if (dataStats[currentAnnee][mois]["produits"][currentIdProd]) {
-                dataProdVentes[i - 1] = Number(dataStats[currentAnnee][mois]["produits"][currentIdProd]["nb_ventes_totales"]);
+                dataProdVentesVolume[i - 1] = Number(dataStats[currentAnnee][mois]["produits"][currentIdProd]["nb_ventes_totales"]);
                 nbProd += Number(dataStats[currentAnnee][mois]["produits"][currentIdProd]["nb_ventes_totales"]);
             }
             else {
-                dataProdVentes[i - 1] = 0;
+                dataProdVentesVolume[i - 1] = 0;
             }
         });
 
@@ -89,7 +100,7 @@ if (Object.keys(dataStats).length > 0) {
             labels: periodes,
             datasets: [{
                 label: "Ventes totales durant le mois",
-                data: dataVentes,
+                data: dataVentesVolume,
                 borderWidth: 3,
                 pointBorderWidth: 8,
             }]
@@ -142,7 +153,7 @@ if (Object.keys(dataStats).length > 0) {
             labels: categories,
             datasets: [{
                 label: "Nombre de ventes",
-                data: dataCatVentes,
+                data: dataCatVentesVolume,
                 borderWidth: 3,
                 pointBorderWidth: 8,
             }]
@@ -179,7 +190,7 @@ if (Object.keys(dataStats).length > 0) {
             labels: periodes,
             datasets: [{
                 label: "Ventes totales durant le mois",
-                data: dataProdVentes,
+                data: dataProdVentesVolume,
                 borderWidth: 3,
                 pointBorderWidth: 8,
             }]
@@ -228,21 +239,21 @@ if (Object.keys(dataStats).length > 0) {
     anneeSelection.addEventListener("change", function () {
         currentAnnee = anneeSelection.value;
 
-        dataVentes = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
-        dataProdVentes = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
-        dataCatVentes = [0, 0, 0, 0, 0];
+        dataVentesVolume = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+        dataProdVentesVolume = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+        dataCatVentesVolume = [0, 0, 0, 0, 0];
 
         arrangeYearAndCategDatas();
         arrangeProdDatas();
 
         allChartCfg.options.plugins.title.text = 'Année' + " " + currentAnnee;
-        allChartCfg.data.datasets[0].data = dataVentes;
+        allChartCfg.data.datasets[0].data = dataVentesVolume;
 
         prodChartCfg.options.plugins.title.text = currentLibelleProd + ' - ' + 'Année' + ' ' + currentAnnee;
-        prodChartCfg.data.datasets[0].data = dataProdVentes;
+        prodChartCfg.data.datasets[0].data = dataProdVentesVolume;
 
         cateChartCfg.options.plugins.title.text = 'Année' + " " + currentAnnee;
-        cateChartCfg.data.datasets[0].data = dataCatVentes;
+        cateChartCfg.data.datasets[0].data = dataCatVentesVolume;
 
         chart3.destroy();
         chart3 = new Chart(cateChart, cateChartCfg);
@@ -260,12 +271,12 @@ if (Object.keys(dataStats).length > 0) {
         currentIdProd = produitSelection.value;
         currentLibelleProd = produitSelection.options[produitSelection.selectedIndex].textContent;
 
-        dataProdVentes = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+        dataProdVentesVolume = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
 
         arrangeProdDatas();
 
         prodChartCfg.options.plugins.title.text = currentLibelleProd + ' - ' + 'Année' + ' ' + currentAnnee;
-        prodChartCfg.data.datasets[0].data = dataProdVentes;
+        prodChartCfg.data.datasets[0].data = dataProdVentesVolume;
 
         chart2.destroy();
         chart2 = new Chart(prodChart, prodChartCfg);
