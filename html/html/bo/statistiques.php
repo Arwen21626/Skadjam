@@ -27,7 +27,7 @@
                 $quantite = $produit["quantite"];
                 $idProd = $produit["id_produit"];
 
-                $rqt = $dbh->query("SELECT libelle_produit, id_vendeur, id_categorie  
+                $rqt = $dbh->query("SELECT libelle_produit, id_vendeur, id_categorie, prix_ttc  
                                     FROM sae3_skadjam._produit 
                                     WHERE id_produit = $idProd", PDO::FETCH_ASSOC);
                 
@@ -35,6 +35,7 @@
                 $idVendeurProd = $infosProduits["id_vendeur"];
                 $libelleProd = $infosProduits["libelle_produit"];
                 $idCategorie = $infosProduits["id_categorie"];
+                $prixTTC = $infosProduits["prix_ttc"];
                 
                 if ($idVendeurProd == $idVendeur){
 
@@ -42,18 +43,22 @@
 
                     if (!isset($dataStats[$annee][$mois])){
                         $dataStats[$annee][$mois]["nb_ventes_totales"] = $quantite;
+                        $dataStats[$annee][$mois]["montant_total_ttc"] = number_format(($prixTTC * $quantite), 2, '.', '');
                     }
                     else {
                         $dataStats[$annee][$mois]["nb_ventes_totales"] += $quantite;
+                        $dataStats[$annee][$mois]["montant_total_ttc"] += number_format(($prixTTC * $quantite), 2, '.', '');
                     }
 
                     if (!isset($dataStats[$annee][$mois]["produits"][$idProd])){
                         $dataStats[$annee][$mois]["produits"][$idProd]["libelle_prod"] = $libelleProd;
                         $dataStats[$annee][$mois]["produits"][$idProd]["nb_ventes_totales"] = $quantite;
                         $dataStats[$annee][$mois]["produits"][$idProd]["id_categorie"] = $idCategorie;
+                        $dataStats[$annee][$mois]["produits"][$idProd]["montant_total_ttc"] = number_format(($prixTTC * $quantite), 2, '.', '');
                     }
                     else {
                         $dataStats[$annee][$mois]["produits"][$idProd]["nb_ventes_totales"] += $quantite;
+                        $dataStats[$annee][$mois]["produits"][$idProd]["montant_total_ttc"] += number_format(($prixTTC * $quantite), 2, '.', '');
                     }
                 }
             }
@@ -91,8 +96,8 @@
         <h2>Mes Statistiques</h2>
 
         <?php if($dataStats){?> 
-            <div class="flex flex-row mb-2">
-                <div>
+            <div class="flex flex-row justify-around mb-16">
+                <div class="flex flex-row">
                     <p class="pr-2">Choisissez une année :</p>
                     <select name="" id="select-annee" class="pl-2 cursor-pointer">
                         <?php 
@@ -107,11 +112,13 @@
                         ?>
                     </select>
                 </div>
-                
 
-                <div>
-                    <p>Format des statistiques de vente :</p>
-                    <select name="" id=""></select>
+                <div class="flex flex-row">
+                    <p class="pr-2">Format des statistiques de vente :</p>
+                    <select name="" id="select-format">
+                        <option value="volume">Volume</option>
+                        <option value="euro">Montant (€-TTC)</option>
+                    </select>
                 </div>
             </div>
 

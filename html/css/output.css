@@ -318,8 +318,8 @@ input.quantite-prod-input {
   .top-20 {
     top: calc(var(--spacing, 0.25rem) * 20);
   }
-  .top-25 {
-    top: calc(var(--spacing, 0.25rem) * 25);
+  .top-21 {
+    top: calc(var(--spacing, 0.25rem) * 21);
   }
   .top-48 {
     top: calc(var(--spacing, 0.25rem) * 48);
@@ -581,6 +581,9 @@ input.quantite-prod-input {
   }
   .mb-15 {
     margin-bottom: calc(var(--spacing, 0.25rem) * 15);
+  }
+  .mb-16 {
+    margin-bottom: calc(var(--spacing, 0.25rem) * 16);
   }
   .ml-0 {
     margin-left: calc(var(--spacing, 0.25rem) * 0);
@@ -1239,6 +1242,10 @@ input.quantite-prod-input {
     border-bottom-style: var(--tw-border-style);
     border-bottom-width: 1px;
   }
+  .border-b-0 {
+    border-bottom-style: var(--tw-border-style);
+    border-bottom-width: 0px;
+  }
   .border-b-2 {
     border-bottom-style: var(--tw-border-style);
     border-bottom-width: 2px;
@@ -1886,16 +1893,6 @@ input.quantite-prod-input {
       top: calc(var(--spacing, 0.25rem) * 14);
     }
   }
-  .md\:top-20 {
-    @media (width >= 48rem) {
-      top: calc(var(--spacing, 0.25rem) * 20);
-    }
-  }
-  .md\:top-21 {
-    @media (width >= 48rem) {
-      top: calc(var(--spacing, 0.25rem) * 21);
-    }
-  }
   .md\:top-48 {
     @media (width >= 48rem) {
       top: calc(var(--spacing, 0.25rem) * 48);
@@ -2494,27 +2491,22 @@ input.quantite-prod-input {
       border-width: 0px;
     }
   }
-  .md\:border-2 {
-    @media (width >= 48rem) {
-      border-style: var(--tw-border-style);
-      border-width: 2px;
-    }
-  }
   .md\:border-t-0 {
     @media (width >= 48rem) {
       border-top-style: var(--tw-border-style);
       border-top-width: 0px;
     }
   }
+  .md\:border-b-2 {
+    @media (width >= 48rem) {
+      border-bottom-style: var(--tw-border-style);
+      border-bottom-width: 2px;
+    }
+  }
   .md\:border-none {
     @media (width >= 48rem) {
       --tw-border-style: none;
       border-style: none;
-    }
-  }
-  .md\:border-black {
-    @media (width >= 48rem) {
-      border-color: var(--color-black, #000);
     }
   }
   .md\:bg-beige {
