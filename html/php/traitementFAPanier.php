@@ -13,17 +13,24 @@ $vientDe = '';
 
 // Si le user vient de l'index
 if ($_GET['vientDe'] == "index") {
-    $vientDe = "/index.php";
+    $vientDe = "/index.php#$idProd";
 }
 // Si le user vient de nouveaux produits
 elseif ($_GET['vientDe'] == "nP") {
-    $vientDe = "/fo/nouveaux_produits.php";
+    $vientDe = "/fo/nouveaux_produits.php#$idProd";
 }
+// Si le user vient de recherche
 elseif ($_GET['vientDe'] == "recherche") {
-    $vientDe = "/fo/recherche.php";
+    $vientDe = "/fo/recherche.php#$idProd";
 }
-
-
+// Si le user vient de futurs achats
+elseif ($_GET['vientDe'] == "fa") {
+    $vientDe = "/fo/futurs_achats.php#$idProd";
+}
+// Si le user vient de promotions
+elseif ($_GET['vientDe'] == "promo") {
+    $vientDe = "/fo/promotions.php#$idProd";
+}
 
 
 if ($ajout == "FA") {
@@ -45,7 +52,7 @@ if ($ajout == "FA") {
         // Sinon on le retire
         // A faire plus tard
     }
-    // header("location:".$vientDe);
+    header("location:".$vientDe);
     
 }
 elseif ($ajout == "Panier") {

@@ -1,4 +1,5 @@
 <?php
+$tabFA = [];
 // Réupération de l'id des futurs achats du client
 if ($_SESSION['role'] == "client") {
     $idCompte = $_SESSION['idCompte'];

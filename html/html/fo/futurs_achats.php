@@ -6,7 +6,6 @@ require_once __DIR__ . "/../../php/fonctions.php";
 include __DIR__. '/../../php/requetesBDD/recupFA.php';
 
 const PAGE_SIZE = 24;
-$tabFA = [];
 
 //initialisation du numéro de page
 if(isset($_GET['page'])&& $_GET['page']!==""){

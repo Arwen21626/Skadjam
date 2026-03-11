@@ -2,6 +2,7 @@
     session_start();
 
     include __DIR__ . '/01_premiere_connexion.php';
+    include __DIR__. '/php/requetesBDD/recupFA.php';
 
     const PAGE_SIZE = 24;
 
@@ -153,7 +154,24 @@
                                 </div>
                             </a>
                             <div class="flex justify-end">
-                                <a id="btnFA" href="./php/traitementFAPanier.php?idProduit=<?php echo $idProduit;?>&ajout=<?php echo $fa;?>&vientDe=index"><button class="cursor-pointer size-10 bg-no-repeat bg-size-[auto_40px] bg-[url(/images/logo/bootstrap_icon/bookmark-fa-plus.svg)] hover:bg-[url(/images/logo/bootstrap_icon/bookmark-fa-plus-fill.svg)]"></button></a>
+                                <!-- Produit dans les futurs achats ? -->
+                                <a id="btnFA" href="./php/traitementFAPanier.php?idProduit=<?php echo $idProduit;?>&ajout=<?php echo $fa;?>&vientDe=index">
+                                    <button class="cursor-pointer size-10 bg-no-repeat bg-size-[auto_40px]
+                                    <?php 
+                                    $bg = "bg-[url(/images/logo/bootstrap_icon/bookmark-fa-plus.svg)]";
+                                    if ($tabFA != null) {
+                                        foreach($tabFA as $prodFA) {
+                                            print_r ($prodFA);
+                                            if ($prodFA['id_produit'] == $idProduit) {
+                                                $bg = "bg-[url(/images/logo/bootstrap_icon/bookmark-fa-plus-fill.svg)]";
+                                            } 
+                                        }
+                                    }
+                                    echo $bg;
+                                    ?>
+                                    ">
+                                    </button>
+                                </a>
                                 <a id="btnPanier" href=""><button class="cursor-pointer size-10 bg-no-repeat bg-size-[auto_40px] bg-[url(/images/logo/bootstrap_icon/cart-vert-fonce.svg)] hover:bg-[url(/images/logo/bootstrap_icon/cart-fill-vert-fonce.svg)]"></button></a>
                             </div>  
                             <!--affichage de la promotion-->
