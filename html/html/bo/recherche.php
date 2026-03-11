@@ -52,7 +52,7 @@
     
     <main class="min-h-[800px]">
         <!-- Barre de recherche -->
-        <div class="bg-white sticky z-1 p-2 top-20 flex flex-row justify-center">
+        <div class="bg-white sticky z-1 p-2 top-20 flex-row justify-center inline-block">
             <input type="text" id="recherche" maxlength="100" class="border-4 border-vertFonce rounded-xl placeholder-gray-500 w-267 p-2 ml-7 mt-4 mb-4" placeholder="Rechercher un produit...">
         </div>
         <button id="filtresTris" class="md:hidden underline  m-2">Filtres & tris</button>
