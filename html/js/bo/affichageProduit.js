@@ -89,4 +89,18 @@ function afficherProduit(tableau, indice){
     let stock = document.createElement("p")
     stock.textContent = "Stock : "+tableau[i]['quantite_stock']
     parent.appendChild(stock)
+
+    // Promotion
+    if (tableau[i]['id_promotion'] != null){
+        parent = produit
+        let promo = document.createElement("div")
+        promo.classList.add("bg-rouge", "absolute", "w-36", "md:w-74", "underline", "text-beige", "pt-2", "pb-1.5")
+        let nomPromo = document.createElement("h4")
+        nomPromo.textContent = tableau[i]['label']
+        nomPromo.classList.add("text-center", "text-beige", "overline", "m-0")
+
+        parent.appendChild(promo)
+        parent = promo
+        parent.append(nomPromo)
+    }
 }
