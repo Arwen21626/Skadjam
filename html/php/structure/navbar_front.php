@@ -19,9 +19,9 @@
     }
 ?>
 
-<nav class="fixed left-0 right-0 bottom-0 w-full md:sticky md:top-0 flex flex-col items-end">
+<nav class="z-10 fixed left-0 right-0 bottom-0 w-full md:sticky md:top-0 flex flex-col items-end">
 
-    <div class="z-10 flex justify-around md:justify-between md:space-x-4 items-center p-1 bg-beige w-full order-2 md:order-1">
+    <div class="z-9 flex justify-around md:justify-between md:space-x-4 items-center p-1 bg-beige w-full order-2 md:order-1">
         <!-- Accueil et petit message -->
         <div class="flex flex-row justify-around md:justify-start md:items-center md:space-x-4 w-1/5">
             <!-- Accueil -->
@@ -52,7 +52,7 @@
     </div>
     <!-- Affichage du menu burger en fonction du role du user -->
     <?php if ($_SESSION['role'] == "client") { ?>
-    <div id="menuBurger" class="bg-beige hidden z-1 md:absolute md:top-14 flex flex-col items-center m-2 p-2 mb-0 w-40 rounded-t-2xl md:mt-0 md:w-60 md:rounded-b-2xl md:rounded-t-none order-1 md:order-2 border-2 border-b-0 md:border-t-0 md:border-b-2 border-black">
+    <div id="menuBurger" class="bg-beige hidden md:absolute md:top-14 flex flex-col items-center m-2 p-2 mb-0 w-40 rounded-t-2xl md:mt-0 md:w-60 md:rounded-b-2xl md:rounded-t-none order-1 md:order-2 border-2 border-b-0 md:border-t-0 md:border-b-2 border-black">
         <ul class="space-y-3 md:space-y-3">
                 <li><a href=<?php echo $urlProfil ?>>Profil</a></li>
                 <hr>
@@ -65,9 +65,9 @@
     </div>
     <?php }
     else{ ?>
-    <div id="menuBurger" class="bg-beige z-1 hidden md:absolute md:top-14 flex flex-col items-center m-2 p-2 mb-0 w-40  rounded-t-2xl md:mt-0 md:w-60 md:rounded-b-2xl md:rounded-t-none order-1 md:order-2 border-2 border-b-0 md:border-t-0 md:border-b-2 border-black">
+    <div id="menuBurger" class="bg-beige hidden md:absolute md:top-14 flex flex-col items-center m-2 p-2 mb-0 w-40  rounded-t-2xl md:mt-0 md:w-60 md:rounded-b-2xl md:rounded-t-none order-1 md:order-2 border-2 border-b-0 md:border-t-0 md:border-b-2 border-black">
         <ul class="space-y-3 md:space-y-2">
-            <li><a href="">Futurs achats</a></li>
+            <li><a href="/html/fo/futurs_achats.php">Futurs achats</a></li>
             <hr>
             <li><a href="/html/fo/connexion.php">Se connecter</a></li>
         </ul>
