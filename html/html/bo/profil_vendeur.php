@@ -134,7 +134,7 @@
                     <!-- Nom -->
                     <div class="flex flex-row space-x-5">
                         <p class="font-bold">Nom :</p>
-                        <p><?php echo htmlentities($denom); ?></p>
+                        <p><?php echo $denom; ?></p>
                     </div>
                     <!-- Adresse -->
                     <div class="flex flex-col space-x-5">

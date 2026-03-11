@@ -3,18 +3,6 @@ session_start();
 require_once __DIR__ . "/../../php/verif_role_fo.php";
 require_once __DIR__ . "/../../01_premiere_connexion.php";
 
-// Vérifie si le bouton 'Se déconnecter à été appuyé'
-if (isset($_POST['logout'])) {
-    // Supprime toutes les variables de session
-    session_unset();
-
-    // Détruit la session
-    session_destroy();
-
-    // Redirection vers la page principale
-    header("Location: ../../index.php");
-    exit();
-}
 ?>
 <!DOCTYPE html>
 <html lang="fr">

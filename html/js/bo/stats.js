@@ -223,8 +223,6 @@ if (Object.keys(dataStats).length > 0) {
 
     let chart2 = new Chart(prodChart, prodChartCfg);
 
-
-
     // Modification du graphique selon l'année sélectionné
 
     anneeSelection.addEventListener("change", function () {

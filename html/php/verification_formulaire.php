@@ -62,7 +62,7 @@ function mailUnique($mail){
 
 function verifDenomination($denomination){
     // Vérification d'une dénomination
-    return preg_match("/^[a-zA-Z- 0-9]{1,}$/", $denomination);
+    return preg_match("/^[a-zA-Zéçèëêàïîäâùüûöô0-9 -]*$/", $denomination);
 }
 
 function verifSiren($siren){
@@ -166,7 +166,7 @@ function verifCp($cp){
 
 function verifVille($ville){
     //verifie le format de la ville
-    return preg_match("/^[\p{L} -]+$/u", $ville);
+    return preg_match("/^[A-Za-zéçèëêàïîäâùüûöô -]+$/", $ville);
 }
 
 function verifAdresse($adresse){
