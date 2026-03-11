@@ -315,20 +315,8 @@ input.quantite-prod-input {
   .top-2\/8 {
     top: calc(2/8 * 100%);
   }
-  .top-14 {
-    top: calc(var(--spacing, 0.25rem) * 14);
-  }
-  .top-16 {
-    top: calc(var(--spacing, 0.25rem) * 16);
-  }
-  .top-18 {
-    top: calc(var(--spacing, 0.25rem) * 18);
-  }
   .top-20 {
     top: calc(var(--spacing, 0.25rem) * 20);
-  }
-  .top-22 {
-    top: calc(var(--spacing, 0.25rem) * 22);
   }
   .top-24 {
     top: calc(var(--spacing, 0.25rem) * 24);
@@ -1174,9 +1162,6 @@ input.quantite-prod-input {
   .overflow-auto {
     overflow: auto;
   }
-  .rounded {
-    border-radius: 0.25rem;
-  }
   .rounded-2xl {
     border-radius: var(--radius-2xl, 1rem);
   }
@@ -1219,10 +1204,6 @@ input.quantite-prod-input {
   .border-2 {
     border-style: var(--tw-border-style);
     border-width: 2px;
-  }
-  .border-3 {
-    border-style: var(--tw-border-style);
-    border-width: 3px;
   }
   .border-4 {
     border-style: var(--tw-border-style);
@@ -1820,13 +1801,6 @@ input.quantite-prod-input {
     &:hover {
       @media (hover: hover) {
         background-image: url(/images/logo/bootstrap_icon/plus-square-fill.svg);
-      }
-    }
-  }
-  .hover\:bg-\[url\(\/images\/logo\/bootstrap_icon\/search-fill\.svg\)\] {
-    &:hover {
-      @media (hover: hover) {
-        background-image: url(/images/logo/bootstrap_icon/search-fill.svg);
       }
     }
   }
