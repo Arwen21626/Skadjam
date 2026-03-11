@@ -314,7 +314,7 @@ if(!$isset || $erreur){
                     <!-- Vendeur -->
                     <div class="flex flex-col flex-wrap">
                         <h3>Informations vendeur :</h3>
-                        <div class="flex flex-row space-x-40 space-y-6">
+                        <div class="flex flex-row space-x-25 space-y-6">
                             <div class="flex flex-col space-y-2">
                                 <label for="nom">Nom * :</label>
                                 <input class="ml-5 border-4 border-solid rounded-2xl border-beige p-1 pl-3" type="text" id="nom" name="nom" value="<?= $nom; ?>" size="30" required >
@@ -326,7 +326,7 @@ if(!$isset || $erreur){
                                 <?= $erreurMail ? "<p style=\"font-size: 0.90em\" class=\"text-rouge\">L'adresse email doit être au format : adresse@e.mail</p>" : ""; ?>
                             </div>
                         </div>
-                        <div class="flex flex-row space-x-40 space-y-6">
+                        <div class="flex flex-row space-x-25 space-y-6">
                             <div class="flex flex-col space-y-2">
                                 <label for="prenom">Prénom * :</label>
                                 <input class="ml-5 border-4 border-solid rounded-2xl border-beige p-1 pl-3" type="text" id="prenom" name="prenom" value="<?= $prenom; ?>" size="30" required>
