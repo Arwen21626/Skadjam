@@ -192,7 +192,7 @@
             
             <div class="flex flex-col mt-5">
                 <label for="adresse">Adresse postale* :</label>
-                <input placeholder="1 rue des fleurs" value="<?php
+                <input placeholder="1 rue des Fleurs" value="<?php
                     if(isset($_POST['adresse'])){
                         echo $_POST['adresse'];
                     }else if(!empty($adresseE['adresse_postale'])){
