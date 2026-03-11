@@ -4,7 +4,7 @@
         <!-- Accueil et petit message -->
         <div class="flex flex-row items-center space-x-4 w-1/5">
             <!-- Accueil -->
-            <a href="/html/bo/index_vendeur.php" class="flex self-start">
+            <a href="/html/bo/index_vendeur.php" class="flex self-start" alt="Accueil" title="Accueil">
                 <button class="size-12 cursor-pointer bg-no-repeat bg-size-[48px] bg-[url(/images/logo/bootstrap_icon/house.svg)] hover:bg-[url(/images/logo/bootstrap_icon/house-fill.svg)]"></button>
             </a>
             <p>Bonjour <?php echo $_SESSION['raisonSociale'] ;?> !</p>
@@ -13,7 +13,7 @@
         <!-- Le reste des boutons -->
          <div class="flex flex-row items-center justify-end space-x-4 w-4/5">
             <!-- Recherche -->
-            <a href="/html/bo/recherche.php">
+            <a href="/html/bo/recherche.php" alt="Recherche" title="Recherche">
                 <button class="size-12 cursor-pointer bg-no-repeat bg-size-[auto_48px] bg-[url(/images/logo/bootstrap_icon/search.svg)] hover:bg-[url(/images/logo/bootstrap_icon/search-selected.svg)]"></button>
             </a>
 
