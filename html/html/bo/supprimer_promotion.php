@@ -26,8 +26,8 @@ $idCompte = $_SESSION['idCompte'];
         <main class=" min-h-[600px]">
             <h2>Voulez-vous vraiment enlever la promotion ?</h2>
             <div class="mt-15 flex flex-row justify-around mb-15">
-                <button id="suppProduit" class="border-2 border-vertFonce rounded-2xl w-auto h-14 px-7 cursor-pointer">Oui</button>
-                <a href="../bo/promotion_vendeur.php"><button class="border-2 border-vertFonce rounded-2xl w-auto h-14 px-7 cursor-pointer">Non</button></a>
+                <a href="../bo/promotion_vendeur.php"><button class="border-2 border-vertFonce rounded-2xl w-auto h-14 px-7 cursor-pointer">Annuler</button></a>
+                <button id="suppProduit" class="border-2 border-rouge rounded-2xl w-auto h-14 px-7 cursor-pointer">Confirmer</button>
             </div>
 
             <script>
