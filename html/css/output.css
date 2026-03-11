@@ -366,6 +366,12 @@ input.quantite-prod-input {
   .z-10 {
     z-index: 10;
   }
+  .order-1 {
+    order: 1;
+  }
+  .order-2 {
+    order: 2;
+  }
   .col-span-2 {
     grid-column: span 2 / span 2;
   }
@@ -452,6 +458,9 @@ input.quantite-prod-input {
   }
   .m-10 {
     margin: calc(var(--spacing, 0.25rem) * 10);
+  }
+  .m-12 {
+    margin: calc(var(--spacing, 0.25rem) * 12);
   }
   .mx-3 {
     margin-inline: calc(var(--spacing, 0.25rem) * 3);
@@ -736,6 +745,9 @@ input.quantite-prod-input {
   .w-1\/4 {
     width: calc(1/4 * 100%);
   }
+  .w-1\/5 {
+    width: calc(1/5 * 100%);
+  }
   .w-1\/8 {
     width: calc(1/8 * 100%);
   }
@@ -1006,6 +1018,9 @@ input.quantite-prod-input {
   .items-center {
     align-items: center;
   }
+  .items-end {
+    align-items: flex-end;
+  }
   .items-start {
     align-items: flex-start;
   }
@@ -1050,6 +1065,13 @@ input.quantite-prod-input {
       --tw-space-y-reverse: 0;
       margin-block-start: calc(calc(var(--spacing, 0.25rem) * 2) * var(--tw-space-y-reverse));
       margin-block-end: calc(calc(var(--spacing, 0.25rem) * 2) * calc(1 - var(--tw-space-y-reverse)));
+    }
+  }
+  .space-y-3 {
+    :where(& > :not(:last-child)) {
+      --tw-space-y-reverse: 0;
+      margin-block-start: calc(calc(var(--spacing, 0.25rem) * 3) * var(--tw-space-y-reverse));
+      margin-block-end: calc(calc(var(--spacing, 0.25rem) * 3) * calc(1 - var(--tw-space-y-reverse)));
     }
   }
   .space-y-4 {
@@ -1273,6 +1295,9 @@ input.quantite-prod-input {
   .bg-\[url\(\/images\/logo\/bootstrap_icon\/house\.svg\)\] {
     background-image: url(/images/logo/bootstrap_icon/house.svg);
   }
+  .bg-\[url\(\/images\/logo\/bootstrap_icon\/list\.svg\)\] {
+    background-image: url(/images/logo/bootstrap_icon/list.svg);
+  }
   .bg-\[url\(\/images\/logo\/bootstrap_icon\/person\.svg\)\] {
     background-image: url(/images/logo/bootstrap_icon/person.svg);
   }
@@ -1284,6 +1309,9 @@ input.quantite-prod-input {
   }
   .bg-\[url\(\/images\/logo\/bootstrap_icon\/truck\.svg\)\] {
     background-image: url(/images/logo/bootstrap_icon/truck.svg);
+  }
+  .bg-size-\[48px\] {
+    background-size: 48px;
   }
   .bg-size-\[auto_48px\] {
     background-size: auto 48px;
@@ -1800,6 +1828,11 @@ input.quantite-prod-input {
       }
     }
   }
+  .md\:absolute {
+    @media (width >= 48rem) {
+      position: absolute;
+    }
+  }
   .md\:relative {
     @media (width >= 48rem) {
       position: relative;
@@ -1818,6 +1851,11 @@ input.quantite-prod-input {
   .md\:top-1\/3 {
     @media (width >= 48rem) {
       top: calc(1/3 * 100%);
+    }
+  }
+  .md\:top-14 {
+    @media (width >= 48rem) {
+      top: calc(var(--spacing, 0.25rem) * 14);
     }
   }
   .md\:top-20 {
@@ -2338,9 +2376,41 @@ input.quantite-prod-input {
       gap: calc(var(--spacing, 0.25rem) * 1);
     }
   }
+  .md\:space-y-2 {
+    @media (width >= 48rem) {
+      :where(& > :not(:last-child)) {
+        --tw-space-y-reverse: 0;
+        margin-block-start: calc(calc(var(--spacing, 0.25rem) * 2) * var(--tw-space-y-reverse));
+        margin-block-end: calc(calc(var(--spacing, 0.25rem) * 2) * calc(1 - var(--tw-space-y-reverse)));
+      }
+    }
+  }
+  .md\:space-y-3 {
+    @media (width >= 48rem) {
+      :where(& > :not(:last-child)) {
+        --tw-space-y-reverse: 0;
+        margin-block-start: calc(calc(var(--spacing, 0.25rem) * 3) * var(--tw-space-y-reverse));
+        margin-block-end: calc(calc(var(--spacing, 0.25rem) * 3) * calc(1 - var(--tw-space-y-reverse)));
+      }
+    }
+  }
+  .md\:space-x-4 {
+    @media (width >= 48rem) {
+      :where(& > :not(:last-child)) {
+        --tw-space-x-reverse: 0;
+        margin-inline-start: calc(calc(var(--spacing, 0.25rem) * 4) * var(--tw-space-x-reverse));
+        margin-inline-end: calc(calc(var(--spacing, 0.25rem) * 4) * calc(1 - var(--tw-space-x-reverse)));
+      }
+    }
+  }
   .md\:self-center {
     @media (width >= 48rem) {
       align-self: center;
+    }
+  }
+  .md\:self-start {
+    @media (width >= 48rem) {
+      align-self: flex-start;
     }
   }
   .md\:rounded-2xl {
@@ -2351,6 +2421,12 @@ input.quantite-prod-input {
   .md\:rounded-md {
     @media (width >= 48rem) {
       border-radius: var(--radius-md, 0.375rem);
+    }
+  }
+  .md\:rounded-t-none {
+    @media (width >= 48rem) {
+      border-top-left-radius: 0;
+      border-top-right-radius: 0;
     }
   }
   .md\:rounded-l-none {
