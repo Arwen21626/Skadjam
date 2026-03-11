@@ -1,4 +1,4 @@
-<div id="input-code" class="hidden flex-col items-center w-full">
+<div id="input-code" class="hidden flex-col items-center w-full" onclick="goLast()">
     <section class="flex flex-row  justify-between w-fit">
         <input type="text" name="nb1" id="in1" size="1" tabindex="1" maxlength="1" pattern="[1-9]" placeholder="X" class="input-code- m-1 border-4 rounded-2xl border-vertClair w-12 h-18 text-4xl text-center">
         <input type="text" name="nb2" id="in2" size="1" tabindex="2" maxlength="1" pattern="[1-9]" placeholder="X" class="input-code- m-1 border-4 rounded-2xl border-vertClair w-12 h-18 text-4xl text-center">
@@ -18,6 +18,10 @@ if (document.querySelector("body").classList.contains("show")){
     parent.style.display = "flex"
 }
 //const txt_key = document.getElementById("txt-key");
+
+const eleFirst = document.getElementById("in1")
+
+
 document.querySelectorAll(".input-code-").forEach((input, idx, inputs) => {
 
     input.value = ""
@@ -26,10 +30,9 @@ document.querySelectorAll(".input-code-").forEach((input, idx, inputs) => {
     let idPrev="in"+(index-1)
     let idNext="in"+(index+1)
     
-    const eleFirst = document.getElementById("in1")
-    const eleLast = document.getElementById("in6")
     const elePrev = document.getElementById(idPrev)
     const eleNext = document.getElementById(idNext)
+    
 
     input.addEventListener('paste', (e) =>{
         e.preventDefault()
@@ -82,6 +85,10 @@ document.querySelectorAll(".input-code-").forEach((input, idx, inputs) => {
         toggleValider()
     })
 
+    input.addEventListener('click', () => {
+        goLast()
+    })
+
 });
 
 function toggleValider(){
@@ -105,5 +112,20 @@ function recup_code(){
 function test_code(code){
     return code.length == 6
 }
+
+function goFirst(){
+    console.log("first")
+    eleFirst.focus()
+}
+
+function goLast(){
+    code = recup_code()
+    size = (code.length<6)?code.length+1:6
+    console.log(code+" "+size)
+    let eleLast = document.getElementById("in"+size)
+    eleLast.focus()
+}
+
+
 
 </script>

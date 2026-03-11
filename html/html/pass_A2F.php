@@ -70,7 +70,7 @@ if (isset($_SESSION['role']) && $_SESSION['role'] !== 'visiteur'){
         initParam(idCompte,secret)
         console.log("termine")
         let ret = saveSecret()
-        
+        history.back();
     }
 
     async function generer(idCompte){
@@ -86,6 +86,7 @@ if (isset($_SESSION['role']) && $_SESSION['role'] !== 'visiteur'){
         view.style.display = "flex"
         input.style.display = "flex"
         btn_gen.style.display = "none"
+        goFirst()
         input.scrollIntoView({
             behavior: 'smooth', // animation fluide
             block: 'center'     // centrer verticalement
@@ -103,6 +104,7 @@ if (isset($_SESSION['role']) && $_SESSION['role'] !== 'visiteur'){
             res.classList.remove("hidden")
             btnTerminer.removeAttribute("disabled")
             btnTerminer.style.display = "block"
+            input.style.display = "none"
         }else{
             res.textContent = "Code incorrect, réessayez."
             res.classList.remove("hidden")
