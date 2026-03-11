@@ -5,6 +5,7 @@ use OTPHP\TOTP;
 require_once __DIR__.'/../../../../vendor/autoload.php';
 require_once __DIR__.'/bddAuthATOR.php';
 require_once __DIR__.'/../../../01_premiere_connexion.php';
+require_once __DIR__.'/PSR20.php';
 
 class AuthATOR{
     private $conn;
@@ -75,6 +76,26 @@ class AuthATOR{
     public function verifyOtp($userCode){
         $otp = TOTP::createFromSecret($this->secret);
         return $otp->verify($userCode,leeway:2);
+    }
+
+    public function getTentative(){
+        return $this->bdd->getTentative($this->conn, $this->userId);
+    }
+
+    public function getTempsRestant(){
+        return $this->bdd->getTempsRestant($this->conn, $this->userId);
+    }
+
+    public function addTentative(){
+        $this->bdd->addTentative($this->conn, $this->userId);
+    }
+
+    public function resetTentative(){
+        $this->bdd->resetTentative($this->conn, $this->userId);
+    }
+    
+    public function addTempsRestant(){
+        $this->bdd->addTempsRestant($this->conn, $this->userId);
     }
 
 }

@@ -224,7 +224,7 @@ if (isset($_POST["nom"])){
                     <!-- Adresse -->
                     <div class="flex flex-col mt-2 mb-2 md:m-2">
                         <label for="adresse">Adresse * :</label>
-                        <input id="adresse" class="border-4 border-solid rounded-2xl border-beige md:w-90 p-1 pl-3 placeholder-gray-500 " type="text" id="adresse" name="adresse" value="<?= $adresse?>" size="60" placeholder="ex : 3 rue des camélias" required>
+                        <input id="adresse" class="border-4 border-solid rounded-2xl border-beige md:w-90 p-1 pl-3 placeholder-gray-500 " type="text" id="adresse" name="adresse" value="<?= $adresse?>" size="60" placeholder="1 rue des Fleurs" required>
                         <?php echo isset($erreurs["adresse"]) ? "<span class=\"text-rouge\">" . $erreurs["adresse"] . " </span>" : '' ?>
                     </div>
 

@@ -133,13 +133,7 @@ unset($_SESSION['erreurs'], $_SESSION['old']);
                 <!-- Adresse postal -->
                 <div class="flex flex-col m-5 basis-1/3 min-w-3xs">
                     <label for="adresse">Adresse* :</label>
-                    <input class="border-4 border-beige rounded-2xl w-1/1 p-1 pl-3"
-                        type="text"
-                        id="adresse"
-                        name="adresse"
-                        placeholder="ex : 3 rue des camélia"
-                        value="<?= $adresse_complete ?>"
-                        required/>
+                    <input class="border-4 border-beige rounded-2xl w-1/1 p-1 pl-3 placeholder-gray-500" type="text" id="adresse" name="adresse" placeholder="1 rue des Fleurs" value="<?= $adresse_complete ?>" required/>
                     <?php if (!empty($erreurs['adresse'])): ?>
                         <p class="text-rouge" style="font-size: 0.90em">
                             L'adresse ne peut contenir que des chiffres, lettres majuscules ou minuscules, 
@@ -151,12 +145,7 @@ unset($_SESSION['erreurs'], $_SESSION['old']);
                 <!-- Ville -->
                 <div class="flex flex-col m-5 basis-1/3 min-w-3xs">
                     <label for="ville">Ville* :</label>
-                    <input class="border-4 border-beige rounded-2xl w-1/1 p-1 pl-3"
-                        type="text"
-                        id="ville"
-                        name="ville"
-                        value="<?= $ville ?>"
-                        required/>
+                    <input class="border-4 border-beige rounded-2xl w-1/1 p-1 pl-3 placeholder-gray-500" placeholder="Lannion" type="text" id="ville" name="ville" value="<?= $ville ?>" required/>
                     <?php if (!empty($erreurs['ville'])): ?>
                         <p class="text-rouge" style="font-size: 0.90em">
                             La ville ne peut contenir que des majuscules, des minuscules, des tirets ou des espaces.
@@ -167,12 +156,7 @@ unset($_SESSION['erreurs'], $_SESSION['old']);
                 <!-- Code postal -->
                 <div class="flex flex-col m-5 basis-1/3 min-w-3xs">
                     <label for="codePostal">Code Postal* :</label>
-                    <input class="border-4 border-beige rounded-2xl w-1/1 p-1 pl-3"
-                        type="text"
-                        id="codePostal"
-                        name="codePostal"
-                        value="<?= $code_postal ?>"
-                        required/>
+                    <input class="border-4 border-beige rounded-2xl w-1/1 p-1 pl-3 placeholder-gray-500" placeholder="22300" type="text" id="codePostal" name="codePostal" value="<?= $code_postal ?>" required/>
                     <?php if (!empty($erreurs['codePostal'])): ?>
                         <p class="text-rouge" style="font-size: 0.90em">
                             Le code postal doit être composé de 5 chiffres.
@@ -183,11 +167,7 @@ unset($_SESSION['erreurs'], $_SESSION['old']);
                 <!-- Batiment -->
                 <div class="flex flex-col m-5 basis-1/3 min-w-3xs">
                     <label for="batiment">Bâtiment :</label>
-                    <input class="border-4 border-beige rounded-2xl w-1/1 p-1 pl-3"
-                        type="text"
-                        id="batiment"
-                        name="batiment"
-                        value="<?= $numero_bat ?>"/>
+                    <input class="border-4 border-beige rounded-2xl w-1/1 p-1 pl-3 placeholder-gray-500" placeholder="3C" type="text" id="batiment" name="batiment" value="<?= $numero_bat ?>"/>
                     <?php if (!empty($erreurs['batiment'])): ?>
                         <p class="text-rouge" style="font-size: 0.90em">Le bâtiment est invalide.</p>
                     <?php endif; ?>
@@ -196,11 +176,7 @@ unset($_SESSION['erreurs'], $_SESSION['old']);
                 <!-- Appartement -->
                 <div class="flex flex-col m-5 basis-1/3 min-w-3xs">
                     <label for="apart">Appartement :</label>
-                    <input class="border-4 border-beige rounded-2xl w-1/1 p-1 pl-3"
-                        type="text"
-                        id="apart"
-                        name="apart"
-                        value="<?= $numero_appart ?>"/>
+                    <input class="border-4 border-beige rounded-2xl w-1/1 p-1 pl-3 placeholder-gray-500" placeholder="22C" type="text" id="apart" name="apart" value="<?= $numero_appart ?>"/>
                     <?php if (!empty($erreurs['apart'])): ?>
                         <p class="text-rouge" style="font-size: 0.90em">L'appartement est invalide.</p>
                     <?php endif; ?>
@@ -209,11 +185,7 @@ unset($_SESSION['erreurs'], $_SESSION['old']);
                 <!-- Interphone -->
                 <div class="flex flex-col m-5 basis-1/3 min-w-3xs">
                     <label for="interphone">Interphone :</label>
-                    <input class="border-4 border-beige rounded-2xl w-1/1 p-1 pl-3"
-                        type="text"
-                        id="interphone"
-                        name="interphone"
-                        value="<?= $code_interphone ?>"/>
+                    <input class="border-4 border-beige rounded-2xl w-1/1 p-1 pl-3 placeholder-gray-500" placeholder="1234" type="text" id="interphone" name="interphone" value="<?= $code_interphone ?>"/>
                     <?php if (!empty($erreurs['interphone'])): ?>
                         <p class="text-rouge" style="font-size: 0.90em">L'interphone est invalide.</p>
                     <?php endif; ?>
