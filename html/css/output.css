@@ -327,8 +327,23 @@ input.quantite-prod-input {
   .top-21 {
     top: calc(var(--spacing, 0.25rem) * 21);
   }
+  .top-22 {
+    top: calc(var(--spacing, 0.25rem) * 22);
+  }
+  .top-24 {
+    top: calc(var(--spacing, 0.25rem) * 24);
+  }
+  .top-25 {
+    top: calc(var(--spacing, 0.25rem) * 25);
+  }
+  .top-26 {
+    top: calc(var(--spacing, 0.25rem) * 26);
+  }
   .top-48 {
     top: calc(var(--spacing, 0.25rem) * 48);
+  }
+  .top-250 {
+    top: calc(var(--spacing, 0.25rem) * 250);
   }
   .right-0 {
     right: calc(var(--spacing, 0.25rem) * 0);
@@ -671,6 +686,18 @@ input.quantite-prod-input {
     width: calc(1/2 * 100%);
     height: calc(1/2 * 100%);
   }
+  .size-4 {
+    width: calc(var(--spacing, 0.25rem) * 4);
+    height: calc(var(--spacing, 0.25rem) * 4);
+  }
+  .size-8 {
+    width: calc(var(--spacing, 0.25rem) * 8);
+    height: calc(var(--spacing, 0.25rem) * 8);
+  }
+  .size-9 {
+    width: calc(var(--spacing, 0.25rem) * 9);
+    height: calc(var(--spacing, 0.25rem) * 9);
+  }
   .size-10 {
     width: calc(var(--spacing, 0.25rem) * 10);
     height: calc(var(--spacing, 0.25rem) * 10);
@@ -701,6 +728,12 @@ input.quantite-prod-input {
   }
   .h-6\! {
     height: calc(var(--spacing, 0.25rem) * 6) !important;
+  }
+  .h-7 {
+    height: calc(var(--spacing, 0.25rem) * 7);
+  }
+  .h-9 {
+    height: calc(var(--spacing, 0.25rem) * 9);
   }
   .h-10 {
     height: calc(var(--spacing, 0.25rem) * 10);
@@ -1092,6 +1125,9 @@ input.quantite-prod-input {
   .items-start {
     align-items: flex-start;
   }
+  .items-stretch {
+    align-items: stretch;
+  }
   .justify-around {
     justify-content: space-around;
   }
@@ -1310,6 +1346,10 @@ input.quantite-prod-input {
     border-bottom-style: var(--tw-border-style);
     border-bottom-width: 0px;
   }
+  .border-b-1 {
+    border-bottom-style: var(--tw-border-style);
+    border-bottom-width: 1px;
+  }
   .border-b-2 {
     border-bottom-style: var(--tw-border-style);
     border-bottom-width: 2px;
@@ -1391,6 +1431,12 @@ input.quantite-prod-input {
   .bg-white {
     background-color: var(--color-white, #fff);
   }
+  .bg-\[url\(\/images\/logo\/bootstrap_icon\/bookmark-fa-plus\.svg\)\] {
+    background-image: url(/images/logo/bootstrap_icon/bookmark-fa-plus.svg);
+  }
+  .bg-\[url\(\/images\/logo\/bootstrap_icon\/cart-vert-fonce\.svg\)\] {
+    background-image: url(/images/logo/bootstrap_icon/cart-vert-fonce.svg);
+  }
   .bg-\[url\(\/images\/logo\/bootstrap_icon\/cart\.svg\)\] {
     background-image: url(/images/logo/bootstrap_icon/cart.svg);
   }
@@ -1415,6 +1461,12 @@ input.quantite-prod-input {
   .bg-size-\[48px\] {
     background-size: 48px;
   }
+  .bg-size-\[auto_36px\] {
+    background-size: auto 36px;
+  }
+  .bg-size-\[auto_40px\] {
+    background-size: auto 40px;
+  }
   .bg-size-\[auto_48px\] {
     background-size: auto 48px;
   }
@@ -1435,6 +1487,9 @@ input.quantite-prod-input {
   }
   .p-2 {
     padding: calc(var(--spacing, 0.25rem) * 2);
+  }
+  .p-3 {
+    padding: calc(var(--spacing, 0.25rem) * 3);
   }
   .p-4 {
     padding: calc(var(--spacing, 0.25rem) * 4);
@@ -1563,6 +1618,10 @@ input.quantite-prod-input {
   .font-bold {
     --tw-font-weight: var(--font-weight-bold, 700);
     font-weight: var(--font-weight-bold, 700);
+  }
+  .font-extrabold {
+    --tw-font-weight: var(--font-weight-extrabold, 800);
+    font-weight: var(--font-weight-extrabold, 800);
   }
   .font-medium {
     --tw-font-weight: var(--font-weight-medium, 500);
@@ -1874,6 +1933,20 @@ input.quantite-prod-input {
       background-color: var(--color-beige);
     }
   }
+  .hover\:bg-\[url\(\/images\/logo\/bootstrap_icon\/bookmark-fa-plus-fill\.svg\)\] {
+    &:hover {
+      @media (hover: hover) {
+        background-image: url(/images/logo/bootstrap_icon/bookmark-fa-plus-fill.svg);
+      }
+    }
+  }
+  .hover\:bg-\[url\(\/images\/logo\/bootstrap_icon\/cart-fill-vert-fonce\.svg\)\] {
+    &:hover {
+      @media (hover: hover) {
+        background-image: url(/images/logo/bootstrap_icon/cart-fill-vert-fonce.svg);
+      }
+    }
+  }
   .hover\:bg-\[url\(\/images\/logo\/bootstrap_icon\/cart-fill\.svg\)\] {
     &:hover {
       @media (hover: hover) {
@@ -1965,6 +2038,16 @@ input.quantite-prod-input {
   .md\:top-14 {
     @media (width >= 48rem) {
       top: calc(var(--spacing, 0.25rem) * 14);
+    }
+  }
+  .md\:top-20 {
+    @media (width >= 48rem) {
+      top: calc(var(--spacing, 0.25rem) * 20);
+    }
+  }
+  .md\:top-21 {
+    @media (width >= 48rem) {
+      top: calc(var(--spacing, 0.25rem) * 21);
     }
   }
   .md\:top-48 {
@@ -2565,6 +2648,18 @@ input.quantite-prod-input {
       border-width: 0px;
     }
   }
+  .md\:border-2 {
+    @media (width >= 48rem) {
+      border-style: var(--tw-border-style);
+      border-width: 2px;
+    }
+  }
+  .md\:border-t {
+    @media (width >= 48rem) {
+      border-top-style: var(--tw-border-style);
+      border-top-width: 1px;
+    }
+  }
   .md\:border-t-0 {
     @media (width >= 48rem) {
       border-top-style: var(--tw-border-style);
@@ -2581,6 +2676,11 @@ input.quantite-prod-input {
     @media (width >= 48rem) {
       --tw-border-style: none;
       border-style: none;
+    }
+  }
+  .md\:border-black {
+    @media (width >= 48rem) {
+      border-color: var(--color-black, #000);
     }
   }
   .md\:bg-beige {
