@@ -196,7 +196,9 @@
                 <img class="w-7" src="images/logo/bootstrap_icon/chevron-left.svg" alt="page précédente">
             </a>
             <?php }?>
+
             <p>page <?php echo $pageNumber;?></p>
+            
             <?php if($pageNumber<$maxPage){?>
             <a class= "lienPage hover:text-rouge" href="<?= "./index.php?page=". $pageNumber+1 ."#nosProduits";?>">
                 <img class="w-7" src="images/logo/bootstrap_icon/chevron-right.svg" alt="page suivante">
