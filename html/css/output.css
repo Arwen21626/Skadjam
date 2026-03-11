@@ -1128,6 +1128,9 @@ input.quantite-prod-input {
   .gap-1 {
     gap: calc(var(--spacing, 0.25rem) * 1);
   }
+  .gap-2 {
+    gap: calc(var(--spacing, 0.25rem) * 2);
+  }
   .gap-3 {
     gap: calc(var(--spacing, 0.25rem) * 3);
   }
@@ -1568,6 +1571,10 @@ input.quantite-prod-input {
   .font-bold {
     --tw-font-weight: var(--font-weight-bold, 700);
     font-weight: var(--font-weight-bold, 700);
+  }
+  .font-extrabold {
+    --tw-font-weight: var(--font-weight-extrabold, 800);
+    font-weight: var(--font-weight-extrabold, 800);
   }
   .font-medium {
     --tw-font-weight: var(--font-weight-medium, 500);
@@ -2045,6 +2052,11 @@ input.quantite-prod-input {
   .md\:col-span-3 {
     @media (width >= 48rem) {
       grid-column: span 3 / span 3;
+    }
+  }
+  .md\:col-start-2 {
+    @media (width >= 48rem) {
+      grid-column-start: 2;
     }
   }
   .md\:float-left {

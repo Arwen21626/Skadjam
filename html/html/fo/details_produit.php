@@ -163,9 +163,9 @@
                     <div class="flex md:flex-col md:mb-4">
                         <h3 class="text-center pr-2 self-center <?php echo ($pourcentage !== NULL)?'line-through':'';?>"> <?php echo $prixTTC ?>€</h3>
                         <h3 class="text-center pr-2 self-center <?php echo ($pourcentage !== NULL)?'':'hidden';?>"> <?php echo $prixRemise ?>€</h3>
-                
-                        <p class="text-center pl-2 mt-1 self-center">
-                            <?php 
+
+                        <p class="text-center pl-2 mt-1 self-center<?php echo ($produitStock > 0) ? '' : ' text-rouge font-bold'; ?>">
+                            <?php
                                 if ($produitStock > 0) { // Le stock est supérieur à 0, le produit est disponible
                                     echo "Disponible"; 
                                 }
