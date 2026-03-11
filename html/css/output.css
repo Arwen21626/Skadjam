@@ -1433,12 +1433,6 @@ input.quantite-prod-input {
   .bg-size-\[48px\] {
     background-size: 48px;
   }
-  .bg-size-\[auto_36px\] {
-    background-size: auto 36px;
-  }
-  .bg-size-\[auto_40px\] {
-    background-size: auto 40px;
-  }
   .bg-size-\[auto_48px\] {
     background-size: auto 48px;
   }
@@ -1996,6 +1990,11 @@ input.quantite-prod-input {
   .md\:top-14 {
     @media (width >= 48rem) {
       top: calc(var(--spacing, 0.25rem) * 14);
+    }
+  }
+  .md\:top-15 {
+    @media (width >= 48rem) {
+      top: calc(var(--spacing, 0.25rem) * 15);
     }
   }
   .md\:top-20 {
@@ -2612,12 +2611,6 @@ input.quantite-prod-input {
       border-width: 2px;
     }
   }
-  .md\:border-t {
-    @media (width >= 48rem) {
-      border-top-style: var(--tw-border-style);
-      border-top-width: 1px;
-    }
-  }
   .md\:border-t-0 {
     @media (width >= 48rem) {
       border-top-style: var(--tw-border-style);
@@ -2752,6 +2745,11 @@ input.quantite-prod-input {
   .md\:text-left {
     @media (width >= 48rem) {
       text-align: left;
+    }
+  }
+  .md\:text-rouge {
+    @media (width >= 48rem) {
+      color: var(--color-rouge);
     }
   }
   .lg\:grid-cols-3 {
