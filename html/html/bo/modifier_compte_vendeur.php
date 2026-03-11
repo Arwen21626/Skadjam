@@ -314,27 +314,27 @@ if(!$isset || $erreur){
                     <!-- Vendeur -->
                     <div class="flex flex-col flex-wrap">
                         <h3>Informations vendeur :</h3>
-                        <div class="flex flex-row space-x-40 space-y-6">
+                        <div class="flex flex-row space-x-25 space-y-6">
                             <div class="flex flex-col space-y-2">
                                 <label for="nom">Nom * :</label>
-                                <input class="ml-5 border-4 border-solid rounded-2xl border-beige p-1 pl-3" type="text" id="nom" name="nom" value="<?= $nom; ?>" size="30" required >
+                                <input class="ml-5 border-4 border-solid rounded-2xl border-beige p-1 pl-3 placeholder-gray-500" placeholder="Dupond" type="text" id="nom" name="nom" value="<?= $nom; ?>" size="30" required >
                                 <?= $erreurNom ? "<p style=\"font-size: 0.90em\" class=\"text-rouge\">Le nom ne peut contenir que des majuscules, des minuscules, des tirets, des espaces ou les accents : é, ç, è, ë, ê, à, ï, î, ä, â, ù, ü, û, ö, ô.</p>" : ""; ?>
                             </div>
                             <div class="flex flex-col space-y-2">
                                 <label for="mail">Mail * :</label>
-                                <input class="ml-5 border-4 border-solid rounded-2xl border-beige p-1 pl-3" type="email" id="mail" name="mail" value="<?= $mail; ?>" size="30" required>
+                                <input class="ml-5 border-4 border-solid rounded-2xl border-beige p-1 pl-3 placeholder-gray-500" placeholder="jean.dupond@mail.com" type="email" id="mail" name="mail" value="<?= $mail; ?>" size="30" required>
                                 <?= $erreurMail ? "<p style=\"font-size: 0.90em\" class=\"text-rouge\">L'adresse email doit être au format : adresse@e.mail</p>" : ""; ?>
                             </div>
                         </div>
-                        <div class="flex flex-row space-x-40 space-y-6">
+                        <div class="flex flex-row space-x-25 space-y-6">
                             <div class="flex flex-col space-y-2">
                                 <label for="prenom">Prénom * :</label>
-                                <input class="ml-5 border-4 border-solid rounded-2xl border-beige p-1 pl-3" type="text" id="prenom" name="prenom" value="<?= $prenom; ?>" size="30" required>
+                                <input class="ml-5 border-4 border-solid rounded-2xl border-beige p-1 pl-3 placeholder-gray-500" placeholder="Jean" type="text" id="prenom" name="prenom" value="<?= $prenom; ?>" size="30" required>
                                 <?= $erreurPrenom ? "<p style=\"font-size: 0.90em\" class=\"text-rouge\">Le nom ne peut contenir que des majuscules, des minuscules, des tirets, des espaces ou les accents : é, ç, è, ë, ê, à, ï, î, ä, â, ù, ü, û, ö, ô.</p>" : ""; ?>
                             </div>
                             <div class="flex flex-col space-y-2">
                                 <label for="tel">Numéro de téléphone * :</label>
-                                <input class="ml-5 border-4 border-solid rounded-2xl border-beige p-1 pl-3" type="tel" id="tel" name="tel" value="<?= $tel; ?>" size="10" required>
+                                <input class="ml-5 border-4 border-solid rounded-2xl border-beige p-1 pl-3 placeholder-gray-500" placeholder="06 12 34 56 78" type="tel" id="tel" name="tel" value="<?= $tel; ?>" size="10" required>
                                 <?= $erreurTel ? "<p style=\"font-size: 0.90em\" class=\"text-rouge\">Le numéro de téléphone doit commencer par 0 suivi de 9 chiffres.</p>" : ""; ?>
                             </div>
                         </div>
@@ -346,24 +346,24 @@ if(!$isset || $erreur){
                     <div class="flex flex-row space-x-40 space-y-6">
                         <div class="flex flex-col space-y-2">
                             <label for="raisonSociale">Raison sociale de l'entreprise * :</label>
-                            <input class="ml-5 border-4 border-solid rounded-2xl border-beige p-1 pl-3" type="text" id="raisonSociale" name="raisonSociale" value="<?= $raisonSociale; ?>" size="30" required>
+                            <input class="ml-5 border-4 border-solid rounded-2xl border-beige p-1 pl-3 placeholder-gray-500" placeholder="Nom de l'entreprise" type="text" id="raisonSociale" name="raisonSociale" value="<?= $raisonSociale; ?>" size="30" required>
                             <?= $erreurRaisonSociale ? "<p style=\"font-size: 0.90em\" class=\"text-rouge\">La raison sociale ne peut contenir que des majuscules, des minuscules, des chiffres, des tirets, des espaces ou les accents : é, ç, è, ë, ê, à, ï, î, ä, â, ù, ü, û, ö, ô.</p>" : ""; ?>
                         </div>
                         <div class="flex flex-col space-y-2">
                             <label for="denomination">Nom de l'entreprise * :</label>
-                            <input class="ml-5 border-4 border-solid rounded-2xl border-beige p-1 pl-3" type="text" id="denomination" name="denomination" value="<?= $denomination; ?>" size="30" required>
+                            <input class="ml-5 border-4 border-solid rounded-2xl border-beige p-1 pl-3 placeholder-gray-500" placeholder="Nom de l'entreprise" type="text" id="denomination" name="denomination" value="<?= $denomination; ?>" size="30" required>
                             <?= $erreurDenomination ? "<p style=\"font-size: 0.90em\" class=\"text-rouge\">La dénomination ne peut contenir que des majuscules, des minuscules, des chiffres, des tirets, des espaces ou les accents : é, ç, è, ë, ê, à, ï, î, ä, â, ù, ü, û, ö, ô.</p>" : ""; ?>
                         </div>
                     </div>
                     <div class="flex flex-row space-x-40 space-y-6">
                         <div class="flex flex-col space-y-2">
                             <label for="iban">Numéro de IBAN * :</label>
-                            <input class="ml-5 border-4 border-solid rounded-2xl border-beige p-1 pl-3" type="text" id="iban" name="iban" value="<?= $iban; ?>" placeholder="FR" size="30" required>
+                            <input class="ml-5 border-4 border-solid rounded-2xl border-beige p-1 pl-3 placeholder-gray-500" type="text" id="iban" name="iban" value="<?= $iban; ?>" placeholder="FR 76 12345 67890 12345678901 45" size="30" required>
                             <?= $erreurIban ? "<p style=\"font-size: 0.90em\" class=\"text-rouge\">Le numéro de IBAN doit commencer par FR suivi de 25 chiffres.</p>" : ""; ?>
                         </div>
                         <div class="flex flex-col space-y-2">
                             <label for="siren">Numéro de SIREN * :</label>
-                            <input class="ml-5 border-4 border-solid rounded-2xl border-beige p-1 pl-3" type="text" id="siren" name="siren" value="<?= $siren; ?>" size="10" required>
+                            <input class="ml-5 border-4 border-solid rounded-2xl border-beige p-1 pl-3 placeholder-gray-500" placeholder="123 456 789" type="text" id="siren" name="siren" value="<?= $siren; ?>" size="10" required>
                             <?= $erreurSiren ? "<p style=\"font-size: 0.90em\" class=\"text-rouge\">Le numéro de SIREN doit contenir exactement 9 chiffres.</p>" : ""; ?>
                         </div>
                     </div>                    
@@ -377,21 +377,21 @@ if(!$isset || $erreur){
                         <!-- Adresse postale -->
                         <div class="flex flex-col space-y-2 ">
                             <label for="adresse">Adresse * :</label>
-                            <input class="ml-5 border-4 border-solid rounded-2xl border-beige p-1 pl-3 w-90" type="text" id="adresse" name="adresse" value="<?= $num . (!empty($numBis) ? " $numBis" : " ") . $adresse; ?>" size="50" placeholder="ex : 3 rue des camélias" required>
+                            <input class="ml-5 border-4 border-solid rounded-2xl border-beige p-1 pl-3 w-90 placeholder-gray-500" type="text" id="adresse" name="adresse" value="<?= $num . (!empty($numBis) ? " $numBis" : " ") . $adresse; ?>" size="50" placeholder="1 rue des Fleurs" required>
                             <?= $erreurAdresse ? "<p style=\"font-size: 0.90em\" class=\"text-rouge\">L'adresse postal doit être du même format que : 1 rue des fleurs</p>" : ""; ?>
                         </div>
 
                         <!-- Ville -->
                         <div class="flex flex-col space-y-2">
                             <label for="ville">Ville * :</label>
-                            <input class="ml-5 border-4 border-solid rounded-2xl border-beige p-1 pl-3 w-60" type="text" id="ville" name="ville" value="<?= $ville; ?>" size="50" required>
+                            <input class="ml-5 border-4 border-solid rounded-2xl border-beige p-1 pl-3 w-60 placeholder-gray-500" placeholder="Lannion" type="text" id="ville" name="ville" value="<?= $ville; ?>" size="50" required>
                             <?= $erreurVille ? "<p style=\"font-size: 0.90em\" class=\"text-rouge\">La ville ne peut contenir que des majuscules, des minuscules, des tirets, des espaces ou les accents : é, ç, è, ë, ê, à, ï, î, ä, â, ù, ü, û, ö, ô.</p>" : ""; ?>
                         </div>
 
                         <!-- Code postal -->
                         <div class="flex flex-col space-y-2">
                             <label for="cp">Code Postal * :</label>
-                            <input class="ml-5 border-4 border-solid rounded-2xl border-beige p-1 pl-3 w-40" type="text" id="cP" name="cp" value="<?= $cp; ?>" size="10" required>
+                            <input class="ml-5 border-4 border-solid rounded-2xl border-beige p-1 pl-3 w-40 placeholder-gray-500" placeholder="22300" type="text" id="cP" name="cp" value="<?= $cp; ?>" size="10" required>
                             <?= $erreurCp ? "<p style=\"font-size: 0.90em\" class=\"text-rouge\">Le code postal doit être composé de 5 chiffres.</p>" : ""; ?>
                         </div>
                     </div>
@@ -402,11 +402,11 @@ if(!$isset || $erreur){
                         <div class="h-20 flex flex-row m-2">
                             <div class="m-2">
                                 <label for="latitude">Latitude : </label>
-                                <input required type="text" name="latitude" id="latitude" class="border-2 border-solid rounded-2xl border-beige p-1 pl-3 w-60" value="<?= $latitude; ?>">
+                                <input required type="text" name="latitude" id="latitude" class="border-2 border-solid rounded-2xl border-beige p-1 pl-3 w-60 placeholder-gray-500" placeholder="49.12" value="<?= $latitude; ?>">
                             </div>
                             <div class="m-2">
                                 <label for="longitude">Longitude : </label>
-                                <input required type="text" name="longitude" id="longitude" class="border-2 border-solid rounded-2xl border-beige p-1 pl-3 w-60" value="<?= $longitude; ?>">
+                                <input required type="text" name="longitude" id="longitude" class="border-2 border-solid rounded-2xl border-beige p-1 pl-3 w-60 placeholder-gray-500" placeholder="-0.12" value="<?= $longitude; ?>">
                             </div>
                         </div>
                         <p id="errorMap" class="text-rouge"></p>

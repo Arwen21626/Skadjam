@@ -8,7 +8,7 @@
         <input type="text" name="nb5" id="in5" size="1" tabindex="5" maxlength="1" pattern="[1-9]" placeholder="X" class="input-code- m-1 border-4 rounded-2xl border-vertClair w-12 h-18 text-4xl text-center">
         <input type="text" name="nb6" id="in6" size="1" tabindex="6" maxlength="1" pattern="[1-9]" placeholder="X" class="input-code- m-1 border-4 rounded-2xl border-vertClair w-12 h-18 text-4xl text-center">
     </section>
-    <button id="valider" onclick="submit(<?= $idClient ?>)" class="border-vertClair border-2 rounded-xl w-40 h-14 cursor-pointer m-5" disabled>Vérifier</button>
+    <button id="valider" onclick="validation()" class="border-vertClair border-2 rounded-xl w-40 h-14 cursor-pointer m-5" disabled>Vérifier</button>
 </div>
 
 <script>
@@ -18,7 +18,7 @@ if (document.querySelector("body").classList.contains("show")){
     parent.style.display = "flex"
 }
 //const txt_key = document.getElementById("txt-key");
-
+let nbValidRest = 3
 const eleFirst = document.getElementById("in1")
 
 
@@ -91,10 +91,37 @@ document.querySelectorAll(".input-code-").forEach((input, idx, inputs) => {
 
 });
 
+
+function sleep(ms) {
+    return new Promise(resolve => setTimeout(resolve, ms));
+}
+
+async function validation(){
+    for (i=0;i<4;i++){
+        valider.textContent = "Vérification"
+        await sleep(200);
+        valider.textContent = "Vérification."
+        await sleep(200);
+        valider.textContent = "Vérification.."
+        await sleep(200);
+        valider.textContent = "Vérification..."
+        await sleep(200);
+    }
+    valide = await submit(<?= $idClient ?>)
+    if (!valide){
+        console.log("valide "+valide)
+        valider.textContent = "Vérifier"
+        nbValidRest--
+    }
+
+}
+
 function toggleValider(){
     console.log(recup_code())
     if (test_code(recup_code()) == true){
         valider.removeAttribute("disabled")
+        
+
     }else{
         valider.setAttribute("disabled", "true")
     }

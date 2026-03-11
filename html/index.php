@@ -152,9 +152,10 @@
                                         affichageNote($note); ?>
                                 </div>
                             </a>
+                            <!-- boutons futurs achats & panier -->
                             <div class="flex justify-end">
-                                <a id="btnFA" href="./php/ajoutFAPanier.php?idProduit=<?php echo $idProduit;?>&ajout=<?php echo $fa;?>"><button class="cursor-pointer size-10 bg-no-repeat bg-size-[auto_40px] bg-[url(/images/logo/bootstrap_icon/bookmark-fa-plus.svg)] hover:bg-[url(/images/logo/bootstrap_icon/bookmark-fa-plus-fill.svg)]"></button></a>
-                                <a id="btnPanier" href=""><button class="cursor-pointer size-10 bg-no-repeat bg-size-[auto_40px] bg-[url(/images/logo/bootstrap_icon/cart-vert-fonce.svg)] hover:bg-[url(/images/logo/bootstrap_icon/cart-fill-vert-fonce.svg)]"></button></a>
+                                <a id="btnFA" href="./php/ajoutFAPanier.php?idProduit=<?php echo $idProduit;?>&ajout=<?php echo $fa;?>"><button class="cursor-pointer size-10 bg-no-repeat bg-size-[auto_40px] bg-[url(/images/logo/bootstrap_icon/bookmark-fa-plus.svg)] hover:bg-[url(/images/logo/bootstrap_icon/bookmark-fa-plus-fill.svg)]" alt="Ajouter aux futurs achats" title="Ajouter aux futurs achats"></button></a>
+                                <a id="btnPanier" href=""><button class="cursor-pointer size-10 bg-no-repeat bg-size-[auto_40px] bg-[url(/images/logo/bootstrap_icon/cart-vert-fonce.svg)] hover:bg-[url(/images/logo/bootstrap_icon/cart-fill-vert-fonce.svg)]" alt="Ajouter au panier" title="Ajouter au panier"></button></a>
                             </div>  
                             <!--affichage de la promotion-->
                                 <?php if($estPromu){ 
@@ -191,11 +192,17 @@
         <!--fin du catalogue-->
         <div class="flex flex-row space-x-4 justify-center py-3">
             <?php if($pageNumber>1){?>
-            <a class= "lienPage hover:text-rouge" href="<?= "./index.php?page=". $pageNumber-1 ."#nosProduits";?>">Page précédente</a>
+            <a class= "lienPage hover:text-rouge" href="<?= "./index.php?page=". $pageNumber-1 ."#nosProduits";?>">
+                <img class="w-7" src="images/logo/bootstrap_icon/chevron-left.svg" alt="page précédente">
+            </a>
             <?php }?>
-        
+
+            <p>page <?php echo $pageNumber;?></p>
+            
             <?php if($pageNumber<$maxPage){?>
-            <a class= "lienPage hover:text-rouge" href="<?= "./index.php?page=". $pageNumber+1 ."#nosProduits";?>">Page suivante</a>
+            <a class= "lienPage hover:text-rouge" href="<?= "./index.php?page=". $pageNumber+1 ."#nosProduits";?>">
+                <img class="w-7" src="images/logo/bootstrap_icon/chevron-right.svg" alt="page suivante">
+            </a>
             <?php }?>
         </div>
     </main>

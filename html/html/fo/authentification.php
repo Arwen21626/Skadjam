@@ -1,9 +1,12 @@
 <?php
 ob_start(); // Démarre le tampon de sortie pour pouvoir utiliser ob_clean() plus tard
 include __DIR__ . '/../../01_premiere_connexion.php'; // Connexion à la base de données
+include __DIR__.'/../../php/structure/authentikATOR/AuthATOR.php';
+include __DIR__.'/../../01_premiere_connexion.php';
 session_start(); // Démarrage de la session
 
 $role = null;
+$clock = time();
 
 // Vérifie que les données de connexion sont bien présentes en session
 if (!isset($_SESSION['dataConnexion'])){
@@ -31,8 +34,14 @@ if (isset($_SESSION['connecte']) && $_SESSION['connecte']){
 $idClient = $dataConnexion['idCompte'];
 $idCompte = $dataConnexion['idCompte'];
 
+$auth = new AuthATOR($dbh, "Alizon", $idCompte, "");
+$restant = $auth->getTempsRestant();
+
+
 // Traitement si le formulaire A2F est validé ou si le compte est déjà connecté (pas de code secret)
 if (($_SERVER['REQUEST_METHOD'] == 'POST' && $_POST['auth'] === 'valide') || $connecte){
+
+    $auth->resetTentative();
 
     // Détecte si la requête vient d'un appel AJAX (fetch) pour adapter la réponse
     if ($_SERVER['REQUEST_METHOD'] == 'POST' && $_POST['auth'] === 'valide'){
@@ -58,7 +67,7 @@ if (($_SERVER['REQUEST_METHOD'] == 'POST' && $_POST['auth'] === 'valide') || $co
                 // Met à jour le nb de produit total contenu dans le panier
                 $stmt = $dbh->prepare("UPDATE sae3_skadjam._panier SET nb_produit_total = nb_produit_total + ? WHERE id_panier = ?");
                 $stmt->execute([$_SESSION['panier']['nb_produit_total'], $idPanier]);
-    
+
                 // Met à jour le montant total TTC du panier
                 $stmt = $dbh->prepare("UPDATE sae3_skadjam._panier SET montant_total_ttc = montant_total_ttc + ? WHERE id_panier = ?");
                 $stmt->execute([$_SESSION['panier']['montant_total_ttc'], $idPanier]);
@@ -170,6 +179,13 @@ if (($_SERVER['REQUEST_METHOD'] == 'POST' && $_POST['auth'] === 'valide') || $co
     <main class="flex flex-col">
         
         <h2>Authentification à deux facteurs</h2>
+        <?php
+        if ($restant>$clock){ 
+            ?>
+        
+        <p>Compte bloqué, réessayez dans <?= $restant ?>.</p>
+        <?php } ?>
+
         <?php include __DIR__.'/../../php/structure/authentikATOR/input_code.php' ?>
         <p id="result" class="hidden"></p>
     </main>
@@ -177,6 +193,7 @@ if (($_SERVER['REQUEST_METHOD'] == 'POST' && $_POST['auth'] === 'valide') || $co
 </body>
 <script src="./../../php/structure/authentikATOR/appelAJAX.js"></script>
 <script>
+    nbTentative = 0
     const res = document.getElementById("result");
     let ret 
     let reponse
@@ -194,7 +211,7 @@ if (($_SERVER['REQUEST_METHOD'] == 'POST' && $_POST['auth'] === 'valide') || $co
             res.classList.remove("hidden")
 
             // Envoi de la confirmation au PHP via AJAX pour finaliser la connexion
-            let data = new FormData()
+            data = new FormData()
             data.append('auth', 'valide')
 
             await fetch('authentification.php', {method: 'post', body: data})
@@ -207,6 +224,11 @@ if (($_SERVER['REQUEST_METHOD'] == 'POST' && $_POST['auth'] === 'valide') || $co
         } else { // Code incorrect
             res.textContent = "Code incorrect, réessayez."
             res.classList.remove("hidden")
+            nbTentative++
+            if (nbTentative==3){
+                ret = await addTempsRestant()
+                window.location.href = "./authentification"
+            }
         }
     }
 </script>

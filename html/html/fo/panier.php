@@ -330,7 +330,7 @@
                                     <p class="ml-2"><?php echo number_format($_SESSION['panier']['montant_total_ttc'], 2, ',', '') . "€";?></p>
                                 </div>
 
-                                <form class="flex justify-center" method="get" action="/php/vider_panier.php">
+                                <form class="flex justify-center" method="get" action="./validation_suppression_panier.php">
                                     <input type="hidden" name="typeVider" value="normal">
                                     <button class="bg-beige rounded-2xl w-32 h-10 mt-2 md:w-40 md:h-14 md:mt-4 cursor-pointer border-black border shadow" type="submit">
                                         Vider le panier

@@ -13,8 +13,9 @@ CREATE TABLE sae3_skadjam._compte (
     mot_de_passe CHARACTER VARYING(100) NOT NULL,
     numero_telephone CHARACTER(12) NOT NULL,
     bloque BOOLEAN NOT NULL,
-    code_secret VARCHAR(255)
-    
+    code_secret VARCHAR(255),
+    tentative INT DEFAULT 0,
+    restant TIMESTAMP DEFAULT NULL
 );
 
 ALTER TABLE sae3_skadjam._compte
@@ -1011,3 +1012,27 @@ CREATE TRIGGER tg_calculer_prix_remiser_update_produit
 BEFORE UPDATE OF prix_ht ON sae3_skadjam._produit
 FOR EACH ROW
 EXECUTE FUNCTION calculer_prix_remiser_update_produit();
+
+
+-- supprime la prommotion des produit supprimer
+CREATE OR REPLACE FUNCTION supprimer_promo_a_la_suppression_de_produit()
+RETURNS TRIGGER AS $$
+DECLARE
+  id_produit_supprimer INTEGER;
+BEGIN
+  PERFORM * FROM sae3_skadjam._promu WHERE id_produit = new.id_produit;
+  
+  IF FOUND AND new.est_supprime != old.est_supprime THEN
+    SELECT id_promotion INTO id_produit_supprimer FROM sae3_skadjam._promu WHERE id_produit = new.id_produit;
+    DELETE FROM sae3_skadjam._promu WHERE id_produit = new.id_produit;
+    DELETE FROM sae3_skadjam._promotion WHERE id_promotion = id_produit_supprimer;
+    
+  END IF;
+  RETURN new;
+END;
+$$ language plpgsql;
+
+CREATE TRIGGER trig_supprimer_promo_a_la_suppression_de_produit
+  AFTER UPDATE ON sae3_skadjam._produit
+  FOR EACH ROW
+  EXECUTE FUNCTION supprimer_promo_a_la_suppression_de_produit();

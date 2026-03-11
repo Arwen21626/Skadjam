@@ -25,7 +25,7 @@
         <!-- Accueil et petit message -->
         <div class="flex flex-row justify-around md:justify-start md:items-center md:space-x-4 w-1/5">
             <!-- Accueil -->
-            <a href="/" class="md:flex md:self-start">
+            <a href="/" class="md:flex md:self-start" alt="Accueil" title="Accueil">
                 <button class="size-12 bg-no-repeat bg-size-[48px] bg-[url(/images/logo/bootstrap_icon/house.svg)]"></button>
             </a>
             <?php if ($_SESSION["role"] === "client"){?>
@@ -36,12 +36,12 @@
         <!-- Le reste des boutons -->
         <div class="flex flex-row justify-around md:justify-end md:space-x-6 w-4/5">
             <!-- Recherche -->
-            <a href="/html/fo/recherche.php">
+            <a href="/html/fo/recherche.php" alt="Recherche" title="Recherche">
                 <button class="size-12 bg-no-repeat bg-size-[auto_48px] bg-[url(/images/logo/bootstrap_icon/search.svg)]"></button>
             </a>
 
             <!-- Panier -->
-            <a href="/html/fo/panier.php">
+            <a href="/html/fo/panier.php" alt="Panier" title="Panier">
                 <button class="size-12 bg-no-repeat bg-size-[auto_48px] bg-[url(/images/logo/bootstrap_icon/cart.svg)]"></button>
             </a>
 

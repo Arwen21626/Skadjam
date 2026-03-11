@@ -189,12 +189,17 @@
         <!--fin du catalogue-->
         <div class="flex flex-row space-x-4 justify-center m-4">
             <?php if ($pageNumber>1){?>
-            <a class= "lienPage underline" href="<?php echo "./index_vendeur.php?page=".($pageNumber-1)."#vosProduits";?>">Page précédente</a>
-            
+            <a class= "lienPage underline" href="<?php echo "./index_vendeur.php?page=".($pageNumber-1)."#vosProduits";?>">
+                <img class="w-7" src="images/logo/bootstrap_icon/chevron-right.svg" alt="page précédente">
+            </a>           
             <?php }?>
-        
+
+            <p>page <?php echo $pageNumber;?></p>
+            
             <?php if ($pageNumber<$maxPage){?>
-            <a class= "lienPage underline" href="<?php echo "./index_vendeur.php?page=".($pageNumber+1)."#vosProduits";?>">Page suivante</a>
+            <a class= "lienPage underline" href="<?php echo "./index_vendeur.php?page=".($pageNumber+1)."#vosProduits";?>">
+                <img class="w-7" src="images/logo/bootstrap_icon/chevron-right.svg" alt="page suivante">
+            </a>
             <?php }?>
         </div>
     </main>

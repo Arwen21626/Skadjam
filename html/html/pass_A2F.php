@@ -54,7 +54,6 @@ if (isset($_SESSION['role']) && $_SESSION['role'] !== 'visiteur'){
 </body>
 <script src="./../php/structure/authentikATOR/appelAJAX.js"></script>
 <script>
-    let ret = 1
     let secret
     
     const view = document.getElementById("veiw-pass")
@@ -105,9 +104,11 @@ if (isset($_SESSION['role']) && $_SESSION['role'] !== 'visiteur'){
             btnTerminer.removeAttribute("disabled")
             btnTerminer.style.display = "block"
             input.style.display = "none"
+            return true
         }else{
             res.textContent = "Code incorrect, réessayez."
             res.classList.remove("hidden")
+            return false
         }
     }
 
