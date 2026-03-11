@@ -1162,6 +1162,13 @@ input.quantite-prod-input {
       margin-inline-end: calc(calc(var(--spacing, 0.25rem) * 20) * calc(1 - var(--tw-space-x-reverse)));
     }
   }
+  .space-x-25 {
+    :where(& > :not(:last-child)) {
+      --tw-space-x-reverse: 0;
+      margin-inline-start: calc(calc(var(--spacing, 0.25rem) * 25) * var(--tw-space-x-reverse));
+      margin-inline-end: calc(calc(var(--spacing, 0.25rem) * 25) * calc(1 - var(--tw-space-x-reverse)));
+    }
+  }
   .space-x-40 {
     :where(& > :not(:last-child)) {
       --tw-space-x-reverse: 0;
