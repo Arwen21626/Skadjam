@@ -28,13 +28,16 @@ if (isset($_POST['logout'])) {
     require __DIR__ . "/../../php/structure/navbar_back.php";
     ?>
     <main class="min-h-[600px]">
-            <h2>Voulez-vous vraiment supprimer votre compte ?</h2>
+        <div class="mt-15">
+            <h2 class="text-center">Voulez-vous vraiment supprimer votre compte ?</h2>
             <h3 class="text-center">Cette action est irréversible.</h3>
-            <div class="mt-15 flex flex-row justify-around mb-15">
-                <a href="profil_vendeur.php"><button class="border-4 border-vertFonce rounded-xl w-auto h-14 px-7 cursor-pointer">Retour sur mon profil</button></a>
-                <a href="../../php/supprimer_compte_vendeur.php"><button class="border-4 border-rouge rounded-xl w-auto h-14 px-7 cursor-pointer">Supprimer mon compte</button></a>
-            </div>
-        </main>
+        </div>
+
+        <div class="mt-15 flex justify-around mb-15">
+            <a href="profil_vendeur.php"><button class="border-2 border-vertFonce rounded-2xl w-auto h-14 px-7 cursor-pointer">Annuler</button></a>
+            <a href="../../php/supprimer_compte_vendeur.php"><button class="border-2 border-rouge rounded-2xl w-auto h-14 px-7 cursor-pointer">Confirmer</button></a>
+        </div>
+    </main>
     <?php require __DIR__ . "/../../php/structure/footer_back.php"; ?>
 </body>
 </html>

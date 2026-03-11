@@ -22,6 +22,10 @@
 
         $tabProduit[] = $row;
     }
+
+    $stmt = $dbh->query("SELECT raison_sociale FROM sae3_skadjam._vendeur WHERE id_compte = $idCompte");
+    $row = $stmt->fetch(PDO::FETCH_ASSOC);
+    $raisonSociale = $row['raison_sociale'];
 ?>
 
 <!DOCTYPE html>
@@ -184,12 +188,12 @@
         <!--fin du catalogue-->
         <div class="flex flex-row space-x-4 justify-center m-4">
             <?php if ($pageNumber>1){?>
-            <a class= "lienPage hover:text-rouge underline" href="<?php echo "./index_vendeur.php?page=".($pageNumber-1)."#vosProduits";?>">Page précédente</a>
+            <a class= "lienPage underline" href="<?php echo "./index_vendeur.php?page=".($pageNumber-1)."#vosProduits";?>">Page précédente</a>
             
             <?php }?>
         
             <?php if ($pageNumber<$maxPage){?>
-            <a class= "lienPage hover:text-rouge underline" href="<?php echo "./index_vendeur.php?page=".($pageNumber+1)."#vosProduits";?>">Page suivante</a>
+            <a class= "lienPage underline" href="<?php echo "./index_vendeur.php?page=".($pageNumber+1)."#vosProduits";?>">Page suivante</a>
             <?php }?>
         </div>
     </main>
