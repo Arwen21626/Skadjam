@@ -30,8 +30,8 @@ if (isset($_POST['logout'])) {
     <main class="min-h-[600px]">
             <h2>Voulez-vous vraiment supprimer cette adresse ?</h2>
             <div class="mt-100 md:mt-15 flex flex-row justify-around">
-                <a href="modifier_compte_client.php"><button class="border-2 border-vertClair rounded-xl w-auto h-14 px-7 cursor-pointer">Retour</button></a>
-                <a href="../../php/supprimer_adresse.php?idAdresse=<?php echo $_GET['idAdresse']; ?>"><button class="border-2 border-rouge rounded-xl w-auto h-14 px-7 cursor-pointer">Supprimer</button></a>
+                <a href="modifier_compte_client.php"><button class="border-2 border-vertClair rounded-xl w-auto h-14 px-7 cursor-pointer">Annuler</button></a>
+                <a href="../../php/supprimer_adresse.php?idAdresse=<?php echo $_GET['idAdresse']; ?>"><button class="border-2 border-rouge rounded-xl w-auto h-14 px-7 cursor-pointer">Confirmer</button></a>
             </div>
         </main>
     <?php require __DIR__ . "/../../php/structure/footer_front.php"; ?>

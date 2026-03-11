@@ -30,11 +30,11 @@ if (isset($_POST['logout'])) {
     <main class="min-h-[600px]">
             <h2>Voulez-vous vraiment vider votre panier ?</h2>
             <div class="mt-100 md:mt-15 flex flex-row justify-around">
-                <a href="panier.php"><button class="border-2 border-vertClair rounded-xl w-auto h-14 px-7 cursor-pointer">Retour</button></a>
+                <a href="panier.php"><button class="border-2 border-vertClair rounded-xl w-auto h-14 px-7 cursor-pointer">Annuler</button></a>
                 <form class="flex justify-center" method="get" action="/php/vider_panier.php">
                     <input type="hidden" name="typeVider" value="normal">
                     <button class="border-2 border-rouge rounded-xl w-auto h-14 px-7 cursor-pointer" type="submit">
-                        Vider le panier
+                        Confirmer
                     </button>
                 </form>
             </div>
