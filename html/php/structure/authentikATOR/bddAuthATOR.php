@@ -77,4 +77,13 @@ class  BddAuthATOR{
             throw $e;
         }
     }
+    
+    function delSecret($conn, $idClient){
+        try {
+            $stmt = $conn->prepare("UPDATE sae3_skadjam._compte SET code_secret = NULL WHERE id_compte = ?");
+            $stmt->execute([$idClient]);
+        }catch (PDOException $e){
+            throw $e;
+        }
+    }
 }

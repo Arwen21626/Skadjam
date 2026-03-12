@@ -45,13 +45,15 @@ class AuthATOR{
         if ($this->edition){
             if ($ret['code_secret']!=NULL){
                 $this->initBefor = true; 
+            }else{
+                    
+                $otp = TOTP::create();
+                $otp->setIssuer($this->entName);
+                $otp->setLabel($this->userName);
+                $this->otpObj = $otp;
+                $this->secret = $otp->getSecret();
+
             }
-                
-            $otp = TOTP::create();
-            $otp->setIssuer($this->entName);
-            $otp->setLabel($this->userName);
-            $this->otpObj = $otp;
-            $this->secret = $otp->getSecret();
         }
 /*
         if ($ret['code_secret'] == NULL){
@@ -118,6 +120,10 @@ class AuthATOR{
     
     public function addTempsRestant(){
         $this->bdd->addTempsRestant($this->conn, $this->userId);
+    }
+
+    public function delSecret(){
+        $this->bdd->delSecret($this->conn, $this->userId);
     }
 
 }

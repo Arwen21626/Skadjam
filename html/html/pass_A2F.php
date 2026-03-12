@@ -1,4 +1,6 @@
 <?php
+include __DIR__.'/../php/structure/authentikATOR/AuthATOR.php';
+include __DIR__ . '/../01_premiere_connexion.php';
 session_start();
 $role = null;
 if (isset($_SESSION['role']) && $_SESSION['role'] !== 'visiteur'){
@@ -9,6 +11,8 @@ if (isset($_SESSION['role']) && $_SESSION['role'] !== 'visiteur'){
     header("Location : /index.php");
 }
 
+$auth = new AuthATOR($dbh, "Alizon", $idClient, "", true);
+$initBeforPhp = ($auth->getInitBefor())?0: 1;
 
 ?>
 <!DOCTYPE html>
@@ -41,8 +45,12 @@ if (isset($_SESSION['role']) && $_SESSION['role'] !== 'visiteur'){
                 <li>Valider l'activation de l'Authentification à deux facteurs</li>
             </ol>
         </section>
+        <?php if ($initBeforPhp==0){ ?>
+            <button id="supprimer" onclick="supprimer()" class="border-vertClair border-2 rounded-xl w-40 h-14 cursor-pointer m-5S">Supprimer A2F</button>
 
-        <button id="gen-key" onclick="generer(<?= $idClient ?>)" class="border-vertClair border-2 rounded-xl w-40 h-14 cursor-pointer m-5S">Générer</button>
+        <?php } else {?>
+            <button id="gen-key" onclick="generer(<?= $idClient ?>)" class="border-vertClair border-2 rounded-xl w-40 h-14 cursor-pointer m-5S">Générer</button>
+        <?php } ?>        
         <section id="veiw-pass" class=" hidden flex-col items-center m-5">
             <pre id="txt-key"></pre>
             <img src="" alt="QR code" id="img-qr-code"  class="w-1/3 border-vertClair border-2 rounded-xl m-4">
@@ -53,20 +61,22 @@ if (isset($_SESSION['role']) && $_SESSION['role'] !== 'visiteur'){
     </main>
     
     <?php ($role === 'vendeur') ? include __DIR__.'/../php/structure/footer_back.php' : include __DIR__.'/../php/structure/footer_front.php' ?>
+    
     <section id="popup"  class="hidden fixed inset-0 backdrop-blur-sm bg-black/30 z-40">
         <section class="flex z-10 bg-white flex-col absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 border-vertClair border-2 rounded-xl p-5 w-1/3">
-            <p class=" self-center">Attention</p>
-            <p>Vous possédez déja l'authentification à deux facteur.</p>
-            <p>En continuer ce processus un nouveau secret vous sera attribuer.</p>
+            <p class=" self-center">Attention</p><br>
+            <p>Etes-vous sur de voulour supprimer l'authentification à deux facteurs.</p>
             <section class="flex flex-row justify-between">
-                <button id="annuler" onclick="backPopUp()" class="border-vertClair border-2 rounded-xl w-40 h-14 cursor-pointer m-5">Annuler</button>
-                <button id="continuer" onclick="closePopUp()" class="border-vertClair border-2 rounded-xl w-40 h-14 cursor-pointer m-5">Continuer</button>
+                <button id="annuler" onclick="closePopUp()" class="border-vertClair border-2 rounded-xl w-40 h-14 cursor-pointer m-5">Annuler</button>
+                <button id="supprimer" onclick="suppPopUp(<?= $idClient ?>)" class="border-vertClair border-2 rounded-xl w-40 h-14 cursor-pointer m-5">Supprimer</button>
             </section>
         </section>
     </section>
 </body>
 <script src="./../php/structure/authentikATOR/appelAJAX.js"></script>
 <script>
+
+    console.log("[pass_A2F] deb initBefor = "+ "<?= $initBeforPhp ?>")
     let secret
     let qrcode
     
@@ -96,12 +106,10 @@ if (isset($_SESSION['role']) && $_SESSION['role'] !== 'visiteur'){
         console.log("[pass_A2F] data :")
         console.log(data)
         console.log("[pass_A2F] initBefor = "+initBefor)
+    }
 
-        if (initBefor==0){
-            showPopUp()
-        }else{
-            showView()
-        }
+    async function supprimer(){
+        showPopUp()
     }
 
     function showView(){
@@ -126,11 +134,14 @@ if (isset($_SESSION['role']) && $_SESSION['role'] !== 'visiteur'){
 
     async function closePopUp() {
         popup.style.display = "none"
-        showView()
+        
+        //showView()
     }
 
-    async function backPopUp() {
-        window.location.replace("<?= ($role === 'vendeur')? "bo/profil_vendeur.php": "fo/profil_client.php" ?>")
+    async function suppPopUp(idCompte) {
+        initParam(idCompte,secret)
+        ret = await delSecret()
+        window.location.replace("./pass_A2F.php")
     }
 
     async function submit(idCompte){
