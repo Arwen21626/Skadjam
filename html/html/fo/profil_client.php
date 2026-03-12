@@ -118,11 +118,16 @@ require_once __DIR__ . "/../../01_premiere_connexion.php";
                 </form>
 
                 <!-- Déconnexion -->
-                <form action="profil_client.php" method="post">
-                    <input type="hidden" id="logout" name="logout" value="true">
-                    <input class="border-vertClair border-2 md:rounded-2xl rounded-xl md:w-72 w-60 md:h-14 h-10 p-2 m-1 cursor-pointer" type="submit" value="Se déconnecter">
-                </form>
+                <a href="/php/deconnexion.php" class="border-vertClair border-2 md:rounded-2xl rounded-xl md:w-72 w-60 md:h-14 h-10 p-2 m-1 cursor-pointer flex justify-center items-center">
+                    <button>Se déconnecter</button>
+                </a>
 
+
+                <!-- A2F -->
+                <a href="/html/pass_A2F.php" class="border-vertClair border-2 md:rounded-2xl rounded-xl md:w-72 w-60 md:h-14 h-10 p-2 m-1 cursor-pointer flex justify-center items-center">
+                    <button>Connexion A2F</button>
+                </a>
+                
                 <!--    Récupérer mes données
                 <a href="donnees_client.php" class="underline! absolute right-4 bottom-41 md:bottom-14 cursor-pointer hover:text-rouge">Demander mes données</a>
                 -->

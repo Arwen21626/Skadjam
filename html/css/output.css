@@ -312,6 +312,15 @@ input.quantite-prod-input {
   .top-0 {
     top: calc(var(--spacing, 0.25rem) * 0);
   }
+  .top-1 {
+    top: calc(var(--spacing, 0.25rem) * 1);
+  }
+  .top-1\/2 {
+    top: calc(1/2 * 100%);
+  }
+  .top-1\/4 {
+    top: calc(1/4 * 100%);
+  }
   .top-2 {
     top: calc(var(--spacing, 0.25rem) * 2);
   }
@@ -363,6 +372,12 @@ input.quantite-prod-input {
   .left-0 {
     left: calc(var(--spacing, 0.25rem) * 0);
   }
+  .left-1 {
+    left: calc(var(--spacing, 0.25rem) * 1);
+  }
+  .left-1\/2 {
+    left: calc(1/2 * 100%);
+  }
   .left-5 {
     left: calc(var(--spacing, 0.25rem) * 5);
   }
@@ -383,6 +398,9 @@ input.quantite-prod-input {
   }
   .z-10 {
     z-index: 10;
+  }
+  .z-40 {
+    z-index: 40;
   }
   .order-1 {
     order: 1;
@@ -594,6 +612,9 @@ input.quantite-prod-input {
   .mb-10 {
     margin-bottom: calc(var(--spacing, 0.25rem) * 10);
   }
+  .mb-14 {
+    margin-bottom: calc(var(--spacing, 0.25rem) * 14);
+  }
   .mb-15 {
     margin-bottom: calc(var(--spacing, 0.25rem) * 15);
   }
@@ -668,6 +689,10 @@ input.quantite-prod-input {
     width: calc(1/2 * 100%);
     height: calc(1/2 * 100%);
   }
+  .size-5 {
+    width: calc(var(--spacing, 0.25rem) * 5);
+    height: calc(var(--spacing, 0.25rem) * 5);
+  }
   .size-10 {
     width: calc(var(--spacing, 0.25rem) * 10);
     height: calc(var(--spacing, 0.25rem) * 10);
@@ -731,6 +756,9 @@ input.quantite-prod-input {
   }
   .h-80 {
     height: calc(var(--spacing, 0.25rem) * 80);
+  }
+  .h-200 {
+    height: calc(var(--spacing, 0.25rem) * 200);
   }
   .h-225 {
     height: calc(var(--spacing, 0.25rem) * 225);
@@ -827,6 +855,9 @@ input.quantite-prod-input {
   }
   .w-7 {
     width: calc(var(--spacing, 0.25rem) * 7);
+  }
+  .w-7xl {
+    width: var(--container-7xl, 80rem);
   }
   .w-8 {
     width: calc(var(--spacing, 0.25rem) * 8);
@@ -1010,6 +1041,22 @@ input.quantite-prod-input {
   }
   .border-collapse {
     border-collapse: collapse;
+  }
+  .-translate-x-1 {
+    --tw-translate-x: calc(var(--spacing, 0.25rem) * -1);
+    translate: var(--tw-translate-x) var(--tw-translate-y);
+  }
+  .-translate-x-1\/2 {
+    --tw-translate-x: calc(calc(1/2 * 100%) * -1);
+    translate: var(--tw-translate-x) var(--tw-translate-y);
+  }
+  .-translate-y-1 {
+    --tw-translate-y: calc(var(--spacing, 0.25rem) * -1);
+    translate: var(--tw-translate-x) var(--tw-translate-y);
+  }
+  .-translate-y-1\/2 {
+    --tw-translate-y: calc(calc(1/2 * 100%) * -1);
+    translate: var(--tw-translate-x) var(--tw-translate-y);
   }
   .rotate-90 {
     rotate: 90deg;
@@ -1211,6 +1258,13 @@ input.quantite-prod-input {
       margin-inline-end: calc(calc(var(--spacing, 0.25rem) * 20) * calc(1 - var(--tw-space-x-reverse)));
     }
   }
+  .space-x-25 {
+    :where(& > :not(:last-child)) {
+      --tw-space-x-reverse: 0;
+      margin-inline-start: calc(calc(var(--spacing, 0.25rem) * 25) * var(--tw-space-x-reverse));
+      margin-inline-end: calc(calc(var(--spacing, 0.25rem) * 25) * calc(1 - var(--tw-space-x-reverse)));
+    }
+  }
   .space-x-40 {
     :where(& > :not(:last-child)) {
       --tw-space-x-reverse: 0;
@@ -1357,6 +1411,12 @@ input.quantite-prod-input {
   }
   .bg-black {
     background-color: var(--color-black, #000);
+  }
+  .bg-black\/30 {
+    background-color: color-mix(in srgb, #000 30%, transparent);
+    @supports (color: color-mix(in lab, red, red)) {
+      background-color: color-mix(in oklab, var(--color-black, #000) 30%, transparent);
+    }
   }
   .bg-black\/50 {
     background-color: color-mix(in srgb, #000 50%, transparent);
@@ -1547,6 +1607,9 @@ input.quantite-prod-input {
   .pr-8 {
     padding-right: calc(var(--spacing, 0.25rem) * 8);
   }
+  .pr-10 {
+    padding-right: calc(var(--spacing, 0.25rem) * 10);
+  }
   .pb-1 {
     padding-bottom: calc(var(--spacing, 0.25rem) * 1);
   }
@@ -1579,6 +1642,9 @@ input.quantite-prod-input {
   }
   .pl-12 {
     padding-left: calc(var(--spacing, 0.25rem) * 12);
+  }
+  .pl-20 {
+    padding-left: calc(var(--spacing, 0.25rem) * 20);
   }
   .text-center {
     text-align: center;
@@ -1667,6 +1733,15 @@ input.quantite-prod-input {
   }
   .filter {
     filter: var(--tw-blur,) var(--tw-brightness,) var(--tw-contrast,) var(--tw-grayscale,) var(--tw-hue-rotate,) var(--tw-invert,) var(--tw-saturate,) var(--tw-sepia,) var(--tw-drop-shadow,);
+  }
+  .backdrop-blur-sm {
+    --tw-backdrop-blur: blur(var(--blur-sm, 8px));
+    -webkit-backdrop-filter: var(--tw-backdrop-blur,) var(--tw-backdrop-brightness,) var(--tw-backdrop-contrast,) var(--tw-backdrop-grayscale,) var(--tw-backdrop-hue-rotate,) var(--tw-backdrop-invert,) var(--tw-backdrop-opacity,) var(--tw-backdrop-saturate,) var(--tw-backdrop-sepia,);
+    backdrop-filter: var(--tw-backdrop-blur,) var(--tw-backdrop-brightness,) var(--tw-backdrop-contrast,) var(--tw-backdrop-grayscale,) var(--tw-backdrop-hue-rotate,) var(--tw-backdrop-invert,) var(--tw-backdrop-opacity,) var(--tw-backdrop-saturate,) var(--tw-backdrop-sepia,);
+  }
+  .backdrop-filter {
+    -webkit-backdrop-filter: var(--tw-backdrop-blur,) var(--tw-backdrop-brightness,) var(--tw-backdrop-contrast,) var(--tw-backdrop-grayscale,) var(--tw-backdrop-hue-rotate,) var(--tw-backdrop-invert,) var(--tw-backdrop-opacity,) var(--tw-backdrop-saturate,) var(--tw-backdrop-sepia,);
+    backdrop-filter: var(--tw-backdrop-blur,) var(--tw-backdrop-brightness,) var(--tw-backdrop-contrast,) var(--tw-backdrop-grayscale,) var(--tw-backdrop-hue-rotate,) var(--tw-backdrop-invert,) var(--tw-backdrop-opacity,) var(--tw-backdrop-saturate,) var(--tw-backdrop-sepia,);
   }
   .transition {
     transition-property: color, background-color, border-color, outline-color, text-decoration-color, fill, stroke, --tw-gradient-from, --tw-gradient-via, --tw-gradient-to, opacity, box-shadow, transform, translate, scale, rotate, filter, -webkit-backdrop-filter, backdrop-filter, display, content-visibility, overlay, pointer-events;
@@ -1905,6 +1980,18 @@ input.quantite-prod-input {
   .checked\:bg-beige {
     &:checked {
       background-color: var(--color-beige);
+    }
+  }
+  .checked\:bg-\[url\(\/images\/logo\/bootstrap_icon\/bookmark-fa-plus-fill\.svg\)\] {
+    &:checked {
+      background-image: url(/images/logo/bootstrap_icon/bookmark-fa-plus-fill.svg);
+    }
+  }
+  .hover\:bg-\[url\(\/images\/logo\/bootstrap_icon\/bookmark-fa-plus-fill\.svg\)\] {
+    &:hover {
+      @media (hover: hover) {
+        background-image: url(/images/logo/bootstrap_icon/bookmark-fa-plus-fill.svg);
+      }
     }
   }
   .hover\:bg-\[url\(\/images\/logo\/bootstrap_icon\/cart-fill-vert-fonce\.svg\)\] {
@@ -2726,11 +2813,37 @@ input.quantite-prod-input {
       text-align: left;
     }
   }
+  .md\:text-sm {
+    @media (width >= 48rem) {
+      font-size: var(--text-sm, 0.875rem);
+      line-height: var(--tw-leading, var(--text-sm--line-height, calc(1.25 / 0.875)));
+    }
+  }
+  .md\:text-rouge {
+    @media (width >= 48rem) {
+      color: var(--color-rouge);
+    }
+  }
   .lg\:grid-cols-3 {
     @media (width >= 64rem) {
       grid-template-columns: repeat(3, minmax(0, 1fr));
     }
   }
+}
+@property --tw-translate-x {
+  syntax: "*";
+  inherits: false;
+  initial-value: 0;
+}
+@property --tw-translate-y {
+  syntax: "*";
+  inherits: false;
+  initial-value: 0;
+}
+@property --tw-translate-z {
+  syntax: "*";
+  inherits: false;
+  initial-value: 0;
 }
 @property --tw-rotate-x {
   syntax: "*";
@@ -2894,6 +3007,42 @@ input.quantite-prod-input {
   syntax: "*";
   inherits: false;
 }
+@property --tw-backdrop-blur {
+  syntax: "*";
+  inherits: false;
+}
+@property --tw-backdrop-brightness {
+  syntax: "*";
+  inherits: false;
+}
+@property --tw-backdrop-contrast {
+  syntax: "*";
+  inherits: false;
+}
+@property --tw-backdrop-grayscale {
+  syntax: "*";
+  inherits: false;
+}
+@property --tw-backdrop-hue-rotate {
+  syntax: "*";
+  inherits: false;
+}
+@property --tw-backdrop-invert {
+  syntax: "*";
+  inherits: false;
+}
+@property --tw-backdrop-opacity {
+  syntax: "*";
+  inherits: false;
+}
+@property --tw-backdrop-saturate {
+  syntax: "*";
+  inherits: false;
+}
+@property --tw-backdrop-sepia {
+  syntax: "*";
+  inherits: false;
+}
 @property --tw-content {
   syntax: "*";
   initial-value: "";
@@ -2906,6 +3055,9 @@ input.quantite-prod-input {
 @layer properties {
   @supports ((-webkit-hyphens: none) and (not (margin-trim: inline))) or ((-moz-orient: inline) and (not (color:rgb(from red r g b)))) {
     *, ::before, ::after, ::backdrop {
+      --tw-translate-x: 0;
+      --tw-translate-y: 0;
+      --tw-translate-z: 0;
       --tw-rotate-x: initial;
       --tw-rotate-y: initial;
       --tw-rotate-z: initial;
@@ -2943,6 +3095,15 @@ input.quantite-prod-input {
       --tw-drop-shadow-color: initial;
       --tw-drop-shadow-alpha: 100%;
       --tw-drop-shadow-size: initial;
+      --tw-backdrop-blur: initial;
+      --tw-backdrop-brightness: initial;
+      --tw-backdrop-contrast: initial;
+      --tw-backdrop-grayscale: initial;
+      --tw-backdrop-hue-rotate: initial;
+      --tw-backdrop-invert: initial;
+      --tw-backdrop-opacity: initial;
+      --tw-backdrop-saturate: initial;
+      --tw-backdrop-sepia: initial;
       --tw-content: "";
       --tw-leading: initial;
     }

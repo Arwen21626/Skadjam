@@ -7,22 +7,7 @@
     require_once __DIR__ . "/../../php/modification_variable.php";
     const PAGE_SIZE = 24;
     $idCompte = $_SESSION['idCompte'];
-    $tabProduit = [];
-    foreach($dbh->query("SELECT *
-        FROM sae3_skadjam._produit pr
-        INNER join sae3_skadjam._montre m
-            ON pr.id_produit=m.id_produit
-        INNER JOIN sae3_skadjam._photo ph  
-            ON ph.id_photo = m.id_photo
-        INNER JOIN sae3_skadjam._vendeur v
-            ON pr.id_vendeur = v.id_compte
-        WHERE v.id_compte = $idCompte
-            AND pr.est_supprime = false"
-        , PDO::FETCH_ASSOC) as $row){
-
-        $tabProduit[] = $row;
-    }
-
+    
     $stmt = $dbh->query("SELECT raison_sociale FROM sae3_skadjam._vendeur WHERE id_compte = $idCompte");
     $row = $stmt->fetch(PDO::FETCH_ASSOC);
     $raisonSociale = $row['raison_sociale'];
@@ -119,7 +104,7 @@
                 //affiche la photo du produit, son nom, son prix et sa note, son stock ?>
                 <article class="flex flex-row flex-wrap justify-around">
                     <?php 
-                        foreach($tabProduit as $id => $valeurs){
+                        foreach($lignes as $id => $valeurs){
                             $idProduit = $valeurs['id_produit'];
                             // Le produit est-il en promotion ?
                             $stmt = $dbh->prepare("SELECT *
@@ -136,7 +121,7 @@
                                         title="<?php echo $valeurs['titre'];?>">
                                         
                                 <!--affichage du nom du produit-->
-                                <p class=" max-w-36"><?php echo $valeurs['libelle_produit'];?></p> 
+                                <p class=" max-w-70"><?php echo $valeurs['libelle_produit'];?></p> 
 
                                 <!--affichage du prix du produit-->   
                                 <div class="flex flex-row justify-between items-center">
@@ -189,12 +174,17 @@
         <!--fin du catalogue-->
         <div class="flex flex-row space-x-4 justify-center m-4">
             <?php if ($pageNumber>1){?>
-            <a class= "lienPage underline" href="<?php echo "./index_vendeur.php?page=".($pageNumber-1)."#vosProduits";?>">Page précédente</a>
-            
+            <a class= "lienPage underline" href="<?php echo "./index_vendeur.php?page=".($pageNumber-1)."#vosProduits";?>">
+                <img class="w-7" src="../../images/logo/bootstrap_icon/chevron-left.svg" alt="page précédente">
+            </a>           
             <?php }?>
-        
+
+            <p>page <?php echo $pageNumber;?></p>
+
             <?php if ($pageNumber<$maxPage){?>
-            <a class= "lienPage underline" href="<?php echo "./index_vendeur.php?page=".($pageNumber+1)."#vosProduits";?>">Page suivante</a>
+            <a class= "lienPage underline" href="<?php echo "./index_vendeur.php?page=".($pageNumber+1)."#vosProduits";?>">
+                <img class="w-7" src="../../images/logo/bootstrap_icon/chevron-right.svg" alt="page suivante">
+            </a>
             <?php }?>
         </div>
     </main>

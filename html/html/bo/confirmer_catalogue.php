@@ -59,11 +59,9 @@
                 
                 <div class="flex justify-around flex-col sticky top-1/4 h-50">
                     <!---bouton retour--->
-                    <a href="index_vendeur.php" class="flex justify-center items-center border-2 border-vertFonce rounded-2xl w-45 h-14 cursor-pointer">Retour</a>
-                    <!---bouton modifier stock--->
-                    <button class="border-2 border-vertFonce rounded-2xl w-45 h-14 cursor-pointer mt-5">
-                        <a href="../bo/modifier_stock.php?idCompte=<?php echo $idCompte ;?>" class="">Modifier le stock</a>
-                    </button>
+                    <a href="./catalogue.php" class="flex justify-center items-center border-2 border-vertFonce rounded-2xl w-45 h-14 cursor-pointer">Retour</a>
+                    <!---bouton télécharger--->
+                    <a href="./confirmer_catalogue.php" class="flex justify-center items-center border-2 border-vertFonce rounded-2xl w-45 h-14 cursor-pointer">Télécharger</a>
                 </div>
 
                 <!---tableau liste des stocks--->
@@ -115,7 +113,7 @@
     </main>
 
     <!--footer-->
-    <?php include(__DIR__ . "/../../php/structure/footer_back.php"); ?>
+    <?php include __DIR__ . "/../../php/structure/footer_back.php"; ?>
     <script>
         let lignesTab = document.getElementsByTagName("tr");
 
@@ -127,26 +125,6 @@
         for(let i = 1; i < lignesTab.length; i++){
             seuil = lignesTab[i].children[4].children[1].textContent;
 
-            // ajout d'une bordure qui indique que le stock est inférieur au seuil
-            if (Number(lignesTab[i].children[4].children[0].textContent) <= Number(seuil)){
-                
-                lignesTab[i].children[lignesTab[i].childElementCount-2].style.borderRightWidth = "0.5em";
 
-                // couleur des lignes alterner
-                if(i%2 !== 0){
-                    lignesTab[i].children[lignesTab[i].childElementCount-2].style.borderColor = rouge;
-                }
-                else{
-                    lignesTab[i].children[lignesTab[i].childElementCount-2].style.borderColor = rougeClaire;
-                }
-
-                // met un logo en complément de la couleur
-                lignesTab[i].children[5].style.backgroundImage = "url(/images/logo/bootstrap_icon/exclamation-triangle.svg)"; 
-                lignesTab[i].children[5].style.backgroundSize = "1.5em auto"; 
-                lignesTab[i].children[5].style.backgroundRepeat = "no-repeat"; 
-                lignesTab[i].children[5].style.backgroundPosition = "center center";
-            }
-        }
-    </script>
 </body>
 </html>

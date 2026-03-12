@@ -29,7 +29,7 @@ unset($_SESSION['erreurs'], $_SESSION['old']);
         <h2 class="flex justify-center text-center">Création du compte client</h2>
 
         <!-- Formulaire -->
-        <form class="flex flex-wrap p-15 pt-0 justify-around" action="../../php/traitement_donnees_compte_client.php" method="post">
+        <form class="flex flex-wrap p-15 pt-0 justify-around placeholder-gray-500" action="../../php/traitement_donnees_compte_client.php" method="post">
             <!-- Ajout d'un attribut au POST nécessaire à la redirection sur le panier en cas de volonté d'achat -->
             <?php if (isset($_GET['veutAcheter'])) { ?>
                 <input type="hidden" name="veutAcheter" value="V">
@@ -37,35 +37,35 @@ unset($_SESSION['erreurs'], $_SESSION['old']);
             <!-- Nom -->
             <div class="flex flex-col basis-1/3 m-5 min-w-3xs">
                 <label for="nom">Nom* :</label>
-                <input class="border-4 border-beige rounded-2xl w-1/1 p-1 pl-3" type="text" name="nom" id="nom" value="<?= htmlspecialchars($old['nom'] ?? '') ?>" required>
+                <input placeholder="Dupond" class="border-4 border-beige rounded-2xl w-1/1 p-1 pl-3 placeholder-gray-500" type="text" name="nom" id="nom" value="<?= htmlspecialchars($old['nom'] ?? '') ?>" required>
                 <?php if (isset($erreurs['nom'])) { echo "<p class='text-rouge' style='font-size: 0.90em'>Le nom ne peut contenir que des majuscules, des minuscules, des tirets, des espaces ou les accents : é, ç, è, ë, ê, à, ï, î, ä, â, ù, ü, û, ö, ô.</p>"; } ?>
             </div>
 
             <!-- Prénom -->
             <div class="flex flex-col basis-1/3 m-5 min-w-3xs">
                 <label for="prenom">Prénom* :</label>
-                <input class="border-4 border-beige rounded-2xl w-1/1 p-1 pl-3" type="text" name="prenom" id="prenom" value="<?= htmlspecialchars($old['prenom'] ?? '') ?>" required>
+                <input placeholder="Jean" class="border-4 border-beige rounded-2xl w-1/1 p-1 pl-3 placeholder-gray-500" type="text" name="prenom" id="prenom" value="<?= htmlspecialchars($old['prenom'] ?? '') ?>" required>
                 <?php if (isset($erreurs['prenom'])) { echo "<p class='text-rouge' style='font-size: 0.90em'>Le prénom ne peut contenir que des majuscules, des minuscules, des tirets, des espaces les accents : é, ç, è, ë, ê, à, ï, î, ä, â, ù, ü, û, ö, ô.</p>"; } ?>
             </div>
 
             <!-- Pseudo -->
             <div class="flex flex-col basis-1/3 m-5 min-w-3xs">
                 <label for="pseudo">Pseudo* :</label>
-                <input class="border-4 border-beige rounded-2xl w-1/1 p-1 pl-3" type="text" name="pseudo" id="pseudo"value="<?= htmlspecialchars($old['pseudo'] ?? '') ?>" required>
+                <input placeholder="Breizh22" class="border-4 border-beige rounded-2xl w-1/1 p-1 pl-3 placeholder-gray-500" type="text" name="pseudo" id="pseudo"value="<?= htmlspecialchars($old['pseudo'] ?? '') ?>" required>
                 <?php if (isset($erreurs['pseudo'])) { echo "<p class='text-rouge' style='font-size: 0.90em'>Le pseudo ne peut que contenir des majuscules, des minuscules, des chiffres, des tirets, tirets du bas ou des espaces.</p>"; } ?>
             </div>
 
             <!-- Date de naissance -->
             <div class="flex flex-col basis-1/3 m-5 min-w-3xs">
                 <label for="naissance">Date de naissance* :</label>
-                <input class="border-4 border-beige rounded-2xl w-1/1 p-1 pl-3" type="date" name="naissance" id="naissance" value="<?= htmlspecialchars($old['naissance'] ?? '') ?>" required> 
+                <input class="border-4 border-beige rounded-2xl w-1/1 p-1 pl-3 placeholder-gray-500" type="date" name="naissance" id="naissance" value="<?= htmlspecialchars($old['naissance'] ?? '') ?>" required> 
                 <?php if (isset($erreurs['naissance'])) { echo "<p class='text-rouge' style='font-size: 0.90em'>La date de naissance doit être de la forme : jj/mm/aaaa.</p>"; } ?>
             </div>
 
             <!-- Téléphone -->
             <div class="flex flex-col basis-1/3 m-5 min-w-3xs">
                 <label for="telephone">Telephone* :</label>
-                <input class="border-4 border-beige rounded-2xl w-1/1 p-1 pl-3 placeholder-gray-500" maxlength="10" type="tel" name="telephone" id="telephone" placeholder="0604030201" pattern="0[0-9]{9}" value="<?= htmlspecialchars($old['telephone'] ?? '') ?>" required>
+                <input class="border-4 border-beige rounded-2xl w-1/1 p-1 pl-3 placeholder-gray-500" maxlength="10" type="tel" name="telephone" id="telephone" placeholder="06 12 34 56 78" pattern="0[0-9]{9}" value="<?= htmlspecialchars($old['telephone'] ?? '') ?>" required>
                 <?php if (isset($erreurs['telephone'])) { echo "<p class='text-rouge' style='font-size: 0.90em'>Le numéro de téléphone doit commencer par 0 suivi de 9 chiffres.</p>"; } ?>
             </div>
 
@@ -80,7 +80,7 @@ unset($_SESSION['erreurs'], $_SESSION['old']);
             <div class="flex flex-col basis-1/3 m-5 min-w-3xs">
                 <label for="mdp">Mot de passe* :</label>
                 <div class="zone-mdp flex flex-row ">
-                    <input class="champ-mdp border-4 border-beige rounded-2xl w-1/1 p-1 pl-3" type="password" name="mdp" id="mdp" value="<?= htmlspecialchars($old['mdp'] ?? '') ?>" required>
+                    <input class="champ-mdp border-4 border-beige rounded-2xl w-1/1 p-1 pl-3 placeholder-gray-500" type="password" name="mdp" id="mdp" value="<?= htmlspecialchars($old['mdp'] ?? '') ?>" required>
                     <?php include __DIR__ . "/../../php/structure/bouton_mdp.php" ?>
                 </div>
                 <p style="font-size: 0.90em" class="<?php if (isset($erreurs['mdp'])) { echo "text-rouge"; } ?>"> 1 majuscule, 1 minuscule, 1 chiffre, 1 caractère spécial, 10 caractères minimum</p>
@@ -90,7 +90,7 @@ unset($_SESSION['erreurs'], $_SESSION['old']);
             <div class="flex flex-col basis-1/3 m-5 min-w-3xs">
                 <label for="verifMdp">Vérification du mot de passe* :</label>
                 <div class="zone-mdp flex flex-row ">
-                    <input class="champ-mdp border-4 border-beige rounded-2xl w-1/1 p-1 pl-3" type="password" name="verifMdp" id="verifMdp" required>
+                    <input class="champ-mdp border-4 border-beige rounded-2xl w-1/1 p-1 pl-3 placeholder-gray-500" type="password" name="verifMdp" id="verifMdp" required>
                     <?php include __DIR__ . "/../../php/structure/bouton_mdp.php" ?>
                 </div>
                 <?php if (isset($verifMdp)) { echo "<p class='text-rouge' style='font-size: 0.90em'>La vérification doit être identique à votre mot de passe.</p>"; } ?>

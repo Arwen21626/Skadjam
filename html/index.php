@@ -152,6 +152,7 @@
                                         affichageNote($note); ?>
                                 </div>
                             </a>
+                            <!-- boutons futurs achats & panier -->
                             <div class="flex justify-end">
                                 <!-- Produit dans les futurs achats ? -->
                                 <a id="btnFA" href="./php/traitementFAPanier.php?idProduit=<?php echo $idProduit;?>&ajout=fa&vientDe=index">
@@ -204,11 +205,17 @@
         <!--fin du catalogue-->
         <div class="flex flex-row space-x-4 justify-center py-3">
             <?php if($pageNumber>1){?>
-            <a class= "lienPage hover:text-rouge" href="<?= "./index.php?page=". $pageNumber-1 ."#nosProduits";?>">Page précédente</a>
+            <a class= "lienPage hover:text-rouge" href="<?= "./index.php?page=". $pageNumber-1 ."#nosProduits";?>">
+                <img class="w-7" src="images/logo/bootstrap_icon/chevron-left.svg" alt="page précédente">
+            </a>
             <?php }?>
-        
+
+            <p>page <?php echo $pageNumber;?></p>
+            
             <?php if($pageNumber<$maxPage){?>
-            <a class= "lienPage hover:text-rouge" href="<?= "./index.php?page=". $pageNumber+1 ."#nosProduits";?>">Page suivante</a>
+            <a class= "lienPage hover:text-rouge" href="<?= "./index.php?page=". $pageNumber+1 ."#nosProduits";?>">
+                <img class="w-7" src="images/logo/bootstrap_icon/chevron-right.svg" alt="page suivante">
+            </a>
             <?php }?>
         </div>
     </main>

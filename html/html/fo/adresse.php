@@ -151,7 +151,7 @@
         <form class="flex flex-col self-center p-10" method="post">
             
             <div class="flex flex-col md:flex-row justify-between">
-                <div class="flex flex-col max-w-70">
+                <div id="nomForm" class="flex flex-col max-w-70">
                     <label for="nom">Nom* :</label>
                     <input placeholder="Cobrec" value="<?php 
                         if(isset($_POST['nom'])){
@@ -164,13 +164,11 @@
                     ?>" class="pl-2 border-4 border-vertClair rounded-xl placeholder-gray-500 max-w-70" type="text" name="nom" id="nom" required>
                     <?php 
                     if($erreurNom){ ?>
-                        <p class="text-rouge">
-                            Votre nom ne peut contenir que des lettres majuscules, minuscules, tirets, espaces et les accents : éçèëêàïîäâùüûöô
-                        </p>
+                        <p id="erreurNomPHP" class="text-rouge">Votre nom ne peut contenir que des lettres majuscules, minuscules, tirets, espaces et des accents</p>
                     <?php } ?>
                 </div>
 
-                <div class="flex flex-col max-w-70">
+                <div id="prenomForm" class="flex flex-col max-w-70">
                     <label for="prenom">Prénom* :</label>
                     <input placeholder="Alizon" value="<?php
                         if(isset($_POST['prenom'])){
@@ -183,16 +181,14 @@
                     ?>" class="pl-2 border-4 border-vertClair rounded-xl placeholder-gray-500 max-w-70" type="text" name="prenom" id="prenom" required>
                     <?php 
                     if($erreurPrenom){ ?>
-                        <p class="text-rouge">
-                            Votre prenom ne peut contenir que des lettres majuscules, minuscules, tirets, espaces et les accents : é, ç, è, ë, ê, à, ï, î, ä, â, ù, ü, û, ö, ô
-                        </p>
+                        <p id="erreurPrenomPHP" class="text-rouge">Votre prenom ne peut contenir que des lettres majuscules, minuscules, tirets, espaces et des accents</p>
                     <?php } ?>
                 </div>
             </div>
             
-            <div class="flex flex-col mt-5">
+            <div id="adresseForm" class="flex flex-col mt-5">
                 <label for="adresse">Adresse postale* :</label>
-                <input placeholder="1 rue des fleurs" value="<?php
+                <input placeholder="1 rue des Fleurs" value="<?php
                     if(isset($_POST['adresse'])){
                         echo $_POST['adresse'];
                     }else if(!empty($adresseE['adresse_postale'])){
@@ -203,7 +199,7 @@
                 ?>" class="pl-2 border-4 border-vertClair rounded-xl placeholder-gray-500 w-100 md:w-200" type="text" name="adresse" id="adresse" required>
                 <?php 
                 if($erreurAdresse){ ?>
-                    <p class="text-rouge">
+                    <p id="erreurAdressePHP" class="text-rouge w-100 md:w-200">
                         Votre adresse postal ne peut contenir que des chiffres, lettres majuscules ou minuscules, 
                         virgules et espaces.
                     </p>
@@ -243,7 +239,7 @@
             </div>
 
             <div class="flex flex-col">
-                <div class="flex flex-col mt-5">
+                <div id="villeForm" class="flex flex-col mt-5">
                     <label for="ville">Ville* :</label>
                     <input placeholder="Lannion" value="<?php
                         if(isset($_POST['ville'])){
@@ -256,11 +252,11 @@
                     ?>" class="pl-2 border-4 border-vertClair rounded-xl placeholder-gray-500 md:w-200 w-40" type="text" name="ville" id="ville" required>
                     <?php 
                     if($erreurVille){ ?>
-                        <p class="text-rouge">Une erreur est survenue au niveau de votre ville</p>
+                        <p id="erreurVillePHP" class="text-rouge">Une erreur est survenue au niveau de votre ville</p>
                     <?php } ?>
                 </div>
                 
-                <div class="flex flex-col mt-5">
+                <div id="codePostalForm" class="flex flex-col mt-5">
                     <label for="codePostal">Code postal* :</label>
                     <input placeholder="22300" value="<?php
                         if(isset($_POST['codePostal'])){
@@ -273,7 +269,7 @@
                     ?>" class="pl-2 border-4 border-vertClair rounded-xl placeholder-gray-500 md:w-200 w-40" type="text" name="codePostal" id="codePostal" required>
                     <?php 
                     if($erreurCodePostal){ ?>
-                        <p class="text-rouge">Votre code posal doit se composer de 5 chiffres</p>
+                        <p id="erreurCodePostalPHP" class="text-rouge">Votre code posal doit se composer de 5 chiffres</p>
                     <?php } ?>
                 </div>
             </div>
@@ -291,6 +287,7 @@
 
 
 
+        <script src="../../js/verifForm.js"></script>
         <script>
             
             // initialisation
@@ -301,12 +298,103 @@
             let numAppart = document.getElementById("numAppart")
             let ville = document.getElementById("ville")
             let codePostal = document.getElementById("codePostal")
-            
+
+
             // Verif nom
-            nom.addEventListener("blur", function(){
-                
+            let nomForm = document.getElementById("nomForm")
+            let erreurNom = document.createElement("p")
+            erreurNom.textContent = "Votre nom ne peut contenir que des lettres majuscules, minuscules, tirets, espaces et des accents"
+            erreurNom.classList.add("md:text-rouge")
+
+            nom.addEventListener("change", function(){
+                if(!validerNomPrenom(nom.value)){                    
+                    erreurNom.classList.remove("md:hidden")
+                    let errPHP = document.getElementById("erreurCodePostalPHP")
+                    if(errPHP) errPHP.classList.add("md:hidden", "hidden")
+                }else{
+                    erreurNom.classList.add("md:hidden")
+                    let errPHP = document.getElementById("erreurNomPHP")
+                    if(errPHP) errPHP.classList.add("md:hidden", "hidden")
+                }
+                nomForm.appendChild(erreurNom)
             })
 
+            // Verif prenom
+            let prenomForm = document.getElementById("prenomForm")
+            let erreurPrenom = document.createElement("p")
+            erreurPrenom.textContent = "Votre prenom ne peut contenir que des lettres majuscules, minuscules, tirets, espaces et des accents"
+            erreurPrenom.classList.add("md:text-rouge", "md:text-sm")
+
+            prenom.addEventListener("change", function(){
+                if(!validerNomPrenom(prenom.value)){                    
+                    erreurPrenom.classList.remove("md:hidden")
+                    let errPHP = document.getElementById("erreurCodePostalPHP")
+                    if(errPHP) errPHP.classList.add("md:hidden", "hidden")
+                }else{
+                    erreurPrenom.classList.add("md:hidden")
+                    let errPHP = document.getElementById("erreurPrenomPHP")
+                    if(errPHP) errPHP.classList.add("md:hidden", "hidden")
+                }
+                prenomForm.appendChild(erreurPrenom)
+            })
+
+            // Verif adresse
+            let adresseForm = document.getElementById("adresseForm")
+            let erreurAdresse = document.createElement("p")
+            erreurAdresse.textContent = "Votre adresse postal ne peut contenir que des chiffres, lettres majuscules ou minuscules, virgules et espaces"
+            erreurAdresse.classList.add("md:text-rouge", "text-rouge", "w-100", "md:w-200")
+
+            adresse.addEventListener("change", function(){
+                if(!validerAdresse(adresse.value)){                    
+                    erreurAdresse.classList.remove("md:hidden")
+                    let errPHP = document.getElementById("erreurCodePostalPHP")
+                    if(errPHP) errPHP.classList.add("md:hidden", "hidden")
+                }else{
+                    erreurAdresse.classList.add("md:hidden")
+                    let errPHP = document.getElementById("erreurAdressePHP")
+                    if(errPHP) errPHP.classList.add("md:hidden", "hidden")
+                }
+                adresseForm.appendChild(erreurAdresse)
+            })
+
+            // Verif ville
+            let villeForm = document.getElementById("villeForm")
+            let erreurVille = document.createElement("p")
+            erreurVille.textContent = "Votre ville ne peut contenir que des lettres majuscules, minuscules, tirets, espaces et des accents"
+            erreurVille.classList.add("md:text-rouge","text-rouge", "w-100", "md:w-200")
+
+            ville.addEventListener("change", function(){
+                if(!validerVille(ville.value)){                    
+                    erreurVille.classList.remove("md:hidden")
+                    let errPHP = document.getElementById("erreurVillePHP")
+                    if(errPHP) errPHP.classList.add("md:hidden", "hidden")
+                }else{
+                    erreurVille.classList.add("md:hidden")
+                    let errPHP = document.getElementById("erreurVillePHP")
+                    if(errPHP) errPHP.classList.add("md:hidden", "hidden")
+                    
+                }
+                villeForm.appendChild(erreurVille)
+            })
+
+            // Verif code postal
+            let codePostalForm = document.getElementById("codePostalForm")
+            let erreurCodePostal = document.createElement("p")
+            erreurCodePostal.textContent = "Votre code posal doit se composer de 5 chiffres"
+            erreurCodePostal.classList.add("md:text-rouge", "text-rouge", "w-100", "md:w-200")
+
+            codePostal.addEventListener("change", function(){
+                if(!validerCodePostal(codePostal.value)){                    
+                    erreurCodePostal.classList.remove("md:hidden")
+                    let errPHP = document.getElementById("erreurCodePostalPHP")
+                    if(errPHP) errPHP.classList.add("md:hidden", "hidden")
+                }else{
+                    erreurCodePostal.classList.add("md:hidden")
+                    let errPHP = document.getElementById("erreurCodePostalPHP")
+                    if(errPHP) errPHP.classList.add("md:hidden", "hidden")
+                }
+                codePostalForm.appendChild(erreurCodePostal)
+            })
 
         </script>
     </main>

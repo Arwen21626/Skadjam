@@ -481,26 +481,26 @@ else { ?>
                 <!-- Nom produit -->
                 <div class="col-start-2 row-start-1 flex flex-col w-155 m-2 p-2">
                     <label for="nom">Nom produit *:</label>
-                    <input value="<?php echo $nom;?>" placeholder="Confiture fraises des bois 200g" class="border-4 border-beige rounded-2xl m-2 placeholder-gray-500" type="text" name="nom" id="nom" required>
+                    <input value="<?php echo $nom;?>" placeholder="Confiture fraises des bois 200g" class="pl-3 border-4 border-beige rounded-2xl m-2 placeholder-gray-500" type="text" name="nom" id="nom" required>
                 </div>
 
                 <div class="col-start-2 row-start-2 flex flex-row justify-between w-155 m-2 p-2">
                     <!-- Prix hors taxe -->
                     <div class="flex flex-col">
                         <label for="prix">Prix *(hors taxe):</label>
-                        <input placeholder="3.99" value="<?php echo $prixHT;?>" class="placeholder-gray-500 border-4 border-beige rounded-2xl w-40 m-2" type="number" name="prix" id="prix" min="0.0" step="0.01" required>
+                        <input placeholder="3.99" value="<?php echo $prixHT;?>" class="pl-3 placeholder-gray-500 border-4 border-beige rounded-2xl w-40 m-2" type="number" name="prix" id="prix" min="0.0" step="0.01" required>
                     </div>
 
                     <!-- Remise -->
                     <div class="flex flex-col">
                         <label for="remise">Remise (%):</label>
-                        <input value="<?php echo $remise*100;?>" placeholder="0" class="border-4 border-beige rounded-2xl w-40 m-2 placeholder-gray-500" type="number" name="remise" id="remise" min="0" max="100">
+                        <input value="<?php echo $remise*100;?>" placeholder="0" class="pl-3 border-4 border-beige rounded-2xl w-40 m-2 placeholder-gray-500" type="number" name="remise" id="remise" min="0" max="100">
                     </div>
 
                     <!-- Quantite en stock -->
                     <div class="flex flex-col">
                         <label for="qteStock">Quantité en stock* :</label>
-                        <input value="<?php echo $qteStock;?>" placeholder="50" class="border-4 border-beige rounded-2xl w-40 m-2 placeholder-gray-500" type="number" name="qteStock" id="qteStock" required>
+                        <input value="<?php echo $qteStock;?>" placeholder="50" class="pl-3 border-4 border-beige rounded-2xl w-40 m-2 placeholder-gray-500" type="number" name="qteStock" id="qteStock" required>
                     </div>
                 </div>
                     
@@ -528,7 +528,7 @@ else { ?>
                     </div>
                     <div class="flex flex-col">
                         <label for="qteUnite">Quantité par unité :</label>
-                        <input value="<?php echo $qteUnite;?>" placeholder="200" class="placeholder-gray-500 border-4 border-beige rounded-2xl w-40 m-2" type="number" name="qteUnite" id="qteUnite" min="0" required>
+                        <input value="<?php echo $qteUnite;?>" placeholder="200" class="pl-3 placeholder-gray-500 border-4 border-beige rounded-2xl w-40 m-2" type="number" name="qteUnite" id="qteUnite" min="0" required>
                     </div>
                 </div>
 
@@ -564,7 +564,7 @@ else { ?>
                 <div class="col-start-1 row-start-5 flex flex-col">
                     <div id="seuilInput" class="flex flex-row mr-4 ml-4">
                         <label class="mr-4" for="seuilAlerte">Seuil d'alerte* :</label>
-                        <input class="border-4 border-beige rounded-2xl w-45" type="number" name="seuilAlerte" id="seuilAlerte" min="0" value="<?php if(isset($seuilAlerte)){echo $seuilAlerte;} ?>">
+                        <input placeholder="0" class="pl-3 border-4 border-beige rounded-2xl w-45" type="number" name="seuilAlerte" id="seuilAlerte" min="0" value="<?php if(isset($seuilAlerte)){echo $seuilAlerte;} ?>">
                     </div>
                 </div>
 
@@ -574,14 +574,14 @@ else { ?>
                         <div>
                             <div class="flex flex-row mr-4 ml-4">
                                 <label class="mr-4" for="dateDebutPromotion">Début de promotion* :</label>
-                                <input class="border-4 border-beige rounded-2xl w-45" type="date" name="dateDebutPromotion" id="dateDebutPromotion" value="<?php echo $dateDebutPromotion; ?>">
+                                <input class="pl-3 border-4 border-beige rounded-2xl w-45" type="date" name="dateDebutPromotion" id="dateDebutPromotion" value="<?php echo $dateDebutPromotion; ?>">
                             </div>
                             <p id="erreurDebPromo" class="text-rouge hidden"></p>
                         </div>
                         <div>
                             <div class="flex flex-row mr-4 ml-4">
                                 <label class="mr-4" for="dateFinPromotion">Fin de promotion :</label>
-                                <input class="border-4 border-beige rounded-2xl w-45" type="date" name="dateFinPromotion" id="dateFinPromotion" value="<?php echo $dateFinPromotion; ?>">
+                                <input class="pl-3 border-4 border-beige rounded-2xl w-45" type="date" name="dateFinPromotion" id="dateFinPromotion" value="<?php echo $dateFinPromotion; ?>">
                             </div>
                             <p id="erreurFinPromo" class="text-rouge hidden"></p>
                         </div>
@@ -589,7 +589,7 @@ else { ?>
                     <div class="flex flex-row justify-around m-2 p-2">
                         <div class="flex flex-row mr-4 ml-4">
                             <label class="mr-4" for="labelPromo">Libellé de la promotion :</label>
-                            <input class="border-4 border-beige rounded-2xl w-45" maxlength="20" type="text" name="labelPromo" id="labelPromo" value="<?php echo $labelPromo;?>">
+                            <input class="pl-3 border-4 border-beige rounded-2xl w-45" maxlength="20" type="text" name="labelPromo" id="labelPromo" value="<?php echo $labelPromo;?>">
                         </div>
                     </div>
                 </div>
@@ -597,7 +597,7 @@ else { ?>
                 <!-- Description -->
                 <div class="col-start-1 col-span-2 row-start-7 flex flex-col m-2 p-2 ">
                     <label for="description">Description *:</label>
-                    <textarea placeholder="Pot de confiture de fraises des bois" class="border-4 border-beige rounded-2xl w-3/4 self-center placeholder-gray-500" name="description" id="description" cols="100" rows="10" required><?php echo $description ;?></textarea>
+                    <textarea placeholder="Pot de confiture de fraises des bois" class="pl-3 border-4 border-beige rounded-2xl w-3/4 self-center placeholder-gray-500" name="description" id="description" cols="100" rows="10" required><?php echo $description ;?></textarea>
                 </div>
                 
                 <!-- Validation -->
