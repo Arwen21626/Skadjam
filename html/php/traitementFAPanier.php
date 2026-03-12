@@ -36,6 +36,11 @@ elseif ($_GET['vientDe'] == "promo") {
     $vientDe = "/html/fo/promotion.php".$ancre;
 }
 
+// Si le user vient des plus vendus
+elseif ($_GET['vientDe'] == "pV") {
+    $vientDe = "/html/fo/les_plus_vendus.php".$ancre;
+}
+
 $chemin = '';
 
 if ($ajout == "fa") {

@@ -29,11 +29,6 @@ include __DIR__. '/../../php/requetesBDD/recup_FA.php';
 <?php include __DIR__."/../../php/structure/head_front.php";?>
 <head> 
     <title>Nouveaux produits</title>
-    <style>
-        button a:hover{
-            color: black;
-        }
-    </style>
 </head>
 
 
