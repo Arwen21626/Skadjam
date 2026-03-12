@@ -159,37 +159,33 @@
                         <h3>Total des ventes du produit sélectionné :</h3>
                     </div>
 
-                    <div class="flex flex-row mt-2">
-                        <p class="pr-2">Choisissez un produit :</p>
-                        <select name="" id="select-produit" class="pl-2 cursor-pointer">
+                    <div class="flex flex-col mt-2">
+                        <p class="pr-2 mb-8">Choisissez un produit :</p>
+
+                        <div id="prod-container" class="flex justify-around flex-row flex-wrap gap-4">
                             <?php 
-                                // $cles = [];
-
-                                // foreach ($dataStats as $annee) { // Parcours toutes les années
-                                //     foreach ($annee as $mois) { // Parcours tous les mois
-                                //         $clesTemp = array_keys($mois["produits"]);
-
-                                //         foreach ($clesTemp as $key) { // Parcours tous les id des produits vendus lors d'un mois d'une année
-                                //             $cles[$key] = $mois["produits"][$key]["libelle_prod"];
-                                //         }
-                                //     }
-                                // }
-
-                                $rqt = $dbh->query("SELECT id_produit, libelle_produit FROM sae3_skadjam._produit WHERE id_vendeur = $idVendeur", PDO::FETCH_ASSOC);
+                                $rqt = $dbh->query("SELECT sae3_skadjam._produit.id_produit, libelle_produit, sae3_skadjam._photo.url_photo, sae3_skadjam._photo.alt, sae3_skadjam._photo.titre FROM sae3_skadjam._produit 
+                                                    INNER JOIN sae3_skadjam._montre ON sae3_skadjam._montre.id_produit = sae3_skadjam._produit.id_produit
+                                                    INNER JOIN sae3_skadjam._photo ON sae3_skadjam._photo.id_photo = sae3_skadjam._montre.id_photo
+                                                    WHERE id_vendeur = $idVendeur", PDO::FETCH_ASSOC);
                                 $cles = $rqt->fetchAll();
 
                                 foreach ($cles as $prod) {
-                                    ?>
-                                        <option value=<?php echo $prod["id_produit"]; ?>><?php echo $prod["libelle_produit"]; ?></option>
-                                    <?php
+                                        ?>
+                                            <div id="<?php echo $prod["id_produit"];?>" class="bg-bleu pb-4">
+                                                <img src="<?php echo $prod["url_photo"]; ?>" alt="<?php echo $prod["alt"]; ?>" title="<?php echo $prod["titre"]; ?>"
+                                                class="w-64 p-4">
+                                                <p class="text-center"><?php echo $prod["libelle_produit"]; ?></p>
+                                            </div>
+                                        <?php
                                 }
                             ?>
-                        </select>
+                        </div>
                     </div>
                 </div>
 
 
-                <div id="container-prod-chart" class="chart-container flex justify-center items-center flex-col p-2 m-12">
+                <div id="container-prod-chart" class="hidden chart-container justify-center items-center flex-col p-2 m-12">
                     <div id="div-prod-chart" class="chart flex justify-center items-center relative m-4 w-[60vw] h-[50vh]">
                         <canvas id="prod-chart"></canvas>
                     </div>
