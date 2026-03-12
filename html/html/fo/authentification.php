@@ -1,7 +1,6 @@
 <?php
 ob_start(); // Démarre le tampon de sortie pour pouvoir utiliser ob_clean() plus tard
 include __DIR__ . '/../../01_premiere_connexion.php'; // Connexion à la base de données
-include __DIR__.'/../../php/structure/authentikATOR/AuthATOR.php';
 session_start(); // Démarrage de la session
 
 // $dt = new DateTime('now', new DateTimeZone('Europe/Paris'));
@@ -45,6 +44,7 @@ if (($_SERVER['REQUEST_METHOD'] == 'POST' && $_POST['auth'] === 'valide') || $co
 
     // Détecte si la requête vient d'un appel AJAX (fetch) pour adapter la réponse
     if ($_SERVER['REQUEST_METHOD'] == 'POST' && $_POST['auth'] === 'valide'){
+        include __DIR__.'/../../php/structure/authentikATOR/AuthATOR.php';
         $ajax = true;
         $auth = new AuthATOR($dbh, "Alizon", $idCompte, "");
         $auth->resetTentative();
@@ -183,7 +183,7 @@ if (($_SERVER['REQUEST_METHOD'] == 'POST' && $_POST['auth'] === 'valide') || $co
         }
     }
 } else {
-
+include __DIR__.'/../../php/structure/authentikATOR/AuthATOR.php';
 $auth = new AuthATOR($dbh, "Alizon", $idCompte, "");
 $finBloquage = $auth->getTempsRestant();
 $tempsRestant = ($finBloquage['restant']!==null)?strtotime($finBloquage['restant'])-$ts_local:0;
