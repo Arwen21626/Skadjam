@@ -21,19 +21,19 @@ if ($_GET['vientDe'] == "index") {
 }
 // Si le user vient de nouveaux produits
 elseif ($_GET['vientDe'] == "nP") {
-    $vientDe = "/fo/nouveaux_produits.php".$ancre;
+    $vientDe = "/html/fo/nouveaux_produits.php".$ancre;
 }
 // Si le user vient de recherche
 elseif ($_GET['vientDe'] == "recherche") {
-    $vientDe = "/fo/recherche.php".$ancre;
+    $vientDe = "/html/fo/recherche.php".$ancre;
 }
 // Si le user vient de futurs achats
 elseif ($_GET['vientDe'] == "fa") {
-    $vientDe = "/fo/futurs_achats.php".$ancre;
+    $vientDe = "/html/fo/futurs_achats.php".$ancre;
 }
 // Si le user vient de promotions
 elseif ($_GET['vientDe'] == "promo") {
-    $vientDe = "/fo/promotions.php".$ancre;
+    $vientDe = "/html/fo/promotions.php".$ancre;
 }
 
 $chemin = '';

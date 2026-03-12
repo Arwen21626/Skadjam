@@ -17,10 +17,6 @@ if (Object.keys(dataStats).length > 0) {
     let formatSelection = document.getElementById("select-format");
     let currentFormat = formatSelection.value;
 
-    let produitSelection = document.getElementById("select-produit");
-    let currentIdProd = produitSelection.value;
-    let currentLibelleProd = produitSelection.options[produitSelection.selectedIndex].textContent;
-
     let divProdChart = document.getElementById("div-prod-chart");
     let containerProdChart = document.getElementById("container-prod-chart");
     let divTextChart = document.createElement("h4");
@@ -157,7 +153,7 @@ if (Object.keys(dataStats).length > 0) {
     }
 
     arrangeYearAndCategDatas();
-    arrangeProdDatas();
+    // arrangeProdDatas();
 
     // Définitions du graphique des ventes totales générales et de sa config
     let allChart = document.getElementById("all-chart");
@@ -278,7 +274,7 @@ if (Object.keys(dataStats).length > 0) {
             plugins: {
                 title: {
                     display: true,
-                    text: currentLibelleProd + ' - ' + 'Année' + ' ' + currentAnnee,
+                    text: "Temp" + ' - ' + 'Année' + ' ' + currentAnnee,
                     color: '#000',
                     font: {
                         size: 21
@@ -317,16 +313,18 @@ if (Object.keys(dataStats).length > 0) {
 
     // Modifications selon le produit sélectionné
 
-    produitSelection.addEventListener("change", function () {
-        currentIdProd = produitSelection.value;
-        currentLibelleProd = produitSelection.options[produitSelection.selectedIndex].textContent;
+    // produitSelection.addEventListener("change", function () {
+    //     currentIdProd = produitSelection.value;
+    //     currentLibelleProd = produitSelection.options[produitSelection.selectedIndex].textContent;
 
-        arrangeProdDatas();
+    //     arrangeProdDatas();
 
-        updateDatasFields();
+    //     updateDatasFields();
 
-        updateCharts();
-    });
+    //     updateCharts();
+    // });
+
+    // Modification selon le format choisi
 
     formatSelection.addEventListener("change", function () {
         currentFormat = formatSelection.value;
