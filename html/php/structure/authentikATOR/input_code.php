@@ -18,7 +18,6 @@ if (document.querySelector("body").classList.contains("show")){
     parent.style.display = "flex"
 }
 //const txt_key = document.getElementById("txt-key");
-let nbValidRest = 3
 const eleFirst = document.getElementById("in1")
 
 
@@ -97,7 +96,8 @@ function sleep(ms) {
 }
 
 async function validation(){
-    for (i=0;i<4;i++){
+    valide = await submit(<?= $idClient ?>)
+    for (i=0;i<2;i++){
         valider.textContent = "Vérification"
         await sleep(200);
         valider.textContent = "Vérification."
@@ -107,11 +107,10 @@ async function validation(){
         valider.textContent = "Vérification..."
         await sleep(200);
     }
-    valide = await submit(<?= $idClient ?>)
+    
     if (!valide){
-        console.log("valide "+valide)
+        console.log("[input_code] valide "+valide)
         valider.textContent = "Vérifier"
-        nbValidRest--
         clearCode()
         goFirst()
     }
@@ -119,7 +118,7 @@ async function validation(){
 }
 
 function toggleValider(){
-    console.log(recup_code())
+    console.log("[input_code] "+recup_code())
     if (test_code(recup_code()) == true){
         valider.removeAttribute("disabled")
         valider.focus()
@@ -140,7 +139,7 @@ function recup_code(){
 
 function clearCode(){
     for (i=1;i<7;i++){
-        document.getElementById("in"+i).value = " "
+        document.getElementById("in"+i).value = ""
     }
 }
 
@@ -149,14 +148,14 @@ function test_code(code){
 }
 
 function goFirst(){
-    console.log("first")
+    console.log("[input_code] first")
     eleFirst.focus()
 }
 
 function goLast(){
     code = recup_code()
     size = (code.length<6)?code.length+1:6
-    console.log(code+" "+size)
+    console.log("[input_code] "+code+" "+size)
     let eleLast = document.getElementById("in"+size)
     eleLast.focus()
 }

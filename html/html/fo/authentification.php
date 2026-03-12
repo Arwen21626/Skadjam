@@ -2,7 +2,6 @@
 ob_start(); // Démarre le tampon de sortie pour pouvoir utiliser ob_clean() plus tard
 include __DIR__ . '/../../01_premiere_connexion.php'; // Connexion à la base de données
 include __DIR__.'/../../php/structure/authentikATOR/AuthATOR.php';
-include __DIR__.'/../../01_premiere_connexion.php';
 session_start(); // Démarrage de la session
 
 // $dt = new DateTime('now', new DateTimeZone('Europe/Paris'));
@@ -187,7 +186,7 @@ $tempsRestant = ($finBloquage['restant']!==null)?strtotime($finBloquage['restant
 </head>
 <body class="show">
     <?php include __DIR__.'/../../php/structure/header_front.php' ?>
-    <main class="flex flex-col">
+    <main class="flex flex-col items-center">
         
         <h2>Authentification à deux facteurs</h2>
         <?php
@@ -199,7 +198,7 @@ $tempsRestant = ($finBloquage['restant']!==null)?strtotime($finBloquage['restant
         <?php } else { ?>
 
         <?php include __DIR__.'/../../php/structure/authentikATOR/input_code.php' ?>
-        <p id="result" class="hidden"></p>
+        <p id="result" class="hidden "></p>
 
         <?php
         } ?>
@@ -208,18 +207,20 @@ $tempsRestant = ($finBloquage['restant']!==null)?strtotime($finBloquage['restant
 </body>
 <script src="./../../php/structure/authentikATOR/appelAJAX.js"></script>
 <script>
-    nbTentative = 0
+    
     const res = document.getElementById("result");
     let ret 
     let reponse
     goFirst()
 
     async function submit(idClient){
+        
+        res.style.color = "black"
         res.classList.add("hidden")
         initParam(idClient)
         let code = recup_code()
         ret = await verifOtp(code) // Vérifie le code OTP saisi par l'utilisateur
-        console.log("connection : "+ret)
+        console.log("[authentification] connection : "+ret)
         if (ret == 0){ // Code correct
             valider.textContent = "Connexion..."
             res.textContent = "Code bon."
@@ -238,10 +239,17 @@ $tempsRestant = ($finBloquage['restant']!==null)?strtotime($finBloquage['restant
             })
         } else { // Code incorrect
             res.classList.remove("hidden")
-            nbTentative++
+            addT = await addTentative()
+            console.log("[authentification] addT "+addT)
+            result = await getTentative()
+            console.log("[authentification] result "+result)
+            nbTentative = result['tentative']
+            console.log("[authentification] nbTentative "+nbTentative)
+            res.style.color = "#A70101"
             res.textContent = "Code incorrect, réessayez. "+(3-nbTentative)+" essais restants."
             if (nbTentative==3){
                 ret = await addTempsRestant()
+                ret1 = await resetTentative()
                 window.location.href = "./authentification.php"
             }
         }

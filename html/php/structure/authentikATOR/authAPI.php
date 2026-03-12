@@ -8,17 +8,21 @@ $action = $_POST['action'];
 $nomSociete = $_POST['societe'];
 $idClient = $_POST['idClient'];
 $secret = $_POST['secret'];//MODIF var secret
+$edition = ($_POST['edition']==0)?true:false;
 
 
-$auth = new AuthATOR($dbh, $nomSociete, $idClient, $secret);//MODIF param secret
+$auth = new AuthATOR($dbh, $nomSociete, $idClient, $secret, $edition);//MODIF param secret
 switch ($action) {
     case 'getSecret':
-        $secret = $auth->getSecret();
+        $secret_ = $auth->getSecret();
         $qrcode = $auth->getQrCode();
+        //$qrcode = "test";
+        $intiBefor = $auth->getInitBefor();
         ob_clean();
         echo json_encode([
-            "secret" => $secret,
-            "qrcode" => $qrcode
+            "secret" => $secret_,
+            "qrcode" => $qrcode,
+            "init" => ($intiBefor)?0:1,
         ]);
         break;
     

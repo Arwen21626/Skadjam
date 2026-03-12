@@ -8,6 +8,8 @@ if (isset($_SESSION['role']) && $_SESSION['role'] !== 'visiteur'){
 } else {
     header("Location : /index.php");
 }
+
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -51,34 +53,60 @@ if (isset($_SESSION['role']) && $_SESSION['role'] !== 'visiteur'){
     </main>
     
     <?php ($role === 'vendeur') ? include __DIR__.'/../php/structure/footer_back.php' : include __DIR__.'/../php/structure/footer_front.php' ?>
+    <section id="popup"  class="hidden fixed inset-0 backdrop-blur-sm bg-black/30 z-40">
+        <section class="flex z-10 bg-white flex-col absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 border-vertClair border-2 rounded-xl p-5 w-1/3">
+            <p class=" self-center">Attention</p>
+            <p>Vous possédez déja l'authentification à deux facteur.</p>
+            <p>En continuer ce processus un nouveau secret vous sera attribuer.</p>
+            <section class="flex flex-row justify-between">
+                <button id="annuler" onclick="backPopUp()" class="border-vertClair border-2 rounded-xl w-40 h-14 cursor-pointer m-5">Annuler</button>
+                <button id="continuer" onclick="closePopUp()" class="border-vertClair border-2 rounded-xl w-40 h-14 cursor-pointer m-5">Continuer</button>
+            </section>
+        </section>
+    </section>
 </body>
 <script src="./../php/structure/authentikATOR/appelAJAX.js"></script>
 <script>
     let secret
+    let qrcode
     
+    const popup = document.getElementById("popup")
     const view = document.getElementById("veiw-pass")
-    const btn_gen = document.getElementById("gen-key");
-    const input = document.getElementById("input-code");
-    const txt_key = document.getElementById("txt-key");
-    const img_qr = document.getElementById("img-qr-code");
-    const res = document.getElementById("result");
+    const btn_gen = document.getElementById("gen-key")
+    const input = document.getElementById("input-code")
+    const txt_key = document.getElementById("txt-key")
+    const img_qr = document.getElementById("img-qr-code")
+    const res = document.getElementById("result")
     const btnTerminer = document.getElementById("terminer")
     
 
     async function terminer(idCompte){
         initParam(idCompte,secret)
-        console.log("termine")
+        console.log("[pass_A2F] termine")
         let ret = await saveSecret()
-        history.back();
+        history.back()
     }
 
     async function generer(idCompte){
-        initParam(idCompte,secret)
+        initParam(idCompte,secret, 0)
         data = await getSecret()
         secret = data['secret']
         qrcode = data['qrcode']
-        console.log("secret : "+secret)
-        console.log("qrcode : "+qrcode)
+        initBefor = data['init']
+        console.log("[pass_A2F] data :")
+        console.log(data)
+        console.log("[pass_A2F] initBefor = "+initBefor)
+
+        if (initBefor==0){
+            showPopUp()
+        }else{
+            showView()
+        }
+    }
+
+    function showView(){
+        console.log("[pass_A2F] secret : "+secret)
+        console.log("[pass_A2F] qrcode : "+qrcode)
         txt = "Secret : "+secret
         txt_key.textContent = txt
         img_qr.src = qrcode
@@ -92,12 +120,25 @@ if (isset($_SESSION['role']) && $_SESSION['role'] !== 'visiteur'){
         })
     }
 
+    async function showPopUp() {
+        popup.style.display = "block"
+    }
+
+    async function closePopUp() {
+        popup.style.display = "none"
+        showView()
+    }
+
+    async function backPopUp() {
+        window.location.replace("<?= ($role === 'vendeur')? "bo/profil_vendeur.php": "fo/profil_client.php" ?>")
+    }
+
     async function submit(idCompte){
         initParam(idCompte,secret)
         const code = recup_code()
-        console.log("[INFO] submit() — code saisi :", code)
+        console.log("[pass_A2F] submit() — code saisi :", code)
         ret = await verifOtp(code)
-        console.log("[INFO] submit() — vérifié :", ret)
+        console.log("[pass_A2F] submit() — vérifié :", ret)
         if (ret == 0) {
             res.textContent = "Code bon."
             res.classList.remove("hidden")

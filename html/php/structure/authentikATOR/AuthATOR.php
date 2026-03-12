@@ -14,13 +14,16 @@ class AuthATOR{
     private $otpObj;
     private $userId;
     private $userName;
+    private $initBefor = false;
+    private $edition;
 
-    public function __construct($connBdd, $nomSociete, $idClient, $secret){
+    public function __construct($connBdd, $nomSociete, $idClient, $secret = "", $edition = false){
         if ($nomSociete != ""){
             $this->bdd = new BddAuthATOR();
             $this->conn = $connBdd;
             $this->entName = $nomSociete;
             $this->userId = $idClient;
+            $this->edition = $edition;
 
             if (empty($secret)){
                 AuthATOR::initSecret();
@@ -39,21 +42,41 @@ class AuthATOR{
         $this->secret = $ret['code_secret'];
         $this->userName = $ret['adresse_mail'];
 
-        if ($ret['code_secret'] == NULL){
-            $clock = new PSR20();
-    
-            $otp = TOTP::generate($clock);
+        if ($this->edition){
+            if ($ret['code_secret']!=NULL){
+                $this->initBefor = true; 
+            }
+                
+            $otp = TOTP::create();
             $otp->setIssuer($this->entName);
             $otp->setLabel($this->userName);
             $this->otpObj = $otp;
             $this->secret = $otp->getSecret();
         }
+/*
+        if ($ret['code_secret'] == NULL){
+
+            $clock = new PSR20();
+    
+            $otp = TOTP::create();
+            $otp->setIssuer($this->entName);
+            $otp->setLabel($this->userName);
+            $this->otpObj = $otp;
+            $this->secret = $otp->getSecret();
+        }else{
+            
+        }
+        */
         
     }
 
     //envoi le secret
     public function getSecret(){
         return $this->secret;
+    }
+
+    public function getInitBefor(){
+        return $this->initBefor;
     }
     
     //envoi le qrcode
