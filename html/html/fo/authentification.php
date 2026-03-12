@@ -38,9 +38,6 @@ $idClient = $dataConnexion['idCompte'];
 $idCompte = $dataConnexion['idCompte'];
 
 
-
-
-
 // Traitement si le formulaire A2F est validé ou si le compte est déjà connecté (pas de code secret)
 if (($_SERVER['REQUEST_METHOD'] == 'POST' && $_POST['auth'] === 'valide') || $connecte){
 
@@ -55,7 +52,25 @@ if (($_SERVER['REQUEST_METHOD'] == 'POST' && $_POST['auth'] === 'valide') || $co
 
     // Traitement spécifique aux clients : fusion du panier visiteur avec le panier du compte
     if($role === 'client'){
+        // Ajout des FA si nécessaire
+        $tabFABDD = [];
+        // Récupération des FA de la BDD
+        foreach($dbh->query("SELECT id_produit FROM sae3_skadjam._futur_achat WHERE id_client = $idCompte", PDO::FETCH_ASSOC) as $row){
+            $tabFABDD[$row['id_produit']] = $row['id_produit'];
+        }
+
+        // On compare pour éviter les doublons
+        // Parcours pour voir si le produit est dans la session
+        foreach ($_SESSION['futurAchat'] as $id) {
+            $trouve = array_search($id, $tabFABDD);
+            // Si le produit n'est pas déjà présent on l'ajoute
+            if ($trouve == false) {
+                $insertFA = $dbh->prepare("INSERT INTO sae3_skadjam._futur_achat(id_produit, id_client) VALUES (?,?)");
+                $insertFA->execute([$id, $idCompte]);
+            }
+        }
         
+
         // Début modif korentin
         // Permet d'ajouter tout les éléments du panier du visiteur au panier du compte auquel il se connecte
         if ($_SESSION['panier']['nb_produit_total'] > 0) 
