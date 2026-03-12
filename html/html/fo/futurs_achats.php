@@ -87,7 +87,7 @@ $lignes = array_slice($tabProd, $pageNumber*PAGE_SIZE-PAGE_SIZE, PAGE_SIZE);
     <?php include __DIR__ . "/../../php/structure/header_front.php"; ?>
     <?php include __DIR__ . "/../../php/structure/navbar_front.php"; ?>
     
-    <main class="md:min-h-[615px]">
+    <main class="min-h-[400px] md:min-h-[615px]">
         <h2>Vos futurs achats</h2>
         <?php if($tabFA == null){ ?>
                     <h4 class="text-center">Votre catalogue est vide.</h4>
