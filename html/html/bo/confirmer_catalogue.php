@@ -40,10 +40,25 @@
         foreach($tabProduit as $id => $valeurs){
             $idProduit = $valeurs['id_produit'];
             if($_POST[$idProduit] == "on"){
+                $img = "../.." . $valeurs['url_photo'];
+                $img = imagecreatefromwebp($img);
+                $tmp = tempnam(sys_get_temp_dir(), 'img') . '.png';
+                imagepng($img, $tmp);
+
+                $y = $pdf->GetY();
+                $pdf->Image($tmp, 10, $y, 30);
+
+                $pdf->SetXY(50, $y);
+
+                $pdf->SetX(50);
                 $titre = iconv('UTF-8', 'ISO-8859-1//TRANSLIT', $valeurs['titre']);
                 $pdf->Cell(40, 10, $titre, 0, 1);
-                $prix = iconv('UTF-8', 'ISO-8859-1//TRANSLIT', $valeurs['prix_ttc'] . " €");
+
+                $pdf->SetX(50);
+                $prix = iconv('UTF-8', 'Windows-1252', $valeurs['prix_ttc'] . " €");
                 $pdf->Cell(40, 10, $prix, 0, 1);
+
+                $pdf->Ln(10);
             }
         }
         $pdf->Output('D','Catalogue.pdf');
