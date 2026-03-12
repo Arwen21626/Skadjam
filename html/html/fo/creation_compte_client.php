@@ -12,11 +12,6 @@ unset($_SESSION['erreurs'], $_SESSION['old']);
 <?php include __DIR__."/../../php/structure/head_front.php";?>
 <head>
     <title>Création d'un compte client</title>
-    <style>
-        button a:hover {
-            color: #000; 
-        }
-    </style>
 </head>
 
 <body>
@@ -78,7 +73,7 @@ unset($_SESSION['erreurs'], $_SESSION['old']);
             <div class="flex flex-col basis-1/3 m-5 min-w-3xs">
                 <label for="mail">Adresse email* :</label>
                 <input class="border-4 border-beige rounded-2xl w-1/1 p-1 pl-3" type="mail" name="mail" id="mail" value="<?= htmlspecialchars($old['mail'] ?? '') ?>" required>
-                <?php if (isset($erreurs['mail'])) { echo "<p class='text-rouge' style='font-size: 0.90em'>L'adresse doit être au format : adresse@e.mail.</p>"; } ?>
+                <?php if (isset($erreurs['mail'])) { echo "<p class='text-rouge' style='font-size: 0.90em'>L'adresse doit être au format : adresse@e.mail </p>"; } ?>
             </div>
 
             <!-- Mot de passe -->

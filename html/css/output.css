@@ -1011,6 +1011,9 @@ input.quantite-prod-input {
   .border-collapse {
     border-collapse: collapse;
   }
+  .rotate-90 {
+    rotate: 90deg;
+  }
   .transform {
     transform: var(--tw-rotate-x,) var(--tw-rotate-y,) var(--tw-rotate-z,) var(--tw-skew-x,) var(--tw-skew-y,);
   }
@@ -1394,14 +1397,17 @@ input.quantite-prod-input {
   .bg-\[url\(\/images\/logo\/bootstrap_icon\/bookmark-fa-plus\.svg\)\] {
     background-image: url(/images/logo/bootstrap_icon/bookmark-fa-plus.svg);
   }
-  .bg-\[url\(\/images\/logo\/bootstrap_icon\/cart-fill-vert-fonce\.svg\)\] {
-    background-image: url(/images/logo/bootstrap_icon/cart-fill-vert-fonce.svg);
-  }
   .bg-\[url\(\/images\/logo\/bootstrap_icon\/cart-vert-fonce\.svg\)\] {
     background-image: url(/images/logo/bootstrap_icon/cart-vert-fonce.svg);
   }
   .bg-\[url\(\/images\/logo\/bootstrap_icon\/cart\.svg\)\] {
     background-image: url(/images/logo/bootstrap_icon/cart.svg);
+  }
+  .bg-\[url\(\/images\/logo\/bootstrap_icon\/chevron-down\.svg\)\] {
+    background-image: url(/images/logo/bootstrap_icon/chevron-down.svg);
+  }
+  .bg-\[url\(\/images\/logo\/bootstrap_icon\/chevron\.svg\)\] {
+    background-image: url(/images/logo/bootstrap_icon/chevron.svg);
   }
   .bg-\[url\(\/images\/logo\/bootstrap_icon\/house\.svg\)\] {
     background-image: url(/images/logo/bootstrap_icon/house.svg);
@@ -1417,6 +1423,21 @@ input.quantite-prod-input {
   }
   .bg-\[url\(\/images\/logo\/bootstrap_icon\/search\.svg\)\] {
     background-image: url(/images/logo/bootstrap_icon/search.svg);
+  }
+  .bg-\[url\(\/images\/logo\/bootstrap_icon\/three-dots-vertical\.svg\)\] {
+    background-image: url(/images/logo/bootstrap_icon/three-dots-vertical.svg);
+  }
+  .bg-\[url\(\/images\/logo\/bootstrap_icon\/tr-down\.svg\)\] {
+    background-image: url(/images/logo/bootstrap_icon/tr-down.svg);
+  }
+  .bg-\[url\(\/images\/logo\/bootstrap_icon\/tree-dots-vertical-down\.svg\)\] {
+    background-image: url(/images/logo/bootstrap_icon/tree-dots-vertical-down.svg);
+  }
+  .bg-\[url\(\/images\/logo\/bootstrap_icon\/tree-dots-vertical\.svg\)\] {
+    background-image: url(/images/logo/bootstrap_icon/tree-dots-vertical.svg);
+  }
+  .bg-\[url\(\/images\/logo\/bootstrap_icon\/tree-down\.svg\)\] {
+    background-image: url(/images/logo/bootstrap_icon/tree-down.svg);
   }
   .bg-\[url\(\/images\/logo\/bootstrap_icon\/truck\.svg\)\] {
     background-image: url(/images/logo/bootstrap_icon/truck.svg);
@@ -1884,13 +1905,6 @@ input.quantite-prod-input {
   .checked\:bg-beige {
     &:checked {
       background-color: var(--color-beige);
-    }
-  }
-  .hover\:bg-\[url\(\/images\/logo\/bootstrap_icon\/bookmark-fa-plus-fill\.svg\)\] {
-    &:hover {
-      @media (hover: hover) {
-        background-image: url(/images/logo/bootstrap_icon/bookmark-fa-plus-fill.svg);
-      }
     }
   }
   .hover\:bg-\[url\(\/images\/logo\/bootstrap_icon\/cart-fill-vert-fonce\.svg\)\] {

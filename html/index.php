@@ -2,13 +2,12 @@
     session_start();
 
     include __DIR__ . '/01_premiere_connexion.php';
-    include __DIR__. '/php/requetesBDD/recupFA.php';
+    
 
     const PAGE_SIZE = 24;
 
     require_once __DIR__ . "/php/fonctions.php";
     require_once __DIR__ . "/php/modification_variable.php";
-    
     require_once __DIR__ . "/php/verif_role_fo.php";
     
     if (!isset($_SESSION['role'])) {
@@ -18,6 +17,9 @@
                                "contient" => []]; //format du tableau représentant un produit : ['id' => 25, 'quantite_par_produit' => 2]
         $_SESSION['futurAchat'] = [];
     }
+
+    include __DIR__. '/php/requetesBDD/recup_FA.php';
+    include __DIR__. '/php/requetesBDD/recup_panier.php';
     
 
     foreach($dbh->query("SELECT pr.id_produit, pr.date_creation, libelle_produit, description_produit, prix_ttc, prix_remise, quantite_stock, id_categorie, pr.id_vendeur, note_moyenne, ph.id_photo, url_photo, alt, titre, id_compte, pu.id_promotion, label
@@ -44,9 +46,6 @@
         $_SESSION['pseudo'] = $pseudo;
         
     }
-
-    $fa = "FA";
-    $p = "Panier";
 ?>
 
 <!DOCTYPE html>
@@ -155,17 +154,13 @@
                             </a>
                             <div class="flex justify-end">
                                 <!-- Produit dans les futurs achats ? -->
-                                <a id="btnFA" href="./php/traitementFAPanier.php?idProduit=<?php echo $idProduit;?>&ajout=<?php echo $fa;?>&vientDe=index">
+                                <a id="btnFA" href="./php/traitementFAPanier.php?idProduit=<?php echo $idProduit;?>&ajout=fa&vientDe=index">
                                     <button class="cursor-pointer size-10 bg-no-repeat bg-size-[auto_40px]
                                     <?php 
                                     $bg = "bg-[url(/images/logo/bootstrap_icon/bookmark-fa-plus.svg)]";
-                                    if ($tabFA != null) {
-                                        foreach($tabFA as $prodFA) {
-                                            print_r ($prodFA);
-                                            if ($prodFA['id_produit'] == $idProduit) {
-                                                $bg = "bg-[url(/images/logo/bootstrap_icon/bookmark-fa-plus-fill.svg)]";
-                                            } 
-                                        }
+                                    $trouve = array_search($idProduit, $_SESSION['futurAchat']);
+                                    if ($trouve != null) {
+                                        $bg = "bg-[url(/images/logo/bootstrap_icon/bookmark-fa-plus-fill.svg)]";
                                     }
                                     echo $bg;
                                     ?>

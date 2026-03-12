@@ -65,6 +65,7 @@ try {
 
         $mdp = password_hash($_POST['mdp'], PASSWORD_DEFAULT);
 
+        // Insertion dans la table compte
         $stmt = $dbh->prepare(
             "INSERT INTO sae3_skadjam._compte (nom_compte, prenom_compte, adresse_mail, mot_de_passe, numero_telephone, bloque)
              VALUES (?, ?, ?, ?, ?, false) RETURNING id_compte"
@@ -72,6 +73,7 @@ try {
         $stmt->execute([$nom, $prenom, $mail, $mdp, $telephone]);
         $idCompte = $stmt->fetchColumn();
 
+        // Insertion dans la table client
         $stmt = $dbh->prepare(
             "INSERT INTO sae3_skadjam._client (id_compte, pseudo, date_naissance)
              VALUES (?, ?, ?)"
@@ -80,18 +82,26 @@ try {
 
         $_SESSION['idCompte'] = $idCompte;
         $_SESSION['role'] = 'client';
-
+        
         $stmt = $dbh->prepare(
             "SELECT id_panier FROM sae3_skadjam._client WHERE id_compte = ?"
         );
         $stmt->execute([$idCompte]);
         $idPanier = $stmt->fetchColumn();
 
+        // Insertion dans la table panier
         $stmt = $dbh->prepare(
             "INSERT INTO sae3_skadjam._panier (id_panier, nb_produit_total, montant_total_ttc, date_derniere_modif, id_client)
              VALUES (?, ?, ?, ?, ?)"
         );
         $stmt->execute([$idPanier, $_SESSION['panier']['nb_produit_total'], $_SESSION['panier']['montant_total_ttc'], $naissance, $idCompte]);
+
+        // Insertion dans la table futurs achats
+        $stmt = $dbh->prepare(
+            "INSERT INTO sae3_skadjam._futur_achat (id_produit, id_client)
+             VALUES (?, ?)"
+        );
+        $stmt->execute([$_SESSION['futurAchat'],$idCompte]);
 
         unset($_SESSION['old']);
         header('Location: /index.php');

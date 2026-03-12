@@ -8,4 +8,7 @@ if ($_SESSION['role'] == "client") {
         $tabFA[] = $row;
     }    
 }
+else{
+    $tabFA = $_SESSION['futurAchat'];
+}
 ?>
