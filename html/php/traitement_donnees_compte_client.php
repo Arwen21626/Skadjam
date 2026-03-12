@@ -101,8 +101,10 @@ try {
             "INSERT INTO sae3_skadjam._futur_achat (id_produit, id_client)
              VALUES (?, ?)"
         );
-        $stmt->execute([$_SESSION['futurAchat'],$idCompte]);
-
+        foreach ($_SESSION['futurAchat'] as $id) {
+            $stmt->execute([$id,$idCompte]);
+        }
+        
         unset($_SESSION['old']);
         header('Location: /index.php');
         exit;

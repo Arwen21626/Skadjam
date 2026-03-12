@@ -63,7 +63,7 @@
                             $estPromu = (!empty($stmt->fetch())); ?>
                             <section class="bg-bleu flex flex-col w-40 h-auto p-2 m-2 md:w-80 md:p-3">
                                 <!--affichage de la photo-->
-                                <a href= "<?php echo "details_produit.php?idProduit=".$idProduit;?>" class=" mb-3">
+                                <div class=" mb-3">
                                     <img class="w-auto h-40 md:h-80 mx-auto block" 
                                         src="<?php echo $valeurs['url_photo'];?>" 
                                         alt="<?php echo $valeurs['alt'];?>"
@@ -86,13 +86,13 @@
                                 
                                 <!--affichage du stock-->
                                 <p>En stock : <?php echo $valeurs['quantite_stock'];?></p>
-                                </a>  
+                                </div>  
 
                                 <!-- Ajouter au catalogue -->
                                 <div class="flex justify-end">
                                     <!-- appearance-none size-10 bg-no-repeat bg-size-[auto_40px] bg-[url(/images/logo/bootstrap_icon/bookmark-fa-plus.svg)] checked:bg-[url(/images/logo/bootstrap_icon/bookmark-fa-plus-fill.svg)] -->
                                     <!-- <input type="hidden" name="idProduit" value="<?php //echo $idProduit; ?>"> -->
-                                    <input type="checkbox" value="<?php echo $idProduit; ?>" name="ajouterAuCatalogue" id="ajouterAuCatalogue" class="cursor-pointer size-5" alt="Ajouter au catalogue" title="Ajouter au catalogue">
+                                    <input type="checkbox" name="<?php echo $idProduit; ?>" id="<?php echo $idProduit; ?>" class="cursor-pointer size-5" alt="Ajouter au catalogue" title="Ajouter au catalogue">
                                 </div>
                                 <!--affichage de la promotion-->
                                 <?php if($estPromu){ 
@@ -119,7 +119,7 @@
                             </section>
                     <?php } ?>
                     <a href="./index_vendeur.php">Annuler</a>
-                    <input type="submit" value="Valider">
+                    <input type="submit" value="Confirmer">
                 </form>         
                 <?php $dbh = null;
             } 
