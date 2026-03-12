@@ -42,6 +42,8 @@
             if($_POST[$idProduit] == "on"){
                 $titre = iconv('UTF-8', 'ISO-8859-1//TRANSLIT', $valeurs['titre']);
                 $pdf->Cell(40, 10, $titre, 0, 1);
+                $prix = iconv('UTF-8', 'ISO-8859-1//TRANSLIT', $valeurs['prix_ttc'] . " €");
+                $pdf->Cell(40, 10, $prix, 0, 1);
             }
         }
         $pdf->Output('D','Catalogue.pdf');
