@@ -30,7 +30,7 @@
         die();
     }
 
-    if($_POST['action'] == 'confirmer'){
+    if(isset($_POST['action']) && $_POST['action'] == 'confirmer'){
         // Traitement de la confirmation
         require '../../../vendor/autoload.php';
 
@@ -39,7 +39,7 @@
         $pdf->SetFont('Arial', '', 16);
         foreach($tabProduit as $id => $valeurs){
             $idProduit = $valeurs['id_produit'];
-            if($_POST[$idProduit] == "on"){
+            if(isset($_POST[$idProduit]) && $_POST[$idProduit] == "on"){
                 $img = "../.." . $valeurs['url_photo'];
                 $img = imagecreatefromwebp($img);
                 $tmp = tempnam(sys_get_temp_dir(), 'img') . '.png';
@@ -112,7 +112,7 @@
                         <?php $ligneIndex = 1;
                             foreach($tabProduit as $id => $valeurs){
                                 $idProduit = $valeurs['id_produit'];
-                                if($_POST[$idProduit] == "on"){ ?>
+                                if(isset($_POST[$idProduit]) && $_POST[$idProduit] == "on"){ ?>
                                     <input type="hidden" name="<?php echo $idProduit; ?>" id="<?php echo $idProduit; ?>" value="on">
                                     <tr class="py-4 <?= ligneCouleur($ligneIndex)?>">
                                         <!---informations des stocks--->
