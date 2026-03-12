@@ -51,7 +51,7 @@
                 $lignes = $tabProduit; 
 
                 //affiche la photo du produit, son nom, son prix et sa note, son stock ?>
-                <article class="flex flex-row flex-wrap justify-around">
+                <form class="flex flex-row flex-wrap justify-around" method="post" action="./confirmer_catalogue.php">
                     <?php 
                         foreach($lignes as $id => $valeurs){
                             $idProduit = $valeurs['id_produit'];
@@ -86,7 +86,14 @@
                                 
                                 <!--affichage du stock-->
                                 <p>En stock : <?php echo $valeurs['quantite_stock'];?></p>
-                                </a>     
+                                </a>  
+
+                                <!-- Ajouter au catalogue -->
+                                <div class="flex justify-end">
+                                    <!-- appearance-none size-10 bg-no-repeat bg-size-[auto_40px] bg-[url(/images/logo/bootstrap_icon/bookmark-fa-plus.svg)] checked:bg-[url(/images/logo/bootstrap_icon/bookmark-fa-plus-fill.svg)] -->
+                                    <!-- <input type="hidden" name="idProduit" value="<?php //echo $idProduit; ?>"> -->
+                                    <input type="checkbox" value="<?php echo $idProduit; ?>" name="ajouterAuCatalogue" id="ajouterAuCatalogue" class="cursor-pointer size-5" alt="Ajouter au catalogue" title="Ajouter au catalogue">
+                                </div>
                                 <!--affichage de la promotion-->
                                 <?php if($estPromu){ 
                                         $stmt = $dbh->prepare("SELECT *
@@ -111,7 +118,9 @@
                                 <?php }} ?> 
                             </section>
                     <?php } ?>
-                </article>         
+                    <a href="./index_vendeur.php">Annuler</a>
+                    <input type="submit" value="Valider">
+                </form>         
                 <?php $dbh = null;
             } 
 
