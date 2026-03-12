@@ -2224,6 +2224,11 @@ input.quantite-prod-input {
       height: auto;
     }
   }
+  .md\:h-min {
+    @media (width >= 48rem) {
+      height: min-content;
+    }
+  }
   .md\:min-h-\[615px\] {
     @media (width >= 48rem) {
       min-height: 615px;
