@@ -7,22 +7,7 @@
     require_once __DIR__ . "/../../php/modification_variable.php";
     const PAGE_SIZE = 24;
     $idCompte = $_SESSION['idCompte'];
-    $tabProduit = [];
-    foreach($dbh->query("SELECT *
-        FROM sae3_skadjam._produit pr
-        INNER join sae3_skadjam._montre m
-            ON pr.id_produit=m.id_produit
-        INNER JOIN sae3_skadjam._photo ph  
-            ON ph.id_photo = m.id_photo
-        INNER JOIN sae3_skadjam._vendeur v
-            ON pr.id_vendeur = v.id_compte
-        WHERE v.id_compte = $idCompte
-            AND pr.est_supprime = false"
-        , PDO::FETCH_ASSOC) as $row){
-
-        $tabProduit[] = $row;
-    }
-
+    
     $stmt = $dbh->query("SELECT raison_sociale FROM sae3_skadjam._vendeur WHERE id_compte = $idCompte");
     $row = $stmt->fetch(PDO::FETCH_ASSOC);
     $raisonSociale = $row['raison_sociale'];
@@ -136,7 +121,7 @@
                                         title="<?php echo $valeurs['titre'];?>">
                                         
                                 <!--affichage du nom du produit-->
-                                <p class=" max-w-36"><?php echo $valeurs['libelle_produit'];?></p> 
+                                <p class=" max-w-70"><?php echo $valeurs['libelle_produit'];?></p> 
 
                                 <!--affichage du prix du produit-->   
                                 <div class="flex flex-row justify-between items-center">

@@ -199,13 +199,13 @@
 
             <!-- Déconnexion -->
             <a href="/php/deconnexion.php" class="border-vertFonce border-2 md:rounded-2xl rounded-xl md:w-72 w-60 md:h-14 h-10 p-2 m-1 cursor-pointer flex justify-center items-center">
-                <button>Se déconnecter</button>
+                <button class="cursor-pointer">Se déconnecter</button>
             </a>
 
 
             <!-- A2F -->
             <a href="/html/pass_A2F.php" class="border-vertFonce border-2 md:rounded-2xl rounded-xl md:w-72 w-60 md:h-14 h-10 p-2 m-1 cursor-pointer flex justify-center items-center">
-                <button>Connexion A2F</button>
+                <button class="cursor-pointer">Connexion <abbr title="Authentification à deux facteurs">A2F</abbr></button>
             </a>
         </div>
 
