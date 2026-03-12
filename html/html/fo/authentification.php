@@ -44,7 +44,7 @@ if (($_SERVER['REQUEST_METHOD'] == 'POST' && $_POST['auth'] === 'valide') || $co
 
     // Détecte si la requête vient d'un appel AJAX (fetch) pour adapter la réponse
     if ($_SERVER['REQUEST_METHOD'] == 'POST' && $_POST['auth'] === 'valide'){
-        include __DIR__.'/../../php/structure/authentikATOR/AuthATOR.php';
+        include __DIR__.'/../../php/structure/authentikATOR/AuthATOR.php'; // koko ne pouvait pas faire de commande composer :/
         $ajax = true;
         $auth = new AuthATOR($dbh, "Alizon", $idCompte, "");
         $auth->resetTentative();

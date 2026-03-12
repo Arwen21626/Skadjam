@@ -68,6 +68,10 @@ switch ($action) {
         $auth->resetTentative();
         echo json_encode(['resetTentative'=>0]);
         break;
+
+    case 'delSecret':
+        $auth->delSecret();
+        echo json_encode(['delSecret'=>0]);
     
     default:
         http_response_code(400);

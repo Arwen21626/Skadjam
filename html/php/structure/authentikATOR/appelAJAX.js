@@ -77,3 +77,9 @@ async function resetTentative(){
     return ret
 }
 
+async function delSecret(){
+    ret = await callApi('delSecret')
+    ret = ret['delSecret']
+    console.log('[appelAJAX] delSecret = '+ret)
+}
+
