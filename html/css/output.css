@@ -772,9 +772,6 @@ input.quantite-prod-input {
   .h-full {
     height: 100%;
   }
-  .min-h-\[40px\] {
-    min-height: 40px;
-  }
   .min-h-\[400px\] {
     min-height: 400px;
   }
@@ -2305,11 +2302,6 @@ input.quantite-prod-input {
   .md\:h-auto {
     @media (width >= 48rem) {
       height: auto;
-    }
-  }
-  .md\:h-min {
-    @media (width >= 48rem) {
-      height: min-content;
     }
   }
   .md\:min-h-\[615px\] {
