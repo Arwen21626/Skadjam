@@ -342,6 +342,9 @@ input.quantite-prod-input {
   .top-48 {
     top: calc(var(--spacing, 0.25rem) * 48);
   }
+  .top-\[84px\] {
+    top: 84px;
+  }
   .right-0 {
     right: calc(var(--spacing, 0.25rem) * 0);
   }
@@ -407,6 +410,9 @@ input.quantite-prod-input {
   }
   .z-40 {
     z-index: 40;
+  }
+  .z-50 {
+    z-index: 50;
   }
   .order-1 {
     order: 1;
@@ -510,6 +516,9 @@ input.quantite-prod-input {
   .mx-auto {
     margin-inline: auto;
   }
+  .my-1 {
+    margin-block: calc(var(--spacing, 0.25rem) * 1);
+  }
   .my-5 {
     margin-block: calc(var(--spacing, 0.25rem) * 5);
   }
@@ -588,6 +597,9 @@ input.quantite-prod-input {
   .mr-16 {
     margin-right: calc(var(--spacing, 0.25rem) * 16);
   }
+  .mr-\[2em\] {
+    margin-right: 2em;
+  }
   .mb-0 {
     margin-bottom: calc(var(--spacing, 0.25rem) * 0);
   }
@@ -651,6 +663,9 @@ input.quantite-prod-input {
   .ml-7 {
     margin-left: calc(var(--spacing, 0.25rem) * 7);
   }
+  .ml-8 {
+    margin-left: calc(var(--spacing, 0.25rem) * 8);
+  }
   .ml-10 {
     margin-left: calc(var(--spacing, 0.25rem) * 10);
   }
@@ -694,6 +709,10 @@ input.quantite-prod-input {
   .size-1\/2 {
     width: calc(1/2 * 100%);
     height: calc(1/2 * 100%);
+  }
+  .size-5 {
+    width: calc(var(--spacing, 0.25rem) * 5);
+    height: calc(var(--spacing, 0.25rem) * 5);
   }
   .size-7 {
     width: calc(var(--spacing, 0.25rem) * 7);
@@ -915,6 +934,9 @@ input.quantite-prod-input {
   }
   .w-40 {
     width: calc(var(--spacing, 0.25rem) * 40);
+  }
+  .w-43 {
+    width: calc(var(--spacing, 0.25rem) * 43);
   }
   .w-45 {
     width: calc(var(--spacing, 0.25rem) * 45);
@@ -1529,6 +1551,9 @@ input.quantite-prod-input {
   .p-2 {
     padding: calc(var(--spacing, 0.25rem) * 2);
   }
+  .p-3 {
+    padding: calc(var(--spacing, 0.25rem) * 3);
+  }
   .p-4 {
     padding: calc(var(--spacing, 0.25rem) * 4);
   }
@@ -1658,6 +1683,10 @@ input.quantite-prod-input {
   .text-4xl {
     font-size: var(--text-4xl, 2.25rem);
     line-height: var(--tw-leading, var(--text-4xl--line-height, calc(2.5 / 2.25)));
+  }
+  .text-base {
+    font-size: var(--text-base, 1rem);
+    line-height: var(--tw-leading, var(--text-base--line-height, calc(1.5 / 1)));
   }
   .font-bold {
     --tw-font-weight: var(--font-weight-bold, 700);
@@ -2581,6 +2610,15 @@ input.quantite-prod-input {
   .md\:gap-1 {
     @media (width >= 48rem) {
       gap: calc(var(--spacing, 0.25rem) * 1);
+    }
+  }
+  .md\:space-y-0 {
+    @media (width >= 48rem) {
+      :where(& > :not(:last-child)) {
+        --tw-space-y-reverse: 0;
+        margin-block-start: calc(calc(var(--spacing, 0.25rem) * 0) * var(--tw-space-y-reverse));
+        margin-block-end: calc(calc(var(--spacing, 0.25rem) * 0) * calc(1 - var(--tw-space-y-reverse)));
+      }
     }
   }
   .md\:space-y-2 {

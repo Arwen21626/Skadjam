@@ -1,4 +1,6 @@
 <?php 
+    error_reporting(E_ALL & ~E_DEPRECATED);
+    ob_start();
     session_start();
     require_once(__DIR__ . "/../../php/verif_role_bo.php");
     include(__DIR__ .'/../../01_premiere_connexion.php');
@@ -43,9 +45,20 @@
         foreach($tabProduit as $id => $valeurs){
             $idProduit = $valeurs['id_produit'];
             $imgPath = "../.." . $valeurs['url_photo'];
+            $ext = strtolower(pathinfo($imgPath, PATHINFO_EXTENSION));
             if(isset($_POST[$idProduit]) && $_POST[$idProduit] == "on"){
                 if(file_exists($imgPath)){
-                    $img = imagecreatefromwebp($imgPath);
+                    $img = false;
+
+                    if ($ext === "webp") {
+                        $img = imagecreatefromwebp($imgPath);
+                    }
+                    elseif ($ext === "png") {
+                        $img = imagecreatefrompng($imgPath);
+                    }
+                    elseif ($ext === "jpg" || $ext === "jpeg") {
+                        $img = imagecreatefromjpeg($imgPath);
+                    }
 
                     if($img !== false){
                         if($i===0){
@@ -90,19 +103,22 @@
                             $j=0;
                         }
                     } else {
-                        echo "Impossible de charger l'image : $imgPath";
+                        error_log("Impossible de charger l'image : $imgPath");
                     }
                 } else {
-                    echo "Fichier image inexistant : $imgPath";
+                    error_log("Fichier image inexistant : $imgPath");
                 }
             }
         }
         $pdf->Output('D','Catalogue.pdf');
+        exit;
     }else{ 
         if(empty($_POST)){
-        header("Location: catalogue.php");
-        exit();
-    } ?>
+            header("Location: catalogue.php");
+            exit();
+        } 
+    }?>
+    
 <!DOCTYPE html>
 <html lang="fr">
 <?php include(__DIR__ . "/../../php/structure/head_back.php");?>
@@ -197,8 +213,8 @@
         for(let i = 1; i < lignesTab.length; i++){
             seuil = lignesTab[i].children[4].children[1].textContent;
 
+        }
 
+    </script>
 </body>
 </html>
-
-<?php } ?>

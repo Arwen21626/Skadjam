@@ -1,7 +1,7 @@
 <?php
+ob_start();
 require_once __DIR__.'/AuthATOR.php';
 require_once __DIR__.'/../../../../authentikATOR/src/PSR20.php';
-
 header('Content-Type: application/json');
 
 $action = $_POST['action'];

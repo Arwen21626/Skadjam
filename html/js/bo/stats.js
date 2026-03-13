@@ -14,12 +14,15 @@ if (Object.keys(dataStats).length > 0) {
     let anneeSelection = document.getElementById("select-annee"); // Input select pour l'année
     let currentAnnee = anneeSelection.value;
 
+    let currentLibelleProd = "Temp";
+
     let formatSelection = document.getElementById("select-format");
     let currentFormat = formatSelection.value;
 
     let divProdChart = document.getElementById("div-prod-chart");
     let containerProdChart = document.getElementById("container-prod-chart");
-    let divTextChart = document.createElement("h4");
+    let divTextChart = document.createElement("div");
+    let textChart = document.createElement("h4");
 
 
     // Champs de données pour les diagrammes
@@ -81,7 +84,7 @@ if (Object.keys(dataStats).length > 0) {
         });
     }
 
-    function arrangeProdDatas() {
+    function arrangeProdDatas(container) {
 
         dataProdVentesVolume = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
         dataProdVentesMontant = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
@@ -93,10 +96,10 @@ if (Object.keys(dataStats).length > 0) {
         Object.keys(dataStats[currentAnnee]).forEach(mois => {
             let i = Number(mois);
             
-            if (dataStats[currentAnnee][mois]["produits"][currentIdProd]) {
-                dataProdVentesVolume[i - 1] = Number(dataStats[currentAnnee][mois]["produits"][currentIdProd]["nb_ventes_totales"]);
-                dataProdVentesMontant[i - 1] = Number(dataStats[currentAnnee][mois]["produits"][currentIdProd]["montant_total_ttc"]);
-                nbProd += Number(dataStats[currentAnnee][mois]["produits"][currentIdProd]["nb_ventes_totales"]);
+            if (dataStats[currentAnnee][mois]["produits"][container.id]) {
+                dataProdVentesVolume[i - 1] = Number(dataStats[currentAnnee][mois]["produits"][container.id]["nb_ventes_totales"]);
+                dataProdVentesMontant[i - 1] = Number(dataStats[currentAnnee][mois]["produits"][container.id]["montant_total_ttc"]);
+                nbProd += Number(dataStats[currentAnnee][mois]["produits"][container.id]["nb_ventes_totales"]);
             }
             else {
                 dataProdVentesVolume[i - 1] = 0;
@@ -107,13 +110,20 @@ if (Object.keys(dataStats).length > 0) {
         if (nbProd == 0){
             divProdChart.classList.add("hidden");
             divTextChart.classList.remove("hidden");
-            divTextChart.textContent = "Aucune statistique enregistrée pour ce produit en " + currentAnnee;
+            textChart.classList.add("text-center");
+            textChart.textContent = "Aucune statistique enregistrée pour ce produit en " + currentAnnee;
 
+            divTextChart.classList.add("justify-center", "flex", "flex-col", "w-[60vw]", "h-[50vh]")
+
+            divTextChart.appendChild(textChart);
             containerProdChart.appendChild(divTextChart);
+
+            container.querySelector("div").textContent = "Aucune stat enregistrée";
         }
         else {
             divProdChart.classList.remove("hidden");
             divTextChart.classList.add("hidden");
+            currentLibelleProd = container.querySelector("p").textContent;
         }
     }
 
@@ -153,7 +163,6 @@ if (Object.keys(dataStats).length > 0) {
     }
 
     arrangeYearAndCategDatas();
-    // arrangeProdDatas();
 
     // Définitions du graphique des ventes totales générales et de sa config
     let allChart = document.getElementById("all-chart");
@@ -274,7 +283,7 @@ if (Object.keys(dataStats).length > 0) {
             plugins: {
                 title: {
                     display: true,
-                    text: "Temp" + ' - ' + 'Année' + ' ' + currentAnnee,
+                    text: currentLibelleProd + ' - ' + 'Année' + ' ' + currentAnnee,
                     color: '#000',
                     font: {
                         size: 21
@@ -304,25 +313,11 @@ if (Object.keys(dataStats).length > 0) {
         currentAnnee = anneeSelection.value;
 
         arrangeYearAndCategDatas();
-        arrangeProdDatas();
 
         updateDatasFields();
 
         updateCharts();
     });
-
-    // Modifications selon le produit sélectionné
-
-    // produitSelection.addEventListener("change", function () {
-    //     currentIdProd = produitSelection.value;
-    //     currentLibelleProd = produitSelection.options[produitSelection.selectedIndex].textContent;
-
-    //     arrangeProdDatas();
-
-    //     updateDatasFields();
-
-    //     updateCharts();
-    // });
 
     // Modification selon le format choisi
 
@@ -332,6 +327,66 @@ if (Object.keys(dataStats).length > 0) {
         updateDatasFields();
         updateCharts();
     });
+
+    // Modifications selon le produit sélectionné
+
+    let chartOpened = false;
+    let overlayChart = document.querySelector("#overlay-chart");
+
+    function showProdChart() {
+
+        if (chartOpened == false) {
+
+            overlayChart.classList.remove("hidden")
+            containerProdChart.classList.remove("hidden");
+
+            chartOpened = true;
+        }
+    }
+
+    document.querySelectorAll(".produit").forEach(container => {
+
+        // balise div pour pouvoir changer la taille du texte, 
+        // car la définition dans le input pour les balises <p> écrasent tout même à la redéfinition
+        let divInfoStatIsRegistered = document.createElement("div");
+        divInfoStatIsRegistered.classList.add("text-center", "text-base", "mb-4", "mt-2");
+        divInfoStatIsRegistered.textContent = "Stat enregistrée";
+
+        container.appendChild(divInfoStatIsRegistered);
+
+        arrangeProdDatas(container);
+
+        container.addEventListener("click", function (){
+            
+            arrangeProdDatas(container);
+            
+            updateDatasFields();
+
+            updateCharts();
+
+            showProdChart();
+        });
+    });
+
+    document.querySelector("#overlay-chart").addEventListener("click", function () {
+
+        if (chartOpened == true) {
+            overlayChart.classList.add("hidden")
+            containerProdChart.classList.add("hidden");
+
+            chartOpened = false;
+        }
+    });
+
+    containerProdChart.addEventListener("click", function () {
+
+        if (chartOpened == true) {
+            overlayChart.classList.add("hidden")
+            containerProdChart.classList.add("hidden");
+
+            chartOpened = false;
+        }
+    });    
 }
 
 
