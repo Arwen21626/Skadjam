@@ -695,10 +695,6 @@ input.quantite-prod-input {
     width: calc(1/2 * 100%);
     height: calc(1/2 * 100%);
   }
-  .size-5 {
-    width: calc(var(--spacing, 0.25rem) * 5);
-    height: calc(var(--spacing, 0.25rem) * 5);
-  }
   .size-7 {
     width: calc(var(--spacing, 0.25rem) * 7);
     height: calc(var(--spacing, 0.25rem) * 7);
@@ -1989,13 +1985,6 @@ input.quantite-prod-input {
   .checked\:bg-\[url\(\/images\/logo\/bootstrap_icon\/bookmark-fa-plus-fill\.svg\)\] {
     &:checked {
       background-image: url(/images/logo/bootstrap_icon/bookmark-fa-plus-fill.svg);
-    }
-  }
-  .hover\:bg-\[url\(\/images\/logo\/bootstrap_icon\/cart-fill-vert-fonce\.svg\)\] {
-    &:hover {
-      @media (hover: hover) {
-        background-image: url(/images/logo/bootstrap_icon/cart-fill-vert-fonce.svg);
-      }
     }
   }
   .hover\:bg-\[url\(\/images\/logo\/bootstrap_icon\/cart-fill\.svg\)\] {
