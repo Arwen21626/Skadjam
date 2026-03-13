@@ -132,7 +132,7 @@ $lignes = array_slice($tabProd, $pageNumber*PAGE_SIZE-PAGE_SIZE, PAGE_SIZE);
                     <!-- boutons futurs achats & panier -->
                     <div class="flex justify-end">
                         <!-- Produit dans les futurs achats ? -->
-                        <a id="btnFA" href="./php/traitementFAPanier.php?idProduit=<?php echo $idProduit;?>&ajout=fa&vientDe=index">
+                        <a id="btnFA" href="/php/traitementFAPanier.php?idProduit=<?php echo $idProduit;?>&ajout=fa&vientDe=fa">
                             <button class="cursor-pointer size-10 bg-no-repeat bg-size-[auto_40px]
                             <?php 
                             $bg = "bg-[url(/images/logo/bootstrap_icon/bookmark-fa-plus.svg)]";
@@ -166,26 +166,26 @@ $lignes = array_slice($tabProd, $pageNumber*PAGE_SIZE-PAGE_SIZE, PAGE_SIZE);
                         </button>
                     </div> 
                     <!--affichage de la promotion-->
-                        <?php if($estPromu){ 
-                            $stmt = $dbh->prepare("SELECT *
-                                                    FROM sae3_skadjam._promu pu
-                                                    INNER JOIN sae3_skadjam._promotion pn
-                                                        ON pu.id_promotion = pn.id_promotion
-                                                    WHERE pu.id_produit = :id_produit");
-                            $stmt->execute([':id_produit' => $idProduit]);
-                            $promotion = $stmt->fetch(PDO::FETCH_ASSOC);
-                            $debutPromo = formatDate($promotion['date_debut_promotion']);
-                            $finPromo = null;
-                            if($promotion['date_fin_promotion'] !== null){
-                                $finPromo = formatDate($promotion['date_fin_promotion']);
-                            }
-                            $labelPromo = $promotion['label'];
-                            if($debutPromo <= date('Y-m-d') && ($finPromo == null || $finPromo >= date('Y-m-d')) && !empty($labelPromo)){
-                        ?>
-                        <div class="bg-rouge absolute w-36 md:w-74 underline text-beige pt-2 pb-1.5">
-                            <h4 class="text-center text-beige overline m-0"><?= htmlspecialchars($labelPromo); ?></h4>
-                        </div>
-                        <?php }} ?>
+                    <?php if($estPromu){ 
+                        $stmt = $dbh->prepare("SELECT *
+                                                FROM sae3_skadjam._promu pu
+                                                INNER JOIN sae3_skadjam._promotion pn
+                                                    ON pu.id_promotion = pn.id_promotion
+                                                WHERE pu.id_produit = :id_produit");
+                        $stmt->execute([':id_produit' => $idProduit]);
+                        $promotion = $stmt->fetch(PDO::FETCH_ASSOC);
+                        $debutPromo = formatDate($promotion['date_debut_promotion']);
+                        $finPromo = null;
+                        if($promotion['date_fin_promotion'] !== null){
+                            $finPromo = formatDate($promotion['date_fin_promotion']);
+                        }
+                        $labelPromo = $promotion['label'];
+                        if($debutPromo <= date('Y-m-d') && ($finPromo == null || $finPromo >= date('Y-m-d')) && !empty($labelPromo)){
+                    ?>
+                    <div class="bg-rouge absolute w-36 md:w-74 underline text-beige pt-2 pb-1.5">
+                        <h4 class="text-center text-beige overline m-0"><?= htmlspecialchars($labelPromo); ?></h4>
+                    </div>
+                    <?php }} ?>
                 </div>
             <?php } ?>
         </div>
@@ -217,7 +217,6 @@ $lignes = array_slice($tabProd, $pageNumber*PAGE_SIZE-PAGE_SIZE, PAGE_SIZE);
                     <p id="btnRetour" class="flex items-center justify-center border-2 border-vertClair rounded-2xl w-25 h-12 cursor-pointer">Retour</p>
                     <input class="border-2 border-vertClair rounded-2xl w-25 h-12 cursor-pointer" type="submit" value="Valider">
                 </div>
-                
             </form>
         </div>
 
