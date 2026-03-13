@@ -1,4 +1,6 @@
 <?php 
+    error_reporting(E_ALL & ~E_DEPRECATED);
+    ob_start();
     session_start();
     require_once(__DIR__ . "/../../php/verif_role_bo.php");
     include(__DIR__ .'/../../01_premiere_connexion.php');
@@ -43,61 +45,78 @@
         foreach($tabProduit as $id => $valeurs){
             $idProduit = $valeurs['id_produit'];
             $imgPath = "../.." . $valeurs['url_photo'];
+            $ext = strtolower(pathinfo($imgPath, PATHINFO_EXTENSION));
+            if(isset($_POST[$idProduit]) && $_POST[$idProduit] == "on"){
+                if(file_exists($imgPath)){
+                    $img = false;
 
-            if(file_exists($imgPath)){
-                $img = imagecreatefromwebp($imgPath);
-
-                if($img !== false){
-                    if($i===0){
-                        $tmp = tempnam(sys_get_temp_dir(), 'img') . '.png';
-                        imagepng($img, $tmp);
-
-                        $y = $pdf->GetY();
-                        $pdf->Image($tmp, 5, $y, 0, 20);
-
-                        $pdf->SetXY(35, $y);
-
-                        $titre = iconv('UTF-8', 'ISO-8859-1//TRANSLIT', $valeurs['titre']);
-                        $pdf->MultiCell(65, 10, $titre, 0, 1);
-
-                        $pdf->SetX(35);
-                        $prix = iconv('UTF-8', 'Windows-1252', $valeurs['prix_ttc'] . " €");
-                        $pdf->MultiCell(65, 10, $prix, 0, 0);
-
-                        $i=1;
-                    }else{
-                        $tmp = tempnam(sys_get_temp_dir(), 'img') . '.png';
-                        imagepng($img, $tmp);
-
-                        $pdf->Image($tmp, 110, $y, 0, 20);
-
-                        $pdf->SetXY(140, $y);
-
-                        $titre = iconv('UTF-8', 'ISO-8859-1//TRANSLIT', $valeurs['titre']);
-                        $pdf->MultiCell(65, 10, $titre, 0, 1);
-
-                        $pdf->SetX(140);
-                        $prix = iconv('UTF-8', 'Windows-1252', $valeurs['prix_ttc'] . " €");
-                        $pdf->MultiCell(65, 10, $prix, 0, 0);
-
-                        $pdf->Ln(10);
-
-                        $i=0;
+                    if ($ext === "webp") {
+                        $img = imagecreatefromwebp($imgPath);
                     }
-                    $j++;
-                    if($j===18){
-                        $pdf->AddPage();
-                        $j=0;
+                    elseif ($ext === "png") {
+                        $img = imagecreatefrompng($imgPath);
+                    }
+                    elseif ($ext === "jpg" || $ext === "jpeg") {
+                        $img = imagecreatefromjpeg($imgPath);
+                    }
+
+                    if($img !== false){
+                        if($i===0){
+                            $tmp = tempnam(sys_get_temp_dir(), 'img') . '.png';
+                            imagepng($img, $tmp);
+
+                            $y = $pdf->GetY();
+                            $pdf->Image($tmp, 5, $y, 0, 20);
+
+                            $pdf->SetXY(35, $y);
+
+                            $titre = iconv('UTF-8', 'ISO-8859-1//TRANSLIT', $valeurs['titre']);
+                            $pdf->MultiCell(65, 10, $titre, 0, 1);
+
+                            $pdf->SetX(35);
+                            $prix = iconv('UTF-8', 'Windows-1252', $valeurs['prix_ttc'] . " €");
+                            $pdf->MultiCell(65, 10, $prix, 0, 0);
+
+                            $i=1;
+                        }else{
+                            $tmp = tempnam(sys_get_temp_dir(), 'img') . '.png';
+                            imagepng($img, $tmp);
+
+                            $pdf->Image($tmp, 110, $y, 0, 20);
+
+                            $pdf->SetXY(140, $y);
+
+                            $titre = iconv('UTF-8', 'ISO-8859-1//TRANSLIT', $valeurs['titre']);
+                            $pdf->MultiCell(65, 10, $titre, 0, 1);
+
+                            $pdf->SetX(140);
+                            $prix = iconv('UTF-8', 'Windows-1252', $valeurs['prix_ttc'] . " €");
+                            $pdf->MultiCell(65, 10, $prix, 0, 0);
+
+                            $pdf->Ln(10);
+
+                            $i=0;
+                        }
+                        $j++;
+                        if($j===18){
+                            $pdf->AddPage();
+                            $j=0;
+                        }
+                    } else {
+                        error_log("Impossible de charger l'image : $imgPath");
                     }
                 } else {
-                    echo "Impossible de charger l'image : $imgPath";
+                    error_log("Fichier image inexistant : $imgPath");
                 }
-            } else {
-                echo "Fichier image inexistant : $imgPath";
             }
         }
         $pdf->Output('D','Catalogue.pdf');
-    }else{ ?>
+        exit;
+    }else{ 
+        if(empty($_POST)){
+        header("Location: catalogue.php");
+        exit();
+    } ?>
 <!DOCTYPE html>
 <html lang="fr">
 <?php include(__DIR__ . "/../../php/structure/head_back.php");?>
@@ -115,12 +134,10 @@
         <h2>Produits choisis</h2>
 
         <!---affichage si catalogue vide--->
-        <?php if($tabProduit == null){ ?>
+        <?php if(empty($tabProduit)){ ?>
             <p>Vous n'avez pas choisi de produits</p>
             <a href="./catalogue.php" class="flex justify-center md:mt-15 md:mb-15 mt-5 mb-5"><button class="border-vertFonce border-2 rounded-lg md:rounded-2xl w-35 h-10 md:w-50 md:h-14 px-7 cursor-pointer">Retour</button></a>
-        <?php } 
-        
-        else{?>
+        <?php }else{ ?>
             <form class="flex justify-center flex-row-reverse mb-14" method="post" action="./confirmer_catalogue.php">
 
                 <div class="flex justify-around flex-col sticky top-1/4 h-50">

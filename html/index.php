@@ -157,12 +157,9 @@
                                     <button class="cursor-pointer size-10 bg-no-repeat bg-size-[auto_40px]
                                     <?php 
                                     $bg = "bg-[url(/images/logo/bootstrap_icon/bookmark-fa-plus.svg)]";
-                                    if ($_SESSION['role'] == "visiteur") {
-                                        $trouve = array_search($idProduit, $_SESSION['futurAchat']);
-                                    }
-                                    else{
-                                        $trouve = array_search($idProduit, $tabFA);
-                                    }
+                                    
+                                    $trouve = array_search($idProduit, $tabFA);
+                                    
                                     if ($trouve != null) {
                                         $bg = "bg-[url(/images/logo/bootstrap_icon/bookmark-fa-plus-fill.svg)]";
                                     }

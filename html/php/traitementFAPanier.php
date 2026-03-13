@@ -80,7 +80,7 @@ if ($ajout == "fa") {
     header("location:".$chemin);
     
 }
-elseif ($ajout == "Panier") {
+elseif ($ajout == "panier") {
     echo "Alède";
 }
 ?>
