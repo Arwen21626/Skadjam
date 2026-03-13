@@ -2,7 +2,6 @@
     session_start();
 
     include __DIR__ . '/01_premiere_connexion.php';
-    
 
     const PAGE_SIZE = 24;
 
@@ -44,7 +43,6 @@
         $row = $stmt->fetch(PDO::FETCH_ASSOC);
         $pseudo = $row['pseudo'];
         $_SESSION['pseudo'] = $pseudo;
-        
     }
 ?>
 
@@ -159,7 +157,12 @@
                                     <button class="cursor-pointer size-10 bg-no-repeat bg-size-[auto_40px]
                                     <?php 
                                     $bg = "bg-[url(/images/logo/bootstrap_icon/bookmark-fa-plus.svg)]";
-                                    $trouve = array_search($idProduit, $_SESSION['futurAchat']);
+                                    if ($_SESSION['role'] == "visiteur") {
+                                        $trouve = array_search($idProduit, $_SESSION['futurAchat']);
+                                    }
+                                    else{
+                                        $trouve = array_search($idProduit, $tabFA);
+                                    }
                                     if ($trouve != null) {
                                         $bg = "bg-[url(/images/logo/bootstrap_icon/bookmark-fa-plus-fill.svg)]";
                                     }

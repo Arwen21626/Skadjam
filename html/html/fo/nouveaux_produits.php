@@ -14,6 +14,14 @@
     }
 
     require_once __DIR__ . "/../../php/verif_role_fo.php";
+
+// Récupération des futurs achats du VISITEUR
+if ($_SESSION['role'] == "visiteur") {
+    $tabFA = $_SESSION['futurAchat'];
+}
+
+// Récupération des futurs achats du client
+include __DIR__. '/../../php/requetesBDD/recup_FA.php';
 ?>
 
 <!DOCTYPE html>
@@ -21,11 +29,6 @@
 <?php include __DIR__."/../../php/structure/head_front.php";?>
 <head> 
     <title>Nouveaux produits</title>
-    <style>
-        button a:hover{
-            color: black;
-        }
-    </style>
 </head>
 
 
@@ -71,10 +74,11 @@
 
                 $maxPage = sizeof($tabProduit)/PAGE_SIZE;
                 //découpe le catalogue en page de 15 produits
-                $lignes = array_slice($tabProduit, $pageNumber*PAGE_SIZE-PAGE_SIZE, PAGE_SIZE);
+                $lignes = array_slice($tabProduit, $pageNumber*PAGE_SIZE-PAGE_SIZE, PAGE_SIZE); 
+                ?>
                 
-                //affiche la photo du produit, son nom, son prix et sa note ?>
-                <article class="flex flex-row flex-wrap justify-around">
+                <!-- Affichage d'une carte produit -->
+                <div class="flex flex-row flex-wrap justify-around">
                     <?php foreach($lignes as $id => $valeurs){
                         $idProduit = $valeurs['id_produit'];
                         // Le produit est-il en promotion ?
@@ -83,9 +87,9 @@
                                             WHERE id_produit = :id_produit");
                         $stmt->execute([':id_produit' => $idProduit]);
                         $estPromu = ($stmt->fetch() !== false); ?>
-                        <section class="bg-bleu flex flex-col w-40 h-auto p-2 m-2 md:w-80 md:p-3">
+                        <div id="<?php echo $idProduit; ?>" class="bg-bleu flex flex-col w-40 h-auto p-2 m-2 md:w-80 md:p-3 justify-between">
                             <!--affichage de la photo-->
-                            <a href= "<?= 'html/fo/details_produit.php?idProduit='.$idProduit;?>" class="mb-3">
+                            <a href= "<?= '/html/fo/details_produit.php?idProduit='.$idProduit;?>" class="mb-3">
                                 <img src="<?= $valeurs['url_photo'];?>" 
                                         alt="<?= $valeurs['alt'];?>"
                                         title="<?= $valeurs['titre'];?>"
@@ -105,6 +109,29 @@
                                         affichageNote($note); ?>
                                 </div>
                             </a>
+                            <!-- boutons futurs achats & panier -->
+                            <div class="flex justify-end">
+                                <!-- Produit dans les futurs achats ? -->
+                                <a id="btnFA" href="/php/traitementFAPanier.php?idProduit=<?php echo $idProduit;?>&ajout=fa&vientDe=nP">
+                                    <button class="cursor-pointer size-10 bg-no-repeat bg-size-[auto_40px]
+                                    <?php 
+                                    $bg = "bg-[url(/images/logo/bootstrap_icon/bookmark-fa-plus.svg)]";
+                                    if ($_SESSION['role'] == "visiteur") {
+                                        $trouve = array_search($idProduit, $_SESSION['futurAchat']);
+                                    }
+                                    else{
+                                        $trouve = array_search($idProduit, $tabFA);
+                                    }
+                                    if ($trouve != null) {
+                                        $bg = "bg-[url(/images/logo/bootstrap_icon/bookmark-fa-plus-fill.svg)]";
+                                    }
+                                    echo $bg;
+                                    ?>
+                                    ">
+                                    </button>
+                                </a>
+                                <a id="btnPanier" href=""><button class="cursor-pointer size-10 bg-no-repeat bg-size-[auto_40px] bg-[url(/images/logo/bootstrap_icon/cart-vert-fonce.svg)] hover:bg-[url(/images/logo/bootstrap_icon/cart-fill-vert-fonce.svg)]"></button></a>
+                            </div>  
                             <!--affichage de la promotion-->
                                 <?php if($estPromu){ 
                                     $stmt = $dbh->prepare("SELECT *
@@ -126,9 +153,9 @@
                                     <h4 class="text-center text-beige overline m-0"><?= htmlspecialchars($labelPromo); ?></h4>
                                 </div>
                                 <?php }} ?>
-                            </section>
+                        </div>
                     <?php } ?>
-                </article>
+                </div>
                 <?php $dbh = null;
             }catch(PDOException $e){
                 print "Erreur !: " . $e->getMessage() . "<br/>";

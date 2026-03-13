@@ -33,7 +33,12 @@ elseif ($_GET['vientDe'] == "fa") {
 }
 // Si le user vient de promotions
 elseif ($_GET['vientDe'] == "promo") {
-    $vientDe = "/html/fo/promotions.php".$ancre;
+    $vientDe = "/html/fo/promotion.php".$ancre;
+}
+
+// Si le user vient des plus vendus
+elseif ($_GET['vientDe'] == "pV") {
+    $vientDe = "/html/fo/les_plus_vendus.php".$ancre;
 }
 
 $chemin = '';
@@ -56,15 +61,10 @@ if ($ajout == "fa") {
         $idCompte = $_SESSION['idCompte'];
         // Récupération de la liste des futurs achats (FA) du client
         foreach($dbh->query("SELECT id_produit FROM sae3_skadjam._futur_achat WHERE id_client = $idCompte", PDO::FETCH_ASSOC) as $row){
-            $tabFABDD[] = $row;
+            $tabFABDD[$row['id_produit']] = $row['id_produit'];
         }
-
         // Parcours pour voir si le produit est dans la bdd
-        foreach ($tabFABDD as $row) {
-            if ($row['id_produit'] == $idProd) {
-                $trouve = true;
-            }
-        }
+        $trouve = array_search($idProd, $tabFABDD);
 
         // Si le produit n'est pas déjà présent on l'ajoute
         if ($trouve == false) {
@@ -84,5 +84,4 @@ elseif ($ajout == "Panier") {
     echo "Alède";
 }
 ?>
-
 

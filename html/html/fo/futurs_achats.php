@@ -87,8 +87,12 @@ $lignes = array_slice($tabProd, $pageNumber*PAGE_SIZE-PAGE_SIZE, PAGE_SIZE);
     <?php include __DIR__ . "/../../php/structure/header_front.php"; ?>
     <?php include __DIR__ . "/../../php/structure/navbar_front.php"; ?>
     
-    <main>
+    <main class="min-h-[400px] md:min-h-[615px]">
         <h2>Vos futurs achats</h2>
+        <?php if($tabFA == null){ ?>
+                    <h4 class="text-center">Votre catalogue est vide.</h4>
+        <?php }
+        else{ ?>
         <!-- Liste des produits -->
         <div class="flex flex-row flex-wrap justify-around">
             <?php foreach($lignes as $id => $valeurs){
@@ -125,16 +129,21 @@ $lignes = array_slice($tabProd, $pageNumber*PAGE_SIZE-PAGE_SIZE, PAGE_SIZE);
                     <div class="flex justify-end">
                         <a id="btnFA" href="/php/traitementFAPanier.php?idProduit=<?php echo $idProduit;?>&ajout=fa&vientDe=fa">
                             <button class="cursor-pointer size-10 bg-no-repeat bg-size-[auto_40px]
-                            <?php 
-                            $bg = "bg-[url(/images/logo/bootstrap_icon/bookmark-fa-plus.svg)]";
-                            $trouve = array_search($idProduit, $_SESSION['futurAchat']);
-                            if ($trouve != null) {
-                                $bg = "bg-[url(/images/logo/bootstrap_icon/bookmark-fa-plus-fill.svg)]";
-                            }
-                                echo $bg;
-                            ?>
-                            ">
-                            </button>
+                                    <?php 
+                                    $bg = "bg-[url(/images/logo/bootstrap_icon/bookmark-fa-plus.svg)]";
+                                    if ($_SESSION['role'] == "visiteur") {
+                                        $trouve = array_search($idProduit, $_SESSION['futurAchat']);
+                                    }
+                                    else{
+                                        $trouve = array_search($idProduit, $tabFA);
+                                    }
+                                    if ($trouve != null) {
+                                        $bg = "bg-[url(/images/logo/bootstrap_icon/bookmark-fa-plus-fill.svg)]";
+                                    }
+                                    echo $bg;
+                                    ?>
+                                    ">
+                                    </button>
                         </a>
                         <a id="btnPanier" href=""><button class="cursor-pointer size-10 bg-no-repeat bg-size-[auto_40px] bg-[url(/images/logo/bootstrap_icon/cart-vert-fonce.svg)]"></button></a>
                     </div>  
@@ -162,6 +171,7 @@ $lignes = array_slice($tabProd, $pageNumber*PAGE_SIZE-PAGE_SIZE, PAGE_SIZE);
                 </div>
             <?php } ?>
         </div>
+        <?php } ?>
         
         <!--fin du catalogue-->
         <div class="flex flex-row space-x-4 justify-center py-3">
