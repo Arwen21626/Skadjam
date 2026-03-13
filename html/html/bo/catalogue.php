@@ -9,7 +9,6 @@
 
     try{
         //récupère toutes les informations sur les produits
-        $tabProduit = [];
         $tabProduit = null;
         $sql="SELECT pr.libelle_produit, pr.id_produit, url_photo, alt, titre, prix_ttc, quantite_stock, 
                     note_moyenne, prix_remise, pourcentage_remise
