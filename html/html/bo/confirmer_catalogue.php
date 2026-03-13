@@ -36,29 +36,64 @@
 
         $pdf = new FPDF();
         $pdf->AddPage();
-        $pdf->SetFont('Arial', '', 16);
+        $pdf->SetFont('Arial', '', 13);
+        $pdf->SetTitle('Catalogue des produits');
+        $i=0;
+        $j=0;
         foreach($tabProduit as $id => $valeurs){
             $idProduit = $valeurs['id_produit'];
-            if(isset($_POST[$idProduit]) && $_POST[$idProduit] == "on"){
-                $img = "../.." . $valeurs['url_photo'];
-                $img = imagecreatefromwebp($img);
-                $tmp = tempnam(sys_get_temp_dir(), 'img') . '.png';
-                imagepng($img, $tmp);
+            $imgPath = "../.." . $valeurs['url_photo'];
 
-                $y = $pdf->GetY();
-                $pdf->Image($tmp, 10, $y, 30);
+            if(file_exists($imgPath)){
+                $img = imagecreatefromwebp($imgPath);
 
-                $pdf->SetXY(50, $y);
+                if($img !== false){
+                    if($i===0){
+                        $tmp = tempnam(sys_get_temp_dir(), 'img') . '.png';
+                        imagepng($img, $tmp);
 
-                $pdf->SetX(50);
-                $titre = iconv('UTF-8', 'ISO-8859-1//TRANSLIT', $valeurs['titre']);
-                $pdf->Cell(40, 10, $titre, 0, 1);
+                        $y = $pdf->GetY();
+                        $pdf->Image($tmp, 5, $y, 0, 20);
 
-                $pdf->SetX(50);
-                $prix = iconv('UTF-8', 'Windows-1252', $valeurs['prix_ttc'] . " €");
-                $pdf->Cell(40, 10, $prix, 0, 1);
+                        $pdf->SetXY(35, $y);
 
-                $pdf->Ln(10);
+                        $titre = iconv('UTF-8', 'ISO-8859-1//TRANSLIT', $valeurs['titre']);
+                        $pdf->MultiCell(65, 10, $titre, 0, 1);
+
+                        $pdf->SetX(35);
+                        $prix = iconv('UTF-8', 'Windows-1252', $valeurs['prix_ttc'] . " €");
+                        $pdf->MultiCell(65, 10, $prix, 0, 0);
+
+                        $i=1;
+                    }else{
+                        $tmp = tempnam(sys_get_temp_dir(), 'img') . '.png';
+                        imagepng($img, $tmp);
+
+                        $pdf->Image($tmp, 110, $y, 0, 20);
+
+                        $pdf->SetXY(140, $y);
+
+                        $titre = iconv('UTF-8', 'ISO-8859-1//TRANSLIT', $valeurs['titre']);
+                        $pdf->MultiCell(65, 10, $titre, 0, 1);
+
+                        $pdf->SetX(140);
+                        $prix = iconv('UTF-8', 'Windows-1252', $valeurs['prix_ttc'] . " €");
+                        $pdf->MultiCell(65, 10, $prix, 0, 0);
+
+                        $pdf->Ln(10);
+
+                        $i=0;
+                    }
+                    $j++;
+                    if($j===18){
+                        $pdf->AddPage();
+                        $j=0;
+                    }
+                } else {
+                    echo "Impossible de charger l'image : $imgPath";
+                }
+            } else {
+                echo "Fichier image inexistant : $imgPath";
             }
         }
         $pdf->Output('D','Catalogue.pdf');
