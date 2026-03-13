@@ -156,6 +156,13 @@
             <p class=" mr-2">Pas encore vendeur ? </p>
             <a href="../bo/crea_compte_vendeur.php" class="underline! hover:text-rouge">Créer un compte vendeur</a>
         </div>
+
+        <script src="../../js/verifForm.js"></script>
+        <script>
+            // initialisation
+            let nom = document.getElementById("nom")
+            let prenom = document.getElementById("prenom")
+        </script>
     </main>
     <?php require_once __DIR__ . "/../../php/structure/footer_front.php"; ?>
 </body>
