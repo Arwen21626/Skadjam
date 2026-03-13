@@ -501,6 +501,9 @@ input.quantite-prod-input {
   .mx-auto {
     margin-inline: auto;
   }
+  .my-1 {
+    margin-block: calc(var(--spacing, 0.25rem) * 1);
+  }
   .my-5 {
     margin-block: calc(var(--spacing, 0.25rem) * 5);
   }
@@ -578,6 +581,9 @@ input.quantite-prod-input {
   }
   .mr-16 {
     margin-right: calc(var(--spacing, 0.25rem) * 16);
+  }
+  .mr-\[2em\] {
+    margin-right: 2em;
   }
   .mb-0 {
     margin-bottom: calc(var(--spacing, 0.25rem) * 0);
