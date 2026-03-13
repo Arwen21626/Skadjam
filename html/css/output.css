@@ -348,9 +348,6 @@ input.quantite-prod-input {
   .right-12 {
     right: calc(var(--spacing, 0.25rem) * 12);
   }
-  .right-\[8em\] {
-    right: 8em;
-  }
   .bottom-0 {
     bottom: calc(var(--spacing, 0.25rem) * 0);
   }

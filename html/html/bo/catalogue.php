@@ -121,9 +121,10 @@
                         <?php } ?>
                     </div> 
                     
-                    <div class="flex flex-col sticky right-[8em] top-32 gap-4 h-fit">
-                        <a href="./index_vendeur.php" class="flex justify-center items-center border-2 border-vertFonce rounded-2xl w-45 h-14 cursor-pointer">Annuler</a>
-                        <input type="submit" value="Confirmer" class="flex justify-center items-center border-2 border-vertFonce rounded-2xl w-45 h-14 cursor-pointer">
+                    <div class="flex flex-col sticky right-[6em] top-32 gap-4 h-fit">
+                        <a href="./index_vendeur.php" class="flex justify-center items-center border-2 border-vertFonce rounded-2xl w-60 h-14 cursor-pointer">Annuler</a>
+                        <button type="button" id="btnSelectAll" class="flex justify-center items-center border-2 border-vertFonce rounded-2xl w-60 h-14 cursor-pointer">Tout sélectionner</button>
+                        <input type="submit" value="Confirmer" class="flex justify-center items-center border-2 border-vertFonce rounded-2xl w-60 h-14 cursor-pointer">
                         <p id="erreurProduit" class="text-rouge hidden">
                             Veuillez sélectionner au moins un produit.
                         </p>
@@ -151,6 +152,22 @@
                 document.getElementById("erreurProduit").classList.remove("hidden");
             }
 
+        });
+
+        const boutonSelectAll = document.getElementById("btnSelectAll");
+        let toutSelectionne = false;
+
+        boutonSelectAll.addEventListener("click", function(){
+
+            const checkboxes = document.querySelectorAll('input[type="checkbox"]');
+
+            toutSelectionne = !toutSelectionne;
+
+            checkboxes.forEach(function(box){
+                box.checked = toutSelectionne;
+            });
+
+            boutonSelectAll.textContent = toutSelectionne ? "Tout Désélectionner" : "Tout sélectionner";
         });
     </script>
 </body>
