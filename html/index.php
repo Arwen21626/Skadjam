@@ -246,16 +246,16 @@
         <!-- Box question nb prod a mettre au panier -->
         <div id="fondNbAddPanier" class="hidden fixed inset-0 bg-black/50 backdrop-blur-sm z-40"></div>
 
-        <div id="contNbAddPanier" class="hidden fixed bg-white top-0 justify-center items-center flex-col p-2 m-12 z-50">
-            <form action="./php/traitementFAPanier.php" method="get" id="formNbAddPanier" class="flex flex-col items-center">
-                <label id="validAjout" class="hidden" for="nbAddPanier">Combien voulez-vous en mettre dans le panier ?</label>
+        <div id="contNbAddPanier" class="hidden fixed bg-white top-1/2 left-1/5 justify-center items-center flex-col p-4 z-50 w-3/5 md:top-2/5 md:w-2/5 md:left-3/10 h-45">
+            <form action="./php/traitementFAPanier.php" method="get" id="formNbAddPanier" class="flex flex-col items-center w-full h-full space-y-4">
+                <label id="validAjout" class="hidden" for="nbAddPanier">Combien voulez-vous en ajouter au panier ?</label>
                 <p id="valideRetrait" class="hidden">Etes-vous sur de vouloir retirer ce produit de votre panier ?</p>
-                <input placeholder="50" class="hidden pl-3 border-4 border-beige rounded-2xl w-40 m-2 placeholder-gray-500" type="number" name="nbAddPanier" id="nbAddPanier" min="0">
+                <input placeholder="5" class="hidden pl-3 border-4 border-beige rounded-2xl w-20 m-2 placeholder-gray-500" type="number" name="nbAddPanier" id="nbAddPanier" min="0">
                 <input type="hidden" name="ajout" value="panier">
                 <input type="hidden" name="vientDe" value="index">
                 <div class="flex flex-row justify-around w-full">
-                    <p id="btnRetour" class="flex items-center justify-center border-2 border-vertFonce rounded-2xl w-25 h-12 cursor-pointer">Retour</p>
-                    <input class="border-2 border-vertFonce rounded-2xl w-25 h-12 cursor-pointer" type="submit" value="Valider">
+                    <p id="btnRetour" class="flex items-center justify-center border-2 border-vertClair rounded-2xl w-25 h-12 cursor-pointer">Retour</p>
+                    <input class="border-2 border-vertClair rounded-2xl w-25 h-12 cursor-pointer" type="submit" value="Valider">
                 </div>
                 
             </form>
