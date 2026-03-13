@@ -161,9 +161,9 @@
                                     <?php 
                                     $bg = "bg-[url(/images/logo/bootstrap_icon/bookmark-fa-plus.svg)]";
                                     
-                                    $trouve = array_search($idProduit, $tabFA);
+                                    $trouveFA = array_search($idProduit, $tabFA);
                                     
-                                    if ($trouve != null) {
+                                    if ($trouveFA != null) {
                                         $bg = "bg-[url(/images/logo/bootstrap_icon/bookmark-fa-plus-fill.svg)]";
                                     }
                                     echo $bg;
@@ -171,16 +171,18 @@
                                     ">
                                     </button>
                                 </a>
+                                <!-- Produit dans le panier ? -->
                                 <a id="btnPanier" href="./php/traitementFAPanier.php?idProduit=<?php echo $idProduit;?>&ajout=panier&vientDe=index">
                                     <button class="cursor-pointer size-10 bg-no-repeat bg-size-[auto_40px]
                                         <?php 
                                         $bg = "bg-[url(/images/logo/bootstrap_icon/cart-vert-fonce.svg)]";
+                                        $trouveP = false;
 
                                         if (isset($_SESSION['panier']['contient'][$idProduit])){
-                                            $trouve = true;
+                                            $trouveP = true;
                                         }
 
-                                        if ($trouve != false) {
+                                        if ($trouveP != false) {
                                             $bg = "bg-[url(/images/logo/bootstrap_icon/cart-fill-vert-fonce.svg)]";
                                         }
                                         echo $bg;

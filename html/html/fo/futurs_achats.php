@@ -21,8 +21,13 @@ if ($_SESSION['role'] == "visiteur") {
     $tabFA = $_SESSION['futurAchat'];
 }
 
-// Récupération des futurs achats du client
+// Récupération des futurs achats et du panier du client
 include __DIR__. '/../../php/requetesBDD/recup_FA.php';
+include __DIR__. '/../../php/requetesBDD/recup_panier.php';
+
+echo "<pre>";
+print_r($tabPanier);
+echo "</pre>";
 
 // Récupération des infos produits en fontion du tabFA
 $tabProd = [];
@@ -66,6 +71,7 @@ else {
         $tabProd[] = $row;
     }
 }
+
 
 
 //découpe le catalogue en page
@@ -127,22 +133,41 @@ $lignes = array_slice($tabProd, $pageNumber*PAGE_SIZE-PAGE_SIZE, PAGE_SIZE);
                         </div>
                     </a>
                     <div class="flex justify-end">
-                        <a id="btnFA" href="/php/traitementFAPanier.php?idProduit=<?php echo $idProduit;?>&ajout=fa&vientDe=fa">
+                        <!-- Produit dans les futurs achats ? -->
+                        <a id="btnFA" href="./php/traitementFAPanier.php?idProduit=<?php echo $idProduit;?>&ajout=fa&vientDe=index">
                             <button class="cursor-pointer size-10 bg-no-repeat bg-size-[auto_40px]
-                                    <?php 
-                                    $bg = "bg-[url(/images/logo/bootstrap_icon/bookmark-fa-plus.svg)]";
-                                    
-                                    $trouve = array_search($idProduit, $tabFA);
-                                    
-                                    if ($trouve != null) {
-                                        $bg = "bg-[url(/images/logo/bootstrap_icon/bookmark-fa-plus-fill.svg)]";
-                                    }
-                                    echo $bg;
-                                    ?>
-                                    ">
-                                    </button>
+                            <?php 
+                            $bg = "bg-[url(/images/logo/bootstrap_icon/bookmark-fa-plus.svg)]";
+                            
+                            $trouveFA = array_search($idProduit, $tabFA);
+                            
+                            if ($trouveFA != null) {
+                                $bg = "bg-[url(/images/logo/bootstrap_icon/bookmark-fa-plus-fill.svg)]";
+                            }
+                            echo $bg;
+                            ?>
+                            ">
+                            </button>
                         </a>
-                        <a id="btnPanier" href=""><button class="cursor-pointer size-10 bg-no-repeat bg-size-[auto_40px] bg-[url(/images/logo/bootstrap_icon/cart-vert-fonce.svg)]"></button></a>
+                        <!-- Produit dans le panier ? -->
+                        <a id="btnPanier" href="./php/traitementFAPanier.php?idProduit=<?php echo $idProduit;?>&ajout=panier&vientDe=index">
+                            <button class="cursor-pointer size-10 bg-no-repeat bg-size-[auto_40px]
+                                <?php 
+                                $bg = "bg-[url(/images/logo/bootstrap_icon/cart-vert-fonce.svg)]";
+                                $trouveP = false;
+
+                                if (isset($_SESSION['panier']['contient'][$idProduit])){
+                                    $trouveP = true;
+                                }
+
+                                if ($trouveP != false) {
+                                    $bg = "bg-[url(/images/logo/bootstrap_icon/cart-fill-vert-fonce.svg)]";
+                                }
+                                echo $bg;
+                                ?>
+                            ">
+                            </button>
+                        </a>
                     </div>  
                     <!--affichage de la promotion-->
                     <?php if($estPromu){ 
