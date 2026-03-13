@@ -18,7 +18,11 @@ if (!isset($_SESSION['dataConnexion'])){
 
 // Récupération des données de connexion stockées en session
 $dataConnexion = $_SESSION['dataConnexion'];
-$connecte = $dataConnexion['connecte'];
+if( isset($dataConnexion['connecte'])){
+    $connecte = $dataConnexion['connecte'];
+}else{
+    $connecte = false;
+}
 $role = $dataConnexion['role'];
 
 // Un visiteur ne peut pas accéder à cette page
