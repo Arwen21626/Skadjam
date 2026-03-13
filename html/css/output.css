@@ -336,6 +336,9 @@ input.quantite-prod-input {
   .top-48 {
     top: calc(var(--spacing, 0.25rem) * 48);
   }
+  .top-\[84px\] {
+    top: 84px;
+  }
   .right-0 {
     right: calc(var(--spacing, 0.25rem) * 0);
   }
@@ -398,6 +401,9 @@ input.quantite-prod-input {
   }
   .z-40 {
     z-index: 40;
+  }
+  .z-50 {
+    z-index: 50;
   }
   .order-1 {
     order: 1;
@@ -647,6 +653,9 @@ input.quantite-prod-input {
   }
   .ml-7 {
     margin-left: calc(var(--spacing, 0.25rem) * 7);
+  }
+  .ml-8 {
+    margin-left: calc(var(--spacing, 0.25rem) * 8);
   }
   .ml-10 {
     margin-left: calc(var(--spacing, 0.25rem) * 10);
@@ -912,9 +921,6 @@ input.quantite-prod-input {
   }
   .w-60 {
     width: calc(var(--spacing, 0.25rem) * 60);
-  }
-  .w-64 {
-    width: calc(var(--spacing, 0.25rem) * 64);
   }
   .w-65 {
     width: calc(var(--spacing, 0.25rem) * 65);
@@ -1470,6 +1476,9 @@ input.quantite-prod-input {
   .p-2 {
     padding: calc(var(--spacing, 0.25rem) * 2);
   }
+  .p-3 {
+    padding: calc(var(--spacing, 0.25rem) * 3);
+  }
   .p-4 {
     padding: calc(var(--spacing, 0.25rem) * 4);
   }
@@ -1596,6 +1605,10 @@ input.quantite-prod-input {
   .text-4xl {
     font-size: var(--text-4xl, 2.25rem);
     line-height: var(--tw-leading, var(--text-4xl--line-height, calc(2.5 / 2.25)));
+  }
+  .text-base {
+    font-size: var(--text-base, 1rem);
+    line-height: var(--tw-leading, var(--text-base--line-height, calc(1.5 / 1)));
   }
   .font-bold {
     --tw-font-weight: var(--font-weight-bold, 700);
