@@ -239,21 +239,19 @@ if ($_SESSION["role"] === "client"){
             <?php 
             // informations sur les adresses du client
             foreach($donneesAdresses as $donnees){?>
-                    <p>adresse : <?php echo $donnees["numero_rue_client"]." ".$donnees["adresse_postal_client"]?></p>
+                    <p>adresse : <?php echo $donnees["numero_rue_client"].($donnees["complement_adresse_client"] !== ""?" ".$donnees["complement_adresse_client"]:"")." ".$donnees["adresse_postal_client"]?></p>
                     <p>ville : <?php echo $donnees["ville_client"]?></p>
                     <p>code postale : <?php echo $donnees["code_postal_client"]?></p>
 
-                    <?php if($donnees["complement_adresse_client"] !== ""){?>
+                    <?php if($donnees["latitude_client"] != ""){?>
                         <p>latitude : <?php echo $donnees["latitude_client"]?></p>
-                    <?php }if($donnees["complement_adresse_client"] !== ""){?>
+                    <?php }if($donnees["longitude_client"] != ""){?>
                         <p>longitude : <?php echo $donnees["longitude_client"]?></p>
-                    <?php }if($donnees["complement_adresse_client"] !== ""){?>
-                        <p>complement d'adresse : <?php echo $donnees["complement_adresse_client"]?></p>
-                    <?php }if($donnees["numero_batiement_client"] !== ""){?>
+                    <?php }if($donnees["numero_batiement_client"] != ""){?>
                         <p>numéro de batiment : <?php echo $donnees["numero_batiement_client"]?></p>
-                    <?php }if($donnees["numero_apart_client"] !== ""){?>
+                    <?php }if($donnees["numero_apart_client"] != ""){?>
                         <p>numéro apartement : <?php echo $donnees["numero_apart_client"]?></p>
-                    <?php }if($donnees["code_interphone_client"] !== ""){?>
+                    <?php }if($donnees["code_interphone_client"] != ""){?>
                         <p>code de l'interphone : <?php echo $donnees["code_interphone_client"]?></p>
                     <?php }?>
             <?php }?>
@@ -264,8 +262,8 @@ if ($_SESSION["role"] === "client"){
             // informations sur les commande passé par le client
             foreach($donneesCommandes as $donnees){?>
                 <div>
-                    <h4>id : <?php echo $donnees["id_commande"]?></h4>
-                    <?php if($donnees["code_interphone_client"] !== ""){?>
+                    <h4>Commande <?php echo $donnees["id_commande"]?></h4>
+                    <?php if($donnees["id_suivie_commande"] != ""){?>
                         <p>id de suivie : <?php echo $donnees["id_suivie_commande"]?></p>
                     <?php }?>
                     <p>état : <?php echo $donnees["etat_commande"]?></p>
@@ -274,22 +272,25 @@ if ($_SESSION["role"] === "client"){
                 </div>
                 <!-- adresse de livraison -->
                 <div>
-                    <h4>L'adresse de livraison</h4>
+                    <h4>L'adresse de livraison</h4> 
                     <p>nom : <?php echo $donnees["nom_adresse_livraison"]?></p>
                     <p>prenom : <?php echo $donnees["prenom_adresse_livraison"]?></p>
-                    <p>adresse postal : <?php echo $donnees["adresse_livraison_postal"]?></p>
-                    <p>complement d'adresse : <?php echo $donnees["complement_adresse_livraison"]?></p>
-                    <p>numéro de rue : <?php echo $donnees["numero_rue_adresse_livraison"]?></p>
-                    <p>numéro de batiment : <?php echo $donnees["numero_batiment_adresse_livraison"]?></p>
-                    <p>numéro d'apartement : <?php echo $donnees["numero_apart_adresse_livraison"]?></p>
-                    <p>code d'interphone : <?php echo $donnees["code_interphone_adresse_livraison"]?></p>
+                    <p>adresse : <?php echo $donnees["numero_rue_adresse_livraison"].($donnees["complement_adresse_livraison"] !== ""?" ".$donnees["complement_adresse_livraison"]:"")." ".$donnees["adresse_livraison_postal"]?></p>
                     <p>code postal : <?php echo $donnees["code_postal_adresse_livraison"]?></p>
                     <p>ville : <?php echo $donnees["ville_adresse_livraison"]?></p>
+                
+                    <?php if($donnees["numero_batiment_adresse_livraison"] != ""){?>
+                        <p>numéro de batiment : <?php echo $donnees["numero_batiment_adresse_livraison"]?></p>
+                    <?php }if($donnees["numero_apart_adresse_livraison"] != ""){?>
+                        <p>numéro apartement : <?php echo $donnees["numero_apart_adresse_livraison"]?></p>
+                    <?php }if($donnees["code_interphone_adresse_livraison"] != ""){?>
+                        <p>code de l'interphone : <?php echo $donnees["code_interphone_adresse_livraison"]?></p>
+                    <?php }?>
                 </div>
                 <!-- facture -->
                 <div>
                     <h4>La facture</h4>
-                    <p>id : <?php echo $donnees["numero_facture"]?></p>
+                    <p>numéro : <?php echo $donnees["numero_facture"]?></p>
                     <p>emmetteur : <?php echo $donnees["emmeteur_facture"]?></p>
                 </div>
                 <div>
@@ -299,15 +300,12 @@ if ($_SESSION["role"] === "client"){
                 
                 foreach($donneesDetailsCommandes as $produits){?>
                     <div>
-                        <h5><?php echo $produits["id_produit_detail_commande"]." - ".$produits["libelle_produit"]?></h5>
+                        <h5><?php echo $produits["libelle_produit"]?></h5>
+                        <p>montant <abbr title="Toutes Taxes Comprises">TTC</abbr> : <?php echo $produits["sous_total_produit_detail_commande"]?></p>
                         <p>montant <abbr title="Hors Taxes">HT</abbr> : <?php echo $produits["montant_ht_detail_commande"]?></p>
                         <p>quantite : <?php echo $produits["quantite_detail_commande"]?></p>
-                        <p>montant <abbr title="Toutes Taxes Comprises">TTC</abbr> : <?php echo $produits["sous_total_produit_detail_commande"]?></p>
-                        <p>quantite par unite : <?php echo $produits["quantite_unite"]?></p>
-                        <p>unite : <?php echo $produits["unite"]?></p>
                         <p>categorie : <?php echo $produits["libelle_categorie"]?></p>
-                        <p>id du vendeur : <?php echo $produits["id_vendeur"]?></p>
-                        <p>raison social du vendeur : <?php echo $produits["raison_sociale"]?></p>
+                        <p>vendeur : <?php echo $produits["raison_sociale"]?></p>
                     </div>
                 <?php }?>
                 </div>
@@ -317,39 +315,41 @@ if ($_SESSION["role"] === "client"){
             <?php 
             foreach($donneesPanier as $donnees){?>
                 <h3>Votre panier</h3>
-                <p>id : <?php echo $donnees["id_panier"]?></p>
                 <p>nombre de produits : <?php echo $donnees["nombre_produit_panier"]?></p>
                 <p>montant total <abbr title="Toutes Taxes Comprises">TTC</abbr> : <?php echo $donnees["montant_total_ttc_panier"]?></p>
                 <p>date de dernière modification : <?php echo $donnees["date_derniere_modif_panier"]?></p>
-                <?php 
-                $donneesProduitsPanier->execute([$donnees["id_panier"]]);?>
+                <?php $donneesProduitsPanier->execute([$donnees["id_panier"]]);?>
                 <div>
-                    <h4>Les produits du panier<h4>
-                    <?php foreach($donneesProduitsPanier as $produits){?>
-                    <div>
-                        <h5><?php echo $produits["id_produit"]." - ".$produits["libelle_produit"]?></h5>
-                        <p>quantite : <?php echo $produits["quantite_par_produit"]?></p>
-                        <p>quantite par unite : <?php echo $produits["quantite_unite"]?></p>
-                        <p>unite : <?php echo $produits["unite"]?></p>
-                        <p>raison social du vendeur : <?php echo $produits["raison_sociale"]?></p>
-                        <p>categorie : <?php echo $produits["libelle_categorie"]?></p>
-                    </div>
-                    <?php }?>
+                    <?php if($donnees["nombre_produit_panier"] !== "0"){?>
+                        <h4>Les produits de votre panier<h4>
+                        <?php foreach($donneesProduitsPanier as $produits){?>
+                            <div>
+                                <h5><?php $produits["libelle_produit"]?></h5>
+                                <p>quantite : <?php echo $produits["quantite_par_produit"]?></p>
+                                <p>categorie : <?php echo $produits["libelle_categorie"]?></p>
+                                <p>vendeur : <?php echo $produits["raison_sociale"]?></p>
+                                
+                            </div>
+                        <?php }?>
                 </div>
-            <?php }?>
+            <?php }
+            }?>
         </section>
         <section>
             <h3>Votre liste des futurs achats</h3>
             <?php 
-            foreach($donneesFuturAchats as $donnees){?>
+            $futurAchatsVide = true;
+            foreach($donneesFuturAchats as $donnees){
+                $futurAchatsVide = false;?>
                 <div>
                     <h4>id produits : <?php echo $donnees["id_produit"]?></h4>
                     <p>libelle du produit : <?php echo $donnees["libelle_produit"]?></p>
-                    <p>quantite par unite : <?php echo $donnees["quantite_unite"]?></p>
-                    <p>quantite par unite : <?php echo $donnees["unite"]?></p>
-                    <p>raison sociale : <?php echo $donnees["raison_sociale"]?></p>
                     <p>categorie : <?php echo $donnees["libelle_categorie"]?></p>
+                    <p>vendeur : <?php echo $donnees["raison_sociale"]?></p>
                 </div>
+            <?php }
+            if($futurAchatsVide === true){?>
+                <p>Votre liste de futurs achats est vide</p>
             <?php }?>
         </section>
         <section>
@@ -357,19 +357,18 @@ if ($_SESSION["role"] === "client"){
             <?php 
             foreach($donneesAvisPostes as $donnees){?>
                 <div>
-                    <h4>id avis : <?php echo $donnees["id_avis"]?></h4>
+                    <h4><?php echo $donnees["id_avis"]?></h4>
+                    <p>commentaire : <?php echo $donnees["contenu_commentaire"]?></p>
                     <p>nombre d'etoiles : <?php echo $donnees["nb_etoile"]?></p>
                     <p>nombre de pouces haut : <?php echo $donnees["nb_pouce_haut"]?></p>
                     <p>nombre de pouces bas : <?php echo $donnees["nb_pouce_bas"]?></p>
-                    <p>commentaire : <?php echo $donnees["contenu_commentaire"]?></p>
+                    <p>signaler : <?php echo $donnees["signaler"]?"true":"false"?></p>
+                    
                     <p>id du produit : <?php echo $donnees["id_produit"]?></p>
                     <p>libelle du produit : <?php echo $donnees["libelle_produit"]?></p>
-                    <p>quantite par unite : <?php echo $donnees["quantite_unite"]?></p>
-                    <p>unite : <?php echo $donnees["unite"]?></p>
-                    <p>raison sociale : <?php echo $donnees["raison_sociale"]?></p>
                     <p>categorie : <?php echo $donnees["libelle_categorie"]?></p>
-                    <p>signaler : <?php echo $donnees["signaler"]?"true":"false"?></p>
-                    <p>id de la photo : <?php echo $donnees["photo_avis"]?></p>
+                    <p>vendeur : <?php echo $donnees["raison_sociale"]?></p>
+                    
                     <img src="<?php echo $donnees["url_photo_avis"]?>" alt="<?php echo $donnees["alt_photo_avis"]?>" title="<?php echo $donnees["titre_photo_avis"]?>">
                     <p>description de la photo : <?php echo $donnees["description_photo_avis"]?></p>
                 </div>
