@@ -27,9 +27,7 @@
                             ORDER BY libelle_produit ASC"
                             , PDO::FETCH_ASSOC) as $row){
             $tabProduit[] = $row;
-        } 
-        
-        $qteStock = $row['quantite_stock'];
+        }
     }
 
     catch (PDOException $e) {
@@ -38,26 +36,45 @@
     }
        
     //traitement de la modification de la quantite_stock
-    if (isset($_POST['qteStock']) && is_array($_POST['qteStock'])) {
-        //màj base de données
-        $updateStock = $dbh->prepare("
-            UPDATE sae3_skadjam._produit
-            SET quantite_stock = :stock
-            WHERE id_produit = :id");
+    if (!empty($_POST["dateDebutPromotion"])) {
 
-        foreach ($_POST['qteStock'] as $idProduit => $qteStock) {
+        foreach($tabProduit as $produit){
 
-            // mise à jour de la base de donnée
-            if (preg_match("/^-{0,1}[0-9]*$/", $qteStock)) {
-                
-                $nouvQte = $qteStock;
+            $idProd = $produit['id_produit'];
 
-                $updateStock->bindParam(':stock', $nouvQte, PDO::PARAM_INT);
-                $updateStock->bindParam(':id', $idProduit, PDO::PARAM_INT);
-                $updateStock->execute();
+            $dateDebut = formatDate($_POST["dateDebutPromotion"]);
+            $dateFin = $_POST["dateFinPromotion"] != null ? formatDate($_POST["dateFinPromotion"]) : null;
+            $label = $_POST["labelPromo"] ?? null;
+            $checkbox = $_POST["checkbox_$idProd"] ?? "off";
+
+            // si la checkbox est cochée -> UPDATE
+            if($checkbox == "on"){
+
+                $sql = "UPDATE sae3_skadjam._promotion pmn
+                        SET date_debut_promotion = :dateDebut,
+                            date_fin_promotion = :dateFin,
+                            label = :label
+                        FROM sae3_skadjam._promu pmu
+                        WHERE pmn.id_promotion = pmu.id_promotion
+                        AND pmu.id_produit = :idProduit";
+
+                $stmt = $dbh->prepare($sql);
+                $stmt->execute([
+                    ':dateDebut' => $dateDebut,
+                    ':dateFin' => $dateFin,
+                    ':label' => $label,
+                    ':idProduit' => $idProd
+                ]);
+
+            }else{
+                // suppression de la promotion si décoché
+                $dbh->prepare("DELETE FROM sae3_skadjam._promu WHERE id_produit = :id")
+                    ->execute([':id' => $idProd]);
             }
         }
-        header("Location: ./modifier_promotion.php?idCompte=$idCompte");
+
+        header("Location: ./promotion_vendeur.php?idCompte=$idCompte");
+        exit();
     } 
 ?>
 
@@ -95,7 +112,7 @@
                         <input class="border-2 border-vertFonce rounded-2xl w-40 h-14 cursor-pointer mt-7" type="submit" value="Valider">
                     </div>
 
-                    <table class="table-auto w-7xl">
+                    <table class="table-auto w-7xl mr-[2em]">
                         <thead>
                             <tr>
                                 <!---noms des colonnes--->
@@ -124,14 +141,16 @@
                                         <td class="text-center py-3"><input class="border-2 border-black rounded-lg w-43 h-10 p-2" type="date" name="dateDebutPromotion" id="dateDebutPromotion" value="<?php echo formatDate($valeurs['date_debut_promotion']); ?>"></td>
                                         <td class="text-center py-3"><input class="border-2 border-black rounded-lg w-43 h-10 p-2" type="date" name="dateFinPromotion" id="dateFinPromotion" value="<?php echo formatDate($valeurs['date_fin_promotion']); ?>"></td>
                                         <td class="text-center py-3"><input maxlength="20" class="border-2 border-black rounded-lg w-30 h-10 p-2" type="text" name="labelPromo" id="labelPromo" value="<?php echo $valeurs['label'];?>"></td>
-                                        <td class="text-center py-3"><input class="size-5" type="checkbox" checked></td>
+                                        <td class="text-center py-3"><input class="size-5" type="checkbox" name="checkbox_<?= $valeurs["id_produit"]; ?>" id="checkbox_<?= $valeurs["id_produit"]; ?>" checked></td>
                                     </tr>
                             <?php }?>
                         </tbody>
                     </table>
                 </form>
             </div>
-            
+            <?php if(isset($_POST['dateDebutPromotion']) && $_POST['dateDebutPromotion'] == null){ ?>
+                <p class="text-rouge text-center">Une promotion doit avoir une date de début</p>
+            <?php } ?>
 
         <?php } ?>
     </main>

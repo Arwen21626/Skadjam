@@ -63,8 +63,8 @@
                     <!---bouton retour--->
                     <a href="index_vendeur.php" class="flex justify-center items-center border-2 border-vertFonce rounded-2xl w-45 h-14 cursor-pointer">Retour</a>
                     <!---bouton modifier promotion--->
-                    <button class="border-2 border-vertFonce rounded-2xl w-45 h-16 cursor-pointer mt-5">
-                        <a href="../bo/modifier_promotion.php?idCompte=<?php echo $idCompte ;?>" class="">Modifier les promotions</a>
+                    <button class="border-2 border-vertFonce rounded-2xl w-45 h-14 cursor-pointer mt-5">
+                        <a href="../bo/modifier_promotion.php?idCompte=<?php echo $idCompte ;?>" class="">Modifier</a>
                     </button>
                 </div>
 
@@ -104,7 +104,7 @@
                                     <th scope="row" class="text-left py-3 pl-3" ><a href="<?php echo htmlentities("details_produit.php?idProduit=".$idProduit);?>"><?php echo $valeurs['libelle_produit']; ?></a></th>
                                     <td class="text-center py-3"><p><?php echo htmlentities($valeurs['date_debut_promotion']);?></p></td>
                                     <td class="text-center py-3"><p><?php echo isset($valeurs['date_fin_promotion']) ? htmlentities($valeurs['date_fin_promotion']) : "non défini";?></p></td>
-                                    <td class="text-center py-3"><p><?php echo htmlentities($valeurs['label']); ?></p></td>
+                                    <td class="text-center py-3"><p><?php echo !empty($valeurs['label']) ? htmlentities($valeurs['label']) : "non défini"; ?></p></td>
                                     
                                 </tr>
                         <?php }?>
