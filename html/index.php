@@ -21,7 +21,7 @@
     include __DIR__. '/php/requetesBDD/recup_panier.php';
     
 
-    foreach($dbh->query("SELECT pr.id_produit, pr.date_creation, libelle_produit, description_produit, prix_ttc, prix_remise, quantite_stock, id_categorie, pr.id_vendeur, note_moyenne, ph.id_photo, url_photo, alt, titre, id_compte, pu.id_promotion, label
+    foreach($dbh->query("SELECT pr.id_produit,pr.quantite_stock, pr.date_creation, libelle_produit, description_produit, prix_ttc, prix_remise, quantite_stock, id_categorie, pr.id_vendeur, note_moyenne, ph.id_photo, url_photo, alt, titre, id_compte, pu.id_promotion, label
                                     FROM sae3_skadjam._produit pr
                                     INNER JOIN sae3_skadjam._montre m
                                         ON pr.id_produit=m.id_produit
@@ -122,9 +122,9 @@
 
                 $maxPage = sizeof($tabProduit)/PAGE_SIZE;
                 //découpe le catalogue en page de 15 produits
-                $lignes = array_slice($tabProduit, $pageNumber*PAGE_SIZE-PAGE_SIZE, PAGE_SIZE);
+                $lignes = array_slice($tabProduit, $pageNumber*PAGE_SIZE-PAGE_SIZE, PAGE_SIZE);?>
                 
-                //affiche la photo du produit, son nom, son prix et sa note ?>
+                <!-- Liste des cartes produits -->
                 <div class="flex flex-row flex-wrap justify-around">
                     <?php foreach($lignes as $id => $valeurs){
                         $idProduit = $valeurs['id_produit'];
@@ -134,7 +134,9 @@
                                             WHERE id_produit = :id_produit");
                         $stmt->execute([':id_produit' => $idProduit]);
                         $estPromu = ($stmt->fetch() !== false); ?>
-                        <div id="<?php echo $idProduit; ?>" class="bg-bleu flex flex-col w-40 h-auto p-2 m-2 md:w-80 md:p-3 justify-between">
+                        <!-- Carte produit -->
+                        <div id="<?php echo $idProduit; ?>" class="carteProduit bg-bleu flex flex-col w-40 h-auto p-2 m-2 md:w-80 md:p-3 justify-between">
+                            <p class="hidden"><?php echo $valeurs['quantite_stock']; ?></p>
                             <!--affichage de la photo-->
                             <a href= "<?= 'html/fo/details_produit.php?idProduit='.$idProduit;?>" class="mb-3">
                                 <img src="<?= $valeurs['url_photo'];?>" 
@@ -175,25 +177,23 @@
                                     </button>
                                 </a>
                                 <!-- Produit dans le panier ? -->
-                                <a id="btnPanier" href="./php/traitementFAPanier.php?idProduit=<?php echo $idProduit;?>&ajout=panier&vientDe=index">
-                                    <button class="cursor-pointer size-10 bg-no-repeat bg-size-[auto_40px]
-                                        <?php 
-                                        $bg = "bg-[url(/images/logo/bootstrap_icon/cart-vert-fonce.svg)]";
-                                        $trouveP = false;
+                                <button class="btnPanier cursor-pointer size-10 bg-no-repeat bg-size-[auto_40px]
+                                    <?php 
+                                    $bg = "bg-[url(/images/logo/bootstrap_icon/cart-vert-fonce.svg)]";
+                                    $trouveP = false;
 
-                                        if (isset($_SESSION['panier']['contient'][$idProduit])){
-                                            $trouveP = true;
-                                        }
+                                    if (isset($_SESSION['panier']['contient'][$idProduit])){
+                                        $trouveP = true;
+                                    }
 
-                                        if ($trouveP != false) {
-                                            $bg = "bg-[url(/images/logo/bootstrap_icon/cart-fill-vert-fonce.svg)]";
-                                        }
-                                        echo $bg;
-                                        ?>
-                                    ">
-                                    </button>
-                                </a>
-                            </div>  
+                                    if ($trouveP != false) {
+                                        $bg = "bg-[url(/images/logo/bootstrap_icon/cart-fill-vert-fonce.svg)]";
+                                    }
+                                    echo $bg;
+                                    ?>
+                                ">
+                                </button>
+                            </div> 
                             <!--affichage de la promotion-->
                                 <?php if($estPromu){ 
                                     $stmt = $dbh->prepare("SELECT *
@@ -225,6 +225,7 @@
             }
 
         ?>
+
         
         <!--fin du catalogue-->
         <div class="flex flex-row space-x-4 justify-center py-3">
@@ -242,7 +243,25 @@
             </a>
             <?php }?>
         </div>
+        <!-- Box question nb prod a mettre au panier -->
+        <div id="fondNbAddPanier" class="hidden fixed inset-0 bg-black/50 backdrop-blur-sm z-40"></div>
 
+        <div id="contNbAddPanier" class="hidden fixed bg-white top-0 justify-center items-center flex-col p-2 m-12 z-50">
+            <form action="./php/traitementFAPanier.php" method="get" id="formNbAddPanier" class="flex flex-col items-center">
+                <label id="validAjout" class="hidden" for="nbAddPanier">Combien voulez-vous en mettre dans le panier ?</label>
+                <p id="valideRetrait" class="hidden">Etes-vous sur de vouloir retirer ce produit de votre panier ?</p>
+                <input placeholder="50" class="hidden pl-3 border-4 border-beige rounded-2xl w-40 m-2 placeholder-gray-500" type="number" name="nbAddPanier" id="nbAddPanier" min="0">
+                <input type="hidden" name="ajout" value="panier">
+                <input type="hidden" name="vientDe" value="index">
+                <div class="flex flex-row justify-around w-full">
+                    <p id="btnRetour" class="flex items-center justify-center border-2 border-vertFonce rounded-2xl w-25 h-12 cursor-pointer">Retour</p>
+                    <input class="border-2 border-vertFonce rounded-2xl w-25 h-12 cursor-pointer" type="submit" value="Valider">
+                </div>
+                
+            </form>
+        </div>
+
+        <!-- Liste des popup de la page -->
         <div id="popup-overlay" class="right-12 md:right-40">
             <?php if($addPanier){ ?>
             <!---popup ajout d'un produit dans le panier--->

@@ -8,6 +8,7 @@ require_once __DIR__ . "/../php/verif_role_fo.php";
 
 // Déclaration des variables
 $idProd = $_GET['idProduit'];
+$qte = $_GET['nbAddPanier'];
 $ajout = $_GET['ajout'];
 $tabFABDD = [];
 $idCompte = -1;
@@ -89,7 +90,7 @@ elseif ($ajout == "panier") {
             // Ajouter le produit
             $_SESSION['panier']['contient'][$idProd] = [
                 'id' => $idProd,
-                'quantite_par_produit' => 1
+                'quantite_par_produit' => $qte
             ];
             $chemin = $vientDe."?addPanier=1".$ancre;
         } else {

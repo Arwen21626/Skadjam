@@ -740,6 +740,9 @@ input.quantite-prod-input {
   .h-1\/1 {
     height: calc(1/1 * 100%);
   }
+  .h-4 {
+    height: calc(var(--spacing, 0.25rem) * 4);
+  }
   .h-5 {
     height: calc(var(--spacing, 0.25rem) * 5);
   }
@@ -749,8 +752,14 @@ input.quantite-prod-input {
   .h-6\! {
     height: calc(var(--spacing, 0.25rem) * 6) !important;
   }
+  .h-7 {
+    height: calc(var(--spacing, 0.25rem) * 7);
+  }
   .h-10 {
     height: calc(var(--spacing, 0.25rem) * 10);
+  }
+  .h-12 {
+    height: calc(var(--spacing, 0.25rem) * 12);
   }
   .h-14 {
     height: calc(var(--spacing, 0.25rem) * 14);
@@ -913,6 +922,9 @@ input.quantite-prod-input {
   }
   .w-16 {
     width: calc(var(--spacing, 0.25rem) * 16);
+  }
+  .w-20 {
+    width: calc(var(--spacing, 0.25rem) * 20);
   }
   .w-24 {
     width: calc(var(--spacing, 0.25rem) * 24);
@@ -1081,12 +1093,56 @@ input.quantite-prod-input {
     --tw-translate-x: calc(calc(1/2 * 100%) * -1);
     translate: var(--tw-translate-x) var(--tw-translate-y);
   }
+  .-translate-x-3 {
+    --tw-translate-x: calc(var(--spacing, 0.25rem) * -3);
+    translate: var(--tw-translate-x) var(--tw-translate-y);
+  }
+  .-translate-x-3\/5 {
+    --tw-translate-x: calc(calc(3/5 * 100%) * -1);
+    translate: var(--tw-translate-x) var(--tw-translate-y);
+  }
+  .-translate-x-3\/6 {
+    --tw-translate-x: calc(calc(3/6 * 100%) * -1);
+    translate: var(--tw-translate-x) var(--tw-translate-y);
+  }
+  .-translate-x-4 {
+    --tw-translate-x: calc(var(--spacing, 0.25rem) * -4);
+    translate: var(--tw-translate-x) var(--tw-translate-y);
+  }
+  .-translate-x-4\/5 {
+    --tw-translate-x: calc(calc(4/5 * 100%) * -1);
+    translate: var(--tw-translate-x) var(--tw-translate-y);
+  }
+  .-translate-x-4\/6 {
+    --tw-translate-x: calc(calc(4/6 * 100%) * -1);
+    translate: var(--tw-translate-x) var(--tw-translate-y);
+  }
   .-translate-y-1 {
     --tw-translate-y: calc(var(--spacing, 0.25rem) * -1);
     translate: var(--tw-translate-x) var(--tw-translate-y);
   }
   .-translate-y-1\/2 {
     --tw-translate-y: calc(calc(1/2 * 100%) * -1);
+    translate: var(--tw-translate-x) var(--tw-translate-y);
+  }
+  .-translate-y-3 {
+    --tw-translate-y: calc(var(--spacing, 0.25rem) * -3);
+    translate: var(--tw-translate-x) var(--tw-translate-y);
+  }
+  .-translate-y-3\/5 {
+    --tw-translate-y: calc(calc(3/5 * 100%) * -1);
+    translate: var(--tw-translate-x) var(--tw-translate-y);
+  }
+  .-translate-y-4 {
+    --tw-translate-y: calc(var(--spacing, 0.25rem) * -4);
+    translate: var(--tw-translate-x) var(--tw-translate-y);
+  }
+  .-translate-y-4\/5 {
+    --tw-translate-y: calc(calc(4/5 * 100%) * -1);
+    translate: var(--tw-translate-x) var(--tw-translate-y);
+  }
+  .-translate-y-4\/6 {
+    --tw-translate-y: calc(calc(4/6 * 100%) * -1);
     translate: var(--tw-translate-x) var(--tw-translate-y);
   }
   .transform {
