@@ -1,17 +1,20 @@
-function afficherProduit(tableau, indice){
+function afficherProduit(tableau,tableauFA, indice){
     
     let i = indice
+
+    let trouve = false
     
     let idProduit = tableau[i]['id_produit']
     let parent = document.getElementById("prod")
 
-    // Section   
-    let produit = document.createElement("section")
+    // Carte produit   
+    let produit = document.createElement("div")
+    produit.classList.add("bg-bleu","flex", "flex-col", "w-40", "h-auto","p-2", "m-2", "md:w-80", "md:p-3", "justify-between")
+    produit.id = idProduit
     parent.appendChild(produit)
-    produit.classList.add("bg-bleu","flex", "flex-col", "w-40", "h-auto","p-2", "m-2", "md:w-80", "md:p-3")
     parent = produit
 
-    //Lien
+    //Lien vers la page detail
     let lien = document.createElement("a")
     lien.href = "details_produit.php?idProduit="+idProduit
     lien.classList.add("mb-3");
@@ -86,6 +89,65 @@ function afficherProduit(tableau, indice){
     let note = tableau[i]['note_moyenne']
     affichageNote(note, parent)
 
+    // Conteneur des boutons futurs achats & panier
+    parent = produit
+    let contientBtnFAP = document.createElement("div")
+    contientBtnFAP.classList.add("flex", "justify-end")
+    parent.appendChild(contientBtnFAP)
+
+    parent = contientBtnFAP
+
+    // Lien vers action quand on appuie sur FA
+    let lienFA = document.createElement("a")
+    lienFA.href = "/php/traitementFAPanier.php?idProduit="+idProduit+"&ajout=fa&vientDe=recherche"
+    lienFA.id = "btnFA"
+    parent.appendChild(lienFA)
+    parent = lienFA
+
+    // Bouton FA
+    let boutonFA = document.createElement("button")
+    boutonFA.classList.add("cursor-pointer", "size-10", "bg-no-repeat", "bg-size-[auto_40px]")
+    let bg = "bg-[url(/images/logo/bootstrap_icon/bookmark-fa-plus.svg)]"
+    if (tableauFA != null) {
+        for (let key in tableauFA) {
+            if (key == idProduit) {
+                trouve = true
+            }
+        }
+    }
+
+    // Si on trouve le produit dans la liste on change l'icone
+    if (trouve != false){
+        bg = "bg-[url(/images/logo/bootstrap_icon/bookmark-fa-plus-fill.svg)]"
+    }
+
+
+    boutonFA.classList.add(bg)
+    parent.appendChild(boutonFA)
+
+    parent = contientBtnFAP
+
+    // Lien vers action quand on appuie sur Panier
+    // let lienP = document.createElement("a")
+    // lienP.href = "/php/traitementFAPanier.php?idProduit="+idProduit+"&ajout=panier&vientDe=recherche"
+    // lienP.id = "btnPanier"
+    // parent.appendChild(lienP)
+    // parent = lienP
+
+    // Bouton FA
+    // let boutonP = document.createElement("button")
+    // boutonP.classList.add("cursor-pointer", "size-10", "bg-no-repeat", "bg-size-[auto_40px]")
+    // bg = "bg-[url(/images/logo/bootstrap_icon/bookmark-fa-plus.svg)]"
+    // trouve = tableauFA.find(idProduit)
+
+    // Si on trouve le produit dans la liste on change l'icone
+    // if (trouve != undefined){
+    //     bg = "bg-[url(/images/logo/bootstrap_icon/bookmark-fa-plus-fill.svg)]"
+    // }
+
+    // boutonFA.classList.add(bg)
+    // parent.appendChild(boutonFA)
+
     // Promotion
     if (tableau[i]['id_promotion'] != null){
         parent = produit
@@ -99,8 +161,6 @@ function afficherProduit(tableau, indice){
         parent = promo
         parent.append(nomPromo)
     }
-    
-
     
     //setTimeout(function(){console.log('Code waits for 1  second')}, 1000);
 }
