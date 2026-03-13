@@ -36,15 +36,23 @@ if ($_SESSION["role"] === "client"){
                     adrl.id_adresse as id_adresse_livraison, adrl.nom as nom_adresse_livraison, adrl.prenom as prenom_adresse_livraison, adrl.adresse_postale as adresse_livraison_postal, 
                         adrl.complement_adresse as complement_adresse_livraison, adrl.numero_rue as numero_rue_adresse_livraison, adrl.numero_bat as numero_batiment_adresse_livraison, 
                         adrl.numero_appart as numero_apart_adresse_livraison, adrl.code_interphone as code_interphone_adresse_livraison, adrl.code_postal as code_postal_adresse_livraison, 
-                        adrl.ville as ville_adresse_livraison, 
-                    f.numero_facture, f.emetteur as emmeteur_facture
+                        adrl.ville as ville_adresse_livraison
 
                 FROM sae3_skadjam._client cli
                     INNER JOIN sae3_skadjam._commande c ON c.id_client = cli.id_compte
                     INNER JOIN sae3_skadjam._adresse_livraison adrl ON adrl.id_adresse = c.id_adresse
-                    INNER JOIN sae3_skadjam._facture f ON f.id_commande = c.id_commande
                 WHERE cli.id_compte = $idCompte
             ", PDO::FETCH_ASSOC);
+
+        // données en rapport avec les factures
+        $donneesFactures = $dbh->prepare("SELECT
+                    f.numero_facture, 
+                    v.raison_sociale
+
+                FROM sae3_skadjam._facture f
+                    INNER JOIN sae3_skadjam._vendeur v ON f.emetteur = v.id_compte
+                WHERE f.id_commande = ?
+            ");
 
         // données en rapport avec les produits commandé
         $donneesDetailsCommandes = $dbh->prepare("SELECT
@@ -208,13 +216,13 @@ if ($_SESSION["role"] === "client"){
     require __DIR__ . "/../../php/structure/header_front.php";
     require __DIR__ . "/../../php/structure/navbar_front.php";
     ?>
-    <main class="min-h-[650x]">
+    <main class="min-h-[650x] m-5">
         <h2>Vos informations</h2>
         <?php 
         // informations sur le compte client
         foreach($donneesClient as $donnees){?>
             <section>
-                <h3>Votre compte</h3>
+                <h3 class="text-center m-2">Votre compte</h3>
                 <p>pseudo : <?php echo $donnees["pseudo_client"]?></p>
                 <p>prenom : <?php echo $donnees["prenom_client"]?></p>
                 <p>nom : <?php echo $donnees["nom_client"]?></p>
@@ -226,7 +234,7 @@ if ($_SESSION["role"] === "client"){
             <!-- infroamtion da la carte bancaire -->
             <?php if($donnees["id_carte_client"] !== null){?>
                 <section>
-                    <h3>Votre carte bancaire</h3>
+                    <h3 class="text-center m-2">Votre carte bancaire</h3>
                     <p>nom : <?php echo $donnees["nom_carte_client"]?></p>
                     <p>numéro : <?php echo $donnees["numero_carte_client"]?></p>
                     <p>cryptogramme : <?php echo $donnees["cryptogramme_carte_client"]?></p>
@@ -235,7 +243,7 @@ if ($_SESSION["role"] === "client"){
             <?php }?>
         <?php }?>
         <section>
-            <h3>Vos adresses</h3>
+            <h3 class="text-center m-2">Vos adresses</h3>
             <?php 
             // informations sur les adresses du client
             foreach($donneesAdresses as $donnees){?>
@@ -257,22 +265,21 @@ if ($_SESSION["role"] === "client"){
             <?php }?>
         </section>
         <section>
-            <h3>Vos commandes</h3>
+            <h3 class="text-center m-2">Vos commandes</h3>
             <?php 
-            // informations sur les commande passé par le client
+            // informations sur les commandes passées par le client
             foreach($donneesCommandes as $donnees){?>
-                <div>
-                    <h4>Commande <?php echo $donnees["id_commande"]?></h4>
-                    <?php if($donnees["id_suivie_commande"] != ""){?>
-                        <p>id de suivie : <?php echo $donnees["id_suivie_commande"]?></p>
-                    <?php }?>
-                    <p>état : <?php echo $donnees["etat_commande"]?></p>
-                    <p>date : <?php echo $donnees["date_commande"]?></p>
-                    <p>montant total <abbr title="Toutes Taxes Comprises">TTC</abbr> : <?php echo $donnees["montant_total_ttc_commande"]?></p>
-                </div>
+                <h4 class=" ml-10 m-2 font-bold"> Commande <?php echo $donnees["id_commande"]?></h4>
+                <?php if($donnees["id_suivie_commande"] != ""){?>
+                    <p>id de suivie : <?php echo $donnees["id_suivie_commande"]?></p>
+                <?php }?>
+                <p>état : <?php echo $donnees["etat_commande"]?></p>
+                <p>date : <?php echo $donnees["date_commande"]?></p>
+                <p>montant total <abbr title="Toutes Taxes Comprises">TTC</abbr> : <?php echo $donnees["montant_total_ttc_commande"]?></p>
+
                 <!-- adresse de livraison -->
                 <div>
-                    <h4>L'adresse de livraison</h4> 
+                    <h5 class=" ml-5 m-2 font-bold">L'adresse de livraison</h5> 
                     <p>nom : <?php echo $donnees["nom_adresse_livraison"]?></p>
                     <p>prenom : <?php echo $donnees["prenom_adresse_livraison"]?></p>
                     <p>adresse : <?php echo $donnees["numero_rue_adresse_livraison"].($donnees["complement_adresse_livraison"] !== ""?" ".$donnees["complement_adresse_livraison"]:"")." ".$donnees["adresse_livraison_postal"]?></p>
@@ -288,19 +295,24 @@ if ($_SESSION["role"] === "client"){
                     <?php }?>
                 </div>
                 <!-- facture -->
+                
                 <div>
-                    <h4>La facture</h4>
-                    <p>numéro : <?php echo $donnees["numero_facture"]?></p>
-                    <p>emmetteur : <?php echo $donnees["emmeteur_facture"]?></p>
+                    <h5 class=" ml-5 m-2 font-bold">Les factures de la commande</h5>
+                    <?php $donneesFactures->execute([$donnees["id_commande"]]);
+                    foreach($donneesFactures as $facture){?>
+                        <h6 class=" ml-2 mt-1 font-bold">numéro : <?php echo $facture["numero_facture"]?></h6>
+                        <p>emmetteur : <?php echo $facture["raison_sociale"]?></p>
+                    <?php }?>
                 </div>
+                
                 <div>
-                    <h4>Les produits de la commande</h4>
+                    <h5 class=" ml-5 m-2 font-bold">Les produits de la commande</h5>
                 <?php // produits commandé
                 $donneesDetailsCommandes->execute([$donnees["id_commande"]]);
                 
                 foreach($donneesDetailsCommandes as $produits){?>
                     <div>
-                        <h5><?php echo $produits["libelle_produit"]?></h5>
+                        <h6 class=" ml-2 mt-1 font-bold"><?php echo $produits["libelle_produit"]?></h6>
                         <p>montant <abbr title="Toutes Taxes Comprises">TTC</abbr> : <?php echo $produits["sous_total_produit_detail_commande"]?></p>
                         <p>montant <abbr title="Hors Taxes">HT</abbr> : <?php echo $produits["montant_ht_detail_commande"]?></p>
                         <p>quantite : <?php echo $produits["quantite_detail_commande"]?></p>
@@ -311,39 +323,39 @@ if ($_SESSION["role"] === "client"){
                 </div>
             <?php }?>
         </section>
+        <!-- le panier du client -->
         <section>
             <?php 
             foreach($donneesPanier as $donnees){?>
-                <h3>Votre panier</h3>
+                <h3 class="text-center m-2">Votre panier</h3>
                 <p>nombre de produits : <?php echo $donnees["nombre_produit_panier"]?></p>
                 <p>montant total <abbr title="Toutes Taxes Comprises">TTC</abbr> : <?php echo $donnees["montant_total_ttc_panier"]?></p>
                 <p>date de dernière modification : <?php echo $donnees["date_derniere_modif_panier"]?></p>
                 <?php $donneesProduitsPanier->execute([$donnees["id_panier"]]);?>
                 <div>
                     <?php if($donnees["nombre_produit_panier"] !== "0"){?>
-                        <h4>Les produits de votre panier<h4>
+                        <h4 class=" ml-10 m-2 font-bold">Les produits de votre panier</h4>
                         <?php foreach($donneesProduitsPanier as $produits){?>
                             <div>
-                                <h5><?php $produits["libelle_produit"]?></h5>
+                                <h5 class=" ml-5 m-2 font-bold"><?php $produits["libelle_produit"]?></h5>
                                 <p>quantite : <?php echo $produits["quantite_par_produit"]?></p>
                                 <p>categorie : <?php echo $produits["libelle_categorie"]?></p>
                                 <p>vendeur : <?php echo $produits["raison_sociale"]?></p>
-                                
                             </div>
-                        <?php }?>
+                        <?php }
+                    }?>
                 </div>
-            <?php }
-            }?>
+            <?php }?>
         </section>
+        <!-- la liste des futurs achats du client -->
         <section>
-            <h3>Votre liste des futurs achats</h3>
+            <h3 class="text-center m-2">Votre liste des futurs achats</h3>
             <?php 
             $futurAchatsVide = true;
             foreach($donneesFuturAchats as $donnees){
                 $futurAchatsVide = false;?>
                 <div>
-                    <h4>id produits : <?php echo $donnees["id_produit"]?></h4>
-                    <p>libelle du produit : <?php echo $donnees["libelle_produit"]?></p>
+                    <h4 class=" ml-10 m-2 font-bold"><?php echo $donnees["libelle_produit"]?></h4>
                     <p>categorie : <?php echo $donnees["libelle_categorie"]?></p>
                     <p>vendeur : <?php echo $donnees["raison_sociale"]?></p>
                 </div>
@@ -352,41 +364,40 @@ if ($_SESSION["role"] === "client"){
                 <p>Votre liste de futurs achats est vide</p>
             <?php }?>
         </section>
+        <!-- les avis poster par le client -->
         <section>
-            <h3>Vos avis postés</h3>
+            <h3 class="text-center m-2">Vos avis postés</h3>
             <?php 
             foreach($donneesAvisPostes as $donnees){?>
                 <div>
-                    <h4><?php echo $donnees["id_avis"]?></h4>
-                    <p>commentaire : <?php echo $donnees["contenu_commentaire"]?></p>
-                    <p>nombre d'etoiles : <?php echo $donnees["nb_etoile"]?></p>
-                    <p>nombre de pouces haut : <?php echo $donnees["nb_pouce_haut"]?></p>
-                    <p>nombre de pouces bas : <?php echo $donnees["nb_pouce_bas"]?></p>
-                    <p>signaler : <?php echo $donnees["signaler"]?"true":"false"?></p>
-                    
-                    <p>id du produit : <?php echo $donnees["id_produit"]?></p>
-                    <p>libelle du produit : <?php echo $donnees["libelle_produit"]?></p>
+                    <h4 class=" ml-10 m-2 font-bold">Sur le produit : <?php echo $donnees["libelle_produit"]?></h4>
                     <p>categorie : <?php echo $donnees["libelle_categorie"]?></p>
                     <p>vendeur : <?php echo $donnees["raison_sociale"]?></p>
+                    <?php if($donnees["contenu_commentaire"] != ""){?>
+                        <p>commentaire : <?php echo $donnees["contenu_commentaire"]?></p>
+                    <?php }?>
+                    <p>nombre d'etoiles : <?php echo $donnees["nb_etoile"]?></p>
+                    <p>nombre de pouces haut : <?php echo $donnees["nb_pouce_haut"] != ""?$donnees["nb_pouce_haut"]:0?></p>
+                    <p>nombre de pouces bas : <?php echo $donnees["nb_pouce_bas"] != ""?$donnees["nb_pouce_bas"]:0?></p>
+                    <p>signaler : <?php echo $donnees["signaler"]?"true":"false"?></p>
                     
-                    <img src="<?php echo $donnees["url_photo_avis"]?>" alt="<?php echo $donnees["alt_photo_avis"]?>" title="<?php echo $donnees["titre_photo_avis"]?>">
-                    <p>description de la photo : <?php echo $donnees["description_photo_avis"]?></p>
+                    <?php if($donnees["url_photo_avis"] != ""){?>
+                        <img src="<?php echo $donnees["url_photo_avis"]?>" alt="<?php echo $donnees["alt_photo_avis"]?>" title="<?php echo $donnees["titre_photo_avis"]?>">
+                        <p>description de la photo : <?php echo $donnees["description_photo_avis"]?></p>
+                    <?php }?>
                 </div>
             <?php }?>
         </section>
+        <!-- avis signaler par le client -->
         <section>
-            <h3>Les avis qui vous avez signalés</h3>
+            <h3 class="text-center m-2">Les avis qui vous avez signalés</h3>
             <?php 
             foreach($donneesAvisSignales as $donnees){?>
                 <div>
-                    <h4>id avis : <?php echo $donnees["avis_signaler"]?></h4>
-                    <p>commentaire : <?php echo $donnees["contenu_avis_signaler"]?></p>
-                    <p>id du produit : <?php echo $donnees["id_produit"]?></p>
-                    <p>libelle du produit : <?php echo $donnees["libelle_produit"]?></p>
-                    <p>quantite par unite : <?php echo $donnees["quantite_unite"]?></p>
-                    <p>unite : <?php echo $donnees["unite"]?></p>
-                    <p>raison sociale : <?php echo $donnees["raison_sociale"]?></p>
+                    <h4 class=" ml-10 m-2 font-bold">Sur le produit : <?php echo $donnees["libelle_produit"]?></h4>
                     <p>categorie : <?php echo $donnees["libelle_categorie"]?></p>
+                    <p>vendeur : <?php echo $donnees["raison_sociale"]?></p>
+                    <p>commentaire : <?php echo $donnees["contenu_avis_signaler"]?></p>
                 </div>
             <?php }?>
         </section>
