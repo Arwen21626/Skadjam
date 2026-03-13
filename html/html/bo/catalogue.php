@@ -51,8 +51,7 @@
                 $lignes = $tabProduit; 
 
                 //affiche la photo du produit, son nom, son prix et sa note, son stock ?>
-                <form class="flex flex-row flex-wrap justify-around" method="post" action="./confirmer_catalogue.php">
-                    <?php 
+                    <form id="formCatalogue" class="flex flex-row flex-wrap justify-around" method="post" action="./confirmer_catalogue.php">                    <?php 
                         foreach($lignes as $id => $valeurs){
                             $idProduit = $valeurs['id_produit'];
                             // Le produit est-il en promotion ?
@@ -92,7 +91,7 @@
                                 <div class="flex justify-end">
                                     <!-- appearance-none size-10 bg-no-repeat bg-size-[auto_40px] bg-[url(/images/logo/bootstrap_icon/bookmark-fa-plus.svg)] checked:bg-[url(/images/logo/bootstrap_icon/bookmark-fa-plus-fill.svg)] -->
                                     <!-- <input type="hidden" name="idProduit" value="<?php //echo $idProduit; ?>"> -->
-                                    <input type="checkbox" name="<?php echo $idProduit; ?>" id="<?php echo $idProduit; ?>" class="cursor-pointer size-5" alt="Ajouter au catalogue" title="Ajouter au catalogue">
+                                    <input type="checkbox" name="<?php echo $idProduit; ?>" id="<?php echo $idProduit; ?>" class="cursor-pointer size-7" alt="Ajouter au catalogue" title="Ajouter au catalogue">
                                 </div>
                                 <!--affichage de la promotion-->
                                 <?php if($estPromu){ 
@@ -118,6 +117,9 @@
                                 <?php }} ?> 
                             </section>
                     <?php } ?>
+                    <p id="erreurProduit" class="text-rouge hidden">
+                        Veuillez sélectionner au moins un produit.
+                    </p>
                     <a href="./index_vendeur.php">Annuler</a>
                     <input type="submit" value="Confirmer">
                 </form>         
@@ -133,5 +135,17 @@
     <?php
         require_once __DIR__ . "/../../php/structure/footer_back.php";
     ?>
+    <script>
+        document.getElementById("formCatalogue").addEventListener("submit", function(e) {
+
+            const checked = document.querySelectorAll('input[type="checkbox"]:checked').length;
+
+            if (checked === 0) {
+                e.preventDefault();
+                document.getElementById("erreurProduit").classList.remove("hidden");
+            }
+
+        });
+    </script>
 </body>
 </html>
