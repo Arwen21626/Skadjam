@@ -128,25 +128,25 @@ function afficherProduit(tableau,tableauFA, indice){
     parent = contientBtnFAP
 
     // Lien vers action quand on appuie sur Panier
-    // let lienP = document.createElement("a")
-    // lienP.href = "/php/traitementFAPanier.php?idProduit="+idProduit+"&ajout=panier&vientDe=recherche"
-    // lienP.id = "btnPanier"
-    // parent.appendChild(lienP)
-    // parent = lienP
+    let lienP = document.createElement("a")
+    lienP.href = "/php/traitementFAPanier.php?idProduit="+idProduit+"&ajout=panier&vientDe=recherche"
+    lienP.id = "btnPanier"
+    parent.appendChild(lienP)
+    parent = lienP
 
-    // Bouton FA
-    // let boutonP = document.createElement("button")
-    // boutonP.classList.add("cursor-pointer", "size-10", "bg-no-repeat", "bg-size-[auto_40px]")
-    // bg = "bg-[url(/images/logo/bootstrap_icon/bookmark-fa-plus.svg)]"
-    // trouve = tableauFA.find(idProduit)
+    // Bouton Panier
+    let boutonP = document.createElement("button")
+    boutonP.classList.add("cursor-pointer", "size-10", "bg-no-repeat", "bg-size-[auto_40px]")
+    bg = "bg-[url(/images/logo/bootstrap_icon/carte.svg)]"
+    trouve = tableauFA.find(idProduit)
 
     // Si on trouve le produit dans la liste on change l'icone
-    // if (trouve != undefined){
-    //     bg = "bg-[url(/images/logo/bootstrap_icon/bookmark-fa-plus-fill.svg)]"
-    // }
+    if (trouve != undefined){
+        bg = "bg-[url(/images/logo/bootstrap_icon/cart-fill.svg)]"
+    }
 
-    // boutonFA.classList.add(bg)
-    // parent.appendChild(boutonFA)
+    boutonFA.classList.add(bg)
+    parent.appendChild(boutonFA)
 
     // Promotion
     if (tableau[i]['id_promotion'] != null){

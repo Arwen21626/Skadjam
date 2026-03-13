@@ -20,8 +20,9 @@ if ($_SESSION['role'] == "visiteur") {
     $tabFA = $_SESSION['futurAchat'];
 }
 
-// Récupération des futurs achats du client
+// Récupération des futurs achats et du panier du client
 include __DIR__. '/../../php/requetesBDD/recup_FA.php';
+include __DIR__. '/../../php/requetesBDD/recup_panier.php';
 ?>
 
 <!DOCTYPE html>
@@ -125,9 +126,9 @@ include __DIR__. '/../../php/requetesBDD/recup_FA.php';
                                     <?php 
                                     $bg = "bg-[url(/images/logo/bootstrap_icon/bookmark-fa-plus.svg)]";
                                     
-                                    $trouve = array_search($idProduit, $tabFA);
+                                    $trouveFA = array_search($idProduit, $tabFA);
                                     
-                                    if ($trouve != null) {
+                                    if ($trouveFA != null) {
                                         $bg = "bg-[url(/images/logo/bootstrap_icon/bookmark-fa-plus-fill.svg)]";
                                     }
                                     echo $bg;
@@ -135,8 +136,26 @@ include __DIR__. '/../../php/requetesBDD/recup_FA.php';
                                     ">
                                     </button>
                                 </a>
-                                <a id="btnPanier" href=""><button class="cursor-pointer size-10 bg-no-repeat bg-size-[auto_40px] bg-[url(/images/logo/bootstrap_icon/cart-vert-fonce.svg)] hover:bg-[url(/images/logo/bootstrap_icon/cart-fill-vert-fonce.svg)]"></button></a>
-                            </div>  
+                                <!-- Produit dans le panier ? -->
+                                <a id="btnPanier" href="/php/traitementFAPanier.php?idProduit=<?php echo $idProduit;?>&ajout=panier&vientDe=pV">
+                                    <button class="cursor-pointer size-10 bg-no-repeat bg-size-[auto_40px]
+                                        <?php 
+                                        $bg = "bg-[url(/images/logo/bootstrap_icon/cart-vert-fonce.svg)]";
+                                        $trouveP = false;
+
+                                        if (isset($_SESSION['panier']['contient'][$idProduit])){
+                                            $trouveP = true;
+                                        }
+
+                                        if ($trouveP != false) {
+                                            $bg = "bg-[url(/images/logo/bootstrap_icon/cart-fill-vert-fonce.svg)]";
+                                        }
+                                        echo $bg;
+                                        ?>
+                                    ">
+                                    </button>
+                                </a>
+                            </div>   
                             <!--affichage de la promotion-->
                                 <?php if($estPromu){ 
                                     $stmt = $dbh->prepare("SELECT *

@@ -6,8 +6,7 @@
     include (__DIR__."/../../php/recup_coord.php");
     include __DIR__. '/../../php/requetesBDD/recup_FA.php';
     include __DIR__. '/../../php/requetesBDD/recup_panier.php';
-    include __DIR__. '/../../php/maj_cookie_fa.php';
-    print_r($tabFA);
+    include __DIR__. '/../../php/maj_cookie.php';
 
     //récupère toutes les infos des tables produits et photos
     $tabProduit = [];

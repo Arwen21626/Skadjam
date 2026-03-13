@@ -44,6 +44,12 @@
         $pseudo = $row['pseudo'];
         $_SESSION['pseudo'] = $pseudo;
     }
+
+    // Variable pour savoir s'il faut afficher une popup
+    $addPanier = (isset($_GET['addPanier']) && $_GET['addPanier'] === "1");
+    $removePanier = (isset($_GET['removePanier']) && $_GET['removePanier'] === "1");
+    $addFA = (isset($_GET['addFA']) && $_GET['addFA'] === "1");
+    $removeFA = (isset($_GET['removeFA']) && $_GET['removeFA'] === "1");
 ?>
 
 <!DOCTYPE html>
@@ -158,9 +164,9 @@
                                     <?php 
                                     $bg = "bg-[url(/images/logo/bootstrap_icon/bookmark-fa-plus.svg)]";
                                     
-                                    $trouve = array_search($idProduit, $tabFA);
+                                    $trouveFA = array_search($idProduit, $tabFA);
                                     
-                                    if ($trouve != null) {
+                                    if ($trouveFA != null) {
                                         $bg = "bg-[url(/images/logo/bootstrap_icon/bookmark-fa-plus-fill.svg)]";
                                     }
                                     echo $bg;
@@ -168,7 +174,25 @@
                                     ">
                                     </button>
                                 </a>
-                                <a id="btnPanier" href=""><button class="cursor-pointer size-10 bg-no-repeat bg-size-[auto_40px] bg-[url(/images/logo/bootstrap_icon/cart-vert-fonce.svg)] hover:bg-[url(/images/logo/bootstrap_icon/cart-fill-vert-fonce.svg)]"></button></a>
+                                <!-- Produit dans le panier ? -->
+                                <a id="btnPanier" href="./php/traitementFAPanier.php?idProduit=<?php echo $idProduit;?>&ajout=panier&vientDe=index">
+                                    <button class="cursor-pointer size-10 bg-no-repeat bg-size-[auto_40px]
+                                        <?php 
+                                        $bg = "bg-[url(/images/logo/bootstrap_icon/cart-vert-fonce.svg)]";
+                                        $trouveP = false;
+
+                                        if (isset($_SESSION['panier']['contient'][$idProduit])){
+                                            $trouveP = true;
+                                        }
+
+                                        if ($trouveP != false) {
+                                            $bg = "bg-[url(/images/logo/bootstrap_icon/cart-fill-vert-fonce.svg)]";
+                                        }
+                                        echo $bg;
+                                        ?>
+                                    ">
+                                    </button>
+                                </a>
                             </div>  
                             <!--affichage de la promotion-->
                                 <?php if($estPromu){ 
@@ -218,12 +242,56 @@
             </a>
             <?php }?>
         </div>
+
+        <div id="popup-overlay" class="right-12 md:right-40">
+            <?php if($addPanier){ ?>
+            <!---popup ajout d'un produit dans le panier--->
+            <div id="popup-ajouter-panier" class="popup p-4 border-vertFonce shadow-xl">
+                <p>Le produit a bien été ajouté à votre panier !</p>
+                <div class="flex justify-around mt-2">
+                    <button class="pl-2 pr-2 border-2 border-vertClair rounded-sm cursor-pointer">OK</button>
+                    <a href="/html/fo/panier.php" class="a-button pl-2 pr-2 border-2 border-vertClair rounded-sm cursor-pointer">Voir le panier</a>
+                </div>
+            </div>
+            <?php } ?>
+
+            <?php if($removePanier){ ?>
+            <!---popup retrait d'un produit du panier--->
+            <div id="popup-retirer-panier" class="popup p-4 border-vertFonce shadow-xl">
+                <p>Le produit a bien été retiré de votre panier !</p>
+                <div class="flex justify-around mt-2">
+                    <button class="pl-2 pr-2 border-2 border-vertClair rounded-sm cursor-pointer">OK</button>
+                    <a href="/html/fo/panier.php" class="a-button pl-2 pr-2 border-2 border-vertClair rounded-sm cursor-pointer">Voir le panier</a>
+                </div>
+            </div>
+            <?php } ?>
+
+            <?php if($addFA){ ?>
+            <!---popup ajout d'un produit aux futurs achats--->
+            <div id="popup-ajouter-fa" class="popup p-4 border-vertFonce shadow-xl">
+                <p>Le produit a bien été ajouté à vos futurs achats !</p>
+                <div class="flex justify-center mt-2">
+                    <button class="pl-2 pr-2 border-2 border-vertClair rounded-sm cursor-pointer">OK</button>
+                </div>
+            </div>
+            <?php } ?>
+
+            <?php if($removeFA){ ?>
+            <!---popup retrait d'un produit aux futurs achats--->
+            <div id="popup-retirer-fa" class="popup p-4 border-vertFonce shadow-xl">
+                <p>Le produit a bien été retiré de vos futurs achats !</p>
+                <div class="flex justify-center mt-2">
+                    <button class="pl-2 pr-2 border-2 border-vertClair rounded-sm cursor-pointer">OK</button>
+                </div>
+            </div>
+            <?php } ?>
+
+        </div>
     </main>
     
 
     <!--footer-->
     <?php require __DIR__ . "/php/structure/footer_front.php"; ?>
-
+    <script type="module" src="./js/fo/popupFAPanier.js"></script>
 </body>
-
 </html>

@@ -12,4 +12,7 @@ if ($_SESSION['role'] == "client") {
         $tabPanier[] = $row;
     }    
 }
+else{
+    $tabPanier = $_SESSION['panier'];
+}
 ?>
