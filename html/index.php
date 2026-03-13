@@ -44,6 +44,9 @@
         $pseudo = $row['pseudo'];
         $_SESSION['pseudo'] = $pseudo;
     }
+    echo "<pre>";
+    print_r($tabPanier);
+    echo "</pre>";
 ?>
 
 <!DOCTYPE html>
@@ -168,7 +171,23 @@
                                     ">
                                     </button>
                                 </a>
-                                <a id="btnPanier" href=""><button class="cursor-pointer size-10 bg-no-repeat bg-size-[auto_40px] bg-[url(/images/logo/bootstrap_icon/cart-vert-fonce.svg)] hover:bg-[url(/images/logo/bootstrap_icon/cart-fill-vert-fonce.svg)]"></button></a>
+                                <a id="btnPanier" href="./php/traitementFAPanier.php?idProduit=<?php echo $idProduit;?>&ajout=panier&vientDe=index">
+                                    <button class="cursor-pointer size-10 bg-no-repeat bg-size-[auto_40px]
+                                        <?php 
+                                        $bg = "bg-[url(/images/logo/bootstrap_icon/cart-vert-fonce.svg)]";
+
+                                        if (isset($_SESSION['panier']['contient'][$idProduit])){
+                                            $trouve = true;
+                                        }
+
+                                        if ($trouve != false) {
+                                            $bg = "bg-[url(/images/logo/bootstrap_icon/cart-fill-vert-fonce.svg)]";
+                                        }
+                                        echo $bg;
+                                        ?>
+                                    ">
+                                    </button>
+                                </a>
                             </div>  
                             <!--affichage de la promotion-->
                                 <?php if($estPromu){ 

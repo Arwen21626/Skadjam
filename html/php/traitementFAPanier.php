@@ -81,7 +81,24 @@ if ($ajout == "fa") {
     
 }
 elseif ($ajout == "panier") {
-    echo "Alède";
+    if ($_SESSION['role'] == "visiteur") {
+        if (!isset($_SESSION['panier']['contient'][$idProd])) {
+            // Ajouter le produit
+            $_SESSION['panier']['contient'][$idProd] = [
+                'id' => $idProd,
+                'quantite_par_produit' => 1
+            ];
+        } else {
+            // Retirer le produit
+            unset($_SESSION['panier']['contient'][$idProd]);
+        }
+        $chemin = $vientDe;
+    }
+    elseif ($_SESSION['role'] == "client") {
+        
+    }
+    header("location:".$chemin);
 }
+
 ?>
 
