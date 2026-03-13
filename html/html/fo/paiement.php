@@ -399,6 +399,20 @@ if($_SESSION['role'] != 'client'){
                 
             </div>
         </main>
+
+        <script src="../../js/verifForm.js"></script>
+        <script>
+            date = "03/21"
+            dateCut = date.split('/')
+            mois = dateCut[0]
+            annee = dateCut[1]
+            anneeEnCours = getFullYear()
+            moisEnCours = getMonth()
+
+            print_r(dateCut)
+            console.log(anneeEnCours)
+            console.log(moisEnCours)
+        </script>
     <?php }?>
     <?php include(__DIR__ . '/../../php/structure/footer_front.php');?>
 </body>

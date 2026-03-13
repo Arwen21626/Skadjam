@@ -13,8 +13,9 @@ CREATE TABLE sae3_skadjam._compte (
     mot_de_passe CHARACTER VARYING(100) NOT NULL,
     numero_telephone CHARACTER(12) NOT NULL,
     bloque BOOLEAN NOT NULL,
-    code_secret VARCHAR(255)
-    
+    code_secret VARCHAR(255),
+    tentative INT DEFAULT 0,
+    restant TIMESTAMP DEFAULT NULL
 );
 
 ALTER TABLE sae3_skadjam._compte

@@ -3,7 +3,11 @@
     // Chemins quand on est dans le dossier html
     require_once __DIR__ . '/../../php/verif_role_fo.php';
     require_once __DIR__ . '/../../01_premiere_connexion.php';
-    include (__DIR__."/../../php/recupCoord.php");
+    include (__DIR__."/../../php/recup_coord.php");
+    include __DIR__. '/../../php/requetesBDD/recup_FA.php';
+    include __DIR__. '/../../php/requetesBDD/recup_panier.php';
+    include __DIR__. '/../../php/maj_cookie_fa.php';
+    print_r($tabFA);
 
     //récupère toutes les infos des tables produits et photos
     $tabProduit = [];
@@ -46,7 +50,7 @@
     
     <script>
         const tabProd = <?php echo json_encode($tabProduit);?>;
-        const tabVendeur = <?php echo json_encode($tabVendeur);?>;        
+        const tabVendeur = <?php echo json_encode($tabVendeur);?>;
     </script>
     
     <script src="../../js/recherche.js"></script>
@@ -273,20 +277,18 @@
         </div>
 
 
-        <section id="listeProduit" class="flex flex-col items-center">
-            <article id="prod" class="flex flex-row flex-wrap justify-around w-auto">
+        <div id="listeProduit" class="flex flex-col items-center">
+            <div id="prod" class="flex flex-row flex-wrap justify-around w-auto">
                 <script>
                     document.addEventListener("DOMContentLoaded", () => {
-                        afficherListe(tabProd)
+                        afficherListe(tabProd, tabFA)
                     });
                 </script>
-            </article>
-
-            <!--fin du catalogue-->
+            </div>
 
             <!-- Pagination en fonction du nb de produits ou affichage s'il n'y en a aucun -->
             <script>affichagePagination(tabProd)</script>
-        </section>
+        </div>
 
         <?php $dbh = null;?>
 

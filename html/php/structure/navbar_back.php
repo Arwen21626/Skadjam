@@ -37,6 +37,8 @@
                 <hr>
                 <li class="text-bleu"><a href="/html/bo/statistiques.php">Statistiques</a></li>
                 <hr>
+                <li class="text-bleu"><a href="/html/bo/catalogue.php">Créer un catalogue</a></li>
+                <hr>
                 <li class="text-bleu"><a href="/php/deconnexion.php">Se déconnecter</a></li>
         </ul>
     </div>

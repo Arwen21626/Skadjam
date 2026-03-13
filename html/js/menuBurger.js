@@ -5,8 +5,12 @@ let menuBurger = document.getElementById("menuBurger")
 btnAutre.addEventListener("click", function(){
     if (menuBurger.classList.contains("hidden")) {
         menuBurger.classList.remove("hidden")
+        btnAutre.classList.remove("bg-[url(/images/logo/bootstrap_icon/list.svg)]")
+        btnAutre.classList.add("bg-[url(/images/logo/bootstrap_icon/three-dots-vertical.svg)]")
     }
     else{
         menuBurger.classList.add("hidden")
+        btnAutre.classList.add("bg-[url(/images/logo/bootstrap_icon/list.svg)]")
+        btnAutre.classList.remove("bg-[url(/images/logo/bootstrap_icon/three-dots-vertical.svg)]")
     }
 })

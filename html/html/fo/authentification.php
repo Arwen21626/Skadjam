@@ -3,6 +3,11 @@ ob_start(); // Démarre le tampon de sortie pour pouvoir utiliser ob_clean() plu
 include __DIR__ . '/../../01_premiere_connexion.php'; // Connexion à la base de données
 session_start(); // Démarrage de la session
 
+// $dt = new DateTime('now', new DateTimeZone('Europe/Paris'));
+// $ts_local = $dt->getTimestamp();
+date_default_timezone_set('Europe/Paris');
+$ts_local = time();
+
 $role = null;
 
 // Vérifie que les données de connexion sont bien présentes en session
@@ -13,7 +18,11 @@ if (!isset($_SESSION['dataConnexion'])){
 
 // Récupération des données de connexion stockées en session
 $dataConnexion = $_SESSION['dataConnexion'];
-$connecte = $dataConnexion['connecte'];
+if( isset($dataConnexion['connecte'])){
+    $connecte = $dataConnexion['connecte'];
+}else{
+    $connecte = false;
+}
 $role = $dataConnexion['role'];
 
 // Un visiteur ne peut pas accéder à cette page
@@ -31,17 +40,41 @@ if (isset($_SESSION['connecte']) && $_SESSION['connecte']){
 $idClient = $dataConnexion['idCompte'];
 $idCompte = $dataConnexion['idCompte'];
 
+
 // Traitement si le formulaire A2F est validé ou si le compte est déjà connecté (pas de code secret)
 if (($_SERVER['REQUEST_METHOD'] == 'POST' && $_POST['auth'] === 'valide') || $connecte){
 
+    
+
     // Détecte si la requête vient d'un appel AJAX (fetch) pour adapter la réponse
     if ($_SERVER['REQUEST_METHOD'] == 'POST' && $_POST['auth'] === 'valide'){
+        include __DIR__.'/../../php/structure/authentikATOR/AuthATOR.php'; // koko ne pouvait pas faire de commande composer :/
         $ajax = true;
+        $auth = new AuthATOR($dbh, "Alizon", $idCompte, "");
+        $auth->resetTentative();
     }
 
     // Traitement spécifique aux clients : fusion du panier visiteur avec le panier du compte
     if($role === 'client'){
+        // Ajout des FA si nécessaire
+        $tabFABDD = [];
+        // Récupération des FA de la BDD
+        foreach($dbh->query("SELECT id_produit FROM sae3_skadjam._futur_achat WHERE id_client = $idCompte", PDO::FETCH_ASSOC) as $row){
+            $tabFABDD[$row['id_produit']] = $row['id_produit'];
+        }
+
+        // On compare pour éviter les doublons
+        // Parcours pour voir si le produit est dans la session
+        foreach ($_SESSION['futurAchat'] as $id) {
+            $trouve = array_search($id, $tabFABDD);
+            // Si le produit n'est pas déjà présent on l'ajoute
+            if ($trouve == false) {
+                $insertFA = $dbh->prepare("INSERT INTO sae3_skadjam._futur_achat(id_produit, id_client) VALUES (?,?)");
+                $insertFA->execute([$id, $idCompte]);
+            }
+        }
         
+
         // Début modif korentin
         // Permet d'ajouter tout les éléments du panier du visiteur au panier du compte auquel il se connecte
         if ($_SESSION['panier']['nb_produit_total'] > 0) 
@@ -58,7 +91,7 @@ if (($_SERVER['REQUEST_METHOD'] == 'POST' && $_POST['auth'] === 'valide') || $co
                 // Met à jour le nb de produit total contenu dans le panier
                 $stmt = $dbh->prepare("UPDATE sae3_skadjam._panier SET nb_produit_total = nb_produit_total + ? WHERE id_panier = ?");
                 $stmt->execute([$_SESSION['panier']['nb_produit_total'], $idPanier]);
-    
+
                 // Met à jour le montant total TTC du panier
                 $stmt = $dbh->prepare("UPDATE sae3_skadjam._panier SET montant_total_ttc = montant_total_ttc + ? WHERE id_panier = ?");
                 $stmt->execute([$_SESSION['panier']['montant_total_ttc'], $idPanier]);
@@ -154,6 +187,11 @@ if (($_SERVER['REQUEST_METHOD'] == 'POST' && $_POST['auth'] === 'valide') || $co
         }
     }
 } else {
+include __DIR__.'/../../php/structure/authentikATOR/AuthATOR.php';
+$auth = new AuthATOR($dbh, "Alizon", $idCompte, "");
+$finBloquage = $auth->getTempsRestant();
+$tempsRestant = ($finBloquage['restant']!==null)?strtotime($finBloquage['restant'])-$ts_local:0;
+
     // Affichage du formulaire A2F si le code n'a pas encore été validé
 ?>
 
@@ -167,34 +205,48 @@ if (($_SERVER['REQUEST_METHOD'] == 'POST' && $_POST['auth'] === 'valide') || $co
 </head>
 <body class="show">
     <?php include __DIR__.'/../../php/structure/header_front.php' ?>
-    <main class="flex flex-col">
+    <main class="flex flex-col items-center">
         
         <h2>Authentification à deux facteurs</h2>
+        <?php
+        if ($tempsRestant>0){
+            $tempsLisible = gmdate("i\ms\s", $tempsRestant);
+            ?>
+        
+        <p>Compte bloqué, réessayez dans <?php print_r($tempsLisible) ?>.</p>
+        <?php } else { ?>
+
         <?php include __DIR__.'/../../php/structure/authentikATOR/input_code.php' ?>
-        <p id="result" class="hidden"></p>
+        <p id="result" class="hidden "></p>
+
+        <?php
+        } ?>
     </main>
     <?php include __DIR__.'/../../php/structure/footer_front.php' ?>
 </body>
 <script src="./../../php/structure/authentikATOR/appelAJAX.js"></script>
 <script>
+    
     const res = document.getElementById("result");
     let ret 
     let reponse
     goFirst()
 
     async function submit(idClient){
+        
+        res.style.color = "black"
         res.classList.add("hidden")
         initParam(idClient)
         let code = recup_code()
         ret = await verifOtp(code) // Vérifie le code OTP saisi par l'utilisateur
-        console.log("connection : "+ret)
+        console.log("[authentification] connection : "+ret)
         if (ret == 0){ // Code correct
             valider.textContent = "Connexion..."
             res.textContent = "Code bon."
             res.classList.remove("hidden")
 
             // Envoi de la confirmation au PHP via AJAX pour finaliser la connexion
-            let data = new FormData()
+            data = new FormData()
             data.append('auth', 'valide')
 
             await fetch('authentification.php', {method: 'post', body: data})
@@ -205,8 +257,20 @@ if (($_SERVER['REQUEST_METHOD'] == 'POST' && $_POST['auth'] === 'valide') || $co
                 window.location.href = r.url // Redirige le navigateur vers l'URL reçue
             })
         } else { // Code incorrect
-            res.textContent = "Code incorrect, réessayez."
             res.classList.remove("hidden")
+            addT = await addTentative()
+            console.log("[authentification] addT "+addT)
+            result = await getTentative()
+            console.log("[authentification] result "+result)
+            nbTentative = result['tentative']
+            console.log("[authentification] nbTentative "+nbTentative)
+            res.style.color = "#A70101"
+            res.textContent = "Code incorrect, réessayez. "+(3-nbTentative)+" essais restants."
+            if (nbTentative==3){
+                ret = await addTempsRestant()
+                ret1 = await resetTentative()
+                window.location.href = "./authentification.php"
+            }
         }
     }
 </script>
