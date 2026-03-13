@@ -330,6 +330,9 @@ input.quantite-prod-input {
   .top-21 {
     top: calc(var(--spacing, 0.25rem) * 21);
   }
+  .top-32 {
+    top: calc(var(--spacing, 0.25rem) * 32);
+  }
   .top-48 {
     top: calc(var(--spacing, 0.25rem) * 48);
   }
@@ -344,6 +347,9 @@ input.quantite-prod-input {
   }
   .right-12 {
     right: calc(var(--spacing, 0.25rem) * 12);
+  }
+  .right-\[8em\] {
+    right: 8em;
   }
   .bottom-0 {
     bottom: calc(var(--spacing, 0.25rem) * 0);
@@ -753,6 +759,9 @@ input.quantite-prod-input {
   .h-auto {
     height: auto;
   }
+  .h-fit {
+    height: fit-content;
+  }
   .h-full {
     height: 100%;
   }
@@ -1117,6 +1126,9 @@ input.quantite-prod-input {
   }
   .gap-4 {
     gap: calc(var(--spacing, 0.25rem) * 4);
+  }
+  .gap-10 {
+    gap: calc(var(--spacing, 0.25rem) * 10);
   }
   .space-y-2 {
     :where(& > :not(:last-child)) {
