@@ -51,77 +51,83 @@
                 $lignes = $tabProduit; 
 
                 //affiche la photo du produit, son nom, son prix et sa note, son stock ?>
-                    <form id="formCatalogue" class="flex flex-row flex-wrap justify-around" method="post" action="./confirmer_catalogue.php">                    <?php 
-                        foreach($lignes as $id => $valeurs){
-                            $idProduit = $valeurs['id_produit'];
-                            // Le produit est-il en promotion ?
-                            $stmt = $dbh->prepare("SELECT *
-                                                FROM sae3_skadjam._promu
-                                                WHERE id_produit = :id_produit");
-                            $stmt->execute([':id_produit' => $idProduit]);
-                            $estPromu = (!empty($stmt->fetch())); ?>
-                            <section class="bg-bleu flex flex-col w-40 h-auto p-2 m-2 md:w-80 md:p-3">
-                                <!--affichage de la photo-->
-                                <div class=" mb-3">
-                                    <img class="w-auto h-40 md:h-80 mx-auto block" 
-                                        src="<?php echo $valeurs['url_photo'];?>" 
-                                        alt="<?php echo $valeurs['alt'];?>"
-                                        title="<?php echo $valeurs['titre'];?>">
-                                        
-                                <!--affichage du nom du produit-->
-                                <p class=" max-w-70"><?php echo $valeurs['libelle_produit'];?></p> 
+                    <form id="formCatalogue" class="flex flex-row-reverse justify-center" method="post" action="./confirmer_catalogue.php">
 
-                                <!--affichage du prix du produit-->   
-                                <div class="flex flex-row justify-between items-center">
-                                    <p class="<?php echo ($valeurs['pourcentage_remise'] !== NULL)?'line-through':'';?>"> <?php echo htmlentities(str_replace(".", ",",$valeurs['prix_ttc'])); ?>€ (<abbr title="Toutes Taxes Comprises">TTC</abbr>)</p>
-                                    <p class="<?php echo ($valeurs['pourcentage_remise'] !== NULL)?'':'hidden';?>"> <?php echo htmlentities(str_replace(".", ",",$valeurs['prix_remise'])); ?>€ (<abbr title="Toutes Taxes Comprises">TTC</abbr>)</p>
+                        <div class="flex justify-around flex-col sticky top-1/4 h-50">
+                            <a href="./index_vendeur.php" class="flex justify-center items-center border-2 border-vertFonce rounded-2xl w-45 h-14 cursor-pointer">Annuler</a>
+                            <input type="submit" value="Confirmer" class="flex justify-center items-center border-2 border-vertFonce rounded-2xl w-45 h-14 cursor-pointer">
+                        </div>
+                        
+                        <div class="flex flex-row flex-wrap">
+                            <?php foreach($lignes as $id => $valeurs){
+                                $idProduit = $valeurs['id_produit'];
+                                // Le produit est-il en promotion ?
+                                $stmt = $dbh->prepare("SELECT *
+                                                    FROM sae3_skadjam._promu
+                                                    WHERE id_produit = :id_produit");
+                                $stmt->execute([':id_produit' => $idProduit]);
+                                $estPromu = (!empty($stmt->fetch())); ?>
+                                <section class="bg-bleu flex flex-col w-40 h-auto p-2 m-2 md:w-80 md:p-3">
+                                    <!--affichage de la photo-->
+                                    <div class=" mb-3">
+                                        <img class="w-auto h-40 md:h-80 mx-auto block" 
+                                            src="<?php echo $valeurs['url_photo'];?>" 
+                                            alt="<?php echo $valeurs['alt'];?>"
+                                            title="<?php echo $valeurs['titre'];?>">
+                                            
+                                    <!--affichage du nom du produit-->
+                                    <p class=" max-w-70"><?php echo $valeurs['libelle_produit'];?></p> 
 
-                                </div>
-                                <!--récupération de la note-->
-                                <div class="flex">
-                                    <?php $note = $valeurs['note_moyenne'];
-                                        affichageNote($note); ?>
-                                </div>
-                                
-                                <!--affichage du stock-->
-                                <p>En stock : <?php echo $valeurs['quantite_stock'];?></p>
-                                </div>  
+                                    <!--affichage du prix du produit-->   
+                                    <div class="flex flex-row justify-between items-center">
+                                        <p class="<?php echo ($valeurs['pourcentage_remise'] !== NULL)?'line-through':'';?>"> <?php echo htmlentities(str_replace(".", ",",$valeurs['prix_ttc'])); ?>€ (<abbr title="Toutes Taxes Comprises">TTC</abbr>)</p>
+                                        <p class="<?php echo ($valeurs['pourcentage_remise'] !== NULL)?'':'hidden';?>"> <?php echo htmlentities(str_replace(".", ",",$valeurs['prix_remise'])); ?>€ (<abbr title="Toutes Taxes Comprises">TTC</abbr>)</p>
 
-                                <!-- Ajouter au catalogue -->
-                                <div class="flex justify-end">
-                                    <!-- appearance-none size-10 bg-no-repeat bg-size-[auto_40px] bg-[url(/images/logo/bootstrap_icon/bookmark-fa-plus.svg)] checked:bg-[url(/images/logo/bootstrap_icon/bookmark-fa-plus-fill.svg)] -->
-                                    <!-- <input type="hidden" name="idProduit" value="<?php //echo $idProduit; ?>"> -->
-                                    <input type="checkbox" name="<?php echo $idProduit; ?>" id="<?php echo $idProduit; ?>" class="cursor-pointer size-7" alt="Ajouter au catalogue" title="Ajouter au catalogue">
-                                </div>
-                                <!--affichage de la promotion-->
-                                <?php if($estPromu){ 
-                                        $stmt = $dbh->prepare("SELECT *
-                                                                FROM sae3_skadjam._promu pu
-                                                                INNER JOIN sae3_skadjam._promotion pn
-                                                                    ON pu.id_promotion = pn.id_promotion
-                                                                WHERE pu.id_produit = :id_produit");
-                                        $stmt->execute([':id_produit' => $idProduit]);
-                                        $promotion = $stmt->fetch(PDO::FETCH_ASSOC);
-                                        $debutPromo = formatDate($promotion['date_debut_promotion']);
-                                        $finPromo = null;
-                                        if($promotion['date_fin_promotion'] !== null){
-                                            $finPromo = formatDate($promotion['date_fin_promotion']);
-                                        }
-                                        $labelPromo = $promotion['label'];
-                                        if($debutPromo <= date('Y-m-d') && ($finPromo === null || $finPromo >= date('Y-m-d')) && !empty($labelPromo)){
-                                    ?>
-                                    <!-- Affichage de la bannière -->
-                                    <div class="bg-rouge absolute w-36 md:w-74 underline text-beige pt-2 pb-1.5">
-                                        <h4 class="text-center text-beige overline m-0"><?php echo htmlspecialchars($labelPromo); ?></h4>
                                     </div>
-                                <?php }} ?> 
-                            </section>
-                    <?php } ?>
-                    <p id="erreurProduit" class="text-rouge hidden">
-                        Veuillez sélectionner au moins un produit.
-                    </p>
-                    <a href="./index_vendeur.php">Annuler</a>
-                    <input type="submit" value="Confirmer">
+                                    <!--récupération de la note-->
+                                    <div class="flex">
+                                        <?php $note = $valeurs['note_moyenne'];
+                                            affichageNote($note); ?>
+                                    </div>
+                                    
+                                    <!--affichage du stock-->
+                                    <p>En stock : <?php echo $valeurs['quantite_stock'];?></p>
+                                    </div>  
+
+                                    <!-- Ajouter au catalogue -->
+                                    <div class="flex justify-end">
+                                        <!-- appearance-none size-10 bg-no-repeat bg-size-[auto_40px] bg-[url(/images/logo/bootstrap_icon/bookmark-fa-plus.svg)] checked:bg-[url(/images/logo/bootstrap_icon/bookmark-fa-plus-fill.svg)] -->
+                                        <!-- <input type="hidden" name="idProduit" value="<?php //echo $idProduit; ?>"> -->
+                                        <input type="checkbox" name="<?php echo $idProduit; ?>" id="<?php echo $idProduit; ?>" class="cursor-pointer size-7" alt="Ajouter au catalogue" title="Ajouter au catalogue">
+                                    </div>
+                                    <!--affichage de la promotion-->
+                                    <?php if($estPromu){ 
+                                            $stmt = $dbh->prepare("SELECT *
+                                                                    FROM sae3_skadjam._promu pu
+                                                                    INNER JOIN sae3_skadjam._promotion pn
+                                                                        ON pu.id_promotion = pn.id_promotion
+                                                                    WHERE pu.id_produit = :id_produit");
+                                            $stmt->execute([':id_produit' => $idProduit]);
+                                            $promotion = $stmt->fetch(PDO::FETCH_ASSOC);
+                                            $debutPromo = formatDate($promotion['date_debut_promotion']);
+                                            $finPromo = null;
+                                            if($promotion['date_fin_promotion'] !== null){
+                                                $finPromo = formatDate($promotion['date_fin_promotion']);
+                                            }
+                                            $labelPromo = $promotion['label'];
+                                            if($debutPromo <= date('Y-m-d') && ($finPromo === null || $finPromo >= date('Y-m-d')) && !empty($labelPromo)){
+                                        ?>
+                                        <!-- Affichage de la bannière -->
+                                        <div class="bg-rouge absolute w-36 md:w-74 underline text-beige pt-2 pb-1.5">
+                                            <h4 class="text-center text-beige overline m-0"><?php echo htmlspecialchars($labelPromo); ?></h4>
+                                        </div>
+                                    <?php }} ?> 
+                                </section>
+                        <?php } ?>
+                        <p id="erreurProduit" class="text-rouge hidden">
+                            Veuillez sélectionner au moins un produit.
+                        </p>
+                    </div>         
                 </form>         
                 <?php $dbh = null;
             } 
