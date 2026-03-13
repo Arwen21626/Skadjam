@@ -682,6 +682,10 @@ input.quantite-prod-input {
     width: calc(1/2 * 100%);
     height: calc(1/2 * 100%);
   }
+  .size-5 {
+    width: calc(var(--spacing, 0.25rem) * 5);
+    height: calc(var(--spacing, 0.25rem) * 5);
+  }
   .size-7 {
     width: calc(var(--spacing, 0.25rem) * 7);
     height: calc(var(--spacing, 0.25rem) * 7);
@@ -884,6 +888,9 @@ input.quantite-prod-input {
   }
   .w-40 {
     width: calc(var(--spacing, 0.25rem) * 40);
+  }
+  .w-43 {
+    width: calc(var(--spacing, 0.25rem) * 43);
   }
   .w-45 {
     width: calc(var(--spacing, 0.25rem) * 45);
@@ -1899,11 +1906,6 @@ input.quantite-prod-input {
       background-color: var(--color-beige);
     }
   }
-  .checked\:bg-\[url\(\/images\/logo\/bootstrap_icon\/bookmark-fa-plus-fill\.svg\)\] {
-    &:checked {
-      background-image: url(/images/logo/bootstrap_icon/bookmark-fa-plus-fill.svg);
-    }
-  }
   .hover\:bg-\[url\(\/images\/logo\/bootstrap_icon\/cart-fill-vert-fonce\.svg\)\] {
     &:hover {
       @media (hover: hover) {
@@ -2507,6 +2509,15 @@ input.quantite-prod-input {
       gap: calc(var(--spacing, 0.25rem) * 1);
     }
   }
+  .md\:space-y-0 {
+    @media (width >= 48rem) {
+      :where(& > :not(:last-child)) {
+        --tw-space-y-reverse: 0;
+        margin-block-start: calc(calc(var(--spacing, 0.25rem) * 0) * var(--tw-space-y-reverse));
+        margin-block-end: calc(calc(var(--spacing, 0.25rem) * 0) * calc(1 - var(--tw-space-y-reverse)));
+      }
+    }
+  }
   .md\:space-y-2 {
     @media (width >= 48rem) {
       :where(& > :not(:last-child)) {
@@ -2721,12 +2732,6 @@ input.quantite-prod-input {
   .md\:text-left {
     @media (width >= 48rem) {
       text-align: left;
-    }
-  }
-  .md\:text-sm {
-    @media (width >= 48rem) {
-      font-size: var(--text-sm, 0.875rem);
-      line-height: var(--tw-leading, var(--text-sm--line-height, calc(1.25 / 0.875)));
     }
   }
   .md\:text-rouge {
