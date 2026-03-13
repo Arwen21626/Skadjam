@@ -920,6 +920,9 @@ input.quantite-prod-input {
   .w-40 {
     width: calc(var(--spacing, 0.25rem) * 40);
   }
+  .w-43 {
+    width: calc(var(--spacing, 0.25rem) * 43);
+  }
   .w-45 {
     width: calc(var(--spacing, 0.25rem) * 45);
   }

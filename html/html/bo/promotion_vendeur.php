@@ -13,8 +13,14 @@
                             FROM sae3_skadjam._produit pr
                             INNER JOIN sae3_skadjam._vendeur v
                                 ON pr.id_vendeur = v.id_compte
-                            INNER JOIN sae3_skadjam._promu pm
-                                ON pr.id_produit = pm.id_produit
+                            INNER JOIN sae3_skadjam._montre m
+                                ON m.id_produit = pr.id_produit
+                            INNER JOIN sae3_skadjam._photo p
+                                ON p.id_photo = m.id_photo
+                            INNER JOIN sae3_skadjam._promu pmu
+                                ON pr.id_produit = pmu.id_produit
+                            INNER JOIN sae3_skadjam._promotion pmn
+                                ON pmu.id_promotion = pmn.id_promotion
                             WHERE v.id_compte = $idCompte AND pr.est_supprime = false
                             ORDER BY libelle_produit ASC"
                             , PDO::FETCH_ASSOC) as $row){
@@ -50,18 +56,26 @@
             <a href="index_vendeur.php" class="flex justify-center mt-15 mb-15">
                 <button class="border-vertFonce border-2 rounded-sm md:rounded-2xl w-35 h-10 md:w-50 md:h-14 px-7 cursor-pointer">Retour</button>
             </a>
-        <?php }
+        <?php }else{?>
+            <div class="flex justify-center flex-row-reverse mb-14">
 
-        else{?>
-            <div class="flex justify-center">
-                <table class="table-auto w-250">
+                <div class="flex justify-around flex-col sticky top-1/4 h-40 ml-10">
+                    <!---bouton retour--->
+                    <a href="index_vendeur.php" class="flex justify-center items-center border-2 border-vertFonce rounded-2xl w-45 h-14 cursor-pointer">Retour</a>
+                    <!---bouton modifier promotion--->
+                    <button class="border-2 border-vertFonce rounded-2xl w-45 h-16 cursor-pointer mt-5">
+                        <a href="../bo/modifier_promotion.php?idCompte=<?php echo $idCompte ;?>" class="">Modifier les promotions</a>
+                    </button>
+                </div>
+
+                <table class="table-auto w-2/3">
                     <thead>
                         <tr>
+                            <th scope="col"></th>
                             <th scope="col" class="text-left w-125 pl-3"><h3>Nom du produit</h3></th>
-                            <th scope="col"><h3>Prix</h3></th>
-                            <th scope="col"><h3>Note</h3></th>
-                            <th scope="col"><h3>Stock</h3></th>
-                            <th scope="col"><h3>En promotion</h3></th>
+                            <th scope="col"><h3>Début</h3></th>
+                            <th scope="col"><h3>Fin</h3></th>
+                            <th scope="col"><h3>libellé</h3></th>
                         </tr>
                     </thead>
                     <tbody>
@@ -81,32 +95,22 @@
                                     $classe = $classe2;
                                 }?>
                                 <tr class="<?php echo $classe; ?>">
+                                    <td class="py-3 w-24 text-center">
+                                        <img class="w-16 h-16 object-contain inline-block" 
+                                            src="<?php echo $valeurs['url_photo'];?>" 
+                                            alt="<?php echo $valeurs['alt'];?>" 
+                                            title="<?php echo $valeurs['titre'];?>">
+                                    </td>
                                     <th scope="row" class="text-left py-3 pl-3" ><a href="<?php echo htmlentities("details_produit.php?idProduit=".$idProduit);?>"><?php echo $valeurs['libelle_produit']; ?></a></th>
-                                    <td class="text-center py-3"><p><?php echo htmlentities($valeurs['prix_ttc']);?> €</p></td>
-                                    <td class="text-center py-3">
-                                        <div class="flex justify-center items-center">
-                                            <?php 
-                                                $note = $valeurs['note_moyenne'];
-                                                affichageNote($note); 
-                                            ?>
-                                        </div>
-                                    </td>
-                                    <td class="text-center py-3"><p><?php echo htmlentities($valeurs['quantite_stock']); ?></p></td>
-                                    <td class="text-center py-3">
-                                        <form method="get" action="supprimer_promotion.php">
-                                            <input type="hidden" name="idProduit" value="<?php echo $idProduit; ?>">
-                                            <button type="submit" class="hover:text-rouge cursor-pointer">Enlever</button>
-                                        </form>
-                                    </td>
+                                    <td class="text-center py-3"><p><?php echo htmlentities($valeurs['date_debut_promotion']);?></p></td>
+                                    <td class="text-center py-3"><p><?php echo isset($valeurs['date_fin_promotion']) ? htmlentities($valeurs['date_fin_promotion']) : "non défini";?></p></td>
+                                    <td class="text-center py-3"><p><?php echo htmlentities($valeurs['label']); ?></p></td>
+                                    
                                 </tr>
                         <?php }?>
                     </tbody>
                 </table>
             </div>
-            <!---bouton retour--->
-            <a href="index_vendeur.php" class="flex justify-center mt-15 mb-15">
-                <button class="border-vertFonce border-2 rounded-sm md:rounded-2xl w-35 h-10 md:w-50 md:h-14 px-7 cursor-pointer">Retour</button>
-            </a>
         <?php } ?>
     </main>
 
