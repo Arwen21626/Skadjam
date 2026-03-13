@@ -72,7 +72,7 @@
                     <thead>
                         <tr>
                             <th scope="col"></th>
-                            <th scope="col" class="text-left w-125 pl-3"><h3>Nom du produit</h3></th>
+                            <th scope="col" class="text-left w-100 pl-3"><h3>Nom du produit</h3></th>
                             <th scope="col"><h3>Début</h3></th>
                             <th scope="col"><h3>Fin</h3></th>
                             <th scope="col"><h3>libellé</h3></th>
