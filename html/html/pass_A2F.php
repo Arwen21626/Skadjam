@@ -106,6 +106,7 @@ $initBeforPhp = ($auth->getInitBefor())?0: 1;
         console.log("[pass_A2F] data :")
         console.log(data)
         console.log("[pass_A2F] initBefor = "+initBefor)
+        showView()
     }
 
     async function supprimer(){
