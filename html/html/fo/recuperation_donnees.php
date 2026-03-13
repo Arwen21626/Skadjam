@@ -125,11 +125,17 @@ if ($_SESSION["role"] === "client"){
             ", PDO::FETCH_ASSOC);
 
         // données en rapport avec les avis postées
-        $donneesAvisPostees = $dbh->query("SELECT 
-                    a.id_compte as id_client, a.id_avis, a.nb_etoile, a.nb_pouce_haut, a.nb_pouce_bas, a.contenu_commentaire, a.id_produit, a.signaler, 
-                    ph.id_photo as photo_avis, ph.url_photo as url_photo_avis, ph.description_photo as description_photo_avis, ph.alt as alt_photo_avis, ph.titre as titre_photo_avis
+        $donneesAvisPostes = $dbh->query("SELECT 
+                    a.id_avis, a.nb_etoile, a.nb_pouce_haut, a.nb_pouce_bas, a.contenu_commentaire, a.id_produit, a.signaler, 
+                    ph.id_photo as photo_avis, ph.url_photo as url_photo_avis, ph.description_photo as description_photo_avis, ph.alt as alt_photo_avis, ph.titre as titre_photo_avis, 
+                    p.libelle_produit, p.quantite_unite, p.unite,
+                    v.raison_sociale,
+                    cat.libelle_categorie
 
                 FROM sae3_skadjam._avis a
+                    INNER JOIN sae3_skadjam._produit p ON a.id_produit = p.id_produit
+                    INNER JOIN sae3_skadjam._vendeur v ON p.id_vendeur = v.id_compte
+                    INNER JOIN sae3_skadjam._categorie cat ON cat.id_categorie = p.id_categorie
                     LEFT JOIN sae3_skadjam._appuie app ON a.id_avis = app.id_avis
                     LEFT JOIN sae3_skadjam._photo ph ON ph.id_photo = app.id_photo
                 WHERE a.id_compte = $idCompte
@@ -137,13 +143,18 @@ if ($_SESSION["role"] === "client"){
             ", PDO::FETCH_ASSOC);
 
         // données en rapport avec les avis signaler
-        $donneesAvisSignalees = $dbh->query("SELECT cli.id_compte as id_client,
+        $donneesAvisSignales = $dbh->query("SELECT
                     sig.id_avis as avis_signaler,
-                    asig.id_avis as avis_signaler, asig.contenu_commentaire as contenu_avis_signaler
-
+                    asig.id_avis as avis_signaler, asig.contenu_commentaire as contenu_avis_signaler, 
+                    p.libelle_produit, p.quantite_unite, p.unite, p.id_produit, 
+                    v.raison_sociale,
+                    cat.libelle_categorie
                 FROM sae3_skadjam._client cli
                     INNER JOIN sae3_skadjam._a_signaler sig ON sig.id_compte = cli.id_compte
                     INNER JOIN sae3_skadjam._avis asig ON asig.id_avis = sig.id_avis
+                    INNER JOIN sae3_skadjam._produit p ON asig.id_produit = p.id_produit
+                    INNER JOIN sae3_skadjam._vendeur v ON p.id_vendeur = v.id_compte
+                    INNER JOIN sae3_skadjam._categorie cat ON cat.id_categorie = p.id_categorie
                 WHERE cli.id_compte = $idCompte
 
             ", PDO::FETCH_ASSOC);
@@ -191,25 +202,14 @@ if ($_SESSION["role"] === "client"){
 <?php require __DIR__ . "/../../php/structure/head_front.php"; ?>
 <head>
     <title>Mes données</title>
-    <style>
-        h2, h3, h4, h5, h6{
-            font-size: 2em;
-        }
-        div, section{
-            margin-left: 1em;
-            border-left: 2px solid black;
-        }
-    </style>
 </head>
 <body>
     <?php
     require __DIR__ . "/../../php/structure/header_front.php";
-    // require __DIR__ . "/../../php/structure/navbar_front.php";
+    require __DIR__ . "/../../php/structure/navbar_front.php";
     ?>
     <main class="min-h-[650x]">
         <h2>Vos informations</h2>
-
-                    
         <?php 
         // informations sur le compte client
         foreach($donneesClient as $donnees){?>
@@ -333,22 +333,60 @@ if ($_SESSION["role"] === "client"){
             <?php }?>
         </section>
         <section>
-            <h4>Votre liste des futur achats</h4>
+            <h4>Votre liste des futurs achats</h4>
             <?php 
-            foreach($donneesFuturAchats as $donnees){
-            echo "<pre>";
-            print_r($donnees);
-            echo "</pre>";?>
-                
-                <p>id produits : <?php echo $donnees["id_produit"]?></p>
-                <p>libelle du produit : <?php echo $donnees["libelle_produit"]?></p>
-                <p>montant total ttc : <?php echo $donnees["quantite_unite"]?></p>
-                <p>date de dernière modification : <?php echo $donnees["raison_sociale"]?></p>
-                <p>date de dernière modification : <?php echo $donnees["libelle_categorie"]?></p>
+            foreach($donneesFuturAchats as $donnees){?>
+                <div>
+                    <h5>id produits : <?php echo $donnees["id_produit"]?></h5>
+                    <p>libelle du produit : <?php echo $donnees["libelle_produit"]?></p>
+                    <p>quantite par unite : <?php echo $donnees["quantite_unite"]?></p>
+                    <p>quantite par unite : <?php echo $donnees["unite"]?></p>
+                    <p>raison sociale : <?php echo $donnees["raison_sociale"]?></p>
+                    <p>categorie : <?php echo $donnees["libelle_categorie"]?></p>
+                </div>
+            <?php }?>
+        </section>
+        <section>
+            <h4>Vos avis postés</h4>
+            <?php 
+            foreach($donneesAvisPostes as $donnees){?>
+                <div>
+                    <h5>id avis : <?php echo $donnees["id_avis"]?></h5>
+                    <p>nombre d'etoiles : <?php echo $donnees["nb_etoile"]?></p>
+                    <p>nombre de pouces haut : <?php echo $donnees["nb_pouce_haut"]?></p>
+                    <p>nombre de pouces bas : <?php echo $donnees["nb_pouce_bas"]?></p>
+                    <p>commentaire : <?php echo $donnees["contenu_commentaire"]?></p>
+                    <p>id du produit : <?php echo $donnees["id_produit"]?></p>
+                    <p>libelle du produit : <?php echo $donnees["libelle_produit"]?></p>
+                    <p>quantite par unite : <?php echo $donnees["quantite_unite"]?></p>
+                    <p>unite : <?php echo $donnees["unite"]?></p>
+                    <p>raison sociale : <?php echo $donnees["raison_sociale"]?></p>
+                    <p>categorie : <?php echo $donnees["libelle_categorie"]?></p>
+                    <p>signaler : <?php echo $donnees["signaler"]?"true":"false"?></p>
+                    <p>id de la photo : <?php echo $donnees["photo_avis"]?></p>
+                    <img src="<?php echo $donnees["url_photo_avis"]?>" alt="<?php echo $donnees["alt_photo_avis"]?>" title="<?php echo $donnees["titre_photo_avis"]?>">
+                    <p>description de la photo : <?php echo $donnees["description_photo_avis"]?></p>
+                </div>
+            <?php }?>
+        </section>
+        <section>
+            <h4>Les avis qui vous avez signalés</h4>
+            <?php 
+            foreach($donneesAvisSignales as $donnees){?>
+                <div>
+                    <h5>id avis : <?php echo $donnees["avis_signaler"]?></h5>
+                    <p>commentaire : <?php echo $donnees["contenu_avis_signaler"]?></p>
+                    <p>id du produit : <?php echo $donnees["id_produit"]?></p>
+                    <p>libelle du produit : <?php echo $donnees["libelle_produit"]?></p>
+                    <p>quantite par unite : <?php echo $donnees["quantite_unite"]?></p>
+                    <p>unite : <?php echo $donnees["unite"]?></p>
+                    <p>raison sociale : <?php echo $donnees["raison_sociale"]?></p>
+                    <p>categorie : <?php echo $donnees["libelle_categorie"]?></p>
+                </div>
             <?php }?>
         </section>
 
     </main>
-    <?php // require __DIR__ . "/../../php/structure/footer_front.php"; ?>
+    <?php require __DIR__ . "/../../php/structure/footer_front.php"; ?>
 </body>
 </html>
