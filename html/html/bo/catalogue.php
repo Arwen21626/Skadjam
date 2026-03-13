@@ -51,13 +51,8 @@
                 $lignes = $tabProduit; 
 
                 //affiche la photo du produit, son nom, son prix et sa note, son stock ?>
-                    <form id="formCatalogue" class="flex flex-row-reverse justify-center" method="post" action="./confirmer_catalogue.php">
+                    <form id="formCatalogue" class="flex justify-center gap-10" method="post" action="./confirmer_catalogue.php">
 
-                        <div class="flex justify-around flex-col sticky top-1/4 h-50">
-                            <a href="./index_vendeur.php" class="flex justify-center items-center border-2 border-vertFonce rounded-2xl w-45 h-14 cursor-pointer">Annuler</a>
-                            <input type="submit" value="Confirmer" class="flex justify-center items-center border-2 border-vertFonce rounded-2xl w-45 h-14 cursor-pointer">
-                        </div>
-                        
                         <div class="flex flex-row flex-wrap">
                             <?php foreach($lignes as $id => $valeurs){
                                 $idProduit = $valeurs['id_produit'];
@@ -124,10 +119,15 @@
                                     <?php }} ?> 
                                 </section>
                         <?php } ?>
+                    </div> 
+                    
+                    <div class="flex flex-col sticky right-[8em] top-32 gap-4 h-fit">
+                        <a href="./index_vendeur.php" class="flex justify-center items-center border-2 border-vertFonce rounded-2xl w-45 h-14 cursor-pointer">Annuler</a>
+                        <input type="submit" value="Confirmer" class="flex justify-center items-center border-2 border-vertFonce rounded-2xl w-45 h-14 cursor-pointer">
                         <p id="erreurProduit" class="text-rouge hidden">
                             Veuillez sélectionner au moins un produit.
                         </p>
-                    </div>         
+                    </div>
                 </form>         
                 <?php $dbh = null;
             } 
