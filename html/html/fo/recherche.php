@@ -35,6 +35,12 @@
     // Récupération du role pour le panier sur la page recherche
     $role = '';
     $role = $_SESSION['role'];
+
+    // Variable pour savoir s'il faut afficher une popup
+    $addPanier = (isset($_GET['addPanier']) && $_GET['addPanier'] === "1");
+    $removePanier = (isset($_GET['removePanier']) && $_GET['removePanier'] === "1");
+    $addFA = (isset($_GET['addFA']) && $_GET['addFA'] === "1");
+    $removeFA = (isset($_GET['removeFA']) && $_GET['removeFA'] === "1");
 ?>
 
 <!DOCTYPE html>
