@@ -33,9 +33,6 @@ $removeFA = (isset($_GET['removeFA']) && $_GET['removeFA'] === "1");
 <head> 
     <title>Promotions</title>
 </head>
-
-
-
 <body>
     <!--header-->
     <?php include __DIR__ . "/../../php/structure/header_front.php"; ?>
@@ -75,7 +72,7 @@ $removeFA = (isset($_GET['removeFA']) && $_GET['removeFA'] === "1");
 
             try {                
                 //récupère toutes les infos des tables produits et photos
-                foreach($dbh->query("SELECT pr.libelle_produit, pr.id_produit, url_photo, alt, titre, prix_ttc, quantite_stock, note_moyenne, prix_remise, pourcentage_remise
+                foreach($dbh->query("SELECT pr.id_produit, pr.libelle_produit, pr.prix_ttc, ph.url_photo, ph.alt, ph.titre, pn.date_debut_promotion, pn.date_fin_promotion, r.pourcentage_remise, pr.prix_remise, pr.note_moyenne, pn.label
                                     FROM sae3_skadjam._produit pr
                                     INNER join sae3_skadjam._montre m
                                         ON pr.id_produit=m.id_produit
@@ -100,12 +97,12 @@ $removeFA = (isset($_GET['removeFA']) && $_GET['removeFA'] === "1");
                         $finPromo = formatDate($row['date_fin_promotion']);
                     }
                     // La promotion est-elle terminée ou commence-t-elle ?
-                    if($row['date_debut_promotion'] <= date('Y-m-d') && ($row['date_fin_promotion'] == null || $row['date_fin_promotion'] >= date('Y-m-d'))){
+                    if(formatDate($row['date_debut_promotion']) <= date('Y-m-d') && ($row['date_fin_promotion'] == null || $row['date_fin_promotion'] >= date('Y-m-d'))){
                         $tabProduit[] = $row;
                     }
                 }
 
-                if($tabProduit == null){ ?>
+                if(empty($tabProduit)){ ?>
                     <p class="text-center mb-9">Nous n'avons pas de produits en promotion pour le moment.</p>
                 <?php }
                 
@@ -127,7 +124,7 @@ $removeFA = (isset($_GET['removeFA']) && $_GET['removeFA'] === "1");
                         <div id="<?php echo $idProduit; ?>" class="carteProduit bg-bleu flex flex-col w-40 h-auto p-2 m-2 md:w-80 md:p-3 justify-between">
                             <p class="hidden"><?php echo $valeurs['quantite_stock']; ?></p>
                             <!--affichage de la photo-->
-                            <a href= "<?= './details_produit.php?idProduit='.$idProduit;?>" class="mb-3">
+                            <a href= "<?= './details_produit.php?idProduit=' . $idProduit;?>" class="mb-3">
                                 <img src="<?= $valeurs['url_photo'];?>" 
                                         alt="<?= $valeurs['alt'];?>"
                                         title="<?= $valeurs['titre'];?>"
