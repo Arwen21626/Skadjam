@@ -98,13 +98,13 @@
             <div class="flex flex-col items-center ">
                 <div class="flex flex-col items-start space-y-4">
                     <!--Champ mail  -->
-                    <div class="flex flex-col md:w-[550px]">
+                    <div id="mailForm" class="flex flex-col md:w-[550px]">
                         <label for="mail">Adresse mail :</label>
                         <input class="cursor:default border-4 border-solid rounded-2xl border-vertClair pl-3 w-70 md:w-[500px] h-15 " type="text" name="mail" id="mail" value="<?= isset($_POST['mail'])? $_POST['mail'] : "" ?>" required>
                     </div>
 
                     <!-- Champ MDP -->
-                    <div class="flex flex-col md:w-[550px]">
+                    <div id="mdpForm" class="flex flex-col md:w-[550px]">
                         <label for="mdp">Mot de passe :</label>
                         <div class="zone-mdp flex flex-row">
                             <!--le flex row sert a alinger l'oeil me demander pas pourquoi (signé Arwen et svp touchez plus) -->
@@ -120,7 +120,7 @@
                 <div class=" flex w-fit flex-col mt-6 items-center ">
                     <!-- Si erreur détecté -->
                     <?php if($erreur){ ?>
-                        <p class="text-rouge items-center"><?php echo 'adresse mail ou mot de passe invalide';?></p>
+                        <p id="erreurConnection" class="text-rouge items-center"><?php echo 'adresse mail ou mot de passe invalide';?></p>
                     <?php }?>
                 </div>
 
@@ -160,8 +160,46 @@
         <script src="../../js/verifForm.js"></script>
         <script>
             // initialisation
-            let nom = document.getElementById("nom")
-            let prenom = document.getElementById("prenom")
+            let mail = document.getElementById("mail")
+            let mdp = document.getElementById("mdp")
+
+            // Verif nom
+            let nomForm = document.getElementById("nomForm")
+            let erreurNom = document.createElement("p")
+            erreurNom.textContent = "Votre nom ne peut contenir que des lettres majuscules, minuscules, tirets, espaces et des accents"
+            erreurNom.classList.add("md:text-rouge", "text-rouge")
+
+            nom.addEventListener("change", function(){
+                if(!verifNomPrenom(nom.value)){                    
+                    erreurNom.classList.remove("md:hidden", "hidden")
+                    let errPHP = document.getElementById("erreurNomPHP")
+                    if(errPHP) errPHP.classList.add("md:hidden", "hidden")
+                }else{
+                    erreurNom.classList.add("md:hidden", "hidden")
+                    let errPHP = document.getElementById("erreurNomPHP")
+                    if(errPHP) errPHP.classList.add("md:hidden", "hidden")
+                }
+                nomForm.appendChild(erreurNom)
+            })
+
+            // Verif nom
+            let mailForm = document.getElementById("mailForm")
+            let erreurNom = document.createElement("p")
+            erreurNom.textContent = "Votre nom ne peut contenir que des lettres majuscules, minuscules, tirets, espaces et des accents"
+            erreurNom.classList.add("md:text-rouge", "text-rouge")
+
+            nom.addEventListener("change", function(){
+                if(!verifNomPrenom(nom.value)){                    
+                    erreurNom.classList.remove("md:hidden", "hidden")
+                    let errPHP = document.getElementById("erreurConnection")
+                    if(errPHP) errPHP.classList.add("md:hidden", "hidden")
+                }else{
+                    erreurNom.classList.add("md:hidden", "hidden")
+                    let errPHP = document.getElementById("erreurConnection")
+                    if(errPHP) errPHP.classList.add("md:hidden", "hidden")
+                }
+                mailForm.appendChild(erreurNom)
+            })
         </script>
     </main>
     <?php require_once __DIR__ . "/../../php/structure/footer_front.php"; ?>
