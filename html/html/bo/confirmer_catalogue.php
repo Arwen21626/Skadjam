@@ -1,7 +1,4 @@
 <?php 
-    if(!extension_loaded('gd')){
-        die("L'extension GD n'est pas activée sur ce serveur.");
-    }
     error_reporting(E_ALL & ~E_DEPRECATED);
     ob_start();
     session_start();
