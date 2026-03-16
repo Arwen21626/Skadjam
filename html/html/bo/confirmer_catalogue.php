@@ -72,20 +72,20 @@
                             imagepng($img, $tmp);
 
                             $y = $pdf->GetY();
-                            $pdf->Image($tmp, 5, $y, 0, 20);
+                            $pdf->Image($tmp, 15, $y, 0, 20);
 
-                            $pdf->SetXY(35, $y);
+                            $pdf->SetXY(45, $y);
 
                             $titre = iconv('UTF-8', 'ISO-8859-1//TRANSLIT', $valeurs['titre']);
                             $pdf->MultiCell(65, 10, $titre, 0, 1);
 
-                            $pdf->SetX(35);
+                            $pdf->SetX(45);
                             $prix = iconv('UTF-8', 'Windows-1252', $valeurs['prix_ttc'] . " €");
                             $pdf->MultiCell(65, 10, $prix, 0, 0);
 
-                            $pdf->SetX(10);
+                            $pdf->SetX(15);
                             $description = html_entity_decode($valeurs['description_produit'], ENT_QUOTES, 'UTF-8');
-                            $description = iconv('UTF-8', 'ISO-8859-1//TRANSLIT', $valeurs['description_produit']);
+                            $description = iconv('UTF-8', 'ISO-8859-1//TRANSLIT', $description);
                             $pdf->MultiCell(65, 10, $description, 0, 0);
 
                             $i=1;
@@ -93,20 +93,20 @@
                             $tmp = tempnam(sys_get_temp_dir(), 'img') . '.png';
                             imagepng($img, $tmp);
 
-                            $pdf->Image($tmp, 110, $y, 0, 20);
+                            $pdf->Image($tmp, 120, $y, 0, 20);
 
-                            $pdf->SetXY(140, $y);
+                            $pdf->SetXY(150, $y);
 
                             $titre = iconv('UTF-8', 'ISO-8859-1//TRANSLIT', $valeurs['titre']);
                             $pdf->MultiCell(65, 10, $titre, 0, 1);
 
-                            $pdf->SetX(140);
+                            $pdf->SetX(150);
                             $prix = iconv('UTF-8', 'Windows-1252', $valeurs['prix_ttc'] . " €");
                             $pdf->MultiCell(65, 10, $prix, 0, 0);
 
-                            $pdf->SetX(110);
+                            $pdf->SetX(120);
                             $description = html_entity_decode($valeurs['description_produit'], ENT_QUOTES, 'UTF-8');
-                            $description = iconv('UTF-8', 'ISO-8859-1//TRANSLIT', $valeurs['description_produit']);
+                            $description = iconv('UTF-8', 'ISO-8859-1//TRANSLIT', $description);
                             $pdf->MultiCell(65, 10, $description, 0, 0);
 
                             $pdf->Ln(10);
@@ -122,34 +122,34 @@
                         if($i===0){
                             $y = $pdf->GetY();
 
-                            $pdf->SetXY(35, $y);
+                            $pdf->SetXY(45, $y);
 
                             $titre = iconv('UTF-8', 'ISO-8859-1//TRANSLIT', $valeurs['titre']);
                             $pdf->MultiCell(65, 10, $titre, 0, 1);
 
-                            $pdf->SetX(35);
+                            $pdf->SetX(45);
                             $prix = iconv('UTF-8', 'Windows-1252', $valeurs['prix_ttc'] . " €");
                             $pdf->MultiCell(65, 10, $prix, 0, 0);
 
-                            $pdf->SetX(10);
+                            $pdf->SetX(15);
                             $description = html_entity_decode($valeurs['description_produit'], ENT_QUOTES, 'UTF-8');
-                            $description = iconv('UTF-8', 'ISO-8859-1//TRANSLIT', $valeurs['description_produit']);
+                            $description = iconv('UTF-8', 'ISO-8859-1//TRANSLIT', $description);
                             $pdf->MultiCell(65, 10, $description, 0, 0);
 
                             $i=1;
                         }else{
-                            $pdf->SetXY(140, $y);
+                            $pdf->SetXY(150, $y);
 
                             $titre = iconv('UTF-8', 'ISO-8859-1//TRANSLIT', $valeurs['titre']);
                             $pdf->MultiCell(65, 10, $titre, 0, 1);
 
-                            $pdf->SetX(140);
+                            $pdf->SetX(150);
                             $prix = iconv('UTF-8', 'Windows-1252', $valeurs['prix_ttc'] . " €");
                             $pdf->MultiCell(65, 10, $prix, 0, 0);
 
-                            $pdf->SetX(110);
+                            $pdf->SetX(120);
                             $description = html_entity_decode($valeurs['description_produit'], ENT_QUOTES, 'UTF-8');
-                            $description = iconv('UTF-8', 'ISO-8859-1//TRANSLIT', $valeurs['description_produit']);
+                            $description = iconv('UTF-8', 'ISO-8859-1//TRANSLIT', $description);
                             $pdf->MultiCell(65, 10, $description, 0, 0);
 
                             $pdf->Ln(10);
