@@ -118,10 +118,9 @@ elseif ($ajout == "panier") {
         $stmt = $dbh->query("SELECT id_panier FROM sae3_skadjam._client WHERE id_compte = $idCompte");
         $row = $stmt->fetch(PDO::FETCH_ASSOC);
         $idPanier = $row['id_panier'];
-
         // Parcours pour voir si le produit est dans la bdd
         if ($tabPanierBDD != null){
-            foreach ($tabPanierBDD['id_produit'] as $id) {
+            foreach ($tabPanierBDD as $id) {
                 if ($id == $idProd) {
                     $trouve = true;
                 }
