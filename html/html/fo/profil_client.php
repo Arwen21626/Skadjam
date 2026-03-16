@@ -129,13 +129,15 @@ require_once __DIR__ . "/../../01_premiere_connexion.php";
 
 
                     <!-- A2F -->
-                    <a href="/html/pass_A2F.php" class="border-vertClair border-2 md:rounded-2xl rounded-xl md:w-72 w-60 md:h-14 h-10 p-2 m-1 cursor-pointer flex justify-center items-center">
+                    <a href="/html/pass_A2F.php" class="border-vertClair border-2 md:mr-[5em] md:rounded-2xl rounded-xl md:w-72 w-60 md:h-14 h-10 p-2 m-1 cursor-pointer flex justify-center items-center">
                         <button>Connexion <abbr title="Authentification à deux facteurs">A2F</abbr></button>
                     </a>
                     
-                    <!--    Récupérer mes données
-                    <a href="donnees_client.php" class="underline! absolute right-4 bottom-41 md:bottom-14 cursor-pointer hover:text-rouge">Demander mes données</a>
-                    -->
+                    <!-- Récupérer mes données -->
+                    <a href="/html/fo/recuperation_donnees.php" class="border-vertClair border-2 md:rounded-2xl rounded-xl md:w-72 w-60 md:h-14 h-10 p-2 m-1 cursor-pointer flex justify-center items-center">
+                        <button>Récupérer mes données</button>
+                    </a>
+
                 </div>
             </div>
 

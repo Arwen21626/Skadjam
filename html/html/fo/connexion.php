@@ -159,46 +159,47 @@
 
         <script src="../../js/verifForm.js"></script>
         <script>
+            console.log("js")
             // initialisation
             let mail = document.getElementById("mail")
             let mdp = document.getElementById("mdp")
 
             // Verif nom
-            let nomForm = document.getElementById("nomForm")
-            let erreurNom = document.createElement("p")
-            erreurNom.textContent = "Votre nom ne peut contenir que des lettres majuscules, minuscules, tirets, espaces et des accents"
-            erreurNom.classList.add("md:text-rouge", "text-rouge")
+            let mailForm = document.getElementById("mailForm")
+            let erreurMail = document.createElement("p")
+            erreurMail.textContent = "L'adresse doit être au format : adresse@e.mail"
+            erreurMail.classList.add("md:text-rouge", "text-rouge")
 
-            nom.addEventListener("change", function(){
-                if(!verifNomPrenom(nom.value)){                    
-                    erreurNom.classList.remove("md:hidden", "hidden")
-                    let errPHP = document.getElementById("erreurNomPHP")
+            mail.addEventListener("change", function(){
+                if(!verifMail(mail.value)){                    
+                    erreurMail.classList.remove("md:hidden", "hidden")
+                    let errPHP = document.getElementById("erreurConnection")
                     if(errPHP) errPHP.classList.add("md:hidden", "hidden")
                 }else{
-                    erreurNom.classList.add("md:hidden", "hidden")
-                    let errPHP = document.getElementById("erreurNomPHP")
+                    erreurMail.classList.add("md:hidden", "hidden")
+                    let errPHP = document.getElementById("erreurConnection")
                     if(errPHP) errPHP.classList.add("md:hidden", "hidden")
                 }
-                nomForm.appendChild(erreurNom)
+                mailForm.appendChild(erreurMail)
             })
 
             // Verif nom
-            let mailForm = document.getElementById("mailForm")
-            let erreurNom = document.createElement("p")
-            erreurNom.textContent = "Votre nom ne peut contenir que des lettres majuscules, minuscules, tirets, espaces et des accents"
-            erreurNom.classList.add("md:text-rouge", "text-rouge")
+            let mdpForm = document.getElementById("mdpForm")
+            let erreurMDP = document.createElement("p")
+            erreurMDP.textContent = "1 majuscule, 1 minuscule, 1 chiffre, 1 caractère spécial, 10 caractères minimum"
+            erreurMDP.classList.add("md:text-rouge", "text-rouge")
 
-            nom.addEventListener("change", function(){
-                if(!verifNomPrenom(nom.value)){                    
-                    erreurNom.classList.remove("md:hidden", "hidden")
+            mdp.addEventListener("change", function(){
+                if(!verifMotDePasse(mdp.value)){                    
+                    erreurMDP.classList.remove("md:hidden", "hidden")
                     let errPHP = document.getElementById("erreurConnection")
                     if(errPHP) errPHP.classList.add("md:hidden", "hidden")
                 }else{
-                    erreurNom.classList.add("md:hidden", "hidden")
+                    erreurMDP.classList.add("md:hidden", "hidden")
                     let errPHP = document.getElementById("erreurConnection")
                     if(errPHP) errPHP.classList.add("md:hidden", "hidden")
                 }
-                mailForm.appendChild(erreurNom)
+                mdpForm.appendChild(erreurMDP)
             })
         </script>
     </main>
