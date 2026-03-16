@@ -53,9 +53,9 @@
 
                     if($ext==="webp" && function_exists('imagecreatefromwebp')){
                         $img = imagecreatefromwebp($imgPath);
-                    }elseif($ext==="png"){
+                    }elseif($ext==="png" && function_exists('imagecreatefrompng')){
                         $img = imagecreatefrompng($imgPath);
-                    }elseif($ext==="jpg" || $ext==="jpeg"){
+                    }elseif(($ext==="jpg" || $ext==="jpeg") && function_exists('imagecreatefromjpeg')){
                         $img = imagecreatefromjpeg($imgPath);
                     }elseif(function_exists('imagecreatefromstring')){
                         $img = @imagecreatefromstring(file_get_contents($imgPath));
