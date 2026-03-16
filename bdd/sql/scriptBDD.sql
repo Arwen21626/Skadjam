@@ -237,12 +237,20 @@ CREATE TABLE sae3_skadjam._contient (
 CREATE TABLE sae3_skadjam._avis (
     id_avis SERIAL NOT NULL,
     nb_etoile INT NOT NULL,
-    nb_pouce_haut INT,
-    nb_pouce_bas INT,
+    nb_pouce_haut INT NOT NULL DEFAULT 0,
+    nb_pouce_bas INT NOT NULL DEFAULT 0,
     contenu_commentaire VARCHAR(500),
     id_produit INT NOT NULL,
     id_compte INT NOT NULL,
     signaler BOOLEAN NOT NULL DEFAULT FALSE
+);
+
+CREATE TABLE sae3_skadjam._pouces (
+    id_pouce SERIAL NOT NULL,
+    id_avis INT NOT NULL,
+    id_compte INT NOT NULL,
+    pouce SMALLINT NOT NULL,
+    UNIQUE(id_avis, id_compte)
 );
 
 CREATE TABLE sae3_skadjam._reponse (
@@ -354,6 +362,10 @@ ALTER TABLE sae3_skadjam._presente
 ALTER TABLE sae3_skadjam._avis
     ADD CONSTRAINT pk_avis
         PRIMARY KEY (id_avis);
+        
+ALTER TABLE sae3_skadjam._pouces
+    ADD CONSTRAINT pk_pouces
+        PRIMARY KEY (id_pouce);
 
 ALTER TABLE sae3_skadjam._reponse
     ADD CONSTRAINT pk_reponse
@@ -546,6 +558,16 @@ ALTER TABLE sae3_skadjam._avis
 
 ALTER TABLE sae3_skadjam._avis
     ADD CONSTRAINT fk_avis_client
+        FOREIGN KEY (id_compte)
+            REFERENCES sae3_skadjam._client(id_compte);
+            
+ALTER TABLE sae3_skadjam._pouces
+    ADD CONSTRAINT fk_pouces_avis
+        FOREIGN KEY (id_avis)
+            REFERENCES sae3_skadjam._avis(id_avis);
+
+ALTER TABLE sae3_skadjam._pouces
+    ADD CONSTRAINT fk_pouces_client
         FOREIGN KEY (id_compte)
             REFERENCES sae3_skadjam._client(id_compte);
             
