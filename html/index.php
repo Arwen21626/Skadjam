@@ -221,17 +221,6 @@
                         </div>
                     <?php } ?>
                 </div>
-                <?php $dbh = null;
-            }catch(PDOException $e){
-                print "Erreur !: " . $e->getMessage() . "<br/>";
-                die();
-            }
-
-        ?>
-                            <?php }
-                        } ?>
-                </div>
-            <?php } ?>
         </div>
         <?php $dbh = null;?>
         
