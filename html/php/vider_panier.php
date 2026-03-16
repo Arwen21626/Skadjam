@@ -34,6 +34,10 @@ if ($_SESSION['role'] === 'client')
     ");
 
     
+
+    
+
+    
     // Redirection différente selon pourquoi on vide le panier -> façon normal ou lors de l'achat
     if ($typeVider === "normal") 
     {
@@ -69,6 +73,11 @@ if ($_SESSION['role'] === 'client')
     $rqt->execute([
         ':idPanier' => $idPanier
     ]);
+
+    // Mise à 0 de la table panier
+    $dbh->query("UPDATE sae3_skadjam._panier
+                 SET nb_produit_total = 0, montant_total_ttc = 0
+                 WHERE id_panier = $idPanier");
 }
 else if ($_SESSION['role'] === 'visiteur')
 {

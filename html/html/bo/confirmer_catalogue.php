@@ -42,6 +42,7 @@
         $pdf->SetTitle('Catalogue des produits');
         $i=0;
         $j=0;
+        $y=0;
         foreach($tabProduit as $id => $valeurs){
             $idProduit = $valeurs['id_produit'];
             $imgPath = "../.." . $valeurs['url_photo'];
@@ -50,17 +51,17 @@
                 if(file_exists($imgPath)){
                     $img = false;
 
-                    if ($ext === "webp") {
+                    if($ext==="webp" && function_exists('imagecreatefromwebp')){
                         $img = imagecreatefromwebp($imgPath);
-                    }
-                    elseif ($ext === "png") {
+                    }elseif($ext==="png" && function_exists('imagecreatefrompng')){
                         $img = imagecreatefrompng($imgPath);
-                    }
-                    elseif ($ext === "jpg" || $ext === "jpeg") {
+                    }elseif(($ext==="jpg" || $ext==="jpeg") && function_exists('imagecreatefromjpeg')){
                         $img = imagecreatefromjpeg($imgPath);
+                    }elseif(function_exists('imagecreatefromstring')){
+                        $img = @imagecreatefromstring(file_get_contents($imgPath));
                     }
 
-                    if($img !== false){
+                    if($img !== false){ // Charger avec les images
                         if($i===0){
                             $tmp = tempnam(sys_get_temp_dir(), 'img') . '.png';
                             imagepng($img, $tmp);
@@ -102,10 +103,41 @@
                             $pdf->AddPage();
                             $j=0;
                         }
-                    } else {
-                        error_log("Impossible de charger l'image : $imgPath");
+                    }else{ // Charger sans les images
+                        if($i===0){
+                            $y = $pdf->GetY();
+
+                            $pdf->SetXY(35, $y);
+
+                            $titre = iconv('UTF-8', 'ISO-8859-1//TRANSLIT', $valeurs['titre']);
+                            $pdf->MultiCell(65, 10, $titre, 0, 1);
+
+                            $pdf->SetX(35);
+                            $prix = iconv('UTF-8', 'Windows-1252', $valeurs['prix_ttc'] . " €");
+                            $pdf->MultiCell(65, 10, $prix, 0, 0);
+
+                            $i=1;
+                        }else{
+                            $pdf->SetXY(140, $y);
+
+                            $titre = iconv('UTF-8', 'ISO-8859-1//TRANSLIT', $valeurs['titre']);
+                            $pdf->MultiCell(65, 10, $titre, 0, 1);
+
+                            $pdf->SetX(140);
+                            $prix = iconv('UTF-8', 'Windows-1252', $valeurs['prix_ttc'] . " €");
+                            $pdf->MultiCell(65, 10, $prix, 0, 0);
+
+                            $pdf->Ln(10);
+
+                            $i=0;
+                        }
+                        $j++;
+                        if($j===18){
+                            $pdf->AddPage();
+                            $j=0;
+                        }
                     }
-                } else {
+                }else{
                     error_log("Fichier image inexistant : $imgPath");
                 }
             }
@@ -114,9 +146,11 @@
         exit;
     }else{ 
         if(empty($_POST)){
-        header("Location: catalogue.php");
-        exit();
-    } ?>
+            header("Location: catalogue.php");
+            exit();
+        } 
+    }?>
+    
 <!DOCTYPE html>
 <html lang="fr">
 <?php include(__DIR__ . "/../../php/structure/head_back.php");?>
@@ -211,8 +245,8 @@
         for(let i = 1; i < lignesTab.length; i++){
             seuil = lignesTab[i].children[4].children[1].textContent;
 
+        }
 
+    </script>
 </body>
 </html>
-
-<?php } ?>

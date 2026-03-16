@@ -100,38 +100,45 @@ require_once __DIR__ . "/../../01_premiere_connexion.php";
                 </table>
             </div>
 
-            <div class="md:mt-15 md:mb-15 flex md:flex-row flex-col justify-around items-center mt-7 mb-7">
-                <!-- Supprimer le compte du client -->
-                <form action="suppression_client.php" method="post">
-                    <input class="border-rouge border-2 md:rounded-2xl rounded-xl md:w-72 w-60 md:h-14 h-10 p-2 m-1 cursor-pointer" type="submit" value="Supprimer mon compte">
-                </form>
-                
-                <!-- Modifier les informations du client (sauf le mot de passe) -->
-                <form action="modifier_compte_client.php" method="post">
-                    <input class="border-vertClair border-2 md:rounded-2xl rounded-xl md:w-72 w-60 md:h-14 h-10 p-2 m-1 cursor-pointer" type="submit" value="Modifier mes informations">
-                </form>
+            <div class="md:mt-15 md:mb-15 mt-7 mb-7">
+                <!-- Première ligne -->
+                <div class="flex flex-col md:flex-row md:justify-center md:mb-5 items-center">
+                    <!-- Supprimer le compte du client -->
+                    <form action="suppression_client.php" method="post">
+                        <input class="border-rouge border-2 md:mr-[5em] md:rounded-2xl rounded-xl md:w-72 w-60 md:h-14 h-10 p-2 m-1 cursor-pointer" type="submit" value="Supprimer mon compte">
+                    </form>
+                    
+                    <!-- Modifier les informations du client (sauf le mot de passe) -->
+                    <form action="modifier_compte_client.php" method="post">
+                        <input class="border-vertClair border-2 md:mr-[5em] md:rounded-2xl rounded-xl md:w-72 w-60 md:h-14 h-10 p-2 m-1 cursor-pointer" type="submit" value="Modifier mes informations">
+                    </form>
 
-                <!-- Modifier le mot de passe du client -->
-                <form action="nouveau_mdp.php">
-                    <?php $_SESSION['adresse_mail'] = $mail; ?>
-                    <input class="border-vertClair border-2 md:rounded-2xl rounded-xl md:w-72 w-60 md:h-14 h-10 p-2 m-1 cursor-pointer" type="submit" value="Modifier mon mot de passe">    
-                </form>
+                    <!-- Modifier le mot de passe du client -->
+                    <form action="nouveau_mdp.php">
+                        <?php $_SESSION['adresse_mail'] = $mail; ?>
+                        <input class="border-vertClair border-2 md:rounded-2xl rounded-xl md:w-72 w-60 md:h-14 h-10 p-2 m-1 cursor-pointer" type="submit" value="Modifier mon mot de passe">    
+                    </form>
+                </div>
 
-                <!-- Déconnexion -->
-                <a href="/php/deconnexion.php" class="border-vertClair border-2 md:rounded-2xl rounded-xl md:w-72 w-60 md:h-14 h-10 p-2 m-1 cursor-pointer flex justify-center items-center">
-                    <button>Se déconnecter</button>
-                </a>
+                <!-- Deuxième ligne -->
+                <div class="flex flex-col md:flex-row md:justify-center items-center">
+                    <!-- Déconnexion -->
+                    <a href="/php/deconnexion.php" class="border-vertClair border-2 md:mr-[5em] md:rounded-2xl rounded-xl md:w-72 w-60 md:h-14 h-10 p-2 m-1 cursor-pointer flex justify-center items-center">
+                        <button>Se déconnecter</button>
+                    </a>
 
 
-                <!-- A2F -->
-                <a href="/html/pass_A2F.php" class="border-vertClair border-2 md:rounded-2xl rounded-xl md:w-72 w-60 md:h-14 h-10 p-2 m-1 cursor-pointer flex justify-center items-center">
-                    <button>Connexion A2F</button>
-                </a>
-                
-                <!--    Récupérer mes données
-                <a href="donnees_client.php" class="underline! absolute right-4 bottom-41 md:bottom-14 cursor-pointer hover:text-rouge">Demander mes données</a>
-                -->
+                    <!-- A2F -->
+                    <a href="/html/pass_A2F.php" class="border-vertClair border-2 md:mr-[5em] md:rounded-2xl rounded-xl md:w-72 w-60 md:h-14 h-10 p-2 m-1 cursor-pointer flex justify-center items-center">
+                        <button>Connexion <abbr title="Authentification à deux facteurs">A2F</abbr></button>
+                    </a>
+                    
+                    <!-- Récupérer mes données -->
+                    <a href="/html/fo/recuperation_donnees_client.php" class="border-vertClair border-2 md:rounded-2xl rounded-xl md:w-72 w-60 md:h-14 h-10 p-2 m-1 cursor-pointer flex justify-center items-center">
+                        <button>Récupérer mes données</button>
+                    </a>
 
+                </div>
             </div>
 
         <?php

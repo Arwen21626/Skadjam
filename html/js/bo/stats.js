@@ -1,8 +1,8 @@
 Chart.Tooltip.positioners.cursor = function(items, eventPosition) {
     // Permet de définir la position du curseur pour tout les graphiques, pour permettre à la tooltip d'être placé sur ce dernier
     return {
-        x: eventPosition.x,
-        y: eventPosition.y
+        x: eventPosition.x + 8,
+        y: eventPosition.y - 8
     };
 };
 
@@ -14,26 +14,46 @@ if (Object.keys(dataStats).length > 0) {
     let anneeSelection = document.getElementById("select-annee"); // Input select pour l'année
     let currentAnnee = anneeSelection.value;
 
+    // Select du format et variable du format actuel
     let formatSelection = document.getElementById("select-format");
     let currentFormat = formatSelection.value;
 
+    // div et container du graphique du produit
     let divProdChart = document.getElementById("div-prod-chart");
     let containerProdChart = document.getElementById("container-prod-chart");
-    let divTextChart = document.createElement("h4");
+    let currentLibelleProd = "Temp"; // Libelle du produit sélectionner pour afficher son graphique
 
+    // Div et texte quand il n'y a aucune stats enregistrée pour les afficher au lieu du graphique
+    let divTextChart = document.createElement("div");
+    divTextChart.classList.add("justify-center", "flex", "flex-col", "w-[60vw]", "h-[50vh]");
+
+    let textChart = document.createElement("h4");
+
+    // ajoute à chaque carte produit une petite div avec un texte indiquant si une stat est enregistrée ou non
+    
+    document.querySelectorAll(".produit").forEach(container => {
+        let divInfoStatIsRegistered = document.createElement("div");
+        divInfoStatIsRegistered.classList.add("text-center", "text-base", "mb-4", "mt-2");
+        divInfoStatIsRegistered.textContent = "Stat enregistrée";
+
+        container.appendChild(divInfoStatIsRegistered);
+    });
 
     // Champs de données pour les diagrammes
     let periodes = ['Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Août', 'Septembre', 'Octobre', 'Novembre', 'Décembre'];
     let categories = ["Alimentaire", "Vêtement", "Artisanat", "Goodies", "Soin"];
 
+    // Données courantes pour les ventes totales
     let dataVentesVolume = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
     let dataVentesMontant = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
     let currentDataVentes = dataVentesVolume;
 
+    // Données courantes pour les ventes sur un produit
     let dataProdVentesVolume = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
     let dataProdVentesMontant = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
     let currentDataProdVentes = dataProdVentesVolume;
 
+    // Données courantes pour les ventes par catégorie
     let dataCatVentesVolume = [0, 0, 0, 0, 0];
     let dataCatVentesMontant = [0, 0, 0, 0, 0];
     let currentDataCatVentes = dataCatVentesVolume;
@@ -81,7 +101,7 @@ if (Object.keys(dataStats).length > 0) {
         });
     }
 
-    function arrangeProdDatas() {
+    function arrangeProdDatas(container) {
 
         dataProdVentesVolume = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
         dataProdVentesMontant = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
@@ -93,10 +113,10 @@ if (Object.keys(dataStats).length > 0) {
         Object.keys(dataStats[currentAnnee]).forEach(mois => {
             let i = Number(mois);
             
-            if (dataStats[currentAnnee][mois]["produits"][currentIdProd]) {
-                dataProdVentesVolume[i - 1] = Number(dataStats[currentAnnee][mois]["produits"][currentIdProd]["nb_ventes_totales"]);
-                dataProdVentesMontant[i - 1] = Number(dataStats[currentAnnee][mois]["produits"][currentIdProd]["montant_total_ttc"]);
-                nbProd += Number(dataStats[currentAnnee][mois]["produits"][currentIdProd]["nb_ventes_totales"]);
+            if (dataStats[currentAnnee][mois]["produits"][container.id]) {
+                dataProdVentesVolume[i - 1] = Number(dataStats[currentAnnee][mois]["produits"][container.id]["nb_ventes_totales"]);
+                dataProdVentesMontant[i - 1] = Number(dataStats[currentAnnee][mois]["produits"][container.id]["montant_total_ttc"]);
+                nbProd += Number(dataStats[currentAnnee][mois]["produits"][container.id]["nb_ventes_totales"]);
             }
             else {
                 dataProdVentesVolume[i - 1] = 0;
@@ -104,16 +124,24 @@ if (Object.keys(dataStats).length > 0) {
             }
         });
 
+        currentLibelleProd = container.querySelector("p").textContent;
+
         if (nbProd == 0){
             divProdChart.classList.add("hidden");
             divTextChart.classList.remove("hidden");
-            divTextChart.textContent = "Aucune statistique enregistrée pour ce produit en " + currentAnnee;
+            textChart.classList.add("text-center");
+            textChart.textContent = "Aucune statistique enregistrée pour le produit : " + currentLibelleProd + " en " + currentAnnee;
 
+
+            divTextChart.appendChild(textChart);
             containerProdChart.appendChild(divTextChart);
+
+            container.querySelector("div").textContent = "Aucune stat enregistrée";
         }
         else {
             divProdChart.classList.remove("hidden");
             divTextChart.classList.add("hidden");
+            container.querySelector("div").textContent = "Stat enregistrée";
         }
     }
 
@@ -153,7 +181,6 @@ if (Object.keys(dataStats).length > 0) {
     }
 
     arrangeYearAndCategDatas();
-    // arrangeProdDatas();
 
     // Définitions du graphique des ventes totales générales et de sa config
     let allChart = document.getElementById("all-chart");
@@ -274,7 +301,7 @@ if (Object.keys(dataStats).length > 0) {
             plugins: {
                 title: {
                     display: true,
-                    text: "Temp" + ' - ' + 'Année' + ' ' + currentAnnee,
+                    text: currentLibelleProd + ' - ' + 'Année' + ' ' + currentAnnee,
                     color: '#000',
                     font: {
                         size: 21
@@ -304,25 +331,15 @@ if (Object.keys(dataStats).length > 0) {
         currentAnnee = anneeSelection.value;
 
         arrangeYearAndCategDatas();
-        arrangeProdDatas();
+
+        document.querySelectorAll(".produit").forEach(container => {
+            arrangeProdDatas(container);
+        });
 
         updateDatasFields();
 
         updateCharts();
     });
-
-    // Modifications selon le produit sélectionné
-
-    // produitSelection.addEventListener("change", function () {
-    //     currentIdProd = produitSelection.value;
-    //     currentLibelleProd = produitSelection.options[produitSelection.selectedIndex].textContent;
-
-    //     arrangeProdDatas();
-
-    //     updateDatasFields();
-
-    //     updateCharts();
-    // });
 
     // Modification selon le format choisi
 
@@ -332,6 +349,58 @@ if (Object.keys(dataStats).length > 0) {
         updateDatasFields();
         updateCharts();
     });
+
+    // Modifications selon le produit sélectionné
+
+    let chartOpened = false;
+    let overlayChart = document.querySelector("#overlay-chart");
+
+    function showProdChart() {
+
+        if (chartOpened == false) {
+
+            overlayChart.classList.remove("hidden")
+            containerProdChart.classList.remove("hidden");
+
+            chartOpened = true;
+        }
+    }
+
+    document.querySelectorAll(".produit").forEach(container => {
+
+        arrangeProdDatas(container);
+
+        container.addEventListener("click", function (){
+            
+            arrangeProdDatas(container);
+            
+            updateDatasFields();
+
+            updateCharts();
+
+            showProdChart();
+        });
+    });
+
+    document.querySelector("#overlay-chart").addEventListener("click", function () {
+
+        if (chartOpened == true) {
+            overlayChart.classList.add("hidden")
+            containerProdChart.classList.add("hidden");
+
+            chartOpened = false;
+        }
+    });
+
+    containerProdChart.addEventListener("click", function () {
+
+        if (chartOpened == true) {
+            overlayChart.classList.add("hidden")
+            containerProdChart.classList.add("hidden");
+
+            chartOpened = false;
+        }
+    });    
 }
 
 

@@ -248,7 +248,7 @@ if($_SESSION['role'] != 'client'){
 
             <form method="post">
                 <div class="flex flex-col md:items-center items-start ml-5 md:ml-0">
-                    <div class="flex flex-col mb-5 mt-5">
+                    <div id="carteForm" class="flex flex-col mb-5 mt-5 w-100">
                         <label for="numero">Numéro de carte* :</label>
                         <input placeholder="0000 1111 2222 3333" maxlength="19" value="<?php
                         if(isset($_POST['numero'])){ 
@@ -258,20 +258,20 @@ if($_SESSION['role'] != 'client'){
                         }*/ ?>" class="pl-2 border-4 border-vertClair rounded-xl placeholder-gray-500 md:w-100 w-75" type="text" name="numero" id="numero" required>
                         <?php
                             if($erreurNumero){ ?>
-                                <p class="text-rouge"><?php echo "Votre numéro de carte doit contenir 16 chiffres";?></p>
+                                <p id="erreurCartePHP" class="text-rouge"><?php echo "Votre numéro de carte doit contenir 16 chiffres";?></p>
                         <?php } ?>
                     </div>
                     
-                    <div class="flex flex-col mb-5">
-                        <div class="flex flex-col w-100">
-                            <label for="expiration">Date d'expiration* :</label>
+                    <div class="flex flex-col mb-5 w-100">
+                        <div id="dateForm" class="flex flex-col w-100">
+                            <label for="mois">Date d'expiration* :</label>
                             <p class="flex flex-row">
                                 <input placeholder="MM" value="<?php 
                                     if(isset($_POST['mois'])){
                                         echo $mois; 
                                     }/*else if(!empty($dateExpiration[0])) {
                                         echo $dateExpiration[0];
-                                    }*/ ?>" maxlength="2" pattern="0[1-9]|1[0-2]" class="pl-2 border-4 border-vertClair rounded-xl placeholder-gray-500 w-15" type="text" name="mois" id="mois" required>
+                                    }*/ ?>" maxlength="2" class="pl-2 border-4 border-vertClair rounded-xl placeholder-gray-500 w-15" type="text" name="mois" id="mois" required>
                                 /
                                 <input placeholder="AA" value="<?php 
                                     if(isset($_POST['annee'])){ 
@@ -281,12 +281,12 @@ if($_SESSION['role'] != 'client'){
                                     }*/ ?>" maxlength="2" class="pl-2 border-4 border-vertClair rounded-xl placeholder-gray-500 w-15" type="text" name="annee" id="annee" required>
                             </p>
                             <?php if($erreurExpiration){ ?>
-                                <p class="text-rouge"><?php echo "La date ne doit pas être dans le passée";?></p>
+                                <p id="erreurDatePHP" class="text-rouge"><?php echo "La date ne doit pas être dans le passée et doit exister";?></p>
                             <?php } ?>
                         </div>
                         
         
-                        <div class="flex flex-col mt-5">
+                        <div id="cryptoForm" class="flex flex-col mt-5 w-100">
                             <label for="cryptogramme">Cryptogramme* :</label>
                             <input placeholder="000" pattern="[0-9]{3}" value="<?php 
                             if(isset($_POST['cryptogramme'])){ 
@@ -296,11 +296,11 @@ if($_SESSION['role'] != 'client'){
                             }*/ ?>" class="pl-2 border-4 border-vertClair rounded-xl placeholder-gray-500 w-50" type="text" name="cryptogramme" id="cryptogramme" required>
 
                             <?php if($erreurCryptogramme){ ?>
-                                <p class="text-rouge"><?php echo "Le cryptogramme doit contenir exactement 3 chiffres";?></p>
+                                <p id="erreurCryptoPHP" class="text-rouge"><?php echo "Le cryptogramme doit contenir exactement 3 chiffres";?></p>
                             <?php } ?>
                         </div>
                     </div>
-                    <div class="flex flex-col mb-5">
+                    <div id="nomForm" class="flex flex-col mb-5 w-100">
                         <label for="nom">Nom du titulaire* :</label>
                         <input placeholder="M Alizon" value="<?php
                         if(isset($_POST['nom'])){ 
@@ -310,7 +310,7 @@ if($_SESSION['role'] != 'client'){
                         }*/ ?>" class="pl-2 border-4 border-vertClair rounded-xl placeholder-gray-500 md:w-100 w-75 ml-0" type="text" name="nom" id="nom" required>
 
                         <?php if($erreurNom){ ?>
-                                <p class="text-rouge"><?php echo "Votre prenom ne peut contenir que des lettres majuscules, minuscules, tirets, espaces et les accents : é, ç, è, ë, ê, à, ï, î, ä, â, ù, ü, û, ö, ô";?></p>
+                                <p id="erreurNomPHP" class="text-rouge"><?php echo "Votre prenom ne peut contenir que des lettres majuscules, minuscules, tirets, espaces";?></p>
                         <?php } ?>
                     </div>
                     <!--<div class="md:w-100 md:ml-5 ml-0">
@@ -343,6 +343,107 @@ if($_SESSION['role'] != 'client'){
                     <input class="border-vertClair border-2 rounded-2xl w-40 h-14 cursor-pointer m-5" type="submit" value="Suivant">
                 </div>
             </form>
+            <script src="../../js/verifForm.js"></script>
+            <script>
+                // initialisation
+                let numCarte = document.getElementById("numero")
+                let dateExpMois = document.getElementById("mois")
+                let dateExpAnnee = document.getElementById("annee")
+                let crypto = document.getElementById("cryptogramme")
+                let nom = document.getElementById("nom")
+
+                // Verif numéro carte
+                let carteForm = document.getElementById("carteForm")
+                let erreurCarte = document.createElement("p")
+                erreurCarte.textContent = "Votre numéro de carte doit contenir 16 chiffres"
+                erreurCarte.classList.add("md:text-rouge", "text-rouge")
+
+                numCarte.addEventListener("change", function(){
+                    if(!verifNumCarte(numCarte.value)){
+                        erreurCarte.classList.remove("md:hidden", "hidden")
+                        let errPHP = document.getElementById("erreurCartePHP")
+                        if(errPHP) errPHP.classList.add("md:hidden", "hidden")
+                    }else{
+                        erreurCarte.classList.add("md:hidden", "hidden")
+                        let errPHP = document.getElementById("erreurCartePHP")
+                        if(errPHP) errPHP.classList.add("md:hidden", "hidden")
+                    }
+                    carteForm.appendChild(erreurCarte)
+                })
+
+                // Verif date
+                let dateForm = document.getElementById("dateForm")
+                let erreurDate = document.createElement("p")
+                erreurDate.textContent = "La date ne doit pas être dans le passée et doit exister"
+                erreurDate.classList.add("md:text-rouge", "text-rouge")
+
+                dateExpAnnee.addEventListener("change", function(){
+                    date = dateExpMois.value+'/'+dateExpAnnee.value
+                    if(!verifExpiration(date)){
+                        erreurDate.classList.remove("md:hidden", "hidden")
+                        let errPHP = document.getElementById("erreurDatePHP")
+                        if(errPHP) errPHP.classList.add("md:hidden", "hidden")
+                    }else{
+                        erreurDate.classList.add("md:hidden", "hidden")
+                        let errPHP = document.getElementById("erreurDatePHP")
+                        if(errPHP) errPHP.classList.add("md:hidden", "hidden")
+                    }
+                    dateForm.appendChild(erreurDate)
+                })
+
+                dateExpMois.addEventListener("change", function(){
+                    date = dateExpMois.value+'/'+dateExpAnnee.value
+                    if(!verifExpiration(date)){
+                        erreurDate.classList.remove("md:hidden", "hidden")
+                        let errPHP = document.getElementById("erreurDatePHP")
+                        if(errPHP) errPHP.classList.add("md:hidden", "hidden")
+                    }else{
+                        erreurDate.classList.add("md:hidden", "hidden")
+                        let errPHP = document.getElementById("erreurDatePHP")
+                        if(errPHP) errPHP.classList.add("md:hidden", "hidden")
+                    }
+                    dateForm.appendChild(erreurDate)
+                })
+                
+
+                // Verif cryptogramme
+                let cryptoForm = document.getElementById("cryptoForm")
+                let erreurCrypto = document.createElement("p")
+                erreurCrypto.textContent = "Le cryptogramme doit contenir exactement 3 chiffres"
+                erreurCrypto.classList.add("md:text-rouge", "text-rouge")
+
+                crypto.addEventListener("change", function(){
+                    if(!verifCryptogramme(crypto.value)){
+                        erreurCrypto.classList.remove("md:hidden", "hidden")
+                        let errPHP = document.getElementById("erreurCryptoPHP")
+                        if(errPHP) errPHP.classList.add("md:hidden", "hidden")
+                    }else{
+                        erreurCrypto.classList.add("md:hidden", "hidden")
+                        let errPHP = document.getElementById("erreurCryptoPHP")
+                        if(errPHP) errPHP.classList.add("md:hidden", "hidden")
+                    }
+                    cryptoForm.appendChild(erreurCrypto)
+                })
+
+                // Verif nom titulaire
+                let nomForm = document.getElementById("nomForm")
+                let erreurNom = document.createElement("p")
+                erreurNom.textContent = "Votre nom ne peut contenir que des lettres majuscules, minuscules, tirets, espaces et des accents"
+                erreurNom.classList.add("md:text-rouge", "text-rouge")
+
+                nom.addEventListener("change", function(){
+                    if(!verifNomPrenom(nom.value)){
+                        erreurNom.classList.remove("md:hidden", "hidden")
+                        let errPHP = document.getElementById("erreurNomPHP")
+                        if(errPHP) errPHP.classList.add("md:hidden", "hidden")
+                    }else{
+                        erreurNom.classList.add("md:hidden", "hidden")
+                        let errPHP = document.getElementById("erreurNomPHP")
+                        if(errPHP) errPHP.classList.add("md:hidden", "hidden")
+                    }
+                    nomForm.appendChild(erreurNom)
+                })
+            </script>
         </main>
     <?php }else{ ?>
         <main class="text-center min-h-[500px]">
@@ -399,20 +500,6 @@ if($_SESSION['role'] != 'client'){
                 
             </div>
         </main>
-
-        <script src="../../js/verifForm.js"></script>
-        <script>
-            date = "03/21"
-            dateCut = date.split('/')
-            mois = dateCut[0]
-            annee = dateCut[1]
-            anneeEnCours = getFullYear()
-            moisEnCours = getMonth()
-
-            print_r(dateCut)
-            console.log(anneeEnCours)
-            console.log(moisEnCours)
-        </script>
     <?php }?>
     <?php include(__DIR__ . '/../../php/structure/footer_front.php');?>
 </body>

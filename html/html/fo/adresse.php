@@ -148,9 +148,9 @@
 
         <h2>Adresse de livraison</h2>
 
-        <form class="flex flex-col self-center p-10" method="post">
+        <form class="flex flex-col self-center" method="post">
             
-            <div class="flex flex-col md:flex-row justify-between">
+            <div class="flex flex-col md:flex-row justify-between space-y-3 md:space-y-0">
                 <div id="nomForm" class="flex flex-col max-w-70">
                     <label for="nom">Nom* :</label>
                     <input placeholder="Cobrec" value="<?php 
@@ -186,7 +186,7 @@
                 </div>
             </div>
             
-            <div id="adresseForm" class="flex flex-col mt-5">
+            <div id="adresseForm" class="flex flex-col mt-5 ">
                 <label for="adresse">Adresse postale* :</label>
                 <input placeholder="1 rue des Fleurs" value="<?php
                     if(isset($_POST['adresse'])){
@@ -207,7 +207,7 @@
             </div>
             
             <div class="flex flex-col mt-5">
-                <div class="flex flex-col md:flex-row md:justify-between">
+                <div class="flex flex-col md:flex-row md:justify-between space-y-3 md:space-y-0">
                     <div class="flex md:self-center flex-col">
                         <label for="numBat">Numéro de bâtiment :</label>
                         <input placeholder="3C" value="<?php
@@ -252,7 +252,7 @@
                     ?>" class="pl-2 border-4 border-vertClair rounded-xl placeholder-gray-500 md:w-200 w-40" type="text" name="ville" id="ville" required>
                     <?php 
                     if($erreurVille){ ?>
-                        <p id="erreurVillePHP" class="text-rouge">Une erreur est survenue au niveau de votre ville</p>
+                        <p id="erreurVillePHP" class="text-rouge">Votre ville ne peut contenir que des lettres majuscules, minuscules, tirets, espaces et des accents</p>
                     <?php } ?>
                 </div>
                 
@@ -304,15 +304,15 @@
             let nomForm = document.getElementById("nomForm")
             let erreurNom = document.createElement("p")
             erreurNom.textContent = "Votre nom ne peut contenir que des lettres majuscules, minuscules, tirets, espaces et des accents"
-            erreurNom.classList.add("md:text-rouge")
+            erreurNom.classList.add("md:text-rouge", "text-rouge")
 
             nom.addEventListener("change", function(){
-                if(!validerNomPrenom(nom.value)){                    
-                    erreurNom.classList.remove("md:hidden")
-                    let errPHP = document.getElementById("erreurCodePostalPHP")
+                if(!verifNomPrenom(nom.value)){                    
+                    erreurNom.classList.remove("md:hidden", "hidden")
+                    let errPHP = document.getElementById("erreurNomPHP")
                     if(errPHP) errPHP.classList.add("md:hidden", "hidden")
                 }else{
-                    erreurNom.classList.add("md:hidden")
+                    erreurNom.classList.add("md:hidden", "hidden")
                     let errPHP = document.getElementById("erreurNomPHP")
                     if(errPHP) errPHP.classList.add("md:hidden", "hidden")
                 }
@@ -323,15 +323,15 @@
             let prenomForm = document.getElementById("prenomForm")
             let erreurPrenom = document.createElement("p")
             erreurPrenom.textContent = "Votre prenom ne peut contenir que des lettres majuscules, minuscules, tirets, espaces et des accents"
-            erreurPrenom.classList.add("md:text-rouge", "md:text-sm")
+            erreurPrenom.classList.add("md:text-rouge", "text-rouge")
 
             prenom.addEventListener("change", function(){
-                if(!validerNomPrenom(prenom.value)){                    
-                    erreurPrenom.classList.remove("md:hidden")
+                if(!verifNomPrenom(prenom.value)){                    
+                    erreurPrenom.classList.remove("md:hidden", "hidden")
                     let errPHP = document.getElementById("erreurCodePostalPHP")
                     if(errPHP) errPHP.classList.add("md:hidden", "hidden")
                 }else{
-                    erreurPrenom.classList.add("md:hidden")
+                    erreurPrenom.classList.add("md:hidden", "hidden")
                     let errPHP = document.getElementById("erreurPrenomPHP")
                     if(errPHP) errPHP.classList.add("md:hidden", "hidden")
                 }
@@ -345,12 +345,12 @@
             erreurAdresse.classList.add("md:text-rouge", "text-rouge", "w-100", "md:w-200")
 
             adresse.addEventListener("change", function(){
-                if(!validerAdresse(adresse.value)){                    
-                    erreurAdresse.classList.remove("md:hidden")
+                if(!verifAdresse(adresse.value)){                    
+                    erreurAdresse.classList.remove("md:hidden", "hidden")
                     let errPHP = document.getElementById("erreurCodePostalPHP")
                     if(errPHP) errPHP.classList.add("md:hidden", "hidden")
                 }else{
-                    erreurAdresse.classList.add("md:hidden")
+                    erreurAdresse.classList.add("md:hidden", "hidden")
                     let errPHP = document.getElementById("erreurAdressePHP")
                     if(errPHP) errPHP.classList.add("md:hidden", "hidden")
                 }
@@ -364,12 +364,12 @@
             erreurVille.classList.add("md:text-rouge","text-rouge", "w-100", "md:w-200")
 
             ville.addEventListener("change", function(){
-                if(!validerVille(ville.value)){                    
-                    erreurVille.classList.remove("md:hidden")
+                if(!verifVille(ville.value)){                    
+                    erreurVille.classList.remove("md:hidden", "hidden")
                     let errPHP = document.getElementById("erreurVillePHP")
                     if(errPHP) errPHP.classList.add("md:hidden", "hidden")
                 }else{
-                    erreurVille.classList.add("md:hidden")
+                    erreurVille.classList.add("md:hidden", "hidden")
                     let errPHP = document.getElementById("erreurVillePHP")
                     if(errPHP) errPHP.classList.add("md:hidden", "hidden")
                     
@@ -384,12 +384,12 @@
             erreurCodePostal.classList.add("md:text-rouge", "text-rouge", "w-100", "md:w-200")
 
             codePostal.addEventListener("change", function(){
-                if(!validerCodePostal(codePostal.value)){                    
-                    erreurCodePostal.classList.remove("md:hidden")
+                if(!verifCodePostal(codePostal.value)){                    
+                    erreurCodePostal.classList.remove("md:hidden", "hidden")
                     let errPHP = document.getElementById("erreurCodePostalPHP")
                     if(errPHP) errPHP.classList.add("md:hidden", "hidden")
                 }else{
-                    erreurCodePostal.classList.add("md:hidden")
+                    erreurCodePostal.classList.add("md:hidden", "hidden")
                     let errPHP = document.getElementById("erreurCodePostalPHP")
                     if(errPHP) errPHP.classList.add("md:hidden", "hidden")
                 }
