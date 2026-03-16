@@ -11,7 +11,7 @@
     try {  
         $tabProduit = null;           
         //récupère toutes les infos des tables produits
-        foreach($dbh->query("SELECT pr.id_produit, pr.libelle_produit, pr.prix_ttc, pr.note_moyenne, pr.quantite_stock, p.url_photo, p.alt, p.titre, pr.seuil_alerte, pr.description_produit
+        foreach($dbh->query("SELECT v.denomination, pr.id_produit, pr.libelle_produit, pr.prix_ttc, pr.note_moyenne, pr.quantite_stock, p.url_photo, p.alt, p.titre, pr.seuil_alerte, pr.description_produit
                             FROM sae3_skadjam._produit pr
                             INNER JOIN sae3_skadjam._vendeur v
                                 ON pr.id_vendeur = v.id_compte
@@ -23,7 +23,7 @@
                             ORDER BY libelle_produit ASC"
                             , PDO::FETCH_ASSOC) as $row){
             $tabProduit[] = $row;
-        } 
+        }
 
     }
 
@@ -36,8 +36,14 @@
         // Traitement de la confirmation
         require '../../../vendor/autoload.php';
 
+        $denomination = $tabProduit[0]["denomination"];
+
         $pdf = new FPDF();
         $pdf->AddPage();
+        $pdf->Ln(5);
+        $pdf->SetFont('Arial', '', 30);
+        $pdf->Cell(0,0,"Catalogue $denomination", 0, 0, 'C');
+        $pdf->Ln(20);
         $pdf->SetFont('Arial', '', 13);
         $i=0;
         $j=0;

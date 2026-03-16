@@ -124,7 +124,6 @@
         //Si le chiffre mis dans l'url dépasse le maximum de page, on remet au maximum
         if($pageNumber>$maxPage){
             $pageNumber = ceil($maxPage);
-            echo $pageNumber;
         }
 
         //découpe le catalogue en page de 24 produits
@@ -185,9 +184,17 @@
                             <?php 
                             $bg = "bg-[url(/images/logo/bootstrap_icon/cart-vert-fonce.svg)]";
                             $trouveP = false;
-
-                            if (isset($_SESSION['panier']['contient'][$idProduit])){
-                                $trouveP = true;
+                            if ($_SESSION['role'] != 'client') {
+                                if (isset($_SESSION['panier']['contient'][$idProduit])){
+                                    $trouveP = true;
+                                }
+                            }  
+                            else{
+                                foreach ($tabPanier as $id) {
+                                    if($id['id_produit'] == $idProduit){
+                                        $trouveP = true;
+                                    }
+                                }
                             }
 
                             if ($trouveP != false) {
@@ -210,10 +217,10 @@
                                 <div class="bg-rouge absolute w-36 md:w-74 underline text-beige pt-2 pb-1.5">
                                     <h4 class="text-center text-beige overline m-0"><?= htmlspecialchars($labelPromo); ?></h4>
                                 </div>
-                            <?php }
-                        } ?>
+                                <?php }} ?>
+                        </div>
+                    <?php } ?>
                 </div>
-            <?php } ?>
         </div>
         <?php $dbh = null;?>
         
@@ -244,7 +251,7 @@
             <form action="./php/traitementFAPanier.php" method="get" id="formNbAddPanier" class="flex flex-col items-center w-full h-full space-y-4">
                 <label id="validAjout" class="hidden" for="nbAddPanier">Combien voulez-vous en ajouter au panier ?</label>
                 <p id="valideRetrait" class="hidden">Etes-vous sur de vouloir retirer ce produit de votre panier ?</p>
-                <input placeholder="5" class="hidden pl-3 border-4 border-beige rounded-2xl w-20 m-2 placeholder-gray-500" type="number" name="nbAddPanier" id="nbAddPanier" min="0">
+                <input placeholder="5" class="hidden pl-3 border-4 border-beige rounded-2xl w-20 m-2 placeholder-gray-500" type="number" name="nbAddPanier" id="nbAddPanier" min="1" required>
                 <input type="hidden" name="ajout" value="panier">
                 <input type="hidden" name="vientDe" value="index">
                 <div class="flex flex-row justify-around w-full">
@@ -297,7 +304,6 @@
                 </div>
             </div>
             <?php } ?>
-
         </div>
     </main>
     

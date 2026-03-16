@@ -59,6 +59,7 @@ if (Object.keys(dataStats).length > 0) {
     let currentDataCatVentes = dataCatVentesVolume;
 
     function updateChartFormat(){
+        // Change les données courantes utilisés par les données correspondantes au format actuel
 
         if (currentFormat == "volume") {
             

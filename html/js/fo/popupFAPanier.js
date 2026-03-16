@@ -71,6 +71,7 @@ btnRetour.addEventListener('click', function(){
     contNbAddPanier.classList.add("hidden")
     fondNbAddPanier.classList.add("hidden")
 })
+// Dans AjoutEventListener() pour la page recherche
 
 carteProduit.forEach(produit => {
     //Ajout de l'event listener sur le bouton
@@ -84,10 +85,12 @@ carteProduit.forEach(produit => {
         p.classList.remove("hidden")
         label.classList.add("hidden")
         inputNb.classList.add("hidden")
+        inputNb.required = false
     } else {
         p.classList.add("hidden")
         label.classList.remove("hidden")
         inputNb.classList.remove("hidden")
+        inputNb.required = true
     }
 
     input.value = id

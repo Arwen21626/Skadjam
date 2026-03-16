@@ -1,6 +1,7 @@
 <script>
     // Eventlisteners sur les cookies de session
     let tabFA = <?php echo json_encode($tabFA); ?>;
+    let tabPanier = <?php echo json_encode($tabPanier); ?>;
 
     // Demande au navigateur s'il supporte l'api
     if ('cookieStore' in window) {
@@ -11,10 +12,15 @@
 
     cookieStore.addEventListener("change", async (event) => {
 
-        const cookieFA = await cookieStore.get("tabFA");
+        let cookieFA = await cookieStore.get("tabFA");
+        let cookieP = await cookieStore.get("tabPanier");
 
         if (cookieFA) {
             tabFA = JSON.parse(cookie.value);
+        }
+
+        if (cookieP) {
+            tabPanier = JSON.parse(cookie.value);
         }
     });
     
