@@ -162,6 +162,12 @@ if ($_SESSION["role"] === "client"){
             src: url("/font/MavenPro/MavenPro-Regular.ttf");
             /* font-size: 25px; */
         }
+        @media print { 
+            header, footer, nav, button { 
+                display: none; 
+            } 
+        }
+
     </style>
 </head>
 <body>
@@ -171,6 +177,9 @@ if ($_SESSION["role"] === "client"){
     ?>
     <main class="min-h-[650x] m-5">
         <h2>Vos informations</h2>
+        <!---boutons imprimer--->
+        <button class="imprimer fixed bottom-15 md:top-70 md:right-5 border-vertClair bg-white border-2 rounded-xl w-35 h-10 px-7 cursor-pointer">Imprimer</button>
+
         <?php 
         // informations sur le compte client
         foreach($donneesClient as $donnees){?>
@@ -361,6 +370,34 @@ if ($_SESSION["role"] === "client"){
                 </div>
             <?php }?>
         </section>
+
+        <script>
+        let btnImprimmer = document.getElementsByClassName("imprimer");
+
+        function fermerPageImpression() {
+            // fermer la page d'impression
+            let iframe = document.getElementsByTagName("iframe")[0];
+            let body = document.getElementsByTagName("body")[0];
+            body.removeChild(iframe); 
+        }
+
+        function gestionPageImpression() {
+            // définie quand est ce qu'on peut fermer la page d'impression
+            // et définie un iframe de type impression
+            this.contentWindow.onbeforeunload = fermerPageImpression;
+            this.contentWindow.onafterprint = fermerPageImpression;
+            this.contentWindow.print(); // indique que c'est une page qui permet d'imprimmer
+        }
+        function affichagePageImpression(){
+            const hideFrame = document.createElement("iframe"); // création d'un iframe
+            hideFrame.onload = gestionPageImpression;
+            hideFrame.src = "./recuperation_donnees_client.php";
+            document.body.appendChild(hideFrame); // ajoute dans le body le iframe pour l'impression
+        }
+
+        btnImprimmer[0].addEventListener("click", () => {affichagePageImpression()});
+
+    </script>
 
     </main>
     <?php require __DIR__ . "/../../php/structure/footer_front.php"; ?>
