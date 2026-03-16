@@ -380,8 +380,6 @@ if (isset($_POST['categorie']) && isset($_POST['nom']) && isset($_POST['prix']) 
                         ':label' => $labelPromo,
                         ':id_promotion' => $idPromotion
                     ]);
-                }else{
-                    echo "Le libellé de la promotion est invalide.";
                 }
             }
 

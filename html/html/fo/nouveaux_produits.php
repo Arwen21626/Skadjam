@@ -92,7 +92,7 @@ include __DIR__. '/../../php/requetesBDD/recup_panier.php';
                         <div id="<?php echo $idProduit; ?>" class="carteProduit bg-bleu flex flex-col w-40 h-auto p-2 m-2 md:w-80 md:p-3 justify-between">
                             <p class="hidden"><?php echo $valeurs['quantite_stock']; ?></p>
                             <!--affichage de la photo-->
-                            <a href= "<?= 'html/fo/details_produit.php?idProduit='.$idProduit;?>" class="mb-3">
+                            <a href= "<?= './details_produit.php?idProduit='.$idProduit;?>" class="mb-3">
                                 <img src="<?= $valeurs['url_photo'];?>" 
                                         alt="<?= $valeurs['alt'];?>"
                                         title="<?= $valeurs['titre'];?>"

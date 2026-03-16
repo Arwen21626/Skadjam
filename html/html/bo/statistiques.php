@@ -172,12 +172,12 @@
                                 foreach ($cles as $prod) {
                                         ?>
                                             <!-- Div représentant une carte produit -->
-                                            <div id="<?php echo $prod["id_produit"]; ?>" class="produit bg-bleu flex flex-col w-80 h-auto p-3 m-2 cursor-pointer">
+                                            <div title="Afficher le graphique" id="<?php echo $prod["id_produit"]; ?>" class="produit bg-bleu flex flex-col w-80 h-auto p-3 m-2 cursor-pointer">
                                                 <!--affichage de la photo-->
                                                 <img class="w-auto h-40 md:h-80 mx-auto block" 
                                                     src="<?php echo $prod['url_photo'];?>" 
                                                     alt="<?php echo $prod['alt'];?>"
-                                                    title="<?php echo $prod['titre'];?>">
+                                                >
                                                         
                                                 <!--affichage du nom du produit-->
                                                 <p class="text-center mt-8 mb-4 max-w-70"><?php echo $prod['libelle_produit'];?></p>
@@ -189,9 +189,10 @@
                     </div>
                 </div>
 
-                <div id="overlay-chart" class="hidden fixed inset-0 bg-black/50 backdrop-blur-sm z-40"></div>
+                <div id="overlay-chart" class="hidden fixed inset-0 bg-black/50 backdrop-blur-sm z-40 cursor-pointer" title="Fermer"></div>
 
-                <div id="container-prod-chart" class="hidden fixed bg-white top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 chart-container justify-center items-center flex-col p-2 m-12 z-50">
+                <div id="container-prod-chart" title="Fermer"
+                class="hidden fixed bg-white top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 chart-container justify-center items-center flex-col p-2 m-12 z-50 cursor-pointer">
                     <div id="div-prod-chart" class="chart flex justify-center items-center relative m-4 w-[60vw] h-[50vh]">
                         <canvas id="prod-chart"></canvas>
                     </div>

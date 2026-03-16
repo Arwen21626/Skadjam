@@ -64,6 +64,10 @@ include __DIR__. '/../../php/requetesBDD/recup_panier.php';
                                         ON pr.id_produit = pu.id_produit
                                     INNER JOIN sae3_skadjam._promotion pn
                                         ON pu.id_promotion = pn.id_promotion
+                                    left join sae3_skadjam._reduit rd
+                                        on rd.id_produit = pr.id_produit
+                                    left join sae3_skadjam._remise r
+                                        on r.id_remise = rd.id_remise
                                     WHERE pr.est_masque = false
                                     AND pr.est_supprime = false"
                                     , PDO::FETCH_ASSOC) as $row){
@@ -98,7 +102,7 @@ include __DIR__. '/../../php/requetesBDD/recup_panier.php';
                         $estPromu = ($stmt->fetch() !== false); ?>
                         <div id="<?php echo $idProduit; ?>" class="bg-bleu flex flex-col w-40 h-auto p-2 m-2 md:w-80 md:p-3 justify-between">
                             <!--affichage de la photo-->
-                            <a href= "<?= 'html/fo/details_produit.php?idProduit='.$idProduit;?>" class="mb-3">
+                            <a href= "<?= './details_produit.php?idProduit='.$idProduit;?>" class="mb-3">
                                 <img src="<?= $valeurs['url_photo'];?>" 
                                         alt="<?= $valeurs['alt'];?>"
                                         title="<?= $valeurs['titre'];?>"

@@ -62,6 +62,14 @@
                                         PDO::FETCH_ASSOC) as $row) {
             $infoPhoto = $row;
         };
+
+        // Requête pour récupérer la date de fin de la promotion
+        $stmt = $dbh->prepare("SELECT date_fin_promotion
+                    FROM sae3_skadjam._promotion pn
+                    NATURAL JOIN sae3_skadjam._promu pu
+                    WHERE pu.id_produit = ?");
+        $stmt->execute([$idProd]);
+        $dateFinPromotion = $stmt->fetchAll(PDO::FETCH_COLUMN);
         
         // Définition des variables PHP pour récupérer chaque donnée nécessaire
         $libelleProd = $produit["libelle_produit"]; // Nom du produit
@@ -149,7 +157,12 @@
         <!-- Section Description -->
         <section class="flex flex-col ">
             <article class="p-2 md:pb-8"> <!-- Titrage -->
-                <h3> <?php echo $libelleProd; ?></h3>
+                <div class="flex flex-col md:flex-row">
+                    <h3> <?php echo $libelleProd; ?></h3>
+                    <?php if(!empty($dateFinPromotion[0])){ ?>
+                    <h4 class="md:relative md:top-1 md:ml-5">promotion se termine le <?= $dateFinPromotion[0]; ?></h4>
+                    <?php } ?>
+                </div>
                 <p class="ml-4">Catégorie : <?php echo $libelleCat; ?></p>
                 <div class="ml-10"> <?php echo affichageNote($noteMoy); ?> </div>
             </article>
@@ -237,13 +250,35 @@
                             ?>
                             <section class=" bg-bleu m-4 p-4 md:w-4xl w-100 <?php echo $aReponse?'mb-0 rounded-t-2xl':'rounded-2xl'?>">
 
-                                <div class="grid grid-cols-4 md:grid-cols-5 justify-items-end">
-                                    <h4 class=" col-span-2 md:col-span-3 justify-self-start">
+                                <div class="flex justify-between items-center py-2">
+                                    <h4>
                                         <?php echo $row['pseudo'];?>
                                     </h4>
-                                    <?php echo affichageNote($row['nb_etoile']);
 
-                                    // savoir si l'utilisateur à déjà signaler l'avis il ne faut pas qu'il puisse le resignaler
+                                    <div class="flex items-center gap-4">
+                                        <div class="">
+                                            <?php echo affichageNote($row['nb_etoile']);?>
+                                        </div>
+
+                                        <div class="flex items-center gap-1">
+                                            <p><?php echo $row['nb_pouce_haut'] ?? 0; ?></p>
+                                            <img class="w-6 h-6 cursor-pointer hover:scale-110 transition" src="../../images/logo/bootstrap_icon/hand-thumbs-up.svg" 
+                                                    alt="icône pouce vers le haut si vous avez aimé l'avis" 
+                                                    title="J'aime cet avis">
+                                        </div>
+                                    
+                                        <div class="flex items-center gap-1">
+                                        <p><?php echo $row['nb_pouce_bas'] ?? 0; ?></p>
+                                        <img class="w-6 h-6 cursor-pointer hover:scale-110 transition" src="../../images/logo/bootstrap_icon/hand-thumbs-down.svg" 
+                                                alt="icône pouce vers le bas si vous n'avez pas aimé l'avis" 
+                                                title="Je n'aime pas cet avis">
+                                        </div>
+                                    </div>
+                                    
+
+                                    
+
+                                    <?php // savoir si l'utilisateur à déjà signaler l'avis il ne faut pas qu'il puisse le resignaler
                                     $aSignaler = false;
                                     //pour le visiteur
                                     if ($_SESSION['role'] === 'visiteur'){
