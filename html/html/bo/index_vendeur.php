@@ -13,10 +13,14 @@
     $_SESSION['raisonSociale'] = $raisonSociale;
 
     try{
-        //récupère toutes les informations sur les produits du vendeur
+        //récupère toutes les infos des tables produits, remise, photos, promotion
+        //sur les produis appartenant à ce vendeur
         $tabProduit = null;
-        $sql="SELECT pr.libelle_produit, pr.id_produit, url_photo, alt, titre, prix_ttc, quantite_stock, 
-                    note_moyenne, prix_remise, pourcentage_remise
+        $sql="SELECT pr.libelle_produit, pr.id_produit, pr.prix_ttc,
+                        pr.quantite_stock, pr.note_moyenne, pr.prix_remise,
+                        r.pourcentage_remise, pu.id_promotion,
+                        pm.label, pm.date_debut_promotion, pm.date_fin_promotion,
+                        ph.url_photo, ph.alt, ph.titre
                 FROM sae3_skadjam._produit pr
                 INNER join sae3_skadjam._montre m
                     ON pr.id_produit=m.id_produit
@@ -28,6 +32,10 @@
                     ON rd.id_produit = pr.id_produit
                 LEFT JOIN sae3_skadjam._remise r
                     ON r.id_remise = rd.id_remise
+                LEFT JOIN sae3_skadjam._promu pu
+                    ON pu.id_produit = pr.id_produit
+                LEFT JOIN sae3_skadjam._promotion pm
+                    ON pu.id_promotion = pm.id_promotion
                 WHERE v.id_compte = :idCompte
                     AND pr.est_supprime = false";
 
@@ -107,68 +115,58 @@
         <?php }
 
             $maxPage = sizeof($tabProduit)/PAGE_SIZE;
-            //découpe le catalogue en page de 15 produits
+            //découpe le catalogue en page de 24 produits
             $lignes = array_slice($tabProduit, $pageNumber*PAGE_SIZE-PAGE_SIZE, PAGE_SIZE); 
 
             //affiche la photo du produit, son nom, son prix et sa note, son stock ?>
             <article class="flex flex-row flex-wrap justify-around">
                 <?php 
-                    foreach($lignes as $id => $valeurs){
-                        $idProduit = $valeurs['id_produit'];
+                    foreach($lignes as $id => $prod){
+                        $idProduit = $prod['id_produit'];
                         // Le produit est-il en promotion ?
-                        $stmt = $dbh->prepare("SELECT *
-                                            FROM sae3_skadjam._promu
-                                            WHERE id_produit = :id_produit");
-                        $stmt->execute([':id_produit' => $idProduit]);
-                        $estPromu = (!empty($stmt->fetch())); ?>
+                        $estPromu = ($prod['id_promotion'] !== null);?>
+                        
                         <section class="bg-bleu flex flex-col w-40 h-auto p-2 m-2 md:w-80 md:p-3">
                             <!--affichage de la photo-->
                             <a href= "<?php echo "details_produit.php?idProduit=".$idProduit;?>" class=" mb-3">
                                 <img class="w-auto h-40 md:h-80 mx-auto block" 
-                                    src="<?php echo $valeurs['url_photo'];?>" 
-                                    alt="<?php echo $valeurs['alt'];?>"
-                                    title="<?php echo $valeurs['titre'];?>">
+                                    src="<?php echo $prod['url_photo'];?>" 
+                                    alt="<?php echo $prod['alt'];?>"
+                                    title="<?php echo $prod['titre'];?>">
                                     
                             <!--affichage du nom du produit-->
-                            <p class=" max-w-70"><?php echo $valeurs['libelle_produit'];?></p> 
+                            <p class=" max-w-70"><?php echo $prod['libelle_produit'];?></p> 
 
                             <!--affichage du prix du produit-->   
                             <div class="flex flex-row justify-between items-center">
-                                <p class="<?php echo ($valeurs['pourcentage_remise'] !== NULL)?'line-through':'';?>"> <?php echo htmlentities(str_replace(".", ",",$valeurs['prix_ttc'])); ?>€ (<abbr title="Toutes Taxes Comprises">TTC</abbr>)</p>
-                                <p class="<?php echo ($valeurs['pourcentage_remise'] !== NULL)?'':'hidden';?>"> <?php echo htmlentities(str_replace(".", ",",$valeurs['prix_remise'])); ?>€ (<abbr title="Toutes Taxes Comprises">TTC</abbr>)</p>
+                                <p class="<?php echo ($prod['pourcentage_remise'] !== NULL)?'line-through':'';?>"> <?php echo htmlentities(str_replace(".", ",",$prod['prix_ttc'])); ?>€ (<abbr title="Toutes Taxes Comprises">TTC</abbr>)</p>
+                                <p class="<?php echo ($prod['pourcentage_remise'] !== NULL)?'':'hidden';?>"> <?php echo htmlentities(str_replace(".", ",",$prod['prix_remise'])); ?>€ (<abbr title="Toutes Taxes Comprises">TTC</abbr>)</p>
 
                             </div>
                             <!--récupération de la note-->
                             <div class="flex">
-                                <?php $note = $valeurs['note_moyenne'];
+                                <?php $note = $prod['note_moyenne'];
                                     affichageNote($note); ?>
                             </div>
                             
                             <!--affichage du stock-->
-                            <p>En stock : <?php echo $valeurs['quantite_stock'];?></p>
+                            <p>En stock : <?php echo $prod['quantite_stock'];?></p>
                             </a>     
                             <!--affichage de la promotion-->
                             <?php if($estPromu){ 
-                                    $stmt = $dbh->prepare("SELECT *
-                                                            FROM sae3_skadjam._promu pu
-                                                            INNER JOIN sae3_skadjam._promotion pn
-                                                                ON pu.id_promotion = pn.id_promotion
-                                                            WHERE pu.id_produit = :id_produit");
-                                    $stmt->execute([':id_produit' => $idProduit]);
-                                    $promotion = $stmt->fetch(PDO::FETCH_ASSOC);
-                                    $debutPromo = formatDate($promotion['date_debut_promotion']);
-                                    $finPromo = null;
-                                    if($promotion['date_fin_promotion'] !== null){
-                                        $finPromo = formatDate($promotion['date_fin_promotion']);
-                                    }
-                                    $labelPromo = $promotion['label'];
-                                    if($debutPromo <= date('Y-m-d') && ($finPromo === null || $finPromo >= date('Y-m-d')) && !empty($labelPromo)){
-                                ?>
-                                <!-- Affichage de la bannière -->
-                                <div class="bg-rouge absolute w-36 md:w-74 underline text-beige pt-2 pb-1.5">
-                                    <h4 class="text-center text-beige overline m-0"><?php echo htmlspecialchars($labelPromo); ?></h4>
-                                </div>
-                            <?php }} ?> 
+                                $debutPromo = formatDate($prod['date_debut_promotion']);
+                                $finPromo = null;
+                                if($prod['date_fin_promotion'] !== null){
+                                    $finPromo = formatDate($prod['date_fin_promotion']);
+                                }
+                                $labelPromo = $prod['label'];
+                                if($debutPromo <= date('Y-m-d') && ($finPromo == null || $finPromo >= date('Y-m-d')) && !empty($labelPromo)){?>
+                                    <!-- Affichage de la bannière -->
+                                    <div class="bg-rouge absolute w-36 md:w-74 underline text-beige pt-2 pb-1.5">
+                                        <h4 class="text-center text-beige overline m-0"><?php echo htmlspecialchars($labelPromo); ?></h4>
+                                    </div>
+                                <?php }
+                            } ?> 
                         </section>
                 <?php } ?>
             </article>         
