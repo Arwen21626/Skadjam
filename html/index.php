@@ -19,24 +19,7 @@
 
     include __DIR__. '/php/requetesBDD/recup_FA.php';
     include __DIR__. '/php/requetesBDD/recup_panier.php';
-    
 
-    foreach($dbh->query("SELECT pr.id_produit,pr.quantite_stock, pr.date_creation, libelle_produit, description_produit, prix_ttc, prix_remise, quantite_stock, id_categorie, pr.id_vendeur, note_moyenne, ph.id_photo, url_photo, alt, titre, id_compte, pu.id_promotion, label
-                                    FROM sae3_skadjam._produit pr
-                                    INNER JOIN sae3_skadjam._montre m
-                                        ON pr.id_produit=m.id_produit
-                                    INNER JOIN sae3_skadjam._photo ph  
-                                        ON ph.id_photo = m.id_photo 
-                                    INNER JOIN sae3_skadjam._vendeur v
-                                        ON pr.id_vendeur = v.id_compte
-                                    LEFT JOIN sae3_skadjam._promu pu
-                                        ON pu.id_produit = pr.id_produit
-                                    LEFT JOIN sae3_skadjam._promotion pm
-                                        ON pu.id_promotion = pm.id_promotion
-                                    WHERE pr.est_supprime = false AND pr.est_masque = false"
-                        , PDO::FETCH_ASSOC) as $row){
-        $tabProduit[] = $row;
-    }
     if ($_SESSION['role'] == "client") {
         $idCompte = $_SESSION['idCompte'];
         $stmt = $dbh->query("SELECT pseudo FROM sae3_skadjam._client WHERE id_compte = $idCompte");
@@ -50,6 +33,48 @@
     $removePanier = (isset($_GET['removePanier']) && $_GET['removePanier'] === "1");
     $addFA = (isset($_GET['addFA']) && $_GET['addFA'] === "1");
     $removeFA = (isset($_GET['removeFA']) && $_GET['removeFA'] === "1");
+
+    try {                
+        //récupère toutes les infos des tables produits, photos, promotion, remise
+        $tabProduit = null;
+        $sql = "SELECT pr.libelle_produit, pr.id_produit, url_photo, alt, titre, 
+                        prix_ttc, quantite_stock, note_moyenne, prix_remise, pourcentage_remise, description_produit,
+                        id_categorie, pr.id_vendeur, ph.id_photo, id_compte, pu.id_promotion, label
+                FROM sae3_skadjam._produit pr
+                INNER JOIN sae3_skadjam._montre m
+                    ON pr.id_produit=m.id_produit
+                INNER JOIN sae3_skadjam._photo ph  
+                    ON ph.id_photo = m.id_photo 
+                INNER JOIN sae3_skadjam._vendeur v
+                    ON pr.id_vendeur = v.id_compte
+                LEFT JOIN sae3_skadjam._reduit rd
+                    ON rd.id_produit = pr.id_produit
+                LEFT JOIN sae3_skadjam._remise r
+                    ON r.id_remise = rd.id_remise
+                LEFT JOIN sae3_skadjam._promu pu
+                    ON pu.id_produit = pr.id_produit
+                LEFT JOIN sae3_skadjam._promotion pm
+                    ON pu.id_promotion = pm.id_promotion
+                WHERE pr.est_supprime = false AND pr.est_masque = false";
+                           
+        $stmt = $dbh->prepare($sql);
+        $stmt->execute();
+        $tabProduit = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+        //initialisation du numéro de page
+        if(isset($_GET['page'])&& $_GET['page']!==""){
+            $pageNumber = $_GET['page'];
+        }else{
+            $pageNumber = 1;
+        }
+    }
+
+    catch(PDOException $e){
+        print "Erreur !: " . $e->getMessage() . "<br/>";
+        die();
+    }
+
+    
 ?>
 
 <!DOCTYPE html>
@@ -91,140 +116,105 @@
         <!--Début du catalogue-->
         <h2 id="nosProduits">Nos produits</h2>
 
-        <?php
-            //initialisation du numéro de page
-            if(isset($_GET['page'])&& $_GET['page']!==""){
-                $pageNumber = $_GET['page'];
-            }else{
-                $pageNumber = 1;
-            }
+        <?php $maxPage = sizeof($tabProduit)/PAGE_SIZE;
+        //découpe le catalogue en page de 15 produits
+        $lignes = array_slice($tabProduit, $pageNumber*PAGE_SIZE-PAGE_SIZE, PAGE_SIZE);?>
+        
+        <!-- Liste des cartes produits -->
+        <div class="flex flex-row flex-wrap justify-around">
+            <?php foreach($lignes as $id => $valeurs){
+                $idProduit = $valeurs['id_produit'];
+                // Le produit est-il en promotion ?
+                $stmt = $dbh->prepare("SELECT *
+                                    FROM sae3_skadjam._promu
+                                    WHERE id_produit = :id_produit");
+                $stmt->execute([':id_produit' => $idProduit]);
+                $estPromu = ($stmt->fetch() !== false); ?>
+                <!-- Carte produit -->
+                <div id="<?php echo $idProduit; ?>" class="carteProduit bg-bleu flex flex-col w-40 h-auto p-2 m-2 md:w-80 md:p-3 justify-between">
+                    <p class="hidden"><?php echo $valeurs['quantite_stock']; ?></p>
+                    <!--affichage de la photo-->
+                    <a href= "<?= 'html/fo/details_produit.php?idProduit='.$idProduit;?>" class="mb-3">
+                        <img src="<?= $valeurs['url_photo'];?>" 
+                                alt="<?= $valeurs['alt'];?>"
+                                title="<?= $valeurs['titre'];?>"
+                                class="w-auto h-40 md:h-80 block mx-auto">
 
-            $tabProduit = [];
+                        <!--affichage du nom du produit-->
+                        <p><?= $valeurs['libelle_produit'];?></p> 
 
-            try {                
-                //récupère toutes les infos des tables produits et photos
-                foreach($dbh->query("SELECT pr.libelle_produit, pr.id_produit, url_photo, alt, titre, prix_ttc, quantite_stock, note_moyenne, prix_remise, pourcentage_remise
-                                    FROM sae3_skadjam._produit pr
-                                    INNER JOIN sae3_skadjam._montre m
-                                        ON pr.id_produit=m.id_produit
-                                    INNER JOIN sae3_skadjam._photo ph  
-                                        ON ph.id_photo = m.id_photo 
-                                    INNER JOIN sae3_skadjam._vendeur v
-                                        ON pr.id_vendeur = v.id_compte
-                                    left join sae3_skadjam._reduit rd
-                                        on rd.id_produit = pr.id_produit
-                                    left join sae3_skadjam._remise r
-                                        on r.id_remise = rd.id_remise
-                                    WHERE pr.est_supprime = false AND pr.est_masque = false"
-                                    , PDO::FETCH_ASSOC) as $row){
-                    $tabProduit[] = $row;
-                }
-
-                $maxPage = sizeof($tabProduit)/PAGE_SIZE;
-                //découpe le catalogue en page de 15 produits
-                $lignes = array_slice($tabProduit, $pageNumber*PAGE_SIZE-PAGE_SIZE, PAGE_SIZE);?>
-                
-                <!-- Liste des cartes produits -->
-                <div class="flex flex-row flex-wrap justify-around">
-                    <?php foreach($lignes as $id => $valeurs){
-                        $idProduit = $valeurs['id_produit'];
-                        // Le produit est-il en promotion ?
-                        $stmt = $dbh->prepare("SELECT *
-                                            FROM sae3_skadjam._promu
-                                            WHERE id_produit = :id_produit");
-                        $stmt->execute([':id_produit' => $idProduit]);
-                        $estPromu = ($stmt->fetch() !== false); ?>
-                        <!-- Carte produit -->
-                        <div id="<?php echo $idProduit; ?>" class="carteProduit bg-bleu flex flex-col w-40 h-auto p-2 m-2 md:w-80 md:p-3 justify-between">
-                            <p class="hidden"><?php echo $valeurs['quantite_stock']; ?></p>
-                            <!--affichage de la photo-->
-                            <a href= "<?= 'html/fo/details_produit.php?idProduit='.$idProduit;?>" class="mb-3">
-                                <img src="<?= $valeurs['url_photo'];?>" 
-                                        alt="<?= $valeurs['alt'];?>"
-                                        title="<?= $valeurs['titre'];?>"
-                                        class="w-auto h-40 md:h-80 block mx-auto">
-
-                                <!--affichage du nom du produit-->
-                                <p><?= $valeurs['libelle_produit'];?></p> 
-
-                                <!--affichage du prix du produit-->   
-                                <div class="flex flex-row justify-between items-center">
-                                    <p class="inline-block <?= ($valeurs['pourcentage_remise'] !== NULL)?'line-through':'';?>"> <?= htmlentities(str_replace(".", ",",$valeurs['prix_ttc'])); ?>€ (<abbr title="Toutes Taxes Comprises">TTC</abbr>)</p>
-                                    <p class=" pl-3 <?= ($valeurs['pourcentage_remise'] !== NULL)?'':'hidden';?>"> <?= htmlentities(str_replace(".", ",",$valeurs['prix_remise'])); ?>€ (<abbr title="Toutes Taxes Comprises">TTC</abbr>)</p>
-                                </div>
-                                <!--récupération de la note-->
-                                <div class="flex">
-                                    <?php $note = $valeurs['note_moyenne'];
-                                        affichageNote($note); ?>
-                                </div>
-                            </a>
-                            <!-- boutons futurs achats & panier -->
-                            <div class="flex justify-end">
-                                <!-- Produit dans les futurs achats ? -->
-                                <a id="btnFA" href="./php/traitementFAPanier.php?idProduit=<?php echo $idProduit;?>&ajout=fa&vientDe=index">
-                                    <button class="cursor-pointer size-10 bg-no-repeat bg-size-[auto_40px]
-                                    <?php 
-                                    $bg = "bg-[url(/images/logo/bootstrap_icon/bookmark-fa-plus.svg)]";
-                                    
-                                    $trouveFA = array_search($idProduit, $tabFA);
-                                    
-                                    if ($trouveFA != null) {
-                                        $bg = "bg-[url(/images/logo/bootstrap_icon/bookmark-fa-plus-fill.svg)]";
-                                    }
-                                    echo $bg;
-                                    ?>
-                                    ">
-                                    </button>
-                                </a>
-                                <!-- Produit dans le panier ? -->
-                                <button class="btnPanier cursor-pointer size-10 bg-no-repeat bg-size-[auto_40px]
-                                    <?php 
-                                    $bg = "bg-[url(/images/logo/bootstrap_icon/cart-vert-fonce.svg)]";
-                                    $trouveP = false;
-
-                                    if (isset($_SESSION['panier']['contient'][$idProduit])){
-                                        $trouveP = true;
-                                    }
-
-                                    if ($trouveP != false) {
-                                        $bg = "bg-[url(/images/logo/bootstrap_icon/cart-fill-vert-fonce.svg)]";
-                                    }
-                                    echo $bg;
-                                    ?>
-                                ">
-                                </button>
-                            </div> 
-                            <!--affichage de la promotion-->
-                                <?php if($estPromu){ 
-                                    $stmt = $dbh->prepare("SELECT *
-                                                            FROM sae3_skadjam._promu pu
-                                                            INNER JOIN sae3_skadjam._promotion pn
-                                                                ON pu.id_promotion = pn.id_promotion
-                                                            WHERE pu.id_produit = :id_produit");
-                                    $stmt->execute([':id_produit' => $idProduit]);
-                                    $promotion = $stmt->fetch(PDO::FETCH_ASSOC);
-                                    $debutPromo = formatDate($promotion['date_debut_promotion']);
-                                    $finPromo = null;
-                                    if($promotion['date_fin_promotion'] !== null){
-                                        $finPromo = formatDate($promotion['date_fin_promotion']);
-                                    }
-                                    $labelPromo = $promotion['label'];
-                                    if($debutPromo <= date('Y-m-d') && ($finPromo == null || $finPromo >= date('Y-m-d')) && !empty($labelPromo)){
-                                ?>
-                                <div class="bg-rouge absolute w-36 md:w-74 underline text-beige pt-2 pb-1.5">
-                                    <h4 class="text-center text-beige overline m-0"><?= htmlspecialchars($labelPromo); ?></h4>
-                                </div>
-                                <?php }} ?>
+                        <!--affichage du prix du produit-->   
+                        <div class="flex flex-row justify-between items-center">
+                            <p class="inline-block <?= ($valeurs['pourcentage_remise'] !== NULL)?'line-through':'';?>"> <?= htmlentities(str_replace(".", ",",$valeurs['prix_ttc'])); ?>€ (<abbr title="Toutes Taxes Comprises">TTC</abbr>)</p>
+                            <p class=" pl-3 <?= ($valeurs['pourcentage_remise'] !== NULL)?'':'hidden';?>"> <?= htmlentities(str_replace(".", ",",$valeurs['prix_remise'])); ?>€ (<abbr title="Toutes Taxes Comprises">TTC</abbr>)</p>
                         </div>
-                    <?php } ?>
-                </div>
-                <?php $dbh = null;
-            }catch(PDOException $e){
-                print "Erreur !: " . $e->getMessage() . "<br/>";
-                die();
-            }
+                        <!--récupération de la note-->
+                        <div class="flex">
+                            <?php $note = $valeurs['note_moyenne'];
+                                affichageNote($note); ?>
+                        </div>
+                    </a>
+                    <!-- boutons futurs achats & panier -->
+                    <div class="flex justify-end">
+                        <!-- Produit dans les futurs achats ? -->
+                        <a id="btnFA" href="./php/traitementFAPanier.php?idProduit=<?php echo $idProduit;?>&ajout=fa&vientDe=index">
+                            <button class="cursor-pointer size-10 bg-no-repeat bg-size-[auto_40px]
+                            <?php 
+                            $bg = "bg-[url(/images/logo/bootstrap_icon/bookmark-fa-plus.svg)]";
+                            
+                            $trouveFA = array_search($idProduit, $tabFA);
+                            
+                            if ($trouveFA != null) {
+                                $bg = "bg-[url(/images/logo/bootstrap_icon/bookmark-fa-plus-fill.svg)]";
+                            }
+                            echo $bg;
+                            ?>
+                            ">
+                            </button>
+                        </a>
+                        <!-- Produit dans le panier ? -->
+                        <button class="btnPanier cursor-pointer size-10 bg-no-repeat bg-size-[auto_40px]
+                            <?php 
+                            $bg = "bg-[url(/images/logo/bootstrap_icon/cart-vert-fonce.svg)]";
+                            $trouveP = false;
 
-        ?>
+                            if (isset($_SESSION['panier']['contient'][$idProduit])){
+                                $trouveP = true;
+                            }
+
+                            if ($trouveP != false) {
+                                $bg = "bg-[url(/images/logo/bootstrap_icon/cart-fill-vert-fonce.svg)]";
+                            }
+                            echo $bg;
+                            ?>
+                        ">
+                        </button>
+                    </div> 
+                    <!--affichage de la promotion-->
+                        <?php if($estPromu){ 
+                            $stmt = $dbh->prepare("SELECT *
+                                                    FROM sae3_skadjam._promu pu
+                                                    INNER JOIN sae3_skadjam._promotion pn
+                                                        ON pu.id_promotion = pn.id_promotion
+                                                    WHERE pu.id_produit = :id_produit");
+                            $stmt->execute([':id_produit' => $idProduit]);
+                            $promotion = $stmt->fetch(PDO::FETCH_ASSOC);
+                            $debutPromo = formatDate($promotion['date_debut_promotion']);
+                            $finPromo = null;
+                            if($promotion['date_fin_promotion'] !== null){
+                                $finPromo = formatDate($promotion['date_fin_promotion']);
+                            }
+                            $labelPromo = $promotion['label'];
+                            if($debutPromo <= date('Y-m-d') && ($finPromo == null || $finPromo >= date('Y-m-d')) && !empty($labelPromo)){
+                        ?>
+                        <div class="bg-rouge absolute w-36 md:w-74 underline text-beige pt-2 pb-1.5">
+                            <h4 class="text-center text-beige overline m-0"><?= htmlspecialchars($labelPromo); ?></h4>
+                        </div>
+                        <?php }} ?>
+                </div>
+            <?php } ?>
+        </div>
+        <?php $dbh = null;?>
 
         
         <!--fin du catalogue-->
