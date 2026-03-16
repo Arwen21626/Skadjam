@@ -124,7 +124,6 @@
         //Si le chiffre mis dans l'url dépasse le maximum de page, on remet au maximum
         if($pageNumber>$maxPage){
             $pageNumber = ceil($maxPage);
-            echo $pageNumber;
         }
 
         //découpe le catalogue en page de 24 produits
