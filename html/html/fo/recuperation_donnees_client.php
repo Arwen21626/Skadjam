@@ -371,7 +371,7 @@ if ($_SESSION["role"] === "client"){
                     <p class=" col-span-2">commentaire : <?php echo $donnees["contenu_avis_signaler"]?></p>
                 </div>
             <?php }
-            if ($aSignaler === true){?>
+            if ($aSignaler === false){?>
                 <p>Vous n'avez signalé aucun avis</p>
             <?php }?>
         </section>
