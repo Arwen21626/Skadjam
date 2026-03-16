@@ -23,6 +23,12 @@ if ($_SESSION['role'] == "visiteur") {
 // Récupération des futurs achats et du panier du client
 include __DIR__. '/../../php/requetesBDD/recup_FA.php';
 include __DIR__. '/../../php/requetesBDD/recup_panier.php';
+
+// Variable pour savoir s'il faut afficher une popup
+$addPanier = (isset($_GET['addPanier']) && $_GET['addPanier'] === "1");
+$removePanier = (isset($_GET['removePanier']) && $_GET['removePanier'] === "1");
+$addFA = (isset($_GET['addFA']) && $_GET['addFA'] === "1");
+$removeFA = (isset($_GET['removeFA']) && $_GET['removeFA'] === "1");
 ?>
 
 <!DOCTYPE html>
@@ -135,9 +141,17 @@ include __DIR__. '/../../php/requetesBDD/recup_panier.php';
                                     <?php 
                                     $bg = "bg-[url(/images/logo/bootstrap_icon/cart-vert-fonce.svg)]";
                                     $trouveP = false;
-
-                                    if (isset($_SESSION['panier']['contient'][$idProduit])){
-                                        $trouveP = true;
+                                    if ($_SESSION['role'] != 'client') {
+                                        if (isset($_SESSION['panier']['contient'][$idProduit])){
+                                            $trouveP = true;
+                                        }
+                                    }  
+                                    else{
+                                        foreach ($tabPanier as $id) {
+                                            if($id['id_produit'] == $idProduit){
+                                                $trouveP = true;
+                                            }
+                                        }
                                     }
 
                                     if ($trouveP != false) {
