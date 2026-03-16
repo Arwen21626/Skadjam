@@ -106,6 +106,8 @@ $lignes = array_slice($tabProd, $pageNumber*PAGE_SIZE-PAGE_SIZE, PAGE_SIZE);
 </head>
 <?php include __DIR__ . "/../../php/structure/head_front.php"; ?>
 
+<script src="/js/ruptureStock.js"></script>
+
 <body>
     <!--header-->
     <?php include __DIR__ . "/../../php/structure/header_front.php"; ?>
@@ -132,11 +134,19 @@ $lignes = array_slice($tabProd, $pageNumber*PAGE_SIZE-PAGE_SIZE, PAGE_SIZE);
                     <p class="hidden"><?php echo $valeurs['quantite_stock']; ?></p>
                     <!--affichage de la photo-->
                     <a href= "<?= 'html/fo/details_produit.php?idProduit='.$idProduit;?>" class="mb-3">
-                        <img src="<?= $valeurs['url_photo'];?>" 
-                                alt="<?= $valeurs['alt'];?>"
-                                title="<?= $valeurs['titre'];?>"
-                                class="w-auto h-40 md:h-80 block mx-auto">
-
+                        <div class="relative img">
+                            <!-- Image -->
+                            <img src="<?= $valeurs['url_photo'];?>" 
+                                    alt="<?= $valeurs['alt'];?>"
+                                    title="<?= $valeurs['titre'];?>"
+                                    class="w-auto h-40 md:h-80 block mx-auto">
+                            <!-- Rupture de stock ? -->
+                            <?php if ($valeurs['quantite_stock'] === "0") { ?>
+                                <script>
+                                    ruptureStock(<?php echo $idProduit ?>)
+                                </script>
+                            <?php } ?>
+                        </div>
                         <!--affichage du nom du produit-->
                         <p><?= $valeurs['libelle_produit'];?></p> 
 

@@ -41,7 +41,7 @@
                         pr.quantite_stock, pr.note_moyenne, pr.prix_remise, 
                         r.pourcentage_remise, pu.id_promotion,
                         pm.label, pm.date_debut_promotion, pm.date_fin_promotion,
-                        ph.url_photo, ph.alt, ph.titre         
+                        ph.url_photo, ph.alt, ph.titre   
                 FROM sae3_skadjam._produit pr
                 INNER JOIN sae3_skadjam._montre m
                     ON pr.id_produit=m.id_produit
@@ -89,7 +89,8 @@
         
         <script src="js/affichageListeProduits.js"></script>
         <script src="js/tris.js"></script>
-        <script src="js/affichageNote.js"></script> 
+        <script src="js/affichageNote.js"></script>
+        <script src="js/ruptureStock.js"></script>
     </head>    
 <?php include __DIR__ . "/php/structure/head_front.php"; ?>
 <body>
@@ -142,11 +143,20 @@
                     <p class="hidden"><?php echo $prod['quantite_stock']; ?></p>
                     <!--affichage de la photo-->
                     <a href= "<?= 'html/fo/details_produit.php?idProduit='.$idProduit;?>" class="mb-3">
-                        <img src="<?= $prod['url_photo'];?>" 
-                                alt="<?= $prod['alt'];?>"
-                                title="<?= $prod['titre'];?>"
-                                class="w-auto h-40 md:h-80 block mx-auto">
-
+                        <div class="relative img">
+                            <!-- Image -->
+                            <img src="<?= $prod['url_photo'];?>" 
+                                    alt="<?= $prod['alt'];?>"
+                                    title="<?= $prod['titre'];?>"
+                                    class="w-auto h-40 md:h-80 block mx-auto">
+                            <!-- Rupture de stock ? -->
+                            <?php if ($prod['quantite_stock'] === "0") { ?>
+                                <script>
+                                    ruptureStock(<?php echo $idProduit ?>)
+                                </script>
+                            <?php } ?>
+                        </div>
+                        
                         <!--affichage du nom du produit-->
                         <p><?= $prod['libelle_produit'];?></p> 
 
