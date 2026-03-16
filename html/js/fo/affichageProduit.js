@@ -26,13 +26,31 @@ function afficherProduit(tableau, tableauFA, tableauP, indice, role){
 
     parent = lien
 
+    //Conteneur rupture stock + Image
+    let contImg = document.createElement("div")
+    contImg.classList.add("img", "relative")
+    parent.appendChild(contImg)
+
     // Image
     let image = document.createElement("img")
     image.src = tableau[i]['url_photo']
     image.alt = tableau[i]['alt']
     image.title = tableau[i]['titre']
     image.classList.add("w-auto", "h-40", "md:h-80", "mx-auto", "block")
-    parent.appendChild(image)
+    contImg.appendChild(image)
+
+    //Rupture stock
+    if (tableau[i]['quantite_stock'] == 0) {
+        let divBandeau = document.createElement("div")
+        let texteBandeau = document.createElement("p")
+        texteBandeau.textContent = "Hors-stock"
+
+        divBandeau.classList.add("absolute", "inset-0", "flex", "items-center", "justify-center", "z-1")
+        texteBandeau.classList.add("bg-rouge", "shadow-lg","text-white", "px-6", "py-2", "w-full", "text-center")
+
+        divBandeau.appendChild(texteBandeau)
+        contImg.appendChild(divBandeau)
+    }
 
     // Nom produit
     let nom = document.createElement("p")
