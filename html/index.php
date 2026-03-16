@@ -35,7 +35,7 @@
     $removeFA = (isset($_GET['removeFA']) && $_GET['removeFA'] === "1");
 
     try {                
-        //récupère toutes les infos des tables produits, remise, photos, promotion, remise
+        //récupère toutes les infos des tables produits, remise, photos, promotion
         $tabProduit = null;
         $sql = "SELECT pr.libelle_produit, pr.id_produit, pr.prix_ttc, 
                         pr.quantite_stock, pr.note_moyenne, pr.prix_remise, 
@@ -198,12 +198,12 @@
                                 $finPromo = formatDate($prod['date_fin_promotion']);
                             }
                             $labelPromo = $prod['label'];
-                            if($debutPromo <= date('Y-m-d') && ($finPromo == null || $finPromo >= date('Y-m-d')) && !empty($labelPromo)){
-                        ?>
-                        <div class="bg-rouge absolute w-36 md:w-74 underline text-beige pt-2 pb-1.5">
-                            <h4 class="text-center text-beige overline m-0"><?= htmlspecialchars($labelPromo); ?></h4>
-                        </div>
-                        <?php }} ?>
+                            if($debutPromo <= date('Y-m-d') && ($finPromo == null || $finPromo >= date('Y-m-d')) && !empty($labelPromo)){?>
+                                <div class="bg-rouge absolute w-36 md:w-74 underline text-beige pt-2 pb-1.5">
+                                    <h4 class="text-center text-beige overline m-0"><?= htmlspecialchars($labelPromo); ?></h4>
+                                </div>
+                            <?php }
+                        } ?>
                 </div>
             <?php } ?>
         </div>
