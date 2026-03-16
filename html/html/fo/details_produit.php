@@ -241,6 +241,11 @@
                                     <h4 class=" col-span-2 md:col-span-3 justify-self-start">
                                         <?php echo $row['pseudo'];?>
                                     </h4>
+
+                                    <img src="../../images/logo/bootstrap_icon/" alt="">
+                                    <?php echo $row['nb_pouce_haut'] ?? 0; ?>
+                                    <img src="" alt="">
+                                    <?php echo $row['nb_pouce_bas'] ?? 0; ?>
                                     <?php echo affichageNote($row['nb_etoile']);
 
                                     // savoir si l'utilisateur à déjà signaler l'avis il ne faut pas qu'il puisse le resignaler
