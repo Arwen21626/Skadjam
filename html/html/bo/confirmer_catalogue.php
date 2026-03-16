@@ -42,6 +42,7 @@
         $pdf->SetTitle('Catalogue des produits');
         $i=0;
         $j=0;
+        $y=0;
         foreach($tabProduit as $id => $valeurs){
             $idProduit = $valeurs['id_produit'];
             $imgPath = "../.." . $valeurs['url_photo'];
@@ -50,7 +51,7 @@
                 if(file_exists($imgPath)){
                     $img = false;
 
-                    if ($ext === "webp") {
+                    if ($ext === "webp" && function_exists('imagecreatefromwebp')) {
                         $img = imagecreatefromwebp($imgPath);
                     }
                     elseif ($ext === "png") {
