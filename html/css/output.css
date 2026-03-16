@@ -1164,6 +1164,9 @@ input.quantite-prod-input {
   .gap-1 {
     gap: calc(var(--spacing, 0.25rem) * 1);
   }
+  .gap-2 {
+    gap: calc(var(--spacing, 0.25rem) * 2);
+  }
   .gap-3 {
     gap: calc(var(--spacing, 0.25rem) * 3);
   }
@@ -2299,6 +2302,11 @@ input.quantite-prod-input {
       height: calc(var(--spacing, 0.25rem) * 28);
     }
   }
+  .md\:h-6 {
+    @media (width >= 48rem) {
+      height: calc(var(--spacing, 0.25rem) * 6);
+    }
+  }
   .md\:h-7 {
     @media (width >= 48rem) {
       height: calc(var(--spacing, 0.25rem) * 7);
@@ -2392,6 +2400,11 @@ input.quantite-prod-input {
   .md\:w-5\/6 {
     @media (width >= 48rem) {
       width: calc(5/6 * 100%);
+    }
+  }
+  .md\:w-6 {
+    @media (width >= 48rem) {
+      width: calc(var(--spacing, 0.25rem) * 6);
     }
   }
   .md\:w-10 {
@@ -2602,6 +2615,11 @@ input.quantite-prod-input {
   .md\:gap-1 {
     @media (width >= 48rem) {
       gap: calc(var(--spacing, 0.25rem) * 1);
+    }
+  }
+  .md\:gap-4 {
+    @media (width >= 48rem) {
+      gap: calc(var(--spacing, 0.25rem) * 4);
     }
   }
   .md\:space-y-0 {
