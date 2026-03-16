@@ -64,6 +64,10 @@ include __DIR__. '/../../php/requetesBDD/recup_panier.php';
                                         ON pr.id_produit = pu.id_produit
                                     INNER JOIN sae3_skadjam._promotion pn
                                         ON pu.id_promotion = pn.id_promotion
+                                    left join sae3_skadjam._reduit rd
+                                        on rd.id_produit = pr.id_produit
+                                    left join sae3_skadjam._remise r
+                                        on r.id_remise = rd.id_remise
                                     WHERE pr.est_masque = false
                                     AND pr.est_supprime = false"
                                     , PDO::FETCH_ASSOC) as $row){
@@ -109,21 +113,8 @@ include __DIR__. '/../../php/requetesBDD/recup_panier.php';
 
                                 <!--affichage du prix du produit-->   
                                 <div class="flex flex-row justify-between items-center">
-                                    <?php
-                                    $remise = $valeurs['pourcentage_remise'] ?? null;
-                                    $prix_ttc = $valeurs['prix_ttc'] ?? '';
-                                    $prix_remise = $valeurs['prix_remise'] ?? '';
-                                    ?>
-
-                                    <p class="inline-block <?= $remise ? 'line-through' : '' ?>">
-                                        <?= htmlentities(str_replace(".", ",", $prix_ttc)); ?>€
-                                        (<abbr title="Toutes Taxes Comprises">TTC</abbr>)
-                                    </p>
-
-                                    <p class="pl-3 <?= $remise ? '' : 'hidden' ?>">
-                                        <?= htmlentities(str_replace(".", ",", $prix_remise)); ?>€
-                                        (<abbr title="Toutes Taxes Comprises">TTC</abbr>)
-                                    </p>
+                                    <p class="inline-block <?= ($valeurs['pourcentage_remise'] !== NULL)?'line-through':'';?>"> <?= htmlentities(str_replace(".", ",",$valeurs['prix_ttc'])); ?>€ (<abbr title="Toutes Taxes Comprises">TTC</abbr>)</p>
+                                    <p class=" pl-3 <?= ($valeurs['pourcentage_remise'] !== NULL)?'':'hidden';?>"> <?= htmlentities(str_replace(".", ",",$valeurs['prix_remise'])); ?>€ (<abbr title="Toutes Taxes Comprises">TTC</abbr>)</p>
                                 </div>
                                 <!--récupération de la note-->
                                 <div class="flex">
