@@ -8,6 +8,7 @@ require_once __DIR__ . "/../php/verif_role_fo.php";
 
 // Déclaration des variables
 $idProd = $_GET['idProduit'];
+$qte = $_GET['nbAddPanier'];
 $ajout = $_GET['ajout'];
 $tabFABDD = [];
 $idCompte = -1;
@@ -17,28 +18,28 @@ $ancre = "#$idProd";
 
 // Si le user vient de l'index
 if ($_GET['vientDe'] == "index") {
-    $vientDe = "/index.php".$ancre;
+    $vientDe = "/index.php";
 }
 // Si le user vient de nouveaux produits
 elseif ($_GET['vientDe'] == "nP") {
-    $vientDe = "/html/fo/nouveaux_produits.php".$ancre;
+    $vientDe = "/html/fo/nouveaux_produits.php";
 }
 // Si le user vient de recherche
 elseif ($_GET['vientDe'] == "recherche") {
-    $vientDe = "/html/fo/recherche.php".$ancre;
+    $vientDe = "/html/fo/recherche.php";
 }
 // Si le user vient de futurs achats
 elseif ($_GET['vientDe'] == "fa") {
-    $vientDe = "/html/fo/futurs_achats.php".$ancre;
+    $vientDe = "/html/fo/futurs_achats.php";
 }
 // Si le user vient de promotions
 elseif ($_GET['vientDe'] == "promo") {
-    $vientDe = "/html/fo/promotion.php".$ancre;
+    $vientDe = "/html/fo/promotion.php";
 }
 
 // Si le user vient des plus vendus
 elseif ($_GET['vientDe'] == "pV") {
-    $vientDe = "/html/fo/les_plus_vendus.php".$ancre;
+    $vientDe = "/html/fo/les_plus_vendus.php";
 }
 
 $chemin = '';
@@ -50,12 +51,14 @@ if ($ajout == "fa") {
         // Si le produit n'est pas déjà présent on l'ajoute
         if ($trouve == false) {
             $_SESSION['futurAchat'][$idProd] = $idProd;
+            $chemin = $vientDe."?addFA=1".$ancre;
         }
         // Sinon on le retire
         else {
             unset($_SESSION['futurAchat'][$trouve]);
+            $chemin = $vientDe."?removeFA=1".$ancre;
         }
-        $chemin = $vientDe;
+        
     }
     elseif ($_SESSION['role'] == "client") {
         $idCompte = $_SESSION['idCompte'];
@@ -70,18 +73,37 @@ if ($ajout == "fa") {
         if ($trouve == false) {
             $insertFA = $dbh->prepare("INSERT INTO sae3_skadjam._futur_achat(id_produit, id_client) VALUES (?,?)");
             $insertFA->execute([$idProd, $idCompte]);
+            $chemin = $vientDe."?addFA=1".$ancre;
         }
         // Sinon on le retire
         else{
             $dbh->query("DELETE FROM sae3_skadjam._futur_achat WHERE id_produit = $idProd AND id_client = $idCompte");
+            $chemin = $vientDe."?removeFA=1".$ancre;
         }
-        $chemin = $vientDe;
     }
-    header("location:".$chemin);
+    header("location:".$chemin); 
     
 }
 elseif ($ajout == "panier") {
-    echo "Alède";
+    if ($_SESSION['role'] == "visiteur") {
+        if (!isset($_SESSION['panier']['contient'][$idProd])) {
+            // Ajouter le produit
+            $_SESSION['panier']['contient'][$idProd] = [
+                'id' => $idProd,
+                'quantite_par_produit' => $qte
+            ];
+            $chemin = $vientDe."?addPanier=1".$ancre;
+        } else {
+            // Retirer le produit
+            unset($_SESSION['panier']['contient'][$idProd]);
+            $chemin = $vientDe."?removePanier=1".$ancre;
+        }
+    }
+    elseif ($_SESSION['role'] == "client") {
+        
+    }
+    header("location:".$chemin);
 }
+
 ?>
 

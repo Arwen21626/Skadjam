@@ -96,7 +96,7 @@
         <h2>Mes Statistiques</h2>
 
         <?php if($dataStats){?> 
-            <div class="flex flex-row justify-around mb-16">
+            <div class="flex flex-row sticky top-[84px] justify-around mb-16 bg-white pt-4 pb-4 border-b z-10">
                 <div class="flex flex-row">
                     <p class="pr-2">Choisissez une année :</p>
                     <select name="" id="select-annee" class="pl-2 cursor-pointer">
@@ -153,14 +153,13 @@
                 </div>
             </div>
 
-            <div id="graphique-produit" class="mt-4">
+            <div id="graphique-produit" class="mt-8">
                 <div class="ml-4">
-                    <div class="mb-2">
-                        <h3>Total des ventes du produit sélectionné :</h3>
+                    <div class="ml-8 mb-8">
+                        <h3>Statistiques des produits :</h3>
                     </div>
 
                     <div class="flex flex-col mt-2">
-                        <p class="pr-2 mb-8">Choisissez un produit :</p>
 
                         <div id="prod-container" class="flex justify-around flex-row flex-wrap gap-4">
                             <?php 
@@ -172,10 +171,16 @@
 
                                 foreach ($cles as $prod) {
                                         ?>
-                                            <div id="<?php echo $prod["id_produit"];?>" class="bg-bleu pb-4">
-                                                <img src="<?php echo $prod["url_photo"]; ?>" alt="<?php echo $prod["alt"]; ?>" title="<?php echo $prod["titre"]; ?>"
-                                                class="w-64 p-4">
-                                                <p class="text-center"><?php echo $prod["libelle_produit"]; ?></p>
+                                            <!-- Div représentant une carte produit -->
+                                            <div id="<?php echo $prod["id_produit"]; ?>" class="produit bg-bleu flex flex-col w-80 h-auto p-3 m-2 cursor-pointer">
+                                                <!--affichage de la photo-->
+                                                <img class="w-auto h-40 md:h-80 mx-auto block" 
+                                                    src="<?php echo $prod['url_photo'];?>" 
+                                                    alt="<?php echo $prod['alt'];?>"
+                                                    title="<?php echo $prod['titre'];?>">
+                                                        
+                                                <!--affichage du nom du produit-->
+                                                <p class="text-center mt-8 mb-4 max-w-70"><?php echo $prod['libelle_produit'];?></p>
                                             </div>
                                         <?php
                                 }
@@ -184,8 +189,9 @@
                     </div>
                 </div>
 
+                <div id="overlay-chart" class="hidden fixed inset-0 bg-black/50 backdrop-blur-sm z-40"></div>
 
-                <div id="container-prod-chart" class="hidden chart-container justify-center items-center flex-col p-2 m-12">
+                <div id="container-prod-chart" class="hidden fixed bg-white top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 chart-container justify-center items-center flex-col p-2 m-12 z-50">
                     <div id="div-prod-chart" class="chart flex justify-center items-center relative m-4 w-[60vw] h-[50vh]">
                         <canvas id="prod-chart"></canvas>
                     </div>

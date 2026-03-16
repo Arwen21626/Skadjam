@@ -1,7 +1,6 @@
 <script>
     // Eventlisteners sur les cookies de session
     let tabFA = <?php echo json_encode($tabFA); ?>;
-    console.log(tabFA)
 
     // Demande au navigateur s'il supporte l'api
     if ('cookieStore' in window) {
@@ -12,13 +11,11 @@
 
     cookieStore.addEventListener("change", async (event) => {
 
-    const cookie = await cookieStore.get("tabFA");
+        const cookieFA = await cookieStore.get("tabFA");
 
-    if (cookie) {
-        tabFA = JSON.parse(cookie.value);
-        console.log("tabFA mis à jour :", tabFA);
-    }
-
-});
+        if (cookieFA) {
+            tabFA = JSON.parse(cookie.value);
+        }
+    });
     
 </script>

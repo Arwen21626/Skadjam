@@ -114,9 +114,11 @@
         exit;
     }else{ 
         if(empty($_POST)){
-        header("Location: catalogue.php");
-        exit();
-    } ?>
+            header("Location: catalogue.php");
+            exit();
+        } 
+    }?>
+    
 <!DOCTYPE html>
 <html lang="fr">
 <?php include(__DIR__ . "/../../php/structure/head_back.php");?>
@@ -211,8 +213,8 @@
         for(let i = 1; i < lignesTab.length; i++){
             seuil = lignesTab[i].children[4].children[1].textContent;
 
+        }
 
+    </script>
 </body>
 </html>
-
-<?php } ?>
