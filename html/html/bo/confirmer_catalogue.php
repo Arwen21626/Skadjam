@@ -57,6 +57,8 @@
                         $img = imagecreatefrompng($imgPath);
                     }elseif($ext==="jpg" || $ext==="jpeg"){
                         $img = imagecreatefromjpeg($imgPath);
+                    }else{
+                        $img = @imagecreatefromstring(file_get_contents($imgPath));
                     }
 
                     if($img !== false){ // Charger avec les images
