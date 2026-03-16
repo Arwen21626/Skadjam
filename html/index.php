@@ -39,10 +39,9 @@
         $tabProduit = null;
         $sql = "SELECT pr.libelle_produit, pr.id_produit, pr.prix_ttc, 
                         pr.quantite_stock, pr.note_moyenne, pr.prix_remise, 
-                        pr.id_categorie, pr.description_produit,
                         r.pourcentage_remise, pu.id_promotion,
                         pm.label, pm.date_debut_promotion, pm.date_fin_promotion,
-                        ph.id_photo, ph.url_photo, ph.alt, ph.titre,         
+                        ph.url_photo, ph.alt, ph.titre         
                 FROM sae3_skadjam._produit pr
                 INNER JOIN sae3_skadjam._montre m
                     ON pr.id_produit=m.id_produit
