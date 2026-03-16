@@ -49,25 +49,23 @@
             $ext = strtolower(pathinfo($imgPath, PATHINFO_EXTENSION));
             if(isset($_POST[$idProduit]) && $_POST[$idProduit] == "on"){
                 if(file_exists($imgPath)){
-                    $img = true;
+                    $img = false;
 
-                    if ($ext === "webp" && function_exists('imagecreatefromwebp')) {
+                    if($ext==="webp" && function_exists('imagecreatefromwebp')){
                         $img = imagecreatefromwebp($imgPath);
-                    }
-                    elseif ($ext === "png") {
+                    }elseif($ext==="png"){
                         $img = imagecreatefrompng($imgPath);
-                    }
-                    elseif ($ext === "jpg" || $ext === "jpeg") {
+                    }elseif($ext==="jpg" || $ext==="jpeg"){
                         $img = imagecreatefromjpeg($imgPath);
                     }
 
-                    if($img !== false){
+                    if($img !== false){ // Charger avec les images
                         if($i===0){
-                            //$tmp = tempnam(sys_get_temp_dir(), 'img') . '.png';
-                            //imagepng($img, $tmp);
+                            $tmp = tempnam(sys_get_temp_dir(), 'img') . '.png';
+                            imagepng($img, $tmp);
 
                             $y = $pdf->GetY();
-                            //$pdf->Image($tmp, 5, $y, 0, 20);
+                            $pdf->Image($tmp, 5, $y, 0, 20);
 
                             $pdf->SetXY(35, $y);
 
@@ -80,10 +78,10 @@
 
                             $i=1;
                         }else{
-                            //$tmp = tempnam(sys_get_temp_dir(), 'img') . '.png';
-                            //imagepng($img, $tmp);
+                            $tmp = tempnam(sys_get_temp_dir(), 'img') . '.png';
+                            imagepng($img, $tmp);
 
-                            //$pdf->Image($tmp, 110, $y, 0, 20);
+                            $pdf->Image($tmp, 110, $y, 0, 20);
 
                             $pdf->SetXY(140, $y);
 
@@ -103,10 +101,41 @@
                             $pdf->AddPage();
                             $j=0;
                         }
-                    } else {
-                        error_log("Impossible de charger l'image : $imgPath");
+                    }else{ // Charger sans les images
+                        if($i===0){
+                            $y = $pdf->GetY();
+
+                            $pdf->SetXY(35, $y);
+
+                            $titre = iconv('UTF-8', 'ISO-8859-1//TRANSLIT', $valeurs['titre']);
+                            $pdf->MultiCell(65, 10, $titre, 0, 1);
+
+                            $pdf->SetX(35);
+                            $prix = iconv('UTF-8', 'Windows-1252', $valeurs['prix_ttc'] . " €");
+                            $pdf->MultiCell(65, 10, $prix, 0, 0);
+
+                            $i=1;
+                        }else{
+                            $pdf->SetXY(140, $y);
+
+                            $titre = iconv('UTF-8', 'ISO-8859-1//TRANSLIT', $valeurs['titre']);
+                            $pdf->MultiCell(65, 10, $titre, 0, 1);
+
+                            $pdf->SetX(140);
+                            $prix = iconv('UTF-8', 'Windows-1252', $valeurs['prix_ttc'] . " €");
+                            $pdf->MultiCell(65, 10, $prix, 0, 0);
+
+                            $pdf->Ln(10);
+
+                            $i=0;
+                        }
+                        $j++;
+                        if($j===18){
+                            $pdf->AddPage();
+                            $j=0;
+                        }
                     }
-                } else {
+                }else{
                     error_log("Fichier image inexistant : $imgPath");
                 }
             }
