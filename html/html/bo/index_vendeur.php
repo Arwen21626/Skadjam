@@ -75,6 +75,7 @@
     <!-- Récupérer l'id du dernier produit créé -->
     <?php $dernierAjout = $dbh->query("SELECT id_produit FROM sae3_skadjam._produit WHERE id_vendeur = $idCompte AND est_supprime = false ORDER BY date_creation DESC LIMIT 1")->fetch(PDO::FETCH_ASSOC); ?>
     <main class="p-8">
+        <!---les 4 images--->
         <div class="grid grid-cols-2 gap-4 justify-items-center">
             <a href="../bo/promotion_vendeur.php" title="lien vers page promotion" alt="promotion">
                 <img src="../../images/images_accueil/promotion.webp" title="lien vers page promotion" alt="Vos produits en promotion" class="w-150 h-auto justify-self-end">
@@ -90,6 +91,7 @@
             </a>        
         </div>
 
+        <!---ligne de boutons--->
         <div class="mt-15 flex flex-row justify-around">
             <a href="creation_produit.php"><button class="border-2 border-vertFonce rounded-2xl w-auto h-14 px-7 cursor-pointer">Créer un produit</button></a>
             <a href="details_remises.php"><button class="border-2 border-vertFonce rounded-2xl w-auto h-14 px-7 cursor-pointer">Consulter les remises</button></a>
@@ -173,14 +175,17 @@
             
         <!--navigation page précédente/suivante de l'index-->
         <div class="flex flex-row space-x-4 justify-center m-4">
+            <!---chevron page précédente--->
             <?php if ($pageNumber>1){?>
             <a class= "lienPage underline" href="<?php echo "./index_vendeur.php?page=".($pageNumber-1)."#vosProduits";?>">
                 <img class="w-7" src="../../images/logo/bootstrap_icon/chevron-left.svg" alt="page précédente">
             </a>           
             <?php }?>
 
+            <!---numéro page actuelle--->
             <p>page <?php echo $pageNumber;?></p>
 
+            <!---chevron page suivante--->
             <?php if ($pageNumber<$maxPage){?>
             <a class= "lienPage underline" href="<?php echo "./index_vendeur.php?page=".($pageNumber+1)."#vosProduits";?>">
                 <img class="w-7" src="../../images/logo/bootstrap_icon/chevron-right.svg" alt="page suivante">
