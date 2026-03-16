@@ -335,7 +335,9 @@ if ($_SESSION["role"] === "client"){
         <section class=" mb-5">
             <h3 class="text-center m-2">Vos avis postés</h3>
             <?php 
-            foreach($donneesAvisPostes as $donnees){?>
+            $aPoster = false;
+            foreach($donneesAvisPostes as $donnees){
+                $aPoster = true;?>
                 <div class=" md:grid grid-cols-4 mb-5 gap-3">
                     <div class=" col-span-4 md:text-center md:grid grid-cols-2">
                         <h4 class=" ml-10 m-2 font-bold col-span-2">Sur le produit : <?php echo $donnees["libelle_produit"]?></h4>
@@ -355,7 +357,10 @@ if ($_SESSION["role"] === "client"){
                         <p>description de la photo : <?php echo $donnees["description_photo_avis"]?></p>
                     <?php }?>
                 </div>
-            <?php }?>
+            <?php }
+            if ($aPoster === false){?>
+                <p>Vous n'avez signalé aucun avis</p>
+            <?php }?>?>
         </section>
         <!-- avis signaler par le client -->
         <section class=" mb-5">
