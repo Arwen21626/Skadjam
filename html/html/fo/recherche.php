@@ -32,6 +32,15 @@
     foreach ($dbh->query("SELECT id_compte, raison_sociale FROM sae3_skadjam._vendeur", PDO::FETCH_ASSOC) as $vendeur) {
         $tabVendeur[] = $vendeur;
     }
+    // Récupération du role pour le panier sur la page recherche
+    $role = '';
+    $role = $_SESSION['role'];
+
+    // Variable pour savoir s'il faut afficher une popup
+    $addPanier = (isset($_GET['addPanier']) && $_GET['addPanier'] === "1");
+    $removePanier = (isset($_GET['removePanier']) && $_GET['removePanier'] === "1");
+    $addFA = (isset($_GET['addFA']) && $_GET['addFA'] === "1");
+    $removeFA = (isset($_GET['removeFA']) && $_GET['removeFA'] === "1");
 ?>
 
 <!DOCTYPE html>
@@ -50,6 +59,7 @@
     <script>
         const tabProd = <?php echo json_encode($tabProduit);?>;
         const tabVendeur = <?php echo json_encode($tabVendeur);?>;
+        let role = <?php echo json_encode($role);?>;
     </script>
     
     <script src="../../js/recherche.js"></script>
@@ -70,6 +80,38 @@
     <!--header-->
     <?php include __DIR__ . "/../../php/structure/header_front.php"; ?>
     <?php include __DIR__ . "/../../php/structure/navbar_front.php"; ?>
+
+    <!-- Box question nb prod a mettre au panier -->
+        <div id="fondNbAddPanier" class="hidden fixed inset-0 bg-black/50 backdrop-blur-sm z-40"></div>
+
+        <div id="contNbAddPanier" class="hidden fixed bg-white top-1/2 left-1/5 justify-center items-center flex-col p-4 z-50 w-3/5 md:top-2/5 md:w-2/5 md:left-3/10 h-45">
+            <form action="/php/traitementFAPanier.php" method="get" id="formNbAddPanier" class="flex flex-col items-center w-full h-full space-y-4">
+                <label id="validAjout" class="hidden" for="nbAddPanier">Combien voulez-vous en ajouter au panier ?</label>
+                <p id="valideRetrait" class="hidden">Etes-vous sur de vouloir retirer ce produit de votre panier ?</p>
+                <input placeholder="5" class="hidden pl-3 border-4 border-beige rounded-2xl w-20 m-2 placeholder-gray-500" type="number" name="nbAddPanier" id="nbAddPanier" min="1">
+                <input type="hidden" name="ajout" value="panier">
+                <input type="hidden" name="vientDe" value="recherche">
+                <div class="flex flex-row justify-around w-full">
+                    <p id="btnRetour" class="flex items-center justify-center border-2 border-vertClair rounded-2xl w-25 h-12 cursor-pointer">Retour</p>
+                    <input class="border-2 border-vertClair rounded-2xl w-25 h-12 cursor-pointer" type="submit" value="Valider">
+                </div>
+            </form>
+        </div>
+    <script>
+        //Récup de la fenetre a affiché
+        let contNbAddPanier = document.getElementById("contNbAddPanier")
+        let fondNbAddPanier = document.getElementById("fondNbAddPanier")
+        let formNbAddPanier = document.getElementById("formNbAddPanier")
+        let input = document.createElement("input")
+
+        input.type = "hidden"
+        let btnOK = ''
+
+        // Affichage dans la fenetre
+        let p = document.getElementById("valideRetrait")
+        let label = document.getElementById("validAjout")
+        let inputNb = document.getElementById("nbAddPanier")
+    </script>
 
     <main class="md:min-h-[900px] min-h-[600px]" id="produits">
 
@@ -280,7 +322,7 @@
             <div id="prod" class="flex flex-row flex-wrap justify-around w-auto">
                 <script>
                     document.addEventListener("DOMContentLoaded", () => {
-                        afficherListe(tabProd, tabFA)
+                        afficherListe(tabProd, tabFA, tabPanier, role)
                     });
                 </script>
             </div>
@@ -299,12 +341,58 @@
             ajoutEventListener()
             var map =  L.map('map').setView([48, -3], 7)
         </script>
+
+        <!-- Liste des popup de la page -->
+        <div id="popup-overlay" class="right-12 md:right-40">
+            <?php if($addPanier){ ?>
+            <!---popup ajout d'un produit dans le panier--->
+            <div id="popup-ajouter-panier" class="popup p-4 border-vertFonce shadow-xl">
+                <p>Le produit a bien été ajouté à votre panier !</p>
+                <div class="flex justify-around mt-2">
+                    <button class="pl-2 pr-2 border-2 border-vertClair rounded-sm cursor-pointer">OK</button>
+                    <a href="/html/fo/panier.php" class="a-button pl-2 pr-2 border-2 border-vertClair rounded-sm cursor-pointer">Voir le panier</a>
+                </div>
+            </div>
+            <?php } ?>
+
+            <?php if($removePanier){ ?>
+            <!---popup retrait d'un produit du panier--->
+            <div id="popup-retirer-panier" class="popup p-4 border-vertFonce shadow-xl">
+                <p>Le produit a bien été retiré de votre panier !</p>
+                <div class="flex justify-around mt-2">
+                    <button class="pl-2 pr-2 border-2 border-vertClair rounded-sm cursor-pointer">OK</button>
+                    <a href="/html/fo/panier.php" class="a-button pl-2 pr-2 border-2 border-vertClair rounded-sm cursor-pointer">Voir le panier</a>
+                </div>
+            </div>
+            <?php } ?>
+
+            <?php if($addFA){ ?>
+            <!---popup ajout d'un produit aux futurs achats--->
+            <div id="popup-ajouter-fa" class="popup p-4 border-vertFonce shadow-xl">
+                <p>Le produit a bien été ajouté à vos futurs achats !</p>
+                <div class="flex justify-center mt-2">
+                    <button class="pl-2 pr-2 border-2 border-vertClair rounded-sm cursor-pointer">OK</button>
+                </div>
+            </div>
+            <?php } ?>
+
+            <?php if($removeFA){ ?>
+            <!---popup retrait d'un produit aux futurs achats--->
+            <div id="popup-retirer-fa" class="popup p-4 border-vertFonce shadow-xl">
+                <p>Le produit a bien été retiré de vos futurs achats !</p>
+                <div class="flex justify-center mt-2">
+                    <button class="pl-2 pr-2 border-2 border-vertClair rounded-sm cursor-pointer">OK</button>
+                </div>
+            </div>
+            <?php } ?>
+
+        </div>
         <script src="../../js/pointeur.js"></script>
         <script src="../../js/fo/map.js"></script>
+        <script type="module" src="../../js/fo/popupRecherchePanier.js"></script>
     </main>
 
     <!--footer-->
     <?php include __DIR__ . "/../../php/structure/footer_front.php"; ?>
-    
 </body>
 </html>

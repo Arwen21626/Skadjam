@@ -1,7 +1,7 @@
 <?php 
     session_start();
-    require_once(__DIR__ . '/../../php/verif_role_bo.php');
-    require_once(__DIR__ . '/../../01_premiere_connexion.php');
+    require_once __DIR__ . '/../../php/verif_role_bo.php';
+    require_once __DIR__ . '/../../01_premiere_connexion.php';
     require_once __DIR__ . "/../../php/fonctions.php";
     require_once __DIR__ . "/../../php/modification_variable.php";
     const PAGE_SIZE = 24;
@@ -120,7 +120,6 @@
             //Si le chiffre mis dans l'url dépasse le maximum de page, on remet au maximum
             if($pageNumber>$maxPage){
                 $pageNumber = ceil($maxPage);
-                echo $pageNumber;
             }
 
             $lignes = array_slice($tabProduit, $pageNumber*PAGE_SIZE-PAGE_SIZE, PAGE_SIZE); 

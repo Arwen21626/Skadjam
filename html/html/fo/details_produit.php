@@ -5,6 +5,7 @@
     require(__DIR__ . "/../../php/fonctions.php");
 
     $idProd = $_GET["idProduit"];
+    $idCompte = $_SESSION['idCompte'] ?? 0;
     $avisAjoute = (isset($_GET['avisAjouter']) && $_GET['avisAjouter'] === "1");
     $avisSupprime = (isset($_GET['avisSupprimer']) && $_GET['avisSupprimer'] === "1");
     $panierAjoute = (isset($_GET['panierAjouter']) && $_GET['panierAjouter'] === "1");
@@ -221,7 +222,12 @@
                 <?php 
                 // tableau contenant tous les avis
                 $avis = [];
-                foreach($dbh->query("SELECT * FROM sae3_skadjam._avis a 
+                foreach($dbh->query("SELECT a.*, c.pseudo,
+                                        (SELECT pouce 
+                                        FROM sae3_skadjam._pouces p 
+                                        WHERE p.id_avis=a.id_avis 
+                                            AND p.id_compte=$idCompte) AS pouce_utilisateur
+                                    FROM sae3_skadjam._avis a 
                                     INNER JOIN sae3_skadjam._client c 
                                         ON a.id_compte = c.id_compte 
                                     WHERE id_produit = $idProd", PDO::FETCH_ASSOC) as $row){
@@ -250,18 +256,44 @@
                             ?>
                             <section class=" bg-bleu m-4 p-4 md:w-4xl w-100 <?php echo $aReponse?'mb-0 rounded-t-2xl':'rounded-2xl'?>">
 
-                                <div class="grid grid-cols-4 md:grid-cols-5 justify-items-end">
-                                    <h4 class=" col-span-2 md:col-span-3 justify-self-start">
+                                <!---pseudonyme--->
+                                <div class="flex justify-between items-center py-2">
+                                    <h4>
                                         <?php echo $row['pseudo'];?>
                                     </h4>
 
-                                    <img src="../../images/logo/bootstrap_icon/" alt="">
-                                    <?php echo $row['nb_pouce_haut'] ?? 0; ?>
-                                    <img src="" alt="">
-                                    <?php echo $row['nb_pouce_bas'] ?? 0; ?>
-                                    <?php echo affichageNote($row['nb_etoile']);
+                                    <div class="flex items-center gap-4">
+                                        <!---note de l'avis--->
+                                        <?php echo affichageNote($row['nb_etoile']);?>
 
-                                    // savoir si l'utilisateur à déjà signaler l'avis il ne faut pas qu'il puisse le resignaler
+                                        <div class="flex items-center gap-1">
+                                            <!---pouce haut--->
+                                            <span id="like-count-<?= $row['id_avis'] ?>">
+                                                <?= $row['nb_pouce_haut'] ?>
+                                            </span>
+                                            <img class="vote-btn like w-6 h-6 cursor-pointer hover:scale-110 transition" 
+                                                    src="<?= ($row['pouce_utilisateur'] === 1) ? '../../images/logo/bootstrap_icon/hand-thumbs-up-fill.svg' : '../../images/logo/bootstrap_icon/hand-thumbs-up.svg' ?>"
+                                                    alt="icône pouce vers le haut si vous avez aimé l'avis" 
+                                                    title="J'aime cet avis"
+                                                    data-id="<?= $row['id_avis'] ?>"
+                                                    data-type="1">
+                                        </div>
+                                    
+                                        <!---pouce bas--->
+                                        <div class="flex items-center gap-1">
+                                            <span id="dislike-count-<?= $row['id_avis'] ?>">
+                                                <?= $row['nb_pouce_bas'] ?>
+                                            </span>
+                                            <img class="vote-btn dislike w-6 h-6 cursor-pointer hover:scale-110 transition" 
+                                                    src="<?= ($row['pouce_utilisateur'] === -1) ? '../../images/logo/bootstrap_icon/hand-thumbs-down-fill.svg' : '../../images/logo/bootstrap_icon/hand-thumbs-down.svg' ?>"
+                                                    alt="icône pouce vers le bas si vous n'avez pas aimé l'avis" 
+                                                    title="Je n'aime pas cet avis"
+                                                    data-id="<?= $row['id_avis'] ?>"
+                                                    data-type="-1">
+                                        </div>
+                                    </div>
+
+                                    <?php // savoir si l'utilisateur à déjà signaler l'avis il ne faut pas qu'il puisse le resignaler
                                     $aSignaler = false;
                                     //pour le visiteur
                                     if ($_SESSION['role'] === 'visiteur'){
@@ -407,6 +439,48 @@
 
         Popup.showPopUp("popup-supprimer-avis", 5000, "avisSupprimer");
     }
+
+    //Affichage du compte de pouces haut(s)/bas
+    document.querySelectorAll(".vote-btn").forEach(button => {
+    button.addEventListener("click", () => {
+        const avisId = button.dataset.id;
+        const voteType = parseInt(button.dataset.type);
+
+        fetch("/php/vote_pouce.php", {
+            method: "POST",
+            headers: { "Content-Type": "application/x-www-form-urlencoded" },
+            body: "id=" + avisId + "&type=" + voteType
+        })
+        .then(res => res.json())
+        .then(data => {
+
+            if(data.error){
+                console.error(data.error);
+                return;
+            }
+
+            const likeCount = document.getElementById("like-count-" + avisId);
+            const dislikeCount = document.getElementById("dislike-count-" + avisId);
+            likeCount.textContent = data.likes;
+            dislikeCount.textContent = data.dislikes;
+
+            const likeBtn = document.querySelector(`.vote-btn.like[data-id='${avisId}']`);
+            const dislikeBtn = document.querySelector(`.vote-btn.dislike[data-id='${avisId}']`);
+
+            // Reset les images
+            likeBtn.src = "../../images/logo/bootstrap_icon/hand-thumbs-up.svg";
+            dislikeBtn.src = "../../images/logo/bootstrap_icon/hand-thumbs-down.svg";
+
+            // Activer le pouce correspondant seulement si l’utilisateur a voté
+            if(data.pouce_utilisateur === 1){
+                likeBtn.src = "../../images/logo/bootstrap_icon/hand-thumbs-up-fill.svg";
+            } else if(data.pouce_utilisateur === -1){
+                dislikeBtn.src = "../../images/logo/bootstrap_icon/hand-thumbs-down-fill.svg";
+            }
+        })
+        .catch(err => console.error(err));
+    });
+});
 
 
 </script>

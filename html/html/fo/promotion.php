@@ -19,6 +19,12 @@
 // Récupération des futurs achats et du panier du client
 include __DIR__. '/../../php/requetesBDD/recup_FA.php';
 include __DIR__. '/../../php/requetesBDD/recup_panier.php';
+
+// Variable pour savoir s'il faut afficher une popup
+$addPanier = (isset($_GET['addPanier']) && $_GET['addPanier'] === "1");
+$removePanier = (isset($_GET['removePanier']) && $_GET['removePanier'] === "1");
+$addFA = (isset($_GET['addFA']) && $_GET['addFA'] === "1");
+$removeFA = (isset($_GET['removeFA']) && $_GET['removeFA'] === "1");
 ?>
 
 <!DOCTYPE html>
@@ -27,13 +33,27 @@ include __DIR__. '/../../php/requetesBDD/recup_panier.php';
 <head> 
     <title>Promotions</title>
 </head>
-
-
-
 <body>
     <!--header-->
     <?php include __DIR__ . "/../../php/structure/header_front.php"; ?>
     <?php include __DIR__ . "/../../php/structure/navbar_front.php"; ?>
+
+    <!-- Box question nb prod a mettre au panier -->
+    <div id="fondNbAddPanier" class="hidden fixed inset-0 bg-black/50 backdrop-blur-sm z-40"></div>
+
+    <div id="contNbAddPanier" class="hidden fixed bg-white top-1/2 left-1/5 justify-center items-center flex-col p-4 z-50 w-3/5 md:top-2/5 md:w-2/5 md:left-3/10 h-45">
+        <form action="/php/traitementFAPanier.php" method="get" id="formNbAddPanier" class="flex flex-col items-center w-full h-full space-y-4">
+            <label id="validAjout" class="hidden" for="nbAddPanier">Combien voulez-vous en ajouter au panier ?</label>
+            <p id="valideRetrait" class="hidden">Etes-vous sur de vouloir retirer ce produit de votre panier ?</p>
+            <input placeholder="5" class="hidden pl-3 border-4 border-beige rounded-2xl w-20 m-2 placeholder-gray-500" type="number" name="nbAddPanier" id="nbAddPanier" min="0">
+            <input type="hidden" name="ajout" value="panier">
+            <input type="hidden" name="vientDe" value="promo">
+            <div class="flex flex-row justify-around w-full">
+                <p id="btnRetour" class="flex items-center justify-center border-2 border-vertClair rounded-2xl w-25 h-12 cursor-pointer">Retour</p>
+                <input class="border-2 border-vertClair rounded-2xl w-25 h-12 cursor-pointer" type="submit" value="Valider">
+            </div>
+        </form>
+    </div>
 
     <main class="min-h-[600px] p-8">
         <!--Début du catalogue-->
@@ -52,7 +72,7 @@ include __DIR__. '/../../php/requetesBDD/recup_panier.php';
 
             try {                
                 //récupère toutes les infos des tables produits et photos
-                foreach($dbh->query("SELECT *
+                foreach($dbh->query("SELECT pr.id_produit, pr.libelle_produit, pr.prix_ttc, ph.url_photo, ph.alt, ph.titre, pn.date_debut_promotion, pn.date_fin_promotion, r.pourcentage_remise, pr.prix_remise, pr.note_moyenne, pn.label
                                     FROM sae3_skadjam._produit pr
                                     INNER join sae3_skadjam._montre m
                                         ON pr.id_produit=m.id_produit
@@ -64,6 +84,10 @@ include __DIR__. '/../../php/requetesBDD/recup_panier.php';
                                         ON pr.id_produit = pu.id_produit
                                     INNER JOIN sae3_skadjam._promotion pn
                                         ON pu.id_promotion = pn.id_promotion
+                                    left join sae3_skadjam._reduit rd
+                                        on rd.id_produit = pr.id_produit
+                                    left join sae3_skadjam._remise r
+                                        on r.id_remise = rd.id_remise
                                     WHERE pr.est_masque = false
                                     AND pr.est_supprime = false"
                                     , PDO::FETCH_ASSOC) as $row){
@@ -73,20 +97,20 @@ include __DIR__. '/../../php/requetesBDD/recup_panier.php';
                         $finPromo = formatDate($row['date_fin_promotion']);
                     }
                     // La promotion est-elle terminée ou commence-t-elle ?
-                    if($row['date_debut_promotion'] <= date('Y-m-d') && ($row['date_fin_promotion'] == null || $row['date_fin_promotion'] >= date('Y-m-d'))){
+                    if(formatDate($row['date_debut_promotion']) <= date('Y-m-d') && ($row['date_fin_promotion'] == null || $row['date_fin_promotion'] >= date('Y-m-d'))){
                         $tabProduit[] = $row;
                     }
                 }
 
-                if($tabProduit == null){ ?>
+                if(empty($tabProduit)){ ?>
                     <p class="text-center mb-9">Nous n'avons pas de produits en promotion pour le moment.</p>
                 <?php }
                 
                 $maxPage = sizeof($tabProduit)/PAGE_SIZE;
                 //découpe le catalogue en page de 15 produits
-                $lignes = array_slice($tabProduit, $pageNumber*PAGE_SIZE-PAGE_SIZE, PAGE_SIZE);
+                $lignes = array_slice($tabProduit, $pageNumber*PAGE_SIZE-PAGE_SIZE, PAGE_SIZE);?>
                 
-                //affiche la photo du produit, son nom, son prix et sa note, son stock ?>
+                <!-- Liste des cartes produits -->
                 <div class="flex flex-row flex-wrap justify-around">
                     <?php foreach($lignes as $id => $valeurs){
                         $idProduit = $valeurs['id_produit'];
@@ -96,9 +120,11 @@ include __DIR__. '/../../php/requetesBDD/recup_panier.php';
                                             WHERE id_produit = :id_produit");
                         $stmt->execute([':id_produit' => $idProduit]);
                         $estPromu = ($stmt->fetch() !== false); ?>
-                        <div id="<?php echo $idProduit; ?>" class="bg-bleu flex flex-col w-40 h-auto p-2 m-2 md:w-80 md:p-3 justify-between">
+                        <!-- Carte produit -->
+                        <div id="<?php echo $idProduit; ?>" class="carteProduit bg-bleu flex flex-col w-40 h-auto p-2 m-2 md:w-80 md:p-3 justify-between">
+                            <p class="hidden"><?php echo $valeurs['quantite_stock']; ?></p>
                             <!--affichage de la photo-->
-                            <a href= "<?= './details_produit.php?idProduit='.$idProduit;?>" class="mb-3">
+                            <a href= "<?= './details_produit.php?idProduit=' . $idProduit;?>" class="mb-3">
                                 <img src="<?= $valeurs['url_photo'];?>" 
                                         alt="<?= $valeurs['alt'];?>"
                                         title="<?= $valeurs['titre'];?>"
@@ -137,46 +163,52 @@ include __DIR__. '/../../php/requetesBDD/recup_panier.php';
                                     </button>
                                 </a>
                                 <!-- Produit dans le panier ? -->
-                                <a id="btnPanier" href="/php/traitementFAPanier.php?idProduit=<?php echo $idProduit;?>&ajout=panier&vientDe=promo">
-                                    <button class="cursor-pointer size-10 bg-no-repeat bg-size-[auto_40px]
-                                        <?php 
-                                        $bg = "bg-[url(/images/logo/bootstrap_icon/cart-vert-fonce.svg)]";
-                                        $trouveP = false;
-
+                                <button class="btnPanier cursor-pointer size-10 bg-no-repeat bg-size-[auto_40px]
+                                    <?php 
+                                    $bg = "bg-[url(/images/logo/bootstrap_icon/cart-vert-fonce.svg)]";
+                                    $trouveP = false;
+                                    if ($_SESSION['role'] != 'client') {
                                         if (isset($_SESSION['panier']['contient'][$idProduit])){
                                             $trouveP = true;
                                         }
-
-                                        if ($trouveP != false) {
-                                            $bg = "bg-[url(/images/logo/bootstrap_icon/cart-fill-vert-fonce.svg)]";
+                                    }  
+                                    else{
+                                        foreach ($tabPanier as $id) {
+                                            if($id['id_produit'] == $idProduit){
+                                                $trouveP = true;
+                                            }
                                         }
-                                        echo $bg;
-                                        ?>
-                                    ">
-                                    </button>
-                                </a>
-                            </div>
-                            <!--affichage de la promotion-->
-                                <?php if($estPromu){ 
-                                    $stmt = $dbh->prepare("SELECT *
-                                                            FROM sae3_skadjam._promu pu
-                                                            INNER JOIN sae3_skadjam._promotion pn
-                                                                ON pu.id_promotion = pn.id_promotion
-                                                            WHERE pu.id_produit = :id_produit");
-                                    $stmt->execute([':id_produit' => $idProduit]);
-                                    $promotion = $stmt->fetch(PDO::FETCH_ASSOC);
-                                    $debutPromo = formatDate($promotion['date_debut_promotion']);
-                                    $finPromo = null;
-                                    if($promotion['date_fin_promotion'] !== null){
-                                        $finPromo = formatDate($promotion['date_fin_promotion']);
                                     }
-                                    $labelPromo = $promotion['label'];
-                                    if($debutPromo <= date('Y-m-d') && ($finPromo == null || $finPromo >= date('Y-m-d')) && !empty($labelPromo)){
-                                ?>
-                                <div class="bg-rouge absolute w-36 md:w-74 underline text-beige pt-2 pb-1.5">
-                                    <h4 class="text-center text-beige overline m-0"><?= htmlspecialchars($labelPromo); ?></h4>
-                                </div>
-                                <?php }} ?>
+
+                                    if ($trouveP != false) {
+                                        $bg = "bg-[url(/images/logo/bootstrap_icon/cart-fill-vert-fonce.svg)]";
+                                    }
+                                    echo $bg;
+                                    ?>
+                                ">
+                                </button>
+                            </div> 
+                            <!--affichage de la promotion-->
+                            <?php if($estPromu){ 
+                                $stmt = $dbh->prepare("SELECT *
+                                                        FROM sae3_skadjam._promu pu
+                                                        INNER JOIN sae3_skadjam._promotion pn
+                                                            ON pu.id_promotion = pn.id_promotion
+                                                        WHERE pu.id_produit = :id_produit");
+                                $stmt->execute([':id_produit' => $idProduit]);
+                                $promotion = $stmt->fetch(PDO::FETCH_ASSOC);
+                                $debutPromo = formatDate($promotion['date_debut_promotion']);
+                                $finPromo = null;
+                                if($promotion['date_fin_promotion'] !== null){
+                                    $finPromo = formatDate($promotion['date_fin_promotion']);
+                                }
+                                $labelPromo = $promotion['label'];
+                                if($debutPromo <= date('Y-m-d') && ($finPromo == null || $finPromo >= date('Y-m-d')) && !empty($labelPromo)){
+                            ?>
+                            <div class="bg-rouge absolute w-36 md:w-74 underline text-beige pt-2 pb-1.5">
+                                <h4 class="text-center text-beige overline m-0"><?= htmlspecialchars($labelPromo); ?></h4>
+                            </div>
+                            <?php }} ?>
                         </div>
                     <?php } ?>
                 </div>         
@@ -207,10 +239,72 @@ include __DIR__. '/../../php/requetesBDD/recup_panier.php';
         <a href="../../index.php" class="flex justify-center mt-7 mb-7">
             <button class="border-vertClair border-2 md:rounded-2xl rounded-xl md:w-60 w-35 md:h-14 h-10 p-2 m-1 cursor-pointer">Retour</button>
         </a>
+        <!-- Box question nb prod a mettre au panier -->
+        <div id="fondNbAddPanier" class="hidden fixed inset-0 bg-black/50 backdrop-blur-sm z-40"></div>
+
+        <div id="contNbAddPanier" class="hidden fixed bg-white top-1/2 left-1/5 justify-center items-center flex-col p-4 z-50 w-3/5 md:top-2/5 md:w-2/5 md:left-3/10 h-45">
+            <form action="/php/traitementFAPanier.php" method="get" id="formNbAddPanier" class="flex flex-col items-center w-full h-full space-y-4">
+                <label id="validAjout" class="hidden" for="nbAddPanier">Combien voulez-vous en ajouter au panier ?</label>
+                <p id="valideRetrait" class="hidden">Etes-vous sur de vouloir retirer ce produit de votre panier ?</p>
+                <input placeholder="5" class="hidden pl-3 border-4 border-beige rounded-2xl w-20 m-2 placeholder-gray-500" type="number" name="nbAddPanier" id="nbAddPanier" min="1">
+                <input type="hidden" name="ajout" value="panier">
+                <input type="hidden" name="vientDe" value="nP">
+                <div class="flex flex-row justify-around w-full">
+                    <p id="btnRetour" class="flex items-center justify-center border-2 border-vertClair rounded-2xl w-25 h-12 cursor-pointer">Retour</p>
+                    <input class="border-2 border-vertClair rounded-2xl w-25 h-12 cursor-pointer" type="submit" value="Valider">
+                </div>
+            </form>
+        </div>
+
+        <!-- Liste des popup de la page -->
+        <div id="popup-overlay" class="right-12 md:right-40">
+            <?php if($addPanier){ ?>
+            <!---popup ajout d'un produit dans le panier--->
+            <div id="popup-ajouter-panier" class="popup p-4 border-vertFonce shadow-xl">
+                <p>Le produit a bien été ajouté à votre panier !</p>
+                <div class="flex justify-around mt-2">
+                    <button class="pl-2 pr-2 border-2 border-vertClair rounded-sm cursor-pointer">OK</button>
+                    <a href="/html/fo/panier.php" class="a-button pl-2 pr-2 border-2 border-vertClair rounded-sm cursor-pointer">Voir le panier</a>
+                </div>
+            </div>
+            <?php } ?>
+
+            <?php if($removePanier){ ?>
+            <!---popup retrait d'un produit du panier--->
+            <div id="popup-retirer-panier" class="popup p-4 border-vertFonce shadow-xl">
+                <p>Le produit a bien été retiré de votre panier !</p>
+                <div class="flex justify-around mt-2">
+                    <button class="pl-2 pr-2 border-2 border-vertClair rounded-sm cursor-pointer">OK</button>
+                    <a href="/html/fo/panier.php" class="a-button pl-2 pr-2 border-2 border-vertClair rounded-sm cursor-pointer">Voir le panier</a>
+                </div>
+            </div>
+            <?php } ?>
+
+            <?php if($addFA){ ?>
+            <!---popup ajout d'un produit aux futurs achats--->
+            <div id="popup-ajouter-fa" class="popup p-4 border-vertFonce shadow-xl">
+                <p>Le produit a bien été ajouté à vos futurs achats !</p>
+                <div class="flex justify-center mt-2">
+                    <button class="pl-2 pr-2 border-2 border-vertClair rounded-sm cursor-pointer">OK</button>
+                </div>
+            </div>
+            <?php } ?>
+
+            <?php if($removeFA){ ?>
+            <!---popup retrait d'un produit aux futurs achats--->
+            <div id="popup-retirer-fa" class="popup p-4 border-vertFonce shadow-xl">
+                <p>Le produit a bien été retiré de vos futurs achats !</p>
+                <div class="flex justify-center mt-2">
+                    <button class="pl-2 pr-2 border-2 border-vertClair rounded-sm cursor-pointer">OK</button>
+                </div>
+            </div>
+            <?php } ?>
+        </div>
     </main>
     
     <!--footer-->
     <?php include __DIR__ . "/../../php/structure/footer_front.php"; ?>
+    <script type="module" src="/js/fo/popupFAPanier.js"></script>
 
 </body>
 

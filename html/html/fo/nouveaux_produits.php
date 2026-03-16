@@ -23,6 +23,12 @@ if ($_SESSION['role'] == "visiteur") {
 // Récupération des futurs achats et du panier du client
 include __DIR__. '/../../php/requetesBDD/recup_FA.php';
 include __DIR__. '/../../php/requetesBDD/recup_panier.php';
+
+// Variable pour savoir s'il faut afficher une popup
+$addPanier = (isset($_GET['addPanier']) && $_GET['addPanier'] === "1");
+$removePanier = (isset($_GET['removePanier']) && $_GET['removePanier'] === "1");
+$addFA = (isset($_GET['addFA']) && $_GET['addFA'] === "1");
+$removeFA = (isset($_GET['removeFA']) && $_GET['removeFA'] === "1");
 ?>
 
 <!DOCTYPE html>
@@ -135,9 +141,17 @@ include __DIR__. '/../../php/requetesBDD/recup_panier.php';
                                     <?php 
                                     $bg = "bg-[url(/images/logo/bootstrap_icon/cart-vert-fonce.svg)]";
                                     $trouveP = false;
-
-                                    if (isset($_SESSION['panier']['contient'][$idProduit])){
-                                        $trouveP = true;
+                                    if ($_SESSION['role'] != 'client') {
+                                        if (isset($_SESSION['panier']['contient'][$idProduit])){
+                                            $trouveP = true;
+                                        }
+                                    }  
+                                    else{
+                                        foreach ($tabPanier as $id) {
+                                            if($id['id_produit'] == $idProduit){
+                                                $trouveP = true;
+                                            }
+                                        }
                                     }
 
                                     if ($trouveP != false) {
@@ -208,7 +222,7 @@ include __DIR__. '/../../php/requetesBDD/recup_panier.php';
             <form action="/php/traitementFAPanier.php" method="get" id="formNbAddPanier" class="flex flex-col items-center w-full h-full space-y-4">
                 <label id="validAjout" class="hidden" for="nbAddPanier">Combien voulez-vous en ajouter au panier ?</label>
                 <p id="valideRetrait" class="hidden">Etes-vous sur de vouloir retirer ce produit de votre panier ?</p>
-                <input placeholder="5" class="hidden pl-3 border-4 border-beige rounded-2xl w-20 m-2 placeholder-gray-500" type="number" name="nbAddPanier" id="nbAddPanier" min="0">
+                <input placeholder="5" class="hidden pl-3 border-4 border-beige rounded-2xl w-20 m-2 placeholder-gray-500" type="number" name="nbAddPanier" id="nbAddPanier" min="1">
                 <input type="hidden" name="ajout" value="panier">
                 <input type="hidden" name="vientDe" value="nP">
                 <div class="flex flex-row justify-around w-full">

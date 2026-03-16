@@ -8,7 +8,13 @@ require_once __DIR__ . "/../php/verif_role_fo.php";
 
 // Déclaration des variables
 $idProd = $_GET['idProduit'];
-$qte = $_GET['nbAddPanier'];
+if (empty($_GET['nbAddPanier'])) {
+    $qte = -1;
+}
+else{
+    $qte = $_GET['nbAddPanier'];
+}
+
 $ajout = $_GET['ajout'];
 $tabFABDD = [];
 $idCompte = -1;
@@ -100,7 +106,38 @@ elseif ($ajout == "panier") {
         }
     }
     elseif ($_SESSION['role'] == "client") {
+        $idCompte = $_SESSION['idCompte'];
+        // Récupération du panier du client
+        foreach($dbh->query("SELECT c.id_panier, c.id_produit FROM sae3_skadjam._panier pa
+                INNER JOIN sae3_skadjam._contient c
+                    ON pa.id_panier = c.id_panier
+                WHERE pa.id_client = $idCompte", PDO::FETCH_ASSOC) as $row){
+            $tabPanierBDD[$row['id_produit']] = $row['id_produit'];
+        }
+        // Récup du num du panier
+        $stmt = $dbh->query("SELECT id_panier FROM sae3_skadjam._client WHERE id_compte = $idCompte");
+        $row = $stmt->fetch(PDO::FETCH_ASSOC);
+        $idPanier = $row['id_panier'];
+        // Parcours pour voir si le produit est dans la bdd
+        if ($tabPanierBDD != null){
+            foreach ($tabPanierBDD as $id) {
+                if ($id == $idProd) {
+                    $trouve = true;
+                }
+            }
+        }
         
+        // Si le produit n'est pas déjà présent on l'ajoute
+        if ($trouve == false && $qte != -1) {
+            $insertPanier = $dbh->prepare("INSERT INTO sae3_skadjam._contient(id_produit,id_panier,quantite_par_produit) VALUES (?,?,?) ");
+            $insertPanier->execute([$idProd, $idPanier, $qte]);
+            $chemin = $vientDe."?addPanier=1".$ancre;
+        }
+        // Sinon on le retire
+        else{
+            $dbh->query("DELETE FROM sae3_skadjam._contient WHERE id_produit = $idProd");
+            $chemin = $vientDe."?removePanier=1".$ancre;
+        }
     }
     header("location:".$chemin);
 }

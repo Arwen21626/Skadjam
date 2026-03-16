@@ -11,7 +11,7 @@
     try {  
         $tabProduit = null;           
         //récupère toutes les infos des tables produits
-        foreach($dbh->query("SELECT pr.id_produit, pr.libelle_produit, pr.prix_ttc, pr.note_moyenne, pr.quantite_stock, p.url_photo, p.alt, p.titre, pr.seuil_alerte
+        foreach($dbh->query("SELECT v.denomination, pr.id_produit, pr.libelle_produit, pr.prix_ttc, pr.note_moyenne, pr.quantite_stock, p.url_photo, p.alt, p.titre, pr.seuil_alerte, pr.description_produit
                             FROM sae3_skadjam._produit pr
                             INNER JOIN sae3_skadjam._vendeur v
                                 ON pr.id_vendeur = v.id_compte
@@ -23,7 +23,7 @@
                             ORDER BY libelle_produit ASC"
                             , PDO::FETCH_ASSOC) as $row){
             $tabProduit[] = $row;
-        } 
+        }
 
     }
 
@@ -36,10 +36,15 @@
         // Traitement de la confirmation
         require '../../../vendor/autoload.php';
 
+        $denomination = $tabProduit[0]["denomination"];
+
         $pdf = new FPDF();
         $pdf->AddPage();
+        $pdf->Ln(5);
+        $pdf->SetFont('Arial', '', 30);
+        $pdf->Cell(0,0,"Catalogue $denomination", 0, 0, 'C');
+        $pdf->Ln(20);
         $pdf->SetFont('Arial', '', 13);
-        $pdf->SetTitle('Catalogue des produits');
         $i=0;
         $j=0;
         $y=0;
@@ -78,6 +83,11 @@
                             $prix = iconv('UTF-8', 'Windows-1252', $valeurs['prix_ttc'] . " €");
                             $pdf->MultiCell(65, 10, $prix, 0, 0);
 
+                            $pdf->SetX(10);
+                            $description = html_entity_decode($valeurs['description_produit'], ENT_QUOTES, 'UTF-8');
+                            $description = iconv('UTF-8', 'ISO-8859-1//TRANSLIT', $valeurs['description_produit']);
+                            $pdf->MultiCell(65, 10, $description, 0, 0);
+
                             $i=1;
                         }else{
                             $tmp = tempnam(sys_get_temp_dir(), 'img') . '.png';
@@ -94,12 +104,17 @@
                             $prix = iconv('UTF-8', 'Windows-1252', $valeurs['prix_ttc'] . " €");
                             $pdf->MultiCell(65, 10, $prix, 0, 0);
 
+                            $pdf->SetX(110);
+                            $description = html_entity_decode($valeurs['description_produit'], ENT_QUOTES, 'UTF-8');
+                            $description = iconv('UTF-8', 'ISO-8859-1//TRANSLIT', $valeurs['description_produit']);
+                            $pdf->MultiCell(65, 10, $description, 0, 0);
+
                             $pdf->Ln(10);
 
                             $i=0;
                         }
                         $j++;
-                        if($j===18){
+                        if($j===8){
                             $pdf->AddPage();
                             $j=0;
                         }
@@ -116,6 +131,11 @@
                             $prix = iconv('UTF-8', 'Windows-1252', $valeurs['prix_ttc'] . " €");
                             $pdf->MultiCell(65, 10, $prix, 0, 0);
 
+                            $pdf->SetX(10);
+                            $description = html_entity_decode($valeurs['description_produit'], ENT_QUOTES, 'UTF-8');
+                            $description = iconv('UTF-8', 'ISO-8859-1//TRANSLIT', $valeurs['description_produit']);
+                            $pdf->MultiCell(65, 10, $description, 0, 0);
+
                             $i=1;
                         }else{
                             $pdf->SetXY(140, $y);
@@ -127,12 +147,17 @@
                             $prix = iconv('UTF-8', 'Windows-1252', $valeurs['prix_ttc'] . " €");
                             $pdf->MultiCell(65, 10, $prix, 0, 0);
 
+                            $pdf->SetX(110);
+                            $description = html_entity_decode($valeurs['description_produit'], ENT_QUOTES, 'UTF-8');
+                            $description = iconv('UTF-8', 'ISO-8859-1//TRANSLIT', $valeurs['description_produit']);
+                            $pdf->MultiCell(65, 10, $description, 0, 0);
+
                             $pdf->Ln(10);
 
                             $i=0;
                         }
                         $j++;
-                        if($j===18){
+                        if($j===8){
                             $pdf->AddPage();
                             $j=0;
                         }

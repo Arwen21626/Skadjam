@@ -16,7 +16,7 @@ $initBeforPhp = ($auth->getInitBefor())?0: 1;
 
 ?>
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -29,13 +29,15 @@ $initBeforPhp = ($auth->getInitBefor())?0: 1;
     <?php ($role === 'vendeur') ? include __DIR__.'/../php/structure/header_back.php' : include __DIR__.'/../php/structure/header_front.php' ?>
     <?php ($role === 'vendeur') ? include __DIR__.'/../php/structure/navbar_back.php' : include __DIR__.'/../php/structure/navbar_front.php' ?>
     
-    <main class=" p-8 flex flex-col items-center">
-        <h2>Authentification à deux facteurs</h2>
-        <p class="w-3/4 m-4">
-            Pour sécuriser au mieux votre compte, vous pouvez ici activer l'Authentification à deux facteurs. Vous aurez besoin de stocker une clé secrète dans une application mobile d'authentification comme Google Authenticator, Proton Authenticator ou d'autres qui généreront grâce à cette clé un code à 6 chiffres.
+    <main class="p-4 relative md:p-8 flex flex-col items-center">
+        <button onclick="window.history.back()" class="w-25 h-10 top-3 left-3 rounded-[8px] border-vertClair bg-white border-2 md:rounded-xl:w-40:h-14:top-5:left-5 cursor-pointer m-5S absolute  z-5">Retour</button>
+
+        <h2 class=" mt-8!">Authentification à deux facteurs</h2>
+        <p class="m-2 md:w-3/4 md:m-4">
+            Pour sécuriser au mieux votre compte, vous pouvez ici activer l'Authentification à deux facteurs. Vous aurez besoin de stocker une clé secrète dans une application mobile d'authentification comme <br><strong>Google Authenticator</strong>, <strong>Proton Authenticator</strong> ou d'autres qui généreront grâce à cette clé un code à 6 chiffres.
         </p>
 
-        <section class=" w-3/4">
+        <section class="m-2 md:w-3/4">
             <h3>Étape pour activer l'authentification à deux facteurs :</h3>
             <ol class=" list-decimal! list-inside mt-4 ml-5">
                 <li>Télécharger une des applications d'authentification</li>
@@ -52,8 +54,15 @@ $initBeforPhp = ($auth->getInitBefor())?0: 1;
             <button id="gen-key" onclick="generer(<?= $idClient ?>)" class="border-vertClair border-2 rounded-xl w-40 h-14 cursor-pointer m-5S">Générer</button>
         <?php } ?>        
         <section id="veiw-pass" class=" hidden flex-col items-center m-5">
-            <pre id="txt-key"></pre>
-            <img src="" alt="QR code" id="img-qr-code"  class="w-1/3 border-vertClair border-2 rounded-xl m-4">
+            <div class="hidden md:flex flex-row">
+                <p>Secret :</p>
+                <pre  id="txt-key"></pre>
+            </div>
+            <div class="flex flex-row items-center justify-between">
+                <p>Code Secret : </p>
+                <button id="btn-cpy" class="block md:hidden border-vertClair border-2 rounded-xl w-40 h-14 cursor-pointer m-2" onclick="copier()">Copier</button>
+            </div>
+            <img src="" alt="QR code" id="img-qr-code"  class="md:w-1/3 border-vertClair border-2 rounded-xl m-4">
             <?php include __DIR__.'/../php/structure/authentikATOR/input_code.php' ?>
             <p id="result" class="hidden"></p>
             <button id="terminer" onclick="terminer(<?= $idClient ?>)" disabled class=" hidden border-vertClair border-2 rounded-xl w-40 h-14 cursor-pointer m-5">Terminer</button>
@@ -63,13 +72,13 @@ $initBeforPhp = ($auth->getInitBefor())?0: 1;
     <?php ($role === 'vendeur') ? include __DIR__.'/../php/structure/footer_back.php' : include __DIR__.'/../php/structure/footer_front.php' ?>
     
     <section id="popup"  class="hidden fixed inset-0 backdrop-blur-sm bg-black/30 z-40">
-        <section class="flex z-10 bg-white flex-col absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 border-vertClair border-2 rounded-xl p-5 w-1/3">
+        <section class="flex z-10 bg-white flex-col absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 border-vertClair border-2 rounded-xl p-5 md:w-1/3">
             <p class=" self-center">Attention</p><br>
             <p>Etes-vous sur de voulour supprimer l'authentification à deux facteurs.</p>
-            <section class="flex flex-row justify-between">
+            <form action="/php/supprimerOtp.php" class="flex flex-row justify-between">
                 <button id="annuler" onclick="closePopUp()" class="border-vertClair border-2 rounded-xl w-40 h-14 cursor-pointer m-5">Annuler</button>
-                <button id="supprimer" onclick="suppPopUp(<?= $idClient ?>)" class="border-vertClair border-2 rounded-xl w-40 h-14 cursor-pointer m-5">Supprimer</button>
-            </section>
+                <button id="supprimer" type="submit" class="border-vertClair border-2 rounded-xl w-40 h-14 cursor-pointer m-5">Supprimer</button>
+            </form>
         </section>
     </section>
 </body>
@@ -82,12 +91,13 @@ $initBeforPhp = ($auth->getInitBefor())?0: 1;
     
     const popup = document.getElementById("popup")
     const view = document.getElementById("veiw-pass")
-    const btn_gen = document.getElementById("gen-key")
+    const btnGen = document.getElementById("gen-key")
     const input = document.getElementById("input-code")
-    const txt_key = document.getElementById("txt-key")
-    const img_qr = document.getElementById("img-qr-code")
+    const txtKey = document.getElementById("txt-key")
+    const imQr = document.getElementById("img-qr-code")
     const res = document.getElementById("result")
     const btnTerminer = document.getElementById("terminer")
+    const btnCpy = document.getElementById("btn-cpy")
     
 
     async function terminer(idCompte){
@@ -116,12 +126,11 @@ $initBeforPhp = ($auth->getInitBefor())?0: 1;
     function showView(){
         console.log("[pass_A2F] secret : "+secret)
         console.log("[pass_A2F] qrcode : "+qrcode)
-        txt = "Secret : "+secret
-        txt_key.textContent = txt
-        img_qr.src = qrcode
+        txtKey.textContent = secret
+        imQr.src = qrcode
         view.style.display = "flex"
         input.style.display = "flex"
-        btn_gen.style.display = "none"
+        btnGen.style.display = "none"
         goFirst()
         input.scrollIntoView({
             behavior: 'smooth', // animation fluide
@@ -143,6 +152,7 @@ $initBeforPhp = ($auth->getInitBefor())?0: 1;
         initParam(idCompte,secret)
         ret = await delSecret()
         window.location.replace("./pass_A2F.php")
+        
     }
 
     async function submit(idCompte){
@@ -165,5 +175,16 @@ $initBeforPhp = ($auth->getInitBefor())?0: 1;
         }
     }
 
+    function sleep(ms) {
+        return new Promise(resolve => setTimeout(resolve, ms));
+    }
+
+    async function copier() {
+        await navigator.clipboard.writeText(txtKey.textContent)
+
+        btnCpy.textContent = "Copié!"
+        await sleep(500)
+        btnCpy.textContent = "copier"
+}
 </script>
 </html>

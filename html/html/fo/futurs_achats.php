@@ -25,11 +25,21 @@ if ($_SESSION['role'] == "visiteur") {
 include __DIR__. '/../../php/requetesBDD/recup_FA.php';
 include __DIR__. '/../../php/requetesBDD/recup_panier.php';
 
+// Variable pour savoir s'il faut afficher une popup
+$addPanier = (isset($_GET['addPanier']) && $_GET['addPanier'] === "1");
+$removePanier = (isset($_GET['removePanier']) && $_GET['removePanier'] === "1");
+$addFA = (isset($_GET['addFA']) && $_GET['addFA'] === "1");
+$removeFA = (isset($_GET['removeFA']) && $_GET['removeFA'] === "1");
+
 // Récupération des infos produits en fontion du tabFA
 $tabProd = [];
 if ($_SESSION['role'] == "client") {
-    foreach($dbh->query("SELECT pr.id_produit, pr.date_creation, libelle_produit, description_produit, prix_ttc, prix_remise, quantite_stock, id_categorie, pr.id_vendeur, note_moyenne, ph.id_photo, url_photo, alt, titre, id_compte, pu.id_promotion, label
-                            FROM sae3_skadjam._produit pr
+    foreach($dbh->query("SELECT pr.libelle_produit, pr.id_produit, pr.prix_ttc, 
+                        pr.quantite_stock, pr.note_moyenne, pr.prix_remise, 
+                        r.pourcentage_remise, pu.id_promotion,
+                        pm.label, pm.date_debut_promotion, pm.date_fin_promotion,
+                        ph.url_photo, ph.alt, ph.titre
+                        FROM sae3_skadjam._produit pr
                                 INNER JOIN sae3_skadjam._montre m
                                     ON pr.id_produit=m.id_produit
                                 INNER JOIN sae3_skadjam._photo ph  
@@ -40,6 +50,10 @@ if ($_SESSION['role'] == "client") {
                                     ON pu.id_produit = pr.id_produit
                                 LEFT JOIN sae3_skadjam._promotion pm
                                     ON pu.id_promotion = pm.id_promotion
+                                LEFT JOIN sae3_skadjam._reduit rd
+                                    ON rd.id_produit = pr.id_produit
+                                LEFT JOIN sae3_skadjam._remise r
+                                    ON r.id_remise = rd.id_remise
                                 INNER JOIN sae3_skadjam._futur_achat fa
                                     ON pr.id_produit = fa.id_produit
                                 WHERE pr.est_supprime = false AND pr.est_masque = false"
@@ -49,14 +63,22 @@ if ($_SESSION['role'] == "client") {
 }
 else {
     foreach ($tabFA as $id) {
-        $stmt = $dbh->query("SELECT pr.id_produit, pr.date_creation, libelle_produit, description_produit, prix_ttc, prix_remise, quantite_stock, id_categorie, pr.id_vendeur, note_moyenne, ph.id_photo, url_photo, alt, titre, id_compte, pu.id_promotion, label
-                            FROM sae3_skadjam._produit pr
+        $stmt = $dbh->query("SELECT pr.libelle_produit, pr.id_produit, pr.prix_ttc, 
+                                pr.quantite_stock, pr.note_moyenne, pr.prix_remise, 
+                                r.pourcentage_remise, pu.id_promotion,
+                                pm.label, pm.date_debut_promotion, pm.date_fin_promotion,
+                                ph.url_photo, ph.alt, ph.titre
+                                FROM sae3_skadjam._produit pr
                                 INNER JOIN sae3_skadjam._montre m
                                     ON pr.id_produit=m.id_produit
                                 INNER JOIN sae3_skadjam._photo ph  
                                     ON ph.id_photo = m.id_photo 
                                 INNER JOIN sae3_skadjam._vendeur v
                                     ON pr.id_vendeur = v.id_compte
+                                LEFT JOIN sae3_skadjam._reduit rd
+                                    ON rd.id_produit = pr.id_produit
+                                LEFT JOIN sae3_skadjam._remise r
+                                    ON r.id_remise = rd.id_remise
                                 LEFT JOIN sae3_skadjam._promu pu
                                     ON pu.id_produit = pr.id_produit
                                 LEFT JOIN sae3_skadjam._promotion pm
@@ -152,9 +174,17 @@ $lignes = array_slice($tabProd, $pageNumber*PAGE_SIZE-PAGE_SIZE, PAGE_SIZE);
                             <?php 
                             $bg = "bg-[url(/images/logo/bootstrap_icon/cart-vert-fonce.svg)]";
                             $trouveP = false;
-
-                            if (isset($_SESSION['panier']['contient'][$idProduit])){
-                                $trouveP = true;
+                            if ($_SESSION['role'] != 'client') {
+                                if (isset($_SESSION['panier']['contient'][$idProduit])){
+                                    $trouveP = true;
+                                }
+                            }  
+                            else{
+                                foreach ($tabPanier as $id) {
+                                    if($id['id_produit'] == $idProduit){
+                                        $trouveP = true;
+                                    }
+                                }
                             }
 
                             if ($trouveP != false) {
@@ -210,7 +240,7 @@ $lignes = array_slice($tabProd, $pageNumber*PAGE_SIZE-PAGE_SIZE, PAGE_SIZE);
             <form action="/php/traitementFAPanier.php" method="get" id="formNbAddPanier" class="flex flex-col items-center w-full h-full space-y-4">
                 <label id="validAjout" class="hidden" for="nbAddPanier">Combien voulez-vous en ajouter au panier ?</label>
                 <p id="valideRetrait" class="hidden">Etes-vous sur de vouloir retirer ce produit de votre panier ?</p>
-                <input placeholder="5" class="hidden pl-3 border-4 border-beige rounded-2xl w-20 m-2 placeholder-gray-500" type="number" name="nbAddPanier" id="nbAddPanier" min="0">
+                <input placeholder="5" class="hidden pl-3 border-4 border-beige rounded-2xl w-20 m-2 placeholder-gray-500" type="number" name="nbAddPanier" id="nbAddPanier" min="1">
                 <input type="hidden" name="ajout" value="panier">
                 <input type="hidden" name="vientDe" value="fa">
                 <div class="flex flex-row justify-around w-full">
@@ -263,7 +293,6 @@ $lignes = array_slice($tabProd, $pageNumber*PAGE_SIZE-PAGE_SIZE, PAGE_SIZE);
                 </div>
             </div>
             <?php } ?>
-
         </div>
     </main>
     <!--footer-->

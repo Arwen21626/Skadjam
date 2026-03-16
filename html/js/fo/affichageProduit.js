@@ -1,4 +1,7 @@
-function afficherProduit(tableau,tableauFA, indice){
+//Variable pour la boucle
+let stock = -1
+
+function afficherProduit(tableau, tableauFA, tableauP, indice, role){
     
     let i = indice
 
@@ -6,10 +9,11 @@ function afficherProduit(tableau,tableauFA, indice){
     
     let idProduit = tableau[i]['id_produit']
     let parent = document.getElementById("prod")
+    let carteProduit = document.getElementById("prod")
 
     // Carte produit   
     let produit = document.createElement("div")
-    produit.classList.add("bg-bleu","flex", "flex-col", "w-40", "h-auto","p-2", "m-2", "md:w-80", "md:p-3", "justify-between")
+    produit.classList.add("carteProduit","bg-bleu","flex", "flex-col", "w-40", "h-auto","p-2", "m-2", "md:w-80", "md:p-3", "justify-between")
     produit.id = idProduit
     parent.appendChild(produit)
     parent = produit
@@ -127,26 +131,61 @@ function afficherProduit(tableau,tableauFA, indice){
 
     parent = contientBtnFAP
 
-    // Lien vers action quand on appuie sur Panier
-    let lienP = document.createElement("a")
-    lienP.href = "/php/traitementFAPanier.php?idProduit="+idProduit+"&ajout=panier&vientDe=recherche"
-    lienP.id = "btnPanier"
-    parent.appendChild(lienP)
-    parent = lienP
-
     // Bouton Panier
     let boutonP = document.createElement("button")
-    boutonP.classList.add("cursor-pointer", "size-10", "bg-no-repeat", "bg-size-[auto_40px]")
-    bg = "bg-[url(/images/logo/bootstrap_icon/carte.svg)]"
-    trouve = tableauFA.find(idProduit)
+    boutonP.classList.add("btnPanier", "cursor-pointer", "size-10", "bg-no-repeat", "bg-size-[auto_40px]")
+    bg = "bg-[url(/images/logo/bootstrap_icon/cart-vert-fonce.svg)]"
 
-    // Si on trouve le produit dans la liste on change l'icone
-    if (trouve != undefined){
-        bg = "bg-[url(/images/logo/bootstrap_icon/cart-fill.svg)]"
+    trouve = false
+
+    // Si client
+    if(role == 'client'){
+        if (tableauP != null) {
+            for (let key in tableauP) {
+                if (key == idProduit) {
+                    trouve = true
+                }
+            }
+        }
     }
+    // Sinon visiteur
+    else{
+        if (tableauP != null) {
+            for (let key in tableauP.contient) {
+                if (key == idProduit) {
+                    trouve = true
+                }
+            }
+        }
+    }
+    // Si on a trouvé le produit dans la liste on change l'icone
+    if (trouve != false){
+        bg = "bg-[url(/images/logo/bootstrap_icon/cart-fill-vert-fonce.svg)]"
+    }
+    boutonP.classList.add(bg)
 
-    boutonFA.classList.add(bg)
-    parent.appendChild(boutonFA)
+    stock = carteProduit.querySelector("p").textContent
+    boutonP.addEventListener('click', function () {
+
+        if (this.className.includes("cart-fill-vert-fonce.svg")) {
+            p.classList.remove("hidden")
+            label.classList.add("hidden")
+            inputNb.classList.add("hidden")
+        } else {
+            p.classList.add("hidden")
+            label.classList.remove("hidden")
+            inputNb.classList.remove("hidden")
+        }
+
+        input.value = idProduit
+        input.name = "idProduit"
+        formNbAddPanier.appendChild(input)
+
+        contNbAddPanier.classList.remove("hidden")
+        fondNbAddPanier.classList.remove("hidden")
+    })
+
+    parent.appendChild(boutonP)
 
     // Promotion
     if (tableau[i]['id_promotion'] != null){

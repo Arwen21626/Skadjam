@@ -372,7 +372,7 @@ if (isset($_POST['categorie']) && isset($_POST['nom']) && isset($_POST['prix']) 
                 }
 
                 // Mise à jour du libellé de la promotion
-                if(strlen($labelPromo) < 20){
+                if(strlen($labelPromo) <= 20){
                     $stmtLibelle = $dbh->prepare("UPDATE sae3_skadjam._promotion SET
                                                 label = :label
                                                 WHERE id_promotion = :id_promotion");
