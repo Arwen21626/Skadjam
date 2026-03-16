@@ -63,11 +63,11 @@
 
                     if($img !== false){
                         if($i===0){
-                            $tmp = tempnam(sys_get_temp_dir(), 'img') . '.png';
-                            imagepng($img, $tmp);
+                            //$tmp = tempnam(sys_get_temp_dir(), 'img') . '.png';
+                            //imagepng($img, $tmp);
 
                             $y = $pdf->GetY();
-                            $pdf->Image($tmp, 5, $y, 0, 20);
+                            //$pdf->Image($tmp, 5, $y, 0, 20);
 
                             $pdf->SetXY(35, $y);
 
@@ -80,10 +80,10 @@
 
                             $i=1;
                         }else{
-                            $tmp = tempnam(sys_get_temp_dir(), 'img') . '.png';
-                            imagepng($img, $tmp);
+                            //$tmp = tempnam(sys_get_temp_dir(), 'img') . '.png';
+                            //imagepng($img, $tmp);
 
-                            $pdf->Image($tmp, 110, $y, 0, 20);
+                            //$pdf->Image($tmp, 110, $y, 0, 20);
 
                             $pdf->SetXY(140, $y);
 
