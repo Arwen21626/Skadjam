@@ -106,6 +106,32 @@ if ($_SESSION["role"] === "client"){
                 WHERE fa.id_client = $idCompte
             ", PDO::FETCH_ASSOC);
 
+        // donéees en rapport avec le compte vendeur
+        // $donneesVendeur = $dbh->query("SELECT c.id_compte as id_vendeur, c.nom_compte as nom_vendeur, c.prenom_compte as prenom_vendeur, c.adresse_mail as email_vendeur, c.numero_telephone as telephone_vendeur, c.bloque as compte_vendeur_bloque, -- c.mot_de_passe, c.code_secret, 
+        //             v.raison_sociale as raison_social_vendeur, v.siren as siren_vendeur, v.description_vendeur, v.iban as iban_vendeur, v.denomination as denomination_vendeur, 
+        //             adr.id_adresse as id_adresse_vendeur, adr.adresse_postale as adresse_postal_vendeur, adr.complement_adresse as complement_adresse_vendeur, adr.numero_rue as numero_rue_vendeur, adr.numero_bat as numero_batiement_vendeur, 
+        //                 adr.numero_appart as numero_apart_vendeur, adr.code_interphone as code_interphone_vendeur, adr.code_postal as code_postal_vendeur, adr.ville as ville_vendeur, adr.latitude as latitude_vendeur, adr.longitude as longitude_vendeur, 
+        //             ph.id_photo as photo_vendeur, ph.url_photo as url_photo_vendeur, ph.description_photo as description_photo_vendeur, ph.alt as alt_photo_vendeur, ph.titre as titre_photo_vendeur
+                
+        //         FROM sae3_skadjam._compte c
+        //             INNER JOIN sae3_skadjam._vendeur v ON c.id_compte = v.id_compte
+        //             LEFT JOIN sae3_skadjam._habite h ON h.id_compte = c.id_compte
+        //             LEFT JOIN sae3_skadjam._adresse adr ON adr.id_adresse = h.id_adresse
+        //             LEFT JOIN sae3_skadjam._presente pr ON pr.id_vendeur = v.id_compte
+        //             LEFT JOIN sae3_skadjam._photo ph ON ph.id_photo = pr.id_photo
+        //         WHERE c.id_compte = $idCompte
+        //     ", PDO::FETCH_ASSOC);
+
+        // données en rapport avec les réponses
+        // $donneesReponses = $dbh->query("SELECT
+        //             rep.contenu_reponse, rep.id_avis as id_avis_repondu
+                
+        //         FROM sae3_skadjam._vendeur v
+        //             INNER JOIN sae3_skadjam._reponse rep ON rep.id_compte = v.id_compte
+        //             INNER JOIN sae3_skadjam._avis a ON a.id_avis = rep.id_avis
+        //         WHERE v.id_compte = $idCompte
+        //     ", PDO::FETCH_ASSOC);
+
         // données en rapport avec les avis postées
         $donneesAvisPostes = $dbh->query("SELECT 
                     a.id_avis, a.nb_etoile, a.nb_pouce_haut, a.nb_pouce_bas, a.contenu_commentaire, a.id_produit, a.signaler, 
@@ -141,6 +167,34 @@ if ($_SESSION["role"] === "client"){
 
             ", PDO::FETCH_ASSOC);
 
+        // données en rapport avec les produits
+        // $donneesProduits = $dbh->query("SELECT
+        //         prod.id_produit as id_produit, prod.libelle_produit as libelle_produit, prod.description_produit as description_produit, prod.prix_ht as prix_ht_produit, 
+        //             prod.prix_ttc as prix_ttc_produit, prod.prix_remise as prix_remise_produit, prod.quantite_unite as quantite_unite_produit, prod.unite as unite_produit,
+        //             prod.id_categorie as id_categorie_produit, prod.id_tva as id_tva_produi, prod.note_moyenne as note_moyenne_produit, prod.est_masque as est_masque_produit, 
+        //             prod.quantite_stock as quantite_stock_produit, prod.seuil_alerte as seuil_alert_produit, prod.est_supprime as est_supprime_produit, prod.date_creation as date_creation_produit, 
+        //         ph.id_photo as photo_produit, ph.url_photo as url_photo_produit, ph.description_photo as description_photo_produit, ph.alt as alt_photo_produit, ph.titre as titre_photo_produit, 
+        //         rem.id_remise as id_remise_produit, rem.pourcentage_remise as pourcentage_produit, rem.date_debut_remise as date_debut_remise_produit, rem.date_fin_remise as date_remise_fin_produit, 
+        //         promo.id_promotion, promo.label, promo.id_photo, promo.id_vendeur, promo.date_debut_promotion, promo.date_fin_promotion, promo.periodicite, promo.heure_debut, promo.heure_fin, 
+        //         ph_promo.id_photo as photo_promotion_produit, ph_promo.url_photo as url_photo_promotion_produit, ph_promo.description_photo as description_photo_promotion_produit, 
+        //             ph_promo.alt as alt_photo_promotion_produit, ph_promo.titre as titre_photo_promotion_produit, 
+        //         cat.id_categorie as categorie_produit, cat.libelle_categorie as libelle_categorie_produit,
+        //         t.id_tva as id_tva_produit, t.nom_tva as nom_tva_produit, t.pourcentage_tva as pourcentage_tva_produit
+            
+        //         FROM sae3_skadjam._compte c
+        //             INNER JOIN sae3_skadjam._vendeur v ON v.id_compte = c.id_compte
+        //             INNER JOIN sae3_skadjam._produit prod ON prod.id_vendeur = v.id_compte
+        //             LEFT JOIN sae3_skadjam._montre mont ON mont.id_produit = prod.id_produit
+        //             LEFT JOIN sae3_skadjam._photo ph ON ph.id_photo = mont.id_photo
+        //             LEFT JOIN sae3_skadjam._reduit red ON red.id_produit = prod.id_produit
+        //             LEFT JOIN sae3_skadjam._remise rem ON rem.id_remise = red.id_remise
+        //             LEFT JOIN sae3_skadjam._promu prom ON prom.id_produit = prod.id_produit
+        //             LEFT JOIN sae3_skadjam._promotion promo ON promo.id_promotion = prom.id_promotion
+        //             LEFT JOIN sae3_skadjam._photo ph_promo ON ph_promo.id_photo = mont.id_photo
+        //             LEFT JOIN sae3_skadjam._categorie cat ON cat.id_categorie = prod.id_categorie
+        //             LEFT JOIN sae3_skadjam._tva t ON t.id_tva = prod.id_tva
+        //         WHERE c.id_compte = $idCompte
+        //     ", PDO::FETCH_ASSOC);
     }
     catch(PDOException $e){
         echo "Erreur dans la récupération des données";
