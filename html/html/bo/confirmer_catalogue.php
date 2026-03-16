@@ -49,7 +49,7 @@
             $ext = strtolower(pathinfo($imgPath, PATHINFO_EXTENSION));
             if(isset($_POST[$idProduit]) && $_POST[$idProduit] == "on"){
                 if(file_exists($imgPath)){
-                    $img = false;
+                    $img = true;
 
                     if ($ext === "webp" && function_exists('imagecreatefromwebp')) {
                         $img = imagecreatefromwebp($imgPath);
