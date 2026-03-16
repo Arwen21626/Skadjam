@@ -39,7 +39,6 @@
         $pdf = new FPDF();
         $pdf->AddPage();
         $pdf->SetFont('Arial', '', 13);
-        $pdf->SetTitle('Catalogue des produits');
         $i=0;
         $j=0;
         $y=0;
@@ -79,6 +78,7 @@
                             $pdf->MultiCell(65, 10, $prix, 0, 0);
 
                             $pdf->SetX(10);
+                            $description = html_entity_decode($valeurs['description_produit'], ENT_QUOTES, 'UTF-8');
                             $description = iconv('UTF-8', 'ISO-8859-1//TRANSLIT', $valeurs['description_produit']);
                             $pdf->MultiCell(65, 10, $description, 0, 0);
 
@@ -99,6 +99,7 @@
                             $pdf->MultiCell(65, 10, $prix, 0, 0);
 
                             $pdf->SetX(110);
+                            $description = html_entity_decode($valeurs['description_produit'], ENT_QUOTES, 'UTF-8');
                             $description = iconv('UTF-8', 'ISO-8859-1//TRANSLIT', $valeurs['description_produit']);
                             $pdf->MultiCell(65, 10, $description, 0, 0);
 
@@ -125,6 +126,7 @@
                             $pdf->MultiCell(65, 10, $prix, 0, 0);
 
                             $pdf->SetX(10);
+                            $description = html_entity_decode($valeurs['description_produit'], ENT_QUOTES, 'UTF-8');
                             $description = iconv('UTF-8', 'ISO-8859-1//TRANSLIT', $valeurs['description_produit']);
                             $pdf->MultiCell(65, 10, $description, 0, 0);
 
@@ -140,6 +142,7 @@
                             $pdf->MultiCell(65, 10, $prix, 0, 0);
 
                             $pdf->SetX(110);
+                            $description = html_entity_decode($valeurs['description_produit'], ENT_QUOTES, 'UTF-8');
                             $description = iconv('UTF-8', 'ISO-8859-1//TRANSLIT', $valeurs['description_produit']);
                             $pdf->MultiCell(65, 10, $description, 0, 0);
 
