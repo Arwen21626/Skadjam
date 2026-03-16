@@ -237,18 +237,35 @@
                             ?>
                             <section class=" bg-bleu m-4 p-4 md:w-4xl w-100 <?php echo $aReponse?'mb-0 rounded-t-2xl':'rounded-2xl'?>">
 
-                                <div class="grid grid-cols-4 md:grid-cols-5 justify-items-end">
-                                    <h4 class=" col-span-2 md:col-span-3 justify-self-start">
+                                <div class="flex justify-between items-center py-2">
+                                    <h4>
                                         <?php echo $row['pseudo'];?>
                                     </h4>
 
-                                    <img src="../../images/logo/bootstrap_icon/" alt="">
-                                    <?php echo $row['nb_pouce_haut'] ?? 0; ?>
-                                    <img src="" alt="">
-                                    <?php echo $row['nb_pouce_bas'] ?? 0; ?>
-                                    <?php echo affichageNote($row['nb_etoile']);
+                                    <div class="">
+                                        <?php echo affichageNote($row['nb_etoile']);?>
+                                    </div>
 
-                                    // savoir si l'utilisateur à déjà signaler l'avis il ne faut pas qu'il puisse le resignaler
+                                    <div class="flex items-center gap-4">
+                                        <div class="flex items-center gap-1">
+                                            <p><?php echo $row['nb_pouce_haut'] ?? 0; ?></p>
+                                            <img class="w-6 h-6" src="../../images/logo/bootstrap_icon/hand-thumbs-up.svg" 
+                                                    alt="icône pouce vers le haut si vous avez aimé l'avis" 
+                                                    title="J'aime cet avis">
+                                        </div>
+                                    
+                                        <div class="flex items-center gap-1">
+                                        <p><?php echo $row['nb_pouce_bas'] ?? 0; ?></p>
+                                        <img class="w-6 h-6" src="../../images/logo/bootstrap_icon/hand-thumbs-down.svg" 
+                                                alt="icône pouce vers le bas si vous n'avez pas aimé l'avis" 
+                                                title="Je n'aime pas cet avis">
+                                        </div>
+                                    </div>
+                                    
+
+                                    
+
+                                    <?php // savoir si l'utilisateur à déjà signaler l'avis il ne faut pas qu'il puisse le resignaler
                                     $aSignaler = false;
                                     //pour le visiteur
                                     if ($_SESSION['role'] === 'visiteur'){
