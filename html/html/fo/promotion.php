@@ -98,7 +98,7 @@ include __DIR__. '/../../php/requetesBDD/recup_panier.php';
                         $estPromu = ($stmt->fetch() !== false); ?>
                         <div id="<?php echo $idProduit; ?>" class="bg-bleu flex flex-col w-40 h-auto p-2 m-2 md:w-80 md:p-3 justify-between">
                             <!--affichage de la photo-->
-                            <a href= "<?= 'html/fo/details_produit.php?idProduit='.$idProduit;?>" class="mb-3">
+                            <a href= "<?= './details_produit.php?idProduit='.$idProduit;?>" class="mb-3">
                                 <img src="<?= $valeurs['url_photo'];?>" 
                                         alt="<?= $valeurs['alt'];?>"
                                         title="<?= $valeurs['titre'];?>"
@@ -109,8 +109,21 @@ include __DIR__. '/../../php/requetesBDD/recup_panier.php';
 
                                 <!--affichage du prix du produit-->   
                                 <div class="flex flex-row justify-between items-center">
-                                    <p class="inline-block <?= ($valeurs['pourcentage_remise'] !== NULL)?'line-through':'';?>"> <?= htmlentities(str_replace(".", ",",$valeurs['prix_ttc'])); ?>€ (<abbr title="Toutes Taxes Comprises">TTC</abbr>)</p>
-                                    <p class=" pl-3 <?= ($valeurs['pourcentage_remise'] !== NULL)?'':'hidden';?>"> <?= htmlentities(str_replace(".", ",",$valeurs['prix_remise'])); ?>€ (<abbr title="Toutes Taxes Comprises">TTC</abbr>)</p>
+                                    <?php
+                                    $remise = $valeurs['pourcentage_remise'] ?? null;
+                                    $prix_ttc = $valeurs['prix_ttc'] ?? '';
+                                    $prix_remise = $valeurs['prix_remise'] ?? '';
+                                    ?>
+
+                                    <p class="inline-block <?= $remise ? 'line-through' : '' ?>">
+                                        <?= htmlentities(str_replace(".", ",", $prix_ttc)); ?>€
+                                        (<abbr title="Toutes Taxes Comprises">TTC</abbr>)
+                                    </p>
+
+                                    <p class="pl-3 <?= $remise ? '' : 'hidden' ?>">
+                                        <?= htmlentities(str_replace(".", ",", $prix_remise)); ?>€
+                                        (<abbr title="Toutes Taxes Comprises">TTC</abbr>)
+                                    </p>
                                 </div>
                                 <!--récupération de la note-->
                                 <div class="flex">

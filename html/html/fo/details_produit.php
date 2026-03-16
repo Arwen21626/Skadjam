@@ -62,6 +62,14 @@
                                         PDO::FETCH_ASSOC) as $row) {
             $infoPhoto = $row;
         };
+
+        // Requête pour récupérer la date de fin de la promotion
+        $stmt = $dbh->prepare("SELECT date_fin_promotion
+                    FROM sae3_skadjam._promotion pn
+                    NATURAL JOIN sae3_skadjam._promu pu
+                    WHERE pu.id_produit = ?");
+        $stmt->execute([$idProd]);
+        $dateFinPromotion = $stmt->fetchAll(PDO::FETCH_COLUMN);
         
         // Définition des variables PHP pour récupérer chaque donnée nécessaire
         $libelleProd = $produit["libelle_produit"]; // Nom du produit
@@ -149,7 +157,12 @@
         <!-- Section Description -->
         <section class="flex flex-col ">
             <article class="p-2 md:pb-8"> <!-- Titrage -->
-                <h3> <?php echo $libelleProd; ?></h3>
+                <div class="flex flex-col md:flex-row">
+                    <h3> <?php echo $libelleProd; ?></h3>
+                    <?php if(!empty($dateFinPromotion[0])){ ?>
+                    <h4 class="md:relative md:top-1 md:ml-5">promotion se termine le <?= $dateFinPromotion[0]; ?></h4>
+                    <?php } ?>
+                </div>
                 <p class="ml-4">Catégorie : <?php echo $libelleCat; ?></p>
                 <div class="ml-10"> <?php echo affichageNote($noteMoy); ?> </div>
             </article>
