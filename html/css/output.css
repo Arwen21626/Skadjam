@@ -390,6 +390,9 @@ input.quantite-prod-input {
   .z-2 {
     z-index: 2;
   }
+  .z-5 {
+    z-index: 5;
+  }
   .z-8 {
     z-index: 8;
   }

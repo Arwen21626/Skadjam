@@ -96,7 +96,7 @@
         <h2>Mes Statistiques</h2>
 
         <?php if($dataStats){?> 
-            <div class="flex flex-row sticky top-[84px] justify-around mb-16 bg-white pt-4 pb-4 border-b z-10">
+            <div class="flex flex-row sticky top-[84px] justify-around mb-16 bg-white pt-4 pb-4 border-b z-5">
                 <div class="flex flex-row">
                     <p class="pr-2">Choisissez une année :</p>
                     <select name="" id="select-annee" class="pl-2 cursor-pointer">
