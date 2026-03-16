@@ -184,17 +184,18 @@
                             <?php 
                             $bg = "bg-[url(/images/logo/bootstrap_icon/cart-vert-fonce.svg)]";
                             $trouveP = false;
-
-                                    if (isset($_SESSION['panier']['contient'][$idProduit])){
+                            if ($_SESSION['role'] != 'client') {
+                                if (isset($_SESSION['panier']['contient'][$idProduit])){
+                                    $trouveP = true;
+                                }
+                            }  
+                            else{
+                                foreach ($tabPanier as $id) {
+                                    if($id['id_produit'] == $idProduit){
                                         $trouveP = true;
                                     }
-                                    else{
-                                        foreach ($tabPanier as $id) {
-                                            if($id['id_produit'] == $idProduit){
-                                                $trouveP = true;
-                                            }
-                                        }
-                                    }
+                                }
+                            }
 
                             if ($trouveP != false) {
                                 $bg = "bg-[url(/images/logo/bootstrap_icon/cart-fill-vert-fonce.svg)]";
