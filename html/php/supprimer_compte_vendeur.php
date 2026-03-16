@@ -8,6 +8,13 @@ if (!isset($_SESSION["idCompte"])) {
     exit();
 }
 
+// verifié si c'est l'utilisateur qui fait l'action
+if (empty($_SESSION['session_confirme'])){
+    $_SESSION['redirect'] = '/php/supprimer_compte_vendeur.php';
+    header("Location: /html/identificationView.php");
+    exit;
+}
+
 // Récupère l'ID du compte à supprimer
 $id = (int) $_SESSION["idCompte"];
 

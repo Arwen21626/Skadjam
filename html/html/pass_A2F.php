@@ -66,10 +66,10 @@ $initBeforPhp = ($auth->getInitBefor())?0: 1;
         <section class="flex z-10 bg-white flex-col absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 border-vertClair border-2 rounded-xl p-5 w-1/3">
             <p class=" self-center">Attention</p><br>
             <p>Etes-vous sur de voulour supprimer l'authentification à deux facteurs.</p>
-            <section class="flex flex-row justify-between">
+            <form action="/php/supprimerOtp.php" class="flex flex-row justify-between">
                 <button id="annuler" onclick="closePopUp()" class="border-vertClair border-2 rounded-xl w-40 h-14 cursor-pointer m-5">Annuler</button>
-                <button id="supprimer" onclick="suppPopUp(<?= $idClient ?>)" class="border-vertClair border-2 rounded-xl w-40 h-14 cursor-pointer m-5">Supprimer</button>
-            </section>
+                <button id="supprimer" type="submit" class="border-vertClair border-2 rounded-xl w-40 h-14 cursor-pointer m-5">Supprimer</button>
+            </form>
         </section>
     </section>
 </body>
