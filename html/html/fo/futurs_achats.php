@@ -25,6 +25,12 @@ if ($_SESSION['role'] == "visiteur") {
 include __DIR__. '/../../php/requetesBDD/recup_FA.php';
 include __DIR__. '/../../php/requetesBDD/recup_panier.php';
 
+// Variable pour savoir s'il faut afficher une popup
+$addPanier = (isset($_GET['addPanier']) && $_GET['addPanier'] === "1");
+$removePanier = (isset($_GET['removePanier']) && $_GET['removePanier'] === "1");
+$addFA = (isset($_GET['addFA']) && $_GET['addFA'] === "1");
+$removeFA = (isset($_GET['removeFA']) && $_GET['removeFA'] === "1");
+
 // Récupération des infos produits en fontion du tabFA
 $tabProd = [];
 if ($_SESSION['role'] == "client") {
@@ -168,9 +174,17 @@ $lignes = array_slice($tabProd, $pageNumber*PAGE_SIZE-PAGE_SIZE, PAGE_SIZE);
                             <?php 
                             $bg = "bg-[url(/images/logo/bootstrap_icon/cart-vert-fonce.svg)]";
                             $trouveP = false;
-
-                            if (isset($_SESSION['panier']['contient'][$idProduit])){
-                                $trouveP = true;
+                            if ($_SESSION['role'] != 'client') {
+                                if (isset($_SESSION['panier']['contient'][$idProduit])){
+                                    $trouveP = true;
+                                }
+                            }  
+                            else{
+                                foreach ($tabPanier as $id) {
+                                    if($id['id_produit'] == $idProduit){
+                                        $trouveP = true;
+                                    }
+                                }
                             }
 
                             if ($trouveP != false) {
@@ -279,7 +293,6 @@ $lignes = array_slice($tabProd, $pageNumber*PAGE_SIZE-PAGE_SIZE, PAGE_SIZE);
                 </div>
             </div>
             <?php } ?>
-
         </div>
     </main>
     <!--footer-->
