@@ -208,7 +208,9 @@ if ($_SESSION["role"] === "client"){
             <h3 class="text-center m-2 col-span-4 md:mt-10">Vos adresses</h3>
             <?php 
             // informations sur les adresses du client
-            foreach($donneesAdresses as $donnees){?>
+            $aAdresse = false;
+            foreach($donneesAdresses as $donnees){
+                $aAdresse = true;?>
                 <div class=" mb-5 md:grid grid-cols-4 col-span-4 gap-3">
                     <h4 class=" col-span-4 font-bold text-center"><?php echo $donnees["numero_rue_client"].($donnees["complement_adresse_client"] !== ""?" ".$donnees["complement_adresse_client"]:"")." ".$donnees["adresse_postal_client"]?></h4>
                     <p>ville : <?php echo $donnees["ville_client"]?></p>
@@ -226,13 +228,17 @@ if ($_SESSION["role"] === "client"){
                         <p>code de l'interphone : <?php echo $donnees["code_interphone_client"]?></p>
                     <?php }?>
                 </div>
+            <?php }
+            if ($aAdresse === false){?>
+                <p> Vous n'avez enregister aucune adresse</p>
             <?php }?>
         </section>
         <section class=" mb-5">
             <h3 class="text-center m-2 md:mt-10">Vos commandes</h3>
-            <?php 
+            <?php $aCommander = false;
             // informations sur les commandes passées par le client
-            foreach($donneesCommandes as $donnees){?>
+            foreach($donneesCommandes as $donnees){
+                $aCommander = true;?>
                 <div class="md:grid grid-cols-4 mb-5 gap-3">
                     <h4 class=" ml-10 m-2 font-bold col-span-4 md:text-center"> Commande <?php echo $donnees["id_commande"]?></h4>
                     <?php if($donnees["id_suivie_commande"] != ""){?>
@@ -288,6 +294,9 @@ if ($_SESSION["role"] === "client"){
                     <?php }?>
                     </div>
                 </div>
+            <?php }
+            if($aCommander === false){?>
+                <p>Vous n'avez passé aucune commande</p>
             <?php }?>
         </section>
         <!-- le panier du client -->
