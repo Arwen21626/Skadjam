@@ -98,6 +98,7 @@
     <?php include __DIR__ . "/php/structure/navbar_front.php"; ?>
 
     <main class="mt-10">
+        <!---les 4 images--->
         <div class="grid grid-cols-2 gap-4 justify-items-center">
             <a href="html/fo/promotion.php" title="lien vers page promotion" alt="promotion">
                 <img src="images/images_accueil/promotion.webp" title="lien vers page promotion" alt="Produits en promotion" class="w-90 md:w-150 h-auto justify-self-end">
