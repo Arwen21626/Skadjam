@@ -261,17 +261,25 @@
                                         </div>
 
                                         <div class="flex items-center gap-1">
-                                            <p><?php echo $row['nb_pouce_haut'] ?? 0; ?></p>
-                                            <img class="w-6 h-6 cursor-pointer hover:scale-110 transition" src="../../images/logo/bootstrap_icon/hand-thumbs-up.svg" 
+                                            <span id="like-count-<?= $row['id_avis'] ?>">
+                                                <?= $row['nb_pouce_haut'] ?? 0 ?>
+                                            </span>
+                                            <img class="vote-btn like w-6 h-6 cursor-pointer hover:scale-110 transition" src="../../images/logo/bootstrap_icon/hand-thumbs-up.svg" 
                                                     alt="icône pouce vers le haut si vous avez aimé l'avis" 
-                                                    title="J'aime cet avis">
+                                                    title="J'aime cet avis"
+                                                    data-id="<?= $row['id_avis'] ?>"
+                                                    data-type="1">
                                         </div>
                                     
                                         <div class="flex items-center gap-1">
-                                        <p><?php echo $row['nb_pouce_bas'] ?? 0; ?></p>
-                                        <img class="w-6 h-6 cursor-pointer hover:scale-110 transition" src="../../images/logo/bootstrap_icon/hand-thumbs-down.svg" 
-                                                alt="icône pouce vers le bas si vous n'avez pas aimé l'avis" 
-                                                title="Je n'aime pas cet avis">
+                                            <span id="dislike-count-<?= $row['id_avis'] ?>">
+                                                <?= $row['nb_pouce_bas'] ?? 0 ?>
+                                            </span>
+                                            <img class="vote-btn dislike w-6 h-6 cursor-pointer hover:scale-110 transition" src="../../images/logo/bootstrap_icon/hand-thumbs-down.svg" 
+                                                    alt="icône pouce vers le bas si vous n'avez pas aimé l'avis" 
+                                                    title="Je n'aime pas cet avis"
+                                                    data-id="<?= $row['id_avis'] ?>"
+                                                    data-type="-1">
                                         </div>
                                     </div>
                                     
@@ -424,6 +432,29 @@
 
         Popup.showPopUp("popup-supprimer-avis", 5000, "avisSupprimer");
     }
+
+    //Affichage du compte de pouces haut(s)/bas
+    document.querySelectorAll(".vote-btn").forEach(button => {
+    button.addEventListener("click", () => {
+        const avisId = button.dataset.id;
+        const voteType = parseInt(button.dataset.type);
+
+        fetch("/php/vote_pouce.php", {
+            method: "POST",
+            headers: { "Content-Type": "application/x-www-form-urlencoded" },
+            body: "id=" + avisId + "&type=" + voteType
+        })
+        .then(res => res.json())
+        .then(data => {
+            if(data.error){
+                console.error(data.error);
+                return;
+            }
+            document.getElementById("like-count-" + avisId).textContent = data.likes;
+            document.getElementById("dislike-count-" + avisId).textContent = data.dislikes;
+        });
+    });
+});
 
 
 </script>
