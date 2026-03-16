@@ -27,9 +27,6 @@ include __DIR__. '/../../php/requetesBDD/recup_panier.php';
 <head> 
     <title>Promotions</title>
 </head>
-
-
-
 <body>
     <!--header-->
     <?php include __DIR__ . "/../../php/structure/header_front.php"; ?>
@@ -52,7 +49,7 @@ include __DIR__. '/../../php/requetesBDD/recup_panier.php';
 
             try {                
                 //récupère toutes les infos des tables produits et photos
-                foreach($dbh->query("SELECT *
+                foreach($dbh->query("SELECT pr.id_produit, pr.libelle_produit, pr.prix_ttc, ph.url_photo, ph.alt, ph.titre, pn.date_debut_promotion, pn.date_fin_promotion, r.pourcentage_remise, pr.prix_remise, pr.note_moyenne, pn.label
                                     FROM sae3_skadjam._produit pr
                                     INNER join sae3_skadjam._montre m
                                         ON pr.id_produit=m.id_produit
@@ -77,12 +74,12 @@ include __DIR__. '/../../php/requetesBDD/recup_panier.php';
                         $finPromo = formatDate($row['date_fin_promotion']);
                     }
                     // La promotion est-elle terminée ou commence-t-elle ?
-                    if($row['date_debut_promotion'] <= date('Y-m-d') && ($row['date_fin_promotion'] == null || $row['date_fin_promotion'] >= date('Y-m-d'))){
+                    if(formatDate($row['date_debut_promotion']) <= date('Y-m-d') && ($row['date_fin_promotion'] == null || $row['date_fin_promotion'] >= date('Y-m-d'))){
                         $tabProduit[] = $row;
                     }
                 }
 
-                if($tabProduit == null){ ?>
+                if(empty($tabProduit)){ ?>
                     <p class="text-center mb-9">Nous n'avons pas de produits en promotion pour le moment.</p>
                 <?php }
                 
@@ -95,14 +92,10 @@ include __DIR__. '/../../php/requetesBDD/recup_panier.php';
                     <?php foreach($lignes as $id => $valeurs){
                         $idProduit = $valeurs['id_produit'];
                         // Le produit est-il en promotion ?
-                        $stmt = $dbh->prepare("SELECT *
-                                            FROM sae3_skadjam._promu
-                                            WHERE id_produit = :id_produit");
-                        $stmt->execute([':id_produit' => $idProduit]);
-                        $estPromu = ($stmt->fetch() !== false); ?>
-                        <div id="<?php echo $idProduit; ?>" class="bg-bleu flex flex-col w-40 h-auto p-2 m-2 md:w-80 md:p-3 justify-between">
+                        $estPromu = true; ?>
+                        <div id="<?= $idProduit; ?>" class="bg-bleu flex flex-col w-40 h-auto p-2 m-2 md:w-80 md:p-3 justify-between">
                             <!--affichage de la photo-->
-                            <a href= "<?= './details_produit.php?idProduit='.$idProduit;?>" class="mb-3">
+                            <a href= "<?= './details_produit.php?idProduit=' . $idProduit;?>" class="mb-3">
                                 <img src="<?= $valeurs['url_photo'];?>" 
                                         alt="<?= $valeurs['alt'];?>"
                                         title="<?= $valeurs['titre'];?>"
@@ -161,26 +154,19 @@ include __DIR__. '/../../php/requetesBDD/recup_panier.php';
                                 </a>
                             </div>
                             <!--affichage de la promotion-->
-                                <?php if($estPromu){ 
-                                    $stmt = $dbh->prepare("SELECT *
-                                                            FROM sae3_skadjam._promu pu
-                                                            INNER JOIN sae3_skadjam._promotion pn
-                                                                ON pu.id_promotion = pn.id_promotion
-                                                            WHERE pu.id_produit = :id_produit");
-                                    $stmt->execute([':id_produit' => $idProduit]);
-                                    $promotion = $stmt->fetch(PDO::FETCH_ASSOC);
-                                    $debutPromo = formatDate($promotion['date_debut_promotion']);
+                                <?php
+                                    $debutPromo = formatDate($valeurs['date_debut_promotion']);
                                     $finPromo = null;
-                                    if($promotion['date_fin_promotion'] !== null){
-                                        $finPromo = formatDate($promotion['date_fin_promotion']);
+                                    if(!empty($valeurs['date_fin_promotion'])){
+                                        $finPromo = formatDate($valeurs['date_fin_promotion']);
                                     }
-                                    $labelPromo = $promotion['label'];
+                                    $labelPromo = $valeurs['label'];
                                     if($debutPromo <= date('Y-m-d') && ($finPromo == null || $finPromo >= date('Y-m-d')) && !empty($labelPromo)){
                                 ?>
                                 <div class="bg-rouge absolute w-36 md:w-74 underline text-beige pt-2 pb-1.5">
                                     <h4 class="text-center text-beige overline m-0"><?= htmlspecialchars($labelPromo); ?></h4>
                                 </div>
-                                <?php }} ?>
+                                <?php } ?>
                         </div>
                     <?php } ?>
                 </div>         

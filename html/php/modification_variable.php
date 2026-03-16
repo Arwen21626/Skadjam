@@ -26,11 +26,11 @@ function formatDate($date){
     
     if (substr($date, 4, 1) === '-'){
         $dateBonFormat = explode('-', $date);
-        return $dateBonFormat[2].'/'.$dateBonFormat[1].'/'.$dateBonFormat[0];
+        return $dateBonFormat[2] . '/'.$dateBonFormat[1] . '/' . $dateBonFormat[0];
     }
     else{
         $dateBonFormat = explode('/', $date);
-        return $dateBonFormat[2].'-'.$dateBonFormat[1].'-'.$dateBonFormat[0];
+        return $dateBonFormat[2] . '-'.$dateBonFormat[1] . '-' . $dateBonFormat[0];
     }
     
 }
