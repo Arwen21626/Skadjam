@@ -4,7 +4,7 @@ let triActuel = {
     type: null
 } 
 
-function mettreAJourListe() {
+function mettreAJourListe(tabFA, tabP, role) {
 
     let copieProd = [...tabProd] 
 
@@ -17,7 +17,7 @@ function mettreAJourListe() {
 
     // TRI
     copieProd = appliquerTri(copieProd)
-    afficherListe(copieProd)
+    afficherListe(copieProd, tabFA, tabP, role)
     affichagePagination(copieProd)
 }
 
@@ -66,7 +66,7 @@ function ajoutEventListener(){
 
     barreRecherche.addEventListener("input",function(){
         copieBarre = barreDeRecherche(copieProd, barreRecherche.value)
-        mettreAJourListe()
+        mettreAJourListe(tabFA, tabP, role)
     })
 
     // Récupérations des elements
@@ -107,52 +107,52 @@ function ajoutEventListener(){
     prixTriCroissant.addEventListener("change",function () {
         triActuel.type = "prixAsc" 
         copieProd = triPrixCroissant(copieProd)
-        mettreAJourListe()
+        mettreAJourListe(tabFA, tabPanier, role)
     })            
 
     prixTriDecroissant.addEventListener("change",function () {
         triActuel.type = "prixDesc" 
         copieProd = triPrixDecroissant(copieProd)
-        mettreAJourListe()
+        mettreAJourListe(tabFA, tabPanier, role)
     })
 
         // Ordre alphabétique
     alphaTriAZ.addEventListener("change",function () {
         triActuel.type = "az" 
         copieProd = triAz(copieProd)
-        mettreAJourListe()
+        mettreAJourListe(tabFA, tabPanier, role)
     })
 
     alphaTriZA.addEventListener("change",function () {
         triActuel.type = "za" 
         copieProd = triZa(copieProd)
-        mettreAJourListe()
+        mettreAJourListe(tabFA, tabPanier, role)
     })
     
         // Note
     noteTri51.addEventListener("change",function () {
         triActuel.type = "noteDesc" 
         copieProd = triEtoileDecroissant(copieProd)
-        mettreAJourListe()
+        mettreAJourListe(tabFA, tabPanier, role)
     })
     
     noteTri15.addEventListener("change", function () {
         triActuel.type = "noteAsc" 
         copieProd = triEtoileCroissant(copieProd)
-        mettreAJourListe()
+        mettreAJourListe(tabFA, tabPanier, role)
     })
 
     if(stockTriCroissant != null && stockTriDecroissant != null){
         stockTriCroissant.addEventListener("change",function () {
             triActuel.type = "stockAsc" 
             copieProd = triStockCroissant(copieProd)
-            mettreAJourListe()
+            mettreAJourListe(tabFA, tabPanier, role)
         })
 
         stockTriDecroissant.addEventListener("change",function () {
             triActuel.type = "stockDesc" 
             copieProd = triStockDecroissant(copieProd)
-            mettreAJourListe()
+            mettreAJourListe(tabFA, tabPanier, role)
         })
     }
      
@@ -187,93 +187,93 @@ function ajoutEventListener(){
     for(let i = 0; i < filtreVendeur.length; i++){
         filtreVendeur[i].addEventListener("change", function () {
             copieProd = toggleFiltre(checkedVendeurs, this.value, this);
-            mettreAJourListe()
+            mettreAJourListe(tabFA, tabPanier, role)
         })
     }
 
         //Catégories
     categorieAlimentaire.addEventListener("change", function () {
         copieProd = toggleFiltre(checkedCategories, "alimentaire", this) 
-        mettreAJourListe()
+        mettreAJourListe(tabFA, tabPanier, role)
     }) 
 
     categorieVetement.addEventListener("change", function () {
         copieProd = toggleFiltre(checkedCategories, "vetement", this) 
-        mettreAJourListe()
+        mettreAJourListe(tabFA, tabPanier, role)
     }) 
 
     categorieArtisanat.addEventListener("change", function () {
         copieProd = toggleFiltre(checkedCategories, "artisanat", this) 
-        mettreAJourListe()
+        mettreAJourListe(tabFA, tabPanier, role)
     }) 
 
     categorieGoodies.addEventListener("change", function () {
         copieProd = toggleFiltre(checkedCategories, "goodies", this) 
-        mettreAJourListe()
+        mettreAJourListe(tabFA, tabPanier, role)
     }) 
 
     categorieSoin.addEventListener("change", function () {
         copieProd = toggleFiltre(checkedCategories, "soin", this) 
-        mettreAJourListe()
+        mettreAJourListe(tabFA, tabPanier, role)
     }) 
 
     
         // Note
     noteNonNote.addEventListener("change", function () {
         copieProd = toggleFiltre(checkedNotes, "0", this) 
-        mettreAJourListe()
+        mettreAJourListe(tabFA, tabPanier, role)
     }) 
 
     noteUneE.addEventListener("change", function () {
         copieProd = toggleFiltre(checkedNotes, "1", this) 
-        mettreAJourListe()
+        mettreAJourListe(tabFA, tabPanier, role)
     }) 
 
     noteDeuxE.addEventListener("change", function () {
         copieProd = toggleFiltre(checkedNotes, "2", this) 
-        mettreAJourListe()
+        mettreAJourListe(tabFA, tabPanier, role)
     }) 
 
     noteTroisE.addEventListener("change", function () {
         copieProd = toggleFiltre(checkedNotes, "3", this) 
-        mettreAJourListe()
+        mettreAJourListe(tabFA, tabPanier, role)
     }) 
 
     noteQuatreE.addEventListener("change", function () {
         copieProd = toggleFiltre(checkedNotes, "4", this) 
-        mettreAJourListe()
+        mettreAJourListe(tabFA, tabPanier, role)
     }) 
 
     noteCinqE.addEventListener("change", function () {
         copieProd = toggleFiltre(checkedNotes, "5", this) 
-        mettreAJourListe()
+        mettreAJourListe(tabFA, tabPanier, role)
     }) 
 
 
         // Tranche de prix
     tranchePrix1.addEventListener("change", function () {
         copieProd = toggleFiltre(checkedTranches, "prix1", this) 
-        mettreAJourListe()
+        mettreAJourListe(tabFA, tabPanier, role)
     }) 
 
     tranchePrix2.addEventListener("change", function () {
         copieProd = toggleFiltre(checkedTranches, "prix2", this) 
-        mettreAJourListe()
+        mettreAJourListe(tabFA, tabPanier, role)
     }) 
 
     tranchePrix3.addEventListener("change", function () {
         copieProd = toggleFiltre(checkedTranches, "prix3", this) 
-        mettreAJourListe()
+        mettreAJourListe(tabFA, tabPanier, role)
     }) 
 
     tranchePrix4.addEventListener("change", function () {
         copieProd = toggleFiltre(checkedTranches, "prix4", this) 
-        mettreAJourListe()
+        mettreAJourListe(tabFA, tabPanier, role)
     }) 
 
     tranchePrix5.addEventListener("change", function () {
         copieProd = toggleFiltre(checkedTranches, "prix5", this) 
-        mettreAJourListe()
+        mettreAJourListe(tabFA, tabPanier, role)
     }) 
 
 
