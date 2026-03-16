@@ -255,21 +255,21 @@
                                         <?php echo $row['pseudo'];?>
                                     </h4>
 
-                                    <div class="">
-                                        <?php echo affichageNote($row['nb_etoile']);?>
-                                    </div>
-
                                     <div class="flex items-center gap-4">
+                                        <div class="">
+                                            <?php echo affichageNote($row['nb_etoile']);?>
+                                        </div>
+
                                         <div class="flex items-center gap-1">
                                             <p><?php echo $row['nb_pouce_haut'] ?? 0; ?></p>
-                                            <img class="w-6 h-6" src="../../images/logo/bootstrap_icon/hand-thumbs-up.svg" 
+                                            <img class="w-6 h-6 cursor-pointer hover:scale-110 transition" src="../../images/logo/bootstrap_icon/hand-thumbs-up.svg" 
                                                     alt="icône pouce vers le haut si vous avez aimé l'avis" 
                                                     title="J'aime cet avis">
                                         </div>
                                     
                                         <div class="flex items-center gap-1">
                                         <p><?php echo $row['nb_pouce_bas'] ?? 0; ?></p>
-                                        <img class="w-6 h-6" src="../../images/logo/bootstrap_icon/hand-thumbs-down.svg" 
+                                        <img class="w-6 h-6 cursor-pointer hover:scale-110 transition" src="../../images/logo/bootstrap_icon/hand-thumbs-down.svg" 
                                                 alt="icône pouce vers le bas si vous n'avez pas aimé l'avis" 
                                                 title="Je n'aime pas cet avis">
                                         </div>
