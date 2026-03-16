@@ -38,7 +38,7 @@ $removeFA = (isset($_GET['removeFA']) && $_GET['removeFA'] === "1");
     <title>Les plus vendus</title>
 </head>
 
-
+<script src="/js/ruptureStock.js"></script>
 
 <body>
     <!--header-->
@@ -58,6 +58,7 @@ $removeFA = (isset($_GET['removeFA']) && $_GET['removeFA'] === "1");
                 //récupère toutes les infos des tables produits et photos
                 foreach($dbh->query("SELECT pr.libelle_produit,
                                     pr.id_produit,
+                                    pr.quantite_stock,
                                     ph.url_photo,
                                     ph.alt,
                                     ph.titre,
@@ -107,11 +108,19 @@ $removeFA = (isset($_GET['removeFA']) && $_GET['removeFA'] === "1");
                     <p class="hidden"><?php echo $valeurs['quantite_stock']; ?></p>
                     <!--affichage de la photo-->
                     <a href= "<?= 'html/fo/details_produit.php?idProduit='.$idProduit;?>" class="mb-3">
-                        <img src="<?= $valeurs['url_photo'];?>" 
-                                alt="<?= $valeurs['alt'];?>"
-                                title="<?= $valeurs['titre'];?>"
-                                class="w-auto h-40 md:h-80 block mx-auto">
-
+                        <div class="relative img">
+                            <!-- Image -->
+                            <img src="<?= $valeurs['url_photo'];?>" 
+                                    alt="<?= $valeurs['alt'];?>"
+                                    title="<?= $valeurs['titre'];?>"
+                                    class="w-auto h-40 md:h-80 block mx-auto">
+                            <!-- Rupture de stock ? -->
+                            <?php if ($valeurs['quantite_stock'] === "0") { ?>
+                                <script>
+                                    ruptureStock(<?php echo $idProduit ?>)
+                                </script>
+                            <?php } ?>
+                        </div>
                         <!--affichage du nom du produit-->
                         <p><?= $valeurs['libelle_produit'];?></p> 
 

@@ -31,6 +31,8 @@ $addFA = (isset($_GET['addFA']) && $_GET['addFA'] === "1");
 $removeFA = (isset($_GET['removeFA']) && $_GET['removeFA'] === "1");
 ?>
 
+<script src="/js/ruptureStock.js"></script>
+
 <!DOCTYPE html>
 <html lang="fr">
 <?php include __DIR__."/../../php/structure/head_front.php";?>
@@ -62,7 +64,7 @@ $removeFA = (isset($_GET['removeFA']) && $_GET['removeFA'] === "1");
 
             try {                
                 //récupère toutes les infos des tables produits et photos
-                foreach($dbh->query("SELECT pr.libelle_produit, pr.id_produit, url_photo, alt, titre, prix_ttc, quantite_stock, note_moyenne, prix_remise, pourcentage_remise
+                foreach($dbh->query("SELECT pr.libelle_produit, pr.id_produit, url_photo, alt, titre, prix_ttc, quantite_stock, note_moyenne, prix_remise, pourcentage_remise, pr.quantite_stock
                                     FROM sae3_skadjam._produit pr
                                     INNER JOIN sae3_skadjam._montre m
                                         ON pr.id_produit=m.id_produit
@@ -99,11 +101,19 @@ $removeFA = (isset($_GET['removeFA']) && $_GET['removeFA'] === "1");
                             <p class="hidden"><?php echo $valeurs['quantite_stock']; ?></p>
                             <!--affichage de la photo-->
                             <a href= "<?= './details_produit.php?idProduit='.$idProduit;?>" class="mb-3">
-                                <img src="<?= $valeurs['url_photo'];?>" 
-                                        alt="<?= $valeurs['alt'];?>"
-                                        title="<?= $valeurs['titre'];?>"
-                                        class="w-auto h-40 md:h-80 block mx-auto">
-
+                                <div class="relative img">
+                                    <!-- Image -->
+                                    <img src="<?= $valeurs['url_photo'];?>" 
+                                            alt="<?= $valeurs['alt'];?>"
+                                            title="<?= $valeurs['titre'];?>"
+                                            class="w-auto h-40 md:h-80 block mx-auto">
+                                    <!-- Rupture de stock ? -->
+                                    <?php if ($valeurs['quantite_stock'] === "0") { ?>
+                                        <script>
+                                            ruptureStock(<?php echo $idProduit ?>)
+                                        </script>
+                                    <?php } ?>
+                                </div>
                                 <!--affichage du nom du produit-->
                                 <p><?= $valeurs['libelle_produit'];?></p> 
 
