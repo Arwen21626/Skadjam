@@ -116,6 +116,13 @@
 
             $maxPage = sizeof($tabProduit)/PAGE_SIZE;
             //découpe le catalogue en page de 24 produits
+
+            //Si le chiffre mis dans l'url dépasse le maximum de page, on remet au maximum
+            if($pageNumber>$maxPage){
+                $pageNumber = ceil($maxPage);
+                echo $pageNumber;
+            }
+
             $lignes = array_slice($tabProduit, $pageNumber*PAGE_SIZE-PAGE_SIZE, PAGE_SIZE); 
 
             //affiche la photo du produit, son nom, son prix et sa note, son stock ?>
