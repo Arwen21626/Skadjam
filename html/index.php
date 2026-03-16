@@ -76,7 +76,6 @@
         die();
     }
 
-    
 ?>
 
 <!DOCTYPE html>
@@ -119,9 +118,18 @@
         <!--Début du catalogue-->
         <h2 id="nosProduits">Nos produits</h2>
 
-        <?php $maxPage = sizeof($tabProduit)/PAGE_SIZE;
+        <?php 
+        $maxPage = sizeof($tabProduit)/PAGE_SIZE;
+        
+        //Si le chiffre mis dans l'url dépasse le maximum de page, on remet au maximum
+        if($pageNumber>$maxPage){
+            $pageNumber = ceil($maxPage);
+            echo $pageNumber;
+        }
+
         //découpe le catalogue en page de 24 produits
-        $lignes = array_slice($tabProduit, $pageNumber*PAGE_SIZE-PAGE_SIZE, PAGE_SIZE);?>
+        $lignes = array_slice($tabProduit, $pageNumber*PAGE_SIZE-PAGE_SIZE, PAGE_SIZE);
+        ?>
         
         <!-- Liste des cartes produits -->
         <div class="flex flex-row flex-wrap justify-around">
@@ -208,7 +216,6 @@
             <?php } ?>
         </div>
         <?php $dbh = null;?>
-
         
         <!--navigation page précédente/suivante de l'index-->
         <div class="flex flex-row space-x-4 justify-center py-3">
@@ -218,7 +225,7 @@
                 <img class="w-7" src="images/logo/bootstrap_icon/chevron-left.svg" alt="page précédente">
             </a>
             <?php }?>
-
+            
             <!---numéro page actuelle--->
             <p>page <?php echo $pageNumber;?></p>
             
@@ -229,6 +236,7 @@
             </a>
             <?php }?>
         </div>
+
         <!-- Box question nb prod a mettre au panier -->
         <div id="fondNbAddPanier" class="hidden fixed inset-0 bg-black/50 backdrop-blur-sm z-40"></div>
 

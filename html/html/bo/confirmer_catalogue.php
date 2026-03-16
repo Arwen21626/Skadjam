@@ -1,7 +1,4 @@
 <?php 
-    if(!extension_loaded('gd')){
-        die("L'extension GD n'est pas activée sur ce serveur.");
-    }
     error_reporting(E_ALL & ~E_DEPRECATED);
     ob_start();
     session_start();
@@ -56,9 +53,9 @@
 
                     if($ext==="webp" && function_exists('imagecreatefromwebp')){
                         $img = imagecreatefromwebp($imgPath);
-                    }elseif($ext==="png"){
+                    }elseif($ext==="png" && function_exists('imagecreatefrompng')){
                         $img = imagecreatefrompng($imgPath);
-                    }elseif($ext==="jpg" || $ext==="jpeg"){
+                    }elseif(($ext==="jpg" || $ext==="jpeg") && function_exists('imagecreatefromjpeg')){
                         $img = imagecreatefromjpeg($imgPath);
                     }elseif(function_exists('imagecreatefromstring')){
                         $img = @imagecreatefromstring(file_get_contents($imgPath));

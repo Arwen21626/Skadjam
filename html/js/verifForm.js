@@ -1,37 +1,37 @@
-function verifNomPrenom(nomForm) {
+function verifNomPrenom(nom) {
     // Autorise Les majuscule, minuscule, accent maj/min, un espace, un ou deux tiret(s)
     var modele = /^[A-Za-zÀ-ÿ]+(( |-{1,2})[A-Za-zÀ-öø-ÿ]+)*$/i;
-    if (modele.test(nomForm)) {
+    if (modele.test(nom)) {
         return true
     } else {
         return false
     }
 }
 
-function verifCodePostal(codePostalForm) {
+function verifCodePostal(codePostal) {
     // Autorise Les majuscule, minuscule, accent maj/min, un espace, un ou deux tiret(s)
     var modele = /^[0-9]{5}$/i;
-    if (modele.test(codePostalForm) && (1000<codePostalForm && codePostalForm<99999)) {
+    if (modele.test(codePostal) && (1<codePostal && codePostal<99999)) {
         return true
     } else {
         return false
     }
 }
 
-function verifVille(villeForm) {
+function verifVille(ville) {
     // Autorise Les majuscule, minuscule, accent maj/min, un espace, un ou deux tiret(s)
     var modele = /^[A-Za-zÀ-ÿ]+(( |-{1,2})[A-Za-zÀ-öø-ÿ]+)*$/i;
-    if (modele.test(villeForm)) {
+    if (modele.test(ville)) {
         return true
     } else {
         return false
     }
 }
 
-function verifAdresse(adresseForm) {
+function verifAdresse(adresse) {
     //verifie le format de l'adresse
     var modele = /^(\d+\s*[A-Za-z]*)[, ]*(.+)$/ui;
-    if (modele.test(adresseForm)) {
+    if (modele.test(adresse)) {
         return true
     } else {
         return false
@@ -81,6 +81,27 @@ function verifNumCarte(num){
     if (modele.test(num)) {
         return true
     }else{
+        return false
+    }
+}
+
+function verifMail(mail) {
+    console.log(mail.length)
+    // Autorise Les majuscule, minuscule, accent maj/min, un espace, un ou deux tiret(s)
+    var modele = /^[A-Za-z0-9.]+@[A-Za-z-]+.[A-Za-z]+$/;
+    if (modele.test(mail) || mail.length > 150) {
+        return true
+    } else {
+        return false
+    }
+}
+
+function verifMotDePasse(mdp) {
+    // Autorise Les majuscule, minuscule, accent maj/min, un espace, un ou deux tiret(s)
+    var modele = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[-@_#$.£!?%*+:;,&~|^])[^\s<>]{10,}$/;
+    if (modele.test(mdp)) {
+        return true
+    } else {
         return false
     }
 }
