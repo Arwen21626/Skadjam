@@ -1,11 +1,11 @@
-function afficherListe(tab, tabFA) {
+function afficherListe(tab, tabFA, tabP, role) {
     //Remise à 0 de la page
     let parent = document.getElementById("prod")
     parent.innerHTML = ""
     
     // Affichage de la liste de produit
     for (let i = first; i < first + numberOfItems && i < tab.length; i++) {
-        afficherProduit(tab,tabFA,i)
+        afficherProduit(tab, tabFA, tabP, i, role)
     }
 
     window.scrollTo(0, 0)

@@ -185,6 +185,13 @@
                                     if (isset($_SESSION['panier']['contient'][$idProduit])){
                                         $trouveP = true;
                                     }
+                                    else{
+                                        foreach ($tabPanier as $id) {
+                                            if($id['id_produit'] == $idProduit){
+                                                $trouveP = true;
+                                            }
+                                        }
+                                    }
 
                                     if ($trouveP != false) {
                                         $bg = "bg-[url(/images/logo/bootstrap_icon/cart-fill-vert-fonce.svg)]";
@@ -225,7 +232,6 @@
             }
 
         ?>
-
         
         <!--fin du catalogue-->
         <div class="flex flex-row space-x-4 justify-center py-3">
@@ -243,6 +249,7 @@
             </a>
             <?php }?>
         </div>
+
         <!-- Box question nb prod a mettre au panier -->
         <div id="fondNbAddPanier" class="hidden fixed inset-0 bg-black/50 backdrop-blur-sm z-40"></div>
 
@@ -250,7 +257,7 @@
             <form action="./php/traitementFAPanier.php" method="get" id="formNbAddPanier" class="flex flex-col items-center w-full h-full space-y-4">
                 <label id="validAjout" class="hidden" for="nbAddPanier">Combien voulez-vous en ajouter au panier ?</label>
                 <p id="valideRetrait" class="hidden">Etes-vous sur de vouloir retirer ce produit de votre panier ?</p>
-                <input placeholder="5" class="hidden pl-3 border-4 border-beige rounded-2xl w-20 m-2 placeholder-gray-500" type="number" name="nbAddPanier" id="nbAddPanier" min="0">
+                <input placeholder="5" class="hidden pl-3 border-4 border-beige rounded-2xl w-20 m-2 placeholder-gray-500" type="number" name="nbAddPanier" id="nbAddPanier" min="1" required>
                 <input type="hidden" name="ajout" value="panier">
                 <input type="hidden" name="vientDe" value="index">
                 <div class="flex flex-row justify-around w-full">
@@ -303,7 +310,6 @@
                 </div>
             </div>
             <?php } ?>
-
         </div>
     </main>
     
