@@ -35,6 +35,12 @@
     // Récupération du role pour le panier sur la page recherche
     $role = '';
     $role = $_SESSION['role'];
+
+    // Variable pour savoir s'il faut afficher une popup
+    $addPanier = (isset($_GET['addPanier']) && $_GET['addPanier'] === "1");
+    $removePanier = (isset($_GET['removePanier']) && $_GET['removePanier'] === "1");
+    $addFA = (isset($_GET['addFA']) && $_GET['addFA'] === "1");
+    $removeFA = (isset($_GET['removeFA']) && $_GET['removeFA'] === "1");
 ?>
 
 <!DOCTYPE html>
@@ -82,7 +88,7 @@
             <form action="/php/traitementFAPanier.php" method="get" id="formNbAddPanier" class="flex flex-col items-center w-full h-full space-y-4">
                 <label id="validAjout" class="hidden" for="nbAddPanier">Combien voulez-vous en ajouter au panier ?</label>
                 <p id="valideRetrait" class="hidden">Etes-vous sur de vouloir retirer ce produit de votre panier ?</p>
-                <input placeholder="5" class="hidden pl-3 border-4 border-beige rounded-2xl w-20 m-2 placeholder-gray-500" type="number" name="nbAddPanier" id="nbAddPanier" min="0">
+                <input placeholder="5" class="hidden pl-3 border-4 border-beige rounded-2xl w-20 m-2 placeholder-gray-500" type="number" name="nbAddPanier" id="nbAddPanier" min="1">
                 <input type="hidden" name="ajout" value="panier">
                 <input type="hidden" name="vientDe" value="recherche">
                 <div class="flex flex-row justify-around w-full">

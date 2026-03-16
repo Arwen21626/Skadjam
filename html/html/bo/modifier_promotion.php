@@ -35,16 +35,18 @@
         die();
     }
        
+    $idProd = $tabProduit[0]['id_produit'];
+
     //traitement de la modification de la quantite_stock
-    if (!empty($_POST["dateDebutPromotion"])) {
+    if (!empty($_POST["dateDebutPromotion_$idProd"])) {
 
         foreach($tabProduit as $produit){
 
             $idProd = $produit['id_produit'];
 
-            $dateDebut = formatDate($_POST["dateDebutPromotion"]);
-            $dateFin = $_POST["dateFinPromotion"] != null ? formatDate($_POST["dateFinPromotion"]) : null;
-            $label = $_POST["labelPromo"] ?? null;
+            $dateDebut = formatDate($_POST["dateDebutPromotion_$idProd"]);
+            $dateFin = $_POST["dateFinPromotion_$idProd"] != null ? formatDate($_POST["dateFinPromotion_$idProd"]) : null;
+            $label = $_POST["labelPromo_$idProd"] ?? null;
             $checkbox = $_POST["checkbox_$idProd"] ?? "off";
 
             // si la checkbox est cochée -> UPDATE
@@ -138,9 +140,9 @@
                                                 title="<?php echo $valeurs['titre'];?>">
                                         </td>
                                         <td scope="row" class="w-100 text-left py-3 pl-3" ><a href="<?php echo htmlentities("details_produit.php?idProduit=".$idProduit);?>"><?php echo $valeurs['libelle_produit']; ?></a></td>
-                                        <td class="text-center py-3"><input class="border-2 border-black rounded-lg w-43 h-10 p-2" type="date" name="dateDebutPromotion" id="dateDebutPromotion" value="<?php echo formatDate($valeurs['date_debut_promotion']); ?>"></td>
-                                        <td class="text-center py-3"><input class="border-2 border-black rounded-lg w-43 h-10 p-2" type="date" name="dateFinPromotion" id="dateFinPromotion" value="<?php echo formatDate($valeurs['date_fin_promotion']); ?>"></td>
-                                        <td class="text-center py-3"><input maxlength="20" class="border-2 border-black rounded-lg w-30 h-10 p-2" type="text" name="labelPromo" id="labelPromo" value="<?php echo $valeurs['label'];?>"></td>
+                                        <td class="text-center py-3"><input class="border-2 border-black rounded-lg w-43 h-10 p-2" type="date" name="dateDebutPromotion_<?= $valeurs["id_produit"]; ?>" id="dateDebutPromotion_<?= $valeurs["id_produit"]; ?>" value="<?php echo formatDate($valeurs['date_debut_promotion']); ?>"></td>
+                                        <td class="text-center py-3"><input class="border-2 border-black rounded-lg w-43 h-10 p-2" type="date" name="dateFinPromotion_<?= $valeurs["id_produit"]; ?>" id="dateFinPromotion_<?= $valeurs["id_produit"]; ?>" value="<?php echo formatDate($valeurs['date_fin_promotion']); ?>"></td>
+                                        <td class="text-center py-3"><input maxlength="20" class="border-2 border-black rounded-lg w-30 h-10 p-2" type="text" name="labelPromo_<?= $valeurs["id_produit"]; ?>" id="labelPromo_<?= $valeurs["id_produit"]; ?>" value="<?php echo $valeurs['label'];?>"></td>
                                         <td class="text-center py-3"><input class="size-5" type="checkbox" name="checkbox_<?= $valeurs["id_produit"]; ?>" id="checkbox_<?= $valeurs["id_produit"]; ?>" checked></td>
                                     </tr>
                             <?php }?>
