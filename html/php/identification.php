@@ -1,18 +1,13 @@
 <?php
 
-function verif_id($mail, $password, $idCompte = null){
+function verif_id($password, $idCompte){
     require __DIR__.'/../01_premiere_connexion.php';
     $passValide = false;
     $code = false;
     
-    if (is_null($idCompte)){
-        $stmt = $dbh->prepare("SELECT mot_de_passe, code_secret FROM sae3_skadjam._compte WHERE adresse_mail = ?");
-        $stmt->execute([$mail]);
-    }else{
-        $stmt = $dbh->prepare("SELECT mot_de_passe, code_secret FROM sae3_skadjam._compte WHERE adresse_mail = ? AND id_compte = ?");
-        $stmt->execute([$mail, $idCompte]);
-    }
-    
+    $stmt = $dbh->prepare("SELECT mot_de_passe, code_secret FROM sae3_skadjam._compte WHERE id_compte = ?");
+    $stmt->execute([$idCompte]);
+        
     $data = $stmt->fetch(PDO::FETCH_ASSOC);
     $count = count($data);
 

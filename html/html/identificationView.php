@@ -8,7 +8,11 @@ session_start();
 $role = (isset($_SESSION['role']))? $_SESSION['role']: null;
 $idClient = (isset($_SESSION['idCompte']))?$_SESSION['idCompte']:null;
 $redirect = (isset($_SESSION['redirect']))?$_SESSION['redirect']:null;
+print_r($_SESSION['action']);
 $action = (isset($_SESSION['action']))?$_SESSION['action']:null;
+if (is_null($action)){
+    $action = (isset($_POST['action']))?$_POST['action']:null;
+}
 $erreur = [];
 $identifie = false;
 
@@ -20,15 +24,13 @@ if (is_null($role) || is_null($idClient) || $role === 'visiteuir' || is_null($re
 
 
 
-if (is_null($action)){
+if ($action === 'identVerif'){
     if (!isset($_POST['password'])){$erreur['password'] = 0;}
-    if (!isset($_POST['mail'])){$erreur['mail'] = 0;}
-    $action = 'identRequest';
+    
     
     if (empty($erreur)){
         $password = $_POST['password'];
-        $id = $_POST['mail'];
-        $data = verif_id($id, $password, $idClient);
+        $data = verif_id($password, $idClient);
         $passValide = $data['pass'];
         $code = $data["code"];
         if (!$passValide){
@@ -52,15 +54,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && $_POST['action'] === 'authVerif'){
 
 if ($identifie){
     $_SESSION['session_confirme'] = true;
+    //header("Location: ".$redirect);
     ob_clean();
     echo json_encode(['url' => $redirect]);
-    header("Location: ".$redirect);
+    exit;
 }
 
 ?>
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -73,18 +76,20 @@ if ($identifie){
 <?php ($role === 'client') ? require_once __DIR__.'/../php/structure/header_front.php' : require_once __DIR__.'/../php/structure/header_back.php' ?>
 
 <?php
+echo "action = ".$action;
+$action = (is_null($action))?'identRequest':$action;
 if ($action === 'identRequest'){ ?>
     <h2>Identification</h2>
     <div class="flex flex-col items-center">
 
         <form action="identificationView.php" method="POST">
             <input type="hidden" name="action" value="identVerif">
-
+<!--
             <div class="flex flex-col md:w-[550px]">
                 <label for="mail">Adresse mail :</label>
                 <input class="cursor:default border-4 border-solid rounded-2xl border-vertClair pl-3 w-70 md:w-[500px] h-15 " type="text" name="mail" id="mail" value="<?= isset($_POST["mail"])? $_POST["mail"] : "" ?>" required>
             </div>
-
+-->
             <div class="flex flex-col md:w-[550px]">
                 <label for="password">Mot de passe :</label>
                 <div class="zone-mdp flex flex-row">
