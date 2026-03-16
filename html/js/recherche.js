@@ -55,10 +55,13 @@ function appliquerTri(tableau) {
 function ajoutEventListener(){
     //Eventlistener sur le bouton retour de la popup d'ajour rapide au panier
     let btnRetour = document.getElementById("btnRetour")
-    btnRetour.addEventListener('click', function(){
-        contNbAddPanier.classList.add("hidden")
-        fondNbAddPanier.classList.add("hidden")
-    })
+    if (btnRetour != null) {
+        btnRetour.addEventListener('click', function(){
+            contNbAddPanier.classList.add("hidden")
+            fondNbAddPanier.classList.add("hidden")
+        })
+    }
+    
 
 // EventListener pour les boutons de changement de page
     // Barre de recherche
