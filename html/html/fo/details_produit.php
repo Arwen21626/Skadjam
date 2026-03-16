@@ -262,16 +262,16 @@
                                         <?php echo $row['pseudo'];?>
                                     </h4>
 
-                                    <div class="flex items-center gap-4">
+                                    <div class="flex items-center md:gap-4 gap-2">
                                         <!---note de l'avis--->
                                         <?php echo affichageNote($row['nb_etoile']);?>
 
-                                        <div class="flex items-center gap-1">
+                                        <div class="flex items-center md:gap-1">
                                             <!---pouce haut--->
                                             <span id="like-count-<?= $row['id_avis'] ?>">
                                                 <?= $row['nb_pouce_haut'] ?>
                                             </span>
-                                            <img class="vote-btn like w-6 h-6 cursor-pointer hover:scale-110 transition" 
+                                            <img class="vote-btn like md:w-6 md:h-6 w-5 h-5 cursor-pointer hover:scale-110 transition" 
                                                     src="<?= ($row['pouce_utilisateur'] === 1) ? '../../images/logo/bootstrap_icon/hand-thumbs-up-fill.svg' : '../../images/logo/bootstrap_icon/hand-thumbs-up.svg' ?>"
                                                     alt="icône pouce vers le haut si vous avez aimé l'avis" 
                                                     title="J'aime cet avis"
@@ -280,11 +280,11 @@
                                         </div>
                                     
                                         <!---pouce bas--->
-                                        <div class="flex items-center gap-1">
+                                        <div class="flex items-center md:gap-1">
                                             <span id="dislike-count-<?= $row['id_avis'] ?>">
                                                 <?= $row['nb_pouce_bas'] ?>
                                             </span>
-                                            <img class="vote-btn dislike w-6 h-6 cursor-pointer hover:scale-110 transition" 
+                                            <img class="vote-btn dislike md:w-6 md:h-6 w-5 h-5 cursor-pointer hover:scale-110 transition" 
                                                     src="<?= ($row['pouce_utilisateur'] === -1) ? '../../images/logo/bootstrap_icon/hand-thumbs-down-fill.svg' : '../../images/logo/bootstrap_icon/hand-thumbs-down.svg' ?>"
                                                     alt="icône pouce vers le bas si vous n'avez pas aimé l'avis" 
                                                     title="Je n'aime pas cet avis"
