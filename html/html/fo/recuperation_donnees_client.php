@@ -230,7 +230,7 @@ if ($_SESSION["role"] === "client"){
                 </div>
             <?php }
             if ($aAdresse === false){?>
-                <p> Vous n'avez enregister aucune adresse</p>
+                <p class=" col-span-4"> Vous n'avez enregister aucune adresse</p>
             <?php }?>
         </section>
         <section class=" mb-5">
@@ -369,7 +369,7 @@ if ($_SESSION["role"] === "client"){
             <?php }
             if ($aPoster === false){?>
                 <p>Vous n'avez signalé aucun avis</p>
-            <?php }?>?>
+            <?php }?>
         </section>
         <!-- avis signaler par le client -->
         <section class=" mb-5">
