@@ -8,7 +8,6 @@ session_start();
 $role = (isset($_SESSION['role']))? $_SESSION['role']: null;
 $idClient = (isset($_SESSION['idCompte']))?$_SESSION['idCompte']:null;
 $redirect = (isset($_SESSION['redirect']))?$_SESSION['redirect']:null;
-print_r($_SESSION['action']);
 $action = (isset($_SESSION['action']))?$_SESSION['action']:null;
 if (is_null($action)){
     $action = (isset($_POST['action']))?$_POST['action']:null;
@@ -21,7 +20,7 @@ if (is_null($role) || is_null($idClient) || $role === 'visiteuir' || is_null($re
     header('Location: /html/fo/connexion.php');
     exit;
 }
-
+$_SESSION['totp'] = 1;
 
 
 if ($action === 'identVerif'){
@@ -39,8 +38,9 @@ if ($action === 'identVerif'){
             $compteValide = true;
             if (!$code){
                 $identifie = true;
-            }
-            else{
+                
+            }else{
+                $_SESSION['totp'] = 0;
                 $action = 'authRequest';
             }
         }
@@ -53,10 +53,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && $_POST['action'] === 'authVerif'){
 }
 
 if ($identifie){
+    error_log("have totp = ".$_SESSION['totp']);
+    error_log(print_r($_SESSION,true));
+    if ($_SESSION['totp']===1){
+        header("Location: ".$redirect);
+    }else{
+        ob_clean();
+        echo json_encode(['url' => $redirect]);
+    }
     $_SESSION['session_confirme'] = true;
-    //header("Location: ".$redirect);
-    ob_clean();
-    echo json_encode(['url' => $redirect]);
     exit;
 }
 
@@ -76,7 +81,6 @@ if ($identifie){
 <?php ($role === 'client') ? require_once __DIR__.'/../php/structure/header_front.php' : require_once __DIR__.'/../php/structure/header_back.php' ?>
 
 <?php
-echo "action = ".$action;
 $action = (is_null($action))?'identRequest':$action;
 if ($action === 'identRequest'){ ?>
     <h2>Identification</h2>
@@ -116,7 +120,7 @@ if ($action === 'identRequest'){ ?>
         </form>
 <?php
 }
-print_r("<br>".$action);
+
 if ($action === 'authRequest'){
 ?>
     <h2>Authentification</h2>
