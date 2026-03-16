@@ -250,6 +250,25 @@ if (conteneurProd) { //Check si un élément de la page panier  est présent ou 
             }
         })
     });
+
+    // Partie du script panier.js pour gérer la gestion de l'overlay pour la demande de validation de vider le panier
+
+    // Définitions des éléments HTML
+    let btnVider = document.getElementById("viderPanier");
+    let btnCancel = document.getElementById("cancelButton");
+    let overlayValiderVider = document.getElementById("overlay-valider");
+    let containerDivValider = document.getElementById("container-div-valider");
+
+    // Définitions des eventsListener
+    btnVider.addEventListener("click", function () {
+        overlayValiderVider.classList.remove("hidden");
+        containerDivValider.classList.remove("hidden");
+    });
+
+    btnCancel.addEventListener("click", function () {
+        overlayValiderVider.classList.add("hidden");
+        containerDivValider.classList.add("hidden");
+    });
 }
 
 

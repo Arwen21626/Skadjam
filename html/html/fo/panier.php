@@ -174,6 +174,27 @@
             <button class="pl-2 pr-2 border-2 border-vertClair rounded-sm cursor-pointer">OK</button>
         </div>
     </div>
+
+    <div id="overlay-valider" class="hidden fixed inset-0 bg-black/50 backdrop-blur-sm z-40"></div>
+
+    <div id="container-div-valider" 
+    class="hidden fixed bg-white top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 chart-container justify-center items-center flex-col p-2 m-12 z-50">
+        <div id="div-form-valider" class="flex flex-col justify-center items-center relative m-4 w-[30vw] h-[25vh]">
+            <p class="md:mb-4">Voulez-vous vraiment vider votre panier ?</p>
+            <form class="flex justify-center" method="get" action="./../../php/vider_panier.php">
+                <input type="hidden" name="typeVider" value="normal">
+                <div>
+                    <button id="cancelButton" class="bg-beige rounded-2xl w-32 h-10 mt-2 md:w-40 md:h-14 md:mt-4 md:mr-2 cursor-pointer border-black border shadow" type="button">
+                        Annuler
+                    </button>
+                    <button class="bg-beige rounded-2xl w-32 h-10 mt-2 md:w-40 md:h-14 md:mt-4 md:ml-2 cursor-pointer border-black border shadow" type="submit">
+                        OK
+                    </button>
+                </div>
+                
+            </form>
+        </div>
+    </div>
     
         <?php
             
@@ -279,12 +300,11 @@
                                     <p class="ml-2"><?php echo number_format($montantTotalTTC, 2, ',', '') . "€"; ?></p>
                                 </div>
 
-                                <form class="flex justify-center" method="get" action="validation_suppression_panier.php">
-                                    <input type="hidden" name="typeVider" value="normal">
-                                    <button class="bg-beige rounded-2xl w-32 h-10 mt-2 md:w-40 md:h-14 md:mt-4 cursor-pointer border-black border shadow" type="submit">
+                                <div class="flex justify-center">
+                                    <button id="viderPanier" class="bg-beige rounded-2xl w-32 h-10 mt-2 md:w-40 md:h-14 md:mt-4 cursor-pointer border-black border shadow">
                                         Vider le panier
                                     </button>
-                                </form>
+                                </div>
                                 
                                 <?php 
                                     if ($peutValider) 
@@ -330,12 +350,11 @@
                                     <p class="ml-2"><?php echo number_format($_SESSION['panier']['montant_total_ttc'], 2, ',', '') . "€";?></p>
                                 </div>
 
-                                <form class="flex justify-center" method="get" action="./validation_suppression_panier.php">
-                                    <input type="hidden" name="typeVider" value="normal">
-                                    <button class="bg-beige rounded-2xl w-32 h-10 mt-2 md:w-40 md:h-14 md:mt-4 cursor-pointer border-black border shadow" type="submit">
+                                <div class="flex justify-center">
+                                    <button id="viderPanier" class="bg-beige rounded-2xl w-32 h-10 mt-2 md:w-40 md:h-14 md:mt-4 cursor-pointer border-black border shadow">
                                         Vider le panier
                                     </button>
-                                </form>
+                                </div>
                                 
                                 <?php 
                                     if ($peutValider) 

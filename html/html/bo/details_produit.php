@@ -95,7 +95,8 @@
             <?php 
             // Recupération des avis
             $avis = [];
-            foreach($dbh->query("SELECT * FROM sae3_skadjam._avis a 
+            foreach($dbh->query("SELECT a.*, c.pseudo
+                                FROM sae3_skadjam._avis a 
                                 INNER JOIN sae3_skadjam._client c 
                                     ON a.id_compte = c.id_compte 
                                 WHERE id_produit = $idProd", PDO::FETCH_ASSOC) as $row){
@@ -121,12 +122,40 @@
                         $aReponse = (isset($reponse['id_avis'])) ? true : false;
                         ?>
                         <section class=" bg-bleu m-4 p-4 w-4xl <?php echo $aReponse?'mb-0 rounded-t-2xl':'rounded-2xl'?>">
-                            <div class="grid grid-cols-4 md:grid-cols-5 justify-items-end w-auto">
-                                <h4 class="mr-4 col-span-2 md:col-span-3 justify-self-start">
-                                    <?php echo $row['pseudo'];?>
-                                </h4>
-                                <?php echo affichageNote($row['nb_etoile']);
-                                if (!$aReponse){?>
+                            
+                            <div class="flex justify-between items-center py-2">
+                                <!---pseudonyme--->
+                                <h4><?php echo $row['pseudo'];?></h4>
+
+                                <div class="flex items-center md:gap-4 gap-2">
+                                    <!---note de l'avis--->
+                                    <?php echo affichageNote($row['nb_etoile']); ?>
+
+                                    <div class="flex items-center md:gap-1">
+                                            <!---pouce haut--->
+                                            <span id="like-count-<?= $row['id_avis'] ?>">
+                                                <?= $row['nb_pouce_haut'] ?>
+                                            </span>
+                                            <img class="vote-btn like md:w-6 md:h-6 w-5 h-5" 
+                                                    src="../../images/logo/bootstrap_icon/hand-thumbs-up.svg"
+                                                    alt="icône pouce vers le haut si vous avez aimé l'avis" 
+                                                    title="J'aime cet avis">
+                                        </div>
+                                    
+                                        <!---pouce bas--->
+                                        <div class="flex items-center md:gap-1">
+                                            <span id="dislike-count-<?= $row['id_avis'] ?>">
+                                                <?= $row['nb_pouce_bas'] ?>
+                                            </span>
+                                            <img class="vote-btn dislike md:w-6 md:h-6 w-5 h-5" 
+                                                    src="../../images/logo/bootstrap_icon/hand-thumbs-down.svg"
+                                                    alt="icône pouce vers le bas si vous n'avez pas aimé l'avis" 
+                                                    title="Je n'aime pas cet avis">
+                                        </div>
+                                </div>
+                                
+                                <!---Répondre/modifier sa réponse--->
+                                <?php if (!$aReponse){?>
                                     <a class="text-black text-center" href="./ajouter_reponse.php?idProduit=<?php echo $idProd;?>&idAvis=<?php echo $row['id_avis']?>">Répondre</a>
                                 <?php }else{?>
                                     <a class="text-black text-center" href="./ajouter_reponse.php?idProduit=<?php echo $idProd;?>&idAvis=<?php echo $row['id_avis']?>">Modifier ma réponse</a>
