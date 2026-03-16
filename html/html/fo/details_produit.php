@@ -256,11 +256,9 @@
                             ?>
                             <section class=" bg-bleu m-4 p-4 md:w-4xl w-100 <?php echo $aReponse?'mb-0 rounded-t-2xl':'rounded-2xl'?>">
 
-                                <!---pseudonyme--->
                                 <div class="flex justify-between items-center py-2">
-                                    <h4>
-                                        <?php echo $row['pseudo'];?>
-                                    </h4>
+                                    <!---pseudonyme--->
+                                    <h4><?php echo $row['pseudo'];?></h4>
 
                                     <div class="flex items-center md:gap-4 gap-2">
                                         <!---note de l'avis--->
