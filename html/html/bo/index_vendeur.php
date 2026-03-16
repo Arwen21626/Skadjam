@@ -135,10 +135,19 @@
                         <section class="bg-bleu flex flex-col w-40 h-auto p-2 m-2 md:w-80 md:p-3">
                             <!--affichage de la photo-->
                             <a href= "<?php echo "details_produit.php?idProduit=".$idProduit;?>" class=" mb-3">
-                                <img class="w-auto h-40 md:h-80 mx-auto block" 
-                                    src="<?php echo $prod['url_photo'];?>" 
-                                    alt="<?php echo $prod['alt'];?>"
-                                    title="<?php echo $prod['titre'];?>">
+                                <div class="relative img">
+                                    <!-- Image -->
+                                    <img src="<?= $prod['url_photo'];?>" 
+                                            alt="<?= $prod['alt'];?>"
+                                            title="<?= $prod['titre'];?>"
+                                            class="w-auto h-40 md:h-80 block mx-auto">
+                                    <!-- Rupture de stock ? -->
+                                    <?php if ($prod['quantite_stock'] === "0") { ?>
+                                        <script>
+                                            ruptureStock(<?php echo $idProduit ?>)
+                                        </script>
+                                    <?php } ?>
+                                </div>
                                     
                             <!--affichage du nom du produit-->
                             <p class=" max-w-70"><?php echo $prod['libelle_produit'];?></p> 
