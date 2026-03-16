@@ -372,6 +372,9 @@ input.quantite-prod-input {
   .bottom-14 {
     bottom: calc(var(--spacing, 0.25rem) * 14);
   }
+  .bottom-15 {
+    bottom: calc(var(--spacing, 0.25rem) * 15);
+  }
   .bottom-22 {
     bottom: calc(var(--spacing, 0.25rem) * 22);
   }
@@ -428,6 +431,9 @@ input.quantite-prod-input {
   }
   .col-span-3 {
     grid-column: span 3 / span 3;
+  }
+  .col-span-4 {
+    grid-column: span 4 / span 4;
   }
   .col-start-1 {
     grid-column-start: 1;
@@ -1700,6 +1706,9 @@ input.quantite-prod-input {
     font-size: var(--text-base, 1rem);
     line-height: var(--tw-leading, var(--text-base--line-height, calc(1.5 / 1)));
   }
+  .text-\[18px\] {
+    font-size: 18px;
+  }
   .font-bold {
     --tw-font-weight: var(--font-weight-bold, 700);
     font-weight: var(--font-weight-bold, 700);
@@ -2138,9 +2147,19 @@ input.quantite-prod-input {
       top: calc(var(--spacing, 0.25rem) * 48);
     }
   }
+  .md\:top-70 {
+    @media (width >= 48rem) {
+      top: calc(var(--spacing, 0.25rem) * 70);
+    }
+  }
   .md\:right-0 {
     @media (width >= 48rem) {
       right: calc(var(--spacing, 0.25rem) * 0);
+    }
+  }
+  .md\:right-5 {
+    @media (width >= 48rem) {
+      right: calc(var(--spacing, 0.25rem) * 5);
     }
   }
   .md\:right-40 {
@@ -2256,6 +2275,11 @@ input.quantite-prod-input {
   .md\:mb-0 {
     @media (width >= 48rem) {
       margin-bottom: calc(var(--spacing, 0.25rem) * 0);
+    }
+  }
+  .md\:mb-1 {
+    @media (width >= 48rem) {
+      margin-bottom: calc(var(--spacing, 0.25rem) * 1);
     }
   }
   .md\:mb-4 {
@@ -2879,6 +2903,11 @@ input.quantite-prod-input {
   .md\:text-left {
     @media (width >= 48rem) {
       text-align: left;
+    }
+  }
+  .md\:text-\[23px\] {
+    @media (width >= 48rem) {
+      font-size: 23px;
     }
   }
   .md\:text-rouge {
