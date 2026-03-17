@@ -1331,6 +1331,20 @@ VALUES
   (1,73),
   (2,34),
   (3,1);
+  
+--Insertion remise
+INSERT INTO sae3_skadjam._remise (pourcentage_remise,date_debut_remise,date_fin_remise) 
+VALUES
+  (0.10,'12/01/2025','null'),
+  (0.50,'25/06/2025','null'),
+  (0.75,'01/01/2026','null');
+
+--Insertion reduit
+INSERT INTO sae3_skadjam._reduit (id_remise,id_produit) 
+VALUES
+  (1,1),
+  (2,2),
+  (3,3);
 
 -- Insertion commandes
 INSERT INTO sae3_skadjam._adresse_livraison (nom, prenom, adresse_postale, numero_rue, code_postal, ville, sauvegarde)

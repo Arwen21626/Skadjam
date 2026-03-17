@@ -117,3 +117,18 @@ WbImport  -file=../csv/promu.csv
           -header=true
           -fileColumns=id_promotion,id_produit
           ;
+          
+WbImport  -file=../csv/remise.csv
+          -schema=sae3_skadjam
+          -delimiter=';'
+          -table=sae3_skadjam._remise
+          -header=true
+          -fileColumns=id_remise,pourcentage_remise, date_debut_remise,date_fin_remise
+;
+WbImport  -file=../csv/reduit.csv
+          -schema=sae3_skadjam
+          -delimiter=';'
+          -table=sae3_skadjam._reduit
+          -header=true
+          -fileColumns=id_remise,id_produit
+          ;
