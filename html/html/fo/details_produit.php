@@ -159,16 +159,6 @@
             </div>
         </div>
 
-        <!-- Popup avis signalé -->
-        <div id="popup-signal-ok" class="popup p-4 border-vertFonce shadow-xl">
-            <p>L'avis a bien été signalé</p>
-            <div class="flex justify-center mt-2">
-                <button class="pl-2 pr-2 border-2 border-vertClair rounded-sm cursor-pointer">
-                    OK
-                </button>
-            </div>
-        </div>
-
     </div>
 
     <main class="p-4 md:pl-8 pr-8">
@@ -572,16 +562,6 @@
 
             // Fermer la popup de confirmation
             Popup.closePopup("popup-confirm-signal");
-
-            // Afficher la popup “avis signalé”
-            Popup.showPopUp("popup-signal-ok", 0, false);
-
-            // Bouton OK pour fermer la popup
-            const popupOk = document.getElementById("popup-signal-ok");
-            const btnOk = popupOk.querySelector("button");
-            btnOk?.addEventListener("click", () => {
-                Popup.closePopup("popup-signal-ok");
-            });
 
             // Mettre à jour le bouton signalement dans la page
             const btn = document.querySelector(`.btn-signal[data-id='${avisIdToSignal}']`);
