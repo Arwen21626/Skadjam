@@ -59,7 +59,7 @@ WbImport  -file=../csv/produits.csv
           -delimiter=';'
           -table=sae3_skadjam._produit
           -header=true
-          -fileColumns=$wb_skip$,id_vendeur,id_categorie,libelle_produit,description_produit,id_tva,prix_ht,prix_ttc,$wb_skip$,$wb_skip$,est_masque, $wb_skip$, quantite_stock,$wb_skip$,quantite_unite,unite
+          -fileColumns=$wb_skip$,id_vendeur,id_categorie,libelle_produit,description_produit,id_tva,prix_ht,prix_ttc,$wb_skip$,$wb_skip$,est_masque, $wb_skip$, quantite_stock,seuil_alerte,quantite_unite,unite
           ;
           
 WbImport  -file=../csv/photos_produits.csv
