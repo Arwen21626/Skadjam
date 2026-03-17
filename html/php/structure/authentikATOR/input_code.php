@@ -8,7 +8,9 @@
         <input type="text" name="nb5" id="in5" size="1" tabindex="5" maxlength="1" pattern="[1-9]" placeholder="X" class="input-code- m-1 border-4 rounded-2xl border-vertClair w-12 h-18 text-4xl text-center">
         <input type="text" name="nb6" id="in6" size="1" tabindex="6" maxlength="1" pattern="[1-9]" placeholder="X" class="input-code- m-1 border-4 rounded-2xl border-vertClair w-12 h-18 text-4xl text-center">
     </section>
-    <button id="valider" onclick="validation()" class="border-vertClair border-2 rounded-xl w-40 h-14 cursor-pointer m-5" disabled>Vérifier</button>
+    <div id="btn-action">
+        <button id="valider" onclick="validation()" class="border-vertClair border-2 rounded-xl w-40 h-14 cursor-pointer m-5" disabled>Vérifier</button>
+    </div>
 </div>
 
 <script>
