@@ -20,12 +20,11 @@ if (is_null($role) || is_null($idClient) || $role === 'visiteuir' || is_null($re
     header('Location: /html/fo/connexion.php');
     exit;
 }
-$_SESSION['totp'] = 1;
+$_SESSION['totp'] = false; // CORRIGÉ : bool au lieu de 1
 
 
 if ($action === 'identVerif'){
     if (!isset($_POST['password'])){$erreur['password'] = 0;}
-    
     
     if (empty($erreur)){
         $password = $_POST['password'];
@@ -39,14 +38,12 @@ if ($action === 'identVerif'){
             error_log(print_r($code,true));
             if (!$code){
                 $identifie = true;
-                
             }else{
-                $_SESSION['totp'] = 0;
+                 // CORRIGÉ : false = a passé par TOTP (pas de redirection directe)
                 $action = 'authRequest';
             }
         }
     }
-
 }
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && $_POST['action'] === 'authVerif'){
@@ -54,16 +51,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && $_POST['action'] === 'authVerif'){
     $identifie = (isset($_POST['auth'])) ? ($_POST['auth'] === 'valide') : false;
     error_log("identifie ".$identifie."\n\n\n\n");
     error_log((true == 0)?"true": "false");
+    $_SESSION['totp'] = true;
 }
 
 if ($identifie){
-    error_log("have totp = ".$_SESSION['totp']);
+    error_log("have totp = ".($_SESSION['totp'] ? 'true' : 'false'));
     error_log(print_r($_SESSION,true));
-    if ($_SESSION['totp']){
+    if (!$_SESSION['totp']){ // CORRIGÉ : true = pas de TOTP → redirection directe
         header("Location: ".$redirect);
     }else{
         ob_clean();
-        echo json_encode(['url' => $redirect]);
+        echo json_encode(['url' => $redirect]); // false = vient du TOTP → réponse AJAX
     }
     $_SESSION['session_confirme'] = true;
     exit;
@@ -79,10 +77,10 @@ if ($identifie){
     <?php ($role === 'client') ? require_once __DIR__.'/../php/structure/head_front.php' : require_once __DIR__.'/../php/structure/head_back.php' ?>
     <title>confirmation d'identité</title>
 </head>
-<body class="show">
-
-<main>
+<body class="show flex flex-col min-h-screen">
 <?php ($role === 'client') ? require_once __DIR__.'/../php/structure/header_front.php' : require_once __DIR__.'/../php/structure/header_back.php' ?>
+
+<main class="flex-1 flex flex-col justify-center">
 
 <?php
 $action = (is_null($action))?'identRequest':$action;
@@ -92,31 +90,22 @@ if ($action === 'identRequest'){ ?>
 
         <form action="identificationView.php" method="POST">
             <input type="hidden" name="action" value="identVerif">
-<!--
-            <div class="flex flex-col md:w-[550px]">
-                <label for="mail">Adresse mail :</label>
-                <input class="cursor:default border-4 border-solid rounded-2xl border-vertClair pl-3 w-70 md:w-[500px] h-15 " type="text" name="mail" id="mail" value="<?= isset($_POST["mail"])? $_POST["mail"] : "" ?>" required>
-            </div>
--->
+
             <div class="flex flex-col md:w-[550px]">
                 <label for="password">Mot de passe :</label>
                 <div class="zone-mdp flex flex-row">
-                    <!--le flex row sert a alinger l'oeil me demander pas pourquoi (signé Arwen et svp touchez plus) -->
                     <input id="password" type="password" class="champ-mdp border-4 border-solid rounded-2xl border-vertClair pl-3 w-70 md:w-[500px] h-15 " name="password" id="mdp"  value="<?= isset($_POST['password'])? $_POST['password'] : "" ?>" required>
                     <?php include __DIR__ . "/../php/structure/bouton_mdp.php" ?>
                 </div>
 
-                <!-- Renvoie sur la page de réinitialisation de mot de passe -->
                 <a href="reinitialiser_mdp.php" class="underline self-end cursor-pointer hover:text-rouge">Mot de passe oublié ?</a>
             </div>
 
             <div class="flex flex-row space-x-10 mb-7">
                 <div class=" justify-self-center">
-                    <!-- Boutton de retour à l'index.php -->
-                    <button class="border-vertClair border-2 md:rounded-2xl rounded-xl md:w-60 w-35 md:h-14 h-10 p-2 m-1 cursor-pointer" onclick="back()">Annuler</button>
+                    <button class="border-vertClair border-2 md:rounded-2xl rounded-xl md:w-60 w-35 md:h-14 h-10 p-2 m-1 cursor-pointer" onclick="window.history.back()">Annuler</button>
                 </div>
                 <div class=" justify-self-center">
-                    <!-- Envoie des données en méthode POST pour se connecter -->
                     <input type="submit" value="Valider" class="border-vertClair border-2 md:rounded-2xl rounded-xl md:w-60 w-35 md:h-14 h-10 p-2 m-1 cursor-pointer">
                 </div>
             </div>
@@ -128,8 +117,9 @@ if ($action === 'identRequest'){ ?>
 if ($action === 'authRequest'){
 ?>
     <h2>Authentification</h2>
+    
     <?php include __DIR__.'/../php/structure/authentikATOR/input_code.php' ?>
-    <p id="result" class="hidden "></p>
+    <p id="result" class="hidden self-center"></p>
 <?php
 }
 ?>
@@ -140,47 +130,55 @@ if ($action === 'authRequest'){
 <script src="./../../php/structure/authentikATOR/appelAJAX.js"></script>
 <script>
     const res = document.getElementById("result");
+    const btnAction = document.getElementById("btn-action")
+    let btnAnnuler = document.createElement("button")
+    btnAnnuler.classList.add("border-vertClair", "border-2", "rounded-xl", "w-40", "h-14", "cursor-pointer", "m-5")
+    btnAnnuler.textContent = "Annuler"
+    btnAction.classList.add("flex", "flex-row", "justify-between")
+    btnAction.prepend(btnAnnuler)
 
+    btnAnnuler.addEventListener("click", () => {window.history.back()})
+
+    goFirst()
     async function submit(idClient){
         
         res.style.color = "black"
         res.classList.add("hidden")
-        initParam(idClient)
+        initParam(idClient) // edition=0 par défaut : lecture seule, on vérifie juste le code
         let code = recup_code()
-        ret = await verifOtp(code) // Vérifie le code OTP saisi par l'utilisateur
-        console.log("[authentification] connection : "+ret)
-        if (ret == 0){ // Code correct
+        let ret = await verifOtp(code) // CORRIGÉ : retourne true/false
+        console.log("[authentification] connection : " + ret)
+        if (ret === true) { // CORRIGÉ : true = code valide (plus de == 0)
             valider.textContent = "Connexion..."
             res.textContent = "Code bon."
             res.classList.remove("hidden")
 
-            // Envoi de la confirmation au PHP via AJAX pour finaliser la connexion
-            data = new FormData()
+            let data = new FormData()
             data.append('auth', 'valide')
             data.append('action', 'authVerif')
 
             await fetch('identificationView.php', {method: 'post', body: data})
             .then(r => {
-                console.log("data url = "+r)
-                return r.json() // Récupère l'URL de redirection renvoyée par le PHP
+                console.log("data url = " + r)
+                return r.json()
             })
             .then(r => {
-                console.log("url = "+r)
-                window.location.href = r.url // Redirige le navigateur vers l'URL reçue
+                console.log("url = " + r)
+                window.location.href = r.url
             })
         } else { // Code incorrect
             res.classList.remove("hidden")
-            addT = await addTentative()
-            console.log("[authentification] addT "+addT)
-            result = await getTentative()
-            console.log("[authentification] result "+result)
-            nbTentative = result['tentative']
-            console.log("[authentification] nbTentative "+nbTentative)
+            let addT = await addTentative()
+            console.log("[authentification] addT " + addT)
+            let result = await getTentative()
+            console.log("[authentification] result " + result)
+            let nbTentative = result['tentative']
+            console.log("[authentification] nbTentative " + nbTentative)
             res.style.color = "#A70101"
-            res.textContent = "Code incorrect, réessayez. "+(3-nbTentative)+" essais restants."
-            if (nbTentative==3){
-                ret = await addTempsRestant()
-                ret1 = await resetTentative()
+            res.textContent = "Code incorrect, réessayez. " + (3 - nbTentative) + " essais restants."
+            if (nbTentative == 3){
+                await addTempsRestant()
+                await resetTentative()
                 window.location.href = "./authentification.php"
             }
         }
