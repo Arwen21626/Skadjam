@@ -1273,6 +1273,50 @@ VALUES
   ('Merci pour votre retour. Nous allons revoir la description de ce produit afin qu''elle reflète mieux la réalité. Votre satisfaction est notre priorité.',18,341),
   ('Nous sommes ravis que ce produit soit devenu un incontournable pour vous ! Votre fidélité nous touche vraiment. 😊',18,342);
 
+--Insertion futur achat
+INSERT INTO sae3_skadjam._futur_achat (id_client,id_produit) 
+VALUES
+  (21,82),
+  (21,15),
+  (22,4),
+  (22,95),
+  (23,36),
+  (23,32),
+  (24,29),
+  (24,18),
+  (25,95),
+  (25,14),
+  (26,87),
+  (26,95),
+  (27,70),
+  (27,12),
+  (28,76),
+  (28,55),
+  (29,5),
+  (29,4),
+  (30,12),
+  (30,28),
+  (31,30),
+  (31,65),
+  (32,78),
+  (32,4),
+  (33,72),
+  (33,26),
+  (34,92),
+  (34,84),
+  (35,90),
+  (35,70),
+  (36,54),
+  (36,29),
+  (37,58),
+  (37,76),
+  (38,36),
+  (38,104),
+  (39,112),
+  (39,1),
+  (40,98),
+  (40,104);
+
 
 --Insertion promotion
 INSERT INTO sae3_skadjam._promotion (label,date_debut_promotion,date_fin_promotion,periodicite,heure_debut,id_vendeur,id_photo) 

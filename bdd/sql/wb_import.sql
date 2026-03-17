@@ -94,6 +94,14 @@ WbImport  -file=../csv/reponse_complete.csv
           -fileColumns=contenu_reponse, id_compte, id_avis
           ;
           
+WbImport  -file=../csv/futur_achat.csv
+          -schema=sae3_skadjam
+          -delimiter=';'
+          -table=sae3_skadjam._futur_achat
+          -header=true
+          -fileColumns=id_client, id_produit
+          ;
+          
           
 WbImport  -file=../csv/promotion.csv
           -schema=sae3_skadjam
