@@ -25,9 +25,17 @@ if (!$stmtAvis->fetch()) {
     exit;
 }
 
+// Vérifier si l'utilisateur est connecté
+if (!isset($_SESSION['idCompte']) || $_SESSION['role'] === 'visiteur') {
+    $response['error'] = "Vous devez être connecté pour signaler un avis.";
+    echo json_encode($response);
+    exit;
+}
+
 // Mettre à jour l'avis
 $updateAvis = $dbh->prepare("UPDATE sae3_skadjam._avis SET signaler = true WHERE id_avis = ?");
 $updateAvis->execute([$idAvis]);
+
 
 // Vérifier si le signalement existe déjà
 $stmtCheck = $dbh->prepare("SELECT 1 FROM sae3_skadjam._a_signaler WHERE id_avis = ? AND id_compte = ?");

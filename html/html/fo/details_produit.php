@@ -136,8 +136,19 @@
         <?php endif; ?>
 
         <!---popup être connecté pour laisser un pouce--->
-        <div id="popup-non-connecte" class="popup p-4 border-rouge shadow-xl hidden">
-            <p>Vous devez être connecté pour laisser un avis 👍👎</p>
+        <div id="popup-non-connecte-pouce" class="popup p-4 border-rouge shadow-xl hidden">
+            <p>Vous devez être connecté pour laisser un avis 👍👎 !</p>
+            <div class="flex justify-center mt-2 gap-4">
+                <button class="pl-2 pr-2 border-2 border-vertClair rounded-sm cursor-pointer">OK</button>
+                <a href="connexion.php" class="pl-2 pr-2 border-2 border-vertClair rounded-sm cursor-pointer">
+                    Se connecter
+                </a>
+            </div>
+        </div>
+
+        <!---popup être connecté pour signaler--->
+        <div id="popup-non-connecte-signaler" class="popup p-4 border-rouge shadow-xl hidden">
+            <p>Vous devez être connecté pour pouvoir signaler un avis !</p>
             <div class="flex justify-center mt-2 gap-4">
                 <button class="pl-2 pr-2 border-2 border-vertClair rounded-sm cursor-pointer">OK</button>
                 <a href="connexion.php" class="pl-2 pr-2 border-2 border-vertClair rounded-sm cursor-pointer">
@@ -288,6 +299,8 @@
                                                     title="Vous avez déjà signalé cet avis">';
                             } else {
                                 // Avis signalable → bouton cliquable
+                                if (isset($_SESSION['role']) && $_SESSION['role'] !== 'visiteur') {
+                                    // Utilisateur connecté → comportement normal
                                 $btnSignal = '<button class="btn-signal cursor-pointer hover:scale-110 transition" 
                                                         data-id="' . $row['id_avis'] . '">
                                                 <img class="md:w-6 md:h-6 w-5 h-5"
@@ -295,6 +308,17 @@
                                                     alt="Signaler" 
                                                     title="Signaler l\'avis">
                                             </button>';
+                                }
+
+                                else {
+                                    // Visiteur non connecté → affiche la popup de connexion
+                                    $btnSignal = '<button class="btn-signal-visiteur cursor-pointer hover:scale-110 transition">
+                                                    <img class="md:w-6 md:h-6 w-5 h-5"
+                                                        src="../../images/logo/bootstrap_icon/exclamation-triangle.svg" 
+                                                        alt="Signaler" 
+                                                        title="Signaler l\'avis">
+                                                </button>';
+                                }
                             }
 
                             $idAvis = $row['id_avis'];
@@ -440,8 +464,8 @@
     const popupElement1 = document.getElementById("popup-ajouter-panier");
     const popupElement2 = document.getElementById("popup-ajouter-avis");
     const popupElement3 = document.getElementById("popup-supprimer-avis");
-
-
+    const popupElement4 = document.getElementById("popup-non-connecte-signaler");
+       
     //affichage popup ajouter au panier
     if (popupElement1) {
         const btnClosePopUp1 = popupElement1.querySelector("button");
@@ -483,7 +507,7 @@
 
             //affichage de la popup si c'est un visiteur tentant de mettre un pouce
             if (!estConnecte) {
-                Popup.showPopUp("popup-non-connecte", 5000);
+                Popup.showPopUp("popup-non-connecte-pouce", 5000);   
                 return;
             }
 
@@ -527,6 +551,22 @@
 
     // Gestion du signalement
     let avisIdToSignal = null;
+
+    // Bouton signalement pour les visiteurs
+    document.querySelectorAll(".btn-signal-visiteur").forEach(btn => {
+        btn.addEventListener("click", () => {
+            // Affiche la popup "Vous devez être connecté pour signaler"
+            if (popupElement4) {
+                const btnClosePopUp4 = popupElement4.querySelector("button");
+
+                btnClosePopUp4?.addEventListener("click", () => {
+                    Popup.closePopup("popup-non-connecte-signaler");
+                });
+
+                Popup.showPopUp("popup-non-connecte-signaler", 5000);
+            }
+        });
+    });
 
     // Affichage de la popup de confirmation
     document.querySelectorAll(".btn-signal").forEach(btn => {
