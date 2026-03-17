@@ -929,11 +929,11 @@ VALUES
 
 
 --Insertion promotion
-INSERT INTO sae3_skadjam._promotion (label,date_debut_promotion,date_fin_promotion,periodicite,heure_debut,heure_fin,id_vendeur,id_photo) 
+INSERT INTO sae3_skadjam._promotion (label,date_debut_promotion,date_fin_promotion,periodicite,heure_debut,id_vendeur,id_photo) 
 VALUES
-  ('Ceci est un caillou','01/01/2026',NULL,NULL,'00:00',NULL,3,NULL),
-  ('Chandeleur','01/01/2026',NULL,NULL,'00:00',NULL,1,NULL),
-  ('Nouveauté','01/01/2026',NULL,NULL,'00:00',NULL,4,NULL);
+  ('Ceci est un caillou','01/01/2026',NULL,NULL,'00:00',3,NULL),
+  ('Chandeleur','01/01/2026',NULL,NULL,'00:00',1,NULL),
+  ('Nouveauté','01/01/2026',NULL,NULL,'00:00',4,NULL);
 
 --Insertion promu
 INSERT INTO sae3_skadjam._promu (id_promotion,id_produit) 

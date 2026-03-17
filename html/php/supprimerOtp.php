@@ -22,5 +22,4 @@ $auth = new AuthATOR($dbh, 'Alizon', $_SESSION['idCompte'], edition:true);
 $res = $auth->delSecret();
 unset($_SESSION["session_confirme"]);
 $location = "/html/".$dossier."/profil_".$role.".php";
-echo $location;
 header("Location: ".$location);

@@ -188,6 +188,10 @@
             <form action="statistiques.php" method="post">
                 <input class="border-vertFonce border-2 rounded-2xl w-72 h-14 p-2 m-1 cursor-pointer" type="submit" value="Mes statistiques">
             </form> 
+
+            <a href="/html/bo/recuperation_donnees_vendeur.php" class="border-vertFonce border-2 md:rounded-2xl rounded-xl md:w-72 w-60 md:h-14 h-10 p-2 m-1 cursor-pointer flex justify-center items-center">
+                <button class="cursor-pointer">Récupérer mes données</button>
+            </a>
         </div>
 
         <div class="flex justify-around mb-15">
