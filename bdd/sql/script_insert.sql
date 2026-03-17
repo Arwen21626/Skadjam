@@ -464,6 +464,7 @@ VALUES
   ('/images/photo_importees/serum_visage_cbd_acide_hyaluronique.webp',NULL,'Sérum visage à l’acide hyaluronique et CBD','Sérum visage à l’acide hyaluronique et CBD'),
   ('/images/photo_importees/gommage_visage_rose.webp',NULL,'Gommage visage à la rose de Bretagne','Gommage visage à la rose de Bretagne');
 
+
 --Insertion Montre
 INSERT INTO sae3_skadjam._montre (id_photo,id_produit) 
 VALUES
@@ -580,7 +581,8 @@ VALUES
   (111,111),
   (112,112),
   (113,113),
-  (114,114);  
+  (114,114);
+
 
 --Insertion Avis
 INSERT INTO sae3_skadjam._avis (nb_etoile,nb_pouce_haut,nb_pouce_bas,contenu_commentaire,id_produit,id_compte,signaler) 
