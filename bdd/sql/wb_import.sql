@@ -86,6 +86,15 @@ WbImport  -file=../csv/avis_complet.csv
           -fileColumns=$wb_skip$,nb_etoile,nb_pouce_haut,nb_pouce_bas,contenu_commentaire,id_produit,id_compte
           ;
           
+WbImport  -file=../csv/reponse_complete.csv
+          -schema=sae3_skadjam
+          -delimiter=';'
+          -table=sae3_skadjam._reponse
+          -header=true
+          -fileColumns=contenu_reponse, id_compte, id_avis
+          ;
+          
+          
 WbImport  -file=../csv/promotion.csv
           -schema=sae3_skadjam
           -delimiter=';'
