@@ -85,28 +85,11 @@
 
         // Définition du lien vers lequel est renvoyé le client en cliquant sur le bouton ajouter au panier
         // Si il est connecté : le produit est ajouté à son panier
-        //Si il n'est pas connecté : le visiteur est renvoyé sur la page de connexion
+        // Si il n'est pas connecté : le visiteur est renvoyé sur la page de connexion
 
         $lienBtnAjouterPanier = "/php/ajouter_panier.php";
 
-        // signalement d'un avis
-        if (isset($_GET['signal']) && $_GET['signal'] === "true"){
-            $idAvis = $_GET['idAvis'];
-            
-            $updateAvis = $dbh->prepare("UPDATE sae3_skadjam._avis SET signaler = 'true' WHERE id_avis = ?");
-            $updateAvis->execute([$idAvis]);
-
-            // si un client ou un vendeur signale un commentaire
-            if (!($_SESSION['role'] === 'visiteur')){
-                $insertAsignaler = $dbh->prepare("INSERT INTO sae3_skadjam._a_signaler VALUES (?, ?)");
-                $insertAsignaler->execute([$idAvis, $idCompte]);
-            }
-            //si un visiteur signale un commentaire
-            else{
-                $_SESSION['avis'][$idAvis] = "signaler";
-            }
-        }
-    }
+   }
 ?>
 
 
@@ -162,6 +145,30 @@
                 </a>
             </div>
         </div>
+
+        <!-- Popup confirmation signalement-->
+        <div id="popup-confirm-signal" class="popup p-4 border-rouge shadow-xl">
+            <p>Voulez-vous vraiment signaler cet avis ?</p>
+            <div class="flex justify-center mt-2 gap-4">
+                <button id="confirm-signal" class="pl-2 pr-2 border-2 border-vertClair rounded-sm cursor-pointer">
+                    Oui
+                </button>
+                <button id="cancel-signal" class="pl-2 pr-2 border-2 border-vertClair rounded-sm cursor-pointer">
+                    Non
+                </button>
+            </div>
+        </div>
+
+        <!-- Popup avis signalé -->
+        <div id="popup-signal-ok" class="popup p-4 border-vertFonce shadow-xl">
+            <p>L'avis a bien été signalé</p>
+            <div class="flex justify-center mt-2">
+                <button class="pl-2 pr-2 border-2 border-vertClair rounded-sm cursor-pointer">
+                    OK
+                </button>
+            </div>
+        </div>
+
     </div>
 
     <main class="p-4 md:pl-8 pr-8">
@@ -260,10 +267,46 @@
                 <section class=" md:ml-32">
                     <?php foreach($avis as $row){
                         if ($row['contenu_commentaire'] != ''){
-                            $monAvis = false;
-                            if($row['id_compte'] == $idCompte){
-                                $monAvis = true;
+                            $monAvis = ($row['id_compte'] == $idCompte);
+
+                            // Vérifier si l'utilisateur a déjà signalé l'avis ou si c'est son propre avis
+                            $aSignaler = false;
+                            $avisSignalable = false;
+
+                            if (!$monAvis && isset($_SESSION['idCompte'])) {
+                                $stmtSignal = $dbh->prepare("
+                                    SELECT 1 
+                                    FROM sae3_skadjam._a_signaler 
+                                    WHERE id_compte = :idCompte AND id_avis = :idAvis
+                                ");
+                                $stmtSignal->execute([
+                                    'idCompte' => $_SESSION['idCompte'],
+                                    'idAvis' => $row['id_avis']
+                                ]);
+                                $aSignaler = $stmtSignal->fetch() ? true : false;
                             }
+
+                            // Déterminer quel bouton afficher
+                            if ($monAvis) {
+                                // Pas de bouton si c'est mon avis
+                                $btnSignal = '';
+                            } elseif ($aSignaler) {
+                                // Avis déjà signalé → bouton plein et désactivé
+                                $btnSignal = '<img class="md:w-6 md:h-6 w-5 h-5" 
+                                                    src="../../images/logo/bootstrap_icon/exclamation-triangle-fill.svg" 
+                                                    alt="Avis déjà signalé" 
+                                                    title="Vous avez déjà signalé cet avis">';
+                            } else {
+                                // Avis signalable → bouton cliquable
+                                $btnSignal = '<button class="btn-signal cursor-pointer hover:scale-110 transition" 
+                                                        data-id="' . $row['id_avis'] . '">
+                                                <img class="md:w-6 md:h-6 w-5 h-5"
+                                                    src="../../images/logo/bootstrap_icon/exclamation-triangle.svg" 
+                                                    alt="Signaler" 
+                                                    title="Signaler l\'avis">
+                                            </button>';
+                            }
+
                             $idAvis = $row['id_avis'];
                             $stmt = $dbh->prepare("SELECT id_avis, raison_sociale, contenu_reponse FROM sae3_skadjam._reponse r
                                                     INNER JOIN sae3_skadjam._vendeur v
@@ -311,43 +354,11 @@
                                         </div>
                                     </div>
 
-                                    <?php // savoir si l'utilisateur à déjà signaler l'avis il ne faut pas qu'il puisse le resignaler
-                                    $aSignaler = false;
-                                    //pour le visiteur
-                                    if ($_SESSION['role'] === 'visiteur'){
-                                        if (isset($_SESSION['avis'][$row['id_avis']])){
-                                            $aSignaler = true;
-                                        }
-                                    }
-                                    // pour les personne connecter à un compte client ou vendeur
-                                    elseif($_SESSION['role'] === 'client' || $_SESSION['role'] === 'vendeur'){
-                                        $idAvis = $row['id_avis'];
-                                        $idCompte = $_SESSION['idCompte'];
-                                        foreach($dbh->query("SELECT id_avis, id_compte 
-                                                                FROM sae3_skadjam._a_signaler s 
-                                                                WHERE id_compte = $idCompte AND id_avis = $idAvis
-                                                            UNION
-                                                            SELECT id_avis, id_compte 
-                                                                FROM sae3_skadjam._avis a 
-                                                                WHERE id_compte = $idCompte  AND id_avis = $idAvis;", PDO::FETCH_ASSOC) as $avisSignalable){
-                                            $aSignaler = true;
-                                        }
-                                    }
-                                    // affichage du bouton signaler vide ou plein
-                                    if (!$aSignaler){
-                                        //si l'utilisateur n'a pas déjà signaler l'avis?>
-                                        <a href="./details_produit.php?idProduit=<?php echo $idProd;?>&signal=true&idAvis=<?php echo $row['id_avis']?>">
-                                            <img class="md:w-6 md:h-6 w-5 h-5 cursor-pointer hover:scale-110 transition" src="../../images/logo/bootstrap_icon/exclamation-triangle.svg" 
-                                                alt="icône attention pour signaler un avis"
-                                                title="Signaler l'avis">
-                                        </a>
-                                    <?php }
-                                    elseif(!$monAvis){ 
-                                        //si ce n'est pas mon propre avis?>
-                                        <img class="md:w-6 md:h-6 w-5 h-5" src="../../images/logo/bootstrap_icon/exclamation-triangle-fill.svg" 
-                                            alt="icône attention pour indiquer que vous avez déjà signaler l'avis"
-                                            title="Vous avez déjà signaler l'avis">
-                                    <?php }?>
+                                    <!-- Bouton signaler -->
+                                    <div>
+                                        <?php echo $btnSignal; ?>
+                                    </div>
+
                                 </div>
                                 <p><?php echo $row['contenu_commentaire'];?></p>     
                             </section>
@@ -476,50 +487,116 @@
 
     //Affichage du compte de pouces haut(s)/bas
     document.querySelectorAll(".vote-btn").forEach(button => {
-    button.addEventListener("click", () => {
-        const avisId = button.dataset.id;
-        const voteType = parseInt(button.dataset.type);
+        button.addEventListener("click", () => {
+            const avisId = button.dataset.id;
+            const voteType = parseInt(button.dataset.type);
 
-        if (!estConnecte) {
-            Popup.showPopUp("popup-non-connecte", 5000);
-            return;
-        }
+            //affichage de la popup si c'est un visiteur tentant de mettre un pouce
+            if (!estConnecte) {
+                Popup.showPopUp("popup-non-connecte", 5000);
+                return;
+            }
 
-        fetch("/php/vote_pouce.php", {
+            //ajout/retrait du pouce dans vote_pouce.php
+            fetch("/php/vote_pouce.php", {
+                method: "POST",
+                headers: { "Content-Type": "application/x-www-form-urlencoded" },
+                body: "id=" + avisId + "&type=" + voteType
+            })
+            .then(res => res.json())
+            .then(data => {
+
+                if(data.error){
+                    console.error(data.error);
+                    return;
+                }
+
+                const likeCount = document.getElementById("like-count-" + avisId);
+                const dislikeCount = document.getElementById("dislike-count-" + avisId);
+                likeCount.textContent = data.likes;
+                dislikeCount.textContent = data.dislikes;
+
+                const likeBtn = document.querySelector(`.vote-btn.like[data-id='${avisId}']`);
+                const dislikeBtn = document.querySelector(`.vote-btn.dislike[data-id='${avisId}']`);
+
+                //Reset les images
+                likeBtn.src = "../../images/logo/bootstrap_icon/hand-thumbs-up.svg";
+                dislikeBtn.src = "../../images/logo/bootstrap_icon/hand-thumbs-down.svg";
+
+                //Activer le pouce correspondant seulement si l’utilisateur a voté
+                if(data.pouce_utilisateur === 1){
+                    likeBtn.src = "../../images/logo/bootstrap_icon/hand-thumbs-up-fill.svg";
+                } else if(data.pouce_utilisateur === -1){
+                    dislikeBtn.src = "../../images/logo/bootstrap_icon/hand-thumbs-down-fill.svg";
+                }
+            })
+            .catch(err => console.error(err));
+        });
+    });
+
+
+    // Gestion du signalement
+    let avisIdToSignal = null;
+
+    // Affichage de la popup de confirmation
+    document.querySelectorAll(".btn-signal").forEach(btn => {
+        btn.addEventListener("click", () => {
+            avisIdToSignal = btn.dataset.id;
+            Popup.showPopUp("popup-confirm-signal", 3000);
+        });
+    });
+
+    // Annuler le signalement
+    const cancelBtn = document.getElementById("cancel-signal");
+    cancelBtn?.addEventListener("click", () => {
+        Popup.closePopup("popup-confirm-signal");
+        avisIdToSignal = null;
+    });
+
+    // Confirmer le signalement
+    const confirmBtn = document.getElementById("confirm-signal");
+    confirmBtn?.addEventListener("click", () => {
+        if (!avisIdToSignal) return;
+
+        fetch("/php/signal_avis.php", {
             method: "POST",
             headers: { "Content-Type": "application/x-www-form-urlencoded" },
-            body: "id=" + avisId + "&type=" + voteType
+            body: "idAvis=" + avisIdToSignal
         })
         .then(res => res.json())
         .then(data => {
-
-            if(data.error){
+            if (data.error) {
                 console.error(data.error);
                 return;
             }
 
-            const likeCount = document.getElementById("like-count-" + avisId);
-            const dislikeCount = document.getElementById("dislike-count-" + avisId);
-            likeCount.textContent = data.likes;
-            dislikeCount.textContent = data.dislikes;
+            // Fermer la popup de confirmation
+            Popup.closePopup("popup-confirm-signal");
 
-            const likeBtn = document.querySelector(`.vote-btn.like[data-id='${avisId}']`);
-            const dislikeBtn = document.querySelector(`.vote-btn.dislike[data-id='${avisId}']`);
+            // Afficher la popup “avis signalé”
+            Popup.showPopUp("popup-signal-ok", 0, false);
 
-            // Reset les images
-            likeBtn.src = "../../images/logo/bootstrap_icon/hand-thumbs-up.svg";
-            dislikeBtn.src = "../../images/logo/bootstrap_icon/hand-thumbs-down.svg";
+            // Bouton OK pour fermer la popup
+            const popupOk = document.getElementById("popup-signal-ok");
+            const btnOk = popupOk.querySelector("button");
+            btnOk?.addEventListener("click", () => {
+                Popup.closePopup("popup-signal-ok");
+            });
 
-            // Activer le pouce correspondant seulement si l’utilisateur a voté
-            if(data.pouce_utilisateur === 1){
-                likeBtn.src = "../../images/logo/bootstrap_icon/hand-thumbs-up-fill.svg";
-            } else if(data.pouce_utilisateur === -1){
-                dislikeBtn.src = "../../images/logo/bootstrap_icon/hand-thumbs-down-fill.svg";
+            // Mettre à jour le bouton signalement dans la page
+            const btn = document.querySelector(`.btn-signal[data-id='${avisIdToSignal}']`);
+            if (btn) {
+                // Remplacer le bouton cliquable par l'image remplie
+                btn.outerHTML = `<img class="md:w-6 md:h-6 w-5 h-5" 
+                                        src="../../images/logo/bootstrap_icon/exclamation-triangle-fill.svg" 
+                                        alt="Avis déjà signalé" 
+                                        title="Vous avez déjà signalé cet avis">`;
             }
+
+            avisIdToSignal = null;
         })
         .catch(err => console.error(err));
     });
-});
 
 
 </script>
