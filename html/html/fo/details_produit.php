@@ -151,6 +151,17 @@
                 </div>
             </div>
         <?php endif; ?>
+
+        <!---popup être connecté pour laisser un pouce--->
+        <div id="popup-non-connecte" class="popup p-4 border-rouge shadow-xl hidden">
+            <p>Vous devez être connecté pour laisser un avis 👍👎</p>
+            <div class="flex justify-center mt-2 gap-4">
+                <button class="pl-2 pr-2 border-2 border-vertClair rounded-sm cursor-pointer">OK</button>
+                <a href="connexion.php" class="pl-2 pr-2 border-2 border-vertClair rounded-sm cursor-pointer">
+                    Se connecter
+                </a>
+            </div>
+        </div>
     </div>
 
     <main class="p-4 md:pl-8 pr-8">
@@ -424,6 +435,7 @@
 <script type="module">
     import * as Popup from "../../js/popup.js";
 
+    const estConnecte = <?= (isset($_SESSION['role']) && $_SESSION['role'] !== 'visiteur') ? 'true' : 'false' ?>;
     const popupElement1 = document.getElementById("popup-ajouter-panier");
     const popupElement2 = document.getElementById("popup-ajouter-avis");
     const popupElement3 = document.getElementById("popup-supprimer-avis");
@@ -467,6 +479,11 @@
     button.addEventListener("click", () => {
         const avisId = button.dataset.id;
         const voteType = parseInt(button.dataset.type);
+
+        if (!estConnecte) {
+            Popup.showPopUp("popup-non-connecte", 5000);
+            return;
+        }
 
         fetch("/php/vote_pouce.php", {
             method: "POST",
