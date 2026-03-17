@@ -155,7 +155,7 @@ CREATE TABLE sae3_skadjam._promotion (
     date_fin_promotion CHARACTER VARYING(12),
     periodicite NUMERIC(5),
     heure_debut CHARACTER VARYING(5) NOT NULL,
-    heure_fin CHARACTER VARYING(5),
+    heure_fin CHARACTER VARYING(5) DEFAULT '23:59',
     id_vendeur INT NOT NULL,
     id_photo INT
 );

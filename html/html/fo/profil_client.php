@@ -83,7 +83,7 @@ require_once __DIR__ . "/../../01_premiere_connexion.php";
                                 <td class="py-3">
                                     <?php for ($i=0; $i < $nbAdresse; $i++) { // Affiche toutes les adresses du client 
                                         $j=$i+1;?>
-                                    <p> n°<?php echo "$j : $numRue[$i] $complement[$i] $adressePostale[$i]$batiment[$i]$appartement[$i], $codePostal[$i] $ville[$i]"; ?></p>
+                                    <p> <abbr title="numéro">n°</abbr><?php echo "$j : $numRue[$i] $complement[$i] $adressePostale[$i]$batiment[$i]$appartement[$i], $codePostal[$i] $ville[$i]"; ?></p>
                                     <?php } ?>
                                 </td>
                             </tr>

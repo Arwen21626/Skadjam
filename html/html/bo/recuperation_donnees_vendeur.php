@@ -55,7 +55,7 @@ if ($_SESSION["role"] === "vendeur"){
                     LEFT JOIN sae3_skadjam._remise rem ON rem.id_remise = red.id_remise
                     LEFT JOIN sae3_skadjam._promu prom ON prom.id_produit = prod.id_produit
                     LEFT JOIN sae3_skadjam._promotion promo ON promo.id_promotion = prom.id_promotion
-                    LEFT JOIN sae3_skadjam._photo ph_promo ON ph_promo.id_photo = mont.id_photo
+                    LEFT JOIN sae3_skadjam._photo ph_promo ON ph_promo.id_photo = promo.id_photo
                     LEFT JOIN sae3_skadjam._categorie cat ON cat.id_categorie = prod.id_categorie
                     LEFT JOIN sae3_skadjam._tva t ON t.id_tva = prod.id_tva
                 WHERE c.id_compte = $idCompte
@@ -169,9 +169,10 @@ if ($_SESSION["role"] === "vendeur"){
         <?php }?>
         <section class="md:grid grid-cols-4 mb-5">
             <h3 class="text-center m-2 col-span-4 md:mt-10">Vos adresses</h3>
-            <?php 
+            <?php $aAdresse = false;
             // informations sur les adresses du vendeur
-            foreach($donneesAdresses as $donnees){?>
+            foreach($donneesAdresses as $donnees){
+                $aAdresse = true?>
                 <div class=" mb-5 md:grid grid-cols-4 col-span-4 gap-3">
                     <h4 class=" col-span-4 font-bold text-center"><?php echo $donnees["numero_rue_vendeur"].($donnees["complement_adresse_vendeur"] !== ""?" ".$donnees["complement_adresse_vendeur"]:"")." ".$donnees["adresse_postal_vendeur"]?></h4>
                     <p>ville : <?php echo $donnees["ville_vendeur"]?></p>
@@ -189,13 +190,17 @@ if ($_SESSION["role"] === "vendeur"){
                         <p>code de l'interphone : <?php echo $donnees["code_interphone_vendeur"]?></p>
                     <?php }?>
                 </div>
+            <?php }
+            if($aAdresse === false){?>
+                <p>Vous n'avez pas enregistrer d'adresse</p>
             <?php }?>
         </section>
         <section class=" mb-5">
             <h3 class="text-center m-2 md:mt-10">Vos commandes</h3>
-            <?php 
+            <?php $aCommande = false;
             // informations sur les commandes du vendeur
-            foreach($donneesFactures as $donnees){?>
+            foreach($donneesFactures as $donnees){
+                $aCommande = true;?>
                 <div class="md:grid grid-cols-4 mb-5 gap-3">
                     <h4 class=" ml-10 m-2 font-bold col-span-4 md:text-center"> Commande <?php echo $donnees["id_commande"]?></h4>
                     <?php if($donnees["id_suivie_commande"] != ""){?>
@@ -222,25 +227,34 @@ if ($_SESSION["role"] === "vendeur"){
                     <?php }?>
                     </div>
                 </div>
+            <?php }
+            if($aCommande === false){?>
+                <p>Vous n'avez aucune commande pour le moment</p>
             <?php }?>
         </section>
         <!-- les reponses poster par le vendeur -->
         <section class=" mb-5">
             <h3 class="text-center m-2">Vos réponses aux avis postés</h3>
-            <?php 
-            foreach($donneesReponsesPostes as $donnees){?>
+            <?php $aResponse = false;
+            foreach($donneesReponsesPostes as $donnees){
+                $aResponse = true;?>
                 <div class=" md:grid grid-cols-4 mb-5 gap-3">
                     <h4 class=" ml-10 m-2 font-bold col-span-4 md:text-center">Sur le produit : <?php echo $donnees["id_produit"]." - ". $donnees["libelle_produit"]?></h4>
                     <p class=" col-span-4">commentaire : <?php echo $donnees["contenu_avis_repondu"]?></p>
                     <p class=" col-span-4">par : <?php echo $donnees["pseudo_client"]?></p>
                     <p class=" col-span-4">reponse : <?php echo $donnees["contenu_reponse"]?></p>
                 </div>
+            <?php }
+            if($aResponse === false){?>
+                <p>Vous n'avez répondu à personne</p>
             <?php }?>
-        </section>
+        </section> 
         <!-- les produits du vendeur -->
         <section class=" mb-5">
             <h3 class="text-center m-2">Vos produits</h3>
-        <?php foreach($donneesProduits as $donnees){?>
+        <?php $aProduit = false;
+        foreach($donneesProduits as $donnees){
+            $aProduit = true;?>
             <div class=" md:grid grid-cols-3 mb-5 gap-3">
                 <div class=" col-span-3 flex justify-self-center">
                     <img class="w-16 h-16 inline-block" src="<?php echo $donnees["url_photo_produit"]?>" alt="<?php echo $donnees["alt_photo_produit"]?>" title="<?php echo $donnees["titre_photo_produit"]?>">
@@ -261,7 +275,7 @@ if ($_SESSION["role"] === "vendeur"){
                 <p>prix <abbr title="Hors Taxes">HT</abbr> : <?php echo $donnees["prix_ht"]?></p>
                 <p>prix <abbr title="Toutes Taxes Comprises">TTC</abbr> : <?php echo $donnees["prix_ttc"]?></p>
                 <p>quatité en stock : <?php echo $donnees["quantite_stock"]?></p>
-                <p>seuil d'alerte : <?php echo $donnees["seuil_alert"]!=""?$donnees["seuil_alert"]:0?></p>
+                <p>seuil d'alerte : <?php echo $donnees["seuil_alerte"]!=""?$donnees["seuil_alerte"]:0?></p>
                 <p>date de création : <?php 
                     $date = explode(" ",$donnees["date_creation"]);
                     echo formatDate($date[0]);?>
@@ -278,15 +292,16 @@ if ($_SESSION["role"] === "vendeur"){
                     <?php if ($donnees["libelle_promotion"] != ""){?>
                         <p>libelle promotion : <?php echo $donnees["libelle_promotion"]?></p>
                         <p>debut de promotion : le <?php echo $donnees["date_debut_promotion"]?> à <?php echo $donnees["heure_debut"]?> </p>
-                    <?php } if ($donnees["date_fin_promotion"] != ""){?>
+                    <?php  if ($donnees["date_fin_promotion"] != ""){?>
                         <p>fin de promotion : le <?php echo $donnees["date_fin_promotion"]?> à <?php echo $donnees["heure_fin"]?> </p>
                     <?php } if ($donnees["periodicite"] != ""){?>
                         <p>periodicite : <?php echo $donnees["periodicite"]?></p>
-                    <?php } if ($donnees["url_photo_promotion"] != ""){?>
-                        <img src="<?php echo $donnees["url_photo_promotion"]?>" alt="<?php echo $donnees["alt_photo_promotion"]?>" title="<?php echo $donnees["titre_photo_promotion"]?>">
-                    <?php } if ($donnees["description_photo_promotion"] != ""){?>
-                        <p class=" col-span-3">description de la photo de promotion : <?php echo $donnees["description_photo_promotion"]?></p>
-                    <?php }?>
+                    <?php } if ($donnees["url_photo_promotion_produit"] != ""){?>
+                        <img src="<?php echo $donnees["url_photo_promotion_produit"]?>" alt="<?php echo $donnees["alt_photo_promotion"]?>" title="<?php echo $donnees["titre_photo_promotion_produit"]?>">
+                    <?php } if ($donnees["description_photo_promotion_produit"] != ""){?>
+                        <p class=" col-span-3">description de la photo de promotion : <?php echo $donnees["description_photo_promotion_produit"]?></p>
+                    <?php }
+                    }?>
                 </div> 
 
                 <!-- remise -->
@@ -300,10 +315,11 @@ if ($_SESSION["role"] === "vendeur"){
                         <p>date de fin de remise : <?php echo $donnees["date_fin_remise"]?></p>
                     <?php }?>
                 </div>
-        </div>
-        <?php }?>
-        
-
+            </div>
+            <?php }
+            if($aProduit === false){?>
+                <p>Vous n'avez aucun produit</p>
+            <?php }?>
         </section>
 
         <script>

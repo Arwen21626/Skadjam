@@ -12,7 +12,7 @@ if (isset($_SESSION['role']) && $_SESSION['role'] !== 'visiteur'){
 }
 
 $auth = new AuthATOR($dbh, "Alizon", $idClient, "", true);
-$initBeforPhp = ($auth->getInitBefor())?0: 1;
+$initBeforPhp = $auth->getInitBefor() ? 1 : 0; // CORRIGÉ : 1 = déjà configuré, 0 = pas encore
 
 ?>
 <!DOCTYPE html>
@@ -25,12 +25,12 @@ $initBeforPhp = ($auth->getInitBefor())?0: 1;
     ($role === 'vendeur') ? include __DIR__.'/../php/structure/head_back.php' : include __DIR__.'/../php/structure/head_front.php';
     ?>
 </head>
-<body>
+<body class="flex flex-col min-h-screen">
     <?php ($role === 'vendeur') ? include __DIR__.'/../php/structure/header_back.php' : include __DIR__.'/../php/structure/header_front.php' ?>
     <?php ($role === 'vendeur') ? include __DIR__.'/../php/structure/navbar_back.php' : include __DIR__.'/../php/structure/navbar_front.php' ?>
     
-    <main class="p-4 relative md:p-8 flex flex-col items-center">
-        <button onclick="window.history.back()" class="w-25 h-10 top-3 left-3 rounded-[8px] border-vertClair bg-white border-2 md:rounded-xl:w-40:h-14:top-5:left-5 cursor-pointer m-5S absolute  z-5">Retour</button>
+    <main class="flex-1 p-4 relative md:p-8 flex flex-col items-center">
+        <button onclick="window.history.back()" class="w-25 h-10 top-3 left-3 rounded-[8px] border-vertClair bg-white border-2 md:rounded-xl md:w-40 md:h-14 md:top-5 md:left-5 cursor-pointer m-5S absolute  z-5">Retour</button>
 
         <h2 class=" mt-8!">Authentification à deux facteurs</h2>
         <p class="m-2 md:w-3/4 md:m-4">
@@ -47,20 +47,20 @@ $initBeforPhp = ($auth->getInitBefor())?0: 1;
                 <li>Valider l'activation de l'Authentification à deux facteurs</li>
             </ol>
         </section>
-        <?php if ($initBeforPhp==0){ ?>
+        <?php if ($initBeforPhp == 1){ // CORRIGÉ : 1 = déjà configuré → afficher "Supprimer" ?>
             <button id="supprimer" onclick="supprimer()" class="border-vertClair border-2 rounded-xl w-40 h-14 cursor-pointer m-5S">Supprimer A2F</button>
 
-        <?php } else {?>
+        <?php } else { ?>
             <button id="gen-key" onclick="generer(<?= $idClient ?>)" class="border-vertClair border-2 rounded-xl w-40 h-14 cursor-pointer m-5S">Générer</button>
         <?php } ?>        
         <section id="veiw-pass" class=" hidden flex-col items-center m-5">
-            <div class="hidden md:flex flex-row">
-                <p>Secret :</p>
+            <div class="hidden md:flex flex-row items-center">
+                <p class="m-2">Secret :</p>
                 <pre  id="txt-key"></pre>
             </div>
-            <div class="flex flex-row items-center justify-between">
+            <div class="md:hidden flex flex-row items-center justify-between">
                 <p>Code Secret : </p>
-                <button id="btn-cpy" class="block md:hidden border-vertClair border-2 rounded-xl w-40 h-14 cursor-pointer m-2" onclick="copier()">Copier</button>
+                <button id="btn-cpy" class="block border-vertClair border-2 rounded-xl w-40 h-14 cursor-pointer m-2" onclick="copier()">Copier</button>
             </div>
             <img src="" alt="QR code" id="img-qr-code"  class="md:w-1/3 border-vertClair border-2 rounded-xl m-4">
             <?php include __DIR__.'/../php/structure/authentikATOR/input_code.php' ?>
@@ -85,7 +85,7 @@ $initBeforPhp = ($auth->getInitBefor())?0: 1;
 <script src="./../php/structure/authentikATOR/appelAJAX.js"></script>
 <script>
 
-    console.log("[pass_A2F] deb initBefor = "+ "<?= $initBeforPhp ?>")
+    console.log("[pass_A2F] deb initBefor = " + "<?= $initBeforPhp ?>")
     let secret
     let qrcode
     
@@ -101,21 +101,21 @@ $initBeforPhp = ($auth->getInitBefor())?0: 1;
     
 
     async function terminer(idCompte){
-        initParam(idCompte,secret)
+        initParam(idCompte, secret, 1) // CORRIGÉ : 1 = mode édition
         console.log("[pass_A2F] termine")
         let ret = await saveSecret()
         history.back()
     }
 
     async function generer(idCompte){
-        initParam(idCompte,secret, 0)
-        data = await getSecret()
+        initParam(idCompte, secret, 1) // CORRIGÉ : 1 = mode édition (était 0, donc inversé)
+        let data = await getSecret()
         secret = data['secret']
         qrcode = data['qrcode']
-        initBefor = data['init']
+        let initBefor = data['init'] // 1 = déjà configuré, 0 = pas encore
         console.log("[pass_A2F] data :")
         console.log(data)
-        console.log("[pass_A2F] initBefor = "+initBefor)
+        console.log("[pass_A2F] initBefor = " + initBefor)
         showView()
     }
 
@@ -124,8 +124,8 @@ $initBeforPhp = ($auth->getInitBefor())?0: 1;
     }
 
     function showView(){
-        console.log("[pass_A2F] secret : "+secret)
-        console.log("[pass_A2F] qrcode : "+qrcode)
+        console.log("[pass_A2F] secret : " + secret)
+        console.log("[pass_A2F] qrcode : " + qrcode)
         txtKey.textContent = secret
         imQr.src = qrcode
         view.style.display = "flex"
@@ -133,8 +133,8 @@ $initBeforPhp = ($auth->getInitBefor())?0: 1;
         btnGen.style.display = "none"
         goFirst()
         input.scrollIntoView({
-            behavior: 'smooth', // animation fluide
-            block: 'center'     // centrer verticalement
+            behavior: 'smooth',
+            block: 'center'
         })
     }
 
@@ -144,31 +144,28 @@ $initBeforPhp = ($auth->getInitBefor())?0: 1;
 
     async function closePopUp() {
         popup.style.display = "none"
-        
-        //showView()
     }
 
     async function suppPopUp(idCompte) {
-        initParam(idCompte,secret)
+        initParam(idCompte, secret, 0) // lecture seule, pas d'édition
         ret = await delSecret()
         window.location.replace("./pass_A2F.php")
-        
     }
 
     async function submit(idCompte){
-        initParam(idCompte,secret)
+        initParam(idCompte, secret, 1) // CORRIGÉ : 1 = mode édition
         const code = recup_code()
         console.log("[pass_A2F] submit() — code saisi :", code)
-        ret = await verifOtp(code)
+        let ret = await verifOtp(code)
         console.log("[pass_A2F] submit() — vérifié :", ret)
-        if (ret == 0) {
+        if (ret === true) { // CORRIGÉ : true = code valide (plus de == 0)
             res.textContent = "Code bon."
             res.classList.remove("hidden")
             btnTerminer.removeAttribute("disabled")
             btnTerminer.style.display = "block"
             input.style.display = "none"
             return true
-        }else{
+        } else {
             res.textContent = "Code incorrect, réessayez."
             res.classList.remove("hidden")
             return false
@@ -181,10 +178,9 @@ $initBeforPhp = ($auth->getInitBefor())?0: 1;
 
     async function copier() {
         await navigator.clipboard.writeText(txtKey.textContent)
-
         btnCpy.textContent = "Copié!"
         await sleep(500)
         btnCpy.textContent = "copier"
-}
+    }
 </script>
 </html>
