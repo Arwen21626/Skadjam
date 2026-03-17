@@ -280,7 +280,7 @@ unset($_SESSION['erreurs'], $_SESSION['old']);
                 mdpForm.appendChild(erreurMdp)
             })
 
-            // Verif mdp
+            // Verification du mdp
             let mdpVerifForm = document.getElementById("mdpVerifForm")
             let erreurVerifMdp = document.createElement("p")
             erreurVerifMdp.textContent = "La vérification doit être identique à votre mot de passe."
