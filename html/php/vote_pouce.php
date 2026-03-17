@@ -1,6 +1,12 @@
 <?php
 require_once(__DIR__ . "/../01_premiere_connexion.php");
 session_start();
+
+if (!isset($_SESSION['role']) || $_SESSION['role'] === 'visiteur') {
+    echo json_encode(["error" => "Non connecté"]);
+    exit;
+}
+
 $dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
 header('Content-Type: application/json');

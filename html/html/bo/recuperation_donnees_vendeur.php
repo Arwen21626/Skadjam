@@ -55,7 +55,7 @@ if ($_SESSION["role"] === "vendeur"){
                     LEFT JOIN sae3_skadjam._remise rem ON rem.id_remise = red.id_remise
                     LEFT JOIN sae3_skadjam._promu prom ON prom.id_produit = prod.id_produit
                     LEFT JOIN sae3_skadjam._promotion promo ON promo.id_promotion = prom.id_promotion
-                    LEFT JOIN sae3_skadjam._photo ph_promo ON ph_promo.id_photo = mont.id_photo
+                    LEFT JOIN sae3_skadjam._photo ph_promo ON ph_promo.id_photo = promo.id_photo
                     LEFT JOIN sae3_skadjam._categorie cat ON cat.id_categorie = prod.id_categorie
                     LEFT JOIN sae3_skadjam._tva t ON t.id_tva = prod.id_tva
                 WHERE c.id_compte = $idCompte
@@ -275,7 +275,7 @@ if ($_SESSION["role"] === "vendeur"){
                 <p>prix <abbr title="Hors Taxes">HT</abbr> : <?php echo $donnees["prix_ht"]?></p>
                 <p>prix <abbr title="Toutes Taxes Comprises">TTC</abbr> : <?php echo $donnees["prix_ttc"]?></p>
                 <p>quatité en stock : <?php echo $donnees["quantite_stock"]?></p>
-                <p>seuil d'alerte : <?php echo $donnees["seuil_alert"]!=""?$donnees["seuil_alert"]:0?></p>
+                <p>seuil d'alerte : <?php echo $donnees["seuil_alerte"]!=""?$donnees["seuil_alerte"]:0?></p>
                 <p>date de création : <?php 
                     $date = explode(" ",$donnees["date_creation"]);
                     echo formatDate($date[0]);?>
@@ -292,15 +292,16 @@ if ($_SESSION["role"] === "vendeur"){
                     <?php if ($donnees["libelle_promotion"] != ""){?>
                         <p>libelle promotion : <?php echo $donnees["libelle_promotion"]?></p>
                         <p>debut de promotion : le <?php echo $donnees["date_debut_promotion"]?> à <?php echo $donnees["heure_debut"]?> </p>
-                    <?php } if ($donnees["date_fin_promotion"] != ""){?>
+                    <?php  if ($donnees["date_fin_promotion"] != ""){?>
                         <p>fin de promotion : le <?php echo $donnees["date_fin_promotion"]?> à <?php echo $donnees["heure_fin"]?> </p>
                     <?php } if ($donnees["periodicite"] != ""){?>
                         <p>periodicite : <?php echo $donnees["periodicite"]?></p>
-                    <?php } if ($donnees["url_photo_promotion"] != ""){?>
-                        <img src="<?php echo $donnees["url_photo_promotion"]?>" alt="<?php echo $donnees["alt_photo_promotion"]?>" title="<?php echo $donnees["titre_photo_promotion"]?>">
-                    <?php } if ($donnees["description_photo_promotion"] != ""){?>
-                        <p class=" col-span-3">description de la photo de promotion : <?php echo $donnees["description_photo_promotion"]?></p>
-                    <?php }?>
+                    <?php } if ($donnees["url_photo_promotion_produit"] != ""){?>
+                        <img src="<?php echo $donnees["url_photo_promotion_produit"]?>" alt="<?php echo $donnees["alt_photo_promotion"]?>" title="<?php echo $donnees["titre_photo_promotion_produit"]?>">
+                    <?php } if ($donnees["description_photo_promotion_produit"] != ""){?>
+                        <p class=" col-span-3">description de la photo de promotion : <?php echo $donnees["description_photo_promotion_produit"]?></p>
+                    <?php }
+                    }?>
                 </div> 
 
                 <!-- remise -->

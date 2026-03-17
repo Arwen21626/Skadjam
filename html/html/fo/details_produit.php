@@ -92,7 +92,6 @@
         // signalement d'un avis
         if (isset($_GET['signal']) && $_GET['signal'] === "true"){
             $idAvis = $_GET['idAvis'];
-            $idCompte = $_SESSION['idCompte'];
             
             $updateAvis = $dbh->prepare("UPDATE sae3_skadjam._avis SET signaler = 'true' WHERE id_avis = ?");
             $updateAvis->execute([$idAvis]);
@@ -152,6 +151,17 @@
                 </div>
             </div>
         <?php endif; ?>
+
+        <!---popup être connecté pour laisser un pouce--->
+        <div id="popup-non-connecte" class="popup p-4 border-rouge shadow-xl hidden">
+            <p>Vous devez être connecté pour laisser un avis 👍👎</p>
+            <div class="flex justify-center mt-2 gap-4">
+                <button class="pl-2 pr-2 border-2 border-vertClair rounded-sm cursor-pointer">OK</button>
+                <a href="connexion.php" class="pl-2 pr-2 border-2 border-vertClair rounded-sm cursor-pointer">
+                    Se connecter
+                </a>
+            </div>
+        </div>
     </div>
 
     <main class="p-4 md:pl-8 pr-8">
@@ -222,17 +232,23 @@
                 <?php 
                 // tableau contenant tous les avis
                 $avis = [];
-                foreach($dbh->query("SELECT a.*, c.pseudo,
-                                        (SELECT pouce 
-                                        FROM sae3_skadjam._pouces p 
-                                        WHERE p.id_avis=a.id_avis 
-                                            AND p.id_compte=$idCompte) AS pouce_utilisateur
-                                    FROM sae3_skadjam._avis a 
-                                    INNER JOIN sae3_skadjam._client c 
-                                        ON a.id_compte = c.id_compte 
-                                    WHERE id_produit = $idProd", PDO::FETCH_ASSOC) as $row){
-                    $avis[] = $row;
-                }
+                $sql = "SELECT a.*, c.pseudo,
+                        (SELECT pouce 
+                        FROM sae3_skadjam._pouces p 
+                        WHERE p.id_avis = a.id_avis 
+                        AND p.id_compte = :idCompte) AS pouce_utilisateur
+                        FROM sae3_skadjam._avis a 
+                        INNER JOIN sae3_skadjam._client c 
+                            ON a.id_compte = c.id_compte 
+                        WHERE id_produit = :idProd";
+
+                $stmt = $dbh->prepare($sql);
+                $stmt->execute([
+                    'idCompte' => $idCompte,
+                    'idProd' => $idProd
+                ]);
+
+                $avis = $stmt->fetchAll(PDO::FETCH_ASSOC);
                 
                 if($avis == null){?>
                     <p class=" md:ml-24">Aucun avis associé à ce produit.</p>
@@ -317,15 +333,17 @@
                                             $aSignaler = true;
                                         }
                                     }
-                                    // affichage ou pas du boutton signaler
-                                    if (!$aSignaler){?>
+                                    // affichage du bouton signaler vide ou plein
+                                    if (!$aSignaler){
+                                        //si l'utilisateur n'a pas déjà signaler l'avis?>
                                         <a href="./details_produit.php?idProduit=<?php echo $idProd;?>&signal=true&idAvis=<?php echo $row['id_avis']?>">
                                             <img class="md:w-6 md:h-6 w-5 h-5 cursor-pointer hover:scale-110 transition" src="../../images/logo/bootstrap_icon/exclamation-triangle.svg" 
                                                 alt="icône attention pour signaler un avis"
                                                 title="Signaler l'avis">
                                         </a>
                                     <?php }
-                                    elseif(!$monAvis){ ?>
+                                    elseif(!$monAvis){ 
+                                        //si ce n'est pas mon propre avis?>
                                         <img class="md:w-6 md:h-6 w-5 h-5" src="../../images/logo/bootstrap_icon/exclamation-triangle-fill.svg" 
                                             alt="icône attention pour indiquer que vous avez déjà signaler l'avis"
                                             title="Vous avez déjà signaler l'avis">
@@ -417,10 +435,13 @@
 <script type="module">
     import * as Popup from "../../js/popup.js";
 
+    const estConnecte = <?= (isset($_SESSION['role']) && $_SESSION['role'] !== 'visiteur') ? 'true' : 'false' ?>;
     const popupElement1 = document.getElementById("popup-ajouter-panier");
     const popupElement2 = document.getElementById("popup-ajouter-avis");
     const popupElement3 = document.getElementById("popup-supprimer-avis");
 
+
+    //affichage popup ajouter au panier
     if (popupElement1) {
         const btnClosePopUp1 = popupElement1.querySelector("button");
 
@@ -431,6 +452,7 @@
         Popup.showPopUp("popup-ajouter-panier", 5000, "panierAjouter");
     }
 
+    //affichage popup ajouter un avis
     if (popupElement2) {
         const btnClosePopUp2 = popupElement2.querySelector("button");
 
@@ -441,6 +463,7 @@
         Popup.showPopUp("popup-ajouter-avis", 5000, "avisAjouter");
     }
 
+    //affichage popup supprimer un aivs
     if (popupElement3) {
         const btnClosePopUp3 = popupElement3.querySelector("button");
 
@@ -456,6 +479,11 @@
     button.addEventListener("click", () => {
         const avisId = button.dataset.id;
         const voteType = parseInt(button.dataset.type);
+
+        if (!estConnecte) {
+            Popup.showPopUp("popup-non-connecte", 5000);
+            return;
+        }
 
         fetch("/php/vote_pouce.php", {
             method: "POST",
