@@ -1345,6 +1345,8 @@ VALUES
   (1,1),
   (2,2),
   (3,3);
+  
+UPDATE sae3_skadjam._remise SET date_fin_remise ='null';
 
 -- Insertion commandes
 INSERT INTO sae3_skadjam._adresse_livraison (nom, prenom, adresse_postale, numero_rue, code_postal, ville, sauvegarde)
