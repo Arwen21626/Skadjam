@@ -59,7 +59,7 @@ WbImport  -file=../csv/produits.csv
           -delimiter=';'
           -table=sae3_skadjam._produit
           -header=true
-          -fileColumns=$wb_skip$,id_vendeur,id_categorie,libelle_produit,description_produit,id_tva,prix_ht,prix_ttc,$wb_skip$,$wb_skip$,est_masque, $wb_skip$, quantite_stock,$wb_skip$,quantite_unite,unite
+          -fileColumns=$wb_skip$,id_vendeur,id_categorie,libelle_produit,description_produit,id_tva,prix_ht,prix_ttc,$wb_skip$,$wb_skip$,est_masque, $wb_skip$, quantite_stock,seuil_alerte,quantite_unite,unite
           ;
           
 WbImport  -file=../csv/photos_produits.csv
@@ -86,6 +86,23 @@ WbImport  -file=../csv/avis_complet.csv
           -fileColumns=$wb_skip$,nb_etoile,nb_pouce_haut,nb_pouce_bas,contenu_commentaire,id_produit,id_compte
           ;
           
+WbImport  -file=../csv/reponse_complete.csv
+          -schema=sae3_skadjam
+          -delimiter=';'
+          -table=sae3_skadjam._reponse
+          -header=true
+          -fileColumns=contenu_reponse, id_compte, id_avis
+          ;
+          
+WbImport  -file=../csv/futur_achat.csv
+          -schema=sae3_skadjam
+          -delimiter=';'
+          -table=sae3_skadjam._futur_achat
+          -header=true
+          -fileColumns=id_client, id_produit
+          ;
+          
+          
 WbImport  -file=../csv/promotion.csv
           -schema=sae3_skadjam
           -delimiter=';'
@@ -99,4 +116,19 @@ WbImport  -file=../csv/promu.csv
           -table=sae3_skadjam._promu
           -header=true
           -fileColumns=id_promotion,id_produit
+          ;
+          
+WbImport  -file=../csv/remise.csv
+          -schema=sae3_skadjam
+          -delimiter=';'
+          -table=sae3_skadjam._remise
+          -header=true
+          -fileColumns=id_remise,pourcentage_remise, date_debut_remise,date_fin_remise
+;
+WbImport  -file=../csv/reduit.csv
+          -schema=sae3_skadjam
+          -delimiter=';'
+          -table=sae3_skadjam._reduit
+          -header=true
+          -fileColumns=id_remise,id_produit
           ;

@@ -86,10 +86,9 @@ function verifNumCarte(num){
 }
 
 function verifMail(mail) {
-    console.log(mail.length)
     // Autorise Les majuscule, minuscule, accent maj/min, un espace, un ou deux tiret(s)
     var modele = /^[A-Za-z0-9.]+@[A-Za-z-]+.[A-Za-z]+$/;
-    if (modele.test(mail) || mail.length > 150) {
+    if (modele.test(mail) && mail.length < 150) {
         return true
     } else {
         return false
@@ -100,6 +99,21 @@ function verifMotDePasse(mdp) {
     // Autorise Les majuscule, minuscule, accent maj/min, un espace, un ou deux tiret(s)
     var modele = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[-@_#$.£!?%*+:;,&~|^])[^\s<>]{10,}$/;
     if (modele.test(mdp)) {
+        return true
+    } else {
+        return false
+    }
+}
+
+function confirmationMotDePasse(mdp, confMdp){
+    // Vérification que le mot de passe correspond au mot de passe de vérification
+    return mdp === confMdp;
+}
+
+function verifPseudo(pseudo){
+    // Vérification du pseudo
+    var modele = /^([0-9A-Za-zÀ-öø-ÿ]+)*$/;
+    if (modele.test(pseudo) && pseudo.length < 30) {
         return true
     } else {
         return false

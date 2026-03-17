@@ -98,13 +98,13 @@
             <div class="flex flex-col items-center ">
                 <div class="flex flex-col items-start space-y-4">
                     <!--Champ mail  -->
-                    <div id="mailForm" class="flex flex-col md:w-[550px]">
+                    <div id="mailForm" class="flex flex-col w-70 md:w-[550px]">
                         <label for="mail">Adresse mail :</label>
                         <input class="cursor:default border-4 border-solid rounded-2xl border-vertClair pl-3 w-70 md:w-[500px] h-15 " type="text" name="mail" id="mail" value="<?= isset($_POST['mail'])? $_POST['mail'] : "" ?>" required>
                     </div>
 
                     <!-- Champ MDP -->
-                    <div id="mdpForm" class="flex flex-col md:w-[550px]">
+                    <div id="mdpForm" class="flex flex-col w-70 md:w-[550px]">
                         <label for="mdp">Mot de passe :</label>
                         <div class="zone-mdp flex flex-row">
                             <!--le flex row sert a alinger l'oeil me demander pas pourquoi (signé Arwen et svp touchez plus) -->
@@ -159,47 +159,20 @@
 
         <script src="../../js/verifForm.js"></script>
         <script>
-            console.log("js")
             // initialisation
             let mail = document.getElementById("mail")
             let mdp = document.getElementById("mdp")
 
-            // Verif nom
-            let mailForm = document.getElementById("mailForm")
-            let erreurMail = document.createElement("p")
-            erreurMail.textContent = "L'adresse doit être au format : adresse@e.mail"
-            erreurMail.classList.add("md:text-rouge", "text-rouge")
-
+           // enlève l'erreur php
             mail.addEventListener("change", function(){
-                if(!verifMail(mail.value)){                    
-                    erreurMail.classList.remove("md:hidden", "hidden")
-                    let errPHP = document.getElementById("erreurConnection")
-                    if(errPHP) errPHP.classList.add("md:hidden", "hidden")
-                }else{
-                    erreurMail.classList.add("md:hidden", "hidden")
-                    let errPHP = document.getElementById("erreurConnection")
-                    if(errPHP) errPHP.classList.add("md:hidden", "hidden")
-                }
-                mailForm.appendChild(erreurMail)
+                let errPHP = document.getElementById("erreurConnection")
+                if(errPHP) errPHP.classList.add("md:hidden", "hidden")
             })
 
-            // Verif nom
-            let mdpForm = document.getElementById("mdpForm")
-            let erreurMDP = document.createElement("p")
-            erreurMDP.textContent = "1 majuscule, 1 minuscule, 1 chiffre, 1 caractère spécial, 10 caractères minimum"
-            erreurMDP.classList.add("md:text-rouge", "text-rouge")
-
+            // enlève l'erreur php
             mdp.addEventListener("change", function(){
-                if(!verifMotDePasse(mdp.value)){                    
-                    erreurMDP.classList.remove("md:hidden", "hidden")
-                    let errPHP = document.getElementById("erreurConnection")
-                    if(errPHP) errPHP.classList.add("md:hidden", "hidden")
-                }else{
-                    erreurMDP.classList.add("md:hidden", "hidden")
-                    let errPHP = document.getElementById("erreurConnection")
-                    if(errPHP) errPHP.classList.add("md:hidden", "hidden")
-                }
-                mdpForm.appendChild(erreurMDP)
+                let errPHP = document.getElementById("erreurConnection")
+                if(errPHP) errPHP.classList.add("md:hidden", "hidden")
             })
         </script>
     </main>
