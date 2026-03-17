@@ -2,6 +2,7 @@
 session_start();
 require_once __DIR__ . "/../../php/verif_role_bo.php";
 require_once __DIR__ . "/../../01_premiere_connexion.php";
+require_once __DIR__ . "/../../php/modification_variable.php";
 
 $idCompte = $_SESSION["idCompte"];
 
@@ -261,7 +262,10 @@ if ($_SESSION["role"] === "vendeur"){
                 <p>prix <abbr title="Toutes Taxes Comprises">TTC</abbr> : <?php echo $donnees["prix_ttc"]?></p>
                 <p>quatité en stock : <?php echo $donnees["quantite_stock"]?></p>
                 <p>seuil d'alerte : <?php echo $donnees["seuil_alert"]!=""?$donnees["seuil_alert"]:0?></p>
-                <p>date de création : <?php echo $donnees["date_creation"]?></p>
+                <p>date de création : <?php 
+                    $date = explode(" ",$donnees["date_creation"]);
+                    echo formatDate($date[0]);?>
+                </p>
                 
                 <!-- tva -->
                 <div>

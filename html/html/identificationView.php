@@ -36,6 +36,7 @@ if ($action === 'identVerif'){
             $action = 'identRequest';
         }else{
             $compteValide = true;
+            error_log(print_r($code,true));
             if (!$code){
                 $identifie = true;
                 
@@ -49,13 +50,16 @@ if ($action === 'identVerif'){
 }
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && $_POST['action'] === 'authVerif'){
+    error_log("\n delamerde\n\n\n\n");
     $identifie = (isset($_POST['auth'])) ? ($_POST['auth'] === 'valide') : false;
+    error_log("identifie ".$identifie."\n\n\n\n");
+    error_log((true == 0)?"true": "false");
 }
 
 if ($identifie){
     error_log("have totp = ".$_SESSION['totp']);
     error_log(print_r($_SESSION,true));
-    if ($_SESSION['totp']===1){
+    if ($_SESSION['totp']){
         header("Location: ".$redirect);
     }else{
         ob_clean();
