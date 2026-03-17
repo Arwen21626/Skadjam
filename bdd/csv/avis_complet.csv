@@ -1,0 +1,343 @@
+id_avis;nb_etoile;nb_pouce_haut;nb_pouce_bas;contenu_commentaire;id_produit;id_compte
+1;2;7;44;Le produit ne correspond pas totalement à la description.;1;21
+2;4;84;60;Ce produit devrait avoir son fan-club.;1;22
+3;2;16;12;Pas terrible… Je ne pense pas le racheter.;1;23
+4;5;12;84;Un incontournable, je suis ravi de mon achat.;2;24
+5;3;36;86;Je suis un peu déçu, je m'attendais à mieux.;2;25
+6;4;94;25;J'adore ce produit ! Il dépasse mes attentes.;2;26
+7;1;4;79;Le produit ne correspond pas totalement à la description.;3;27
+8;5;23;79;Excellent rapport qualité-prix, vraiment satisfait.;3;28
+9;2;60;32;Qualité moyenne, pourrait être amélioré.;3;29
+10;1;13;35;Pas terrible… Je ne pense pas le racheter.;4;30
+11;4;5;37;Un incontournable, je suis ravi de mon achat.;4;31
+12;2;26;98;Le produit ne correspond pas totalement à la description.;4;32
+13;1;48;68;Le produit ne correspond pas totalement à la description.;5;33
+14;4;65;7;Je ne sais pas ce que j'ai acheté, mais j'aime ça.;5;34
+15;1;18;23;Je suis un peu déçu, je m'attendais à mieux.;5;35
+16;4;47;55;Je ne sais pas ce que j'ai acheté, mais j'aime ça.;6;36
+17;2;75;84;Pas terrible… Je ne pense pas le racheter.;6;37
+18;4;92;11;Je ne sais pas ce que j'ai acheté, mais j'aime ça.;6;38
+19;2;95;34;Je suis un peu déçu, je m'attendais à mieux.;7;39
+20;2;49;56;Je suis un peu déçu, je m'attendais à mieux.;7;40
+21;5;82;25;Très bonne qualité, je recommanderai sans hésiter.;7;21
+22;2;19;8;Je suis un peu déçu, je m'attendais à mieux.;8;22
+23;4;17;80;J'ai failli en racheter dix juste pour le fun.;8;23
+24;2;5;19;Qualité moyenne, pourrait être amélioré.;8;24
+25;2;26;58;Pas terrible… Je ne pense pas le racheter.;9;25
+26;3;90;6;Je ne sais pas ce que j'ai acheté, mais j'aime ça.;9;26
+27;3;46;97;Le produit ne correspond pas totalement à la description.;9;27
+28;3;28;91;Je ne sais pas ce que j'ai acheté, mais j'aime ça.;10;28
+29;2;82;92;Qualité moyenne, pourrait être amélioré.;10;29
+30;5;39;28;Un incontournable, je suis ravi de mon achat.;10;30
+31;3;93;97;Ce produit devrait avoir son fan-club.;11;31
+32;4;61;82;Très bonne qualité, je recommanderai sans hésiter.;11;32
+33;4;59;88;Très bonne qualité, je recommanderai sans hésiter.;11;33
+34;4;15;4;Ce produit devrait avoir son fan-club.;12;34
+35;3;24;0;Je suis un peu déçu, je m'attendais à mieux.;12;35
+36;5;92;80;J'adore ce produit ! Il dépasse mes attentes.;12;36
+37;5;68;46;J'adore ce produit ! Il dépasse mes attentes.;13;37
+38;5;17;35;J'ai failli en racheter dix juste pour le fun.;13;38
+39;4;23;27;J'ai failli en racheter dix juste pour le fun.;13;39
+40;2;79;3;Le produit ne correspond pas totalement à la description.;14;40
+41;5;62;65;Très bonne qualité, je recommanderai sans hésiter.;14;21
+42;5;29;49;Excellent rapport qualité-prix, vraiment satisfait.;14;22
+43;5;71;70;Excellent rapport qualité-prix, vraiment satisfait.;15;23
+44;1;59;65;Qualité moyenne, pourrait être amélioré.;15;24
+45;4;57;73;Très bonne qualité, je recommanderai sans hésiter.;15;25
+46;3;57;43;Qualité moyenne, pourrait être amélioré.;16;26
+47;5;56;56;Ce produit est tellement bon que mon chat veut aussi en acheter.;16;27
+48;2;21;38;Je suis un peu déçu, je m'attendais à mieux.;16;28
+49;4;75;80;J'adore ce produit ! Il dépasse mes attentes.;17;29
+50;4;99;81;Excellent rapport qualité-prix, vraiment satisfait.;17;30
+51;3;21;39;Pas terrible… Je ne pense pas le racheter.;17;31
+52;1;68;72;Pas terrible… Je ne pense pas le racheter.;18;32
+53;4;73;98;J'adore ce produit ! Il dépasse mes attentes.;18;33
+54;2;99;65;Le produit ne correspond pas totalement à la description.;18;34
+55;4;56;77;Un incontournable, je suis ravi de mon achat.;19;35
+56;1;73;18;Le produit ne correspond pas totalement à la description.;19;36
+57;2;56;48;Pas terrible… Je ne pense pas le racheter.;19;37
+58;1;84;18;Le produit ne correspond pas totalement à la description.;20;38
+59;4;40;28;J'adore ce produit ! Il dépasse mes attentes.;20;39
+60;1;73;25;Qualité moyenne, pourrait être amélioré.;20;40
+61;3;59;36;Ce produit devrait avoir son fan-club.;21;21
+62;3;33;16;Le produit ne correspond pas totalement à la description.;21;22
+63;5;99;39;J'ai failli en racheter dix juste pour le fun.;21;23
+64;4;70;43;J'ai failli en racheter dix juste pour le fun.;22;24
+65;3;51;21;Qualité moyenne, pourrait être amélioré.;22;25
+66;4;4;11;Je ne sais pas ce que j'ai acheté, mais j'aime ça.;22;26
+67;2;84;21;Le produit ne correspond pas totalement à la description.;23;27
+68;3;63;25;Le produit ne correspond pas totalement à la description.;23;28
+69;4;42;25;Un incontournable, je suis ravi de mon achat.;23;29
+70;3;15;26;J'ai failli en racheter dix juste pour le fun.;24;30
+71;4;6;42;Très bonne qualité, je recommanderai sans hésiter.;24;31
+72;3;11;13;Je suis un peu déçu, je m'attendais à mieux.;24;32
+73;1;89;46;Je suis un peu déçu, je m'attendais à mieux.;25;33
+74;2;8;86;Qualité moyenne, pourrait être amélioré.;25;34
+75;3;31;69;Ce produit est tellement bon que mon chat veut aussi en acheter.;25;35
+76;1;13;58;Pas terrible… Je ne pense pas le racheter.;26;36
+77;5;20;3;Ce produit est tellement bon que mon chat veut aussi en acheter.;26;37
+78;1;92;95;Le produit ne correspond pas totalement à la description.;26;38
+79;2;52;62;Le produit ne correspond pas totalement à la description.;27;39
+80;4;87;13;Ce produit est tellement bon que mon chat veut aussi en acheter.;27;40
+81;3;41;29;Le produit ne correspond pas totalement à la description.;27;21
+82;5;45;33;Ce produit devrait avoir son fan-club.;28;22
+83;5;26;59;J'ai failli en racheter dix juste pour le fun.;28;23
+84;3;65;63;Ce produit est tellement bon que mon chat veut aussi en acheter.;28;24
+85;1;69;51;Qualité moyenne, pourrait être amélioré.;29;25
+86;5;86;76;J'ai failli en racheter dix juste pour le fun.;29;26
+87;2;88;45;Je suis un peu déçu, je m'attendais à mieux.;29;27
+88;3;89;36;Ce produit devrait avoir son fan-club.;30;28
+89;3;78;69;Le produit ne correspond pas totalement à la description.;30;29
+90;4;81;33;Très bonne qualité, je recommanderai sans hésiter.;30;30
+91;1;55;39;Le produit ne correspond pas totalement à la description.;31;31
+92;1;50;7;Le produit ne correspond pas totalement à la description.;31;32
+93;1;66;75;Le produit ne correspond pas totalement à la description.;31;33
+94;5;41;24;Ce produit est tellement bon que mon chat veut aussi en acheter.;32;34
+95;5;33;57;Très bonne qualité, je recommanderai sans hésiter.;32;35
+96;5;58;88;J'adore ce produit ! Il dépasse mes attentes.;32;36
+97;2;36;53;Qualité moyenne, pourrait être amélioré.;33;37
+98;2;18;49;Pas terrible… Je ne pense pas le racheter.;33;38
+99;1;38;98;Je suis un peu déçu, je m'attendais à mieux.;33;39
+100;3;12;40;Le produit ne correspond pas totalement à la description.;34;40
+101;4;99;98;Un incontournable, je suis ravi de mon achat.;34;21
+102;5;37;86;J'adore ce produit ! Il dépasse mes attentes.;34;22
+103;5;99;48;Excellent rapport qualité-prix, vraiment satisfait.;35;23
+104;3;6;67;Ce produit devrait avoir son fan-club.;35;24
+105;4;89;51;Ce produit est tellement bon que mon chat veut aussi en acheter.;35;25
+106;3;31;18;Je suis un peu déçu, je m'attendais à mieux.;36;26
+107;5;17;9;J'ai failli en racheter dix juste pour le fun.;36;27
+108;5;33;35;J'adore ce produit ! Il dépasse mes attentes.;36;28
+109;4;6;56;Excellent rapport qualité-prix, vraiment satisfait.;37;29
+110;4;21;15;Très bonne qualité, je recommanderai sans hésiter.;37;30
+111;5;30;91;Un incontournable, je suis ravi de mon achat.;37;31
+112;5;6;5;Je ne sais pas ce que j'ai acheté, mais j'aime ça.;38;32
+113;5;98;96;J'ai failli en racheter dix juste pour le fun.;38;33
+114;5;45;37;Je ne sais pas ce que j'ai acheté, mais j'aime ça.;38;34
+115;5;63;90;Ce produit devrait avoir son fan-club.;39;35
+116;4;63;76;Un incontournable, je suis ravi de mon achat.;39;36
+117;5;12;98;Très bonne qualité, je recommanderai sans hésiter.;39;37
+118;3;49;21;Pas terrible… Je ne pense pas le racheter.;40;38
+119;5;87;17;J'adore ce produit ! Il dépasse mes attentes.;40;39
+120;4;90;5;J'adore ce produit ! Il dépasse mes attentes.;40;40
+121;4;5;40;J'adore ce produit ! Il dépasse mes attentes.;41;21
+122;5;80;62;J'adore ce produit ! Il dépasse mes attentes.;41;22
+123;4;27;13;Très bonne qualité, je recommanderai sans hésiter.;41;23
+124;4;42;73;J'ai failli en racheter dix juste pour le fun.;42;24
+125;4;16;72;Très bonne qualité, je recommanderai sans hésiter.;42;25
+126;5;69;55;Ce produit est tellement bon que mon chat veut aussi en acheter.;42;26
+127;3;44;2;Je suis un peu déçu, je m'attendais à mieux.;43;27
+128;1;19;17;Pas terrible… Je ne pense pas le racheter.;43;28
+129;1;58;8;Le produit ne correspond pas totalement à la description.;43;29
+130;4;67;100;Un incontournable, je suis ravi de mon achat.;44;30
+131;3;93;49;Qualité moyenne, pourrait être amélioré.;44;31
+132;5;77;53;Ce produit devrait avoir son fan-club.;44;32
+133;3;85;15;Le produit ne correspond pas totalement à la description.;45;33
+134;4;57;16;Ce produit est tellement bon que mon chat veut aussi en acheter.;45;34
+135;2;82;24;Je suis un peu déçu, je m'attendais à mieux.;45;35
+136;5;18;88;Je ne sais pas ce que j'ai acheté, mais j'aime ça.;46;36
+137;4;55;15;Ce produit est tellement bon que mon chat veut aussi en acheter.;46;37
+138;4;88;28;Ce produit est tellement bon que mon chat veut aussi en acheter.;46;38
+139;5;58;100;Un incontournable, je suis ravi de mon achat.;47;39
+140;3;25;49;Le produit ne correspond pas totalement à la description.;47;40
+141;3;75;82;Qualité moyenne, pourrait être amélioré.;47;21
+142;5;91;85;Un incontournable, je suis ravi de mon achat.;48;22
+143;3;99;93;Ce produit est tellement bon que mon chat veut aussi en acheter.;48;23
+144;4;70;40;Je ne sais pas ce que j'ai acheté, mais j'aime ça.;48;24
+145;4;49;25;Très bonne qualité, je recommanderai sans hésiter.;49;25
+146;4;75;92;Très bonne qualité, je recommanderai sans hésiter.;49;26
+147;3;52;94;Ce produit devrait avoir son fan-club.;49;27
+148;4;22;61;J'adore ce produit ! Il dépasse mes attentes.;50;28
+149;5;81;97;Ce produit devrait avoir son fan-club.;50;29
+150;3;4;53;Je ne sais pas ce que j'ai acheté, mais j'aime ça.;50;30
+151;5;96;1;J'adore ce produit ! Il dépasse mes attentes.;51;31
+152;5;27;85;Ce produit devrait avoir son fan-club.;51;32
+153;3;22;21;Qualité moyenne, pourrait être amélioré.;51;33
+154;4;95;23;Ce produit est tellement bon que mon chat veut aussi en acheter.;52;34
+155;2;27;67;Qualité moyenne, pourrait être amélioré.;52;35
+156;1;39;53;Qualité moyenne, pourrait être amélioré.;52;36
+157;2;4;83;Qualité moyenne, pourrait être amélioré.;53;37
+158;3;31;86;Le produit ne correspond pas totalement à la description.;53;38
+159;1;77;6;Je suis un peu déçu, je m'attendais à mieux.;53;39
+160;3;69;58;Je ne sais pas ce que j'ai acheté, mais j'aime ça.;54;40
+161;4;74;94;J'adore ce produit ! Il dépasse mes attentes.;54;21
+162;2;92;50;Pas terrible… Je ne pense pas le racheter.;54;22
+163;5;86;100;Un incontournable, je suis ravi de mon achat.;55;23
+164;4;98;97;J'adore ce produit ! Il dépasse mes attentes.;55;24
+165;5;29;79;Excellent rapport qualité-prix, vraiment satisfait.;55;25
+166;4;73;21;Très bonne qualité, je recommanderai sans hésiter.;56;26
+167;4;31;40;Ce produit est tellement bon que mon chat veut aussi en acheter.;56;27
+168;4;43;9;J'adore ce produit ! Il dépasse mes attentes.;56;28
+169;1;4;48;Qualité moyenne, pourrait être amélioré.;57;29
+170;3;89;66;Je suis un peu déçu, je m'attendais à mieux.;57;30
+171;5;76;42;J'adore ce produit ! Il dépasse mes attentes.;57;31
+172;5;50;36;Un incontournable, je suis ravi de mon achat.;58;32
+173;5;85;61;Un incontournable, je suis ravi de mon achat.;58;33
+174;4;59;34;J'ai failli en racheter dix juste pour le fun.;58;34
+175;4;24;93;J'adore ce produit ! Il dépasse mes attentes.;59;35
+176;5;91;87;J'adore ce produit ! Il dépasse mes attentes.;59;36
+177;4;10;44;Un incontournable, je suis ravi de mon achat.;59;37
+178;3;11;92;Je suis un peu déçu, je m'attendais à mieux.;60;38
+179;4;6;56;Excellent rapport qualité-prix, vraiment satisfait.;60;39
+180;4;73;84;Excellent rapport qualité-prix, vraiment satisfait.;60;40
+181;2;91;77;Le produit ne correspond pas totalement à la description.;61;21
+182;5;6;37;J'ai failli en racheter dix juste pour le fun.;61;22
+183;3;60;38;Le produit ne correspond pas totalement à la description.;61;23
+184;3;23;6;Ce produit est tellement bon que mon chat veut aussi en acheter.;62;24
+185;1;34;93;Qualité moyenne, pourrait être amélioré.;62;25
+186;5;61;35;Un incontournable, je suis ravi de mon achat.;62;26
+187;1;32;18;Le produit ne correspond pas totalement à la description.;63;27
+188;5;8;64;J'adore ce produit ! Il dépasse mes attentes.;63;28
+189;1;54;36;Pas terrible… Je ne pense pas le racheter.;63;29
+190;3;70;24;Ce produit devrait avoir son fan-club.;64;30
+191;4;19;45;Ce produit est tellement bon que mon chat veut aussi en acheter.;64;31
+192;3;41;58;Qualité moyenne, pourrait être amélioré.;64;32
+193;4;53;49;J'adore ce produit ! Il dépasse mes attentes.;65;33
+194;3;22;12;Ce produit devrait avoir son fan-club.;65;34
+195;4;67;29;Un incontournable, je suis ravi de mon achat.;65;35
+196;4;9;65;Très bonne qualité, je recommanderai sans hésiter.;66;36
+197;4;38;2;Très bonne qualité, je recommanderai sans hésiter.;66;37
+198;1;72;2;Pas terrible… Je ne pense pas le racheter.;66;38
+199;5;61;95;J'adore ce produit ! Il dépasse mes attentes.;67;39
+200;4;55;90;Excellent rapport qualité-prix, vraiment satisfait.;67;40
+201;2;64;60;Qualité moyenne, pourrait être amélioré.;67;21
+202;5;1;27;Je ne sais pas ce que j'ai acheté, mais j'aime ça.;68;22
+203;5;85;58;Ce produit est tellement bon que mon chat veut aussi en acheter.;68;23
+204;5;63;20;Ce produit est tellement bon que mon chat veut aussi en acheter.;68;24
+205;5;9;45;J'adore ce produit ! Il dépasse mes attentes.;69;25
+206;2;8;13;Pas terrible… Je ne pense pas le racheter.;69;26
+207;3;91;79;J'ai failli en racheter dix juste pour le fun.;69;27
+208;2;51;98;Le produit ne correspond pas totalement à la description.;70;28
+209;4;84;55;Ce produit devrait avoir son fan-club.;70;29
+210;1;11;3;Le produit ne correspond pas totalement à la description.;70;30
+211;3;95;82;Le produit ne correspond pas totalement à la description.;71;31
+212;5;13;32;Je ne sais pas ce que j'ai acheté, mais j'aime ça.;71;32
+213;3;64;92;Pas terrible… Je ne pense pas le racheter.;71;33
+214;5;58;69;Ce produit est tellement bon que mon chat veut aussi en acheter.;72;34
+215;5;55;18;J'ai failli en racheter dix juste pour le fun.;72;35
+216;4;63;74;Un incontournable, je suis ravi de mon achat.;72;36
+217;4;7;32;Ce produit est tellement bon que mon chat veut aussi en acheter.;73;37
+218;5;77;24;Je ne sais pas ce que j'ai acheté, mais j'aime ça.;73;38
+219;2;62;87;Pas terrible… Je ne pense pas le racheter.;73;39
+220;1;34;57;Qualité moyenne, pourrait être amélioré.;74;40
+221;1;39;71;Je suis un peu déçu, je m'attendais à mieux.;74;21
+222;3;83;88;Je suis un peu déçu, je m'attendais à mieux.;74;22
+223;1;40;33;Le produit ne correspond pas totalement à la description.;75;23
+224;5;97;62;Je ne sais pas ce que j'ai acheté, mais j'aime ça.;75;24
+225;4;53;54;Très bonne qualité, je recommanderai sans hésiter.;75;25
+226;1;51;25;Qualité moyenne, pourrait être amélioré.;76;26
+227;1;97;79;Le produit ne correspond pas totalement à la description.;76;27
+228;4;91;28;J'adore ce produit ! Il dépasse mes attentes.;76;28
+229;4;54;21;Excellent rapport qualité-prix, vraiment satisfait.;77;29
+230;2;95;46;Qualité moyenne, pourrait être amélioré.;77;30
+231;4;82;7;J'ai failli en racheter dix juste pour le fun.;77;31
+232;3;25;89;Le produit ne correspond pas totalement à la description.;78;32
+233;2;97;94;Pas terrible… Je ne pense pas le racheter.;78;33
+234;2;56;85;Le produit ne correspond pas totalement à la description.;78;34
+235;4;81;56;J'adore ce produit ! Il dépasse mes attentes.;79;35
+236;5;62;20;Un incontournable, je suis ravi de mon achat.;79;36
+237;3;76;98;Je ne sais pas ce que j'ai acheté, mais j'aime ça.;79;37
+238;3;56;38;J'ai failli en racheter dix juste pour le fun.;80;38
+239;4;69;89;Excellent rapport qualité-prix, vraiment satisfait.;80;39
+240;5;18;26;Ce produit est tellement bon que mon chat veut aussi en acheter.;80;40
+241;5;18;45;Un incontournable, je suis ravi de mon achat.;81;21
+242;5;44;73;Très bonne qualité, je recommanderai sans hésiter.;81;22
+243;5;80;37;Un incontournable, je suis ravi de mon achat.;81;23
+244;3;28;21;Je suis un peu déçu, je m'attendais à mieux.;82;24
+245;4;72;21;Très bonne qualité, je recommanderai sans hésiter.;82;25
+246;3;12;77;Je ne sais pas ce que j'ai acheté, mais j'aime ça.;82;26
+247;5;48;50;Ce produit devrait avoir son fan-club.;83;27
+248;3;8;75;Qualité moyenne, pourrait être amélioré.;83;28
+249;3;3;82;Je ne sais pas ce que j'ai acheté, mais j'aime ça.;83;29
+250;5;0;82;Ce produit devrait avoir son fan-club.;84;30
+251;4;46;80;Excellent rapport qualité-prix, vraiment satisfait.;84;31
+252;5;23;4;J'adore ce produit ! Il dépasse mes attentes.;84;32
+253;5;71;25;Ce produit est tellement bon que mon chat veut aussi en acheter.;85;33
+254;4;72;86;Très bonne qualité, je recommanderai sans hésiter.;85;34
+255;3;53;0;Pas terrible… Je ne pense pas le racheter.;85;35
+256;3;45;77;Le produit ne correspond pas totalement à la description.;86;36
+257;1;81;39;Je suis un peu déçu, je m'attendais à mieux.;86;37
+258;1;3;87;Le produit ne correspond pas totalement à la description.;86;38
+259;4;93;82;Excellent rapport qualité-prix, vraiment satisfait.;87;39
+260;1;25;7;Pas terrible… Je ne pense pas le racheter.;87;40
+261;3;27;81;Je ne sais pas ce que j'ai acheté, mais j'aime ça.;87;21
+262;4;9;20;Excellent rapport qualité-prix, vraiment satisfait.;88;22
+263;4;30;61;Très bonne qualité, je recommanderai sans hésiter.;88;23
+264;2;55;92;Je suis un peu déçu, je m'attendais à mieux.;88;24
+265;3;20;18;Pas terrible… Je ne pense pas le racheter.;89;25
+266;3;88;19;Je suis un peu déçu, je m'attendais à mieux.;89;26
+267;4;98;7;Je ne sais pas ce que j'ai acheté, mais j'aime ça.;89;27
+268;2;95;9;Le produit ne correspond pas totalement à la description.;90;28
+269;3;2;56;Pas terrible… Je ne pense pas le racheter.;90;29
+270;5;92;56;J'adore ce produit ! Il dépasse mes attentes.;90;30
+271;2;22;75;Je suis un peu déçu, je m'attendais à mieux.;91;31
+272;5;48;100;Excellent rapport qualité-prix, vraiment satisfait.;91;32
+273;2;46;65;Je suis un peu déçu, je m'attendais à mieux.;91;33
+274;3;61;15;Je suis un peu déçu, je m'attendais à mieux.;92;34
+275;4;99;67;Un incontournable, je suis ravi de mon achat.;92;35
+276;5;80;18;J'adore ce produit ! Il dépasse mes attentes.;92;36
+277;4;73;69;J'adore ce produit ! Il dépasse mes attentes.;93;37
+278;3;27;99;J'ai failli en racheter dix juste pour le fun.;93;38
+279;2;25;21;Pas terrible… Je ne pense pas le racheter.;93;39
+280;5;90;83;Très bonne qualité, je recommanderai sans hésiter.;94;40
+281;1;7;31;Pas terrible… Je ne pense pas le racheter.;94;21
+282;1;24;97;Le produit ne correspond pas totalement à la description.;94;22
+283;4;14;21;J'adore ce produit ! Il dépasse mes attentes.;95;23
+284;5;87;7;Ce produit est tellement bon que mon chat veut aussi en acheter.;95;24
+285;5;8;78;Très bonne qualité, je recommanderai sans hésiter.;95;25
+286;4;98;81;Très bonne qualité, je recommanderai sans hésiter.;96;26
+287;4;82;71;Ce produit devrait avoir son fan-club.;96;27
+288;5;81;36;J'ai failli en racheter dix juste pour le fun.;96;28
+289;5;96;56;Ce produit est tellement bon que mon chat veut aussi en acheter.;97;29
+290;5;67;97;J'ai failli en racheter dix juste pour le fun.;97;30
+291;3;56;53;Pas terrible… Je ne pense pas le racheter.;97;31
+292;3;74;89;J'ai failli en racheter dix juste pour le fun.;98;32
+293;1;73;79;Pas terrible… Je ne pense pas le racheter.;98;33
+294;4;85;23;Un incontournable, je suis ravi de mon achat.;98;34
+295;4;41;49;Très bonne qualité, je recommanderai sans hésiter.;99;35
+296;5;75;90;Très bonne qualité, je recommanderai sans hésiter.;99;36
+297;4;69;81;J'adore ce produit ! Il dépasse mes attentes.;99;37
+298;3;8;8;Qualité moyenne, pourrait être amélioré.;100;38
+299;4;36;80;Je ne sais pas ce que j'ai acheté, mais j'aime ça.;100;39
+300;4;5;100;Excellent rapport qualité-prix, vraiment satisfait.;100;40
+301;5;34;74;Excellent rapport qualité-prix, vraiment satisfait.;101;21
+302;3;21;39;Je ne sais pas ce que j'ai acheté, mais j'aime ça.;101;22
+303;3;70;80;J'ai failli en racheter dix juste pour le fun.;101;23
+304;3;27;49;Ce produit est tellement bon que mon chat veut aussi en acheter.;102;24
+305;5;83;39;Très bonne qualité, je recommanderai sans hésiter.;102;25
+306;3;57;57;J'ai failli en racheter dix juste pour le fun.;102;26
+307;5;64;92;J'adore ce produit ! Il dépasse mes attentes.;103;27
+308;1;60;41;Pas terrible… Je ne pense pas le racheter.;103;28
+309;5;72;32;Ce produit devrait avoir son fan-club.;103;29
+310;5;99;24;Excellent rapport qualité-prix, vraiment satisfait.;104;30
+311;1;69;79;Qualité moyenne, pourrait être amélioré.;104;31
+312;5;2;49;Un incontournable, je suis ravi de mon achat.;104;32
+313;5;28;65;Ce produit est tellement bon que mon chat veut aussi en acheter.;105;33
+314;1;18;3;Je suis un peu déçu, je m'attendais à mieux.;105;34
+315;4;9;67;Un incontournable, je suis ravi de mon achat.;105;35
+316;1;63;5;Je suis un peu déçu, je m'attendais à mieux.;106;36
+317;2;34;65;Je suis un peu déçu, je m'attendais à mieux.;106;37
+318;3;30;11;Qualité moyenne, pourrait être amélioré.;106;38
+319;1;25;10;Qualité moyenne, pourrait être amélioré.;107;39
+320;5;8;31;Un incontournable, je suis ravi de mon achat.;107;40
+321;3;72;64;Je ne sais pas ce que j'ai acheté, mais j'aime ça.;107;21
+322;5;54;3;Excellent rapport qualité-prix, vraiment satisfait.;108;22
+323;4;76;99;Un incontournable, je suis ravi de mon achat.;108;23
+324;5;58;92;J'adore ce produit ! Il dépasse mes attentes.;108;24
+325;3;53;74;Pas terrible… Je ne pense pas le racheter.;109;25
+326;2;13;53;Le produit ne correspond pas totalement à la description.;109;26
+327;5;67;17;Je ne sais pas ce que j'ai acheté, mais j'aime ça.;109;27
+328;3;9;72;Je suis un peu déçu, je m'attendais à mieux.;110;28
+329;4;17;53;Un incontournable, je suis ravi de mon achat.;110;29
+330;5;9;83;J'adore ce produit ! Il dépasse mes attentes.;110;30
+331;3;82;54;Pas terrible… Je ne pense pas le racheter.;111;31
+332;4;97;66;Un incontournable, je suis ravi de mon achat.;111;32
+333;1;12;35;Je suis un peu déçu, je m'attendais à mieux.;111;33
+334;3;45;25;Qualité moyenne, pourrait être amélioré.;112;34
+335;2;51;81;Pas terrible… Je ne pense pas le racheter.;112;35
+336;1;61;41;Pas terrible… Je ne pense pas le racheter.;112;36
+337;4;100;63;Ce produit devrait avoir son fan-club.;113;37
+338;4;51;23;J'adore ce produit ! Il dépasse mes attentes.;113;38
+339;3;4;58;J'ai failli en racheter dix juste pour le fun.;113;39
+340;3;48;75;Qualité moyenne, pourrait être amélioré.;114;40
+341;2;23;89;Le produit ne correspond pas totalement à la description.;114;21
+342;5;21;46;Un incontournable, je suis ravi de mon achat.;114;22

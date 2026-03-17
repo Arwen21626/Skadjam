@@ -78,12 +78,12 @@ WbImport  -file=../csv/montre.csv
           -fileColumns=id_photo,id_produit
           ;
         
-WbImport  -file=../csv/avis.csv
+WbImport  -file=../csv/avis_complet.csv
           -schema=sae3_skadjam
           -delimiter=';'
           -table=sae3_skadjam._avis
           -header=true
-          -fileColumns=$wb_skip$,nb_etoile,$wb_skip$,$wb_skip$,contenu_commentaire,id_produit,id_compte
+          -fileColumns=$wb_skip$,nb_etoile,nb_pouce_haut,nb_pouce_bas,contenu_commentaire,id_produit,id_compte
           ;
           
 WbImport  -file=../csv/promotion.csv
