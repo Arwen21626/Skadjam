@@ -55,7 +55,7 @@ if ($_SESSION["role"] === "vendeur"){
                     LEFT JOIN sae3_skadjam._remise rem ON rem.id_remise = red.id_remise
                     LEFT JOIN sae3_skadjam._promu prom ON prom.id_produit = prod.id_produit
                     LEFT JOIN sae3_skadjam._promotion promo ON promo.id_promotion = prom.id_promotion
-                    LEFT JOIN sae3_skadjam._photo ph_promo ON ph_promo.id_photo = mont.id_photo
+                    LEFT JOIN sae3_skadjam._photo ph_promo ON ph_promo.id_photo = prom.id_photo
                     LEFT JOIN sae3_skadjam._categorie cat ON cat.id_categorie = prod.id_categorie
                     LEFT JOIN sae3_skadjam._tva t ON t.id_tva = prod.id_tva
                 WHERE c.id_compte = $idCompte
