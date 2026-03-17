@@ -6,7 +6,7 @@ idProduit;id_vendeur;idCategorie;libelle;descriptionProduit;idTVA;prixHT;prixTTC
 5;4;1;Confiture confit de cidre 500g;Délicieuse confiture confit de cidre 500g, préparée avec des ingrédients de qualité pour un goût authentique.;1;5.5;5.8;0;null;false;5.8;586;30;500;g
 6;4;1;Confiture fraise au miel 500g;Délicieuse confiture fraise au miel 500g, préparée avec des ingrédients de qualité pour un goût authentique.;1;5.5;5.8;0;null;false;5.8;602;30;500;g
 7;4;1;Confiture mûre 500g;Délicieuse confiture mûre 500g, préparée avec des ingrédients de qualité pour un goût authentique.;1;5.5;5.8;0;null;false;5.8;244;30;500;g
-8;4;1;Confiture fruits rouges 500g;Délicieuse confiture fruits rouges 500g, préparée avec des ingrédients de qualité pour un goût authentique.;1;5.5;5.8;0;null;false;5.8;72;30;500;g
+8;3;1;Confiture fruits rouges 500g;Délicieuse confiture fruits rouges 500g, préparée avec des ingrédients de qualité pour un goût authentique.;1;5.5;5.8;0;null;false;5.8;72;30;500;g
 9;4;1;Confiture pêche 500g;Délicieuse confiture pêche 500g, préparée avec des ingrédients de qualité pour un goût authentique.;1;5.5;5.8;0;null;false;5.8;306;30;500;g
 10;4;1;Confiture kiwi 500g;Délicieuse confiture kiwi 500g, préparée avec des ingrédients de qualité pour un goût authentique.;1;5.5;5.8;0;null;false;5.8;147;30;500;g
 11;4;1;Pâte a tartiner caramel beurre salé au rhum 500g;Onctueuse pâte à tartiner caramel beurre salé au rhum 500g, idéale pour un petit-déjeuner gourmand.;1;5.99;6.23;0;null;false;6.23;83;30;500;g
@@ -48,7 +48,7 @@ idProduit;id_vendeur;idCategorie;libelle;descriptionProduit;idTVA;prixHT;prixTTC
 47;10;1;Tisane caramel 100g;Tisane caramel 100g, parfum délicat pour une pause détente.;1;2.99;3.15;0;null;false;3.15;65;30;100;g
 48;10;1;Tisane fruits rouges 100g;Tisane fruits rouges 100g, parfum délicat pour une pause détente.;1;2.99;3.15;0;null;false;3.15;533;30;100;g
 49;10;1;Tisane réglisse menthe 100g;Tisane réglisse menthe 100g, parfum délicat pour une pause détente.;1;2.99;3.15;0;null;false;3.15;564;30;100;g
-50;16;2;Ciré jaune;Vêtement breton : ciré jaune, robuste et typique.;3;59.99;71.99;0;null;false;71.99;831;30;1;L
+50;3;2;Ciré jaune;Vêtement breton : ciré jaune, robuste et typique.;3;59.99;71.99;0;null;false;71.99;831;30;1;L
 51;16;2;Ciré bleu;Vêtement breton : ciré bleu, robuste et typique.;3;59.99;71.99;0;null;false;71.99;766;30;1;L
 52;16;2;Ciré rouge;Vêtement breton : ciré rouge, robuste et typique.;3;59.99;71.99;0;null;false;71.99;204;30;1;L
 53;16;2;Ciré gris;Vêtement breton : ciré gris, robuste et typique.;3;59.99;71.99;0;null;false;71.99;1000;30;1;L
@@ -106,7 +106,7 @@ idProduit;id_vendeur;idCategorie;libelle;descriptionProduit;idTVA;prixHT;prixTTC
 105;7;4;Pin’s drapeau breton;Souvenir breton : pin’s drapeau breton, pratique et authentique.;3;1.99;2.99;0;null;false;2.99;759;30;1;Piece
 106;7;4;Pin’s triskel;Souvenir breton : pin’s triskel, pratique et authentique.;3;1.99;2.99;0;null;false;2.99;334;30;1;Piece
 107;7;4;Pins hermine;Souvenir breton : pins hermine, pratique et authentique.;3;1.99;2.99;0;null;false;2.99;273;30;1;Piece
-108;18;5;Gel douche odeur kouign-amann;Gel douche parfumé, pour un moment gourmand et original.;3;5.99;7.19;0;null;false;7.19;448;30;25;cl
+108;3;5;Gel douche odeur kouign-amann;Gel douche parfumé, pour un moment gourmand et original.;3;5.99;7.19;0;null;false;7.19;448;30;25;cl
 109;18;5;Crème de bain aux algues;Une crème onctueuse qui transforme le bain en véritable moment de détente, enrichie en algues marines reminéralisantes.;3;6.99;8.39;0;null;false;8.39;783;30;50;cl
 110;18;5;Beurre hydratant corps & visages;Un soin riche et nourrissant qui protège et hydrate intensément la peau du corps et du visage.;3;6.99;8.39;0;null;false;8.39;54;30;90;g
 111;18;5;Crème main au chanvre et safran de Bretagne;Une crème apaisante et réparatrice, alliant les vertus nourrissantes du chanvre et l’élégance du safran breton.;3;5.99;7.19;0;null;false;7.19;119;30;120;g
