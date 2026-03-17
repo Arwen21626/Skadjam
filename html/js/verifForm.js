@@ -1,7 +1,7 @@
 function verifNomPrenom(nom) {
     // Autorise Les majuscule, minuscule, accent maj/min, un espace, un ou deux tiret(s)
-    var modele = /^[A-Za-zÀ-ÿ]+(( |-{1,2})[A-Za-zÀ-öø-ÿ]+)*$/i;
-    if (modele.test(nom)) {
+    var regex = /^[A-Za-zÀ-ÿ]+(( |-{1,2})[A-Za-zÀ-öø-ÿ]+)*$/i
+    if (regex.test(nom)) {
         return true
     } else {
         return false
@@ -10,8 +10,8 @@ function verifNomPrenom(nom) {
 
 function verifCodePostal(codePostal) {
     // Autorise Les majuscule, minuscule, accent maj/min, un espace, un ou deux tiret(s)
-    var modele = /^[0-9]{5}$/i;
-    if (modele.test(codePostal) && (1<codePostal && codePostal<99999)) {
+    var regex = /^[0-9]{5}$/i
+    if (regex.test(codePostal) && (1<codePostal && codePostal<99999)) {
         return true
     } else {
         return false
@@ -20,8 +20,8 @@ function verifCodePostal(codePostal) {
 
 function verifVille(ville) {
     // Autorise Les majuscule, minuscule, accent maj/min, un espace, un ou deux tiret(s)
-    var modele = /^[A-Za-zÀ-ÿ]+(( |-{1,2})[A-Za-zÀ-öø-ÿ]+)*$/i;
-    if (modele.test(ville)) {
+    var regex = /^[A-Za-zÀ-ÿ]+(( |-{1,2})[A-Za-zÀ-öø-ÿ]+)*$/i
+    if (regex.test(ville)) {
         return true
     } else {
         return false
@@ -30,8 +30,8 @@ function verifVille(ville) {
 
 function verifAdresse(adresse) {
     //verifie le format de l'adresse
-    var modele = /^(\d+\s*[A-Za-z]*)[, ]*(.+)$/ui;
-    if (modele.test(adresse)) {
+    var regex = /^(\d+\s*[A-Za-z]*)[, ]*(.+)$/ui
+    if (regex.test(adresse)) {
         return true
     } else {
         return false
@@ -49,25 +49,25 @@ function verifExpiration(date){
     moisEnCours = x.getMonth()+1
 
     if(annee > anneeEnCours && mois > 0 && mois <= 12){
-        valide = true;
+        valide = true
     }
     else if(annee == anneeEnCours){
         if(mois >= moisEnCours && mois > 0 && mois <= 12){
-            valide = true;
+            valide = true
         }else{
-            valide = false;
+            valide = false
         }
     }
     else{
-        valide = false;
+        valide = false
     }
-    return valide;
+    return valide
 }
 
 function verifCryptogramme(cryptogramme){
     // Vérifie que le cryptogramme à bien 3 chiffres
-    var modele = /[0-9]{3}/i;
-    if (modele.test(cryptogramme)) {
+    var regex = /[0-9]{3}/i
+    if (regex.test(cryptogramme)) {
         return true
     } else {
         return false
@@ -75,10 +75,10 @@ function verifCryptogramme(cryptogramme){
 }
 
 function verifNumCarte(num){
-    num = num.replaceAll(" ", "");
+    num = num.replaceAll(" ", "")
     //Vérifie que le numéro de la carte à bien 16 chiffres
-    var modele = /^[0-9]{16}$/
-    if (modele.test(num)) {
+    var regex = /^[0-9]{16}$/
+    if (regex.test(num)) {
         return true
     }else{
         return false
@@ -87,8 +87,8 @@ function verifNumCarte(num){
 
 function verifMail(mail) {
     // Autorise Les majuscule, minuscule, accent maj/min, un espace, un ou deux tiret(s)
-    var modele = /^[A-Za-z0-9.]+@[A-Za-z-]+.[A-Za-z]+$/;
-    if (modele.test(mail) && mail.length < 150) {
+    var regex = /^[A-Za-z0-9.]+@[A-Za-z-]+.[A-Za-z]+$/
+    if (regex.test(mail) && mail.length < 150) {
         return true
     } else {
         return false
@@ -97,8 +97,8 @@ function verifMail(mail) {
 
 function verifMotDePasse(mdp) {
     // Autorise Les majuscule, minuscule, accent maj/min, un espace, un ou deux tiret(s)
-    var modele = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[-@_#$.£!?%*+:;,&~|^])[^\s<>]{10,}$/;
-    if (modele.test(mdp)) {
+    var regex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[-@_#$.£!?%*+:,&~|^])[^\s<>]{10,}$/
+    if (regex.test(mdp)) {
         return true
     } else {
         return false
@@ -107,13 +107,63 @@ function verifMotDePasse(mdp) {
 
 function confirmationMotDePasse(mdp, confMdp){
     // Vérification que le mot de passe correspond au mot de passe de vérification
-    return mdp === confMdp;
+    return mdp === confMdp
 }
 
 function verifPseudo(pseudo){
     // Vérification du pseudo
-    var modele = /^([0-9A-Za-zÀ-öø-ÿ]+)*$/;
-    if (modele.test(pseudo) && pseudo.length < 30) {
+    var regex = /^([0-9A-Za-zÀ-öø-ÿ]+)*$/
+    if (regex.test(pseudo) && pseudo.length < 30) {
+        return true
+    } else {
+        return false
+    }
+}
+
+function verifDate(date) {
+    // Vérifie que la date est au format jj-mm-aaaa
+    const regex = /^\d{2}-\d{2}-\d{4}$/
+    if (!regex.test(date)) return false
+
+    const [jour, mois, annee] = date.split('-').map(Number)
+    const d = new Date(annee, mois - 1, jour)
+
+    // Vérifie que la date créée correspond exactement
+    if(d.getFullYear() === annee && d.getMonth() + 1 === mois && d.getDate() === jour){
+        return true
+    } else {
+        return false
+    }
+}
+
+function verifNaissance(naissance) {
+    if (!verifDate(naissance)) return false
+
+    // Séparer jour, mois, année
+    const [jour, mois, annee] = naissance.split('-').map(Number)
+    const dateNaissance = new Date(annee, mois - 1, jour)
+    const aujourdHui = new Date()
+
+    // Calcul exact de l'âge
+    let age = aujourdHui.getFullYear() - dateNaissance.getFullYear()
+    const moisDiff = aujourdHui.getMonth() - dateNaissance.getMonth()
+
+    // Ajuste si l'anniversaire n'est pas encore passé cette année
+    if (moisDiff < 0 || (moisDiff === 0 && aujourdHui.getDate() < dateNaissance.getDate())) {
+        age--
+    }
+
+    if(age >= 18){
+        return true
+    } else {
+        return false
+    }
+}
+
+function verifTelephone(telephone){
+    // Vérification du telephone
+    var regex = /^0[0-9]{9}$/
+    if (regex.test(telephone)) {
         return true
     } else {
         return false
