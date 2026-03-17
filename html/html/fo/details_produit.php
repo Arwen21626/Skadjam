@@ -244,6 +244,10 @@
                 <section class=" md:ml-32">
                     <?php foreach($avis as $row){
                         if ($row['contenu_commentaire'] != ''){
+                            $monAvis = false;
+                            if($row['id_compte'] == $idCompte){
+                                $monAvis = true;
+                            }
                             $idAvis = $row['id_avis'];
                             $stmt = $dbh->prepare("SELECT id_avis, raison_sociale, contenu_reponse FROM sae3_skadjam._reponse r
                                                     INNER JOIN sae3_skadjam._vendeur v
@@ -256,11 +260,9 @@
                             ?>
                             <section class=" bg-bleu m-4 p-4 md:w-4xl w-100 <?php echo $aReponse?'mb-0 rounded-t-2xl':'rounded-2xl'?>">
 
-                                <!---pseudonyme--->
                                 <div class="flex justify-between items-center py-2">
-                                    <h4>
-                                        <?php echo $row['pseudo'];?>
-                                    </h4>
+                                    <!---pseudonyme--->
+                                    <h4><?php echo $row['pseudo'];?></h4>
 
                                     <div class="flex items-center md:gap-4 gap-2">
                                         <!---note de l'avis--->
@@ -317,7 +319,16 @@
                                     }
                                     // affichage ou pas du boutton signaler
                                     if (!$aSignaler){?>
-                                        <a class="text-black" href="./details_produit.php?idProduit=<?php echo $idProd;?>&signal=true&idAvis=<?php echo $row['id_avis']?>">Signaler</a>
+                                        <a href="./details_produit.php?idProduit=<?php echo $idProd;?>&signal=true&idAvis=<?php echo $row['id_avis']?>">
+                                            <img class="md:w-6 md:h-6 w-5 h-5 cursor-pointer hover:scale-110 transition" src="../../images/logo/bootstrap_icon/exclamation-triangle.svg" 
+                                                alt="icône attention pour signaler un avis"
+                                                title="Signaler l'avis">
+                                        </a>
+                                    <?php }
+                                    elseif(!$monAvis){ ?>
+                                        <img class="md:w-6 md:h-6 w-5 h-5" src="../../images/logo/bootstrap_icon/exclamation-triangle-fill.svg" 
+                                            alt="icône attention pour indiquer que vous avez déjà signaler l'avis"
+                                            title="Vous avez déjà signaler l'avis">
                                     <?php }?>
                                 </div>
                                 <p><?php echo $row['contenu_commentaire'];?></p>     

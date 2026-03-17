@@ -2,6 +2,7 @@
 session_start();
 require_once __DIR__ . "/../../php/verif_role_bo.php";
 require_once __DIR__ . "/../../01_premiere_connexion.php";
+require_once __DIR__ . "/../../php/modification_variable.php";
 
 $idCompte = $_SESSION["idCompte"];
 
@@ -212,8 +213,8 @@ if ($_SESSION["role"] === "vendeur"){
                     $donneesDetailsCommandes->execute([$donnees["id_commande"], $idCompte]);
                     
                     foreach($donneesDetailsCommandes as $produits){?>
-                        <div class=" md:grid grid-cols-4 mb-5 gap-3">
-                            <h6 class=" md:text-[23px] text-[18px] ml-2 mt-1 font-bold col-span-4 md:text-center"><?php echo $produits["id_produit"]." - ".$produits["libelle_produit"]?></h6>
+                        <div class=" md:grid grid-cols-3 mb-5 gap-3">
+                            <h6 class=" md:text-[23px] text-[18px] ml-2 mt-1 font-bold col-span-3 md:text-center"><?php echo $produits["id_produit"]." - ".$produits["libelle_produit"]?></h6>
                             <p>montant <abbr title="Toutes Taxes Comprises">TTC</abbr> : <?php echo $produits["sous_total_produit_detail_commande"]?></p>
                             <p>montant <abbr title="Hors Taxes">HT</abbr> : <?php echo $produits["montant_ht_detail_commande"]?></p>
                             <p>quantite : <?php echo $produits["quantite_detail_commande"]?></p>
@@ -237,47 +238,68 @@ if ($_SESSION["role"] === "vendeur"){
             <?php }?>
         </section>
         <!-- les produits du vendeur -->
-        <section>
-            <h3>Vos produits</h3>
+        <section class=" mb-5">
+            <h3 class="text-center m-2">Vos produits</h3>
         <?php foreach($donneesProduits as $donnees){?>
-            <div>
-                <h4><?php echo $donnees["id_produit"]." - ".$donnees["libelle_produit"]?></h4>
-                <p>description : <?php echo $donnees["description_produit"]?></p>
+            <div class=" md:grid grid-cols-3 mb-5 gap-3">
+                <div class=" col-span-3 flex justify-self-center">
+                    <img class="w-16 h-16 inline-block" src="<?php echo $donnees["url_photo_produit"]?>" alt="<?php echo $donnees["alt_photo_produit"]?>" title="<?php echo $donnees["titre_photo_produit"]?>">
+                    <h4 class=" ml-10 m-2 font-bold"><?php echo $donnees["id_produit"]." - ".$donnees["libelle_produit"]?></h4>
+                </div>
+                
+                <div class="flex col-span-3">
+                    <p>visible par les clients : <?php echo $donnees["est_masque"]?"true":"false"?></p>
+                    <p class="ml-8">supprimé : <?php echo $donnees["est_supprime"]?"true":"false"?></p>
+                </div>
+                
+                <p class=" col-span-3">description : <?php echo $donnees["description_produit"]?></p>
+                <p>unité : <?php echo $donnees["unite"]?></p>
+                <p>quantité par unité : <?php echo $donnees["quantite_unite"]?></p>
+                <p>categorie : <?php echo $donnees["libelle_categorie"]?></p>
+                <p>note moyenne : <?php echo true?$donnees["note_moyenne"]:"non noté"?></p>
+
                 <p>prix <abbr title="Hors Taxes">HT</abbr> : <?php echo $donnees["prix_ht"]?></p>
                 <p>prix <abbr title="Toutes Taxes Comprises">TTC</abbr> : <?php echo $donnees["prix_ttc"]?></p>
-                <p>prix avec remise : <?php echo $donnees["prix_remise"]?></p>
-                <p>visible pas les clients : <?php echo $donnees["est_masque"]?"true":"false"?></p>
                 <p>quatité en stock : <?php echo $donnees["quantite_stock"]?></p>
                 <p>seuil d'alerte : <?php echo $donnees["seuil_alert"]!=""?$donnees["seuil_alert"]:0?></p>
-                <p>quantité par unité : <?php echo $donnees["quantite_unite"]?></p>
-                <p>unité : <?php echo $donnees["unite"]?></p>
-                <p>note moyenne : <?php echo true?$donnees["note_moyenne"]:"non noté"?></p>
-                <p>supprimé : <?php echo $donnees["est_supprime"]?"true":"false"?></p>
-                <p>date de création : <?php echo $donnees["date_creation"]?></p>
-                <p>categorie : <?php echo $donnees["libelle_categorie"]?></p>
-                <p>nom de la TVA : <?php echo $donnees["nom_tva"]?></p>
-                <p>pourcentage de TVA : <?php echo $donnees["pourcentage_tva"]?></p>
-                <img src="<?php $donnees["url_photo"]?>" alt="<?php $donnees["alt_photo"]?>" title="<?php $donnees["titre_photo"]?>">
-                <?php if ($donnees["description_photo"] != ""){?>
-                    <p>description de la photo : <?php echo $donnees["description_photo"]?></p>
-                <?php } if ($donnees["libelle_promotion"] != ""){?>
-                    <p>libelle promotion : <?php echo $donnees["libelle_promotion"]?></p>
-                    <p>debut de promotion : le <?php echo $donnees["date_debut_promotion"]?> à <?php echo $donnees["heure_debut"]?> </p>
-                <?php } if ($donnees["date_fin_promotion"] != ""){?>
-                    <p>fin de promotion : le <?php echo $donnees["date_fin_promotion"]?> à <?php echo $donnees["heure_fin"]?> </p>
-                <?php } if ($donnees["periodicite"] != ""){?>
-                    <p>periodicite : <?php echo $donnees["periodicite"]?></p>
-                <?php } if ($donnees["url_photo_promotion"] != ""){?>
-                    <img src="<?php $donnees["url_photo_promotion"]?>" alt="<?php $donnees["alt_photo_promotion"]?>" title="<?php $donnees["titre_photo_promotion"]?>">
-                <?php } if ($donnees["description_photo_promotion"] != ""){?>
-                    <p>description de la photo : <?php echo $donnees["description_photo_promotion"]?></p>
-                <?php } if ($donnees["pourcentage_remise"] != ""){?>
-                    <p>pourcentage de remise : <?php echo $donnees["pourcentage_remise"]?></p>
-                <?php } if ($donnees["date_debut_remise"] != ""){?>
-                    <p>date de début de remise : <?php echo $donnees["date_debut_remise"]?></p>
-                <?php } if ($donnees["date_fin_remise"] != ""){?>
-                    <p>date de fin de remise : <?php echo $donnees["date_fin_remise"]?></p>
-                <?php }?>
+                <p>date de création : <?php 
+                    $date = explode(" ",$donnees["date_creation"]);
+                    echo formatDate($date[0]);?>
+                </p>
+                
+                <!-- tva -->
+                <div>
+                    <p>nom de la TVA : <?php echo $donnees["nom_tva"]?></p>
+                    <p>pourcentage de TVA : <?php echo $donnees["pourcentage_tva"]?></p>
+                </div>
+
+                <!-- promotion -->
+                <div> 
+                    <?php if ($donnees["libelle_promotion"] != ""){?>
+                        <p>libelle promotion : <?php echo $donnees["libelle_promotion"]?></p>
+                        <p>debut de promotion : le <?php echo $donnees["date_debut_promotion"]?> à <?php echo $donnees["heure_debut"]?> </p>
+                    <?php } if ($donnees["date_fin_promotion"] != ""){?>
+                        <p>fin de promotion : le <?php echo $donnees["date_fin_promotion"]?> à <?php echo $donnees["heure_fin"]?> </p>
+                    <?php } if ($donnees["periodicite"] != ""){?>
+                        <p>periodicite : <?php echo $donnees["periodicite"]?></p>
+                    <?php } if ($donnees["url_photo_promotion"] != ""){?>
+                        <img src="<?php echo $donnees["url_photo_promotion"]?>" alt="<?php echo $donnees["alt_photo_promotion"]?>" title="<?php echo $donnees["titre_photo_promotion"]?>">
+                    <?php } if ($donnees["description_photo_promotion"] != ""){?>
+                        <p class=" col-span-3">description de la photo de promotion : <?php echo $donnees["description_photo_promotion"]?></p>
+                    <?php }?>
+                </div> 
+
+                <!-- remise -->
+                <div>
+                    <?php if ($donnees["pourcentage_remise"] != ""){?>
+                        <p>prix avec remise : <?php echo $donnees["prix_remise"]?></p>
+                        <p>pourcentage de remise : <?php echo $donnees["pourcentage_remise"]?></p>
+                    <?php } if ($donnees["date_debut_remise"] != ""){?>
+                        <p>date de début de remise : <?php echo $donnees["date_debut_remise"]?></p>
+                    <?php } if ($donnees["date_fin_remise"] != ""){?>
+                        <p>date de fin de remise : <?php echo $donnees["date_fin_remise"]?></p>
+                    <?php }?>
+                </div>
         </div>
         <?php }?>
         

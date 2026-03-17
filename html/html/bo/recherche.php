@@ -253,7 +253,8 @@
             <article id="prod" class="flex flex-row flex-wrap justify-around w-auto">
                 <script>
                     document.addEventListener("DOMContentLoaded", () => {
-                        afficherListe(tabProd)
+                        console.log(tabProd)
+                        afficherListe(tabProd, null, null, null)
                     });
                 </script>
             </article>

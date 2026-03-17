@@ -63,9 +63,11 @@
     else if(isset($_GET['supr']) && $_GET['supr'] === 'true'){
         $supprReponse = $dbh->prepare("DELETE FROM sae3_skadjam._reponse WHERE id_avis = ?");
         $suprAsignaler = $dbh->prepare("DELETE FROM sae3_skadjam._a_signaler WHERE id_avis = ?");
+        $suprPouces = $dbh->prepare("DELETE FROM sae3_skadjam._pouces WHERE id_avis = ?");
         $suprAvis = $dbh->prepare("DELETE FROM sae3_skadjam._avis WHERE id_produit = ? AND id_compte = ?");
         $supprReponse->execute([$idAvis]);
         $suprAsignaler->execute([$idAvis]);
+        $suprPouces->execute([$idAvis]);
         $suprAvis->execute([$idProd, $idCompte]);
         
         header("location: ./details_produit.php?idProduit=$idProd&avisSupprimer=1");

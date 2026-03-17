@@ -11,7 +11,7 @@
     try {  
         $tabProduit = null;           
         //récupère toutes les infos des tables produits
-        foreach($dbh->query("SELECT v.denomination, pr.id_produit, pr.libelle_produit, pr.prix_ttc, pr.note_moyenne, pr.quantite_stock, p.url_photo, p.alt, p.titre, pr.seuil_alerte, pr.description_produit
+        foreach($dbh->query("SELECT v.denomination, pr.id_produit, pr.libelle_produit, pr.prix_remise, pr.prix_ttc, pr.note_moyenne, pr.quantite_stock, p.url_photo, p.alt, p.titre, pr.seuil_alerte, pr.description_produit
                             FROM sae3_skadjam._produit pr
                             INNER JOIN sae3_skadjam._vendeur v
                                 ON pr.id_vendeur = v.id_compte
@@ -72,20 +72,24 @@
                             imagepng($img, $tmp);
 
                             $y = $pdf->GetY();
-                            $pdf->Image($tmp, 5, $y, 0, 20);
+                            $pdf->Image($tmp, 15, $y, 0, 20);
 
-                            $pdf->SetXY(35, $y);
+                            $pdf->SetXY(45, $y);
 
                             $titre = iconv('UTF-8', 'ISO-8859-1//TRANSLIT', $valeurs['titre']);
                             $pdf->MultiCell(65, 10, $titre, 0, 1);
 
-                            $pdf->SetX(35);
-                            $prix = iconv('UTF-8', 'Windows-1252', $valeurs['prix_ttc'] . " €");
+                            $pdf->SetX(45);
+                            if($valeurs['prix_remise'] === $valeurs['prix_ttc']){
+                                $prix = iconv('UTF-8', 'Windows-1252', $valeurs['prix_remise'] . " €");
+                            }else{
+                                $prix = iconv('UTF-8', 'Windows-1252', $valeurs['prix_remise'] . " € (remise)");
+                            }
                             $pdf->MultiCell(65, 10, $prix, 0, 0);
 
-                            $pdf->SetX(10);
+                            $pdf->SetX(15);
                             $description = html_entity_decode($valeurs['description_produit'], ENT_QUOTES, 'UTF-8');
-                            $description = iconv('UTF-8', 'ISO-8859-1//TRANSLIT', $valeurs['description_produit']);
+                            $description = iconv('UTF-8', 'ISO-8859-1//TRANSLIT', $description);
                             $pdf->MultiCell(65, 10, $description, 0, 0);
 
                             $i=1;
@@ -93,20 +97,24 @@
                             $tmp = tempnam(sys_get_temp_dir(), 'img') . '.png';
                             imagepng($img, $tmp);
 
-                            $pdf->Image($tmp, 110, $y, 0, 20);
+                            $pdf->Image($tmp, 120, $y, 0, 20);
 
-                            $pdf->SetXY(140, $y);
+                            $pdf->SetXY(150, $y);
 
                             $titre = iconv('UTF-8', 'ISO-8859-1//TRANSLIT', $valeurs['titre']);
                             $pdf->MultiCell(65, 10, $titre, 0, 1);
 
-                            $pdf->SetX(140);
-                            $prix = iconv('UTF-8', 'Windows-1252', $valeurs['prix_ttc'] . " €");
+                            $pdf->SetX(150);
+                            if($valeurs['prix_remise'] === $valeurs['prix_ttc']){
+                                $prix = iconv('UTF-8', 'Windows-1252', $valeurs['prix_remise'] . " €");
+                            }else{
+                                $prix = iconv('UTF-8', 'Windows-1252', $valeurs['prix_remise'] . " € (remise)");
+                            }
                             $pdf->MultiCell(65, 10, $prix, 0, 0);
 
-                            $pdf->SetX(110);
+                            $pdf->SetX(120);
                             $description = html_entity_decode($valeurs['description_produit'], ENT_QUOTES, 'UTF-8');
-                            $description = iconv('UTF-8', 'ISO-8859-1//TRANSLIT', $valeurs['description_produit']);
+                            $description = iconv('UTF-8', 'ISO-8859-1//TRANSLIT', $description);
                             $pdf->MultiCell(65, 10, $description, 0, 0);
 
                             $pdf->Ln(10);
@@ -122,34 +130,42 @@
                         if($i===0){
                             $y = $pdf->GetY();
 
-                            $pdf->SetXY(35, $y);
+                            $pdf->SetXY(45, $y);
 
                             $titre = iconv('UTF-8', 'ISO-8859-1//TRANSLIT', $valeurs['titre']);
                             $pdf->MultiCell(65, 10, $titre, 0, 1);
 
-                            $pdf->SetX(35);
-                            $prix = iconv('UTF-8', 'Windows-1252', $valeurs['prix_ttc'] . " €");
+                            $pdf->SetX(45);
+                            if($valeurs['prix_remise'] === $valeurs['prix_ttc']){
+                                $prix = iconv('UTF-8', 'Windows-1252', $valeurs['prix_remise'] . " €");
+                            }else{
+                                $prix = iconv('UTF-8', 'Windows-1252', $valeurs['prix_remise'] . " € (remise)");
+                            }
                             $pdf->MultiCell(65, 10, $prix, 0, 0);
 
-                            $pdf->SetX(10);
+                            $pdf->SetX(15);
                             $description = html_entity_decode($valeurs['description_produit'], ENT_QUOTES, 'UTF-8');
-                            $description = iconv('UTF-8', 'ISO-8859-1//TRANSLIT', $valeurs['description_produit']);
+                            $description = iconv('UTF-8', 'ISO-8859-1//TRANSLIT', $description);
                             $pdf->MultiCell(65, 10, $description, 0, 0);
 
                             $i=1;
                         }else{
-                            $pdf->SetXY(140, $y);
+                            $pdf->SetXY(150, $y);
 
                             $titre = iconv('UTF-8', 'ISO-8859-1//TRANSLIT', $valeurs['titre']);
                             $pdf->MultiCell(65, 10, $titre, 0, 1);
 
-                            $pdf->SetX(140);
-                            $prix = iconv('UTF-8', 'Windows-1252', $valeurs['prix_ttc'] . " €");
+                            $pdf->SetX(150);
+                            if($valeurs['prix_remise'] === $valeurs['prix_ttc']){
+                                $prix = iconv('UTF-8', 'Windows-1252', $valeurs['prix_remise'] . " €");
+                            }else{
+                                $prix = iconv('UTF-8', 'Windows-1252', $valeurs['prix_remise'] . " € (remise)");
+                            }
                             $pdf->MultiCell(65, 10, $prix, 0, 0);
 
-                            $pdf->SetX(110);
+                            $pdf->SetX(120);
                             $description = html_entity_decode($valeurs['description_produit'], ENT_QUOTES, 'UTF-8');
-                            $description = iconv('UTF-8', 'ISO-8859-1//TRANSLIT', $valeurs['description_produit']);
+                            $description = iconv('UTF-8', 'ISO-8859-1//TRANSLIT', $description);
                             $pdf->MultiCell(65, 10, $description, 0, 0);
 
                             $pdf->Ln(10);

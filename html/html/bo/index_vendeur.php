@@ -73,6 +73,7 @@
     <script src="../../js/tris.js"></script>
     <script src="../../js/filtres.js"></script>
     <script src="../../js/affichageNote.js"></script>
+    <script src="../../js/ruptureStock.js"></script>
 </head>
 
 
@@ -131,8 +132,8 @@
                         $idProduit = $prod['id_produit'];
                         // Le produit est-il en promotion ?
                         $estPromu = ($prod['id_promotion'] !== null);?>
-                        
-                        <section class="bg-bleu flex flex-col w-40 h-auto p-2 m-2 md:w-80 md:p-3">
+                        <!-- Carte produit -->
+                        <div id="<?php echo $idProduit; ?>" class="bg-bleu flex flex-col w-40 h-auto p-2 m-2 md:w-80 md:p-3">
                             <!--affichage de la photo-->
                             <a href= "<?php echo "details_produit.php?idProduit=".$idProduit;?>" class=" mb-3">
                                 <div class="relative img">
@@ -182,7 +183,7 @@
                                     </div>
                                 <?php }
                             } ?> 
-                        </section>
+                        </div>
                 <?php } ?>
             </article>         
             
