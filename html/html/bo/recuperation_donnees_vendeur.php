@@ -292,15 +292,16 @@ if ($_SESSION["role"] === "vendeur"){
                     <?php if ($donnees["libelle_promotion"] != ""){?>
                         <p>libelle promotion : <?php echo $donnees["libelle_promotion"]?></p>
                         <p>debut de promotion : le <?php echo $donnees["date_debut_promotion"]?> à <?php echo $donnees["heure_debut"]?> </p>
-                    <?php } if ($donnees["date_fin_promotion"] != ""){?>
+                    <?php  if ($donnees["date_fin_promotion"] != ""){?>
                         <p>fin de promotion : le <?php echo $donnees["date_fin_promotion"]?> à <?php echo $donnees["heure_fin"]?> </p>
                     <?php } if ($donnees["periodicite"] != ""){?>
                         <p>periodicite : <?php echo $donnees["periodicite"]?></p>
                     <?php } if ($donnees["url_photo_promotion_produit"] != ""){?>
-                        <img src="<?php echo $donnees["url_photo_promotion_produit"]?>" alt="<?php echo $donnees["alt_photo_promotion"]?>" title="<?php echo $donnees["titre_photo_promotion"]?>">
+                        <img src="<?php echo $donnees["url_photo_promotion_produit"]?>" alt="<?php echo $donnees["alt_photo_promotion"]?>" title="<?php echo $donnees["titre_photo_promotion_produit"]?>">
                     <?php } if ($donnees["description_photo_promotion_produit"] != ""){?>
                         <p class=" col-span-3">description de la photo de promotion : <?php echo $donnees["description_photo_promotion_produit"]?></p>
-                    <?php }?>
+                    <?php }
+                    }?>
                 </div> 
 
                 <!-- remise -->
