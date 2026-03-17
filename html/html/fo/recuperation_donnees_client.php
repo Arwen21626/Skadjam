@@ -306,8 +306,10 @@ if ($_SESSION["role"] === "client"){
                 <h3 class="text-center m-2 col-span-4">Votre panier</h3>
                 <p>nombre de produits : <?php echo $donnees["nombre_produit_panier"]?></p>
                 <p>montant total <abbr title="Toutes Taxes Comprises">TTC</abbr> : <?php echo $donnees["montant_total_ttc_panier"]?></p>
+                <?php if ($donnees["date_derniere_modif_panier"] != ""){?>
                 <p class=" col-span-2">date de dernière modification : <?php echo $donnees["date_derniere_modif_panier"]?></p>
-                <?php $donneesProduitsPanier->execute([$donnees["id_panier"]]);?>
+                <?php }
+                $donneesProduitsPanier->execute([$donnees["id_panier"]]);?>
                 <div class=" col-span-4">
                     <?php if($donnees["nombre_produit_panier"] !== "0"){?>
                         <h4 class=" ml-10 m-2 font-bold md:text-center">Les produits de votre panier</h4>
