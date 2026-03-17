@@ -275,7 +275,7 @@ if ($_SESSION["role"] === "vendeur"){
                 <p>prix <abbr title="Hors Taxes">HT</abbr> : <?php echo $donnees["prix_ht"]?></p>
                 <p>prix <abbr title="Toutes Taxes Comprises">TTC</abbr> : <?php echo $donnees["prix_ttc"]?></p>
                 <p>quatité en stock : <?php echo $donnees["quantite_stock"]?></p>
-                <p>seuil d'alerte : <?php echo $donnees["seuil_alert"]!=""?$donnees["seuil_alert"]:0?></p>
+                <p>seuil d'alerte : <?php echo $donnees["seuil_alerte"]!=""?$donnees["seuil_alerte"]:0?></p>
                 <p>date de création : <?php 
                     $date = explode(" ",$donnees["date_creation"]);
                     echo formatDate($date[0]);?>
@@ -296,10 +296,10 @@ if ($_SESSION["role"] === "vendeur"){
                         <p>fin de promotion : le <?php echo $donnees["date_fin_promotion"]?> à <?php echo $donnees["heure_fin"]?> </p>
                     <?php } if ($donnees["periodicite"] != ""){?>
                         <p>periodicite : <?php echo $donnees["periodicite"]?></p>
-                    <?php } if ($donnees["url_photo_promotion"] != ""){?>
-                        <img src="<?php echo $donnees["url_photo_promotion"]?>" alt="<?php echo $donnees["alt_photo_promotion"]?>" title="<?php echo $donnees["titre_photo_promotion"]?>">
-                    <?php } if ($donnees["description_photo_promotion"] != ""){?>
-                        <p class=" col-span-3">description de la photo de promotion : <?php echo $donnees["description_photo_promotion"]?></p>
+                    <?php } if ($donnees["url_photo_promotion_produit"] != ""){?>
+                        <img src="<?php echo $donnees["url_photo_promotion_produit"]?>" alt="<?php echo $donnees["alt_photo_promotion"]?>" title="<?php echo $donnees["titre_photo_promotion"]?>">
+                    <?php } if ($donnees["description_photo_promotion_produit"] != ""){?>
+                        <p class=" col-span-3">description de la photo de promotion : <?php echo $donnees["description_photo_promotion_produit"]?></p>
                     <?php }?>
                 </div> 
 
