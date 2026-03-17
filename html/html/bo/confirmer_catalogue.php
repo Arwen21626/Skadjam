@@ -11,7 +11,7 @@
     try {  
         $tabProduit = null;           
         //récupère toutes les infos des tables produits
-        foreach($dbh->query("SELECT v.denomination, pr.id_produit, pr.libelle_produit, pr.prix_ttc, pr.note_moyenne, pr.quantite_stock, p.url_photo, p.alt, p.titre, pr.seuil_alerte, pr.description_produit
+        foreach($dbh->query("SELECT v.denomination, pr.id_produit, pr.libelle_produit, pr.prix_remise, pr.prix_ttc, pr.note_moyenne, pr.quantite_stock, p.url_photo, p.alt, p.titre, pr.seuil_alerte, pr.description_produit
                             FROM sae3_skadjam._produit pr
                             INNER JOIN sae3_skadjam._vendeur v
                                 ON pr.id_vendeur = v.id_compte
@@ -80,7 +80,11 @@
                             $pdf->MultiCell(65, 10, $titre, 0, 1);
 
                             $pdf->SetX(45);
-                            $prix = iconv('UTF-8', 'Windows-1252', $valeurs['prix_ttc'] . " €");
+                            if($valeurs['prix_remise'] === $valeurs['prix_ttc']){
+                                $prix = iconv('UTF-8', 'Windows-1252', $valeurs['prix_remise'] . " €");
+                            }else{
+                                $prix = iconv('UTF-8', 'Windows-1252', $valeurs['prix_remise'] . " € (remise)");
+                            }
                             $pdf->MultiCell(65, 10, $prix, 0, 0);
 
                             $pdf->SetX(15);
@@ -101,7 +105,11 @@
                             $pdf->MultiCell(65, 10, $titre, 0, 1);
 
                             $pdf->SetX(150);
-                            $prix = iconv('UTF-8', 'Windows-1252', $valeurs['prix_ttc'] . " €");
+                            if($valeurs['prix_remise'] === $valeurs['prix_ttc']){
+                                $prix = iconv('UTF-8', 'Windows-1252', $valeurs['prix_remise'] . " €");
+                            }else{
+                                $prix = iconv('UTF-8', 'Windows-1252', $valeurs['prix_remise'] . " € (remise)");
+                            }
                             $pdf->MultiCell(65, 10, $prix, 0, 0);
 
                             $pdf->SetX(120);
@@ -128,7 +136,11 @@
                             $pdf->MultiCell(65, 10, $titre, 0, 1);
 
                             $pdf->SetX(45);
-                            $prix = iconv('UTF-8', 'Windows-1252', $valeurs['prix_ttc'] . " €");
+                            if($valeurs['prix_remise'] === $valeurs['prix_ttc']){
+                                $prix = iconv('UTF-8', 'Windows-1252', $valeurs['prix_remise'] . " €");
+                            }else{
+                                $prix = iconv('UTF-8', 'Windows-1252', $valeurs['prix_remise'] . " € (remise)");
+                            }
                             $pdf->MultiCell(65, 10, $prix, 0, 0);
 
                             $pdf->SetX(15);
@@ -144,7 +156,11 @@
                             $pdf->MultiCell(65, 10, $titre, 0, 1);
 
                             $pdf->SetX(150);
-                            $prix = iconv('UTF-8', 'Windows-1252', $valeurs['prix_ttc'] . " €");
+                            if($valeurs['prix_remise'] === $valeurs['prix_ttc']){
+                                $prix = iconv('UTF-8', 'Windows-1252', $valeurs['prix_remise'] . " €");
+                            }else{
+                                $prix = iconv('UTF-8', 'Windows-1252', $valeurs['prix_remise'] . " € (remise)");
+                            }
                             $pdf->MultiCell(65, 10, $prix, 0, 0);
 
                             $pdf->SetX(120);
