@@ -830,6 +830,9 @@ input.quantite-prod-input {
   .min-h-\[420px\] {
     min-height: 420px;
   }
+  .min-h-\[458px\] {
+    min-height: 458px;
+  }
   .min-h-\[500px\] {
     min-height: 500px;
   }
