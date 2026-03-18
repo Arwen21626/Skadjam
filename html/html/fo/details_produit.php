@@ -249,12 +249,12 @@
                     <div class="border-2 border-vertClair rounded-2xl flex-col items-center p-2 text-center">
                         <p id="nbInPanier">Panier : <?= $nbInPanier?></p>
                         <div id="input-number" class=" flex flex-row items-center">
-                            <button class=" cursor-pointer" onclick="suppProduit()">
-                                <img src="../../images/logo/bootstrap_icon//dash-square.svg" alt="plus-button" width="30px">
+                            <button class=" cursor-pointer" onclick="suppProduit()" onmouseenter="enterBtn('btn-dash')" onmouseleave="leaveBtn('btn-dash')">
+                                <img id="btn-dash" src="../../images/logo/bootstrap_icon//dash-square.svg" alt="plus-button" width="30px">
                             </button>
                             <input type="text" id="nb-produit" value="1" min="1" size="10" class="ml-2 mr-2 text-center border-3 border-vertClair">
-                            <button class=" cursor-pointer" onclick="addProduit()">
-                                <img src="../../images/logo/bootstrap_icon/plus-square.svg" alt="plus-button" width="30px">
+                            <button class=" cursor-pointer" onclick="addProduit()" onmouseenter="enterBtn('btn-plus')" onmouseleave="leaveBtn('btn-plus')">
+                                <img id="btn-plus" src="../../images/logo/bootstrap_icon/plus-square.svg" alt="plus-button" width="30px">
                             </button>
                         </div>
                         <form method="post" action="<?php echo $lienBtnAjouterPanier ?>" >
@@ -535,6 +535,17 @@
         })
 
     
+        function enterBtn(id){
+            let imgBtn = document.getElementById(id)
+            if (id === 'btn-dash'){imgBtn.src = "../../images/logo/bootstrap_icon/dash-square-fill.svg"}
+            if (id === 'btn-plus'){imgBtn.src = "../../images/logo/bootstrap_icon/plus-square-fill.svg"}
+        }
+
+        function leaveBtn(id){
+            let imgBtn = document.getElementById(id)
+            if (id === 'btn-dash'){imgBtn.src = "../../images/logo/bootstrap_icon/dash-square.svg"}
+            if (id === 'btn-plus'){imgBtn.src = "../../images/logo/bootstrap_icon/plus-square.svg"}
+        }
     </script>
 </body>
 
