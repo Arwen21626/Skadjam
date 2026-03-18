@@ -79,7 +79,7 @@
                             $pdf->SetXY(45, $y);
 
                             $titre = iconv('UTF-8', 'ISO-8859-1//TRANSLIT', $valeurs['titre']);
-                            $pdf->MultiCell(65, 10, $titre, 0, 1);
+                            $pdf->MultiCell(60, 10, $titre, 0, 1);
 
                             $pdf->SetX(45);
                             if($valeurs['prix_remise'] === $valeurs['prix_ttc']){
@@ -92,7 +92,7 @@
                             $pdf->SetX(15);
                             $description = html_entity_decode($valeurs['description_produit'], ENT_QUOTES, 'UTF-8');
                             $description = iconv('UTF-8', 'ISO-8859-1//TRANSLIT', $description);
-                            $pdf->MultiCell(65, 10, $description, 0, 0);
+                            $pdf->MultiCell(75, 10, $description, 0, 0);
 
                             $i=1;
                         }else{
@@ -105,7 +105,7 @@
                             $pdf->SetXY(150, $y);
 
                             $titre = iconv('UTF-8', 'ISO-8859-1//TRANSLIT', $valeurs['titre']);
-                            $pdf->MultiCell(65, 10, $titre, 0, 1);
+                            $pdf->MultiCell(60, 10, $titre, 0, 1);
 
                             $pdf->SetX(150);
                             if($valeurs['prix_remise'] === $valeurs['prix_ttc']){
@@ -118,15 +118,18 @@
                             $pdf->SetX(120);
                             $description = html_entity_decode($valeurs['description_produit'], ENT_QUOTES, 'UTF-8');
                             $description = iconv('UTF-8', 'ISO-8859-1//TRANSLIT', $description);
-                            $pdf->MultiCell(65, 10, $description, 0, 0);
+                            $pdf->MultiCell(75, 10, $description, 0, 0);
 
                             $pdf->Ln(10);
 
                             $i=0;
+                            if ($pdf->GetY() > 225) { // (A4 = 297)
+                                $pdf->AddPage();
+                            }
                         }
                         $j++;
                         if($j===8){
-                            $pdf->AddPage();
+                            //$pdf->AddPage();
                             $j=0;
                         }
                     }else{ // Charger sans les images
@@ -137,7 +140,7 @@
                             $pdf->SetXY(45, $y);
 
                             $titre = iconv('UTF-8', 'ISO-8859-1//TRANSLIT', $valeurs['titre']);
-                            $pdf->MultiCell(65, 10, $titre, 0, 1);
+                            $pdf->MultiCell(60, 10, $titre, 0, 1);
 
                             $pdf->SetX(45);
                             if($valeurs['prix_remise'] === $valeurs['prix_ttc']){
@@ -150,7 +153,7 @@
                             $pdf->SetX(15);
                             $description = html_entity_decode($valeurs['description_produit'], ENT_QUOTES, 'UTF-8');
                             $description = iconv('UTF-8', 'ISO-8859-1//TRANSLIT', $description);
-                            $pdf->MultiCell(65, 10, $description, 0, 0);
+                            $pdf->MultiCell(75, 10, $description, 0, 0);
 
                             $i=1;
                         }else{
@@ -158,7 +161,7 @@
                             $pdf->SetXY(150, $y);
 
                             $titre = iconv('UTF-8', 'ISO-8859-1//TRANSLIT', $valeurs['titre']);
-                            $pdf->MultiCell(65, 10, $titre, 0, 1);
+                            $pdf->MultiCell(60, 10, $titre, 0, 1);
 
                             $pdf->SetX(150);
                             if($valeurs['prix_remise'] === $valeurs['prix_ttc']){
@@ -171,15 +174,18 @@
                             $pdf->SetX(120);
                             $description = html_entity_decode($valeurs['description_produit'], ENT_QUOTES, 'UTF-8');
                             $description = iconv('UTF-8', 'ISO-8859-1//TRANSLIT', $description);
-                            $pdf->MultiCell(65, 10, $description, 0, 0);
+                            $pdf->MultiCell(75, 10, $description, 0, 0);
 
                             $pdf->Ln(10);
 
                             $i=0;
+                            if ($pdf->GetY() > 225) { // (A4 = 297)
+                                $pdf->AddPage();
+                            }
                         }
                         $j++;
                         if($j===8){
-                            $pdf->AddPage();
+                            //$pdf->AddPage();
                             $j=0;
                         }
                     }
