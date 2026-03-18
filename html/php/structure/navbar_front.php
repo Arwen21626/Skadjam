@@ -46,7 +46,7 @@
             </a>
 
             <!-- Autres -->
-            <button id="btnAutre" class="size-12 bg-no-repeat bg-size-[auto_48px] bg-[url(/images/logo/bootstrap_icon/list.svg)]"></button>
+            <button id="btnAutre" alt="Autre" title="Autre" class="size-12 bg-no-repeat bg-size-[auto_48px] bg-[url(/images/logo/bootstrap_icon/list.svg)]"></button>
         </div>
         
     </div>

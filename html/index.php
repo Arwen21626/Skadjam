@@ -174,7 +174,7 @@
                     <!-- boutons futurs achats & panier -->
                     <div class="flex justify-end">
                         <!-- Produit dans les futurs achats ? -->
-                        <a id="btnFA" href="./php/traitementFAPanier.php?idProduit=<?php echo $idProduit;?>&ajout=fa&vientDe=index">
+                        <a id="btnFA" href="./php/traitementFAPanier.php?idProduit=<?php echo $idProduit;?>&ajout=fa&vientDe=index" alt="Ajouter à vos futurs achats" title="Ajouter à vos futurs achats">
                             <button class="cursor-pointer size-10 bg-no-repeat bg-size-[auto_40px]
                             <?php 
                             $bg = "bg-[url(/images/logo/bootstrap_icon/bookmark-fa-plus.svg)]";
@@ -212,7 +212,7 @@
                             }
                             echo $bg;
                             ?>
-                        ">
+                        " alt="Ajouter à votre panier" title="Ajouter à votre panier">
                         </button>
                     </div> 
                     <!--affichage de la promotion-->
