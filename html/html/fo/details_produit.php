@@ -31,6 +31,7 @@
                         , PDO::FETCH_ASSOC) as $row){
         $produit = $row;
     }
+    error_log(print_r($produit, true));
 
     if ($produit === "vide") 
     {
@@ -82,6 +83,43 @@
         $produitDesc = $produit["description_produit"];
         $noteMoy = $produit["note_moyenne"];
         $pourcentage = $produit['pourcentage_remise'];
+
+        // nombre de ce produit dans le panier
+        $nbInPanier = 0;
+        if ($_SESSION['role'] === 'visiteur' && $_SESSION['panier']['nb_produit_total']>0){
+            foreach ($_SESSION['panier']['contient'] as $prod){
+                error_log("produit compare : ".$prod['id']."===".$idProd);
+                if ($prod['id'] === $idProd){
+                    $nbInPanier = $prod['quantite_par_produit'];
+                    break;
+                }
+            }
+        }
+        if ($_SESSION['role'] === 'client'){
+            $stmt = $dbh->prepare("SELECT quantite_par_produit FROM sae3_skadjam._contient con INNER JOIN sae3_skadjam._client cli ON con.id_panier = cli.id_panier WHERE con.id_produit = ? AND cli.id_compte = ?");
+            $stmt->execute([$idProd, $idCompte]);
+            $result = $stmt->fetch(PDO::FETCH_ASSOC);
+            if ($result){
+                $nbInPanier = $result['quantite_par_produit'];
+            }
+        }
+        
+        // est dans FA
+        $inFA = false;
+        if ($_SESSION['role'] === 'visiteur' && !empty($_SESSION['futurAchat'])){
+            if (isset($_SESSION['futurAchat'][$idProd])){
+                $inFA = true;
+            }
+        }
+        if ($_SESSION['role'] === 'client'){
+            $stmt = $dbh->prepare("SELECT id_produit FROM sae3_skadjam._futur_achat WHERE id_produit = ? AND id_client = ?");
+            $stmt->execute([$idProd, $idCompte]);
+            $result = $stmt->fetch(PDO::FETCH_ASSOC);
+            if ($result){
+                $inFA = true;
+            }
+        }
+        
 
         // Définition du lien vers lequel est renvoyé le client en cliquant sur le bouton ajouter au panier
         // Si il est connecté : le produit est ajouté à son panier
@@ -174,7 +212,7 @@
 
     <main class="p-4 md:pl-8 pr-8">
         <!-- Section Description -->
-        <section class="flex flex-col ">
+        <section class="flex flex-col items-center md:items-stretch">
             <article class="p-2 md:pb-8"> <!-- Titrage -->
                 <div class="flex flex-col md:flex-row">
                     <h3> <?php echo $libelleProd; ?></h3>
@@ -186,13 +224,13 @@
                 <div class="ml-10"> <?php echo affichageNote($noteMoy); ?> </div>
             </article>
             
-            <article class="md:flex md:flex-row md:justify-around">
+            <article class="flex flex-col items-center md:items-stretch md:flex-row md:justify-around">
                 <img src="<?php echo $infoPhoto["url_photo"]; ?>"  alt=<?php echo $infoPhoto["alt"] ?> title=<?php echo $infoPhoto["titre"] ?>
                 class="size-1/2 border
                        md:size-1/4">
 
-                <div class="p-2 flex flex-col items-start md:items-center">
-                    <div class="flex md:flex-col md:mb-4">
+                <div class="p-2 flex flex-col items-center">
+                    <div class="flex flex-col md:mb-4">
                         <h3 class="text-center pr-2 self-center <?php echo ($pourcentage !== NULL)?'line-through':'';?>"> <?php echo $prixTTC ?>€</h3>
                         <h3 class="text-center pr-2 self-center <?php echo ($pourcentage !== NULL)?'':'hidden';?>"> <?php echo $prixRemise ?>€</h3>
 
@@ -211,16 +249,31 @@
                     <div class="flex md:flex-col">
                         <p class="text-center pr-1 md:p-0">Vendu par</p>
                         <p class="text-center font-medium pl-1 md:p-0"><?php echo $nomVendeur ?></p>
+                    </div><br>
+                    <div class="border-2 border-vertClair mt-2 rounded-2xl flex-col items-center p-2 text-center">
+                        <p id="nbInPanier">Panier : <?= $nbInPanier?></p>
+                        <div id="input-number" class=" flex flex-row items-center">
+                            <button class=" cursor-pointer" onclick="suppProduit()" onmouseenter="enterBtn('btn-dash')" onmouseleave="leaveBtn('btn-dash')">
+                                <img id="btn-dash" src="../../images/logo/bootstrap_icon//dash-square.svg" alt="plus-button" width="30px">
+                            </button>
+                            <input type="text" id="nb-produit" value="1" min="1" size="10" class="ml-2 mr-2 text-center border-3 border-vertClair">
+                            <button class=" cursor-pointer" onclick="addProduit()" onmouseenter="enterBtn('btn-plus')" onmouseleave="leaveBtn('btn-plus')">
+                                <img id="btn-plus" src="../../images/logo/bootstrap_icon/plus-square.svg" alt="plus-button" width="30px">
+                            </button>
+                        </div>
+                        <form method="post" action="<?php echo $lienBtnAjouterPanier ?>" >
+                            <input type="hidden" name="idProduit" value="<?php echo $idProd ?>">
+                            <input type="hidden" name="pageDeRetour" value="details">
+                            <input type="hidden" name="nbProduit" id="champ-nb-produit" value="1">
+                            <button class="bg-beige rounded-2xl w-40 h-14 mt-4 cursor-pointer hover:text-rouge"
+                            type="submit">
+                                Ajouter au panier
+                            </button>
+                        </form>
                     </div>
-                    
-                    <form method="post" action="<?php echo $lienBtnAjouterPanier ?>" >
-                        <input type="hidden" name="idProduit" value="<?php echo $idProd ?>">
-                        <input type="hidden" name="pageDeRetour" value="details">
-                        <button class="bg-beige rounded-2xl w-40 h-14 mt-4 cursor-pointer hover:text-rouge"
-                        type="submit">
-                            Ajouter au panier
-                        </button>
-                    </form>
+                    <div>
+                        <a class=" block text-center bg-beige rounded-2xl w-40 h-14 mt-4 cursor-pointer hover:text-rouge" href="../../php/traitementFAPanier.php?idProduit=<?= $idProd ?>&ajout=fa&vientDe=detailProd"><?= (isset($inFA) && $inFA)? "Supprimer des futures achats":"Ajouter aux futures achats" ?></a>
+                    </div>
                 </div>
             </article>
         </section>
@@ -455,6 +508,66 @@
     </main>
 
     <?php require(__DIR__ . "/../../php/structure/footer_front.php") ?>
+    <script>
+        const maxProduit = <?= $produit['quantite_stock'] ?>;
+        const inputNbProduit = document.getElementById("nb-produit")
+        const champNbProduit = document.getElementById("champ-nb-produit")
+        const reg = /^[0]*[1-9][0-9]*[.,]?[0-9]*$/
+
+        function addProduit(){
+            if (inputNbProduit.value<maxProduit){
+                inputNbProduit.value++
+                champNbProduit.value = inputNbProduit.value
+            }
+        }
+
+        function suppProduit(){
+            if (inputNbProduit.value>1){
+                inputNbProduit.value--
+                champNbProduit.value = inputNbProduit.value
+            }
+        }
+    
+        inputNbProduit.addEventListener("change", () => {
+            if (!reg.test(inputNbProduit.value)){
+                inputNbProduit.value = 1
+                console.log("attention")
+            }
+
+            inputNbProduit.value = parseInt(inputNbProduit.value)
+
+            if (/^0/.test(inputNbProduit.value)){
+                let chaineNbProduit = ""
+                let fin = false
+                let lengthInput = inputNbProduit.value.length
+                for (i=0;i<lengthInput; i++){
+                    if (inputNbProduit.value[i] != 0 || fin){
+                        if (!fin){fin=true}
+                        chaineNbProduit = chaineNbProduit + inputNbProduit.value[i]
+                    }
+                }
+                inputNbProduit.value = chaineNbProduit
+            }
+
+            if (inputNbProduit.value > maxProduit){
+                inputNbProduit.value = maxProduit
+            }
+            champNbProduit.value = inputNbProduit.value
+        })
+
+    
+        function enterBtn(id){
+            let imgBtn = document.getElementById(id)
+            if (id === 'btn-dash'){imgBtn.src = "../../images/logo/bootstrap_icon/dash-square-fill.svg"}
+            if (id === 'btn-plus'){imgBtn.src = "../../images/logo/bootstrap_icon/plus-square-fill.svg"}
+        }
+
+        function leaveBtn(id){
+            let imgBtn = document.getElementById(id)
+            if (id === 'btn-dash'){imgBtn.src = "../../images/logo/bootstrap_icon/dash-square.svg"}
+            if (id === 'btn-plus'){imgBtn.src = "../../images/logo/bootstrap_icon/plus-square.svg"}
+        }
+    </script>
 </body>
 
 <script type="module">
@@ -619,6 +732,7 @@
     });
 
 
+    
 </script>
 
 </html>

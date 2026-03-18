@@ -42,6 +42,9 @@ elseif ($_GET['vientDe'] == "fa") {
 elseif ($_GET['vientDe'] == "promo") {
     $vientDe = "/html/fo/promotion.php";
 }
+elseif ($_GET['vientDe'] == "detailProd") {
+    $vientDe = "/html/fo/details_produit.php";
+}
 
 // Si le user vient des plus vendus
 elseif ($_GET['vientDe'] == "pV") {
@@ -57,12 +60,12 @@ if ($ajout == "fa") {
         // Si le produit n'est pas déjà présent on l'ajoute
         if ($trouve == false) {
             $_SESSION['futurAchat'][$idProd] = $idProd;
-            $chemin = $vientDe."?addFA=1".$ancre;
+            $chemin = $vientDe."?addFA=1";
         }
         // Sinon on le retire
         else {
             unset($_SESSION['futurAchat'][$trouve]);
-            $chemin = $vientDe."?removeFA=1".$ancre;
+            $chemin = $vientDe."?removeFA=1";
         }
         
     }
@@ -79,14 +82,20 @@ if ($ajout == "fa") {
         if ($trouve == false) {
             $insertFA = $dbh->prepare("INSERT INTO sae3_skadjam._futur_achat(id_produit, id_client) VALUES (?,?)");
             $insertFA->execute([$idProd, $idCompte]);
-            $chemin = $vientDe."?addFA=1".$ancre;
+            $chemin = $vientDe."?addFA=1";
         }
         // Sinon on le retire
         else{
             $dbh->query("DELETE FROM sae3_skadjam._futur_achat WHERE id_produit = $idProd AND id_client = $idCompte");
-            $chemin = $vientDe."?removeFA=1".$ancre;
+            $chemin = $vientDe."?removeFA=1";
         }
     }
+    if ($_GET['vientDe'] == "detailProd"){
+        $chemin = $chemin."&idProduit=". $idProd;
+    }else{
+        $chemin = $chemin.$ancre;
+    }
+    error_log("chemin= " .$chemin);
     header("location:".$chemin); 
     
 }
@@ -98,11 +107,11 @@ elseif ($ajout == "panier") {
                 'id' => $idProd,
                 'quantite_par_produit' => $qte
             ];
-            $chemin = $vientDe."?addPanier=1".$ancre;
+            $chemin = $vientDe."?addPanier=1";
         } else {
             // Retirer le produit
             unset($_SESSION['panier']['contient'][$idProd]);
-            $chemin = $vientDe."?removePanier=1".$ancre;
+            $chemin = $vientDe."?removePanier=1";
         }
     }
     elseif ($_SESSION['role'] == "client") {
@@ -131,14 +140,20 @@ elseif ($ajout == "panier") {
         if ($trouve == false && $qte != -1) {
             $insertPanier = $dbh->prepare("INSERT INTO sae3_skadjam._contient(id_produit,id_panier,quantite_par_produit) VALUES (?,?,?) ");
             $insertPanier->execute([$idProd, $idPanier, $qte]);
-            $chemin = $vientDe."?addPanier=1".$ancre;
+            $chemin = $vientDe."?addPanier=1";
         }
         // Sinon on le retire
         else{
             $dbh->query("DELETE FROM sae3_skadjam._contient WHERE id_produit = $idProd");
-            $chemin = $vientDe."?removePanier=1".$ancre;
+            $chemin = $vientDe."?removePanier=1";
         }
     }
+    if ($_GET['vientDe'] == "detailProd"){
+        $chemin = $chemin."&idProduit=". $idProd;
+    }else{
+        $chemin = $chemin.$ancre;
+    }
+    error_log("chemin= " .$chemin);
     header("location:".$chemin);
 }
 
