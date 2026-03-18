@@ -1,6 +1,3 @@
-//Variable pour la boucle
-let stock = -1
-
 function afficherProduit(tableau, tableauFA, tableauP, indice, role){
     
     let i = indice
@@ -40,6 +37,7 @@ function afficherProduit(tableau, tableauFA, tableauP, indice, role){
     contImg.appendChild(image)
 
     //Rupture stock
+    
     if (tableau[i]['quantite_stock'] == 0) {
         let divBandeau = document.createElement("div")
         let texteBandeau = document.createElement("p")
@@ -47,6 +45,7 @@ function afficherProduit(tableau, tableauFA, tableauP, indice, role){
 
         divBandeau.classList.add("absolute", "inset-0", "flex", "items-center", "justify-center", "z-1")
         texteBandeau.classList.add("bg-rouge", "shadow-lg","text-white", "px-6", "py-2", "w-full", "text-center")
+        produit.classList.add("grayscale")
 
         divBandeau.appendChild(texteBandeau)
         contImg.appendChild(divBandeau)
@@ -123,6 +122,8 @@ function afficherProduit(tableau, tableauFA, tableauP, indice, role){
     let lienFA = document.createElement("a")
     lienFA.href = "/php/traitementFAPanier.php?idProduit="+idProduit+"&ajout=fa&vientDe=recherche"
     lienFA.id = "btnFA"
+    lienFA.alt = "Ajouter à vos futurs achats"
+    lienFA.title = "Ajouter à vos futurs achats"
     parent.appendChild(lienFA)
     parent = lienFA
 
@@ -151,6 +152,8 @@ function afficherProduit(tableau, tableauFA, tableauP, indice, role){
 
     // Bouton Panier
     let boutonP = document.createElement("button")
+    boutonP.alt="Ajouter à votre panier"
+    boutonP.title="Ajouter à votre panier"
     boutonP.classList.add("btnPanier", "cursor-pointer", "size-10", "bg-no-repeat", "bg-size-[auto_40px]")
     bg = "bg-[url(/images/logo/bootstrap_icon/cart-vert-fonce.svg)]"
 
@@ -182,25 +185,26 @@ function afficherProduit(tableau, tableauFA, tableauP, indice, role){
     }
     boutonP.classList.add(bg)
 
-    stock = carteProduit.querySelector("p").textContent
+    
     boutonP.addEventListener('click', function () {
+        if (tableau[i]['quantite_stock'] > 0) {
+            if (this.className.includes("cart-fill-vert-fonce.svg")) {
+                p.classList.remove("hidden")
+                label.classList.add("hidden")
+                inputNb.classList.add("hidden")
+            } else {
+                p.classList.add("hidden")
+                label.classList.remove("hidden")
+                inputNb.classList.remove("hidden")
+            }
 
-        if (this.className.includes("cart-fill-vert-fonce.svg")) {
-            p.classList.remove("hidden")
-            label.classList.add("hidden")
-            inputNb.classList.add("hidden")
-        } else {
-            p.classList.add("hidden")
-            label.classList.remove("hidden")
-            inputNb.classList.remove("hidden")
+            input.value = idProduit
+            input.name = "idProduit"
+            formNbAddPanier.appendChild(input)
+
+            contNbAddPanier.classList.remove("hidden")
+            fondNbAddPanier.classList.remove("hidden")
         }
-
-        input.value = idProduit
-        input.name = "idProduit"
-        formNbAddPanier.appendChild(input)
-
-        contNbAddPanier.classList.remove("hidden")
-        fondNbAddPanier.classList.remove("hidden")
     })
 
     parent.appendChild(boutonP)

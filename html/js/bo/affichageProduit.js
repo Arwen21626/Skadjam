@@ -41,7 +41,8 @@ function afficherProduit(tableau,tabFA, tabP, indice, role){
 
         divBandeau.classList.add("absolute", "inset-0", "flex", "items-center", "justify-center", "z-1")
         texteBandeau.classList.add("bg-rouge", "shadow-lg","text-white", "px-6", "py-2", "w-full", "text-center")
-
+        produit.classList.add("grayscale")
+        
         divBandeau.appendChild(texteBandeau)
         contImg.appendChild(divBandeau)
     }

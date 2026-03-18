@@ -784,8 +784,8 @@ input.quantite-prod-input {
   .h-80 {
     height: calc(var(--spacing, 0.25rem) * 80);
   }
-  .h-200 {
-    height: calc(var(--spacing, 0.25rem) * 200);
+  .h-230 {
+    height: calc(var(--spacing, 0.25rem) * 230);
   }
   .h-\[25vh\] {
     height: 25vh;
@@ -810,6 +810,9 @@ input.quantite-prod-input {
   }
   .min-h-\[420px\] {
     min-height: 420px;
+  }
+  .min-h-\[458px\] {
+    min-height: 458px;
   }
   .min-h-\[500px\] {
     min-height: 500px;
@@ -1723,6 +1726,10 @@ input.quantite-prod-input {
     --tw-blur: blur(8px);
     filter: var(--tw-blur,) var(--tw-brightness,) var(--tw-contrast,) var(--tw-grayscale,) var(--tw-hue-rotate,) var(--tw-invert,) var(--tw-saturate,) var(--tw-sepia,) var(--tw-drop-shadow,);
   }
+  .grayscale {
+    --tw-grayscale: grayscale(100%);
+    filter: var(--tw-blur,) var(--tw-brightness,) var(--tw-contrast,) var(--tw-grayscale,) var(--tw-hue-rotate,) var(--tw-invert,) var(--tw-saturate,) var(--tw-sepia,) var(--tw-drop-shadow,);
+  }
   .filter {
     filter: var(--tw-blur,) var(--tw-brightness,) var(--tw-contrast,) var(--tw-grayscale,) var(--tw-hue-rotate,) var(--tw-invert,) var(--tw-saturate,) var(--tw-sepia,) var(--tw-drop-shadow,);
   }
@@ -2361,9 +2368,9 @@ input.quantite-prod-input {
       height: calc(var(--spacing, 0.25rem) * 85);
     }
   }
-  .md\:h-225 {
+  .md\:h-230 {
     @media (width >= 48rem) {
-      height: calc(var(--spacing, 0.25rem) * 225);
+      height: calc(var(--spacing, 0.25rem) * 230);
     }
   }
   .md\:h-auto {

@@ -178,7 +178,7 @@
                     <!-- boutons futurs achats & panier -->
                     <div class="flex justify-end">
                         <!-- Produit dans les futurs achats ? -->
-                        <a id="btnFA" href="./php/traitementFAPanier.php?idProduit=<?php echo $idProduit;?>&ajout=fa&vientDe=index">
+                        <a id="btnFA" href="./php/traitementFAPanier.php?idProduit=<?php echo $idProduit;?>&ajout=fa&vientDe=index" alt="Ajouter à vos futurs achats" title="Ajouter à vos futurs achats">
                             <button class="cursor-pointer size-10 bg-no-repeat bg-size-[auto_40px]
                             <?php 
                             $bg = "bg-[url(/images/logo/bootstrap_icon/bookmark-fa-plus.svg)]";
@@ -216,7 +216,7 @@
                             }
                             echo $bg;
                             ?>
-                        ">
+                        " alt="Ajouter à votre panier" title="Ajouter à votre panier">
                         </button>
                     </div> 
                     <!--affichage de la promotion-->
@@ -265,7 +265,7 @@
             <form action="./php/traitementFAPanier.php" method="get" id="formNbAddPanier" class="flex flex-col items-center w-full h-full space-y-4">
                 <label id="validAjout" class="hidden" for="nbAddPanier">Combien voulez-vous en ajouter au panier ?</label>
                 <p id="valideRetrait" class="hidden">Etes-vous sur de vouloir retirer ce produit de votre panier ?</p>
-                <input placeholder="5" class="hidden pl-3 border-4 border-beige rounded-2xl w-20 m-2 placeholder-gray-500" type="number" name="nbAddPanier" id="nbAddPanier" min="1" required>
+                <input placeholder="5" class="hidden pl-3 border-2 border-vertClair rounded-2xl w-20 m-2 placeholder-gray-500" type="number" name="nbAddPanier" id="nbAddPanier" min="1" required>
                 <input type="hidden" name="ajout" value="panier">
                 <input type="hidden" name="vientDe" value="index">
                 <div class="flex flex-row justify-around w-full">

@@ -91,13 +91,13 @@ if (Object.keys(dataStats).length > 0) {
             let i = Number(mois);
 
             dataVentesVolume[i - 1] = Number(dataStats[currentAnnee][mois]["nb_ventes_totales"]); // Insert les données dans le champ data du diagramme
-            dataVentesMontant[i - 1] = Number(dataStats[currentAnnee][mois]["montant_total_ttc"]) // Insert les données en version montant
+            dataVentesMontant[i - 1] = Number(dataStats[currentAnnee][mois]["montant_total_ttc"]).toFixed(2); // Insert les données en version montant
 
             Object.keys(dataStats[currentAnnee][mois]["produits"]).forEach(produit => { // Insert les données des catégories dans le champ data du diagramme
                 let iCat = Number(dataStats[currentAnnee][mois]["produits"][produit]["id_categorie"]);
                 
-                dataCatVentesVolume[iCat - 1] += Number(dataStats[currentAnnee][mois]["produits"][produit]["nb_ventes_totales"])
-                dataCatVentesMontant[iCat - 1] += Number(dataStats[currentAnnee][mois]["produits"][produit]["montant_total_ttc"])
+                dataCatVentesVolume[iCat - 1] += Number(dataStats[currentAnnee][mois]["produits"][produit]["nb_ventes_totales"]);
+                dataCatVentesMontant[iCat - 1] += Number(dataStats[currentAnnee][mois]["produits"][produit]["montant_total_ttc"]);
             });
         });
     }
@@ -224,7 +224,21 @@ if (Object.keys(dataStats).length > 0) {
                     }
                 },
                 tooltip: {
-                    position: 'cursor'
+                    position: 'cursor',
+                    callbacks: {
+                        label: function(context) {
+                            // récupère la valeur brute
+                            let value = Number(context.raw);
+
+                            if (value.toString().includes(".")) {
+                                // force 2 décimales pour tous les nombres
+                                return "Ventes totales en montant : " + value.toFixed(2) + " €";
+                            }
+                            else {
+                                return "Ventes totales en volume : " + value;
+                            }
+                        }
+                    }
                 }
             },
             interaction: {
@@ -265,6 +279,22 @@ if (Object.keys(dataStats).length > 0) {
                 legend: {
                     labels: {
                         color: '#000'
+                    }
+                },
+                tooltip: {
+                    callbacks: {
+                        label: function(context) {
+                            // récupère la valeur brute
+                            let value = Number(context.raw);
+                            
+                            if (value.toString().includes(".")) {
+                                // force 2 décimales pour tous les nombres
+                                return "Ventes totales en montant : " + value.toFixed(2) + " €";
+                            }
+                            else {
+                                return "Ventes totales en volume : " + value;
+                            }
+                        }
                     }
                 }
             }
@@ -314,7 +344,21 @@ if (Object.keys(dataStats).length > 0) {
                     }
                 },
                 tooltip: {
-                    position: 'cursor'
+                    position: 'cursor',
+                    callbacks: {
+                        label: function(context) {
+                            // récupère la valeur brute
+                            let value = Number(context.raw);
+                            
+                            if (value.toString().includes(".")) {
+                                // force 2 décimales pour tous les nombres
+                                return "Ventes totales en montant : " + value.toFixed(2) + " €";
+                            }
+                            else {
+                                return "Ventes totales en volume : " + value;
+                            }
+                        }
+                    }
                 }
             },
             interaction: {
