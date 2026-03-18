@@ -74,7 +74,7 @@
                             imagepng($img, $tmp);
 
                             $y = $pdf->GetY();
-                            $pdf->Image($tmp, 15, $y, 0, 20);
+                            $pdf->Image($tmp, 15, $y, 0, 20, "PNG", "http://10.253.5.109/html/fo/details_produit.php?idProduit=$idProduit");
 
                             $pdf->SetXY(45, $y);
 
@@ -100,7 +100,7 @@
                             $tmp = tempnam(sys_get_temp_dir(), 'img') . '.png';
                             imagepng($img, $tmp);
 
-                            $pdf->Image($tmp, 120, $y, 0, 20);
+                            $pdf->Image($tmp, 120, $y, 0, 20, "PNG", "http://10.253.5.109/html/fo/details_produit.php?idProduit=$idProduit");
 
                             $pdf->SetXY(150, $y);
 
