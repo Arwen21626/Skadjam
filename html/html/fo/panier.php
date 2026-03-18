@@ -178,16 +178,16 @@
     <div id="overlay-valider" class="hidden fixed inset-0 bg-black/50 backdrop-blur-sm z-40"></div>
 
     <div id="container-div-valider" 
-    class="hidden fixed bg-white top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 chart-container justify-center items-center flex-col p-2 m-12 z-50">
-        <div id="div-form-valider" class="flex flex-col justify-center items-center relative m-4 w-[30vw] h-[25vh]">
-            <p class="md:mb-4">Voulez-vous vraiment vider votre panier ?</p>
+    class="hidden fixed bg-white top-1/4 left-8 md:top-1/2 md:left-1/2 md:-translate-x-1/2 md:-translate-y-1/2 chart-container justify-center items-center flex-col p-2 m-12 z-50">
+        <div id="div-form-valider" class="flex flex-col justify-center items-center relative m-4 w-[50vw] h-[20vh] md:h-[25vh] md:w-[30vw] ">
+            <p class="mb-4 text-center">Voulez-vous vraiment vider votre panier ?</p>
             <form class="flex justify-center" method="get" action="./../../php/vider_panier.php">
                 <input type="hidden" name="typeVider" value="normal">
                 <div>
-                    <button id="cancelButton" class="bg-beige rounded-2xl w-32 h-10 mt-2 md:w-40 md:h-14 md:mt-4 md:mr-2 cursor-pointer border-black border shadow" type="button">
+                    <button id="cancelButton" class="bg-beige rounded-2xl w-20 h-10 mt-2 md:w-40 md:h-14 md:mt-4 mr-2 cursor-pointer border-black border shadow" type="button">
                         Annuler
                     </button>
-                    <button class="bg-beige rounded-2xl w-32 h-10 mt-2 md:w-40 md:h-14 md:mt-4 md:ml-2 cursor-pointer border-black border shadow" type="submit">
+                    <button class="bg-beige rounded-2xl w-20 h-10 mt-2 md:w-40 md:h-14 md:mt-4 ml-2 cursor-pointer border-black border shadow" type="submit">
                         OK
                     </button>
                 </div>

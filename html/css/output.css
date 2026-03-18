@@ -396,6 +396,9 @@ input.quantite-prod-input {
   .left-5 {
     left: calc(var(--spacing, 0.25rem) * 5);
   }
+  .left-8 {
+    left: calc(var(--spacing, 0.25rem) * 8);
+  }
   .z-0 {
     z-index: 0;
   }
@@ -806,8 +809,8 @@ input.quantite-prod-input {
   .h-230 {
     height: calc(var(--spacing, 0.25rem) * 230);
   }
-  .h-\[25vh\] {
-    height: 25vh;
+  .h-\[20vh\] {
+    height: 20vh;
   }
   .h-\[45vh\] {
     height: 45vh;
@@ -1046,11 +1049,11 @@ input.quantite-prod-input {
   .w-290 {
     width: calc(var(--spacing, 0.25rem) * 290);
   }
-  .w-\[30vw\] {
-    width: 30vw;
-  }
   .w-\[45vw\] {
     width: 45vw;
+  }
+  .w-\[50vw\] {
+    width: 50vw;
   }
   .w-\[60vw\] {
     width: 60vw;
@@ -2156,6 +2159,11 @@ input.quantite-prod-input {
       top: calc(var(--spacing, 0.25rem) * 1);
     }
   }
+  .md\:top-1\/2 {
+    @media (width >= 48rem) {
+      top: calc(1/2 * 100%);
+    }
+  }
   .md\:top-1\/3 {
     @media (width >= 48rem) {
       top: calc(1/3 * 100%);
@@ -2214,6 +2222,11 @@ input.quantite-prod-input {
   .md\:bottom-64 {
     @media (width >= 48rem) {
       bottom: calc(var(--spacing, 0.25rem) * 64);
+    }
+  }
+  .md\:left-1\/2 {
+    @media (width >= 48rem) {
+      left: calc(1/2 * 100%);
     }
   }
   .md\:left-3\/10 {
@@ -2291,11 +2304,6 @@ input.quantite-prod-input {
       margin-top: calc(var(--spacing, 0.25rem) * 15);
     }
   }
-  .md\:mr-2 {
-    @media (width >= 48rem) {
-      margin-right: calc(var(--spacing, 0.25rem) * 2);
-    }
-  }
   .md\:mr-10 {
     @media (width >= 48rem) {
       margin-right: calc(var(--spacing, 0.25rem) * 10);
@@ -2339,11 +2347,6 @@ input.quantite-prod-input {
   .md\:ml-0 {
     @media (width >= 48rem) {
       margin-left: calc(var(--spacing, 0.25rem) * 0);
-    }
-  }
-  .md\:ml-2 {
-    @media (width >= 48rem) {
-      margin-left: calc(var(--spacing, 0.25rem) * 2);
     }
   }
   .md\:ml-5 {
@@ -2457,6 +2460,11 @@ input.quantite-prod-input {
   .md\:h-230 {
     @media (width >= 48rem) {
       height: calc(var(--spacing, 0.25rem) * 230);
+    }
+  }
+  .md\:h-\[25vh\] {
+    @media (width >= 48rem) {
+      height: 25vh;
     }
   }
   .md\:h-auto {
@@ -2644,6 +2652,11 @@ input.quantite-prod-input {
       width: calc(var(--spacing, 0.25rem) * 275);
     }
   }
+  .md\:w-\[30vw\] {
+    @media (width >= 48rem) {
+      width: 30vw;
+    }
+  }
   .md\:w-\[500px\] {
     @media (width >= 48rem) {
       width: 500px;
@@ -2662,6 +2675,18 @@ input.quantite-prod-input {
   .md\:max-w-fit {
     @media (width >= 48rem) {
       max-width: fit-content;
+    }
+  }
+  .md\:-translate-x-1\/2 {
+    @media (width >= 48rem) {
+      --tw-translate-x: calc(calc(1/2 * 100%) * -1);
+      translate: var(--tw-translate-x) var(--tw-translate-y);
+    }
+  }
+  .md\:-translate-y-1\/2 {
+    @media (width >= 48rem) {
+      --tw-translate-y: calc(calc(1/2 * 100%) * -1);
+      translate: var(--tw-translate-x) var(--tw-translate-y);
     }
   }
   .md\:grid-cols-1 {
