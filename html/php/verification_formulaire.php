@@ -3,7 +3,7 @@ include __DIR__ . "/../01_premiere_connexion.php";
 
 function verifNomPrenom($nom){
     // Vérification que soit un prénom soit un nom soyent au bon format
-    if (strlen($nom) > 100 || !preg_match("/^[A-Za-zÀ-ÿ]+(( |-{1,2})[A-Za-zÀ-öø-ÿ]+)*$/", $nom)){
+    if (strlen($nom) > 100 || !preg_match("/^[A-Za-zÀ-öø-ÿ]+(( |-{1,2})[A-Za-zÀ-öø-ÿ]+)*$/", $nom)){
         return false;
     }
     else{
@@ -62,7 +62,7 @@ function mailUnique($mail){
 
 function verifDenomination($denomination){
     // Vérification d'une dénomination
-    return preg_match("/^[a-zA-Zéçèëêàïîäâùüûöô0-9 -]*$/", $denomination);
+    return preg_match("/^[a-zA-ZÀ-öø-ÿ0-9 -]*$/", $denomination);
 }
 
 function verifSiren($siren){
@@ -121,7 +121,7 @@ function verifQteStock($qteStock){
 
 function verifPseudo($pseudo){
     // Vérification du pseudo
-    if (strlen($pseudo) > 30 || !preg_match("/^[0-9A-Za-z_ -]+$/", $pseudo)){
+    if (strlen($pseudo) > 30 || !preg_match("/^[A-Za-zÀ-öø-ÿ]+(( |-{1,2})[A-Za-zÀ-öø-ÿ]+)*$/", $pseudo)){
         return false;
     }
     else{
@@ -129,34 +129,23 @@ function verifPseudo($pseudo){
     }
 }
 
+
 function verifDate($date){
-    // Vérification du format des dates
-    // date entrer dans le format aaaa-mm-jj
-    if (!preg_match("/^[0-9]{4}-(0[0-9]|1[0-2])-([0-2][0-9]|3[01])$/", $date)){
-        return false;
-    }
-    else{
-        return true;
-    }
+    // Vérifie que la date est au format jj-mm-aaaa
+    $d = DateTime::createFromFormat('d-m-Y', $date);
+    return $d && $d->format('d-m-Y') === $date;
 }
 
 function verifAge($naissance){
-    // Vérification que la personne a plus de 18 ans
-    // date entrer dans le format aaaa-mm-jj
-    if (verifDate($naissance)){
-        $dateNaissance = explode('-', $naissance);
-        $dateAujourdhui = date('d-m-Y');
-        $dateAujourdhui = explode('-', $dateAujourdhui);
+    if (!verifDate($naissance)) return false;
 
-        // Calcule de l'age
-        $age = $dateAujourdhui[2] - $dateNaissance[0];
+    $dateNaissance = new DateTime($naissance);
+    $aujourdHui = new DateTime();
 
-        // Vérification
-        if ($age >= 18){
-            return true;
-        }
-    }
-    return false;
+    // Calcul exact de l'âge
+    $age = $aujourdHui->diff($dateNaissance)->y;
+
+    return $age >= 18;
 }
 
 function verifCp($cp){
@@ -166,7 +155,7 @@ function verifCp($cp){
 
 function verifVille($ville){
     //verifie le format de la ville
-    return preg_match("/^[A-Za-zéçèëêàïîäâùüûöô -]+$/", $ville);
+    return preg_match("/^[A-Za-zÀ-öø-ÿ -]+$/", $ville);
 }
 
 function verifAdresse($adresse){

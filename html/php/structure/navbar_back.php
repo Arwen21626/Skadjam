@@ -26,7 +26,7 @@
             </a>
 
             <!-- Autres -->
-            <button id="btnAutre" class="size-12 bg-no-repeat bg-size-[auto_48px] bg-[url(/images/logo/bootstrap_icon/list.svg)] cursor-pointer"></button>
+            <button id="btnAutre" alt="Autre" title="Autre" class="size-12 bg-no-repeat bg-size-[auto_48px] bg-[url(/images/logo/bootstrap_icon/list.svg)] cursor-pointer"></button>
         </div>
     </div>
     <div id="menuBurger" class="bg-vertMoyen hidden absolute top-21 flex flex-col items-center m-2 p-2  mt-0 w-60 rounded-b-2xl rounded-t-none border-2 border-t-0 border-bleu">

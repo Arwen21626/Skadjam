@@ -155,7 +155,7 @@ CREATE TABLE sae3_skadjam._promotion (
     date_fin_promotion CHARACTER VARYING(12),
     periodicite NUMERIC(5),
     heure_debut CHARACTER VARYING(5) NOT NULL,
-    heure_fin CHARACTER VARYING(5) DEFAULT '23:59',
+    heure_fin CHARACTER VARYING(5),
     id_vendeur INT NOT NULL,
     id_photo INT
 );
@@ -192,7 +192,7 @@ CREATE TABLE sae3_skadjam._panier (
     id_panier INT NOT NULL,
     nb_produit_total NUMERIC(9) NOT NULL,
     montant_total_ttc NUMERIC(10,2) NOT NULL,
-    date_derniere_modif CHARACTER VARYING(12) NOT NULL,
+    date_derniere_modif CHARACTER VARYING(12),
     id_client INT NOT NULL
 );
 
@@ -680,11 +680,6 @@ ALTER TABLE sae3_skadjam._remise
     ADD CONSTRAINT ch_remise_date_debut
         CHECK (date_debut_remise ~ '([0-2][0-9]|3[01])/(0[0-9]|1[0-2])/[0-9]{4}');
 
-/*
-ALTER TABLE sae3_skadjam._remise
-    ADD CONSTRAINT ch_remise_date_fin
-        CHECK (date_fin_remise ~ '([0-2][0-9]|3[01])/(0[0-9]|1[0-2])/[0-9]{4}');
-*/
 ALTER TABLE sae3_skadjam._promotion
     ADD CONSTRAINT ch_promotion_date_debut
         CHECK (date_debut_promotion ~ '([0-2][0-9]|3[01])/(0[0-9]|1[0-2])/[0-9]{4}');
@@ -704,182 +699,6 @@ ALTER TABLE sae3_skadjam._promotion
 
 
 /*Fonctions*/
-
--- CREATE OR REPLACE FUNCTION calcul_commande_montant_ttc()
--- RETURNS TRIGGER AS $$
--- DECLARE 
---   montant_total_ttc REAL := 0;
--- BEGIN
---   montant_total_ttc := SUM(sous_total) FROM sae3_skadjam._details;
---   RETURN montant_total_ttc;
--- END;
--- $$ language plpgsql;
-
--- CREATE TRIGGER trig_commmande
---   BEFORE INSERT ON sae3_skadjam._commande
---   FOR EACH ROW
---   EXECUTE FUNCTION calcul_commande_montant_ttc();
-  
-
-
-/*CREATE OR REPLACE FUNCTION calcul_facture_montant_ht()
-RETURNS TRIGGER AS $$
-DECLARE 
-  montant_ht REAL := 0;
-BEGIN
-  montant_ht := SUM(montant_ht) FROM sae3_skadjam._details;
-  RETURN montant_ht;
-END;
-$$ language plpgsql;
-
-CREATE TRIGGER trig_facture
-  BEFORE INSERT ON sae3_skadjam._facture
-  FOR EACH ROW
-  EXECUTE FUNCTION calcul_facture_montant_ht();*/
-  
-
-
-/*CREATE OR REPLACE FUNCTION calcul_details_sous_total()
-RETURNS TRIGGER AS $$
-DECLARE 
-  sous_total REAL := 0;
-BEGIN
-  sous_total := (montant_ht*(1+tva))*quantite FROM sae3_skadjam._details;
-  RETURN sous_total;
-END;
-$$ language plpgsql;*/
-
-
-
-/*CREATE OR REPLACE FUNCTION details_montant_ht()
-RETURNS TRIGGER AS $$
-DECLARE 
-  montant_ht REAL := prix_ht 
-  FROM sae3_skadjam._produit
-    INNER JOIN sae3_skadjam._details
-      ON sae3_skadjam._details.id_produit = sae3_skadjam._produit.id_produit;
-BEGIN
-  RETURN montant_ht;
-END;
-$$ language plpgsql;*/
-
-/*CREATE OR REPLACE FUNCTION details_tva()
-RETURNS TRIGGER AS $$
-DECLARE 
-  tva REAL := pourcentage_tva
-  FROM sae3_skadjam._details
-    INNER JOIN sae3_skadjam._produit 
-      ON sae3_skadjam._details.id_produit = sae3_skadjam._produit.id_produit
-     INNER JOIN sae3_skadjam._tva
-      ON sae3_skadjam._tva.id_tva = sae3_skadjam._produit.id_tva;
-BEGIN
-  RETURN tva;
-END;
-$$ language plpgsql;*/
-
-/*CREATE TRIGGER trig_details_calcul_sous_total
-  BEFORE INSERT ON sae3_skadjam._details
-  FOR EACH ROW
-  EXECUTE FUNCTION calcul_details_sous_total();
-
-CREATE TRIGGER trig_details_montant_ht
-  AFTER INSERT ON sae3_skadjam._details
-  FOR EACH ROW
-  EXECUTE FUNCTION details_montant_ht();
-  
-CREATE TRIGGER trig_details_tva
-  AFTER INSERT ON sae3_skadjam._details
-  FOR EACH ROW
-  EXECUTE FUNCTION details_tva();*/
-  
-
-
--- CREATE OR REPLACE FUNCTION calcul_panier_produit_total()
--- RETURNS TRIGGER AS $$
--- DECLARE 
---   nb_prod INTEGER := 0;
--- BEGIN
---   nb_prod := SUM(quantite_par_produit) FROM sae3_skadjam._contient;
---   RETURN nb_prod;
--- END;
--- $$ language plpgsql;
-
--- CREATE TRIGGER trig_panier_nb_produit
---   BEFORE INSERT ON sae3_skadjam._commande
---   FOR EACH ROW
---   EXECUTE FUNCTION calcul_panier_produit_total();
-  
-
-
--- CREATE OR REPLACE FUNCTION calcul_panier_montant_total_ttc()
--- RETURNS TRIGGER AS $$
--- DECLARE
---   res INT;
--- BEGIN
---   PERFORM * FROM sae3_skadjam._contient c WHERE new.id_panier = c.id_panier;
---   IF NOT FOUND THEN
---     res := 0;
---   ELSE
---     res := SUM(quantite_par_produit) FROM sae3_skadjam._contient c WHERE new.id_panier = c.id_panier;
---   END IF;
-  
---   new.montant_total_ttc := res;
---   RETURN new;
--- END;
--- $$ language plpgsql;
-
--- CREATE OR REPLACE TRIGGER trig_panier_montant_total_ttc
---   BEFORE INSERT OR UPDATE ON sae3_skadjam._panier
---   FOR EACH ROW
---   EXECUTE FUNCTION calcul_panier_montant_total_ttc();
-  
-
--- CREATE OR REPLACE FUNCTION calcul_produit_prix_ttc()
--- RETURNS TRIGGER AS $$
--- DECLARE 
---   res INT;
--- BEGIN
---   PERFORM * FROM sae3_skadjam._contient c WHERE new.id_panier = c.id_panier;
---   IF NOT FOUND THEN
---     res := 0;
---   ELSE
---     res := prod.prix_ttc * c.quantite_par_produit
---                               FROM sae3_skadjam._produit prod
---                                 INNER JOIN sae3_skadjam._contient c ON prod.id_produit = c.id_produit
---                                 INNER JOIN sae3_skadjam._panier p ON p.id_panier = c.id_panier
---                               WHERE p.id_panier = new.id_panier;
---   END IF;
---   new.nb_produit_total := res;
---   RETURN new;
--- END;
--- $$ language plpgsql;
-
--- CREATE OR REPLACE TRIGGER trig_produit_montant_ttc
---   BEFORE INSERT OR UPDATE ON sae3_skadjam._panier
---   FOR EACH ROW
---   EXECUTE FUNCTION calcul_produit_prix_ttc();
-  
-
--- CREATE OR REPLACE FUNCTION calcul_produit_prix_remise()
--- RETURNS TRIGGER AS $$
--- DECLARE 
---   prix_remise REAL := 0;
--- BEGIN
---   prix_remise := prix_ttc *(1-sae3_skadjam._remise.pourcentage_remise)
---                   FROM sae3_skadjam._produit 
---                     INNER JOIN sae3_skadjam._reduit 
---                       ON sae3_skadjam._reduit.id_produit = sae3_skadjam._produit.id_produit
---                      INNER JOIN sae3_skadjam._remise
---                       ON  sae3_skadjam._reduit.id_remise = sae3_skadjam._remise.id_remise;
---                   RETURN prix_remise;
--- END;
--- $$ language plpgsql;
-
--- CREATE TRIGGER trig_produit_montant_ttc
---   AFTER INSERT ON sae3_skadjam._produit
---   FOR EACH ROW
---   EXECUTE FUNCTION calcul_produit_prix_remise();
-  
 
 CREATE OR REPLACE FUNCTION calcul_note_moyenne()
 RETURNS TRIGGER AS $$
@@ -918,11 +737,12 @@ BEGIN
 END;
 $$ language plpgsql;
 
-CREATE OR REPLACE TRIGGER tg_calculer_prix_remiser
+CREATE OR REPLACE TRIGGER tg_calculer_prix_remiser_remise
   AFTER INSERT OR UPDATE ON sae3_skadjam._remise
   FOR EACH ROW
   EXECUTE FUNCTION calculer_prix_remiser();
 
+  
 --après création de la commande
 CREATE OR REPLACE FUNCTION creer_commande_et_facture()
 RETURNS TRIGGER AS $$

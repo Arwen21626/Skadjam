@@ -91,7 +91,7 @@
         require_once __DIR__ . "/../../php/structure/navbar_back.php";
     ?>
 
-    <main class="m-4 pt-8 min-h-[420px] flex flex-col">
+    <main class="m-4 pt-8 min-h-[458px] flex flex-col">
 
         <h2>Mes Statistiques</h2>
 

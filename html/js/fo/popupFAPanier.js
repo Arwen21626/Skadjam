@@ -78,26 +78,28 @@ carteProduit.forEach(produit => {
     btnPanier = produit.querySelector(".btnPanier")
     btnPanier.addEventListener('click', function () {
 
-    id = produit.id
-    stock = produit.querySelector("p").textContent
+        id = produit.id
+        stock = produit.querySelector("p").textContent
 
-    if (this.className.includes("cart-fill-vert-fonce.svg")) {
-        p.classList.remove("hidden")
-        label.classList.add("hidden")
-        inputNb.classList.add("hidden")
-        inputNb.required = false
-    } else {
-        p.classList.add("hidden")
-        label.classList.remove("hidden")
-        inputNb.classList.remove("hidden")
-        inputNb.required = true
-    }
+        if (stock > 0) {
+            if (this.className.includes("cart-fill-vert-fonce.svg")) {
+                p.classList.remove("hidden")
+                label.classList.add("hidden")
+                inputNb.classList.add("hidden")
+                inputNb.required = false
+            } else {
+                p.classList.add("hidden")
+                label.classList.remove("hidden")
+                inputNb.classList.remove("hidden")
+                inputNb.required = true
+            }
 
-    input.value = id
-    input.name = "idProduit"
-    formNbAddPanier.appendChild(input)
+            input.value = id
+            input.name = "idProduit"
+            formNbAddPanier.appendChild(input)
 
-    contNbAddPanier.classList.remove("hidden")
-    fondNbAddPanier.classList.remove("hidden")
+            contNbAddPanier.classList.remove("hidden")
+            fondNbAddPanier.classList.remove("hidden")
+        }
     })
 })

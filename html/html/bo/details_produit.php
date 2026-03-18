@@ -42,9 +42,19 @@
 <body>
     <!--header-->
     <?php 
-    include(__DIR__ . '/../../php/structure/header_back.php');
-    include(__DIR__ . '/../../php/structure/navbar_back.php');
+        include(__DIR__ . '/../../php/structure/header_back.php');
+        include(__DIR__ . '/../../php/structure/navbar_back.php');
     ?>
+
+    <div id="popup-overlay" class="right-12 md:right-40">
+        <!---popup être un client pour laisser un pouce--->
+        <div id="popup-pas-client" class="popup p-4 border-rouge shadow-xl hidden">
+            <p>Seul un client peut laisser un avis 👍👎</p>
+            <div class="flex justify-center mt-2 gap-4">
+                <button class="pl-2 pr-2 border-2 border-vertFonce rounded-sm cursor-pointer">OK</button>
+            </div>
+        </div>
+    </div>
 
     <main class="p-10 flex flex-col">
         <!--affichage du libelle-->
@@ -210,4 +220,15 @@
     </main>
     <?php include(__DIR__ . '/../../php/structure/footer_back.php');?>
 </body>
+<script type="module">
+    import * as Popup from "../../js/popup.js";
+    
+    document.querySelectorAll(".vote-btn").forEach(button => {
+        button.addEventListener("click", () => {
+
+            Popup.showPopUp("popup-pas-client", 5000);
+            return;
+        });
+    });
+</script>
 </html>
