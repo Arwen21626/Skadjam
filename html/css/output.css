@@ -803,6 +803,9 @@ input.quantite-prod-input {
   .h-200 {
     height: calc(var(--spacing, 0.25rem) * 200);
   }
+  .h-230 {
+    height: calc(var(--spacing, 0.25rem) * 230);
+  }
   .h-\[25vh\] {
     height: 25vh;
   }
@@ -2442,6 +2445,11 @@ input.quantite-prod-input {
   .md\:h-225 {
     @media (width >= 48rem) {
       height: calc(var(--spacing, 0.25rem) * 225);
+    }
+  }
+  .md\:h-230 {
+    @media (width >= 48rem) {
+      height: calc(var(--spacing, 0.25rem) * 230);
     }
   }
   .md\:h-auto {
