@@ -132,3 +132,35 @@ WbImport  -file=../csv/reduit.csv
           -header=true
           -fileColumns=id_remise,id_produit
           ;
+          
+WbImport  -file=../csv/adresse_livraison.csv
+          -schema=sae3_skadjam
+          -delimiter=';'
+          -table=sae3_skadjam._adresse_livraison
+          -header=true
+          -fileColumns=nom,prenom,adresse_postale,complement_adresse,numero_rue,numero_bat,numero_appart,code_interphone,code_postal,ville,sauvegarde
+          ;
+
+WbImport  -file=../csv/commande.csv
+          -schema=sae3_skadjam
+          -delimiter=';'
+          -table=sae3_skadjam._commande
+          -header=true
+          -fileColumns=id_commande,id_suivi,id_adresse,etat,date_commande,montant_total_ttc,id_client
+          ;
+          
+WbImport  -file=../csv/details.csv
+          -schema=sae3_skadjam
+          -delimiter=';'
+          -table=sae3_skadjam._details
+          -header=true
+          -fileColumns=montant_ht,quantite,sous_total,id_commande,id_produit
+          ;
+-- Executer le script d'insert avant et juste executer  celui la ->
+WbImport  -file=../csv/donne.csv
+          -schema=sae3_skadjam
+          -delimiter=';'
+          -table=sae3_skadjam._donne
+          -header=true
+          -fileColumns=id_panier,id_commande
+          ;

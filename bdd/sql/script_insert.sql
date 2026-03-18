@@ -1348,32 +1348,118 @@ VALUES
   
 UPDATE sae3_skadjam._remise SET date_fin_remise ='null';
 
--- Insertion commandes
-INSERT INTO sae3_skadjam._adresse_livraison (nom, prenom, adresse_postale, numero_rue, code_postal, ville, sauvegarde)
+--Insertion adresse livraison
+INSERT INTO sae3_skadjam._adresse_livraison (nom,prenom,adresse_postale,complement_adresse,numero_rue,numero_bat,numero_appart,code_interphone,code_postal,ville,sauvegarde) 
 VALUES
-  ('De Fontaine', 'Furina', 'C Place de Liyue', 1, 50500, 'Fontaine', false);
+  ('Dijoux','Sabine','chemin de Alexandre',NULL,3,NULL,NULL,NULL,72069,'Evrard-sur-Muller',false),
+  ('Valette','Franck','boulevard Klein',NULL,53,NULL,NULL,NULL,23411,'Martin-les-Bains',false),
+  ('Perrot','Denis','avenue Alix Gauthier',NULL,36,NULL,NULL,NULL,11282,'Sainte LorraineBourg',false),
+  ('Normand','Bertrand','chemin Lefort',NULL,7,NULL,NULL,NULL,27504,'Rousseau-les-Bains',false),
+  ('Hardy','Grégoire','rue Lucie David',NULL,44,NULL,NULL,NULL,39426,'Saint Adéledan',false),
+  ('Lefèvre','Simone','rue de Jacques',NULL,65,NULL,NULL,NULL,94399,'Dumasboeuf',false),
+  ('Fernandes','Jules','boulevard de Morel',NULL,13,NULL,NULL,NULL,80814,'Schmitt',false),
+  ('Gautier','Gérard','rue de Huet',NULL,8,NULL,NULL,NULL,90595,'Tanguy',false),
+  ('Jacob','Sabine','rue Tristan Gay',NULL,312,NULL,NULL,NULL,42037,'Riouboeuf',false),
+  ('Cohen','Virginie','rue Lucas Vincent',NULL,10,NULL,NULL,NULL,60673,'Saint JosephVille',false),
+  ('Bouchet','Michèle','avenue de Rodrigues',NULL,69,NULL,NULL,NULL,76186,'Guilbert-les-Bains',false),
+  ('Rocher','Claude','rue Martine Clément',NULL,15,NULL,NULL,NULL,50719,'Chrétiendan',false),
+  ('Pichon','Timothée','rue Barre',NULL,37,NULL,NULL,NULL,41449,'Maillot',false),
+  ('Grondin','Louise','rue Pages',NULL,96,NULL,NULL,NULL,77624,'CharrierVille',false),
+  ('Wagner','Alexandria','boulevard de Dumont',NULL,73,NULL,NULL,NULL,95455,'Bertin',false),
+  ('Rossi','François','rue Marie',NULL,2,NULL,NULL,NULL,50089,'Jacob-sur-Pineau',false),
+  ('Gilles','Matthieu','rue de Charpentier',NULL,4,NULL,NULL,NULL,98306,'Pons-la-Forêt',false),
+  ('Bouvet','Bertrand','boulevard de Hamon',NULL,49,NULL,NULL,NULL,40361,'Guillotdan',false),
+  ('Carpentier','Clémence','chemin Sylvie Meunier',NULL,5,NULL,NULL,NULL,32336,'Daniel',false),
+  ('Couturier','Laure','rue Louise Labbé',NULL,536,NULL,NULL,NULL,76820,'Sainte Alexnec',false);
 
-INSERT INTO sae3_skadjam._commande (id_adresse, etat, date_commande, montant_total_ttc, id_client)
+--Insertion commande
+INSERT INTO sae3_skadjam._commande (id_suivi,id_adresse,etat,date_commande,montant_total_ttc,id_client) 
 VALUES
-  (1, 'En attente', '01/02/2026', 82.74, 21),
-  (1, 'En attente', '18/07/2025', 113.93, 21),
-  (1, 'En attente', '09/10/2024', 57.57, 21);
-        
-INSERT INTO sae3_skadjam._details (montant_ht, quantite, sous_total, id_commande, id_produit)
-VALUES
-  (25.99, 1, 31.19, 1, 73),
-  (4.99, 2, 11.98, 1, 98),
-  (10.99, 3, 39.57, 1, 104),
-  (25.99, 2, 62.38, 2, 73),
-  (4.99, 2, 11.98, 2, 98),
-  (10.99, 3, 39.57, 2, 104),
-  (15.99, 3, 57.57, 3, 68);
+  (NULL,1,'En attente','01/02/2026  ',82.74,21),
+  (NULL,1,'En attente','18/07/2025  ',113.93,21),
+  (NULL,1,'En attente','09/10/2024  ',57.57,21),
+  (NULL,5,'En attente','15/01/2025  ',121.17,25),
+  (NULL,6,'En attente','03/03/2023  ',80.35,26),
+  (NULL,19,'En attente','27/05/2023  ',139.08,39),
+  (NULL,16,'En attente','12/07/2023  ',19.16,36),
+  (NULL,12,'En attente','30/09/2023  ',43.14,32),
+  (NULL,8,'En attente','18/11/2023  ',50.38,28),
+  (NULL,2,'En attente','05/02/2024  ',47.98,22),
+  (NULL,4,'En attente','22/04/2024  ',47.87,24),
+  (NULL,17,'En attente','09/06/2024  ',11.98,37),
+  (NULL,14,'En attente','14/08/2024  ',23.20,34),
+  (NULL,2,'En attente','01/10/2024  ',83.59,22),
+  (NULL,5,'En attente','19/12/2024  ',93.57,25),
+  (NULL,15,'En attente','07/01/2025  ',47.95,35),
+  (NULL,15,'En attente','25/03/2025  ',31.19,35),
+  (NULL,20,'En attente','11/05/2025  ',62.38,40),
+  (NULL,13,'En attente','29/07/2025  ',59.51,33),
+  (NULL,13,'En attente','16/11/2025  ',53.91,33);
 
--- Insertion dans donne
-INSERT INTO sae3_skadjam._donne (id_panier, id_commande)
-  VALUES (1, 1);
-INSERT INTO sae3_skadjam._donne (id_panier, id_commande)
-  VALUES (1, 2);
-INSERT INTO sae3_skadjam._donne (id_panier, id_commande)
-  VALUES (1, 3);
-                    
+--Insertion details
+INSERT INTO sae3_skadjam._details (montant_ht,quantite,sous_total,id_commande,id_produit) 
+VALUES
+  (25.99,1,31.19,1,73),
+  (4.99,2,11.98,1,98),
+  (10.99,3,39.57,1,104),
+  (25.99,2,62.38,2,73),
+  (4.99,2,11.98,2,98),
+  (10.99,3,39.57,2,104),
+  (15.99,3,57.57,3,68),
+  (5.50,6,34.80,4,8),
+  (5.99,2,14.38,4,108),
+  (59.99,1,71.99,4,50),
+  (25.99,2,62.38,5,75),
+  (4.99,3,17.97,5,91),
+  (25.99,1,31.19,6,72),
+  (5.99,5,35.95,6,108),
+  (4.99,4,23.96,6,99),
+  (19.99,2,47.98,6,80),
+  (3.99,4,19.16,7,77),
+  (5.99,6,43.14,8,108),
+  (15.99,1,19.19,9,69),
+  (25.99,1,31.19,9,70),
+  (19.99,2,47.98,10,80),
+  (1.99,10,29.90,11,89),
+  (4.99,3,17.97,11,99),
+  (4.99,2,11.98,12,98),
+  (5.50,4,23.20,13,8),
+  (59.99,1,71.99,14,50),
+  (5.50,2,11.60,14,8),
+  (25.99,1,31.19,15,73),
+  (25.99,1,31.19,15,74),
+  (25.99,1,31.19,15,72),
+  (10.99,2,26.38,16,104),
+  (5.99,3,21.57,16,108),
+  (25.99,1,31.19,17,75),
+  (25.99,1,31.19,18,76),
+  (25.99,1,31.19,18,75),
+  (19.99,1,23.99,19,80),
+  (1.99,8,23.92,19,89),
+  (5.50,2,11.60,19,8),
+  (4.99,6,35.94,20,90),
+  (4.99,3,17.97,20,91);
+
+--Insertion donne
+INSERT INTO sae3_skadjam._donne (id_panier,id_commande) 
+VALUES
+  (1,1),
+  (1,2),
+  (1,3),
+  (5,4),
+  (6,5),
+  (19,6),
+  (16,7),
+  (12,8),
+  (8,9),
+  (2,10),
+  (4,11),
+  (17,12),
+  (14,13),
+  (2,14),
+  (5,15),
+  (15,16),
+  (15,17),
+  (20,18),
+  (13,19),
+  (13,20);

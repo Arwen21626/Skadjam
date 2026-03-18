@@ -192,7 +192,7 @@ CREATE TABLE sae3_skadjam._panier (
     id_panier INT NOT NULL,
     nb_produit_total NUMERIC(9) NOT NULL,
     montant_total_ttc NUMERIC(10,2) NOT NULL,
-    date_derniere_modif CHARACTER VARYING(12) NOT NULL,
+    date_derniere_modif CHARACTER VARYING(12),
     id_client INT NOT NULL
 );
 
@@ -680,11 +680,6 @@ ALTER TABLE sae3_skadjam._remise
     ADD CONSTRAINT ch_remise_date_debut
         CHECK (date_debut_remise ~ '([0-2][0-9]|3[01])/(0[0-9]|1[0-2])/[0-9]{4}');
 
-/*
-ALTER TABLE sae3_skadjam._remise
-    ADD CONSTRAINT ch_remise_date_fin
-        CHECK (date_fin_remise ~ '([0-2][0-9]|3[01])/(0[0-9]|1[0-2])/[0-9]{4}');
-*/
 ALTER TABLE sae3_skadjam._promotion
     ADD CONSTRAINT ch_promotion_date_debut
         CHECK (date_debut_promotion ~ '([0-2][0-9]|3[01])/(0[0-9]|1[0-2])/[0-9]{4}');
