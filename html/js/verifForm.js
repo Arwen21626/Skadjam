@@ -1,6 +1,6 @@
 function verifNomPrenom(nom) {
     // Autorise Les majuscule, minuscule, accent maj/min, un espace, un ou deux tiret(s)
-    var regex = /^[A-Za-zÀ-ÿ]+(( |-{1,2})[A-Za-zÀ-öø-ÿ]+)*$/i
+    var regex = /^[A-Za-zÀ-öø-ÿ]+(( |-{1,2})[A-Za-zÀ-öø-ÿ]+)*$/i
     if (regex.test(nom)) {
         return true
     } else {
@@ -20,7 +20,7 @@ function verifCodePostal(codePostal) {
 
 function verifVille(ville) {
     // Autorise Les majuscule, minuscule, accent maj/min, un espace, un ou deux tiret(s)
-    var regex = /^[A-Za-zÀ-ÿ]+(( |-{1,2})[A-Za-zÀ-öø-ÿ]+)*$/i
+    var regex = /^[A-Za-zÀ-öø-ÿ]+(( |-{1,2})[A-Za-zÀ-öø-ÿ]+)*$/i
     if (regex.test(ville)) {
         return true
     } else {
@@ -32,6 +32,16 @@ function verifAdresse(adresse) {
     //verifie le format de l'adresse
     var regex = /^(\d+\s*[A-Za-z]*)[, ]*(.+)$/ui
     if (regex.test(adresse)) {
+        return true
+    } else {
+        return false
+    }
+}
+
+function verifVille(ville){
+    // Vérification de la ville
+    var regex = /^([A-Za-zÀ-öø-ÿ]+)*$/i
+    if (regex.test(ville)) {
         return true
     } else {
         return false
@@ -122,40 +132,44 @@ function verifPseudo(pseudo){
 
 function verifDate(date) {
     // Vérifie que la date est au format jj-mm-aaaa
-    const regex = /^\d{2}-\d{2}-\d{4}$/
-    if (!regex.test(date)) return false
-
-    const [jour, mois, annee] = date.split('-').map(Number)
-    const d = new Date(annee, mois - 1, jour)
-
-    // Vérifie que la date créée correspond exactement
-    if(d.getFullYear() === annee && d.getMonth() + 1 === mois && d.getDate() === jour){
-        return true
-    } else {
+    const regex = /^\d{4}-\d{2}-\d{2}$/
+    if (regex.test(date)){
+        const [annee, mois, jour] = date.split('-').map(Number)
+        const d = new Date(annee, mois - 1, jour)
+    
+        // Vérifie que la date créée correspond exactement
+        if(d.getFullYear() === annee && d.getMonth() + 1 === mois && d.getDate() === jour){
+            return true
+        } else {
+            return false
+        }
+    }else{
         return false
     }
 }
 
 function verifNaissance(naissance) {
-    if (!verifDate(naissance)) return false
-
-    // Séparer jour, mois, année
-    const [jour, mois, annee] = naissance.split('-').map(Number)
-    const dateNaissance = new Date(annee, mois - 1, jour)
-    const aujourdHui = new Date()
-
-    // Calcul exact de l'âge
-    let age = aujourdHui.getFullYear() - dateNaissance.getFullYear()
-    const moisDiff = aujourdHui.getMonth() - dateNaissance.getMonth()
-
-    // Ajuste si l'anniversaire n'est pas encore passé cette année
-    if (moisDiff < 0 || (moisDiff === 0 && aujourdHui.getDate() < dateNaissance.getDate())) {
-        age--
-    }
-
-    if(age >= 18){
-        return true
-    } else {
+    console.log(naissance)
+    if (verifDate(naissance)){
+        // Séparer jour, mois, année
+        const [annee, mois, jour] = naissance.split('-').map(Number)
+        const dateNaissance = new Date(annee, mois - 1, jour)
+        const aujourdHui = new Date()
+    
+        // Calcul exact de l'âge
+        let age = aujourdHui.getFullYear() - dateNaissance.getFullYear()
+        const moisDiff = aujourdHui.getMonth() - dateNaissance.getMonth()
+    
+        // Ajuste si l'anniversaire n'est pas encore passé cette année
+        if (moisDiff < 0 || (moisDiff === 0 && aujourdHui.getDate() < dateNaissance.getDate())) {
+            age--
+        }
+        if(age >= 18){
+            return true
+        } else {
+            return false
+        }
+    }else{
         return false
     }
 }

@@ -3,7 +3,7 @@ include __DIR__ . "/../01_premiere_connexion.php";
 
 function verifNomPrenom($nom){
     // Vérification que soit un prénom soit un nom soyent au bon format
-    if (strlen($nom) > 100 || !preg_match("/^[A-Za-zÀ-ÿ]+(( |-{1,2})[A-Za-zÀ-öø-ÿ]+)*$/", $nom)){
+    if (strlen($nom) > 100 || !preg_match("/^[A-Za-zÀ-öø-ÿ]+(( |-{1,2})[A-Za-zÀ-öø-ÿ]+)*$/", $nom)){
         return false;
     }
     else{
@@ -62,7 +62,7 @@ function mailUnique($mail){
 
 function verifDenomination($denomination){
     // Vérification d'une dénomination
-    return preg_match("/^[a-zA-Zéçèëêàïîäâùüûöô0-9 -]*$/", $denomination);
+    return preg_match("/^[a-zA-ZÀ-öø-ÿ0-9 -]*$/", $denomination);
 }
 
 function verifSiren($siren){
@@ -121,7 +121,7 @@ function verifQteStock($qteStock){
 
 function verifPseudo($pseudo){
     // Vérification du pseudo
-    if (strlen($pseudo) > 30 || !preg_match("/^[A-Za-zÀ-ÿ]+(( |-{1,2})[A-Za-zÀ-öø-ÿ]+)*$/", $pseudo)){
+    if (strlen($pseudo) > 30 || !preg_match("/^[A-Za-zÀ-öø-ÿ]+(( |-{1,2})[A-Za-zÀ-öø-ÿ]+)*$/", $pseudo)){
         return false;
     }
     else{
@@ -155,7 +155,7 @@ function verifCp($cp){
 
 function verifVille($ville){
     //verifie le format de la ville
-    return preg_match("/^[A-Za-zéçèëêàïîäâùüûöô -]+$/", $ville);
+    return preg_match("/^[A-Za-zÀ-öø-ÿ -]+$/", $ville);
 }
 
 function verifAdresse($adresse){
