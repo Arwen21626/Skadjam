@@ -38,6 +38,7 @@
 
         $denomination = $tabProduit[0]["denomination"];
 
+        //Création du pdf
         $pdf = new FPDF();
         $pdf->AddPage();
         $pdf->Ln(5);
@@ -68,11 +69,12 @@
 
                     if($img !== false){ // Charger avec les images
                         if($i===0){
+                            //mettre le produit à gauche
                             $tmp = tempnam(sys_get_temp_dir(), 'img') . '.png';
                             imagepng($img, $tmp);
 
                             $y = $pdf->GetY();
-                            $pdf->Image($tmp, 15, $y, 0, 20);
+                            $pdf->Image($tmp, 15, $y, 0, 20, "PNG", "http://10.253.5.109/html/fo/details_produit.php?idProduit=$idProduit");
 
                             $pdf->SetXY(45, $y);
 
@@ -94,10 +96,11 @@
 
                             $i=1;
                         }else{
+                            //mettre le produit à droite
                             $tmp = tempnam(sys_get_temp_dir(), 'img') . '.png';
                             imagepng($img, $tmp);
 
-                            $pdf->Image($tmp, 120, $y, 0, 20);
+                            $pdf->Image($tmp, 120, $y, 0, 20, "PNG", "http://10.253.5.109/html/fo/details_produit.php?idProduit=$idProduit");
 
                             $pdf->SetXY(150, $y);
 
@@ -128,6 +131,7 @@
                         }
                     }else{ // Charger sans les images
                         if($i===0){
+                            //mettre le produit à gauche
                             $y = $pdf->GetY();
 
                             $pdf->SetXY(45, $y);
@@ -150,6 +154,7 @@
 
                             $i=1;
                         }else{
+                            //mettre le produit à droite
                             $pdf->SetXY(150, $y);
 
                             $titre = iconv('UTF-8', 'ISO-8859-1//TRANSLIT', $valeurs['titre']);
