@@ -226,26 +226,31 @@
                     <div class="flex md:flex-col">
                         <p class="text-center pr-1 md:p-0">Vendu par</p>
                         <p class="text-center font-medium pl-1 md:p-0"><?php echo $nomVendeur ?></p>
+                    </div><br>
+                    <div class="border-2 border-vertClair rounded-2xl flex-col items-center p-2 text-center">
+                        <p id="nbInPanier">Panier : <?= $nbInPanier?></p>
+                        <div id="input-number" class=" flex flex-row items-center">
+                            <button class=" cursor-pointer" onclick="suppProduit()">
+                                <img src="../../images/logo/bootstrap_icon//dash-square.svg" alt="plus-button" width="30px">
+                            </button>
+                            <input type="text" id="nb-produit" value="1" min="1" size="10" class="ml-2 mr-2 text-center border-3 border-vertClair">
+                            <button class=" cursor-pointer" onclick="addProduit()">
+                                <img src="../../images/logo/bootstrap_icon/plus-square.svg" alt="plus-button" width="30px">
+                            </button>
+                        </div>
+                        <form method="post" action="<?php echo $lienBtnAjouterPanier ?>" >
+                            <input type="hidden" name="idProduit" value="<?php echo $idProd ?>">
+                            <input type="hidden" name="pageDeRetour" value="details">
+                            <input type="hidden" name="nbProduit" id="champ-nb-produit" value="1">
+                            <button class="bg-beige rounded-2xl w-40 h-14 mt-4 cursor-pointer hover:text-rouge"
+                            type="submit">
+                                Ajouter au panier
+                            </button>
+                        </form>
                     </div>
-                    <p id="nbInPanier">Panier : <?= $nbInPanier?></p>
-                    <div id="input-number">
-                        <button class=" cursor-pointer h-[25px]" onclick="suppProduit()">
-                            <img src="../../images/logo/bootstrap_icon//dash-square.svg" alt="plus-button" height="50px">
-                        </button>
-                        <input type="number" id="nb-produit" value="1" min="1">
-                        <button class=" cursor-pointer h-[25px]" onclick="addProduit()">
-                            <img src="../../images/logo/bootstrap_icon/plus-square.svg" alt="plus-button" height="50px">
-                        </button>
+                    <div>
+                        <a class=" block text-center bg-beige rounded-2xl w-40 h-14 mt-4 cursor-pointer hover:text-rouge" href="../../php/traitementFAPanier.php?idProduit=<?= $idProd ?>&ajout=fa&vientDe=detailProd"><?= (isset($_GET['removeFA']))? "Supprimer des futures achats":"Ajouter aux futures achats" ?></a>
                     </div>
-                    <form method="post" action="<?php echo $lienBtnAjouterPanier ?>" >
-                        <input type="hidden" name="idProduit" value="<?php echo $idProd ?>">
-                        <input type="hidden" name="pageDeRetour" value="details">
-                        <input type="hidden" name="nbProduit" id="champ-nb-produit" value="1">
-                        <button class="bg-beige rounded-2xl w-40 h-14 mt-4 cursor-pointer hover:text-rouge"
-                        type="submit">
-                            Ajouter au panier
-                        </button>
-                    </form>
                 </div>
             </article>
         </section>
