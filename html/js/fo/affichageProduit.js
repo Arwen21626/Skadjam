@@ -40,6 +40,7 @@ function afficherProduit(tableau, tableauFA, tableauP, indice, role){
     contImg.appendChild(image)
 
     //Rupture stock
+    
     if (tableau[i]['quantite_stock'] == 0) {
         let divBandeau = document.createElement("div")
         let texteBandeau = document.createElement("p")
@@ -47,6 +48,7 @@ function afficherProduit(tableau, tableauFA, tableauP, indice, role){
 
         divBandeau.classList.add("absolute", "inset-0", "flex", "items-center", "justify-center", "z-1")
         texteBandeau.classList.add("bg-rouge", "shadow-lg","text-white", "px-6", "py-2", "w-full", "text-center")
+        produit.classList.add("grayscale")
 
         divBandeau.appendChild(texteBandeau)
         contImg.appendChild(divBandeau)
@@ -184,23 +186,24 @@ function afficherProduit(tableau, tableauFA, tableauP, indice, role){
 
     stock = carteProduit.querySelector("p").textContent
     boutonP.addEventListener('click', function () {
+        if (stock > 0) {
+            if (this.className.includes("cart-fill-vert-fonce.svg")) {
+                p.classList.remove("hidden")
+                label.classList.add("hidden")
+                inputNb.classList.add("hidden")
+            } else {
+                p.classList.add("hidden")
+                label.classList.remove("hidden")
+                inputNb.classList.remove("hidden")
+            }
 
-        if (this.className.includes("cart-fill-vert-fonce.svg")) {
-            p.classList.remove("hidden")
-            label.classList.add("hidden")
-            inputNb.classList.add("hidden")
-        } else {
-            p.classList.add("hidden")
-            label.classList.remove("hidden")
-            inputNb.classList.remove("hidden")
+            input.value = idProduit
+            input.name = "idProduit"
+            formNbAddPanier.appendChild(input)
+
+            contNbAddPanier.classList.remove("hidden")
+            fondNbAddPanier.classList.remove("hidden")
         }
-
-        input.value = idProduit
-        input.name = "idProduit"
-        formNbAddPanier.appendChild(input)
-
-        contNbAddPanier.classList.remove("hidden")
-        fondNbAddPanier.classList.remove("hidden")
     })
 
     parent.appendChild(boutonP)
