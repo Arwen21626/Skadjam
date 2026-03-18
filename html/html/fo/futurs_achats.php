@@ -33,7 +33,9 @@ $removeFA = (isset($_GET['removeFA']) && $_GET['removeFA'] === "1");
 
 // Récupération des infos produits en fontion du tabFA
 $tabProd = [];
+
 if ($_SESSION['role'] == "client") {
+    $idCompte = $_SESSION['idCompte'];
     foreach($dbh->query("SELECT pr.libelle_produit, pr.id_produit, pr.prix_ttc, 
                         pr.quantite_stock, pr.note_moyenne, pr.prix_remise, 
                         r.pourcentage_remise, pu.id_promotion,
@@ -56,7 +58,7 @@ if ($_SESSION['role'] == "client") {
                                     ON r.id_remise = rd.id_remise
                                 INNER JOIN sae3_skadjam._futur_achat fa
                                     ON pr.id_produit = fa.id_produit
-                                WHERE pr.est_supprime = false AND pr.est_masque = false"
+                                WHERE pr.est_supprime = false AND pr.est_masque = false AND fa.id_client = $idCompte"
                     , PDO::FETCH_ASSOC) as $row){
         $tabProd[] = $row;
     }
