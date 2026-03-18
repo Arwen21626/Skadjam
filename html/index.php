@@ -127,6 +127,10 @@
             $pageNumber = ceil($maxPage);
         }
 
+        if($pageNumber<1){
+            $pageNumber = 1;
+        }
+
         //découpe le catalogue en page de 24 produits
         $lignes = array_slice($tabProduit, $pageNumber*PAGE_SIZE-PAGE_SIZE, PAGE_SIZE);
         ?>
