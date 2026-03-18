@@ -33,8 +33,9 @@ $removeFA = (isset($_GET['removeFA']) && $_GET['removeFA'] === "1");
 
 // Récupération des infos produits en fontion du tabFA
 $tabProd = [];
-$idCompte = $_SESSION['idCompte'];
+
 if ($_SESSION['role'] == "client") {
+    $idCompte = $_SESSION['idCompte'];
     foreach($dbh->query("SELECT pr.libelle_produit, pr.id_produit, pr.prix_ttc, 
                         pr.quantite_stock, pr.note_moyenne, pr.prix_remise, 
                         r.pourcentage_remise, pu.id_promotion,
