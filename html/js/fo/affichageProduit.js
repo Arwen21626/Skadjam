@@ -122,6 +122,8 @@ function afficherProduit(tableau, tableauFA, tableauP, indice, role){
     let lienFA = document.createElement("a")
     lienFA.href = "/php/traitementFAPanier.php?idProduit="+idProduit+"&ajout=fa&vientDe=recherche"
     lienFA.id = "btnFA"
+    lienFA.alt = "Ajouter à vos futurs achats"
+    lienFA.title = "Ajouter à vos futurs achats"
     parent.appendChild(lienFA)
     parent = lienFA
 
@@ -150,6 +152,8 @@ function afficherProduit(tableau, tableauFA, tableauP, indice, role){
 
     // Bouton Panier
     let boutonP = document.createElement("button")
+    boutonP.alt="Ajouter à votre panier"
+    boutonP.title="Ajouter à votre panier"
     boutonP.classList.add("btnPanier", "cursor-pointer", "size-10", "bg-no-repeat", "bg-size-[auto_40px]")
     bg = "bg-[url(/images/logo/bootstrap_icon/cart-vert-fonce.svg)]"
 
