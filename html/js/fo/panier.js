@@ -160,7 +160,8 @@ if (conteneurProd) { //Check si un élément de la page panier  est présent ou 
             texteBandeau.textContent = "Hors-stock";
 
             divBandeau.classList.add("absolute", "inset-0", "flex", "items-center", "justify-center", "z-1");
-            texteBandeau.classList.add("bg-rouge", "shadow-lg","text-white", "px-6", "py-2", "w-full", "text-center")
+            texteBandeau.classList.add("bg-rouge", "shadow-lg","text-white", "px-6", "py-2", "w-full", "text-center");
+            container.classList.add("grayscale");
 
             divBandeau.appendChild(texteBandeau);
             divImage.appendChild(divBandeau);
