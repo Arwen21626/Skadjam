@@ -183,3 +183,40 @@ function verifTelephone(telephone){
         return false
     }
 }
+
+function verifIBAN(iban){
+    // Vérification de l'IBAN
+    var regex = /^FR[0-9]{25}$/
+    if (regex.test(iban)) {
+        return true
+    } else {
+        return false
+    }
+}
+
+function verifSiren(siren){
+    // Vérification de l'IBAN
+    var regex = /^[0-9]{9}$/
+    if (regex.test(siren) ) {
+        var sirenSplit = siren.split("")
+        sirenSplit[1] *= 2;
+        sirenSplit[3] *= 2;
+        sirenSplit[5] *= 2;
+        sirenSplit[7] *= 2;
+        sirenSplit.forEach(nb => {
+            if (nb > 9) {
+                nb = nb -9
+            }
+        var somme = sirenSplit.some()
+        if (somme%10 === 0) {
+            return true
+        }
+        else{
+            return false
+        }
+        });
+        
+    } else {
+        return false
+    }
+}
