@@ -11,7 +11,7 @@ unset($_SESSION['erreurs'], $_SESSION['old']);
 <html lang="fr">
 <?php include __DIR__."/../../php/structure/head_front.php";?>
 <head>
-    <title>Création d'un compte client</title>
+    <title>Création du compte client</title>
 </head>
 
 <body>
