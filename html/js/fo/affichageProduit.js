@@ -1,6 +1,3 @@
-//Variable pour la boucle
-let stock = -1
-
 function afficherProduit(tableau, tableauFA, tableauP, indice, role){
     
     let i = indice
@@ -184,9 +181,9 @@ function afficherProduit(tableau, tableauFA, tableauP, indice, role){
     }
     boutonP.classList.add(bg)
 
-    stock = carteProduit.querySelector("p").textContent
+    
     boutonP.addEventListener('click', function () {
-        if (stock > 0) {
+        if (tableau[i]['quantite_stock'] > 0) {
             if (this.className.includes("cart-fill-vert-fonce.svg")) {
                 p.classList.remove("hidden")
                 label.classList.add("hidden")
