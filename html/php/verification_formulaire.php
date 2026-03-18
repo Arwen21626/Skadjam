@@ -132,8 +132,8 @@ function verifPseudo($pseudo){
 
 function verifDate($date){
     // Vérifie que la date est au format jj-mm-aaaa
-    $d = DateTime::createFromFormat('d-m-Y', $date);
-    return $d && $d->format('d-m-Y') === $date;
+    $d = DateTime::createFromFormat('Y-m-d', $date);
+    return $d && $d->format('Y-m-d') === $date;
 }
 
 function verifAge($naissance){
