@@ -116,7 +116,7 @@
     <main class="md:min-h-[900px] min-h-[600px]" id="produits">
 
         <!-- Aside -->
-        <aside class="z-8 sidebar hidden overflow-auto bg-beige/90 w-110 min-h-[500px] fixed top-0 bottom-10 md:bg-beige p-4 md:sticky md:block md:w-79 md:h-225 md:top-14 md:float-left ">
+        <aside class="z-8 sidebar hidden overflow-auto bg-beige/90 w-110 min-h-[500px] fixed top-0 bottom-10 md:bg-beige p-4 md:sticky md:block md:w-79 md:h-230 md:top-14 md:float-left ">
             
             <!-- Filtres -->
             <section>
