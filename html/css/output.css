@@ -2615,6 +2615,11 @@ input.quantite-prod-input {
       align-items: flex-start;
     }
   }
+  .md\:items-stretch {
+    @media (width >= 48rem) {
+      align-items: stretch;
+    }
+  }
   .md\:justify-around {
     @media (width >= 48rem) {
       justify-content: space-around;

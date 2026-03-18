@@ -208,7 +208,7 @@
 
     <main class="p-4 md:pl-8 pr-8">
         <!-- Section Description -->
-        <section class="flex flex-col ">
+        <section class="flex flex-col items-center md:items-stretch">
             <article class="p-2 md:pb-8"> <!-- Titrage -->
                 <div class="flex flex-col md:flex-row">
                     <h3> <?php echo $libelleProd; ?></h3>
@@ -220,13 +220,13 @@
                 <div class="ml-10"> <?php echo affichageNote($noteMoy); ?> </div>
             </article>
             
-            <article class="md:flex md:flex-row md:justify-around">
+            <article class="flex flex-col items-center md:items-stretch md:flex-row md:justify-around">
                 <img src="<?php echo $infoPhoto["url_photo"]; ?>"  alt=<?php echo $infoPhoto["alt"] ?> title=<?php echo $infoPhoto["titre"] ?>
                 class="size-1/2 border
                        md:size-1/4">
 
-                <div class="p-2 flex flex-col items-start md:items-center">
-                    <div class="flex md:flex-col md:mb-4">
+                <div class="p-2 flex flex-col items-center">
+                    <div class="flex flex-col md:mb-4">
                         <h3 class="text-center pr-2 self-center <?php echo ($pourcentage !== NULL)?'line-through':'';?>"> <?php echo $prixTTC ?>€</h3>
                         <h3 class="text-center pr-2 self-center <?php echo ($pourcentage !== NULL)?'':'hidden';?>"> <?php echo $prixRemise ?>€</h3>
 
@@ -246,7 +246,7 @@
                         <p class="text-center pr-1 md:p-0">Vendu par</p>
                         <p class="text-center font-medium pl-1 md:p-0"><?php echo $nomVendeur ?></p>
                     </div><br>
-                    <div class="border-2 border-vertClair rounded-2xl flex-col items-center p-2 text-center">
+                    <div class="border-2 border-vertClair mt-2 rounded-2xl flex-col items-center p-2 text-center">
                         <p id="nbInPanier">Panier : <?= $nbInPanier?></p>
                         <div id="input-number" class=" flex flex-row items-center">
                             <button class=" cursor-pointer" onclick="suppProduit()" onmouseenter="enterBtn('btn-dash')" onmouseleave="leaveBtn('btn-dash')">
