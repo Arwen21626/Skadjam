@@ -101,10 +101,29 @@
         if ($_SESSION['role'] === 'client'){
             $stmt = $dbh->prepare("SELECT quantite_par_produit FROM sae3_skadjam._contient con INNER JOIN sae3_skadjam._client cli ON con.id_panier = cli.id_panier WHERE con.id_produit = ? AND cli.id_compte = ?");
             $stmt->execute([$idProd, $idCompte]);
-            $result = $stmt->fetch();
-            $nbInPanier = $result['quantite_par_produit'];
+            $result = $stmt->fetch(PDO::FETCH_ASSOC);
+            if ($result){
+                $nbInPanier = $result['quantite_par_produit'];
+            }
             error_log(print_r($result,true));
         }
+        
+        // est dans FA
+        $inFA = false;
+        if ($_SESSION['role'] === 'visiteur' && !empty($_SESSION['futurAchat'])){
+            if (isset($_SESSION['futurAchat'][$idProd])){
+                $inFA = true;
+            }
+        }
+        if ($_SESSION['role'] === 'client'){
+            $stmt = $dbh->prepare("SELECT id_produit FROM sae3_skadjam._futur_achat WHERE id_produit = ? AND id_client = ?");
+            $stmt->execute([$idProd, $idCompte]);
+            $result = $stmt->fetch(PDO::FETCH_ASSOC);
+            if ($result){
+                $inFA = true;
+            }
+        }
+        
 
         // Définition du lien vers lequel est renvoyé le client en cliquant sur le bouton ajouter au panier
         // Si il est connecté : le produit est ajouté à son panier
@@ -249,7 +268,7 @@
                         </form>
                     </div>
                     <div>
-                        <a class=" block text-center bg-beige rounded-2xl w-40 h-14 mt-4 cursor-pointer hover:text-rouge" href="../../php/traitementFAPanier.php?idProduit=<?= $idProd ?>&ajout=fa&vientDe=detailProd"><?= (isset($_GET['removeFA']))? "Supprimer des futures achats":"Ajouter aux futures achats" ?></a>
+                        <a class=" block text-center bg-beige rounded-2xl w-40 h-14 mt-4 cursor-pointer hover:text-rouge" href="../../php/traitementFAPanier.php?idProduit=<?= $idProd ?>&ajout=fa&vientDe=detailProd"><?= (isset($inFA) && $inFA)? "Supprimer des futures achats":"Ajouter aux futures achats" ?></a>
                     </div>
                 </div>
             </article>
