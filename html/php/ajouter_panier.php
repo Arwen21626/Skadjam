@@ -2,12 +2,13 @@
 require_once(__DIR__ . "/../01_premiere_connexion.php");
 
 session_start();
-
+$nbProduit = $_POST['nbProduit'];
 if ($_SESSION['role'] === 'client')
 {
     // Récupère l'id compte et l'id produit
     $idClient = $_SESSION["idCompte"];
     $idProd = $_POST["idProduit"];
+    
 
 
     // Récupère les infos du panier du client
@@ -51,13 +52,14 @@ if ($_SESSION['role'] === 'client')
             $dbh->query("INSERT INTO sae3_skadjam._contient
                     (id_produit, id_panier, quantite_par_produit)
                     VALUES 
-                    ($idProd, $idPanier, 1)");
+                    ($idProd, $idPanier, $nbProduit)");
         }
         else // Si la requête renvoie une array, on modifie la quantité du produit présent dans la panier
         {
             $quantiteProd = $estDansPanier["quantite_par_produit"]; // Récupère la quantité actuelle du produit puis l'incrémente
-            $quantiteProd++;
-
+            error_log("Quantite befor ".$quantiteProd);
+            $quantiteProd = $quantiteProd + $nbProduit;
+            error_log("Quantite after ". $quantiteProd);
             // Met à jour la quantité du produit présent dans le panier du client
             $maj = $dbh->prepare("
                 UPDATE sae3_skadjam._contient SET
@@ -99,17 +101,17 @@ else if ($_SESSION['role'] === 'visiteur')
         {
             if ($prod['id'] == $idProd)
             {
-                $_SESSION['panier']['contient'][$i]['quantite_par_produit']++;
-                $_SESSION['panier']['nb_produit_total']++;
+                $_SESSION['panier']['contient'][$i]['quantite_par_produit'] =$nbProduit + $_SESSION['panier']['contient'][$i]['quantite_par_produit'] ;
+                $_SESSION['panier']['nb_produit_total'] = $nbProduit + $_SESSION['panier']['nb_produit_total'];
                 $_SESSION['panier']['montant_total_ttc'] += $infoProduit['prix_ttc'];
                 $estDansPanier = true;
             }
         }
 
-        if (!$estDansPanier) 
+        if (!$estDansPanier)
         {
-            $_SESSION['panier']['contient'][] = ['id' => $idProd, 'quantite_par_produit' => 1];
-            $_SESSION['panier']['nb_produit_total']++;
+            $_SESSION['panier']['contient'][] = ['id' => $idProd, 'quantite_par_produit' => $nbProduit];
+            $_SESSION['panier']['nb_produit_total'] = $nbProduit + $_SESSION['panier']['nb_produit_total'];
             $_SESSION['panier']['montant_total_ttc'] += $infoProduit['prix_ttc'];
         }
 

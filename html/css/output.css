@@ -787,6 +787,9 @@ input.quantite-prod-input {
   .h-200 {
     height: calc(var(--spacing, 0.25rem) * 200);
   }
+  .h-\[25px\] {
+    height: 25px;
+  }
   .h-\[25vh\] {
     height: 25vh;
   }

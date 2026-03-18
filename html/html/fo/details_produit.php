@@ -31,6 +31,7 @@
                         , PDO::FETCH_ASSOC) as $row){
         $produit = $row;
     }
+    error_log(print_r($produit, true));
 
     if ($produit === "vide") 
     {
@@ -204,10 +205,19 @@
                         <p class="text-center pr-1 md:p-0">Vendu par</p>
                         <p class="text-center font-medium pl-1 md:p-0"><?php echo $nomVendeur ?></p>
                     </div>
-                    
+                    <div id="input-number">
+                        <button class=" cursor-pointer h-[25px]" onclick="suppProduit()">
+                            <img src="../../images/logo/bootstrap_icon//dash-square.svg" alt="plus-button" height="50px">
+                        </button>
+                        <input type="number" id="nb-produit" value="1" min="1">
+                        <button class=" cursor-pointer h-[25px]" onclick="addProduit()">
+                            <img src="../../images/logo/bootstrap_icon/plus-square.svg" alt="plus-button" height="50px">
+                        </button>
+                    </div>
                     <form method="post" action="<?php echo $lienBtnAjouterPanier ?>" >
                         <input type="hidden" name="idProduit" value="<?php echo $idProd ?>">
                         <input type="hidden" name="pageDeRetour" value="details">
+                        <input type="hidden" name="nbProduit" id="champ-nb-produit" value="1">
                         <button class="bg-beige rounded-2xl w-40 h-14 mt-4 cursor-pointer hover:text-rouge"
                         type="submit">
                             Ajouter au panier
@@ -430,6 +440,55 @@
     </main>
 
     <?php require(__DIR__ . "/../../php/structure/footer_front.php") ?>
+    <script>
+        const maxProduit = <?= $produit['quantite_stock'] ?>;
+        const inputNbProduit = document.getElementById("nb-produit")
+        const champNbProduit = document.getElementById("champ-nb-produit")
+        const reg = /^[0]*[1-9][0-9]*[.,]?[0-9]*$/
+
+        function addProduit(){
+            if (inputNbProduit.value<maxProduit){
+                inputNbProduit.value++
+                champNbProduit.value = inputNbProduit.value
+            }
+        }
+
+        function suppProduit(){
+            if (inputNbProduit.value>1){
+                inputNbProduit.value--
+                champNbProduit.value = inputNbProduit.value
+            }
+        }
+    
+        inputNbProduit.addEventListener("change", () => {
+            if (!reg.test(inputNbProduit.value)){
+                inputNbProduit.value = 1
+                console.log("attention")
+            }
+
+            inputNbProduit.value = parseInt(inputNbProduit.value)
+
+            if (/^0/.test(inputNbProduit.value)){
+                let chaineNbProduit = ""
+                let fin = false
+                let lengthInput = inputNbProduit.value.length
+                for (i=0;i<lengthInput; i++){
+                    if (inputNbProduit.value[i] != 0 || fin){
+                        if (!fin){fin=true}
+                        chaineNbProduit = chaineNbProduit + inputNbProduit.value[i]
+                    }
+                }
+                inputNbProduit.value = chaineNbProduit
+            }
+
+            if (inputNbProduit.value > maxProduit){
+                inputNbProduit.value = maxProduit
+            }
+            champNbProduit.value = inputNbProduit.value
+        })
+
+    
+    </script>
 </body>
 
 <script type="module">
@@ -476,52 +535,52 @@
 
     //Affichage du compte de pouces haut(s)/bas
     document.querySelectorAll(".vote-btn").forEach(button => {
-    button.addEventListener("click", () => {
-        const avisId = button.dataset.id;
-        const voteType = parseInt(button.dataset.type);
+        button.addEventListener("click", () => {
+            const avisId = button.dataset.id;
+            const voteType = parseInt(button.dataset.type);
 
-        if (!estConnecte) {
-            Popup.showPopUp("popup-non-connecte", 5000);
-            return;
-        }
-
-        fetch("/php/vote_pouce.php", {
-            method: "POST",
-            headers: { "Content-Type": "application/x-www-form-urlencoded" },
-            body: "id=" + avisId + "&type=" + voteType
-        })
-        .then(res => res.json())
-        .then(data => {
-
-            if(data.error){
-                console.error(data.error);
+            if (!estConnecte) {
+                Popup.showPopUp("popup-non-connecte", 5000);
                 return;
             }
 
-            const likeCount = document.getElementById("like-count-" + avisId);
-            const dislikeCount = document.getElementById("dislike-count-" + avisId);
-            likeCount.textContent = data.likes;
-            dislikeCount.textContent = data.dislikes;
+            fetch("/php/vote_pouce.php", {
+                method: "POST",
+                headers: { "Content-Type": "application/x-www-form-urlencoded" },
+                body: "id=" + avisId + "&type=" + voteType
+            })
+            .then(res => res.json())
+            .then(data => {
 
-            const likeBtn = document.querySelector(`.vote-btn.like[data-id='${avisId}']`);
-            const dislikeBtn = document.querySelector(`.vote-btn.dislike[data-id='${avisId}']`);
+                if(data.error){
+                    console.error(data.error);
+                    return;
+                }
 
-            // Reset les images
-            likeBtn.src = "../../images/logo/bootstrap_icon/hand-thumbs-up.svg";
-            dislikeBtn.src = "../../images/logo/bootstrap_icon/hand-thumbs-down.svg";
+                const likeCount = document.getElementById("like-count-" + avisId);
+                const dislikeCount = document.getElementById("dislike-count-" + avisId);
+                likeCount.textContent = data.likes;
+                dislikeCount.textContent = data.dislikes;
 
-            // Activer le pouce correspondant seulement si l’utilisateur a voté
-            if(data.pouce_utilisateur === 1){
-                likeBtn.src = "../../images/logo/bootstrap_icon/hand-thumbs-up-fill.svg";
-            } else if(data.pouce_utilisateur === -1){
-                dislikeBtn.src = "../../images/logo/bootstrap_icon/hand-thumbs-down-fill.svg";
-            }
-        })
-        .catch(err => console.error(err));
+                const likeBtn = document.querySelector(`.vote-btn.like[data-id='${avisId}']`);
+                const dislikeBtn = document.querySelector(`.vote-btn.dislike[data-id='${avisId}']`);
+
+                // Reset les images
+                likeBtn.src = "../../images/logo/bootstrap_icon/hand-thumbs-up.svg";
+                dislikeBtn.src = "../../images/logo/bootstrap_icon/hand-thumbs-down.svg";
+
+                // Activer le pouce correspondant seulement si l’utilisateur a voté
+                if(data.pouce_utilisateur === 1){
+                    likeBtn.src = "../../images/logo/bootstrap_icon/hand-thumbs-up-fill.svg";
+                } else if(data.pouce_utilisateur === -1){
+                    dislikeBtn.src = "../../images/logo/bootstrap_icon/hand-thumbs-down-fill.svg";
+                }
+            })
+            .catch(err => console.error(err));
+        });
     });
-});
 
-
+    
 </script>
 
 </html>
