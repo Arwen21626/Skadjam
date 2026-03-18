@@ -84,6 +84,28 @@
         $noteMoy = $produit["note_moyenne"];
         $pourcentage = $produit['pourcentage_remise'];
 
+        error_log(print_r($_SESSION, true));
+        // nombre de ce produit dans le panier
+        $nbInPanier = 0;
+        error_log("role = ".$_SESSION['role']);
+        error_log("nb_prod_total = ".$_SESSION['panier']['nb_produit_total']);
+        if ($_SESSION['role'] === 'visiteur' && $_SESSION['panier']['nb_produit_total']>0){
+            foreach ($_SESSION['panier']['contient'] as $prod){
+                error_log("produit compare : ".$prod['id']."===".$idProd);
+                if ($prod['id'] === $idProd){
+                    $nbInPanier = $prod['quantite_par_produit'];
+                    break;
+                }
+            }
+        }
+        if ($_SESSION['role'] === 'client'){
+            $stmt = $dbh->prepare("SELECT quantite_par_produit FROM sae3_skadjam._contient con INNER JOIN sae3_skadjam._client cli ON con.id_panier = cli.id_panier WHERE con.id_produit = ? AND cli.id_compte = ?");
+            $stmt->execute([$idProd, $idCompte]);
+            $result = $stmt->fetch();
+            $nbInPanier = $result['quantite_par_produit'];
+            error_log(print_r($result,true));
+        }
+
         // Définition du lien vers lequel est renvoyé le client en cliquant sur le bouton ajouter au panier
         // Si il est connecté : le produit est ajouté à son panier
         //Si il n'est pas connecté : le visiteur est renvoyé sur la page de connexion
@@ -205,6 +227,7 @@
                         <p class="text-center pr-1 md:p-0">Vendu par</p>
                         <p class="text-center font-medium pl-1 md:p-0"><?php echo $nomVendeur ?></p>
                     </div>
+                    <p id="nbInPanier">Panier : <?= $nbInPanier?></p>
                     <div id="input-number">
                         <button class=" cursor-pointer h-[25px]" onclick="suppProduit()">
                             <img src="../../images/logo/bootstrap_icon//dash-square.svg" alt="plus-button" height="50px">
