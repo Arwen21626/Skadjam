@@ -84,11 +84,8 @@
         $noteMoy = $produit["note_moyenne"];
         $pourcentage = $produit['pourcentage_remise'];
 
-        error_log(print_r($_SESSION, true));
         // nombre de ce produit dans le panier
         $nbInPanier = 0;
-        error_log("role = ".$_SESSION['role']);
-        error_log("nb_prod_total = ".$_SESSION['panier']['nb_produit_total']);
         if ($_SESSION['role'] === 'visiteur' && $_SESSION['panier']['nb_produit_total']>0){
             foreach ($_SESSION['panier']['contient'] as $prod){
                 error_log("produit compare : ".$prod['id']."===".$idProd);
@@ -105,7 +102,6 @@
             if ($result){
                 $nbInPanier = $result['quantite_par_produit'];
             }
-            error_log(print_r($result,true));
         }
         
         // est dans FA
