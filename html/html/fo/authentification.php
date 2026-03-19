@@ -203,9 +203,9 @@ $tempsRestant = ($finBloquage['restant']!==null)?strtotime($finBloquage['restant
     <?php include __DIR__.'/../../php/structure/head_front.php' ?>
     <title>auth A2F</title>
 </head>
-<body class="show">
+<body class="show flex flex-col min-h-screen">
     <?php include __DIR__.'/../../php/structure/header_front.php' ?>
-    <main class="flex flex-col items-center">
+    <main class="flex-1 flex flex-col items-center justify-center">
         
         <h2>Authentification à deux facteurs</h2>
         <?php
@@ -240,7 +240,7 @@ $tempsRestant = ($finBloquage['restant']!==null)?strtotime($finBloquage['restant
         let code = recup_code()
         ret = await verifOtp(code) // Vérifie le code OTP saisi par l'utilisateur
         console.log("[authentification] connection : "+ret)
-        if (ret == 0){ // Code correct
+        if (ret){ // Code correct
             valider.textContent = "Connexion..."
             res.textContent = "Code bon."
             res.classList.remove("hidden")
