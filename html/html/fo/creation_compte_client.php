@@ -157,13 +157,11 @@ unset($_SESSION['erreurs'], $_SESSION['old']);
             nom.addEventListener("change", function(){
                 if(!verifNomPrenom(nom.value)){                    
                     erreurNom.classList.remove("md:hidden", "hidden")
-                    let errPHP = document.getElementById("erreurNomPHP")
-                    if(errPHP) errPHP.classList.add("md:hidden", "hidden")
                 }else{
                     erreurNom.classList.add("md:hidden", "hidden")
-                    let errPHP = document.getElementById("erreurNomPHP")
-                    if(errPHP) errPHP.classList.add("md:hidden", "hidden")
                 }
+                let errPHP = document.getElementById("erreurNomPHP")
+                if(errPHP) errPHP.classList.add("md:hidden", "hidden")
                 nomForm.appendChild(erreurNom)
             })
 
@@ -176,13 +174,11 @@ unset($_SESSION['erreurs'], $_SESSION['old']);
             prenom.addEventListener("change", function(){
                 if(!verifNomPrenom(prenom.value)){                    
                     erreurPrenom.classList.remove("md:hidden", "hidden")
-                    let errPHP = document.getElementById("erreurPrenomPHP")
-                    if(errPHP) errPHP.classList.add("md:hidden", "hidden")
                 }else{
                     erreurPrenom.classList.add("md:hidden", "hidden")
-                    let errPHP = document.getElementById("erreurPrenomPHP")
-                    if(errPHP) errPHP.classList.add("md:hidden", "hidden")
                 }
+                let errPHP = document.getElementById("erreurPrenomPHP")
+                if(errPHP) errPHP.classList.add("md:hidden", "hidden")
                 prenomForm.appendChild(erreurPrenom)
             })
 
@@ -198,7 +194,6 @@ unset($_SESSION['erreurs'], $_SESSION['old']);
                 }else{
                     erreurPseudo.classList.add("md:hidden", "hidden")
                 }
-                
                 let errPHP = document.getElementById("erreurPseudoPHP")
                 if(errPHP) errPHP.classList.add("md:hidden", "hidden")
                 pseudoForm.appendChild(erreurPseudo)
@@ -213,13 +208,11 @@ unset($_SESSION['erreurs'], $_SESSION['old']);
             naissance.addEventListener("change", function(){
                 if(!verifNaissance(naissance.value)){                    
                     erreurNaissance.classList.remove("md:hidden", "hidden")
-                    let errPHP = document.getElementById("erreurNaissancePHP")
-                    if(errPHP) errPHP.classList.add("md:hidden", "hidden")
                 }else{
                     erreurNaissance.classList.add("md:hidden", "hidden")
-                    let errPHP = document.getElementById("erreurNaissancePHP")
-                    if(errPHP) errPHP.classList.add("md:hidden", "hidden")
                 }
+                let errPHP = document.getElementById("erreurNaissancePHP")
+                if(errPHP) errPHP.classList.add("md:hidden", "hidden")
                 naissanceForm.appendChild(erreurNaissance)
             })
 
@@ -232,13 +225,11 @@ unset($_SESSION['erreurs'], $_SESSION['old']);
             tel.addEventListener("change", function(){
                 if(!verifTelephone(tel.value)){                    
                     erreurTel.classList.remove("md:hidden", "hidden")
-                    let errPHP = document.getElementById("erreurTelPHP")
-                    if(errPHP) errPHP.classList.add("md:hidden", "hidden")
                 }else{
                     erreurTel.classList.add("md:hidden", "hidden")
-                    let errPHP = document.getElementById("erreurTelPHP")
-                    if(errPHP) errPHP.classList.add("md:hidden", "hidden")
                 }
+                let errPHP = document.getElementById("erreurTelPHP")
+                if(errPHP) errPHP.classList.add("md:hidden", "hidden")
                 telForm.appendChild(erreurTel)
             })
 
@@ -251,13 +242,11 @@ unset($_SESSION['erreurs'], $_SESSION['old']);
             mail.addEventListener("change", function(){
                 if(!verifMail(mail.value)){                    
                     erreurMail.classList.remove("md:hidden", "hidden")
-                    let errPHP = document.getElementById("erreurMailPHP")
-                    if(errPHP) errPHP.classList.add("md:hidden", "hidden")
                 }else{
                     erreurMail.classList.add("md:hidden", "hidden")
-                    let errPHP = document.getElementById("erreurMailPHP")
-                    if(errPHP) errPHP.classList.add("md:hidden", "hidden")
                 }
+                let errPHP = document.getElementById("erreurMailPHP")
+                if(errPHP) errPHP.classList.add("md:hidden", "hidden")
                 mailForm.appendChild(erreurMail)
             })
 
@@ -270,13 +259,11 @@ unset($_SESSION['erreurs'], $_SESSION['old']);
             mdp.addEventListener("change", function(){
                 if(!verifMotDePasse(mdp.value)){                    
                     erreurMdp.classList.remove("md:hidden", "hidden")
-                    let errPHP = document.getElementById("erreurMdpPHP")
-                    if(errPHP) errPHP.classList.add("md:hidden", "hidden")
                 }else{
                     erreurMdp.classList.add("md:hidden", "hidden")
-                    let errPHP = document.getElementById("erreurMdpPHP")
-                    if(errPHP) errPHP.classList.add("md:hidden", "hidden")
                 }
+                let errPHP = document.getElementById("erreurMdpPHP")
+                if(errPHP) errPHP.classList.add("md:hidden", "hidden")
                 mdpForm.appendChild(erreurMdp)
             })
 
@@ -289,18 +276,14 @@ unset($_SESSION['erreurs'], $_SESSION['old']);
             verifMdp.addEventListener("change", function(){
                 if(!confirmationMotDePasse(mdp.value, verifMdp.value)){                    
                     erreurVerifMdp.classList.remove("md:hidden", "hidden")
-                    let errPHP = document.getElementById("erreurVerifMdpPHP")
-                    if(errPHP) errPHP.classList.add("md:hidden", "hidden")
                 }else{
                     erreurVerifMdp.classList.add("md:hidden", "hidden")
-                    let errPHP = document.getElementById("erreurVerifMdpPHP")
-                    if(errPHP) errPHP.classList.add("md:hidden", "hidden")
                 }
+                let errPHP = document.getElementById("erreurVerifMdpPHP")
+                if(errPHP) errPHP.classList.add("md:hidden", "hidden")
                 mdpVerifForm.appendChild(erreurVerifMdp)
             })
-
         </script>
-
     </main>
     <?php 
     // Import du footer
