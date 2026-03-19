@@ -149,7 +149,6 @@ function verifDate(date) {
 }
 
 function verifNaissance(naissance) {
-    console.log(naissance)
     if (verifDate(naissance)){
         // Séparer jour, mois, année
         const [annee, mois, jour] = naissance.split('-').map(Number)

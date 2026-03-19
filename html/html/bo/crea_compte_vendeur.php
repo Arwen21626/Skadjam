@@ -30,18 +30,18 @@ if (!isset($_SESSION["role"]) || $_SESSION["role"]!=="vendeur"){
 if (isset($_POST["nom"])){
   
     //récuperer les attributs du post
-    $nom = $_POST["nom"]; 
-    $prenom = formatPrenom($_POST["prenom"]);   
-    $mail = $_POST["mail"];                     
-    $tel = $_POST["tel"];                       
-    $denomination = $_POST["denomination"];     
-    $raisonSociale = $_POST["raisonSociale"];   
-    $iban = $_POST["iban"];                     
+    $nom = $_POST["nom"];
+    $prenom = formatPrenom($_POST["prenom"]);
+    $mail = $_POST["mail"];
+    $tel = $_POST["tel"];
+    $denomination = $_POST["denomination"];
+    $raisonSociale = $_POST["raisonSociale"];
+    $iban = $_POST["iban"];
     $adresse = $_POST["adresse"];
     $ville = $_POST["ville"];
     $cp = $_POST["cP"];
-    $siren = $_POST["siren"];                   
-    $mdp = $_POST["mdp"];                       
+    $siren = $_POST["siren"];
+    $mdp = $_POST["mdp"];
     $verif = $_POST["verif"];
     $latitude = $_POST["latitude"];
     $longitude = $_POST["longitude"];
@@ -151,7 +151,7 @@ if (isset($_POST["nom"])){
                 <!-- à la validation du formulaire, s'il y a des erreurs, les informations valides resteront saisies -->
                 <div class="flex-col md:flex-row flex flex-nowrap">
                     <!-- Nom -->
-                    <div id="nomForm" class="flex flex-col mt-2 mb-2 md:m-2 ">
+                    <div id="nomForm" class="flex flex-col mt-2 mb-2 md:w-120 md:m-2 ">
                         <label for="nom">Nom * :</label>
                         <input placeholder="Dupond" class="border-4 border-solid rounded-2xl border-beige p-1 pl-3 w-60 md:w-96 placeholder-gray-500" type="text" id="nom" name="nom" value="<?= $nom ?>" size="25" required >
                         <!-- s'il y a une erreur elle sera affiché sous la cellule -->
@@ -159,7 +159,7 @@ if (isset($_POST["nom"])){
                     </div>
 
                     <!-- Prénom -->
-                    <div id="prenomForm" class="flex flex-col mt-2 mb-2 md:m-2 md:ml-20">
+                    <div id="prenomForm" class="flex flex-col mt-2 mb-2 md:w-120 md:m-2 md:ml-20">
                         <label for="prenom">Prénom * :</label>
                         <input placeholder="Jean" class="border-4 border-solid rounded-2xl border-beige p-1 pl-3 w-60 md:w-96 placeholder-gray-500" type="text" id="prenom" name="prenom" value="<?= $prenom ?>" size="25" required>
                         <!-- s'il y a une erreur elle sera affiché sous la cellule -->
@@ -168,7 +168,7 @@ if (isset($_POST["nom"])){
                 </div>
                 <div class="flex flex-nowrap flex-col md:flex-row">
                     <!-- Mail -->
-                    <div id="mailForm" class="flex flex-col mt-2 mb-2 md:m-2">
+                    <div id="mailForm" class="flex flex-col mt-2 mb-2 md:w-120 md:m-2">
                         <label for="mail">Mail * :</label>
                         <input placeholder="jean.dupond@mail.com" class="border-4 border-solid rounded-2xl border-beige p-1 pl-3 w-72 md:w-96 placeholder-gray-500" type="email" id="mail" name="mail" value="<?= $mail ?>" size="40" required>
                         <!-- s'il y a une erreur elle sera affiché sous la cellule -->
@@ -177,9 +177,9 @@ if (isset($_POST["nom"])){
                     </div>
 
                     <!-- Téléphone -->
-                    <div id="telephoneForm" class="flex flex-col mt-2 mb-2 md:m-2 md:ml-20 md:">
+                    <div id="telephoneForm" class="flex flex-col mt-2 mb-2 md:m-2 md:w-100 md:ml-20 md:">
                         <label for="tel">Numéro de téléphone * :</label>
-                        <input placeholder="06 12 34 56 78" class="border-4 border-solid rounded-2xl border-beige p-1 pl-3 w-40 md:w-60 placeholder-gray-500" type="tel" id="tel" name="tel" value="<?= $tel ?>" size="16" required>
+                        <input placeholder="06 12 34 56 78" class="border-4 border-solid rounded-2xl border-beige p-1 pl-3 w-60 md:w-70 placeholder-gray-500" type="tel" id="tel" name="tel" value="<?= $tel ?>" maxlength="10" size="16" required>
                         <!-- s'il y a une erreur elle sera affiché sous la cellule -->
                         <?php echo isset($erreurs["tel"]) ? "<span id=\"erreurTelPHP\" class=\"text-rouge\">" . $erreurs["tel"] . " </span>" : '' ?>
                     </div>
@@ -187,30 +187,30 @@ if (isset($_POST["nom"])){
             </section>
 
             <h3>Informations entreprise :</h3>
-            <section class="flex flex-col md:flex-row md:flex-wrap md:w-1/2">
+            <section class="flex flex-col md:flex-row md:flex-wrap md:w-4/5">
                 <!-- Raison sociale -->
-                <div id="raisonSocialeForm" class="flex flex-col mt-2 mb-2 md:m-2">
+                <div id="raisonSocialeForm" class="flex flex-col mt-2 mb-2 md:w-130 md:m-2">
                     <label for="raisonSociale">Raison sociale de l'entreprise * :</label>
                     <input placeholder="Nom de l'entreprise" class="border-4 border-solid rounded-2xl border-beige p-1 pl-3 md:w-5/6 placeholder-gray-500" type="text" id="raisonSociale" name="raisonSociale" value="<?= $raisonSociale ?>" size="40" required>
                     <?php echo isset($erreurs["raisonSociale"]) ? "<span id=\"erreurRaisonSocialePHP\" class=\"text-rouge\">" . $erreurs["raisonSociale"] . " </span>" : '' ?>
                 </div>
 
                 <!-- Nom entreprise -->
-                <div id="denominationForm" iconv class="flex flex-col mt-2 mb-2 md:m-2 ">
+                <div id="denominationForm" iconv class="flex flex-col mt-2 mb-2 md:w-130 md:m-2 ">
                     <label for="denomination">Nom de l'entreprise * :</label>
                     <input placeholder="Nom de l'entreprise" class="border-4 border-solid rounded-2xl border-beige p-1 pl-3 md:w-5/6 placeholder-gray-500" type="text" id="denomination" name="denomination" value="<?= $denomination ?>" size="40" required>
                     <?php echo isset($erreurs["denomination"]) ? "<span id=\"erreurDenominationPHP\" class=\"text-rouge\">" . $erreurs["denomination"] . " </span>" : '' ?>
                 </div>
 
                 <!-- IBAN -->
-                <div id="ibanForm" class="flex flex-col mt-2 mb-2 md:m-2">
+                <div id="ibanForm" class="flex flex-col mt-2 mb-2 md:w-130 md:m-2">
                     <label for="iban">Numéro de IBAN * :</label>
                     <input placeholder="FR 76 12345 67890 12345678901 45" class="border-4 border-solid rounded-2xl border-beige p-1 pl-3 md:w-5/6 placeholder-gray-500" type="text" id="iban" name="iban" value="<?= $iban ?>" size="40" required>
                     <?php echo isset($erreurs["iban"]) ? "<span id=\"erreurIbanPHP\" class=\"text-rouge\">" . $erreurs["iban"] . " </span>" : '' ?>
                 </div>
 
                 <!-- SIREN -->
-                <div id="sirenForm" class="flex flex-col mt-2 mb-2 md:m-2">
+                <div id="sirenForm" class="flex flex-col mt-2 mb-2 md:w-130 md:m-2">
                     <label for="siren">Numéro de SIREN * :</label>
                     <input placeholder="123 456 789" class="border-4 border-solid rounded-2xl border-beige p-1 pl-3 w-60 placeholder-gray-500" type="text" id="siren" name="siren" value="<?= $siren ?>" size="11" required>
                     <?php echo isset($erreurs["siren"]) ? "<span id=\"erreurSirenPHP\" class=\"text-rouge\">" . $erreurs["siren"] . " </span>" : '' ?>
@@ -222,23 +222,23 @@ if (isset($_POST["nom"])){
             <section class="flex flex-col md:flex-row">
                 <div class="flex flex-col md:w-1/3">
                     <!-- Adresse -->
-                    <div id="adresseForm" class="flex flex-col mt-2 mb-2 md:m-2">
+                    <div id="adresseForm" class="flex flex-col mt-2 mb-2 md:w-100 md:m-2">
                         <label for="adresse">Adresse * :</label>
                         <input id="adresse" class="border-4 border-solid rounded-2xl border-beige md:w-90 p-1 pl-3 placeholder-gray-500 " type="text" id="adresse" name="adresse" value="<?= $adresse?>" size="60" placeholder="1 rue des Fleurs" required>
                         <?php echo isset($erreurs["adresse"]) ? "<span id=\"erreurAdressePHP\" class=\"text-rouge\">" . $erreurs["adresse"] . " </span>" : '' ?>
                     </div>
 
                     <!-- Ville -->
-                    <div id="villeForm" class="flex flex-col mt-2 mb-2 md:m-2">
+                    <div id="villeForm" class="flex flex-col mt-2 mb-2 md:w-100 md:m-2">
                         <label for="ville">Ville * :</label>
                         <input placeholder="Lannion" id="ville" class="border-4 border-solid rounded-2xl border-beige p-1 pl-3 w-60 placeholder-gray-500" type="text" id="ville" name="ville" value="<?= $ville?>" size="30" required>
                         <?php echo isset($erreurs["ville"]) ? "<p id=\"erreurVillePHP\" class=\"text-rouge\">" . $erreurs["ville"] . " </p>" : '' ?>
                     </div>
 
                     <!-- Code postal -->
-                    <div id="codePostalForm" class="flex flex-col mt-2 mb-2 md:m-2">
-                        <label for="cp">Code Postal * :</label>
-                        <input id="cP" class="border-4 border-solid rounded-2xl border-beige p-1 pl-3 w-40 placeholder-gray-500" type="text" name="cp" value="<?= $cp?>" size="10" placeholder="22300" required>
+                    <div id="codePostalForm" class="flex flex-col mt-2 mb-2 md:w-100 md:m-2">
+                        <label for="cP">Code Postal * :</label>
+                        <input id="cP" class="border-4 border-solid rounded-2xl border-beige p-1 pl-3 w-40 placeholder-gray-500" type="text" name="cP" value="<?= $cp?>" size="10" placeholder="22300" required>
                         <?php echo isset($erreurs["cp"]) ? "<span id=\"erreurCodePostalPHP\" class=\"text-rouge\">" . $erreurs["cp"] . " </span>" : '' ?>
                     </div>
                 </div>
@@ -261,7 +261,7 @@ if (isset($_POST["nom"])){
             </section>
 
             <h3>Mot de passe :</h3>
-            <section class="flex flex-col md:flex-row md:flex-wrap md:w-4/5">
+            <section class="flex flex-col md:flex-wrap md:w-4/5">
                 <!-- MDP -->
                 <div id="mdpForm" class="flex flex-col mt-2 mb-2 md:m-2">
                     <label for="mdp">Mot de passe * :</label>

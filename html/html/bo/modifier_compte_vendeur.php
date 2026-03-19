@@ -315,27 +315,27 @@ if(!$isset || $erreur){
                     <div class="flex flex-col flex-wrap">
                         <h3>Informations vendeur :</h3>
                         <div class="flex flex-row space-x-25 space-y-6">
-                            <div class="flex flex-col space-y-2">
+                            <div id="nomForm" class="flex flex-col md:w-110 space-y-2">
                                 <label for="nom">Nom * :</label>
                                 <input class="ml-5 border-4 border-solid rounded-2xl border-beige p-1 pl-3 placeholder-gray-500" placeholder="Dupond" type="text" id="nom" name="nom" value="<?= $nom; ?>" size="30" required >
-                                <?= $erreurNom ? "<p style=\"font-size: 0.90em\" class=\"text-rouge\">Le nom ne peut contenir que des majuscules, des minuscules, des tirets, des espaces ou les accents : é, ç, è, ë, ê, à, ï, î, ä, â, ù, ü, û, ö, ô.</p>" : ""; ?>
+                                <?= $erreurNom ? "<p id=\"erreurNomPHP\" style=\"font-size: 0.90em\" class=\"text-rouge\">Le nom ne peut contenir que des majuscules, des minuscules, des tirets, des espaces ou des accents.</p>" : ""; ?>
                             </div>
-                            <div class="flex flex-col space-y-2">
+                            <div id="mailForm" class="flex flex-col md:w-120 space-y-2">
                                 <label for="mail">Mail * :</label>
                                 <input class="ml-5 border-4 border-solid rounded-2xl border-beige p-1 pl-3 placeholder-gray-500" placeholder="jean.dupond@mail.com" type="email" id="mail" name="mail" value="<?= $mail; ?>" size="30" required>
-                                <?= $erreurMail ? "<p style=\"font-size: 0.90em\" class=\"text-rouge\">L'adresse email doit être au format : adresse@e.mail</p>" : ""; ?>
+                                <?= $erreurMail ? "<p id=\"erreurMailPHP\" style=\"font-size: 0.90em\" class=\"text-rouge\">L'adresse email doit être au format : adresse@e.mail</p>" : ""; ?>
                             </div>
                         </div>
                         <div class="flex flex-row space-x-25 space-y-6">
-                            <div class="flex flex-col space-y-2">
+                            <div id="prenomForm" class="flex flex-col md:w-110 space-y-2">
                                 <label for="prenom">Prénom * :</label>
                                 <input class="ml-5 border-4 border-solid rounded-2xl border-beige p-1 pl-3 placeholder-gray-500" placeholder="Jean" type="text" id="prenom" name="prenom" value="<?= $prenom; ?>" size="30" required>
-                                <?= $erreurPrenom ? "<p style=\"font-size: 0.90em\" class=\"text-rouge\">Le nom ne peut contenir que des majuscules, des minuscules, des tirets, des espaces ou les accents : é, ç, è, ë, ê, à, ï, î, ä, â, ù, ü, û, ö, ô.</p>" : ""; ?>
+                                <?= $erreurPrenom ? "<p id=\"erreurPrenomPHP\" style=\"font-size: 0.90em\" class=\"text-rouge\">Le nom ne peut contenir que des majuscules, des minuscules, des tirets, des espaces ou des accents.</p>" : ""; ?>
                             </div>
-                            <div class="flex flex-col space-y-2">
+                            <div id="telephoneForm" class="flex flex-col md:w-70 space-y-2">
                                 <label for="tel">Numéro de téléphone * :</label>
                                 <input class="ml-5 border-4 border-solid rounded-2xl border-beige p-1 pl-3 placeholder-gray-500" placeholder="06 12 34 56 78" type="tel" id="tel" name="tel" value="<?= $tel; ?>" size="10" required>
-                                <?= $erreurTel ? "<p style=\"font-size: 0.90em\" class=\"text-rouge\">Le numéro de téléphone doit commencer par 0 suivi de 9 chiffres.</p>" : ""; ?>
+                                <?= $erreurTel ? "<p id=\"erreurTelPHP\" style=\"font-size: 0.90em\" class=\"text-rouge\">Le numéro de téléphone doit commencer par 0 suivi de 9 chiffres.</p>" : ""; ?>
                             </div>
                         </div>
                     </div>
@@ -344,27 +344,27 @@ if(!$isset || $erreur){
                 <h3>Informations entreprise :</h3>
                 <div class="flex flex-col">
                     <div class="flex flex-row space-x-40 space-y-6">
-                        <div class="flex flex-col space-y-2">
+                        <div id="raisonSocialeForm" class="flex flex-col md:w-150 space-y-2">
                             <label for="raisonSociale">Raison sociale de l'entreprise * :</label>
                             <input class="ml-5 border-4 border-solid rounded-2xl border-beige p-1 pl-3 placeholder-gray-500" placeholder="Nom de l'entreprise" type="text" id="raisonSociale" name="raisonSociale" value="<?= $raisonSociale; ?>" size="30" required>
-                            <?= $erreurRaisonSociale ? "<p style=\"font-size: 0.90em\" class=\"text-rouge\">La raison sociale ne peut contenir que des majuscules, des minuscules, des chiffres, des tirets, des espaces ou les accents : é, ç, è, ë, ê, à, ï, î, ä, â, ù, ü, û, ö, ô.</p>" : ""; ?>
+                            <?= $erreurRaisonSociale ? "<p id=\"erreurRaisonSocialePHP\" style=\"font-size: 0.90em\" class=\"text-rouge\">La raison sociale ne peut contenir que des majuscules, des minuscules, des chiffres, des tirets, des espaces ou des accents.</p>" : ""; ?>
                         </div>
-                        <div class="flex flex-col space-y-2">
+                        <div id="denominationForm" class="flex flex-col md:w-150 space-y-2">
                             <label for="denomination">Nom de l'entreprise * :</label>
                             <input class="ml-5 border-4 border-solid rounded-2xl border-beige p-1 pl-3 placeholder-gray-500" placeholder="Nom de l'entreprise" type="text" id="denomination" name="denomination" value="<?= $denomination; ?>" size="30" required>
-                            <?= $erreurDenomination ? "<p style=\"font-size: 0.90em\" class=\"text-rouge\">La dénomination ne peut contenir que des majuscules, des minuscules, des chiffres, des tirets, des espaces ou les accents : é, ç, è, ë, ê, à, ï, î, ä, â, ù, ü, û, ö, ô.</p>" : ""; ?>
+                            <?= $erreurDenomination ? "<p id=\"erreurRaisonSocialePHP\" style=\"font-size: 0.90em\" class=\"text-rouge\">La dénomination ne peut contenir que des majuscules, des minuscules, des chiffres, des tirets, des espaces ou des accents.</p>" : ""; ?>
                         </div>
                     </div>
-                    <div class="flex flex-row space-x-40 space-y-6">
-                        <div class="flex flex-col space-y-2">
+                    <div  class="flex flex-row space-x-40 space-y-6">
+                        <div id="ibanForm" class="flex flex-col md:w-150 space-y-2">
                             <label for="iban">Numéro de IBAN * :</label>
                             <input class="ml-5 border-4 border-solid rounded-2xl border-beige p-1 pl-3 placeholder-gray-500" type="text" id="iban" name="iban" value="<?= $iban; ?>" placeholder="FR 76 12345 67890 12345678901 45" size="30" required>
-                            <?= $erreurIban ? "<p style=\"font-size: 0.90em\" class=\"text-rouge\">Le numéro de IBAN doit commencer par FR suivi de 25 chiffres.</p>" : ""; ?>
+                            <?= $erreurIban ? "<p id=\"erreuIbanPHP\" style=\"font-size: 0.90em\" class=\"text-rouge\">Le numéro de IBAN doit commencer par FR suivi de 25 chiffres sans espace.</p>" : ""; ?>
                         </div>
-                        <div class="flex flex-col space-y-2">
+                        <div id="sirenForm" class="flex flex-col md:w-150 space-y-2">
                             <label for="siren">Numéro de SIREN * :</label>
                             <input class="ml-5 border-4 border-solid rounded-2xl border-beige p-1 pl-3 placeholder-gray-500" placeholder="123 456 789" type="text" id="siren" name="siren" value="<?= $siren; ?>" size="10" required>
-                            <?= $erreurSiren ? "<p style=\"font-size: 0.90em\" class=\"text-rouge\">Le numéro de SIREN doit contenir exactement 9 chiffres.</p>" : ""; ?>
+                            <?= $erreurSiren ? "<p id=\"erreurSirenPHP\" style=\"font-size: 0.90em\" class=\"text-rouge\">Le numéro de SIREN doit contenir exactement 9 chiffres.</p>" : ""; ?>
                         </div>
                     </div>                    
                 </div>
@@ -375,24 +375,24 @@ if(!$isset || $erreur){
                     <!-- Champs de l'adresse -->
                     <div class="flex flex-col w-1/3">
                         <!-- Adresse postale -->
-                        <div class="flex flex-col space-y-2 ">
+                        <div id="adresseForm" class="flex flex-col space-y-2 ">
                             <label for="adresse">Adresse * :</label>
                             <input class="ml-5 border-4 border-solid rounded-2xl border-beige p-1 pl-3 w-90 placeholder-gray-500" type="text" id="adresse" name="adresse" value="<?= $num . (!empty($numBis) ? " $numBis" : " ") . $adresse; ?>" size="50" placeholder="1 rue des Fleurs" required>
-                            <?= $erreurAdresse ? "<p style=\"font-size: 0.90em\" class=\"text-rouge\">L'adresse postal doit être du même format que : 1 rue des fleurs</p>" : ""; ?>
+                            <?= $erreurAdresse ? "<p id=\"erreurAdressePHP\" style=\"font-size: 0.90em\" class=\"text-rouge\">L'adresse postal doit être du même format que : 1 rue des fleurs</p>" : ""; ?>
                         </div>
 
                         <!-- Ville -->
-                        <div class="flex flex-col space-y-2">
+                        <div id="villeForm" class="flex flex-col space-y-2">
                             <label for="ville">Ville * :</label>
                             <input class="ml-5 border-4 border-solid rounded-2xl border-beige p-1 pl-3 w-60 placeholder-gray-500" placeholder="Lannion" type="text" id="ville" name="ville" value="<?= $ville; ?>" size="50" required>
-                            <?= $erreurVille ? "<p style=\"font-size: 0.90em\" class=\"text-rouge\">La ville ne peut contenir que des majuscules, des minuscules, des tirets, des espaces ou les accents : é, ç, è, ë, ê, à, ï, î, ä, â, ù, ü, û, ö, ô.</p>" : ""; ?>
+                            <?= $erreurVille ? "<p id=\"erreurVillePHP\" style=\"font-size: 0.90em\" class=\"text-rouge\">La ville ne peut contenir que des majuscules, des minuscules, des tirets, des espaces ou les accents : é, ç, è, ë, ê, à, ï, î, ä, â, ù, ü, û, ö, ô.</p>" : ""; ?>
                         </div>
 
                         <!-- Code postal -->
-                        <div class="flex flex-col space-y-2">
+                        <div id="codePostalForm" class="flex flex-col space-y-2">
                             <label for="cp">Code Postal * :</label>
                             <input class="ml-5 border-4 border-solid rounded-2xl border-beige p-1 pl-3 w-40 placeholder-gray-500" placeholder="22300" type="text" id="cP" name="cp" value="<?= $cp; ?>" size="10" required>
-                            <?= $erreurCp ? "<p style=\"font-size: 0.90em\" class=\"text-rouge\">Le code postal doit être composé de 5 chiffres.</p>" : ""; ?>
+                            <?= $erreurCp ? "<p id=\"erreurCodePostalPHP\" style=\"font-size: 0.90em\" class=\"text-rouge\">Le code postal doit être composé de 5 chiffres.</p>" : ""; ?>
                         </div>
                     </div>
                     <!-- Carte -->
@@ -415,9 +415,9 @@ if(!$isset || $erreur){
 
                 <!-- Description -->
                 <h3>Description :</h3>
-                <div class="flex flex-col justify-around">
+                <div id="descriptionForm" class="flex flex-col justify-around">
                     <textarea class="ml-5 border-4 border-solid rounded-2xl border-beige p-1 pl-3 mb-4" id="description" name="description" rows="5"><?= isset($description) ? $description : ''; ?></textarea>
-                    <?= $erreurDescription ? "<p style=\"font-size: 0.90em\" class=\"text-rouge\">La description ne peut pas dépasser 500 caractères.</p>" : ""; ?>
+                    <?= $erreurDescription ? "<p id=\"erreurDescriptionPHP\" style=\"font-size: 0.90em\" class=\"text-rouge\">La description ne peut pas dépasser 500 caractères.</p>" : ""; ?>
                 </div>
 
                 <!-- Valider le formulaire -->
@@ -426,6 +426,231 @@ if(!$isset || $erreur){
                     <input class="cursor-pointer border-2 border-vertFonce rounded-2xl w-40  h-14 p-0 m-0 md:mr-10" type="Submit" name="submit" id="submit" value="Valider">
                 </div>
             </form>
+
+                <script src="../../js/verifForm.js"></script>
+            <script>
+                // initialisation
+                let nom = document.getElementById("nom")
+                let prenom = document.getElementById("prenom")
+                let mail = document.getElementById("mail")
+                let telephone = document.getElementById("tel")
+                let raisonSociale = document.getElementById('raisonSociale')
+                let denomination = document.getElementById('denomination')
+                let iban = document.getElementById('iban')
+                let siren = document.getElementById('siren')
+                let adresseF = document.getElementById("adresse")
+                let villeF = document.getElementById("ville")
+                let codePostal = document.getElementById("cP")
+                let mdp = document.getElementById("mdp")
+                let verifMdp = document.getElementById("verif")
+                let description = document.getElementById("description")
+
+                // Verif nom
+                let nomForm = document.getElementById("nomForm")
+                let erreurNom = document.createElement("p")
+                erreurNom.textContent = "Le nom ne peut contenir que des majuscules, des minuscules, des tirets, des espaces ou des accents."
+                erreurNom.classList.add("md:text-rouge", "text-rouge", "md:ml-5")
+
+                nom.addEventListener("change", function(){
+                    if(!verifNomPrenom(nom.value)){                    
+                        erreurNom.classList.remove("md:hidden", "hidden")
+                    }else{
+                        erreurNom.classList.add("md:hidden", "hidden")
+                    }
+                    let errPHP = document.getElementById("erreurNomPHP")
+                    if(errPHP) errPHP.classList.add("md:hidden", "hidden")
+                    nomForm.appendChild(erreurNom)
+                })
+
+                // Verif prenom
+                let prenomForm = document.getElementById("prenomForm")
+                let erreurPrenom = document.createElement("p")
+                erreurPrenom.textContent = "Le prenom ne peut contenir que des majuscules, des minuscules, des tirets, des espaces ou des accents."
+                erreurPrenom.classList.add("md:text-rouge", "text-rouge", "md:ml-5")
+
+                prenom.addEventListener("change", function(){
+                    if(!verifNomPrenom(prenom.value)){                    
+                        erreurPrenom.classList.remove("md:hidden", "hidden")
+                    }else{
+                        erreurPrenom.classList.add("md:hidden", "hidden")
+                    }
+                    let errPHP = document.getElementById("erreurPrenomPHP")
+                    if(errPHP) errPHP.classList.add("md:hidden", "hidden")
+                    prenomForm.appendChild(erreurPrenom)
+                })
+
+                // Verif mail
+                let mailForm = document.getElementById("mailForm")
+                let erreurMail = document.createElement("p")
+                erreurMail.textContent = "L'adresse doit être au format : adresse@e.mail"
+                erreurMail.classList.add("md:text-rouge", "text-rouge", "md:ml-5")
+
+                mail.addEventListener("change", function(){
+                    if(!verifMail(mail.value)){                    
+                        erreurMail.classList.remove("md:hidden", "hidden")
+                    }else{
+                        erreurMail.classList.add("md:hidden", "hidden")
+                    }
+                    let errPHP1 = document.getElementById("erreurMailPHP1")
+                    if(errPHP1) errPHP1.classList.add("md:hidden", "hidden")
+                    let errPHP2 = document.getElementById("erreurMailPHP2")
+                    if(errPHP2) errPHP2.classList.add("md:hidden", "hidden")
+                    mailForm.appendChild(erreurMail)
+                })
+
+                // Verif tel
+                let telForm = document.getElementById("telephoneForm")
+                let erreurTel = document.createElement("p")
+                erreurTel.textContent = "Le numéro de téléphone doit commencer par 0 suivi de 9 chiffres."
+                erreurTel.classList.add("md:text-rouge", "text-rouge", "md:ml-5")
+
+                telephone.addEventListener("change", function(){
+                    if(!verifTelephone(telephone.value)){
+                        erreurTel.classList.remove("md:hidden", "hidden")
+                    }else{
+                        erreurTel.classList.add("md:hidden", "hidden")
+                    }
+                    let errPHP = document.getElementById("erreurTelPHP")
+                    if(errPHP) errPHP.classList.add("md:hidden", "hidden")
+                    telForm.appendChild(erreurTel)
+                })
+
+                // Verif raison sociale
+                let raisonSocialeForm = document.getElementById("raisonSocialeForm")
+                let erreurRaisonSociale = document.createElement("p")
+                erreurRaisonSociale.textContent = "La raison sociale de l'entreprise peut contenir uniquement des lettres majuscules ou minuscules, des chiffres, des tirets et des accents."
+                erreurRaisonSociale.classList.add("md:text-rouge", "text-rouge", "md:ml-5")
+
+                raisonSociale.addEventListener("change", function(){
+                    if(!verifDenomination(raisonSociale.value)){
+                        erreurRaisonSociale.classList.remove("md:hidden", "hidden")
+                    }else{
+                        erreurRaisonSociale.classList.add("md:hidden", "hidden")
+                    }
+                    let errPHP = document.getElementById("erreurRaisonSocialePHP")
+                    if(errPHP) errPHP.classList.add("md:hidden", "hidden")
+                    raisonSocialeForm.appendChild(erreurRaisonSociale)
+                })
+
+                // Verif denomination de l'entreprise
+                let denominationForm = document.getElementById("denominationForm")
+                let erreurDenomination = document.createElement("p")
+                erreurDenomination.textContent = "La dénomination de l'entreprise peut contenir uniquement des lettres majuscules ou minuscules, des chiffres, des tirets et des accents."
+                erreurDenomination.classList.add("md:text-rouge", "text-rouge", "md:ml-5")
+
+                denomination.addEventListener("change", function(){
+                    if(!verifDenomination(denomination.value)){
+                        erreurDenomination.classList.remove("md:hidden", "hidden")
+                    }else{
+                        erreurDenomination.classList.add("md:hidden", "hidden")
+                    }
+                    let errPHP = document.getElementById("erreurDenominationPHP")
+                    if(errPHP) errPHP.classList.add("md:hidden", "hidden")
+                    denominationForm.appendChild(erreurDenomination)
+                })
+
+                // Verif iban
+                let ibanForm = document.getElementById("ibanForm")
+                let erreurIban = document.createElement("p")
+                erreurIban.textContent = "L'iban doit commencer par FR suivi de 25 chiffres."
+                erreurIban.classList.add("md:text-rouge", "text-rouge", "md:ml-5")
+
+                iban.addEventListener("change", function(){
+                    if(!verifIban(iban.value)){
+                        erreurIban.classList.remove("md:hidden", "hidden")
+                    }else{
+                        erreurIban.classList.add("md:hidden", "hidden")
+                    }
+                    let errPHP = document.getElementById("erreurIbanPHP")
+                    if(errPHP) errPHP.classList.add("md:hidden", "hidden")
+                    ibanForm.appendChild(erreurIban)
+                })
+
+                // Verif siren
+                let sirenForm = document.getElementById("sirenForm")
+                let erreurSiren = document.createElement("p")
+                erreurSiren.textContent = "Le numéro de SIREN doit contenir 9 chiffres et passer la formule de Lunh"
+                erreurSiren.classList.add("md:text-rouge", "text-rouge", "md:ml-5")
+
+                siren.addEventListener("change", function(){
+                    if(!verifSiren(siren.value)){
+                        erreurSiren.classList.remove("md:hidden", "hidden")
+                    }else{
+                        erreurSiren.classList.add("md:hidden", "hidden")
+                    }
+                    let errPHP = document.getElementById("erreurSirenPHP")
+                    if(errPHP) errPHP.classList.add("md:hidden", "hidden")
+                    sirenForm.appendChild(erreurSiren)
+                })
+
+                // Verif adresse
+                let adresseForm = document.getElementById("adresseForm")
+                let erreurAdresse = document.createElement("p")
+                erreurAdresse.textContent = "L'adresse postal doit être du même format que : 1 rue des fleurs"
+                erreurAdresse.classList.add("md:text-rouge", "text-rouge", "md:ml-5")
+
+                adresseF.addEventListener("change", function(){
+                    if(!verifAdresse(adresseF.value)){                    
+                        erreurAdresse.classList.remove("md:hidden", "hidden")
+                    }else{
+                        erreurAdresse.classList.add("md:hidden", "hidden")
+                    }
+                    let errPHP = document.getElementById("erreurAdressePHP")
+                    if(errPHP) errPHP.classList.add("md:hidden", "hidden")
+                    adresseForm.appendChild(erreurAdresse)
+                })
+
+                // Verif ville
+                let villeForm = document.getElementById("villeForm")
+                let erreurVille = document.createElement("p")
+                erreurVille.textContent = "La ville peut contenir seulement des lettres majuscules ou minuscules, des tirets, des espaces et des accents."
+                erreurVille.classList.add("md:text-rouge", "text-rouge", "md:ml-5")
+
+                villeF.addEventListener("change", function(){
+                    if(!verifVille(villeF.value)){                    
+                        erreurVille.classList.remove("md:hidden", "hidden")
+                    }else{
+                        erreurVille.classList.add("md:hidden", "hidden")
+                    }
+                    let errPHP = document.getElementById("erreurVillePHP")
+                    if(errPHP) errPHP.classList.add("md:hidden", "hidden")
+                    villeForm.appendChild(erreurVille)
+                })
+
+                // Verif code postal
+                let codePostalForm = document.getElementById("codePostalForm")
+                let erreurCodePostal = document.createElement("p")
+                erreurCodePostal.textContent = "Le code postale doit contenir 5 chiffres."
+                erreurCodePostal.classList.add("md:text-rouge", "text-rouge", "md:ml-5")
+
+                codePostal.addEventListener("change", function(){
+                    if(!verifCodePostal(codePostal.value)){                    
+                        erreurCodePostal.classList.remove("md:hidden", "hidden")
+                    }else{
+                        erreurCodePostal.classList.add("md:hidden", "hidden")
+                    }
+                    let errPHP = document.getElementById("erreurCodePostalPHP")
+                    if(errPHP) errPHP.classList.add("md:hidden", "hidden")
+                    codePostalForm.appendChild(erreurCodePostal)
+                })
+
+                // Verif description
+                let descriptionForm = document.getElementById("descriptionForm")
+                let erreurDescription = document.createElement("p")
+                erreurDescription.textContent = "La description ne peut pas dépasser 500 caractères."
+                erreurDescription.classList.add("md:text-rouge", "text-rouge", "md:ml-5")
+
+                description.addEventListener("change", function(){
+                    if(!(description.value.length < 500)){                    
+                        erreurDescription.classList.remove("md:hidden", "hidden")
+                    }else{
+                        erreurDescription.classList.add("md:hidden", "hidden")
+                    }
+                    let errPHP = document.getElementById("erreurDescriptionPHP")
+                    if(errPHP) errPHP.classList.add("md:hidden", "hidden")
+                    descriptionForm.appendChild(erreurDescription)
+                })
+            </script>
         </main>
 
         <?php 

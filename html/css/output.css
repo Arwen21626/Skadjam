@@ -812,6 +812,9 @@ input.quantite-prod-input {
   .h-\[20vh\] {
     height: 20vh;
   }
+  .h-\[25vh\] {
+    height: 25vh;
+  }
   .h-\[45vh\] {
     height: 45vh;
   }
@@ -1048,6 +1051,9 @@ input.quantite-prod-input {
   }
   .w-290 {
     width: calc(var(--spacing, 0.25rem) * 290);
+  }
+  .w-\[30vw\] {
+    width: 30vw;
   }
   .w-\[45vw\] {
     width: 45vw;
@@ -2304,6 +2310,11 @@ input.quantite-prod-input {
       margin-top: calc(var(--spacing, 0.25rem) * 15);
     }
   }
+  .md\:mr-2 {
+    @media (width >= 48rem) {
+      margin-right: calc(var(--spacing, 0.25rem) * 2);
+    }
+  }
   .md\:mr-10 {
     @media (width >= 48rem) {
       margin-right: calc(var(--spacing, 0.25rem) * 10);
@@ -2347,6 +2358,11 @@ input.quantite-prod-input {
   .md\:ml-0 {
     @media (width >= 48rem) {
       margin-left: calc(var(--spacing, 0.25rem) * 0);
+    }
+  }
+  .md\:ml-2 {
+    @media (width >= 48rem) {
+      margin-left: calc(var(--spacing, 0.25rem) * 2);
     }
   }
   .md\:ml-5 {
@@ -2547,6 +2563,11 @@ input.quantite-prod-input {
       width: calc(var(--spacing, 0.25rem) * 10);
     }
   }
+  .md\:w-13 {
+    @media (width >= 48rem) {
+      width: calc(var(--spacing, 0.25rem) * 13);
+    }
+  }
   .md\:w-40 {
     @media (width >= 48rem) {
       width: calc(var(--spacing, 0.25rem) * 40);
@@ -2617,6 +2638,11 @@ input.quantite-prod-input {
       width: calc(var(--spacing, 0.25rem) * 100);
     }
   }
+  .md\:w-105 {
+    @media (width >= 48rem) {
+      width: calc(var(--spacing, 0.25rem) * 105);
+    }
+  }
   .md\:w-110 {
     @media (width >= 48rem) {
       width: calc(var(--spacing, 0.25rem) * 110);
@@ -2627,9 +2653,19 @@ input.quantite-prod-input {
       width: calc(var(--spacing, 0.25rem) * 120);
     }
   }
+  .md\:w-130 {
+    @media (width >= 48rem) {
+      width: calc(var(--spacing, 0.25rem) * 130);
+    }
+  }
   .md\:w-150 {
     @media (width >= 48rem) {
       width: calc(var(--spacing, 0.25rem) * 150);
+    }
+  }
+  .md\:w-160 {
+    @media (width >= 48rem) {
+      width: calc(var(--spacing, 0.25rem) * 160);
     }
   }
   .md\:w-200 {
@@ -2650,6 +2686,11 @@ input.quantite-prod-input {
   .md\:w-275 {
     @media (width >= 48rem) {
       width: calc(var(--spacing, 0.25rem) * 275);
+    }
+  }
+  .md\:w-1200 {
+    @media (width >= 48rem) {
+      width: calc(var(--spacing, 0.25rem) * 1200);
     }
   }
   .md\:w-\[30vw\] {
