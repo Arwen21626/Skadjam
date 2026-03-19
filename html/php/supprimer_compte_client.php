@@ -23,6 +23,11 @@ try {
     $dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     $dbh->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC);
 
+    // Recup id_panier du client
+    $recupIdPanier = $dbh->query("SELECT id_panier FROM sae3_skadjam._client WHERE id_compte = $id");
+    $row = $recupIdPanier->fetch(PDO::FETCH_ASSOC);
+    $idPanier = $row['id_panier'];
+
     // Copier les avis dans le compte anonyme
     $stmt = $dbh->prepare("SELECT * FROM sae3_skadjam._avis WHERE id_compte = :id");
     $stmt->bindParam(':id', $id, PDO::PARAM_INT);
@@ -57,6 +62,22 @@ try {
             $stmtInsertRep->execute([':contenu' => $r['contenu_reponse'], ':nouvel_id' => $nouvelIdAvis, ':id_vendeur' => $r['id_compte']]);
         }
     }
+    echo $idPanier;
+    echo "<br>";
+
+    // anonymiser dans la table _pouces
+    $suppPouces = $dbh->query("UPDATE sae3_skadjam._pouces SET id_compte = 41 WHERE id_compte = $id");
+    // anonymiser dans la table _a_signaler
+    $suppPouces = $dbh->query("UPDATE sae3_skadjam._a_signaler SET id_compte = 41 WHERE id_compte = $id");
+    // anonymiser dans _donne
+    $suppDonne = $dbh->query("UPDATE sae3_skadjam._donne SET id_panier = 21 WHERE id_panier = $idPanier");
+    // anonymiser dans _contient
+    $suppContient = $dbh->query("UPDATE sae3_skadjam._contient SET id_panier = 21 WHERE id_panier = $idPanier");
+    // anonymiser dans _commande
+    $suppCommande = $dbh->query("UPDATE sae3_skadjam._commande SET id_client = 41 WHERE id_client = $id");
+    
+
+    
 
     // Supprime le compte du client
     $stmt = $dbh->prepare("DELETE FROM sae3_skadjam._reponse r

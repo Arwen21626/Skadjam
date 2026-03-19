@@ -272,7 +272,7 @@
                         </form>
                     </div>
                     <div>
-                        <a class=" block text-center bg-beige rounded-2xl w-40 h-14 mt-4 cursor-pointer hover:text-rouge" href="../../php/traitementFAPanier.php?idProduit=<?= $idProd ?>&ajout=fa&vientDe=detailProd"><?= (isset($inFA) && $inFA)? "Supprimer des futures achats":"Ajouter aux futures achats" ?></a>
+                        <a class=" block text-center bg-beige rounded-2xl w-40 h-14 mt-4 cursor-pointer hover:text-rouge" href="../../php/traitementFAPanier.php?idProduit=<?= $idProd ?>&ajout=fa&vientDe=detailProd"><?= (isset($inFA) && $inFA)? "Supprimer des futurs achats":"Ajouter aux futurs achats" ?></a>
                     </div>
                 </div>
             </article>

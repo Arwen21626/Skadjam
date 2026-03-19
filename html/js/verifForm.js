@@ -149,7 +149,6 @@ function verifDate(date) {
 }
 
 function verifNaissance(naissance) {
-    console.log(naissance)
     if (verifDate(naissance)){
         // Séparer jour, mois, année
         const [annee, mois, jour] = naissance.split('-').map(Number)
@@ -184,7 +183,7 @@ function verifTelephone(telephone){
     }
 }
 
-function verifIBAN(iban){
+function verifIban(iban){
     // Vérification de l'IBAN
     var regex = /^FR[0-9]{25}$/
     if (regex.test(iban)) {
@@ -194,28 +193,32 @@ function verifIBAN(iban){
     }
 }
 
-function verifSiren(siren){
-    // Vérification de l'IBAN
-    var regex = /^[0-9]{9}$/
-    if (regex.test(siren) ) {
-        var sirenSplit = siren.split("")
-        sirenSplit[1] *= 2;
-        sirenSplit[3] *= 2;
-        sirenSplit[5] *= 2;
-        sirenSplit[7] *= 2;
-        sirenSplit.forEach(nb => {
-            if (nb > 9) {
-                nb = nb -9
-            }
-        var somme = sirenSplit.some()
-        if (somme%10 === 0) {
-            return true
+function verifSiren(siren) {
+    // Vérifie que c'est bien 9 chiffres
+    if (!/^[0-9]{9}$/.test(siren)) return false;
+
+    let sirenSplit = siren.split("").map(Number);
+    let somme = 0;
+
+    for (let i = 0; i < sirenSplit.length; i++) {
+        let nb = sirenSplit[i];
+        // Double les chiffres en position paire (selon Luhn, en partant de la droite)
+        if (i % 2 === 1) {
+            nb *= 2;
+            if (nb > 9) nb -= 9;
         }
-        else{
-            return false
-        }
-        });
-        
+        somme += nb;
+    }
+
+    return somme % 10 === 0;
+}
+
+
+function verifDenomination(denomination) {
+    // Autorise Les majuscule, minuscule, accent maj/min, un espace, un ou deux tiret(s)
+    var regex = /^[A-Za-zÀ-öø-ÿ]+(( |-{1,2})[A-Za-zÀ-öø-ÿ]+)*$/i
+    if (regex.test(denomination)) {
+        return true
     } else {
         return false
     }

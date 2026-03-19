@@ -216,13 +216,11 @@ foreach($dbh->query("SELECT * FROM sae3_skadjam._compte c
             nom.addEventListener("change", function(){
                 if(!verifNomPrenom(nom.value)){                    
                     erreurNom.classList.remove("md:hidden", "hidden")
-                    let errPHP = document.getElementById("erreurNomPHP")
-                    if(errPHP) errPHP.classList.add("md:hidden", "hidden")
                 }else{
                     erreurNom.classList.add("md:hidden", "hidden")
-                    let errPHP = document.getElementById("erreurNomPHP")
-                    if(errPHP) errPHP.classList.add("md:hidden", "hidden")
                 }
+                let errPHP = document.getElementById("erreurNomPHP")
+                if(errPHP) errPHP.classList.add("md:hidden", "hidden")
                 nomForm.appendChild(erreurNom)
             })
 
@@ -235,13 +233,11 @@ foreach($dbh->query("SELECT * FROM sae3_skadjam._compte c
             prenom.addEventListener("change", function(){
                 if(!verifNomPrenom(prenom.value)){                    
                     erreurPrenom.classList.remove("md:hidden", "hidden")
-                    let errPHP = document.getElementById("erreurPrenomPHP")
-                    if(errPHP) errPHP.classList.add("md:hidden", "hidden")
                 }else{
                     erreurPrenom.classList.add("md:hidden", "hidden")
-                    let errPHP = document.getElementById("erreurPrenomPHP")
-                    if(errPHP) errPHP.classList.add("md:hidden", "hidden")
                 }
+                let errPHP = document.getElementById("erreurPrenomPHP")
+                if(errPHP) errPHP.classList.add("md:hidden", "hidden")
                 prenomForm.appendChild(erreurPrenom)
             })
 
@@ -256,8 +252,7 @@ foreach($dbh->query("SELECT * FROM sae3_skadjam._compte c
                     erreurPseudo.classList.remove("md:hidden", "hidden")
                 }else{
                     erreurPseudo.classList.add("md:hidden", "hidden")
-                }
-                
+                }  
                 let errPHP = document.getElementById("erreurPseudoPHP")
                 if(errPHP) errPHP.classList.add("md:hidden", "hidden")
                 pseudoForm.appendChild(erreurPseudo)
@@ -273,13 +268,12 @@ foreach($dbh->query("SELECT * FROM sae3_skadjam._compte c
             naissance.addEventListener("change", function(){
                 if(!verifNaissance(naissance.value)){                 
                     erreurNaissance.classList.remove("md:hidden", "hidden")
-                    let errPHP = document.getElementById("erreurNaissancePHP")
-                    if(errPHP) errPHP.classList.add("md:hidden", "hidden")
                 }else{
                     erreurNaissance.classList.add("md:hidden", "hidden")
-                    let errPHP = document.getElementById("erreurNaissancePHP")
-                    if(errPHP) errPHP.classList.add("md:hidden", "hidden")
+                    
                 }
+                let errPHP = document.getElementById("erreurNaissancePHP")
+                if(errPHP) errPHP.classList.add("md:hidden", "hidden")
                 naissanceForm.appendChild(erreurNaissance)
             })
 
@@ -292,13 +286,11 @@ foreach($dbh->query("SELECT * FROM sae3_skadjam._compte c
             telephone.addEventListener("change", function(){
                 if(!verifTelephone(telephone.value)){
                     erreurTel.classList.remove("md:hidden", "hidden")
-                    let errPHP = document.getElementById("erreurTelPHP")
-                    if(errPHP) errPHP.classList.add("md:hidden", "hidden")
                 }else{
                     erreurTel.classList.add("md:hidden", "hidden")
-                    let errPHP = document.getElementById("erreurTelPHP")
-                    if(errPHP) errPHP.classList.add("md:hidden", "hidden")
                 }
+                let errPHP = document.getElementById("erreurTelPHP")
+                if(errPHP) errPHP.classList.add("md:hidden", "hidden")
                 telForm.appendChild(erreurTel)
             })
 
@@ -311,13 +303,11 @@ foreach($dbh->query("SELECT * FROM sae3_skadjam._compte c
             mail.addEventListener("change", function(){
                 if(!verifMail(mail.value)){                    
                     erreurMail.classList.remove("md:hidden", "hidden")
-                    let errPHP = document.getElementById("erreurMailPHP")
-                    if(errPHP) errPHP.classList.add("md:hidden", "hidden")
                 }else{
                     erreurMail.classList.add("md:hidden", "hidden")
-                    let errPHP = document.getElementById("erreurMailPHP")
-                    if(errPHP) errPHP.classList.add("md:hidden", "hidden")
                 }
+                let errPHP = document.getElementById("erreurMailPHP")
+                if(errPHP) errPHP.classList.add("md:hidden", "hidden")
                 mailForm.appendChild(erreurMail)
             })
 
@@ -330,13 +320,11 @@ foreach($dbh->query("SELECT * FROM sae3_skadjam._compte c
             adresse.addEventListener("change", function(){
                 if(!verifAdresse(adresse.value)){                    
                     erreurAdresse.classList.remove("md:hidden", "hidden")
-                    let errPHP = document.getElementById("erreurAdressePHP")
-                    if(errPHP) errPHP.classList.add("md:hidden", "hidden")
                 }else{
                     erreurAdresse.classList.add("md:hidden", "hidden")
-                    let errPHP = document.getElementById("erreurAdressePHP")
-                    if(errPHP) errPHP.classList.add("md:hidden", "hidden")
                 }
+                let errPHP = document.getElementById("erreurAdressePHP")
+                if(errPHP) errPHP.classList.add("md:hidden", "hidden")
                 adresseForm.appendChild(erreurAdresse)
             })
 
@@ -349,13 +337,11 @@ foreach($dbh->query("SELECT * FROM sae3_skadjam._compte c
             ville.addEventListener("change", function(){
                 if(!verifVille(ville.value)){                    
                     erreurVille.classList.remove("md:hidden", "hidden")
-                    let errPHP = document.getElementById("erreurVillePHP")
-                    if(errPHP) errPHP.classList.add("md:hidden", "hidden")
                 }else{
                     erreurVille.classList.add("md:hidden", "hidden")
-                    let errPHP = document.getElementById("erreurVillePHP")
-                    if(errPHP) errPHP.classList.add("md:hidden", "hidden")
                 }
+                let errPHP = document.getElementById("erreurVillePHP")
+                if(errPHP) errPHP.classList.add("md:hidden", "hidden")
                 villeForm.appendChild(erreurVille)
             })
 
@@ -368,18 +354,15 @@ foreach($dbh->query("SELECT * FROM sae3_skadjam._compte c
             codePostal.addEventListener("change", function(){
                 if(!verifCodePostal(codePostal.value)){                    
                     erreurCodePostal.classList.remove("md:hidden", "hidden")
-                    let errPHP = document.getElementById("erreurCodePostalPHP")
-                    if(errPHP) errPHP.classList.add("md:hidden", "hidden")
                 }else{
                     erreurCodePostal.classList.add("md:hidden", "hidden")
-                    let errPHP = document.getElementById("erreurCodePostalPHP")
-                    if(errPHP) errPHP.classList.add("md:hidden", "hidden")
                 }
+                let errPHP = document.getElementById("erreurCodePostalPHP")
+                if(errPHP) errPHP.classList.add("md:hidden", "hidden")
                 codePostalForm.appendChild(erreurCodePostal)
             })
         </script>
     </main>
-
     <?php 
     // Import du footer
     include __DIR__ . "/../../php/structure/footer_front.php";
